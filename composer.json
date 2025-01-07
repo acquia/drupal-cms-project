@@ -1,0 +1,99 @@
+{
+    "name": "acquia/drupal-cms-project",
+    "description": "Drupal with a bunch of useful stuff and a scaffold tailored to Acquia hosting.",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "repositories": {
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    },
+    "require": {
+        "acquia/drupal-environment-detector": "^1",
+        "acquia/drupal-recommended-settings": "^1.0",
+        "acquia/memcache-settings": "^1",
+        "composer/installers": "^2.3",
+        "cweagans/composer-patches": "^1.7",
+        "drupal/config_sync_without_site_uuid": "^1.0@beta",
+        "drupal/core-composer-scaffold": "^11.1.1",
+        "drupal/core-recommended": "^11.1.1",
+        "drupal/drupal_cms_accessibility_tools": "*",
+        "drupal/drupal_cms_ai": "*",
+        "drupal/drupal_cms_analytics": "*",
+        "drupal/drupal_cms_blog": "*",
+        "drupal/drupal_cms_case_study": "*",
+        "drupal/drupal_cms_events": "*",
+        "drupal/drupal_cms_forms": "*",
+        "drupal/drupal_cms_news": "*",
+        "drupal/drupal_cms_person": "*",
+        "drupal/drupal_cms_project": "*",
+        "drupal/drupal_cms_seo_tools": "*",
+        "drupal/drupal_cms_starter": "*",
+        "drupal/mysql57": "^1.0",
+        "drush/drush": "^13"
+    },
+    "require-dev": {
+        "drupal/core-dev": "^11"
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "drupal/core-composer-scaffold": true,
+            "drupal/core-project-message": true,
+            "php-http/discovery": true,
+            "acquia/drupal-recommended-settings": true,
+            "phpstan/extension-installer": true,
+            "tbachert/spi": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "cweagans/composer-patches": true
+        },
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "extra": {
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "docroot/"
+            },
+            "file-mapping": {
+                "[web-root]/sites/default/default.services.yml": {
+                    "mode": "replace",
+                    "overwrite": false,
+                    "path": "docroot/core/assets/scaffold/files/default.services.yml"
+                },
+                "[web-root]/sites/default/default.settings.php": {
+                    "mode": "replace",
+                    "overwrite": false,
+                    "path": "docroot/core/assets/scaffold/files/default.settings.php"
+                }
+            }
+        },
+        "installer-paths": {
+            "docroot/core": ["type:drupal-core"],
+            "docroot/libraries/{$name}": ["type:drupal-library"],
+            "docroot/modules/contrib/{$name}": ["type:drupal-module"],
+            "docroot/profiles/contrib/{$name}": ["type:drupal-profile"],
+            "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
+            "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
+            "docroot/modules/custom/{$name}": ["type:drupal-custom-module"],
+            "docroot/profiles/custom/{$name}": ["type:drupal-custom-profile"],
+            "recipes/{$name}": ["type:drupal-recipe"],
+            "docroot/themes/custom/{$name}": ["type:drupal-custom-theme"]
+        },
+        "patches": {
+            "acquia/drupal-recommended-settings": {
+                "Add mysql57 include": "https://github.com/acquia/drupal-recommended-settings/commit/e14fb51ea91acf283bb3c5af312e34fe655caf80.patch"
+            }
+        }
+    },
+    "scripts": {
+        "update-profile": "./scripts/update-profile.sh",
+        "post-update-cmd": "@update-profile"
+    }
+}
