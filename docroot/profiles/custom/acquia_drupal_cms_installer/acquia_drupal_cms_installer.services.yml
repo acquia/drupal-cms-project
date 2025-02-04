@@ -1,0 +1,5 @@
+services:
+  Drupal\RecipeKit\RecipeAppliedSubscriber:
+    autowire: true
+    tags:
+      - { name: event_subscriber }
