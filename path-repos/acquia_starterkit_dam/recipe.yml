@@ -1,0 +1,21 @@
+name: 'Acquia Starter Kit DAM'
+description: 'Provides an Acquia DAM related configuration.'
+type: 'Media type'
+recipes:
+  - acquia_starterkit_image
+  - acquia_starterkit_remote_video
+install:
+  # Contrib
+  - acquia_starterkit_core
+  - acquia_dam_integration_links
+config:
+  # If the active config doesn't match what's in the recipe config, we can
+  # assume that DAM config already exist or site owner has made some
+  # tweaks to these configs.
+  strict: false
+  import:
+    acquia_dam: '*'
+  actions:
+    field.field.node.*.field_*_image:
+      addBundlesToField:
+        acquia_dam_image_asset: acquia_dam_image_asset

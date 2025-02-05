@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.full_html
+  module:
+    - filter
+    - node
+    - system
+    - taxonomy
+    - toolbar
+id: content_administrator
+label: 'Content Administrator'
+weight: 0
+is_admin: false
+permissions:
+  - 'access taxonomy overview'
+  - 'access toolbar'
+  - 'administer nodes'
+  - 'administer taxonomy'
+  - 'bypass node access'
+  - 'use text format full_html'
+  - 'view the administration theme'

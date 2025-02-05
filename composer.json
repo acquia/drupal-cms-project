@@ -16,25 +16,29 @@
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         },
-        "installer_kit": {
-            "type": "path",
-            "url": "../installer_kit"
-        },
         "acquia_starterkit_dam": {
             "type": "path",
-            "url": "../acquia_starterkits-0.x-recipes/recipes/acquia_starterkit_dam"
+            "url": "./path-repos/acquia_starterkit_dam"
         },
         "acquia_starterkit_search": {
             "type": "path",
-            "url": "../acquia_starterkits-0.x-recipes/recipes/acquia_starterkit_search"
+            "url": "./path-repos/acquia_starterkit_search"
         },
         "acquia_starterkit_image": {
             "type": "path",
-            "url": "../acquia_starterkits-0.x-recipes/recipes/acquia_starterkit_image"
+            "url": "./path-repos/acquia_starterkit_image"
         },
         "acquia_starterkit_remote_video": {
             "type": "path",
-            "url": "../acquia_starterkits-0.x-recipes/recipes/acquia_starterkit_remote_video"
+            "url": "./path-repos/acquia_starterkit_remote_video"
+        },
+        "acquia_starterkit_content_roles": {
+            "type": "path",
+            "url": "./path-repos/acquia_starterkit_content_roles"
+        },
+        "acquia_starterkit_core": {
+            "type": "path",
+            "url": "./path-repos/acquia_starterkit_core"
         }
     },
     "require": {
@@ -46,8 +50,8 @@
         "drupal/config_sync_without_site_uuid": "^1.0@beta",
         "drupal/core-composer-scaffold": "^11.1.1",
         "drupal/core-recommended": "^11.1.1",
-        "drupal/acquia_cms_dam": "*",
-        "drupal/acquia_cms_search": "*",
+        "drupal/acquia_starterkit_dam": "*",
+        "drupal/acquia_starterkit_search": "*",
         "drupal/drupal_cms_accessibility_tools": "*",
         "drupal/drupal_cms_ai": "*",
         "drupal/drupal_cms_analytics": "*",
@@ -61,7 +65,7 @@
         "drupal/drupal_cms_seo_tools": "*",
         "drupal/drupal_cms_starter": "*",
         "drupal/mysql57": "^1.0",
-        "drupal/recipe-installer-kit": "*",
+        "drupal/recipe_installer_kit": "*",
         "drush/drush": "^13"
     },
     "require-dev": {

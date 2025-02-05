@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.full_html
+  module:
+    - filter
+    - node
+    - system
+    - toolbar
+id: content_author
+label: 'Content Author'
+weight: 0
+is_admin: false
+permissions:
+  - 'access toolbar'
+  - 'administer menu'
+  - 'use text format full_html'
+  - 'view own unpublished content'
+  - 'view the administration theme'

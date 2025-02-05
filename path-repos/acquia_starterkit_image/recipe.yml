@@ -1,0 +1,461 @@
+name: 'Acquia Starter Kit Image'
+description: 'Provides an Image media type and related configuration.'
+type: 'Media type'
+recipes:
+  - core/recipes/image_media_type
+  - core/recipes/tags_taxonomy
+install:
+  # Contrib
+  - acquia_starterkit_core
+  - field_group
+  - focal_point
+  - imce
+config:
+  # If the active config doesn't match what's in the recipe config, we can
+  # assume that Image already exist or site owner has made some
+  # tweaks to these configs.
+  strict: false
+  import:
+    field_group: '*'
+    focal_point: '*'
+    imce: '*'
+  actions:
+    field.field.media.image.field_media_image:
+      simpleConfigUpdate:
+        settings:
+          handler: 'default:file'
+          handler_settings: { }
+          file_directory: '[date:custom:Y]-[date:custom:m]'
+          file_extensions: 'png gif jpg jpeg'
+          max_filesize: ''
+          max_resolution: ''
+          min_resolution: ''
+          alt_field: true
+          alt_field_required: false
+          title_field: false
+          title_field_required: false
+          default_image:
+            uuid: null
+            alt: ''
+            title: ''
+            width: null
+            height: null
+    core.entity_view_display.media.image.default:
+      simpleConfigUpdate:
+        status: true
+        mode: default
+        content:
+          field_media_image:
+            type: image
+            label: visually_hidden
+            settings:
+              image_link: ''
+              image_style: coh_x_large
+              image_loading:
+                attribute: lazy
+            third_party_settings: { }
+            weight: 0
+            region: content
+        hidden:
+          created: true
+          field_categories: true
+          field_tags: true
+          name: true
+          search_api_excerpt: true
+          thumbnail: true
+          uid: true
+    core.entity_view_display.media.image.embedded:
+      simpleConfigUpdate:
+        status: true
+        mode: embedded
+        content:
+          field_media_image:
+            type: image
+            label: visually_hidden
+            settings:
+              image_link: ''
+              image_style: coh_medium
+              image_loading:
+                attribute: lazy
+            third_party_settings: { }
+            weight: 0
+            region: content
+        hidden:
+          created: true
+          field_categories: true
+          field_tags: true
+          name: true
+          search_api_excerpt: true
+          thumbnail: true
+          uid: true
+    core.entity_view_display.media.image.full:
+      simpleConfigUpdate:
+        status: true
+        mode: full
+        content:
+          field_media_image:
+            type: image
+            label: visually_hidden
+            settings:
+              image_link: ''
+              image_style: coh_x_large
+              image_loading:
+                attribute: lazy
+            third_party_settings: { }
+            weight: 0
+            region: content
+        hidden:
+          created: true
+          field_categories: true
+          field_tags: true
+          name: true
+          search_api_excerpt: true
+          thumbnail: true
+          uid: true
+    core.entity_view_display.media.image.large:
+      simpleConfigUpdate:
+        status: true
+        mode: large
+        content:
+          field_media_image:
+            type: image
+            label: hidden
+            settings:
+              image_link: ''
+              image_style: coh_x_large
+              image_loading:
+                attribute: lazy
+            third_party_settings: { }
+            weight: 0
+            region: content
+        hidden:
+          created: true
+          field_categories: true
+          field_tags: true
+          name: true
+          search_api_excerpt: true
+          thumbnail: true
+          uid: true
+    core.entity_view_display.media.image.large_landscape:
+      simpleConfigUpdate:
+        status: true
+        mode: large_landscape
+        content:
+          field_media_image:
+            type: image
+            label: hidden
+            settings:
+              image_link: ''
+              image_style: coh_x_large_landscape
+              image_loading:
+                attribute: lazy
+            third_party_settings: { }
+            weight: 0
+            region: content
+        hidden:
+          created: true
+          field_categories: true
+          field_tags: true
+          name: true
+          search_api_excerpt: true
+          thumbnail: true
+          uid: true
+    core.entity_view_display.media.image.large_super_landscape:
+      simpleConfigUpdate:
+        status: true
+        mode: large_super_landscape
+        content:
+          field_media_image:
+            type: image
+            label: visually_hidden
+            settings:
+              image_link: ''
+              image_style: coh_x_large_super_landscape
+              image_loading:
+                attribute: lazy
+            third_party_settings: { }
+            weight: 0
+            region: content
+        hidden:
+          created: true
+          field_categories: true
+          field_tags: true
+          name: true
+          search_api_excerpt: true
+          thumbnail: true
+          uid: true
+    core.entity_view_display.media.image.medium:
+      simpleConfigUpdate:
+        status: true
+        mode: medium
+        content:
+          field_media_image:
+            type: image
+            label: hidden
+            settings:
+              image_link: ''
+              image_style: coh_medium
+            third_party_settings: { }
+            weight: 0
+            region: content
+        hidden:
+          created: true
+          field_categories: true
+          field_tags: true
+          name: true
+          search_api_excerpt: true
+          thumbnail: true
+          uid: true
+    core.entity_view_display.media.image.medium_landscape:
+      simpleConfigUpdate:
+        status: true
+        mode: medium_landscape
+        content:
+          field_media_image:
+            type: image
+            label: above
+            settings:
+              image_link: ''
+              image_style: coh_medium_landscape
+            third_party_settings: { }
+            weight: 0
+            region: content
+        hidden:
+          created: true
+          field_categories: true
+          field_tags: true
+          name: true
+          search_api_excerpt: true
+          thumbnail: true
+          uid: true
+    core.entity_view_display.media.image.small:
+      simpleConfigUpdate:
+        status: true
+        mode: small
+        content:
+          field_media_image:
+            type: image
+            label: hidden
+            settings:
+              image_link: ''
+              image_style: coh_small
+            third_party_settings: { }
+            weight: 0
+            region: content
+        hidden:
+          created: true
+          field_categories: true
+          field_tags: true
+          name: true
+          search_api_excerpt: true
+          thumbnail: true
+          uid: true
+    core.entity_view_display.media.image.small_landscape:
+      simpleConfigUpdate:
+        status: true
+        mode: small_landscape
+        content:
+          field_media_image:
+            type: image
+            label: hidden
+            settings:
+              image_link: ''
+              image_style: coh_small_landscape
+            third_party_settings: { }
+            weight: 0
+            region: content
+        hidden:
+          created: true
+          field_categories: true
+          field_tags: true
+          name: true
+          search_api_excerpt: true
+          thumbnail: true
+          uid: true
+    core.entity_view_display.media.image.teaser:
+      simpleConfigUpdate:
+        status: true
+        mode: teaser
+        content:
+          field_media_image:
+            type: image
+            label: visually_hidden
+            settings:
+              image_link: ''
+              image_style: x_small_landscape
+              image_loading:
+                attribute: lazy
+            third_party_settings: { }
+            weight: 0
+            region: content
+        hidden:
+          created: true
+          field_categories: true
+          field_tags: true
+          name: true
+          search_api_excerpt: true
+          thumbnail: true
+          uid: true
+    core.entity_view_display.media.image.x_small_square:
+      simpleConfigUpdate:
+        status: true
+        mode: x_small_square
+        content:
+          field_media_image:
+            type: image
+            label: visually_hidden
+            settings:
+              image_link: ''
+              image_style: x_small_square
+              image_loading:
+                attribute: lazy
+            third_party_settings: { }
+            weight: 0
+            region: content
+        hidden:
+          created: true
+          field_categories: true
+          field_tags: true
+          name: true
+          search_api_excerpt: true
+          thumbnail: true
+          uid: true
+    core.entity_form_display.media.image.default:
+      simpleConfigUpdate:
+        status: true
+        third_party_settings:
+          field_group:
+            group_taxonomy:
+              children:
+                - field_categories
+                - field_tags
+              label: Taxonomy
+              region: content
+              parent_name: ''
+              weight: 4
+              format_type: fieldset
+              format_settings:
+                classes: ''
+                id: ''
+                description: ''
+                required_fields: true
+        content:
+          name:
+            type: string_textfield
+            weight: 0
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+            third_party_settings: { }
+          field_media_image:
+            type: image_focal_point
+            weight: 1
+            region: content
+            settings:
+              progress_indicator: throbber
+              preview_image_style: medium
+              preview_link: true
+              offsets: '50,50'
+            third_party_settings:
+              imce:
+                enabled: false
+          field_categories:
+            type: options_select
+            weight: 3
+            region: content
+            settings: { }
+            third_party_settings: { }
+          field_tags:
+            type: entity_reference_autocomplete_tags
+            weight: 4
+            region: content
+            settings:
+              match_operator: CONTAINS
+              match_limit: 10
+              size: 60
+              placeholder: ''
+            third_party_settings: { }
+        hidden:
+          created: true
+          path: true
+          status: true
+          uid: true
+    core.entity_form_display.media.image.media_library:
+      simpleConfigUpdate:
+        status: true
+        third_party_settings:
+          field_group:
+            group_taxonomy:
+              children:
+                - field_categories
+                - field_tags
+              label: Taxonomy
+              region: content
+              parent_name: ''
+              weight: 4
+              format_type: fieldset
+              format_settings:
+                classes: ''
+                id: ''
+                description: ''
+                required_fields: true
+        content:
+          name:
+            type: string_textfield
+            weight: 0
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+            third_party_settings: { }
+          field_media_image:
+            type: image_focal_point
+            weight: 1
+            region: content
+            settings:
+              progress_indicator: throbber
+              preview_image_style: medium
+              preview_link: true
+              offsets: '50,50'
+            third_party_settings:
+              imce:
+                enabled: false
+          field_categories:
+            type: options_select
+            weight: 3
+            region: content
+            settings: { }
+            third_party_settings: { }
+          field_tags:
+            type: entity_reference_autocomplete_tags
+            weight: 4
+            region: content
+            settings:
+              match_operator: CONTAINS
+              match_limit: 10
+              size: 60
+              placeholder: ''
+            third_party_settings: { }
+        hidden:
+          created: true
+          path: true
+          status: true
+          uid: true
+    media.type.image:
+      setThirdPartySettings:
+        - module: acquia_starterkit_core
+          key: roles_permissions
+          value:
+            content_author:
+              grant_permissions:
+                - 'create image media'
+                - 'edit own image media'
+                - 'delete own image media'
+            content_editor:
+              grant_permissions:
+                - 'create image media'
+                - 'edit own image media'
+                - 'delete own image media'
+                - 'edit any image media'
+                - 'delete any image media'

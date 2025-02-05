@@ -5,34 +5,49 @@ type: profile
 # needs of the recipes you want to apply.
 core_version_requirement: '^11.1'
 
+# Change this to whatever you like. It's only visible to users in the installer's profile
+# selection step, which is skipped if you mark this profile as a distribution.
 description: 'Provides install-time tweaks. Not to be used in production.'
 
+# Remove this entire `distribution` section if you'd like users to choose which profile
+# to use at the start of the install.
 distribution:
   name: Acquia Drupal CMS Installer
   install:
-    finish_url: '/dashboard'
+    theme: drupal_cms_installer_theme
+    finish_url: '/admin/dashboard/welcome'
 
 # A list of forms that should be presented to the user before choosing database
 # settings and installing the system. Each of these forms must implement
-# \Drupal\RecipeKit\Form\InstallerFormInterface.
+# \Drupal\RecipeKit\Installer\FormInterface.
 forms:
-- '\Drupal\RecipeKit\Form\InstallerRecipesForm'
-- '\Drupal\RecipeKit\Form\InstallerSiteNameForm'
+  - '\Drupal\RecipeKit\Installer\Form\RecipesForm'
+  - '\Drupal\RecipeKit\Installer\Form\SiteNameForm'
 
 recipes:
   # This should be a list of recipes' Composer package names that should always be
   # applied during the install process.
   required:
-    - drupal/drupal_cms_forms
+    - drupal/drupal_cms_starter
 
-  # This should be a list of recipes to show to the user as choices at the start of the
-  # install process. The keys should the recipes' Composer package names, and the values
-  # should be the user-facing names of the recipes.
+  # This should be a set of recipe combinations to show to the user as choices at the
+  # start of the install process. The keys should be the user-facing names of the
+  # combinations, and the values should be lists of the Composer package names of the
+  # recipes that make up that combination.
   optional:
-    drupal/drupal_cms_blog: Blog
-    drupal/acquia_starterkit_dam: Acquia DAM integrations
-    drupal/acquia_starterkit_search: Acquia Search integrations
-
-# To control the look and feel of the install process, you can override various libraries
-# here, using the same syntax as you would in a theme.
-libraries-override: {}
+    'Blog':
+      - drupal/drupal_cms_blog
+    'Case Studies':
+      - drupal/drupal_cms_case_study
+    'Events':
+      - drupal/drupal_cms_events
+    'News':
+      - drupal/drupal_cms_news
+    'Person Profiles':
+      - drupal/drupal_cms_person
+    'Projects':
+      - drupal/drupal_cms_project
+    Acquia DAM integrations:
+      - drupal/acquia_starterkit_dam
+    Acquia Search integrations:
+      - drupal/acquia_starterkit_search

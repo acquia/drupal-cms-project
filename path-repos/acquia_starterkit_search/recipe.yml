@@ -1,0 +1,334 @@
+name: 'Acquia Starter Kit Search'
+description: 'Provides a Search related configuration.'
+recipes:
+  - core/recipes/content_search
+install:
+  # core
+  - node
+  - olivero
+  - search
+  - path
+  - views
+  #contrib
+  - facets
+  - facets_pretty_paths
+  - search_api
+  - search_api_db
+  - search_api_autocomplete
+  - acquia_cms_search
+config:
+  # If the active config doesn't match what's in the recipe config, we can
+  # assume that Image already exist or site owner has made some
+  # tweaks to these configs.
+  strict: false
+  import:
+    acquia_cms_search:
+      - search_api.server.database
+      - search_api.index.content
+      - search_api_autocomplete.search.search
+      - views.view.search_fallback
+      - views.view.search
+  actions:
+    system.theme:
+      simpleConfigUpdate:
+        default: olivero
+    node.type.*:
+      setThirdPartySetting:
+        module: acquia_cms_search
+        key: search_index
+        value: content
+      createForEachIfNotExists:
+        facets.facet_source.search_api__views_page__%bundles__page:
+          status: true
+          id: 'search_api__views_page__%bundles__page'
+          name: 'search_api:views_page__%bundles__page'
+          filter_key: ''
+          url_processor: facets_pretty_paths
+          breadcrumb:
+            active: false
+            before: true
+            group: false
+        facets.facet.search_%bundle_type:
+          status: true
+          id: 'search_%bundle_type'
+          name: '%bundle Type'
+          weight: 0
+          min_count: 1
+          url_alias: '%bundle_type'
+          facet_source_id: 'search_api:views_page__search__search'
+          field_identifier: 'field_%bundle_type'
+          query_operator: or
+          hard_limit: 0
+          exclude: false
+          use_hierarchy: false
+          expand_hierarchy: false
+          enable_parent_when_child_gets_disabled: true
+          widget:
+            type: links
+            config:
+              show_numbers: true
+              soft_limit: 0
+              show_reset_link: false
+              reset_text: 'Show all'
+              hide_reset_when_no_selection: false
+              soft_limit_settings:
+                show_less_label: 'Show less'
+                show_more_label: 'Show more'
+          empty_behavior:
+            behavior: none
+          only_visible_when_facet_source_is_visible: true
+          show_only_one_result: true
+          show_title: false
+          processor_configs:
+            active_widget_order:
+              processor_id: active_widget_order
+              weights:
+                sort: 20
+              settings:
+                sort: DESC
+            count_widget_order:
+              processor_id: count_widget_order
+              weights:
+                sort: 30
+              settings:
+                sort: DESC
+            dependent_processor:
+              processor_id: dependent_processor
+              weights:
+                build: 5
+              settings:
+                search_content_type:
+                  enable: true
+                  condition: not_empty
+                  values: ''
+                  negate: false
+            display_value_widget_order:
+              processor_id: display_value_widget_order
+              weights:
+                sort: 40
+              settings:
+                sort: ASC
+            translate_entity:
+              processor_id: translate_entity
+              weights:
+                build: 5
+              settings: { }
+            url_processor_handler:
+              processor_id: url_processor_handler
+              weights:
+                pre_query: 50
+                build: 15
+              settings: { }
+        facets.facet.%bundles_category:
+          status: true
+          third_party_settings:
+            facets_pretty_paths:
+              coder: taxonomy_term_coder
+          id: '%bundles_category'
+          name: Category
+          weight: 0
+          min_count: 1
+          url_alias: category
+          facet_source_id: 'search_api:views_page__%bundles__page'
+          field_identifier: field_categories
+          query_operator: or
+          hard_limit: 0
+          exclude: false
+          use_hierarchy: false
+          keep_hierarchy_parents_active: false
+          hierarchy:
+            type: taxonomy
+            config: { }
+          expand_hierarchy: false
+          enable_parent_when_child_gets_disabled: true
+          widget:
+            type: links
+            config:
+              show_numbers: true
+              soft_limit: 0
+              show_reset_link: false
+              reset_text: 'Show all'
+              hide_reset_when_no_selection: false
+              soft_limit_settings:
+                show_less_label: 'Show less'
+                show_more_label: 'Show more'
+          empty_behavior:
+            behavior: none
+          only_visible_when_facet_source_is_visible: true
+          show_only_one_result: false
+          show_title: false
+          processor_configs:
+            active_widget_order:
+              processor_id: active_widget_order
+              weights:
+                sort: 20
+              settings:
+                sort: DESC
+            count_widget_order:
+              processor_id: count_widget_order
+              weights:
+                sort: 30
+              settings:
+                sort: DESC
+            display_value_widget_order:
+              processor_id: display_value_widget_order
+              weights:
+                sort: 40
+              settings:
+                sort: ASC
+            hierarchy_processor:
+              processor_id: hierarchy_processor
+              weights:
+                build: 100
+              settings: { }
+            translate_entity:
+              processor_id: translate_entity
+              weights:
+                build: 5
+              settings: { }
+            url_processor_handler:
+              processor_id: url_processor_handler
+              weights:
+                pre_query: 50
+                build: 15
+              settings: { }
+        facets.facet.%bundles_%bundle_type:
+          status: true
+          third_party_settings:
+            facets_pretty_paths:
+              coder: taxonomy_term_coder
+          id: '%bundles_%bundle_type'
+          name: '%bundle Type'
+          weight: 0
+          min_count: 1
+          missing: false
+          missing_label: others
+          url_alias: type
+          facet_source_id: 'search_api:views_page__%bundles__page'
+          field_identifier: 'field_%bundle_type'
+          query_operator: or
+          hard_limit: 0
+          exclude: false
+          use_hierarchy: false
+          keep_hierarchy_parents_active: false
+          hierarchy:
+            type: taxonomy
+            config: { }
+          expand_hierarchy: false
+          enable_parent_when_child_gets_disabled: true
+          widget:
+            type: links
+            config:
+              show_numbers: true
+              soft_limit: 0
+              show_reset_link: false
+              reset_text: 'Show all'
+              hide_reset_when_no_selection: false
+              soft_limit_settings:
+                show_less_label: 'Show less'
+                show_more_label: 'Show more'
+          empty_behavior:
+            behavior: none
+          only_visible_when_facet_source_is_visible: true
+          show_only_one_result: true
+          show_title: false
+          processor_configs:
+            active_widget_order:
+              processor_id: active_widget_order
+              weights:
+                sort: 20
+              settings:
+                sort: DESC
+            count_widget_order:
+              processor_id: count_widget_order
+              weights:
+                sort: 30
+              settings:
+                sort: DESC
+            display_value_widget_order:
+              processor_id: display_value_widget_order
+              weights:
+                sort: 40
+              settings:
+                sort: ASC
+            hierarchy_processor:
+              processor_id: hierarchy_processor
+              weights:
+                build: 100
+              settings: { }
+            translate_entity:
+              processor_id: translate_entity
+              weights:
+                build: 5
+              settings: { }
+            url_processor_handler:
+              processor_id: url_processor_handler
+              weights:
+                pre_query: 50
+                build: 15
+              settings: { }
+        block.block.%bundles_category:
+          langcode: en
+          status: true
+          id: "%bundles_category"
+          theme: olivero
+          region: sidebar
+          weight: 0
+          provider: null
+          plugin: 'facet_block:%bundles_category'
+          settings:
+            id: 'facet_block:%bundles_category'
+            label: Category
+            label_display: visible
+            provider: facets
+            block_id: "%bundles_category"
+          visibility:
+            request_path:
+              id: request_path
+              negate: false
+              pages: "/%bundles\r\n/%bundles/*"
+        block.block.%bundles_%bundle_type:
+          langcode: en
+          status: true
+          id: '%bundles_%bundle_type'
+          theme: olivero
+          region: sidebar
+          weight: 0
+          provider: null
+          plugin: 'facet_block:%bundles_%bundle_type'
+          settings:
+            id: 'facet_block:%bundles_%bundle_type'
+            label: '%bundle Type'
+            label_display: visible
+            provider: facets
+            block_id: '%bundles_%bundle_type'
+          visibility:
+            request_path:
+              id: request_path
+              negate: false
+              pages: "/%bundles\r\n/%bundles/*"
+        block.block.search_%bundle_type:
+          status: true
+          id: 'search_%bundle_type'
+          theme: olivero
+          region: sidebar
+          weight: 0
+          provider: null
+          plugin: 'facet_block:search_%bundle_type'
+          settings:
+            id: 'facet_block:search_%bundle_type'
+            label: '%bundle Type'
+            label_display: visible
+            provider: facets
+            block_id: 'search_%bundle_type'
+          visibility:
+            request_path:
+              id: request_path
+              negate: false
+              pages: "/%bundles\r\n/%bundles/*"
+    user.role.anonymous:
+      grantPermissions:
+        - 'use search_api_autocomplete for search'
+    user.role.authenticated:
+      grantPermissions:
+        - 'use search_api_autocomplete for search'

@@ -1,0 +1,37 @@
+name: 'Acquia Starter Kit Content Roles'
+description: 'Creates roles to manage content of the site and provides permissions.'
+type: 'User role'
+install:
+  - taxonomy
+  - toolbar
+  - node
+  - media
+  - acquia_starterkit_core
+recipes:
+  - core/recipes/content_editor_role
+  - core/recipes/full_html_format_editor
+config:
+  # If the active config doesn't match what's in the recipe config, we can assume that these
+  # roles already exist or site owner has made some tweaks to these roles.
+  strict: false
+  actions:
+    user.role.content_editor:
+      grantPermissions:
+        - 'access toolbar'
+        - 'access administration pages'
+        - 'view own unpublished content'
+      grantPermissionsForEachNodeType:
+        - 'edit any %bundle content'
+        - 'delete any %bundle content'
+      grantPermissionsForEachMediaType:
+        - 'edit any %bundle media'
+        - 'delete any %bundle media'
+    user.role.content_author:
+      grantPermissionsForEachNodeType:
+        - 'create %bundle content'
+        - 'edit own %bundle content'
+        - 'delete own %bundle content'
+      grantPermissionsForEachMediaType:
+        - 'create %bundle media'
+        - 'edit own %bundle media'
+        - 'delete own %bundle media'
