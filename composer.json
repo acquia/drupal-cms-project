@@ -39,6 +39,7 @@
         "drupal/drupal_cms_seo_tools": "*",
         "drupal/drupal_cms_starter": "*",
         "drupal/mysql57": "^1.0",
+        "drupal/recipe_installer_kit": "^1.0@alpha",
         "drush/drush": "^13"
     },
     "require-dev": {
@@ -65,6 +66,7 @@
         "optimize-autoloader": true
     },
     "extra": {
+        "composer-exit-on-patch-failure": true,
         "drupal-scaffold": {
             "locations": {
                 "web-root": "docroot/"
@@ -100,8 +102,5 @@
             }
         }
     },
-    "scripts": {
-        "update-profile": "./scripts/update-profile.sh",
-        "post-update-cmd": "@update-profile"
-    }
+    "scripts": {}
 }
