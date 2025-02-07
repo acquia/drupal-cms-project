@@ -7,14 +7,14 @@ core_version_requirement: '^11.1'
 
 # Change this to whatever you like. It's only visible to users in the installer's profile
 # selection step, which is skipped if you mark this profile as a distribution.
-description: 'Custom installer that allows for selection of recipes.'
+description: 'Provides install-time tweaks. Not to be used in production.'
 
 # Remove this entire `distribution` section if you'd like users to choose which profile
 # to use at the start of the install.
 distribution:
   name: Acquia Drupal CMS Installer
   install:
-    theme: drupal_cms_installer_theme
+    theme: acquia_drupal_cms_installer_theme
     finish_url: '/admin/dashboard/welcome'
 
 # A list of forms that should be presented to the user before choosing database

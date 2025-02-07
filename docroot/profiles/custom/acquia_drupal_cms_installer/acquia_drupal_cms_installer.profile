@@ -9,7 +9,10 @@ use Drupal\RecipeKit\Installer\Hooks;
  * Implements hook_install_tasks().
  */
 function acquia_drupal_cms_installer_install_tasks(): array {
-  return Hooks::installTasks();
+  return array_merge(
+    ['acquia_drupal_cms_installer_tweak_config' => []],
+    Hooks::installTasks(),
+  );
 }
 
 /**
@@ -24,4 +27,21 @@ function acquia_drupal_cms_installer_install_tasks_alter(array &$tasks, array $i
  */
 function acquia_drupal_cms_installer_form_alter(array &$form, FormStateInterface $form_state, string $form_id): void {
   Hooks::formAlter($form, $form_state, $form_id);
+}
+
+/**
+ * Tell Package Manager about acquia/drupal-recommended-settings.
+ *
+ * @return void
+ */
+function acquia_drupal_cms_installer_tweak_config(): void {
+  $config = \Drupal::configFactory()->getEditable('package_manager.settings');
+  $additional_trusted_composer_plugins = $config->get('additional_trusted_composer_plugins');
+  $additional_trusted_composer_plugins[] = 'acquia/drupal-recommended-settings';
+
+  $config->set(
+    'additional_trusted_composer_plugins',
+    $additional_trusted_composer_plugins,
+  );
+  $config->save();
 }
