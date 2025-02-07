@@ -36,12 +36,15 @@ function acquia_drupal_cms_installer_form_alter(array &$form, FormStateInterface
  */
 function acquia_drupal_cms_installer_tweak_config(): void {
   $config = \Drupal::configFactory()->getEditable('package_manager.settings');
-  $additional_trusted_composer_plugins = $config->get('additional_trusted_composer_plugins');
-  $additional_trusted_composer_plugins[] = 'acquia/drupal-recommended-settings';
+
+  $additional_trusted_composer_plugins = array_merge(
+    $config->get('additional_trusted_composer_plugins'),
+    ['acquia/drupal-recommended-settings']
+  );
 
   $config->set(
     'additional_trusted_composer_plugins',
-    $additional_trusted_composer_plugins,
+    $additional_trusted_composer_plugins
   );
   $config->save();
 }
