@@ -5,14 +5,14 @@ on: [push, pull_request]
 permissions:
   contents: read
 
-env:
-  # Trick env detector into thinking we're in a supported CI environment.
-  PIPELINE_ENV: 'pipelines'
-
 jobs:
   build-install:
 
     runs-on: ubuntu-latest
+
+    env:
+      # Trick env detector into thinking we're in a supported CI environment.
+      PIPELINE_ENV: 'pipelines'
 
     services:
       mysql:
@@ -22,7 +22,9 @@ jobs:
           # so we can create and migrate the test database.
           # See: https://hub.docker.com/_/mysql
           MYSQL_DATABASE: drupal
+          MYSQL_PASSWORD: drupal
           MYSQL_ROOT_PASSWORD: drupal
+          MYSQL_ROOT_HOST: "%"
         ports:
           # Opens port 3306 on service container and host
           # https://docs.github.com/en/actions/using-containerized-services/about-service-containers
