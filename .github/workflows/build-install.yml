@@ -5,6 +5,10 @@ on: [push, pull_request]
 permissions:
   contents: read
 
+env:
+  # Trick env detector into thinking we're in a supported CI environment.
+  PIPELINE_ENV: 'pipelines'
+
 jobs:
   build-install:
 
