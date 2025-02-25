@@ -59,7 +59,9 @@ jobs:
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: Override settings file
-        run: echo "require DRUPAL_ROOT . '/../.github/fixtures/gh-actions.settings.php';" >> .docroot/sites/default/settings/settings.php
+        run:
+          - pwd
+          - echo "require DRUPAL_ROOT . '/../.github/fixtures/gh-actions.settings.php';" >> docroot/sites/default/settings/settings.php
 
       - name: Install Drupal
         run: |
