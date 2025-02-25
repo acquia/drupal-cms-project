@@ -1,15 +1,15 @@
-# GitHub Action for Symfony with MySQL
+# GitHub Action for Drupal with MySQL
 name: Compose and install Drupal CMS
 on: [push, pull_request]
 jobs:
   symfony:
-    name: Symfony (PHP ${{ matrix.php-versions }})
+    name: Drupal (PHP ${{ matrix.php-versions }})
     runs-on: ubuntu-latest
 
     # Docs: https://docs.github.com/en/actions/using-containerized-services
     services:
       mysql:
-        image: mysql:latest
+        image: mysql:5.7
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: false
           MYSQL_ROOT_PASSWORD: root
@@ -61,12 +61,6 @@ jobs:
 
       - name: Install Composer dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader
-
-      - name: Debug environment
-        run: php ./.github/fixtures/environment.php
-
-      - name: Debug connection
-        run: ./vendor/bin/drush status
 
       - name: Install Drupal
         run: ./vendor/bin/drush site:install
