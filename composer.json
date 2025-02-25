@@ -97,6 +97,9 @@
             "docroot/themes/custom/{$name}": ["type:drupal-custom-theme"]
         },
         "patches": {
+            "acquia/drupal-recommended-settings": {
+                "CI DB Settings": "patches/drs-ci-db.patch"
+            }
         }
     },
     "scripts": {}
