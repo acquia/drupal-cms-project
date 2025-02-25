@@ -61,6 +61,9 @@ jobs:
       - name: Setup db connection
         run: ./vendor/bin/drush init:settings --database=drupal --username=root --password=drupal --host=127.0.0.1 --port=3606
 
+      - name: Debug environment
+        run: php ./.github/fixtures/environment.php
+
       - name: Debug connection
         run: ./vendor/bin/drush status
 
