@@ -59,4 +59,4 @@ jobs:
         run: |
           ./vendor/bin/drush site:install --db-url=${DATABASE_URL}
         env:
-          DATABASE_URL: mysql://root:symfony@127.0.0.1/symfony
+          DATABASE_URL: mysql://root:symfony@localhost/symfony
