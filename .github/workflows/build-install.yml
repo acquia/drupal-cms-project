@@ -12,8 +12,8 @@ jobs:
         image: mysql:latest
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: false
-          MYSQL_ROOT_PASSWORD: drupal
-          MYSQL_DATABASE: drupal
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: root
         ports:
           - 3306/tcp
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -42,7 +42,7 @@ jobs:
       - name: Start mysql service
         run: |
           sudo systemctl start mysql.service
-          mysql -e 'CREATE DATABASE drupal' -uroot -pdrupal
+          mysql -e 'CREATE DATABASE drupal;' -uroot -proot
 
       - name: Get composer cache directory
         id: composer-cache
