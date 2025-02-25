@@ -6,9 +6,6 @@ jobs:
     name: Symfony (PHP ${{ matrix.php-versions }})
     runs-on: ubuntu-latest
 
-    env:
-      DB_USERNAME: drupal
-
     # Docs: https://docs.github.com/en/actions/using-containerized-services
     services:
       mysql:
@@ -61,9 +58,12 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
-      - name: Run Migration
+      - name: Override settings file
+        run: echo "require DRUPAL_ROOT . '/../.github/fixtures/gh-actions.settings.php';" >> .docroot/sites/default/settings/settings.php
+
+      - name: Install Drupal
         run: |
           ./vendor/bin/drush site:install --db-url=${DATABASE_URL}
         env:
-          DATABASE_URL: mysql://drupal:drupal@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/drupal
+          DATABASE_URL: mysql://root:drupal@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/drupal
 
