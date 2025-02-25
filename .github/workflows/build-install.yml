@@ -59,10 +59,10 @@ jobs:
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: Setup db connection
-        run: ./vendor/bin/drush init:settings --database=drupal --username=root --password=drupal --host=127.0.0.1 --port=3606 --uri=gh-action-ci
+        run: ./vendor/bin/drush init:settings --database=drupal --username=root --password=drupal --host=127.0.0.1 --port=3606
+
+      - name: Debug connection
+        run: ./vendor/bin/drush status
 
       - name: Install Drupal
-        run: ./vendor/bin/drush site:install --uri=gh-actions-ci
-        env:
-          DATABASE_URL: mysql://root:drupal@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/drupal
-
+        run: ./vendor/bin/drush site:install
