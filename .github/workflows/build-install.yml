@@ -1,6 +1,10 @@
 # GitHub Action for Drupal with MySQL
 name: Compose and install Drupal CMS
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '1 0 * * *'
 jobs:
   symfony:
     name: Drupal (PHP ${{ matrix.php-versions }})
