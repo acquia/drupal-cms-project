@@ -2,7 +2,7 @@
   $databases['default']['replica'][] = [
     'driver' => 'mysql',
     'database' => 'drupal',
-    'username' => 'bla',
+    'username' => 'root',
     'password' => 'drupal',
     'host' => 3306,
   ];
