@@ -31,6 +31,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up MySQL
+        run: |
+          sudo /etc/init.d/mysql start
+          mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -uroot -proot
+          mysql -e 'SHOW DATABASES;' -uroot -proot
+          mysql -e 'CREATE USER "drupal"@"localhost" IDENTIFIED BY "drupal";' -uroot -proot
+          mysql -e 'GRANT ALL PRIVILEGES ON *.* TO "drupal"@"localhost" WITH GRANT OPTION;' -uroot -proot
+          mysql -e 'FLUSH PRIVILEGES;' -uroot -proot
+          mysql -e 'SHOW GRANTS FOR "drupal"@"localhost";' -uroot -proot
+
       - name: Validate composer.json and composer.lock
         run: composer validate --no-check-all
 
