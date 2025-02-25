@@ -65,7 +65,7 @@ jobs:
         run: echo "require DRUPAL_ROOT . '/../.github/fixtures/gh-actions.settings.php';" >> docroot/sites/default/settings/settings.php
 
       - name: Debug2
-        run: cat docroot/sites/default/settings/settings.php
+        run: cat docroot/sites/default/settings.php
 
       - name: Install Drupal
         run: |
