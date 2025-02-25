@@ -19,7 +19,7 @@
     },
     "require": {
         "acquia/drupal-environment-detector": "^1",
-        "acquia/drupal-recommended-settings": "1.1.0",
+        "acquia/drupal-recommended-settings": "^1",
         "acquia/memcache-settings": "^1",
         "composer/installers": "^2.3",
         "cweagans/composer-patches": "^1.7",
@@ -97,9 +97,6 @@
             "docroot/themes/custom/{$name}": ["type:drupal-custom-theme"]
         },
         "patches": {
-            "acquia/drupal-recommended-settings": {
-                "ACMS-4480: Include settings for MySQL Compatibility": "https://patch-diff.githubusercontent.com/raw/acquia/drupal-recommended-settings/pull/82.patch"
-            }
         }
     },
     "scripts": {}
