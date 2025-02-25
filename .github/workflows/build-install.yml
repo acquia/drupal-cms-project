@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-versions: ['8.3']
+        php-versions: ['7.4', '8.0', '8.1']
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -62,4 +62,5 @@ jobs:
         run: |
           ./vendor/bin/drush site:install --db-url=${DATABASE_URL}
         env:
-          DATABASE_URL: mysql://root:symfony@127.0.0.1/symfony
+          DATABASE_URL: mysql://root:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
+
