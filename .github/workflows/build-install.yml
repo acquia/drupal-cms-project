@@ -62,7 +62,7 @@ jobs:
         run: pwd
 
       - name: Override settings file
-        run: echo "require DRUPAL_ROOT . '/../.github/fixtures/gh-actions.settings.php';" >> docroot/sites/default/settings/settings.php
+        run: echo "require DRUPAL_ROOT . '/../.github/fixtures/gh-actions.settings.php';" >> docroot/sites/default/settings.php
 
       - name: Debug2
         run: cat docroot/sites/default/settings.php
