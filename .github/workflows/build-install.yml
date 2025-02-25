@@ -12,8 +12,8 @@ jobs:
         image: mysql:latest
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: false
-          MYSQL_ROOT_PASSWORD: symfony
-          MYSQL_DATABASE: symfony
+          MYSQL_ROOT_PASSWORD: drupal
+          MYSQL_DATABASE: drupal
         ports:
           - 3306/tcp
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -62,5 +62,5 @@ jobs:
         run: |
           ./vendor/bin/drush site:install --db-url=${DATABASE_URL}
         env:
-          DATABASE_URL: mysql://root:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
+          DATABASE_URL: mysql://root:drupal@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/drupal
 
