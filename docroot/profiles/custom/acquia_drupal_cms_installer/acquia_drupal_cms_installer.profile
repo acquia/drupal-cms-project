@@ -8,10 +8,10 @@ use Drupal\RecipeKit\Installer\Hooks;
 /**
  * Implements hook_install_tasks().
  */
-function acquia_drupal_cms_installer_install_tasks(): array {
+function acquia_drupal_cms_installer_install_tasks(array &$install_state): array {
   return array_merge(
     ['acquia_drupal_cms_installer_tweak_config' => []],
-    Hooks::installTasks(),
+    Hooks::installTasks($install_state),
   );
 }
 
