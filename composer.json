@@ -23,7 +23,7 @@
         "acquia/memcache-settings": "^1",
         "composer/installers": "^2.3",
         "cweagans/composer-patches": "^1.7",
-        "dealerdirect/phpcodesniffer-composer-installer": "1.1.0",
+        "dealerdirect/phpcodesniffer-composer-installer": "1.0.0",
         "drupal/config_sync_without_site_uuid": "^1.0@beta",
         "drupal/core-composer-scaffold": "^11.1.1",
         "drupal/core-recommended": "^11.1.1",
@@ -97,11 +97,7 @@
             "recipes/{$name}": ["type:drupal-recipe"],
             "docroot/themes/custom/{$name}": ["type:drupal-custom-theme"]
         },
-        "patches": {
-            "dealerdirect/phpcodesniffer-composer-installer": {
-                "245: Fix `The provided cwd ../squizlabs/php_codesniffer does not exist.`": "https://patch-diff.githubusercontent.com/raw/PHPCSStandards/composer-installer/pull/245.diff"
-            }
-        }
+        "patches": {}
     },
     "scripts": {
         "post-create-project-cmd": "rm -rf .github/"
