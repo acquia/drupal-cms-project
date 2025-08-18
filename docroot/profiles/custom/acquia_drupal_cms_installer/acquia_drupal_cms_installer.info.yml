@@ -14,14 +14,13 @@ description: 'Provides a recipe-based installer UI. Auto-generated from drupal/r
 distribution:
   name: Acquia Drupal CMS Installer
   install:
-    theme: acquia_drupal_cms_installer_theme
     finish_url: '/admin/dashboard/welcome'
+    theme: acquia_drupal_cms_installer_theme
 
 # A list of forms that should be presented to the user before choosing database
 # settings and installing the system. Each of these forms must implement
 # \Drupal\RecipeKit\Installer\FormInterface.
 forms:
-  - '\Drupal\RecipeKit\Installer\Form\RecipesForm'
   - '\Drupal\RecipeKit\Installer\Form\SiteNameForm'
 
 recipes:
@@ -30,20 +29,24 @@ recipes:
   required:
     - drupal/drupal_cms_starter
 
-  # This should be a set of recipe combinations to show to the user as choices at the
-  # start of the install process. The keys should be the user-facing names of the
-  # combinations, and the values should be lists of the Composer package names of the
-  # recipes that make up that combination.
-  optional:
-    'Blog':
-      - drupal/drupal_cms_blog
-    'Case Studies':
-      - drupal/drupal_cms_case_study
-    'Events':
-      - drupal/drupal_cms_events
-    'News':
-      - drupal/drupal_cms_news
-    'Person Profiles':
-      - drupal/drupal_cms_person
-    'Projects':
-      - drupal/drupal_cms_project
+# Explicitly provide an empty list of themes -- this prevents the installer from
+# injecting Stark into it.
+# @see install_profile_info()
+themes: []
+
+hide_messages:
+  # If installed in a language other than English, don't show these confusing
+  # technical messages about how many translations were imported.
+  # @see locale_translate_batch_finished()
+  - ['One translation file imported. %number translations were added, %update translations were updated and %delete translations were removed.', '@count translation files imported. %number translations were added, %update translations were updated and %delete translations were removed.']
+  - 'The configuration was successfully updated. There are %number configuration objects updated.'
+
+  # This appears mid-install if you install in a non-English language, which is confusing.
+  - 'Check <a href=":translate_status">available translations</a> for your language(s).'
+
+  # This appears post-install, or mid-install (when it's not actionable) if you install in a
+  # non-English language, but it's pointless since Drupal CMS does the proper set-up for you.
+  - 'Honeypot installed successfully. Please <a href=":url">configure Honeypot</a> to protect your forms from spam bots.'
+
+# The project for which to download translations from `localize.drupal.org`.
+project: cms
