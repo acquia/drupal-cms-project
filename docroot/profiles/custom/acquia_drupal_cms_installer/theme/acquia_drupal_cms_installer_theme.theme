@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use Drupal\Core\File\FileUrlGeneratorInterface;
+use Drupal\Core\Language\LanguageInterface;
+use Drupal\Core\Language\LanguageManager;
 
 /**
  * Implements template_preprocess_install_page().
@@ -11,6 +13,33 @@ function acquia_drupal_cms_installer_theme_preprocess_install_page(array &$varia
   $theme_path = \Drupal::theme()->getActiveTheme()->getPath();
   $variables['theme_path'] = \Drupal::service(FileUrlGeneratorInterface::class)
     ->generateString($theme_path);
+
+  // Only show the language switcher if there is no batch job in progress.
+  $batch = &batch_get();
+  if (empty($batch)) {
+    $variables['languages'] = [];
+    foreach (LanguageManager::getStandardLanguageList() as $langcode => $language) {
+      // Pass the language's native name to the template, along with its
+      // direction (if defined).
+      $variables['languages'][$langcode] = [
+        'name' => $language[1],
+        'direction' => $language[2] ?? LanguageInterface::DIRECTION_LTR,
+      ];
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function acquia_drupal_cms_installer_theme_theme(): array {
+  return [
+    'step_svg' => [
+      'variables' => [
+        'id' => NULL,
+      ],
+    ],
+  ];
 }
 
 /**
@@ -28,6 +57,11 @@ function acquia_drupal_cms_installer_theme_form_installer_site_name_form_alter(a
   $form['site_name'] += [
     '#prefix' => '<div class="cms-installer__form-group">',
     '#suffix' => '</div>',
+  ];
+  $form['svg'] = [
+    '#theme' => 'step_svg',
+    '#id' => 'name',
+    '#weight' => 1000,
   ];
   $form['actions']['submit']['#attributes']['class'] = ['button--next'];
 }
@@ -54,7 +88,11 @@ function acquia_drupal_cms_installer_theme_form_installer_recipes_form_alter(arr
     '#suffix' => '</p>',
     '#weight' => 100,
   ];
-
+  $form['svg'] = [
+    '#theme' => 'step_svg',
+    '#id' => 'recipes',
+    '#weight' => 1000,
+  ];
   $form['actions']['submit']['#attributes']['class'] = ['button--next'];
 }
 
@@ -68,6 +106,12 @@ function acquia_drupal_cms_installer_theme_form_install_settings_form_alter(arra
     '#suffix' => '</p>',
     '#weight' => -50,
   ];
+  $form['svg'] = [
+    '#theme' => 'step_svg',
+    '#id' => 'settings',
+    '#weight' => 1000,
+  ];
+  $form['driver']['#type'] = 'select';
 }
 
 /**
@@ -97,4 +141,10 @@ function acquia_drupal_cms_installer_theme_form_install_configure_form_alter(arr
       '#suffix' => '</div>',
     ];
   }
+  $form['svg'] = [
+    '#theme' => 'step_svg',
+    '#id' => 'account',
+    '#weight' => 1000,
+  ];
+  $form['actions']['submit']['#value'] = t('Finish');
 }
