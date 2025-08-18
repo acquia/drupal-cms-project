@@ -4,7 +4,12 @@ Project template for building [Drupal CMS](https://drupal.org/drupal-cms) tailor
 ## Example workflow using [Acquia CLI](https://docs.acquia.com/acquia-cloud-platform/add-ons/acquia-cli/install)
 1. Create project
    ```
-   composer create-project --stability=dev acquia/drupal-cms-project
+   composer create-project acquia/drupal-cms-project
+   ```
+
+   Or, if you want to try the pre-release 2.x version of Drupal CMS with Experience Builder:
+   ```
+   composer create-project acquia/drupal-cms-project:2.x-dev --stability=dev
    ```
 
 2. Initialize repo and commit
