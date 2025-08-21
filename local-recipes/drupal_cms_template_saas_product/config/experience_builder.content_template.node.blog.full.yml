@@ -1,0 +1,128 @@
+id: node.blog.full
+content_entity_type_id: node
+content_entity_type_bundle: blog
+content_entity_type_view_mode: full
+dependencies:
+  module:
+    - node
+  config:
+    - node.type.blog
+    - core.entity_view_mode.node.full
+    - experience_builder.component.sdc.mercury.image
+component_tree:
+  - uuid: 92e68054-9f78-4420-8752-96ec693d2fa9
+    component_id: block.system_breadcrumb_block
+    component_version: cec23aa503e2a02f
+    inputs:
+      label: Breadcrumbs
+      label_display: '0'
+  - uuid: 4e32407b-d45c-4b49-bfa6-33716f9bd4d2
+    component_id: sdc.mercury.hero-blog
+    component_version: 3369edf28650f8a1
+    inputs:
+      heading_text: 'Vivamus curae metus neque mollis orci ipsum sapien velit cursus'
+      level: 1
+      date: '2026-02-12'
+      author: 'John Smith'
+  - parent_uuid: 4e32407b-d45c-4b49-bfa6-33716f9bd4d2
+    slot: blog_media
+    uuid: 59a40305-ae72-4f38-b1fd-19e1513faf13
+    component_id: sdc.mercury.image
+    component_version: b5daf971b3493091
+    inputs:
+      media:
+        sourceType: default-relative-url
+        value:
+          src: assets/957040.jpg
+          alt: 'Placeholder text.'
+        jsonSchema:
+          type: object
+          properties:
+            src:
+              type: string
+              format: uri-reference
+              pattern: '^(/|https?://)?.*\.([Pp][Nn][Gg]|[Gg][Ii][Ff]|[Jj][Pp][Gg]|[Jj][Pp][Ee][Gg]|[Ww][Ee][Bb][Pp]|[Aa][Vv][Ii][Ff])(\?.*)?(#.*)?$'
+            alt:
+              type: string
+            width:
+              type: integer
+            height:
+              type: integer
+          required:
+            - src
+        componentId: sdc.mercury.image
+      size: 16/9
+  - uuid: ea40592d-2c03-45e8-9c19-a66a96a59ec9
+    component_id: sdc.mercury.grid-container
+    component_version: 4ce2cab23cf0c6fb
+    inputs:
+      columns: '100'
+      grid_header: false
+      grid_footer: false
+      margin_before: normal
+      margin_after: normal
+      width: 3/4
+      color_mode: light
+  - parent_uuid: ea40592d-2c03-45e8-9c19-a66a96a59ec9
+    slot: container_region
+    uuid: caa1e4b2-d58b-4140-b99b-ab3e1ce55ad5
+    component_id: sdc.mercury.text
+    component_version: f453e7c0a3958697
+    inputs:
+      text:
+        value: '<p>PUT THE BODY TEXT HERE YOU CHUMP</p>'
+      color_mode: light
+  - uuid: 4305752c-db60-48dc-837b-c7a12dd656fe
+    component_id: sdc.mercury.cta
+    component_version: 0ae205c14519d717
+    inputs:
+      heading_text: 'Lorem ipsum dolor sit amet finibus aliquam pharetra'
+      level: 2
+      text: 'Turn this into a pattern'
+      media:
+        sourceType: default-relative-url
+        value:
+          src: assets/256381.jpg
+          alt: 'Photo by pixabay'
+        jsonSchema:
+          type: object
+          properties:
+            src:
+              type: string
+              format: uri-reference
+              pattern: '^(/|https?://)?.*\.([Pp][Nn][Gg]|[Gg][Ii][Ff]|[Jj][Pp][Gg]|[Jj][Pp][Ee][Gg]|[Ww][Ee][Bb][Pp]|[Aa][Vv][Ii][Ff])(\?.*)?(#.*)?$'
+            alt:
+              type: string
+            width:
+              type: integer
+            height:
+              type: integer
+          required:
+            - src
+        componentId: sdc.mercury.cta
+      text_align: center
+      color_mode: light
+  - parent_uuid: 4305752c-db60-48dc-837b-c7a12dd656fe
+    slot: actions
+    uuid: 766d0781-cae3-471f-8d43-0f5f27659fbb
+    component_id: sdc.mercury.button
+    component_version: 7c0d1ba66d5ca41e
+    inputs:
+      variant: primary
+      disabled: false
+      label: 'Button Label'
+      icon: ph-arrow-left
+      icon_first: false
+      href: false
+  - parent_uuid: 4305752c-db60-48dc-837b-c7a12dd656fe
+    slot: actions
+    uuid: f61ffe08-6016-458e-b19f-7bef09f26382
+    component_id: sdc.mercury.button
+    component_version: 7c0d1ba66d5ca41e
+    inputs:
+      variant: secondary
+      disabled: false
+      label: 'Button Label'
+      icon: ph-arrow-left
+      icon_first: false
+      href: false

@@ -1,0 +1,49 @@
+name: SaaS Product
+type: Site
+recipes:
+  - drupal_cms_blog
+  - drupal_cms_forms
+  - drupal_cms_starter
+install:
+  - gin_login
+  - ui_icons_menu
+config:
+  import:
+    system:
+      - system.menu.footer
+  actions:
+    # Allow XB to render all content types.
+    field.storage.node.field_component_tree:
+      addToAllBundles:
+        label: Components
+        description: Stores a component tree for Experience Builder.
+    # Use Mercury's dark color scheme by default.
+    mercury.settings:
+      simpleConfigUpdate:
+        scheme: byte-dark
+    # Allow basic pages to go into the main menu, or the footer.
+    node.type.page:
+      setThirdPartySettings:
+        -
+          module: menu_ui
+          key: available_menus
+          value:
+            - main
+            - footer
+        -
+          module: menu_ui
+          key: parent
+          value: 'main:'
+    system.site:
+      simpleConfigUpdate:
+        # The Home page, built in Experience Builder.
+        page.front: '/home'
+    system.theme:
+      simpleConfigUpdate:
+          default: 'mercury'
+    views.view.blog:
+      setProperties:
+        # Opt this view into the grid-snap styling that Mercury offers.
+        tag: 'mercury:snap'
+        # Remove header text.
+        display.latest.display_options.header: []

@@ -12,9 +12,20 @@
     ],
     "homepage": "https://github.com/acquia/drupal-cms-project",
     "repositories": {
+        "cms-helper": {
+            "type": "vcs",
+            "url": "https://git.drupalcode.org/project/drupal_cms_helper.git"
+        },
         "drupal": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+        },
+        "local-recipes": {
+            "type": "path",
+            "url": "local-recipes/*",
+            "options": {
+                "symlink": true
+            }
         }
     },
     "require": {
@@ -31,7 +42,8 @@
         "drupal/drupal_cms_analytics": "*",
         "drupal/drupal_cms_forms": "*",
         "drupal/drupal_cms_seo_tools": "*",
-        "drupal/drupal_cms_starter": "1.2.3",
+        "drupal/drupal_cms_starter": "^2",
+        "drupal/drupal_cms_template_saas_product": "*",
         "drupal/experience_builder": "@alpha",
         "drupal/mysql57": "^1.0",
         "drupal/project_browser": "@beta",
@@ -96,9 +108,6 @@
         "patches": {
             "drupal/trash": {
                 "3493912 - Drupal CMS Installation Fails due to Trash": "https://git.drupalcode.org/project/trash/-/merge_requests/34/diffs.patch"
-            },
-            "drupal/drupal_cms_starter": {
-                "Full fix in 3513758 - Partial fix to fix schema error": "./patches/pb_enabled_sources_schema_fix.patch"
             }
         }
     },

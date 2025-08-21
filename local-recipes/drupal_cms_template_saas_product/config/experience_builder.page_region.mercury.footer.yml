@@ -1,0 +1,60 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - experience_builder.component.block.system_menu_block.footer
+    - experience_builder.component.block.system_menu_block.social
+    - experience_builder.component.block.webform_block
+    - experience_builder.component.sdc.mercury.footer
+  module:
+    - options
+  theme:
+    - mercury
+id: mercury.footer
+region: footer
+theme: mercury
+component_tree:
+  -
+    uuid: b4ea9fb2-d3fc-428a-9114-bce92069cbab
+    component_id: sdc.mercury.footer
+    component_version: cf282ffd2f085509
+    inputs:
+      align: true
+      color_mode: dark
+  -
+    parent_uuid: b4ea9fb2-d3fc-428a-9114-bce92069cbab
+    slot: footer_menu
+    uuid: d794fa46-51a8-4b6f-b088-4da10ad2b1aa
+    component_id: block.system_menu_block.footer
+    component_version: edacf59ecca4a7cd
+    inputs:
+      label: Footer
+      label_display: '0'
+      level: 1
+      depth: null
+      expand_all_items: false
+  -
+    parent_uuid: b4ea9fb2-d3fc-428a-9114-bce92069cbab
+    slot: footer_bottom_first
+    uuid: 1ecbf892-8e32-423d-babe-094398a3a325
+    component_id: block.system_menu_block.social
+    component_version: 2b669e6cee911c12
+    inputs:
+      label: Social
+      label_display: '0'
+      level: 1
+      depth: null
+      expand_all_items: false
+  -
+    parent_uuid: b4ea9fb2-d3fc-428a-9114-bce92069cbab
+    slot: footer_bottom_last
+    uuid: ea05da26-dd36-48ca-8c98-b464d6272168
+    component_id: block.webform_block
+    component_version: 300e9b7cdec0fec0
+    inputs:
+      webform_id: newsletter_signup
+      default_data: ''
+      redirect: false
+      lazy: false
+      label: Webform
+      label_display: '0'
