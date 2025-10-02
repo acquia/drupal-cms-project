@@ -97,11 +97,7 @@
             "recipes/{$name}": ["type:drupal-recipe"],
             "docroot/themes/custom/{$name}": ["type:drupal-custom-theme"]
         },
-        "patches": {
-            "drupal/trash": {
-                "3493912 - Drupal CMS Installation Fails due to Trash": "https://git.drupalcode.org/project/trash/-/merge_requests/34/diffs.patch"
-            }
-        }
+        "patches": {}
     },
     "scripts": {
         "post-create-project-cmd": "rm -rf .github/"
