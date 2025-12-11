@@ -62,15 +62,16 @@
     "prefer-stable": true,
     "config": {
         "allow-plugins": {
+            "acquia/drupal-recommended-settings": true,
             "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
             "drupal/core-composer-scaffold": true,
             "drupal/core-project-message": true,
+            "drupal/core-vendor-hardening": true,
             "php-http/discovery": true,
-            "acquia/drupal-recommended-settings": true,
             "phpstan/extension-installer": true,
-            "tbachert/spi": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "cweagans/composer-patches": true
+            "tbachert/spi": true
         },
         "sort-packages": true,
         "optimize-autoloader": true
