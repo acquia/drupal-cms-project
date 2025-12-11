@@ -14,7 +14,6 @@ description: 'Provides a recipe-based installer UI. Auto-generated from drupal/r
 distribution:
   name: Acquia Drupal CMS Installer
   install:
-    finish_url: '/admin/dashboard/welcome'
     theme: acquia_drupal_cms_installer_theme
 
 # A list of forms that should be presented to the user before choosing database
@@ -22,11 +21,11 @@ distribution:
 # \Drupal\RecipeKit\Installer\FormInterface.
 forms:
   - '\Drupal\RecipeKit\Installer\Form\SiteNameForm'
+  - '\Drupal\RecipeKit\Installer\Form\SiteTemplateForm'
 
 recipes:
-  # This should be a list of recipes' Composer package names that should always be
-  # applied during the install process.
-  required:
+  # The recipes to apply if the user doesn't choose a site template.
+  default:
     - drupal/drupal_cms_starter
 
 # Explicitly provide an empty list of themes -- this prevents the installer from

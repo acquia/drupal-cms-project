@@ -19,32 +19,26 @@
         "drupal": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
-        },
-        "local-recipes": {
-            "type": "path",
-            "url": "local-recipes/*",
-            "options": {
-                "symlink": true
-            }
         }
     },
     "require": {
         "acquia/drupal-environment-detector": "^1",
         "acquia/drupal-recommended-settings": "^1",
-        "acquia/memcache-settings": "^1",
+        "composer/composer": "^2.8",
         "composer/installers": "^2.3",
-        "cweagans/composer-patches": "^1.7",
+        "drupal/byte": "^1@alpha",
         "drupal/config_sync_without_site_uuid": "^1.0@beta",
-        "drupal/core-composer-scaffold": "^11.1.1",
-        "drupal/core-recommended": "^11.1.1",
-        "drupal/drupal_cms_accessibility_tools": "*",
-        "drupal/drupal_cms_ai": "*",
-        "drupal/drupal_cms_analytics": "*",
-        "drupal/drupal_cms_forms": "*",
-        "drupal/drupal_cms_seo_tools": "*",
+        "drupal/core-composer-scaffold": "^11.2.4",
+        "drupal/core-recommended": "^11.2.4",
+        "drupal/core-vendor-hardening": "^11.2.4",
+        "drupal/cva": "@beta",
+        "drupal/drupal_cms_accessibility_tools": "^2",
+        "drupal/drupal_cms_ai": "^2",
+        "drupal/drupal_cms_forms": "^2",
+        "drupal/drupal_cms_google_analytics": "^2",
+        "drupal/drupal_cms_seo_tools": "^2",
         "drupal/drupal_cms_starter": "^2",
-        "drupal/drupal_cms_template_saas_product": "*",
-        "drupal/experience_builder": "@alpha",
+        "drupal/mercury": "@alpha",
         "drupal/mysql57": "^1.0",
         "drupal/project_browser": "@beta",
         "drupal/recipe_installer_kit": "^1.0.0-alpha5",
@@ -61,15 +55,16 @@
     "prefer-stable": true,
     "config": {
         "allow-plugins": {
+            "acquia/drupal-recommended-settings": true,
             "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
             "drupal/core-composer-scaffold": true,
             "drupal/core-project-message": true,
+            "drupal/core-vendor-hardening": true,
             "php-http/discovery": true,
-            "acquia/drupal-recommended-settings": true,
             "phpstan/extension-installer": true,
-            "tbachert/spi": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "cweagans/composer-patches": true
+            "tbachert/spi": true
         },
         "sort-packages": true,
         "optimize-autoloader": true
@@ -105,11 +100,7 @@
             "recipes/{$name}": ["type:drupal-recipe"],
             "docroot/themes/custom/{$name}": ["type:drupal-custom-theme"]
         },
-        "patches": {
-            "drupal/trash": {
-                "3493912 - Drupal CMS Installation Fails due to Trash": "https://git.drupalcode.org/project/trash/-/merge_requests/34/diffs.patch"
-            }
-        }
+        "patches": {}
     },
     "scripts": {
         "post-create-project-cmd": "rm -rf .github/"
