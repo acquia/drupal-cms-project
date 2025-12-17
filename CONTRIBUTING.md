@@ -4,7 +4,7 @@
 
 Like all open source software, you are permitted and encouraged to extend this project as much as you like - via version control and build systems you maintain.
 
-We accept suggestions for the project through our Github issue queue. You may submit suggestions through our issue queue on Drupal.org.
+We accept suggestions for the project through our Github issue queue.
 
 ## Internal Acquia Contributions
 
