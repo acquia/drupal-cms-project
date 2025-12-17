@@ -1,5 +1,5 @@
-# Drupal CMS Tailored for Acquia Hosting
-Project template for building [Drupal CMS](https://drupal.org/drupal-cms) tailored for Acquia hosting. This project follows the official Drupal CMS releases plus includes Acquia-specific additions and integrations.
+# Drupal CMS - Acquia Hosting Tailored Version
+Project template for building [Drupal CMS](https://drupal.org/drupal-cms) tailored for Acquia hosting. This project follows the official Drupal CMS releases and includes Acquia-specific additions and integrations.
 
 ## Example workflow using [Acquia CLI](https://docs.acquia.com/acquia-cloud-platform/add-ons/acquia-cli/install)
 1. Create project
