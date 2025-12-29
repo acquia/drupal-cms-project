@@ -1,12 +1,14 @@
-# Contributing to Acquia Drupal CMS Project
+# Contributing to Drupal CMS - Acquia Hosting Tailored Version
 
 ## External Contributions
-Like all open source software, you are permitted and encouraged to extend Acquia Drupal CMS Project as much as you like - via version control and build systems you maintain.
 
-We accept suggestions for Acquia Drupal CMS Project through our Github issue queue. You may submit patches through our issue queue on Drupal.org.
+Like all open source software, you are permitted and encouraged to extend this project as much as you like - via version control and build systems you maintain.
+
+We accept suggestions for the project through our Github issue queue.
 
 ## Internal Acquia Contributions
-Contributing to Acquia Drupal CMS Project requires the ability to push branches to the repository, since we can not use forks. If you need access, speak to Acquia Drupal CMS Project engineering leadership.
+
+Contributing to this project requires the ability to push branches to the repository, since we can not use forks. If you need access, speak to Acquia engineering leaders of this project.
 
 git checkout develop
 git pull
