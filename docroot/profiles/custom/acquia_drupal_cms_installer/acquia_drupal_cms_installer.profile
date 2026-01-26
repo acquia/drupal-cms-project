@@ -56,20 +56,6 @@ function acquia_drupal_cms_installer_form_install_configure_form_alter(array &$f
  * @return void
  */
 function acquia_drupal_cms_installer_helper(): void {
-  // Tell package manager about acquia/drupal-recommended-settings.
-  $config = \Drupal::configFactory()->getEditable('package_manager.settings');
-
-  $additional_trusted_composer_plugins = array_merge(
-    $config->get('additional_trusted_composer_plugins'),
-    ['acquia/drupal-recommended-settings']
-  );
-
-  $config->set(
-    'additional_trusted_composer_plugins',
-    $additional_trusted_composer_plugins
-  );
-  $config->save();
-
   // Uninstall Package Manager and Automatic Updates.
   \Drupal::service('module_installer')->uninstall(['package_manager', 'automatic_updates']);
 }
