@@ -56,6 +56,5 @@ function acquia_drupal_cms_installer_form_install_configure_form_alter(array &$f
  * @return void
  */
 function acquia_drupal_cms_installer_helper(): void {
-  // Uninstall Package Manager and Automatic Updates.
   \Drupal::service('module_installer')->uninstall(['package_manager', 'automatic_updates']);
 }
