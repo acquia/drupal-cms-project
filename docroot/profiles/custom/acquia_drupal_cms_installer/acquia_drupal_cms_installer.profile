@@ -12,7 +12,7 @@ use Drupal\RecipeKit\Installer\Messenger;
  */
 function acquia_drupal_cms_installer_install_tasks(array &$install_state): array {
   return array_merge(
-    ['acquia_drupal_cms_installer_tweak_config' => []],
+    ['acquia_drupal_cms_installer_helper' => []],
     Hooks::installTasks($install_state),
   );
 }
@@ -51,11 +51,12 @@ function acquia_drupal_cms_installer_form_install_configure_form_alter(array &$f
 }
 
 /**
- * Tell Package Manager about acquia/drupal-recommended-settings.
+ * Various Acquia-specific tweaks.
  *
  * @return void
  */
-function acquia_drupal_cms_installer_tweak_config(): void {
+function acquia_drupal_cms_installer_helper(): void {
+  // Tell package manager about acquia/drupal-recommended-settings.
   $config = \Drupal::configFactory()->getEditable('package_manager.settings');
 
   $additional_trusted_composer_plugins = array_merge(
@@ -68,4 +69,7 @@ function acquia_drupal_cms_installer_tweak_config(): void {
     $additional_trusted_composer_plugins
   );
   $config->save();
+
+  // Uninstall Package Manager and Automatic Updates.
+  \Drupal::service('module_installer')->uninstall(['package_manager', 'automatic_updates']);
 }
