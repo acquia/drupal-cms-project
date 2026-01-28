@@ -7,11 +7,6 @@ Project template for building [Drupal CMS](https://drupal.org/drupal-cms) tailor
    composer create-project acquia/drupal-cms-project
    ```
 
-   Or, if you want to try the pre-release 2.x version of Drupal CMS with Experience Builder:
-   ```
-   composer create-project acquia/drupal-cms-project:2.x-dev --stability=dev
-   ```
-
 2. Initialize repo and commit
    ```
    cd drupal-cms-project && git init && git add -A && git commit -m "initial build"
@@ -19,12 +14,12 @@ Project template for building [Drupal CMS](https://drupal.org/drupal-cms) tailor
 
 3. Build artifact and push to cloud
    ```
-   /usr/local/bin/acli push:artifact --destination-git-urls=<YOUR_ACQUIA_GIT_REPO_URL> --destination-git-branch=artifact--dcms-scaffold --quiet
+   /usr/local/bin/acli push:artifact --destination-git-urls=<YOUR_ACQUIA_GIT_REPO_URL> --destination-git-branch=dist --quiet
    ```
 
 4. Checkout the new branch on cloud
    ```
-   /usr/local/bin/acli app:task-wait "$(/usr/local/bin/acli api:environments:code-switch <YOUR_AH_SITEGROUP>.dev artifact--dcms-scaffold)"
+   /usr/local/bin/acli app:task-wait "$(/usr/local/bin/acli api:environments:code-switch <YOUR_AH_SITEGROUP>.dev dist)"
    ```
 
 5. Drop database on cloud if you have previously installed a site and want to see the Drupal CMS installer
@@ -35,7 +30,7 @@ Project template for building [Drupal CMS](https://drupal.org/drupal-cms) tailor
 6. Visit your site!
 
 ## License
-Copyright (C) 2025 Acquia, Inc.
+Copyright (C) 2026 Acquia, Inc.
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 2 as published by the Free Software Foundation.
 
