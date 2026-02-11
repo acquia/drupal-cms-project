@@ -90,9 +90,9 @@ jobs:
           mkdir -p docroot/sites/default/files
           chmod 777 docroot/sites/default/files
 
-          # Install Drupal with SQLite using absolute path
+          # Install Drupal with SQLite (relative path from docroot)
           ./vendor/bin/drush site:install minimal \
-            --db-url="sqlite://$(pwd)/docroot/sites/default/files/.ht.sqlite" \
+            --db-url="sqlite://localhost/sites/default/files/.ht.sqlite" \
             --site-name="Drupal CMS" \
             --account-name=admin \
             --account-pass=admin \
