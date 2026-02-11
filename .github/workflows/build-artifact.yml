@@ -101,7 +101,7 @@ jobs:
           mkdir -p config/default
 
           # Install Drupal with MySQL
-          ./vendor/bin/drush site:install minimal \
+          ./vendor/bin/drush site:install recipes/drupal_cms_starter \
             --db-url="mysql://drupal:drupal@127.0.0.1/drupal" \
             --site-name="Drupal CMS" \
             --account-name=admin \
