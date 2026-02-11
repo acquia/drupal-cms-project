@@ -64,12 +64,15 @@ jobs:
         run: |
           cd /tmp/artifact
 
+          # Remove .gitignore so all files (including vendor, docroot/core, etc.) can be committed
+          rm -f .gitignore .gitattributes .editorconfig
+
           # Initialize git in artifact directory
           git init
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Add all files
+          # Add all files (including previously ignored directories)
           git add -A
 
           # Create commit
