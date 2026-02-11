@@ -81,18 +81,23 @@ jobs:
           # Force push to dist branch (creating orphan branch with no history)
           git push --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:dist
 
+      - name: Start MySQL and create database
+        run: |
+          sudo systemctl start mysql.service
+          mysql -e 'CREATE USER "drupal"@"127.0.0.1" IDENTIFIED BY "drupal";' -uroot -proot
+          mysql -e 'CREATE DATABASE drupal;' -uroot -proot
+          mysql -e 'GRANT ALL PRIVILEGES ON drupal.* TO "drupal"@"127.0.0.1";' -uroot -proot
+
       - name: Install Drupal and export configuration
         run: |
           cd /tmp/artifact
 
           # Create necessary directories
           mkdir -p config/default
-          mkdir -p docroot/sites/default/files
-          chmod 777 docroot/sites/default/files
 
-          # Install Drupal with SQLite (relative path from docroot)
+          # Install Drupal with MySQL
           ./vendor/bin/drush site:install minimal \
-            --db-url="sqlite://localhost/sites/default/files/.ht.sqlite" \
+            --db-url="mysql://drupal:drupal@127.0.0.1/drupal" \
             --site-name="Drupal CMS" \
             --account-name=admin \
             --account-pass=admin \
@@ -109,11 +114,9 @@ jobs:
         run: |
           cd /tmp/artifact
 
-          # Create a .gitignore to exclude database and settings changes
+          # Create a .gitignore to exclude settings changes and files directory
           cat > .gitignore << 'EOF'
-          # Exclude SQLite database
-          *.sqlite
-          # Exclude settings.php changes (if any)
+          # Exclude settings.php changes (if any were made during install)
           docroot/sites/*/settings.php
           docroot/sites/*/settings.local.php
           # Exclude files directory except .htaccess
