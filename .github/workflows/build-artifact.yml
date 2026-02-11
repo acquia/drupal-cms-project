@@ -64,16 +64,21 @@ jobs:
         run: |
           cd /tmp/artifact
 
-          # Remove .gitignore so all files (including vendor, docroot/core, etc.) can be committed
-          rm -f .gitignore .gitattributes .editorconfig
+          # Remove ALL .gitignore files recursively so scaffold and built files can be committed
+          find . -name ".gitignore" -type f -delete
+          rm -f .gitattributes .editorconfig
 
           # Initialize git in artifact directory
           git init
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Add all files (including previously ignored directories)
+          # Add all files (including previously ignored directories and scaffold files)
           git add -A
+
+          # Verify scaffold files are staged
+          echo "Checking for scaffold files:"
+          git ls-files docroot/ | grep -E "(index\.php|autoload\.php|\.htaccess|update\.php)" || echo "Warning: Some scaffold files may be missing"
 
           # Create initial commit with built artifact
           git commit -m "Build artifact from ${{ github.sha }}"
