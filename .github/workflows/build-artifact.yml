@@ -1,0 +1,81 @@
+name: Build and Deploy Artifact to dist Branch
+
+on:
+  push:
+    branches:
+      - 2.x  # Trigger on pushes to the main branch
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  build-artifact:
+    name: Build Drupal Artifact
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, mysql
+          coverage: none
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install Composer dependencies
+        run: composer install --no-dev --no-progress --prefer-dist --optimize-autoloader
+
+      - name: Prepare artifact directory
+        run: |
+          # Create a temporary directory for the artifact
+          mkdir -p /tmp/artifact
+
+          # Copy all files to artifact directory, excluding .git and .github
+          rsync -av \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='node_modules' \
+            --exclude='.idea' \
+            --exclude='.vscode' \
+            ./ /tmp/artifact/
+
+          # Ensure vendor and docroot are included
+          echo "Artifact size:"
+          du -sh /tmp/artifact
+
+      - name: Deploy to dist branch
+        run: |
+          cd /tmp/artifact
+
+          # Initialize git in artifact directory
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Add all files
+          git add -A
+
+          # Create commit
+          git commit -m "Build artifact from ${{ github.sha }}"
+
+          # Force push to dist branch (creating orphan branch with no history)
+          git push --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:dist
+
+      - name: Summary
+        run: |
+          echo "✅ Artifact successfully deployed to dist branch"
+          echo "📦 Source commit: ${{ github.sha }}"
+          echo "🌿 Artifact branch: dist"
