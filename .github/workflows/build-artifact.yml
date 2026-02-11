@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - 2.x  # Trigger on pushes to the main branch
+  schedule:
+    - cron: '0 0 * * *'   # Midnight UTC
+    - cron: '0 8 * * *'   # 8am UTC
+    - cron: '0 16 * * *'  # 4pm UTC
   workflow_dispatch:  # Allow manual triggering
 
 jobs:
