@@ -75,14 +75,68 @@ jobs:
           # Add all files (including previously ignored directories)
           git add -A
 
-          # Create commit
+          # Create initial commit with built artifact
           git commit -m "Build artifact from ${{ github.sha }}"
 
           # Force push to dist branch (creating orphan branch with no history)
           git push --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:dist
+
+      - name: Install Drupal and export configuration
+        run: |
+          cd /tmp/artifact
+
+          # Create config directory if it doesn't exist
+          mkdir -p config/default
+
+          # Install Drupal with SQLite
+          ./vendor/bin/drush site:install minimal \
+            --db-url=sqlite://sites/default/files/.ht.sqlite \
+            --site-name="Drupal CMS" \
+            --account-name=admin \
+            --account-pass=admin \
+            --yes
+
+          # Export configuration
+          ./vendor/bin/drush config:export --yes
+
+          # Verify config was exported
+          echo "Exported configuration files:"
+          ls -la config/default/ | head -20
+
+      - name: Commit exported configuration
+        run: |
+          cd /tmp/artifact
+
+          # Create a .gitignore to exclude database and settings changes
+          cat > .gitignore << 'EOF'
+          # Exclude SQLite database
+          *.sqlite
+          # Exclude settings.php changes (if any)
+          docroot/sites/*/settings.php
+          docroot/sites/*/settings.local.php
+          # Exclude files directory except .htaccess
+          docroot/sites/*/files/*
+          !docroot/sites/*/files/.htaccess
+          EOF
+
+          # Stage the config directory and .gitignore
+          git add config/
+          git add .gitignore
+
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "No configuration changes to commit"
+          else
+            # Commit the configuration
+            git commit -m "Add exported configuration from fresh install"
+
+            # Push the updated dist branch
+            git push --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:dist
+          fi
 
       - name: Summary
         run: |
           echo "✅ Artifact successfully deployed to dist branch"
           echo "📦 Source commit: ${{ github.sha }}"
           echo "🌿 Artifact branch: dist"
+          echo "⚙️  Configuration exported to config/default/"
