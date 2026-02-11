@@ -85,12 +85,14 @@ jobs:
         run: |
           cd /tmp/artifact
 
-          # Create config directory if it doesn't exist
+          # Create necessary directories
           mkdir -p config/default
+          mkdir -p docroot/sites/default/files
+          chmod 777 docroot/sites/default/files
 
-          # Install Drupal with SQLite
+          # Install Drupal with SQLite using absolute path
           ./vendor/bin/drush site:install minimal \
-            --db-url=sqlite://sites/default/files/.ht.sqlite \
+            --db-url="sqlite://$(pwd)/docroot/sites/default/files/.ht.sqlite" \
             --site-name="Drupal CMS" \
             --account-name=admin \
             --account-pass=admin \
