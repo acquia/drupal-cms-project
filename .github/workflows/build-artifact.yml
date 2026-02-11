@@ -99,6 +99,12 @@ jobs:
 
           # Create necessary directories
           mkdir -p config/default
+          mkdir -p docroot/sites/default/files
+          mkdir -p private
+
+          # Set proper permissions
+          chmod -R 777 docroot/sites/default/files
+          chmod -R 777 private
 
           # Install Drupal with MySQL
           ./vendor/bin/drush site:install recipes/drupal_cms_starter \
@@ -119,14 +125,17 @@ jobs:
         run: |
           cd /tmp/artifact
 
-          # Create a .gitignore to exclude settings changes and files directory
+          # Create a .gitignore to exclude settings changes and files directories
           cat > .gitignore << 'EOF'
           # Exclude settings.php changes (if any were made during install)
           docroot/sites/*/settings.php
           docroot/sites/*/settings.local.php
-          # Exclude files directory except .htaccess
+          # Exclude public files directory except .htaccess
           docroot/sites/*/files/*
           !docroot/sites/*/files/.htaccess
+          # Exclude private files directory
+          private/*
+          !private/.htaccess
           EOF
 
           # Stage the config directory and .gitignore
