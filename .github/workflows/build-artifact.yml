@@ -42,6 +42,15 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-dev --no-progress --prefer-dist --optimize-autoloader
 
+      - name: Create required directories
+        run: |
+          mkdir -p config/default
+          mkdir -p docroot/sites/default/files
+          mkdir -p private/default
+          touch config/default/.gitkeep
+          touch docroot/sites/default/files/.gitkeep
+          touch private/default/.gitkeep
+
       - name: Prepare artifact directory
         run: |
           # Create a temporary directory for the artifact
@@ -55,10 +64,6 @@ jobs:
             --exclude='.idea' \
             --exclude='.vscode' \
             ./ /tmp/artifact/
-
-          # Ensure vendor and docroot are included
-          echo "Artifact size:"
-          du -sh /tmp/artifact
 
       - name: Deploy to dist branch
         run: |
