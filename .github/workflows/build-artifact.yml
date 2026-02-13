@@ -87,9 +87,18 @@ jobs:
 
           # Export configuration
           ./vendor/bin/drush config:export --yes
-          
+
+      - name: Sanitize and provide way to generate unique values.
+        run: |
           # Remove the site UUID so we can create a unique one for each clone of the artifact.
           yq -i '.uuid = ""' "config/default/system.site.yml"
+          
+          mkdir scripts
+          cat > scripts/populate-unique.sh << 'EOF'
+          #!/bin/sh
+          ./vendor/bin/drush config:set system.site uuid "$(uuidgen)" --yes
+          ./vendor/bin/drush drupal:hash-salt:init
+          EOF
 
       - name: Deploy to dist branch
         run: |
@@ -103,7 +112,7 @@ jobs:
           !files-private/default/.htaccess
           
           # This file shouldn't be included in the actual artifact.
-          .gitginore
+          .gitignore
           
           # Files that we'll regenerate for each unique clone.
           salt.txt          
