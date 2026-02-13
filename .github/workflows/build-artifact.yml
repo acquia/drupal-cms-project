@@ -101,8 +101,8 @@ jobs:
           salt.txt          
           EOF
           
+          # Provide a script to repopulate these values.
           mkdir scripts
-          
           cat > scripts/populate-unique.sh << EOF1
           #!/bin/sh
           rm config/default/system.site.yml
@@ -124,6 +124,8 @@ jobs:
           
           ./vendor/bin/drush drupal:hash-salt:init
           EOF1
+          
+          chmod +x scripts/populate-unique.sh
 
       - name: Deploy to dist branch
         run: |
