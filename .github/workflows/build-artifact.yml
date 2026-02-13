@@ -103,12 +103,12 @@ jobs:
           
           mkdir scripts
           
-          cat > scripts/populate-unique.sh << 'EOF1'
+          cat > scripts/populate-unique.sh << EOF1
           #!/bin/sh
           rm config/default/system.site.yml
-          cat > config/default/system.site.yml << 'EOF2'
+          cat > config/default/system.site.yml << EOF2
           langcode: en
-          uuid: '$(uuidgen)'
+          uuid: "$(uuidgen)"
           name: 'Drupal CMS'
           mail: admin@example.com
           slogan: ''
