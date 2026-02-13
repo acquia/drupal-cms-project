@@ -102,17 +102,34 @@ jobs:
           EOF
           
           mkdir scripts
-          cat > scripts/populate-unique.sh << 'EOF'
+          
+          cat > scripts/populate-unique.sh << 'EOF1'
           #!/bin/sh
-          ./vendor/bin/drush config:set system.site uuid "$(uuidgen)" --yes
+          rm config/default/system.site.yml
+          cat > config/default/system.site.yml << 'EOF2'
+          langcode: en
+          uuid: 'ABC12345-6789-ABCD-1234567890AB'
+          name: 'Drupal CMS'
+          mail: admin@example.com
+          slogan: ''
+          page:
+            403: /user/login
+            404: ''
+            front: /page/1
+          admin_compact_mode: false
+          weight_select_max: 100
+          default_langcode: en
+          mail_notification: null
+          EOF2
+          
           ./vendor/bin/drush drupal:hash-salt:init
-          EOF
+          EOF1
 
       - name: Deploy to dist branch
         run: |
           cd /tmp/artifact
 
-          cat >> filename.txt << 'EOF'
+          cat >> .gitignore << 'EOF'
           
           # Ensure the files directories are included in the artifact, but ignore their contents except for .htaccess files.
           docroot/sites/*/files/*
