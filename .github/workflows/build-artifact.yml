@@ -131,7 +131,7 @@ jobs:
         run: |
           cd /tmp/artifact
 
-          cat >> .gitignore << 'EOF'
+          cat >> .gitignore << EOF
           
           # Ensure the files directories are included in the artifact, but ignore their contents except for .htaccess files.
           docroot/sites/*/files/*
@@ -143,7 +143,7 @@ jobs:
           .gitignore
           EOF
 
-          # Remove ALL other .gitignore files recursively so scaffold and built files can be committed
+          # Remove ALL other .gitignore files recursively so scaffold and built files can be committed.
           find . -name ".gitignore" -type f ! -path "./.gitignore" -delete
           rm -f .gitattributes .editorconfig
 
