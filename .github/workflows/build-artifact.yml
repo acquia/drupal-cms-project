@@ -90,17 +90,12 @@ jobs:
         run: |
           cd /tmp/artifact
 
-          # Create a .gitignore to exclude settings changes and files directories
+          # Create a .gitignore to exclude files directories
           cat > .gitignore << 'EOF'
-          # Exclude settings.php changes (if any were made during install)
-          docroot/sites/*/settings.php
-          docroot/sites/*/settings.local.php
-          # Exclude public files directory except .htaccess
           docroot/sites/*/files/*
           !docroot/sites/*/files/.htaccess
-          # Exclude private files directory
-          private/*
-          !private/.htaccess
+          private/default/*
+          !private/default/.htaccess
           EOF
 
           # Remove ALL other .gitignore files recursively so scaffold and built files can be committed
