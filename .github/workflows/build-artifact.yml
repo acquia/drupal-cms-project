@@ -87,12 +87,12 @@ jobs:
 
           # Export configuration
           ./vendor/bin/drush config:export --yes
-
-      - name: Sanitize and provide way to generate unique values.
-        run: |
+          
           # Remove the site UUID so we can create a unique one for each clone of the artifact.
           yq -i '.uuid = ""' "config/default/system.site.yml"
-          
+
+      - name: Sanitize and provide way to generate unique values.
+        run: |  
           mkdir scripts
           cat > scripts/populate-unique.sh << 'EOF'
           #!/bin/sh
