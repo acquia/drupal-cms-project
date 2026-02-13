@@ -1,5 +1,4 @@
 name: Build and Deploy Artifact to dist Branch
-
 on:
   push:
     branches:
@@ -9,6 +8,8 @@ on:
     - cron: '0 8 * * *'
     - cron: '0 16 * * *'
   workflow_dispatch:
+env:
+  ARTIFACT_DIR: /tmp/artifact
 
 jobs:
   build-artifact:
@@ -51,16 +52,16 @@ jobs:
 
       - name: Prepare artifact directory
         run: |
-          mkdir -p /tmp/artifact
+          mkdir -p $ARTIFACT_DIR
 
           rsync -av \
             --exclude='.git' \
             --exclude='.github' \
-            ./ /tmp/artifact/
+            ./ $ARTIFACT_DIR
 
       - name: Install Drupal and export configuration
         run: |
-          cd /tmp/artifact
+          cd $ARTIFACT_DIR
 
           # Create files directories and make sure they stick around.
           mkdir -p docroot/sites/default/files
@@ -83,7 +84,7 @@ jobs:
 
       - name: Remove values that should be unique and provide a way to replace them.
         run: |
-          cd /tmp/artifact
+          cd $ARTIFACT_DIR
           
           # Remove the site UUID.
           yq -i '.uuid = ""' "config/default/system.site.yml"
@@ -122,7 +123,7 @@ jobs:
 
       - name: Deploy to dist branch
         run: |
-          cd /tmp/artifact
+          cd $ARTIFACT_DIR
 
           cat >> .gitignore << EOF
           
