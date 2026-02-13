@@ -67,12 +67,16 @@ jobs:
         run: |
           cd /tmp/artifact
 
-          # Set proper permissions for Drupal directories
+          # Create files directories and make sure they stick around.
           mkdir -p docroot/sites/default/files
           mkdir -p files-private/default
           touch docroot/sites/default/files/.gitkeep
           touch files-private/default/.gitkeep
-
+          
+          # Ensure the private files directory has an .htaccess file.
+          HTACCESS_CONTENT=$(./vendor/bin/drush php-eval 'echo \Drupal\Component\FileSecurity\FileSecurity::htaccessLines(TRUE);')
+          echo "$HTACCESS_CONTENT" > files-private/default/.htaccess
+          
           # Install Drupal with MySQL
           ./vendor/bin/drush site:install recipes/drupal_cms_starter \
             --db-url="mysql://drupal:drupal@127.0.0.1/drupal" \
