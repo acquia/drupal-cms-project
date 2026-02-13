@@ -87,17 +87,26 @@ jobs:
 
           # Export configuration
           ./vendor/bin/drush config:export --yes
+          
+          # Remove the site UUID so we can create a unique one for each clone of the artifact.
+          yq -i '.uuid = ""' "config/default/system.site.yml"
 
       - name: Deploy to dist branch
         run: |
           cd /tmp/artifact
 
-          # Create a .gitignore to exclude files directories
           cat > .gitignore << 'EOF'
+          # Ensure the files directories are included in the artifact, but ignore their contents except for .htaccess files.
           docroot/sites/*/files/*
           !docroot/sites/*/files/.htaccess
           files-private/default/*
           !files-private/default/.htaccess
+          
+          # This file shouldn't be included in the actual artifact.
+          .gitginore
+          
+          # Files that we'll regenerate for each unique clone.
+          salt.txt          
           EOF
 
           # Remove ALL other .gitignore files recursively so scaffold and built files can be committed
@@ -117,5 +126,3 @@ jobs:
         run: |
           echo "✅ Artifact successfully deployed to dist branch"
           echo "📦 Source commit: ${{ github.sha }}"
-          echo "🌿 Artifact branch: dist"
-          echo "⚙️  Configuration exported to config/default/"
