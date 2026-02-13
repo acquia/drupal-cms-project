@@ -84,10 +84,6 @@ jobs:
           # Export configuration
           ./vendor/bin/drush config:export --yes
 
-          # Verify config was exported
-          echo "Exported configuration files:"
-          ls -la config/default/ | head -20
-
       - name: Deploy to dist branch
         run: |
           cd /tmp/artifact
@@ -96,8 +92,8 @@ jobs:
           cat > .gitignore << 'EOF'
           docroot/sites/*/files/*
           !docroot/sites/*/files/.htaccess
-          private/default/*
-          !private/default/.htaccess
+          files-private/default/*
+          !files-private/default/.htaccess
           EOF
 
           # Remove ALL other .gitignore files recursively so scaffold and built files can be committed
@@ -109,23 +105,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Add all files (including scaffold files, vendor, and exported config)
           git add -A
-
-          # Verify scaffold files and config are staged
-          echo "Checking for scaffold files:"
-          git ls-files docroot/ | grep -E "(index\.php|autoload\.php|\.htaccess|update\.php)" || echo "Warning: Some scaffold files may be missing"
-          echo "Checking for exported config:"
-          git ls-files config/default/ | head -5 || echo "Warning: Config files may be missing"
-
-          # Create single commit with complete artifact
-          git commit -m "Build artifact from ${{ github.sha }}" \
-            -m "Includes:" \
-            -m "- Composer dependencies (vendor/)" \
-            -m "- Drupal core scaffold files" \
-            -m "- Exported configuration from fresh install"
-
-          # Force push to dist branch (creating orphan branch with no history)
+          git commit -m "Build artifact from ${{ github.sha }}"
           git push --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:dist
 
       - name: Summary
