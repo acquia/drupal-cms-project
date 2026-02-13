@@ -122,12 +122,11 @@ jobs:
           git ls-files config/default/ | head -5 || echo "Warning: Config files may be missing"
 
           # Create single commit with complete artifact
-          git commit -m "Build artifact from ${{ github.sha }}
-
-Includes:
-- Composer dependencies (vendor/)
-- Drupal core scaffold files
-- Exported configuration from fresh install"
+          git commit -m "Build artifact from ${{ github.sha }}" \
+            -m "Includes:" \
+            -m "- Composer dependencies (vendor/)" \
+            -m "- Drupal core scaffold files" \
+            -m "- Exported configuration from fresh install"
 
           # Force push to dist branch (creating orphan branch with no history)
           git push --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:dist
