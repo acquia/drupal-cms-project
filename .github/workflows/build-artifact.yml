@@ -69,9 +69,9 @@ jobs:
 
           # Set proper permissions for Drupal directories
           mkdir -p docroot/sites/default/files
-          mkdir -p private/default
+          mkdir -p files-private/default
           touch docroot/sites/default/files/.gitkeep
-          touch private/default/.gitkeep
+          touch files-private/default/.gitkeep
 
           # Install Drupal with MySQL
           ./vendor/bin/drush site:install recipes/drupal_cms_starter \
