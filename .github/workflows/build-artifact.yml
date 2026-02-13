@@ -42,14 +42,12 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-dev --no-progress --prefer-dist --optimize-autoloader
 
-      - name: Create required directories
+      - name: Start MySQL and create database
         run: |
-          mkdir -p config/default
-          mkdir -p docroot/sites/default/files
-          mkdir -p private/default
-          touch config/default/.gitkeep
-          touch docroot/sites/default/files/.gitkeep
-          touch private/default/.gitkeep
+          sudo systemctl start mysql.service
+          mysql -e 'CREATE USER "drupal"@"127.0.0.1" IDENTIFIED BY "drupal";' -uroot -proot
+          mysql -e 'CREATE DATABASE drupal;' -uroot -proot
+          mysql -e 'GRANT ALL PRIVILEGES ON drupal.* TO "drupal"@"127.0.0.1";' -uroot -proot
 
       - name: Prepare artifact directory
         run: |
@@ -65,51 +63,13 @@ jobs:
             --exclude='.vscode' \
             ./ /tmp/artifact/
 
-      - name: Deploy to dist branch
-        run: |
-          cd /tmp/artifact
-
-          # Remove ALL .gitignore files recursively so scaffold and built files can be committed
-          find . -name ".gitignore" -type f -delete
-          rm -f .gitattributes .editorconfig
-
-          # Initialize git in artifact directory
-          git init
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          # Add all files (including previously ignored directories and scaffold files)
-          git add -A
-
-          # Verify scaffold files are staged
-          echo "Checking for scaffold files:"
-          git ls-files docroot/ | grep -E "(index\.php|autoload\.php|\.htaccess|update\.php)" || echo "Warning: Some scaffold files may be missing"
-
-          # Create initial commit with built artifact
-          git commit -m "Build artifact from ${{ github.sha }}"
-
-          # Force push to dist branch (creating orphan branch with no history)
-          git push --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:dist
-
-      - name: Start MySQL and create database
-        run: |
-          sudo systemctl start mysql.service
-          mysql -e 'CREATE USER "drupal"@"127.0.0.1" IDENTIFIED BY "drupal";' -uroot -proot
-          mysql -e 'CREATE DATABASE drupal;' -uroot -proot
-          mysql -e 'GRANT ALL PRIVILEGES ON drupal.* TO "drupal"@"127.0.0.1";' -uroot -proot
-
       - name: Install Drupal and export configuration
         run: |
           cd /tmp/artifact
 
-          # Create necessary directories
-          mkdir -p config/default
+          # Set proper permissions for Drupal directories
           mkdir -p docroot/sites/default/files
-          mkdir -p private
-
-          # Set proper permissions
-          chmod -R 777 docroot/sites/default/files
-          chmod -R 777 private
+          mkdir -p private/default
 
           # Install Drupal with MySQL
           ./vendor/bin/drush site:install recipes/drupal_cms_starter \
@@ -126,7 +86,7 @@ jobs:
           echo "Exported configuration files:"
           ls -la config/default/ | head -20
 
-      - name: Commit exported configuration
+      - name: Deploy to dist branch
         run: |
           cd /tmp/artifact
 
@@ -143,20 +103,34 @@ jobs:
           !private/.htaccess
           EOF
 
-          # Stage the config directory and .gitignore
-          git add config/
-          git add .gitignore
+          # Remove ALL other .gitignore files recursively so scaffold and built files can be committed
+          find . -name ".gitignore" -type f ! -path "./.gitignore" -delete
+          rm -f .gitattributes .editorconfig
 
-          # Check if there are changes to commit
-          if git diff --staged --quiet; then
-            echo "No configuration changes to commit"
-          else
-            # Commit the configuration
-            git commit -m "Add exported configuration from fresh install"
+          # Initialize git in artifact directory
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-            # Push the updated dist branch
-            git push --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:dist
-          fi
+          # Add all files (including scaffold files, vendor, and exported config)
+          git add -A
+
+          # Verify scaffold files and config are staged
+          echo "Checking for scaffold files:"
+          git ls-files docroot/ | grep -E "(index\.php|autoload\.php|\.htaccess|update\.php)" || echo "Warning: Some scaffold files may be missing"
+          echo "Checking for exported config:"
+          git ls-files config/default/ | head -5 || echo "Warning: Config files may be missing"
+
+          # Create single commit with complete artifact
+          git commit -m "Build artifact from ${{ github.sha }}
+
+Includes:
+- Composer dependencies (vendor/)
+- Drupal core scaffold files
+- Exported configuration from fresh install"
+
+          # Force push to dist branch (creating orphan branch with no history)
+          git push --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:dist
 
       - name: Summary
         run: |
