@@ -108,7 +108,7 @@ jobs:
           rm config/default/system.site.yml
           cat > config/default/system.site.yml << 'EOF2'
           langcode: en
-          uuid: 'ABC12345-6789-ABCD-1234567890AB'
+          uuid: '$(uuidgen)'
           name: 'Drupal CMS'
           mail: admin@example.com
           slogan: ''
