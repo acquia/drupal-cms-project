@@ -22,8 +22,8 @@ set_site_uuid() {
 
   require_file "${system_site_yml}"
 
-  # Insert UUID as the first line of the file
-  perl -pi -e "print \"uuid: ${uuid}\\n\" if \$. == 1" "${system_site_yml}"
+  # Replace UUID in system.site.yml.
+  sed -i.bak "s/^uuid: .*/uuid: ${uuid}/" "${system_site_yml}" && rm "${system_site_yml}.bak"
 
   log_info "Set site UUID to ${GREEN}${uuid}${NC} in ${GREEN}system.site.yml${NC}"
 }
@@ -98,12 +98,6 @@ export_site_content() {
 #   1 if content directory doesn't exist
 import_site_content() {
   local content_dir="$1"
-
-  if [[ ! -d "${content_dir}" ]]; then
-    log_error "Content directory not found: ${GREEN}${content_dir}${NC}"
-    exit 1
-  fi
-
   execute_drush_command content:import "${content_dir}"
   log_success "Imported site content"
 }

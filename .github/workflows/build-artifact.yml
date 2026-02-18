@@ -4,7 +4,9 @@ on:
     branches:
       - 2.x
   schedule:
-    - cron: '0 8 * * *'
+    # This workflow runs every 8 hours to build and push the code artifact
+    # with the latest dependencies.
+    - cron: 0 */8 * * *
   workflow_dispatch:
 
 env:
@@ -37,7 +39,7 @@ jobs:
         id: composer-cache
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
-      - name: Cache composer dependencies
+      - name: Cache Composer dependencies
         uses: actions/cache@v3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
