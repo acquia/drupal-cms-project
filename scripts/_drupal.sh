@@ -34,31 +34,7 @@ set_site_uuid() {
 #   Exported configuration files in config/default/
 export_drupal_configuration() {
   # Export all configuration
-  execute_drush_command cex --yes
-
-  # For now, we will clean up UUIDs and _core keys using shell script.
-  # @todo Remove after https://www.drupal.org/i/3564710 is merged and code is
-  # available in `drupal_cms_helper` module and replace above command with:
-  # execute_drush_command cex --generic --yes
-  #====================================Start Remove============================
-  local config_dir="${ARTIFACT_DIR}/config/default"
-
-  # Remove UUID from all configs.
-  log_info "Removing ${GREEN}uuid${NC} keys from configuration files"
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    find "${config_dir}" -type f -not -name 'canvas.folder*' -exec sed -i '' -e '/^uuid: /d' {} \;
-  else
-    find "${config_dir}" -type f -not -name 'canvas.folder*' -exec sed -i '/^uuid: /d' {} \;
-  fi
-
-  # Remove _core and default_config_hash from all configs.
-  log_info "Removing ${GREEN}_core${NC} keys from configuration files"
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    find "${config_dir}" -type f -exec sed -i '' -e '/_core:/,+1d' {} \;
-  else
-    find "${config_dir}" -type f -exec sed -i '/_core:/,+1d' {} \;
-  fi
-  #====================================End Remove==============================
+  execute_drush_command cex --generic --yes
   log_success "Exported Drupal configuration"
 }
 
@@ -67,28 +43,8 @@ export_drupal_configuration() {
 # Output:
 #   Content files in content/
 export_site_content() {
-  # Currently there's no generic way to export only content, so we export the
-  # entire site and then move the content directory to the artifact root.
-  # This is not ideal but allows us to use the existing site:export command
-  # without modification.
-
-  # @todo Implement a content-only export command in drupal_cms_helper and replace
-  # this logic with a direct content export once available.
-  local export_temp="${ARTIFACT_DIR}/recipes/site_export"
-
-  # Export entire site to temporary location
-  execute_drush_command site:export --destination="${export_temp}"
-
-  # Move only content to artifact root
-  if [[ -d "${export_temp}/content" ]]; then
-    mv "${export_temp}/content" "${ARTIFACT_DIR}/"
-    log_success "Exported site content"
-  else
-    log_warning "No content directory found in site export"
-  fi
-
-  # Clean up temporary export directory
-  rm -rf "${export_temp}"
+  # Export all content to artifact directory
+  execute_drush_command content:export:all "${ARTIFACT_DIR}/content"
 }
 
 # Import site content from artifact directory

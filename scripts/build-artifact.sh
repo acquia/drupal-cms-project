@@ -100,15 +100,11 @@ main() {
   print_heading "Validating file structure"
   validate_htaccess_files
 
-  # Reset site UUID for generic config export
-  print_heading "Preparing configuration for export"
-  execute_drush_command cset system.site uuid 'NULL' --yes
-  log_info "Set site UUID to NULL for generic config export"
-
   # Export configuration and content
   print_heading "Exporting Drupal configuration"
   export_drupal_configuration
 
+  # Export complete site content
   print_heading "Exporting site content"
   export_site_content
 
