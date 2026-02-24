@@ -2,11 +2,11 @@ name: Build and Deploy Artifact to dist Branch
 on:
   push:
     branches:
-      - 2.x
+      - main
   schedule:
-    - cron: '0 0 * * *'
-    - cron: '0 8 * * *'
-    - cron: '0 16 * * *'
+    # Run this workflow every 8 hours to repackage the pre-built Drupal CMS site
+    # with the latest dependencies.
+    - cron: 0 */8 * * *
   workflow_dispatch:
 env:
   ARTIFACT_DIR: /tmp/artifact
@@ -25,15 +25,15 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
-          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, mysql
+          php-version: '8.5'
+          extensions: mbstring, xml, mysql, pdo_mysql, gd
           coverage: none
 
       - name: Get composer cache directory
         id: composer-cache
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
-      - name: Cache composer dependencies
+      - name: Cache Composer dependencies
         uses: actions/cache@v3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
@@ -80,7 +80,7 @@ jobs:
             --account-pass=admin \
             --yes
 
-          ./vendor/bin/drush config:export --yes
+          ./vendor/bin/drush config:export --generic --yes
 
       - name: Remove values that should be unique and provide a way to replace them.
         run: |
