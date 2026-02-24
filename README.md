@@ -29,6 +29,44 @@ Project template for building [Drupal CMS](https://drupal.org/drupal-cms) tailor
 
 6. Visit your site!
 
+## Branches
+This repo ships with two branches: `main` and `dist`.
+
+### main
+The `main` branch is used for development. When your ready to deploy a feature or update, you will build an artifact from the main branch using ACLI.
+
+### dist
+The `dist` branch is a prebuilt deployment artifact. You can use it to get an application up and running quickly without building an artifact. You must create a unique salt hash and site UUID in the `dist` branch before using it. There is a script for this provided in the `dist branch`: `scripts/replace-unique.sh`.
+
+### Workflow
+#### Quick-start
+Use the pre-built `dist` branch to get an application up and running quickly
+1. Check out the `dist` branch.
+    ```
+    $ git checkout dist
+    ```
+2. Populate with unique values
+    ```
+    $ ./scripts/populate-unique.sh
+    ```
+3. Add the unique values to git
+    ```
+    $ git add -A
+    $ git commit -m "Unique"
+    $ git push origin dist
+    ```
+
+#### Develop and deploy a feature
+1. Create a feature branch from `main`
+    ```
+    $ git checkout -b <feature-branch-name> main
+    ```
+2. Do your work on the feature branch. Once it's reviewed and ready, merge it back into main.
+3. Create a deployment artifact from `main`.
+    ```
+    $ acli push:artifact --destination-git-urls="<Your Acquia Git URK>" --destination-git-branch=dist--feature-name
+    ```
+
 ## License
 Copyright (C) 2026 Acquia, Inc.
 
