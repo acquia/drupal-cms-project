@@ -4,8 +4,7 @@ on:
     branches:
       - main
   schedule:
-    # Run this workflow every 8 hours to repackage the pre-built Drupal CMS site
-    # with the latest dependencies.
+    # Run this workflow every 8 hours to repackage the pre-built dist branch including exported config.
     - cron: 0 */8 * * *
   workflow_dispatch:
 env:
