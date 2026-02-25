@@ -25,7 +25,6 @@
         "cweagans/composer-patches": "^2.0",
         "drupal/byte": "^1",
         "drupal/config_sync_without_site_uuid": "^1.0@beta",
-        "drupal/core": "^11.3",
         "drupal/core-composer-scaffold": "^11.3",
         "drupal/core-recommended": "^11.3",
         "drupal/core-vendor-hardening": "^11.3",
@@ -95,11 +94,7 @@
             "recipes/{$name}": ["type:drupal-recipe"],
             "docroot/themes/custom/{$name}": ["type:drupal-custom-theme"]
         },
-        "composer-patches": {
-            "drupal/core": {
-                "3564735 - Container service exceptions while installed from existing config": "https://www.drupal.org/files/issues/2026-02-23/3564735-18.patch"
-            }
-        }
+        "composer-patches": {}
     },
     "scripts": {
         "post-create-project-cmd": "rm -rf .github/"
