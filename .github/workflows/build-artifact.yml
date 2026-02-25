@@ -139,6 +139,7 @@ jobs:
 
       - name: Install from dist config
         run: |
+          ./scripts/populate-unique.sh
           ./vendor/bin/drush site:install --existing-config
 
       - name: Summary
