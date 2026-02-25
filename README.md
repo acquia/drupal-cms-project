@@ -36,7 +36,7 @@ This repo ships with two branches: `main` and `dist`.
 The `main` branch is used for development. When you're ready to deploy a feature or update, you will build an artifact from the main branch using ACLI.
 
 ### dist
-The `dist` branch is a prebuilt deployment artifact. You can use it to get an application up and running quickly without building an artifact. You must generate a unique salt hash in the `dist` branch before using it. You can use the Drupal Recommended Settings provided Drush command to do this: `drush drupal:hash-salt:init`.
+The `dist` branch is a prebuilt deployment artifact. You can use it to get an application up and running quickly without building an artifact. You must generate a unique salt hash in the `dist` branch before using it. You can use the Drupal Recommended Settings provided Drush command to do this: `drush drupal:hash-salt:init`. This artifact uses the latest PHP version available on Acquia, currently 8.5.
 
 ### Workflow
 #### Quick-start
