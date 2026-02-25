@@ -33,27 +33,35 @@ Project template for building [Drupal CMS](https://drupal.org/drupal-cms) tailor
 This repo ships with two branches: `main` and `dist`.
 
 ### main
-The `main` branch is used for development. When your ready to deploy a feature or update, you will build an artifact from the main branch using ACLI.
+The `main` branch is used for development. When you're ready to deploy a feature or update, you will build an artifact from the main branch using ACLI.
 
 ### dist
-The `dist` branch is a prebuilt deployment artifact. You can use it to get an application up and running quickly without building an artifact. You must create a unique salt hash and site UUID in the `dist` branch before using it. There is a script for this provided in the `dist branch`: `scripts/replace-unique.sh`.
+The `dist` branch is a prebuilt deployment artifact. You can use it to get an application up and running quickly without building an artifact. You must generate a unique salt hash in the `dist` branch before using it. You can use the Drupal Recommended Settings provided Drush command to do this: `drush drupal:hash-salt:init`.
 
 ### Workflow
 #### Quick-start
-Use the pre-built `dist` branch to get an application up and running quickly
+Use the pre-built `dist` branch to get an application up and running quickly.
 1. Check out the `dist` branch.
     ```
     $ git checkout dist
     ```
-2. Populate with unique values
+2. Generate a unique hash salt.
     ```
-    $ ./scripts/populate-unique.sh
+    $ vendor/bin/drush drupal:hash-salt:init
     ```
-3. Add the unique values to git
+3. Add the unique values to git.
     ```
     $ git add -A
     $ git commit -m "Unique"
     $ git push origin dist
+    ```
+4. Install from the prebuilt artifact's configuration on cloud.
+    ```
+    $ /usr/local/bin/acli remote:drush @<YOUR_AH_SITEGROUP>.dev -- site:install --existing-config --yes
+    ```
+5. Import the default content provided by Drupal CMS.
+    ```
+    $ /usr/local/bin/acli remote:drush @<YOUR_AH_SITEGROUP>.dev -- content:import ../recipes/drupal_cms_starter/content --yes
     ```
 
 #### Develop and deploy a feature
