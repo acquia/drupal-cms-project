@@ -93,7 +93,11 @@
             "recipes/{$name}": ["type:drupal-recipe"],
             "docroot/themes/custom/{$name}": ["type:drupal-custom-theme"]
         },
-        "patches": {}
+        "patches": {
+            "drupal/core": {
+                "3564735 - Container / service exceptions while installed from existing config\n": "https://www.drupal.org/files/issues/2026-02-23/3564735-18.patch"
+            }
+        }
     },
     "scripts": {
         "post-create-project-cmd": "rm -rf .github/"
