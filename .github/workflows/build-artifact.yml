@@ -9,6 +9,8 @@ on:
   workflow_dispatch:
 env:
   ARTIFACT_DIR: /tmp/artifact
+permissions:
+  contents: write
 
 jobs:
   build-artifact:
