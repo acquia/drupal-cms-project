@@ -58,7 +58,7 @@ The `dist` branch is a prebuilt deployment artifact. You can use it to get an ap
     ```
     $ git checkout dist
     ```
-3. Remove the Github remote.
+3. Remove the GitHub remote.
     ```
     $ git remote remove origin
     ```

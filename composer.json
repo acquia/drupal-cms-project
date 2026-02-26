@@ -94,7 +94,7 @@
             "recipes/{$name}": ["type:drupal-recipe"],
             "docroot/themes/custom/{$name}": ["type:drupal-custom-theme"]
         },
-        "composer-patches": {}
+        "patches": {}
     },
     "scripts": {
         "post-create-project-cmd": "rm -rf .github/"
