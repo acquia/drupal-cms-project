@@ -87,7 +87,7 @@ The `dist` branch is a prebuilt deployment artifact. You can use it to get an ap
     ```
 
 ## License
-Copyright (C) 2026 Acquia, Inc.
+Copyright © 2026 Acquia, Inc.
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 2 as published by the Free Software Foundation.
 
