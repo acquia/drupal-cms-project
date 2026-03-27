@@ -12,6 +12,14 @@
     ],
     "homepage": "https://github.com/acquia/drupal-cms-project",
     "repositories": {
+        "trials-recipe": {
+            "type": "path",
+            "url": "custom-extensions/acquia_trials"
+        },
+        "trials-modules": {
+            "type": "path",
+            "url": "custom-extensions/modules/*"
+        },
         "drupal": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
@@ -23,6 +31,7 @@
         "composer/composer": "^2.8",
         "composer/installers": "^2.3",
         "cweagans/composer-patches": "^2.0",
+        "drupal/acquia_trials": "dev-main@dev",
         "drupal/byte": "^1",
         "drupal/config_sync_without_site_uuid": "^1.0@beta",
         "drupal/core-composer-scaffold": "^11.3",
@@ -45,7 +54,7 @@
     "conflict": {
         "drupal/drupal": "*"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
         "allow-plugins": {

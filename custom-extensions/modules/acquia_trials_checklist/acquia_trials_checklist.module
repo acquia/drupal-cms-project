@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * @file
+ * Acquia Trials Checklist module.
+ */
+
+use Drupal\Component\Serialization\Yaml;
+use Drupal\Core\Url;
+
+/**
+ * Returns the checklist item definitions.
+ *
+ * @return array
+ *   Keyed array of checklist items.
+ */
+function acquia_trials_checklist_get_items(): array {
+  $path = __DIR__ . '/checklist_items.yml';
+  $items = Yaml::decode(file_get_contents($path));
+  foreach ($items as &$item) {
+    $item['title'] = t($item['title']);
+    $item['description'] = t($item['description']);
+  }
+  return $items;
+}
+
+/**
+ * Implements hook_checklistapi_checklist_info().
+ */
+function acquia_trials_checklist_checklistapi_checklist_info(): array {
+  $items = acquia_trials_checklist_get_items();
+  $checklist_items = [];
+  foreach ($items as $key => $item) {
+    $checklist_items[$key] = [
+      '#title' => $item['title'],
+      '#description' => $item['description'],
+      '#url' => Url::fromUri('internal:' . $item['url']),
+    ];
+  }
+
+  return [
+    'acquia_trials_checklist' => [
+      '#title' => t('Acquia Trials Checklist'),
+      '#path' => '/admin/config/system/acquia-trials-checklist',
+      '#description' => t('A checklist of tasks to explore the Drupal CMS trial.'),
+      'getting_started' => array_merge(
+        ['#title' => t('Getting Started')],
+        $checklist_items,
+      ),
+    ],
+  ];
+}
+
+/**
+ * Implements hook_theme().
+ */
+function acquia_trials_checklist_theme(): array {
+  return [
+    'acquia_trials_checklist' => [
+      'variables' => [
+        'items' => [],
+        'progress' => 0,
+      ],
+      'template' => 'acquia-trials-checklist',
+    ],
+  ];
+}

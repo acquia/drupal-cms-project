@@ -1,0 +1,48 @@
+{#
+/**
+ * @file
+ * Template for the Acquia Trials Checklist block.
+ *
+ * Variables:
+ * - items: Array of checklist items.
+ * - progress: Completion percentage (0–100).
+ */
+#}
+<div class="acquia-trials-checklist">
+  <div class="checklist-header">
+    <h2 class="checklist-header__title">{{ 'Welcome to the Drupal CMS Trial'|t }}</h2>
+    <div class="checklist-header__progress">
+      <span class="checklist-progress__label">{{ 'PROGRESS'|t }}</span>
+      <span class="checklist-progress__percentage">{{ progress }}%</span>
+    </div>
+  </div>
+
+  <p class="checklist-header__description">{{ "You're powered up and ready to go. Start with these essential tasks to explore the platform."|t }}</p>
+
+  <div class="checklist-progress__bar">
+    <div class="checklist-progress__fill" style="width: {{ progress }}%"></div>
+  </div>
+
+  <div class="checklist-items">
+    {% for item in items %}
+      <div class="checklist-item{% if item.completed %} checklist-item--completed{% endif %}" data-item-key="{{ item.key }}" data-url="{{ item.url }}">
+        <button type="button" class="checklist-item__checkbox" data-item-key="{{ item.key }}" aria-label="{{ 'Toggle @title'|t({'@title': item.title}) }}">
+          <svg class="checklist-item__icon-complete" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="11" fill="#4CAF50" stroke="#4CAF50" stroke-width="2"/>
+            <path d="M7 12.5l3 3 7-7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <svg class="checklist-item__icon-pending" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="11" fill="#fff" stroke="#CBD5E1" stroke-width="2"/>
+          </svg>
+        </button>
+        <div class="checklist-item__content">
+          <span class="checklist-item__title">{{ item.title }}</span>
+          <span class="checklist-item__description">{{ item.description }}</span>
+        </div>
+        {% if not item.completed %}
+          <a href="{{ item.url }}" class="checklist-item__start">{{ 'START'|t }}</a>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>

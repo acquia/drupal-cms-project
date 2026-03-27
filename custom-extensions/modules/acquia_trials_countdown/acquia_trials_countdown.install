@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Install and uninstall functions for Acquia Trials Countdown.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function acquia_trials_countdown_install() {
+  $trial_end = acquia_trials_countdown_fetch_trial_end();
+  \Drupal::state()->set('acquia_trials_countdown.trial_end', $trial_end);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function acquia_trials_countdown_uninstall() {
+  \Drupal::state()->delete('acquia_trials_countdown.trial_end');
+}
