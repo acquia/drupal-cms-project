@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Acquia Trials Cloud Platform module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function acquia_trials_cloud_platform_theme(): array {
+  return [
+    'acquia_trials_cloud_platform' => [
+      'variables' => [
+        'features' => [],
+        'cta_url' => 'https://cloud.acquia.com',
+      ],
+      'template' => 'acquia-trials-cloud-platform',
+    ],
+  ];
+}
