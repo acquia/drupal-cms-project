@@ -32,8 +32,12 @@
         "composer/installers": "^2.3",
         "cweagans/composer-patches": "^2.0",
         "drupal/acquia_trials": "dev-main@dev",
+        "drupal/archimedes": "^1.0",
         "drupal/byte": "^1",
+        "drupal/caresphere": "^1.2",
         "drupal/config_sync_without_site_uuid": "^1.0@beta",
+        "drupal/convene": "^1.2",
+        "drupal/convivial_gov": "^1.1",
         "drupal/core-composer-scaffold": "^11.3",
         "drupal/core-recommended": "^11.3",
         "drupal/core-vendor-hardening": "^11.3",
@@ -44,6 +48,11 @@
         "drupal/drupal_cms_installer": "^2.1@beta",
         "drupal/drupal_cms_seo_tools": "^2",
         "drupal/drupal_cms_starter": "^2",
+        "drupal/haven": "^1.0",
+        "drupal/healthcare": "^1.0",
+        "drupal/local": "^1.0",
+        "drupal/provus_edu": "^1.0",
+        "drupal/pulse": "^1.0",
         "drupal/recipe_installer_kit": "^1.0.4",
         "drupal/webform": "@beta"
     },
@@ -104,7 +113,11 @@
             "recipes/{$name}": ["type:drupal-recipe"],
             "docroot/themes/custom/{$name}": ["type:drupal-custom-theme"]
         },
-        "patches": {}
+        "patches": {
+            "drupal/core": {
+                "3498026 - RecipeRunner::processInstall() installs modules one by one": "https://git.drupalcode.org/project/drupal/-/merge_requests/15102/diffs.patch"
+            }
+        }
     },
     "scripts": {
         "post-create-project-cmd": "rm -rf .github/"
