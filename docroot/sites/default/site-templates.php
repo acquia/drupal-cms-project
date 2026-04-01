@@ -14,6 +14,13 @@ return [
     'package' => 'drupal/byte',
     'creator' => 'Drupal CMS',
   ],
+  'haven' => [
+    'name' => 'Haven',
+    'description' => 'Designed for non-profit sites, this template features a bright, warm design that can be adapted for many use cases. It comes pre-configured with blog, projects and people profiles, as well as newsletter signup, donation add-ons and more.',
+    'screenshot' => 'https://new.drupal.org/assets/styles/card_teaser_image/public/site-templates/2026-03/screencapture-drupal-cms-dev-ddev-site-2026-03-13-10_09_56_0.png.webp',
+    'package' => 'drupal/haven',
+    'creator' => 'Drupal CMS',
+  ],
   'drupal_cms_starter' => [
     'name' => 'Starter',
     'description' => 'A simple template with just the basics. Bring your own design, and build what you need.',
