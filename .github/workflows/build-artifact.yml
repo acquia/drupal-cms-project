@@ -74,7 +74,7 @@ jobs:
           HTACCESS_CONTENT=$(./vendor/bin/drush php-eval 'echo \Drupal\Component\FileSecurity\FileSecurity::htaccessLines(TRUE);')
           echo "$HTACCESS_CONTENT" > files-private/default/.htaccess
           
-          ./vendor/bin/drush site:install recipes/drupal_cms_starter \
+          ./vendor/bin/drush site:install recipes/contrib/drupal_cms_starter \
             --db-url="mysql://drupal:drupal@127.0.0.1/drupal" \
             --site-name="Drupal CMS" \
             --account-name=admin \
