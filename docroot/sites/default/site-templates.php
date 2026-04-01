@@ -5,9 +5,21 @@
  * This file:
  *   * Prevents Drupal CMS from listing site templates that aren't included in the codebase.
  *   * Serves as a cononical list of recipes that are included in the codebases.
- *   * Allows overrides to the names, descriptions, etc of the site templates that are displayed in the installer.
  */
 return [
+  'byte' => [
+    'name' => 'Byte',
+    'description' => 'Designed for a SaaS product website, this template includes landing pages, a blog, newsletter sign up and other features.',
+    'screenshot' => 'https://new.drupal.org/assets/styles/card_teaser_image/public/site-templates/2026-03/byte-home_2.png.webp',
+    'package' => 'drupal/byte',
+    'creator' => 'Drupal CMS',
+  ],
+  'drupal_cms_starter' => [
+    'name' => 'Starter',
+    'description' => 'A simple template with just the basics. Bring your own design, and build what you need.',
+    'package' => 'drupal/drupal_cms_starter',
+    'creator' => 'Drupal CMS',
+  ],
   'archimedes' => [
     'name' => 'Archimedes',
     'description' => 'Designed for a primary/secondary education website. Includes landing pages, a blog, newsletter sign-up and other features.',
