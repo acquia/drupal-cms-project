@@ -17,6 +17,7 @@ return [
   'drupal_cms_starter' => [
     'name' => 'Starter',
     'description' => 'A simple template with just the basics. Bring your own design, and build what you need.',
+    'screenshot' => 'https://git.drupalcode.org/project/drupal_cms_starter/-/raw/2.x/screenshot.webp',
     'package' => 'drupal/drupal_cms_starter',
     'creator' => 'Drupal CMS',
   ],
