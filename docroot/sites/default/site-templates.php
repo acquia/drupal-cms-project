@@ -8,6 +8,19 @@
  *   * Allows overrides to the names, descriptions, etc of the site templates that are displayed in the installer.
  */
 return [
+  'archimedes' => [
+    'name' => 'Archimedes',
+    'description' => 'Designed for a primary/secondary education website. Includes landing pages, a blog, newsletter sign-up and other features.',
+    'screenshot' => 'https://git.drupalcode.org/project/archimedes/-/raw/1.0.x/screenshot.webp?ref_type=heads',
+    'package' => 'drupal/archimedes',
+    'links' => [
+      [
+        'text' => 'Learn more',
+        'url' => 'https://new.drupal.org/site-template/archimedes',
+      ],
+    ],
+    'creator' => 'Zoocha',
+  ],
   'convivial_gov' => [
     'name' => 'Convivial Gov',
     'description' => 'A starter site providing editor-friendly components for best-practice government sites.',
