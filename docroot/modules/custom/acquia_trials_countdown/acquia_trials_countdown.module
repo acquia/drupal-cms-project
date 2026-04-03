@@ -30,9 +30,6 @@ function acquia_trials_countdown_cron() {
  */
 function acquia_trials_countdown_page_attachments(array &$attachments) {
   $trial_end = \Drupal::state()->get('acquia_trials_countdown.trial_end');
-  if (empty($trial_end)) {
-    return;
-  }
 
   $attachments['#attached']['library'][] = 'acquia_trials_countdown/countdown-banner';
   $attachments['#attached']['drupalSettings']['trialsCountdown'] = [

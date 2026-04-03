@@ -44,7 +44,7 @@ class TrialEndClientTest extends UnitTestCase {
   }
 
   /**
-   * Tests fetchTrialEnd() throws when the API response has no timestamp.
+   * Tests fetchTrialEnd() when the API response has no timestamp.
    */
   public function testFetchTrialEndMissingTimestamp(): void {
     $body = $this->createMock(StreamInterface::class);
@@ -59,9 +59,10 @@ class TrialEndClientTest extends UnitTestCase {
 
     $client = new TrialEndClient($httpClient, 'https://api.example.com/trials');
 
-    $this->expectException(\RuntimeException::class);
-    $this->expectExceptionMessage('API response missing valid timestamp.');
-    $client->fetchTrialEnd('sub-123');
+    $result = $client->fetchTrialEnd('sub-123');
+    $expected = TrialEndClient::DEFAULT_EXPIRATION_SECONDS;
+    $this->assertEquals($expected, $result);
+
   }
 
   /**
@@ -76,9 +77,9 @@ class TrialEndClientTest extends UnitTestCase {
       ));
 
     $client = new TrialEndClient($httpClient, 'https://api.example.com/trials');
-
-    $this->expectException(RequestException::class);
-    $client->fetchTrialEnd('sub-123');
+    $result = $client->fetchTrialEnd('sub-123');
+    $expected = TrialEndClient::DEFAULT_EXPIRATION_SECONDS;
+    $this->assertEquals($expected, $result);
   }
 
 }

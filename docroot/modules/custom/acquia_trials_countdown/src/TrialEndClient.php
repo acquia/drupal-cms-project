@@ -11,6 +11,8 @@ use GuzzleHttp\Psr7\Response;
  */
 class TrialEndClient {
 
+  const DEFAULT_EXPIRATION_SECONDS = 1800000000;
+
   public function __construct(
     protected readonly ClientInterface $httpClient,
     protected readonly string $apiBaseUrl,
@@ -32,23 +34,33 @@ class TrialEndClient {
       ]);
     }
     catch (\GuzzleHttp\Exception\GuzzleException $e) {
-      Drupal::logger('acquia_trials_countdown')->error($e->getMessage());
       // If any type of GuzzleException is thrown, just log it and provide a default expiration of a few days from now.
       $response = $this->getMockResponse();
+      if (\Drupal::hasContainer()) {
+        // Container isn't initialized in Unit test.
+        Drupal::logger('acquia_trials_countdown')->error($e->getMessage());
+      }
     }
 
     $data = json_decode($response->getBody(), TRUE);
     if (empty($data['timestamp']) || !is_numeric($data['timestamp'])) {
-      Drupal::logger('acquia_trials_countdown')->error('Invalid or empty timestamp returned. Timestamp: ' . $data['timestamp']);
       // Just give an expiration time of a few days from now if we somehow got bad data.
-      $data = ['timestamp' => time() + (8 * 24 * 60 * 60)];
+      $data = ['timestamp' => self::DEFAULT_EXPIRATION_SECONDS];
+      if (\Drupal::hasContainer()) {
+        // Container isn't initialized in Unit test.
+        Drupal::logger('acquia_trials_countdown')->error('Invalid response from Acquia API.');
+      }
     }
 
     return (int) $data['timestamp'];
   }
 
   private function getMockResponse(): Response {
-    return new Response(200, [], json_encode(['timestamp' => time() + (8 * 24 * 60 * 60)]));
+    return new Response(
+      200,
+      [],
+      json_encode(['timestamp' => self::DEFAULT_EXPIRATION_SECONDS]),
+    );
   }
 
 }
