@@ -12,7 +12,7 @@
  *   The trial end Unix timestamp.
  */
 function acquia_trials_countdown_fetch_trial_end(): int {
-  $subscription_id = \Drupal\Core\Site\Settings::get('acquia_subscription_id', '');
+  $subscription_id = getenv('SUBSCRIPTION_ID') ?: '';
   return \Drupal::service('acquia_trials_countdown.trial_end_client')
     ->fetchTrialEnd($subscription_id);
 }
