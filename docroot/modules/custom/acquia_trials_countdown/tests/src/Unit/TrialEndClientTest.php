@@ -74,7 +74,7 @@ class TrialEndClientTest extends UnitTestCase {
   }
 
   /**
-   * Tests fetchTrialEnd() propagates HTTP exceptions.
+   * Tests fetchTrialEnd() returns the default timestamp on HTTP exceptions.
    */
   public function testFetchTrialEndHttpError(): void {
     $httpClient = $this->createMock(ClientInterface::class);
