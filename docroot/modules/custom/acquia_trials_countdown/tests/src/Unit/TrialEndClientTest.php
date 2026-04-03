@@ -11,10 +11,18 @@ use Psr\Http\Message\ResponseInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use Psr\Http\Message\StreamInterface;
+use Psr\Log\LoggerInterface;
 
 #[CoversClass(TrialEndClient::class)]
 #[Group('acquia_trials_countdown')]
 class TrialEndClientTest extends UnitTestCase {
+
+  protected LoggerInterface $logger;
+
+  protected function setUp(): void {
+    parent::setUp();
+    $this->logger = $this->createMock(LoggerInterface::class);
+  }
 
   /**
    * Tests fetchTrialEnd() returns the timestamp from a successful API response.
@@ -37,7 +45,7 @@ class TrialEndClientTest extends UnitTestCase {
       ])
       ->willReturn($response);
 
-    $client = new TrialEndClient($httpClient, 'https://api.example.com/trials');
+    $client = new TrialEndClient($httpClient, 'https://api.example.com/trials', $this->logger);
     $result = $client->fetchTrialEnd('sub-123');
 
     $this->assertSame($expectedTimestamp, $result);
@@ -57,7 +65,7 @@ class TrialEndClientTest extends UnitTestCase {
     $httpClient = $this->createMock(ClientInterface::class);
     $httpClient->method('request')->willReturn($response);
 
-    $client = new TrialEndClient($httpClient, 'https://api.example.com/trials');
+    $client = new TrialEndClient($httpClient, 'https://api.example.com/trials', $this->logger);
 
     $result = $client->fetchTrialEnd('sub-123');
     $expected = TrialEndClient::DEFAULT_EXPIRATION_SECONDS;
@@ -76,7 +84,7 @@ class TrialEndClientTest extends UnitTestCase {
         $this->createMock(RequestInterface::class),
       ));
 
-    $client = new TrialEndClient($httpClient, 'https://api.example.com/trials');
+    $client = new TrialEndClient($httpClient, 'https://api.example.com/trials', $this->logger);
     $result = $client->fetchTrialEnd('sub-123');
     $expected = TrialEndClient::DEFAULT_EXPIRATION_SECONDS;
     $this->assertEquals($expected, $result);
