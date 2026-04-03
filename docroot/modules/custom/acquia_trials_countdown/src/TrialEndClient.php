@@ -40,7 +40,8 @@ class TrialEndClient {
       $this->logger->error($e->getMessage());
     }
 
-    $data = json_decode($response->getBody(), TRUE);
+    $responseBody = (string) $response->getBody();
+    $data = json_decode($responseBody, TRUE);
     if (empty($data['timestamp']) || !is_numeric($data['timestamp'])) {
       // Just give an expiration time of a few days from now if we somehow got bad data.
       $data = ['timestamp' => self::DEFAULT_EXPIRATION_SECONDS];
