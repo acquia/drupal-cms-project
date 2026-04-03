@@ -6,16 +6,15 @@
  */
 
 /**
- * Fetches the trial end timestamp.
- *
- * Currently returns a hardcoded value of 14 days from now. This will be
- * replaced with an API call to Acquia Cloud Platform in the future.
+ * Fetches the trial end timestamp from the Acquia API.
  *
  * @return int
  *   The trial end Unix timestamp.
  */
 function acquia_trials_countdown_fetch_trial_end(): int {
-  return time() + (9 * 24 * 60 * 60);
+  $subscription_id = getenv('SUBSCRIPTION_ID') ?: '';
+  return \Drupal::service('acquia_trials_countdown.trial_end_client')
+    ->fetchTrialEnd($subscription_id);
 }
 
 /**
@@ -31,9 +30,6 @@ function acquia_trials_countdown_cron() {
  */
 function acquia_trials_countdown_page_attachments(array &$attachments) {
   $trial_end = \Drupal::state()->get('acquia_trials_countdown.trial_end');
-  if (empty($trial_end)) {
-    return;
-  }
 
   $attachments['#attached']['library'][] = 'acquia_trials_countdown/countdown-banner';
   $attachments['#attached']['drupalSettings']['trialsCountdown'] = [
