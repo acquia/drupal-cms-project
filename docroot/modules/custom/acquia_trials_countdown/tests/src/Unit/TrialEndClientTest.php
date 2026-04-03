@@ -52,7 +52,7 @@ class TrialEndClientTest extends UnitTestCase {
   }
 
   /**
-   * Tests fetchTrialEnd() when the API response has no timestamp.
+   * Tests fetchTrialEnd() returns the default timestamp when the API response has no timestamp.
    */
   public function testFetchTrialEndMissingTimestamp(): void {
     $body = $this->createMock(StreamInterface::class);
@@ -67,9 +67,12 @@ class TrialEndClientTest extends UnitTestCase {
 
     $client = new TrialEndClient($httpClient, 'https://api.example.com/trials', $this->logger);
 
+    $before = time();
     $result = $client->fetchTrialEnd('sub-123');
-    $expected = TrialEndClient::DEFAULT_EXPIRATION_SECONDS;
-    $this->assertEquals($expected, $result);
+    $after = time();
+
+    $this->assertGreaterThanOrEqual($before + TrialEndClient::DEFAULT_EXPIRATION_TTL_SECONDS, $result);
+    $this->assertLessThanOrEqual($after + TrialEndClient::DEFAULT_EXPIRATION_TTL_SECONDS, $result);
 
   }
 
@@ -85,9 +88,13 @@ class TrialEndClientTest extends UnitTestCase {
       ));
 
     $client = new TrialEndClient($httpClient, 'https://api.example.com/trials', $this->logger);
+
+    $before = time();
     $result = $client->fetchTrialEnd('sub-123');
-    $expected = TrialEndClient::DEFAULT_EXPIRATION_SECONDS;
-    $this->assertEquals($expected, $result);
+    $after = time();
+
+    $this->assertGreaterThanOrEqual($before + TrialEndClient::DEFAULT_EXPIRATION_TTL_SECONDS, $result);
+    $this->assertLessThanOrEqual($after + TrialEndClient::DEFAULT_EXPIRATION_TTL_SECONDS, $result);
   }
 
 }

@@ -11,7 +11,10 @@ use Psr\Log\LoggerInterface;
  */
 class TrialEndClient {
 
-  const DEFAULT_EXPIRATION_SECONDS = 1800000000;
+  /**
+   * Default TTL in seconds (3 days) used as fallback when the API is unavailable.
+   */
+  const DEFAULT_EXPIRATION_TTL_SECONDS = 259200;
 
   public function __construct(
     protected readonly ClientInterface $httpClient,
@@ -44,7 +47,7 @@ class TrialEndClient {
     $data = json_decode($responseBody, TRUE);
     if (empty($data['timestamp']) || !is_numeric($data['timestamp'])) {
       // Just give an expiration time of a few days from now if we somehow got bad data.
-      $data = ['timestamp' => self::DEFAULT_EXPIRATION_SECONDS];
+      $data = ['timestamp' => time() + self::DEFAULT_EXPIRATION_TTL_SECONDS];
       $this->logger->error('Invalid response from Acquia API.');
     }
 
@@ -55,7 +58,7 @@ class TrialEndClient {
     return new Response(
       200,
       [],
-      json_encode(['timestamp' => self::DEFAULT_EXPIRATION_SECONDS]),
+      json_encode(['timestamp' => time() + self::DEFAULT_EXPIRATION_TTL_SECONDS]),
     );
   }
 
