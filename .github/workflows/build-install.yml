@@ -76,4 +76,10 @@ jobs:
           mkdir -p docroot/sites/default/files
 
       - name: Install Drupal
-        run: ./vendor/bin/drush site:install ./recipes/contrib/${{ matrix.site-templates }}
+        run: |
+          ./vendor/bin/drush site:install ./recipes/contrib/${{ matrix.site-templates }} --yes > install.log 2>&1
+          cat install.log
+          if grep -q "Error: ]" install.log; then
+            echo "Drush finished with hidden errors"
+            exit 1
+          fi
