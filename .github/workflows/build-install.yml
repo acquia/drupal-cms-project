@@ -25,6 +25,7 @@ jobs:
       fail-fast: false
       matrix:
         php-versions: ['8.5']
+        site-templates: ['byte', 'haven', 'drupal_cms_starter', 'archimedes', 'convivial_gov', 'healthcare', 'pulse', 'local', 'provus_edu', 'caresphere', 'convene']
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -67,4 +68,4 @@ jobs:
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: Install Drupal
-        run: ./vendor/bin/drush site:install
+        run: ./vendor/bin/drush site:install ./recipes/contrib/${{ matrix.site-templates }}
