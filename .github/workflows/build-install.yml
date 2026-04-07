@@ -1,13 +1,34 @@
 # GitHub Action for Drupal with MySQL
-name: Compose and install Drupal CMS
+name: Compose and install Drupal CMS Site Templates
 on:
   push:
   pull_request:
   schedule:
     - cron: '1 0 * * *'
 jobs:
-  symfony:
-    name: Drupal (PHP ${{ matrix.php-versions }})
+  get-templates:
+    name: Get available site templates
+    runs-on: ubuntu-latest
+    outputs:
+      templates: ${{ steps.site-templates.outputs.templates }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+
+      - name: Get available Site Templates
+        id: site-templates
+        run: |
+          TEMPLATES=$(php -r '$t = include "docroot/sites/default/site-templates.php"; echo json_encode(array_keys($t));')
+          echo "templates=$TEMPLATES" >> "$GITHUB_OUTPUT"
+
+  install:
+    name: Install `${{ matrix.site-template }}` on PHP ${{ matrix.php-versions }}
+    needs: get-templates
     runs-on: ubuntu-latest
 
     # Docs: https://docs.github.com/en/actions/using-containerized-services
@@ -25,6 +46,7 @@ jobs:
       fail-fast: false
       matrix:
         php-versions: ['8.5']
+        site-template: ${{ fromJson(needs.get-templates.outputs.templates) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -66,5 +88,16 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
+      - name: Setup file upload directories
+        run: |
+          mkdir -p files-private/default
+          mkdir -p docroot/sites/default/files
+
       - name: Install Drupal
-        run: ./vendor/bin/drush site:install
+        run: |
+          ./vendor/bin/drush site:install ./recipes/contrib/${{ matrix.site-template }} --yes > install.log 2>&1
+          cat install.log
+          if grep -q "\[error\]" install.log; then
+            echo "Drush finished with hidden errors"
+            exit 1
+          fi
