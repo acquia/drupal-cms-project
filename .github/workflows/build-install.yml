@@ -26,9 +26,6 @@ jobs:
       matrix:
         php-versions: ['8.5']
         site-templates: ['byte', 'haven', 'drupal_cms_starter', 'archimedes', 'convivial_gov', 'healthcare', 'pulse', 'local', 'provus_edu', 'caresphere', 'convene']
-        allow-failures:
-          - php-versions: ['8.5']
-            site-templates: ['pulse']
     steps:
       - name: Checkout
         uses: actions/checkout@v4
