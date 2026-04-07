@@ -1,5 +1,5 @@
 # GitHub Action for Drupal with MySQL
-name: Compose and install Drupal CMS
+name: Compose and install Drupal CMS Site Templates
 on:
   push:
   pull_request:
@@ -28,7 +28,7 @@ jobs:
         site-templates: ['byte', 'haven', 'drupal_cms_starter', 'archimedes', 'convivial_gov', 'healthcare', 'pulse', 'local', 'provus_edu', 'caresphere', 'convene']
         allow-failures:
           - php-versions: ['8.5']
-            site-templates: ['convivial_gov', 'healthcare', 'pulse', 'local', 'provus_edu', 'caresphere', 'convene']
+            site-templates: ['pulse']
     steps:
       - name: Checkout
         uses: actions/checkout@v4
