@@ -7,7 +7,7 @@ on:
     - cron: '1 0 * * *'
 jobs:
   symfony:
-    name: ${{matrix.site-templates}} Site Template on PHP ${{ matrix.php-versions }}
+    name: Install `${{matrix.site-templates}}` on PHP ${{ matrix.php-versions }}
     runs-on: ubuntu-latest
 
     # Docs: https://docs.github.com/en/actions/using-containerized-services
