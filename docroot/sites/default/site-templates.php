@@ -71,19 +71,6 @@ return [
     ],
     'creator' => 'Kanopi Studios',
   ],
-  'pulse' => [
-    'name' => 'Pulse',
-    'description' => 'Designed for a modern health and wellness platform. Features sections for health topics, research studies, expert insights, articles, and reviews. Supports FAQs, trending content, and expert consultation forms.',
-    'screenshot' => 'https://git.drupalcode.org/project/pulse/-/raw/1.0.x/screenshot.webp?ref_type=heads',
-    'package' => 'drupal/pulse',
-    'links' => [
-      [
-        'text' => 'Learn more',
-        'url' => 'https://new.drupal.org/site-template/pulse-healthcare',
-      ],
-    ],
-    'creator' => 'QED42',
-  ],
   'local' => [
     'name' => 'Local',
     'description' => 'A local council website with services, navigation, and demo content in a classic blue and white palette.',
