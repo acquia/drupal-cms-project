@@ -14,17 +14,9 @@ final class OAuth2AuthorizationEvent extends Event {
   private UserInterface|null $user = NULL;
 
   public function __construct(
-    private readonly IdpProvider $provider,
-    private readonly AccessToken $accessToken,
+    public readonly IdpProvider $provider,
+    public readonly AccessToken $accessToken,
   ) {
-  }
-
-  public function getProvider(): IdpProvider {
-    return $this->provider;
-  }
-
-  public function getAccessToken(): AccessToken {
-    return $this->accessToken;
   }
 
   public function setUser(UserInterface $user): void {

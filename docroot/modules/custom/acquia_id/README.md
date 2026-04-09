@@ -36,7 +36,7 @@ final class MyAuthorizationSubscriber implements EventSubscriberInterface {
   }
 
   public function onAuthorization(OAuth2AuthorizationEvent $event): void {
-    $resourceOwner = $event->getProvider()->getResourceOwner($event->getAccessToken());
+    $resourceOwner = $event->provider->getResourceOwner($event->accessToken);
     $user = user_load_by_mail($resourceOwner->getId());
     if ($user) {
       $event->setUser($user);

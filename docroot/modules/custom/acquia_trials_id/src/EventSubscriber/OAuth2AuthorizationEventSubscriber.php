@@ -44,16 +44,14 @@ final class OAuth2AuthorizationEventSubscriber implements EventSubscriberInterfa
       throw new AccessException('Acquia application UUID is not available.');
     }
 
-    $accessToken = $event->getAccessToken();
-
     try {
-      $this->clientFactory->get($accessToken->getToken())->getApplication($applicationUuid);
+      $this->clientFactory->get($event->accessToken->getToken())->getApplication($applicationUuid);
     }
     catch (GuzzleException) {
       throw new AccessException('User does not have access to this application.');
     }
 
-    $resourceOwner = $event->getProvider()->getResourceOwner($accessToken);
+    $resourceOwner = $event->provider->getResourceOwner($event->accessToken);
     $email = $resourceOwner->getId();
 
     $user = user_load_by_mail($email);
