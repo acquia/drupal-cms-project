@@ -52,6 +52,7 @@ final class OAuth2AuthorizationEventSubscriber implements EventSubscriberInterfa
     }
 
     $resourceOwner = $event->provider->getResourceOwner($event->accessToken);
+    $data = $resourceOwner->toArray();
     $email = $resourceOwner->getId();
 
     $user = user_load_by_mail($email);
@@ -63,6 +64,7 @@ final class OAuth2AuthorizationEventSubscriber implements EventSubscriberInterfa
       ]);
     }
 
+    $user->set('uuid', $data['uuid'] ?? '');
     $user->addRole('administrator');
     $user->save();
 
