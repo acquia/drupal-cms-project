@@ -9,9 +9,9 @@ Set the following service parameters, typically in `settings.php` or a `services
 ```yaml
 parameters:
   acquia_id.client_id: 'your-oauth2-client-id'
-  acquia_id.idp_base_uri: 'https://id.acquia.com/oauth2/default'
-  acquia_id.cloud_api_base_uri: 'https://cloud.acquia.com'
-  acquia_id.idp_logout_redirect_uri: 'https://cloud.acquia.com'
+  # These default to production values and only need overriding for non-production environments.
+  # acquia_id.idp_base_uri: 'https://id.acquia.com/oauth2/default'
+  # acquia_id.cloud_api_base_uri: 'https://cloud.acquia.com'
 ```
 
 The SSO route is `/acquia-id/sso`.
