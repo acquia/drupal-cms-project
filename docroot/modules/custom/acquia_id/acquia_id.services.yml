@@ -1,0 +1,26 @@
+parameters:
+  acquia_id.client_id: ''
+  acquia_id.idp_base_uri: ''
+  acquia_id.cloud_api_base_uri: ''
+  acquia_id.idp_logout_redirect_uri: 'https://cloud.acquia.com'
+
+services:
+  acquia_id.oauth2.provider_factory:
+    class: Drupal\acquia_id\OAuth2\ProviderFactory
+    arguments:
+      - '@http_client_factory'
+      - '%acquia_id.client_id%'
+      - '%acquia_id.idp_base_uri%'
+      - '%acquia_id.cloud_api_base_uri%'
+    public: false
+
+  acquia_id.oauth2.provider:
+    class: Drupal\acquia_id\OAuth2\Provider\AcquiaIdProvider
+    factory: ['@acquia_id.oauth2.provider_factory', 'get']
+
+  acquia_id.oauth2.access_token_repository:
+    class: Drupal\acquia_id\OAuth2\AccessTokenRepository
+    arguments:
+      - '@acquia_id.oauth2.provider_factory'
+      - '@user.data'
+      - '@datetime.time'
