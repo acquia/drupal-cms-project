@@ -61,8 +61,10 @@ final class OAuth2AuthorizationEventSubscriber implements EventSubscriberInterfa
         'name' => $email,
         'status' => 1,
       ]);
-      $user->save();
     }
+
+    $user->addRole('administrator');
+    $user->save();
 
     $event->setUser($user);
   }
