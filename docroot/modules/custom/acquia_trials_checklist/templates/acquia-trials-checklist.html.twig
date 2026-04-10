@@ -40,7 +40,7 @@
           <span class="checklist-item__description">{{ item.description }}</span>
         </div>
         {% if not item.completed %}
-          <a href="{{ item.url }}" class="checklist-item__start">{{ 'START'|t }}</a>
+          <a href="{{ item.url }}" class="checklist-item__start">{{ 'GO'|t }}</a>
         {% endif %}
       </div>
     {% endfor %}
