@@ -10,7 +10,7 @@ use League\OAuth2\Client\Token\AccessToken;
 /**
  * OAuth2 provider for Acquia ID (id.acquia.com).
  */
-final class AcquiaIdProvider extends IdpProvider {
+class AcquiaIdProvider extends IdpProvider {
 
   private string $idpBaseUri;
 

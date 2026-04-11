@@ -8,7 +8,7 @@ use Drupal\Core\Http\ClientFactory;
 use Drupal\Core\Url;
 use Drupal\acquia_id\OAuth2\Provider\AcquiaIdProvider;
 
-final class ProviderFactory {
+class ProviderFactory {
 
   public function __construct(
     private readonly ClientFactory $httpClientFactory,
