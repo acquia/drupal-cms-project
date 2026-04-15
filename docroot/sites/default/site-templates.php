@@ -140,4 +140,10 @@ return [
     ],
     'creator' => 'OpenSense Labs',
   ],
+  'drupal_cms_site_template_base' => [
+    'name' => 'Blank',
+    'description' => 'A blank template with the foundational features of Drupal CMS, for those who truly want to start from scratch.',
+    'screenshot' => '',
+    'package' => 'drupal/drupal_cms_site_template_base',
+  ],
 ];
