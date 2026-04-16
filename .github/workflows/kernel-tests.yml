@@ -1,17 +1,31 @@
-name: Unit Tests
+name: Kernel Tests
 on:
   push:
   pull_request:
 
 jobs:
-  unit-tests:
-    name: PHPUnit (PHP ${{ matrix.php-versions }})
+  kernel-tests:
+    name: PHPUnit Kernel (PHP ${{ matrix.php-versions }})
     runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false
       matrix:
         php-versions: ['8.5']
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: drupal_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
 
     steps:
       - name: Checkout
@@ -21,7 +35,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: mbstring, xml, ctype, iconv, intl
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql
           coverage: none
 
       - name: Get composer cache directory
@@ -38,6 +52,8 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
-      - name: Run custom module unit tests
+      - name: Run custom module kernel tests
         working-directory: docroot/core
-        run: ../../vendor/bin/phpunit --testsuite=unit ../modules/custom/
+        env:
+          SIMPLETEST_DB: mysql://root:root@127.0.0.1:3306/drupal_test
+        run: ../../vendor/bin/phpunit --testsuite=kernel ../modules/custom/
