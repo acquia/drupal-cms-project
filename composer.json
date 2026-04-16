@@ -38,12 +38,14 @@
         "drupal/drupal_cms_forms": "^2",
         "drupal/drupal_cms_google_analytics": "^2",
         "drupal/drupal_cms_installer": "^2.1@beta",
+        "drupal/drupal_cms_site_template_base": "^1@dev",
         "drupal/drupal_cms_seo_tools": "^2",
         "drupal/drupal_cms_starter": "^2",
         "drupal/haven": "^1.0",
         "drupal/healthcare": "^1.0",
         "drupal/local": "^1.0",
         "drupal/provus_edu": "^1.0",
+        "drupal/pulse": "^1.0",
         "drupal/recipe_installer_kit": "^1.0.4",
         "drupal/webform": "@beta",
         "league/oauth2-client": "^2"
@@ -67,6 +69,7 @@
             "drupal/core-project-message": true,
             "drupal/core-recipe-unpack": true,
             "drupal/core-vendor-hardening": true,
+            "drupal/site_template_helper": true,
             "php-http/discovery": true,
             "phpstan/extension-installer": true,
             "tbachert/spi": true
@@ -107,7 +110,7 @@
         },
         "patches": {
             "drupal/core": {
-                "3498026 - RecipeRunner::processInstall() installs modules one by one": "https://git.drupalcode.org/project/drupal/-/merge_requests/15102/diffs.patch"
+                "3498026 - RecipeRunner::processInstall() installs modules one by one": "./patches/3498026.diff"
             }
         }
     },
