@@ -56,4 +56,4 @@ jobs:
         working-directory: docroot/core
         env:
           SIMPLETEST_DB: mysql://root:root@127.0.0.1:3306/drupal_test
-        run: ../../vendor/bin/phpunit --testsuite=kernel ../modules/custom/
+        run: ../../vendor/bin/phpunit ../modules/custom/*/tests/src/Kernel
