@@ -13,13 +13,16 @@ use Drupal\Tests\user\Traits\UserCreationTrait;
 use League\OAuth2\Client\Token\AccessToken;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Drupal\acquia_id\Controller\OAuth2Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\HttpKernel\TerminableInterface;
 
 #[CoversClass(OAuth2Controller::class)]
 #[Group('acquia_id')]
+#[RunTestsInSeparateProcesses]
 class OAuth2ControllerTest extends KernelTestBase {
 
   use UserCreationTrait;
@@ -54,6 +57,11 @@ class OAuth2ControllerTest extends KernelTestBase {
       ->addTag('http_client_middleware');
     $container->register(MockedCloudApiMiddleware::class)
       ->addTag('http_client_middleware');
+    // Decorate the HTTP kernel so exceptions propagate to the test rather than
+    // being caught by Drupal's exception subscribers.
+    $container->register('http_kernel.test', TestHttpKernel::class)
+      ->setDecoratedService('http_kernel.basic')
+      ->addArgument(new \Symfony\Component\DependencyInjection\Reference('http_kernel.test.inner'));
   }
 
   public function testInitialVisitRedirectsToIdp(): void {
@@ -69,7 +77,14 @@ class OAuth2ControllerTest extends KernelTestBase {
     );
     $this->assertStringContainsString('code_challenge=', $location);
     $this->assertStringContainsString('code_challenge_method=S256', $location);
-    $this->assertStringContainsString('scope=openid+email+profile+offline_access', $location);
+
+    // Verify scopes are present (URL may encode spaces as %20 or +).
+    $query = parse_url($location, PHP_URL_QUERY);
+    parse_str($query, $params);
+    $this->assertStringContainsString('openid', $params['scope']);
+    $this->assertStringContainsString('email', $params['scope']);
+    $this->assertStringContainsString('profile', $params['scope']);
+    $this->assertStringContainsString('offline_access', $params['scope']);
   }
 
   public function testDestinationIsPreservedInSession(): void {
@@ -87,7 +102,7 @@ class OAuth2ControllerTest extends KernelTestBase {
   }
 
   public function testMissingStateThrowsAccessDenied(): void {
-    $this->expectException(AccessDeniedHttpException::class);
+    $this->expectException(\Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException::class);
     $this->expectExceptionMessage('Missing state');
 
     $this->doRequest(
@@ -98,7 +113,7 @@ class OAuth2ControllerTest extends KernelTestBase {
   }
 
   public function testMismatchedStateThrowsAccessDenied(): void {
-    $this->expectException(AccessDeniedHttpException::class);
+    $this->expectException(\Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException::class);
     $this->expectExceptionMessage('Invalid state');
 
     $this->doRequest(
@@ -196,6 +211,31 @@ class OAuth2ControllerTest extends KernelTestBase {
 
     $http_kernel = $this->container->get('http_kernel');
     return $http_kernel->handle($request);
+  }
+
+}
+
+/**
+ * HTTP kernel decorator that lets exceptions propagate to the test.
+ */
+final class TestHttpKernel implements HttpKernelInterface, TerminableInterface {
+
+  public function __construct(
+    private readonly HttpKernelInterface $httpKernel,
+  ) {}
+
+  public function handle(
+    Request $request,
+    int $type = self::MAIN_REQUEST,
+    bool $catch = TRUE,
+  ): Response {
+    return $this->httpKernel->handle($request, $type, FALSE);
+  }
+
+  public function terminate(Request $request, Response $response): void {
+    if ($this->httpKernel instanceof TerminableInterface) {
+      $this->httpKernel->terminate($request, $response);
+    }
   }
 
 }

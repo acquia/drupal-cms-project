@@ -44,7 +44,16 @@ final class MockedCloudApiMiddleware {
           );
         }
 
-        // Application access check endpoint.
+        // Application access check endpoint (reject empty UUID path).
+        if ($path === '/api/applications/' || $path === '/api/applications') {
+          return new FulfilledPromise(
+            new Response(
+              404,
+              ['Content-Type' => 'application/json'],
+              Json::encode(['error' => 'Not Found']),
+            ),
+          );
+        }
         if (preg_match('#^/api/applications/(.+)$#', $path, $matches)) {
           if ($access_token === 'NO_APP_ACCESS_TOKEN') {
             return new FulfilledPromise(

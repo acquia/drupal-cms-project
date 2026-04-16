@@ -40,7 +40,7 @@ final class OAuth2AuthorizationEventSubscriber implements EventSubscriberInterfa
    */
   public function onAuthorization(OAuth2AuthorizationEvent $event): void {
     $applicationUuid = AcquiaDrupalEnvironmentDetector::getAhApplicationUuid();
-    if ($applicationUuid === NULL) {
+    if (empty($applicationUuid)) {
       throw new AccessException('Acquia application UUID is not available.');
     }
 

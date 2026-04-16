@@ -18,9 +18,11 @@ use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use League\OAuth2\Client\Token\AccessToken;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 #[CoversClass(OAuth2AuthorizationEventSubscriber::class)]
 #[Group('acquia_trials_id')]
+#[RunTestsInSeparateProcesses]
 class OAuth2AuthorizationEventSubscriberTest extends KernelTestBase {
 
   use UserCreationTrait;
