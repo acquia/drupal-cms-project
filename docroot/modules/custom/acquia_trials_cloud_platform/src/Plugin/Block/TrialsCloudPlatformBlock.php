@@ -38,10 +38,15 @@ class TrialsCloudPlatformBlock extends BlockBase {
       ],
     ];
 
+    $subscription_id = getenv('AH_APPLICATION_UUID') ?: '';
+    $cta_url = $subscription_id !== ''
+      ? 'https://cloud.acquia.com/subscriptions/' . $subscription_id
+      : 'https://cloud.acquia.com/subscriptions';
+
     return [
       '#theme' => 'acquia_trials_cloud_platform',
       '#features' => $features,
-      '#cta_url' => 'https://cloud.acquia.com',
+      '#cta_url' => $cta_url,
       '#attached' => [
         'library' => ['acquia_trials_cloud_platform/cloud-platform'],
       ],
