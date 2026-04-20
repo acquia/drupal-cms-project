@@ -9,11 +9,16 @@
  * Implements hook_theme().
  */
 function acquia_trials_cloud_platform_theme(): array {
+  $subscription_id = getenv('AH_SUBSCRIPTION_ID') ?: '';
+  $cta_url = $subscription_id !== ''
+    ? 'https://cloud.acquia.com/subscriptions/' . $subscription_id
+    : 'https://cloud.acquia.com/subscriptions';
+
   return [
     'acquia_trials_cloud_platform' => [
       'variables' => [
         'features' => [],
-        'cta_url' => 'https://cloud.acquia.com',
+        'cta_url' => $cta_url,
       ],
       'template' => 'acquia-trials-cloud-platform',
     ],
