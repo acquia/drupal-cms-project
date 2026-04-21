@@ -81,8 +81,6 @@ jobs:
             --account-pass=admin \
             --yes
 
-          ./vendor/bin/drush config:export --generic --yes
-
       - name: Remove values that should be unique.
         run: |
           cd $ARTIFACT_DIR
@@ -121,16 +119,6 @@ jobs:
           git add -A
           git commit -m "Build artifact from ${{ github.sha }}"
           git push --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:dist
-
-      - name: Checkout dist branch
-        uses: actions/checkout@v4
-        with:
-          ref: dist
-
-      - name: Install from dist config
-        run: |
-          ./vendor/bin/drush drupal:hash-salt:init
-          ./vendor/bin/drush site:install --existing-config
 
       - name: Summary
         run: |
