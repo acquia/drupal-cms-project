@@ -9,9 +9,11 @@
  * Implements hook_install().
  */
 function acquia_trials_countdown_install() {
-  $subscription_id = getenv('SUBSCRIPTION_ID') ?: '';
-  $trial_end = \Drupal::service('acquia_trials_countdown.trial_end_client')
-    ->fetchTrialEnd($subscription_id);
+  // @todo Use the API to get expiration when it's ready.
+  //$subscription_id = getenv('SUBSCRIPTION_ID') ?: '';
+  //$trial_end = \Drupal::service('acquia_trials_countdown.trial_end_client')
+  //  ->fetchTrialEnd($subscription_id);
+  $trial_end = (60 * 60 * 24 * 14) + time();
   \Drupal::state()->set('acquia_trials_countdown.trial_end', $trial_end);
 }
 
