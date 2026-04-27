@@ -36,4 +36,15 @@ function acquia_trials_countdown_page_attachments(array &$attachments) {
   $attachments['#attached']['drupalSettings']['trialsCountdown'] = [
     'endTimestamp' => $trial_end,
   ];
+
+  $attachments['#attached']['html_head'][] = [
+    [
+      '#tag' => 'script',
+      '#attributes' => [
+        'type' => 'text/javascript',
+      ],
+      '#value' => "(function(w,q){w['QualifiedObject']=q;w[q]=w[q]||function(){(w[q].q=w[q].q||[]).push(arguments)};})(window,'qualified')",
+    ],
+    'qualified-scheduler', // Unique key for the snippet
+  ];
 }

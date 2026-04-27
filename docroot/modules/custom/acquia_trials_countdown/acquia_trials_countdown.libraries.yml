@@ -1,8 +1,13 @@
 countdown-banner:
+  header: true
   css:
     theme:
       css/acquia_trials_countdown.css: {}
   js:
     js/acquia_trials_countdown.js: {}
+    https://js.qualified.com/qualified.js?token=DvcmevEzPHDhSEtM: {
+      type: external,
+      attributes: { async: true }
+    }
   dependencies:
     - core/drupalSettings
