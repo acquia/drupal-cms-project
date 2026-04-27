@@ -72,7 +72,7 @@ class OAuth2ControllerTest extends KernelTestBase {
     $this->assertSame(Response::HTTP_SEE_OTHER, $response->getStatusCode());
     $location = $response->headers->get('Location');
     $this->assertStringContainsString(
-      'https://id.acquia.com/oauth2/default/v1/authorize',
+      'id.acquia.com/oauth2/default/v1/authorize',
       $location,
     );
     $this->assertStringContainsString('code_challenge=', $location);
@@ -96,7 +96,7 @@ class OAuth2ControllerTest extends KernelTestBase {
 
     $this->assertSame(Response::HTTP_SEE_OTHER, $response->getStatusCode());
     $this->assertStringContainsString(
-      'https://id.acquia.com/oauth2/default/v1/authorize',
+      'id.acquia.com/oauth2/default/v1/authorize',
       $response->headers->get('Location'),
     );
   }
@@ -146,7 +146,7 @@ class OAuth2ControllerTest extends KernelTestBase {
     $this->assertTrue($response->isRedirect());
     $this->assertSame(Response::HTTP_SEE_OTHER, $response->getStatusCode());
     $this->assertStringContainsString(
-      'https://cloud.acquia.com',
+      'cloud.acquia.com',
       $response->headers->get('Location'),
     );
   }
@@ -163,7 +163,7 @@ class OAuth2ControllerTest extends KernelTestBase {
     $response = $this->doRequest($request);
 
     $this->assertStringContainsString(
-      'https://id.acquia.com/oauth2/default/v1/authorize',
+      'id.acquia.com/oauth2/default/v1/authorize',
       $response->headers->get('Location'),
     );
   }

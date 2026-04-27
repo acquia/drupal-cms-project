@@ -6,13 +6,14 @@ namespace Drupal\acquia_id;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\DependencyInjection\ServiceProviderBase;
+use Acquia\Drupal\RecommendedSettings\Helpers\EnvironmentDetector;
 
 final class AcquiaIdServiceProvider extends ServiceProviderBase {
 
   public function alter(ContainerBuilder $container): void {
     parent::alter($container);
 
-    if (getenv('AH_SITE_ENVIRONMENT') === 'prod') {
+    if (EnvironmentDetector::isProdEnv()) {
       $idp_base_uri = 'https://id.acquia.com/oauth2/default';
       $cloud_api_base_uri = 'https://cloud.acquia.com';
     }
