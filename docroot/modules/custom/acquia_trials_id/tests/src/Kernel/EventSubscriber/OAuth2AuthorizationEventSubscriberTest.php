@@ -7,6 +7,8 @@ namespace Drupal\Tests\acquia_trials_id\Kernel\EventSubscriber;
 use Drupal\Core\Access\AccessException;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\KernelTests\KernelTestBase;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder as SymfonyContainerBuilder;
 use Drupal\Tests\acquia_id\Kernel\HttpClientMiddleware\MockedCloudApiMiddleware;
 use Drupal\Tests\acquia_id\Kernel\HttpClientMiddleware\MockedIdpMiddleware;
 use Drupal\Tests\user\Traits\UserCreationTrait;
@@ -58,6 +60,15 @@ class OAuth2AuthorizationEventSubscriberTest extends KernelTestBase {
       ->addTag('http_client_middleware');
     $container->register(MockedCloudApiMiddleware::class)
       ->addTag('http_client_middleware');
+
+    // Override after AcquiaIdServiceProvider::alter() sets staging URLs.
+    $container->addCompilerPass(new class implements CompilerPassInterface {
+      public function process(SymfonyContainerBuilder $container): void {
+        $container->setParameter('acquia_id.idp_base_uri', 'https://id.acquia.com/oauth2/default');
+        $container->setParameter('acquia_id.cloud_api_base_uri', 'https://cloud.acquia.com');
+        $container->setParameter('acquia_id.idp_logout_redirect_uri', 'https://cloud.acquia.com');
+      }
+    }, priority: -200);
   }
 
   public function testThrowsWhenApplicationUuidNotAvailable(): void {
