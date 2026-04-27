@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Hook implementations for the Acquia ID module.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Session\AccountInterface;
+use Drupal\user\UserInterface;
+
+/**
+ * Implements hook_user_logout().
+ */
+function acquia_id_user_logout(AccountInterface $account): void {
+  \Drupal::service('acquia_id.oauth2.access_token_repository')->delete((int) $account->id());
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete() for user entities.
+ */
+function acquia_id_user_delete(UserInterface $account): void {
+  \Drupal::service('acquia_id.oauth2.access_token_repository')->delete((int) $account->id());
+}
