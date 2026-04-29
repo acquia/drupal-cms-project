@@ -13,13 +13,13 @@ final class AcquiaIdServiceProvider extends ServiceProviderBase {
   public function alter(ContainerBuilder $container): void {
     parent::alter($container);
 
-    if (EnvironmentDetector::isProdEnv()) {
-      $idp_base_uri = 'https://id.acquia.com/oauth2/default';
-      $cloud_api_base_uri = 'https://cloud.acquia.com';
-    }
-    else {
+    if (EnvironmentDetector::getAhRealm() === 'gardens') {
       $idp_base_uri = 'https://staging.id.acquia.com/oauth2/default';
       $cloud_api_base_uri = 'https://staging.cloud.acquia.com';
+    }
+    else {
+      $idp_base_uri = 'https://id.acquia.com/oauth2/default';
+      $cloud_api_base_uri = 'https://cloud.acquia.com';
     }
 
     $container->setParameter('acquia_id.idp_base_uri', $idp_base_uri);
