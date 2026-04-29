@@ -15,6 +15,8 @@ use Drupal\Core\Url;
 use Drupal\acquia_id\Events\OAuth2AuthorizationEvent;
 use Drupal\acquia_id\OAuth2\AccessTokenRepository;
 use Drupal\acquia_id\OAuth2\Provider\AcquiaIdProvider;
+use Drupal\acquia_id\Helper\AcquiaEnvironmentUrls;
+use Drupal\acquia_id\Helper\CloudApiChecker;
 use GuzzleHttp\Exception\RequestException;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken;
@@ -40,6 +42,7 @@ final class OAuth2Controller implements ContainerInjectionInterface {
     private readonly EventDispatcherInterface $eventDispatcher,
     private readonly AccessTokenRepository $accessTokenRepository,
     private readonly string $idpLogoutRedirectUri,
+    private readonly CloudApiChecker $cloudApiChecker,
   ) {
   }
 
@@ -53,6 +56,7 @@ final class OAuth2Controller implements ContainerInjectionInterface {
       $container->get('event_dispatcher'),
       $container->get('acquia_id.oauth2.access_token_repository'),
       $container->getParameter('acquia_id.idp_logout_redirect_uri'),
+      new CloudApiChecker(),
     );
   }
 
@@ -73,6 +77,10 @@ final class OAuth2Controller implements ContainerInjectionInterface {
         $this->session->set('oauth2_destination', $request->query->get('destination'));
         $request->query->set('destination', '');
       }
+      // Use AH_APPLICATION_UUID from environment for environment selection.
+      $uuid = getenv('AH_APPLICATION_UUID') ?: '';
+      $idpUrl = AcquiaEnvironmentUrls::getIdpUrl($uuid, $this->cloudApiChecker);
+      $this->provider->setBaseAuthorizationUrl($idpUrl);
       $response = new TrustedRedirectResponse(
         $this->provider->getAuthorizationUrl(),
         Response::HTTP_SEE_OTHER
