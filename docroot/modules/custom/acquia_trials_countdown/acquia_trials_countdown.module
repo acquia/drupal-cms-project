@@ -30,6 +30,10 @@ function acquia_trials_countdown_cron() {
  * Implements hook_page_attachments().
  */
 function acquia_trials_countdown_page_attachments(array &$attachments) {
+  if (!\Drupal::currentUser()->hasPermission('access administration pages')) {
+    return;
+  }
+
   $trial_end = \Drupal::state()->get('acquia_trials_countdown.trial_end');
 
   $attachments['#attached']['library'][] = 'acquia_trials_countdown/countdown-banner';
