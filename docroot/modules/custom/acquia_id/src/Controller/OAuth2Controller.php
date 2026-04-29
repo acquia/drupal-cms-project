@@ -80,7 +80,7 @@ final class OAuth2Controller implements ContainerInjectionInterface {
       // Use AH_APPLICATION_UUID from environment for environment selection.
       $uuid = getenv('AH_APPLICATION_UUID') ?: '';
       $idpUrl = AcquiaEnvironmentUrls::getIdpUrl($uuid, $this->cloudApiChecker);
-      $this->provider->setBaseAuthorizationUrl($idpUrl);
+      $this->provider->setIdpBaseUri($idpUrl);
       $response = new TrustedRedirectResponse(
         $this->provider->getAuthorizationUrl(),
         Response::HTTP_SEE_OTHER
