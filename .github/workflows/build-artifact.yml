@@ -81,6 +81,62 @@ jobs:
             --account-pass=admin \
             --yes
 
+      - name: Generate per-template DB seeds for trials
+        run: |
+          cd $ARTIFACT_DIR
+          mkdir -p seeds
+
+          # Trial-eligible template recipe slugs.
+          # These must match the TemplateID values used in trials-service CreateTrial requests.
+          # Confirm the full list with Adam / drupal-cms team before adding new templates.
+          # Recipe packages must be installed via composer (see composer.json installer-paths).
+          TEMPLATES=(
+            "drupal_cms_starter"
+          )
+
+          for TEMPLATE in "${TEMPLATES[@]}"; do
+            echo "=== Seeding template: ${TEMPLATE} ==="
+
+            # Re-install Drupal with this specific template recipe.
+            # Each iteration drops and recreates the DB via site:install.
+            ./vendor/bin/drush site:install "recipes/contrib/${TEMPLATE}" \
+              --db-url="mysql://drupal:drupal@127.0.0.1/drupal" \
+              --site-name="Trial Site" \
+              --account-name=admin \
+              --account-pass=admin \
+              --yes
+
+            # Apply the custom Acquia Trials recipe on top of the template install.
+            # This bakes trial-specific modules and dashboard config into the seed dump
+            # so they are not re-applied at runtime (faster hydration).
+            # NOTE: recipe must be idempotent — confirm with drupal-cms team.
+            php ./vendor/drush/drush/drush.php recipe ./recipes/custom/acquia_trials
+
+            # Cache rebuild before dumping to ensure a clean state.
+            ./vendor/bin/drush cr
+
+            # Dump the DB to a gzipped SQL file.
+            # Portability flags:
+            #   --no-tablespaces      : omits tablespace clauses that fail on RDS
+            #   --single-transaction  : consistent snapshot without table locks
+            #   --skip-lock-tables    : avoids LOCK TABLES statements
+            ./vendor/bin/drush sql:dump \
+              --extra-dump="--no-tablespaces --single-transaction --skip-lock-tables" \
+              --gzip \
+              --result-file="seeds/${TEMPLATE}.sql.gz"
+
+            SEED_SIZE=$(du -sh "seeds/${TEMPLATE}.sql.gz" | cut -f1)
+            echo "=== Seed created: seeds/${TEMPLATE}.sql.gz (${SEED_SIZE}) ==="
+          done
+
+          # Warn if total seed size exceeds 50 MB — consider pivoting to B-EFS approach.
+          TOTAL_SIZE=$(du -sh seeds/ | cut -f1)
+          echo "=== Total seeds directory size: ${TOTAL_SIZE} ==="
+          TOTAL_BYTES=$(du -sb seeds/ | cut -f1)
+          if [ "$TOTAL_BYTES" -gt 52428800 ]; then
+            echo "::warning::seeds/ directory exceeds 50 MB (${TOTAL_SIZE}). Consider moving seeds to EFS (Approach B-EFS) to avoid slowing git clone time."
+          fi
+
       - name: Remove values that should be unique.
         run: |
           cd $ARTIFACT_DIR
@@ -108,6 +164,7 @@ jobs:
           EOF
 
           # Remove ALL other .gitignore files recursively so scaffold and built files can be committed.
+          # NOTE: seeds/*.sql.gz must NOT be gitignored — they are intentionally committed to dist.
           find . -name ".gitignore" -type f ! -path "./.gitignore" -delete
           rm -f .gitattributes .editorconfig
 
@@ -124,3 +181,7 @@ jobs:
         run: |
           echo "✅ Artifact successfully deployed to dist branch"
           echo "📦 Source commit: ${{ github.sha }}"
+          if [ -d "/tmp/artifact/seeds" ]; then
+            echo "🌱 Seeds included in dist branch:"
+            ls -lh /tmp/artifact/seeds/
+          fi
