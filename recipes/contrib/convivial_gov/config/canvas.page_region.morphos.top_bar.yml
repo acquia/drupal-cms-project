@@ -1,0 +1,42 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.morphos.google_translate
+    - canvas.component.sdc.morphos.grid
+    - canvas.component.sdc.morphos.group
+    - canvas.component.sdc.morphos.scheme_switcher
+  module:
+    - options
+  theme:
+    - morphos
+id: morphos.top_bar
+region: top_bar
+theme: morphos
+component_tree:
+  0:
+    uuid: 00d1a0d1-d4b4-4e50-a8b4-343ebb286d91
+    component_id: sdc.morphos.grid
+    component_version: 9ba5ea411b12f640
+    inputs: '{"row_count":1,"container":"container--normal","column_widths":"grid-col-widths--100","palette":"color--neutral","padding_top":"4","padding_bottom":"4"}'
+  '0:cell_1:0':
+    parent_uuid: 00d1a0d1-d4b4-4e50-a8b4-343ebb286d91
+    slot: cell_1
+    uuid: fe54a1cf-1b54-4379-89a4-38e0ce2dec76
+    component_id: sdc.morphos.group
+    component_version: 4bbb4b78a3877f4c
+    inputs: '{"allow_wrap":true,"justify":"space-between","alignment":"center"}'
+  '0:cell_1:0:items:0':
+    parent_uuid: fe54a1cf-1b54-4379-89a4-38e0ce2dec76
+    slot: items
+    uuid: b5fd5909-568f-42b9-bca0-574e33cfb54a
+    component_id: sdc.morphos.google_translate
+    component_version: 98b24544b148f508
+    inputs: '{"language":"en","icon":"globe"}'
+  '0:cell_1:0:items:1':
+    parent_uuid: fe54a1cf-1b54-4379-89a4-38e0ce2dec76
+    slot: items
+    uuid: 66c59438-9f98-452c-b200-f51293811bcf
+    component_id: sdc.morphos.scheme_switcher
+    component_version: 8fe3be948e0194e1
+    inputs: '[]'

@@ -1,0 +1,189 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - eureka
+label: 'Item list'
+id: sdc.eureka.item-list
+source: sdc
+source_local_id: 'eureka:item-list'
+provider: eureka
+active_version: f312880d07349418
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        item_list_type:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: column-cards
+          expression: ℹ︎list_string␟value
+        item_list_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Vacancies
+          expression: ℹ︎string␟value
+        item_list_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '2'
+          expression: ℹ︎list_float␟value
+        item_list_summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Optional summary below the title'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        item_list_items_block:
+          title: 'Item list items'
+          description: 'Items inside of the list'
+  f312880d07349418:
+    settings:
+      prop_field_definitions:
+        item_list_type:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: column-cards
+          expression: ℹ︎list_string␟value
+        item_list_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Vacancies
+          expression: ℹ︎string␟value
+        item_list_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '2'
+          expression: ℹ︎list_float␟value
+        item_list_summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Optional summary below the title'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        item_list_items_block:
+          title: 'Item list items'
+          description: 'Items inside of the list'
+  3ffa2b70f2e7bdb0:
+    settings:
+      prop_field_definitions:
+        item_list_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Vacancies
+          expression: ℹ︎string␟value
+        item_list_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '2'
+          expression: ℹ︎list_float␟value
+        item_list_summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Optional summary below the title'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        item_list_items_block:
+          title: 'Item list items'
+          description: 'Items inside of the list'
+  5b0ff6e0fabb0827:
+    settings:
+      prop_field_definitions:
+        item_list_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Vacancies
+          expression: ℹ︎string␟value
+        item_list_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '2'
+          expression: ℹ︎list_float␟value
+        item_list_summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Optional summary below the title'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }

@@ -1,0 +1,5 @@
+services:
+  eca_test_circular_dependency.test_service:
+    class: Drupal\eca_test_circular_dependency\TestServiceWithTokenDependency
+    arguments:
+      - '@token'

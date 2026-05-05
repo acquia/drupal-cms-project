@@ -1,0 +1,147 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: e1134819-bca5-4a8f-a741-e6d2f76be6fd
+  default_langcode: en
+  depends:
+    b6bf9f86-e49f-4d0f-8834-3f08fdd8b8eb: file
+    c2205fed-268e-457a-a382-7a928e33ddc4: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Backgrounds
+  description:
+    -
+      value: 'Demonstration of the background components available in Convivial Template.'
+  components:
+    -
+      uuid: 7e1df2ff-faed-4b05-ba9a-72518df80a54
+      component_id: sdc.morphos.banner
+      inputs:
+        title: Backgrounds
+        padding_top: '12'
+        padding_bottom: '12'
+        palette: color--primary
+        texture: texture--conic-top-start
+    -
+      parent_uuid: 7e1df2ff-faed-4b05-ba9a-72518df80a54
+      slot: breadcrumb
+      uuid: 426ea261-56b1-4d2d-a112-057c7b1f3f25
+      component_id: block.system_breadcrumb_block
+      inputs:
+        label: Breadcrumbs
+        label_display: '0'
+    -
+      uuid: ea8f651e-ad3d-4553-b63c-9be8330830b0
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading: 'Parallax Background'
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--primary
+        intro:
+          value: '<p>Adds a scrolling parallax imaged based on a users scroll position of the parent component.</p>'
+          format: canvas_html_block
+        content_position: section-position--start
+        content_alignment: section-alignment--start
+        layout: layout--12
+        overlay: overlay--linear-start
+    -
+      parent_uuid: ea8f651e-ad3d-4553-b63c-9be8330830b0
+      slot: backgrounds
+      uuid: 747aee29-dd7a-4e06-be37-f327b9fa8236
+      component_id: sdc.morphos.parallax_background
+      inputs:
+        speed: 2
+        media_query: '(min-width:768px)'
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: c2205fed-268e-457a-a382-7a928e33ddc4
+            target_type: media
+    -
+      uuid: 39eaa936-d8fb-41ab-934b-ffb0a3f663be
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_bottom: '24'
+        container: container--normal
+        palette: color--primary
+        overlay: overlay--linear-start
+        heading: 'Video Background'
+        intro:
+          value: '<p>Adds a background video to a component.</p>'
+          format: canvas_html_block
+        content_position: section-position--start
+        content_alignment: section-alignment--start
+        padding_top: '24'
+    -
+      parent_uuid: 39eaa936-d8fb-41ab-934b-ffb0a3f663be
+      slot: backgrounds
+      uuid: bb1ebda5-1b6a-4a09-837f-edc6c0faada0
+      component_id: sdc.morphos.video_background
+      inputs:
+        url: 'https://youtu.be/AWLS6nmrVGo'
+        media_query: '(min-width:768px)'
+    -
+      uuid: 1c621d0a-4202-41ae-b65a-55da728b85ef
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '24'
+        padding_bottom: '24'
+        container: container--normal
+        palette: color--primary
+        overlay: overlay--linear-start
+        heading: 'Image background'
+        intro:
+          value: '<p>Adds a background image to a component, with many rich controls.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 1c621d0a-4202-41ae-b65a-55da728b85ef
+      slot: backgrounds
+      uuid: 590674d3-e1b7-4174-804c-1087e977a62f
+      component_id: sdc.morphos.image_background
+      inputs:
+        position: 'center center'
+        style: cover
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: c2205fed-268e-457a-a382-7a928e33ddc4
+            target_type: media
+        media_query: '(min-width: 768px)'
+  path:
+    -
+      alias: /demo/backgrounds
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

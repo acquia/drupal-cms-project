@@ -1,0 +1,811 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Drupal\Tests\canvas\Kernel\Config;
+
+use PHPUnit\Framework\Attributes\TestWith;
+use Drupal\canvas\ComponentDoesNotMeetRequirementsException;
+use Drupal\canvas\Plugin\Canvas\ComponentSource\SingleDirectoryComponentDiscovery;
+use Drupal\Core\Config\Schema\SchemaIncompleteException;
+use Drupal\canvas\ComponentSource\ComponentSourceInterface;
+use Drupal\canvas\ComponentSource\ComponentSourceManager;
+use Drupal\canvas\Entity\Component;
+use Drupal\canvas\Entity\ComponentInterface;
+use Drupal\canvas\Entity\Folder;
+use Drupal\canvas\Entity\JavaScriptComponent;
+use Drupal\canvas\Entity\VersionedConfigEntityBase;
+use Drupal\canvas\Entity\VersionedConfigEntityInterface;
+use Drupal\canvas\Plugin\Canvas\ComponentSource\BlockComponent;
+use Drupal\canvas\Plugin\Canvas\ComponentSource\JsComponent;
+use Drupal\canvas\Plugin\Canvas\ComponentSource\SingleDirectoryComponent;
+use Drupal\Core\Theme\ComponentPluginManager;
+use Drupal\Tests\canvas\Kernel\Traits\CiModulePathTrait;
+use Drupal\Tests\canvas\Traits\BetterConfigDependencyManagerTrait;
+use Drupal\Tests\canvas\Traits\ConstraintViolationsTestTrait;
+use Drupal\Tests\canvas\Traits\ContribStrictConfigSchemaTestTrait;
+use Drupal\Tests\canvas\Traits\GenerateComponentConfigTrait;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+use Symfony\Component\Yaml\Yaml;
+
+/**
+ * Tests validation of component entities.
+ */
+#[Group('canvas')]
+#[Group('canvas_component_sources')]
+#[RunTestsInSeparateProcesses]
+class ComponentValidationTest extends BetterConfigEntityValidationTestBase {
+
+  use BetterConfigDependencyManagerTrait;
+  use ConstraintViolationsTestTrait;
+  use ContribStrictConfigSchemaTestTrait;
+  use GenerateComponentConfigTrait;
+  use CiModulePathTrait;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected static $modules = [
+    'canvas',
+    'sdc',
+    'canvas_test_sdc',
+    // Canvas's dependencies (modules providing field types + widgets).
+    'datetime',
+    'file',
+    'field',
+    'image',
+    'options',
+    'path',
+    'link',
+    'text',
+    'filter',
+    'ckeditor5',
+    'editor',
+    'user',
+  ];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected static array $propertiesWithOptionalValues = [
+    'provider',
+  ];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected static $configSchemaCheckerExclusions = [
+    // We need to create a JavaScriptComponent with invalid source-defined slot
+    // name in order to test that even Component config entity's fallback slot
+    // definitions are validated.
+    // @see ::testSlotNameValidation()
+    'canvas.' . JavaScriptComponent::ENTITY_TYPE_ID . '.invalid_slot',
+    'canvas.' . Component::ENTITY_TYPE_ID . '.' . JsComponent::SOURCE_PLUGIN_ID . '.invalid_slot',
+  ];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp(): void {
+    parent::setUp();
+    $this->installConfig('canvas');
+
+    // TRICKY: creating the first Component config entity (for an SDC) triggers
+    // SDC plugin discovery, which in turn triggers all Component config
+    // entities for SDCs to be created. Which in turn means the corresponding
+    // Folders have been created — including for the SDC Component config entity
+    // this test is manually/explicitly creating.
+    // To work around this, first explicitly generate all Component config
+    // entities, then delete the auto-created Component config entity.
+    $this->generateComponentConfig();
+    $auto_created_component = Component::load('sdc.canvas_test_sdc.my-cta');
+    self::assertNotNull($auto_created_component);
+    self::assertNotNull(Folder::loadByItemAndConfigEntityTypeId('sdc.canvas_test_sdc.my-cta', Component::ENTITY_TYPE_ID));
+    $auto_created_component->delete();
+    self::assertNull(Folder::loadByItemAndConfigEntityTypeId('sdc.canvas_test_sdc.my-cta', Component::ENTITY_TYPE_ID));
+
+    $this->entity = Component::create([
+      'id' => 'sdc.canvas_test_sdc.my-cta',
+      'source' => SingleDirectoryComponent::SOURCE_PLUGIN_ID,
+      'source_local_id' => 'canvas_test_sdc:my-cta',
+      'active_version' => 'c3aed5021bdabae0',
+      'versioned_properties' => [
+        VersionedConfigEntityBase::ACTIVE_VERSION => [
+          'settings' => [
+            'prop_field_definitions' => [
+              'text' => [
+                'required' => TRUE,
+                // @see \Drupal\Core\Field\Plugin\Field\FieldType\StringItem
+                'field_type' => 'string',
+                // @see \Drupal\Core\Field\Plugin\Field\FieldWidget\StringTextfieldWidget
+                'field_widget' => 'string_textfield',
+                'default_value' => [0 => ['value' => 'Hello, world!']],
+                'expression' => 'ℹ︎string␟value',
+              ],
+              'href' => [
+                'required' => TRUE,
+                // @see \Drupal\Core\Field\Plugin\Field\FieldType\UriItem
+                'field_type' => 'uri',
+                // @see \Drupal\Core\Field\Plugin\Field\FieldWidget\UriWidget
+                'field_widget' => 'uri',
+                'default_value' => [0 => ['value' => 'https://drupal.org']],
+                'expression' => 'ℹ︎uri␟value',
+              ],
+              'target' => [
+                'required' => FALSE,
+                // @see \Drupal\options\Plugin\Field\FieldType\ListStringItem
+                'field_type' => 'list_string',
+                'field_storage_settings' => [
+                  'allowed_values_function' => 'canvas_load_allowed_values_for_component_prop',
+                ],
+                // @see \Drupal\Core\Field\Plugin\Field\FieldWidget\OptionsSelectWidget
+                'field_widget' => 'options_select',
+                'default_value' => NULL,
+                'expression' => 'ℹ︎list_string␟value',
+              ],
+            ],
+          ],
+        ],
+        // Simulate the reality prior to `required` becoming a required key in
+        // `type: canvas.generated_field_explicit_input_ux`. This is considered
+        // valid thanks to `type: canvas.component.versioned.*.*` not validating
+        // `settings`.
+        // Note: this is a subset of the active version, with a single SDC prop
+        // and NO `required` key.
+        'nonsensical' => [
+          'settings' => [
+            'prop_field_definitions' => [
+              'text' => [
+                'field_type' => 'string',
+                'field_widget' => 'string_textfield',
+                'default_value' => [0 => ['value' => 'Hello, world!']],
+                'expression' => 'ℹ︎string␟value',
+              ],
+            ],
+          ],
+          'fallback_metadata' => ['slot_definitions' => []],
+        ],
+      ],
+      'label' => 'Test',
+    ]);
+    $this->entity->save();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function testEntityIsValid(): void {
+    parent::testEntityIsValid();
+
+    // Beyond validity, validate config dependencies are computed correctly.
+    $this->assertSame(
+      [
+        'module' => [
+          'canvas_test_sdc',
+          'options',
+        ],
+      ],
+      $this->entity->getDependencies()
+    );
+    $this->assertSame([
+      'module' => [
+        'canvas_test_sdc',
+        'options',
+        'canvas',
+      ],
+    ], $this->getAllDependencies($this->entity));
+  }
+
+  /**
+   * Tests all ComponentSource plugin-specific settings.
+   *
+   * - `canvas.generated_field_explicit_input_ux` extends the
+   * fallback `canvas.component_source_settings.*`
+   * - The "sdc" and "js" ones both extend
+   *   `canvas.component_source_settings.*`
+   * - The "block" one extends the fallback one.
+   *
+   * See the base type (`type: canvas.component_source_settings.*`) and all
+   * source-specific subtypes:
+   * - `type: canvas.generated_field_explicit_input_ux`
+   * - `type: canvas.component_source_settings.sdc`
+   * - `type: canvas.component_source_settings.js`
+   * - `type: canvas.component_source_settings.block`
+   *
+   * @legacy-covers \Drupal\canvas\Plugin\Validation\Constraint\SdcPropKeysConstraintValidator
+   */
+  public function testComponentSourceSpecificSettings(): void {
+    // @see \Drupal\canvas\Plugin\Canvas\ComponentSource\SingleDirectoryComponent
+    \assert($this->entity instanceof Component);
+    $invalid_settings_due_to_extraneous_prop_field_definition = $invalid_settings_due_to_missing_prop_field_definition = $this->entity->getSettings();
+
+    // Too much.
+    $this->enableModules(['media', 'media_library', 'views']);
+    $invalid_settings_due_to_extraneous_prop_field_definition['prop_field_definitions']['image'] = [
+      'required' => FALSE,
+      'field_type' => 'image',
+      'field_storage_settings' => [
+        'target_type' => 'media',
+      ],
+      'field_instance_settings' => [
+        'handler' => 'default:media',
+        'handler_settings' => [
+          'target_bundles' => [
+            'image' => 'image',
+          ],
+        ],
+      ],
+      'field_widget' => 'media_library_widget',
+      'default_value' => [],
+      'expression' => 'ℹ︎image␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}',
+    ];
+    try {
+      $this->entity->createVersion('abcdef12343fa3dc')
+        ->setSettings($invalid_settings_due_to_extraneous_prop_field_definition)
+        ->save();
+    }
+    catch (SchemaIncompleteException $e) {
+      // We can't use ::assertValidationErrors here because we need to make use
+      // of ::save to set fallback metadata.
+      self::assertEquals('Schema errors for canvas.component.sdc.canvas_test_sdc.my-cta with the following errors: 0 [active_version] The version abcdef12343fa3dc does not match the hash of the settings for this version, expected c81cc60fb82d7011., 1 [versioned_properties.active.settings.prop_field_definitions] Configuration present for a non-existent SDC prop: &lt;em class=&quot;placeholder&quot;&gt;image&lt;/em&gt;.', $e->getMessage());
+    }
+
+    // Too little.
+    $target = $invalid_settings_due_to_missing_prop_field_definition['prop_field_definitions']['target'];
+    unset($invalid_settings_due_to_missing_prop_field_definition['prop_field_definitions']['target']);
+    try {
+      \assert($this->entity instanceof ComponentInterface);
+      $this->entity->createVersion('abcdef12343fa3dc')
+        ->setSettings($invalid_settings_due_to_missing_prop_field_definition)
+        ->save();
+    }
+    catch (SchemaIncompleteException $e) {
+      // We can't use ::assertValidationErrors here because we need to make use
+      // of ::save to set fallback metadata.
+      self::assertEquals('Schema errors for canvas.component.sdc.canvas_test_sdc.my-cta with the following errors: 0 [active_version] The version abcdef12343fa3dc does not match the hash of the settings for this version, expected c6f70e26b5325b9c., 1 [versioned_properties.active.settings.prop_field_definitions] Configuration for the SDC prop &quot;&lt;em class=&quot;placeholder&quot;&gt;Target&lt;/em&gt;&quot; (&lt;em class=&quot;placeholder&quot;&gt;target&lt;/em&gt;) is missing.', $e->getMessage());
+    }
+    // But an invalid version hash doesn't matter for old versions.
+    $invalid_settings_due_to_missing_prop_field_definition['prop_field_definitions']['target'] = $target;
+    \assert($this->entity instanceof ComponentInterface);
+    $this->entity->createVersion(
+      'c3aed5021bdabae0'
+    )->setSettings($invalid_settings_due_to_missing_prop_field_definition)->save();
+    // No validation errors even though the old 'abcdef12343fa3dc'
+    // version is invalid.
+    $this->assertValidationErrors([]);
+
+    // @see \Drupal\canvas\Plugin\Canvas\ComponentSource\JsComponent
+    // Create a "code component" that has the same explicit inputs as the
+    // `canvas_test_sdc:my-cta`.
+    $sdc_yaml = Yaml::parseFile($this->root . self::getCiModulePath() . '/tests/modules/canvas_test_sdc/components/my-cta/my-cta.component.yml');
+    $props = array_diff_key(
+      $sdc_yaml['props']['properties'],
+      // SDC has special infrastructure for a prop named "attributes".
+      array_flip(['attributes']),
+    );
+    // The `canvas_test_sdc:my-cta` SDC does not actually meet the requirements.
+    $props['href']['examples'][] = 'https://example.com';
+    $props['target']['examples'][] = '_blank';
+    // @todo Consider supporting this in https://www.drupal.org/i/3514672
+    unset($props['target']['default']);
+    JavaScriptComponent::create([
+      'machineName' => 'my-cta',
+      'name' => $this->getRandomGenerator()->sentences(5),
+      'status' => TRUE,
+      'props' => $props,
+      'required' => $sdc_yaml['props']['required'],
+      'js' => ['original' => '', 'compiled' => ''],
+      'css' => ['original' => '', 'compiled' => ''],
+      'dataDependencies' => [],
+    ])->save();
+    \assert($this->entity instanceof Component);
+    $this->entity = Component::create([
+      'id' => 'js.my-cta',
+      'source' => JsComponent::SOURCE_PLUGIN_ID,
+      'source_local_id' => 'my-cta',
+      'active_version' => 'c6f70e26b5325b9c',
+      'versioned_properties' => [
+        VersionedConfigEntityBase::ACTIVE_VERSION => [
+          'settings' => [
+            'prop_field_definitions' => array_diff_key(
+              $this->entity->getSettings()['prop_field_definitions'],
+              // Remove the 'target' key to trigger a validation error.
+              array_flip(['target']),
+            ),
+          ],
+        ],
+      ],
+      'label' => 'Test',
+    ]);
+    $this->assertValidationErrors([
+      \sprintf('versioned_properties.%s.settings.prop_field_definitions', VersionedConfigEntityInterface::ACTIVE_VERSION) => "'target' is a required key.",
+      // @see \Drupal\canvas\Entity\Component::preSave()
+      \sprintf('versioned_properties.%s', VersionedConfigEntityInterface::ACTIVE_VERSION) => "'fallback_metadata' is a required key because versioned_properties.%key is active (see config schema type canvas.component.versioned.active.*).",
+    ]);
+
+    // @see \Drupal\canvas\Plugin\Canvas\ComponentSource\BlockComponent
+    $this->enableModules(['block']);
+    $this->installConfig(['system']);
+    $defaults = [];
+
+    $this->entity = Component::create([
+      'id' => 'block.system_branding_block',
+      'source' => BlockComponent::SOURCE_PLUGIN_ID,
+      'source_local_id' => 'system_branding_block',
+      'active_version' => '7a2bdba02d8b7911',
+      'versioned_properties' => [
+        VersionedConfigEntityBase::ACTIVE_VERSION => [
+          'settings' => [
+            'default_settings' => [
+              // For `type: block_settings`.
+              'id' => 'system_branding_block',
+              'provider' => 'system',
+              'label' => 'Site branding',
+              // For `type: block.settings.system_branding_block`, which extends
+              // the above.
+              // @see \Drupal\system\Plugin\Block\SystemBrandingBlock::defaultConfiguration()
+              'use_site_logo' => TRUE,
+              'use_site_name' => FALSE,
+              // But intentionally omitted `use_site_slogan`, which SHOULD
+              // trigger a validation error.
+              // 'use_site_slogan' => FALSE,.
+              // @todo Upstream core bug in `type: block_settings`: `label_display` should be a boolean but has `type: label` — change to FALSE once https://www.drupal.org/i/2544708 is fixed
+              'label_display' => '0',
+            ] + $defaults,
+          ],
+        ],
+      ],
+      'label' => 'Test',
+    ]);
+    // We can't know the active version ahead of time, because block versions
+    // can vary depending on upstream changes in core.
+    $version = $this->entity->getComponentSource()->generateVersionHash();
+
+    $this->assertValidationErrors([
+      'active_version' => "The version 7a2bdba02d8b7911 does not match the hash of the settings for this version, expected $version.",
+      \sprintf('versioned_properties.%s.settings.default_settings', VersionedConfigEntityInterface::ACTIVE_VERSION) => "'use_site_slogan' is a required key because source_local_id is system_branding_block (see config schema type block.settings.system_branding_block).",
+      // @see \Drupal\canvas\Entity\Component::preSave()
+      \sprintf('versioned_properties.%s', VersionedConfigEntityInterface::ACTIVE_VERSION) => "'fallback_metadata' is a required key because versioned_properties.%key is active (see config schema type canvas.component.versioned.active.*).",
+    ]);
+  }
+
+  /**
+   * Data provider for ::testInvalidMachineNameCharacters().
+   *
+   * @return array<string, array<int, bool|string>>
+   *   The test cases.
+   */
+  public static function providerInvalidMachineNameCharacters(): array {
+    return [
+      'INVALID: missing components' => ['sdc.sdc', FALSE],
+      'INVALID: space separated' => ['sdc.space separated.space separated', FALSE],
+      'INVALID: uppercase letters' => ['sdc.Uppercase_Letters.Uppercase_Letters', FALSE],
+      // @todo period separated should be valid for the final identifier.
+      'INVALID: period separated' => ['sdc.provider.period.separated', FALSE],
+      'INVALID: only underscore separated' => ['sdc.underscore_separated_underscore_separated', FALSE],
+      'VALID: dot instead of colon' => ['sdc.provider.component', TRUE],
+      'VALID: dash separated' => ['sdc.dash-separated.dash-separated', TRUE],
+      'VALID: underscore separated' => ['sdc.underscore_separated.underscore_separated', TRUE],
+    ];
+  }
+
+  /**
+   * Machine name of \Drupal\canvas\Entity\Component needs to be joined with +.
+   */
+  protected function randomMachineName($length = 8): string {
+    return 'sdc.' . parent::randomMachineName(intdiv($length, 2)) . '.' . parent::randomMachineName(intdiv($length, 2));
+  }
+
+  /**
+   * Tests validating a component with a SDC machine name.
+   */
+  public function testInvalidId(): void {
+    $this->entity->set('id', 'invalid:name');
+    $this->assertValidationErrors([
+      '' => "The 'id' property cannot be changed.",
+      'id' => "Expected 'sdc.canvas_test_sdc.my-cta', not 'invalid:name'. Format: '&lt;%parent.source&gt;.&lt;%parent.source_local_id&gt;'.",
+    ]);
+  }
+
+  public function testImmutableProperties(array $valid_values = []): void {
+    $valid_values = [
+      'id' => 'sdc.sdc_test.no-props',
+      'source' => 'test',
+      'source_local_id' => 'sdc_test:no-props',
+    ];
+    $additional_validation_errors = [
+      'id' => [
+        'id' => "Expected 'sdc.canvas_test_sdc.my-cta', not 'sdc.sdc_test.no-props'. Format: '&lt;%parent.source&gt;.&lt;%parent.source_local_id&gt;'.",
+      ],
+      'source' => [
+        'id' => "Expected 'test.canvas_test_sdc.my-cta', not 'sdc.canvas_test_sdc.my-cta'. Format: '&lt;%parent.source&gt;.&lt;%parent.source_local_id&gt;'.",
+        'source' => [
+          "The 'test' plugin does not exist.",
+          // @todo Remove after https://www.drupal.org/i/3520484#stable is done.
+          'The value you selected is not a valid choice.',
+        ],
+        \sprintf('versioned_properties.%s.settings', VersionedConfigEntityInterface::ACTIVE_VERSION) => "'prop_field_definitions' is an unknown key because source is test (see config schema type canvas.component_source_settings.*).",
+      ],
+      'source_local_id' => [
+        'id' => "Expected 'sdc.sdc_test.no-props', not 'sdc.canvas_test_sdc.my-cta'. Format: '&lt;%parent.source&gt;.&lt;%parent.source_local_id&gt;'.",
+        'source_local_id' => "The 'sdc_test:no-props' plugin does not exist.",
+      ],
+    ];
+
+    // @todo Update parent method to accept a `$additional_validation_errors` parameter in addition to `$valid_values`, and uncomment the next line, remove all lines after it.
+    // parent::testImmutableProperties($valid_values);
+    $constraints = $this->entity->getEntityType()->getConstraints();
+    $this->assertNotEmpty($constraints['ImmutableProperties'], 'All config entities should have at least one immutable ID property.');
+
+    foreach ($constraints['ImmutableProperties'] as $property_name) {
+      $original_value = $this->entity->get($property_name);
+      $this->entity->set($property_name, $valid_values[$property_name] ?? $this->randomMachineName());
+      try {
+        $this->assertValidationErrors([
+          '' => "The '$property_name' property cannot be changed.",
+        ] + ($additional_validation_errors[$property_name] ?? []));
+      }
+      catch (SchemaIncompleteException) {
+        // Safe to ignore, because the validation error for the immutable
+        // property *did* occur.
+      }
+      $this->entity->set($property_name, $original_value);
+    }
+  }
+
+  /**
+   * Tests status with sdc.
+   *
+   * @todo Consider moving this (and its sibling ::testStatusWithBlock()) to
+   *   \Drupal\Tests\canvas\Kernel\Plugin\Canvas\ComponentSource\ComponentSourceTestBase in https://www.drupal.org/project/canvas/issues/3561271.
+   * @see \Drupal\canvas\ComponentSource\ComponentSourceManager::generateComponentsForSource())
+   * @legacy-covers \Drupal\canvas\Plugin\Validation\Constraint\ComponentStatusConstraintValidator
+   */
+  public function testStatusWithSdc(): void {
+    $source_specific_component_id = 'canvas_test_sdc:image-required-without-example';
+    // Manually create a Component config entity that this source's discovery
+    // would not have created because it does not meet requirements. This is
+    // considered valid as long as the Component is disabled (`status=FALSE`).
+    $discovery = new SingleDirectoryComponentDiscovery($this->container->get(ComponentPluginManager::class));
+    try {
+      $discovery->checkRequirements($source_specific_component_id);
+      $this->fail("$source_specific_component_id should not meet requirements for the purposes of this test.");
+    }
+    catch (ComponentDoesNotMeetRequirementsException) {
+      // No-op.
+    }
+    $component = Component::create([
+      'id' => SingleDirectoryComponentDiscovery::getComponentConfigEntityId($source_specific_component_id),
+      'label' => 'Test',
+      'category' => 'test',
+      'source' => SingleDirectoryComponent::SOURCE_PLUGIN_ID,
+      'source_local_id' => $source_specific_component_id,
+      'active_version' => 'f4d1c916802ab8db',
+      'versioned_properties' => [
+        VersionedConfigEntityBase::ACTIVE_VERSION => [
+          'settings' => $discovery->computeComponentSettings($source_specific_component_id),
+        ],
+      ],
+    ]);
+    $component->setStatus(FALSE);
+    $this->assertEquals(SAVED_NEW, $component->save());
+    $component->setStatus(TRUE);
+    $this->entity = $component;
+    $this->assertValidationErrors([
+      'status' => [
+        'The component \'<em class="placeholder">sdc.canvas_test_sdc.image-required-without-example</em>\' cannot be enabled because it does not meet the requirements of Drupal Canvas.',
+        'Prop "image" is required, but does not have example value',
+      ],
+    ]);
+  }
+
+  /**
+   * Tests status with block.
+   *
+   * @legacy-covers \Drupal\canvas\Plugin\Validation\Constraint\ComponentStatusConstraintValidator
+   */
+  public function testStatusWithBlock(): void {
+    $this->enableModules(['node', 'block']);
+
+    // Manually create a Component config entity that this source's discovery
+    // would not have created because it does not meet requirements. This is
+    // considered valid as long as the Component is disabled (`status=FALSE`).
+    $component = Component::create([
+      'id' => 'block.node_syndicate_block',
+      'status' => FALSE,
+      'label' => 'Test',
+      'source' => BlockComponent::SOURCE_PLUGIN_ID,
+      'source_local_id' => 'node_syndicate_block',
+      'active_version' => 'random',
+      'versioned_properties' => [
+        VersionedConfigEntityBase::ACTIVE_VERSION => [
+          'settings' => [
+            'default_settings' => [
+              'id' => 'node_syndicate_block',
+              'label' => 'Syndicate',
+              // @todo Change this to FALSE once https://drupal.org/i/2544708
+              //   is fixed.
+              'label_display' => '0',
+              'provider' => 'node',
+              'block_count' => 10,
+            ],
+          ],
+        ],
+      ],
+    ]);
+    // We can't know the active version ahead of time, because block versions
+    // can vary depending on upstream changes in core.
+    $version = $component->getComponentSource()->generateVersionHash();
+    $component->set('active_version', $version);
+    $component->resetToActiveVersion();
+
+    $this->assertTrue($component instanceof Component);
+    $this->assertFalse($component->status());
+    $this->assertEquals(SAVED_NEW, $component->save());
+
+    $component->setStatus(TRUE);
+    $this->assertTrue($component->status());
+
+    $this->entity = $component;
+    $this->assertValidationErrors([
+      'status' => [
+        'The component \'<em class="placeholder">block.node_syndicate_block</em>\' cannot be enabled because it does not meet the requirements of Drupal Canvas.',
+        'Block plugin settings must opt into strict validation. Use the FullyValidatable constraint. See https://www.drupal.org/node/3404425',
+      ],
+    ]);
+  }
+
+  /**
+   * Tests slot name validation.
+   *
+   * @see \Drupal\Tests\canvas\Unit\Plugin\Validation\Constraint\ValidSlotNameConstraintValidatorTest
+   */
+  #[TestWith(["valid", FALSE, "102d161a6069b0bf"])]
+  #[TestWith(["rm -rf /", TRUE, "d4b25a8c7fa2617c"])]
+  public function testSlotNameValidation(string $slot_name, bool $is_invalid, string $expected_version): void {
+    // For every "code component" (JavaScriptComponent) with `status: true`, a
+    // corresponding Component config entity is auto-created. Use this to be
+    // able to test.
+    $js_component_with_invalid_slot = JavaScriptComponent::create([
+      'machineName' => 'invalid_slot',
+      'name' => $this->getRandomGenerator()->sentences(5),
+      'status' => FALSE,
+      'props' => [],
+      'required' => [],
+      'slots' => [
+        $slot_name => [
+          'title' => 'Bad?',
+          'description' => "This slot might have an invalid name.",
+          'examples' => [],
+        ],
+      ],
+      'js' => [
+        'original' => 'console.log("hey");',
+        'compiled' => 'console.log("hey");',
+      ],
+      'css' => [
+        'original' => '.test { display: none; }',
+        'compiled' => '.test { display: none; }',
+      ],
+      'dataDependencies' => [],
+    ]);
+    $violations = $js_component_with_invalid_slot->getTypedData()->validate();
+    if ($is_invalid) {
+      $expected_violations = [
+        "slots.$slot_name" => \sprintf('<em class="placeholder">&quot;%s&quot;</em> is not a valid slot name.', \htmlentities($slot_name)),
+      ];
+      // Violations could come from ValidSlotNameConstraint but also from json
+      // schema where slot properties must match the ^[a-zA-Z0-9_-]+$ pattern.
+      // @see core/assets/schemas/v1/metadata-full.schema.json
+      if (\preg_match('/^[a-zA-Z0-9_-]+$/', $slot_name) !== 1) {
+        $expected_violations = [
+          '' => \sprintf("In component canvas:invalid_slot:\n[slots] The property %s is not defined and the definition does not allow additional properties", $slot_name),
+        ] + $expected_violations;
+      }
+      // Strip out the prefix added by https://www.drupal.org/node/3549909. This
+      // can be removed when 11.3 is the minimum supported version of core.
+      if (version_compare(\Drupal::VERSION, '11.3', '<')) {
+        $expected_violations[''] = substr($expected_violations[''], 34);
+      }
+      self::assertSame($expected_violations, self::violationsToArray($violations));
+    }
+    else {
+      self::assertCount(0, $violations);
+    }
+
+    // Save anyway, because the purpose of this test is to verify that even the
+    // slot names in the fallback metadata for a Component are validated.
+    $js_component_with_invalid_slot->enable()->save();
+    $corresponding_component = Component::load(JsComponent::SOURCE_PLUGIN_ID . '.invalid_slot');
+    \assert($corresponding_component instanceof Component);
+
+    // Assert that the slot name indeed is present in the auto-generated
+    // fallback metadata.
+    // @see \Drupal\canvas\Entity\Component::preSave()
+    self::assertArrayHasKey($slot_name, $corresponding_component->get('fallback_metadata')['slot_definitions']);
+
+    // Make the corresponding Component the entity being tested and validate.
+    $this->entity = $corresponding_component;
+    self::assertSame([$expected_version], $this->entity->getVersions());
+    $expected_errors = [];
+    if ($is_invalid) {
+      $expected_errors["versioned_properties.active.fallback_metadata.slot_definitions.$slot_name"] = \sprintf('<em class="placeholder">&quot;%s&quot;</em> is not a valid slot name.', htmlentities($slot_name));
+    }
+    $this->assertValidationErrors($expected_errors);
+
+    // Ensure that even when a change in the JavaScriptComponent causes a new
+    // version of the Component to be created *without* an invalid slot, that
+    // the same validation error is still thrown for the old version, but not
+    // for the new version.
+    $js_component_with_invalid_slot->set('slots', [])->save();
+    $updated_corresponding_component = Component::load(JsComponent::SOURCE_PLUGIN_ID . '.invalid_slot');
+    \assert($updated_corresponding_component instanceof Component);
+    $this->entity = $updated_corresponding_component;
+    self::assertSame(['8fe3be948e0194e1', $expected_version], $this->entity->getVersions());
+    $expected_errors = [];
+    if ($is_invalid) {
+      $expected_errors["versioned_properties.$expected_version.fallback_metadata.slot_definitions.$slot_name"] = \sprintf('<em class="placeholder">&quot;%s&quot;</em> is not a valid slot name.', htmlentities($slot_name));
+    }
+    $this->assertValidationErrors($expected_errors);
+  }
+
+  /**
+   * Tests unmatched enum and meta enum.
+   *
+   * @legacy-covers \Drupal\canvas\ComponentMetadataRequirementsChecker::check
+   */
+  public function testUnmatchedEnumAndMetaEnum(): void {
+    // In an SDC, periods are valid `meta:enum` keys.
+    $component = Component::load('sdc.canvas_test_sdc.component-mismatch-meta-enum');
+    self::assertNotNull($component);
+    $this->entity = $component;
+    $this->assertValidationErrors([]);
+
+    // Create a code component" that has the same schema, where this is NOT
+    // allowed, due to config (schema) limitations.
+    $sdc_yaml = Yaml::parseFile($this->root . self::getCiModulePath() . '/tests/modules/canvas_test_sdc/components/component-mismatch-meta-enum/component-mismatch-meta-enum.component.yml');
+    $component = Component::load('js.component-mismatch-meta-enum');
+    self::assertNull($component);
+    $code_component = JavaScriptComponent::create([
+      'machineName' => 'component-mismatch-meta-enum',
+      'name' => $this->getRandomGenerator()->sentences(5),
+      'status' => FALSE,
+      'props' => $sdc_yaml['props']['properties'],
+      'required' => $sdc_yaml['props']['required'] ?? [],
+      'js' => ['original' => '', 'compiled' => ''],
+      'css' => ['original' => '', 'compiled' => ''],
+      'dataDependencies' => [],
+    ]);
+    $this->entity = $code_component;
+    try {
+      $this->assertValidationErrors([
+        '' => [
+          'The "meta:enum" keys for the "style" prop enum cannot contain a dot. Offending key: "contains.dots"',
+          'The values for the "style" prop enum must be defined in "meta:enum". Missing keys: "contains_dots"',
+          'The "meta:enum" keys for the "numbers" prop enum cannot contain a dot. Offending key: "3.14"',
+          'The values for the "numbers" prop enum must be defined in "meta:enum". Missing keys: "3_14"',
+        ],
+      ]);
+    }
+    catch (\InvalidArgumentException $e) {
+      // The ::assertValidationErrors() call above did in fact confirm that the
+      // listed validation errors occurred. However, it then checks whether the
+      // config schema checker finds additional problems. And in this case, it
+      // does, precisely because it is using dots in keys, which is not allowed
+      // by the config (schema) system.
+      // In other words: this demonstrates exactly why we need to special-case
+      // code components' metadata!
+      self::assertSame("The configuration property contains doesn't exist.", $e->getMessage());
+    }
+  }
+
+  /**
+   * Tests unmatched enum and meta enum for array items.
+   *
+   * @legacy-covers \Drupal\canvas\ComponentMetadataRequirementsChecker::check
+   */
+  public function testUnmatchedEnumAndMetaEnumForArrayItems(): void {
+    // In an SDC, periods are valid `meta:enum` keys.
+    $component = Component::load('sdc.canvas_test_sdc.component-mismatch-meta-enum-array-items');
+    self::assertNotNull($component);
+    $this->entity = $component;
+    $this->assertValidationErrors([]);
+
+    // Create a code component that has the same schema, where this is NOT
+    // allowed, due to config (schema) limitations.
+    $sdc_yaml = Yaml::parseFile($this->root . self::getCiModulePath() . '/tests/modules/canvas_test_sdc/components/component-mismatch-meta-enum-array-items/component-mismatch-meta-enum-array-items.component.yml');
+    $component = Component::load('js.component-mismatch-meta-enum-array-items');
+    self::assertNull($component);
+    $code_component = JavaScriptComponent::create([
+      'machineName' => 'component-mismatch-meta-enum-array-items',
+      'name' => $this->getRandomGenerator()->sentences(5),
+      'status' => FALSE,
+      'props' => $sdc_yaml['props']['properties'],
+      'required' => $sdc_yaml['props']['required'] ?? [],
+      'js' => ['original' => '', 'compiled' => ''],
+      'css' => ['original' => '', 'compiled' => ''],
+      'dataDependencies' => [],
+    ]);
+    $this->entity = $code_component;
+    try {
+      $this->assertValidationErrors([
+        '' => [
+          'The "meta:enum" keys for the "colors" prop enum cannot contain a dot. Offending key: "green.light"',
+          'The values for the "colors" prop enum must be defined in "meta:enum". Missing keys: "green_light"',
+        ],
+      ]);
+    }
+    catch (\InvalidArgumentException $e) {
+      // The ::assertValidationErrors() call above did in fact confirm that the
+      // listed validation errors occurred. However, it then checks whether the
+      // config schema checker finds additional problems. And in this case, it
+      // does, precisely because it is using dots in keys, which is not allowed
+      // by the config (schema) system.
+      // In other words: this demonstrates exactly why we need to special-case
+      // code components' metadata!
+      self::assertSame("The configuration property green doesn't exist.", $e->getMessage());
+    }
+  }
+
+  public function testInvalidPropFieldDefinition(): void {
+    \assert($this->entity instanceof Component);
+    $settings = $this->entity->getSettings();
+    \assert($settings['prop_field_definitions']['text']['default_value'] !== NULL);
+    \assert($settings['prop_field_definitions']['href']['required'] === TRUE);
+    $settings['prop_field_definitions']['text']['default_value'] = NULL;
+    $settings['prop_field_definitions']['href']['required'] = FALSE;
+
+    try {
+      $this->entity->createVersion(
+        '9a4bf4b2813868dd'
+      )->setSettings($settings)->save();
+
+    }
+    catch (SchemaIncompleteException $e) {
+      // Assert the validation errors we forced:
+      // 1. text is required, so default_value cannot be null.
+      // 2. href is not required in the Component version, but it is on the actual SDC metadata.
+      self::assertEquals('Schema errors for canvas.component.sdc.canvas_test_sdc.my-cta with the following errors: 0 [versioned_properties.active.settings.prop_field_definitions.text.default_value] The required component prop &quot;&lt;em class=&quot;placeholder&quot;&gt;Title&lt;/em&gt;&quot; (&lt;em class=&quot;placeholder&quot;&gt;text&lt;/em&gt;) must not be null., 1 [versioned_properties.active.settings.prop_field_definitions.href.required] The requiredness of the prop &quot;&lt;em class=&quot;placeholder&quot;&gt;URL&lt;/em&gt;&quot; (&lt;em class=&quot;placeholder&quot;&gt;href&lt;/em&gt;) must match its implementation.', $e->getMessage());
+    }
+  }
+
+  /**
+   * Tests invalid prop field definition expression.
+   *
+   * @see `type:canvas.generated_field_explicit_input_ux`
+   * @legacy-covers \Drupal\canvas\Plugin\Canvas\ComponentSource\GeneratedFieldExplicitInputUxComponentSourceBase
+   */
+  #[TestWith(["ℹ︎non_existing_field_type␟value", NULL])]
+  #[TestWith(["ℹ︎string␟non_existing_field_property", NULL])]
+  #[TestWith(["nonsense", "<em class=\"placeholder\">nonsense</em> is not a valid prop expression."])]
+  #[TestWith(["oops_lost_the_prefix_field_type␟value", "<em class=\"placeholder\">oops_lost_the_prefix_field_type␟value</em> is not a valid prop expression."])]
+  #[TestWith(["ℹ︎string␞this_is_not_a_delta", "<em class=\"placeholder\">ℹ︎string␞this_is_not_a_delta</em> is not a valid prop expression."])]
+  #[TestWith(["ℹ︎␜entity:node␝title␞␟value", "The expression is valid, but not one of the allowed types: <em class=\"placeholder\">&quot;FieldTypePropExpression&quot;, &quot;FieldTypeObjectPropsExpression&quot;, &quot;ReferenceFieldTypePropExpression&quot;</em>."])]
+  public function testInvalidPropFieldDefinitionExpression(string $expression, ?string $expected_message): void {
+    $expected_validation_errors = \is_string($expected_message)
+      ? ['versioned_properties.active.settings.prop_field_definitions.text.expression' => $expected_message]
+      : [];
+
+    \assert($this->entity instanceof Component);
+    $settings = $this->entity->getSettings();
+    $settings['prop_field_definitions']['text']['expression'] = $expression;
+
+    // When the settings change, the version will also change.
+    $source = \Drupal::service(ComponentSourceManager::class)
+      ->createInstance(SingleDirectoryComponent::SOURCE_PLUGIN_ID, [
+        'local_source_id' => $this->entity->get('source_local_id'),
+        ...$settings,
+      ]);
+    \assert($source instanceof ComponentSourceInterface);
+    $this->entity
+      ->createVersion($source->generateVersionHash())
+      ->setSettings($settings);
+
+    $this->assertValidationErrors([
+      // Because ::preSave() did not get executed. Irrelevant for this test.
+      'versioned_properties.active' => "'fallback_metadata' is a required key because versioned_properties.%key is active (see config schema type canvas.component.versioned.active.*).",
+    ] + $expected_validation_errors);
+  }
+
+}

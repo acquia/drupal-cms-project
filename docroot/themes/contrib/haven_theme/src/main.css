@@ -1,0 +1,383 @@
+@import "tailwindcss";
+
+@import "../components/navbar/navbar.tailwind.css";
+@import "../components/anchor/anchor.tailwind.css";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-light: var(--secondary-light);
+  --color-secondary-dark: var(--secondary-dark);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-accent-dark: var(--accent-dark);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --shadow-2xs: var(--shadow-2xs);
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow: var(--shadow);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-2xl: var(--shadow-2xl);
+}
+
+@theme {
+  --text-9xl: 7.5rem; /* 120px */
+  --text-9xl--line-height: 1; /* 120px */
+
+  --text-8xl: 6rem; /* 96px */
+  --text-8xl--line-height: 1; /* 96px */
+
+  --text-7xl: 4.5rem; /* 72px */
+  --text-7xl--line-height: 1; /* 72px */
+
+  --text-6xl: 3.75rem; /* 60px */
+  --text-6xl--line-height: 1; /* 60px */
+
+  --text-5xl: 3rem; /* 48px */
+  --text-5xl--line-height: 1.083333; /* 52px */
+
+  --text-4xl: 2.5rem; /* 40px */
+  --text-4xl--line-height: 1.2; /* 48px */
+
+  --text-3xl: 2rem; /* 32px */
+  --text-3xl--line-height: 1.3125; /* 42px */
+
+  --text-2xl: 1.5rem; /* 24px */
+  --text-2xl--line-height: 1.3333; /* 32px */
+
+  --text-xl: 1.25rem; /* 20px */
+  --text-xl--line-height: 1.35; /* 30px */
+
+  --text-lg: 1.125rem; /* 18px */
+  --text-lg--line-height: 1.5; /* 27px */
+
+  --text-base: 1rem; /* 16px */
+  --text-base--line-height: 1.5; /* 24px */
+
+  --text-md: var(--text-base);
+  --text-md--line-height: var(--text-base--line-height);
+
+  --text-sm: 0.875rem; /* 14px */
+  --text-sm--line-height: 1.5; /* 21px */
+
+  --text-xs: 0.75rem; /* 12px */
+  --text-xs--line-height: 1.5; /* 18px */
+
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --spacing: 4px;
+}
+
+/* Set the container width and padding globally */
+@utility container {
+  @apply mx-auto px-4 md:px-6;
+}
+
+/* Custom theme classes */
+@layer base {
+  body {
+    @apply rounded-b-3xl font-normal text-foreground antialiased;
+  }
+  .region-header {
+    @apply bg-background;
+  }
+
+  p {
+    @apply mb-4;
+  }
+
+  ul,
+  ol {
+    @apply list-disc ps-5;
+  }
+
+  /* Set base heading styles since Tailwind sets them to inherit */
+  h1 {
+    @apply font-sans text-5xl leading-none font-semibold md:text-6xl lg:text-7xl 2xl:text-8xl;
+  }
+
+  h2 {
+    @apply font-sans text-3xl font-semibold md:text-4xl lg:text-5xl 2xl:text-6xl;
+  }
+
+  h3 {
+    @apply font-sans text-2xl font-semibold xl:text-3xl;
+  }
+
+  h4 {
+    @apply font-sans text-xl font-semibold md:text-2xl;
+  }
+
+  h5 {
+    @apply font-sans text-lg font-semibold md:text-xl;
+  }
+
+  h6 {
+    @apply font-sans text-base font-semibold md:text-lg;
+  }
+
+  code,
+  pre {
+    @apply font-mono text-sm text-inherit;
+  }
+
+  small {
+    @apply text-sm text-inherit;
+  }
+
+  strong,
+  b {
+    @apply font-semibold text-inherit;
+  }
+
+  em,
+  i {
+    @apply text-inherit italic;
+  }
+
+  hr {
+    @apply my-4 border-t border-muted;
+  }
+
+  table,
+  th,
+  td {
+    @apply text-base text-inherit lg:text-lg 2xl:text-xl;
+  }
+
+  sup {
+    top: -0.5em;
+    font-size: 60%;
+    /* ^ match normalize to avoid conflicts. */
+  }
+
+  .hide-scrollbar-x::-webkit-scrollbar {
+    height: 0px;
+  }
+
+  .hide-scrollbar-x {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+}
+
+@layer components {
+  .webform-submission-form {
+    .visually-hidden {
+      @apply sr-only;
+    }
+  }
+
+  .webform-submission-form,
+  .fieldset-wrapper,
+  *[id^="edit-page-"] {
+    @apply flex flex-col gap-8;
+  }
+
+  fieldset:not(.webform-type-fieldset) .fieldset-wrapper {
+    @apply gap-1;
+  }
+
+  label,
+  .fieldset-legend {
+    @apply mb-1 block text-sm font-semibold md:text-base;
+  }
+
+  .form-item:focus-within,
+  .fieldgroup:focus-within {
+    > label,
+    .fieldset-legend {
+      @apply text-primary;
+    }
+  }
+
+  .webform-element-description {
+    @apply mt-2 text-xs;
+  }
+
+  .form-required::after {
+    content: "*";
+    @apply ml-1 text-red-500;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="date"],
+  input[type="time"],
+  textarea,
+  select {
+    @apply w-full border-0 border-b bg-transparent p-2 text-base outline-none;
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="number"]:focus,
+  input[type="password"]:focus,
+  input[type="search"]:focus,
+  input[type="date"]:focus,
+  input[type="time"]:focus,
+  textarea:focus,
+  select:focus {
+    @apply border-primary bg-primary-foreground shadow-sm;
+  }
+
+  select:focus {
+    @apply text-primary;
+  }
+
+  input::placeholder,
+  textarea::placeholder,
+  select {
+    @apply text-muted-foreground;
+  }
+
+  .form-submit,
+  input.button {
+    @apply cursor-pointer rounded-full bg-primary px-5 py-2 text-base text-primary-foreground;
+  }
+
+  .form-submit:hover,
+  input.button:hover {
+    @apply bg-primary/85;
+  }
+
+  .form-item--error input,
+  .form-item--error textarea,
+  .form-item--error select {
+    @apply border-red-500;
+  }
+
+  .form-item--error input:focus,
+  .form-item--error textarea:focus,
+  .form-item--error select:focus {
+    @apply border-red-500 shadow-sm;
+  }
+
+  .form-item--error-message {
+    @apply mt-1 mb-3 basis-full text-sm text-red-500;
+  }
+
+  .webform-options-display-one-column {
+    @apply flex flex-col gap-2;
+  }
+
+  .webform-type-checkbox.form-item,
+  .webform-type-radio.form-item {
+    @apply flex flex-wrap gap-2;
+
+    label {
+      @apply m-0 font-normal;
+    }
+  }
+
+  .progress-text {
+    @apply text-inherit!;
+  }
+}
+
+/* Override the moderation form block background */
+.entity-moderation-form {
+  background: inherit;
+}
+
+/* Ensure the page content does not cover the top bar when scrolling */
+.layout-container {
+  position: relative;
+  z-index: 1;
+}
+
+@layer utilities {
+  /* For custom utility classes with highest precedence. */
+
+  /* Set the container query context for full-width elements. */
+  .layout-content {
+    container-type: inline-size;
+    @apply relative z-100 rounded-b-3xl bg-background;
+  }
+
+  /* Set a fixed width on the main content container. */
+  .region-content {
+    @apply container pb-8;
+  }
+
+  /* Alter the logo in the footer manually for the dark background. */
+  .site-footer .branding img {
+    filter: brightness(0) invert(92%) sepia(51%) saturate(793%) hue-rotate(329deg) brightness(105%) contrast(101%);
+  }
+
+  /* Add a utility class for full-width elements. */
+  .cq-full {
+    width: 100cqw;
+    margin-inline: calc(-50cqw + 50%);
+  }
+
+  /* Responsive text size utility */
+  .heading-responsive-8xl {
+    @apply text-6xl md:text-7xl xl:text-8xl;
+  }
+
+  .heading-responsive-7xl {
+    @apply text-5xl md:text-6xl xl:text-7xl;
+  }
+
+  .heading-responsive-6xl {
+    @apply text-4xl md:text-5xl xl:text-6xl; /* H1 */
+  }
+
+  .heading-responsive-5xl {
+    @apply text-3xl md:text-4xl xl:text-5xl;
+  }
+
+  .heading-responsive-4xl {
+    @apply text-3xl xl:text-4xl; /* H2 */
+  }
+
+  .heading-responsive-3xl {
+    @apply text-2xl xl:text-3xl; /* H3 */
+  }
+
+  .heading-responsive-2xl {
+    @apply text-xl md:text-2xl; /* H4 */
+  }
+
+  .heading-responsive-xl {
+    @apply text-lg md:text-xl; /* H5 */
+  }
+}

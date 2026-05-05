@@ -1,0 +1,16 @@
+{#
+/**
+ * @file
+ * Theme override to display a view of unformatted rows for the search page.
+ *
+ * @see views-view-unformatted.html.twig
+ */
+#}
+{% if title %}
+    <h3>{{ title }}</h3>
+{% endif %}
+{% for row in rows %}
+    <div{{ row.attributes.addClass('mb-8 last:mb-0') }}>
+        {{ row.content }}
+    </div>
+{% endfor %}

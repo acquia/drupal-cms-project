@@ -1,0 +1,50 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Logo
+description: Displays the official organizational branding or site identity, typically linked to the homepage.
+group: Global
+status: stable
+props:
+  type: object
+  properties:
+    url:
+      type: string
+      title: URL
+      description: URL that will wrap each of the images.
+      examples:
+        - '/'
+    breakpoint:
+      type: integer
+      title: Breakpoint
+      description: The min width (px) of the logo before it changes to the small logo.
+      examples:
+        - 768
+    width:
+      type: integer
+      title: Width
+      examples:
+        - 200
+    width_small:
+      type: integer
+      title: Width (small)
+      examples:
+        - 160
+    logo_light:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Light logo
+      type: object
+    logo_light_small:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Light logo (small)
+      type: object
+    logo_dark:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Dark logo
+      type: object
+    logo_dark_small:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Dark logo (small)
+      type: object
+libraryOverrides:
+  css:
+    component:
+      ../../dist/css/logo.css: { minified: true }

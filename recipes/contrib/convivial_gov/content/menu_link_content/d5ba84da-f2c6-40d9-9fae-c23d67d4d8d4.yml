@@ -1,0 +1,44 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: d5ba84da-f2c6-40d9-9fae-c23d67d4d8d4
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    36513b69-9cd2-4686-acb9-4cc17e21a6df: menu_link_content
+    6bba6bb9-47be-4721-a2ed-d0bd6b515474: canvas_page
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Search
+  menu_name:
+    -
+      value: footer
+  link:
+    -
+      title: ''
+      options:
+        icon: null
+        icon_display: icon_only
+      target_uuid: 6bba6bb9-47be-4721-a2ed-d0bd6b515474
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: true
+  weight:
+    -
+      value: -50
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:36513b69-9cd2-4686-acb9-4cc17e21a6df'
+  revision_translation_affected:
+    -
+      value: true

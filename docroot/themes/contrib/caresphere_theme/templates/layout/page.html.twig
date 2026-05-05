@@ -1,0 +1,65 @@
+{#
+/**
+ * @file
+ * Theme override to display a single page.
+ *
+ * Regions:
+ * - page.header        Main navigation menu block.
+ * - page.header_links  CTA menu block (e.g. "Header CTA" Drupal menu).
+ * - page.content       Canvas page components.
+ * - page.footer        Footer blocks.
+ *
+ *
+ * @see template_preprocess_page()
+ */
+#}
+<div class="layout-container">
+
+  <header class="region-header" role="banner">
+    <div class="header-inner custom-container">
+      {{ page.header }}
+      {{ page.header_links }}
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="hamburger-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="w-6 h-6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></span>
+        <span class="close-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="w-6 h-6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></span>
+      </button>
+    </div>
+  </header>
+
+  {{ page.primary_menu }}
+  {{ page.secondary_menu }}
+  {{ page.breadcrumb }}
+  {{ page.highlighted }}
+  {{ page.help }}
+
+  <main role="main">
+    <a id="main-content" tabindex="-1"></a>
+
+    {% if not rendered_by_canvas %}
+      <div class="layout-content">
+        {{ page.content }}
+      </div>
+    {% else %}
+      {{ page.content }}
+    {% endif %}
+
+    {% if page.sidebar_first %}
+      <aside class="layout-sidebar-first" role="complementary">
+        {{ page.sidebar_first }}
+      </aside>
+    {% endif %}
+
+    {% if page.sidebar_second %}
+      <aside class="layout-sidebar-second" role="complementary">
+        {{ page.sidebar_second }}
+      </aside>
+    {% endif %}
+  </main>
+
+  {% if page.footer %}
+    <footer role="contentinfo">
+      {{ page.footer }}
+    </footer>
+  {% endif %}
+
+</div>

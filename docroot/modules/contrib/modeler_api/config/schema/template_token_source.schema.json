@@ -1,0 +1,123 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Modeler API Template Token Source Definition",
+  "description": "Schema for MODULE.modeler_api.template_tokens.yml files. Each top-level key is a definition ID containing a model_owner and a hierarchical token tree. The first level of children under each token indicator must declare a purpose.",
+  "type": "object",
+  "additionalProperties": {
+    "$ref": "#/definitions/definition"
+  },
+  "definitions": {
+    "definition": {
+      "type": "object",
+      "required": ["model_owner", "tokens"],
+      "properties": {
+        "model_owner": {
+          "type": "string",
+          "description": "The model owner plugin ID this definition belongs to."
+        },
+        "tokens": {
+          "type": "object",
+          "description": "The top-level token indicators. Each key is an indicator ID.",
+          "additionalProperties": {
+            "$ref": "#/definitions/indicator_token"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "indicator_token": {
+      "type": "object",
+      "description": "A top-level token indicator. Its direct children must each declare a purpose.",
+      "required": ["name", "token"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The human-readable name of the token indicator."
+        },
+        "token": {
+          "type": "string",
+          "description": "The token identifier."
+        },
+        "children": {
+          "type": "object",
+          "description": "Purpose branches underneath this indicator.",
+          "additionalProperties": {
+            "$ref": "#/definitions/purpose_token"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "purpose_token": {
+      "type": "object",
+      "description": "A first-level child that declares the purpose for its entire branch.",
+      "required": ["name", "token", "purpose"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The human-readable name."
+        },
+        "token": {
+          "type": "string",
+          "description": "The colon-separated token path."
+        },
+        "purpose": {
+          "type": "string",
+          "enum": ["select", "config"],
+          "description": "The purpose of this branch. 'select' for DOM element selection via CSS selectors. 'config' for configuration values."
+        },
+        "selector": {
+          "type": "string",
+          "description": "A CSS selector string (only for select-purpose branches). Narrows the DOM selection incrementally from the parent level."
+        },
+        "value": {
+          "type": "string",
+          "description": "An optional sample or default value."
+        },
+        "children": {
+          "type": "object",
+          "description": "Recursive child tokens.",
+          "additionalProperties": {
+            "$ref": "#/definitions/token_entry"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "token_entry": {
+      "type": "object",
+      "description": "A token entry at any depth below the purpose level.",
+      "required": ["name", "token"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The human-readable name."
+        },
+        "token": {
+          "type": "string",
+          "description": "The colon-separated token path."
+        },
+        "value": {
+          "type": "string",
+          "description": "An optional sample or default value."
+        },
+        "selector": {
+          "type": "string",
+          "description": "A CSS selector string (for select-purpose branches). Each level's selector incrementally narrows the DOM selection within its parent's matched elements."
+        },
+        "target": {
+          "type": "string",
+          "description": "A CSS selector used to identify target elements within the matched context. The selector is run within the context element (e.g. a .form-item wrapper) to find the target. The attribute specified in the bracket part of the selector (e.g. [name]) determines which attribute value is extracted as the target identifier. Example: ':is(input, select, textarea)[name]' finds the form element and reads its name attribute."
+        },
+        "children": {
+          "type": "object",
+          "description": "Recursive child tokens.",
+          "additionalProperties": {
+            "$ref": "#/definitions/token_entry"
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

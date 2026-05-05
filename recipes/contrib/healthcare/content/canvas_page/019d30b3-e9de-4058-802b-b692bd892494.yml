@@ -1,0 +1,162 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 019d30b3-e9de-4058-802b-b692bd892494
+  default_langcode: en
+  depends:
+    79202bd8-1449-47ef-850f-dedfdfd952dd: file
+    3b32e28a-c76c-47ef-94ab-adc3fc0f0b5d: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Patient Portal'
+  description:
+    -
+      value: 'Access your health information anytime, anywhere.'
+  components:
+    -
+      uuid: 3e2fc08e-6a0b-4fda-9009-7e908f6f4578
+      component_id: sdc.diagnosis.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        background: secondary
+        padding_block_start: '32'
+        padding_block_end: '32'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        image_size: '4:3'
+        image_position: right
+        image_radius: extra-large
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 3b32e28a-c76c-47ef-94ab-adc3fc0f0b5d
+            target_type: media
+    -
+      parent_uuid: 3e2fc08e-6a0b-4fda-9009-7e908f6f4578
+      slot: hero_slot
+      uuid: eead23c7-84cf-45fc-8aaf-3322065ebf11
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'MyChart Patient Portal'
+        level: 1
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 3e2fc08e-6a0b-4fda-9009-7e908f6f4578
+      slot: hero_slot
+      uuid: 932e9ae5-94c1-446e-8a90-118acf1f1813
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Access your health information anytime, anywhere.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: f3513b8c-b1d9-452d-8e79-5c5f295a62eb
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: f3513b8c-b1d9-452d-8e79-5c5f295a62eb
+      slot: main_slot
+      uuid: c5529f70-2624-4287-9b0c-f38b7ec537a0
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>The MyChart patient portal gives you secure, online access to your personal health information from your desktop, laptop, tablet, or smartphone. With MyChart, you can manage your healthcare from the comfort of your home.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: f3513b8c-b1d9-452d-8e79-5c5f295a62eb
+      slot: main_slot
+      uuid: fdd3251b-f771-460e-8496-ded5615de281
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'What You Can Do with MyChart'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: f3513b8c-b1d9-452d-8e79-5c5f295a62eb
+      slot: main_slot
+      uuid: 376c1caa-a46c-4293-8b3c-b5238b6dfe20
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<ul><li data-list-item-id="e9baadc809d941a3f8375848bbfeb9816">View test results and medical records</li><li data-list-item-id="ec75211bca6ab16e6ad073c69a6a9f759">Schedule appointments</li><li data-list-item-id="ef83637e0efb883351ffbb4f4d80daa7f">Request prescription refills</li><li data-list-item-id="e38355e0447e377e43da58a9f50fff5ad">Send messages to your care team</li><li data-list-item-id="e5e035c812d4d188fa3cb9c2fad3cf032">Pay bills online</li><li data-list-item-id="e8d0f70f9082967e52272b7edcc6aabe2">Access after-visit summaries</li><li data-list-item-id="e5d56e8bcb3d87a6e679a98bfa895fe47">Update contact and insurance information</li></ul>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: f3513b8c-b1d9-452d-8e79-5c5f295a62eb
+      slot: main_slot
+      uuid: d02f2d0a-7b09-4431-ada7-3d6f7a0f2815
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Sign Up for MyChart'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: f3513b8c-b1d9-452d-8e79-5c5f295a62eb
+      slot: main_slot
+      uuid: a8fb2769-3409-4d27-abb7-eeb51032cf8c
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>New patients can request access during their first visit, or call (555) 123-4571 for assistance setting up your account.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: f3513b8c-b1d9-452d-8e79-5c5f295a62eb
+      slot: main_slot
+      uuid: f86ae37d-04bf-4bba-899d-186f006dd9ed
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'MyChart Mobile App'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: f3513b8c-b1d9-452d-8e79-5c5f295a62eb
+      slot: main_slot
+      uuid: 8d24b476-5df7-4615-a23e-c8337ca8ac29
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Download the MyChart app for iOS or Android to access your health information on the go.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+  path:
+    -
+      alias: /patients/portal
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

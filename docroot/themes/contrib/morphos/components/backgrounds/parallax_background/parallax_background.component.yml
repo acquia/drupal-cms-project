@@ -1,0 +1,51 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Parallax Background
+description: A background image effect where the image moves slower than the foreground content during scrolling.
+group: Background
+status: stable
+props:
+  type: object
+  properties:
+    image:
+      $ref: 'json-schema-definitions://canvas.module/image'
+      title: Image
+      description: Image to display as the background.
+      type: object
+    speed:
+      type: integer
+      title: Speed
+      description: 'Control speed and direction (-100 to 200). 0 = static, 100 = scroll, 200 = 2x scroll, -100 = reverse scroll.'
+      default: 150
+      examples:
+        - 150
+    opacity:
+      type: number
+      title: Opacity
+      description: 'Select the opacity level. 30% will reveal 70% of the colour palette.'
+      enum: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+      meta:enum:
+        0: '0%'
+        10: '10%'
+        20: '20%'
+        30: '30%'
+        40: '40%'
+        50: '50%'
+        60: '60%'
+        70: '70%'
+        80: '80%'
+        90: '90%'
+        100: '100%'
+    media_query:
+      type: string
+      title: Media query
+      description: 'Define a media query to control the application of the background, e.g., (min-width: 768px).'
+libraryOverrides:
+  dependencies:
+    - core/drupal
+    - core/once
+    - morphos/jarallax_library
+  css:
+    component:
+      ../../../dist/css/parallax_background.css: { minified: true }
+  js:
+    ../../../dist/js/parallax_background.js: { minified: true }

@@ -1,0 +1,366 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 4a287d3f-bc17-407c-b516-c068c9d70f53
+  default_langcode: en
+  depends:
+    bee44531-dc41-4052-ba50-cc66d6d54a2e: file
+    7a8f47b7-237f-4811-950f-976190fee4a7: media
+    1e0bd36b-6ff0-457b-b636-ef8d4e151469: file
+    70f24536-de38-4845-bb23-3e8d19b9acda: media
+    4d1134a0-9978-4cc9-ba04-201851157306: file
+    46f43270-75f4-4d5f-ad02-cfee38c3ff4c: media
+    7853739b-c63f-4bfa-815b-926edc2945f4: file
+    baf0315b-dcd1-4028-869f-194144773138: media
+    7d3647ff-d827-4e4d-8864-e2eca5a72a2d: file
+    6b6f7dcc-028d-4005-9443-4e6171fed4bb: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Leadership
+  description:
+    -
+      value: "Meet the people who guide Haven's strategy, operations, and community partnerships. Haven's leadership team brings together decades of experience in environmental advocacy, nonprofit management, and community organizing."
+  components:
+    -
+      uuid: fa62e5d0-5d61-485d-86e9-c28f99282b14
+      component_id: sdc.haven_theme.hero-billboard
+      inputs:
+        height: large
+        flex_position: hero-center
+        content_background: false
+        overlay_opacity: 40%
+        object_position: center
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 7a8f47b7-237f-4811-950f-976190fee4a7
+            target_type: media
+        overlap_navbar: true
+    -
+      parent_uuid: fa62e5d0-5d61-485d-86e9-c28f99282b14
+      slot: hero_slot
+      uuid: ac4cac15-4f5d-4bcd-86cc-cd9a6e39e0eb
+      component_id: sdc.haven_theme.badge
+      inputs:
+        label: 'Our people'
+        style: accent
+        icon_first: true
+    -
+      parent_uuid: fa62e5d0-5d61-485d-86e9-c28f99282b14
+      slot: hero_slot
+      uuid: 309c49a9-b932-4d07-98f4-e571bfcc216b
+      component_id: sdc.haven_theme.heading
+      inputs:
+        heading_text: "Meet the people who guide Haven's strategy, operations, and community partnerships"
+        text_size: heading-responsive-6xl
+        text_color: inverted
+        align: center
+    -
+      uuid: 8bd19fce-3223-49d4-810a-16c6ae1ef80b
+      component_id: sdc.haven_theme.section
+      inputs:
+        width: 100%
+        columns: '1 column'
+        mobile_columns: '1'
+        margin_block_start: '32'
+        margin_block_end: '32'
+        padding_block_start: '64'
+        padding_block_end: '64'
+        restrict_width: false
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: 8bd19fce-3223-49d4-810a-16c6ae1ef80b
+      slot: main_slot
+      uuid: 02f1160f-6982-4bfb-97b1-a4d655ef6044
+      component_id: sdc.haven_theme.hero-side-by-side
+      inputs:
+        hero_flex_direction_mobile: vertical
+        padding: true
+        image_size: '4:3'
+        image_position: left
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 70f24536-de38-4845-bb23-3e8d19b9acda
+            target_type: media
+        background: white
+    -
+      parent_uuid: 02f1160f-6982-4bfb-97b1-a4d655ef6044
+      slot: hero_slot
+      uuid: 3d73d9df-731d-41df-a73e-86b0d5fa1890
+      component_id: sdc.haven_theme.heading
+      inputs:
+        heading_text: 'Driven by purpose'
+        level: 2
+        text_size: heading-responsive-6xl
+        text_color: secondary
+        align: left
+    -
+      parent_uuid: 02f1160f-6982-4bfb-97b1-a4d655ef6044
+      slot: hero_slot
+      uuid: 98a78c1a-f148-47a8-b939-470284a89100
+      component_id: sdc.haven_theme.text
+      inputs:
+        text:
+          value: "<p>Haven's leadership team brings together decades of experience in environmental advocacy, nonprofit management, and community organizing. We're united by a shared commitment to climate action that is ambitious, equitable, and grounded in the realities of the communities we serve.</p>"
+          format: canvas_html_block
+        text_size: text-lg
+        text_color: default
+        columns: '1 column'
+    -
+      uuid: 79d246b1-5fbc-4b2f-a262-bb1880c1a643
+      component_id: sdc.haven_theme.section
+      inputs:
+        width: 80%
+        columns: '3 columns'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        restrict_width: false
+        section_header: true
+        section_footer: true
+    -
+      parent_uuid: 79d246b1-5fbc-4b2f-a262-bb1880c1a643
+      slot: header_slot
+      uuid: 255a83e6-d118-4a2a-99fe-42c17f7a5ebe
+      component_id: sdc.haven_theme.heading
+      inputs:
+        heading_text: 'Our leadership team'
+        level: 2
+        text_size: heading-responsive-6xl
+        text_color: default
+        align: center
+    -
+      parent_uuid: 79d246b1-5fbc-4b2f-a262-bb1880c1a643
+      slot: main_slot
+      uuid: 64263d02-b24b-4730-a0c6-a7f5a0bf00ff
+      component_id: sdc.haven_theme.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: md
+        background: white
+        stretch: false
+    -
+      parent_uuid: 64263d02-b24b-4730-a0c6-a7f5a0bf00ff
+      slot: group_slot
+      uuid: d97466e6-4355-4ac9-9618-4280055c39ee
+      component_id: sdc.haven_theme.image
+      inputs:
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 46f43270-75f4-4d5f-ad02-cfee38c3ff4c
+            target_type: media
+        size: '1:1'
+        radius: small
+    -
+      parent_uuid: 64263d02-b24b-4730-a0c6-a7f5a0bf00ff
+      slot: group_slot
+      uuid: 0f9bf961-626e-4732-8e03-f80933836c82
+      component_id: sdc.haven_theme.group
+      inputs:
+        flex_direction: column
+        flex_gap: sm
+        items_align: start
+        flex_align: start
+        radius: sm
+        stretch: false
+    -
+      parent_uuid: 0f9bf961-626e-4732-8e03-f80933836c82
+      slot: group_slot
+      uuid: b05be340-be71-4df9-9f31-c2ff455a692a
+      component_id: sdc.haven_theme.heading
+      inputs:
+        heading_text: 'Jordan Ellis'
+        level: 2
+        text_size: heading-responsive-3xl
+        text_color: text-default
+        align: left
+    -
+      parent_uuid: 0f9bf961-626e-4732-8e03-f80933836c82
+      slot: group_slot
+      uuid: 9220b81d-0141-4a6a-80db-7eab1e38d617
+      component_id: sdc.haven_theme.heading
+      inputs:
+        heading_text: 'Executive director'
+        text_size: heading-responsive-xl
+        text_color: text-default
+        align: left
+    -
+      parent_uuid: 64263d02-b24b-4730-a0c6-a7f5a0bf00ff
+      slot: group_slot
+      uuid: 16c3be3f-c5de-4ef4-a257-42a2ab9a93ef
+      component_id: sdc.haven_theme.text
+      inputs:
+        text:
+          value: '<p>Jordan has spent 15 years working at the intersection of environmental policy and grassroots organizing. Before joining Haven, they led statewide campaigns on clean energy access and helped pass landmark emissions legislation in two states. Jordan believes that the most effective climate solutions are the ones communities build for themselves.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+        columns: '1 column'
+    -
+      parent_uuid: 79d246b1-5fbc-4b2f-a262-bb1880c1a643
+      slot: main_slot
+      uuid: eaefa601-13b0-49bb-b2a3-6efc7c3d529a
+      component_id: sdc.haven_theme.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: md
+        background: white
+        stretch: true
+    -
+      parent_uuid: eaefa601-13b0-49bb-b2a3-6efc7c3d529a
+      slot: group_slot
+      uuid: c759c9b0-a4cc-4cc4-bebc-9d787e08af8d
+      component_id: sdc.haven_theme.image
+      inputs:
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: baf0315b-dcd1-4028-869f-194144773138
+            target_type: media
+        size: '1:1'
+        radius: small
+    -
+      parent_uuid: eaefa601-13b0-49bb-b2a3-6efc7c3d529a
+      slot: group_slot
+      uuid: f560be72-b9db-4eba-b3a4-e610984d99e5
+      component_id: sdc.haven_theme.group
+      inputs:
+        flex_direction: column
+        flex_gap: sm
+        items_align: start
+        flex_align: start
+        radius: sm
+        stretch: false
+    -
+      parent_uuid: f560be72-b9db-4eba-b3a4-e610984d99e5
+      slot: group_slot
+      uuid: aee80f5b-40a5-42b8-bb89-4876dd458677
+      component_id: sdc.haven_theme.heading
+      inputs:
+        heading_text: 'Maria Santos'
+        level: 2
+        text_size: heading-responsive-3xl
+        text_color: text-default
+        align: left
+    -
+      parent_uuid: f560be72-b9db-4eba-b3a4-e610984d99e5
+      slot: group_slot
+      uuid: 76880d2e-c67b-4bfa-a1a2-e26cd03fc61c
+      component_id: sdc.haven_theme.heading
+      inputs:
+        heading_text: 'Director of programs'
+        text_size: heading-responsive-xl
+        text_color: text-default
+        align: left
+    -
+      parent_uuid: eaefa601-13b0-49bb-b2a3-6efc7c3d529a
+      slot: group_slot
+      uuid: d5e42d27-a315-4198-a55c-0d9058a02b73
+      component_id: sdc.haven_theme.text
+      inputs:
+        text:
+          value: "<p>Maria oversees Haven's campaign portfolio and partner network. With a background in environmental justice and community development, she brings a deep commitment to centering frontline voices in every initiative Haven undertakes. She previously worked with urban sustainability coalitions across the Southwest.</p>"
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+        columns: '1 column'
+    -
+      parent_uuid: 79d246b1-5fbc-4b2f-a262-bb1880c1a643
+      slot: main_slot
+      uuid: 0e01a18e-b54a-43ad-b3ad-8007555aa95c
+      component_id: sdc.haven_theme.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: md
+        background: white
+        stretch: true
+    -
+      parent_uuid: 0e01a18e-b54a-43ad-b3ad-8007555aa95c
+      slot: group_slot
+      uuid: 511197c0-8185-475b-b4e6-b58899cdba1b
+      component_id: sdc.haven_theme.image
+      inputs:
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 6b6f7dcc-028d-4005-9443-4e6171fed4bb
+            target_type: media
+        size: '1:1'
+        radius: small
+    -
+      parent_uuid: 0e01a18e-b54a-43ad-b3ad-8007555aa95c
+      slot: group_slot
+      uuid: 2489b4c3-5fdd-4bf3-bafb-4309b9f48935
+      component_id: sdc.haven_theme.group
+      inputs:
+        flex_direction: column
+        flex_gap: sm
+        items_align: start
+        flex_align: start
+        radius: sm
+        stretch: false
+    -
+      parent_uuid: 2489b4c3-5fdd-4bf3-bafb-4309b9f48935
+      slot: group_slot
+      uuid: 0f2fc71e-e951-40d0-b7a9-af544f0fe8f7
+      component_id: sdc.haven_theme.heading
+      inputs:
+        heading_text: 'David Park'
+        level: 2
+        text_size: heading-responsive-3xl
+        text_color: text-default
+        align: left
+    -
+      parent_uuid: 2489b4c3-5fdd-4bf3-bafb-4309b9f48935
+      slot: group_slot
+      uuid: a2f60820-3d83-4a8f-915e-6afafd4fb315
+      component_id: sdc.haven_theme.heading
+      inputs:
+        heading_text: 'Director of communications'
+        text_size: heading-responsive-xl
+        text_color: text-default
+        align: left
+    -
+      parent_uuid: 0e01a18e-b54a-43ad-b3ad-8007555aa95c
+      slot: group_slot
+      uuid: e655c1c9-f8ae-4437-9be3-044828327122
+      component_id: sdc.haven_theme.text
+      inputs:
+        text:
+          value: "<p>David leads Haven's storytelling and public engagement work. He has spent his career helping mission-driven organizations cut through the noise and connect with the people who matter most to their work. He is a firm believer that hope — not fear — is the most powerful motivator for change.</p>"
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+        columns: '1 column'
+  path:
+    -
+      alias: /leadership
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

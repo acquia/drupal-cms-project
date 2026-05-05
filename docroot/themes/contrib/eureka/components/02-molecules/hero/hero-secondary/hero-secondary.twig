@@ -1,0 +1,58 @@
+{#
+/**
+ * Available variables:
+ * - hero_secondary_base_class: base classname of the wrapper.
+ * - hero_secondary_modifiers: array of modifiers to add to the base classname of the wrapper.
+ * - hero_secondary_blockname: blockname prepended to the base classname of the wrapper(s) and each component.
+ * - hero_secondary_extra_classes: array of extra classes to add to the base classes.
+ *
+ * - hero_secondary_media: url of the hero_secondary image.
+ * - hero_secondary_media_alt: alt of the hero_secondary image.
+ * - hero_secondary_heading: Title of the component
+ * - hero_secondary_heading_level: (default: 1) what level of heading to show on the hero_secondary
+ * - hero_secondary_text: Descriptive text
+ *
+ * Available blocks:
+ * - hero_secondary_media_block
+ * - hero_secondary_text_block
+ */
+#}
+{% set hero_secondary_base_class = 'hero-secondary' %}
+{% set hero_secondary_modifiers = hero_secondary_modifiers|default([]) %}
+
+<section {{ bem(hero_secondary_base_class, hero_secondary_modifiers, hero_secondary_blockname, hero_secondary_extra_classes) }}>
+  {# Image #}
+  {% if hero_secondary_media %}
+    {% block hero_secondary_media_block %}
+      <div {{ bem('media', [], hero_secondary_base_class) }}>
+        {% include 'canvas:image' with {
+          src: hero_secondary_media.src,
+          alt: hero_secondary_media.alt,
+          loading: 'lazy',
+          sizes: '(max-width: 480px) 100vw, (max-width: 768px) 50vw, 33vw',
+        } only %}
+      </div>
+    {% endblock %}
+  {% endif %}
+  {# Content #}
+  {% if hero_secondary_heading or hero_secondary_text %}
+    <div {{ bem('content', hero_secondary_content_modifiers, hero_secondary_base_class) }}>
+      {# Title #}
+      {% if hero_secondary_heading %}
+        {{ include("eureka:heading", {
+          heading_level: hero_secondary_heading_level|default(1),
+          heading: hero_secondary_heading,
+          heading_size_override: 'main',
+        }, with_context = false) }}
+      {% endif %}
+      {# Text #}
+      {% if hero_secondary_text %}
+        {% block hero_secondary_text_block %}
+          {{ include("eureka:paragraph", {
+            paragraph_content: hero_secondary_text,
+          }, with_context = false) }}
+        {% endblock %}
+      {% endif %}
+    </div>
+  {% endif %}
+</section>

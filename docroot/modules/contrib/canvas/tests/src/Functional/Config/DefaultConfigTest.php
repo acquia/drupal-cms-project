@@ -1,0 +1,95 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Drupal\Tests\canvas\Functional\Config;
+
+use PHPUnit\Framework\Attributes\Group;
+use Drupal\canvas\Entity\Component as ComponentEntity;
+use Drupal\canvas\Plugin\Canvas\ComponentSource\SingleDirectoryComponent;
+use Drupal\Core\Config\FileStorage;
+use Drupal\Core\Config\InstallStorage;
+use Drupal\Core\Config\StorageInterface;
+use Drupal\KernelTests\AssertConfigTrait;
+use Drupal\Tests\canvas\Functional\FunctionalTestBase;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+
+/**
+ * Tests Default Config.
+ */
+#[RunTestsInSeparateProcesses]
+#[Group('canvas')]
+class DefaultConfigTest extends FunctionalTestBase {
+
+  use AssertConfigTrait;
+
+  protected static $configSchemaCheckerExclusions = [
+    // The "all-props" test-only SDC is used to assess also prop shapes that are
+    // not yet storable, and hence do not meet the requirements.
+    // @see \Drupal\canvas\Plugin\Canvas\ComponentSource\SingleDirectoryComponentDiscovery::checkRequirements()
+    'canvas.' . ComponentEntity::ENTITY_TYPE_ID . '.' . SingleDirectoryComponent::SOURCE_PLUGIN_ID . '.sdc_test_all_props.all-props',
+  ];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected static $modules = [
+    'canvas',
+    'sdc_test_all_props',
+  ];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $profile = 'standard';
+
+  /**
+   * Tests the module-supplied configuration is the same after installation.
+   *
+   * @see \Drupal\Tests\demo_umami\Functional\DemoUmamiProfileTest::assertDefaultConfig()
+   */
+  public function testConfig(): void {
+    // @todo Remove this when 11.3 is the minimum supported version of core.
+    if (version_compare(\Drupal::VERSION, '11.3', '>=')) {
+      $this->markTestSkipped("Skipped on Drupal 11.3 or later because Canvas's default config does not yet include the `styles` option in its text editor configuration.");
+    }
+    // Just connect directly to the config table so we don't need to worry about
+    // the cache layer.
+    $active_config_storage = $this->container->get('config.storage');
+
+    $default_config_storage = new FileStorage($this->container->get('extension.list.module')->getPath('canvas') . '/' . InstallStorage::CONFIG_INSTALL_DIRECTORY, InstallStorage::DEFAULT_COLLECTION);
+    $this->assertDefaultConfig($default_config_storage, $active_config_storage);
+
+    $default_config_storage = new FileStorage($this->container->get('extension.list.module')->getPath('canvas') . '/' . InstallStorage::CONFIG_OPTIONAL_DIRECTORY, InstallStorage::DEFAULT_COLLECTION);
+    $this->assertDefaultConfig($default_config_storage, $active_config_storage);
+  }
+
+  /**
+   * Asserts that the default configuration matches active configuration.
+   *
+   * @param \Drupal\Core\Config\StorageInterface $default_config_storage
+   *   The default configuration storage to check.
+   * @param \Drupal\Core\Config\StorageInterface $active_config_storage
+   *   The active configuration storage.
+   */
+  protected function assertDefaultConfig(StorageInterface $default_config_storage, StorageInterface $active_config_storage): void {
+    /** @var \Drupal\Core\Config\ConfigManagerInterface $config_manager */
+    $config_manager = $this->container->get('config.manager');
+
+    foreach ($default_config_storage->listAll() as $config_name) {
+      if ($active_config_storage->exists($config_name)) {
+        $result = $config_manager->diff($default_config_storage, $active_config_storage, $config_name);
+        $this->assertConfigDiff($result, $config_name, []);
+      }
+      else {
+        $this->fail("$config_name has not been installed");
+      }
+    }
+  }
+
+}

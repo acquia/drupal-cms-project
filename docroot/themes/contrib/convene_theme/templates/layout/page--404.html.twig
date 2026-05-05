@@ -1,0 +1,132 @@
+<div class="layout-container">
+
+	<main role="main">
+		<a id="main-content" tabindex="-1"></a>
+
+		<div class="custom-404-page">
+			<style>
+				.custom-404-page {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					padding: 6rem 1rem;
+					background: #030113;
+					background-image: radial-gradient(circle at 50% 0%, #1b163d 0%, #030113 70%);
+					min-height: calc(100vh - 200px);
+                    color: #fff;
+                    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+				}
+				.custom-404-card {
+					background: rgba(255, 255, 255, 0.02);
+					border: 1px solid rgba(255, 255, 255, 0.05);
+					backdrop-filter: blur(24px);
+					-webkit-backdrop-filter: blur(24px);
+					border-radius: 2rem;
+					padding: 4rem 2rem;
+					max-width: 900px;
+					width: 100%;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					text-align: center;
+					box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+                    position: relative;
+                    overflow: hidden;
+				}
+                .custom-404-card::before {
+                    content: '';
+                    position: absolute;
+                    top: -50%;
+                    left: -50%;
+                    width: 200%;
+                    height: 200%;
+                    background: radial-gradient(circle at center, rgba(100, 49, 241, 0.1) 0%, transparent 40%);
+                    pointer-events: none;
+                    z-index: 0;
+                }
+
+                .custom-404-image {
+                  display:none;
+                }
+				.custom-404-image {
+					width: 100%;
+					max-width: 600px;
+					height: auto;
+					border-radius: 1.5rem;
+					margin-bottom: 3rem;
+					box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+                    position: relative;
+                    z-index: 1;
+                    border: 1px solid rgba(255,255,255,0.05);
+				}
+                .custom-404-content-inner {
+                    position: relative;
+                    z-index: 1;
+                }
+				.custom-404-code {
+					font-size: clamp(5rem, 10vw, 8rem);
+					font-weight: 800;
+					line-height: 1;
+					margin: 0 0 1rem 0;
+					background: linear-gradient(135deg, #ffffff 0%, #1ebdb6 100%);
+					-webkit-background-clip: text;
+					-webkit-text-fill-color: transparent;
+					letter-spacing: -0.03em;
+				}
+				.custom-404-title {
+					font-size: clamp(1.5rem, 3vw, 2.25rem);
+					font-weight: 600;
+					color: #ffffff;
+					margin: 0 0 1.5rem 0;
+				}
+				.custom-404-desc {
+					font-size: 1.125rem;
+					color: rgba(255, 255, 255, 0.7);
+					max-width: 600px;
+					margin: 0 auto 3rem auto;
+					line-height: 1.6;
+				}
+				.custom-404-action {
+					display: inline-flex;
+					align-items: center;
+					justify-content: center;
+					padding: 1.125rem 2.5rem;
+					background: #6431f1;
+					color: #ffffff;
+					text-decoration: none;
+					border-radius: 50px;
+					font-weight: 600;
+					font-size: 1.125rem;
+					transition: all 0.3s ease;
+					border: 1px solid rgba(255,255,255,0.1);
+				}
+				.custom-404-action:hover {
+					background: #5027c2;
+					transform: translateY(-2px);
+					box-shadow: 0 10px 25px rgba(100, 49, 241, 0.4);
+                    color: #fff;
+				}
+                .custom-404-action svg {
+                    margin-right: 0.75rem;
+                }
+			</style>
+			
+			<div class="custom-404-card">
+				
+                <div class="custom-404-content-inner">
+                    <h1 class="custom-404-code">404</h1>
+                    <h2 class="custom-404-title">Looks like you're lost.</h2>
+                    <p class="custom-404-desc">The venue or event you are looking for doesn't exist anymore, or the link might be broken.</p>
+                    
+                    <a href="{{ url('<front>') }}" class="custom-404-action">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        Return to Homepage
+                    </a>
+                </div>
+			</div>
+		</div>
+
+	</main>
+</div>

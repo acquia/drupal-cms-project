@@ -1,0 +1,275 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 559287ee-9426-45dd-94f0-abe8fac4d8fa
+  default_langcode: en
+  depends:
+    103288a5-b703-42d5-b9d0-05250a8a001b: file
+    3133db7f-fc9f-40b2-9509-ae9b3eab5733: media
+    fd45b1c0-e153-4e76-9c55-a60cd06a5134: file
+    ea5eb5b1-a175-417b-a72f-ac25db9240f6: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Contact
+  description:
+    -
+      value: 'Whether you have questions about admissions, programs, or campus life, we’re here to help.'
+  components:
+    -
+      uuid: 98401a53-9929-44df-87ac-80ba18da0f6f
+      component_id: sdc.provus_base_theme.hero_banner
+      inputs:
+        title: 'Get in Touch with Windy City Community College'
+        body:
+          value: '<p><strong>Whether you have questions about admissions, programs, or campus life, we’re here to help.</strong></p>'
+          format: canvas_full_html
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 3133db7f-fc9f-40b2-9509-ae9b3eab5733
+            target_type: media
+        is_short_banner: true
+        image_position: full
+        background_color: primary
+        text_container_width: col-lg-6
+        text_alignment: left
+    -
+      uuid: c6935018-32df-4c30-8738-8830a4bcb46c
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        padding_top: pt-5
+        padding_bottom: pb-5
+    -
+      parent_uuid: c6935018-32df-4c30-8738-8830a4bcb46c
+      slot: content
+      uuid: 6633bc53-e3ec-46a6-aca4-c93066354fc5
+      component_id: sdc.provus_base_theme.two_column
+      inputs:
+        desktop_width: 50-50
+        tablet_width: 50-50
+        mobile_width: 100-100
+    -
+      parent_uuid: 6633bc53-e3ec-46a6-aca4-c93066354fc5
+      slot: column_1
+      uuid: 6a285f96-7e8e-4d57-8d95-a6c3cb2b8bdd
+      component_id: sdc.provus_base_theme.image
+      inputs:
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: ea5eb5b1-a175-417b-a72f-ac25db9240f6
+            target_type: media
+        size: '4:3'
+        radius: rounded-0
+        margin_bottom: mb-0
+    -
+      parent_uuid: 6633bc53-e3ec-46a6-aca4-c93066354fc5
+      slot: column_2
+      uuid: fb779580-ad19-4768-bd2d-7f2e0b3eccd4
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Contact Information'
+        subtitle: 'Get Started'
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 6633bc53-e3ec-46a6-aca4-c93066354fc5
+      slot: column_2
+      uuid: fd350a56-14b3-482e-b9cf-562a41ed7d31
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p>📍 Address:<br>4809 N. Ravenswood Ave. Suite 126,&nbsp;<br>Chicago, IL 60640<br><br>📞 Phone:<br>(773)-525-8255<br><br>✉️ Email:<br>ignite@prometsource.com&nbsp;<br><br>🕒 Hours of Operation:<br>Monday–Friday: 8:00 AM – 5:00 PM CT<br>Saturday: 9:00 AM – 2:00 PM CT</p>'
+          format: canvas_full_html
+    -
+      uuid: 1ceef973-053a-4d0d-bbf8-9b8b4d3ecaca
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        custom_class: bg-grey
+        flex_enabled: false
+        container_type: container
+    -
+      parent_uuid: 1ceef973-053a-4d0d-bbf8-9b8b4d3ecaca
+      slot: content
+      uuid: c898ad95-501f-49e1-858f-298681178794
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Have a Question? Let Us Know!'
+        decorative_line: true
+        alignment: center
+    -
+      parent_uuid: 1ceef973-053a-4d0d-bbf8-9b8b4d3ecaca
+      slot: content
+      uuid: d45bf535-0918-4e6c-a6b8-439b98c16514
+      component_id: block.webform_block
+      inputs:
+        label: Webform
+        label_display: '0'
+        webform_id: contact
+        default_data: ''
+        redirect: true
+        lazy: true
+    -
+      uuid: dd8129f9-a37b-41ec-80e3-05316ed2a546
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: true
+        padding_bottom: pb-5
+        padding_top: pt-5
+        align_items: align-items-center
+    -
+      parent_uuid: dd8129f9-a37b-41ec-80e3-05316ed2a546
+      slot: content
+      uuid: 3d50c11e-3ee1-4b12-aed3-fe42f40a1541
+      component_id: sdc.provus_base_theme.two_column
+      inputs:
+        desktop_width: 50-50
+        tablet_width: 50-50
+        mobile_width: 100-100
+    -
+      parent_uuid: 3d50c11e-3ee1-4b12-aed3-fe42f40a1541
+      slot: column_1
+      uuid: 03ff0ac0-1881-4694-a564-c340909f9aa9
+      component_id: sdc.provus_base_theme.google_map
+      inputs:
+        title: 'Main campus map'
+        embed_url:
+          uri: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2967.1231554743968!2d-87.6734807!3d41.9546897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd240b74542cb%3A0x858ca15d09e3ac77!2s4001%20N%20Ravenswood%20Ave%2C%20Chicago%2C%20IL%2060613%2C%20USA!5e0!3m2!1sen!2sph!4v1773728012815!5m2!1sen!2sph'
+          options: {  }
+        size: '16:9'
+        radius: rounded-0
+        allow_fullscreen: false
+    -
+      parent_uuid: 3d50c11e-3ee1-4b12-aed3-fe42f40a1541
+      slot: column_2
+      uuid: 603ecf52-f5f1-41ec-9ee5-9fd3d6d8ce3f
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Visit Us in Person'
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 3d50c11e-3ee1-4b12-aed3-fe42f40a1541
+      slot: column_2
+      uuid: 34cb276f-729b-48ee-a425-396123d9b5b7
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p><span style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);color:rgb(0, 0, 0);display:inline !important;float:none;font-family:&quot;Source Sans 3&quot;, serif;font-size:18px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:pre-wrap;widows:2;word-spacing:0px;">Easily find your way to Windy City Community College using our interactive campus map.</span></p>'
+          format: canvas_full_html
+    -
+      parent_uuid: 3d50c11e-3ee1-4b12-aed3-fe42f40a1541
+      slot: column_2
+      uuid: c1b1de2c-eeea-41ac-be9b-ab7835a936c9
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Show Google Map'
+        url:
+          uri: 'https://www.google.com/maps?ll=41.954567%2C-87.67364&z=16&t=m&hl=en&gl=PH&mapclient=embed&q=4001%20N%20Ravenswood%20Ave%20Chicago%2C%20IL%2060613%20USA'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: auto
+  path:
+    -
+      alias: /contact
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

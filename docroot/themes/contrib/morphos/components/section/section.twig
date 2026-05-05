@@ -1,0 +1,314 @@
+{% set is_preview = canvas_is_preview or in_preview %}
+
+{% set container_attributes = create_attribute() %}
+{% set container_inner_attributes = create_attribute() %}
+{% set header_attributes = create_attribute() %}
+{% set header_content_attributes = create_attribute() %}
+{% set intro_attributes = create_attribute() %}
+{% set main_attributes = create_attribute() %}
+{% set content_attributes = create_attribute() %}
+{% set overlay_attributes = create_attribute() %}
+
+{% set slot_header_items %}{% block header_items %}{% endblock %}{% endset %}
+{% set slot_main_items %}{% block main_items %}{% endblock %}{% endset %}
+{% set slot_footer_items %}{% block footer_items %}{% endblock %}{% endset %}
+{% set slot_backgrounds %}{% block backgrounds %}{% endblock %}{% endset %}
+{% set slot_behaviors %}{% block behaviors %}{% endblock %}{% endset %}
+
+{% set is_header_items_render = slot_header_items|render|striptags('<drupal-render-placeholder><img><figure><div><button>')|trim %}
+{% set is_header_render = is_header_items_render or (heading and not hide_heading) or intro %}
+{% set is_main_items_render = slot_main_items|render|striptags('<drupal-render-placeholder><img><figure><div><button>')|trim %}
+{% set is_footer_items_render = slot_footer_items|render|striptags('<drupal-render-placeholder><img><figure><div><button>')|trim %}
+{% set is_footer_render =  is_footer_items_render or (readmore_url and readmore_text) %}
+
+{% set margin = [
+  margin_top == '0' ? 'mt-0',
+  margin_top == '4' ? 'mt-4',
+  margin_top == '8' ? 'mt-6 lg:mt-8',
+  margin_top == '12' ? 'mt-8 md:mt-10 lg:mt-12',
+  margin_top == '16' ? 'mt-10 md:mt-12 lg:mt-16',
+  margin_top == '24' ? 'mt-16 md:mt-20 lg:mt-24',
+  margin_top == '32' ? 'mt-20 md:mt-24 lg:mt-32',
+  margin_bottom == '0' ? 'mb-0',
+  margin_bottom == '4' ? 'mb-4',
+  margin_bottom == '8' ? 'mb-6 lg:mb-8',
+  margin_bottom == '12' ? 'mb-8 md:mb-10 lg:mb-12',
+  margin_bottom == '16' ? 'mb-10 md:mb-12 lg:mb-16',
+  margin_bottom == '24' ? 'mb-16 md:mb-20 lg:mb-24',
+  margin_bottom == '32' ? 'mb-20 md:mb-24 lg:mb-32',
+] %}
+
+{% set padding = [
+  padding_top == '0' ? 'pt-0',
+  padding_top == '4' ? 'pt-4',
+  padding_top == '8' ? 'pt-6 lg:pt-8',
+  padding_top == '12' ? 'pt-8 md:pt-10 lg:pt-12',
+  padding_top == '16' ? 'pt-10 md:pt-12 lg:pt-16',
+  padding_top == '24' ? 'pt-16 md:pt-20 lg:pt-24',
+  padding_top == '32' ? 'pt-20 md:pt-24 lg:pt-32',
+  padding_bottom == '0' ? 'pb-0',
+  padding_bottom == '4' ? 'pb-4',
+  padding_bottom == '8' ? 'pb-6 lg:pb-8',
+  padding_bottom == '12' ? 'pb-8 md:pb-10 lg:pb-12',
+  padding_bottom == '16' ? 'pb-10 md:pb-12 lg:pb-16',
+  padding_bottom == '24' ? 'pb-16 md:pb-20 lg:pb-24',
+  padding_bottom == '32' ? 'pb-20 md:pb-24 lg:pb-32',
+] %}
+
+{% set classes = [
+  'section',
+  'component',
+  is_preview ? 'component--preview',
+  content_alignment == 'section-alignment--start' ? 'text-start',
+  content_alignment == 'section-alignment--center' ? 'text-center',
+  content_alignment == 'section-alignment--end' ? 'text-end',
+  content_alignment == 'section-alignment--justify' ? 'text-justify',
+  palette,
+  texture,
+  overlay ? 'has-overlay',
+]|merge(margin) %}
+
+{% set container_classes = [
+  'section__container',
+  'component__container',
+  container == 'container--normal' or not container ? 'container mx-auto px-4',
+  container == 'container--edgy' ? 'w-full',
+  container == 'container--wide' ? 'w-full px-4',
+  container == 'container--narrow' ? 'container w-full lg:max-w-[80%] mx-auto px-4',
+]|merge(padding) %}
+
+{% set container_inner_classes = [
+  'section__container-inner',
+  'grid grid-cols-12',
+  '@container',
+  content_width == 'section-width--100' ? 'w-full',
+  content_width == 'section-width--75' ? 'w-full lg:max-w-[75%]',
+  content_width == 'section-width--66' ? 'w-full lg:max-w-[66%]',
+  content_width == 'section-width--50' ? 'w-full lg:max-w-[50%]',
+  content_position == 'section-position--start' ? 'mr-auto',
+  content_position == 'section-position--center' ? 'mx-auto',
+  content_position == 'section-position--end' ? 'ml-auto',
+] %}
+
+{% set header_classes = [
+  'section__header',
+  'order-1',
+  'col-span-12',
+  layout == 'layout--3-9' ? '@3xl:col-span-3',
+  layout == 'layout--3-1-8' ? '@3xl:col-span-3',
+  layout == 'layout--4-8' ? '@3xl:col-span-4',
+  layout == 'layout--4-1-7' ? '@3xl:col-span-4',
+  layout == 'layout--5-7' ? '@3xl:col-span-5',
+  layout == 'layout--5-1-6' ? '@3xl:col-span-5',
+  layout == 'layout--6-6m' ? '@3xl:col-span-6',
+  layout == 'layout--9-3' ? '@3xl:col-span-3 @3xl:order-2',
+  layout == 'layout--8-1-3' ? '@3xl:col-start-10 @3xl:col-span-3 @3xl:order-2',
+  layout == 'layout--8-4' ? '@3xl:col-span-4 @3xl:order-2',
+  layout == 'layout--7-1-4' ? '@3xl:col-start-9 @3xl:col-span-4 @3xl:order-2',
+  layout == 'layout--7-5' ? '@3xl:col-span-5 @3xl:order-2',
+  layout == 'layout--6-1-5' ? '@3xl:col-start-7 @3xl:col-span-5 @3xl:order-2',
+  layout == 'layout--6m-6' ? '@3xl:col-span-6 @3xl:order-2',
+] %}
+
+{% set header_content_classes = [
+  'section__header-content',
+  prose_size ? 'prose ' ~ prose_size,
+] %}
+
+{% set intro_classes = [
+  'section__intro',
+  not prose_size ? 'prose prose-lg'
+] %}
+
+{% set main_classes = [
+  'section__main',
+  'order-2',
+  'col-span-12',
+  '@container',
+  layout == 'layout--3-9' ? '@3xl:col-span-9',
+  layout == 'layout--3-1-8' and is_header_render ? '@3xl:col-start-5',
+  layout == 'layout--3-1-8' ? '@3xl:col-span-8',
+  layout == 'layout--4-8' ? '@3xl:col-span-8',
+  layout == 'layout--4-1-7' and is_header_render ? '@3xl:col-start-6',
+  layout == 'layout--4-1-7' ? '@3xl:col-span-7',
+  layout == 'layout--5-7' ? '@3xl:col-span-7',
+  layout == 'layout--5-1-6' and is_header_render ? '@3xl:col-start-7',
+  layout == 'layout--5-1-6' ? '@3xl:col-span-6',
+  layout == 'layout--6-6m' ? '@3xl:col-span-6',
+  layout == 'layout--9-3' ? '@3xl:col-span-9 @3xl:order-1',
+  layout == 'layout--8-1-3' ? '@3xl:col-span-8 @3xl:order-1',
+  layout == 'layout--8-4' ? '@3xl:col-span-8 @3xl:order-1',
+  layout == 'layout--7-1-4' ? '@3xl:col-span-7 @3xl:order-1',
+  layout == 'layout--7-5' ? '@3xl:col-span-7 @3xl:order-1',
+  layout == 'layout--6-1-5' ? '@3xl:col-span-6 @3xl:order-1',
+  layout == 'layout--6m-6' ? '@3xl:col-span-6 @3xl:order-1',
+] %}
+
+{% set content_classes = [
+  'section__content',
+  'grid grid-cols-1',
+  column_widths ? 'no-rhythm',
+  column_widths == 'section-col-widths--50-50' ? '@md:grid-cols-2',
+  column_widths == 'section-col-widths--33-33-33' ? '@md:grid-cols-2 @3xl:grid-cols-3',
+  column_widths == 'section-col-widths--25-25-25-25' ? '@md:grid-cols-2 @3xl:grid-cols-4',
+] %}
+
+{% set component_preview %}
+  <div{{ attributes.addClass(classes) }}>
+    <div{{ container_attributes.addClass(container_classes) }}>
+      <div{{ container_inner_attributes.addClass(container_inner_classes) }}>
+        {% if show_header %}
+          <header{{ header_attributes.addClass(header_classes) }}>
+            <div{{ header_content_attributes.addClass(header_content_classes) }}>
+              {% if heading and not hide_heading %}
+                {{ include('morphos:heading', {
+                  heading,
+                  level: heading_level|default(2),
+                  additional_classes: 'section__heading',
+                },
+                  with_context: false
+                ) }}
+              {% endif %}
+              {% if intro %}
+                <div{{ intro_attributes.addClass(intro_classes) }}>{{ intro }}</div>
+              {% endif %}
+            </div>
+            <div class="section__header-items">
+              {{ slot_header_items }}
+            </div>
+          </header>
+        {% endif %}
+
+        <div{{ main_attributes.addClass(main_classes) }}>
+          <div{{ content_attributes.addClass(content_classes) }}>
+            {{ slot_main_items }}
+          </div>
+        </div>
+
+        {% if show_footer %}
+          <footer class="section__footer">
+            <div class="section__footer-content">
+              <div class="section__footer-items">
+                {{ slot_footer_items }}
+              </div>
+
+              {% if readmore_url and readmore_text %}
+                <div class="section__readmore">
+                  <a href="{{ readmore_url }}" class="btn btn-default btn-outline">
+                    {{ readmore_text }}
+
+                    {{ include('morphos:icon', {
+                      icon: 'arrow-circle-right',
+                      icon_size: 'icon-size--sm',
+                    },
+                      with_context: false
+                    ) }}
+                  </a>
+                </div>
+              {% endif %}
+            </div>
+          </footer>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="component__backgrounds">
+      {{ slot_backgrounds }}
+    </div>
+    <div{{ overlay_attributes.addClass('component__overlay', overlay) }}></div>
+    <div class="component__behaviors">
+      {{ slot_behaviors }}
+    </div>
+  </div>
+{% endset %}
+
+{% set component_render %}
+  <div{{ attributes.addClass(classes) }}>
+    <div{{ container_attributes.addClass(container_classes) }}>
+      <div{{ container_inner_attributes.addClass(container_inner_classes) }}>
+        {% if show_header %}
+          {% if is_header_render %}
+            <header{{ header_attributes.addClass(header_classes) }}>
+              {% if (heading and not hide_heading) or intro %}
+                <div{{ header_content_attributes.addClass(header_content_classes) }}>
+                  {% if heading and not hide_heading %}
+                    {{ include('morphos:heading', {
+                      heading,
+                      level: heading_level|default(2),
+                      additional_classes: 'section__heading',
+                    },
+                      with_context: false
+                    ) }}
+                  {% endif %}
+                  {% if intro %}
+                    <div{{ intro_attributes.addClass(intro_classes) }}>{{ intro }}</div>
+                  {% endif %}
+                </div>
+              {% endif %}
+              {% if is_header_items_render %}
+                <div class="section__header-items">
+                  {{ slot_header_items }}
+                </div>
+              {% endif %}
+            </header>
+          {% endif %}
+        {% endif %}
+
+        {% if is_main_items_render %}
+          <div{{ main_attributes.addClass(main_classes) }}>
+            <div{{ content_attributes.addClass(content_classes) }}>
+              {{ slot_main_items }}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if show_footer %}
+          {% if is_footer_render %}
+            <footer class="section__footer">
+              <div class="section__footer-content">
+                {% if is_footer_items_render %}
+                  <div class="section__footer-items">
+                    {{ slot_footer_items }}
+                  </div>
+                {% endif %}
+
+                {% if readmore_url and readmore_text %}
+                  <div class="section__readmore">
+                    <a href="{{ readmore_url }}" class="btn btn-default btn-outline">
+                      {{ readmore_text }}
+
+                      {{ include('morphos:icon', {
+                        icon: 'arrow-circle-right',
+                        icon_size: 'icon-size--sm',
+                      },
+                        with_context: false
+                      ) }}
+                    </a>
+                  </div>
+                {% endif %}
+              </div>
+            </footer>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+
+    {% if slot_backgrounds|render|striptags('<drupal-render-placeholder><img><figure><div><button>')|trim %}
+      <div class="component__backgrounds">
+        {{ slot_backgrounds }}
+      </div>
+    {% endif %}
+
+    {% if overlay %}
+      <div{{ overlay_attributes.addClass('component__overlay', overlay) }}></div>
+    {% endif %}
+
+    {% if slot_behaviors|render|striptags('<drupal-render-placeholder><img><figure><div><button>')|trim %}
+      <div class="component__behaviors">
+        {{ slot_behaviors }}
+      </div>
+    {% endif %}
+  </div>
+{% endset %}
+
+{{ is_preview ? component_preview : component_render }}

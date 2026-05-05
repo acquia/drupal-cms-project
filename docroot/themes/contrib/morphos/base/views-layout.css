@@ -1,0 +1,66 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: base/views-layout.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+@reference "../tailwindcss";
+
+/* Views component */
+@layer components {
+  .views-layout {
+    /* Remove list styling and padding when ul is used as grid container */
+    > ul {
+      @apply list-none gap-4 p-0 ps-0 lg:gap-6;
+    }
+  }
+
+  /* Full width - single column stacked layout */
+  .views-layout--full-width > ul {
+    @apply flex flex-col;
+  }
+
+  /* Halves - 2 column grid */
+  .views-layout--halves > ul {
+    @apply grid grid-cols-1 sm:grid-cols-2;
+  }
+
+  /* Thirds - 3 column grid */
+  .views-layout--thirds > ul {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
+  }
+
+  /* Quarters - 4 column grid */
+  .views-layout--quarters > ul {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+  }
+
+  /* Sixths - 6 column grid */
+  .views-layout--sixths > ul {
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6;
+  }
+
+  /* Read more */
+  .views-readmore {
+    @apply flex justify-end;
+  }
+
+  /* Modifier */
+  .views-layout--no-gap {
+    > ul {
+      @apply gap-0;
+    }
+  }
+
+  .views-layout--no-column-gap {
+    > ul {
+      @apply gap-x-0;
+    }
+  }
+
+  .views-layout--no-row-gap {
+    > ul {
+      @apply gap-y-0;
+    }
+  }
+}

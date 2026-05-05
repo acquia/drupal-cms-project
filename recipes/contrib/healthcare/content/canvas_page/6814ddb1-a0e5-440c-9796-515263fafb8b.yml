@@ -1,0 +1,123 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 6814ddb1-a0e5-440c-9796-515263fafb8b
+  default_langcode: en
+  depends:
+    f106d2c0-ad80-446a-ac23-452b0c4ad160: file
+    95dc926b-b764-48fd-b140-271b47c3392b: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Services
+  description:
+    -
+      value: 'From primary care to specialized treatment, we offer complete healthcare for you and your family.'
+  components:
+    -
+      uuid: 3a082a83-e2a7-4236-aed5-d667e51f4808
+      component_id: sdc.diagnosis.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        background: secondary
+        padding_block_start: '32'
+        padding_block_end: '32'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        image_size: '4:3'
+        image_position: right
+        image_radius: extra-large
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 95dc926b-b764-48fd-b140-271b47c3392b
+            target_type: media
+    -
+      parent_uuid: 3a082a83-e2a7-4236-aed5-d667e51f4808
+      slot: hero_slot
+      uuid: 9d845e81-8696-498c-b02b-1340bb51d3f3
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Comprehensive Healthcare Services'
+        level: 1
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 3a082a83-e2a7-4236-aed5-d667e51f4808
+      slot: hero_slot
+      uuid: cb7e2164-1c2d-47f5-851f-9f8ac44da118
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>From primary care to specialized treatment, we offer complete healthcare for you and your family.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: 4908f3d3-e0b2-492b-816c-0bf0988e3681
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: 4908f3d3-e0b2-492b-816c-0bf0988e3681
+      slot: main_slot
+      uuid: fcc1c340-becd-4fe7-8ea0-ac379032800d
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Saltmarsh Island Health provides a full range of medical services to meet the diverse health needs of our community. Our experienced healthcare professionals are dedicated to helping you achieve and maintain optimal health.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: 583ac275-3e57-4e3a-bd7f-ec7277af1083
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: true
+        views_columns: 33-33-33
+    -
+      parent_uuid: 583ac275-3e57-4e3a-bd7f-ec7277af1083
+      slot: main_slot
+      uuid: cc6d0ebf-236b-4590-95a4-a0d9840cebaa
+      component_id: block.views_block.all_services-block_1
+      inputs:
+        label: 'All Services'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+  path:
+    -
+      alias: /services
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

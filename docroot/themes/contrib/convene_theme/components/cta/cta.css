@@ -1,0 +1,73 @@
+.cta-component.cta-component--themed, body:not(.canvas-page) .cta-component.cta-component--admin-theme, .cta-component {
+  padding: 80px 24px;
+  background-color: #092845; /* Dark blue background from Figma */
+  color: #FFFFFF;
+}
+
+.cta-component .cta-component__inner {
+  max-width: 800px; /* Constrain width to force text wrapping like the screenshot */
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.cta-component .cta-component__eyebrow {
+  margin-bottom: 0;
+  width: 100%;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cta-component .cta-component__title {
+  margin-bottom: 16px; /* Extra gap between text and buttons */
+  width: 100%;
+  font-size: 28px; /* Large readable text */
+  font-weight: 300; /* Regular/Light weight */
+  line-height: 1.4;
+  color: #FFFFFF;
+  margin-top: 0;
+}
+
+/* Action Area (Buttons) */
+.cta-component .cta-component__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+}
+
+/* Aggressively ensure the canvas slot wrapper has physical dimension even if completely empty */
+.cta-component .cta-component__actions > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  min-width: 120px;
+  width: 100%;
+  min-height: 48px !important;
+  outline: 1px dashed rgba(255, 255, 255, 0.2); /* White dashed outline for visibility on dark BG */
+}
+
+/* Responsiveness */
+@media (max-width: 992px) {
+  .cta-component.cta-component--themed, body:not(.canvas-page) .cta-component.cta-component--admin-theme, .cta-component {
+    padding: 64px 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cta-component.cta-component--themed, body:not(.canvas-page) .cta-component.cta-component--admin-theme, .cta-component {
+    padding: 48px 24px;
+  }
+  .cta-component .cta-component__title {
+    font-size: 16px;
+  }
+}

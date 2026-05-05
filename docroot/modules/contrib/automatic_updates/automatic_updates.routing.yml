@@ -1,0 +1,58 @@
+automatic_updates.status_check:
+  path: '/admin/automatic_updates/status'
+  defaults:
+    _controller: '\Drupal\automatic_updates\Controller\StatusCheckController::run'
+    _title: 'Update readiness checking'
+  requirements:
+    _permission: 'administer software updates'
+  options:
+    _maintenance_access: TRUE
+    _automatic_updates_status_messages: skip
+
+automatic_updates.confirmation_page:
+  path: '/admin/automatic-update-ready/{stage_id}'
+  defaults:
+    _form: '\Drupal\automatic_updates\Form\UpdateReady'
+    _title: 'Ready to update'
+  requirements:
+    _permission: 'administer software updates'
+  options:
+    _maintenance_access: TRUE
+    _automatic_updates_status_messages: skip
+
+automatic_updates.extensions_confirmation_page:
+  path: '/admin/automatic-update-extensions-ready/{stage_id}'
+  defaults:
+    _form: '\Drupal\automatic_updates\Form\ExtensionsUpdateReady'
+    _title: 'Ready to update'
+  requirements:
+    _permission: 'administer software updates'
+  options:
+    _admin_route: TRUE
+    _maintenance_access: TRUE
+    _automatic_updates_status_messages: skip
+
+automatic_updates.finish:
+  path: '/automatic-update/finish'
+  defaults:
+    _controller: '\Drupal\automatic_updates\Controller\UpdateController::onFinish'
+  requirements:
+    _permission: 'administer software updates'
+  options:
+    _maintenance_access: TRUE
+    _automatic_updates_status_messages: skip
+
+# This route is automatically cloned so it can appear as a distinct local task in
+# multiple places.
+# @see \Drupal\automatic_updates\Routing\RouteSubscriber::alterRoutes()
+automatic_updates.update_form:
+  path: '/admin/reports/updates/update'
+  defaults:
+    _controller: '\Drupal\automatic_updates\Controller\UpdateController::dashboard'
+    _title: 'Update'
+  requirements:
+    _permission: 'administer software updates'
+  options:
+    _admin_route: true
+    _maintenance_access: true
+    _automatic_updates_status_messages: skip

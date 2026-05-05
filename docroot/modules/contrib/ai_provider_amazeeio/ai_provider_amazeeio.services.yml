@@ -1,0 +1,41 @@
+parameters:
+  ai_provider_amazeeio.trial_access_provisioning.disable: false
+  ai_provider_amazeeio.internal.disable_environment_detection: false
+services:
+  _defaults:
+    autowire: true
+
+  logger.channel.ai_provider_amazeeio:
+    class: Drupal\Core\Logger\LoggerChannel
+    factory: ['@logger.factory', 'get']
+    arguments: ['ai_provider_amazeeio']
+  ai_provider_amazeeio.api_client:
+    class: Drupal\ai_provider_amazeeio\AmazeeIoApi\AmazeeClient
+    arguments:
+      $client: '@http_client'
+      $logger: '@logger.channel.ai_provider_amazeeio'
+  ai_provider_amazeeio.postgres_client:
+    class: Drupal\ai_provider_amazeeio\Vdb\Postgres\PostgresPgvectorClient
+  Drupal\ai_provider_amazeeio\TrialAccess\TrialKeyGenerator:
+    class: Drupal\ai_provider_amazeeio\TrialAccess\TrialKeyGenerator
+    arguments:
+      - '@entity_type.manager'
+      - '@http_client'
+      - '@config.factory'
+      - '@ai.provider'
+      - '@module_handler'
+      - '@ai_provider_amazeeio.api_client'
+      - '@state'
+      - '@logger.channel.ai_provider_amazeeio'
+      - '@messenger'
+
+  Drupal\ai_provider_amazeeio\TrialAccess\ProgressReporterFactoryInterface:
+    class: Drupal\ai_provider_amazeeio\TrialAccess\ProgressReporterFactory
+
+  Drupal\ai_provider_amazeeio\TrialAccess\TrialAccountProvisionerFactoryInterface:
+    class: Drupal\ai_provider_amazeeio\TrialAccess\TrialAccountProvisionerFactory
+    arguments:
+      $aiProviderManager: '@ai.provider'
+      $apiClient: '@ai_provider_amazeeio.api_client'
+      $logger: '@logger.channel.ai_provider_amazeeio'
+      $dryRun: '%ai_provider_amazeeio.trial_access_provisioning.disable%'

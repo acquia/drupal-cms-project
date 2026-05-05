@@ -1,0 +1,55 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: base/page.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+@reference "../tailwindcss";
+
+.page__main {
+  background-color: var(--background, #fff);
+}
+
+[data-header='sticky'] {
+  .page__top,
+  .page__bottom {
+    @apply relative z-2;
+  }
+
+  .page__banner,
+  .page__main,
+  .page__footer {
+    @apply relative z-1;
+  }
+
+  .page__header {
+    @apply sticky top-0 z-2;
+  }
+}
+
+[data-footer='sticky'] {
+  .page__top,
+  .page__header,
+  .page__bottom {
+    @apply relative z-2;
+  }
+
+  .page__banner,
+  .page__main {
+    @apply relative z-1;
+  }
+
+  .page__footer {
+    @apply sticky bottom-0 z-0;
+  }
+}
+
+[data-header='sticky'][data-footer='sticky'] {
+  .page__header {
+    @apply sticky top-0 z-2;
+  }
+
+  .page__footer {
+    @apply sticky bottom-0 z-0;
+  }
+}

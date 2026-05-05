@@ -1,0 +1,70 @@
+toastify.settings:
+  type: config_object
+  label: 'Toastify settings'
+  mapping:
+    status:
+      type: toastify_type_settings
+      label: 'Status settings'
+    warning:
+      type: toastify_type_settings
+      label: 'Warning settings'
+    error:
+      type: toastify_type_settings
+      label: 'Error settings'
+    enable_for:
+      type: mapping
+      label: 'Enable for'
+      mapping:
+        admin_theme:
+          type: boolean
+          label: 'Admin theme'
+          description: 'Enable for the admin theme.'
+        frontend_theme:
+          type: boolean
+          label: 'Frontend theme'
+          description: 'Enable for the frontend theme.'
+
+toastify_type_settings:
+  type: mapping
+  label: 'Settings for a specific type of notification'
+  mapping:
+    duration:
+      type: integer
+      label: 'Duration (ms)'
+      description: 'The duration in milliseconds before the notification disappears.'
+    color:
+      type: string
+      label: 'Primary color'
+      description: 'The main color of the notification.'
+    color2:
+      type: string
+      label: 'Secondary color'
+      description: 'The secondary color used in gradients.'
+    colorProgressBar:
+      type: string
+      label: 'Progress bar color'
+      description: 'The color of the progress bar.'
+    direction:
+      type: string
+      label: 'Direction'
+      description: 'Direction of the animation (e.g., to right).'
+    gravity:
+      type: string
+      label: 'Gravity'
+      description: 'Vertical position (e.g., top, bottom).'
+    position:
+      type: string
+      label: 'Horizontal position'
+      description: 'Horizontal position (e.g., left, center, right).'
+    close:
+      type: boolean
+      label: 'Close button'
+      description: 'Whether to show a close button.'
+    offsetX:
+      type: integer
+      label: 'Horizontal offset'
+      description: 'Offset in pixels from the horizontal position.'
+    offsetY:
+      type: integer
+      label: 'Vertical offset'
+      description: 'Offset in pixels from the vertical position.'

@@ -1,0 +1,12 @@
+name: Test Theme — SDC using a well-known prop shape WITHOUT $ref
+type: theme
+# Intentionally NOT depending on test_theme_base: this theme wants its SDC to work when that other theme is not installed, yet wants to use the same prop shape.
+base theme: false
+core_version_requirement: ^11
+dependencies:
+  - canvas:canvas
+
+# Information added by Drupal.org packaging script on 2026-04-21
+version: '1.3.3'
+project: 'canvas'
+datestamp: 1776736573

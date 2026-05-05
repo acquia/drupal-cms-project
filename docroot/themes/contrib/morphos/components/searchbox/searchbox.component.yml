@@ -1,0 +1,73 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Searchbox
+description: An input field that allows users to perform site-wide keyword searches.
+group: Global
+props:
+  type: object
+  properties:
+    action_url:
+      title: Action URL
+      description: URL to handle the form submission.
+      type: string
+      format: uri-reference
+      default: /search
+      examples:
+        - /search
+    method:
+      title: Method
+      description: HTTP request method.
+      type: string
+      default: GET
+      examples:
+        - GET
+    query_name:
+      title: Query param name
+      description: Name attribute for the search input field.
+      type: string
+      default: keywords
+      examples:
+        - keywords
+    button_label:
+      title: Button label
+      description: Label text for the search button.
+      type: string
+      default: Search
+      examples:
+        - Search
+    placeholder_icon:
+      title: Placeholder icon
+      description: Icon shown in the search box.
+      type: string
+      default: magnifying-glass
+      examples:
+        - magnifying-glass
+    placeholder_text:
+      title: Placeholder text
+      description: Help text shown in the search box.
+      type: string
+      default: 'What are you looking for?'
+      examples:
+        - 'What are you looking for?'
+    size:
+      title: Size
+      description: Size of the input text field and other elements.
+      type: string
+      default: xl
+      enum:
+        - xs
+        - sm
+        - md
+        - lg
+        - xl
+      meta:enum:
+        xs: Extra small
+        sm: Small
+        md: Medium
+        lg: Large
+        xl: Extra large
+      examples:
+        - xl
+libraryOverrides:
+  css:
+    component:
+      ../../dist/css/searchbox.css: { minified: true }

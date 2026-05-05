@@ -1,0 +1,292 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: dd7d495d-f2e2-49b1-9740-8077cee6fc2e
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Textures
+  description:
+    -
+      value: 'Demonstration of the textures available in Convivial Template.'
+  components:
+    -
+      uuid: 13e90b98-3b63-45e4-960d-36f84030db10
+      component_id: sdc.morphos.banner
+      inputs:
+        title: Textures
+        padding_top: '12'
+        padding_bottom: '12'
+        palette: color--primary
+        texture: texture--conic-top-start
+    -
+      parent_uuid: 13e90b98-3b63-45e4-960d-36f84030db10
+      slot: breadcrumb
+      uuid: e053483c-2d95-4212-9c5f-6800b2f2d623
+      component_id: block.system_breadcrumb_block
+      inputs:
+        label: Breadcrumbs
+        label_display: '0'
+    -
+      uuid: 74e311c8-d823-4544-b2a2-16971de8967d
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        layout: layout--12
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '16'
+        padding_bottom: '16'
+        container: container--normal
+        palette: color--secondary
+        content_position: section-position--start
+        content_alignment: section-alignment--start
+        texture: texture--linear-start
+        heading: 'Linear: start'
+    -
+      uuid: c578f0a8-b599-4fb9-a383-930811bffbcc
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--secondary
+        heading: 'Linear: End'
+        layout: layout--12
+        content_position: section-position--start
+        content_alignment: section-alignment--start
+        texture: texture--linear-end
+    -
+      uuid: 868c5b20-cac5-45bc-a5ad-4c83f09fda1a
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '16'
+        padding_bottom: '16'
+        container: container--normal
+        palette: color--secondary
+        heading: 'Linear: Top'
+        content_position: section-position--start
+        texture: texture--linear-top
+        layout: layout--12
+    -
+      uuid: e6e9dc8d-58c0-473e-bb1b-5875ec9aa62f
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '16'
+        padding_bottom: '16'
+        container: container--normal
+        palette: color--secondary
+        heading: 'Linear: Bottom'
+        layout: layout--12
+        texture: texture--linear-bottom
+    -
+      uuid: 40856386-b01e-47da-94d4-0ce29cb38ad4
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '16'
+        padding_bottom: '16'
+        container: container--normal
+        palette: color--secondary
+        heading: 'Linear: Top start'
+        texture: texture--linear-top-start
+        layout: layout--12
+    -
+      uuid: d0c96233-7466-446c-b2e6-5e93b5e791d0
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '16'
+        padding_bottom: '16'
+        container: container--normal
+        palette: color--secondary
+        heading: 'Linear: Top End'
+        layout: layout--12
+        texture: texture--linear-top-end
+    -
+      uuid: 8c6dff6b-916b-4232-855f-bc56976ae618
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '16'
+        padding_bottom: '16'
+        container: container--normal
+        palette: color--secondary
+        heading: 'Linear: Bottom start'
+        layout: layout--12
+        texture: texture--linear-bottom-start
+    -
+      uuid: b2200682-5c5f-494f-87e8-25bc6602b9af
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '16'
+        padding_bottom: '16'
+        container: container--normal
+        palette: color--secondary
+        heading: 'Linear: Bottom End'
+        texture: texture--linear-bottom-end
+        layout: layout--12
+    -
+      uuid: 1c76de5a-3b23-4390-9ef2-96906a10582f
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '16'
+        padding_bottom: '16'
+        container: container--normal
+        palette: color--primary
+        heading: 'Radial: Spotlight'
+        layout: layout--12
+        texture: texture--radial-spotlight
+    -
+      uuid: 465c64b1-9a19-4a92-a9a1-b98ff9963d17
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '16'
+        padding_bottom: '16'
+        container: container--normal
+        palette: color--primary
+        layout: layout--12
+        heading: 'Radial: Vignette'
+        texture: texture--radial-vignette
+    -
+      uuid: 2868ddef-6cd0-4e06-8a02-fae4e3b5499a
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '16'
+        padding_bottom: '16'
+        container: container--normal
+        palette: color--primary
+        heading: 'Conic: Top start'
+        layout: layout--12
+        texture: texture--conic-top-start
+    -
+      uuid: c9c78ee1-60c7-4f8e-b01d-baec8452219b
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '16'
+        padding_bottom: '16'
+        container: container--normal
+        palette: color--primary
+        heading: 'Conic: Top end'
+        layout: layout--12
+        texture: texture--conic-top-end
+    -
+      uuid: 7734fac1-dc86-4437-a961-8362f57a96bd
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '16'
+        padding_bottom: '16'
+        container: container--normal
+        palette: color--primary
+        heading: 'Conic: Bottom start'
+        layout: layout--12
+        texture: texture--conic-bottom-start
+    -
+      uuid: 8e460f9a-ee89-4c11-97c9-035e8b7b7e48
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '16'
+        padding_bottom: '16'
+        container: container--normal
+        palette: color--primary
+        heading: 'Conic: Bottom start'
+        layout: layout--12
+        texture: texture--conic-bottom-end
+  path:
+    -
+      alias: /demo/textures
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

@@ -1,0 +1,498 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Custom Field module.
+ */
+
+use Drupal\Core\Field\FieldConfigInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\field\Entity\FieldConfig;
+
+/**
+ * Update entity field definitions for new 'size' setting.
+ *
+ * @see https://www.drupal.org/project/custom_field/issues/3379711
+ */
+function custom_field_update_8001(): TranslatableMarkup {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $entity_type_manager->clearCachedDefinitions();
+  $entity_type_ids = [];
+  $change_summary = \Drupal::service('entity.definition_update_manager')->getChangeSummary();
+  foreach ($change_summary as $entity_type_id => $change_list) {
+    $entity_type = $entity_type_manager->getDefinition($entity_type_id);
+    \Drupal::entityDefinitionUpdateManager()->installEntityType($entity_type);
+    $entity_type_ids[] = $entity_type_id;
+  }
+
+  return t('Installed/Updated the entity type(s): @entity_type_ids', [
+    '@entity_type_ids' => implode(', ', $entity_type_ids),
+  ]);
+}
+
+/**
+ * Update entity field definitions for new 'datetime_type' setting.
+ */
+function custom_field_update_8002(): TranslatableMarkup {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $entity_type_manager->clearCachedDefinitions();
+  $entity_type_ids = [];
+  $change_summary = \Drupal::service('entity.definition_update_manager')->getChangeSummary();
+  foreach ($change_summary as $entity_type_id => $change_list) {
+    $entity_type = $entity_type_manager->getDefinition($entity_type_id);
+    \Drupal::entityDefinitionUpdateManager()->installEntityType($entity_type);
+    $entity_type_ids[] = $entity_type_id;
+  }
+
+  return t('Installed/Updated the entity type(s): @entity_type_ids', [
+    '@entity_type_ids' => implode(', ', $entity_type_ids),
+  ]);
+}
+
+/**
+ * Deprecate and replace the 'CustomField' widget with 'Flexbox'.
+ */
+function custom_field_update_8003(): TranslatableMarkup {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $entity_field_manager = \Drupal::service('entity_field.manager');
+
+  // Get the entity field map for fields of type 'custom'.
+  $entity_field_map = $entity_field_manager->getFieldMapByFieldType('custom');
+  $updated = [];
+
+  // Iterate through the field map.
+  foreach ($entity_field_map as $entity_type_id => $fields) {
+    foreach ($fields as $field_name => $field_info) {
+      foreach ($field_info['bundles'] as $bundle) {
+        $field = FieldConfig::loadByName($entity_type_id, $bundle, $field_name);
+        if (!$field) {
+          continue 2;
+        }
+        // Load the form display for the current entity type.
+        /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $form_display */
+        $form_display = $entity_type_manager->getStorage('entity_form_display')
+          ->load($entity_type_id . '.' . $bundle . '.default');
+        if ($form_display) {
+          // Get the widget type from the field info.
+          $component = $form_display->getComponent($field_name);
+          if ($component['type'] == 'custom_default') {
+            $form_display->setComponent($field_name, [
+              'type' => 'custom_flex',
+              'settings' => [],
+            ]);
+            $form_display->save();
+            $updated[] = $entity_type_id . '.' . $bundle . '.' . $field_name;
+          }
+        }
+      }
+    }
+  }
+
+  // Clear the Drupal cache to apply the changes.
+  $entity_type_manager->clearCachedDefinitions();
+  if (!empty($updated)) {
+    return t('Updated the display components to the <em>Flexbox</em> display for the following field(s). You should visit the <em>Manage form display</em> page for further configuration. : @fields', [
+      '@fields' => implode(', ', $updated),
+    ]);
+  }
+
+  return t('No existing display components were impacted by this update.');
+}
+
+/**
+ * Update entity field definitions for new 'image' field.
+ */
+function custom_field_update_8004(): void {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $entity_type_manager->clearCachedDefinitions();
+  $change_summary = \Drupal::service('entity.definition_update_manager')->getChangeSummary();
+  foreach ($change_summary as $entity_type_id => $change_list) {
+    $entity_type = $entity_type_manager->getDefinition($entity_type_id);
+    \Drupal::entityDefinitionUpdateManager()->installEntityType($entity_type);
+  }
+}
+
+/**
+ * Update field storage schema for all 'custom' fields.
+ */
+function custom_field_update_8005(): void {
+  // Intentionally empty – schema changes were moved to 10003.
+}
+
+/**
+ * Enable jsonapi integration module if jsonapi module is enabled.
+ */
+function custom_field_update_8006(): void {
+  $module_handler = \Drupal::moduleHandler();
+  if ($module_handler->moduleExists('jsonapi') &&
+    !$module_handler->moduleExists('custom_field_jsonapi')) {
+    \Drupal::service('module_installer')->install(['custom_field_jsonapi']);
+  }
+}
+
+/**
+ * Add extra timezone field to datetime fields.
+ */
+function custom_field_update_8007(): void {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  // Clear cached definitions to ensure we work with the latest data.
+  $entity_type_manager->clearCachedDefinitions();
+  /** @var \Drupal\custom_field\CustomFieldUpdateManagerInterface $update_manager */
+  $update_manager = \Drupal::service('custom_field.update_manager');
+
+  $timezone_definition = [
+    'description' => 'The preferred timezone.',
+    'type' => 'varchar',
+    'length' => 32,
+  ];
+
+  // Load all field storage configurations for the 'custom' field type.
+  /** @var \Drupal\field\FieldStorageConfigInterface[] $storages */
+  $storages = $entity_type_manager
+    ->getStorage('field_storage_config')
+    ->loadByProperties(['type' => 'custom']);
+
+  foreach ($storages as $storage) {
+    $entity_type_id = $storage->getTargetEntityTypeId();
+    $field_name = $storage->getName();
+    $columns = $storage->getSetting('columns') ?? [];
+
+    // Build the list of needed timezone columns.
+    $extra_columns = [];
+    foreach ($columns as $name => $column) {
+      if ($column['type'] == 'datetime') {
+        $extra_columns["{$name}__timezone"] = $timezone_definition;
+      }
+    }
+    if (empty($extra_columns)) {
+      continue;
+    }
+    try {
+      $update_manager->addExtraColumns($entity_type_id, $field_name, $extra_columns);
+    }
+    catch (\Throwable $e) {
+      \Drupal::logger('custom_field')->error('Failed to add timezone columns for @field on @entity: @message', [
+        '@field' => $field_name,
+        '@entity' => $entity_type_id,
+        '@message' => $e->getMessage(),
+      ]);
+    }
+  }
+}
+
+/**
+ * Update custom field configuration widget settings.
+ */
+function custom_field_update_10001(): void {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  /** @var \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager */
+  $entity_field_manager = \Drupal::service('entity_field.manager');
+
+  // Get the entity field map for fields of type 'custom'.
+  $entity_field_map = $entity_field_manager->getFieldMapByFieldType('custom');
+
+  foreach ($entity_field_map as $entity_type_id => $fields) {
+    foreach ($fields as $field_name => $field_info) {
+      foreach ($field_info['bundles'] as $bundle) {
+        $field = FieldConfig::loadByName($entity_type_id, $bundle, $field_name);
+        if ($field === NULL) {
+          // Field must be a base field and can't be updated.
+          continue;
+        }
+        $field_settings = $field->getSetting('field_settings');
+        $form_display_fields = [];
+        foreach ($field_settings as $name => $custom_field) {
+          $widget_settings = $custom_field['widget_settings'] ?? [];
+          $settings = $widget_settings['settings'] ?? [];
+          $widget_type = $custom_field['type'] ?? NULL;
+          if ($widget_type === NULL) {
+            continue;
+          }
+          $default_label = str_replace('_', ' ', ucfirst($name));
+
+          // Create display settings.
+          $display_fields_extracted = extract_settings_for_update_10001('display', $settings);
+          $form_display_settings = [
+            'type' => $widget_type,
+            'weight' => $custom_field['weight'] ?? 0,
+            'label' => $widget_settings['label'] ?? $default_label,
+          ] + $display_fields_extracted;
+
+          // Merge field settings.
+          $default_field_settings = [
+            'label' => $widget_settings['label'] ?? $default_label,
+            'check_empty' => $custom_field['check_empty'] ?? FALSE,
+            'translatable' => $widget_settings['translatable'] ?? FALSE,
+            'required' => $settings['required'] ?? FALSE,
+          ];
+
+          if (isset($settings['allowed_values']) && is_array($settings['allowed_values'])) {
+            $allowed_values = [];
+            // Rewrite keys to expected config.
+            foreach ($settings['allowed_values'] as $value) {
+              $allowed_values[] = [
+                'key' => $value['key'],
+                'label' => $value['value'],
+              ];
+            }
+            $default_field_settings['allowed_values'] = $allowed_values;
+          }
+
+          $fields_extracted = extract_settings_for_update_10001('field', $settings);
+          $default_field_settings += $fields_extracted;
+
+          // Update the custom field settings.
+          $field_settings[$name] = $default_field_settings;
+
+          // Update the form display fields.
+          $form_display_fields[(string) $name] = $form_display_settings;
+        }
+
+        // If there are no display fields to map, assume config is already up to
+        // date.
+        if (empty($form_display_fields)) {
+          continue;
+        }
+        // Update the field settings.
+        assert($field instanceof FieldConfigInterface);
+        $field->setSetting('field_settings', $field_settings);
+        $field->save();
+
+        if ($displays = $entity_type_manager->getStorage('entity_form_display')->loadByProperties([
+          'targetEntityType' => $entity_type_id,
+          'bundle' => $bundle,
+        ])) {
+          /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $display */
+          foreach ($displays as $display) {
+            if ($component = $display->getComponent($field_name)) {
+              $component['settings']['fields'] = $form_display_fields;
+              $display->setComponent($field_name, $component);
+              $display->save();
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Helper function to extract field settings for update 10001.
+ *
+ * @param string $type
+ *   The type of either 'field' or 'display'.
+ * @param array $settings
+ *   An array of settings to extract.
+ *
+ * @return array
+ *   An array of settings to return.
+ */
+function extract_settings_for_update_10001(string $type, array $settings): array {
+  $field_keys = [
+    'description',
+    'description_display',
+    'prefix',
+    'suffix',
+    'file_directory',
+    'file_extensions',
+    'max_filesize',
+    'max_resolution',
+    'min_resolution',
+    'alt_field',
+    'alt_field_required',
+    'title_field',
+    'title_field_required',
+    'table_empty',
+    'min',
+    'max',
+    'pattern',
+    'link_type',
+    'field_prefix',
+    'field_prefix_custom',
+    'title',
+    'enabled_attributes',
+    'widget_default_open',
+    'seconds_enabled',
+    'seconds_step',
+    'formatted',
+    'default_format',
+    'format',
+    'timezone_enabled',
+    'timezone_options',
+    'handler',
+    'handler_settings',
+    'allowed_views',
+    'force_default',
+    'token_browser',
+  ];
+
+  $display_keys = [
+    'size',
+    'placeholder',
+    'maxlength',
+    'maxlength_js',
+    'preview_image_style',
+    'progress_indicator',
+    'rows',
+    'key_label',
+    'value_label',
+    'placeholder_url',
+    'placeholder_title',
+    'match_operator',
+    'match_limit',
+    'empty_option',
+    'force_deepest_level',
+    'level_labels',
+    'default_colors',
+    'date_order',
+    'time_type',
+    'increment',
+    'linkit_profile',
+    'linkit_auto_link_text',
+    'media_types',
+    'entity_browser',
+  ];
+
+  $return = [];
+  $match = $type == 'display' ? $display_keys : $field_keys;
+
+  foreach ($settings as $key => $value) {
+    if (in_array($key, $match)) {
+      if ($key == 'entity_browser' && is_array($value)) {
+        $return = array_merge($return, $value);
+      }
+      else {
+        $return[$key] = $value;
+      }
+    }
+  }
+
+  return $return;
+}
+
+/**
+ * Remove 'label' from the widget settings configuration.
+ */
+function custom_field_update_10002(): void {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $entity_field_manager = \Drupal::service('entity_field.manager');
+
+  // Get the entity field map for fields of type 'custom'.
+  $entity_field_map = $entity_field_manager->getFieldMapByFieldType('custom');
+
+  // Iterate through the field map.
+  foreach ($entity_field_map as $entity_type_id => $fields) {
+    foreach ($fields as $field_name => $field_info) {
+      foreach ($field_info['bundles'] as $bundle) {
+        $field = FieldConfig::loadByName($entity_type_id, $bundle, $field_name);
+        if (!$field) {
+          continue 2;
+        }
+        /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface[] $displays */
+        if ($displays = $entity_type_manager->getStorage('entity_form_display')->loadByProperties([
+          'targetEntityType' => $entity_type_id,
+          'bundle' => $bundle,
+        ])) {
+          foreach ($displays as $display) {
+            if ($component = $display->getComponent($field_name)) {
+              if (isset($component['settings']['label'])) {
+                unset($component['settings']['label']);
+                $display->setComponent($field_name, $component);
+                $display->save();
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Clear the Drupal cache to apply the changes.
+  $entity_type_manager->clearCachedDefinitions();
+}
+
+/**
+ * Normalize column definitions for all custom field storages.
+ *
+ * This is the safe retry of the logic originally in 8005,
+ * running AFTER 8007 has added the missing timezone column.
+ */
+function custom_field_update_10003(): void {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $entity_type_manager->clearCachedDefinitions();
+
+  /** @var \Drupal\field\FieldStorageConfigInterface[] $storages */
+  $storages = $entity_type_manager->getStorage('field_storage_config')
+    ->loadByProperties(['type' => 'custom']);
+
+  foreach ($storages as $storage) {
+    $columns = $storage->getSetting('columns') ?? [];
+    $changed = FALSE;
+
+    foreach ($columns as $name => $column) {
+      $normalized = [
+        'name' => $column['name'] ?? $name,
+        'type' => $column['type'],
+      ];
+
+      switch ($column['type']) {
+        case 'string':
+        case 'telephone':
+          $default_length = $column['type'] === 'telephone' ? 256 : 255;
+          $normalized['length'] = $column['max_length'] ?? $column['length'] ?? $default_length;
+          break;
+
+        case 'integer':
+        case 'float':
+          $normalized['unsigned'] = !empty($column['unsigned']);
+          $normalized['size'] = $column['size'] ?? 'normal';
+          break;
+
+        case 'decimal':
+          $normalized['unsigned'] = !empty($column['unsigned']);
+          $normalized['precision'] = $column['precision'] ?? 10;
+          $normalized['scale'] = $column['scale'] ?? 2;
+          break;
+
+        case 'entity_reference':
+          $normalized['target_type'] = $column['target_type'];
+          break;
+
+        case 'file':
+        case 'image':
+          $normalized['target_type'] = 'file';
+          $normalized['uri_scheme'] = $column['uri_scheme'] ?? 'public';
+          break;
+
+        case 'viewfield':
+          $normalized['target_type'] = 'view';
+          break;
+
+        case 'datetime':
+        case 'daterange':
+          $normalized['datetime_type'] = $column['datetime_type'] ?? 'datetime';
+          break;
+      }
+
+      if ($normalized !== $column) {
+        $columns[$name] = $normalized;
+        $changed = TRUE;
+      }
+    }
+
+    if ($changed) {
+      $storage->setSetting('columns', $columns);
+      $storage->save();
+
+      try {
+        \Drupal::entityDefinitionUpdateManager()->updateFieldStorageDefinition($storage);
+      }
+      catch (\Throwable $e) {
+        \Drupal::logger('custom_field')->error(
+          'custom_field_update_10003 failed for field @field: @message',
+          ['@field' => $storage->id(), '@message' => $e->getMessage()]
+        );
+      }
+    }
+  }
+}

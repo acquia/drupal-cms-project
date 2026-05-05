@@ -1,0 +1,66 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.morphos.button
+    - canvas.component.sdc.morphos.content
+    - canvas.component.sdc.morphos.heading
+    - canvas.component.sdc.morphos.hero
+    - canvas.component.sdc.morphos.video_background
+    - filter.format.canvas_html_block
+  module:
+    - options
+    - text
+id: hero_with_video
+label: 'Hero with video'
+component_tree:
+  0:
+    uuid: fe867951-d9c0-4ae3-917e-e9bbc320fad8
+    component_id: sdc.morphos.hero
+    component_version: 5d595a47e6b0fa62
+    inputs:
+      content_width: content-width--50
+      padding_top: '32'
+      padding_bottom: '32'
+      container: container--normal
+      palette: color--primary
+      overlay: overlay--radial-center
+      content_position: content-position--center
+      content_alignment: center
+  '0:backgrounds:0':
+    parent_uuid: fe867951-d9c0-4ae3-917e-e9bbc320fad8
+    slot: backgrounds
+    uuid: 89b77591-0263-4823-8339-d1dc575be772
+    component_id: sdc.morphos.video_background
+    component_version: 7095b3c869f13489
+    inputs:
+      url: 'https://youtu.be/AWLS6nmrVGo'
+      media_query: '(min-width:768px)'
+  '0:items:0':
+    parent_uuid: fe867951-d9c0-4ae3-917e-e9bbc320fad8
+    slot: items
+    uuid: 45d21684-8c6c-4b73-aa69-f90504a7eabf
+    component_id: sdc.morphos.heading
+    component_version: bdb1547b41446399
+    inputs:
+      heading: 'Hero with video'
+      level: 1
+      use_display_font: false
+  '0:items:1':
+    parent_uuid: fe867951-d9c0-4ae3-917e-e9bbc320fad8
+    slot: items
+    uuid: 2085a400-962a-408c-9200-b7b4ce637006
+    component_id: sdc.morphos.content
+    component_version: aca7da150405d653
+    inputs:
+      content:
+        value: "<p>Visual and arresting hero with background video, heading content and call to action link. Used for capturing the user's imagination and attention.</p>"
+        format: canvas_html_block
+  '0:items:2':
+    parent_uuid: fe867951-d9c0-4ae3-917e-e9bbc320fad8
+    slot: items
+    uuid: 3c37ac5a-4647-47d5-8736-ef0a569822d6
+    component_id: sdc.morphos.button
+    component_version: 9461b80f0eef1b1c
+    inputs:
+      text: 'Button text'

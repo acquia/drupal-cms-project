@@ -1,0 +1,15 @@
+<div{{ content_attributes.addClass(rowclass) }}>
+  <div class="lightGalleryContainer">
+    {% if images[0] %}
+      {% for item in images %}
+        {{ item }}
+        <a href="{{ image['#image']['#media'].field_media_image.entity.uri.value }}" data-sub-html=".caption">
+          <img src="{{ image[0]['#media'].field_media_image.entity.uri.value }}" alt="{{ image[0]['#media'].field_media_image.alt }}" />
+          <div class="caption">
+            <p>{{ item.image_caption }}</p>
+          </div>
+        </a>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>

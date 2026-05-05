@@ -1,0 +1,37 @@
+name: Pulse Theme
+type: theme
+description: The Pulse theme includes settings for the Editorial Experience, focusing on appearance and supporting Tailwind v4 for Pulse Site Teamplate.
+base theme: stable9
+core_version_requirement: ^8 || ^9 || ^10 || ^11
+
+libraries:
+  - pulse_theme/global-styling
+
+regions:
+  header: Header
+  primary_menu: Primary menu
+  secondary_menu: Secondary menu
+  highlighted: Highlighted
+  breadcrumb: Breadcrumb
+  content: Content
+  footer: Footer
+
+features:
+  - logo
+  - favicon
+
+components:
+  namespaces:
+    base:
+      - components/00-base
+    atoms:
+      - components/01-atoms
+    molecules:
+      - components/02-molecules
+    organisms:
+      - components/03-organisms
+
+# Information added by Drupal.org packaging script on 2026-03-16
+version: '1.0.1'
+project: 'pulse_theme'
+datestamp: 1773704061

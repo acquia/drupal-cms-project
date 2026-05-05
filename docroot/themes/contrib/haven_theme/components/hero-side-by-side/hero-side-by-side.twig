@@ -1,0 +1,146 @@
+{% set hero_padding = padding|default(false) ? 'yes' : 'no' %}
+
+{% set hero =
+  html_cva(
+    base: ['relative flex h-full'],
+    variants: {
+      imagePosition: {
+        left: 'md:flex-row',
+        right: 'md:flex-row-reverse'
+      },
+      heroFlexDirectionMobile: {
+        vertical: 'flex-col',
+        'vertical-reverse': 'flex-col-reverse'
+      },
+      padding: {
+        yes: 'p-4 md:p-8',
+        no: ''
+      }
+    }
+  )
+%}
+
+{% set bgd =
+  html_cva(
+    base: ['absolute inset-0 z-[-1] rounded-lg'],
+    variants: {
+      background: {
+        primary: 'bg-primary-dark text-primary-foreground',
+        white: 'bg-white text-primary-foreground',
+        secondary: 'bg-secondary-dark text-secondary-foreground',
+        accent: 'bg-accent-dark text-accent-foreground'
+      }
+    }
+  )
+%}
+
+{% set image =
+  html_cva(
+    base: ['flex-1 overflow-hidden'],
+    variants: {
+      imageSize: {
+        '2:1': 'aspect-2/1',
+        '16:9': 'aspect-16/9',
+        '3:2': 'aspect-3/2',
+        '4:3': 'aspect-4/3',
+        '1:1': 'aspect-1/1'
+      },
+      padding: {
+        yes: 'rounded-lg',
+        no: ''
+      }
+    },
+    compound_variants: [
+      {
+        padding: ['no'],
+        imagePosition: ['left'],
+        class: 'md:rounded-l-lg md:rounded-r-none'
+      },
+      {
+        padding: ['no'],
+        imagePosition: ['right'],
+        class: 'md:rounded-l-none md:rounded-r-lg'
+      },
+      {
+        padding: ['no'],
+        heroFlexDirectionMobile: ['vertical'],
+        class: 'rounded-t-lg'
+      },
+      {
+        padding: ['no'],
+        heroFlexDirectionMobile: ['vertical-reverse'],
+        class: 'rounded-b-lg'
+      }
+    ]
+  )
+%}
+
+{% set content =
+  html_cva(
+    base: ['flex flex-col gap-6'],
+    variants: {
+      padding: {
+        yes: 'py-4 md:px-6',
+        no: 'p-6 md:p-8'
+      }
+    }
+  )
+%}
+
+{% set hero_classes =
+  hero.apply({
+    imagePosition: image_position,
+    heroFlexDirectionMobile: hero_flex_direction_mobile,
+    padding: hero_padding
+  })
+%}
+
+{% set bgd_classes =
+  bgd.apply({
+    background: background
+  })
+%}
+
+{% set image_classes =
+  image.apply({
+    imageSize: image_size,
+    padding: hero_padding,
+    imagePosition: image_position,
+    heroFlexDirectionMobile: hero_flex_direction_mobile
+  })
+%}
+
+{% set content_classes =
+  content.apply({
+    padding: hero_padding
+  })
+%}
+
+<section class="{{ hero_classes }}">
+  {% if background is not empty and background != 'None' %}
+    <div class="{{ bgd_classes }}"></div>
+  {% endif %}
+
+  <div class="{{ image_classes }}">
+    {% block hero_media %}
+      {% include 'canvas:image' ignore missing with {
+        src: media.src,
+        alt: media.alt,
+        class: 'object-cover w-full h-full',
+        width: media.width,
+        height: media.height,
+        loading: 'eager',
+        sizes: '50vw'
+      } only %}
+    {% endblock %}
+  </div>
+  <div class="self-center md:flex-1">
+    <div class="{{ content_classes }}">
+      {% block hero_content %}
+        {% block hero_slot %}
+
+        {% endblock %}
+      {% endblock %}
+    </div>
+  </div>
+</section>

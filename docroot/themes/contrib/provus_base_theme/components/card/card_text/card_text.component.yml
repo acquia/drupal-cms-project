@@ -1,0 +1,103 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Card Text
+status: stable
+description: Text card component with title, body content, and optional additional content section
+group: Provus Components
+
+variants:
+  default:
+    title: Default
+    description: Standard text card with title and body content
+
+display_options:
+  display_description: 'Text card with title and body content.'
+  display_comment: 'Block of text card with title and body content.'
+  display_extenders: {  }
+  block_description: 'Text card with title and body content'
+  block_category: 'Provus Components'
+
+props:
+  type: object
+  required:
+    - card_type
+  properties:
+    card_type:
+      type: string
+      title: 'Card Type'
+      description: 'Type of card to display'
+      examples:
+        - 'basic'
+        - 'plus'
+      default: 'basic'
+      enum:
+        - 'basic'
+        - 'plus'
+      meta:enum:
+        basic: 'Basic'
+        plus: 'Plus'
+    title:
+      type: string
+      title: 'Title'
+      description: 'Main card title displayed as a heading'
+      examples:
+        - 'Welcome to Our Services'
+        - 'About Our Company'
+        - 'Key Features'
+      default: ''
+    body:
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: block
+      title: 'Main Content'
+      description: 'Main content text displayed in the card body. Supports multiple lines of text. Only displayed in "Plus" card.'
+      examples:
+        - |
+          We provide exceptional services to help your business grow and succeed in today's competitive market.
+          
+          Our team of experts is dedicated to delivering high-quality solutions tailored to your needs.
+      default: ''
+    link_text:
+      type: string
+      title: 'Link Text'
+      description: 'Link button displayed in the card'
+      examples:
+        - 'Action Button'
+      default: ''
+    link_url:
+      type: string
+      format: uri-reference
+      title: 'Link URL'
+      description: 'URL for the link button'
+      examples:
+        - '/contact'
+      default: ''
+    link_style:
+      type: string
+      enum:
+        - default
+        - primary
+        - secondary
+      meta:enum:
+        default: Default
+        primary: Primary
+        secondary: Secondary
+      title: 'Link Style'
+      description: 'Style of the link button'
+      default: 'default'
+      examples:
+        - 'default'
+    more_content:
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: block
+      title: 'Footer Content'
+      description: 'Additional content section displayed below the main body text. Supports HTML markup for rich content (lists, links, formatted text, etc.). HTML will be rendered as-is.'
+      examples:
+        - '<ul><li>Feature one</li><li>Feature two</li><li>Feature three</li></ul>'
+      default: ''
+    content_attributes:
+      type: string
+      title: 'Content attributes'
+      description: 'Same as attributes, except applied to the main content tag that appears in the template.'
+      default: ''
+    

@@ -1,0 +1,16 @@
+{% set classes = [
+  'info-item',
+  highlight_border ? 'info-item--highlight' : '',
+] %}
+
+<div{{attributes.addClass(classes)}}>
+  {% if title %}
+    <h3 class="info-item__title">{{ title }}</h3>
+  {% endif %}
+  
+  {% if description %}
+    <div class="info-item__description">
+      {{ description }}
+    </div>
+  {% endif %}
+</div>

@@ -1,0 +1,127 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Drupal\canvas\Plugin\DataType;
+
+use Drupal\Component\Plugin\DependentPluginInterface;
+use Drupal\Component\Utility\NestedArray;
+use Drupal\Component\Utility\UrlHelper;
+use Drupal\Core\Cache\CacheableDependencyInterface;
+use Drupal\Core\Cache\CacheableMetadata;
+use Drupal\Core\Field\FieldItemInterface;
+use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\GeneratedUrl;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\TypedData\Attribute\DataType;
+use Drupal\Core\TypedData\Plugin\DataType\Uri;
+use Drupal\canvas\PropExpressions\StructuredData\Evaluator;
+use Drupal\canvas\PropExpressions\StructuredData\StructuredDataPropExpression;
+
+#[DataType(
+  id: self::PLUGIN_ID,
+  label: new TranslatableMarkup("URI template")
+)]
+class ComputedUrlWithQueryString extends Uri implements DependentPluginInterface, CacheableDependencyInterface {
+
+  use ComputedDataTypeWithCacheabilityTrait {
+    getValue as private traitGetValue;
+  }
+
+  public const string PLUGIN_ID = 'computed_url_with_query_string';
+
+  private GeneratedUrl $computedValue;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getValue(): GeneratedUrl {
+    return $this->traitGetValue();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getString() {
+    return $this->getValue()->getGeneratedUrl();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  private function computeValue(): GeneratedUrl {
+    \assert($this->isComputed === FALSE);
+
+    $field_item = $this->getParent();
+    if (!$field_item instanceof FieldItemInterface) {
+      throw new \LogicException('This data type must be used as a computed field property.');
+    }
+
+    // Gather instructions for this computed field property.
+    $instructions = $this->getDataDefinition()->getSettings();
+    if (!\array_key_exists('url', $instructions)) {
+      throw new \LogicException(\sprintf("No `url` setting specified for %s.", $this->getName()));
+    }
+    if (!\array_key_exists('query_parameters', $instructions)) {
+      throw new \LogicException(\sprintf("No `query_parameters` setting specified for %s.", $this->getName()));
+    }
+    $url_prop_expression = StructuredDataPropExpression::fromString($instructions['url']);
+
+    $url_with_query_string = new GeneratedUrl();
+
+    // Compute the URL and query string from the provided instructions.
+    $this->cacheability = new CacheableMetadata();
+    $url = Evaluator::evaluate($field_item, $url_prop_expression, is_required: TRUE);
+    $url_with_query_string->addCacheableDependency($url);
+    \assert(\is_string($url->value));
+    $url_components = UrlHelper::parse($url->value);
+    foreach ($instructions['query_parameters'] as $query_parameter_name => $query_parameter_instruction) {
+      $query_parameter = Evaluator::evaluate(
+        $field_item,
+        StructuredDataPropExpression::fromString($query_parameter_instruction),
+        is_required: TRUE,
+      );
+      $url_with_query_string->addCacheableDependency($query_parameter);
+      $url_components['query'][$query_parameter_name] = $query_parameter->value;
+    }
+
+    // Assemble it.
+    $computed_url = \sprintf("%s?%s",
+      $url_components['path'],
+      UrlHelper::buildQuery($url_components['query']),
+    );
+    if ($url_components['fragment'] !== '') {
+      $computed_url .= '#' . $url_components['fragment'];
+    }
+    $url_with_query_string->setGeneratedUrl($computed_url);
+
+    return $url_with_query_string;
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * Conveys that this computed field property class depends on data not
+   * contained in the host entity. Important for dependency tracking.
+   */
+  public function calculateDependencies(): array {
+    \assert($this->getParent() !== NULL);
+    $field_item_list = $this->getParent()->getParent();
+    \assert($field_item_list === NULL || $field_item_list instanceof FieldItemListInterface);
+    $instructions = $this->getDataDefinition()->getSettings();
+    \assert(\array_key_exists('url', $instructions) && \is_string($instructions['url']));
+    \assert(\array_key_exists('query_parameters', $instructions) && \is_array($instructions['query_parameters']));
+
+    // Calculate the dependencies for this computed field property, by
+    // calculating the dependencies of all structured data prop expressions this
+    // (see ::getValue()) uses.
+    $url_prop_expression = StructuredDataPropExpression::fromString($instructions['url']);
+    $dependencies = $url_prop_expression->calculateDependencies($field_item_list);
+    foreach ($instructions['query_parameters'] as $query_parameter_instruction) {
+      $dependencies = NestedArray::mergeDeep($dependencies, StructuredDataPropExpression::fromString($query_parameter_instruction)->calculateDependencies($field_item_list));
+    }
+
+    return $dependencies;
+  }
+
+}

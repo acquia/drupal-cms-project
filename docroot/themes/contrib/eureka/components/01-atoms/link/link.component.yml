@@ -1,0 +1,44 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Link
+status: stable
+description: Default link component
+group: Eureka component items
+props:
+  type: object
+  properties:
+    link_url:
+      type: string
+      title: Link url
+      description: The url of the link
+      examples:
+        - https://zoocha.com
+    link_content:
+      type: string
+      title: Link content
+      description: The content of the link
+      examples:
+        - Link to Zoocha's website
+    link_cta:
+      type: boolean
+      title: Cta link
+      description: Applies call to action link styles.
+      examples:
+        - false
+    link_icon:
+      type: boolean
+      title: Link icon
+      description: Optional link icon
+      examples:
+        - false
+    link_icon_before:
+      type: boolean
+      title: Link icon before
+      description: Positions the icon before the link text.
+      examples:
+        - false
+    link_icon_name:
+      type: ['string', 'null']
+      title: Link icon name
+      description: Add an icon name to display it within the link
+      examples:
+        - chevron

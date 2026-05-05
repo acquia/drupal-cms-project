@@ -1,0 +1,7 @@
+services:
+  _defaults:
+    autowire: true
+  Drupal\drupal_cms_installer\Silencer:
+    public: false
+    decorates: messenger
+  Drupal\drupal_cms_installer\RecipeHandler: ~

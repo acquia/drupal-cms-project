@@ -1,0 +1,81 @@
+{#
+/**
+ * Available variables:
+ * - text_and_image_base_class: base classname of the wrapper.
+ * - text_and_image_modifiers: array of modifiers to add to the base classname of the wrapper.
+ * - text_and_image_blockname: blockname prepended to the base classname of the wrapper(s) and each component.
+ * - text_and_image_extra_classes: extra classes, optional for the component.
+ *
+ * - text_and_image_heading: the heading of the component.
+ * - text_and_image_heading_level: the heading level of the component.
+ * - text_and_image_description: the description of the image and text component.
+ * - text_and_image_alignment: the alignment of the image [left, right].
+ *
+ * - text_and_image_cta_text: the optional cta text.
+ * - text_and_image_cta_url: the optional cta url.
+ * - text_and_image_cta_external: true for external links.
+ *
+ * Available blocks:
+ * - text_and_image_description_block: the description of the image and text component
+ * - text_and_image_image_block: the image of the image and text component
+ */
+#}
+
+{% set text_and_image_base_class = 'text-and-image' %}
+{% set text_and_image_extra_classes = text_and_image_extra_classes|default([])|merge(['container']) %}
+
+{% if text_and_image_type %}
+  {% set text_and_image_modifiers = text_and_image_modifiers|default([])|merge([text_and_image_type]) %}
+{% endif %}
+
+<div {{ bem(text_and_image_base_class, text_and_image_modifiers, text_and_image_blockname, text_and_image_extra_classes) }}>
+  {% if 'image-left' in text_and_image_alignment %}
+    {% block text_and_image_image_block %}
+      <div {{ bem('media', [], text_and_image_base_class) }}>
+        {% include 'canvas:image' with {
+          src: text_and_image_media.src,
+          alt: text_and_image_media.alt,
+          loading: 'lazy',
+          sizes: '(max-width: 480px) 100vw, (max-width: 768px) 50vw, 33vw',
+        } only %}
+      </div>
+    {% endblock %}
+  {% endif %}
+  <div {{ bem('content', [], text_and_image_base_class) }}>
+    {{ include('eureka:component-title', {
+      component_title_heading: text_and_image_heading,
+      component_title_heading_level: text_and_image_heading_level|default(2),
+    }, with_context = false) }}
+    {% if text_and_image_description %}
+      <div {{ bem('description', [], text_and_image_base_class) }}>
+        {% block text_and_image_description_block %}
+          {{ text_and_image_description }}
+        {% endblock %}
+      </div>
+    {% endif %}
+    {% if text_and_image_message_section_title or text_and_image_message_section_subitle %}
+      <div {{ bem('message-section', [], text_and_image_base_class) }}>
+        {% if text_and_image_message_section_title %}
+          <strong>{{ text_and_image_message_section_title }}</strong>
+        {% endif %}
+        {% if text_and_image_message_section_subitle %}
+          <em>{{ text_and_image_message_section_subitle }}</em>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% if text_and_image_cta_text and text_and_image_cta_url %}
+      {{ include("eureka:button", {
+        button_content: text_and_image_cta_text,
+        button_url: text_and_image_cta_url,
+        button_type: 'secondary',
+        button_icon: text_and_image_cta_external,
+        button_icon_before: text_and_image_cta_external,
+        button_icon_name: 'external',
+        button_extra_classes: ['text-and-image__cta'],
+      }, with_context = false) }}
+    {% endif %}
+  </div>
+  {% if 'image-right' in text_and_image_alignment %}
+    {{ block('text_and_image_image_block') }}
+  {% endif %}
+</div>

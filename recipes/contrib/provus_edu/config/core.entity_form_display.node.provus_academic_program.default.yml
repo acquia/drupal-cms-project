@@ -1,0 +1,140 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.provus_academic_program.field_provus_ap_department
+    - field.field.node.provus_academic_program.field_provus_ap_editorial_sect
+    - field.field.node.provus_academic_program.field_provus_ap_program_level
+    - field.field.node.provus_academic_program.field_provus_ap_program_location
+    - field.field.node.provus_academic_program.field_provus_ap_program_type
+    - field.field.node.provus_academic_program.field_provus_ap_sort_name
+    - field.field.node.provus_academic_program.field_provus_ap_summary
+    - node.type.provus_academic_program
+  module:
+    - path
+    - text
+id: node.provus_academic_program.default
+targetEntityType: node
+bundle: provus_academic_program
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_provus_ap_department:
+    type: options_select
+    weight: 122
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_provus_ap_editorial_sect:
+    type: options_buttons
+    weight: 123
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_provus_ap_program_level:
+    type: options_buttons
+    weight: 124
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_provus_ap_program_location:
+    type: options_buttons
+    weight: 125
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_provus_ap_program_type:
+    type: options_buttons
+    weight: 126
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_provus_ap_sort_name:
+    type: string_textfield
+    weight: 127
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_provus_ap_summary:
+    type: text_textarea_with_summary
+    weight: 128
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 15
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 120
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 16
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  publish_on: true
+  publish_state: true
+  unpublish_on: true
+  unpublish_state: true

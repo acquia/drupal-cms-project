@@ -1,0 +1,42 @@
+<div class="article-body-wrapper person-node">
+  <div class="person-header">
+    <div class="row">
+      <div class="col-md-8">
+        <h1>{{ first_name }} {{ last_name }}</h1>
+        {% if job_title|render %}
+        <h2>{{ job_title }}</h2>
+        {% endif %}
+        <div class="node__content clearfix">
+          <div class="content-body">
+            {% if about|render %}
+            {{ about }}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        {% if image_url %}
+        <div class="person-image">
+          <img src="{{ image_url.src }}" alt="{{ image_url.alt ? image_url.alt : 'Image' }}">
+        </div>
+        {% endif %}
+        {% if email|render %}
+        <div class="email">
+          <div class="email-wrapper"><span class="far fa-envelope"></span></div>{{ email }}
+        </div>
+        {% endif %}
+        {% if phone|render %}
+        <div class="phone">
+          <div class="phone-wrapper"><span class="fas fa-phone"></span></div>
+          {% set phone_rendered = phone|render %}
+          {% if '<a' in phone_rendered %}
+            {{ phone }}
+          {% else %}
+            <a href="tel:{{ phone_rendered|striptags|trim }}">{{ phone_rendered }}</a>
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

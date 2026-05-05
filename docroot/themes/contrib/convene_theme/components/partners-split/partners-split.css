@@ -1,0 +1,140 @@
+.partners-split.partners-split--themed, .partners-split {
+  padding: 80px 24px;
+}
+
+.partners-split .partners-split__container {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two side-by-side columns */
+  gap: 64px;
+  align-items: center; /* Center vertically */
+}
+
+/* LEFT SIDE - Content */
+.partners-split .partners-split__content-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 16px;
+}
+
+.partners-split .partners-split__eyebrow {
+  margin-bottom: 0;
+  width: 100%;
+  color: #1E88E6; /* Primary blue for eyebrow */
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.partners-split .partners-split__title {
+  margin-bottom: 0px;
+  width: 100%;
+  font-size: 40px;
+  font-weight: 400; /* Light/Regular */
+  line-height: 1.2;
+  color: #030804;
+}
+
+.partners-split .partners-split__description {
+  margin-bottom: 24px; /* More space before buttons */
+  width: 100%;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #4b5563; /* Grey text */
+}
+
+.partners-split .partners-split__actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap; /* allows button stacking if very narrow */
+  min-height: 48px; /* Ensure slot area is visible in builder when empty */
+  width: 100%;
+}
+
+.partners-split .partners-split__actions .button--secondary {
+  box-shadow: 0px 1px 2px 0px rgba(3, 8, 4, .05);
+  border-radius: 12px;
+  padding: 10px 24px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  color: #030804;
+  background-color: rgba(3, 8, 4, .05);
+}
+
+.partners-split .partners-split__actions .button--tertiary {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  color: #030804;
+  padding: unset;
+  position: relative;
+}
+
+.partners-split .partners-split__actions .button--tertiary:hover {
+  background-color: unset !important;
+  background: unset !important;
+  box-shadow: unset !important;
+  transform: unset !important;
+}
+
+.partners-split .partners-split__actions .button--tertiary::after {
+  content: "";
+  position: absolute;
+  right: -16px;
+  top: 7px;
+  width: 7px;
+  height: 12px;
+  background-image: url("right-arrow.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* RIGHT SIDE - Logo Grid */
+.partners-split .partners-split__grid-side {
+  width: 100%;
+}
+
+.partners-split .partners-split__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns for the inner cards */
+  gap: 24px;
+  width: 100%;
+}
+
+/* Responsiveness */
+@media (max-width: 992px) {
+  .partners-split.partners-split--themed, body:not(.canvas-page) .partners-split.partners-split--admin-theme, .partners-split {
+    padding: 64px 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .partners-split.partners-split--themed, body:not(.canvas-page) .partners-split.partners-split--admin-theme, .partners-split {
+    padding: 48px 24px;
+  }
+  .partners-split .partners-split__container {
+    grid-template-columns: 1fr; /* Stack vertically on small screens */
+    gap: 32px;
+  }
+  .partners-split .partners-split__grid {
+    grid-template-columns: 1fr 1fr; /* keep two side-by-side logos on mobile */
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+    .partners-split .partners-split__grid {
+        grid-template-columns: 1fr; /* drop to single stack on very tiny screens */
+    }
+}

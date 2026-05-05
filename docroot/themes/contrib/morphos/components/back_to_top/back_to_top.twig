@@ -1,0 +1,26 @@
+{% set is_preview = canvas_is_preview or in_preview %}
+
+{% set classes = [
+  'back-to-top',
+  not is_preview ? 'fixed bottom-6 right-6 rtl:right-[unset] rtl:left-6 z-50 gap-2 transition-all duration-300 opacity-0 invisible'
+] %}
+
+{% set text = text|default('Back to top') %}
+{% set anchor = anchor|default('#top') %}
+
+<nav{{ attributes
+  .setAttribute('role', 'navigation')
+  .setAttribute('aria-label', text)
+  .addClass(classes) }}
+>
+  <a href="{{ anchor }}" class="btn btn-default">
+    {{ text }}
+
+    {{ include('morphos:icon', {
+      icon: 'arrow-up',
+      icon_size: 'icon-size--sm',
+    },
+      with_context: false
+    ) }}
+  </a>
+</nav>

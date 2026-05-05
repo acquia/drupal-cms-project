@@ -1,0 +1,554 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.custom_field_entity_test.field_test
+    - field.field.node.custom_field_entity_test.field_test_multiple
+    - field.field.node.custom_field_entity_test.field_test_unlimited
+    - node.type.custom_field_entity_test
+  module:
+    - custom_field
+    - path
+id: node.custom_field_entity_test.default
+targetEntityType: node
+bundle: custom_field_entity_test
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_test:
+    type: custom_flex
+    weight: 121
+    region: content
+    settings:
+      wrapper: div
+      label_prefix: Item
+      auto_collapse: true
+      open: true
+      fields:
+        string:
+          weight: 0
+          type: text
+          label: String
+          size: 60
+          placeholder: ''
+          maxlength: 255
+        string_long:
+          weight: 0
+          type: textarea
+          label: 'String long'
+          placeholder: ''
+          maxlength: null
+          rows: 5
+        integer:
+          weight: 0
+          type: integer
+          label: Integer
+          placeholder: ''
+        decimal:
+          weight: 0
+          type: decimal
+          label: Decimal
+          placeholder: ''
+        float:
+          weight: 0
+          type: float
+          label: Float
+          placeholder: ''
+        email:
+          weight: 0
+          type: email
+          label: Email
+          size: 60
+          placeholder: ''
+        telephone:
+          weight: 0
+          type: telephone
+          label: Telephone
+          size: 60
+          placeholder: ''
+          maxlength: 256
+        uri:
+          weight: 0
+          type: url
+          label: Uri
+          placeholder: ''
+        boolean:
+          weight: 0
+          type: checkbox
+          label: Boolean
+        color:
+          weight: 0
+          type: color
+          label: Color
+        map:
+          weight: 0
+          type: map_key_value
+          label: Map
+          key_label: Key
+          value_label: Value
+        map_string:
+          weight: 0
+          type: map_text
+          label: 'Map string'
+        datetime:
+          weight: 0
+          type: datetime_default
+          label: Datetime
+          year_range: '1900:2050'
+        daterange:
+          weight: 0
+          type: daterange_default
+          label: Daterange
+          year_range: '1900:2050'
+          start_label: 'Start date'
+          end_label: 'End date'
+          date_end_required: false
+          year_range_end: '1900:2050'
+          all_day_checkbox: false
+          same_day_checkbox: false
+        entity_reference:
+          weight: 0
+          type: entity_reference_autocomplete
+          label: 'Entity reference'
+          size: 60
+          placeholder: ''
+          match_operator: CONTAINS
+          match_limit: 10
+        file:
+          weight: 0
+          type: file_generic
+          label: File
+          progress_indicator: throbber
+        image:
+          weight: 0
+          type: image_image
+          label: Image
+          preview_image_style: thumbnail
+          progress_indicator: throbber
+        link:
+          weight: 0
+          type: link_default
+          label: Link
+          placeholder_url: ''
+          placeholder_title: ''
+        time:
+          weight: 0
+          type: time_widget
+          label: Time
+        time_range:
+          weight: 0
+          type: time_range
+          label: 'Time range'
+          start_label: 'Start time'
+          end_label: 'End time'
+          time_end_required: false
+        viewfield:
+          weight: 0
+          type: viewfield_select
+          label: Viewfield
+          empty_option: '- None -'
+        duration:
+          weight: 0
+          type: duration
+          label: Duration
+          duration_element: options
+      columns:
+        string: '12'
+        string_long: '12'
+        integer: '12'
+        decimal: '12'
+        float: '12'
+        email: '12'
+        telephone: '12'
+        uri: '12'
+        boolean: '12'
+        color: '12'
+        map: '12'
+        map_string: '12'
+        datetime: '12'
+        daterange: '12'
+        entity_reference: '12'
+        file: '12'
+        image: '12'
+        link: '12'
+        time: '12'
+        time_range: '12'
+        viewfield: '12'
+        duration: '12'
+      breakpoint: ''
+    third_party_settings: {  }
+  field_test_multiple:
+    type: custom_flex
+    weight: 121
+    region: content
+    settings:
+      wrapper: div
+      label_prefix: Item
+      auto_collapse: true
+      open: true
+      fields:
+        string:
+          weight: 0
+          type: text
+          label: String
+          size: 60
+          placeholder: ''
+          maxlength: 255
+        string_long:
+          weight: 0
+          type: textarea
+          label: 'String long'
+          placeholder: ''
+          maxlength: null
+          rows: 5
+        integer:
+          weight: 0
+          type: integer
+          label: Integer
+          placeholder: ''
+        decimal:
+          weight: 0
+          type: decimal
+          label: Decimal
+          placeholder: ''
+        float:
+          weight: 0
+          type: float
+          label: Float
+          placeholder: ''
+        email:
+          weight: 0
+          type: email
+          label: Email
+          size: 60
+          placeholder: ''
+        telephone:
+          weight: 0
+          type: telephone
+          label: Telephone
+          size: 60
+          placeholder: ''
+          maxlength: 256
+        uri:
+          weight: 0
+          type: url
+          label: Uri
+          placeholder: ''
+        boolean:
+          weight: 0
+          type: checkbox
+          label: Boolean
+        color:
+          weight: 0
+          type: color
+          label: Color
+        map:
+          weight: 0
+          type: map_key_value
+          label: Map
+          key_label: Key
+          value_label: Value
+        map_string:
+          weight: 0
+          type: map_text
+          label: 'Map string'
+        datetime:
+          weight: 0
+          type: datetime_default
+          label: Datetime
+          year_range: '1900:2050'
+        daterange:
+          weight: 0
+          type: daterange_default
+          label: Daterange
+          year_range: '1900:2050'
+          start_label: 'Start date'
+          end_label: 'End date'
+          date_end_required: false
+          year_range_end: '1900:2050'
+          all_day_checkbox: false
+          same_day_checkbox: false
+        entity_reference:
+          weight: 0
+          type: entity_reference_autocomplete
+          label: 'Entity reference'
+          size: 60
+          placeholder: ''
+          match_operator: CONTAINS
+          match_limit: 10
+        file:
+          weight: 0
+          type: file_generic
+          label: File
+          progress_indicator: throbber
+        image:
+          weight: 0
+          type: image_image
+          label: Image
+          preview_image_style: thumbnail
+          progress_indicator: throbber
+        link:
+          weight: 0
+          type: link_default
+          label: Link
+          placeholder_url: ''
+          placeholder_title: ''
+        time:
+          weight: 0
+          type: time_widget
+          label: Time
+        time_range:
+          weight: 0
+          type: time_range
+          label: 'Time range'
+          start_label: 'Start time'
+          end_label: 'End time'
+          time_end_required: false
+        viewfield:
+          weight: 0
+          type: viewfield_select
+          label: Viewfield
+          empty_option: '- None -'
+        duration:
+          weight: 0
+          type: duration
+          label: Duration
+          duration_element: options
+      columns:
+        string: '12'
+        string_long: '12'
+        integer: '12'
+        decimal: '12'
+        float: '12'
+        email: '12'
+        telephone: '12'
+        uri: '12'
+        boolean: '12'
+        color: '12'
+        map: '12'
+        map_string: '12'
+        datetime: '12'
+        daterange: '12'
+        entity_reference: '12'
+        file: '12'
+        image: '12'
+        link: '12'
+        time: '12'
+        time_range: '12'
+        viewfield: '12'
+        duration: '12'
+      breakpoint: ''
+    third_party_settings: {  }
+  field_test_unlimited:
+    type: custom_flex
+    weight: 121
+    region: content
+    settings:
+      wrapper: div
+      label_prefix: Item
+      auto_collapse: true
+      open: true
+      fields:
+        string:
+          weight: 0
+          type: text
+          label: String
+          size: 60
+          placeholder: ''
+          maxlength: 255
+        string_long:
+          weight: 0
+          type: textarea
+          label: 'String long'
+          placeholder: ''
+          maxlength: null
+          rows: 5
+        integer:
+          weight: 0
+          type: integer
+          label: Integer
+          placeholder: ''
+        decimal:
+          weight: 0
+          type: decimal
+          label: Decimal
+          placeholder: ''
+        float:
+          weight: 0
+          type: float
+          label: Float
+          placeholder: ''
+        email:
+          weight: 0
+          type: email
+          label: Email
+          size: 60
+          placeholder: ''
+        telephone:
+          weight: 0
+          type: telephone
+          label: Telephone
+          size: 60
+          placeholder: ''
+          maxlength: 256
+        uri:
+          weight: 0
+          type: url
+          label: Uri
+          placeholder: ''
+        boolean:
+          weight: 0
+          type: checkbox
+          label: Boolean
+        color:
+          weight: 0
+          type: color
+          label: Color
+        map:
+          weight: 0
+          type: map_key_value
+          label: Map
+          key_label: Key
+          value_label: Value
+        map_string:
+          weight: 0
+          type: map_text
+          label: 'Map string'
+        datetime:
+          weight: 0
+          type: datetime_default
+          label: Datetime
+          year_range: '1900:2050'
+        daterange:
+          weight: 0
+          type: daterange_default
+          label: Daterange
+          year_range: '1900:2050'
+          start_label: 'Start date'
+          end_label: 'End date'
+          date_end_required: false
+          year_range_end: '1900:2050'
+          all_day_checkbox: false
+          same_day_checkbox: false
+        entity_reference:
+          weight: 0
+          type: entity_reference_autocomplete
+          label: 'Entity reference'
+          size: 60
+          placeholder: ''
+          match_operator: CONTAINS
+          match_limit: 10
+        file:
+          weight: 0
+          type: file_generic
+          label: File
+          progress_indicator: throbber
+        image:
+          weight: 0
+          type: image_image
+          label: Image
+          preview_image_style: thumbnail
+          progress_indicator: throbber
+        link:
+          weight: 0
+          type: link_default
+          label: Link
+          placeholder_url: ''
+          placeholder_title: ''
+        time:
+          weight: 0
+          type: time_widget
+          label: Time
+        time_range:
+          weight: 0
+          type: time_range
+          label: 'Time range'
+          start_label: 'Start time'
+          end_label: 'End time'
+          time_end_required: false
+        viewfield:
+          weight: 0
+          type: viewfield_select
+          label: Viewfield
+          empty_option: '- None -'
+        duration:
+          weight: 0
+          type: duration
+          label: Duration
+          duration_element: options
+      columns:
+        string: '12'
+        string_long: '12'
+        integer: '12'
+        decimal: '12'
+        float: '12'
+        email: '12'
+        telephone: '12'
+        uri: '12'
+        boolean: '12'
+        color: '12'
+        map: '12'
+        map_string: '12'
+        datetime: '12'
+        daterange: '12'
+        entity_reference: '12'
+        file: '12'
+        image: '12'
+        link: '12'
+        time: '12'
+        time_range: '12'
+        viewfield: '12'
+        duration: '12'
+      breakpoint: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 15
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 120
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 16
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

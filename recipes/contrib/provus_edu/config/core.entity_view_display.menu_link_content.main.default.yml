@@ -1,0 +1,42 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.menu_link_content.main.field_provus_menu_callout_image
+    - field.field.menu_link_content.main.field_provus_menu_callout_link
+    - system.menu.main
+  module:
+    - link
+id: menu_link_content.main.default
+targetEntityType: menu_link_content
+bundle: main
+mode: default
+content:
+  children:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_provus_menu_callout_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: 4_3_medium
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_provus_menu_callout_link:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  search_api_excerpt: true

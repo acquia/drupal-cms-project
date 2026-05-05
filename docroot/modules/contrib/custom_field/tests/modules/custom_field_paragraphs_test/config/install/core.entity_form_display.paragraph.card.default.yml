@@ -1,0 +1,41 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.card.field_content
+    - paragraphs.paragraphs_type.card
+  module:
+    - custom_field
+id: paragraph.card.default
+targetEntityType: paragraph
+bundle: card
+mode: default
+content:
+  field_content:
+    type: custom_stacked
+    weight: 0
+    region: content
+    settings:
+      wrapper: div
+      label_prefix: Item
+      auto_collapse: true
+      open: true
+      fields:
+        title:
+          weight: 0
+          type: text
+          label: Title
+          size: 60
+          placeholder: ''
+          maxlength: 255
+        media:
+          weight: 0
+          type: media_library_widget
+          label: Media
+          media_types:
+            - image
+            - document
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

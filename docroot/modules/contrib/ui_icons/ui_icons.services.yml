@@ -1,0 +1,10 @@
+services:
+  ui_icons.search:
+    class: Drupal\ui_icons\IconSearch
+    arguments: ['@plugin.manager.icon_pack', '@renderer', '@cache.default']
+
+  ui_icons.twig_extension:
+    class: Drupal\ui_icons\Template\IconPreviewTwigExtension
+    arguments: ['@plugin.manager.icon_pack']
+    tags:
+      - { name: twig.extension }

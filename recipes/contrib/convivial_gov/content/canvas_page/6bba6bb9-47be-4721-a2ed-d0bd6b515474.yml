@@ -1,0 +1,67 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 6bba6bb9-47be-4721-a2ed-d0bd6b515474
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Search
+  description:
+    -
+      value: 'Search the site.'
+  components:
+    -
+      uuid: 167d749b-a3d0-4838-9429-06a73988a2bd
+      component_id: sdc.morphos.banner
+      inputs:
+        title: Search
+        padding_top: '12'
+        padding_bottom: '12'
+        palette: color--primary
+        texture: texture--conic-top-start
+    -
+      parent_uuid: 167d749b-a3d0-4838-9429-06a73988a2bd
+      slot: breadcrumb
+      uuid: b0970de7-91b7-4e93-8d90-6311beea5b1e
+      component_id: block.system_breadcrumb_block
+      inputs:
+        label: Breadcrumbs
+        label_display: '0'
+    -
+      uuid: a0793bfe-86ef-43ce-a7f8-680b52328141
+      component_id: sdc.morphos.layout
+      inputs:
+        layout: layout--4-1-7
+        container: container--normal
+        padding_top: '12'
+        padding_bottom: '12'
+    -
+      parent_uuid: a0793bfe-86ef-43ce-a7f8-680b52328141
+      slot: main
+      uuid: e58a6e45-e4c1-4eea-8cfd-7c02e59a37de
+      component_id: block.views_block.mc_search-search
+      inputs:
+        label: 'Search: Search'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+  path:
+    -
+      alias: /search
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

@@ -1,0 +1,38 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_mc_hide
+field_name: field_mc_hide
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: hide-header
+      label: Header
+    -
+      value: hide-breadcrumb
+      label: Breadcrumb
+    -
+      value: hide-heading
+      label: Heading
+    -
+      value: hide-introduction
+      label: Introduction
+    -
+      value: hide-sidebar
+      label: Sidebar
+    -
+      value: hide-sidebar-edgy
+      label: 'Sidebar - Edgy'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

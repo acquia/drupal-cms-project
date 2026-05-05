@@ -1,0 +1,763 @@
+eca.event.plugin.form:form_build:
+  type: eca.event.plugin
+  label: 'Form Build'
+  mapping:
+    form_ids:
+      type: string
+      label: 'Restrict by form ID'
+    entity_type_id:
+      type: string
+      label: 'Restrict by entity type ID'
+    bundle:
+      type: string
+      label: 'Restrict by entity bundle'
+    operation:
+      type: string
+      label: 'Restrict by operation'
+
+eca.event.plugin.form:form_process:
+  type: eca.event.plugin
+  label: 'Form Process'
+  mapping:
+    form_ids:
+      type: string
+      label: 'Restrict by form ID'
+    entity_type_id:
+      type: string
+      label: 'Restrict by entity type ID'
+    bundle:
+      type: string
+      label: 'Restrict by entity bundle'
+    operation:
+      type: string
+      label: 'Restrict by operation'
+
+eca.event.plugin.form:form_after_build:
+  type: eca.event.plugin
+  label: 'Form After Build'
+  mapping:
+    form_ids:
+      type: string
+      label: 'Restrict by form ID'
+    entity_type_id:
+      type: string
+      label: 'Restrict by entity type ID'
+    bundle:
+      type: string
+      label: 'Restrict by entity bundle'
+    operation:
+      type: string
+      label: 'Restrict by operation'
+
+eca.event.plugin.form:form_validate:
+  type: eca.event.plugin
+  label: 'Form Validate'
+  mapping:
+    form_ids:
+      type: string
+      label: 'Restrict by form ID'
+    entity_type_id:
+      type: string
+      label: 'Restrict by entity type ID'
+    bundle:
+      type: string
+      label: 'Restrict by entity bundle'
+    operation:
+      type: string
+      label: 'Restrict by operation'
+
+eca.event.plugin.form:form_submit:
+  type: eca.event.plugin
+  label: 'Form Submit'
+  mapping:
+    form_ids:
+      type: string
+      label: 'Restrict by form ID'
+    entity_type_id:
+      type: string
+      label: 'Restrict by entity type ID'
+    bundle:
+      type: string
+      label: 'Restrict by entity bundle'
+    operation:
+      type: string
+      label: 'Restrict by operation'
+
+eca.event.plugin.form:ief_build:
+  type: eca.event.plugin
+  label: 'Ief Build'
+  mapping:
+    form_ids:
+      type: string
+      label: 'Parent: Restrict by form ID'
+    entity_type_id:
+      type: string
+      label: 'Restrict by entity type ID'
+    bundle:
+      type: string
+      label: 'Restrict by entity bundle'
+    operation:
+      type: string
+      label: 'Parent: Restrict by operation'
+    parent_type_id:
+      type: string
+      label: 'Parent: Restrict by entity type ID'
+    parent_bundle:
+      type: string
+      label: 'Parent: Restrict by entity bundle'
+    field_name:
+      type: string
+      label: 'Parent: Restrict by field name'
+
+eca.condition.plugin.eca_form_field_exists:
+  type: eca.condition.plugin
+  label: 'Form Field Exists'
+  mapping:
+    field_name:
+      type: string
+      label: 'Field name'
+      constraints:
+        NotBlank: []
+
+eca.condition.plugin.eca_form_operation:
+  type: eca.condition.plugin
+  label: 'Form Operation'
+  mapping:
+    operation:
+      type: string
+      label: 'Operation'
+    operator:
+      type: string
+      label: 'Comparison operator'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Plugin\ECA\Condition\StringComparisonBase::getAllValidOperators'
+    type:
+      type: string
+      label: 'Comparison type'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Plugin\ECA\Condition\StringComparisonBase::getAllValidTypes'
+    case:
+      type: boolean
+      label: 'Case sensitive comparison'
+
+eca.condition.plugin.eca_form_field_value:
+  type: eca.condition.plugin
+  label: 'Form Field Value'
+  mapping:
+    field_value:
+      type: text
+      label: 'Field value'
+    field_name:
+      type: string
+      label: 'Field name'
+      constraints:
+        NotBlank: []
+    strip_tags:
+      type: boolean
+      label: 'Strip tags'
+    trim:
+      type: boolean
+      label: 'Trim'
+    xss_filter:
+      type: boolean
+      label: 'Filter XSS'
+    operator:
+      type: string
+      label: 'Comparison operator'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Plugin\ECA\Condition\StringComparisonBase::getAllValidOperators'
+    type:
+      type: string
+      label: 'Comparison type'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Plugin\ECA\Condition\StringComparisonBase::getAllValidTypes'
+    case:
+      type: boolean
+      label: 'Case sensitive comparison'
+
+eca.condition.plugin.eca_form_triggered:
+  type: eca.condition.plugin
+  label: 'Form Triggered'
+  mapping:
+    trigger_name:
+      type: string
+      label: 'Trigger name'
+    operator:
+      type: string
+      label: 'Comparison operator'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Plugin\ECA\Condition\StringComparisonBase::getAllValidOperators'
+    type:
+      type: string
+      label: 'Comparison type'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Plugin\ECA\Condition\StringComparisonBase::getAllValidTypes'
+    case:
+      type: boolean
+      label: 'Case sensitive comparison'
+
+eca.condition.plugin.eca_form_has_errors:
+  type: eca.condition.plugin
+  label: 'Form Has Errors'
+
+eca.condition.plugin.eca_form_submitted:
+  type: eca.condition.plugin
+  label: 'Form Submitted'
+
+action.configuration.eca_form_build_entity:
+  type: mapping
+  label: 'Configuration for the "Form Build Entity" action'
+  mapping:
+    token_name:
+      type: required_label
+      label: 'Name of token'
+
+action.configuration.eca_form_field_add_state:
+  type: mapping
+  label: 'Configuration for the "Form Field Add State" action'
+  mapping:
+    selector:
+      type: string
+      label: 'Selector'
+    state:
+      type: string
+      label: 'State'
+      constraints:
+        # @see \Drupal\eca_form\Plugin\Action\FormFieldAddState::buildConfigurationForm()
+        Choice:
+          - 'enabled'
+          - 'disabled'
+          - 'required'
+          - 'optional'
+          - 'visible'
+          - 'invisible'
+          - 'checked'
+          - 'unchecked'
+          - 'expanded'
+          - 'collapsed'
+        NotBlank: []
+    condition:
+      type: string
+      label: 'Condition'
+      constraints:
+        Choice:
+          - empty
+          - filled
+          - checked
+          - unchecked
+          - expanded
+          - collapsed
+          - value
+        NotBlank: []
+    value:
+      type: string
+      label: 'Value'
+    field_name:
+      type: string
+      label: 'Field name'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_form_field_get_default_value:
+  type: mapping
+  label: 'Configuration for the "Form Field Get Default Value" action'
+  mapping:
+    token_name:
+      type: label
+      label: 'Name of token'
+    field_name:
+      type: string
+      label: 'Field name'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_form_field_get_options:
+  type: mapping
+  label: 'Configuration for the "Form Field Get Options" action'
+  mapping:
+    token_name:
+      type: label
+      label: 'Name of token'
+    field_name:
+      type: string
+      label: 'Field name'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_form_field_get_value:
+  type: mapping
+  label: 'Configuration for the "Form Field Get Value" action'
+  mapping:
+    token_name:
+      type: required_label
+      label: 'Name of token'
+    field_name:
+      type: string
+      label: 'Field name'
+      constraints:
+        NotBlank: []
+    strip_tags:
+      type: boolean
+      label: 'Strip tags'
+    trim:
+      type: boolean
+      label: 'Trim'
+    xss_filter:
+      type: boolean
+      label: 'Filter XSS'
+
+action.configuration.eca_form_field_access:
+  type: mapping
+  label: 'Configuration for the "Form Field Access" action'
+  mapping:
+    flag:
+      type: boolean
+      label: 'Set as access'
+    field_name:
+      type: string
+      label: 'Field name'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_form_field_disable:
+  type: mapping
+  label: 'Configuration for the "Form Field Disable" action'
+  mapping:
+    flag:
+      type: boolean
+      label: 'Set as disabled'
+    field_name:
+      type: string
+      label: 'Field name'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_form_field_require:
+  type: mapping
+  label: 'Configuration for the "Form Field Require" action'
+  mapping:
+    flag:
+      type: boolean
+      label: 'Set as required'
+    field_name:
+      type: string
+      label: 'Field name'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_form_field_default_value:
+  type: mapping
+  label: 'Configuration for the "Form Field Default Value" action'
+  mapping:
+    value:
+      type: string
+      label: 'Value'
+    field_name:
+      type: string
+      label: 'Field name'
+      constraints:
+        NotBlank: []
+    strip_tags:
+      type: boolean
+      label: 'Strip tags'
+    trim:
+      type: boolean
+      label: 'Trim'
+    xss_filter:
+      type: boolean
+      label: 'Filter XSS'
+
+action.configuration.eca_form_field_set_description:
+  type: mapping
+  label: 'Configuration for the "Form Field Set Description" action'
+  mapping:
+    description:
+      type: string
+      label: 'Element description'
+    field_name:
+      type: string
+      label: 'Field name'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_form_field_set_label:
+  type: mapping
+  label: 'Configuration for the "Form Field Set Label" action'
+  mapping:
+    label:
+      type: string
+      label: 'Element label'
+    field_name:
+      type: string
+      label: 'Field name'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_form_field_set_options:
+  type: mapping
+  label: 'Configuration for the "Form Field Set Options" action'
+  mapping:
+    options:
+      type: text
+      label: 'Options'
+    use_yaml:
+      type: boolean
+      label: 'Interpret above value as YAML format'
+    validate_yaml:
+      type: boolean
+      label: 'Validate YAML to prevent this from being executed when invalid'
+    field_name:
+      type: string
+      label: 'Field name'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_form_field_set_value:
+  type: mapping
+  label: 'Configuration for the "Form Field Set Value" action'
+  mapping:
+    field_value:
+      type: text
+      label: 'Field value'
+    use_yaml:
+      type: boolean
+      label: 'Interpret above value as YAML format'
+    validate_yaml:
+      type: boolean
+      label: 'Validate YAML to prevent this from being executed when invalid'
+    field_name:
+      type: string
+      label: 'Field name'
+      constraints:
+        NotBlank: []
+    strip_tags:
+      type: boolean
+      label: 'Strip tags'
+    trim:
+      type: boolean
+      label: 'Trim'
+    xss_filter:
+      type: boolean
+      label: 'Filter XSS'
+
+action.configuration.eca_form_field_set_error:
+  type: mapping
+  label: 'Configuration for the "Form Field Set Error" action'
+  mapping:
+    message:
+      type: string
+      label: 'Message'
+    field_name:
+      type: string
+      label: 'Field name'
+
+action.configuration.eca_form_field_set_weight:
+  type: mapping
+  label: 'Configuration for the "Form Field Set Weight" action'
+  mapping:
+    weight:
+      type: string
+      label: 'Element weight'
+    field_name:
+      type: string
+      label: 'Field name'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_form_state_get_property_value:
+  type: mapping
+  label: 'Configuration for the "Form State Get Property Value" action'
+  mapping:
+    token_name:
+      type: required_label
+      label: 'Name of token'
+    property_name:
+      type: string
+      label: 'Name of property'
+
+action.configuration.eca_form_state_set_property_value:
+  type: mapping
+  label: 'Configuration for the "Form State Set Property Value" action'
+  mapping:
+    property_value:
+      type: text
+      label: 'Value of the property'
+    use_yaml:
+      type: boolean
+      label: 'Interpret above value as YAML format'
+    validate_yaml:
+      type: boolean
+      label: 'Validate YAML to prevent this from being executed when invalid'
+    property_name:
+      type: string
+      label: 'Name of property'
+
+action.configuration.eca_form_state_set_rebuild:
+  type: mapping
+  label: 'Configuration for the "Form State Set Rebuild" action'
+  mapping:
+    rebuild:
+      type: boolean
+      label: 'Enable rebuild'
+
+action.configuration.eca_form_state_set_redirect:
+  type: mapping
+  label: 'Configuration for the "Form State Set Redirect" action'
+  mapping:
+    destination:
+      type: string
+      label: 'Destination URL'
+
+action.configuration.eca_form_add_ajax:
+  type: mapping
+  label: 'Configuration for the "Form Add Ajax" action'
+  mapping:
+    disable_validation_errors:
+      type: boolean
+      label: 'Disable validation errors'
+    validate_fields:
+      type: string
+      label: 'Validate form fields'
+    target:
+      type: string
+      label: 'Target'
+    field_name:
+      type: string
+      label: 'Field name'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_form_add_container_element:
+  type: mapping
+  label: 'Configuration for the "Form Add Container Element" action'
+  mapping:
+    name:
+      type: string
+      label: 'Element name'
+      constraints:
+        NotBlank: []
+    optional:
+      type: boolean
+      label: 'Optional'
+    weight:
+      type: weight
+      label: 'Element weight'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_form_add_group_element:
+  type: mapping
+  label: 'Configuration for the "Form Add Group Element" action'
+  mapping:
+    name:
+      type: string
+      label: 'Element name'
+      constraints:
+        NotBlank: []
+    title:
+      type: string
+      label: 'Title'
+      constraints:
+        NotBlank: []
+    open:
+      type: boolean
+      label: 'Open'
+    weight:
+      type: weight
+      label: 'Element weight'
+      constraints:
+        NotBlank: []
+    fields:
+      type: string
+      label: 'Fields'
+    introduction_text:
+      type: text
+      label: 'Introduction text'
+    summary_value:
+      type: text
+      label: 'Summary value'
+    group:
+      type: string
+      label: 'Group'
+
+action.configuration.eca_form_add_hiddenfield:
+  type: mapping
+  label: 'Configuration for the "Form Add Hidden Field" action'
+  mapping:
+    type:
+      type: string
+      label: 'type'
+    value:
+      type: string
+      label: 'Value'
+    name:
+      type: string
+      label: 'Field name'
+      constraints:
+        NotBlank: []
+    title:
+      type: string
+      label: 'title'
+    description:
+      type: string
+      label: 'description'
+    required:
+      type: boolean
+      label: 'required'
+    weight:
+      type: weight
+      label: 'Element weight'
+      constraints:
+        NotBlank: []
+    default_value:
+      type: string
+      label: 'default_value'
+
+action.configuration.eca_form_add_optionsfield:
+  type: mapping
+  label: 'Configuration for the "Form Add Options Field" action'
+  mapping:
+    type:
+      type: string
+      label: 'Field type'
+      constraints:
+        # Choice: []
+        NotBlank: []
+    multiple:
+      type: boolean
+      label: 'Allow multiple values'
+    options:
+      type: text
+      label: 'Options'
+    use_yaml:
+      type: boolean
+      label: 'Interpret above value as YAML format'
+    validate_yaml:
+      type: boolean
+      label: 'Validate YAML to prevent this from being executed when invalid'
+    name:
+      type: string
+      label: 'Field name'
+      constraints:
+        NotBlank: []
+    title:
+      type: string
+      label: 'Field title'
+      constraints:
+        NotBlank: []
+    description:
+      type: text
+      label: 'Field description'
+    required:
+      type: boolean
+      label: 'Field is required'
+    weight:
+      type: weight
+      label: 'Element weight'
+      constraints:
+        NotBlank: []
+    default_value:
+      type: text
+      label: 'Default value'
+
+action.configuration.eca_form_add_submit_button:
+  type: mapping
+  label: 'Configuration for the "Form Add Submit Button" action'
+  mapping:
+    name:
+      type: string
+      label: 'Trigger name'
+      constraints:
+        NotBlank: []
+    value:
+      type: string
+      label: 'Button label'
+      constraints:
+        NotBlank: []
+    weight:
+      type: weight
+      label: 'Element weight'
+      constraints:
+        NotBlank: []
+    button_type:
+      type: string
+      label: 'Button type'
+      constraints:
+        Choice:
+          - _none
+          - primary
+          - secondary
+          - danger
+        NotBlank: []
+
+action.configuration.eca_form_add_textfield:
+  type: mapping
+  label: 'Configuration for the "Form Add Text Field" action'
+  mapping:
+    type:
+      type: string
+      label: 'Field type'
+      constraints:
+        # Choice: []
+        NotBlank: []
+    name:
+      type: string
+      label: 'Field name'
+      constraints:
+        NotBlank: []
+    title:
+      type: string
+      label: 'Field title'
+      constraints:
+        NotBlank: []
+    description:
+      type: text
+      label: 'Field description'
+    required:
+      type: boolean
+      label: 'Field is required'
+    weight:
+      type: weight
+      label: 'Element weight'
+      constraints:
+        NotBlank: []
+    default_value:
+      type: text
+      label: 'Default value'
+
+action.configuration.eca_form_get_errors:
+  type: mapping
+  label: 'Configuration for the "Form Get Errors" action'
+  mapping:
+    token_name:
+      type: required_label
+      label: 'Name of token'
+
+action.configuration.eca_form_set_action:
+  type: mapping
+  label: 'Configuration for the "Form Set Action" action'
+  mapping:
+    action:
+      type: string
+      label: 'Action URL'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_form_set_method:
+  type: mapping
+  label: 'Configuration for the "Form Set Method" action'
+  mapping:
+    method:
+      type: string
+      label: 'Method'
+      constraints:
+        Choice:
+          - get
+          - post
+        NotBlank: []

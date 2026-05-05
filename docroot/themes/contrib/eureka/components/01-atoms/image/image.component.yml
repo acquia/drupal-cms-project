@@ -1,0 +1,26 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Image
+status: stable
+description: Default image component
+group: Eureka component items
+props:
+  type: object
+  properties:
+    mobile_size:
+      type: string
+      title: Mobile size
+      description: Size of the image for mobile
+      examples:
+        - 400x225
+    tablet_size:
+      type: string
+      title: Tablet size
+      description: Size of the image for tablet
+      examples:
+        - 800x450
+    desktop_size:
+      type: string
+      title: Desktop size
+      description: Size of the image for desktop
+      examples:
+        - 1440x810

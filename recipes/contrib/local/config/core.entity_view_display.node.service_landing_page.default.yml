@@ -1,0 +1,42 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.service_landing_page.field_description
+    - field.field.node.service_landing_page.field_in_this_section
+    - field.field.node.service_landing_page.field_top_task_count
+    - node.type.service_landing_page
+  module:
+    - entity_reference_revisions
+    - options
+    - user
+id: node.service_landing_page.default
+targetEntityType: node
+bundle: service_landing_page
+mode: default
+content:
+  field_description:
+    type: string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_in_this_section:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_top_task_count:
+    type: list_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  links: true
+  search_api_excerpt: true

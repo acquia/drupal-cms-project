@@ -1,0 +1,89 @@
+// Person Content Type Page
+
+.person-node .email {
+  display: flex;
+  align-items: center;
+  gap: rem-calc(16);
+  margin-bottom: rem-calc(10);
+    .email-wrapper {
+      background-color: $secondary;
+      border-radius: 50%;
+      height: rem-calc(28);
+        .fa-envelope{
+          padding: rem-calc(6);
+          color: #FFFFFF;
+        }
+    }
+}
+
+.person-node .phone {
+  display: flex;
+  align-items: center;
+  gap: rem-calc(16);
+  margin-bottom: rem-calc(5);
+    .phone-wrapper {
+      background-color: $secondary;
+      border-radius: 50%;
+      height: rem-calc(28);
+        .fa-phone{
+          padding: rem-calc(6);
+          color: #FFFFFF;
+        }
+    }
+}
+.person-node .person-image img {
+  width: rem-calc(433);
+  height: rem-calc(526);
+  border-radius: rem-calc(8);
+}
+
+// For mobile devices.
+@media (min-width: 300px) and (max-width: 900px) {
+  .person-node .person-header {
+   .field--name-title {
+     font-size: rem-calc(35);
+     line-height: rem-calc(5);
+    }
+   .field--name-field-provus-titles {
+     font-size: rem-calc(28);
+     line-height: rem-calc(40);
+   }
+  }
+  .person-node .email {
+    gap: 1px;
+      .field--type-email {
+        margin-left: 7px;
+        font-size: rem-calc(14)
+      }
+   }
+  .person-node .phone {
+    gap: 1px;
+      .field--type-telephone {
+        margin-left: 7px;
+        font-size: rem-calc(14)
+      }
+  }
+  .person-node .person-image img {
+    width: rem-calc(500);
+    height: rem-calc(526);
+    border-radius: rem-calc(8);
+  }
+}
+
+// For iPad devices.
+@media (min-width: 910px) and (max-width: 1400px) {
+  .person-node .email {
+    gap: 1px;
+      .field--type-email {
+        margin-left: 7px;
+        font-size: rem-calc(14)
+      }
+   }
+  .person-node .phone {
+    gap: 1px;
+      .field--type-telephone {
+        margin-left: 7px;
+        font-size: rem-calc(14)
+      }
+  }
+}

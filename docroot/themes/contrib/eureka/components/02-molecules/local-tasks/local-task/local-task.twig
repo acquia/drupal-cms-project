@@ -1,0 +1,31 @@
+{#
+/**
+ * Available variables:
+ * - attributes: HTML attributes for the wrapper element.
+ * - is_active: Whether the task item is an active tab.
+ * - link: A rendered link element.
+ *
+ * - local_task_text: Text of the local task.
+ * - local_task_url: Text of the local task.
+ *
+ * Note: This template renders the content for each task item in
+ * menu-local-tasks.html.twig.
+ */
+#}
+
+{% set local_task_classes = [
+  is_active ? 'is-active' : 'button--secondary',
+] %}
+
+{% embed "eureka:list-item" with {
+  list_item_base_class: 'task',
+  list_item_blockname: 'local-tasks',
+} %}
+  {% block list_item_content_block %}
+    {{ include("eureka:button", {
+      button_content: local_task_text|default(link['#title']),
+      button_url: local_task_url|default(link['#url']),
+      button_extra_classes: local_task_classes,
+    }, with_context = false) }}
+  {% endblock %}
+{% endembed %}

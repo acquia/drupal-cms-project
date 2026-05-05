@@ -1,0 +1,69 @@
+{
+  "name": "@drupal-canvas/cli",
+  "description": "CLI tool for managing Drupal Canvas code components",
+  "license": "GPL-2.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "git+https://git.drupalcode.org/project/canvas.git"
+  },
+  "bugs": "https://www.drupal.org/project/issues/canvas",
+  "main": "dist/index.js",
+  "bin": {
+    "canvas": "./dist/index.js"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node dist/index.js",
+    "build": "NODE_ENV=production tsup",
+    "dev": "NODE_ENV=development tsup --watch",
+    "test:vitest": "vitest run",
+    "watch:test": "vitest watch",
+    "test": "npx npm-run-all --parallel --continue-on-error test:*",
+    "type-check": "tsc --noEmit --pretty"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "canvas",
+    "drupal",
+    "cli"
+  ],
+  "devDependencies": {
+    "@drupal-canvas/discovery": "*",
+    "@drupal-canvas/vite-compat": "*",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^24.0.0",
+    "globals": "^16.0.0",
+    "msw": "^2.10.2",
+    "prettier": "^3.2.1",
+    "tsup": "^8.5.1",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.3"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.26.9",
+    "@clack/prompts": "^0.11.0",
+    "@drupal-canvas/eslint-config": "^0.2.1",
+    "@swc/wasm": "^1.12.1",
+    "ajv": "^8.18.0",
+    "ajv-formats": "^3.0.1",
+    "axios": "^1.15.1",
+    "chalk": "^5.4.1",
+    "commander": "^14.0.0",
+    "dotenv": "^16.5.0",
+    "drupal-canvas": "^0.3.2",
+    "eslint": "^9.22.0",
+    "js-yaml": "^4.1.0",
+    "lightningcss": "^1.30.1",
+    "open": "^11.0.0",
+    "opentype.js": "^1.3.4",
+    "request-filtering-agent": "^3.2.0",
+    "table": "^6.9.0",
+    "tailwindcss-in-browser": "^0.6.0",
+    "unifont": "^0.7.4",
+    "vite": "^6.3.5",
+    "woff2-encoder": "^2.0.0"
+  }
+}

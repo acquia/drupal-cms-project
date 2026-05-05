@@ -1,0 +1,15 @@
+<div class="block-provus-stat-group">
+  {% if title %}
+  <h2 class="card-title">
+    <div class="field field--name-field-provus-title field--type-string field--label-hidden field__item">{{ title }}</div>
+  </h2>
+  {% endif %}
+  <div class="row">
+    <div class="col col-6">
+      {% block stat_item_1 %}{% endblock %}
+    </div>
+    <div class="col col-6">
+      {% block stat_item_2 %}{% endblock %}
+    </div>
+  </div>
+</div>

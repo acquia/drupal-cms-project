@@ -1,0 +1,135 @@
+{#
+/**
+ * @file
+ * Theme override to display a menu.
+ *
+ * Available variables:
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - below: The menu item child items.
+ *   - title: The menu link title.
+ *   - url: The menu link URL, instance of \Drupal\Core\Url
+ *   - localized_options: Menu link localized options.
+ *   - is_expanded: TRUE if the link has visible children within the current
+ *     menu tree.
+ *   - is_collapsed: TRUE if the link has children within the current menu tree
+ *     that are not currently visible.
+ *   - in_active_trail: TRUE if the link is in the active trail.
+ */
+#}
+{% import _self as menus %}
+
+{#
+/**
+ * We call a macro which calls itself to render the full tree.
+ * @see https://twig.symfony.com/doc/3.x/tags/macro.html
+ */
+#}
+{{ menus.menu_links(items, attributes, 0, expand_all) }}
+
+{% macro menu_links(items, attributes, menu_level, expand_all) %}
+  {% import _self as menus %}
+
+  {% set classes = [
+    'menu-sidebar',
+    'menu',
+    'menu-vertical',
+    'w-full',
+  ]|merge(sidebar_classes ?: []) %}
+  {% set toggle_button_classes = [
+    'menu-sidebar__toggle',
+    'menu-dropdown-toggle',
+    '[&:after]:content-none',
+    'btn',
+    'btn-ghost',
+    'btn-xs',
+  ] %}
+
+  {% if items %}
+    {% set menu_items %}
+      {% for item in items %}
+        {% set is_expanded = expand_all or item.in_active_trail ? true : false %}
+        {% set toggle_wrapper_classes = [
+          'menu-sidebar__toggle-wrapper',
+          'flex',
+          item.in_active_trail ? 'menu-active',
+        ] %}
+        {% set icon_collapsed_classes = [
+          'menu-sidebar__icon',
+          'menu-sidebar__icon--collapsed',
+          is_expanded ? 'hidden',
+        ] %}
+        {% set icon_expanded_classes = [
+          'menu-sidebar__icon',
+          'menu-sidebar__icon--expanded',
+          not is_expanded ? 'hidden',
+        ] %}
+        {% set dropdown_classes = [
+          'menu-dropdown',
+          is_expanded ? 'menu-dropdown-show',
+        ] %}
+
+        <li{{ item.attributes }}>
+          {% if item.below %}
+            <div class="{{ toggle_wrapper_classes|join(' ') }}">
+              {{ link(item.title, item.url, {
+                class: [
+                  'grow',
+                  'no-underline',
+                  item.in_active_trail ? 'menu-active'
+                ]
+              }) }}
+              <button
+                class="{{ toggle_button_classes|join(' ') }}"
+                aria-label="Toggle button for {{ item.title }} submenu"
+                aria-expanded="{{ is_expanded ? 'true' : 'false' }}"
+              >
+                <span class="{{ icon_collapsed_classes|join(' ') }}">
+                  {{ include(
+                    '@morphos/components/icon/icon.twig',
+                    {
+                      icon: 'caret-up',
+                      icon_size: 'icon-size--xs'
+                    },
+                    with_context: false
+                  ) }}
+                </span>
+                <span class="{{ icon_expanded_classes|join(' ') }}">
+                  {{ include(
+                    '@morphos/components/icon/icon.twig',
+                    {
+                      icon: 'caret-down',
+                      icon_size: 'icon-size--xs'
+                    },
+                    with_context: false
+                  ) }}
+                </span>
+              </button>
+            </div>
+
+            <ul class="{{ dropdown_classes|join(' ') }}">
+              {{ menus.menu_links(item.below, attributes, menu_level + 1, expand_all) }}
+            </ul>
+          {% else %}
+            {{ link(item.title, item.url, {
+              class: [
+                'grow',
+                'no-underline',
+                item.in_active_trail ? 'menu-active',
+              ]
+            }) }}
+          {% endif %}
+        </li>
+      {% endfor %}
+    {% endset %}
+
+    {% if menu_level == 0 %}
+      <ul{{ attributes.addClass(classes) }}>
+        {{ menu_items }}
+      </ul>
+    {% else %}
+      {{ menu_items }}
+    {% endif %}
+  {% endif %}
+{% endmacro %}

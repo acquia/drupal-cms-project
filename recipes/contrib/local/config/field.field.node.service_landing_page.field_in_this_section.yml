@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_in_this_section
+    - node.type.service_landing_page
+    - paragraphs.paragraphs_type.service_in_this_section
+  module:
+    - entity_reference_revisions
+id: node.service_landing_page.field_in_this_section
+field_name: field_in_this_section
+entity_type: node
+bundle: service_landing_page
+label: 'In this section'
+description: 'Managed automatically by ECA when service pages are published or updated.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      service_in_this_section: service_in_this_section
+    negate: 0
+    target_bundles_drag_drop:
+      service_in_this_section:
+        weight: 0
+        enabled: true
+field_type: entity_reference_revisions

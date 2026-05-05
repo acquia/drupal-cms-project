@@ -1,0 +1,512 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 1b592d43-fff0-4a56-9d24-993ec83615cf
+  default_langcode: en
+  depends:
+    554078cf-867f-4497-8bfb-aa544a3cc71a: file
+    763dcd2e-f12c-4bee-8c80-f5ab9686f535: media
+    47daac98-0d45-4677-8d0e-05d4d63a6624: file
+    3d0656f6-b8f1-4c65-8a71-958c65899013: media
+    c5d48288-fd14-44df-b422-02e897b90de3: file
+    a7a351db-79f4-4651-a293-9b43803cb95b: media
+    8adfd50d-97f6-43ed-ade2-0dfa71f56a6d: file
+    b0f92c64-55a9-41da-9a44-a1d66f17b02d: media
+    cc0b0408-e6c6-4e98-85d4-76c852b43f61: file
+    c6f59863-9ee8-466b-b040-a39df5ac0ec5: media
+    d5df87f0-80ab-4bbc-9d12-e645a4ec87fe: file
+    7aac24e6-4305-440a-9e15-4ddfe8ad139b: media
+    b62135d8-0ec8-409e-81cd-75531c7f4423: file
+    6e6d7278-3881-4d4f-ae88-0863cbd28dbb: media
+    a5b9e969-d164-4ad9-9eb6-8cf70e04377e: file
+    cefd0a2a-9f8a-42ab-876f-68732e8eafd1: file
+    98d7fee4-2269-434e-bf88-d177aefa64a0: media
+    abf6a0e3-02f3-4ab0-ba1e-3e567b514cec: media
+    eac16121-d336-4e8b-bd7d-f2ee3608f585: file
+    fd6b45cc-dcd5-4161-baff-17ce59126ccc: file
+    84e35491-db24-4042-ac39-fe510a01c495: media
+    74b7d1b2-46c0-4ce6-9b7a-24ac846b1a1b: media
+    e0f585fa-1e1c-449e-98d0-a2e074df0a0e: file
+    2b462e0e-d27d-44aa-95ff-af9b5ae9c43a: media
+    dff4c626-a52e-4de8-a7fe-b5d45735fecc: file
+    1852211b-caab-41a7-8c0e-7d9dcfdcf922: media
+    0a06e8a7-7954-42fa-9770-18b365ca4153: file
+    153d0922-a446-4a2e-abf3-f9ac43faff9b: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Impact
+  components:
+    -
+      uuid: d3a9d11d-88d1-4111-b302-41513e12bb48
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        alignment: center
+        paddingtop: 14
+        paddingbottom: 14
+        backgroundcolor: black
+        background_image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 763dcd2e-f12c-4bee-8c80-f5ab9686f535
+            target_type: media
+        use_custom_container: false
+    -
+      parent_uuid: d3a9d11d-88d1-4111-b302-41513e12bb48
+      slot: content
+      uuid: f75aa42c-acbb-4543-b7af-10154b0d6472
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: "What we've accomplished"
+          format: canvas_html_inline
+        tagline: Results
+        textcolor: light
+        description: 'Our work speaks through the lives we touch and the change we create together.'
+        heading_level: 1
+    -
+      parent_uuid: f75aa42c-acbb-4543-b7af-10154b0d6472
+      slot: ctas
+      uuid: 8ef932b8-1294-4b9c-b72a-d61c09b53425
+      component_id: sdc.caresphere_theme.button
+      inputs:
+        href: 'https://easebuzz.in/demo'
+        size: medium
+        label: Donate
+        variant: primary
+        disabled: false
+        icon_first: false
+        mobile_width: false
+        border_radius: default
+    -
+      parent_uuid: f75aa42c-acbb-4543-b7af-10154b0d6472
+      slot: ctas
+      uuid: a50e51d0-bd34-4de5-8347-1385f5ddfb96
+      component_id: sdc.caresphere_theme.button
+      inputs:
+        href: /get-involved
+        size: medium
+        label: 'Get involved'
+        variant: secondary-white
+        disabled: false
+        icon_first: false
+        mobile_width: false
+        border_radius: default
+    -
+      uuid: d4fe4c29-1cb2-4d61-a44d-c798dc52b2e7
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        margintop: 14
+        marginbottom: 10
+        use_custom_container: true
+    -
+      parent_uuid: d4fe4c29-1cb2-4d61-a44d-c798dc52b2e7
+      slot: content
+      uuid: 666e7948-4683-4b56-bc30-3d278d8a62cd
+      component_id: sdc.caresphere_theme.heading
+      inputs:
+        align: left
+        level: 3
+        text_size: default
+        text_color: default
+        heading_text: 'The numbers behind our mission'
+    -
+      uuid: 590a2ea2-5591-4722-a666-ec7bc0eb5552
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        marginbottom: 14
+        use_custom_container: false
+    -
+      parent_uuid: 590a2ea2-5591-4722-a666-ec7bc0eb5552
+      slot: content
+      uuid: fc359fba-9b76-44d4-9905-f3c4b982d867
+      component_id: sdc.caresphere_theme.section-grid
+      inputs:
+        grid_gap: 4
+        column_1_layout: full
+        column_2_layout: full
+        column_3_layout: full
+    -
+      parent_uuid: fc359fba-9b76-44d4-9905-f3c4b982d867
+      slot: slot_1
+      uuid: 0d481da6-8d32-42dd-9d9e-6b81931d7c4b
+      component_id: sdc.caresphere_theme.stat-card
+      inputs:
+        label: 'Lives directly served'
+        value: '2,847'
+        description: 'Individuals supported through our core programs this year'
+        full_height: false
+        image_position: top
+    -
+      parent_uuid: fc359fba-9b76-44d4-9905-f3c4b982d867
+      slot: slot_2
+      uuid: a0ea0eb4-d8be-436a-b2b1-74476761e6fe
+      component_id: sdc.caresphere_theme.stat-card
+      inputs:
+        label: 'Community partnerships built'
+        value: '156'
+        description: 'Organizations working alongside us to expand our reach'
+        full_height: false
+        image_position: top
+    -
+      parent_uuid: fc359fba-9b76-44d4-9905-f3c4b982d867
+      slot: slot_3
+      uuid: 0143bbea-6e57-42c6-baea-b264684f7a75
+      component_id: sdc.caresphere_theme.stat-card
+      inputs:
+        label: 'Participants report positive change'
+        value: 94%
+        description: 'Measured through follow-up surveys and community feedback'
+        full_height: false
+        image_position: top
+    -
+      uuid: 1e5c0a3e-67e7-4a09-8209-41aa3a5d7c61
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        alignment: center
+        paddingtop: 14
+        use_custom_container: false
+    -
+      parent_uuid: 1e5c0a3e-67e7-4a09-8209-41aa3a5d7c61
+      slot: content
+      uuid: de284f46-3981-407b-b461-787fb889a0c1
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: 'Moments that matter'
+          format: canvas_html_inline
+        description: 'See the work unfold across our communities.'
+        heading_level: 2
+    -
+      uuid: 86bed859-fd1e-457d-8c97-ab1b3f712872
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        marginbottom: 14
+        use_custom_container: false
+    -
+      parent_uuid: 86bed859-fd1e-457d-8c97-ab1b3f712872
+      slot: content
+      uuid: 418bb377-30c9-49e6-beb5-51f182f86785
+      component_id: sdc.caresphere_theme.slider
+      inputs:
+        loop: false
+        autoplay: false
+        show_arrows: true
+        autoplay_delay: 0
+        show_pagination: true
+    -
+      parent_uuid: 418bb377-30c9-49e6-beb5-51f182f86785
+      slot: slides
+      uuid: 9003cae0-5f33-4684-9dee-98a5de4d6c61
+      component_id: sdc.caresphere_theme.image
+      inputs:
+        size: '1:1'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 3d0656f6-b8f1-4c65-8a71-958c65899013
+            target_type: media
+        radius: small
+        caption: 'Stronger together, building better communities'
+        border_radius: 8
+    -
+      parent_uuid: 418bb377-30c9-49e6-beb5-51f182f86785
+      slot: slides
+      uuid: 05651a66-bf1d-4a9b-ac4b-20d8a4a65735
+      component_id: sdc.caresphere_theme.image
+      inputs:
+        size: '1:1'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: a7a351db-79f4-4651-a293-9b43803cb95b
+            target_type: media
+        radius: small
+        caption: 'Empowering minds through education'
+        border_radius: 8
+    -
+      parent_uuid: 418bb377-30c9-49e6-beb5-51f182f86785
+      slot: slides
+      uuid: 632e569d-0907-4a12-87f3-d10061a6b6b1
+      component_id: sdc.caresphere_theme.image
+      inputs:
+        size: '1:1'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: b0f92c64-55a9-41da-9a44-a1d66f17b02d
+            target_type: media
+        radius: small
+        caption: 'Taking action for a greener tomorrow'
+        border_radius: 8
+    -
+      parent_uuid: 418bb377-30c9-49e6-beb5-51f182f86785
+      slot: slides
+      uuid: 47f55b7f-d09c-4ae4-9c02-85550192055c
+      component_id: sdc.caresphere_theme.image
+      inputs:
+        size: '1:1'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: c6f59863-9ee8-466b-b040-a39df5ac0ec5
+            target_type: media
+        radius: small
+        caption: 'Bringing hope through every meal'
+        border_radius: 8
+    -
+      parent_uuid: 418bb377-30c9-49e6-beb5-51f182f86785
+      slot: slides
+      uuid: 332cd0a3-c505-432a-a764-2f560bcbebee
+      component_id: sdc.caresphere_theme.image
+      inputs:
+        size: '1:1'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 7aac24e6-4305-440a-9e15-4ddfe8ad139b
+            target_type: media
+        radius: small
+        caption: 'Creating opportunities through skills'
+        border_radius: 8
+    -
+      parent_uuid: 418bb377-30c9-49e6-beb5-51f182f86785
+      slot: slides
+      uuid: 4257f617-a3ec-41fe-bf5c-92c55f78651c
+      component_id: sdc.caresphere_theme.image
+      inputs:
+        size: '1:1'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 6e6d7278-3881-4d4f-ae88-0863cbd28dbb
+            target_type: media
+        radius: small
+        caption: 'Every action creates a lasting impact'
+        border_radius: 8
+    -
+      uuid: 534e3af3-3de8-46ca-bc98-a568bc1a726b
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        paddingtop: 14
+        marginbottom: 0
+        paddingbottom: 10
+        backgroundcolor: dark-gray
+        use_custom_container: false
+    -
+      parent_uuid: 534e3af3-3de8-46ca-bc98-a568bc1a726b
+      slot: content
+      uuid: f9d5a143-8e26-40b8-be02-598b8f307be8
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: 'Real voices'
+          format: canvas_html_inline
+        textcolor: light
+        description: 'Hear from the individuals and families who have experienced the transformative power of our community health programs.'
+        heading_level: 2
+    -
+      uuid: 52e45a27-623f-4ca7-a40e-ac9b37f856e0
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        marginbottom: 0
+        paddingbottom: 14
+        backgroundcolor: dark-gray
+        use_custom_container: false
+    -
+      parent_uuid: 52e45a27-623f-4ca7-a40e-ac9b37f856e0
+      slot: content
+      uuid: 81dbf60f-d7f4-42cb-be8b-aa2bcf8ef2ff
+      component_id: sdc.caresphere_theme.section-grid
+      inputs:
+        column_2_layout: full
+        column_3_layout: full
+        is_small_container: false
+    -
+      parent_uuid: 81dbf60f-d7f4-42cb-be8b-aa2bcf8ef2ff
+      slot: slot_1
+      uuid: aa38297f-ddca-4c09-b7d3-fd3abb71a2a7
+      component_id: sdc.caresphere_theme.card-case-study
+      inputs:
+        quote: '"CareSphere gave us more than support — they gave us hope. Their commitment to improving lives in our community has created real, lasting change for families like ours."'
+        cta_url: /get-involved
+        cta_label: 'Join Our Mission'
+        logo_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: abf6a0e3-02f3-4ab0-ba1e-3e567b514cec
+            target_type: media
+        author_name: 'Maria Rodriguez'
+        avatar_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 98d7fee4-2269-434e-bf88-d177aefa64a0
+            target_type: media
+        author_position: 'Community Member'
+    -
+      parent_uuid: 81dbf60f-d7f4-42cb-be8b-aa2bcf8ef2ff
+      slot: slot_2
+      uuid: c5a60194-5f13-4094-8763-cab811af33ba
+      component_id: sdc.caresphere_theme.card-case-study
+      inputs:
+        quote: '"The support we received from CareSphere changed our lives. Their dedication to community health is truly inspiring and has made a lasting impact on our family.'
+        cta_url: /get-involved
+        cta_label: 'Join Our Mission'
+        logo_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 74b7d1b2-46c0-4ce6-9b7a-24ac846b1a1b
+            target_type: media
+        author_name: 'James Rodriguez'
+        avatar_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 84e35491-db24-4042-ac39-fe510a01c495
+            target_type: media
+        author_position: 'Community Member'
+    -
+      parent_uuid: 81dbf60f-d7f4-42cb-be8b-aa2bcf8ef2ff
+      slot: slot_3
+      uuid: a8c808c3-b092-441f-8d53-02da2f2d7af3
+      component_id: sdc.caresphere_theme.card-case-study
+      inputs:
+        quote: '"Thanks to CareSphere, we now have access to resources we never thought possible. Their work in strengthening community has truly transformed our everyday lives."'
+        cta_url: /get-involved
+        cta_label: 'Join Our Mission'
+        logo_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: abf6a0e3-02f3-4ab0-ba1e-3e567b514cec
+            target_type: media
+        author_name: Christina
+        avatar_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 2b462e0e-d27d-44aa-95ff-af9b5ae9c43a
+            target_type: media
+        author_position: 'Community Member'
+    -
+      uuid: be9faa8e-72e9-42ad-b20e-26e30c08d452
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        alignment: center
+        paddingtop: 14
+        marginbottom: 0
+        paddingbottom: 10
+        backgroundcolor: dark-gray
+        use_custom_container: false
+    -
+      parent_uuid: be9faa8e-72e9-42ad-b20e-26e30c08d452
+      slot: content
+      uuid: 5b160312-546c-41f8-883f-1d88a8ad1835
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: 'How one program changed everything'
+          format: canvas_html_inline
+        tagline: Impact
+        textcolor: light
+        description: 'Maria arrived uncertain and left with skills that opened doors. Her journey through our training initiative shows what becomes possible when someone gets the right support at the right time.'
+        heading_level: 2
+    -
+      uuid: 9247f5df-97c6-4b23-92ea-dac643993555
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        marginbottom: 0
+        paddingbottom: 14
+        backgroundcolor: dark-gray
+        use_custom_container: false
+    -
+      parent_uuid: 9247f5df-97c6-4b23-92ea-dac643993555
+      slot: content
+      uuid: 718947df-9df8-40d2-8e31-84bd0d4b3e69
+      component_id: sdc.caresphere_theme.section-grid
+      inputs:
+        grid_layout: 1_column
+    -
+      parent_uuid: 718947df-9df8-40d2-8e31-84bd0d4b3e69
+      slot: slot_1
+      uuid: 7b0fbc38-3b16-4128-bc5e-3e88ccccb370
+      component_id: sdc.caresphere_theme.image
+      inputs:
+        size: '16:9'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 1852211b-caab-41a7-8c0e-7d9dcfdcf922
+            target_type: media
+        radius: small
+        border_radius: 8
+    -
+      uuid: 408df611-86c6-4e92-9a05-314a14ff5aaa
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        gap: 10
+        alignment: center
+        paddingtop: 14
+        marginbottom: 0
+        paddingbottom: 14
+        backgroundcolor: black
+        use_custom_container: false
+    -
+      parent_uuid: 408df611-86c6-4e92-9a05-314a14ff5aaa
+      slot: content
+      uuid: ac45ec1d-33df-4f5d-9c2d-080b1c8ed4d9
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: 'Join us in building change'
+          format: full_html
+        description: 'We track what matters. Our work produces real results that improve lives and strengthen neighborhoods.'
+        heading_level: 2
+    -
+      parent_uuid: ac45ec1d-33df-4f5d-9c2d-080b1c8ed4d9
+      slot: ctas
+      uuid: 000bc23e-f050-46ab-b437-b9b1491ef4b4
+      component_id: sdc.caresphere_theme.button
+      inputs:
+        href: 'https://easebuzz.in/demo'
+        size: medium
+        label: Donate
+        variant: primary
+        disabled: false
+        icon_first: false
+        mobile_width: false
+        border_radius: default
+    -
+      parent_uuid: ac45ec1d-33df-4f5d-9c2d-080b1c8ed4d9
+      slot: ctas
+      uuid: 7109845e-0334-4768-ae72-2e66f9cd41e9
+      component_id: sdc.caresphere_theme.button
+      inputs:
+        href: /get-involved
+        size: medium
+        label: 'Get involved'
+        variant: secondary-white
+        disabled: false
+        icon_first: false
+        mobile_width: false
+        border_radius: default
+    -
+      parent_uuid: 408df611-86c6-4e92-9a05-314a14ff5aaa
+      slot: content
+      uuid: e42bdb19-75d5-40b7-88c9-29c675c0d1ef
+      component_id: sdc.caresphere_theme.section-grid
+      inputs:
+        grid_layout: 1_column
+        is_small_container: false
+    -
+      parent_uuid: e42bdb19-75d5-40b7-88c9-29c675c0d1ef
+      slot: slot_1
+      uuid: c2855157-760b-42eb-90b7-d72f1ac402cd
+      component_id: sdc.caresphere_theme.image
+      inputs:
+        size: '16:9'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 153d0922-a446-4a2e-abf3-f9ac43faff9b
+            target_type: media
+        radius: small
+        border_radius: 8
+  path:
+    -
+      alias: /impact
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

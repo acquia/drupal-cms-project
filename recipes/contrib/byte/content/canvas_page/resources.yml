@@ -1,0 +1,179 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: e149c5f8-38b6-4b32-80de-4c5163879458
+  default_langcode: en
+  depends:
+    ec07e5e9-d11e-4550-b528-66dffbc93527: file
+    3a63058d-4aa1-4b91-b530-28696677c56e: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Resources
+  components:
+    -
+      uuid: 8e7de4fe-ab1f-41fe-b73f-b1cd4fcc5da8
+      component_id: sdc.byte_theme.hero-billboard
+      inputs:
+        height: large
+        flex_position: hero-center
+        overlay_opacity: 0%
+        object_position: bottom
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 3a63058d-4aa1-4b91-b530-28696677c56e
+            target_type: media
+        overlap_navbar: true
+    -
+      parent_uuid: 8e7de4fe-ab1f-41fe-b73f-b1cd4fcc5da8
+      slot: hero_slot
+      uuid: cc1b4ca9-bc25-4c56-a7a2-45b5aac3f275
+      component_id: sdc.byte_theme.heading
+      inputs:
+        heading_text: 'Resources & support'
+        level: 1
+        text_size: default
+        text_color: default
+        align: center
+    -
+      parent_uuid: 8e7de4fe-ab1f-41fe-b73f-b1cd4fcc5da8
+      slot: hero_slot
+      uuid: 8f0bb2a9-5e7d-4c3a-b302-42d15732d561
+      component_id: sdc.byte_theme.text
+      inputs:
+        text:
+          value: '<p class="text-align-center">Whether you''re just getting started, or looking to accelerate your journey, we''ve got you covered with our comprehensive online resources.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: 5cfee834-e77f-4c4d-b7fa-007a62185962
+      component_id: sdc.byte_theme.section
+      inputs:
+        columns: 25-25-25-25
+        mobile_columns: '1'
+        width: 100%
+        margin_block_start: '48'
+        margin_block_end: '96'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: true
+    -
+      parent_uuid: 5cfee834-e77f-4c4d-b7fa-007a62185962
+      slot: main_slot
+      uuid: 12b80685-ff24-41cc-96a5-1c7cf0db45d2
+      component_id: sdc.byte_theme.card-icon
+      inputs:
+        border_radius: large
+        text: 'Quick start guide'
+        description:
+          value: '<p>Get up and running in minutes with our step-by-step setup guide. Learn how to create your account, issue your first cards, configure approval workflows, and connect your accounting software.</p>'
+          format: canvas_html_block
+        text_align: center
+        icon: rocket
+        icon_size: large
+        icon_align: center
+        url: '#'
+    -
+      parent_uuid: 5cfee834-e77f-4c4d-b7fa-007a62185962
+      slot: main_slot
+      uuid: 6e991ab6-39db-4201-8c62-b372f29bc46c
+      component_id: sdc.byte_theme.card-icon
+      inputs:
+        border_radius: large
+        text: 'Developer docs'
+        description:
+          value: '<p>Build powerful integrations with our comprehensive API documentation. Access detailed endpoints, code examples, and SDKs to connect our expense platform with your existing tools and workflows.</p>'
+          format: canvas_html_block
+        text_align: center
+        icon: book-open
+        icon_size: large
+        icon_align: center
+        url: '#'
+    -
+      parent_uuid: 5cfee834-e77f-4c4d-b7fa-007a62185962
+      slot: main_slot
+      uuid: ebbf9e40-f3dc-4e80-bdc2-6d24194fbf66
+      component_id: sdc.byte_theme.card-icon
+      inputs:
+        text: 'Community forum'
+        description:
+          value: '<p>Connect with other finance leaders, share best practices, and discover new ways to optimize your expense processes. Our active community is here to help you get the most out of the platform.</p>'
+          format: canvas_html_block
+        text_align: center
+        icon: users-three
+        icon_size: large
+        icon_align: center
+        border_radius: large
+        url: '#'
+    -
+      parent_uuid: 5cfee834-e77f-4c4d-b7fa-007a62185962
+      slot: main_slot
+      uuid: ab48969d-ea3b-41b9-b007-3b97886d4b96
+      component_id: sdc.byte_theme.card-icon
+      inputs:
+        border_radius: large
+        text: 'Support desk'
+        description:
+          value: '<p>Our dedicated support team is ready to help you succeed. Submit tickets, track issues, and get expert assistance whenever you need it—because great software deserves great support.</p>'
+          format: canvas_html_block
+        text_align: center
+        icon: question
+        icon_size: large
+        icon_align: center
+        url: '#'
+    -
+      uuid: ad011ce1-cd77-4746-8d1e-c8e84cb00af6
+      component_id: sdc.byte_theme.section
+      inputs:
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: true
+        views_columns: 33-33-33
+    -
+      parent_uuid: ad011ce1-cd77-4746-8d1e-c8e84cb00af6
+      slot: header_slot
+      uuid: e5c2accd-727d-4489-9512-3e6dd770209e
+      component_id: sdc.byte_theme.heading
+      inputs:
+        heading_text: 'Our latest insights'
+        level: 2
+        text_size: heading-responsive-6xl
+        text_color: default
+        align: center
+    -
+      parent_uuid: ad011ce1-cd77-4746-8d1e-c8e84cb00af6
+      slot: main_slot
+      uuid: ff8d2003-eef6-4f3c-8c10-03f50a76e013
+      component_id: block.views_block.blog-all
+      inputs:
+        label: 'Blog: All blog posts'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+  path:
+    -
+      alias: /resources
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

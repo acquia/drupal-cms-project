@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Install file for the ECA Form submodule.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function eca_form_install(): void {
+  module_set_weight('eca_form', 1);
+}

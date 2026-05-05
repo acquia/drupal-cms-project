@@ -1,0 +1,129 @@
+{% set is_preview = canvas_is_preview or in_preview %}
+
+{% set body_attributes = create_attribute() %}
+{% set action_attributes = create_attribute() %}
+
+{% set slot_badge_items %}{% block badge_items %}{% endblock %}{% endset %}
+{% set slot_body_items %}{% block body_items %}{% endblock %}{% endset %}
+{% set slot_actions %}{% block actions %}{% endblock %}{% endset %}
+
+{% set classes = [
+  'card',
+  'relative',
+  style,
+  size,
+  card_side ? 'card-side',
+  palette,
+  texture,
+  is_preview ? 'card--preview',
+] %}
+
+{% set body_classes = [
+  'card__body',
+  'card-body',
+  text_alignment == 'text-start' ? 'text-start',
+  text_alignment == 'items-center' ? 'text-center items-center',
+  center ? 'items-center text-center',
+] %}
+
+{% set action_classes = [
+  'card__actions',
+  'card-actions',
+  actions_alignment == 'justify-start' ? 'justify-start',
+  actions_alignment == 'items-center' ? 'justify-center',
+  actions_alignment == 'justify-end' ? 'justify-end',
+] %}
+
+{% set component_preview %}
+  <div{{ attributes.addClass(classes) }}>
+    {% if image.src %}
+      <figure class="card__image">
+        {{ include('canvas:image', {
+          src: image.src,
+          alt: image.alt,
+          class: 'object-cover w-full',
+          width: image.width,
+          height: image.height,
+        },
+          with_context: false
+        ) }}
+      </figure>
+    {% endif %}
+    <div{{ body_attributes.addClass(body_classes) }}>
+      <div class="card__badge">
+        {{ slot_badge_items }}
+      </div>
+      {% if heading %}
+        {{ include('morphos:heading', {
+          heading,
+          level: heading_level|default(3),
+          additional_classes: ['card__title', 'card-title'],
+        },
+          with_context: false
+        ) }}
+      {% endif %}
+      {% if body %}
+        <div class="card__content">
+          {{ body }}
+        </div>
+      {% endif %}
+      <div class="card__content">
+        {{ slot_body_items }}
+      </div>
+      <div{{ action_attributes.addClass(action_classes) }}>
+        {{ slot_actions }}
+      </div>
+    </div>
+  </div>
+{% endset %}
+
+{% set component_render %}
+  <div{{ attributes.addClass(classes) }}>
+    {% if image.src %}
+      <figure class="card__image">
+        {{ include('canvas:image', {
+          src: image.src,
+          alt: image.alt,
+          class: 'object-cover w-full',
+          width: image.width,
+          height: image.height,
+        },
+          with_context: false
+        ) }}
+      </figure>
+    {% endif %}
+    <div{{ body_attributes.addClass(body_classes) }}>
+      {% if slot_badge_items|render|striptags('<drupal-render-placeholder><img><figure><div><button>')|trim %}
+        <div class="card__badge">
+          {{ slot_badge_items }}
+        </div>
+      {% endif %}
+      {% if heading %}
+        {{ include('morphos:heading', {
+          heading,
+          level: heading_level|default(3),
+          additional_classes: ['card__title', 'card-title'],
+        },
+          with_context: false
+        ) }}
+      {% endif %}
+      {% if body %}
+        <div class="card__content">
+          {{ body }}
+        </div>
+      {% endif %}
+      {% if slot_body_items|render|striptags('<drupal-render-placeholder><img><figure><div><button>')|trim %}
+        <div class="card__content">
+          {{ slot_body_items }}
+        </div>
+      {% endif %}
+      {% if slot_actions|render|striptags('<drupal-render-placeholder><img><figure><div><button>')|trim %}
+        <div{{ action_attributes.addClass(action_classes) }}>
+          {{ slot_actions }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endset %}
+
+{{ is_preview ? component_preview : component_render }}

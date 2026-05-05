@@ -1,0 +1,51 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: base/card.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+@reference "../tailwindcss";
+
+.card {
+  @apply h-full overflow-hidden;
+
+  background-color: var(--background-stronger);
+  border-color: var(--background-weaker);
+  border-radius: var(--radius-box);
+  color: var(--foreground);
+}
+
+.card--clickable {
+  @apply shadow-sm hover:shadow-md;
+
+  .card__title {
+    a {
+      @apply underline;
+
+      &:before {
+        @apply absolute inset-0;
+
+        content: '';
+      }
+    }
+  }
+}
+
+.card__title {
+  @apply m-0 text-[1.25rem];
+}
+
+.card__image {
+  .media-entity img {
+    @apply h-auto w-full rounded-none;
+  }
+}
+
+.card__info,
+.card__date {
+  color: var(--foreground-weak);
+}
+
+.card__date {
+  @apply mt-2;
+}

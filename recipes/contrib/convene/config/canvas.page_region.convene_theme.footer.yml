@@ -1,0 +1,82 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.system_branding_block
+    - canvas.component.block.system_menu_block.connect
+    - canvas.component.block.system_menu_block.event-info
+    - canvas.component.block.system_menu_block.tickets
+    - canvas.component.block.webform_block
+    - canvas.component.sdc.convene_theme.copyright
+    - canvas.component.sdc.convene_theme.footer
+  theme:
+    - convene_theme
+id: convene_theme.footer
+region: footer
+theme: convene_theme
+component_tree:
+  0:
+    uuid: 9015777A-CFDF-46EC-B5BE-11C1D5788F12
+    component_id: sdc.convene_theme.footer
+    component_version: 2d96e443b1313467
+    inputs: {  }
+  '0:footer:0':
+    parent_uuid: 9015777A-CFDF-46EC-B5BE-11C1D5788F12
+    slot: footer
+    uuid: 9537DDCB-44EF-4C2D-A027-30418DC65A35
+    component_id: block.system_branding_block
+    component_version: b168140fdcaebae5
+    inputs:
+      label: 'Site branding'
+      label_display: '0'
+      use_site_logo: true
+      use_site_name: false
+      use_site_slogan: false
+  '0:footer:1':
+    parent_uuid: 9015777A-CFDF-46EC-B5BE-11C1D5788F12
+    slot: footer
+    uuid: B16C7801-F134-4C82-8575-791EA0CA5CD9
+    component_id: block.system_menu_block.connect
+    component_version: 7a1a68e548425150
+    inputs:
+      label: Connect
+      label_display: visible
+      level: 1
+  '0:footer:2':
+    parent_uuid: 9015777A-CFDF-46EC-B5BE-11C1D5788F12
+    slot: footer
+    uuid: 9C40CEAE-6CC0-46C1-855C-965606CADA48
+    component_id: block.system_menu_block.event-info
+    component_version: 8676209316729a0c
+    inputs:
+      label: 'Event info'
+      label_display: visible
+      level: 1
+  '0:footer:3':
+    parent_uuid: 9015777A-CFDF-46EC-B5BE-11C1D5788F12
+    slot: footer
+    uuid: 04882BB2-EA84-4DB7-BB22-A97FE9EBDEB2
+    component_id: block.system_menu_block.tickets
+    component_version: 7df4036b602d0b6f
+    inputs:
+      label: Tickets
+      label_display: visible
+      level: 1
+  '0:footer:4':
+    parent_uuid: 9015777A-CFDF-46EC-B5BE-11C1D5788F12
+    slot: footer
+    uuid: 060992FA-84C3-4ED7-838D-667F6222F5CB
+    component_id: block.webform_block
+    component_version: 75298500addde82f
+    inputs:
+      label: 'Signup for latest updates'
+      label_display: visible
+      webform_id: update_webform
+  '0:footer_bottom:0':
+    parent_uuid: 9015777A-CFDF-46EC-B5BE-11C1D5788F12
+    slot: footer_bottom
+    uuid: ADE5EA95-72C8-46BE-8C7A-FE23D48DEA56
+    component_id: sdc.convene_theme.copyright
+    component_version: 442eed26aa9e1b43
+    inputs:
+      text: '© 2026 OpenSense Labs. Crafted together with the community.'

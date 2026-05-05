@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @file
+ * Acquia Trials Countdown module.
+ */
+
+/**
+ * Fetches the trial end timestamp from the Acquia API.
+ *
+ * @return int
+ *   The trial end Unix timestamp.
+ */
+function acquia_trials_countdown_fetch_trial_end(): int {
+  $subscription_id = getenv('SUBSCRIPTION_ID') ?: '';
+  return \Drupal::service('acquia_trials_countdown.trial_end_client')
+    ->fetchTrialEnd($subscription_id);
+}
+
+/**
+ * Implements hook_cron().
+ */
+function acquia_trials_countdown_cron() {
+  // @todo reenable once the API is ready.
+  //$trial_end = acquia_trials_countdown_fetch_trial_end();
+  //\Drupal::state()->set('acquia_trials_countdown.trial_end', $trial_end);
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function acquia_trials_countdown_page_attachments(array &$attachments) {
+  $attachments['#cache']['contexts'][] = 'user.permissions';
+  if (!\Drupal::currentUser()->hasPermission('access administration pages')) {
+    return;
+  }
+
+  $trial_end = \Drupal::state()->get('acquia_trials_countdown.trial_end');
+
+  $attachments['#attached']['library'][] = 'acquia_trials_countdown/countdown-banner';
+  $attachments['#attached']['drupalSettings']['trialsCountdown'] = [
+    'endTimestamp' => $trial_end,
+  ];
+}

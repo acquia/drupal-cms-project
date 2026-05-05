@@ -1,0 +1,86 @@
+html {
+  box-sizing: border-box;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--body-copy);
+  line-height: 1.5;
+  margin: 0;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+*:focus-visible {
+  box-shadow: var(--focus-shadow);
+  outline: var(--focus-outline);
+  outline-offset: 0.2rem;
+}
+
+.sr-only,
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px; /* Fix for https://github.com/twbs/bootstrap/issues/25686 */
+  overflow: hidden;
+  clip-path: inset(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only-focusable:active,
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip-path: none;
+  white-space: normal;
+}
+
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main {
+  flex-grow: 1;
+}
+
+.toolbar-menu .menu-item {
+  margin: 0;
+}
+
+.component {
+  margin: var(--spacing-1);
+  padding-top: var(--component-space);
+  padding-bottom: var(--component-space);
+  border-radius: 1.6rem;
+}
+
+::selection {
+  color: var(--white);
+  background: var(--brand-primary);
+}
+
+/* Disable all animations by default if 'prefer-reduced-motion' is enabled
+ * NOTE: Check your animations with this feature enabled; it will turn off
+ * animation but not transforms, so it might look a bit weird!
+ */
+@media (prefers-reduced-motion) {
+  * {
+    transition: none !important;
+  }
+}

@@ -1,0 +1,93 @@
+.pass-card {
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.pass-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
+}
+
+/* TOP MEDIA HALF */
+.pass-card__top {
+  background-color: #E2E8F0; /* Placeholder light grey background if image doesn't fill it */
+  width: 100%;
+  aspect-ratio: 16 / 11; /* roughly matches Figma aspect ratio */
+  max-height: 233px;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.pass-card__media {
+  max-height: 233px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.pass-card__media img,
+.pass-card__media .component {
+  max-height: 233px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* BOTTOM CONTENT HALF */
+.pass-card__bottom {
+  background-color: #0f2e4a; /* Lighter dark blue than the grid background */
+  padding: 16px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.pass-card__content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.pass-card__eyebrow {
+  margin-bottom: 12px;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.pass-card__title {
+  margin-bottom: 16px;
+  font-size: 32px;
+  font-weight: 400; /* Regular per screenshot */
+  line-height: 1.2;
+  color: #FFFFFF;
+  margin-top: 0;
+}
+
+.pass-card__description {
+  margin-bottom: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #A0AEC0; /* Light grey/blue text */
+  flex-grow: 1;
+}
+
+.pass-card__action {
+  color: #FFFFFF; 
+}
+
+/* Fix for nested links/buttons placed in the action slot */
+.pass-card__action a {
+  margin-top: 10px;
+  color: #FFFFFF;
+  text-decoration: none;
+}

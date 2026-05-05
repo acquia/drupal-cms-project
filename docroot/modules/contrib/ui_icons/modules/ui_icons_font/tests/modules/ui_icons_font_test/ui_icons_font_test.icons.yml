@@ -1,0 +1,37 @@
+test_font:
+  extractor: font
+  config:
+    sources:
+      - icons/foo.codepoints
+      - icons/foo.ttf
+      - icons/foo.json
+      - icons/foo.yml
+  settings:
+    size:
+      title: "Size"
+      type: "integer"
+      default: 32
+    color:
+      title: "Color"
+      type: "string"
+      format: "color"
+  template: >-
+    <i class="icon icon-{{ icon_id }}"
+      style="
+        font-size:{{ size|default(32) }}px;
+        color:{{ color }};
+      "
+    >
+      {{ content|default(icon_id)|spaceless }}
+    </i>
+  preview: >
+    <i
+      class="icon icon-{{ icon_id }}"
+      style="
+        font-size:{{ size|default(48) }}px;
+        line-height:{{ size|default(48) }}px;
+        color:{{ color|default('orange') }};
+      "
+    >
+      {{ content|default(icon_id)|first }}
+    </i>

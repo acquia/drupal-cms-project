@@ -1,0 +1,7 @@
+services:
+  eca_ui.event_collector:
+    class: Drupal\eca_ui\EventSubscriber\EcaEventCollector
+    arguments:
+      - '@state'
+    tags:
+      - { name: event_subscriber }

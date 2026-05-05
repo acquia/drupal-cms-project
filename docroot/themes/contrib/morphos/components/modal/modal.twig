@@ -1,0 +1,44 @@
+{% set is_preview = canvas_is_preview or in_preview %}
+
+{% set slot_action_item %}{% block action_item %}{% endblock %}{% endset %}
+{% set slot_box_items %}{% block box_items %}{% endblock %}{% endset %}
+
+{% set component_preview %}
+  <div{{ attributes.addClass('modal-component') }}>
+    <div class="modal-component__action">
+      {{ slot_action_item }}
+    </div>
+
+    <div class="min-h-20">
+      {{ slot_box_items }}
+    </div>
+  </div>
+{% endset %}
+
+{% set component_render %}
+  <div {{ attributes.addClass('modal-component').setAttribute('data-modal-placement', placement) }}>
+    <div class="modal-component__action">
+      {{ slot_action_item }}
+    </div>
+
+    <div class="modal-component__dialog modal">
+      <div class="modal-box">
+        <button
+          type="button" class="modal-component__close btn btn-sm btn-circle btn-ghost absolute right-2 rtl:right-[unset] rtl:left-2 top-2"
+          aria-label="Close">
+          {{ include('morphos:icon', {
+            icon: 'x-circle',
+            icon_size: 'icon-size--sm',
+          },
+            with_context: false
+          ) }}
+        </button>
+        <div class="modal-component__body">
+          {{ slot_box_items }}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endset %}
+
+{{ is_preview ? component_preview : component_render }}

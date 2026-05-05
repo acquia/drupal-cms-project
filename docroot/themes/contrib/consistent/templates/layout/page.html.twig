@@ -1,0 +1,133 @@
+<header class="border-b border-border bg-white" role="banner">
+  <div class="stwl-container flex items-center justify-between py-3 gap-4">
+    <a href="{{ path('<front>') }}" class="flex items-center gap-3 no-underline shrink-0" rel="home">
+      {% if logo %}
+        <img src="{{ logo }}" alt="{{ site_name }}" class="h-14 w-auto" />
+      {% elseif site_name %}
+        <span class="text-foreground font-bold text-lg leading-tight">{{ site_name }}</span>
+      {% endif %}
+    </a>
+    <div class="stwl-desktop-nav items-center gap-4">
+      <form action="/search" method="get" class="flex" role="search" aria-label="{{ 'Site search'|t }}">
+        <label for="header-search-desktop" class="sr-only">{{ 'Search'|t }}</label>
+        <input
+          type="search"
+          id="header-search-desktop"
+          name="keywords"
+          placeholder="{{ 'Search'|t }}"
+          class="h-10 px-3 text-base border-2 border-foreground bg-white text-foreground"
+        />
+        <button
+          type="submit"
+          class="h-10 w-10 flex items-center justify-center bg-yellow text-black cursor-pointer hover:bg-focus hover:brightness-90 transition duration-200 focus:outline-none focus:bg-focus focus:text-focus-text focus:shadow-[0_2px_0_0_var(--color-foreground)]"
+          aria-label="{{ 'Search'|t }}"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+      </form>
+
+      <nav class="flex items-center gap-4" aria-label="{{ 'Header links'|t }}">
+        <a href="/about" class="text-foreground text-base no-underline hover:underline whitespace-nowrap">{{ 'About'|t }}</a>
+        <a href="/whats-on" class="text-foreground text-base no-underline hover:underline whitespace-nowrap">{{ 'What\'s on'|t }}</a>
+      </nav>
+
+      <button
+        type="button"
+        class="flex items-center gap-2 px-4 py-2 text-base border-2 border-card-border rounded-[var(--radius)] cursor-pointer hover:border-foreground transition duration-200"
+        aria-expanded="false"
+        aria-controls="services-menu"
+        data-stwl-toggle="services-menu"
+      >
+        {{ 'Services'|t }}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+    <button
+      type="button"
+      class="stwl-mobile-trigger items-center justify-center w-11 h-11"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="{{ 'Open menu'|t }}"
+      data-stwl-toggle="mobile-menu"
+    >
+      <svg class="stwl-icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg class="stwl-icon-close hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="stwl-mobile-menu" aria-hidden="true">
+    <div class="stwl-container flex flex-col gap-4 py-4">
+      <form action="/search" method="get" class="flex" role="search" aria-label="{{ 'Site search'|t }}">
+        <label for="header-search-mobile" class="sr-only">{{ 'Search'|t }}</label>
+        <input
+          type="search"
+          id="header-search-mobile"
+          name="keywords"
+          placeholder="{{ 'Search'|t }}"
+          class="flex-1 h-12 px-3 text-base border-2 border-foreground bg-white text-foreground"
+        />
+        <button
+          type="submit"
+          class="h-12 w-12 flex items-center justify-center bg-yellow text-black cursor-pointer hover:brightness-90 transition duration-200 focus:outline-none focus:bg-focus focus:text-focus-text focus:shadow-[0_2px_0_0_var(--color-foreground)]"
+          aria-label="{{ 'Search'|t }}"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+      </form>
+      <nav class="flex flex-col" aria-label="{{ 'Main navigation'|t }}">
+        <a href="/about" class="text-foreground text-base font-bold no-underline py-3 border-b border-border">{{ 'About'|t }}</a>
+        <a href="/whats-on" class="text-foreground text-base font-bold no-underline py-3 border-b border-border">{{ 'What\'s on'|t }}</a>
+        <a href="/services" class="text-foreground text-base font-bold no-underline py-3 border-b border-border">{{ 'Services'|t }}</a>
+      </nav>
+      {% if page.header %}
+        <div class="pt-2">
+          {{ page.header }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  <div id="services-menu" class="hidden border-t border-border" aria-hidden="true">
+    <div class="stwl-container py-6">
+      {{ page.header }}
+    </div>
+  </div>
+</header>
+{% if page.breadcrumb %}
+  <div class="stwl-container py-3">
+    {{ page.breadcrumb }}
+  </div>
+{% endif %}
+<main id="main-content" role="main" tabindex="-1" class="focus:outline-none focus:shadow-none">
+  {% if rendered_by_canvas %}
+    {{ page.content }}
+  {% else %}
+    <div class="stwl-container py-10">
+      {{ title }}
+      {{ page.content }}
+    </div>
+  {% endif %}
+</main>
+<footer class="stwl-footer bg-black text-white" role="contentinfo">
+  <div class="stwl-container">
+    <div class="flex items-center justify-between py-8 border-b border-grey-1">
+      <a href="{{ path('<front>') }}" class="no-underline shrink-0" rel="home">
+        {% if logo_white %}
+          <img src="{{ logo_white }}" alt="{{ site_name }}" class="h-14 w-auto" />
+        {% endif %}
+      </a>
+      {% if page.footer_social %}
+        <div class="flex items-center gap-4 text-white">
+          {{ page.footer_social }}
+        </div>
+      {% endif %}
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 py-8">
+      {% if page.footer_primary %}
+        <div>{{ page.footer_primary }}</div>
+      {% endif %}
+      {% if page.footer_secondary %}
+        <div>{{ page.footer_secondary }}</div>
+      {% endif %}
+    </div>
+
+  </div>
+</footer>

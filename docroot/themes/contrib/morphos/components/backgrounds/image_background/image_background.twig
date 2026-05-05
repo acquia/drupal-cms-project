@@ -1,0 +1,26 @@
+{# Set default values for props to prevent errors #}
+{% set position = position|default('center center') %}
+{% set media_query = media_query|default(null) %}
+{% set media_query_attr = media_query ? 'data-background-media-query="' ~ media_query ~ '"' : '' %}
+
+{# Only render if there is a background image to show #}
+{% if image.src %}
+  <div class="bg-image-wrap absolute inset-0 z-[-1]"
+    {{ media_query_attr|raw }}
+    style="
+      background-image: url('{{ image.src }}');
+      {% if style in ['cover', 'contain'] %}
+        background-size: {{ style }};
+        background-repeat: no-repeat;
+      {% else %}
+        background-repeat: {{ style }};
+      {% endif %}
+      {% if position %}
+        background-position: {{ position }};
+      {% endif %}
+      {% if opacity %}
+        opacity: {{ opacity / 100 }};
+      {% endif %}
+    ">
+  </div>
+{% endif %}

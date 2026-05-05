@@ -1,0 +1,1065 @@
+field.value.custom:
+  type: sequence
+  label: 'Default value'
+  sequence:
+    type: ignore
+
+field.field_settings.custom:
+  type: mapping
+  label: 'Custom field settings'
+  mapping:
+    add_more_label:
+      type: label
+      label: 'Add another button label'
+    field_settings:
+      type: sequence
+      label: 'Field settings'
+      sequence:
+        type: custom_field.field_settings.[%key]
+        label: 'Custom field settings'
+
+field.storage_settings.custom:
+  type: mapping
+  label: 'Custom field settings'
+  mapping:
+    columns:
+      type: sequence
+      label: 'Columns'
+      sequence:
+        type: custom_field.column
+        label: 'Column'
+
+field.widget.settings.*:
+  type: custom_field_widget_base
+
+field.widget.settings.custom_flex:
+  type: custom_field_widget_base
+  mapping:
+    columns:
+      type: sequence
+      label: 'Column settings'
+      sequence:
+        type: string
+        constraints:
+          Choice:
+            - auto
+            - '1'
+            - '2'
+            - '3'
+            - '4'
+            - '5'
+            - '6'
+            - '7'
+            - '8'
+            - '9'
+            - '10'
+            - '11'
+            - '12'
+
+    breakpoint:
+      type: string
+      label: 'Stack items on:'
+      constraints:
+        Choice:
+          - ''
+          - medium
+          - small
+
+field.widget.settings.custom_stacked:
+  type: custom_field_widget_base
+
+custom_field_widget_base:
+  type: mapping
+  label: 'Custom field widget settings'
+  mapping:
+    wrapper:
+      type: string
+      label: 'Wrapper'
+      constraints:
+        Choice:
+          - div
+          - fieldset
+          - details
+    label_value:
+      type: string
+      label: 'Label value'
+    label_limit:
+      type: integer
+      label: 'Label limit'
+    label_prefix:
+      type: label
+      label: 'Label prefix'
+    auto_collapse:
+      type: boolean
+      label: 'Auto collapse'
+    open:
+      type: boolean
+      label: 'Show open by default?'
+    fields:
+      type: sequence
+      label: 'Custom field widgets'
+      sequence:
+        type: custom_field.field.[%key]
+        label: 'Custom field widget'
+
+# Widget settings.
+custom_field.field.*:
+  type: mapping
+  mapping:
+    weight:
+      type: weight
+      label: 'Weight'
+    type:
+      type: string
+      label: 'Widget type machine name'
+      constraints:
+        PluginExists:
+          manager: plugin.manager.custom_field_widget
+          interface: '\Drupal\custom_field\Plugin\CustomFieldWidgetInterface'
+    label:
+      type: label
+      label: 'Label'
+    size:
+      type: integer
+      label: 'Size of textfield'
+    placeholder:
+      type: label
+      label: 'Placeholder'
+    maxlength:
+      type: integer
+      label: 'Max length'
+    maxlength_js:
+      type: boolean
+      label: 'Show max length character count'
+    # ImageWidget.
+    preview_image_style:
+      type: string
+      label: 'Preview image style'
+    progress_indicator:
+      type: string
+      label: 'Progress indicator'
+    # TextareaWidget.
+    rows:
+      type: integer
+      label: 'Rows'
+    # MapKeyValueWidget.
+    key_label:
+      type: label
+      label: 'Key label'
+    value_label:
+      type: label
+      label: 'Value label'
+    # LinkWidget|LinkitWidget.
+    placeholder_url:
+      type: string
+      label: 'Placeholder for URL'
+    placeholder_title:
+      type: label
+      label: 'Placeholder for link text'
+    # EntityReferenceAutocompleteWidget.
+    match_operator:
+      type: string
+      label: 'Match operator'
+    match_limit:
+      type: integer
+      label: 'Match limit'
+    # EntityReferenceRadiosWidget|EntityReferenceSelectWidget|RadiosWidget|SelectWidget|ViewfieldSelectWidget.
+    empty_option:
+      type: string
+      label: 'Empty option'
+    # HierarchicalSelectWidget.
+    force_deepest_level:
+      type: boolean
+      label: 'Force deepest level'
+    level_labels:
+      type: boolean
+      label: 'Show level labels'
+    # ColorBoxesWidget.
+    default_colors:
+      type: string
+      label: 'Default colors'
+    # DateTimeDatelistWidget.
+    date_order:
+      type: string
+      label: 'Date part order'
+    time_type:
+      type: string
+      label: 'Time type'
+    increment:
+      type: integer
+      label: 'increment'
+    # Date widgets.
+    year_range:
+      type: string
+      label: 'Year range'
+    # DateRange|TimeRange widgets.
+    start_label:
+      type: label
+      label: 'Start label'
+    end_label:
+      type: label
+      label: 'End label'
+    date_end_required:
+      type: boolean
+      label: 'Require end date'
+    year_range_end:
+      type: string
+      label: 'Year range end'
+    all_day_checkbox:
+      type: boolean
+      label: 'All day checkbox'
+    same_day_checkbox:
+      type: boolean
+      label: 'Same day checkbox'
+    # TimeRange widget.
+    time_end_required:
+      type: boolean
+      label: 'Require end time'
+    # Duration widget.
+    duration_element:
+      type: string
+      label: 'Duration element'
+
+custom_field_formatter_base:
+  type: mapping
+  label: 'Formatter settings'
+  mapping:
+    fields:
+      type: sequence
+      label: 'Custom field formatters'
+      sequence:
+        type: mapping
+        label: 'Custom field formatter'
+        mapping:
+          weight:
+            type: weight
+            label: 'Weight'
+          format_type:
+            type: string
+            label: 'Formatter type machine name'
+            constraints:
+              PluginExists:
+                manager: plugin.manager.custom_field_formatter
+                interface: '\Drupal\custom_field\Plugin\CustomFieldFormatterInterface'
+          wrappers:
+            type: custom_field.formatter.wrappers
+          formatter_settings:
+            type: custom_field.formatter_settings
+
+custom_field.formatter.wrappers:
+  type: mapping
+  label: 'Style settings'
+  mapping:
+    field_wrapper_tag:
+      type: string
+      label: 'Field wrapper tag'
+    field_wrapper_classes:
+      type: string
+      label: 'Field wrapper classes'
+    field_tag:
+      type: string
+      label: 'Field tag'
+    field_classes:
+      type: string
+      label: 'Field classes'
+    label_tag:
+      type: string
+      label: 'Label tag'
+    label_classes:
+      type: string
+      label: 'Label classes'
+
+field.formatter.settings.custom_formatter:
+  type: custom_field_formatter_base
+  label: 'Default'
+
+field.formatter.settings.custom_inline:
+  type: custom_field_formatter_base
+  label: 'Inline'
+  mapping:
+    show_labels:
+      type: boolean
+      label: 'Show labels?'
+    label_separator:
+      type: string
+      label: 'Label separator'
+    item_separator:
+      type: string
+      label: 'Item separator'
+
+field.formatter.settings.custom_list:
+  type: custom_field_formatter_base
+  label: 'HTML list'
+  mapping:
+    list_type:
+      type: string
+      label: 'List type'
+      constraints:
+        Choice:
+          - ul
+          - ol
+
+field.formatter.settings.custom_table:
+  type: custom_field_formatter_base
+  label: 'Table'
+  mapping:
+    hide_empty:
+      type: boolean
+      label: 'Hide columns with empty rows'
+    sort_by:
+      type: string
+      label: 'Sort by'
+    sort_order:
+      type: string
+      label: 'Sort order'
+      constraints:
+        Choice:
+          - asc
+          - desc
+    hide_header:
+      type: boolean
+      label: 'Hide header'
+
+field.formatter.settings.flipped_table:
+  type: custom_field_formatter_base
+  label: 'Table (flipped)'
+  mapping:
+    hide_empty:
+      type: boolean
+      label: 'Hide rows with empty columns'
+
+field.formatter.settings.custom_template:
+  type: mapping
+  label: 'Custom template'
+  mapping:
+    template:
+      type: text
+      label: 'Template'
+    tokens:
+      type: string
+      label: 'Tokens'
+      constraints:
+        Choice:
+          - basic
+          - advanced
+    advanced_tokens:
+      type: custom_field.token_browser
+      label: 'Advanced tokens'
+
+custom_field.dynamic_property:
+  type: mapping
+  label: 'Dynamic property'
+  mapping:
+    widget:
+      type: string
+      label: 'Widget'
+      constraints:
+        PluginExists:
+          manager: plugin.manager.custom_field_component_prop_widget
+          interface: '\Drupal\custom_field\Plugin\PropWidgetInterface'
+    value:
+      type: custom_field.prop_value.[%parent.widget]
+      label: 'Value'
+
+# Default prop value type.
+custom_field.prop_value.*:
+  type: string
+  label: 'Value'
+
+custom_field.prop_value.boolean:
+  type: boolean
+  label: 'Boolean'
+
+custom_field.prop_value.integer:
+  type: integer
+  label: 'Integer'
+
+custom_field.prop_value.attributes:
+  type: mapping
+  label: 'Attributes'
+  mapping:
+    title:
+      type: string
+      label: 'Title'
+    aria-label:
+      type: string
+      label: 'Aria label'
+    target:
+      type: string
+      label: 'Target'
+    class:
+      type: string
+      label: 'Class'
+    id:
+      type: string
+      label: 'Id'
+    name:
+      type: string
+      label: 'Name'
+    rel:
+      type: string
+      label: 'Rel'
+    accesskey:
+      type: string
+      label: 'Accesskey'
+
+# Object.
+custom_field.prop_value.object:
+  type: sequence
+  label: 'Object'
+  sequence:
+    type: custom_field.dynamic_property
+    label: 'Prop'
+
+# Image.
+custom_field.prop_value.image:
+  type: mapping
+  label: 'Image'
+  mapping:
+    fids:
+      type: sequence
+      sequence:
+        type: integer
+        label: 'File ID'
+    src:
+      type: string
+      label: 'Source'
+    alt:
+      type: string
+      label: 'Alternative text'
+    width:
+      type: integer
+      label: 'Width'
+    height:
+      type: integer
+      label: 'Height'
+
+# Array of strings.
+custom_field.prop_value.array_string:
+  type: sequence
+  label: 'Items'
+  sequence:
+    type: string
+    label: 'Item'
+
+# Array of integers.
+custom_field.prop_value.array_integer:
+  type: sequence
+  label: 'Items'
+  sequence:
+    type: integer
+    label: 'Item'
+
+# Array of numbers.
+custom_field.prop_value.array_number:
+  type: sequence
+  label: 'Items'
+  sequence:
+    type: float
+    label: 'Item'
+
+# Array of objects.
+custom_field.prop_value.array_object:
+  type: sequence
+  label: 'Items'
+  sequence:
+    type: sequence
+    label: 'Item'
+    sequence:
+      type: custom_field.dynamic_property
+      label: 'Prop'
+
+# Array of images.
+custom_field.prop_value.array_image:
+  type: sequence
+  label: 'Image Items'
+  sequence:
+    type: sequence
+    label: 'Image Item'
+    sequence:
+      type: custom_field.dynamic_property
+      label: 'Image'
+
+field.formatter.settings.custom_field_sdc:
+  type: mapping
+  label: 'Single directory component'
+  mapping:
+    component:
+      type: string
+      label: 'Component'
+    variant:
+      type: string
+      label: 'Variant'
+    props:
+      type: sequence
+      label: 'Props'
+      sequence:
+        type: custom_field.dynamic_property
+        label: 'Prop'
+    slots:
+      type: sequence
+      label: 'Slots'
+      sequence:
+        type: mapping
+        mapping:
+          source:
+            type: string
+            label: 'Source'
+          field:
+            type: string
+            label: 'Field'
+          formatter_settings:
+            type: custom_field.formatter_settings
+          format_type:
+            type: string
+            label: 'Formatter type machine name'
+            constraints:
+              PluginExists:
+                manager: plugin.manager.custom_field_formatter
+                interface: '\Drupal\custom_field\Plugin\CustomFieldFormatterInterface'
+          wrappers:
+            type: custom_field.formatter.wrappers
+
+custom_field.column:
+  type: mapping
+  label: 'Column'
+  mapping:
+    allowed_values:
+      type: custom_field.allowed_values
+      label: 'Allowed values list'
+    name:
+      type: string
+      label: 'Name'
+    type:
+      type: string
+      label: 'Field type machine name'
+      constraints:
+        PluginExists:
+          manager: plugin.manager.custom_field_type
+          interface: '\Drupal\custom_field\Plugin\CustomFieldTypeInterface'
+    length:
+      type: integer
+      label: 'Length'
+    unsigned:
+      type: boolean
+      label: 'Unsigned'
+    precision:
+      type: integer
+      label: 'Precision'
+    scale:
+      type: integer
+      label: 'Scale'
+    size:
+      type: string
+      label: 'Size'
+      constraints:
+        Choice:
+          - tiny
+          - small
+          - medium
+          - big
+          - normal
+    datetime_type:
+      type: string
+      label: 'Date type'
+      constraints:
+        Choice:
+          - datetime
+          - date
+          - allday
+    target_type:
+      type: string
+      label: 'Type of item to reference'
+    uri_scheme:
+      type: string
+      label: 'Upload destination'
+
+# Field settings.
+custom_field.field_settings.*:
+  type: mapping
+  label: 'Custom field settings'
+  mapping:
+    label:
+      type: label
+      label: 'Label'
+    check_empty:
+      type: boolean
+      label: 'Check empty?'
+    required:
+      type: boolean
+      label: 'Required'
+    translatable:
+      type: boolean
+      label: 'Users may translate this field'
+    description:
+      type: text
+      label: 'Help text'
+    description_display:
+      type: string
+      label: 'Help text position'
+      constraints:
+        Choice:
+          - before
+          - after
+    # string|integer|float|decimal subfields.
+    prefix:
+      type: label
+      label: 'Prefix'
+    suffix:
+      type: label
+      label: 'Suffix'
+    # string|integer|float|telephone subfields.
+    allowed_values:
+      type: custom_field.allowed_values
+      label: 'Allowed values list'
+    # file|image subfields.
+    file_directory:
+      type: string
+      label: 'File directory'
+    file_extensions:
+      type: string
+      label: 'Allowed file extensions'
+    max_filesize:
+      type: string
+      label: 'Maximum upload size'
+    # image subfields.
+    max_resolution:
+      type: string
+      label: 'Maximum image resolution'
+    min_resolution:
+      type: string
+      label: 'Minimum image resolution'
+    alt_field:
+      type: boolean
+      label: 'Enable Alt field'
+    alt_field_required:
+      type: boolean
+      label: 'Alt field required'
+    title_field:
+      type: boolean
+      label: 'Enable Title field'
+    title_field_required:
+      type: boolean
+      label: 'Title field required'
+    # map|map_string subfields.
+    table_empty:
+      type: string
+      label: 'Empty text'
+    # integer|float|decimal subfields.
+    min:
+      type: integer
+      label: 'Minimum'
+    max:
+      type: integer
+      label: 'Maximum'
+    # telephone subfields.
+    pattern:
+      type: string
+      label: 'Telephone format'
+    # uri|link subfields.
+    link_type:
+      type: integer
+      label: 'Allowed link type'
+    field_prefix:
+      type: string
+      label: 'Field prefix'
+    field_prefix_custom:
+      type: string
+      label: 'Custom field prefix'
+    # link subfields.
+    title:
+      type: integer
+      label: 'Allow link text'
+    enabled_attributes:
+      type: sequence
+      sequence:
+        type: boolean
+        label: 'Enabled'
+    widget_default_open:
+      type: string
+      label: 'Widget expand behavior'
+    # time subfields.
+    seconds_enabled:
+      type: boolean
+      label: 'Add seconds parameter to input widget'
+    seconds_step:
+      type: integer
+      label: 'Step to change seconds'
+    # string_long subfields.
+    formatted:
+      type: boolean
+      label: 'Enable wysiwyg'
+    default_format:
+      type: string
+      label: 'Default format'
+    format:
+      type: mapping
+      label: 'Format settings'
+      mapping:
+        guidelines:
+          type: boolean
+          label: 'Show format guidelines'
+        help:
+          type: boolean
+          label: 'Show format help'
+    # datetime|daterange subfields.
+    timezone_enabled:
+      type: boolean
+      label: 'Enable time zone selection'
+    timezone_options:
+      type: sequence
+      label: 'Time zone options'
+      sequence:
+        type: string
+        label: 'Time zone'
+    # daterange subfields.
+    duration_enabled:
+      type: boolean
+      label: 'Enable duration selection'
+    duration_options:
+      type: custom_field.duration_options
+      label: 'Duration options'
+    # entity_reference subfields.
+    handler:
+      type: string
+      label: 'Handler'
+    handler_settings:
+      type: mapping
+      label: 'Handler settings'
+      mapping:
+        include_anonymous:
+          type: boolean
+          label: 'Include anonymous'
+        filter:
+          type: mapping
+          label: 'Filter'
+          mapping:
+            type:
+              type: string
+              label: 'Type'
+        sort:
+          type: mapping
+          label: 'Sort'
+          mapping:
+            field:
+              type: string
+              label: 'Sort by'
+            direction:
+              type: string
+              label: 'Sort direction'
+        auto_create:
+          type: boolean
+          label: 'Create referenced entities if they do not already exist'
+        target_bundles:
+          type: sequence
+          label: 'Target bundles'
+          sequence:
+            type: string
+            label: 'Bundle'
+        auto_create_bundle:
+          type: string
+          label: 'Store new items in'
+        view:
+          type: mapping
+          label: 'View used to select the entities'
+          mapping:
+            view_name:
+              type: string
+              label: 'View machine name'
+            display_name:
+              type: string
+              label: 'View display name'
+            arguments:
+              type: sequence
+              label: 'View arguments'
+              sequence:
+                type: custom_field.view_arguments.[%key]
+
+custom_field.view_arguments.*:
+  type: string
+
+custom_field.token_browser:
+  type: mapping
+  label: 'Token browser'
+  mapping:
+    recursion_limit:
+      type: integer
+      label: 'Recursion limit'
+      constraints:
+        Choice:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+    global_types:
+      type: boolean
+      label: 'Global types'
+
+custom_field.allowed_values:
+  type: sequence
+  sequence:
+    type: mapping
+    label: 'Allowed value with label'
+    mapping:
+      key:
+        type: string
+        label: 'Value'
+      label:
+        type: label
+        label: 'Label'
+
+custom_field.duration_options:
+  type: sequence
+  sequence:
+    type: mapping
+    label: 'Duration value with label'
+    mapping:
+      key:
+        type: integer
+        label: 'Value'
+      label:
+        type: label
+        label: 'Label'
+
+custom_field.formatter_settings:
+  type: mapping
+  label: 'Formatter settings'
+  mapping:
+    decimal_separator:
+      type: string
+      label: 'Decimal marker'
+    format:
+      type: string
+      label: 'Output format'
+      constraints:
+        Choice:
+          - yes-no
+          - true-false
+          - on-off
+          - enabled-disabled
+          - boolean
+          - unicode-yes-no
+          - custom
+    format_custom_true:
+      type: string
+      label: 'Custom output for TRUE'
+    format_custom_false:
+      type: string
+      label: 'Custom output for FALSE'
+    image_link:
+      type: string
+      label: 'Link image to'
+    image_style:
+      type: string
+      label: 'Image style'
+    image_loading:
+      type: mapping
+      label: 'Image loading settings'
+      mapping:
+        attribute:
+          type: string
+          label: 'Loading attribute'
+    key_label:
+      type: string
+      label: 'Key label'
+      constraints:
+        Choice:
+          - key
+          - label
+    value_label:
+      type: string
+      label: 'Value label'
+    label_display:
+      type: string
+      label: 'Label display'
+      constraints:
+        Choice:
+          - above
+          - inline
+          - hidden
+          - visually_hidden
+    field_label:
+      type: label
+      label: 'Field label'
+    prefix_suffix:
+      type: boolean
+      label: 'Display prefix/suffix'
+    # The link formatter settings.
+    link_text:
+      type: string
+      label: 'Link text'
+    title:
+      type: string
+      label: 'Title'
+    trim_length:
+      type: integer
+      label: 'Trim link text length'
+    url_plain:
+      type: boolean
+      label: 'Show URL as plain text'
+    url_only:
+      type: boolean
+      label: 'URL only'
+    rel:
+      type: string
+      label: 'Add rel="nofollow" to links'
+    noopener:
+      type: string
+      label: 'Add rel="noopener" to links'
+    noreferrer:
+      type: string
+      label: 'Add rel="noreferrer" to links'
+    id:
+      type: string
+      label: 'ID'
+    class:
+      type: string
+      label: 'Class'
+    aria-label:
+      type: string
+      label: 'ARIA label'
+    accesskey:
+      type: string
+      label: 'Accesskey'
+    name:
+      type: string
+      label: 'Name'
+    scale:
+      type: integer
+      label: 'Scale'
+    target:
+      type: string
+      label: 'Open link in new window'
+    thousand_separator:
+      type: string
+      label: 'Thousand marker'
+    # DateTimeFormatterBase.
+    timezone_override:
+      type: string
+      label: 'Time zone override'
+    timezone_stored:
+      type: boolean
+      label: 'Use stored time zone'
+    display_timezone:
+      type: boolean
+      label: 'Display time zone'
+    timezone_format:
+      type: string
+      label: 'Time zone format'
+    user_timezone:
+      type: boolean
+      label: 'Append date/time in user time zone'
+    format_type:
+      type: string
+      label: 'Date format'
+    date_format:
+      type: string
+      label: 'Date/time format'
+    future_format:
+      type: required_label
+      label: 'Future format'
+    past_format:
+      type: required_label
+      label: 'Past format'
+    granularity:
+      type: integer
+      label: 'Granularity'
+    view_mode:
+      type: string
+      label: 'View mode'
+    link:
+      type: boolean
+      label: 'Link label to the referenced entity'
+    hierarchy_display:
+      type: string
+      label: 'Terms to display'
+    hierarchy_link:
+      type: boolean
+      label: 'Link each term'
+    hierarchy_wrap:
+      type: string
+      label: 'Wrap each term'
+    hierarchy_separator:
+      type: string
+      label: 'Separator'
+    hierarchy_reverse:
+      type: boolean
+      label: 'Reverse order'
+    time_format:
+      type: string
+      label: 'Time format'
+    # DateRangeDefaultFormatter.
+    from_to:
+      type: string
+      label: 'Display'
+      constraints:
+        Choice:
+          - both
+          - start_date
+          - end_date
+    separator:
+      type: string
+      label: 'Date separator'
+    end_date_fallback_text:
+      type: string
+      label: 'End date fallback text'
+    # DateTime/DateRange formatters.
+    date_format_parts:
+      type: sequence
+      label: 'Date format parts'
+      sequence:
+        type: custom_field.date_part
+        label: 'Date format part'
+    time_format_parts:
+      type: sequence
+      label: 'Time format parts'
+      sequence:
+        type: custom_field.date_part
+        label: 'Time format part'
+    date_first:
+      type: string
+      label: 'First part shown'
+      constraints:
+        Choice:
+          - date
+          - time
+    date_time_separator:
+      type: string
+      label: 'Date/time separator'
+    all_day_label:
+      type: string
+      label: 'All day label'
+    all_day_separator:
+      type: string
+      label: 'All day separator'
+    # DateRange|Duration formatters.
+    duration_granularity:
+      type: string
+      label: 'Duration granularity'
+    duration_separator:
+      type: string
+      label: 'Duration separator'
+    # MapInline formatter.
+    item_separator:
+      type: string
+      label: 'Item separator'
+    # MapList formatter.
+    list_type:
+      type: string
+      label: 'List type'
+      constraints:
+        Choice:
+          - ul
+          - ol
+
+custom_field.date_part:
+  type: mapping
+  mapping:
+    format:
+      type: date_format
+      label: 'Format'
+    suffix:
+      type: string
+      label: 'Suffix'

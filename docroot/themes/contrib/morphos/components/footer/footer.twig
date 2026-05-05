@@ -1,0 +1,82 @@
+{% set is_preview = canvas_is_preview or in_preview %}
+
+{% set container_attributes = create_attribute() %}
+{% set overlay_attributes = create_attribute() %}
+
+{% set margin = [
+  margin_top == '0' ? 'mt-0',
+  margin_top == '4' ? 'mt-4',
+  margin_top == '8' ? 'mt-6 lg:mt-8',
+  margin_top == '12' ? 'mt-8 md:mt-10 lg:mt-12',
+  margin_top == '16' ? 'mt-10 md:mt-12 lg:mt-16',
+  margin_top == '24' ? 'mt-16 md:mt-20 lg:mt-24',
+  margin_top == '32' ? 'mt-20 md:mt-24 lg:mt-32',
+  margin_bottom == '0' ? 'mb-0',
+  margin_bottom == '4' ? 'mb-4',
+  margin_bottom == '8' ? 'mb-6 lg:mb-8',
+  margin_bottom == '12' ? 'mb-8 md:mb-10 lg:mb-12',
+  margin_bottom == '16' ? 'mb-10 md:mb-12 lg:mb-16',
+  margin_bottom == '24' ? 'mb-16 md:mb-20 lg:mb-24',
+  margin_bottom == '32' ? 'mb-20 md:mb-24 lg:mb-32',
+] %}
+
+{% set padding = [
+  padding_top == '0' ? 'pt-0',
+  padding_top == '4' ? 'pt-4',
+  padding_top == '8' ? 'pt-6 lg:pt-8',
+  padding_top == '12' ? 'pt-8 md:pt-10 lg:pt-12',
+  padding_top == '16' ? 'pt-10 md:pt-12 lg:pt-16',
+  padding_top == '24' ? 'pt-16 md:pt-20 lg:pt-24',
+  padding_top == '32' ? 'pt-20 md:pt-24 lg:pt-32',
+  padding_bottom == '0' ? 'pb-0',
+  padding_bottom == '4' ? 'pb-4',
+  padding_bottom == '8' ? 'pb-6 lg:pb-8',
+  padding_bottom == '12' ? 'pb-8 md:pb-10 lg:pb-12',
+  padding_bottom == '16' ? 'pb-10 md:pb-12 lg:pb-16',
+  padding_bottom == '24' ? 'pb-16 md:pb-20 lg:pb-24',
+  padding_bottom == '32' ? 'pb-20 md:pb-24 lg:pb-32',
+] %}
+
+{% set classes = [
+  'footer',
+  'component',
+  is_preview ? 'component--preview',
+  palette,
+  texture,
+  overlay ? 'has-overlay',
+]|merge(margin) %}
+
+{% set container_classes = [
+  'component__container',
+  container == 'container--normal' or not container ? 'container mx-auto px-4',
+  container == 'container--edgy' ? 'w-full',
+  container == 'container--wide' ? 'w-full px-4',
+  container == 'container--narrow' ? 'container w-full lg:max-w-[80%] mx-auto px-4',
+]|merge(padding) %}
+
+<div{{ attributes.addClass(classes) }}>
+  <div{{ container_attributes.addClass(container_classes) }}>
+    <div class="footer__top">
+      {% block top_items %}{% endblock %}
+    </div>
+    <div
+      class="footer__middle flex flex-col w-full gap-4 pb-8 md:grid md:grid-cols-[minmax(0,3fr)_minmax(0,1fr)]">
+      <div class="footer__main">
+        {% block main_items %}{% endblock %}
+      </div>
+      <div class="footer__side">
+        {% block side_items %}{% endblock %}
+      </div>
+    </div>
+    <div class="footer__bottom w-full border-t pt-8">
+      {% block bottom_items %}{% endblock %}
+    </div>
+  </div>
+  <div class="component__backgrounds">
+    {% block backgrounds %}{% endblock %}
+  </div>
+  <div{{ overlay_attributes.addClass('component__overlay', overlay) }}></div>
+  <div class="component__behaviors">
+    {% block behaviors %}{% endblock %}
+  </div>
+</div>

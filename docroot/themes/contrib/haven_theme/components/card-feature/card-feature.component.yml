@@ -1,0 +1,73 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Feature card
+group: Card
+props:
+  type: object
+  required:
+    - icon_size
+  properties:
+    heading_text:
+      type: string
+      title: Heading
+      examples:
+        - "This is your card title"
+    level:
+      type: number
+      title: Heading level
+      enum:
+        - 2
+        - 3
+        - 4
+      default: 3
+      examples:
+        - 3
+    url:
+      type: string
+      title: Link
+      format: uri-reference
+    media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Image
+      type: object
+      examples:
+        - src: "assets/gradient.jpg"
+          width: 800
+          height: 600
+          alt: "Blue to green gradient placeholder image"
+    overlay:
+      type: string
+      title: Image overlay
+      enum:
+        - primary
+        - secondary
+        - accent
+        - muted
+        - white
+      meta:enum:
+        primary: Primary
+        secondary: Secondary
+        accent: Accent
+        muted: Muted
+        white: White
+    icon:
+      type: string
+      title: Icon name
+      description: 'The ID of an icon from the <a href="https://phosphoricons.com/" target="_blank">Phosphor Icons</a> library.'
+      default: "arrow-circle-right"
+      examples:
+        - "arrow-circle-right"
+    icon_size:
+      type: string
+      title: Icon size
+      enum:
+        - small
+        - medium
+        - large
+        - extra-large
+      meta:enum:
+        small: Small
+        medium: Medium
+        large: Large
+        extra-large: Extra large
+      examples:
+        - large

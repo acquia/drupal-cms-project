@@ -1,0 +1,63 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 41e134bf-ed0e-40bd-ac5e-62024453cbf5
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: '403'
+  components:
+    -
+      uuid: eb7afa85-ec79-4174-b254-bc8c8bd166fc
+      component_id: sdc.morphos.banner
+      inputs:
+        title: 'Access Denied'
+        padding_top: '12'
+        padding_bottom: '12'
+        palette: color--primary
+        texture: texture--conic-top-start
+    -
+      parent_uuid: eb7afa85-ec79-4174-b254-bc8c8bd166fc
+      slot: breadcrumb
+      uuid: 01e18dee-db52-4976-8762-d3717fc074ee
+      component_id: block.system_breadcrumb_block
+      inputs:
+        label: Breadcrumbs
+        label_display: '0'
+    -
+      uuid: 0b301fd6-7ae1-4f7a-a342-794f51f05df9
+      component_id: sdc.morphos.layout
+      inputs:
+        layout: layout--4-1-7
+        container: container--normal
+        padding_top: '12'
+        padding_bottom: '12'
+    -
+      parent_uuid: 0b301fd6-7ae1-4f7a-a342-794f51f05df9
+      slot: main
+      uuid: 1c6fd6eb-1aa5-4a82-be52-49cd3279d2a8
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>Access to this page is restricted</p>'
+          format: canvas_html_block
+  path:
+    -
+      alias: /403
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

@@ -1,0 +1,66 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.internal_resource.field_audience
+    - field.field.node.internal_resource.field_description
+    - field.field.node.internal_resource.field_file
+    - field.field.node.internal_resource.field_resource_type
+    - field.field.node.internal_resource.field_specialties
+    - field.field.node.internal_resource.field_summary
+    - node.type.internal_resource
+  module:
+    - text
+    - user
+id: node.internal_resource.default
+targetEntityType: node
+bundle: internal_resource
+mode: default
+content:
+  field_audience:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_file:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_resource_type:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_specialties:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_summary: true

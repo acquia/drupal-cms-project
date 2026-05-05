@@ -1,0 +1,734 @@
+/**
+ * @file base.css
+ * Global resets and base element styles. Uses design tokens from theme.css.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  border-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+  line-height: 1.5;
+  font-family: var(--font-sans);
+}
+
+body {
+  font-weight: var(--font-weight-normal);
+  -webkit-font-smoothing: antialiased;
+}
+
+p {
+  font-size: var(--p-size);
+  line-height: var(--p-lh);
+}
+
+ul,
+ol {
+  padding-inline-start: calc(var(--spacing) * 5);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+h1 {
+  font-size: var(--h1-size);
+  line-height: var(--h1-lh);
+  font-weight: var(--font-weight-normal);
+}
+
+h2 {
+  font-size: var(--h2-size);
+  line-height: var(--h2-lh);
+  font-weight: var(--font-weight-normal);
+}
+
+h3 {
+  font-size: var(--h3-size);
+  line-height: var(--h3-lh);
+  font-weight: var(--font-weight-normal);
+}
+
+h4 {
+  font-size: var(--h4-size);
+  line-height: var(--h4-lh);
+  font-weight: var(--font-weight-normal);
+}
+
+h5 {
+  font-size: var(--h5-size);
+  line-height: var(--h5-lh);
+  font-weight: var(--font-weight-normal);
+}
+
+h6 {
+  font-size: var(--h6-size);
+  line-height: var(--h6-lh);
+  font-weight: var(--font-weight-normal);
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Layout wrappers */
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.layout-content {
+  flex: 1;
+}
+
+.cq-full {
+  width: 100%;
+  max-width: 100%;
+  margin-inline: 0;
+}
+
+/* Font utilities */
+.font-logo {
+  font-family: var(--font-logo);
+}
+
+/* Screen-reader only */
+.sr-only,
+.visually-hidden {
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border-width: 0;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  position: absolute;
+  overflow: hidden;
+}
+
+/* Breadcrumb – Figma 1-7374: horizontal, 8px gap, 16px text, no list markers */
+.breadcrumb .breadcrumb__list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  list-style: none;
+  list-style-type: none;
+  padding-inline-start: 0;
+  margin: 0;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--foreground);
+}
+
+.breadcrumb .breadcrumb__list > li {
+  display: inline-flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+}
+
+.breadcrumb .breadcrumb__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.breadcrumb .breadcrumb__link:hover {
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+.breadcrumb .breadcrumb__separator {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--foreground);
+  user-select: none;
+}
+
+.breadcrumb .breadcrumb__current {
+  font-weight: 400;
+}
+
+/* Drupal form helper */
+.entity-moderation-form {
+  background: inherit;
+}
+
+/* Branding block */
+.branding__link {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.branding__link:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.branding img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.custom-container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 1.25rem !important ;
+  padding-left: 1.25rem !important;
+
+  @media (min-width: 576px) {
+    max-width: 540px;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+  @media (min-width: 768px) {
+    max-width: 720px;
+  }
+  @media (min-width: 992px) {
+    max-width: 960px;
+  }
+  @media (min-width: 1200px) {
+    max-width: 1140px;
+  }
+  @media (min-width: 1400px) {
+    max-width: 1312px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0 !important;
+  }
+}
+
+.small-container {
+  width: 100%;
+  max-width: 768px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 1.25rem !important ;
+  padding-left: 1.25rem !important;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0 !important;
+  }
+}
+
+/* ==========================================================================
+   Get in touch webform (Figma: desktop 1-9153, mobile 1-8750)
+   ========================================================================== */
+
+.webform-submission-get-in-touch-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  width: 100%;
+  max-width: 100%;
+  justify-content: stretch !important; /* override section centering so form uses full width */
+  text-align: left;
+}
+
+.webform-submission-get-in-touch-form .form-item-email {
+  grid-column: 1;
+  margin: 0;
+  min-width: 0; /* allow grid item to shrink below content size */
+}
+
+.webform-submission-get-in-touch-form .form-email {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 10px 12px;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
+  font-weight: var(--font-weight-normal);
+  color: var(--background);
+  background: rgba(2, 7, 4, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  min-height: 42px;
+  box-sizing: border-box;
+  text-align: left !important;
+  max-width: 331px;
+}
+
+.webform-submission-get-in-touch-form .form-email::placeholder {
+  color: rgba(2, 7, 4, 0.6);
+  opacity: 1;
+}
+
+.webform-submission-get-in-touch-form .form-email:focus {
+  outline: 0;
+  border-color: var(--primary);
+  background: rgba(2, 7, 4, 0.08);
+}
+
+.webform-submission-get-in-touch-form .form-actions {
+  grid-column: 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.webform-submission-get-in-touch-form .form-submit,
+.webform-submission-get-in-touch-form .webform-button--submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 24px;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
+  font-weight: var(--font-weight-medium);
+  color: var(--primary-foreground);
+  background: var(--primary);
+  border: 1.5px solid var(--destructive);
+  border-bottom-width: 4px;
+  border-radius: 0;
+  cursor: pointer;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.webform-submission-get-in-touch-form .form-submit:hover,
+.webform-submission-get-in-touch-form .webform-button--submit:hover {
+  background: var(--destructive);
+  border-color: #7a0000;
+  border-bottom-color: #7a0000;
+}
+
+.webform-submission-get-in-touch-form .form-item-markup {
+  grid-column: 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.webform-submission-get-in-touch-form .form-item-markup p {
+  font-size: var(--text-xs);
+  line-height: var(--text-xs--line-height);
+  font-weight: var(--font-weight-normal);
+  color: var(--background);
+  text-align: center !important;
+  margin: 0;
+}
+
+/* Desktop: email and button on one row */
+@media (min-width: 768px) {
+  .webform-submission-get-in-touch-form {
+    grid-template-columns: 1fr auto;
+  }
+
+  .webform-submission-get-in-touch-form .form-item-email {
+    grid-column: 1;
+  }
+
+  .webform-submission-get-in-touch-form .form-actions {
+    grid-column: 2;
+    align-self: stretch;
+  }
+
+  .webform-submission-get-in-touch-form .form-submit,
+  .webform-submission-get-in-touch-form .webform-button--submit {
+    width: auto;
+    min-height: 42px;
+  }
+
+  .webform-submission-get-in-touch-form .form-item-markup {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ==========================================================================
+   Tell us more / Send us a message webforms
+   Desktop: Figma 1-6974 | Mobile: Figma 1-6720
+   ========================================================================== */
+
+.webform-submission-tell-us-more-form,
+.webform-submission-send-us-a-message-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 100%;
+  text-align: left;
+}
+
+/* Form item spacing and layout */
+.webform-submission-tell-us-more-form .form-item,
+.webform-submission-send-us-a-message-form .form-item {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* Labels */
+.webform-submission-tell-us-more-form .form-item label:not(.option),
+.webform-submission-send-us-a-message-form .form-item label:not(.option),
+.webform-submission-tell-us-more-form .fieldset-legend,
+.webform-submission-send-us-a-message-form .fieldset-legend {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
+  font-weight: var(--font-weight-normal);
+  color: var(--background);
+}
+
+/* Shared input/select/textarea look */
+.webform-submission-tell-us-more-form .form-text,
+.webform-submission-tell-us-more-form .form-email,
+.webform-submission-tell-us-more-form .form-tel,
+.webform-submission-tell-us-more-form .form-select,
+.webform-submission-tell-us-more-form .form-textarea,
+.webform-submission-send-us-a-message-form .form-text,
+.webform-submission-send-us-a-message-form .form-email,
+.webform-submission-send-us-a-message-form .form-tel,
+.webform-submission-send-us-a-message-form .form-select,
+.webform-submission-send-us-a-message-form .form-textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 8px 12px;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
+  font-weight: var(--font-weight-normal);
+  color: var(--background);
+  background: rgba(2, 7, 4, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  min-height: 42px;
+  box-sizing: border-box;
+}
+
+.webform-submission-tell-us-more-form .form-text::placeholder,
+.webform-submission-tell-us-more-form .form-email::placeholder,
+.webform-submission-tell-us-more-form .form-tel::placeholder,
+.webform-submission-tell-us-more-form .form-textarea::placeholder,
+.webform-submission-send-us-a-message-form .form-text::placeholder,
+.webform-submission-send-us-a-message-form .form-email::placeholder,
+.webform-submission-send-us-a-message-form .form-tel::placeholder,
+.webform-submission-send-us-a-message-form .form-textarea::placeholder {
+  color: rgba(2, 7, 4, 0.6);
+  opacity: 1;
+}
+
+.webform-submission-tell-us-more-form .form-text:focus,
+.webform-submission-tell-us-more-form .form-email:focus,
+.webform-submission-tell-us-more-form .form-tel:focus,
+.webform-submission-tell-us-more-form .form-select:focus,
+.webform-submission-tell-us-more-form .form-textarea:focus,
+.webform-submission-send-us-a-message-form .form-text:focus,
+.webform-submission-send-us-a-message-form .form-email:focus,
+.webform-submission-send-us-a-message-form .form-tel:focus,
+.webform-submission-send-us-a-message-form .form-select:focus,
+.webform-submission-send-us-a-message-form .form-textarea:focus {
+  outline: 0;
+  border-color: var(--primary);
+  background: rgba(2, 7, 4, 0.08);
+}
+
+/* Select dropdown */
+.webform-submission-tell-us-more-form .form-select,
+.webform-submission-send-us-a-message-form .form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23020704' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 18px;
+  padding-right: 40px;
+}
+
+/* Textarea */
+.webform-submission-tell-us-more-form .form-textarea,
+.webform-submission-send-us-a-message-form .form-textarea {
+  min-height: 180px;
+  resize: vertical;
+}
+
+/* Radios fieldset */
+.webform-submission-tell-us-more-form .radios--wrapper,
+.webform-submission-send-us-a-message-form .radios--wrapper {
+  margin: 0;
+  padding: 16px 0 0;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.webform-submission-tell-us-more-form .radios--wrapper .fieldset-wrapper,
+.webform-submission-send-us-a-message-form .radios--wrapper .fieldset-wrapper {
+  padding: 0;
+}
+
+.webform-submission-tell-us-more-form .js-webform-radios,
+.webform-submission-send-us-a-message-form .js-webform-radios {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Radio item */
+.webform-submission-tell-us-more-form .webform-type-radio,
+.webform-submission-send-us-a-message-form .webform-type-radio {
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  flex-direction: row !important;
+  align-items: center !important;
+}
+
+.webform-submission-tell-us-more-form .form-radio,
+.webform-submission-send-us-a-message-form .form-radio {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  margin: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: rgba(2, 7, 4, 0.05);
+  appearance: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.webform-submission-tell-us-more-form .form-radio:checked,
+.webform-submission-send-us-a-message-form .form-radio:checked {
+  border-width: 5px;
+  border-color: var(--primary);
+  background: var(--foreground);
+}
+
+.webform-submission-tell-us-more-form .webform-type-radio label.option,
+.webform-submission-send-us-a-message-form .webform-type-radio label.option {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
+  color: var(--background);
+  cursor: pointer;
+  margin: 0;
+}
+
+/* Checkbox */
+.webform-submission-tell-us-more-form .form-type-checkbox,
+.webform-submission-send-us-a-message-form .form-type-checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.webform-submission-tell-us-more-form .form-checkbox,
+.webform-submission-send-us-a-message-form .form-checkbox {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  margin: 0;
+  border: 1px solid var(--border);
+  background: rgba(2, 7, 4, 0.05);
+  border-radius: 0;
+  appearance: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.webform-submission-tell-us-more-form .form-checkbox:checked,
+.webform-submission-send-us-a-message-form .form-checkbox:checked {
+  background: var(--primary);
+  border-color: var(--primary);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+  background-size: 12px;
+  background-position: center;
+}
+
+.webform-submission-tell-us-more-form .form-type-checkbox label.option,
+.webform-submission-send-us-a-message-form .form-type-checkbox label.option {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
+  color: var(--background);
+  cursor: pointer;
+  margin: 0;
+}
+
+/* Form actions / submit */
+.webform-submission-tell-us-more-form .form-actions,
+.webform-submission-send-us-a-message-form .form-actions {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.webform-submission-tell-us-more-form .form-submit,
+.webform-submission-tell-us-more-form .webform-button--submit,
+.webform-submission-send-us-a-message-form .form-submit,
+.webform-submission-send-us-a-message-form .webform-button--submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
+  font-weight: var(--font-weight-medium);
+  color: var(--primary-foreground);
+  background: var(--primary);
+  border: 1.5px solid var(--destructive);
+  border-bottom-width: 4px;
+  border-radius: 0;
+  cursor: pointer;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.webform-submission-tell-us-more-form .form-submit:hover,
+.webform-submission-tell-us-more-form .webform-button--submit:hover,
+.webform-submission-send-us-a-message-form .form-submit:hover,
+.webform-submission-send-us-a-message-form .webform-button--submit:hover {
+  background: var(--destructive);
+  border-color: #7a0000;
+  border-bottom-color: #7a0000;
+}
+
+/* ----- Mobile (Figma 1-6720): single column, stacked ----- */
+@media (max-width: 767px) {
+  .webform-submission-tell-us-more-form .form-item-first-name,
+  .webform-submission-tell-us-more-form .form-item-last-name,
+  .webform-submission-tell-us-more-form .form-item-email,
+  .webform-submission-tell-us-more-form .form-item-phone,
+  .webform-submission-send-us-a-message-form .form-item-first-name,
+  .webform-submission-send-us-a-message-form .form-item-last-name,
+  .webform-submission-send-us-a-message-form .form-item-email,
+  .webform-submission-send-us-a-message-form .form-item-phone {
+    grid-column: 1;
+  }
+
+  .webform-submission-tell-us-more-form .form-submit,
+  .webform-submission-tell-us-more-form .webform-button--submit,
+  .webform-submission-send-us-a-message-form .form-submit,
+  .webform-submission-send-us-a-message-form .webform-button--submit {
+    width: 100%;
+  }
+}
+
+/* ----- Desktop (Figma 1-6974): two-column rows for name and email/phone ----- */
+@media (min-width: 768px) {
+  .webform-submission-tell-us-more-form,
+  .webform-submission-send-us-a-message-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  /* First name, Last name: first row */
+  .webform-submission-tell-us-more-form .form-item-first-name,
+  .webform-submission-send-us-a-message-form .form-item-first-name {
+    grid-column: 1;
+  }
+
+  .webform-submission-tell-us-more-form .form-item-last-name,
+  .webform-submission-send-us-a-message-form .form-item-last-name {
+    grid-column: 2;
+  }
+
+  /* Email, Phone: second row */
+  .webform-submission-tell-us-more-form .form-item-email,
+  .webform-submission-send-us-a-message-form .form-item-email {
+    grid-column: 1;
+  }
+
+  .webform-submission-tell-us-more-form .form-item-phone,
+  .webform-submission-send-us-a-message-form .form-item-phone {
+    grid-column: 2;
+  }
+
+  /* Topic / About select: full width */
+  .webform-submission-tell-us-more-form .form-item-topic,
+  .webform-submission-send-us-a-message-form .form-item-about {
+    grid-column: 1 / -1;
+  }
+
+  /* Radios fieldset: full width */
+  .webform-submission-tell-us-more-form .radios--wrapper,
+  .webform-submission-send-us-a-message-form .radios--wrapper {
+    grid-column: 1 / -1;
+  }
+
+  /* Radios: two columns on desktop */
+  .webform-submission-tell-us-more-form .js-webform-radios,
+  .webform-submission-send-us-a-message-form .js-webform-radios {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 24px;
+  }
+
+  /* Message: full width */
+  .webform-submission-tell-us-more-form .form-item-message,
+  .webform-submission-send-us-a-message-form .form-item-message {
+    grid-column: 1 / -1;
+  }
+
+  /* Privacy checkbox: full width */
+  .webform-submission-tell-us-more-form .form-item-privacy,
+  .webform-submission-send-us-a-message-form .form-item-privacy {
+    grid-column: 1 / -1;
+  }
+
+  /* Submit: full width on desktop (left-aligned block) */
+  .webform-submission-tell-us-more-form .form-actions,
+  .webform-submission-send-us-a-message-form .form-actions {
+    grid-column: 1 / -1;
+  }
+
+  .webform-submission-tell-us-more-form .form-submit,
+  .webform-submission-tell-us-more-form .webform-button--submit,
+  .webform-submission-send-us-a-message-form .form-submit,
+  .webform-submission-send-us-a-message-form .webform-button--submit {
+    width: fit-content;
+  }
+}

@@ -1,0 +1,17 @@
+id: eca_migrate_test_migration
+label: 'ECA migrate test migration'
+migration_group: default
+source:
+  plugin: embedded_data
+  data_rows:
+    -
+      id: 1
+      name: 'Test item'
+  ids:
+    id:
+      type: integer
+process:
+  name: name
+destination:
+  plugin: config
+  config_name: test.settings

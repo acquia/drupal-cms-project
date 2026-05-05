@@ -1,0 +1,219 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: e8c30f2c-49c7-4b83-a39a-d2df239b184d
+  default_langcode: en
+  depends:
+    0772a65f-b6fe-4c8e-97b8-45fc9bb3037b: file
+    24d3dcbb-f1fa-4174-8fb0-f6cad504cd96: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Blog
+  description:
+    -
+      value: 'Find your inspiration for change. Explore articles, stories, and insights from our contributors that will make you want to get involved in the fight against climate change.'
+  components:
+    -
+      uuid: bf4d68d3-abe4-4937-a50b-51e34933677d
+      component_id: sdc.haven_theme.hero-billboard
+      inputs:
+        height: ribbon
+        flex_position: center-left
+        content_background: false
+        overlay_opacity: 40%
+        object_position: top
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 24d3dcbb-f1fa-4174-8fb0-f6cad504cd96
+            target_type: media
+        overlap_navbar: true
+    -
+      parent_uuid: bf4d68d3-abe4-4937-a50b-51e34933677d
+      slot: hero_slot
+      uuid: a2a314e6-9a19-4a33-bb5e-a550e36ab76b
+      component_id: sdc.haven_theme.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+    -
+      parent_uuid: a2a314e6-9a19-4a33-bb5e-a550e36ab76b
+      slot: group_slot
+      uuid: 379b21bc-81ad-4d12-969f-61e47fa7460a
+      component_id: sdc.haven_theme.badge
+      inputs:
+        label: 'Our blog'
+        style: accent
+        icon_first: true
+    -
+      parent_uuid: bf4d68d3-abe4-4937-a50b-51e34933677d
+      slot: hero_slot
+      uuid: 189fbb55-8deb-48ad-b47e-c38fa5f496b8
+      component_id: sdc.haven_theme.heading
+      inputs:
+        heading_text: 'Inspiration for change'
+        level: 1
+        text_size: heading-responsive-7xl
+        text_color: inverted
+        align: left
+    -
+      parent_uuid: bf4d68d3-abe4-4937-a50b-51e34933677d
+      slot: hero_slot
+      uuid: fd6ca545-c127-43d1-9d3b-f14706b699c8
+      component_id: sdc.haven_theme.text
+      inputs:
+        text:
+          value: '<p>Explore articles, stories, and insights from our contributors that will make you want to get involved in the fight against climate change.</p>'
+          format: canvas_html_block
+        text_size: text-lg
+        text_color: inverted
+        columns: '1 column'
+    -
+      uuid: 80fa7405-a0c1-428c-8a37-7a8239efa31f
+      component_id: sdc.haven_theme.section
+      inputs:
+        width: 100%
+        columns: '1 column'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: true
+        views_columns: '3 columns'
+    -
+      parent_uuid: 80fa7405-a0c1-428c-8a37-7a8239efa31f
+      slot: main_slot
+      uuid: 46a9b96d-744c-4b94-aa9c-3d40ac784d70
+      component_id: block.views_block.blog-all
+      inputs:
+        label: 'Blog: All blog posts'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      uuid: c1a87cf1-e2ea-48a6-9dbc-adca09744870
+      component_id: sdc.haven_theme.section
+      inputs:
+        width: 100%
+        columns: '1 column'
+        mobile_columns: '1'
+        margin_block_start: '32'
+        margin_block_end: '32'
+        padding_block_start: '32'
+        padding_block_end: '32'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: c1a87cf1-e2ea-48a6-9dbc-adca09744870
+      slot: main_slot
+      uuid: 4853d52b-705c-4e7d-a04a-72ffd77d772c
+      component_id: sdc.haven_theme.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: center
+        radius: sm
+        background: accent
+        padding: sm
+    -
+      parent_uuid: 4853d52b-705c-4e7d-a04a-72ffd77d772c
+      slot: group_slot
+      uuid: ae320e25-38ea-4a01-abd3-fcc3aa353fb5
+      component_id: sdc.haven_theme.grid
+      inputs:
+        width: 100%
+        columns: '2 columns 67%-33%'
+        mobile_columns: '1'
+    -
+      parent_uuid: ae320e25-38ea-4a01-abd3-fcc3aa353fb5
+      slot: main_slot
+      uuid: 44088b13-4bf7-4437-91e9-1a2a26c6bce6
+      component_id: sdc.haven_theme.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: center
+        radius: sm
+    -
+      parent_uuid: 44088b13-4bf7-4437-91e9-1a2a26c6bce6
+      slot: group_slot
+      uuid: 5d450b22-2d08-4570-81ab-148fc848c049
+      component_id: sdc.haven_theme.heading
+      inputs:
+        heading_text: 'Join the fight against climate change'
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 44088b13-4bf7-4437-91e9-1a2a26c6bce6
+      slot: group_slot
+      uuid: 64d7d79f-998e-49ba-8589-76dc189b2710
+      component_id: sdc.haven_theme.heading
+      inputs:
+        heading_text: 'Haven is powered by people who believe that collective action can change the world — and by the donations that make that action possible. Join thousands of supporters who are investing in a livable future.'
+        text_size: default
+        text_color: default
+        align: left
+    -
+      parent_uuid: ae320e25-38ea-4a01-abd3-fcc3aa353fb5
+      slot: main_slot
+      uuid: 8393c458-b78d-49d0-acae-4a90883ae98d
+      component_id: sdc.haven_theme.group
+      inputs:
+        flex_direction: row
+        flex_gap: md
+        items_align: start
+        flex_align: center
+    -
+      parent_uuid: 8393c458-b78d-49d0-acae-4a90883ae98d
+      slot: group_slot
+      uuid: 72a944b2-6aba-494c-beb4-0312255ec6b9
+      component_id: sdc.haven_theme.button
+      inputs:
+        variant: primary
+        outlined: false
+        label: 'Donate now'
+        size: medium
+        icon: arrow-right
+        icon_first: false
+        disabled: false
+        mobile_width: false
+    -
+      parent_uuid: 8393c458-b78d-49d0-acae-4a90883ae98d
+      slot: group_slot
+      uuid: 93b3aba4-4341-4f66-a054-86368f276c4a
+      component_id: sdc.haven_theme.button
+      inputs:
+        variant: primary
+        outlined: true
+        label: 'Learn more'
+        size: medium
+        icon_first: false
+        disabled: false
+        mobile_width: false
+  path:
+    -
+      alias: /blog
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

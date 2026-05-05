@@ -1,0 +1,82 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 0665d00a-fe18-4c9b-b5c3-b67dfc6138ac
+  default_langcode: en
+  depends:
+    b7d53ced-d13c-4b62-9114-89d604992e44: file
+    129628f8-b556-44f9-acef-26b889012d18: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Legal Page'
+  description:
+    -
+      value: 'Read the Convene website terms and conditions, privacy policy, and legal information.'
+  components:
+    -
+      uuid: 83f75307-f43c-40d9-a1f4-dc7345a357a6
+      component_id: sdc.convene_theme.hero
+      inputs:
+        variation: small
+    -
+      parent_uuid: 83f75307-f43c-40d9-a1f4-dc7345a357a6
+      slot: heading
+      uuid: a9929040-5cd8-429e-8b16-89c4a08802a5
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        heading: 'Legal page'
+        heading_tag: div
+    -
+      parent_uuid: 83f75307-f43c-40d9-a1f4-dc7345a357a6
+      slot: subheading
+      uuid: b993fa01-5d02-4a69-9f28-1f3ddf5c03ee
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        description: 'Privacy Policy, Terms and conditions, GDPR, etc'
+        heading_tag: div
+    -
+      parent_uuid: 83f75307-f43c-40d9-a1f4-dc7345a357a6
+      slot: background_media
+      uuid: 6b075652-0e48-4515-bd52-dc8dad18f383
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 129628f8-b556-44f9-acef-26b889012d18
+            target_type: media
+        loading: lazy
+    -
+      uuid: 79d9c3da-d353-4ab3-86b4-675b0048d881
+      component_id: sdc.convene_theme.sdc_grid
+      inputs:
+        columns: '1'
+        padding_right: 8px
+        padding_bottom: 8px
+    -
+      parent_uuid: 79d9c3da-d353-4ab3-86b4-675b0048d881
+      slot: slot_1
+      uuid: 9a878440-94ad-4651-b4d6-46fbea6fc7a5
+      component_id: sdc.convene_theme.full_content_module
+      inputs: {  }
+  path:
+    -
+      alias: /legal-page
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"title":"Legal | Convene Terms \u0026 Privacy Policy"}'

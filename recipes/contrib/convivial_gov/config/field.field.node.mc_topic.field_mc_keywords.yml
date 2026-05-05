@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_mc_keywords
+    - node.type.mc_topic
+id: node.mc_topic.field_mc_keywords
+field_name: field_mc_keywords
+entity_type: node
+bundle: mc_topic
+label: Keywords
+description: 'Extra keywords can help with search results.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

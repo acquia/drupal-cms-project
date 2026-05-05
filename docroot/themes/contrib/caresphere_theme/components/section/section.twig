@@ -1,0 +1,57 @@
+{#
+/**
+ * @file
+ * A dynamic section wrapper matching the spectrum_section_style layout module capability.
+ */
+#}
+
+{# Dynamically construct our padding/margin/bg classes based on the component's props #}
+{% set align = alignment|default('left') %}
+{% set classes = [
+  'section-layout',
+  'bg-' ~ backgroundcolor|default('white'),
+  'section-layout--align-' ~ align
+] %}
+
+{% if use_custom_container %}
+  {% set classes = classes|merge(['custom-container']) %}
+{% endif %}
+
+{% set custom_mt = margintop|default(0) %}
+{% set custom_mb = marginbottom|default(10) %}
+{% set custom_pt = paddingtop|default(0) %}
+{% set custom_pb = paddingbottom|default(0) %}
+{% set custom_gap = gap|default(0) %}
+
+{% set inline_style = '--section-mt: ' ~ (custom_mt * 0.5) ~ 'rem; ' ~
+                      '--section-mb: ' ~ (custom_mb * 0.5) ~ 'rem; ' ~
+                      '--section-pt: ' ~ (custom_pt * 0.5) ~ 'rem; ' ~
+                      '--section-pb: ' ~ (custom_pb * 0.5) ~ 'rem; ' ~
+                      '--section-gap: ' ~ (custom_gap * 0.5) ~ 'rem;' %}
+
+{# Also render the section ID #}
+{% set section_id_attr = section_id ? 'id="' ~ section_id ~ '"' : '' %}
+
+<section {{ attributes.addClass(classes).setAttribute('style', inline_style) }} {{ section_id_attr|raw }}>
+  {# Background Image Support #}
+  {% if background_image.src %}
+    <div class="section-layout__bg" aria-hidden="true">
+      {% include 'canvas:image' ignore missing with {
+        src: background_image.src,
+        alt: background_image.alt|default(''),
+        class: 'section-layout__bg-image',
+        width: background_image.width,
+        height: background_image.height
+      } only %}
+      <div class="section-layout__overlay"></div>
+    </div>
+  {% endif %}
+
+  {# The "slot" is the dropzone where Canvas will render other components dragged into it #}
+  {% block content %}
+    {# If no components are placed inside it yet, show a placeholder in the CMS #}
+    <div class="section-layout__empty-state">
+      <em>Drop components here</em>
+    </div>
+  {% endblock %}
+</section>

@@ -1,0 +1,66 @@
+site_name: Modeler API module for Drupal
+site_url: https://www.drupal.org/project/modeler_api
+repo_url: https://git.drupalcode.org/project/modeler_api
+repo_name: drupal/modeler_api
+docs_dir: docs
+site_dir: site
+edit_uri: -/tree/1.1.x/docs/
+theme:
+  name: material
+  font:
+    code: Roboto Mono
+  logo: assets/logo.svg
+  favicon: assets/favicon.ico
+  palette:
+    primary: indigo
+  features:
+    - header.autohide
+    - navigation.footer
+    - navigation.sections
+    - content.action.edit
+    - content.code.copy
+plugins:
+  - search:
+      lang: en
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.blocks.caption
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
+extra:
+  social:
+    - icon: fontawesome/brands/gitlab
+      link: https://git.drupalcode.org/project/modeler_api
+    - icon: fontawesome/brands/slack
+      link: https://drupal.slack.com/archives/C08K6KX2EHH
+nav:
+  - Home: index.md
+  - Architecture: architecture/index.md
+  - Plugin Managers:
+      - plugin-managers/index.md
+      - Model Owner: plugin-managers/model-owner/index.md
+      - Modeler: plugin-managers/modeler/index.md
+      - Context: plugin-managers/context/index.md
+      - Plugin Dependency: plugin-managers/plugin-dependency/index.md
+      - Template Token: plugin-managers/template-token/index.md
+  - API Reference:
+      - api-reference/index.md
+      - Api Service: api-reference/api-service.md
+      - Value Objects: api-reference/value-objects.md
+      - Config Schema: api-reference/config-schema.md
+      - Routing & Permissions: api-reference/routing-permissions.md
+      - Drush Commands: api-reference/drush-commands.md
+  - Implementation Guide:
+      - guide/index.md
+      - Creating a Model Owner: guide/creating-model-owner.md
+      - Creating a Modeler: guide/creating-modeler.md
+      - YAML Plugin Definitions: guide/yaml-plugins.md

@@ -1,0 +1,43 @@
+.form-item--date__item {
+  min-width: 20rem;
+  background: var(--white);
+  position: relative;
+  appearance: none;
+}
+
+/* To display a custom icon in case the client needs it - remove if not */
+.form-item--date__item::after {
+  content: url('../../../../images/icons/calendar.svg');
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 0.3rem;
+  right: 0.3rem;
+  width: 3.6rem;
+  height: 3.6rem;
+  background-color: var(--white);
+  pointer-events: none;
+}
+
+.form-fieldset--date .form-items {
+  margin-top: var(--spacing-4);
+}
+
+.form-fieldset--date .form-items .form-item {
+  margin: var(--spacing-2) var(--spacing-4) var(--spacing-2) 0;
+}
+
+.form-fieldset--date .form-items .form-item__textfield {
+  max-width: 13rem;
+}
+
+@media (min-width: 768px) {
+  .form-fieldset--date .form-items {
+    display: flex;
+  }
+
+  .form-fieldset--date .form-items .form-item {
+    margin-top: 0;
+  }
+}

@@ -1,0 +1,26 @@
+.card.card-testimonial {
+  border-radius: 48px 4px 48px 4px;
+  overflow: hidden;
+
+  .testimonial-content {
+    .testimonial-body {
+      @include text-style-headline-h-3;
+      color: $text-colors-text-contrast;
+      font-weight: 600;
+    }
+
+    .testimonial-name {
+      @include text-style-headline-h-4;
+      color: $text-colors-text-contrast;
+      text-transform: uppercase;
+      font-weight: 500 !important;
+    }
+
+    .testimonial-role  {
+      @include text-style-body-body-2;
+      font-size: 18px !important;
+      color: $text-colors-text-contrast;
+      font-weight: 400;
+    }
+  }
+}

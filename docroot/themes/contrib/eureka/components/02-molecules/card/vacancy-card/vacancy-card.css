@@ -1,0 +1,63 @@
+.vacancy-card {
+  margin-bottom: var(--spacing-3);
+  padding: var(--spacing-3);
+  border: 0.2rem solid var(--grey-light);
+  background-color: var(--white);
+  border-radius: 1.6rem;
+  box-shadow: var(--box-shadow-default);
+}
+
+.vacancy-card__heading {
+  margin: 0;
+}
+
+.vacancy-card__tags {
+  display: flex;
+  gap: var(--spacing-1);
+  margin: var(--spacing-1-5) 0 0 0;
+}
+
+.vacancy-card__text {
+  margin: var(--spacing-2) 0 0 0;
+  color: var(--grey-dark);
+}
+
+.vacancy-card__date {
+  margin: var(--spacing-2) 0 0 0;
+  font-weight: var(--font-medium);
+}
+
+.vacancy-card__date .icon {
+  color: var(--brand-primary-dark);
+
+}
+
+.vacancy-card__salary {
+  margin: var(--spacing-1) 0 0 0;
+  font-weight: var(--font-medium);
+}
+
+.vacancy-card__salary span {
+  font-weight: var(--font-bold);
+}
+
+.vacancy-card__cta {
+  flex-shrink: 0;
+  margin-top: var(--spacing-3);
+}
+
+@media (min-width: 768px) {
+  .vacancy-card {
+    margin-bottom: var(--spacing-5);
+    padding: var(--spacing-4);
+  }
+}
+
+@media (min-width: 1024px) {
+  .vacancy-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--spacing-5);
+  }
+}

@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.eureka.news-card
+    - core.entity_view_mode.node.card
+    - field.field.media.image.field_media_image
+    - field.field.node.news.field_hero_image
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - node.type.news
+  module:
+    - file
+    - media
+    - node
+id: node.news.card
+content_entity_type_id: node
+content_entity_type_bundle: news
+content_entity_type_view_mode: card
+component_tree:
+  -
+    uuid: 080badc5-6944-43a4-be7f-0a1a01757f36
+    component_id: sdc.eureka.news-card
+    component_version: 5896f2145b8afbc2
+    inputs: '{"news_card_date":"8 Oct 2025","news_card_heading":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:news\u241dtitle\u241e\u241fvalue"},"news_card_image":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:news\u241dfield_hero_image\u241e\u241fentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241f{src\u21a0src_with_alternate_widths,alt\u21a0alt,width\u21a0width,height\u21a0height}"},"news_card_link_url":{"sourceType":"host-entity-url","absolute":false},"news_card_text":"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}'
+exposed_slots: {  }

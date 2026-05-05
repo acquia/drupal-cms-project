@@ -1,0 +1,190 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Drupal\canvas_ai\Hook;
+
+use Drupal\Core\Hook\Attribute\Hook;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\canvas_ai\CanvasAiPermissions;
+
+/**
+ * Hook implementations for canvas_ai tokens.
+ */
+class CanvasAiHooks {
+  use StringTranslationTrait;
+
+  public function __construct(
+    private readonly AccountInterface $currentUser,
+    private readonly ConfigFactoryInterface $configFactory,
+  ) {}
+
+  /**
+   * Implements hook_token_info().
+   */
+  #[Hook('token_info')]
+  public function canvas_ai_token_info(): array {
+    return [
+      'types' => [
+        'canvas_ai' => [
+          'name' => $this->t('Canvas AI Agent'),
+          'description' => $this->t('Tokens related to Canvas AI Agent context.'),
+        ],
+      ],
+      'tokens' => [
+        'canvas_ai' => [
+          'entity_type' => [
+            'name' => $this->t('Entity Type'),
+            'description' => $this->t('Returns the entity type value passed to the AI Agent.'),
+          ],
+          'entity_id' => [
+            'name' => $this->t('Entity Id'),
+            'description' => $this->t('Returns the entity id value passed to the AI Agent.'),
+          ],
+          'selected_component' => [
+            'name' => $this->t('Selected Component'),
+            'description' => $this->t('Returns the selected component name passed to the AI Agent.'),
+          ],
+          'selected_component_required_props' => [
+            'name' => $this->t('Selected Component Required Props'),
+            'description' => $this->t('Returns the required props of the selected component passed to the AI Agent.'),
+          ],
+          'layout' => [
+            'name' => $this->t('Layout'),
+            'description' => $this->t('Returns the current page layout value passed to the AI Agent.'),
+          ],
+          'derived_proptypes' => [
+            'name' => $this->t('derived Proptypes'),
+            'description' => $this->t('Returns the proptypes available in Drupal Canvas.'),
+          ],
+          'page_title' => [
+            'name' => $this->t('Page Title'),
+            'description' => $this->t('Returns the title of the page.'),
+          ],
+          'page_description' => [
+            'name' => $this->t('Page Description'),
+            'description' => $this->t('Returns the description of the page.'),
+          ],
+          'active_component_uuid' => [
+            'name' => $this->t('Active Component UUID'),
+            'description' => $this->t('Returns the UUID of the active component in the page.'),
+          ],
+          'menu_fetch_source' => [
+            'name' => $this->t('Menu Fetch Source'),
+            'description' => $this->t('Returns the source for menu fetching.'),
+          ],
+          'json_api_module_status' => [
+            'name' => $this->t('JSON API Module status'),
+            'description' => $this->t('Returns the status of JSON API module.'),
+          ],
+          'available_regions' => [
+            'name' => $this->t('Available Regions'),
+            'description' => $this->t('Returns the available regions.'),
+          ],
+          'verbose_context_for_orchestrator' => [
+            'name' => $this->t('Verbose Context for Orchestrator'),
+            'description' => $this->t('Returns a detailed context summary for the AI Orchestrator.'),
+          ],
+          'custom_libraries' => [
+            'name' => $this->t('Custom libraries in Canvas.'),
+            'description' => $this->t('Returns the custom libraries in Canvas.'),
+          ],
+        ],
+      ],
+    ];
+  }
+
+  /**
+   * Implements hook_tokens().
+   */
+  #[Hook('tokens')]
+  public function canvas_ai_tokens(string $type, array $tokens, array $data = [], array $options = []): array {
+    $replacements = [];
+
+    if ($type === 'canvas_ai') {
+      foreach ($tokens as $name => $original) {
+        switch ($name) {
+          case 'entity_type':
+            $replacements[$original] = $data['entity_type'] ?? NULL;
+            break;
+
+          case 'entity_id':
+            $replacements[$original] = $data['entity_id'] ?? NULL;
+            break;
+
+          case 'selected_component':
+            $replacements[$original] = $data['selected_component'] ?? NULL;
+            break;
+
+          case 'selected_component_required_props':
+            $replacements[$original] = $data['selected_component_required_props'] ?? NULL;
+            break;
+
+          case 'layout':
+            // Apostrophes in layout content break YAML parsing when this
+            // token is replaced into default_information_tools.
+            // Fix: double them, since '' is YAML's escape for a literal apostrophe.
+            // @todo Revert this after https://www.drupal.org/project/ai_agents/issues/3584463 gets fixed.
+            $replacements[$original] = isset($data['layout']) ? str_replace("'", "''", $data['layout']) : NULL;
+            break;
+
+          case 'derived_proptypes':
+            $replacements[$original] = $data['derived_proptypes'] ?? NULL;
+            break;
+
+          case 'page_title':
+            // Same apostrophe escaping as layout — see comment above.
+            $replacements[$original] = isset($data['page_title']) ? str_replace("'", "''", $data['page_title']) : NULL;
+            break;
+
+          case 'page_description':
+            $replacements[$original] = isset($data['page_description']) ? str_replace("'", "''", $data['page_description']) : NULL;
+            break;
+
+          case 'active_component_uuid':
+            $replacements[$original] = $data['active_component_uuid'] ?? 'None';
+            break;
+
+          case 'menu_fetch_source':
+            $replacements[$original] = $data['menu_fetch_source'] ?? NULL;
+            break;
+
+          case 'json_api_module_status':
+            $replacements[$original] = $data['json_api_module_status'];
+            break;
+
+          case 'available_regions':
+            $replacements[$original] = !empty($data['available_regions']) ? $data['available_regions'] : NULL;
+            break;
+
+          case 'verbose_context_for_orchestrator':
+            $replacements[$original] = !empty($data['verbose_context_for_orchestrator']) ? $data['verbose_context_for_orchestrator'] : NULL;
+            break;
+
+          case 'custom_libraries':
+            $replacements[$original] = $data['custom_libraries'];
+            break;
+        }
+      }
+    }
+
+    return $replacements;
+  }
+
+  /**
+   * Implements hook_js_settings_alter().
+   */
+  #[Hook('js_settings_alter')]
+  public function jsSettingsAlter(array &$settings): void {
+    if (!empty($settings['canvas']['aiExtensionAvailable'])) {
+      $config = $this->configFactory->get('canvas_ai.settings');
+      $file_upload_size_mb = $config->get('file_upload_size') ?? 2;
+      $file_upload_size_bytes = $file_upload_size_mb * 1024 * 1024;
+      $settings['canvas']['canvasAiMaxFileSize'] = $file_upload_size_bytes;
+      $settings['canvas']['permissions']['useCanvasAi'] = $this->currentUser->hasPermission(CanvasAiPermissions::USE_CANVAS_AI);
+    }
+  }
+
+}

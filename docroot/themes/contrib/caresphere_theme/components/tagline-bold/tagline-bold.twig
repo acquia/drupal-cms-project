@@ -1,0 +1,7 @@
+{#
+  Tagline bold: Centered bold text for taglines (e.g. "Trusted by organizations and communities across the region").
+#}
+{% set size = font_size|default('default') %}
+<p{{ attributes.addClass('tagline-bold', 'tagline-bold--size-' ~ size) }}>
+  {{ text }}
+</p>

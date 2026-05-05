@@ -1,0 +1,9 @@
+modeler_api:
+  class: \Drupal\Core\Menu\MenuLinkDefault
+  deriver: \Drupal\modeler_api\Plugin\Derivative\ModelerApiMenuLink
+
+modeler_api.settings:
+  title: Modeler API
+  parent: system.admin_config_workflow
+  route_name: modeler_api.settings
+  weight: 10

@@ -1,0 +1,93 @@
+{#
+/**
+ * @file
+ * Theme override for status messages.
+ *
+ * Displays status, error, and warning messages, grouped by type.
+ *
+ * An invisible heading identifies the messages for assistive technology.
+ * Sighted users see a colored box. See
+ * https://www.w3.org/TR/WCAG-TECHS/H69.html for info.
+ *
+ * Add an ARIA label to the contentinfo area so that assistive technology
+ * user agents will better describe this landmark.
+ *
+ * Available variables:
+ * - message_list: List of messages to be displayed, grouped by type.
+ * - status_headings: List of all status types.
+ * - attributes: HTML attributes for the element, including:
+ *   - class: HTML classes.
+ */
+#}
+{{ attach_library('byte_theme/messages') }}
+<div data-drupal-messages class="fixed bottom-4 z-50 flex flex-col gap-3 px-4 sm:right-4 sm:max-w-lg sm:p-0 md:max-w-xl">
+  {% for type, messages in message_list %}
+    {% if type == 'status' %}
+      {% set type_class = 'bg-green-100 text-green-900' %}
+      {% set type_icon = 'check-circle' %}
+      {% set close_button_class = 'text-green-700 hover:text-green-900 hover:bg-green-200' %}
+    {% elseif type == 'info' %}
+      {% set type_class = 'bg-blue-100 text-blue-900' %}
+      {% set type_icon = 'info' %}
+      {% set close_button_class = 'text-blue-700 hover:text-blue-900 hover:bg-blue-200' %}
+    {% elseif type == 'warning' %}
+      {% set type_class = 'bg-yellow-100 text-yellow-900' %}
+      {% set type_icon = 'warning' %}
+      {% set close_button_class = 'text-yellow-700 hover:text-yellow-900 hover:bg-yellow-200' %}
+    {% elseif type == 'error' %}
+      {% set type_class = 'bg-red-100 text-red-900' %}
+      {% set type_icon = 'x-circle' %}
+      {% set close_button_class = 'text-red-700 hover:text-red-900 hover:bg-red-200' %}
+    {% endif %}
+    <div
+      class="message-item flex flex-row items-start gap-2 rounded-md p-4 shadow-lg transition-all duration-300 ease-out {{ type_class }}"
+      data-message-item
+      role="contentinfo"
+      aria-label="{{ status_headings[type] }}"
+    >
+      <div class="message-header flex shrink-0">
+        <div class="message-{{ type }}-icon my-auto">
+          {{
+            include(
+              '@byte_theme/components/icon/icon.twig',
+              {
+                icon: type_icon,
+                icon_size: 'medium'
+              },
+              with_context: false
+            )
+          }}
+        </div>
+        <h2 class="visually-hidden">{{ status_headings[type] }}</h2>
+      </div>
+      <div class="message-body my-auto grow text-base xl:text-lg [&_a]:underline [&_a]:underline-offset-2">
+        {% if (messages|length) > 1 %}
+          <ul class="flex list-none flex-col gap-2 px-0">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          {{ messages|first }}
+        {% endif %}
+      </div>
+      <button
+        type="button"
+        class="shrink-0 cursor-pointer rounded p-1 transition-colors {{ close_button_class }}"
+        data-message-close
+        aria-label="{{ 'Close message'|t }}"
+      >
+        {{
+          include(
+            '@byte_theme/components/icon/icon.twig',
+            {
+              icon: 'x',
+              icon_size: 'small'
+            },
+            with_context: false
+          )
+        }}
+      </button>
+    </div>
+  {% endfor %}
+</div>

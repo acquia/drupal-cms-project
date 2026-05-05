@@ -1,0 +1,67 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: be47ee41-c85c-4a85-8b14-6a013e18eac3
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Resources
+  description:
+    -
+      value: 'The resource section.'
+  components:
+    -
+      uuid: d6673024-99fd-4160-b79f-67a6aa05a43d
+      component_id: sdc.morphos.banner
+      inputs:
+        padding_top: '12'
+        padding_bottom: '12'
+        palette: color--primary
+        texture: texture--conic-top-start
+        title: Resources
+    -
+      parent_uuid: d6673024-99fd-4160-b79f-67a6aa05a43d
+      slot: breadcrumb
+      uuid: ae41db36-9f56-43b9-85f5-ded81dde591a
+      component_id: block.system_breadcrumb_block
+      inputs:
+        label: Breadcrumbs
+        label_display: '0'
+    -
+      uuid: 42c27ad0-7e5d-483c-96df-0bc9eb0150fa
+      component_id: sdc.morphos.layout
+      inputs:
+        layout: layout--4-1-7
+        container: container--normal
+        padding_top: '12'
+        padding_bottom: '12'
+    -
+      parent_uuid: 42c27ad0-7e5d-483c-96df-0bc9eb0150fa
+      slot: main
+      uuid: 459c03cc-6017-450c-a9e7-191af2e6ec2d
+      component_id: block.views_block.mc_search-resources
+      inputs:
+        label: 'Search: Resources'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+  path:
+    -
+      alias: /resources
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

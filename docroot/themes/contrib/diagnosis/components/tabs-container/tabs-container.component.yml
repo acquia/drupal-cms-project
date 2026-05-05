@@ -1,0 +1,34 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Tabs container
+description: A container for tabs that creates an accessible tablist. Only one tab may be active at a time. On mobile, displays as an accordion.
+group: Layout
+props:
+  type: object
+  properties:
+    aria_label:
+      type: string
+      title: Accessible label
+      description: Descriptive label for the tablist
+      examples:
+        - Main navigation tabs
+    orientation:
+      type: string
+      title: Tab orientation
+      description: Display tabs horizontally (top) or vertically (left side)
+      enum:
+        - horizontal
+        - vertical
+      meta:enum:
+        horizontal: Horizontal (default)
+        vertical: Vertical (sidebar)
+      examples:
+        - horizontal
+slots:
+  tabs_content:
+    title: Tabs content
+    description: Add tab components here. Only one can be active at a time.
+libraryOverrides:
+  css:
+    tabs-container.css: {}
+  js:
+    tabs-container.js: { attributes: { type: module } }

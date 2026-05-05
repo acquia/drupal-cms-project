@@ -1,0 +1,90 @@
+{% set is_preview = canvas_is_preview or in_preview %}
+
+{% set content_attributes = create_attribute() %}
+{% set overlay_attributes = create_attribute() %}
+
+{% set slot_items %}{% block items %}{% endblock %}{% endset %}
+{% set slot_backgrounds %}{% block backgrounds %}{% endblock %}{% endset %}
+{% set slot_behaviors %}{% block behaviors %}{% endblock %}{% endset %}
+
+{% set margin = [
+  margin_top == '0' ? 'mt-0',
+  margin_top == '4' ? 'mt-4',
+  margin_top == '8' ? 'mt-6 lg:mt-8',
+  margin_top == '12' ? 'mt-8 md:mt-10 lg:mt-12',
+  margin_top == '16' ? 'mt-10 md:mt-12 lg:mt-16',
+  margin_top == '24' ? 'mt-16 md:mt-20 lg:mt-24',
+  margin_top == '32' ? 'mt-20 md:mt-24 lg:mt-32',
+  margin_bottom == '0' ? 'mb-0',
+  margin_bottom == '4' ? 'mb-4',
+  margin_bottom == '8' ? 'mb-6 lg:mb-8',
+  margin_bottom == '12' ? 'mb-8 md:mb-10 lg:mb-12',
+  margin_bottom == '16' ? 'mb-10 md:mb-12 lg:mb-16',
+  margin_bottom == '24' ? 'mb-16 md:mb-20 lg:mb-24',
+  margin_bottom == '32' ? 'mb-20 md:mb-24 lg:mb-32',
+] %}
+
+{% set padding = [
+  padding == '0' ? 'p-0',
+  padding == '4' ? 'p-4',
+  padding == '8' ? 'p-6 lg:p-8',
+  padding == '12' ? 'p-8 md:p-10 lg:p-12',
+  padding == '16' ? 'p-10 md:p-12 lg:p-16',
+  padding == '24' ? 'p-16 md:p-20 lg:p-24',
+  padding == '32' ? 'p-20 md:p-24 lg:p-32',
+] %}
+
+{% set classes = [
+  'component',
+  is_preview ? 'component--preview',
+  palette,
+  texture,
+  overlay ? 'has-overlay',
+]|merge(margin) %}
+
+{% set content_classes = [
+  'component__content',
+  'flex',
+  'w-full',
+  allow_wrap ? 'flex-wrap',
+  direction == 'horizontal' ? 'flex-row',
+  direction == 'vertical' ? 'flex-col',
+  alignment ? 'items-' ~ alignment,
+  justify == 'start' ? 'justify-start',
+  justify == 'center' ? 'justify-center',
+  justify == 'end' ? 'justify-end',
+  justify == 'space-between' ? 'justify-between',
+  justify == 'space-around' ? 'justify-around',
+  justify == 'space-evenly' ? 'justify-evenly',
+  justify == 'stretch' ? 'justify-stretch',
+  gap ? 'gap-' ~ gap,
+]|merge(padding) %}
+
+<div{{ attributes.addClass(classes) }}>
+  <div{{ content_attributes.addClass(content_classes) }}>
+    {{ slot_items }}
+  </div>
+  {% if is_preview %}
+    <div class="component__backgrounds">
+      {{ slot_backgrounds }}
+    </div>
+    <div{{ overlay_attributes.addClass('component__overlay', overlay) }}></div>
+    <div class="component__behaviors">
+      {{ slot_behaviors }}
+    </div>
+  {% else %}
+    {% if slot_backgrounds|render|striptags('<drupal-render-placeholder><img><figure><div><button>')|trim %}
+      <div class="component__backgrounds">
+        {{ slot_backgrounds }}
+      </div>
+    {% endif %}
+    {% if overlay %}
+      <div{{ overlay_attributes.addClass('component__overlay', overlay) }}></div>
+    {% endif %}
+    {% if slot_behaviors|render|striptags('<drupal-render-placeholder><img><figure><div><button>')|trim %}
+      <div class="component__behaviors">
+        {{ slot_behaviors }}
+      </div>
+    {% endif %}
+  {% endif %}
+</div>

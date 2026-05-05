@@ -1,0 +1,137 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.service_page.field_description
+    - field.field.node.service_page.field_parent
+    - field.field.node.service_landing_page.field_in_this_section
+    - field.field.paragraph.service_in_this_section.field_link
+    - field.field.paragraph.service_in_this_section.field_summary
+    - field.storage.node.field_description
+    - field.storage.node.field_parent
+    - field.storage.paragraph.field_link
+    - field.storage.paragraph.field_summary
+    - node.type.service_page
+    - paragraphs.paragraphs_type.service_in_this_section
+  module:
+    - eca_content
+    - modeler_api
+third_party_settings:
+  modeler_api:
+    modeler_id: bpmn_io
+    label: 'Service page: insert'
+id: service_page_insert
+weight: 0
+template: null
+events:
+  content_entity__insert_service_page:
+    plugin: 'content_entity:insert'
+    label: 'Insert service page'
+    configuration:
+      type: 'node service_page'
+    successors:
+      -
+        id: load_parent_node
+        condition: ''
+conditions: {  }
+gateways: {  }
+actions:
+  load_parent_node:
+    label: 'Entity: load parent landing page'
+    plugin: eca_token_load_entity_ref
+    configuration:
+      field_name_entity_ref: field_parent
+      token_name: parent_node
+      from: current
+      entity_type: _none
+      entity_id: ''
+      revision_id: ''
+      properties: ''
+      langcode: _interface
+      latest_revision: false
+      unchanged: false
+      object: ''
+    successors:
+      -
+        id: create_paragraph
+        condition: ''
+  create_paragraph:
+    label: 'Entity: create new paragraph'
+    plugin: eca_new_entity
+    configuration:
+      token_name: new_paragraph
+      type: 'paragraph service_in_this_section'
+      langcode: ''
+      label: ''
+      published: false
+      owner: ''
+    successors:
+      -
+        id: set_summary
+        condition: ''
+  set_summary:
+    label: 'Entity: set summary from description'
+    plugin: eca_set_field_value
+    configuration:
+      field_name: field_summary
+      field_value: '[node:field_description:value]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: false
+      object: new_paragraph
+    successors:
+      -
+        id: set_link_uri
+        condition: ''
+  set_link_uri:
+    label: 'Entity: set link URI'
+    plugin: eca_set_field_value
+    configuration:
+      field_name: field_link.uri
+      field_value: 'entity:node/[node:nid]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: false
+      object: new_paragraph
+    successors:
+      -
+        id: set_link_title
+        condition: ''
+  set_link_title:
+    label: 'Entity: set link title'
+    plugin: eca_set_field_value
+    configuration:
+      field_name: field_link.title
+      field_value: '[node:title]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: false
+      object: new_paragraph
+    successors:
+      -
+        id: save_new_paragraph
+        condition: ''
+  save_new_paragraph:
+    label: 'Entity: save new paragraph'
+    plugin: eca_save_entity
+    configuration:
+      object: new_paragraph
+    successors:
+      -
+        id: append_to_parent
+        condition: ''
+  append_to_parent:
+    label: 'Entity: append paragraph to parent'
+    plugin: eca_set_field_value
+    configuration:
+      field_name: field_in_this_section
+      field_value: '[new_paragraph]'
+      method: 'append:not_full'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: parent_node
+    successors: {  }

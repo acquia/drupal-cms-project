@@ -1,0 +1,147 @@
+global:
+  version: VERSION
+  css:
+    theme:
+      dist/css/global.css: { minified: true, preprocess: false }
+
+# Theme colors
+theme_colors:
+  version: 1.x
+  js:
+    theme_colors/theme-colors.js: {}
+  css:
+    theme:
+      theme_colors/theme-colors.css: {}
+  dependencies:
+    - core/jquery
+    - morphos/leader_line_library
+
+leader_line_library:
+  remote: https://github.com/anseki/leader-line
+  version: 1.0.7
+  license:
+    name: MIT
+    url: http://opensource.org/licenses/mit-license.php
+    gpl-compatible: true
+  js:
+    //cdn.jsdelivr.net/npm/leader-line@1.0.7/leader-line.min.js:
+      { type: external, minified: true }
+
+swiper_library:
+  remote: https://github.com/nolimits4web/swiper
+  version: 11.x
+  license:
+    name: MIT
+    url: https://github.com/nolimits4web/swiper/blob/master/LICENSE
+    gpl-compatible: true
+  js:
+    //cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js:
+      { type: external, minified: true }
+  css:
+    theme:
+      //cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css:
+        { type: external, minified: true }
+
+videojs_library:
+  remote: https://github.com/videojs/video.js
+  version: 8.x
+  license:
+    name: Apache-2.0
+    url: https://github.com/videojs/video.js/blob/main/LICENSE
+    gpl-compatible: true
+  js:
+    //cdn.jsdelivr.net/npm/video.js@8/dist/video.min.js:
+      { type: external, minified: true }
+  css:
+    theme:
+      //cdn.jsdelivr.net/npm/video.js@8/dist/video-js.min.css:
+        { type: external, minified: true }
+
+videojs_compat:
+  js:
+    lib/videojs-compat.js: { minified: true }
+  dependencies:
+    - morphos/videojs_library
+
+videojs_youtube_library:
+  remote: https://github.com/videojs/videojs-youtube
+  version: 3.x
+  license:
+    name: MIT
+    url: https://github.com/videojs/videojs-youtube/blob/main/LICENSE
+    gpl-compatible: true
+  js:
+    //cdn.jsdelivr.net/npm/videojs-youtube@3/dist/Youtube.min.js:
+      { type: external, minified: true }
+  dependencies:
+    - morphos/videojs_compat
+
+vimeo_player_library:
+  remote: https://github.com/vimeo/player.js
+  version: 2.x
+  license:
+    name: MIT
+    url: https://github.com/vimeo/player.js/blob/main/LICENSE.md
+    gpl-compatible: true
+  js:
+    //cdn.jsdelivr.net/npm/@vimeo/player@2/dist/player.min.js:
+      { type: external, minified: true }
+
+videojs_vimeo_library:
+  js:
+    lib/videojs-vimeo-tech.js: {}
+  dependencies:
+    - morphos/videojs_compat
+    - morphos/vimeo_player_library
+
+jarallax_library:
+  remote: https://github.com/nk-o/jarallax
+  version: 2.x
+  license:
+    name: MIT
+    url: https://github.com/nk-o/jarallax/blob/master/LICENSE
+    gpl-compatible: true
+  js:
+    //cdn.jsdelivr.net/npm/jarallax@2/dist/jarallax.min.js:
+      { type: external, minified: true }
+
+tocbot_library:
+  remote: https://github.com/tscanlin/tocbot
+  version: 4.x
+  license:
+    name: MIT
+    url: https://github.com/tscanlin/tocbot/blob/master/LICENSE
+    gpl-compatible: true
+  js:
+    //cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js:
+      { type: external, minified: true }
+
+alert_banner:
+  js:
+    dist/js/alert_banner.js: { minified: true }
+  dependencies:
+    - core/drupal
+    - core/once
+
+google_translate_library:
+  js:
+    //translate.google.com/translate_a/element.js?cb=googleTranslateElementInit:
+      { type: external, minified: true }
+
+accessible_megamenu_library:
+  remote: https://github.com/adobe-accessibility/Accessible-Mega-Menu
+  version: 1.0.0
+  license:
+    name: Apache-2.0
+    url: https://github.com/adobe-accessibility/Accessible-Mega-Menu/blob/master/LICENSE
+    gpl-compatible: true
+  js:
+    lib/jquery-accessibleMegaMenu.js: {}
+  dependencies:
+    - core/jquery
+
+scheme_switcher:
+  version: 1.x
+  header: true
+  js:
+    dist/js/scheme_switcher.js: { minified: true }

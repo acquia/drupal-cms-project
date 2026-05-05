@@ -1,0 +1,43 @@
+{% set is_preview = canvas_is_preview or in_preview %}
+
+{% set alert_action_attributes = create_attribute() %}
+
+{% set slot_buttons %}{% block buttons %}{% endblock %}{% endset %}
+
+{% set classes = [
+  'alert',
+  style,
+  direction,
+  color ? color : 'color--info',
+  'w-full',
+] %}
+
+{% set action_classes = [
+  'alert__action',
+  is_preview ? '[&>*]:min-w-20',
+] %}
+
+<div{{ attributes.setAttribute('role', 'alert').addClass(classes, additional_classes) }}>
+  <div class="alert__icon">
+    {{ include('morphos:icon', {
+      icon,
+      icon_size: 'icon-size--sm',
+    },
+      with_context: false
+    ) }}
+  </div>
+  <div class="alert__content">
+    {{- message -}}
+  </div>
+  {% if is_preview %}
+    <div{{ alert_action_attributes.addClass(action_classes) }}>
+      {{ slot_buttons }}
+    </div>
+  {% else %}
+    {% if slot_buttons|render|striptags('<drupal-render-placeholder><img><figure><div><button>')|trim %}
+      <div{{ alert_action_attributes.addClass(action_classes) }}>
+        {{ slot_buttons }}
+      </div>
+    {% endif %}
+  {% endif %}
+</div>

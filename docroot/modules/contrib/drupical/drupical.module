@@ -1,0 +1,69 @@
+<?php
+
+/**
+ * @file
+ * Provides integration with Drupical API for displaying Drupal events.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function drupical_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.drupical':
+      $output = '';
+      $output .= '<h2>' . t('About') . '</h2>';
+      $output .= '<p>' . t('The Drupical module displays upcoming Drupal events from the Drupal.org community calendar. For more information, see the <a href=":documentation">online documentation for the Drupical module</a>.', [':documentation' => 'https://www.drupal.org/project/drupical']) . '</p>';
+      $output .= '<h2>' . t('Uses') . '</h2>';
+      $output .= '<dl><dt>' . t('Viewing events') . '</dt>';
+      $output .= '<dd>' . t('Users can view upcoming Drupal events including DrupalCons, camps, meetups, and training sessions.') . '</dd>';
+      $output .= '</dl>';
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function drupical_theme($existing, $type, $theme, $path) {
+  return [
+    'drupical' => [
+      'variables' => [
+        'featured' => [],
+        'standard' => [],
+        'count' => 0,
+        'total_count' => 0,
+        'has_more' => FALSE,
+        'offset' => 0,
+        'limit' => 5,
+        'organize_link' => '',
+        'drupalcon_link' => '',
+        'camps_link' => '',
+        'drupical_link' => '',
+        'add_event_link' => '',
+      ],
+    ],
+    'drupical_item' => [
+      'variables' => [
+        'event' => NULL,
+        'featured' => FALSE,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_cron().
+ */
+function drupical_cron() {
+  $config = \Drupal::config('drupical.settings');
+  $interval = $config->get('cron_interval') ?? 3600;
+  $last_check = \Drupal::state()->get('drupical.last_fetch', 0);
+  $time = \Drupal::time()->getRequestTime();
+  if ($time - $last_check > $interval) {
+    \Drupal::service('drupical.fetcher')->fetch(TRUE);
+    \Drupal::state()->set('drupical.last_fetch', $time);
+  }
+}

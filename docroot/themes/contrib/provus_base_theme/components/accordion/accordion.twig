@@ -1,0 +1,8 @@
+{% if title %}
+  <h2 class="accordion-title">{{ title }}</h2>
+{% endif %}
+
+<div class="accordion" id="{{ accordion_id }}" data-accordion-id="{{ accordion_id }}">
+{% block accordion_body %}
+{% endblock %}
+</div>

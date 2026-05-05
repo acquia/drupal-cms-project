@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: alert
+label: Alert
+type: 'canonical_entities:node'
+pattern: '/alerts/[node:title]'
+selection_criteria:
+  9bbdddc3-a59c-443b-9d65-542e4fdf1a39:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 9bbdddc3-a59c-443b-9d65-542e4fdf1a39
+    context_mapping:
+      node: node
+    bundles:
+      mc_alert: mc_alert
+selection_logic: and
+weight: -10
+relationships: {  }

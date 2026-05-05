@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.diagnosis.card
+    - core.base_field_override.node.location.title
+    - core.entity_view_mode.node.teaser
+    - field.field.media.image.field_media_image
+    - field.field.node.location.field_photo
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - node.type.location
+  module:
+    - file
+    - media
+    - node
+    - options
+id: node.location.teaser
+content_entity_type_id: node
+content_entity_type_bundle: location
+content_entity_type_view_mode: teaser
+component_tree:
+  -
+    uuid: 40f7bfc1-28cd-4bd7-9ab3-2d1e4640c283
+    component_id: sdc.diagnosis.card
+    component_version: 0728c5d1325904d6
+    inputs: '{"background":"default","style":"full","orientation":"vertical","heading_text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:location\u241dtitle\u241e\u241fvalue"},"level":3,"media":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:location\u241dfield_photo\u241e\u241fentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241f{src\u21a0src_with_alternate_widths,alt\u21a0alt,width\u21a0width,height\u21a0height}"},"url":{"sourceType":"host-entity-url","absolute":true},"is_text_centered":false}'
+exposed_slots: {  }

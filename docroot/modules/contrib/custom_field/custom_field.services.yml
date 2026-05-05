@@ -1,0 +1,107 @@
+services:
+  Drupal\custom_field\Hook\GeneralHooks:
+    class: Drupal\custom_field\Hook\GeneralHooks
+    autowire: true
+
+  Drupal\custom_field\Hook\FormHooks:
+    class: Drupal\custom_field\Hook\FormHooks
+    autowire: true
+
+  Drupal\custom_field\Hook\ThemeHooks:
+    class: Drupal\custom_field\Hook\ThemeHooks
+    autowire: true
+
+  Drupal\custom_field\Hook\TokenHooks:
+    class: Drupal\custom_field\Hook\TokenHooks
+    autowire: true
+
+  Drupal\custom_field\Hook\ViewsHooks:
+    class: Drupal\custom_field\Hook\ViewsHooks
+    autowire: true
+
+  Drupal\custom_field\Hook\EntityHooks:
+    class: Drupal\custom_field\Hook\EntityHooks
+    autowire: true
+
+  logger.channel.custom_field:
+    parent: logger.channel_base
+    arguments:
+      - 'custom_field'
+
+  plugin.manager.custom_field_type:
+    class: Drupal\custom_field\Plugin\CustomFieldTypeManager
+    autowire: true
+    parent: default_plugin_manager
+
+  # Alias to CustomFieldTypeManager.
+  Drupal\custom_field\Plugin\CustomFieldTypeManagerInterface:
+    alias: plugin.manager.custom_field_type
+
+  plugin.manager.custom_field_widget:
+    class: Drupal\custom_field\Plugin\CustomFieldWidgetManager
+    parent: default_plugin_manager
+    arguments:
+      - '@plugin.manager.custom_field_type'
+
+  # Alias to CustomFieldWidgetManager.
+  Drupal\custom_field\Plugin\CustomFieldWidgetManagerInterface:
+    alias: plugin.manager.custom_field_widget
+
+  plugin.manager.custom_field_formatter:
+    class: Drupal\custom_field\Plugin\CustomFieldFormatterManager
+    parent: default_plugin_manager
+    arguments:
+      - '@plugin.manager.custom_field_type'
+
+  # Alias to CustomFieldFormatterManager.
+  Drupal\custom_field\Plugin\CustomFieldFormatterManagerInterface:
+    alias: plugin.manager.custom_field_formatter
+
+  plugin.manager.custom_field_feeds:
+    class: Drupal\custom_field\Plugin\CustomFieldFeedsManager
+    parent: default_plugin_manager
+    arguments:
+      - '@plugin.manager.custom_field_type'
+
+  plugin.manager.custom_field_component_prop_widget:
+    class: Drupal\custom_field\PluginManager\PropWidgetManager
+    parent: default_plugin_manager
+
+  #Alias to PropWidgetManager.
+  Drupal\custom_field\PluginManager\PropWidgetManagerInterface:
+    alias: plugin.manager.custom_field_component_prop_widget
+
+  custom_field.update_manager:
+    class: Drupal\custom_field\CustomFieldUpdateManager
+    arguments:
+      - '@entity.definition_update_manager'
+      - '@entity_type.manager'
+      - '@entity_type.bundle.info'
+      - '@database'
+      - '@plugin.manager.custom_field_type'
+      - '@entity.last_installed_schema.repository'
+      - '@keyvalue'
+      - '@config.factory'
+      - '@module_handler'
+      - '@logger.channel.custom_field'
+      - '@messenger'
+
+  custom_field.generate_data:
+    class: Drupal\custom_field\CustomFieldGenerateData
+    arguments:
+      - '@plugin.manager.custom_field_type'
+
+  custom_field.tag_manager:
+    class: Drupal\custom_field\TagManager
+    arguments:
+      - '@container.namespaces'
+      - '@module_handler'
+      - '@theme_handler'
+      - '@cache.discovery'
+
+  plugin.manager.custom_field_link_attributes:
+    class: Drupal\custom_field\LinkAttributesManager
+    arguments:
+      - '@container.namespaces'
+      - '@module_handler'
+      - '@cache.discovery'

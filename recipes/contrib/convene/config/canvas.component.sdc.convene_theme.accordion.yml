@@ -1,0 +1,60 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - convene_theme
+label: 'Accordion Item'
+id: sdc.convene_theme.accordion
+source: sdc
+source_local_id: 'convene_theme:accordion'
+provider: convene_theme
+active_version: 454fc57974a6ccb4
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        title:
+          title: 'Title Slot'
+          description: 'Slot for the accordion trigger text.'
+        content:
+          title: 'Content Slot'
+          description: 'Slot for the hidden/collapsible content.'
+  88b9c0e4b04dbf97:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+        disable_css:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value: null
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        title:
+          title: 'Title Slot'
+          description: 'Slot for the accordion trigger text.'
+        content:
+          title: 'Content Slot'
+          description: 'Slot for the hidden/collapsible content.'

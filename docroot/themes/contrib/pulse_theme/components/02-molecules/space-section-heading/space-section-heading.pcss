@@ -1,0 +1,69 @@
+@reference "../../00-base/global/global.pcss";
+
+/* Section heading */
+
+.section-heading {
+  .intro-section {
+    @apply md:max-w-4xl;
+
+    &__label {
+      @apply block mb-2;
+    }
+
+    &__title {
+      .headline {
+        @apply m-0 inline-flex items-center;
+      }
+    }
+  }
+
+  .data-section {
+    @apply md:max-w-4xl;
+
+    &__description {
+      @apply mt-6;
+    }
+  }
+
+  /* Center alignment */
+  &.center-alignment {
+    .intro-section,
+    .data-section {
+      @apply md:mx-auto;
+
+      .intro-section__title {
+        @apply justify-center;
+      }
+    }
+  }
+
+  /* Split alignment */
+  &.split-section {
+    .container {
+      @apply md:grid md:grid-cols-2 md:gap-x-8 lg:gap-x-[8.5rem];
+    }
+
+    .intro-section {
+      @apply md:max-w-[30.5rem];
+    }
+
+    .data-section {
+      @apply md:max-w-[37rem];
+
+      &__description {
+        @apply mt-0;
+      }
+    }
+
+    &.no-description {
+      .container {
+        @apply md:block;
+      }
+
+      .intro-section,
+      .data-section {
+        @apply max-w-full;
+      }
+    }
+  }
+}

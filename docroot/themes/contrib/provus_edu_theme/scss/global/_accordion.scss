@@ -1,0 +1,23 @@
+.accordion {
+    border-top: 1px solid #d6d6d6
+}
+.accordion-item .accordion-collapse {
+    @include text-style-body-body-1;
+    color: $text-colors-text-primary;
+}
+
+.accordion-item .accordion-header .accordion-button {
+    @include text-style-headline-h-4;
+}
+
+.block-provus-faq-group {
+    .group-title {
+      @include text-style-headline-h-2;
+      margin-bottom: 4rem;
+    }
+  
+    .accordion {
+      max-width: 986px;
+      margin: 0 auto;
+    }
+  }

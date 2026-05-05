@@ -1,0 +1,72 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: eb7ba635-c92a-4db0-963a-1d7cb041ed4b
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Contact
+  description:
+    -
+      value: 'Contact the site own via email.'
+  components:
+    -
+      uuid: cfe1cf37-8867-4e91-9905-f649d918d9e9
+      component_id: sdc.morphos.banner
+      inputs:
+        padding_top: '12'
+        padding_bottom: '12'
+        title: Contact
+        palette: color--primary
+        texture: texture--conic-top-start
+        introduction:
+          value: '<p>This contact page is for demonstration purposes.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: cfe1cf37-8867-4e91-9905-f649d918d9e9
+      slot: breadcrumb
+      uuid: 32b06ffb-7a23-4a2c-a92c-a43535574bc6
+      component_id: block.system_breadcrumb_block
+      inputs:
+        label: Breadcrumbs
+        label_display: '0'
+    -
+      uuid: 0856600e-532e-411c-a3ff-1f063a0813d5
+      component_id: sdc.morphos.layout
+      inputs:
+        layout: layout--4-1-7
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+    -
+      parent_uuid: 0856600e-532e-411c-a3ff-1f063a0813d5
+      slot: main
+      uuid: 8052bdb4-80ba-4c44-ab2f-787bebe699f3
+      component_id: block.webform_block
+      inputs:
+        label: Webform
+        label_display: '0'
+        webform_id: contact_form
+        default_data: ''
+        redirect: false
+        lazy: false
+  path:
+    -
+      alias: /contact
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

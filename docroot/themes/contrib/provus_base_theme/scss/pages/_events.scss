@@ -1,0 +1,173 @@
+.mini-date {
+  display: flex;
+  align-items: center;
+  margin-bottom: rem-calc(32);
+  &-left {
+    background: $white;
+    overflow: hidden;
+    padding: rem-calc(36 40 32 40);
+    position: relative;
+    margin-right: rem-calc(26);
+    border-radius: $card-border-radius;
+    border: 1px solid $card-border-color;
+    width: rem-calc(128);
+    min-width: rem-calc(128);
+    text-align: center;
+    height: 140px;
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 1rem;
+      width: 100%;
+      background: $secondary-shade;
+    }
+    .mini-date {
+      &-top {
+        font-size: rem-calc(21);
+        line-height: rem-calc(27);
+        letter-spacing: rem-calc(3);
+        color: $black;
+        text-transform: uppercase;
+        margin-bottom: rem-calc(10);
+      }
+      &-bottom {
+        font-weight: bold;
+        font-size: rem-calc(42);
+        line-height: rem-calc(27);
+        text-align: center;
+        letter-spacing: rem-calc(1);
+        color: $black;
+      }
+    }
+  }
+  &-right {
+    .mini-date {
+      &-title {
+        h3 {
+          margin-top: 0;
+          margin-bottom: rem-calc(8);
+          a {
+            color: $text-primary;
+            text-decoration: none;
+            &:hover,
+            &:focus {
+              text-decoration: underline;
+              color: $primary-shade;
+            }
+          }
+        }
+      }
+      &-fulldate {
+        font-size: rem-calc(14);
+        line-height: rem-calc(23);
+        color: $text-secondary;
+        &::before {
+          color: $secondary-shade;
+          font-family: $font-fontawesome;
+          font-weight: 900;
+          font-size: rem-calc(20);
+          content: "\f017";
+          background: none;
+          margin-right: rem-calc(8);
+          font-size: rem-calc(14);
+        }
+      }
+      &-text {
+        margin-top: rem-calc(8);
+      }
+    }
+  }
+}
+
+.card {
+ &.card-event-mini {
+   border-radius: $card-border-radius;
+   padding-top: rem-calc(16);
+   position: relative;
+   overflow: hidden;
+   &:before {
+     content: '';
+     height: rem-calc(16);
+     width: 100%;
+     background: $primary-shade;
+     position: absolute;
+     top: 0;
+     left: 0;
+     transition: all 0.3s ease-in-out;
+   }
+   &:hover {
+     &:before {
+       height: rem-calc(24);
+     }
+   }
+   .card-tag {
+     margin-top: rem-calc(30);
+   }
+   .card-body {
+     padding: rem-calc(24);
+   }
+
+   .card-date {
+     color: $black;
+     &-top {
+       font-weight: 400;
+       font-size: rem-calc(21);
+       line-height: rem-calc(27);
+       letter-spacing: rem-calc(3);
+       text-transform: uppercase;
+       margin-bottom: rem-calc(5);
+     }
+     &-bottom {
+       font-weight: 700;
+       font-size: rem-calc(42);
+       line-height: rem-calc(27);
+       letter-spacing: rem-calc(1);
+     }
+   }
+   h3 {
+     margin-top: rem-calc(30);
+     a {
+       color: $text-primary;
+       text-decoration: none;
+       &:hover,
+       &:focus {
+         text-decoration: underline;
+         color: $primary-shade;
+       }
+     }
+   }
+   .card-full-date {
+     font-weight: 400;
+     font-size: rem-calc(18);
+     line-height: rem-calc(23);
+   }
+ }
+}
+.fc {
+  .fc-daygrid-day:not(.fc-day-other) {
+    .fc-daygrid-day-top {
+      font-weight: 600;
+    }
+  }
+  .fc-day-other .fc-daygrid-day-top {
+    opacity: 1 !important;
+  }
+  .fc-daygrid-event {
+    overflow: hidden;
+  }
+  .fc-toolbar {
+    display: block;
+    @include media-breakpoint-up(sm) {
+      display: flex;
+    }
+    .fc-toolbar-chunk {
+      text-align: center;
+    }
+  }
+}
+
+.block-fullcalendar-block {
+  margin-bottom: $padding-padding-xlg;
+}

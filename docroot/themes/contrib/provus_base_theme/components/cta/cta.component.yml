@@ -1,0 +1,68 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Call-to-action
+status: stable
+description: Call-to-action component with title, subtitle, body content, background image, and action links
+group: Provus Components
+
+variants:
+  default:
+    title: Default
+    description: Standard CTA with title, content and call-to-action links
+
+props:
+  type: object
+  required:
+    - title
+  properties:
+    subtitle:
+      type: string
+      title: 'Subtitle'
+      description: 'Optional subtitle displayed above the main title'
+      examples:
+        - 'Get Started'
+        - 'Limited Time Offer'
+        - 'Special Promotion'
+      default: ''
+    title:
+      type: string
+      title: 'Title'
+      description: 'Main CTA title displayed prominently'
+      examples:
+        - 'Ready to Get Started?'
+        - 'Join Us Today'
+        - 'Contact Our Team'
+      default: ''
+    body:
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: block
+      title: 'Main content'
+      description: 'Main content text describing the call-to-action. Supports multiple lines of text. Line breaks will be preserved in the display.'
+      examples:
+        - '<p>Take the next step and discover how we can help you achieve your goals.</p>'
+        - |
+          <p>Our team is ready to assist you.</p>
+          <p>Get in touch today!</p>
+      default: ''
+    background_image_path:
+      type: object
+      $ref: json-schema-definitions://canvas.module/image
+      title: 'Background Image'
+      description: 'Optional background image URL displayed behind the CTA content'
+      default: ''
+    background_color:
+      type: string
+      title: 'Background Color'
+      description: 'Background color for the CTA'
+      examples:
+        - 'Primary'
+        - 'Secondary'
+      default: 'primary'
+      enum:
+        - 'Primary'
+        - 'Secondary'
+
+slots:
+  cta_footer:
+    title: Buttons
+    description: Buttons components placed inside the CTA container

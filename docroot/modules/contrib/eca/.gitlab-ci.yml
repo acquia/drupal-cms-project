@@ -1,0 +1,34 @@
+include:
+  - project: $_GITLAB_TEMPLATES_REPO
+    ref: $_GITLAB_TEMPLATES_REF
+    file:
+      - '/includes/include.drupalci.main.yml'
+      - '/includes/include.drupalci.variables.yml'
+      - '/includes/include.drupalci.workflows.yml'
+
+variables:
+  _CSPELL_IGNORE_PATHS: '"**/eca.eca.*.yml"'
+  OPT_IN_TEST_PREVIOUS_MAJOR: 0
+  OPT_IN_TEST_NEXT_MINOR: 1
+  OPT_IN_TEST_NEXT_MAJOR: 1
+  RUN_JOB_UPGRADE_STATUS: 0
+
+cspell:
+  allow_failure: false
+phpcs:
+  allow_failure: false
+phpstan:
+  allow_failure: false
+phpstan (next minor):
+  allow_failure: false
+# Allow failure until Drush can be installed with Drupal 12
+phpstan (next major):
+  allow_failure: true
+phpunit (previous major):
+  allow_failure: false
+phpunit (next minor):
+  allow_failure: false
+phpunit (next major):
+  allow_failure: false
+upgrade status:
+  allow_failure: false

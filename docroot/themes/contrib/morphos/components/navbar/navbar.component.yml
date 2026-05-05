@@ -1,0 +1,90 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Navbar
+description: The primary navigation header containing site menus, branding, and utility links; usually fixed to the top of the viewport.
+group: Global
+status: stable
+props:
+  type: object
+  properties:
+    container:
+      type: string
+      title: Container
+      description: Select how the content is to be contained.
+      enum:
+        - container--edgy
+        - container--wide
+        - container--normal
+        - container--narrow
+      meta:enum:
+        container--edgy: Edgy
+        container--wide: Wide
+        container--normal: Normal
+        container--narrow: Narrow
+      examples:
+        - container--normal
+    palette:
+      type: string
+      title: Palette
+      description: Select the colour palette for the content.
+      enum:
+        - color--standard
+        - color--alternate
+        - color--primary
+        - color--secondary
+        - color--accent
+        - color--neutral
+      meta:enum:
+        color--standard: Standard
+        color--alternate: Alternate
+        color--primary: Primary
+        color--secondary: Secondary
+        color--accent: Accent
+        color--neutral: Neutral
+    texture:
+      type: string
+      title: Texture
+      description: Select the texture to apply to the palette.
+      enum:
+        - texture--linear-start
+        - texture--linear-end
+        - texture--linear-top
+        - texture--linear-bottom
+        - texture--linear-top-start
+        - texture--linear-top-end
+        - texture--linear-bottom-start
+        - texture--linear-bottom-end
+        - texture--radial-spotlight
+        - texture--radial-vignette
+        - texture--conic-top-start
+        - texture--conic-top-end
+        - texture--conic-bottom-start
+        - texture--conic-bottom-end
+      meta:enum:
+        texture--linear-start: 'Linear: Start'
+        texture--linear-end: 'Linear: End'
+        texture--linear-top: 'Linear: Top'
+        texture--linear-bottom: 'Linear: Bottom'
+        texture--linear-top-start: 'Linear: Top start'
+        texture--linear-top-end: 'Linear: Top end'
+        texture--linear-bottom-start: 'Linear: Bottom start'
+        texture--linear-bottom-end: 'Linear: Bottom end'
+        texture--radial-spotlight: 'Radial: Spotlight'
+        texture--radial-vignette: 'Radial: Vignette'
+        texture--conic-top-start: 'Conic: Top start'
+        texture--conic-top-end: 'Conic: Top end'
+        texture--conic-bottom-start: 'Conic: Bottom start'
+        texture--conic-bottom-end: 'Conic: Bottom end'
+slots:
+  start:
+    title: Start
+    description: Add Logo or other content items.
+  center:
+    title: Center
+    description: Add content items.
+  end:
+    title: End
+    description: 'Add menu, search or other content items.'
+libraryOverrides:
+  css:
+    component:
+      ../../dist/css/navbar.css: { minified: true }

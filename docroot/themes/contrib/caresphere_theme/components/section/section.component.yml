@@ -1,0 +1,67 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Section (Style Container)
+group: Layout
+status: stable
+props:
+  type: object
+  properties:
+    section_id:
+      type: string
+      title: Section ID
+      description: "Optional anchor ID for linking to this section."
+    background_image:
+      type: object
+      title: Background Image
+      description: "Optional background image for this section."
+      $ref: json-schema-definitions://canvas.module/image
+    backgroundcolor:
+      type: string
+      title: Background Color
+      enum:
+        - white
+        - black
+        - dark-gray
+        - gray-light
+      default: white
+    alignment:
+      type: string
+      title: Alignment
+      enum:
+        - left
+        - center
+        - right
+      default: left
+    margintop:
+      type: integer
+      title: Margin Top
+      description: "Enter a multiple of 8px. Default 0 translates to 0px."
+      default: 0
+    marginbottom:
+      type: integer
+      title: Margin Bottom
+      description: "Enter a multiple of 8px. Default 10 translates to 80px."
+      default: 10
+    paddingtop:
+      type: integer
+      title: Padding Top
+      description: "Enter a multiple of 8px. Default 0 translates to 0px."
+      default: 0
+    paddingbottom:
+      type: integer
+      title: Padding Bottom
+      description: "Enter a multiple of 8px. Default 0 translates to 0px."
+      default: 0
+    gap:
+      type: integer
+      title: Gap
+      description: "Enter a multiple of 8px. Default 0 translates to 0px."
+      default: 0
+    use_custom_container:
+      type: boolean
+      title: Use Custom Container
+      description: "Constrain the width of this section."
+      default: false
+slots:
+  content:
+    title: Content
+    description: "Drag and drop components inside this styled layout section."

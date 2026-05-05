@@ -1,0 +1,132 @@
+eca.event.plugin.config:delete:
+  type: eca.event.plugin
+  label: 'Config Delete'
+  mapping:
+    config_name:
+      type: string
+      label: 'Config name'
+    sync_mode:
+      type: string
+      label: 'Sync Mode'
+      constraints:
+        Choice:
+          - ''
+          - 'yes'
+          - 'no'
+
+eca.event.plugin.config:collection_info:
+  type: eca.event.plugin
+  label: 'Collect information on all config collections'
+
+eca.event.plugin.config:import:
+  type: eca.event.plugin
+  label: 'Import config'
+
+eca.event.plugin.config:import_missing_content:
+  type: eca.event.plugin
+  label: 'Import config but content missing'
+
+eca.event.plugin.config:import_validate:
+  type: eca.event.plugin
+  label: 'Import config validation'
+
+eca.event.plugin.config:rename:
+  type: eca.event.plugin
+  label: 'Rename config'
+
+eca.event.plugin.config:save:
+  type: eca.event.plugin
+  label: 'Config Save'
+  mapping:
+    config_name:
+      type: string
+      label: 'Config name'
+    sync_mode:
+      type: string
+      label: 'Sync Mode'
+      constraints:
+        Choice:
+          - ''
+          - 'yes'
+          - 'no'
+    write_mode:
+      type: string
+      label: 'Write Mode'
+      constraints:
+        Choice:
+          - ''
+          - 'new'
+          - 'update'
+
+eca.condition.plugin.eca_config_installer_sync_mode:
+  type: eca.condition.plugin
+  label: 'Config Installer Sync Mode'
+
+action.configuration.eca_config_read:
+  type: mapping
+  label: 'Configuration for the "Config Read" action'
+  mapping:
+    token_name:
+      type: label
+      label: 'Name of token'
+    include_overridden:
+      type: boolean
+      label: 'Include overridden'
+    config_name:
+      type: string
+      label: 'Config name'
+      constraints:
+        NotBlank: []
+    config_key:
+      type: string
+      label: 'Config key'
+
+action.configuration.eca_config_write:
+  type: mapping
+  label: 'Configuration for the "Config Write" action'
+  mapping:
+    config_value:
+      type: text
+      label: 'Config value'
+    use_yaml:
+      type: boolean
+      label: 'Interpret above config value as YAML format'
+    validate_yaml:
+      type: boolean
+      label: 'Validate YAML to prevent this from being executed when invalid'
+    save_config:
+      type: boolean
+      label: 'Save configuration'
+    config_name:
+      type: string
+      label: 'Config name'
+      constraints:
+        NotBlank: []
+    config_key:
+      type: string
+      label: 'Config key'
+
+action.configuration.eca_config_list:
+  type: mapping
+  label: 'Configuration for the "Config List" action'
+  mapping:
+    token_name:
+      type: string
+      label: 'Name of the token which should hold the list'
+    prefix:
+      type: string
+      label: 'An optional configuration prefix.'
+
+action.configuration.eca_config_action:
+  type: mapping
+  label: 'Configuration for the "Config Action" action'
+  mapping:
+    action_id:
+      type: string
+      label: 'Config action ID'
+    config_name:
+      type: string
+      label: 'Name of the config object or entity to run the action upon (wildcards allowed)'
+    data:
+      type: text
+      label: 'Additional data to pass to the action, in YAML format'

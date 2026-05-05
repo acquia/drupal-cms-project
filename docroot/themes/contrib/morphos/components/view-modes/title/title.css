@@ -1,0 +1,48 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: components/view-modes/title/title.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+@reference "../../../tailwindcss";
+
+.title__title {
+  @apply m-0 text-[1.25rem] font-bold;
+}
+
+[dir='rtl'] {
+  .title__icon {
+    @apply scale-x-[-1];
+  }
+}
+
+.title__link {
+  @apply flex items-center justify-between gap-4 border-t border-b p-4 no-underline;
+
+  border-color: var(--foreground, inherit);
+  color: var(--forground, inherit);
+
+  &:hover {
+    background-color: var(--link, inherit);
+    border-color: var(--link, inherit);
+    color: var(--link-contrast, inherit);
+  }
+}
+
+.title__label {
+  @apply border-t border-b p-4;
+
+  border-color: var(--foreground, inherit);
+}
+
+/* Special case for views layout */
+.views-layout--no-row-gap {
+  > ul {
+    li + li {
+      .title__label,
+      .title__link {
+        @apply border-t-0;
+      }
+    }
+  }
+}

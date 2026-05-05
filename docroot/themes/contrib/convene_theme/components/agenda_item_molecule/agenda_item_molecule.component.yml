@@ -1,0 +1,33 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Agenda Item
+group: Molecules
+status: stable
+description: A single item in a timeline with a title, subtitle, and multiple action buttons.
+props:
+  type: object
+  properties:
+    admin_theme:
+      title: Admin Theme
+      type: boolean
+      default: false
+      description: Check to enable Admin Theme styles.
+    title:
+      title: Title
+      type: string
+      description: The main heading for this agenda item.
+    subtitle:
+      title: Subtitle
+      type: string
+      description: The secondary text (e.g. Day one, time slot).
+    description:
+      title: Description
+      type: string
+      description: The main paragraph text for the item details.
+slots:
+  actions:
+    title: Actions
+    description: Drop button components here.
+library:
+  css:
+    component:
+      agenda_item_molecule.css: {}

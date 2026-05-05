@@ -1,0 +1,54 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 287ac529-09e9-4b94-980a-bedd0742c0f0
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: '403 - Access denied'
+  components:
+    -
+      uuid: 7b847c7a-9c63-4ee9-a0f8-82ab52111866
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: none
+        padding_right: none
+        padding_top: none
+        padding_bottom: none
+        margin_top: small
+        margin_bottom: small
+    -
+      parent_uuid: 7b847c7a-9c63-4ee9-a0f8-82ab52111866
+      slot: content
+      uuid: 49b78ac9-7faf-46fa-878b-50375b4a0815
+      component_id: sdc.pulse_theme.space-section-heading
+      inputs:
+        label: '403'
+        title: 'Access denied'
+        tag_name: h2
+        description:
+          value: '<p>You do not have permission to access this page.</p>'
+          format: canvas_html_block
+        alignment: left
+  path:
+    -
+      alias: /access-denied
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

@@ -1,0 +1,176 @@
+.section-contact-form {
+  .content {
+    .field--name-field-title {
+      .field__item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include text-style-headline-h-2;
+        color: $color-heading;
+
+        &::before,
+        &::after {
+          content: "";
+          flex: 1;
+          height: 2px; // Adjust thickness of the line
+          background-color: #5B1522; // Same color as text
+        }
+
+        &::before {
+          margin-right: 40px;
+        }
+
+        &::after {
+          margin-left: 40px;
+        }
+      }
+    }
+  }
+
+
+  .field--name-field-webform {
+    display: flex;
+    justify-content: center;
+
+    .field__item {
+      max-width: 740px;
+      width: 100%;
+
+      .js-form-item {
+        height: 84px;
+
+        input {
+          height: 52px;
+
+          &::placeholder {
+            margin-right: 16px;
+            color: $text-colors-text-hint;
+          }
+        }
+      }
+
+      .form-item-message {
+        margin-bottom: rem-calc(160) !important;
+      }
+    }
+  }
+}
+
+.block-provus-embed .embed-component {
+  border-radius: $images-border-radius-radius-xxl 4px $images-border-radius-radius-xxl 4px;
+  overflow: hidden;
+}
+
+.webform-submission-form .js-form-item .form-control {
+  color: $text-colors-text-hint;
+}
+
+.views-exposed-form {
+  margin-bottom: 34px;
+
+  .d-flex {
+    gap: 34px;
+  }
+
+  input, select {
+    border-radius: 100px;
+    border: 1px solid#E7E8E9;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.06), 0px 5px 4px -4px rgba(0, 0, 0, 0.02);
+    color: #646F79;
+    font-size: 14px;
+    font-weight: 450;
+    line-height: 22px;
+    letter-spacing: -0.128px;
+  }
+
+  select {
+    padding: .65rem 1rem;
+  }
+
+  label {
+    font-size: 14px;
+    font-weight: 450;
+    line-height: 22px;
+    letter-spacing: -0.128px;
+    color: #646F79;
+  }
+
+  .form-submit {
+    border-radius: 100px;
+    text-transform: uppercase;
+    @include text-style-body-body-1;
+    padding: .5rem 1rem;
+    text-decoration: none;
+    border: 0;
+
+    &:hover {
+      text-decoration: none;
+      @include text-style-body-body-1;
+      border: 0;
+    }
+
+    &[name="reset"] {
+      background-color: transparent;
+      color: #000;
+      box-shadow: none;
+      border: none;
+      position: relative;
+      padding-right: 1.5rem;
+
+      background-image: url('/themes/contrib/provus_edu_theme/images/reset.svg');
+      background-size: 16px;
+      background-repeat: no-repeat;
+      background-position: center right;
+      text-transform: none;
+
+      &:after {
+        content: ' ';
+
+        width: 16px;
+        height: 16px;
+        position: absolute;
+        right: 0;
+        bottom: 7px;
+      }
+    }
+  }
+
+  .form-actions {
+    margin-bottom: 0 !important;
+  }
+}
+
+//fix for provus_edu_theme
+.webform-submission-newsletter-form {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
+  margin: 12px 0;
+
+  .form-type-email,
+  .form-actions {
+    margin-bottom: 0 !important;
+  }
+
+  .form-type-email {
+    label {
+      display: none !important;
+    }
+
+    [type="email"]:focus {
+      border-width: 1px;
+    }
+  }
+
+  .form-actions .button {
+    margin-right: 0;
+  }
+}
+
+//fix for provus_edu_theme
+.webform-submission-contact-form {
+  max-width: 740px;
+  width: 100%;
+  margin: 0 auto;
+}

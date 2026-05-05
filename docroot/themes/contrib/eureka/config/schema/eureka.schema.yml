@@ -1,0 +1,44 @@
+eureka.settings:
+  type: theme_settings
+  label: 'Eureka settings'
+  mapping:
+    scheme:
+      type: string
+      label: Colour scheme
+      constraints:
+        Choice:
+          - blue
+          - red
+          - purple
+          - green
+    telephone:
+      type: string
+      label: Contact telephone
+    email:
+      type: email
+      label: Email address
+    location:
+      type: string
+      label: Location
+    header_info:
+      type: string
+      label: Short informational text for the header
+    footer_contact_title:
+      type: string
+      label: Footer contact title
+    footer_times_title:
+      type: string
+      label: Footer opening times title
+    footer_quicklinks_title:
+      type: string
+      label: Footer quicklinks title
+    footer_times:
+      type: mapping
+      label: 'Footer opening times'
+      mapping:
+        value:
+          type: text
+          label: 'Value'
+        format:
+          type: string
+          label: 'Text format'

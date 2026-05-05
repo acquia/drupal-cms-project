@@ -1,0 +1,274 @@
+/**
+ * H1 to H6, Subheadings, Captions and Body Text Styles
+ */
+
+@mixin text-style-display-headline-display() {
+  font-family: $font-heading;
+  font-style: normal;
+  font-size: 60px;
+  font-weight: $font-weight-display-headline;
+  line-height: 64px;
+
+  @include media-breakpoint-up(md) {
+    font-size: $font-size-display-headline;
+    line-height: $line-height-display-headline;
+  }
+}
+
+@mixin text-style-display-headline-display-banner() {
+  font-family: $font-heading;
+  font-style: normal;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 48px;
+
+  @include media-breakpoint-up(md) {
+    font-size: $font-size-display-headline;
+    line-height: $line-height-display-headline;
+  }
+
+  @include media-breakpoint-up(xl) {
+    font-size: 80px;
+    line-height: 88px;
+  }
+}
+
+@mixin text-style-headline-h-1() {
+  font-family: $font-heading;
+  font-style: normal;
+  font-size: 40px;
+  font-weight: $h1-font-weight;
+  line-height: 48px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: $h1-font-size;
+    line-height: $line-height-h1;
+  }
+}
+
+@mixin text-style-headline-h-2() {
+  font-family: $font-heading;
+  font-style: normal;
+  font-size: 32px;
+  font-weight: $h2-font-weight;
+  line-height: 40px;
+  margin-top: .75rem;
+  margin-bottom: .75rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: $h2-font-size;
+    line-height: $line-height-h2;
+  }
+}
+
+@mixin text-style-headline-h-3() {
+  font-family: $font-heading;
+  font-style: normal;
+  font-size: 24px;
+  font-weight: $h3-font-weight;
+  line-height: 32px;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: $h3-font-size;
+    line-height: $line-height-h3;
+  }
+}
+
+@mixin text-style-headline-h-4() {
+  font-family: $font-heading;
+  font-style: normal;
+  font-size: 20px;
+  font-weight: $h4-font-weight;
+  line-height: 28px;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: $h4-font-size;
+    line-height: $line-height-h4;
+  }
+}
+
+@mixin text-style-headline-h-5() {
+  font-family: $font-heading;
+  font-style: normal;
+  font-size: 18px;
+  font-weight: $h5-font-weight;
+  line-height: 24px;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: $h5-font-size;
+    line-height: $line-height-h5;
+  }
+}
+
+@mixin text-style-subheadline-sub-1() {
+  font-family: $font-heading;
+  font-style: normal;
+  font-size: 16px;
+  font-weight: $font-weight-sub1-headline;
+  line-height: 24px;
+
+  @include media-breakpoint-up(md) {
+    font-size: $font-size-sub1-headline;
+    line-height: $line-height-sub1-headline;
+  }
+}
+
+@mixin text-style-subheadline-sub-2() {
+  font-family: $font-heading;
+  font-style: normal;
+  font-size: 14px;
+  font-weight: $font-weight-sub2-headline;
+  line-height: 20px;
+
+  @include media-breakpoint-up(md) {
+    font-size: $font-size-sub2-headline;
+    line-height: $line-height-sub2-headline;
+  }
+}
+
+@mixin text-style-body-body-1() {
+  font-family: $font-body;
+  font-style: normal;
+  font-size: 16px;
+  font-weight: $font-weight-body-md;
+  line-height: 24px;
+
+  @include media-breakpoint-up(md) {
+    font-size: $font-size-body-md;
+    line-height: $line-height-body-md;
+  }
+}
+
+@mixin text-style-body-body-2() {
+  font-family: $font-body;
+  font-style: normal;
+  font-size: 14px;
+  font-weight: $font-weight-body-sm;
+  line-height: 20px;
+
+  @include media-breakpoint-up(md) {
+    font-size: $font-size-body-sm;
+    line-height: $line-height-body-sm;
+  }
+}
+
+@mixin text-style-caption-caption-1() {
+  font-family: $font-heading;
+  font-style: normal;
+  font-size: 12px;
+  font-weight: $font-weight-caption;
+  line-height: 12px;
+
+  @include media-breakpoint-up(md) {
+    font-size: $font-size-caption;
+    line-height: $line-height-caption;
+  }
+}
+
+@mixin text-style-eyebrow-eyebrow-1() {
+  font-family: $font-heading;
+  font-style: normal;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: $font-weight-eyebrow-lg;
+  line-height: 12px;
+  letter-spacing: 0.3125rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: $font-size-eyebrow-md;
+    line-height: $line-height-eyebrow-md;
+    letter-spacing: 0.3125rem;
+  }
+}
+
+@mixin text-style-eyebrow-large() {
+  font-family: $font-heading;
+  font-style: normal;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 14px;
+  letter-spacing: 5px;
+
+  @include media-breakpoint-up(md) {
+    font-size: $font-size-eyebrow-lg;
+    line-height: $line-height-eyebrow-lg;
+  }
+}
+
+@mixin text-style-card-headline-h-5() {
+  color: $text-colors-body-color;
+  font-family: $font-heading;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+/**
+ * BUTTONS TEXT STYLES
+ */
+@mixin text-style-button-large() {
+  font-family: $font-body;
+  font-style: normal;
+  font-size: 16px;
+  font-weight: $font-weight-button-lg;
+  line-height: $line-height-button-lg;
+
+  @include media-breakpoint-up(md) {
+    font-size: $font-size-button-lg;
+    line-height: $line-height-button-lg;
+  }
+}
+
+@mixin text-style-button-medium() {
+  font-family: $font-body;
+  font-style: normal;
+  font-size: 14px;
+  font-weight: $font-weight-button-md;
+  line-height: $line-height-button-md;
+
+  @include media-breakpoint-up(md) {
+    font-size: $font-size-button-md;
+    line-height: $line-height-button-md;
+  }
+}
+
+@mixin text-style-button-small() {
+  font-family: $font-body;
+  font-style: normal;
+  font-size: 13px;
+  font-weight: $font-weight-button-sm;
+  line-height: $line-height-button-sm;
+
+  @include media-breakpoint-up(md) {
+    font-size: $font-size-button-sm;
+    line-height: $line-height-button-sm;
+  }
+}
+
+
+@mixin text-style-breadcrumbs() {
+  font-family: $font-body;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+@mixin text-style-testimonial-name() {
+  font-family: $font-body;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 200%;
+  letter-spacing: -0.176px;
+}

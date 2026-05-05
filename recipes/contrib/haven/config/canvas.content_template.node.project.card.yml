@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.haven_theme.card-feature
+    - core.entity_view_mode.node.card
+    - field.field.media.image.field_media_image
+    - field.field.node.project.field_featured_image
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - node.type.project
+  module:
+    - file
+    - media
+    - node
+    - options
+id: node.project.card
+content_entity_type_id: node
+content_entity_type_bundle: project
+content_entity_type_view_mode: card
+component_tree:
+  -
+    uuid: 541cd361-6a3d-40b2-bbfa-b0aaf17204ba
+    component_id: sdc.haven_theme.card-feature
+    component_version: c56342d80dcd2a16
+    inputs: '{"heading_text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:project\u241dtitle\u241e\u241fvalue"},"level":2,"media":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:project\u241dfield_featured_image\u241e\u241fentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241f{src\u21a0src_with_alternate_widths,alt\u21a0alt,width\u21a0width,height\u21a0height}"},"icon":"arrow-circle-right","icon_size":"extra-large","url":{"sourceType":"host-entity-url","absolute":false}}'
+exposed_slots: {  }

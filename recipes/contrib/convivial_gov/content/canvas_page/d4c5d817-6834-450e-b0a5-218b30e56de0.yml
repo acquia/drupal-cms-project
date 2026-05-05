@@ -1,0 +1,361 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: d4c5d817-6834-450e-b0a5-218b30e56de0
+  default_langcode: en
+  depends:
+    b6bf9f86-e49f-4d0f-8834-3f08fdd8b8eb: file
+    c2205fed-268e-457a-a382-7a928e33ddc4: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Overlays
+  description:
+    -
+      value: 'Demonstration of the background overlays available in Convivial Template.'
+  components:
+    -
+      uuid: c52032c3-ebc8-4637-8802-7e243963c2b7
+      component_id: sdc.morphos.banner
+      inputs:
+        title: Overlays
+        padding_top: '12'
+        padding_bottom: '12'
+        palette: color--primary
+        texture: texture--conic-top-start
+    -
+      parent_uuid: c52032c3-ebc8-4637-8802-7e243963c2b7
+      slot: breadcrumb
+      uuid: 9a94bf2b-0834-43d3-9510-39c412cbdda3
+      component_id: block.system_breadcrumb_block
+      inputs:
+        label: Breadcrumbs
+        label_display: '0'
+    -
+      uuid: 75ded05b-aba0-4f88-a0ec-4ee36d9c6bf6
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--primary
+        overlay: overlay--linear-start
+        content_position: section-position--start
+        content_alignment: section-alignment--start
+        heading: 'Linear: Start'
+    -
+      parent_uuid: 75ded05b-aba0-4f88-a0ec-4ee36d9c6bf6
+      slot: backgrounds
+      uuid: 64d10d0b-452c-429c-94d8-9af28908592a
+      component_id: sdc.morphos.image_background
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: c2205fed-268e-457a-a382-7a928e33ddc4
+            target_type: media
+        position: 'center center'
+        style: cover
+    -
+      uuid: 28df3d71-79ba-4251-bd6d-c5aa3938f1f9
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '24'
+        padding_bottom: '24'
+        container: container--normal
+        palette: color--neutral
+        heading: 'Linear: End'
+        layout: layout--8-4
+        content_position: section-position--start
+        content_alignment: section-alignment--start
+        overlay: overlay--linear-end
+    -
+      parent_uuid: 28df3d71-79ba-4251-bd6d-c5aa3938f1f9
+      slot: backgrounds
+      uuid: 8c97116f-e9ff-4496-bfb9-1b5401a2032b
+      component_id: sdc.morphos.image_background
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: c2205fed-268e-457a-a382-7a928e33ddc4
+            target_type: media
+        position: 'center center'
+        style: cover
+    -
+      uuid: fe8bbc15-907e-4dca-ab30-f21a11c706d3
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '24'
+        padding_bottom: '24'
+        container: container--normal
+        palette: color--primary
+        heading: 'Linear: Top'
+        layout: layout--12
+        content_position: section-position--start
+        content_alignment: section-alignment--start
+        overlay: overlay--linear-top
+    -
+      parent_uuid: fe8bbc15-907e-4dca-ab30-f21a11c706d3
+      slot: backgrounds
+      uuid: 0be9667e-36cd-4486-9dce-06dfc6be8506
+      component_id: sdc.morphos.image_background
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: c2205fed-268e-457a-a382-7a928e33ddc4
+            target_type: media
+        position: 'center center'
+        style: cover
+    -
+      uuid: 93144e5a-fa95-42a9-a0ca-e14e06faaf6b
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '24'
+        padding_bottom: '24'
+        container: container--normal
+        palette: color--neutral
+        heading: 'Linear: Bottom'
+        layout: layout--12
+        content_position: section-position--start
+        content_alignment: section-alignment--start
+        overlay: overlay--linear-bottom
+    -
+      parent_uuid: 93144e5a-fa95-42a9-a0ca-e14e06faaf6b
+      slot: backgrounds
+      uuid: 564cd038-c66f-40cd-8fca-1372e7f365b1
+      component_id: sdc.morphos.image_background
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: c2205fed-268e-457a-a382-7a928e33ddc4
+            target_type: media
+        position: 'center center'
+        style: cover
+    -
+      uuid: c8f80202-5978-4dc8-9b88-0b2a4c6ce282
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '24'
+        padding_bottom: '24'
+        container: container--normal
+        palette: color--primary
+        heading: 'Linear: Top start'
+        layout: layout--12
+        content_position: section-position--start
+        content_alignment: section-alignment--start
+        overlay: overlay--linear-top-start
+    -
+      parent_uuid: c8f80202-5978-4dc8-9b88-0b2a4c6ce282
+      slot: backgrounds
+      uuid: 446b9420-3e4f-4159-ba50-9d7716364a3f
+      component_id: sdc.morphos.image_background
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: c2205fed-268e-457a-a382-7a928e33ddc4
+            target_type: media
+        position: 'center center'
+        style: cover
+    -
+      uuid: a851dd14-c451-4214-b004-d0eb6518494c
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '24'
+        padding_bottom: '24'
+        container: container--normal
+        palette: color--neutral
+        heading: 'Linear: Top end'
+        layout: layout--8-4
+        content_position: section-position--start
+        content_alignment: section-alignment--start
+        overlay: overlay--linear-top-end
+    -
+      parent_uuid: a851dd14-c451-4214-b004-d0eb6518494c
+      slot: backgrounds
+      uuid: 72ca6a2f-af0d-4659-bc01-336cf93c259c
+      component_id: sdc.morphos.image_background
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: c2205fed-268e-457a-a382-7a928e33ddc4
+            target_type: media
+        position: 'center center'
+        style: cover
+    -
+      uuid: 321fd67a-eb24-47b0-9779-5232894376e6
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '24'
+        padding_bottom: '24'
+        container: container--normal
+        palette: color--primary
+        heading: 'Linear: Bottom start'
+        layout: layout--12
+        content_position: section-position--start
+        content_alignment: section-alignment--start
+        overlay: overlay--linear-bottom-start
+    -
+      parent_uuid: 321fd67a-eb24-47b0-9779-5232894376e6
+      slot: backgrounds
+      uuid: 60b07461-f26c-431f-8f94-c2c21ddf0e28
+      component_id: sdc.morphos.image_background
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: c2205fed-268e-457a-a382-7a928e33ddc4
+            target_type: media
+        position: 'center center'
+        style: cover
+    -
+      uuid: 29263321-ac20-4b17-bf00-e3e2aeb0c55e
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '24'
+        padding_bottom: '24'
+        container: container--normal
+        palette: color--neutral
+        heading: 'Linear: Bottom end'
+        layout: layout--8-4
+        content_position: section-position--start
+        content_alignment: section-alignment--start
+        overlay: overlay--linear-bottom-end
+    -
+      parent_uuid: 29263321-ac20-4b17-bf00-e3e2aeb0c55e
+      slot: backgrounds
+      uuid: 625b96c9-4099-4c43-bb9c-739a47858984
+      component_id: sdc.morphos.image_background
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: c2205fed-268e-457a-a382-7a928e33ddc4
+            target_type: media
+        position: 'center center'
+        style: cover
+    -
+      uuid: 0db8520c-8425-4d01-a691-fbd5dd92e880
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--50
+        column_widths: section-col-widths--100
+        padding_top: '24'
+        padding_bottom: '24'
+        container: container--normal
+        palette: color--primary
+        heading: 'Radial: Center'
+        layout: layout--12
+        content_position: section-position--center
+        content_alignment: section-alignment--start
+        overlay: overlay--radial-center
+    -
+      parent_uuid: 0db8520c-8425-4d01-a691-fbd5dd92e880
+      slot: backgrounds
+      uuid: 2a8e2f44-70b1-4ec8-857c-13f230feb4ec
+      component_id: sdc.morphos.image_background
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: c2205fed-268e-457a-a382-7a928e33ddc4
+            target_type: media
+        position: 'center center'
+        style: cover
+    -
+      uuid: 457744c1-d88f-4fc1-925c-3132d10754e3
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--50
+        column_widths: section-col-widths--100
+        padding_top: '24'
+        padding_bottom: '24'
+        container: container--normal
+        palette: color--secondary
+        heading: 'Background opacity 70%, secondary palette'
+        layout: layout--12
+        content_position: section-position--center
+        content_alignment: section-alignment--center
+    -
+      parent_uuid: 457744c1-d88f-4fc1-925c-3132d10754e3
+      slot: backgrounds
+      uuid: 3255e3a9-1cc5-4c35-81c4-4504db0a11d0
+      component_id: sdc.morphos.image_background
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: c2205fed-268e-457a-a382-7a928e33ddc4
+            target_type: media
+        position: 'center center'
+        style: cover
+        opacity: 30
+  path:
+    -
+      alias: /demo/overlays
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

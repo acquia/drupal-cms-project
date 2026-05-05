@@ -1,0 +1,109 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.content_format
+    - media.type.document
+    - media.type.image
+    - media.type.remote_video
+    - media.type.svg_image
+    - media.type.video
+    - node.type.mc_alert
+    - node.type.mc_article
+    - node.type.mc_audience
+    - node.type.mc_event
+    - node.type.mc_page
+    - node.type.mc_person
+    - node.type.mc_resource
+    - node.type.mc_section
+    - node.type.mc_topic
+    - workflows.workflow.editorial
+  module:
+    - canvas
+    - content_moderation
+    - file
+    - filter
+    - media
+    - media_library_bulk_upload
+    - node
+    - path
+    - redirect
+    - scheduler
+    - system
+    - trash
+id: content_editor
+label: 'Content editor'
+weight: -8
+is_admin: false
+permissions:
+  - 'access administration pages'
+  - 'access content overview'
+  - 'access files overview'
+  - 'access media overview'
+  - 'access trash'
+  - 'administer menu'
+  - 'administer redirects'
+  - 'administer url aliases'
+  - 'create canvas_page'
+  - 'create document media'
+  - 'create image media'
+  - 'create mc_alert content'
+  - 'create mc_article content'
+  - 'create mc_audience content'
+  - 'create mc_event content'
+  - 'create mc_page content'
+  - 'create mc_person content'
+  - 'create mc_resource content'
+  - 'create mc_section content'
+  - 'create mc_topic content'
+  - 'create media'
+  - 'create remote_video media'
+  - 'create svg_image media'
+  - 'create url aliases'
+  - 'create video media'
+  - 'delete canvas_page'
+  - 'delete own document media'
+  - 'delete own image media'
+  - 'delete own remote_video media'
+  - 'delete own svg_image media'
+  - 'delete own video media'
+  - 'edit any document media'
+  - 'edit any image media'
+  - 'edit any mc_alert content'
+  - 'edit any mc_article content'
+  - 'edit any mc_audience content'
+  - 'edit any mc_event content'
+  - 'edit any mc_page content'
+  - 'edit any mc_person content'
+  - 'edit any mc_resource content'
+  - 'edit any mc_section content'
+  - 'edit any mc_topic content'
+  - 'edit any remote_video media'
+  - 'edit any svg_image media'
+  - 'edit any video media'
+  - 'edit canvas_page'
+  - 'update any media'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition needs_review'
+  - 'use media document bulk upload form'
+  - 'use media image bulk upload form'
+  - 'use media remote_video bulk upload form'
+  - 'use media svg_image bulk upload form'
+  - 'use media video bulk upload form'
+  - 'use text format content_format'
+  - 'view all media revisions'
+  - 'view all revisions'
+  - 'view any unpublished content'
+  - 'view latest version'
+  - 'view mc_alert revisions'
+  - 'view mc_article revisions'
+  - 'view mc_audience revisions'
+  - 'view mc_event revisions'
+  - 'view mc_page revisions'
+  - 'view mc_person revisions'
+  - 'view mc_resource revisions'
+  - 'view mc_section revisions'
+  - 'view mc_topic revisions'
+  - 'view own unpublished content'
+  - 'view own unpublished media'
+  - 'view scheduled content'

@@ -1,0 +1,85 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - convene_theme
+label: 'Agenda Module'
+id: sdc.convene_theme.agenda_module
+source: sdc
+source_local_id: 'convene_theme:agenda_module'
+provider: convene_theme
+active_version: 1944aa5d596438b2
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+        eyebrow:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        description:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        actions:
+          title: Actions
+          description: 'Centered action buttons below description.'
+        agenda_items:
+          title: 'Agenda Items'
+          description: 'A list of Agenda Item molecules dropped here.'
+  c9bbc402d1f131be:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        eyebrow_slot:
+          title: 'Eyebrow Slot'
+          description: 'The centered section eyebrow (Day one).'
+        title_slot:
+          title: 'Title Slot'
+          description: 'The centered section title.'
+        description_slot:
+          title: 'Description Slot'
+          description: 'The centered description text.'
+        actions:
+          title: Actions
+          description: 'Centered action buttons below description.'
+        agenda_items:
+          title: 'Agenda Items'
+          description: 'A list of Agenda Item molecules dropped here.'

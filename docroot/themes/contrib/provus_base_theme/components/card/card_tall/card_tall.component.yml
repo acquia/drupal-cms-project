@@ -1,0 +1,63 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Card Tall
+status: stable
+description: Tall card component with image, title, optional date or header, and link wrapper
+group: Provus Components
+
+variants:
+  default:
+    title: Default
+    description: Standard tall card with image, title and optional date/header
+
+display_options:
+  display_description: 'Tall card with image, title and optional date or header.'
+  display_comment: 'Block of tall card with image, title and optional date or header.'
+  display_extenders: {  }
+  block_description: 'Tall card with image, title and optional date or header'
+  block_category: 'Provus Components'
+
+props:
+  type: object
+  required:
+    - title
+    - image_url
+  properties:
+    title:
+      type: string
+      title: 'Title'
+      description: 'Main card title displayed as a heading'
+      examples:
+        - 'Our Services'
+        - 'Latest News'
+        - 'Featured Article'
+      default: ''
+    image_url:
+      type: object
+      $ref: json-schema-definitions://canvas.module/image
+      title: 'Image'
+      description: 'Main image displayed at the top of the card'
+      examples:
+        - src: 'https://placehold.co/280x448'
+          alt: 'Image'
+      default: ''
+    header:
+      type: string
+      title: 'Header Content'
+      description: 'Optional header text displayed as an alternative to the subtitle. Only shown if subtitle is empty.'
+      examples:
+        - 'Featured'
+      default: ''
+    link:
+      type: string
+      format: uri-reference
+      title: 'Link URL'
+      description: 'URL for the link button'
+      examples:
+        - '/contact'
+      default: ''
+    content_attributes:
+      type: string
+      title: 'Content attributes'
+      description: 'Same as attributes, except applied to the main content tag that appears in the template.'
+      default: ''
+    

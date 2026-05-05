@@ -1,0 +1,116 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: dfa036af-fbd8-448f-b3a7-138ea39601fa
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Skins
+  description:
+    -
+      value: 'Demonstration of the various starter skins available in Convivial Template.'
+  components:
+    -
+      uuid: 12fc14a6-1752-4106-b355-bf7135328cb9
+      component_id: sdc.morphos.banner
+      inputs:
+        title: Skins
+        padding_top: '12'
+        padding_bottom: '12'
+        palette: color--primary
+        texture: texture--conic-top-start
+    -
+      parent_uuid: 12fc14a6-1752-4106-b355-bf7135328cb9
+      slot: breadcrumb
+      uuid: 50c2305d-7cc5-4ddb-b308-943ddf812801
+      component_id: block.system_breadcrumb_block
+      inputs:
+        label: Breadcrumbs
+        label_display: '0'
+    -
+      uuid: 96dd89ef-2774-47c0-81b0-84974b575125
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--25-25-25-25
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--standard
+        layout: layout--12
+    -
+      parent_uuid: 96dd89ef-2774-47c0-81b0-84974b575125
+      slot: main_items
+      uuid: 91934285-910b-4c88-aedf-5d9da46aa87b
+      component_id: sdc.morphos.card_simple
+      inputs:
+        info: Skin
+        heading: Convivial
+        heading_level: 3
+        url: /demo/skins/convivial
+        summary:
+          value: '<p>Convivial is a theme designed for conservative business/organisations. Utalising blues and yellows. &nbsp;</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 96dd89ef-2774-47c0-81b0-84974b575125
+      slot: main_items
+      uuid: 746f6c2d-f9e9-47e5-a500-de8b87b51a52
+      component_id: sdc.morphos.card_simple
+      inputs:
+        info: Skin
+        heading: Standard
+        heading_level: 3
+        url: /demo/skins/standard
+        summary:
+          value: '<p>Standard is a theme based on DaisyUI with some accessibility colour improvements</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 96dd89ef-2774-47c0-81b0-84974b575125
+      slot: main_items
+      uuid: d01b29d8-d334-4f14-8191-88dbf92bf05f
+      component_id: sdc.morphos.card_simple
+      inputs:
+        info: Skin
+        heading: Campaign
+        heading_level: 3
+        url: /demo/skins/campaign
+        summary:
+          value: '<p>Campaign is a unique theme for marketing material. It can allow you to purposefully alter the look of your website pages.&nbsp;</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 96dd89ef-2774-47c0-81b0-84974b575125
+      slot: main_items
+      uuid: 277a38aa-42e6-4fb6-8b9b-5b64f98118a8
+      component_id: sdc.morphos.card_simple
+      inputs:
+        info: Skin
+        heading: 'Gov AU'
+        heading_level: 3
+        url: /demo/skins/gov-au
+        summary:
+          value: '<p>Gov AU is a theme designed to suit Australian Government sites.</p>'
+          format: canvas_html_block
+  path:
+    -
+      alias: /demo/skins
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

@@ -1,0 +1,121 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Drupal\canvas\PropExpressions\StructuredData;
+
+use Drupal\canvas\Utility\TypedDataHelper;
+use Drupal\Component\Plugin\DependentPluginInterface;
+use Drupal\Component\Utility\NestedArray;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\Core\Field\FieldItemInterface;
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
+use Drupal\Core\Field\FieldTypePluginManagerInterface;
+use Drupal\Core\Field\FieldItemListInterface;
+
+/**
+ * For pointing to a prop in a field type (not considering any delta).
+ */
+final class FieldTypePropExpression implements FieldTypeBasedPropExpressionInterface, ScalarPropExpressionInterface {
+
+  public function __construct(
+    public readonly string $fieldType,
+    public readonly string $propName,
+  ) {}
+
+  public function __toString(): string {
+    return static::PREFIX_EXPRESSION_TYPE
+      . $this->fieldType
+      . static::PREFIX_PROPERTY_LEVEL . $this->propName;
+  }
+
+  public static function fromString(string $representation): static {
+    $parts = explode('␟', mb_substr($representation, 2));
+    return new FieldTypePropExpression(...$parts);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function calculateDependencies(FieldableEntityInterface|FieldItemListInterface|null $field_item_list = NULL): array {
+    \assert($field_item_list === NULL || $field_item_list instanceof FieldItemListInterface);
+    // @phpstan-ignore-next-line
+    $field_type_manager = \Drupal::service(FieldTypePluginManagerInterface::class);
+    \assert($field_type_manager instanceof FieldTypePluginManagerInterface);
+    $provider = $field_type_manager->getDefinition($this->fieldType)['provider'] ?? NULL;
+
+    $dependencies = [];
+    // Core-provided field types need no modules to be installed.
+    if (!\in_array($provider, [NULL, 'core'], TRUE)) {
+      $dependencies['module'][] = $provider;
+    }
+
+    // Computed properties can have dependencies of their own.
+    // When the field property objects exist: use them, to also compute content
+    // dependencies.
+    // @see \Drupal\canvas\PropSource\ContentAwareDependentInterface
+    if ($field_item_list !== NULL && !$field_item_list->isEmpty()) {
+      $field_definition = $field_item_list->getFieldDefinition();
+      $field_storage_definition = match ($field_definition instanceof FieldStorageDefinitionInterface) {
+        TRUE => $field_definition,
+        FALSE => $field_definition->getFieldStorageDefinition(),
+      };
+      $property_definitions = $field_storage_definition->getPropertyDefinitions();
+      if (!\array_key_exists($this->propName, $property_definitions)) {
+        // @phpcs:ignore Drupal.Semantics.FunctionTriggerError.TriggerErrorTextLayoutRelaxed
+        @trigger_error(\sprintf('Property %s does not exist', $this->propName), E_USER_DEPRECATED);
+      }
+      elseif (is_a($property_definitions[$this->propName]->getClass(), DependentPluginInterface::class, TRUE)) {
+        \assert($property_definitions[$this->propName]->isComputed());
+        foreach ($field_item_list as $field_item) {
+          $field_item_prop = $field_item->get($this->propName);
+          // @todo This looks like a PHPStan regression: https://github.com/phpstan/phpstan/issues/12882#issuecomment-4157685453
+          \assert($field_item_prop instanceof DependentPluginInterface);
+          $dependencies = NestedArray::mergeDeep($dependencies, $field_item_prop->calculateDependencies());
+        }
+      }
+    }
+    // Otherwise: conjure an empty field item object, get the (empty) evaluated
+    // property that this expression would evaluate, and calculate its
+    // dependencies, if any.
+    else {
+      $empty_field_item = TypedDataHelper::conjureFieldItemObject($this->fieldType);
+      $properties = $empty_field_item->getProperties(TRUE);
+      if (!\array_key_exists($this->propName, $properties)) {
+        // @phpcs:ignore Drupal.Semantics.FunctionTriggerError.TriggerErrorTextLayoutRelaxed
+        @trigger_error(\sprintf('Property %s does not exist', $this->propName), E_USER_DEPRECATED);
+      }
+      elseif ($properties[$this->propName] instanceof DependentPluginInterface) {
+        // @phpstan-ignore method.nonObject
+        \assert($empty_field_item->getDataDefinition()->getPropertyDefinition($this->propName)->isComputed());
+        $dependencies = NestedArray::mergeDeep($dependencies, $properties[$this->propName]->calculateDependencies());
+      }
+    }
+
+    return $dependencies;
+  }
+
+  public function validateSupport(EntityInterface|FieldItemInterface|FieldItemListInterface $field): void {
+    \assert($field instanceof FieldItemInterface || $field instanceof FieldItemListInterface);
+    $actual_field_type = $field->getFieldDefinition()->getType();
+    if ($actual_field_type !== $this->fieldType) {
+      throw new \DomainException(\sprintf("`%s` is an expression for field type `%s`, but the provided field item (list) is of type `%s`.", (string) $this, $this->fieldType, $actual_field_type));
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getFieldType(): string {
+    return $this->fieldType;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getFieldPropertyName(): string {
+    return $this->propName;
+  }
+
+}

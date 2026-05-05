@@ -1,0 +1,202 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 37ebab39-4b4e-4ed2-9f06-13a5959b2d12
+  default_langcode: en
+  depends:
+    81e8df1d-6e5e-4c40-bbb9-8965a13a7500: file
+    b2db6e04-bc38-407e-af13-8ea0019d0a73: media
+    7410ab76-707b-42f2-bcb6-df6635a5808c: file
+    b604af49-54e8-454f-8ae1-349d177638bf: media
+    068c2473-06a0-4a19-ac53-528fc797750e: file
+    536b37f5-ad6b-4794-b2f3-7dab4ee53a5d: media
+    10cbdc2c-66c0-438a-a5cc-cd3474c7d41a: file
+    268b6034-a11f-4ee9-9327-33089fb21139: media
+    2678c97d-66eb-4edc-a046-dcdde78f4c47: file
+    7340f6fe-37c0-4bbe-ad90-2e3c8a286b88: media
+    5aaf4c74-bfd4-4b0a-be65-6edb5b63f01e: file
+    5d2d613d-616e-4f9a-8af2-de163a3314b4: media
+    b7d53ced-d13c-4b62-9114-89d604992e44: file
+    129628f8-b556-44f9-acef-26b889012d18: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Venue Page'
+  description:
+    -
+      value: 'View Convene Conference ticket pricing, passes, and packages. Choose the right pass for sessions, workshops, and networking events.'
+  components:
+    -
+      uuid: 832571cf-1b44-4afa-92c7-cdd154837eed
+      component_id: sdc.convene_theme.hero
+      inputs:
+        variation: small
+    -
+      parent_uuid: 832571cf-1b44-4afa-92c7-cdd154837eed
+      slot: heading
+      uuid: ced16d5c-33a3-42ef-981e-6f3d04f66fce
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        heading: Venue
+        heading_tag: div
+    -
+      parent_uuid: 832571cf-1b44-4afa-92c7-cdd154837eed
+      slot: subheading
+      uuid: 831413d7-fe06-4221-b2b2-81ebe7505b63
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        description: 'Where to find us'
+        heading_tag: div
+    -
+      parent_uuid: 832571cf-1b44-4afa-92c7-cdd154837eed
+      slot: background_media
+      uuid: 00fd5569-9779-4dbd-a0d6-a2ecb1384166
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: b2db6e04-bc38-407e-af13-8ea0019d0a73
+            target_type: media
+        loading: eager
+    -
+      uuid: 321b5ce7-3637-4084-b8b0-4e43d294e414
+      component_id: sdc.convene_theme.location-split
+      inputs:
+        title: 'The venue and what to expect'
+        address: '123 Conference Boulevard, Suite 400'
+        eyebrow: Location
+        description: "We've chosen a central location with easy access by public transit and ample parking. The venue offers modern facilities and comfortable spaces for all attendees."
+    -
+      uuid: a34fe3f8-9cb5-4770-9f2e-f70880e202ff
+      component_id: sdc.convene_theme.map-container
+      inputs:
+        title: 'Find us on the map'
+        eyebrow: Map
+        description: 'Use the map below to locate the venue and plan your route. Parking information and transit options are available through the links below.'
+    -
+      parent_uuid: a34fe3f8-9cb5-4770-9f2e-f70880e202ff
+      slot: media
+      uuid: e7a02a51-e2b0-4812-9e9f-fb927faca7a1
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: b604af49-54e8-454f-8ae1-349d177638bf
+            target_type: media
+    -
+      uuid: 7aa99c3a-6842-4852-b2ad-05e610923833
+      component_id: sdc.convene_theme.benefits-grid
+      inputs:
+        title: 'Getting here matters'
+        eyebrow: Logistics
+        description: 'Multiple routes work well for most travelers'
+    -
+      parent_uuid: 7aa99c3a-6842-4852-b2ad-05e610923833
+      slot: items
+      uuid: 03608d2b-d753-4640-bb7e-4e2e6833c422
+      component_id: sdc.convene_theme.benefit-card
+      inputs:
+        title: 'Public transportation'
+        description: 'BART and Muni lines serve the area directly'
+    -
+      parent_uuid: 03608d2b-d753-4640-bb7e-4e2e6833c422
+      slot: icon
+      uuid: df14c623-1b25-476a-8bd9-d99d8d91b72c
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 536b37f5-ad6b-4794-b2f3-7dab4ee53a5d
+            target_type: media
+    -
+      parent_uuid: 7aa99c3a-6842-4852-b2ad-05e610923833
+      slot: items
+      uuid: 6cf0deb1-608f-4813-8bc6-59baa4545e04
+      component_id: sdc.convene_theme.benefit-card
+      inputs:
+        title: 'Parking options'
+        description: 'Street parking and garages nearby offer reasonable rates'
+    -
+      parent_uuid: 6cf0deb1-608f-4813-8bc6-59baa4545e04
+      slot: icon
+      uuid: 8b50c847-27c7-4816-b617-d34f8cc4b651
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 268b6034-a11f-4ee9-9327-33089fb21139
+            target_type: media
+    -
+      parent_uuid: 7aa99c3a-6842-4852-b2ad-05e610923833
+      slot: items
+      uuid: 8dc602ff-55d7-415b-9f0b-857859dd6f4a
+      component_id: sdc.convene_theme.benefit-card
+      inputs:
+        title: Accessibility
+        description: 'Wheelchair access and elevators throughout the building'
+    -
+      parent_uuid: 8dc602ff-55d7-415b-9f0b-857859dd6f4a
+      slot: icon
+      uuid: 6171636e-7724-472e-ae2f-1517b52b6903
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 7340f6fe-37c0-4bbe-ad90-2e3c8a286b88
+            target_type: media
+    -
+      parent_uuid: 7aa99c3a-6842-4852-b2ad-05e610923833
+      slot: items
+      uuid: 075730e0-c27e-4664-b956-cae1b44daf2e
+      component_id: sdc.convene_theme.benefit-card
+      inputs:
+        title: 'Driving directions'
+        description: 'GPS coordinates and turn-by-turn guidance available'
+    -
+      parent_uuid: 075730e0-c27e-4664-b956-cae1b44daf2e
+      slot: icon
+      uuid: d1557c56-3656-4100-a3dd-de3725132407
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 5d2d613d-616e-4f9a-8af2-de163a3314b4
+            target_type: media
+    -
+      uuid: 62e07442-4a91-4fd5-80e1-801f67f18ef3
+      component_id: sdc.convene_theme.map-container
+      inputs:
+        title: 'Need help finding us?'
+        description: 'Contact our team if you have questions about parking, accessibility, or directions to the venue.'
+        alternate_bg: true
+    -
+      parent_uuid: 62e07442-4a91-4fd5-80e1-801f67f18ef3
+      slot: media
+      uuid: 924924cb-3f94-4d80-bc48-8241a2bc2ec2
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 129628f8-b556-44f9-acef-26b889012d18
+            target_type: media
+  path:
+    -
+      alias: /venue-page
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"title":"Venue | Convene Conference Location \u0026 Directions"}'

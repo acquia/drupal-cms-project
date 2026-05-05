@@ -1,0 +1,349 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 04412c6a-2534-4460-9e5c-1be9edcc01a3
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Demo
+  description:
+    -
+      value: 'Demonstration section of Convivial Template showcasing all of the features and capabilities.'
+  components:
+    -
+      uuid: 91624191-ccda-4153-898b-28b6bfd344a6
+      component_id: sdc.morphos.banner
+      inputs:
+        title: 'Demo page'
+        padding_top: '12'
+        padding_bottom: '12'
+        palette: color--primary
+        texture: texture--conic-top-start
+    -
+      parent_uuid: 91624191-ccda-4153-898b-28b6bfd344a6
+      slot: breadcrumb
+      uuid: b68c189e-5005-4483-b92f-8573b517a89f
+      component_id: block.system_breadcrumb_block
+      inputs:
+        label: Breadcrumbs
+        label_display: '0'
+    -
+      uuid: ecdfc8d2-c8f1-4342-a079-802d23766398
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: false
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--25-25-25-25
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--standard
+        layout: layout--12
+        heading: ' Content Page Demos'
+    -
+      parent_uuid: ecdfc8d2-c8f1-4342-a079-802d23766398
+      slot: main_items
+      uuid: f2a2384c-98de-40f9-b457-a396430f1daa
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: browser
+        icon_size: icon-size--xl
+        icon_align: center
+        heading: Page
+        url: /demo/page
+    -
+      parent_uuid: ecdfc8d2-c8f1-4342-a079-802d23766398
+      slot: main_items
+      uuid: 4dbea9b5-583c-4b46-96ef-6fabac61ab39
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: users
+        icon_size: icon-size--xl
+        icon_align: center
+        heading: Audience
+        url: /demo/audience
+    -
+      parent_uuid: ecdfc8d2-c8f1-4342-a079-802d23766398
+      slot: main_items
+      uuid: 87161538-4905-45af-801c-d90634f05653
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: tag-simple
+        icon_size: icon-size--xl
+        icon_align: center
+        heading: Topic
+        url: /demo/topic
+    -
+      parent_uuid: ecdfc8d2-c8f1-4342-a079-802d23766398
+      slot: main_items
+      uuid: dbd08451-db43-44d8-a23b-88c8bc734003
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: folder-open
+        icon_size: icon-size--xl
+        icon_align: center
+        heading: Section
+        url: /demo/section
+    -
+      parent_uuid: ecdfc8d2-c8f1-4342-a079-802d23766398
+      slot: main_items
+      uuid: 2b8fb2e1-44d0-48d7-a6b2-8c46eb950320
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: folders
+        icon_size: icon-size--xl
+        icon_align: center
+        heading: Resource
+        url: /resources/demo-resource
+    -
+      parent_uuid: ecdfc8d2-c8f1-4342-a079-802d23766398
+      slot: main_items
+      uuid: 6f08a4ea-21d1-4d6f-81b4-4ca0fd68ba05
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: calendar
+        icon_size: icon-size--xl
+        icon_align: center
+        heading: Event
+        url: /events/demo-event
+    -
+      parent_uuid: ecdfc8d2-c8f1-4342-a079-802d23766398
+      slot: main_items
+      uuid: 3a064d59-ea0b-42ad-9a68-998b277263a0
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: newspaper
+        icon_size: icon-size--xl
+        icon_align: center
+        heading: Article
+        url: /news/demo-article
+    -
+      parent_uuid: ecdfc8d2-c8f1-4342-a079-802d23766398
+      slot: main_items
+      uuid: 7244fb38-ae32-41ce-a33c-d1d1b83431e1
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: user
+        icon_size: icon-size--xl
+        icon_align: center
+        heading: Person
+        url: /ministers/demo-person
+    -
+      uuid: f12d85d0-3303-4e8c-b796-5f3306b61a4e
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: false
+        heading_level: 2
+        hide_heading: false
+        column_widths: section-col-widths--25-25-25-25
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--secondary
+        layout: layout--12
+        heading: Features
+    -
+      parent_uuid: f12d85d0-3303-4e8c-b796-5f3306b61a4e
+      slot: main_items
+      uuid: 2f416b8f-22c3-4cca-a585-7943d6264c35
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: puzzle-piece
+        icon_size: icon-size--xl
+        icon_align: center
+        heading: Components
+        url: /demo/components
+    -
+      parent_uuid: f12d85d0-3303-4e8c-b796-5f3306b61a4e
+      slot: main_items
+      uuid: 82ffb808-672e-460d-a29f-d87c810146d8
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: layout
+        icon_size: icon-size--xl
+        icon_align: center
+        heading: 'View modes'
+        url: /demo/view-modes
+    -
+      parent_uuid: f12d85d0-3303-4e8c-b796-5f3306b61a4e
+      slot: main_items
+      uuid: b742c210-95d1-427b-a278-56229bc7833c
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: palette
+        icon_size: icon-size--xl
+        icon_align: center
+        heading: Palettes
+        url: /demo/palettes
+    -
+      parent_uuid: f12d85d0-3303-4e8c-b796-5f3306b61a4e
+      slot: main_items
+      uuid: e04eb78e-1668-4e5b-b874-2737e82e4677
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: image
+        icon_size: icon-size--xl
+        icon_align: center
+        heading: Backgrounds
+        url: /demo/backgrounds
+    -
+      parent_uuid: f12d85d0-3303-4e8c-b796-5f3306b61a4e
+      slot: main_items
+      uuid: c3d2891f-3230-4405-b745-e370f3e8a5b0
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: lightning
+        icon_size: icon-size--xl
+        icon_align: center
+        heading: Behaviors
+        url: /demo/behaviors
+    -
+      parent_uuid: f12d85d0-3303-4e8c-b796-5f3306b61a4e
+      slot: main_items
+      uuid: a6f82e0a-a7fe-4894-a43b-948422624472
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: t-shirt
+        icon_size: icon-size--xl
+        icon_align: center
+        heading: Skins
+        url: /demo/skins
+    -
+      parent_uuid: f12d85d0-3303-4e8c-b796-5f3306b61a4e
+      slot: main_items
+      uuid: 579b0ec7-d81b-455f-af1b-b3277804364c
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: gradient
+        icon_size: icon-size--xl
+        icon_align: center
+        heading: Textures
+        url: /demo/textures
+    -
+      parent_uuid: f12d85d0-3303-4e8c-b796-5f3306b61a4e
+      slot: main_items
+      uuid: dac72223-42e4-4434-b224-d2d449172bb2
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: squares-four
+        icon_size: icon-size--xl
+        icon_align: center
+        heading: Patterns
+        url: /demo/patterns
+    -
+      parent_uuid: f12d85d0-3303-4e8c-b796-5f3306b61a4e
+      slot: main_items
+      uuid: 5870ae1c-8a71-4d2d-9bfa-511e8af444af
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: cards-three
+        icon_size: icon-size--xl
+        icon_align: center
+        heading: Overlays
+        url: /demo/overlays
+    -
+      parent_uuid: f12d85d0-3303-4e8c-b796-5f3306b61a4e
+      slot: main_items
+      uuid: dbf648b9-ad86-4f70-b3fd-a145e1ac3b75
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: cube-transparent
+        icon_size: icon-size--xl
+        icon_align: center
+        heading: Containers
+        url: /demo/containers
+    -
+      uuid: 6b4a7041-b681-4e92-86aa-4ecaec2a18f5
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: false
+        heading_level: 2
+        hide_heading: false
+        intro:
+          value: '<p>Every skin includes:</p><ul><li data-list-item-id="eaa8aa6475c4a5f1c745b0f37cdfcd9f7">Light and Dark mode schemes</li><li data-list-item-id="e6557840176fd01116ba97b505b772608">Multiple palette options per scheme</li><li data-list-item-id="eff1d06d881d15813ac64e0169b11e86a">Control over components display, and the UI.</li><li data-list-item-id="e1af563d0ebb6d7dc6eaaab3f7fb46e2e">Flexible Typography settings</li></ul>'
+          format: canvas_html_block
+        content_width: section-width--100
+        column_widths: section-col-widths--25-25-25-25
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--primary
+        heading: Skins
+        layout: layout--3-1-8
+    -
+      parent_uuid: 6b4a7041-b681-4e92-86aa-4ecaec2a18f5
+      slot: main_items
+      uuid: 5b5135ec-1432-424c-b427-e4d16b0ff6f2
+      component_id: sdc.morphos.card_simple
+      inputs:
+        info: Skin
+        heading: Convivial
+        heading_level: 3
+        url: /demo/skins/convivial
+        summary:
+          value: '<p>Convivial is a theme designed for conservative business/organisations. Utalising blues and yellows. &nbsp;</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 6b4a7041-b681-4e92-86aa-4ecaec2a18f5
+      slot: main_items
+      uuid: 00e4527f-e34a-43a5-b704-2c815fb6f6a8
+      component_id: sdc.morphos.card_simple
+      inputs:
+        info: Skin
+        heading: Standard
+        heading_level: 3
+        url: /demo/skins/standard
+        summary:
+          value: '<p>Standard is a theme based on DaisyUI with some accessibility colour improvements.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 6b4a7041-b681-4e92-86aa-4ecaec2a18f5
+      slot: main_items
+      uuid: 63fbc465-6bbc-41c2-855b-4b19b4b65be5
+      component_id: sdc.morphos.card_simple
+      inputs:
+        info: Skin
+        heading: Campaign
+        heading_level: 3
+        url: /demo/skins/campaign
+        summary:
+          value: '<p>Campaign is a unique theme for marketing material. It can allow you to pruposefully alter the look of your website pages.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 6b4a7041-b681-4e92-86aa-4ecaec2a18f5
+      slot: main_items
+      uuid: a50aa6ed-2bd2-44eb-9574-1d4bbb54c25a
+      component_id: sdc.morphos.card_simple
+      inputs:
+        info: Skin
+        heading: 'Gov AU'
+        heading_level: 3
+        url: /demo/skins/gov-au
+        summary:
+          value: '<p>Gov AU is a theme designed to suit Australian Government sites.&nbsp;</p>'
+          format: canvas_html_block
+  path:
+    -
+      alias: /demo
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

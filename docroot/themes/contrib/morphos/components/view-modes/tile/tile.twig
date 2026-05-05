@@ -1,0 +1,25 @@
+<div{{ attributes.addClass('tile') }}>
+  {% if image %}
+    <div class="tile__image">
+      {{ include('morphos:image', { image }, with_context = false) }}
+    </div>
+  {% endif %}
+  <div class="tile__content">
+    {% if info %}
+      <div class="tile__info">
+        {{ info }}
+      </div>
+    {% endif %}
+    {% if heading %}
+      <div class="tile__title">
+        {% if url %}
+          <a href="{{- url -}}" class="tile__link">
+            {{ heading }}
+          </a>
+        {% else %}
+          {{ heading }}
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>

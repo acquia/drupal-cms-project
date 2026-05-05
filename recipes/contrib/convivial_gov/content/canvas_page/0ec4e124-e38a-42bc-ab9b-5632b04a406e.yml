@@ -1,0 +1,156 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 0ec4e124-e38a-42bc-ab9b-5632b04a406e
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'View modes'
+  description:
+    -
+      value: 'Demonstration of view mode displays available in Convivial Template.'
+  components:
+    -
+      uuid: 9757b350-d6dd-4830-a20e-f56c66e7404f
+      component_id: sdc.morphos.banner
+      inputs:
+        title: 'View modes'
+        padding_top: '12'
+        padding_bottom: '12'
+        palette: color--primary
+        texture: texture--conic-top-start
+    -
+      parent_uuid: 9757b350-d6dd-4830-a20e-f56c66e7404f
+      slot: breadcrumb
+      uuid: c2e9b6dc-f576-495a-80e9-f8c9d5e4d2a9
+      component_id: block.system_breadcrumb_block
+      inputs:
+        label: Breadcrumbs
+        label_display: '0'
+    -
+      uuid: c0c5e61d-fd8e-4681-aae9-29453aecc970
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--standard
+        layout: layout--12
+        content_position: section-position--start
+        content_alignment: section-alignment--start
+    -
+      parent_uuid: c0c5e61d-fd8e-4681-aae9-29453aecc970
+      slot: main_items
+      uuid: 816d7dd3-aa68-4b23-90d3-1e1a6fa3a87b
+      component_id: block.views_block.demo_displays-card_icon
+      inputs:
+        label: 'Demo Displays: Card - Icon'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      parent_uuid: c0c5e61d-fd8e-4681-aae9-29453aecc970
+      slot: main_items
+      uuid: aed81e7b-e2a2-4730-bf0e-b595dcf78053
+      component_id: block.views_block.demo_displays-mc_card_image
+      inputs:
+        label: 'Demo Displays: Card - Image'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      parent_uuid: c0c5e61d-fd8e-4681-aae9-29453aecc970
+      slot: main_items
+      uuid: 565520e1-3b9c-41a1-911c-b3ca523259e9
+      component_id: block.views_block.demo_displays-mc_card_simple
+      inputs:
+        label: 'Demo Displays: Card - Simple'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      parent_uuid: c0c5e61d-fd8e-4681-aae9-29453aecc970
+      slot: main_items
+      uuid: e015c286-552b-4022-b9a6-d247135a8da5
+      component_id: block.views_block.demo_displays-mc_summary
+      inputs:
+        label: 'Demo Displays: Summary'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      parent_uuid: c0c5e61d-fd8e-4681-aae9-29453aecc970
+      slot: main_items
+      uuid: 32b7e092-749b-4e9d-96d1-cee89f311d6d
+      component_id: block.views_block.demo_displays-mc_teaser_big
+      inputs:
+        label: 'Demo Displays: Teaser - Big'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      parent_uuid: c0c5e61d-fd8e-4681-aae9-29453aecc970
+      slot: main_items
+      uuid: 099a04f7-c99b-401d-9adf-24dce170655c
+      component_id: block.views_block.demo_displays-mc_teaser_medium
+      inputs:
+        label: 'Demo Displays: Teaser - Medium'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      parent_uuid: c0c5e61d-fd8e-4681-aae9-29453aecc970
+      slot: main_items
+      uuid: c9f03cb2-27d7-4b50-ae6a-3f1aa8e1fb3b
+      component_id: block.views_block.demo_displays-mc_teaser_small
+      inputs:
+        label: 'Demo Displays: Teaser - Small'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      parent_uuid: c0c5e61d-fd8e-4681-aae9-29453aecc970
+      slot: main_items
+      uuid: 2b4e4bdf-cdcc-440a-a6c2-515b0391bc4b
+      component_id: block.views_block.demo_displays-mc_tile
+      inputs:
+        label: 'Demo Displays: Tile'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      parent_uuid: c0c5e61d-fd8e-4681-aae9-29453aecc970
+      slot: main_items
+      uuid: 079db872-4b0e-4837-a813-799b86e2fe60
+      component_id: block.views_block.demo_displays-mc_title
+      inputs:
+        label: 'Demo Displays: Title'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+  path:
+    -
+      alias: /demo/view-modes
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

@@ -1,0 +1,14 @@
+<article {{ attributes }}>
+  <header>
+    <h2>{{ heading }}</h2>
+    <div class="subheading">{{ subheading }}</div>
+  </header>
+
+  <div class="content">
+    <p>{{ content }}</p>
+    <div class="tags">
+      {{ tags|join(', ') }}
+    </div>
+  </div>
+  <footer>{{ footer }}</footer>
+</article>

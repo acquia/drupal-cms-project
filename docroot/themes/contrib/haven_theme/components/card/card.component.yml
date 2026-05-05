@@ -1,0 +1,51 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Image card
+group: Card
+props:
+  type: object
+  properties:
+    heading_text:
+      type: string
+      title: Heading
+      examples:
+        - "This is your card title"
+    level:
+      type: number
+      title: Heading level
+      enum:
+        - 2
+        - 3
+        - 4
+      default: 3
+      examples:
+        - 3
+    date:
+      type: string
+      title: Date
+      format: date
+    url:
+      type: string
+      title: Link
+      format: uri-reference
+    media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Image
+      type: object
+      examples:
+        - src: "assets/gradient.jpg"
+          width: 800
+          height: 600
+          alt: "Blue to green gradient placeholder image"
+    category:
+      type: string
+      title: Category
+      default: "Category"
+      examples:
+        - "Category"
+    icon:
+      type: string
+      title: Icon name
+      description: 'The ID of an icon from the <a href="https://phosphoricons.com/" target="_blank">Phosphor Icons</a> library.'
+      default: "globe"
+      examples:
+        - "globe"

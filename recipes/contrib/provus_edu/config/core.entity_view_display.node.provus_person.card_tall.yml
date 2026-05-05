@@ -1,0 +1,60 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.card_tall
+    - field.field.node.provus_person.field_content
+    - field.field.node.provus_person.field_featured_image
+    - field.field.node.provus_person.field_provus_email
+    - field.field.node.provus_person.field_provus_fname
+    - field.field.node.provus_person.field_provus_lname
+    - field.field.node.provus_person.field_provus_person_category
+    - field.field.node.provus_person.field_provus_telephone
+    - field.field.node.provus_person.field_provus_titles
+    - node.type.provus_person
+  module:
+    - layout_builder
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.provus_person.card_tall
+targetEntityType: node
+bundle: provus_person
+mode: card_tall
+content:
+  field_featured_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: medium
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_provus_telephone:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_provus_titles:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  addtoany: true
+  field_content: true
+  field_provus_email: true
+  field_provus_fname: true
+  field_provus_lname: true
+  field_provus_person_category: true
+  links: true
+  search_api_excerpt: true

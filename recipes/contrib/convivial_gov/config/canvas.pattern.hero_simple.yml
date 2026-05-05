@@ -1,0 +1,55 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.morphos.button
+    - canvas.component.sdc.morphos.content
+    - canvas.component.sdc.morphos.heading
+    - canvas.component.sdc.morphos.hero
+    - filter.format.canvas_html_block
+  module:
+    - options
+    - text
+id: hero_simple
+label: 'Hero simple'
+component_tree:
+  0:
+    uuid: 38ec0c24-3329-46b5-9658-218ab5d561f6
+    component_id: sdc.morphos.hero
+    component_version: 5d595a47e6b0fa62
+    inputs:
+      content_width: content-width--50
+      padding_top: '32'
+      padding_bottom: '32'
+      container: container--normal
+      palette: color--primary
+      content_position: content-position--center
+      content_alignment: center
+  '0:items:0':
+    parent_uuid: 38ec0c24-3329-46b5-9658-218ab5d561f6
+    slot: items
+    uuid: 09bb1309-3dbf-4053-bd5b-542c67f8d366
+    component_id: sdc.morphos.heading
+    component_version: bdb1547b41446399
+    inputs:
+      heading: 'Hero simple'
+      level: 1
+      use_display_font: false
+  '0:items:1':
+    parent_uuid: 38ec0c24-3329-46b5-9658-218ab5d561f6
+    slot: items
+    uuid: 28ed5198-37c8-4746-bb20-bfa2f395754f
+    component_id: sdc.morphos.content
+    component_version: aca7da150405d653
+    inputs:
+      content:
+        value: '<p>Simple hero with heading content and call to action link. Used for clear messaging.</p>'
+        format: canvas_html_block
+  '0:items:2':
+    parent_uuid: 38ec0c24-3329-46b5-9658-218ab5d561f6
+    slot: items
+    uuid: 7495244e-705d-4597-a4bf-004aaca53e1c
+    component_id: sdc.morphos.button
+    component_version: 9461b80f0eef1b1c
+    inputs:
+      text: 'Button text'

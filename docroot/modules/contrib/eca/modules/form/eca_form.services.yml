@@ -1,0 +1,8 @@
+services:
+  eca.token_data.current_form:
+    class: Drupal\eca_form\Token\CurrentFormDataProvider
+    tags:
+      - { name: eca.token_data_provider }
+
+parameters:
+  eca_form.skip_procedural_hook_scan: true

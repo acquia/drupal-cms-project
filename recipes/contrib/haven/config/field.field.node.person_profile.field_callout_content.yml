@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_callout_content
+    - filter.format.content_format
+    - node.type.person_profile
+  module:
+    - text
+id: node.person_profile.field_callout_content
+field_name: field_callout_content
+entity_type: node
+bundle: person_profile
+label: 'Callout content'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - content_format
+field_type: text_long

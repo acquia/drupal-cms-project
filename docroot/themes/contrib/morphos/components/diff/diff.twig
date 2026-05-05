@@ -1,0 +1,41 @@
+{% set is_preview = canvas_is_preview or in_preview %}
+
+{% set classes = [
+  'diff',
+  'aspect-16/9',
+  'js-diff',
+  'has-rhythm',
+] %}
+
+<figure{{ attributes.setAttribute('tabindex', 0).addClass(classes) }}>
+  <div class="diff-item-1" role="img" tabindex="0">
+    {% if item_1.src %}
+      {{ include('canvas:image', {
+        src: item_1.src,
+        alt: item_1.alt,
+        width: item_1.width,
+        height: item_1.height,
+      },
+        with_context: false
+      ) }}
+    {% endif %}
+  </div>
+  <div class="diff-item-2" role="img">
+    {% if item_2.src %}
+      {{ include('canvas:image', {
+        src: item_2.src,
+        alt: item_2.alt,
+        width: item_2.width,
+        height: item_2.height,
+      },
+        with_context: false
+      ) }}
+    {% endif %}
+  </div>
+  <div class="diff-resizer"></div>
+  {% if is_preview and item_1.src is empty and item_2.src is empty %}
+    <div class="p-8 text-center text-base-content/50 min-w-3">
+      Select images using the panel on the right.
+    </div>
+  {% endif %}
+</figure>

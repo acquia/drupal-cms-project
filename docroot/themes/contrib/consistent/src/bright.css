@@ -1,0 +1,44 @@
+/* ==========================================================================
+   Consistent — Bright palette token overrides
+   Loaded on top of main.css when the Bright palette is active.
+   Only tokens that differ from Classic are declared here.
+   ========================================================================== */
+
+html {
+  /* Primary palette — hot pink */
+  --color-primary: #d4357f;
+  --color-primary-hover: #a02362;
+
+  /* Secondary — amber */
+  --color-secondary: #f0a800;
+
+  /* Border — amber */
+  --color-border: #e8a000;
+
+  /* Shape — rounded throughout */
+  --radius: 2rem;
+  --radius-sm: 0.5rem;
+
+  /* Offset shadow — solid amber */
+  --shadow-offset: 4px 4px 0 0 var(--color-border);
+  --shadow-offset-x: 4px;
+  --shadow-offset-y: 4px;
+
+  /* Use the border colour for cards */
+  --color-card-border: var(--color-border);
+
+  /* Top-task pills — pink filled */
+  --color-top-task-bg: var(--color-primary);
+  --color-top-task-text: var(--color-white);
+  --color-top-task-border: var(--color-primary-hover);
+}
+
+/* Top-task label — bold in bright palette */
+.stwl-top-task span {
+  font-weight: bold;
+}
+
+/* Services button — no offset shadow */
+[data-stwl-toggle="services-menu"] {
+  box-shadow: none;
+}

@@ -1,0 +1,49 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.diagnosis.hero-blog
+    - canvas.component.sdc.diagnosis.section
+    - canvas.component.sdc.diagnosis.text
+    - core.entity_view_mode.node.full
+    - field.field.media.image.field_media_image
+    - field.field.node.post.body
+    - field.field.node.post.field_featured_image
+    - filter.format.full_html
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - node.type.post
+  module:
+    - file
+    - media
+    - node
+    - options
+    - user
+id: node.post.full
+content_entity_type_id: node
+content_entity_type_bundle: post
+content_entity_type_view_mode: full
+component_tree:
+  0:
+    uuid: dc15cfca-efcf-4d4e-8d96-a472322a27e8
+    component_id: sdc.diagnosis.hero-blog
+    component_version: af16cffe0dc9f59c
+    inputs: '{"heading_text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:post\u241dtitle\u241e\u241fvalue"},"level":1,"date":1770856866,"author":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:post\u241duid\u241e\u241fentity\u241c\u241centity:user\u241dname\u241e\u241fvalue"},"media":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:post\u241dfield_featured_image\u241e\u241fentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241f{src\u21a0src_with_alternate_widths,alt\u21a0alt,width\u21a0width,height\u21a0height}"}}'
+  1:
+    uuid: b96bae0c-488f-418d-95b5-073f3a588105
+    component_id: sdc.diagnosis.section
+    component_version: 4e137b5efb1f5f5f
+    inputs: '{"width":"50%","columns":"100","mobile_columns":"1","margin_block_start":"48","margin_block_end":"48","padding_block_start":"0","padding_block_end":"0","section_header":false,"section_footer":false}'
+  '1:main_slot:0':
+    parent_uuid: b96bae0c-488f-418d-95b5-073f3a588105
+    slot: main_slot
+    uuid: 638878a3-0d17-429e-9f42-3ff40e749c43
+    component_id: sdc.diagnosis.text
+    component_version: a32701352f55e6f5
+    inputs: '{"text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:post\u241dbody\u241e\u241fprocessed"},"text_size":"normal","text_color":"default"}'
+  2:
+    uuid: 38c1dcc3-edbf-4cea-8d43-5b39f72f1515
+    component_id: sdc.diagnosis.section
+    component_version: 4e137b5efb1f5f5f
+    inputs: '{"width":"100%","columns":"50-50","mobile_columns":"1","margin_block_start":"48","margin_block_end":"48","padding_block_start":"0","padding_block_end":"0","section_header":false,"section_footer":false}'
+exposed_slots: {  }

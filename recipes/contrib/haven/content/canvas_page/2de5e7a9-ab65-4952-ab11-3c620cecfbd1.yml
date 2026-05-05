@@ -1,0 +1,304 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 2de5e7a9-ab65-4952-ab11-3c620cecfbd1
+  default_langcode: en
+  depends:
+    f48ae026-b651-468d-9950-3cc2f5c030d0: file
+    3f8d7ef1-8223-44fa-bd12-d0c8bf0ad5f6: media
+    b692e2fa-28a4-4010-9c96-419ad675350c: file
+    74cacf28-cdfe-4d6b-8e31-882b78681ebb: media
+    10a0f3e0-838d-4868-9725-4d788d1f5728: file
+    fd5e0f1e-8abd-4682-bb91-ea94435b0ff3: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Careers
+  description:
+    -
+      value: 'Working with Haven is your chance to be a part of something that matters. We believe that competitive compensation and strong benefits are essential to building a team that can do its best work.'
+  components:
+    -
+      uuid: 26aa367f-2d98-4596-87e7-734dd93ef7e3
+      component_id: sdc.haven_theme.hero-billboard
+      inputs:
+        height: large
+        flex_position: hero-center
+        content_background: false
+        overlay_opacity: 40%
+        object_position: center
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 3f8d7ef1-8223-44fa-bd12-d0c8bf0ad5f6
+            target_type: media
+        overlap_navbar: true
+    -
+      parent_uuid: 26aa367f-2d98-4596-87e7-734dd93ef7e3
+      slot: hero_slot
+      uuid: 011e4ffb-5679-42c8-aaab-c47fd1ca74f0
+      component_id: sdc.haven_theme.badge
+      inputs:
+        label: 'Work with us'
+        style: accent
+        icon_first: true
+    -
+      parent_uuid: 26aa367f-2d98-4596-87e7-734dd93ef7e3
+      slot: hero_slot
+      uuid: 5e07fd4d-5d7e-4fc9-8b67-b3ef4c8ef61c
+      component_id: sdc.haven_theme.heading
+      inputs:
+        heading_text: 'Your chance to be a part of something that matters. '
+        text_size: heading-responsive-6xl
+        text_color: inverted
+        align: center
+    -
+      uuid: 8655ffc1-c4a1-4013-90b9-f012a161c32b
+      component_id: sdc.haven_theme.section
+      inputs:
+        width: 100%
+        columns: '1 column'
+        mobile_columns: '1'
+        margin_block_start: '64'
+        margin_block_end: '64'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        restrict_width: false
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: 8655ffc1-c4a1-4013-90b9-f012a161c32b
+      slot: main_slot
+      uuid: 5519187c-016d-4a36-86ee-18ed5e78fc9d
+      component_id: sdc.haven_theme.hero-side-by-side
+      inputs:
+        hero_flex_direction_mobile: vertical
+        padding: true
+        image_size: '3:2'
+        image_position: left
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 74cacf28-cdfe-4d6b-8e31-882b78681ebb
+            target_type: media
+        background: white
+    -
+      parent_uuid: 5519187c-016d-4a36-86ee-18ed5e78fc9d
+      slot: hero_slot
+      uuid: 95ec4dd6-f9bb-4ed9-97df-14560a5284be
+      component_id: sdc.haven_theme.heading
+      inputs:
+        heading_text: 'What we offer'
+        level: 2
+        text_size: heading-responsive-5xl
+        text_color: secondary
+        align: left
+    -
+      parent_uuid: 5519187c-016d-4a36-86ee-18ed5e78fc9d
+      slot: hero_slot
+      uuid: 0cc1813a-d390-492a-929b-a587f8d93f38
+      component_id: sdc.haven_theme.text
+      inputs:
+        text:
+          value: '<p>We believe that competitive compensation and strong benefits are essential to building a team that can do its best work.</p><p>We offer: Comprehensive health, dental, and vision coverage for employees and dependents. A retirement plan with employer contributions. Generous paid time off, including organizational closure for major holidays. A professional development budget for every staff member. Remote and hybrid working options.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+        columns: '1 column'
+    -
+      uuid: 4521c68f-a412-4539-9919-724c111fca1f
+      component_id: sdc.haven_theme.section
+      inputs:
+        width: 100%
+        columns: '2 columns'
+        mobile_columns: '1'
+        margin_block_start: '64'
+        margin_block_end: '64'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        restrict_width: false
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: 4521c68f-a412-4539-9919-724c111fca1f
+      slot: main_slot
+      uuid: bc44d2a1-c392-4b5b-be66-55c03614d0af
+      component_id: sdc.haven_theme.card-testimonial
+      inputs:
+        text: 'I came to Haven with a background in community organizing but not much experience in policy advocacy, and within a year I was leading a statewide campaign. The trust this organization puts in its people is unlike anywhere else I’ve worked.'
+        cite_name: 'Isiah Julio'
+        cite_text: 'Climate policy advocate'
+        style: white
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/portrait.png
+            alt: Placeholder
+            width: 100
+            height: 100
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.haven_theme.card-testimonial
+    -
+      parent_uuid: 4521c68f-a412-4539-9919-724c111fca1f
+      slot: main_slot
+      uuid: 97ee3667-6718-439d-92ec-00d0b3e84841
+      component_id: sdc.haven_theme.card-testimonial
+      inputs:
+        text: "I’ve worked in nonprofits for most of my career, but Haven is the first place where I've felt like the work I do every day is genuinely moving the needle. The mission isn’t just something on the wall — it shapes every decision we make as a team."
+        cite_name: 'Isiah Julio'
+        cite_text: 'Climate policy advocate'
+        style: white
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/portrait.png
+            alt: Placeholder
+            width: 100
+            height: 100
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.haven_theme.card-testimonial
+    -
+      uuid: 50e4c89c-b966-4635-a74c-0a8e2b25c20e
+      component_id: sdc.haven_theme.section
+      inputs:
+        width: 90%
+        columns: '3 columns'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '64'
+        padding_block_start: '64'
+        padding_block_end: '64'
+        restrict_width: true
+        section_header: true
+        section_footer: true
+        background_color: secondary
+        background_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: fd5e0f1e-8abd-4682-bb91-ea94435b0ff3
+            target_type: media
+    -
+      parent_uuid: 50e4c89c-b966-4635-a74c-0a8e2b25c20e
+      slot: header_slot
+      uuid: 53c85b7e-285f-47ef-8925-236bc85a7944
+      component_id: sdc.haven_theme.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: center
+        flex_align: center
+        radius: sm
+        padding: sm
+        stretch: false
+    -
+      parent_uuid: 53c85b7e-285f-47ef-8925-236bc85a7944
+      slot: group_slot
+      uuid: b5c6e25d-940a-4837-a6f3-c25094675a8e
+      component_id: sdc.haven_theme.heading
+      inputs:
+        heading_text: 'Join our team'
+        level: 2
+        text_size: heading-responsive-5xl
+        text_color: inverted
+        align: center
+    -
+      parent_uuid: 50e4c89c-b966-4635-a74c-0a8e2b25c20e
+      slot: main_slot
+      uuid: 23bb20fe-31c2-4dc7-b5c0-b910377d0797
+      component_id: sdc.haven_theme.card-icon
+      inputs:
+        text_color: inverted
+        border_radius: medium
+        icon: desk
+        icon_size: large
+        icon_align: center
+        text: 'Meaningful work, every day'
+        description:
+          value: '<p>At Haven, your work connects directly to outcomes in the real world — campaigns won, communities supported, and policies changed.</p>'
+          format: canvas_html_block
+        text_align: center
+        background_color: muted
+    -
+      parent_uuid: 50e4c89c-b966-4635-a74c-0a8e2b25c20e
+      slot: main_slot
+      uuid: 0b8283e1-78fe-4d4d-9957-59926e0370fe
+      component_id: sdc.haven_theme.card-icon
+      inputs:
+        text_color: inverted
+        border_radius: medium
+        icon: handshake
+        icon_size: large
+        icon_align: center
+        text: 'A culture of trust'
+        description:
+          value: '<p>We operate with transparency and mutual respect. Staff have genuine autonomy, and leadership listens. We make decisions together where we can.</p>'
+          format: canvas_html_block
+        text_align: center
+        background_color: muted
+    -
+      parent_uuid: 50e4c89c-b966-4635-a74c-0a8e2b25c20e
+      slot: main_slot
+      uuid: 55cf22bd-ee9a-4039-be28-8fdfccee8845
+      component_id: sdc.haven_theme.card-icon
+      inputs:
+        text_color: inverted
+        border_radius: medium
+        icon: plant
+        icon_size: large
+        icon_align: center
+        text: 'Room to grow'
+        description:
+          value: '<p>We invest in our people. That means professional development support, honest feedback, and opportunities to take on new challenges as the organization grows.</p>'
+          format: canvas_html_block
+        text_align: center
+        background_color: muted
+  path:
+    -
+      alias: /careers
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

@@ -1,0 +1,151 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: base/media.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+@import '../tailwindcss';
+
+.media-entity {
+  img {
+    border-radius: var(--radius-selector);
+  }
+
+  video {
+    @apply aspect-video max-w-full;
+  }
+}
+
+.media-entity--type-image {
+  @apply overflow-hidden;
+}
+
+figure {
+  &:has(> .media-entity--type-image) {
+    @apply overflow-hidden;
+
+    border-radius: var(--radius-selector);
+
+    > .media-entity {
+      img {
+        @apply rounded-none;
+      }
+    }
+  }
+}
+
+.media-oembed-content {
+  @apply aspect-video h-auto max-w-full;
+}
+
+/*
+ * Scope for the WYSIWYG content with embedded media.
+ * The .has-embedded-media class is added to the container of the WYSIWYG content.
+ * Given at least 20rem for text content.
+ * - Small: 1/3 width at @lg 32rem.
+ * - Medium: 1/2 width at @2xl 42rem.
+ * - Large: full width at all breakpoints.
+ */
+.has-embedded-media {
+  @apply @container/html-content w-full;
+
+  .media-entity {
+    @apply mb-4 w-full;
+
+    &:last-child {
+      @apply mb-0;
+    }
+
+    img {
+      @apply h-auto w-full;
+    }
+
+    video {
+      @apply h-auto w-full;
+    }
+  }
+
+  .media-entity--view-mode-small {
+    @apply @lg/html-content:w-1/3;
+
+    &.align-right {
+      @apply @lg/html-content:ml-6;
+    }
+
+    &.align-left {
+      @apply @lg/html-content:mr-6;
+    }
+  }
+
+  .media-entity--view-mode-medium {
+    @apply @2xl/html-content:w-1/2;
+
+    &.align-right {
+      @apply @2xl/html-content:ml-6;
+    }
+
+    &.align-left {
+      @apply @2xl/html-content:mr-6;
+    }
+  }
+
+  .media-entity--view-mode-large {
+    @apply w-full;
+  }
+
+  figure {
+    @apply mx-auto mb-4 w-full;
+
+    &:last-child {
+      @apply mb-0;
+    }
+
+    &:has(> .media-entity) {
+      @apply w-full;
+
+      > .media-entity {
+        @apply m-0 w-full;
+      }
+
+      img {
+        @apply w-full;
+      }
+    }
+
+    &:has(> .media-entity--view-mode-small) {
+      @apply @lg/html-content:w-1/3;
+
+      &.align-right {
+        @apply @lg/html-content:ml-6;
+      }
+
+      &.align-left {
+        @apply @lg/html-content:mr-6;
+      }
+    }
+
+    &:has(> .media-entity--view-mode-medium) {
+      @apply @2xl/html-content:w-1/2;
+
+      &.align-right {
+        @apply @2xl/html-content:ml-6;
+      }
+
+      &.align-left {
+        @apply @2xl/html-content:mr-6;
+      }
+    }
+  }
+
+  figcaption {
+    @apply p-2 text-sm;
+
+    background-color: var(--background-weak);
+  }
+}
+
+/*
+ * Override Klaro's default styles.
+ */
+.klaro.cm-as-context-notice {
+  @apply p-0;
+}

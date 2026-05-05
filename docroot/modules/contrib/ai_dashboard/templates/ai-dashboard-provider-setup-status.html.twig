@@ -1,0 +1,9 @@
+<span class="provider-status">
+  <span title="{{ status_text }}" class="provider-status--{{ is_key_set }}">
+    <span class="visually-hidden">{{ status_text }}</span>
+  </span>
+  <a title="{{ 'Go to provider configuration'|t }}" href="{{ configuration_link }}">
+    <span class="provider-status--configuration-link"></span>
+    <span class="visually-hidden">{{ 'Go to provider configuration'|t }}</span>
+  </a>
+</span>

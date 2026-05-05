@@ -1,0 +1,123 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 45c66efd-9187-46c5-b461-5fc55aaf5f1c
+  default_langcode: en
+  depends:
+    77186708-6417-462f-9967-5cdc14e1d854: file
+    4ef3c6ea-7237-47ad-b671-6b2b9980c8ff: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Find a Provider'
+  description:
+    -
+      value: 'Experienced, compassionate providers dedicated to your health and well-being.'
+  components:
+    -
+      uuid: 36a3887d-5a71-4446-894a-90aeb349714a
+      component_id: sdc.diagnosis.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        background: secondary
+        padding_block_start: '32'
+        padding_block_end: '32'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        image_size: '4:3'
+        image_position: right
+        image_radius: extra-large
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 4ef3c6ea-7237-47ad-b671-6b2b9980c8ff
+            target_type: media
+    -
+      parent_uuid: 36a3887d-5a71-4446-894a-90aeb349714a
+      slot: hero_slot
+      uuid: 5a6ca78c-f9bd-4747-a8c4-a8f0d2e97f48
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Meet Our Healthcare Team'
+        level: 1
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 36a3887d-5a71-4446-894a-90aeb349714a
+      slot: hero_slot
+      uuid: f0888146-9c6d-48d6-b749-8b7204acd2fd
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Experienced, compassionate providers dedicated to your health and well-being.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: 8dd6a24d-6857-4552-b4ba-6233140727d7
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: 8dd6a24d-6857-4552-b4ba-6233140727d7
+      slot: main_slot
+      uuid: 1c4747a9-be6e-4257-9722-a8b46be3094c
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: |-
+            <p>Our team of board-certified physicians, nurse practitioners, and physician assistants bring decades of combined experience and are committed to providing personalized, patient-centered care. Browse our provider directory to find the right healthcare professional for you and your family.</p>
+
+            <p>All of our providers accept most major insurance plans. We welcome new patients and offer same-day appointments for urgent concerns.</p>
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: 86efa7a4-702f-408a-9927-95baa14a463f
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 100%
+        columns: '100'
+        views_columns: 33-33-33
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: 86efa7a4-702f-408a-9927-95baa14a463f
+      slot: main_slot
+      uuid: e554e2e6-6b25-4685-887f-109b9b21e000
+      component_id: block.views_block.providers_all-block_1
+      inputs:
+        label: 'All Providers'
+        label_display: '0'
+        views_label: ''
+        items_per_page: 12
+  path:
+    -
+      alias: /providers
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

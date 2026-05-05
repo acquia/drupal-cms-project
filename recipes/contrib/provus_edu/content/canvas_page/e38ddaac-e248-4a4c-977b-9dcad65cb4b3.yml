@@ -1,0 +1,580 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: e38ddaac-e248-4a4c-977b-9dcad65cb4b3
+  default_langcode: en
+  depends:
+    1decdc50-4432-4fdf-985e-fe8850e4f623: file
+    d6722984-821a-48cd-b184-926826f7f4b6: media
+    29d53dbf-80d5-4261-be98-2af231cd7839: file
+    b714b89f-7839-4e26-9caf-051b5e8d14da: media
+    5d04cccc-230e-4501-baf9-70102785b8c9: file
+    2cac259f-0710-407b-837f-37f2a543d778: media
+    76ffa334-4ef6-4ce1-abbf-970997d8a4fa: file
+    947a3f46-f3f7-4913-ba3d-cfa6b7c01e4d: media
+    07ca8615-e440-4fd8-8a8a-033d3700b458: file
+    ad8e2cd4-5e2d-473e-89c2-f4abe01970c6: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Academics
+  description:
+    -
+      value: 'Discover the academic opportunities waiting for you at Windy City Community College. From career-focused programs to transfer pathways, we’re here to help you achieve your dreams.'
+  components:
+    -
+      uuid: d35bf739-de05-4f58-9bb6-11be2c152972
+      component_id: sdc.provus_base_theme.hero_banner
+      inputs:
+        title: 'Your Goals. Your Path. Your Future.'
+        body:
+          value: '<p>Discover the academic opportunities waiting for you at Windy City Community College. From career-focused programs to transfer pathways, we’re here to help you achieve your dreams.</p>'
+          format: canvas_full_html
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: d6722984-821a-48cd-b184-926826f7f4b6
+            target_type: media
+        is_short_banner: true
+        image_position: full
+        background_color: primary
+        text_container_width: col-lg-12
+        text_alignment: left
+    -
+      parent_uuid: d35bf739-de05-4f58-9bb6-11be2c152972
+      slot: hero_banner_buttons
+      uuid: aed044cd-3cd9-4057-ab96-745a99adb717
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Apply Now'
+        url:
+          uri: 'internal:/contact'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: auto
+    -
+      parent_uuid: d35bf739-de05-4f58-9bb6-11be2c152972
+      slot: hero_banner_buttons
+      uuid: cf2f6e49-3c58-4e7e-ba82-4417c36f9a06
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Explore Programs'
+        url:
+          uri: 'internal:/contact'
+          options: {  }
+        variant: secondary
+        id: my-button
+        size: normal
+        width: auto
+    -
+      uuid: 55d8722f-ed83-4e8d-9d3a-31dbe8fbf599
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: true
+        padding_top: pt-5
+        padding_bottom: pb-5
+        align_items: align-items-center
+    -
+      parent_uuid: 55d8722f-ed83-4e8d-9d3a-31dbe8fbf599
+      slot: content
+      uuid: 95a4ad6a-bc38-47a4-8b92-95e7dc1c7a2f
+      component_id: sdc.provus_base_theme.two_column
+      inputs:
+        desktop_width: 50-50
+        tablet_width: 50-50
+        mobile_width: 100-100
+    -
+      parent_uuid: 95a4ad6a-bc38-47a4-8b92-95e7dc1c7a2f
+      slot: column_1
+      uuid: 12c8ace4-6f44-4637-81ee-64917a23b4a3
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'A Foundation for Success'
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 95a4ad6a-bc38-47a4-8b92-95e7dc1c7a2f
+      slot: column_1
+      uuid: dcf4514e-d2f9-463d-a436-58ff165a08d7
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p>At Windy City Community College, we’re dedicated to providing an education that’s as unique as your aspirations. With a diverse selection of programs, flexible learning options, and unparalleled support, we empower students to excel in the classroom and beyond.</p>'
+          format: canvas_full_html
+    -
+      parent_uuid: 95a4ad6a-bc38-47a4-8b92-95e7dc1c7a2f
+      slot: column_2
+      uuid: 699fb956-b1b4-4d98-aa2c-98c998aaf8ef
+      component_id: sdc.provus_base_theme.image
+      inputs:
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: b714b89f-7839-4e26-9caf-051b5e8d14da
+            target_type: media
+        size: '4:3'
+        radius: rounded-0
+        margin_bottom: mb-0
+    -
+      uuid: 78bc4698-2831-4c8e-8244-de5b76d21914
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        custom_class: bg-grey
+    -
+      parent_uuid: 78bc4698-2831-4c8e-8244-de5b76d21914
+      slot: content
+      uuid: 3d9202a5-1a70-40b4-9edb-5ff98ea135e9
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: 3d9202a5-1a70-40b4-9edb-5ff98ea135e9
+      slot: column_1
+      uuid: 21974c05-59d8-467c-9d71-af1eb52457bc
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Programs and Pathways'
+        decorative_line: true
+        alignment: center
+    -
+      parent_uuid: 3d9202a5-1a70-40b4-9edb-5ff98ea135e9
+      slot: column_1
+      uuid: d26807fa-5878-4fdc-9fc2-4319380809b8
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p class="text-align-center">Explore our diverse range of programs designed to meet the needs of today’s students and tomorrow’s workforce.</p>'
+          format: canvas_full_html
+    -
+      parent_uuid: 3d9202a5-1a70-40b4-9edb-5ff98ea135e9
+      slot: column_1
+      uuid: 0be941e8-0273-4bad-aecd-7865bd933680
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'View All Programs'
+        url:
+          uri: 'internal:/academics/programs'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: auto
+        wrapper: div
+        alignment: center
+    -
+      uuid: 905d6f89-0fef-48de-9102-959aab8119cf
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        padding_bottom: pb-5
+        padding_top: pt-5
+    -
+      parent_uuid: 905d6f89-0fef-48de-9102-959aab8119cf
+      slot: content
+      uuid: a6128fa1-c45f-42b2-8858-95fb81888428
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: a6128fa1-c45f-42b2-8858-95fb81888428
+      slot: column_1
+      uuid: 51b78f6c-8f38-4c78-8dfd-8421573b78bb
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Academic Support Services'
+        decorative_line: true
+        alignment: center
+    -
+      parent_uuid: a6128fa1-c45f-42b2-8858-95fb81888428
+      slot: column_1
+      uuid: f4a9372b-8f15-47fa-9ad3-bc3ffe0ef85a
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: |-
+            <p class="text-align-center">Life can be busy, but your education doesn’t have to wait. We offer multiple learning formats to fit your schedule:</p>
+            <br/>
+          format: canvas_full_html
+    -
+      parent_uuid: 905d6f89-0fef-48de-9102-959aab8119cf
+      slot: content
+      uuid: 916f6e1d-c994-43c0-b164-ddf454b568d6
+      component_id: sdc.provus_base_theme.three_column
+      inputs:
+        desktop_width: 33-33-33
+        tablet_width: 33-33-33
+        mobile_width: 100-100-100
+    -
+      parent_uuid: 916f6e1d-c994-43c0-b164-ddf454b568d6
+      slot: column_1
+      uuid: ed228ea6-43e2-4670-a5c0-d7f8c05d5720
+      component_id: sdc.provus_base_theme.card_image_top
+      inputs:
+        title: 'On-Campus Classes'
+        body:
+          value: '<p>Engage in traditional, face-to-face learning in a dynamic environment.</p>'
+          format: canvas_html_block
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 2cac259f-0710-407b-837f-37f2a543d778
+            target_type: media
+        is_image_circle: false
+        link_style: default
+    -
+      parent_uuid: 916f6e1d-c994-43c0-b164-ddf454b568d6
+      slot: column_2
+      uuid: 2a7e54af-bb84-433e-bd4e-6a7157e0a5c4
+      component_id: sdc.provus_base_theme.card_image_top
+      inputs:
+        title: 'Online Learning'
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 947a3f46-f3f7-4913-ba3d-cfa6b7c01e4d
+            target_type: media
+        is_image_circle: false
+        link_style: default
+        body:
+          value: '<p>Access quality education from anywhere with fully online or hybrid courses.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 916f6e1d-c994-43c0-b164-ddf454b568d6
+      slot: column_3
+      uuid: 3d9e869b-9a3a-419d-bc24-ae95f2a552ee
+      component_id: sdc.provus_base_theme.card_image_top
+      inputs:
+        title: 'Evening and Weekend Options'
+        body:
+          value: '<p>Designed for working students and parents, these classes provide flexibility.</p>'
+          format: canvas_html_block
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: b714b89f-7839-4e26-9caf-051b5e8d14da
+            target_type: media
+        is_image_circle: false
+        link_style: default
+    -
+      parent_uuid: 905d6f89-0fef-48de-9102-959aab8119cf
+      slot: content
+      uuid: a6ed86e0-0524-41fd-a84d-d5a7e27f8713
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Learn More About Online Learning'
+        url:
+          uri: 'internal:/'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: auto
+        wrapper: div
+        alignment: center
+    -
+      parent_uuid: 905d6f89-0fef-48de-9102-959aab8119cf
+      slot: content
+      uuid: 2506af3e-7535-41b8-a6dc-b948929c2ad2
+      component_id: sdc.provus_base_theme.spacer
+      inputs:
+        padding_all: p-4
+    -
+      parent_uuid: 905d6f89-0fef-48de-9102-959aab8119cf
+      slot: content
+      uuid: 45ca0168-8bde-4474-a784-20484e9b8882
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Academic Support Services'
+        decorative_line: true
+        alignment: center
+    -
+      parent_uuid: 905d6f89-0fef-48de-9102-959aab8119cf
+      slot: content
+      uuid: 95a91b51-048b-4de4-adca-d1ab12945d5f
+      component_id: sdc.provus_base_theme.three_column
+      inputs:
+        desktop_width: 33-33-33
+        tablet_width: 33-33-33
+        mobile_width: 100-100-100
+    -
+      parent_uuid: 95a91b51-048b-4de4-adca-d1ab12945d5f
+      slot: column_1
+      uuid: 680d7925-05e3-4de5-be1a-2188076ab659
+      component_id: sdc.provus_base_theme.list_style
+      inputs:
+        list_style: none
+        additional_classes: list-unstyled
+        font_weight: fw-bold
+        font_size: fs-6
+        text_color: text-primary
+    -
+      parent_uuid: 680d7925-05e3-4de5-be1a-2188076ab659
+      slot: list_items
+      uuid: 6c949f16-8c1d-48e6-9cd5-52d1d3ffe31c
+      component_id: sdc.provus_base_theme.list_style_item
+      inputs:
+        icon: fa-link
+        body: 'Tutoring and Learning Centers'
+    -
+      parent_uuid: 95a91b51-048b-4de4-adca-d1ab12945d5f
+      slot: column_2
+      uuid: c77d3bab-9e5d-4b71-936d-0279b298eca9
+      component_id: sdc.provus_base_theme.list_style
+      inputs:
+        list_style: none
+        additional_classes: list-unstyled
+        font_weight: fw-bold
+        font_size: fs-6
+        text_color: text-primary
+    -
+      parent_uuid: c77d3bab-9e5d-4b71-936d-0279b298eca9
+      slot: list_items
+      uuid: e34d31cd-d987-4d8b-8ca2-1efc6d9649d4
+      component_id: sdc.provus_base_theme.list_style_item
+      inputs:
+        icon: fa-link
+        body: 'Library and Research Tools'
+    -
+      parent_uuid: 95a91b51-048b-4de4-adca-d1ab12945d5f
+      slot: column_3
+      uuid: c8614699-87fa-4a41-9bad-680ec6c7c1bb
+      component_id: sdc.provus_base_theme.list_style
+      inputs:
+        list_style: none
+        additional_classes: list-unstyled
+        font_weight: fw-bold
+        font_size: fs-6
+        text_color: text-primary
+    -
+      parent_uuid: c8614699-87fa-4a41-9bad-680ec6c7c1bb
+      slot: list_items
+      uuid: ac77612f-8e4f-4110-8d24-8494744137fe
+      component_id: sdc.provus_base_theme.list_style_item
+      inputs:
+        icon: fa-link
+        body: 'Academic Advising'
+    -
+      parent_uuid: 905d6f89-0fef-48de-9102-959aab8119cf
+      slot: content
+      uuid: 64c572dd-2cc2-4b5d-95fd-a6d445ee5560
+      component_id: sdc.provus_base_theme.spacer
+      inputs:
+        padding_all: p-3
+    -
+      uuid: e1aac840-c2ef-46f1-868e-4e66ffad914f
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        custom_class: bg-plus
+        flex_enabled: false
+        container_type: container
+    -
+      parent_uuid: e1aac840-c2ef-46f1-868e-4e66ffad914f
+      slot: content
+      uuid: c86f6dab-f57a-4888-9c6b-ac2f2fdfa024
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Success Stories'
+        decorative_line: false
+        alignment: center
+    -
+      parent_uuid: e1aac840-c2ef-46f1-868e-4e66ffad914f
+      slot: content
+      uuid: 57675453-2047-4765-9e1f-af07450f4512
+      component_id: sdc.provus_base_theme.testimonial
+      inputs:
+        display_type: right
+        name: 'Jessica Rivera'
+        role: 'Class of 2023'
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: ad8e2cd4-5e2d-473e-89c2-f4abe01970c6
+            target_type: media
+        body: 'Thanks to Windy City Community College, I earned my Bachelor of Applied Science in Cybersecurity and now work in a job I love at a leading tech company. The support I received here changed my life.'
+    -
+      uuid: 74125224-fc3c-4224-8aba-d2b2c227a9dd
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        padding_top: pt-5
+        padding_bottom: pb-5
+    -
+      parent_uuid: 74125224-fc3c-4224-8aba-d2b2c227a9dd
+      slot: content
+      uuid: f437cd89-25aa-4e05-981a-2d2bfbe16442
+      component_id: sdc.provus_base_theme.cta
+      inputs:
+        title: 'Become a Member'
+        body:
+          value: '<p>Join our student community today and unlock member perks. Get updates, useful resources, and invites to exclusive sessions. Meet peers, share ideas, and build skills together every week. Sign up now and belong with us.</p>'
+          format: canvas_full_html
+        background_color: Secondary
+    -
+      parent_uuid: f437cd89-25aa-4e05-981a-2d2bfbe16442
+      slot: cta_footer
+      uuid: a6ffdd6b-33f3-4566-abfc-c1dcd22d4a88
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Apply Now'
+        url:
+          uri: 'internal:/admissions'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: auto
+  path:
+    -
+      alias: /academics
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

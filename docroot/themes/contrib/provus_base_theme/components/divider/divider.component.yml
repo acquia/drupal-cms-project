@@ -1,0 +1,109 @@
+$schema: 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+name: Divider
+description: A horizontal divider with configurable vertical spacing.
+status: stable
+group: Provus Components
+
+variants:
+  default:
+    title: Default
+    description: Horizontal divider with optional top and bottom spacing
+
+props:
+  type: object
+  properties:
+    padding_all:
+      type: string
+      title: Padding
+      description: Bootstrap padding class.
+      default: p-0
+      enum:
+        - p-0
+        - p-1
+        - p-2
+        - p-3
+        - p-4
+        - p-5
+      meta:enum:
+        p-0: "P-0"
+        p-1: "P-1"
+        p-2: "P-2"
+        p-3: "P-3"
+        p-4: "P-4"
+        p-5: "P-5"
+    padding_top:
+      type: string
+      title: Padding top
+      description: Bootstrap padding-top class.
+      default: pt-0
+      enum:
+        - pt-0
+        - pt-1
+        - pt-2
+        - pt-3
+        - pt-4
+        - pt-5
+      meta:enum:
+        pt-0: "Pt-0"
+        pt-1: "Pt-1"
+        pt-2: "Pt-2"
+        pt-3: "Pt-3"
+        pt-4: "Pt-4"
+        pt-5: "Pt-5"
+    padding_bottom:
+      type: string
+      title: Padding bottom
+      description: Bootstrap padding-bottom class.
+      default: pb-0
+      enum:
+        - pb-0
+        - pb-1
+        - pb-2
+        - pb-3
+        - pb-4
+        - pb-5
+      meta:enum:
+        pb-0: "Pb-0"
+        pb-1: "Pb-1"
+        pb-2: "Pb-2"
+        pb-3: "Pb-3"
+        pb-4: "Pb-4"
+        pb-5: "Pb-5"
+    padding_start:
+      type: string
+      title: Padding start
+      description: Bootstrap padding-start class.
+      default: ps-0
+      enum:
+        - ps-0
+        - ps-1
+        - ps-2
+        - ps-3
+        - ps-4
+        - ps-5
+      meta:enum:
+        ps-0: "Ps-0"
+        ps-1: "Ps-1"
+        ps-2: "Ps-2"
+        ps-3: "Ps-3"
+        ps-4: "Ps-4"
+        ps-5: "Ps-5"
+    padding_end:
+      type: string
+      title: Padding end
+      description: Bootstrap padding-end class.
+      default: pe-0
+      enum:
+        - pe-0
+        - pe-1
+        - pe-2
+        - pe-3
+        - pe-4
+        - pe-5
+      meta:enum:
+        pe-0: "Pe-0"
+        pe-1: "Pe-1"
+        pe-2: "Pe-2"
+        pe-3: "Pe-3"
+        pe-4: "Pe-4"
+        pe-5: "Pe-5"

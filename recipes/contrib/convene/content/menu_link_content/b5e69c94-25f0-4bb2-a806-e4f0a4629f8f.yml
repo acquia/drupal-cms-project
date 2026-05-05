@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: b5e69c94-25f0-4bb2-a806-e4f0a4629f8f
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    30787e74-d5c9-4b9c-9ea4-95365facab98: menu_link_content
+    0665d00a-fe18-4c9b-b5c3-b67dfc6138ac: canvas_page
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Legal Page'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      title: ''
+      options: {  }
+      target_uuid: 0665d00a-fe18-4c9b-b5c3-b67dfc6138ac
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -47
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:30787e74-d5c9-4b9c-9ea4-95365facab98'
+  revision_translation_affected:
+    -
+      value: true

@@ -1,0 +1,719 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - link
+    - options
+  theme:
+    - eureka
+label: 'Vacancy card'
+id: sdc.eureka.vacancy-card
+source: sdc
+source_local_id: 'eureka:vacancy-card'
+provider: eureka
+active_version: 546605072cf0f754
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        vacancy_card_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Year 3 Class Teacher'
+          expression: ℹ︎string␟value
+        vacancy_card_tags:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+        vacancy_card_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'We are seeking an enthusiastic and dedicated Year 3 Class Teacher to join our supportive and dynamic team.'
+          expression: ℹ︎string␟value
+        vacancy_card_date:
+          required: false
+          field_type: datetime
+          field_storage_settings:
+            datetime_type: date
+          field_instance_settings: {  }
+          field_widget: datetime_default
+          default_value:
+            -
+              default_date: '2025-11-15'
+          expression: ℹ︎datetime␟value
+        vacancy_card_salary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '£28,000 - £38,810 per annum'
+          expression: ℹ︎string␟value
+        vacancy_card_cta_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Apply now'
+          expression: ℹ︎string␟value
+        vacancy_card_cta_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: 'https://zoocha.com'
+              options: {  }
+          expression: ℹ︎link␟url
+    fallback_metadata:
+      slot_definitions: {  }
+  546605072cf0f754:
+    settings:
+      prop_field_definitions:
+        vacancy_card_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Year 3 Class Teacher'
+          expression: ℹ︎string␟value
+        vacancy_card_tags:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+        vacancy_card_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'We are seeking an enthusiastic and dedicated Year 3 Class Teacher to join our supportive and dynamic team.'
+          expression: ℹ︎string␟value
+        vacancy_card_date:
+          required: false
+          field_type: datetime
+          field_storage_settings:
+            datetime_type: date
+          field_instance_settings: {  }
+          field_widget: datetime_default
+          default_value:
+            -
+              default_date: '2025-11-15'
+          expression: ℹ︎datetime␟value
+        vacancy_card_salary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '£28,000 - £38,810 per annum'
+          expression: ℹ︎string␟value
+        vacancy_card_cta_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Apply now'
+          expression: ℹ︎string␟value
+        vacancy_card_cta_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: 'https://zoocha.com'
+              options: {  }
+          expression: ℹ︎link␟url
+    fallback_metadata:
+      slot_definitions: {  }
+  8c7188565c73f0ce:
+    settings:
+      prop_field_definitions:
+        vacancy_card_cta_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Apply now'
+          expression: ℹ︎string␟value
+        vacancy_card_cta_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: 'https://zoocha.com'
+              options: {  }
+          expression: ℹ︎link␟url
+        vacancy_card_date:
+          required: false
+          field_type: datetime
+          field_storage_settings:
+            datetime_type: date
+          field_instance_settings: {  }
+          field_widget: datetime_default
+          default_value:
+            -
+              value: 'November 15, 2025'
+          expression: ℹ︎datetime␟value
+        vacancy_card_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Year 3 Class Teacher'
+          expression: ℹ︎string␟value
+        vacancy_card_salary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '£28,000 - £38,810 per annum'
+          expression: ℹ︎string␟value
+        vacancy_card_tags:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+        vacancy_card_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'We are seeking an enthusiastic and dedicated Year 3 Class Teacher to join our supportive and dynamic team.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  456d4b7964db3791:
+    settings:
+      prop_field_definitions:
+        vacancy_card_cta_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Apply now'
+          expression: ℹ︎string␟value
+        vacancy_card_cta_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: 'https://zoocha.com'
+              options: {  }
+          expression: ℹ︎link␟url
+        vacancy_card_date:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'November 15, 2025'
+          expression: ℹ︎string␟value
+        vacancy_card_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Year 3 Class Teacher'
+          expression: ℹ︎string␟value
+        vacancy_card_salary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '£28,000 - £38,810 per annum'
+          expression: ℹ︎string␟value
+        vacancy_card_tags:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+        vacancy_card_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'We are seeking an enthusiastic and dedicated Year 3 Class Teacher to join our supportive and dynamic team.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  a397b68637fdab60:
+    settings:
+      prop_field_definitions:
+        vacancy_card_cta_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Apply now'
+          expression: ℹ︎string␟value
+        vacancy_card_cta_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: 'https://zoocha.com'
+              options: {  }
+          expression: ℹ︎link␟url
+        vacancy_card_date:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Application deadline: November 15, 2025'
+          expression: ℹ︎string␟value
+        vacancy_card_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Year 3 Class Teacher'
+          expression: ℹ︎string␟value
+        vacancy_card_salary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '£28,000 - £38,810 per annum'
+          expression: ℹ︎string␟value
+        vacancy_card_tags:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+        vacancy_card_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'We are seeking an enthusiastic and dedicated Year 3 Class Teacher to join our supportive and dynamic team.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  e8c6778f578df846:
+    settings:
+      prop_field_definitions:
+        vacancy_card_cta_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Apply now'
+          expression: ℹ︎string␟value
+        vacancy_card_cta_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 16
+          field_widget: link_default
+          default_value:
+            -
+              uri: 'https://zoocha.com'
+              options: {  }
+          expression: ℹ︎link␟url
+        vacancy_card_date:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Application deadline: November 15, 2025'
+          expression: ℹ︎string␟value
+        vacancy_card_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Year 3 Class Teacher'
+          expression: ℹ︎string␟value
+        vacancy_card_salary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '£28,000 - £38,810 per annum'
+          expression: ℹ︎string␟value
+        vacancy_card_tags:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+        vacancy_card_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'We are seeking an enthusiastic and dedicated Year 3 Class Teacher to join our supportive and dynamic team.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  e51998a92481c863:
+    settings:
+      prop_field_definitions:
+        vacancy_card_cta_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Apply now'
+          expression: ℹ︎string␟value
+        vacancy_card_cta_url:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'https://zoocha.com'
+          expression: ℹ︎string␟value
+        vacancy_card_date:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Application deadline: November 15, 2025'
+          expression: ℹ︎string␟value
+        vacancy_card_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Year 3 Class Teacher'
+          expression: ℹ︎string␟value
+        vacancy_card_salary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '£28,000 - £38,810 per annum'
+          expression: ℹ︎string␟value
+        vacancy_card_tags:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+        vacancy_card_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'We are seeking an enthusiastic and dedicated Year 3 Class Teacher to join our supportive and dynamic team.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  50e3156f19f06909:
+    settings:
+      prop_field_definitions:
+        vacancy_card_cta_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Apply now'
+          expression: ℹ︎string␟value
+        vacancy_card_cta_url:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'https://zoocha.com'
+          expression: ℹ︎string␟value
+        vacancy_card_date:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Application deadline: November 15, 2025'
+          expression: ℹ︎string␟value
+        vacancy_card_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Year 3 Class Teacher'
+          expression: ℹ︎string␟value
+        vacancy_card_salary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '£28,000 - £38,810 per annum'
+          expression: ℹ︎string␟value
+        vacancy_card_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'We are seeking an enthusiastic and dedicated Year 3 Class Teacher to join our supportive and dynamic team.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  5406f021f89b8822:
+    settings:
+      prop_field_definitions:
+        card_date:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '8 Oct 2025'
+          expression: ℹ︎string␟value
+        card_date_show_above:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: false
+          expression: ℹ︎boolean␟value
+        card_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum'
+          expression: ℹ︎string␟value
+        card_image_src:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'https://dummyimage.com/400x225/d9d9d9/242424'
+          expression: ℹ︎string␟value
+        card_link_url:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'https://zoocha.com'
+          expression: ℹ︎string␟value
+        card_subheading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Dolor sit amet'
+          expression: ℹ︎string␟value
+        card_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+          expression: ℹ︎string␟value
+        card_video_id:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        card_video_type:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions: {  }

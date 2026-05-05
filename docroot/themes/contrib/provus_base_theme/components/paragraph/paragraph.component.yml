@@ -1,0 +1,241 @@
+$schema: 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+name: Paragraph
+description: A paragraph element with optional Bootstrap spacing classes.
+status: stable
+group: Provus Components
+
+variants:
+  default:
+    title: Default
+    description: Standard paragraph component with optional Bootstrap spacing classes
+
+props:
+  type: object
+  required:
+    - text
+  properties:
+    text:
+      type: string
+      title: Text
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples: 
+        - 'A paragraph element for text content.'
+    text_color:
+      type: string
+      title: Text color
+      default: none
+      enum:
+        - text-primary
+        - text-secondary
+        - text-success
+        - text-danger
+        - text-warning
+        - text-info
+        - text-light
+        - text-dark
+        - text-body
+        - text-muted
+        - text-white
+      meta:enum:
+        text-primary: "Text-primary"
+        text-secondary: "Text-secondary"
+        text-success: "Text-success"
+        text-danger: "Text-danger"
+        text-warning: "Text-warning"
+        text-info: "Text-info"
+        text-light: "Text-light"
+        text-dark: "Text-dark"
+        text-body: "Text-body"
+        text-muted: "Text-muted"
+        text-white: "Text-white"
+    margin_all:
+      type: string
+      title: Margin
+      description: Bootstrap margin class.
+      default: m-0
+      enum:
+        - m-0
+        - m-1
+        - m-2
+        - m-3
+        - m-4
+        - m-5
+      meta:enum:
+        m-0: "M-0"
+        m-1: "M-1"
+        m-2: "M-2"
+        m-3: "M-3"
+        m-4: "M-4"
+        m-5: "M-5"
+    margin_top:
+      type: string
+      title: Margin top
+      description: Bootstrap margin-top class.
+      default: mt-0
+      enum:
+        - mt-0
+        - mt-1
+        - mt-2
+        - mt-3
+        - mt-4
+        - mt-5
+      meta:enum:
+        mt-0: "Mt-0"
+        mt-1: "Mt-1"
+        mt-2: "Mt-2"
+        mt-3: "Mt-3"
+        mt-4: "Mt-4"
+        mt-5: "Mt-5"
+    margin_bottom:
+      type: string
+      title: Margin bottom
+      description: Bootstrap margin-bottom class.
+      default: mb-0
+      enum:
+        - mb-0
+        - mb-1
+        - mb-2
+        - mb-3
+        - mb-4
+        - mb-5
+      meta:enum:
+        mb-0: "Mb-0"
+        mb-1: "Mb-1"
+        mb-2: "Mb-2"
+        mb-3: "Mb-3"
+        mb-4: "Mb-4"
+        mb-5: "Mb-5"
+    margin_start:
+      type: string
+      title: Margin start
+      description: Bootstrap margin-start class.
+      default: ms-0
+      enum:
+        - ms-0
+        - ms-1
+        - ms-2
+        - ms-3
+        - ms-4
+        - ms-5
+      meta:enum:
+        ms-0: "Ms-0"
+        ms-1: "Ms-1"
+        ms-2: "Ms-2"
+        ms-3: "Ms-3"
+        ms-4: "Ms-4"
+        ms-5: "Ms-5"
+    margin_end:
+      type: string
+      title: Margin end
+      description: Bootstrap margin-end class.
+      default: me-0
+      enum:
+        - me-0
+        - me-1
+        - me-2
+        - me-3
+        - me-4
+        - me-5
+      meta:enum:
+        me-0: "Me-0"
+        me-1: "Me-1"
+        me-2: "Me-2"
+        me-3: "Me-3"
+        me-4: "Me-4"
+        me-5: "Me-5"
+    padding_all:
+      type: string
+      title: Padding
+      description: Bootstrap padding class.
+      default: p-0
+      enum:
+        - p-0
+        - p-1
+        - p-2
+        - p-3
+        - p-4
+        - p-5
+      meta:enum:
+        p-0: "P-0"
+        p-1: "P-1"
+        p-2: "P-2"
+        p-3: "P-3"
+        p-4: "P-4"
+        p-5: "P-5"
+    padding_top:
+      type: string
+      title: Padding top
+      description: Bootstrap padding-top class.
+      default: pt-0
+      enum:
+        - pt-0
+        - pt-1
+        - pt-2
+        - pt-3
+        - pt-4
+        - pt-5
+      meta:enum:
+        pt-0: "Pt-0"
+        pt-1: "Pt-1"
+        pt-2: "Pt-2"
+        pt-3: "Pt-3"
+        pt-4: "Pt-4"
+        pt-5: "Pt-5"
+    padding_bottom:
+      type: string
+      title: Padding bottom
+      description: Bootstrap padding-bottom class.
+      default: pb-0
+      enum:
+        - pb-0
+        - pb-1
+        - pb-2
+        - pb-3
+        - pb-4
+        - pb-5
+      meta:enum:
+        pb-0: "Pb-0"
+        pb-1: "Pb-1"
+        pb-2: "Pb-2"
+        pb-3: "Pb-3"
+        pb-4: "Pb-4"
+        pb-5: "Pb-5"
+    padding_start:
+      type: string
+      title: Padding start
+      description: Bootstrap padding-start class.
+      default: ps-0
+      enum:
+        - ps-0
+        - ps-1
+        - ps-2
+        - ps-3
+        - ps-4
+        - ps-5
+      meta:enum:
+        ps-0: "Ps-0"
+        ps-1: "Ps-1"
+        ps-2: "Ps-2"
+        ps-3: "Ps-3"
+        ps-4: "Ps-4"
+        ps-5: "Ps-5"
+    padding_end:
+      type: string
+      title: Padding end
+      description: Bootstrap padding-end class.
+      default: pe-0
+      enum:
+        - pe-0
+        - pe-1
+        - pe-2
+        - pe-3
+        - pe-4
+        - pe-5
+      meta:enum:
+        pe-0: "Pe-0"
+        pe-1: "Pe-1"
+        pe-2: "Pe-2"
+        pe-3: "Pe-3"
+        pe-4: "Pe-4"
+        pe-5: "Pe-5"

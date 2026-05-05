@@ -1,0 +1,94 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.morphos.card_icon
+    - canvas.component.sdc.morphos.section
+    - filter.format.canvas_html_block
+  module:
+    - options
+    - text
+id: icon_cards_section
+label: 'Icon Cards section'
+component_tree:
+  0:
+    uuid: a4f1c0c0-e76f-4f91-ad3c-e11fcb10e6bd
+    component_id: sdc.morphos.section
+    component_version: 32ebb6399d6fc06d
+    inputs:
+      show_header: true
+      show_footer: false
+      heading: 'Icon Cards section'
+      heading_level: 2
+      hide_heading: false
+      content_width: section-width--100
+      content_position: section-position--start
+      content_alignment: section-alignment--start
+      palette: color--standard
+      container: container--normal
+      padding_top: '12'
+      padding_bottom: '12'
+      column_widths: section-col-widths--25-25-25-25
+      intro:
+        value: '<p>Four cards with icons displayed in a section with heading and introduction. Used for important tasks.</p>'
+        format: canvas_html_block
+  '0:main_items:0':
+    parent_uuid: a4f1c0c0-e76f-4f91-ad3c-e11fcb10e6bd
+    slot: main_items
+    uuid: 1f0d6ff9-b6f8-4cbe-98a4-fb49ec726516
+    component_id: sdc.morphos.card_icon
+    component_version: d4eca39fe668c715
+    inputs:
+      icon: rocket
+      icon_size: icon-size--xl
+      icon_align: left
+      heading: 'Card heading'
+      url: 'http://example.com'
+      summary:
+        value: '<p>Icon card summary text.</p>'
+        format: canvas_html_block
+  '0:main_items:1':
+    parent_uuid: a4f1c0c0-e76f-4f91-ad3c-e11fcb10e6bd
+    slot: main_items
+    uuid: 05427ae6-7b21-4444-8113-42eea4ef1d01
+    component_id: sdc.morphos.card_icon
+    component_version: d4eca39fe668c715
+    inputs:
+      icon: rocket
+      icon_size: icon-size--xl
+      icon_align: left
+      heading: 'Card heading'
+      url: 'http://example.com'
+      summary:
+        value: '<p>Icon card summary text.</p>'
+        format: canvas_html_block
+  '0:main_items:2':
+    parent_uuid: a4f1c0c0-e76f-4f91-ad3c-e11fcb10e6bd
+    slot: main_items
+    uuid: fee34588-d3e3-47e1-8cd1-a1b1421a061e
+    component_id: sdc.morphos.card_icon
+    component_version: d4eca39fe668c715
+    inputs:
+      icon: rocket
+      icon_size: icon-size--xl
+      icon_align: left
+      heading: 'Card heading'
+      url: 'http://example.com'
+      summary:
+        value: '<p>Icon card summary text.</p>'
+        format: canvas_html_block
+  '0:main_items:3':
+    parent_uuid: a4f1c0c0-e76f-4f91-ad3c-e11fcb10e6bd
+    slot: main_items
+    uuid: 2c895310-29a6-488a-bea7-5521138f9512
+    component_id: sdc.morphos.card_icon
+    component_version: d4eca39fe668c715
+    inputs:
+      icon: rocket
+      icon_size: icon-size--xl
+      icon_align: left
+      heading: 'Card heading'
+      url: 'http://example.com'
+      summary:
+        value: '<p>Icon card summary text.</p>'
+        format: canvas_html_block

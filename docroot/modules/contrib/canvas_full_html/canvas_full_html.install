@@ -1,0 +1,64 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for the Canvas Full HTML module.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_install().
+ */
+function canvas_full_html_install(): void {
+  \Drupal::messenger()->addStatus(t(
+    'Canvas Full HTML: The "canvas_full_html" text format has been created. You can customise its toolbar at <a href=":url">Administration &gt; Configuration &gt; Content &gt; Text formats</a>.',
+    [':url' => '/admin/config/content/formats/manage/canvas_full_html'],
+  ));
+}
+
+/**
+ * Implements hook_module_preuninstall().
+ */
+function canvas_full_html_module_preuninstall(string $module): void {
+  if ($module !== 'canvas_full_html') {
+    return;
+  }
+  $config = \Drupal::configFactory()->getEditable(
+    'canvas.component.sdc.canvas_full_html.rich_text_block'
+  );
+  if (!$config->isNew()) {
+    $config->delete();
+  }
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function canvas_full_html_requirements(string $phase): array {
+  $requirements = [];
+
+  if ($phase === 'runtime') {
+    $format_storage = \Drupal::entityTypeManager()->getStorage('filter_format');
+    $format = $format_storage->load('canvas_full_html');
+
+    if (!$format) {
+      $requirements['canvas_full_html_format'] = [
+        'title' => t('Canvas Full HTML'),
+        'description' => t(
+          'The canvas_full_html text format is missing. Re-installing the module will recreate it.'
+        ),
+        'severity' => REQUIREMENT_ERROR,
+      ];
+    }
+    else {
+      $requirements['canvas_full_html_format'] = [
+        'title' => t('Canvas Full HTML'),
+        'value' => t('canvas_full_html text format is available'),
+        'severity' => REQUIREMENT_OK,
+      ];
+    }
+  }
+
+  return $requirements;
+}

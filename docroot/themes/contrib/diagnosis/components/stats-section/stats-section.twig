@@ -1,0 +1,187 @@
+{#
+/**
+ * @file
+ * Stats Section Component
+ *
+ * A two-column section with a content card and grid of stat cards.
+ *
+ * Available variables:
+ * - content_heading: Main content heading (string)
+ * - content_body: Content body text (string)
+ * - content_button_url: Button URL (string)
+ * - content_button_text: Button text (string)
+ * - content_background: Background variant for content card
+ * - stat1_value, stat1_label, stat1_background: First stat card
+ * - stat2_value, stat2_label, stat2_background: Second stat card
+ * - stat3_value, stat3_label, stat3_background: Third stat card
+ * - rounded: Whether to apply rounded corners to all cards (boolean)
+ */
+#}
+{% set section_rounded = rounded is defined ? rounded : true %}
+
+{% set wrapper =
+  html_cva(
+    base: [],
+    variants: {
+      marginBlockStart: {
+        0: 'mt-0',
+        8: 'mt-2',
+        20: 'mt-5',
+        32: 'mt-6 md:mt-7 xl:mt-8',
+        48: 'mt-8 md:mt-10 xl:mt-12',
+        64: 'mt-10 md:mt-13 xl:mt-16',
+        96: 'mt-16 md:mt-20 xl:mt-24',
+        128: 'mt-20 md:mt-24 xl:mt-32'
+      },
+      marginBlockEnd: {
+        0: 'mb-0',
+        8: 'mb-2',
+        20: 'mb-5',
+        32: 'mb-6 md:mb-7 xl:mb-8',
+        48: 'mb-8 md:mb-10 xl:mb-12',
+        64: 'mb-10 md:mb-13 xl:mb-16',
+        96: 'mb-16 md:mb-20 xl:mb-24',
+        128: 'mb-20 md:mb-24 xl:mb-32'
+      }
+    }
+  )
+%}
+
+{% set wrapper_classes =
+  wrapper.apply({
+    marginBlockStart: margin_block_start|default('0'),
+    marginBlockEnd: margin_block_end|default('0')
+  })
+%}
+
+{% set bg_classes = {
+  default: 'bg-card text-card-foreground',
+  accent: 'bg-accent text-accent-foreground',
+  primary: 'bg-primary text-primary-foreground',
+  muted: 'bg-muted text-muted-foreground',
+  bright: 'bg-bright text-bright-foreground',
+  light: 'bg-light text-light-foreground',
+  inverted: 'bg-foreground text-background'
+} %}
+
+<div class="stats-section {{ wrapper_classes }}">
+  <div class="stats-section__grid">
+    {# Content card (left column on desktop) #}
+    <div class="stats-section__content">
+      {% set content_bg_class = content_background|default('default') %}
+      <div
+        class="content-card relative flex flex-col p-4 shadow-2xl transition duration-300 lg:p-6 {{
+        section_rounded
+          ? 'rounded-xl'
+          : 'rounded-none'
+        }} {{ bg_classes[content_bg_class] }}"
+      >
+        <div class="content-card__body">
+          {% if content_heading %}
+            <h2 class="content-card__heading">{{ content_heading }}</h2>
+          {% endif %}
+
+          {% if content_body %}
+            <div class="content-card__text">
+              {{ content_body|raw }}
+            </div>
+          {% endif %}
+
+          {% if content_button_url and content_button_text %}
+            <div class="content-card__button">
+              {{
+                include(
+                  '@diagnosis/components/button/button.twig',
+                  {
+                    href: content_button_url,
+                    label: content_button_text,
+                    variant: content_button_variant|default('primary'),
+                    size: content_button_size|default('medium'),
+                    icon: content_button_icon|default(null),
+                    icon_first: content_button_icon_first|default(false),
+                    mobile_width: content_button_mobile_width|default(false)
+                  },
+                  with_context: false
+                )
+              }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    {# Stats grid (right column on desktop) #}
+    <div class="stats-section__stats">
+      <div class="stats-grid">
+        {# Stat 1 - Full width top row #}
+        {% if stat1_value and stat1_label %}
+          <div class="stats-grid__item stats-grid__item--1">
+            {% set stat1_bg = stat1_background|default('default') %}
+            <div
+              class="stat-card relative flex flex-col p-4 shadow-2xl transition duration-300 lg:p-6 {{
+              section_rounded
+                ? 'rounded-xl'
+                : 'rounded-none'
+              }} {{ bg_classes[stat1_bg] }}"
+            >
+              <div class="stat-card__content">
+                <div class="stat-card__value">
+                  {{ stat1_value }}
+                </div>
+                <div class="stat-card__label">
+                  {{ stat1_label|raw }}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+        {# Stat 2 - Bottom left #}
+        {% if stat2_value and stat2_label %}
+          <div class="stats-grid__item stats-grid__item--2">
+            {% set stat2_bg = stat2_background|default('default') %}
+            <div
+              class="stat-card relative flex flex-col p-4 shadow-2xl transition duration-300 lg:p-6 {{
+              section_rounded
+                ? 'rounded-xl'
+                : 'rounded-none'
+              }} {{ bg_classes[stat2_bg] }}"
+            >
+              <div class="stat-card__content">
+                <div class="stat-card__value">
+                  {{ stat2_value }}
+                </div>
+                <div class="stat-card__label">
+                  {{ stat2_label|raw }}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+        {# Stat 3 - Bottom right #}
+        {% if stat3_value and stat3_label %}
+          <div class="stats-grid__item stats-grid__item--3">
+            {% set stat3_bg = stat3_background|default('default') %}
+            <div
+              class="stat-card relative flex flex-col p-4 shadow-2xl transition duration-300 lg:p-6 {{
+              section_rounded
+                ? 'rounded-xl'
+                : 'rounded-none'
+              }} {{ bg_classes[stat3_bg] }}"
+            >
+              <div class="stat-card__content">
+                <div class="stat-card__value">
+                  {{ stat3_value }}
+                </div>
+                <div class="stat-card__label">
+                  {{ stat3_label|raw }}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

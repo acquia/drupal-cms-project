@@ -1,0 +1,108 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.system_breadcrumb_block
+    - canvas.component.block.views_block.mc_content_fields_media-featured_image
+    - canvas.component.block.views_block.mc_content_fields_node-attachments
+    - canvas.component.block.views_block.mc_content_fields_node-audience
+    - canvas.component.block.views_block.mc_content_fields_node-relateds
+    - canvas.component.block.views_block.mc_content_fields_node-topics
+    - canvas.component.sdc.morphos.banner
+    - canvas.component.sdc.morphos.content
+    - canvas.component.sdc.morphos.layout
+    - canvas.component.sdc.morphos.section
+    - canvas.component.sdc.morphos.toc
+    - core.entity_view_mode.node.full
+    - field.field.media.image.field_media_image
+    - field.field.node.mc_article.field_mc_banner_image
+    - field.field.node.mc_article.field_mc_banner_title
+    - field.field.node.mc_article.field_mc_content
+    - field.field.node.mc_article.field_mc_intro
+    - field.field.node.mc_article.field_mc_published_date
+    - field.field.node.mc_article.field_mc_toc
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - node.type.mc_article
+  module:
+    - file
+    - media
+    - node
+    - options
+id: node.mc_article.full
+content_entity_type_id: node
+content_entity_type_bundle: mc_article
+content_entity_type_view_mode: full
+component_tree:
+  0:
+    uuid: 6bd4f9d5-53e9-42c6-a0f1-22f260d2516f
+    component_id: sdc.morphos.banner
+    component_version: 9b5c82290dafa0f4
+    inputs: '{"title":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_article\u241dtitle\u241e\u241fvalue"},"padding_top":"12","padding_bottom":"12","banner_title":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_article\u241dfield_mc_banner_title\u241e\u241fvalue"},"introduction":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_article\u241dfield_mc_intro\u241e\u241fprocessed"},"featured_image":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_article\u241dfield_mc_banner_image\u241e\u241fentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241f{src\u21a0src_with_alternate_widths,alt\u21a0alt,width\u21a0width,height\u21a0height}"},"palette":"color--primary","texture":"texture--conic-bottom-end","date":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_article\u241dfield_mc_published_date\u241e\u241fvalue"}}'
+  '0:breadcrumb:0':
+    parent_uuid: 6bd4f9d5-53e9-42c6-a0f1-22f260d2516f
+    slot: breadcrumb
+    uuid: b33e711e-92cf-4566-91e1-95f70b308fb0
+    component_id: block.system_breadcrumb_block
+    component_version: ad6359c331fc7c45
+    inputs: '{"label":"Breadcrumbs","label_display":"0"}'
+  1:
+    uuid: 572da1f6-0d6e-4a2d-8e9d-ee855cf84277
+    component_id: sdc.morphos.layout
+    component_version: d2a5f1008f68c839
+    inputs: '{"layout":"layout--7-1-4","padding_top":"12","padding_bottom":"12","container":"container--normal"}'
+  '1:main:0':
+    parent_uuid: 572da1f6-0d6e-4a2d-8e9d-ee855cf84277
+    slot: main
+    uuid: ce7e212c-1896-485b-97c1-87460fffaf1d
+    component_id: block.views_block.mc_content_fields_media-featured_image
+    component_version: f35fa6bf5d3674cb
+    inputs: '{"label":"Content fields Media: featured_image","label_display":"0","views_label":"","items_per_page":null}'
+  '1:main:1':
+    parent_uuid: 572da1f6-0d6e-4a2d-8e9d-ee855cf84277
+    slot: main
+    uuid: 389da0eb-c31f-43cc-8e22-ba4ab5b15a1b
+    component_id: sdc.morphos.content
+    component_version: aca7da150405d653
+    inputs: '{"content":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_article\u241dfield_mc_content\u241e\u241fprocessed"}}'
+  '1:main:2':
+    parent_uuid: 572da1f6-0d6e-4a2d-8e9d-ee855cf84277
+    slot: main
+    uuid: c37a4d0f-9a4b-406d-8836-75c25ee3ed84
+    component_id: block.views_block.mc_content_fields_node-attachments
+    component_version: 2cd5793eba124031
+    inputs: '{"label":"Content fields Node: attachments","label_display":"0","views_label":"","items_per_page":null}'
+  '1:main:3':
+    parent_uuid: 572da1f6-0d6e-4a2d-8e9d-ee855cf84277
+    slot: main
+    uuid: b3de36d8-4575-42cc-96c2-4dbeb58b11dd
+    component_id: block.views_block.mc_content_fields_node-topics
+    component_version: 85bffdde172fd1a4
+    inputs: '{"label":"Content fields Node: topics","label_display":"0","views_label":"","items_per_page":null}'
+  '1:main:4':
+    parent_uuid: 572da1f6-0d6e-4a2d-8e9d-ee855cf84277
+    slot: main
+    uuid: 65c48fdd-8f77-444b-8905-f765fe401a05
+    component_id: block.views_block.mc_content_fields_node-audience
+    component_version: c49b3b575bbc2351
+    inputs: '{"label":"Content fields Node: audience","label_display":"0","views_label":"","items_per_page":null}'
+  '1:side:0':
+    parent_uuid: 572da1f6-0d6e-4a2d-8e9d-ee855cf84277
+    slot: side
+    uuid: 77e217e9-0f77-4aee-b92f-4117dc3aae52
+    component_id: sdc.morphos.toc
+    component_version: b084e4ab88d027b3
+    inputs: '{"show":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_article\u241dfield_mc_toc\u241e\u241fvalue"},"content_selector":".layout__container .layout__content","heading_levels":"h2,h3","sticky":true,"heading":"On this page","heading_level":3}'
+  2:
+    uuid: 3f00afad-2a92-4611-b771-a581026c1481
+    component_id: sdc.morphos.section
+    component_version: 32ebb6399d6fc06d
+    inputs: '{"show_header":false,"show_footer":false,"heading_level":2,"hide_heading":false,"content_width":"section-width--100","column_widths":"section-col-widths--100","padding_top":"12","padding_bottom":"12","container":"container--normal","palette":"color--alternate"}'
+  '2:main_items:0':
+    parent_uuid: 3f00afad-2a92-4611-b771-a581026c1481
+    slot: main_items
+    uuid: ed9b9592-d7dd-4f95-900d-e8ec99f60ed7
+    component_id: block.views_block.mc_content_fields_node-relateds
+    component_version: aa6538cb3c0e0f95
+    inputs: '{"label":"Content fields Node: relateds","label_display":"0","views_label":"","items_per_page":null}'
+exposed_slots: {  }

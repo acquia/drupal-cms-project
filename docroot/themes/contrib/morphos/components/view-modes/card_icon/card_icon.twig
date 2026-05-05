@@ -1,0 +1,48 @@
+{% set body_attributes = create_attribute() %}
+{% set alignment_classes = icon_align == 'center' ? 'items-center text-center' %}
+
+{% set classes = [
+  'card',
+  'card--icon',
+  url ? 'card--clickable',
+] %}
+
+{% set body_classes = [
+  'card__body',
+  'card-body',
+  alignment_classes,
+] %}
+
+<div{{ attributes.addClass(classes) }}>
+  <div{{ body_attributes.addClass(body_classes) }}>
+    {% if icon %}
+      <div class="card__icon">
+        {% if icon %}
+          {{ include('morphos:icon', {
+            icon,
+            icon_size: icon_size|default('icon-size--xl'),
+          },
+            with_context: false
+          ) }}
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if heading %}
+      {{ include('morphos:heading', {
+        heading,
+        level: heading_level|default(3),
+        url: url|default(''),
+        additional_classes: ['card__title', 'card-title'],
+      },
+        with_context: false
+      ) }}
+    {% endif %}
+
+    {% if summary %}
+      <div class="card__content">
+        {{ summary }}
+      </div>
+    {% endif %}
+  </div>
+</div>

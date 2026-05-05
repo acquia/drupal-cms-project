@@ -1,0 +1,273 @@
+<?php
+
+/**
+ * @file
+ * Contains custom_field.module.
+ */
+
+use Drupal\Component\Utility\Html;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Template\Attribute;
+use Drupal\custom_field\Hook\EntityHooks;
+use Drupal\custom_field\Hook\FormHooks;
+use Drupal\custom_field\Hook\GeneralHooks;
+use Drupal\custom_field\Hook\ThemeHooks;
+use Drupal\custom_field\Hook\TokenHooks;
+use Drupal\custom_field\Hook\ViewsHooks;
+use Drupal\custom_field\TagManagerInterface;
+use Drupal\field\FieldStorageConfigInterface;
+
+/**
+ * Implements hook_help().
+ */
+// @phpstan-ignore-next-line
+#[LegacyHook]
+// phpcs:ignore Squiz.WhiteSpace.FunctionSpacing.Before
+function custom_field_help(string $route_name, RouteMatchInterface $route_match) {
+  return \Drupal::service(GeneralHooks::class)->help($route_name, $route_match);
+}
+
+/**
+ * Implements hook_theme().
+ */
+// @phpstan-ignore-next-line
+#[LegacyHook]
+// phpcs:ignore Squiz.WhiteSpace.FunctionSpacing.Before
+function custom_field_theme(): array {
+  return \Drupal::service(ThemeHooks::class)->theme();
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+// @phpstan-ignore-next-line
+#[LegacyHook]
+// phpcs:ignore Squiz.WhiteSpace.FunctionSpacing.Before
+function custom_field_theme_suggestions_custom_field(array $variables): array {
+  return \Drupal::service(ThemeHooks::class)->themeSuggestionsCustomField($variables);
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+// @phpstan-ignore-next-line
+#[LegacyHook]
+// phpcs:ignore Squiz.WhiteSpace.FunctionSpacing.Before
+function custom_field_theme_suggestions_custom_field_item(array $variables): array {
+  return \Drupal::service(ThemeHooks::class)->themeSuggestionsCustomFieldItem($variables);
+}
+
+/**
+ * Implements hook_token_info().
+ */
+// @phpstan-ignore-next-line
+#[LegacyHook]
+// phpcs:ignore Squiz.WhiteSpace.FunctionSpacing.Before
+function custom_field_token_info(): array {
+  return \Drupal::service(TokenHooks::class)->tokenInfo();
+}
+
+/**
+ * Implements hook_tokens().
+ */
+// @phpstan-ignore-next-line
+#[LegacyHook]
+// phpcs:ignore Squiz.WhiteSpace.FunctionSpacing.Before
+function custom_field_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata): array {
+  return \Drupal::service(TokenHooks::class)->tokens($type, $tokens, $data, $options, $bubbleable_metadata);
+}
+
+/**
+ * Implements hook_field_views_data().
+ */
+// @phpstan-ignore-next-line
+#[LegacyHook]
+// phpcs:ignore Squiz.WhiteSpace.FunctionSpacing.Before
+function custom_field_field_views_data(FieldStorageConfigInterface $field_storage): array {
+  return \Drupal::service(ViewsHooks::class)->fieldViewsData($field_storage);
+}
+
+/**
+ * Prepares variables for custom-field template.
+ */
+function template_preprocess_custom_field(array &$variables): void {
+  $variables['items'] = $variables['elements']['#items'];
+  $variables['field_name'] = $variables['elements']['#field_name'];
+  // Set the item attributes.
+  foreach ($variables['elements']['#items'] as &$item) {
+    // Attributes are optional, so we check if it's set first and process
+    // appropriately.
+    if (isset($item['attributes'])) {
+      $item['attributes'] = new Attribute($item['attributes']);
+    }
+    else {
+      $item['attributes'] = new Attribute();
+    }
+  }
+}
+
+/**
+ * Prepares variables for custom-field-item template.
+ */
+function template_preprocess_custom_field_item(array &$variables): void {
+  $wrappers = $variables['elements']['#wrappers'];
+  // Set wrapper classes.
+  if (!empty($wrappers['field_wrapper_classes'])) {
+    $wrapper_classes = explode(' ', $wrappers['field_wrapper_classes']);
+    foreach ($wrapper_classes as $class) {
+      $variables['attributes']['class'][] = Html::cleanCssIdentifier($class, []);
+    }
+  }
+  // Set field classes.
+  if (!empty($wrappers['field_classes'])) {
+    $field_classes = explode(' ', $wrappers['field_classes']);
+    foreach ($field_classes as $class) {
+      $variables['content_attributes']['class'][] = Html::cleanCssIdentifier($class, []);
+    }
+  }
+  // Set label classes.
+  if (!empty($wrappers['label_classes'])) {
+    $label_classes = explode(' ', $wrappers['label_classes']);
+    foreach ($label_classes as $class) {
+      $variables['title_attributes']['class'][] = Html::cleanCssIdentifier($class, []);
+    }
+  }
+
+  $variables['display_label_tag'] = $wrappers['label_tag'] !== TagManagerInterface::NO_MARKUP_VALUE;
+  $variables['display_field_tag'] = $wrappers['field_tag'] !== TagManagerInterface::NO_MARKUP_VALUE;
+  $variables['display_field_wrapper_tag'] = $wrappers['field_wrapper_tag'] !== TagManagerInterface::NO_MARKUP_VALUE;
+  $variables['field_wrapper_tag'] = $wrappers['field_wrapper_tag'];
+  $variables['field_tag'] = $wrappers['field_tag'];
+  $variables['label_tag'] = $wrappers['label_tag'];
+  $variables['label'] = $variables['elements']['#label'];
+  $variables['label_display'] = $variables['elements']['#label_display'];
+  $variables['label_hidden'] = ($variables['elements']['#label_display'] == 'hidden');
+  $variables['value'] = $variables['elements']['#value'];
+  $variables['name'] = $variables['elements']['#name'];
+  $variables['type'] = $variables['elements']['#type'];
+  $variables['field_name'] = $variables['elements']['#field_name'];
+}
+
+/**
+ * Prepares variables for custom-field-daterange template.
+ */
+function template_preprocess_custom_field_daterange(array &$variables): void {
+  $variables['all_day'] = $variables['elements']['all_day'] ?? NULL;
+  $variables['same_day'] = $variables['elements']['same_day'] ?? NULL;
+  $variables['start_value'] = $variables['elements']['value'] ?? NULL;
+  $variables['end_value'] = $variables['elements']['end_value'] ?? NULL;
+  $variables['duration'] = $variables['elements']['duration'] ?? NULL;
+  $variables['timezone'] = $variables['elements']['timezone'] ?? NULL;
+}
+
+/**
+ * Prepares variables for custom-field-time-range template.
+ */
+function template_preprocess_custom_field_time_range(array &$variables): void {
+  $variables['start_value'] = $variables['elements']['value'] ?? NULL;
+  $variables['end_value'] = $variables['elements']['end_value'] ?? NULL;
+}
+
+/**
+ * Implements hook_preprocess_field_multiple_value_form().
+ */
+// @phpstan-ignore-next-line
+#[LegacyHook]
+// phpcs:ignore Squiz.WhiteSpace.FunctionSpacing.Before
+function custom_field_preprocess_field_multiple_value_form(array &$variables): void {
+  \Drupal::service(ThemeHooks::class)->preprocessFieldMultipleValueForm($variables);
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+// @phpstan-ignore-next-line
+#[LegacyHook]
+// phpcs:ignore Squiz.WhiteSpace.FunctionSpacing.Before
+function custom_field_form_field_config_edit_form_alter(array &$form, FormStateInterface $form_state, string $form_id): void {
+  \Drupal::service(FormHooks::class)->formFieldConfigEditFormAlter($form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_field_type_category_info_alter().
+ */
+// @phpstan-ignore-next-line
+#[LegacyHook]
+// phpcs:ignore Squiz.WhiteSpace.FunctionSpacing.Before
+function custom_field_field_type_category_info_alter(array &$definitions): void {
+  \Drupal::service(GeneralHooks::class)->fieldTypeCategoryInfoAlter($definitions);
+}
+
+/**
+ * Implements hook_field_widget_complete_form_alter().
+ */
+// @phpstan-ignore-next-line
+#[LegacyHook]
+// phpcs:ignore Squiz.WhiteSpace.FunctionSpacing.Before
+function custom_field_field_widget_complete_form_alter(array &$element, FormStateInterface $form_state, array $context): void {
+  \Drupal::service(FormHooks::class)->fieldWidgetCompleteFormAlter($element, $form_state, $context);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert() for node entities.
+ */
+// @phpstan-ignore-next-line
+#[LegacyHook]
+// phpcs:ignore Squiz.WhiteSpace.FunctionSpacing.Before
+function custom_field_node_insert(EntityInterface $node): void {
+  \Drupal::service(EntityHooks::class)->nodeInsert($node);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update() for node entities.
+ */
+// @phpstan-ignore-next-line
+#[LegacyHook]
+// phpcs:ignore Squiz.WhiteSpace.FunctionSpacing.Before
+function custom_field_node_update(EntityInterface $node): void {
+  \Drupal::service(EntityHooks::class)->nodeUpdate($node);
+}
+
+/**
+ * Implements hook_entity_view_display_presave().
+ */
+// @phpstan-ignore-next-line
+#[LegacyHook]
+// phpcs:ignore Squiz.WhiteSpace.FunctionSpacing.Before
+function custom_field_entity_view_display_presave(EntityViewDisplayInterface $display): void {
+  \Drupal::service(EntityHooks::class)->entityViewDisplayPresave($display);
+}
+
+/**
+ * Implements hook_sam_allowed_widget_types_alter().
+ *
+ * Allows custom fields to work with the Simple Add More module.
+ *
+ * @see https://www.drupal.org/project/sam
+ */
+// @phpstan-ignore-next-line
+#[LegacyHook]
+// phpcs:ignore Squiz.WhiteSpace.FunctionSpacing.Before
+function custom_field_sam_allowed_widget_types_alter(array &$widget_types): void {
+  \Drupal::service(GeneralHooks::class)->samAllowedWidgetTypesAlter($widget_types);
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function custom_field_module_implements_alter(array &$implementations, string $hook): void {
+  if ($hook === 'node_update') {
+    // Make sure we run after taxonomy so the index doesn't get deleted.
+    if (isset($implementations['taxonomy'])) {
+      $group = $implementations['custom_field'];
+      unset($implementations['custom_field']);
+      // Put our module right after.
+      $implementations['custom_field'] = $group;
+    }
+  }
+}

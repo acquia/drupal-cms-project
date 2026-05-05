@@ -1,0 +1,31 @@
+services:
+  plugin.manager.ai_agents:
+    class: Drupal\ai_agents\PluginManager\AiAgentManager
+    parent: default_plugin_manager
+    arguments: ['@entity_type.manager', '@current_user', '@plugin.manager.ai.function_calls', '@ai_agents.agent_helper', '@token', '@event_dispatcher', '@ai.provider', '@ai_agents.artifact_helper', '@uuid']
+  ai_agents.agent_helper:
+    class: Drupal\ai_agents\Service\AgentHelper
+    arguments: ['@extension.path.resolver', '@module_handler', '@ai.prompt_json_decode', '@ai.prompt_code_block_extractor', '@config.factory', '@plugin.manager.ai_agent_validation']
+  ai_agents.field_agent_helper:
+    class: Drupal\ai_agents\Service\FieldAgent\FieldAgentHelper
+    arguments: ['@current_user', '@plugin.manager.field.field_type', '@entity_type.manager', '@entity_display.repository', '@plugin.manager.field.widget', '@plugin.manager.field.formatter', '@entity_field.manager', '@entity_type.bundle.info', '@router.route_provider']
+  plugin.manager.ai_agent_validation:
+    class: Drupal\ai_agents\PluginManager\AiAgentValidationPluginManager
+    parent: default_plugin_manager
+  ai_agents.artifact_helper:
+    class: Drupal\ai_agents\Service\ArtifactHelper
+    autowire: true
+  ai_agents.artifact_storage:
+    class: Drupal\ai_agents\Artifact\InMemoryArtifactStorage
+  Drupal\ai_agents\Artifact\ArtifactStorageInterface: '@ai_agents.artifact_storage'
+  ai_agents.agent_status_poller:
+    class: Drupal\ai_agents\Service\AgentStatus\AiAgentStatusPollerService
+    arguments: ['@ai_agents.private_temp_status_storage']
+  ai_agents.private_temp_status_storage:
+    class: Drupal\ai_agents\Service\AgentStatus\Storages\PrivateTempStatusStorage
+    arguments: ['@tempstore.private', '@session_manager']
+  ai_agents.agent_status_subscriber:
+    class: '\Drupal\ai_agents\EventSubscriber\AgentStatusSubscriber'
+    arguments: ['@ai_agents.private_temp_status_storage', '@datetime.time', '@plugin.manager.ai.function_calls']
+    tags:
+      - { name: 'event_subscriber' }

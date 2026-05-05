@@ -1,0 +1,52 @@
+/**
+ * @file
+ * Stylesheet for the custom_field widget.
+ */
+.custom-field-levels-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  column-gap: 0.5rem;
+}
+
+.custom-field-levels-wrapper .form-item {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.custom-field-element-flex {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.5rem;
+}
+
+.custom-field-element-flex.duration-options {
+  flex-wrap: nowrap;
+}
+
+.custom-field-element-flex:not(.duration-options) > div {
+  margin-block-start: 0;
+}
+
+.custom-field-element-flex > div.form-item--no-label {
+  margin-top: 0;
+}
+
+.custom-field-align-self-center {
+  align-self: center;
+}
+
+table th.custom-field-actions {
+  width: 0;
+}
+
+table th.custom-field-actions button,
+table th.custom-field-actions-header button {
+  white-space: nowrap;
+}
+
+table th.custom-field-actions-header > .form-item__label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: resource
+label: Resource
+type: 'canonical_entities:node'
+pattern: '/resources/[node:title]'
+selection_criteria:
+  c0372445-9d66-4de1-ba71-b60b9b07a1cb:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: c0372445-9d66-4de1-ba71-b60b9b07a1cb
+    context_mapping:
+      node: node
+    bundles:
+      mc_resource: mc_resource
+selection_logic: and
+weight: -8
+relationships: {  }

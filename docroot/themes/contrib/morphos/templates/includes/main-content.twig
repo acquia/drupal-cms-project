@@ -1,0 +1,23 @@
+{% set main_content_attributes = create_attribute() %}
+
+<main{{ main_content_attributes
+  .addClass('page__main')
+  .setAttribute('role', 'main')
+  .setAttribute('id', 'main-content')
+  .setAttribute('tabindex', '-1') }}>
+  {% if is_canvas_page %}
+    {{ page.content }}
+  {% else %}
+    {% embed 'morphos:layout' with {
+      attributes: create_attribute(),
+      layout: 'layout--7-1-4',
+      container: 'container--normal',
+      padding_top: '12',
+      padding_bottom: '12',
+    } %}
+      {% block main %}
+        {{ page.content }}
+      {% endblock %}
+    {% endembed %}
+  {% endif %}
+</main>

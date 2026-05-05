@@ -1,0 +1,44 @@
+{#
+/**
+ * @file
+ * Default theme implementation of a datetime form wrapper.
+ *
+ * Available variables:
+ * - content: The form element to be output, usually a datelist, or datetime.
+ * - title: The title of the form element.
+ * - title_attributes: HTML attributes for the title wrapper.
+ * - description: Description text for the form element.
+ * - required: An indicator for whether the associated form element is required.
+ *
+ * @see \Drupal\Core\Datetime\DatePreprocess::preprocessDatetimeWrapper()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set title_classes = [
+    required ? 'js-form-required',
+    required ? 'form-required',
+  ]
+%}
+{% if title %}
+  <div{{ title_attributes.addClass(title_classes) }}>
+    <canvas-drupal-label
+      title="{{ render_var(title) }}"
+      required="{{ required }}"
+      {% if prop_link_data %}
+        direct_linker_data="{{ prop_link_data }}"
+      {% endif %}
+    >
+    </canvas-drupal-label>
+  </div>
+{% endif %}
+{{ content }}
+{% if errors %}
+  <div>
+    {{ errors }}
+  </div>
+{% endif %}
+{% if description %}
+  <canvas-description{{ create_attribute({class: ['description-unwrapped']})}} description="{{ description|render|e('html_attr') }}" />
+{% endif %}

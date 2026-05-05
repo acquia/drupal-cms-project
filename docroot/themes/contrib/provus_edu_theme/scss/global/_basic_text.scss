@@ -1,0 +1,99 @@
+.block-provus-basic-text {
+  .secondary-link-text {
+    @include text-style-secondary-link-text-button
+  }
+  
+  p {
+    color: $text-colors-text-primary;
+    
+    .button-primary {
+      @include text-style-secondary-link-text;
+      @include text-style-button-primary;
+
+      &:hover{
+        background: $button-primary-background-hover;
+      }
+
+      &:focus {
+        border: 2px solid $button-primary-background;
+        background: $button-primary-background-hover;
+      }
+
+      &:active {
+        background: $button-secondary-background;
+      }
+
+      &:disabled {
+        opacity: 0.4;
+        background: var(--Background-Colors-background-primary, #D6D6D6);
+      }
+    }
+
+    .button-outlined {
+      @include text-style-secondary-link-text;
+      @include text-style-button-outlined;
+      text-decoration: none;
+
+      &:focus {
+        border: 2px solid $button-outline-background-focus;
+      }
+
+      &:hover {
+        color: $button-outline-text-hover;
+        background: $button-transparent-text-hover;
+      }
+
+      &:active {
+        color: $button-outline-text-hover;
+        background: $primary-colors-primary-hover;
+        border: none;
+      }
+
+      &:disabled {
+        border-radius: 100px;
+        opacity: 0.4;
+        background: var(--Background-Colors-background-primary, #D6D6D6);
+      }
+    }
+
+    .button-secondary {
+      @include text-style-secondary-link-text;
+      @include text-style-button-secondary;
+      text-decoration: none;
+
+      &:hover {
+        background: $text-colors-text-contrast;
+      }
+
+      &:focus {
+        border: 2px solid $button-secondary-background-focus;
+        background: $background-colors-background-light;
+      }
+
+      &:active {
+        background: $button-secondary-background-active;
+      }
+
+      &:disabled {
+        opacity: 0.4;
+        background: var(--Background-Colors-background-primary, #D6D6D6);
+      }
+    }
+
+    .outline-sm, .outline-md, .outline-lg {
+      padding-bottom: $padding-padding-sm;
+    }
+
+    &:has(.outline-sm,.outline-md, .outline-lg) {
+      padding-bottom: $padding-padding-md;
+    }
+  }
+
+  h2, h3, h4, h5, h6 {
+    color: $text-colors-text-secondary;
+  }
+}
+
+h2, h3, h4, h5, h6 {
+  color: $text-colors-text-secondary;
+}

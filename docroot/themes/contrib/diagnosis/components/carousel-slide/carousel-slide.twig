@@ -1,0 +1,55 @@
+{% set component_classes = component_classes|default('') %}
+{% set bg_variant = background|default('default') %}
+{% set padding_size = padding|default('medium') %}
+{% set content_width = width|default('100%') %}
+
+{# Slide container with background variants #}
+{% set slide = html_cva(
+  base: ['carousel-slide', 'swiper-slide', 'w-full', 'h-full', 'flex', 'items-center', 'justify-center'],
+  variants: {
+    background: {
+      default: 'bg-background text-foreground',
+      muted: 'bg-muted text-foreground',
+      bright: 'bg-bright text-bright-foreground',
+      light: 'bg-light text-light-foreground',
+      accent: 'bg-accent text-accent-foreground',
+      primary: 'bg-primary text-primary-foreground',
+    },
+  },
+) %}
+
+{# Content wrapper with padding and width variants #}
+{% set content = html_cva(
+  base: ['carousel-slide--content', 'mx-auto'],
+  variants: {
+    padding: {
+      none: '',
+      small: 'p-4',
+      medium: 'p-8',
+      large: 'p-12',
+    },
+    width: {
+      '100%': 'w-full',
+      '90%': 'w-[90%]',
+      '80%': 'w-[80%]',
+      '75%': 'w-3/4',
+      '50%': 'w-1/2',
+    },
+  },
+) %}
+
+{% set slide_classes = slide.apply({background: bg_variant}) %}
+{% set content_classes = content.apply({padding: padding_size, width: content_width}) %}
+
+<div class="{{ slide_classes }} {{ component_classes }}"
+     role="group"
+     aria-roledescription="slide">
+  <div class="{{ content_classes }}">
+    {% block slide_content %}
+      {# Default placeholder content #}
+      <div class="text-center">
+        <p class="text-lg">Slide content goes here</p>
+      </div>
+    {% endblock %}
+  </div>
+</div>

@@ -1,0 +1,110 @@
+{% set cta_text_align = text_align|default('center') %}
+{% set background_color = background_color|default('noColor') %}
+
+{% set cta_variants =
+  html_cva(
+    base: ['cq-full relative z-1'],
+    variants: {
+      backgroundColor: {
+        primary: 'bg-primary text-primary-foreground',
+        secondary: 'bg-secondary text-secondary-foreground',
+        accent: 'bg-accent text-accent-foreground',
+        muted: 'bg-muted text-muted-foreground',
+        inverted: 'bg-foreground text-background',
+        noColor: 'bg-none text-foreground'
+      }
+    }
+  )
+%}
+
+{% set cta_content_variants =
+  html_cva(
+    base: ['relative', 'flex flex-col justify-center', 'min-h-80', 'gap-6 lg:gap-8', 'py-[90px] lg:py-[115px] xl:py-[140px]'],
+    variants: {
+      textAlign: {
+        left: ['text-left'],
+        right: ['text-right'],
+        center: ['text-center', 'lg:max-w-3/4', 'mx-auto', 'items-center']
+      },
+      hasBackground: {
+        yes: 'text-white!',
+        no: ''
+      }
+    }
+  )
+%}
+
+{% set cta_links_variants =
+  html_cva(
+    base: ['flex', 'w-full', 'flex-col', 'gap-6', 'sm:flex-row'],
+    variants: {
+      textAlign: {
+        left: 'md:justify-start',
+        right: 'md:justify-end',
+        center: ['justify-center', 'items-center']
+      }
+    }
+  )
+%}
+
+<section
+  class="{{
+  cta_variants.apply({
+    backgroundColor: background_color
+  })
+  }}"
+>
+  {% block media %}
+    {% if media.src is not empty %}
+      <div class="absolute z-[-1] h-full w-full">
+        <div class="absolute inset-0 bg-black/30"></div>
+        {% include 'canvas:image' ignore missing with {
+          src: media.src,
+          alt: media.alt,
+          class: 'object-cover w-full h-full',
+          width: media.width,
+          height: media.height
+        } only %}
+      </div>
+    {% endif %}
+  {% endblock %}
+  <div
+    class="{{
+    cta_content_variants.apply({
+      textAlign: cta_text_align
+    })
+    }} px-4"
+  >
+    {{
+      include(
+        'byte_theme:heading',
+        {
+          heading_text: heading_text|default(''),
+          level: level|default(2),
+          align: cta_text_align,
+          text_color: 'default',
+          url: '',
+          heading_classes: 'max-w-3xl',
+          text_size: 'heading-responsive-7xl'
+        },
+        with_context: false
+      )
+    }}
+    <p class="max-w-2xl text-xl font-normal">
+      {{ text }}
+    </p>
+    {% if block('actions') is defined %}
+      <div
+        class="{{
+        cta_links_variants.apply({
+          textAlign: cta_text_align
+        })
+        }}"
+      >
+        {% block actions %}
+
+        {% endblock %}
+      </div>
+    {% endif %}
+  </div>
+</section>

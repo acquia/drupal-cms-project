@@ -1,0 +1,36 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Location Split
+group: Organisms
+status: stable
+description: A two-column component displaying location details on a dark blue background.
+props:
+  type: object
+  properties:
+    admin_theme:
+      title: Admin Theme
+      type: boolean
+      default: false
+      description: Check to enable Admin Theme styles.
+    eyebrow:
+      title: Eyebrow (e.g., 'Location')
+      type: string
+    title:
+      title: Title (e.g., 'The venue and what to expect')
+      type: string
+    description:
+      title: Description Paragraph
+      type: string
+    address:
+      title: Address Text
+      type: string
+    phone:
+      title: Phone Number
+      type: string
+slots:
+  action:
+    title: Action Slot
+    description: Slot for buttons (e.g., 'Learn', 'Map').
+library:
+  css:
+    component:
+      location-split.css: {}

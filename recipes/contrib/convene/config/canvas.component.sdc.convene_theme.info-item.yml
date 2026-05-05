@@ -1,0 +1,41 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - convene_theme
+label: 'Info Item'
+id: sdc.convene_theme.info-item
+source: sdc
+source_local_id: 'convene_theme:info-item'
+provider: convene_theme
+active_version: 0c0c9166ada0fe24
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        description:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        highlight_border:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value: null
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions: {  }

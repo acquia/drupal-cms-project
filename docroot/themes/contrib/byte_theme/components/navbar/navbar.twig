@@ -1,0 +1,117 @@
+{% set dropdown_menu =
+  html_cva(
+    base: [
+      'navbar--dropdown-menu',
+      'flex flex-col items-stretch justify-start md:flex-row',
+      'max-h-full',
+      'gap-2',
+      'overflow-auto md:overflow-visible'
+    ],
+    variants: {
+      menuAlign: {
+        left: 'pl-8 md:justify-start',
+        center: 'md:justify-center',
+        right: 'md:justify-end'
+      }
+    }
+  )
+%}
+
+{% set dropdown_menu_classes =
+  dropdown_menu.apply({
+    menuAlign: menu_align|default('center')
+  })
+%}
+
+<div class="navbar relative z-[500] container mx-auto flex justify-between p-2 px-4 md:py-4">
+  <div class="navbar--logo self-center [&>div]:flex [&>div]:flex-col [&>div]:justify-center">
+    {% block logo %}
+      {{ include('@byte_theme/templates/block/block--system-branding-block.html.twig') }}
+    {% endblock %}
+  </div>
+
+  <div
+    class="navbar--menu fixed inset-0 top-[calc(var(--drupal-displace-offset-top,0px)+var(--gin-toolbar-height,0px)-var(--navbar-scroll-top,0px))] grid shrink-1 grow-1 grid-cols-[1fr] grid-rows-[auto_1fr_auto] flex-col items-stretch justify-start bg-background pb-8 md:static md:flex md:h-auto md:flex-row md:items-center md:bg-transparent md:pb-0"
+  >
+    <div
+      class="navbar--modal-top relative z-[500] col-span-1 col-start-1 row-span-1 row-start-1 container mx-auto flex w-full justify-between p-2 md:hidden"
+    >
+      <div
+        class="navbar--modal-logo flex min-h-[44px] flex-1 flex-col items-start justify-center md:hidden [&>div]:flex [&>div]:flex-col [&>div]:justify-center"
+      >
+        {{ block('logo') }}
+      </div>
+
+      <button
+        class="navbar--hide-menu flex h-[44px] w-[44px] flex-0 cursor-pointer items-center justify-center p-2 md:hidden"
+        aria-label="{{ 'Hide menu'|t }}"
+      >
+        {{
+          include(
+            '@byte_theme/components/icon/icon.twig',
+            {
+              icon: 'x',
+              icon_size: 'medium'
+            }
+          )
+        }}
+      </button>
+    </div>
+
+    <div
+      class="navbar--dropdown-menu-wrapper relative col-span-1 col-start-1 row-span-1 row-start-2 container mx-auto min-h-0 w-full flex-1 p-2 px-4 after:pointer-events-none after:absolute after:bottom-0 after:z-3 after:h-24 after:w-full after:bg-linear-to-b after:from-transparent after:to-background after:content-[''] md:p-0 md:after:content-none"
+    >
+      <div class="{{ dropdown_menu_classes }}">
+        {% block navigation %}
+
+        {% endblock %}
+      </div>
+    </div>
+
+    <div
+      class="navbar--links col-span-1 col-start-1 row-span-1 row-start-3 ml-auto flex w-full flex-initial shrink-0 grow-0 flex-col justify-end gap-2 md:w-auto md:flex-row [&>*:first-child]:ml-2"
+    >
+      {% block links %}
+        {{
+          include(
+            'byte_theme:button',
+            {
+              variant: 'primary',
+              label: 'Button'|t,
+              icon: 'arrow-right',
+              href: 'https://example.com',
+              size: 'medium'
+            }
+          )
+        }}
+
+        {{
+          include(
+            'byte_theme:button',
+            {
+              variant: 'secondary',
+              label: 'Another'|t,
+              icon: 'arrow-right',
+              href: 'https://example.com',
+              size: 'medium'
+            }
+          )
+        }}
+      {% endblock %}
+    </div>
+  </div>
+
+  <div class="navbar--hamburger-container flex min-h-[44px] min-w-[44px] shrink-0 grow-0 items-center justify-center md:hidden">
+    <button class="navbar--hamburger flex items-center justify-center" aria-label="{{ 'Show menu'|t }}">
+      {{
+        include(
+          '@byte_theme/components/icon/icon.twig',
+          {
+            icon: 'list',
+            icon_size: 'medium'
+          }
+        )
+      }}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.system_breadcrumb_block
+    - canvas.component.block.views_block.mc_content_fields_node-attachments
+    - canvas.component.block.views_block.mc_topic_content-articles
+    - canvas.component.block.views_block.mc_topic_content-events
+    - canvas.component.block.views_block.mc_topic_content-resources
+    - canvas.component.sdc.morphos.banner
+    - canvas.component.sdc.morphos.content
+    - canvas.component.sdc.morphos.layout
+    - core.entity_view_mode.node.full
+    - field.field.media.image.field_media_image
+    - field.field.node.mc_topic.field_mc_banner_image
+    - field.field.node.mc_topic.field_mc_banner_title
+    - field.field.node.mc_topic.field_mc_content
+    - field.field.node.mc_topic.field_mc_intro
+    - field.field.node.mc_topic.field_mc_updated_date
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - node.type.mc_topic
+  module:
+    - file
+    - media
+    - node
+    - options
+id: node.mc_topic.full
+content_entity_type_id: node
+content_entity_type_bundle: mc_topic
+content_entity_type_view_mode: full
+component_tree:
+  0:
+    uuid: e95224c5-2aa8-4772-a24a-c5dbf5e13965
+    component_id: sdc.morphos.banner
+    component_version: 9b5c82290dafa0f4
+    inputs: '{"title":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_topic\u241dtitle\u241e\u241fvalue"},"padding_top":"12","padding_bottom":"12","banner_title":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_topic\u241dfield_mc_banner_title\u241e\u241fvalue"},"introduction":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_topic\u241dfield_mc_intro\u241e\u241fprocessed"},"featured_image":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_topic\u241dfield_mc_banner_image\u241e\u241fentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241f{src\u21a0src_with_alternate_widths,alt\u21a0alt,width\u21a0width,height\u21a0height}"},"palette":"color--primary","texture":"texture--conic-bottom-end","date":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_topic\u241dfield_mc_updated_date\u241e\u241fvalue"}}'
+  '0:breadcrumb:0':
+    parent_uuid: e95224c5-2aa8-4772-a24a-c5dbf5e13965
+    slot: breadcrumb
+    uuid: 996262a7-f976-4cd1-b009-6997a77e6898
+    component_id: block.system_breadcrumb_block
+    component_version: ad6359c331fc7c45
+    inputs: '{"label":"Breadcrumbs","label_display":"0"}'
+  1:
+    uuid: 0793bda8-5038-44b2-9cf3-34a0bbb47a2c
+    component_id: sdc.morphos.layout
+    component_version: d2a5f1008f68c839
+    inputs: '{"layout":"layout--12","padding_top":"12","padding_bottom":"12","container":"container--normal"}'
+  '1:main:0':
+    parent_uuid: 0793bda8-5038-44b2-9cf3-34a0bbb47a2c
+    slot: main
+    uuid: 97735e3c-ea87-48e2-b5d9-3b78169e8cb3
+    component_id: sdc.morphos.content
+    component_version: aca7da150405d653
+    inputs: '{"content":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_topic\u241dfield_mc_content\u241e\u241fprocessed"}}'
+  '1:main:1':
+    parent_uuid: 0793bda8-5038-44b2-9cf3-34a0bbb47a2c
+    slot: main
+    uuid: f78b676c-a954-412c-b970-e774f019115d
+    component_id: block.views_block.mc_content_fields_node-attachments
+    component_version: 2cd5793eba124031
+    inputs: '{"label":"Content fields Node: attachments","label_display":"0","views_label":"","items_per_page":null}'
+  '1:main:2':
+    parent_uuid: 0793bda8-5038-44b2-9cf3-34a0bbb47a2c
+    slot: main
+    uuid: 99195e63-fdfd-4b63-bb6a-db5e0a9730e3
+    component_id: block.views_block.mc_topic_content-articles
+    component_version: 1084d32fadfb06d9
+    inputs: '{"label":"Topic content: articles","label_display":"0","views_label":"","items_per_page":null}'
+  '1:main:3':
+    parent_uuid: 0793bda8-5038-44b2-9cf3-34a0bbb47a2c
+    slot: main
+    uuid: 33e84dfd-d442-42aa-83f1-0eab6da78ce5
+    component_id: block.views_block.mc_topic_content-resources
+    component_version: 98804577fe125b6f
+    inputs: '{"label":"Topic content: resources","label_display":"0","views_label":"","items_per_page":null}'
+  '1:main:4':
+    parent_uuid: 0793bda8-5038-44b2-9cf3-34a0bbb47a2c
+    slot: main
+    uuid: 30ccfb1a-aa17-4365-a240-8ee190d02968
+    component_id: block.views_block.mc_topic_content-events
+    component_version: f6a7035b11390410
+    inputs: '{"label":"Topic content: events","label_display":"0","views_label":"","items_per_page":null}'
+exposed_slots: {  }

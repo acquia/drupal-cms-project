@@ -1,0 +1,86 @@
+/* CSS-only select styling (from https://github.com/filamentgroup/select-css) */
+.form-item__dropdown {
+  display: block;
+  position: relative;
+  background-color: var(--white);
+}
+
+.form-item__dropdown::after {
+  content: "";
+  background-image: url('../../../../images/icons/chevron-down.svg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 2.4rem;
+  width: 2.4rem;
+  position: absolute;
+  top: calc(50% - 1.2rem);
+  right: var(--spacing-2);
+  z-index: 2;
+
+  /* These hacks make the select behind the arrow clickable in some browsers */
+  pointer-events: none;
+  display: none;
+}
+
+.form-item__select {
+  border: 0.2rem solid var(--form-border);
+  border-radius: 0;
+  margin: 0;
+  padding: var(--spacing-2);
+  width: 100%;
+}
+
+@supports (appearance: none) and (mask-type: alpha) {
+  /* Show custom arrow */
+  .form-item__dropdown::after {
+    display: block;
+  }
+
+  /* Remove select styling */
+  .form-item__select {
+    padding-right: var(--spacing-2); /* Match-01 */
+
+    /* inside @supports so that iOS <= 8 display the native arrow */
+    background: none; /* Match-04 */
+
+    /* inside @supports so that Android <= 4.3 display the native arrow */
+    appearance: none;
+  }
+
+  .select--custom-list .form-item__dropdown {
+    background-color: transparent;
+  }
+
+  .select--custom-list .form-item__dropdown::after {
+    content: none;
+  }
+
+  .select--custom-list select + span.ui-button {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    width: auto;
+    color: var(--brand-primary-dark);
+  }
+
+  /* Autocomplete. */
+  .ui-front--custom .ui-menu-item {
+    margin: 0 var(--spacing-2);
+    padding: var(--spacing-2);
+  }
+
+  .ui-front--custom .ui-menu-item .ui-menu-item-wrapper {
+    padding-left: 0;
+    padding-right: 0;
+    white-space: nowrap;
+  }
+
+  .ui-front--custom .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    background-color: transparent;
+    margin: 0;
+  }
+}

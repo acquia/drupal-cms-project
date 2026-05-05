@@ -1,0 +1,62 @@
+{% set is_preview = canvas_is_preview or in_preview %}
+
+{% set navbar_container_attributes = create_attribute() %}
+
+{% set slot_start %}{% block start %}{% endblock %}{% endset %}
+{% set slot_center %}{% block center %}{% endblock %}{% endset %}
+{% set slot_end %}{% block end %}{% endblock %}{% endset %}
+
+{% set classes = [
+  'navbar',
+  palette,
+  texture,
+  is_preview ? 'navbar--preview',
+] %}
+
+{% set container_classes = [
+  'navbar__container',
+  container == 'container--edgy' ? 'w-full',
+  container == 'container--wide' ? 'w-full px-4',
+  container == 'container--normal' or not container ? 'container mx-auto px-4',
+  container == 'container--narrow' ? 'container w-full lg:max-w-[80%] mx-auto px-4',
+] %}
+
+{% set component_preview %}
+  <nav{{ attributes.addClass(classes) }}>
+    <div{{ navbar_container_attributes.addClass(container_classes) }}>
+      <div class="navbar__start">
+        {{ slot_start }}
+      </div>
+      <div class="navbar__center">
+        {{ slot_center }}
+      </div>
+      <div class="navbar__end">
+        {{ slot_end }}
+      </div>
+    </div>
+  </nav>
+{% endset %}
+
+{% set component_render %}
+  <nav{{ attributes.addClass(classes) }}>
+    <div{{ navbar_container_attributes.addClass(container_classes) }}>
+      {% if slot_start|render|striptags('<drupal-render-placeholder><figure><img>')|trim %}
+        <div class="navbar__start">
+          {{ slot_start }}
+        </div>
+      {% endif %}
+      {% if slot_center|render|striptags('<drupal-render-placeholder>')|trim %}
+        <div class="navbar__center">
+          {{ slot_center }}
+        </div>
+      {% endif %}
+      {% if slot_end|render|striptags('<drupal-render-placeholder>')|trim %}
+        <div class="navbar__end">
+          {{ slot_end }}
+        </div>
+      {% endif %}
+    </div>
+  </nav>
+{% endset %}
+
+{{ is_preview ? component_preview : component_render }}

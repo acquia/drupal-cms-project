@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * Contains hooks and functions for ai_dashboard module.
+ */
+
+use Drupal\ai_dashboard\Hook\AiDashboardHooks;
+use Drupal\Core\Hook\Attribute\LegacyHook;
+
+/**
+ * Implements hook_theme().
+ */
+#[LegacyHook]
+function ai_dashboard_theme() {
+  return \Drupal::service(AiDashboardHooks::class)->theme();
+}
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function ai_dashboard_preprocess_block(&$variables) {
+  if ($variables['plugin_id'] == 'project_browser_block:ai_dashboard_recommended') {
+    $variables['title_suffix'] = [
+      '#markup' => '<p class="block-help">' . t('Apply pre-configured settings to enable safe and effective AI functionality.') . '</p>',
+    ];
+  }
+  if ($variables['plugin_id'] == 'ai_documentation') {
+    $variables['title_suffix'] = [
+      '#markup' => '<p class="block-help">' . t('Access detailed guides, reference materials, and tutorials for all AI features.') . '</p>',
+    ];
+  }
+  if ($variables['plugin_id'] == 'admin_menu_links') {
+    $variables['title_suffix'] = [
+      '#markup' => '<p class="block-help">' . t('Configure custom AI features and integrations tailored to your workflows.'),
+    ];
+  }
+}

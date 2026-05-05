@@ -1,0 +1,50 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Hero blog
+description: Hero component for the blog content type.
+group: Hero
+props:
+  type: object
+  properties:
+    heading_text:
+      type: string
+      title: Heading
+      default: "Enter the title"
+      examples:
+        - "Vivamus curae metus neque mollis orci ipsum sapien velit cursus"
+
+    level:
+      type: integer
+      title: Heading level
+      enum: [1, 2, 3, 4, 5, 6]
+      examples:
+        - 1
+
+    date:
+      type: integer
+      title: Published Date
+      # 2026-02-12
+      default: 1770856866
+      examples:
+        - 1770856866
+
+    author:
+      type: string
+      title: Author
+      examples:
+        - "John Smith"
+
+    author_url:
+      type: string
+      title: Author link
+      default: ""
+      examples: []
+
+    media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Image
+      type: object
+      examples:
+        - src: "assets/luke-chesser-pJadQetzTkI-unsplash.jpg"
+          alt: "Green blue gradient placeholder image"
+          width: 1920
+          height: 1344

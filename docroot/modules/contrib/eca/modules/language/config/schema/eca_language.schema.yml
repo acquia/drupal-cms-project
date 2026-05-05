@@ -1,0 +1,22 @@
+eca.event.plugin.eca_language:negotiate:
+  type: eca.event.plugin
+  label: 'ECA language negotiation'
+
+action.configuration.eca_get_current_langcode:
+  type: mapping
+  label: 'Configuration for the "Get Current Langcode" action'
+  mapping:
+    token_name:
+      type: required_label
+      label: 'Name of token'
+
+action.configuration.eca_set_current_langcode:
+  type: mapping
+  label: 'Configuration for the "Set Current Langcode" action'
+  mapping:
+    langcode:
+      type: string
+      label: 'Language'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Validation\EcaConstraintCallbacks::getAllValidLangcodes'

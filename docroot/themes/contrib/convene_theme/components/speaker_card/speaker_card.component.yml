@@ -1,0 +1,31 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Speaker Card
+group: Molecules
+status: stable
+description: A card displaying speaker information including image, name, role, bio, and social links.
+props:
+  type: object
+  properties:
+    name:
+      title: Name
+      type: string
+      description: The name of the speaker.
+    role:
+      title: Role
+      type: string
+      description: The job title or role of the speaker.
+    description:
+      title: Bio
+      type: string
+      description: A short biography of the speaker.
+slots:
+  speaker_card_image:
+    title: Speaker Image
+    description: The speaker's profile photo.
+  social_items:
+    title: Social Links
+    description: A collection of Social Link atoms.
+library:
+  css:
+    component:
+      speaker_card.css: {}

@@ -1,0 +1,73 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.morphos.section
+    - canvas.component.sdc.morphos.stat
+    - filter.format.canvas_html_block
+  module:
+    - options
+    - text
+id: stats_section
+label: 'Stats section'
+component_tree:
+  0:
+    uuid: 8ddfd9a3-4e4d-43d6-aa56-16037861c709
+    component_id: sdc.morphos.section
+    component_version: 32ebb6399d6fc06d
+    inputs:
+      show_header: true
+      show_footer: false
+      heading: 'Stats section'
+      heading_level: 2
+      hide_heading: false
+      content_width: section-width--100
+      content_position: section-position--start
+      content_alignment: section-alignment--start
+      palette: color--standard
+      container: container--normal
+      padding_top: '12'
+      padding_bottom: '12'
+      column_widths: section-col-widths--33-33-33
+      intro:
+        value: '<p>Statistics with animations displayed in a section. Used for conveying important, convincing, numerical data for key insights.</p>'
+        format: canvas_html_block
+  '0:main_items:0':
+    parent_uuid: 8ddfd9a3-4e4d-43d6-aa56-16037861c709
+    slot: main_items
+    uuid: 55b572e1-bc37-41b1-8040-f0e0431a5ac8
+    component_id: sdc.morphos.stat
+    component_version: 545e7231c7ec0b85
+    inputs:
+      title: 'Total page views'
+      value: 89400
+      prefix: $
+      suffix: '%'
+      size: stat--md
+      desc: '21% more than last month'
+  '0:main_items:1':
+    parent_uuid: 8ddfd9a3-4e4d-43d6-aa56-16037861c709
+    slot: main_items
+    uuid: 3d767fe9-265b-43cb-9ee8-071fce25c1d9
+    component_id: sdc.morphos.stat
+    component_version: 545e7231c7ec0b85
+    inputs:
+      title: 'Total page views'
+      value: 89400
+      prefix: $
+      suffix: '%'
+      size: stat--md
+      desc: '21% more than last month'
+  '0:main_items:2':
+    parent_uuid: 8ddfd9a3-4e4d-43d6-aa56-16037861c709
+    slot: main_items
+    uuid: cdf83850-d301-4263-a153-3e6262ba2cb1
+    component_id: sdc.morphos.stat
+    component_version: 545e7231c7ec0b85
+    inputs:
+      title: 'Total page views'
+      value: 89400
+      prefix: $
+      suffix: '%'
+      size: stat--md
+      desc: '21% more than last month'

@@ -1,0 +1,243 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: a370cc8c-43ef-43cc-9ca4-73a49a06e427
+  default_langcode: en
+  depends:
+    dff4c626-a52e-4de8-a7fe-b5d45735fecc: file
+    1852211b-caab-41a7-8c0e-7d9dcfdcf922: media
+    0a06e8a7-7954-42fa-9770-18b365ca4153: file
+    153d0922-a446-4a2e-abf3-f9ac43faff9b: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'News Story'
+  components:
+    -
+      uuid: 61d28dc5-2edf-4138-9438-211b3768332e
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        gap: 10
+        paddingtop: 14
+        marginbottom: 0
+        paddingbottom: 14
+        backgroundcolor: black
+        use_custom_container: false
+    -
+      parent_uuid: 61d28dc5-2edf-4138-9438-211b3768332e
+      slot: content
+      uuid: 8b657d2b-d8e4-41b5-a472-0c15458b13d0
+      component_id: sdc.caresphere_theme.section-grid
+      inputs:
+        grid_layout: 1_column
+        grid_row_gap: 3
+        column_1_layout: stacked
+        is_small_container: true
+    -
+      parent_uuid: 8b657d2b-d8e4-41b5-a472-0c15458b13d0
+      slot: slot_1
+      uuid: 352bced7-5455-4356-986a-aea34d7bd512
+      component_id: block.system_breadcrumb_block
+      inputs:
+        label: Breadcrumbs
+        label_display: '0'
+    -
+      parent_uuid: 8b657d2b-d8e4-41b5-a472-0c15458b13d0
+      slot: slot_1
+      uuid: 64d07c4b-9975-413e-969d-04d5e027c192
+      component_id: sdc.caresphere_theme.heading
+      inputs:
+        align: left
+        level: 2
+        text_size: default
+        text_color: primary
+        heading_text: 'How one community found strength together'
+    -
+      parent_uuid: 8b657d2b-d8e4-41b5-a472-0c15458b13d0
+      slot: slot_1
+      uuid: 56e57c46-08a1-494b-8b43-30ee5a3dbd69
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        margintop: 6
+        backgroundcolor: black
+        use_custom_container: false
+    -
+      parent_uuid: 56e57c46-08a1-494b-8b43-30ee5a3dbd69
+      slot: content
+      uuid: 3db8ca01-c2c8-4ad8-b0a5-79712f43a778
+      component_id: sdc.caresphere_theme.author-share
+      inputs:
+        date: '15 Mar 2024'
+        read_time: '6 min read'
+        share_url: /
+        link_x_url: 'https://x.com/'
+        author_name: 'Sarah Mitchell'
+        author_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 1852211b-caab-41a7-8c0e-7d9dcfdcf922
+            target_type: media
+        link_copy_url: /
+        link_facebook_url: 'https://www.facebook.com/'
+        link_linkedin_url: 'https://www.linkedin.com/'
+    -
+      parent_uuid: 61d28dc5-2edf-4138-9438-211b3768332e
+      slot: content
+      uuid: 2bc6d788-edbf-4c58-b299-ad21d818e512
+      component_id: sdc.caresphere_theme.section-grid
+      inputs:
+        grid_layout: 1_column
+        column_1_layout: full
+        is_small_container: false
+    -
+      parent_uuid: 2bc6d788-edbf-4c58-b299-ad21d818e512
+      slot: slot_1
+      uuid: e0a24e22-502e-4631-81b6-857b74c582f3
+      component_id: sdc.caresphere_theme.image
+      inputs:
+        size: '2:1'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 1852211b-caab-41a7-8c0e-7d9dcfdcf922
+            target_type: media
+        radius: small
+        border_radius: 8
+    -
+      uuid: c1e8e361-5f14-4db7-90b0-2fb30e514483
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        paddingtop: 14
+        marginbottom: 0
+        paddingbottom: 14
+        backgroundcolor: dark-gray
+        use_custom_container: false
+    -
+      parent_uuid: c1e8e361-5f14-4db7-90b0-2fb30e514483
+      slot: content
+      uuid: 4a15c567-5d57-4573-b7bf-2fcca18f3875
+      component_id: sdc.caresphere_theme.section-grid
+      inputs:
+        grid_layout: 1_column
+        column_1_layout: full
+        is_small_container: true
+    -
+      parent_uuid: 4a15c567-5d57-4573-b7bf-2fcca18f3875
+      slot: slot_1
+      uuid: 4b6753f4-17c3-4361-be1a-761b191af633
+      component_id: sdc.caresphere_theme.text
+      inputs:
+        text:
+          value: '<p><strong>Introduction</strong></p><p>&nbsp;</p><p>Communities are often defined not just by the places people live, but by the bonds they share during challenging times. When difficulties arise, the true strength of a community is revealed through cooperation, empathy, and a shared sense of purpose. This is the story of how one community came together, discovering resilience and hope through unity and collective effort.</p><p>&nbsp;</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: inverted
+    -
+      parent_uuid: 4a15c567-5d57-4573-b7bf-2fcca18f3875
+      slot: slot_1
+      uuid: b2d3979d-d9c3-4f3e-bb6f-34dfa3768485
+      component_id: sdc.caresphere_theme.image
+      inputs:
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 1852211b-caab-41a7-8c0e-7d9dcfdcf922
+            target_type: media
+        radius: extra-large
+        caption: 'Image caption goes here'
+        border_radius: 8
+    -
+      parent_uuid: 4a15c567-5d57-4573-b7bf-2fcca18f3875
+      slot: slot_1
+      uuid: 03a63be6-1bd0-42c0-a45e-75300911ef44
+      component_id: sdc.caresphere_theme.text
+      inputs:
+        text:
+          value: '<p>&nbsp;</p><p>The journey began when the community faced a challenge that affected everyone—testing their resources, patience, and spirit. At first, uncertainty and concern filled the air, but it didn’t take long for people to realize that the best way forward was together. Neighbors who had rarely spoken before began checking in on each other. Volunteers stepped forward to organize support groups, share resources, and offer help to those who needed it most.</p><p>&nbsp;</p><p>Local leaders, small businesses, and residents collaborated to create initiatives that kept everyone connected and supported. Community gatherings, whether in person or virtual, became spaces where people could share ideas, listen to one another, and build solutions collectively. These efforts not only addressed immediate needs but also strengthened relationships that might never have formed otherwise.</p><p>&nbsp;</p><p>Over time, what started as a response to hardship evolved into something greater—a deeper sense of belonging and responsibility toward one another. The community discovered that cooperation, kindness, and open communication could transform challenges into opportunities for growth.</p><p>&nbsp;</p><p><strong>Conclusion</strong></p><p>In the end, the experience showed that a community’s greatest strength lies in its people. By standing together, supporting one another, and believing in shared progress, the community turned adversity into a powerful reminder of what unity can achieve. Their story demonstrates that when individuals come together with compassion and determination, even the most difficult circumstances can lead to stronger connections and a brighter future for everyone.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: inverted
+    -
+      uuid: f9e8a314-b208-4415-9b32-c692152e592c
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        gap: 10
+        alignment: center
+        paddingtop: 14
+        marginbottom: 0
+        paddingbottom: 14
+        backgroundcolor: black
+        use_custom_container: false
+    -
+      parent_uuid: f9e8a314-b208-4415-9b32-c692152e592c
+      slot: content
+      uuid: eb0044f7-9a06-48ce-be7a-8dd42a278348
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: 'Join us in building change'
+          format: canvas_html_inline
+        description: 'Your support creates opportunity and strengthens the community we serve together.'
+        heading_level: 2
+    -
+      parent_uuid: eb0044f7-9a06-48ce-be7a-8dd42a278348
+      slot: ctas
+      uuid: c56c4c76-507c-4f92-b064-818e55482f68
+      component_id: sdc.caresphere_theme.button
+      inputs:
+        href: 'https://easebuzz.in/demo'
+        size: medium
+        label: Donate
+        variant: primary
+        disabled: false
+        icon_first: false
+        mobile_width: false
+        border_radius: default
+    -
+      parent_uuid: eb0044f7-9a06-48ce-be7a-8dd42a278348
+      slot: ctas
+      uuid: f97be8c0-a713-4a2b-a2b8-0b7c5af03b35
+      component_id: sdc.caresphere_theme.button
+      inputs:
+        href: /get-involved
+        size: medium
+        label: 'Get involved'
+        variant: secondary-white
+        disabled: false
+        icon_first: false
+        mobile_width: false
+        border_radius: default
+    -
+      parent_uuid: f9e8a314-b208-4415-9b32-c692152e592c
+      slot: content
+      uuid: bf2861ae-05e9-46e1-96e8-6a55977d3ea0
+      component_id: sdc.caresphere_theme.section-grid
+      inputs:
+        grid_layout: 1_column
+        is_small_container: false
+    -
+      parent_uuid: bf2861ae-05e9-46e1-96e8-6a55977d3ea0
+      slot: slot_1
+      uuid: d23a7f8e-eff5-40ba-8315-5791ed6284ea
+      component_id: sdc.caresphere_theme.image
+      inputs:
+        size: '16:9'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 153d0922-a446-4a2e-abf3-f9ac43faff9b
+            target_type: media
+        radius: small
+        border_radius: 8
+  path:
+    -
+      alias: /news-story
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

@@ -1,0 +1,43 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - bootstrap_barrio
+label: Figure
+id: sdc.bootstrap_barrio.figure
+source: sdc
+source_local_id: 'bootstrap_barrio:figure'
+provider: bootstrap_barrio
+active_version: 7b5535ad9998976a
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        image_url:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        caption:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        rounded:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value: null
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        image:
+          title: Image

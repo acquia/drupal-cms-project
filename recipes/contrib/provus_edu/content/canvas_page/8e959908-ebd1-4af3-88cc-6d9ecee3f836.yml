@@ -1,0 +1,455 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 8e959908-ebd1-4af3-88cc-6d9ecee3f836
+  default_langcode: en
+  depends:
+    37c890a1-1700-4ebd-97de-65ad845928fd: file
+    37382dc2-912f-4475-a4d0-9bbb1562f5dd: media
+    9db2dd07-c860-4348-8fac-0eaa7808fa10: file
+    f5a46e7c-eb66-45e5-b627-c87133f234b3: media
+    587f8016-1748-49f1-b83a-b574d31d690b: file
+    52246ead-00dc-46b7-b223-6bd51d32f630: media
+    a49f4d88-b61f-446e-a0b9-550437d82aa7: file
+    efec4080-4870-4e13-9330-b6c5d8228804: media
+    187369f4-f147-4578-8014-b6f1626fd195: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Academic Programs'
+  description:
+    -
+      value: 'Explore degree and certificate programs that match your goals and ambitions'
+  components:
+    -
+      uuid: 229ae24d-1963-4254-83cc-227a0dab2b17
+      component_id: sdc.provus_base_theme.hero_banner
+      inputs:
+        title: 'Finding the Right Education for You'
+        body:
+          value: '<p><strong>Explore degree and certificate programs that match your goals and ambitions</strong></p>'
+          format: canvas_full_html
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 37382dc2-912f-4475-a4d0-9bbb1562f5dd
+            target_type: media
+        is_short_banner: true
+        image_position: full
+        background_color: primary
+        text_container_width: col-lg-6
+        text_alignment: left
+    -
+      parent_uuid: 229ae24d-1963-4254-83cc-227a0dab2b17
+      slot: hero_banner_buttons
+      uuid: c47745d4-66c7-466c-bb97-8c36b8aa6085
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Apply Now'
+        url:
+          uri: 'internal:/admissions'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: auto
+    -
+      parent_uuid: 229ae24d-1963-4254-83cc-227a0dab2b17
+      slot: hero_banner_buttons
+      uuid: 676e2f5f-0e46-474d-98c8-26dac075c9f1
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Explore Programs'
+        url:
+          uri: 'internal:/academics/programs'
+          options: {  }
+        variant: secondary
+        id: my-button
+        size: normal
+        width: auto
+    -
+      uuid: 1a462c81-c163-422d-b95a-8788785ad965
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        justify_content: justify-content-center
+        custom_class: bg-grey
+    -
+      parent_uuid: 1a462c81-c163-422d-b95a-8788785ad965
+      slot: content
+      uuid: 7af1f7bc-8e96-4b40-a298-6b09ae214f8e
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: 7af1f7bc-8e96-4b40-a298-6b09ae214f8e
+      slot: column_1
+      uuid: c0d2dd27-9de8-4691-a909-1013b8a7cca0
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Program Overview'
+        decorative_line: false
+        alignment: center
+    -
+      parent_uuid: 7af1f7bc-8e96-4b40-a298-6b09ae214f8e
+      slot: column_1
+      uuid: e785d3df-148c-47f8-b776-582e036b67dc
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p class="text-align-center">The BAS in Business program provides in-depth knowledge and hands-on experience in core business disciplines.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 7af1f7bc-8e96-4b40-a298-6b09ae214f8e
+      slot: column_1
+      uuid: cf5f8b96-dd9e-4763-abcf-186eae5f86cd
+      component_id: block.views_block.academic_programs-block_1
+      inputs:
+        label: 'Academic Programs'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      uuid: 4b6daa4a-7578-45af-8f2e-00855530156a
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        flex_enabled: true
+        padding_top: pt-5
+        padding_bottom: pb-5
+        container_type: container
+        align_items: align-items-center
+    -
+      parent_uuid: 4b6daa4a-7578-45af-8f2e-00855530156a
+      slot: content
+      uuid: 41cd25fc-95c4-4cbc-afc8-6976e9b2787f
+      component_id: sdc.provus_base_theme.two_column
+      inputs:
+        desktop_width: 50-50
+        tablet_width: 50-50
+        mobile_width: 100-100
+    -
+      parent_uuid: 41cd25fc-95c4-4cbc-afc8-6976e9b2787f
+      slot: column_1
+      uuid: 1bc3dc51-3117-4c1c-90f8-f0455e74ea5c
+      component_id: sdc.provus_base_theme.image
+      inputs:
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: f5a46e7c-eb66-45e5-b627-c87133f234b3
+            target_type: media
+        size: '4:3'
+        radius: rounded-0
+        margin_bottom: mb-0
+    -
+      parent_uuid: 41cd25fc-95c4-4cbc-afc8-6976e9b2787f
+      slot: column_2
+      uuid: 0cf72310-793c-4d0e-9ab3-e1ef19db9352
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Career Opportunities'
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 41cd25fc-95c4-4cbc-afc8-6976e9b2787f
+      slot: column_2
+      uuid: 798e2ee0-9127-43e1-b803-8bb2485e5012
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: "<p>Graduates of the BAS in Business are prepared for leadership roles in various industries, including:</p><p>✓ Marketing and Sales\L</p><p>✓ Human Resources\L</p><p>✓ Financial Analysis\L</p><p>✓ Entrepreneurial Ventures</p><p><strong>Median Salary: $70,000+ annually</strong> (varies by role and experience)</p>"
+          format: canvas_full_html
+    -
+      uuid: 89eb41a3-ed98-483f-8a0c-36cd8c1e8239
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        flex_enabled: true
+        padding_top: pt-5
+        padding_bottom: pb-5
+        container_type: container
+        align_items: align-items-center
+    -
+      parent_uuid: 89eb41a3-ed98-483f-8a0c-36cd8c1e8239
+      slot: content
+      uuid: b4e80f2d-8bc9-4a6f-a87d-d720d2c2e917
+      component_id: sdc.provus_base_theme.two_column
+      inputs:
+        desktop_width: 50-50
+        tablet_width: 50-50
+        mobile_width: 100-100
+    -
+      parent_uuid: b4e80f2d-8bc9-4a6f-a87d-d720d2c2e917
+      slot: column_1
+      uuid: 3efc7e5a-14fc-4ebc-a9cf-2938338c3814
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Admission Requirements'
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: b4e80f2d-8bc9-4a6f-a87d-d720d2c2e917
+      slot: column_1
+      uuid: 2710121a-2143-444e-9203-7b31e921e68f
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p>To qualify for the program, applicants must:<br><br>Hold an associate degree or have completed at least 60 transferable credits.<br>Submit official transcripts from previous institutions.<br>Complete an application and submit a personal statement.</p>'
+          format: canvas_full_html
+    -
+      parent_uuid: b4e80f2d-8bc9-4a6f-a87d-d720d2c2e917
+      slot: column_1
+      uuid: 252b3f8f-62c0-4af3-a718-147f5fd3ee0b
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Learn more about admissions'
+        url:
+          uri: 'internal:/admissions'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: auto
+    -
+      parent_uuid: b4e80f2d-8bc9-4a6f-a87d-d720d2c2e917
+      slot: column_2
+      uuid: 704a8523-4178-438c-9d86-5453922a2bd2
+      component_id: sdc.provus_base_theme.image
+      inputs:
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 52246ead-00dc-46b7-b223-6bd51d32f630
+            target_type: media
+        size: '4:3'
+        radius: rounded-0
+        margin_bottom: mb-0
+    -
+      uuid: 7cc9054c-002e-4b4c-8b03-eaaeb713f4cc
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        custom_class: bg-plus
+    -
+      parent_uuid: 7cc9054c-002e-4b4c-8b03-eaaeb713f4cc
+      slot: content
+      uuid: 09f751bb-9b93-4f4a-9372-c8c82c3073a2
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: 09f751bb-9b93-4f4a-9372-c8c82c3073a2
+      slot: column_1
+      uuid: 3f5eeb11-ffac-4f65-bb45-1ccd7e6c88b6
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Success Stories'
+        decorative_line: false
+        alignment: center
+    -
+      parent_uuid: 09f751bb-9b93-4f4a-9372-c8c82c3073a2
+      slot: column_1
+      uuid: 72f7accf-5e38-46d5-9f82-1dc6eb1cf34f
+      component_id: sdc.provus_base_theme.testimonial
+      inputs:
+        display_type: right
+        name: 'Alex Johnson'
+        role: 'Class of 2023'
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: efec4080-4870-4e13-9330-b6c5d8228804
+            target_type: media
+        body: 'The BAS in Business Management program gave me the skills and confidence to move into a leadership role at my company. The support from faculty and the flexible course schedule made it possible for me to achieve my goals while working full-time.'
+    -
+      uuid: f5d61f99-f071-44c8-a134-52133b9ddcc0
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        padding_top: pt-5
+        padding_bottom: pb-5
+    -
+      parent_uuid: f5d61f99-f071-44c8-a134-52133b9ddcc0
+      slot: content
+      uuid: 2de35e87-873b-4309-8694-6a327bfb21ab
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: 2de35e87-873b-4309-8694-6a327bfb21ab
+      slot: column_1
+      uuid: 0af84e71-a81d-4f78-b05d-8fac5e465887
+      component_id: sdc.provus_base_theme.cta
+      inputs:
+        title: 'Become a Member'
+        body:
+          value: '<p>Join our student community today and unlock member perks. Get updates, useful resources, and invites to exclusive sessions. Meet peers, share ideas, and build skills together every week. Sign up now and belong with us.</p>'
+          format: canvas_full_html
+        background_color: Secondary
+    -
+      parent_uuid: 0af84e71-a81d-4f78-b05d-8fac5e465887
+      slot: cta_footer
+      uuid: 35b8a1a2-b974-48c9-90f6-e3cc9cd01486
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Apply now'
+        url:
+          uri: 'internal:/admissions'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: auto
+  path:
+    -
+      alias: /academics/programs
+      langcode: en
+  image:
+    -
+      entity: 187369f4-f147-4578-8014-b6f1626fd195
+  revision_translation_affected:
+    -
+      value: true

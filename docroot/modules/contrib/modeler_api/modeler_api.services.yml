@@ -1,0 +1,112 @@
+services:
+
+  modeler_api.service:
+    class: Drupal\modeler_api\Api
+    arguments:
+      - '@current_user'
+      - '@plugin.manager.modeler_api.model_owner'
+      - '@plugin.manager.modeler_api.modeler'
+      - '@config.factory'
+      - '@config.storage.export'
+      - '@file_system'
+      - '@plugin.manager.menu.link'
+      - '@plugin.manager.modeler_api.context'
+      - '@plugin.manager.modeler_api.dependency'
+      - '@plugin.manager.modeler_api.template_token'
+      - '@modeler_api.context_list_builder'
+      - '@modeler_api.dependency_list_builder'
+      - '@modeler_api.template_token_list_builder'
+      - !service_closure '@entity_type.manager'
+      - !service_closure '@router.route_provider'
+      - !service_closure '@token'
+      - !service_closure '@?token.tree_builder'
+
+  logger.channel.modeler_api:
+    parent: logger.channel_base
+    arguments:
+      - 'modeler_api'
+
+  modeler_api.export.recipe:
+    class: Drupal\modeler_api\ExportRecipe
+    arguments:
+      - '@config.storage.export'
+      - '@file_system'
+      - '@extension.list.module'
+      - '@messenger'
+      - '@modeler_api.service'
+
+  modeler_api.update:
+    class: Drupal\modeler_api\Update
+    arguments:
+      - '@entity_type.manager'
+      - '@messenger'
+      - '@plugin.manager.modeler_api.model_owner'
+
+  plugin.manager.modeler_api.model_owner:
+    class: Drupal\modeler_api\Plugin\ModelOwnerPluginManager
+    parent: default_plugin_manager
+
+  plugin.manager.modeler_api.modeler:
+    class: Drupal\modeler_api\Plugin\ModelerPluginManager
+    parent: default_plugin_manager
+
+  plugin.manager.modeler_api.context:
+    class: Drupal\modeler_api\Plugin\ContextPluginManager
+    arguments:
+      - '@module_handler'
+      - '@cache.discovery'
+
+  plugin.manager.modeler_api.dependency:
+    class: Drupal\modeler_api\Plugin\DependencyPluginManager
+    arguments:
+      - '@module_handler'
+      - '@cache.discovery'
+
+  plugin.manager.modeler_api.template_token:
+    class: Drupal\modeler_api\Plugin\TemplateTokenPluginManager
+    arguments:
+      - '@module_handler'
+      - '@cache.discovery'
+
+  modeler_api.context_list_builder:
+    class: Drupal\modeler_api\ContextListBuilder
+    arguments:
+      - '@plugin.manager.modeler_api.context'
+      - '@module_handler'
+
+  modeler_api.dependency_list_builder:
+    class: Drupal\modeler_api\DependencyListBuilder
+    arguments:
+      - '@plugin.manager.modeler_api.dependency'
+      - '@module_handler'
+
+  modeler_api.template_token_list_builder:
+    class: Drupal\modeler_api\TemplateTokenListBuilder
+    arguments:
+      - '@plugin.manager.modeler_api.template_token'
+      - '@module_handler'
+
+  modeler_api.template_token_resolver:
+    class: Drupal\modeler_api\TemplateTokenResolver
+    arguments:
+      - '@plugin.manager.modeler_api.template_token'
+      - '@plugin.manager.modeler_api.model_owner'
+      - '@entity_type.manager'
+      - '@modeler_api.service'
+
+  modeler_api.param_converter:
+    class: Drupal\modeler_api\ModelerApiConverter
+    tags:
+      - { name: paramconverter }
+
+  # Fix autowiring for Hooks\EntityHooks.
+  Drupal\modeler_api\Api: '@modeler_api.service'
+  Drupal\modeler_api\Plugin\ModelOwnerPluginManager: '@plugin.manager.modeler_api.model_owner'
+  Drupal\modeler_api\Plugin\ModelerPluginManager: '@plugin.manager.modeler_api.modeler'
+  Drupal\modeler_api\Plugin\ContextPluginManager: '@plugin.manager.modeler_api.context'
+  Drupal\modeler_api\Plugin\DependencyPluginManager: '@plugin.manager.modeler_api.dependency'
+  Drupal\modeler_api\Plugin\TemplateTokenPluginManager: '@plugin.manager.modeler_api.template_token'
+  Drupal\modeler_api\ContextListBuilder: '@modeler_api.context_list_builder'
+  Drupal\modeler_api\DependencyListBuilder: '@modeler_api.dependency_list_builder'
+  Drupal\modeler_api\TemplateTokenListBuilder: '@modeler_api.template_token_list_builder'
+  Drupal\modeler_api\TemplateTokenResolver: '@modeler_api.template_token_resolver'

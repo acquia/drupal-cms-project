@@ -1,0 +1,125 @@
+{% set button_variant = variant|default('primary') %}
+{% set button_size = size|default('medium') %}
+{% set is_disabled = disabled|default(false) %}
+{% set has_icon = icon is not empty %}
+
+{% set button_variants =
+  html_cva(
+    base: [
+      'group flex items-center justify-center transition duration-300 ease-in-out',
+      'rounded-lg leading-tight font-medium',
+      'cursor-pointer no-underline outline-none hover:no-underline',
+      'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
+      'disabled:pointer-events-none disabled:opacity-50'
+    ],
+    variants: {
+      size: {
+        small: 'gap-1 px-4 py-2 text-sm xl:py-2.5 xl:text-md',
+        medium: 'gap-2 px-5 py-2 text-md xl:py-3 xl:text-lg',
+        large: 'gap-3 px-6 py-3 text-lg xl:py-3.5 xl:text-xl'
+      },
+      variant: {
+        primary: ['bg-primary text-primary-foreground duration-300 ease-in-out hover:bg-primary/85'],
+        secondary: ['bg-accent text-accent-foreground duration-300 ease-in-out hover:bg-accent/80'],
+        'primary-inverted': ['bg-primary-foreground text-primary duration-300 ease-in-out hover:bg-primary-foreground/85'],
+        'secondary-inverted': ['border border-accent bg-accent-foreground text-accent duration-300 ease-in-out hover:bg-accent-foreground/80']
+      },
+      width: {
+        full: 'w-full sm:w-fit',
+        fit: 'w-fit'
+      },
+      iconPosition: {
+        first: 'flex-row',
+        last: 'flex-row-reverse'
+      }
+    }
+  )
+%}
+
+{% set icon_size_map = {
+  small: 'extra-extra-small',
+  medium: 'extra-small',
+  large: 'small'
+} %}
+
+{% set button_width = mobile_width|default(false) ? 'full' : 'fit' %}
+{% set icon_position = icon_first|default(false) ? 'first' : 'last' %}
+{% set icon_classes = 'transition duration-300 ease-in-out group-hover:translate-x-1' %}
+
+{# Normalize btn_classes - handle both array and string formats #}
+{% set additional_classes = btn_classes|default('') %}
+{% if additional_classes is iterable %}
+  {% set additional_classes = additional_classes|join(' ') %}
+{% endif %}
+
+{# If href is provided and button is not disabled, present a link; otherwise render a button #}
+{% set disabled_attr = is_disabled ? 'aria-disabled="true"' : '' %}
+{% set button_disabled_attr = is_disabled ? 'disabled' : '' %}
+{% set href = disabled|default(false) ? null : href %}
+
+{% if href %}
+  <a
+    href="{{ href }}"
+    class="{{
+    button_variants.apply(
+      {
+        size: button_size,
+        variant: button_variant,
+        width: button_width,
+        iconPosition: has_icon ? icon_position : 'last'
+      },
+      additional_classes
+    )
+    }}"
+    {{ disabled_attr }}
+  >
+    {% if has_icon %}
+      <span class="{{ icon_classes }}">
+        {{
+          include(
+            '@mercury/components/icon/icon.twig',
+            {
+              weight: 'bold',
+              icon: icon,
+              icon_size: icon_size_map[button_size]
+            },
+            with_context: false
+          )
+        }}
+      </span>
+    {% endif %}
+    {{ label }}
+  </a>
+{% else %}
+  <button
+    class="{{
+    button_variants.apply(
+      {
+        size: button_size,
+        variant: button_variant,
+        width: button_width,
+        iconPosition: has_icon ? icon_position : 'last'
+      },
+      additional_classes
+    )
+    }}"
+    {{ button_disabled_attr }}
+  >
+    {% if has_icon %}
+      <span class="{{ icon_classes }}">
+        {{
+          include(
+            '@mercury/components/icon/icon.twig',
+            {
+              weight: 'bold',
+              icon: icon,
+              icon_size: icon_size_map[button_size]
+            },
+            with_context: false
+          )
+        }}
+      </span>
+    {% endif %}
+    {{ label }}
+  </button>
+{% endif %}

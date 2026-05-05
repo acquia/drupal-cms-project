@@ -1,0 +1,52 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - provus_base_theme
+label: 'List (Div) Container'
+id: sdc.provus_base_theme.list_div
+source: sdc
+source_local_id: 'provus_base_theme:list_div'
+provider: provus_base_theme
+active_version: b88afa86786a6783
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        list_style:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: icon-left
+          expression: ℹ︎list_string␟value
+        list_orientation:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: stacked
+          expression: ℹ︎list_string␟value
+        content_attributes:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        list_items:
+          title: 'List items'
+          description: 'List item components placed inside the list container'

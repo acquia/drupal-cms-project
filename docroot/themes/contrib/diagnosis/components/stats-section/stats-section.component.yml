@@ -1,0 +1,236 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Stats Section
+group: Layout
+libraryOverrides:
+  css:
+    stats-section.css: {}
+props:
+  type: object
+  required:
+    - content_heading
+    - stat1_value
+    - stat1_label
+  properties:
+    content_heading:
+      type: string
+      title: Content heading
+      examples:
+        - "Our Impact"
+    content_body:
+      type: string
+      title: Content body
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - "<p>We're making a difference in communities across the country.</p>"
+    content_button_url:
+      type: string
+      title: Button URL
+      examples:
+        - "#"
+    content_button_text:
+      type: string
+      title: Button text
+      examples:
+        - "Learn More"
+    content_button_variant:
+      type: string
+      title: Button style
+      enum:
+        - primary
+        - secondary
+        - primary-inverted
+        - secondary-inverted
+      meta:enum:
+        primary: Primary
+        secondary: Secondary
+        primary-inverted: Primary inverted
+        secondary-inverted: Secondary inverted
+      default: primary
+    content_button_size:
+      type: string
+      title: Button size
+      enum:
+        - small
+        - medium
+        - large
+      meta:enum:
+        small: Small
+        medium: Medium
+        large: Large
+      default: medium
+    content_button_icon:
+      type: string
+      title: Button icon
+      enum:
+        - arrow-right
+        - arrow-left
+        - caret-right
+        - caret-left
+        - download
+        - user-plus
+      meta:enum:
+        arrow-right: Arrow right
+        arrow-left: Arrow left
+        caret-right: Caret right
+        caret-left: Caret left
+        download: Download
+        user-plus: User plus
+    content_button_icon_first:
+      type: boolean
+      title: Display icon first
+      default: false
+    content_button_mobile_width:
+      type: boolean
+      title: Full width on mobile
+      default: false
+    content_background:
+      type: string
+      title: Content card background
+      enum:
+        - default
+        - accent
+        - primary
+        - muted
+        - bright
+        - light
+        - inverted
+      meta:enum:
+        default: Default
+        accent: Accent
+        primary: Primary
+        muted: Muted
+        bright: Bright
+        light: Light
+        inverted: Inverted
+      default: default
+    stat1_value:
+      type: string
+      title: Stat 1 - Value
+      examples:
+        - "10K+"
+    stat1_label:
+      type: string
+      title: Stat 1 - Label
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - "<p>Happy Customers</p>"
+    stat1_background:
+      type: string
+      title: Stat 1 - Background
+      enum:
+        - default
+        - accent
+        - primary
+        - muted
+        - bright
+        - light
+        - inverted
+      meta:enum:
+        default: Default
+        accent: Accent
+        primary: Primary
+        muted: Muted
+        bright: Bright
+        light: Light
+        inverted: Inverted
+      default: accent
+    stat2_value:
+      type: string
+      title: Stat 2 - Value
+      examples:
+        - "500+"
+    stat2_label:
+      type: string
+      title: Stat 2 - Label
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - "<p>Projects Completed</p>"
+    stat2_background:
+      type: string
+      title: Stat 2 - Background
+      enum:
+        - default
+        - accent
+        - primary
+        - muted
+        - bright
+        - light
+        - inverted
+      meta:enum:
+        default: Default
+        accent: Accent
+        primary: Primary
+        muted: Muted
+        bright: Bright
+        light: Light
+        inverted: Inverted
+      default: primary
+    stat3_value:
+      type: string
+      title: Stat 3 - Value
+      examples:
+        - "50+"
+    stat3_label:
+      type: string
+      title: Stat 3 - Label
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - "<p>Team Members</p>"
+    stat3_background:
+      type: string
+      title: Stat 3 - Background
+      enum:
+        - default
+        - accent
+        - primary
+        - muted
+        - bright
+        - light
+        - inverted
+      meta:enum:
+        default: Default
+        accent: Accent
+        primary: Primary
+        muted: Muted
+        bright: Bright
+        light: Light
+        inverted: Inverted
+      default: default
+    margin_block_start:
+      type: string
+      title: Margin top
+      enum:
+        - "0"
+        - "8"
+        - "20"
+        - "32"
+        - "48"
+        - "64"
+        - "96"
+        - "128"
+      examples:
+        - "48"
+    margin_block_end:
+      type: string
+      title: Margin bottom
+      enum:
+        - "0"
+        - "8"
+        - "20"
+        - "32"
+        - "48"
+        - "64"
+        - "96"
+        - "128"
+      examples:
+        - "48"
+    rounded:
+      type: boolean
+      title: Rounded corners
+      default: true
+      examples:
+        - true

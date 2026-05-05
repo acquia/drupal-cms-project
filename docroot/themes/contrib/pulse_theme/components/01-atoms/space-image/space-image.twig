@@ -1,0 +1,67 @@
+{#
+/**
+ * @file
+ * Space Image Component.
+ *
+ * Props:
+ * - image: Object. Defines the image properties.
+ *   - src: String. Path to the image file.
+ *   - alt: String. Alternative text for the image.
+ *   - width: Integer. Width of the image.
+ *   - height: Integer. Height of the image.
+ *   Example:
+ *     src: '/themes/contrib/pulse_theme/components/01-atoms/space-image/images/city.jpeg'
+ *     alt: 'Image of a cityscape'
+ *     width: 600
+ *     height: 400
+ *
+ * - corners: String. Defines the corner radius of the image.
+ *   Options: 'none', 'round', 'round-md', 'round-lg', 'round-xl', 'round-2xl', 'round-3xl', 'round-full'.
+ *   default: 'none'.
+ *   Example: 'round-lg'.
+ *
+ * - image_caption: String. Optional caption text for the image.
+ *   default: null.
+ *   Example: 'A beautiful cityscape'.
+ *
+ * - extra_classes: String. Additional class names (space-separated) for custom styling.
+ *   Example: 'custom-shadow custom-border'.
+ */
+#}
+
+{% set image_classes = [
+  'image-el',
+  corners
+]| sort | join(' ') | trim %}
+
+{% set image_wrapper_classes = [
+  'image-wrapper',
+  extra_classes
+]| sort | join(' ') | trim %}
+
+{% if image_caption is not empty %}
+  <figure>
+    <div class="{{ image_wrapper_classes }}">
+      {% include 'canvas:image' ignore missing with {
+        src: image.src,
+        alt: image.alt|default('Image of ' ~ image_caption),
+        class: image_classes,
+        width: image.width,
+        height: image.height,
+        loading: loading|default('lazy')
+      } only %}
+    </div>
+    <figcaption class="mt-3">{{ '- ' }} {{ image_caption }}</figcaption>
+  </figure>
+{% else %}
+  <div class="{{ image_wrapper_classes }}">
+    {% include 'canvas:image' ignore missing with {
+      src: image.src,
+      alt: image.alt|default('Image of ' ~ image_caption),
+      class: image_classes,
+      width: image.width,
+      height: image.height,
+      loading: loading|default('lazy')
+    } only %}
+  </div>
+{% endif %}

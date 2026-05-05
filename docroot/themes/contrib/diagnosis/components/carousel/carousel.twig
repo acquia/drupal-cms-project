@@ -1,0 +1,63 @@
+{% set component_classes = component_classes|default('') %}
+{% set unique_id = 'carousel'|clean_unique_id %}
+{% set show_nav = show_navigation ?? true %}
+{% set show_pages = show_pagination ?? true %}
+
+{# Carousel container #}
+{% set carousel = html_cva(base: ['carousel', 'swiper', 'relative', 'w-full']) %}
+{% set carousel_classes = carousel.apply({}) %}
+
+<div
+  class="{{ carousel_classes }} {{ component_classes }}"
+  data-carousel-id="{{ unique_id }}"
+  role="region"
+  aria-roledescription="carousel"
+  aria-label="{{ aria_label|default('Carousel') }}"
+>
+  {# Swiper wrapper #}
+  <div class="swiper-wrapper">
+    {% block slides %}
+      {# Default example slides #}
+      {% embed 'diagnosis:carousel-slide' %}
+        {% block slide_content %}
+          <div class="bg-muted p-8 text-center">
+            <p class="text-lg">
+              Slide 1
+            </p>
+          </div>
+        {% endblock %}
+      {% endembed %}
+
+      {% embed 'diagnosis:carousel-slide' %}
+        {% block slide_content %}
+          <div class="bg-muted p-8 text-center">
+            <p class="text-lg">
+              Slide 2
+            </p>
+          </div>
+        {% endblock %}
+      {% endembed %}
+
+      {% embed 'diagnosis:carousel-slide' %}
+        {% block slide_content %}
+          <div class="bg-muted p-8 text-center">
+            <p class="text-lg">
+              Slide 3
+            </p>
+          </div>
+        {% endblock %}
+      {% endembed %}
+    {% endblock %}
+  </div>
+
+  {% if show_nav %}
+    {# Navigation buttons #}
+    <button class="carousel-button-prev swiper-button-prev" aria-label="Previous slide" type="button"></button>
+    <button class="carousel-button-next swiper-button-next" aria-label="Next slide" type="button"></button>
+  {% endif %}
+
+  {% if show_pages %}
+    {# Pagination #}
+    <div class="swiper-pagination carousel-pagination" role="group" aria-label="Carousel pagination"></div>
+  {% endif %}
+</div>

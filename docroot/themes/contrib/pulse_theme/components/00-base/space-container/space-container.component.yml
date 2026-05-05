@@ -1,0 +1,190 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+
+name: Space Container
+
+status: stable
+
+group: Base
+
+props:
+  type: object
+  properties:
+    background_color:
+      type: string
+      title: Background color
+      description: The background color of the container.
+      enum:
+        - transparent
+        - white
+        - black
+        - base-brand
+        - option-1
+        - option-2
+        - option-3
+        - option-4
+        - option-5
+        - option-6
+        - option-7
+        - option-8
+        - option-9
+        - option-10
+      meta:enum:
+        transparent: Transparent
+        white: White
+        black: Black
+        base-brand: Base Brand
+        option-1: Option 1
+        option-2: Option 2
+        option-3: Option 3
+        option-4: Option 4
+        option-5: Option 5
+        option-6: Option 6
+        option-7: Option 7
+        option-8: Option 8
+        option-9: Option 9
+        option-10: Option 10
+      default: transparent
+      examples:
+        - transparent
+
+    width:
+      type: string
+      title: Width
+      description: The width of the container.
+      enum:
+        - boxed-width
+        - full-width
+        - width-4xl
+        - width-5xl
+      meta:enum:
+        boxed-width: Box Width
+        full-width: Full Width
+        width-4xl: 4xl Width - 896px
+        width-5xl: 5xl Width - 1024px
+      default: full-width
+      examples:
+        - 'full-width'
+
+    padding_left:
+      type: string
+      title: Padding left
+      Description: The left padding of the container.
+      enum:
+        - none
+        - small
+        - medium
+        - large
+        - x-large
+      default: none
+      examples:
+        - 'none'
+
+    padding_right:
+      type: string
+      title: Padding right
+      Description: The right padding of the container.
+      enum:
+        - none
+        - small
+        - medium
+        - large
+        - x-large
+      default: none
+      examples:
+        - 'none'
+
+    padding_top:
+      type: string
+      title: Padding top
+      Description: The top padding of the container.
+      enum:
+        - none
+        - small
+        - medium
+        - large
+        - x-large
+      default: none
+      examples:
+        - 'none'
+
+    padding_bottom:
+      type: string
+      title: Padding bottom
+      Description: The bottom padding of the container.
+      enum:
+        - none
+        - small
+        - medium
+        - large
+        - x-large
+      default: none
+      examples:
+        - 'none'
+
+    margin_top:
+      type: string
+      title: Margin top
+      Description: The top margin of the container.
+      enum:
+        - none
+        - small
+        - medium
+        - large
+        - x-large
+      default: none
+      examples:
+        - 'none'
+
+    margin_bottom:
+      type: string
+      title: Margin bottom
+      Description: The bottom margin of the container.
+      enum:
+        - none
+        - small
+        - medium
+        - large
+        - x-large
+      default: none
+      examples:
+        - 'none'
+
+    background_pattern:
+      type: boolean
+      title: Background pattern
+      description: Whether the pattern is showing or not.
+      default: false
+      examples:
+        - false
+
+    pattern_image_position:
+      type: string
+      title: Background pattern position
+      description: Defines the position of the background pattern within the container (e.g., bottom-left, bottom-right, both corners, full width, or none).
+      enum:
+        - bottom-right
+        - bottom-left
+        - bottom-center
+        - both-bottom-right-left
+      meta:enum:
+        bottom-right: Bottom Right
+        bottom-left: Bottom Left
+        bottom-center: Bottom Center
+        both-bottom-right-left: Both - Bottom right & left
+      default: bottom-right
+      examples:
+        - 'bottom-right'
+
+    modifier_class:
+      type: string
+      title: Modifier class
+      description: Additional classes.
+
+  required:
+    - width
+
+slots:
+  content:
+    type: string
+    title: Content
+    description: Content slot.

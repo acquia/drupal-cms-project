@@ -1,0 +1,22 @@
+{% set content_attributes = create_attribute() %}
+
+{% set slot_icon %}{% block icon %}{% endblock %}{% endset %}
+
+{% set content_classes = [
+  'tab-content',
+  'border-base-300',
+  'bg-base-100',
+  'p-6',
+  prose_size ? 'prose ' ~ prose_size,
+] %}
+
+<label{{ attributes.addClass('tab') }}>
+  <input type="radio" />
+  {% if slot_icon|trim %}
+    {{ slot_icon }}
+  {% endif %}
+  {{ label|default('Tab') }}
+</label>
+<div{{ content_attributes.addClass(content_classes) }}>
+  {{ content }}
+</div>

@@ -1,0 +1,59 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.system_branding_block
+    - canvas.component.block.system_menu_block.main
+    - canvas.component.sdc.morphos.button
+    - canvas.component.sdc.morphos.modal
+    - canvas.component.sdc.morphos.navbar
+    - canvas.component.sdc.morphos.searchbox
+  module:
+    - link
+    - options
+  theme:
+    - morphos
+id: morphos.header
+region: header
+theme: morphos
+component_tree:
+  0:
+    uuid: 9be10750-d04b-4a93-93de-4c6869150f76
+    component_id: sdc.morphos.navbar
+    component_version: 4639908f76cc69ed
+    inputs: '{"palette":"color--standard"}'
+  '0:center:0':
+    parent_uuid: 9be10750-d04b-4a93-93de-4c6869150f76
+    slot: center
+    uuid: ad39b9a0-72c2-4bdb-b6bf-2ed24065ee69
+    component_id: block.system_menu_block.main
+    component_version: 023ff7ba63f80798
+    inputs: '{"label":"Main navigation","label_display":"0","level":"1","depth":"2","expand_all_items":true}'
+  '0:end:0':
+    parent_uuid: 9be10750-d04b-4a93-93de-4c6869150f76
+    slot: end
+    uuid: 3cc12336-7769-4ff3-a629-80f25253729c
+    component_id: sdc.morphos.modal
+    component_version: f3bea52a1de2618d
+    inputs: '{"placement":"modal-middle"}'
+  '0:end:0:action_item:0':
+    parent_uuid: 3cc12336-7769-4ff3-a629-80f25253729c
+    slot: action_item
+    uuid: 1ddf7579-104f-42b1-91f2-3a8fd1cee6fe
+    component_id: sdc.morphos.button
+    component_version: 9461b80f0eef1b1c
+    inputs: '{"text":"Search","icon":"magnifying-glass","size":"btn-lg","style":"btn-link","shape":"btn-square","label":"Search"}'
+  '0:end:0:box_items:0':
+    parent_uuid: 3cc12336-7769-4ff3-a629-80f25253729c
+    slot: box_items
+    uuid: e4d7e1dc-480d-493e-a99e-1e4830cff75c
+    component_id: sdc.morphos.searchbox
+    component_version: 9150172f17ac6229
+    inputs: '{"action_url":{"uri":"internal:\/search","options":[]},"method":"GET","query_name":"keywords","button_label":"Search","placeholder_icon":"magnifying-glass","placeholder_text":"What are you looking for?","size":"xl"}'
+  '0:start:0':
+    parent_uuid: 9be10750-d04b-4a93-93de-4c6869150f76
+    slot: start
+    uuid: 64f477cc-92f5-4ea4-a426-ea9ecf77661a
+    component_id: block.system_branding_block
+    component_version: b168140fdcaebae5
+    inputs: '{"label":"Site branding","label_display":"0","use_site_logo":true,"use_site_name":false,"use_site_slogan":false}'

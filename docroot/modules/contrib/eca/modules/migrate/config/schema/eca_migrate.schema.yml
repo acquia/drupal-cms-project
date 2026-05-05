@@ -1,0 +1,70 @@
+eca.event.plugin.migrate:idmap_message:
+  type: eca.event.plugin
+  label: 'Save message to ID map'
+
+eca.event.plugin.migrate:map_delete:
+  type: eca.event.plugin
+  label: 'Remove entry from migration map'
+
+eca.event.plugin.migrate:map_save:
+  type: eca.event.plugin
+  label: 'Save to migration map'
+
+eca.event.plugin.migrate:post_import:
+  type: eca.event.plugin
+  label: 'Migration import finished'
+
+eca.event.plugin.migrate:post_rollback:
+  type: eca.event.plugin
+  label: 'Migration rollback finished'
+
+eca.event.plugin.migrate:post_row_delete:
+  type: eca.event.plugin
+  label: 'Migration row deleted'
+
+eca.event.plugin.migrate:post_row_save:
+  type: eca.event.plugin
+  label: 'Migration row saved'
+
+eca.event.plugin.migrate:pre_import:
+  type: eca.event.plugin
+  label: 'Migration import started'
+
+eca.event.plugin.migrate:pre_rollback:
+  type: eca.event.plugin
+  label: 'Migration rollback started'
+
+eca.event.plugin.migrate:pre_row_delete:
+  type: eca.event.plugin
+  label: 'Deleting migration row'
+
+eca.event.plugin.migrate:pre_row_save:
+  type: eca.event.plugin
+  label: 'Saving migration row'
+
+action.configuration.eca_migrate_run_migration:
+  type: mapping
+  label: 'Configuration for the "Migrate: Run migration" action'
+  mapping:
+    migration_id:
+      type: string
+      label: 'Migration ID'
+    update:
+      type: boolean
+      label: 'Update existing records'
+
+action.configuration.eca_migrate_rollback_migration:
+  type: mapping
+  label: 'Configuration for the "Migrate: Rollback migration" action'
+  mapping:
+    migration_id:
+      type: string
+      label: 'Migration ID'
+
+action.configuration.eca_migrate_reset_migration:
+  type: mapping
+  label: 'Configuration for the "Migrate: Reset migration" action'
+  mapping:
+    migration_id:
+      type: string
+      label: 'Migration ID'

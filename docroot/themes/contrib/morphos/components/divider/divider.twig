@@ -1,0 +1,7 @@
+{% set classes = [
+  'divider',
+  color ? 'divider-' ~ color,
+  'has-rhythm',
+] %}
+
+<div{{ attributes.addClass(classes) }}>{{ text }}</div>

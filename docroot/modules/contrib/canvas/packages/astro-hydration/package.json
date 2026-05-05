@@ -1,0 +1,27 @@
+{
+  "name": "@drupal-canvas/astro-hydration",
+  "type": "module",
+  "version": "0.0.0",
+  "license": "GPL-2.0-or-later",
+  "scripts": {
+    "build": "npm run build:drupal-canvas && astro build && node extract-hydration-script.js",
+    "build:drupal-canvas": "npm run build --workspace=drupal-canvas",
+    "type-check": "tsc --noEmit --pretty"
+  },
+  "canvas": {
+    "//": "@see docs/adr/0008-astro-hydration-bundled-dependencies-as-external.md",
+    "buildOnly": ["astro", "@astrojs/preact"]
+  },
+  "dependencies": {
+    "@astrojs/preact": "^4.0.3",
+    "@tailwindcss/typography": "^0.5.19",
+    "astro": "^5.6.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "drupal-canvas": "^0.3.1",
+    "drupal-jsonapi-params": "^2.3.2",
+    "preact": "^10.25.4",
+    "swr": "^2.3.7",
+    "tailwind-merge": "^3.0.2"
+  }
+}

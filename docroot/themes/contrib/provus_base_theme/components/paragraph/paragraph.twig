@@ -1,0 +1,23 @@
+{% set text_color = text_color|default('none') %}
+{% set text_rendered = text is iterable ? text|render : text|default('') %}
+{% set text_markup = text_rendered|lower %}
+{% set has_block_tags = text_markup matches '/<\\s*(p|div|ul|ol|blockquote)\\b/' %}
+{% set wrapper_tag = has_block_tags ? 'div' : 'p' %}
+{% set classes = [
+    'paragraph',
+    text_color != 'none' ? text_color : '',
+    margin_all,
+    margin_top,
+    margin_bottom,
+    margin_start,
+    margin_end,
+    padding_all,
+    padding_top,
+    padding_bottom,
+    padding_start,
+    padding_end,
+] %}
+
+<{{ wrapper_tag }}{{ attributes.addClass(classes) }}>
+  {{ text_rendered }}
+</{{ wrapper_tag }}>

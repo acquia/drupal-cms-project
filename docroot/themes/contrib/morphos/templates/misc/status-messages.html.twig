@@ -1,0 +1,67 @@
+{#
+/**
+ * @file
+ * Default theme implementation for status messages.
+ *
+ * Displays status, error, and warning messages, grouped by type.
+ *
+ * An invisible heading identifies the messages for assistive technology.
+ * Sighted users see a colored box. See https://www.w3.org/TR/WCAG-TECHS/H69.html
+ * for info.
+ *
+ * Add an ARIA label to the contentinfo area so that assistive technology
+ * user agents will better describe this landmark.
+ *
+ * Available variables:
+ * - message_list: List of messages to be displayed, grouped by type.
+ * - status_headings: List of all status types.
+ * - attributes: HTML attributes for the element, including:
+ *   - class: HTML classes.
+ */
+#}
+{% set icon_type = {
+  'success': 'check-circle',
+  'warning': 'warning-circle',
+  'error': 'x-circle',
+  'info': 'info',
+} %}
+
+<div data-drupal-messages>
+  {% for type, messages in message_list %}
+    {% set message_type = type in ['error', 'warning', 'status'] ? (type == 'status' ? 'success' : type) : 'info' %}
+    {% set classes = [
+      'messages',
+      'messages--' ~ message_type,
+      'color--' ~ message_type,
+    ] %}
+
+    <div{{ attributes|without('role', 'aria-label')
+      .addClass(classes)
+      .setAttribute('role', 'contentinfo')
+      .setAttribute('aria-label', status_headings[type]) }}>
+      <div class="messages__container container mx-auto">
+        {% for message in messages %}
+          {% embed 'morphos:alert' with {
+            message,
+            icon: icon_type[message_type],
+            color: 'color--' ~ message_type,
+            additional_classes: ['message', 'rounded-none', 'border-none', 'shadow-none'],
+          } %}
+            {% block buttons %}
+              {{ include('morphos:button', {
+                label: 'Close',
+                icon: 'x',
+                size: 'btn-xs',
+                style: 'btn-ghost',
+                shape: 'btn-circle',
+                additional_classes: ['message__close', 'alert__close'],
+              },
+                with_context: false
+              ) }}
+            {% endblock %}
+          {% endembed %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+</div>

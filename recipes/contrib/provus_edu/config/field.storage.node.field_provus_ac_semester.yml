@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_provus_ac_semester
+field_name: field_provus_ac_semester
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: fall
+      label: 'Fall Semester'
+    -
+      value: semester
+      label: 'Semester Semester'
+    -
+      value: first
+      label: 'First Semester'
+    -
+      value: second
+      label: 'Second Semester'
+    -
+      value: third
+      label: 'Third Semester'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

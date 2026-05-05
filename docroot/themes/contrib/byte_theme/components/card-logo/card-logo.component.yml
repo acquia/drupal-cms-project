@@ -1,0 +1,47 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Logo card
+description: A component with an image and optional background and link.
+group: Card
+props:
+  type: object
+  properties:
+    media:
+      $ref: json-schema-definitions://canvas.module/image
+      type: object
+      title: Logo
+      examples:
+        - src: "assets/dark.png"
+          alt: "Placeholder brand logo"
+          width: 188
+          height: 113
+    background_color:
+      type: string
+      title: Background color
+      enum:
+        - primary
+        - secondary
+        - accent
+        - muted
+      meta:enum:
+        primary: Primary
+        secondary: Secondary
+        accent: Accent
+        muted: Muted
+        inverted: Inverted
+    border_radius:
+      type: string
+      title: Border radius
+      enum:
+        - small
+        - medium
+        - large
+      meta:enum:
+        small: Small
+        medium: Medium
+        large: Large
+      default: small
+      examples:
+        - small
+    url:
+      type: string
+      title: Link

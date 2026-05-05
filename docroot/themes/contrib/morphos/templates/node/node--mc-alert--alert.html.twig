@@ -1,0 +1,35 @@
+{{ attach_library('morphos/alert_banner') }}
+
+{% set alert_id = node.id %}
+{% set alert_type = content.field_mc_alert_type[0]['#markup']|lower ?: 'info' %} 
+
+{% set classes = [
+  'alert-banner',
+  'color--' ~ alert_type,
+  'hidden',
+] %}
+
+{# We add data-alert-id to identify this specific message #}
+<div {{ attributes.addClass(classes).setAttribute('data-alert-id', alert_id) }}>
+  <div class="container mx-auto">
+    {% embed 'morphos:alert' with {
+      message: content.field_mc_content,
+      icon: content.field_mc_icon[0]['#icon_id'] ?? 'info',
+      color: 'color--' ~ alert_type,
+      additional_classes: ['alert-banner__alert', 'rounded-none', 'border-none', 'shadow-none'],
+    } %}
+      {% block buttons %}
+        {{ include('morphos:button', {
+          label: 'Close',
+          icon: 'x',
+          size: 'btn-xs',
+          style: 'btn-ghost',
+          shape: 'btn-circle',
+          additional_classes: ['alert-banner__btn-close'],
+        },
+          with_context: false
+        ) }}
+      {% endblock %}
+    {% endembed %}
+  </div> 
+</div>

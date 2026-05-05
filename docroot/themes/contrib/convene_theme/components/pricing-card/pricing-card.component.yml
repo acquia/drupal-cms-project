@@ -1,0 +1,33 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Pricing Card
+group: Molecules
+status: stable
+description: An individual simple pricing card component with a light grey background and text props.
+props:
+  type: object
+  properties:
+    admin_theme:
+      title: Admin Theme
+      type: boolean
+      default: false
+      description: Check to enable Admin Theme styles (applies CSS only on frontend to preserve Canvas builder look).
+    title:
+      title: Title (e.g., 'Early bird')
+      type: string
+    description:
+      title: Description (e.g., 'Limited availability...')
+      type: string
+    price:
+      title: Price (e.g., '$99')
+      type: string
+slots:
+  action:
+    title: Action Slot
+    description: Slot for the action button (e.g., 'Book now').
+  features:
+    title: Features Slot
+    description: Slot for the unordered list (<ul>) of features. Will be styled with checkmarks automatically.
+library:
+  css:
+    component:
+      pricing-card.css: {}

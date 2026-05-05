@@ -1,0 +1,437 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: All props
+props:
+  type: object
+  required:
+    - test_REQUIRED_string
+    - test_REQUIRED_string_format_uri
+    - test_REQUIRED_string_html_inline
+    - test_REQUIRED_string_html_block
+    - test_REQUIRED_string_html
+    - test_REQUIRED_string_format_uri_reference_web_links
+  properties:
+    test_bool_default_false:
+      title: 'Bool (default false)'
+      description: 'This is the description of Bool (default false)'
+      type: boolean
+      examples:
+        - false
+    test_bool_default_true:
+      title: 'Bool (default true)'
+      description: 'This is the description of Bool (default true)'
+      type: boolean
+      examples:
+        - true
+    test_string:
+      title: 'String — single line'
+      description: 'This is the description of String — single line'
+      type: string
+      # Implied pattern:
+      #pattern: '.''
+      examples:
+        - "Hello, world!"
+    test_string_multiline:
+      title: 'String — multi-line'
+      description: 'This is the description of String — multi-line'
+      type: string
+      # @see https://json-schema.org/understanding-json-schema/reference/regular_expressions
+      pattern: '(.|\r?\n)*'
+      # This pattern needs to match the pattern added in
+      # \Drupal\canvas\Plugin\Field\FieldTypeOverride\StringLongItemOverride::propertyDefinitions.
+      examples:
+        - "Hello,\nmultiline\nworld!"
+    test_REQUIRED_string:
+      title: 'String (required)'
+      description: 'This is the description of String (required)'
+      type: string
+      examples:
+        - Hello, required world!
+    test_string_enum:
+      title: 'String - Enum'
+      description: 'This is the description of String - Enum'
+      type: string
+      enum:
+        - foo
+        - bar
+      meta:enum:
+        foo: Foo
+        bar: Bar
+      examples:
+        - foo
+    test_integer_enum:
+      title: 'Integer - Enum'
+      description: 'This is the description of Integer - Enum'
+      type: integer
+      enum:
+        - 1
+        - 2
+      meta:enum:
+        1: 1
+        2: 2
+      examples:
+        - 1
+
+    # Built-in formats: dates and times
+    # @see https://json-schema.org/understanding-json-schema/reference/string#dates-and-times
+    test_string_format_date_time:
+      title: 'String, format=date-time'
+      description: 'This is the description of String, format=date-time'
+      type: string
+      format: date-time
+      examples:
+        - '2016-09-16T20:20:39+00:00'
+    test_string_format_date:
+      title: 'String, format=date'
+      description: 'This is the description of String, format=date'
+      type: string
+      format: date
+      examples:
+        - '2018-11-13'
+    test_string_format_time:
+      title: 'String, format=time'
+      description: 'This is the description of String, format=time'
+      type: string
+      format: time
+      examples:
+        - '20:20:39'
+        # @todo 🐛 This is copy/pasted from https://json-schema.org/understanding-json-schema/reference/string#dates-and-times but is refused by justinrainbow/json-schema!
+        # - '20:20:39+00:00'
+    test_string_format_duration:
+      title: 'String, format=duration'
+      description: 'This is the description of String, format=duration'
+      type: string
+      format: duration
+    # Built-in formats: email addresses.
+    # @see https://json-schema.org/understanding-json-schema/reference/string#email-addresses
+    test_string_format_email:
+      title: 'String, format=email'
+      description: 'This is the description of String, format=email'
+      type: string
+      format: email
+      examples:
+        - hello@example.com
+    test_string_format_idn_email:
+      title: 'String, format=idn-email'
+      description: 'This is the description of String, format=idn-email'
+      type: string
+      format: idn-email
+      examples:
+        - hello@idn.example.com
+    # Built-in formats: hostnames.
+    # @see https://json-schema.org/understanding-json-schema/reference/string#hostnames
+    test_string_format_hostname:
+      title: 'String, format=hostname'
+      description: 'This is the description of String, format=hostname'
+      type: string
+      format: hostname
+    test_string_format_idn_hostname:
+      title: 'String, format=date-time'
+      description: 'This is the description of String, format=date-time'
+      type: string
+      format: idn-hostname
+    # Built-in formats: IP addresses.
+    # @see https://json-schema.org/understanding-json-schema/reference/string#ip-addresses
+    test_string_format_ipv4:
+      title: 'String, format=ipv4'
+      description: 'This is the description of String, format=ipv4'
+      type: string
+      format: ipv4
+    test_string_format_ipv6:
+      title: 'String, format=ipv6'
+      description: 'This is the description of String, format=ipv6'
+      type: string
+      format: ipv6
+    # Built-in formats: resource identifiers.
+    # @see https://json-schema.org/understanding-json-schema/reference/string#resource-identifiers
+    test_string_format_uuid:
+      title: 'String, format=uuid'
+      description: 'This is the description of String, format=uuid'
+      type: string
+      format: uuid
+    test_REQUIRED_string_format_uri:
+      title: 'String, format=uri (required)'
+      description: 'This is the description of String, format=uri (required)'
+      type: string
+      format: uri
+      examples:
+        - https://uri.example.com
+    test_REQUIRED_string_format_uri_reference_web_links:
+      title: 'String, format=uri-reference, x-allowed-schemes: [http, https] (required)'
+      description: 'This is the description of String, format=uri-reference, x-allowed-schemes: [http, https] (required)'
+      type: string
+      format: uri-reference
+      x-allowed-schemes:
+        - http
+        - https
+      examples:
+        - https://uri.example.com
+        - /my-account
+    test_string_format_uri:
+      title: 'String, format=uri'
+      description: 'This is the description of String, format=uri'
+      type: string
+      format: uri
+      examples:
+        - https://uri.example.com
+    test_string_format_uri_image:
+      title: 'String, format=uri, relative or absolute images only — using contentMediaType=image/* directly'
+      description: 'This is the description of String, format=uri, relative or absolute images only — using contentMediaType=image/* directly'
+      type: string
+      format: uri-reference
+      contentMediaType: image/*
+      # @see https://github.com/json-schema-org/json-schema-spec/issues/1557
+      x-allowed-schemes: [http, https]
+    test_string_format_uri_image_using_ref:
+      title: 'String, format=uri, relative or absolute images only — using $ref'
+      description: 'This is the description of String, format=uri, relative or absolute images only — using $ref'
+      $ref: json-schema-definitions://canvas.module/image-uri
+      # @todo Remove in https://www.drupal.org/project/drupal/issues/3352063 — should not be necessary, but removing this causes \Drupal\Core\Theme\Component\ComponentMetadata::parseSchemaInfo() to generate `type = ['', 'object'] 🐛
+      type: string
+      # ⚠️ The reference above is equivalent to:
+      # type: string
+      # format: uri-reference
+      # contentMediaType: image/*
+      # x-allowed-schemes: [http, https]
+    test_string_format_uri_public_stream_wrapper:
+      title: 'String, format=uri, public:// stream wrapper only'
+      description: 'This is the description of String, format=uri, public:// stream wrapper only'
+      type: string
+      format: uri
+      # @see https://github.com/json-schema-org/json-schema-spec/issues/1557
+      x-allowed-schemes: [public]
+    test_string_format_uri_public_stream_wrapper_using_ref:
+      title: 'String, format=uri, public:// stream wrapper only — using $ref'
+      description: 'This is the description of String, format=uri, public:// stream wrapper only — using $ref'
+      $ref: json-schema-definitions://canvas.module/stream-wrapper-uri
+      # @todo Remove in https://www.drupal.org/project/drupal/issues/3352063 — should not be necessary, but removing this causes \Drupal\Core\Theme\Component\ComponentMetadata::parseSchemaInfo() to generate `type = ['', 'object'] 🐛
+      type: string
+    test_string_format_uri_reference:
+      title: 'String, format=uri-reference'
+      description: 'This is the description of String, format=uri-reference'
+      type: string
+      format: uri-reference
+      examples:
+        - /example-uri
+    test_string_format_iri:
+      title: 'String, format=iri'
+      description: 'This is the description of String, format=iri'
+      type: string
+      format: iri
+      examples:
+        - https://iri.example.com
+    test_string_format_iri_reference:
+      title: 'String, format=iri-reference'
+      description: 'This is the description of String, format=iri-reference'
+      type: string
+      format: iri-reference
+      examples:
+        - /example-iri
+    # Built-in formats: URI template.
+    # @see https://json-schema.org/understanding-json-schema/reference/string#uri-template
+    test_string_format_uri_template:
+      title: 'String, format=uri-template'
+      description: 'This is the description of String, format=uri-template'
+      type: string
+      format: uri-template
+    # Built-in formats: JSON Pointer.
+    # @see https://json-schema.org/understanding-json-schema/reference/string#json-pointer
+    test_string_format_json_pointer:
+      title: 'String, format=json-pointer'
+      description: 'This is the description of String, format=json-pointer'
+      type: string
+      format: json-pointer
+    test_string_format_relative_json_pointer:
+      title: 'String, format=relative-json-pointer'
+      description: 'This is the description of String, format=relative-json-pointer'
+      type: string
+      format: relative-json-pointer
+    # Built-in formats: Regular expressions.
+    # @see https://json-schema.org/understanding-json-schema/reference/string#regular-expressions
+    test_string_format_regex:
+      title: 'String, format=regex'
+      description: 'This is the description of String, format=regex'
+      type: string
+      format: regex
+
+    test_integer:
+      title: 'Integer'
+      description: 'This is the description of Integer'
+      type: integer
+      examples:
+        - -42
+    test_integer_range_minimum:
+      title: 'Integer, minimum=0'
+      description: 'This is the description of Integer, minimum=0'
+      type: integer
+      minimum: 0
+      examples:
+        - 42
+    test_integer_range_minimum_maximum_timestamps:
+      title: 'Integer, minimum=-2147483648, maximum=2147483648'
+      description: 'This is the description of Integer, minimum=-2147483648, maximum=2147483648'
+      type: integer
+      minimum: -2147483648
+      maximum: 2147483648
+      examples:
+        - 1730718000
+    test_integer_by_the_dozen:
+      title: 'Integer, multipleOf=12'
+      description: 'This is the description of Integer, multipleOf=12'
+      type: integer
+      multipleOf: 12
+      examples:
+        - 24
+        - 144
+
+    test_number:
+      title: 'Number'
+      description: 'This is the description of Number'
+      type: number
+      examples:
+        - 3.14
+
+    # The "image" predefined object format.
+    # @todo Agree on one special case, for ecosystem-wide formats: `json-schema-definitions://drupal/<something>`, so `json-schema-definitions://drupal/image` here.
+    test_object_drupal_image:
+      title: 'Object, $ref=json-schema-definitions://canvas.module/image'
+      description: 'This is the description of Object, $ref=json-schema-definitions://canvas.module/image'
+      $ref: json-schema-definitions://canvas.module/image
+      # @todo Remove in https://www.drupal.org/project/drupal/issues/3352063 — should not be necessary, but removing this causes \Drupal\Core\Theme\Component\ComponentMetadata::parseSchemaInfo() to generate `type = ['', 'object'] 🐛
+      type: object
+      examples:
+        - src: /sites/default/files/600x400.png
+          alt: 'Boring placeholder'
+          width: 600
+          height: 400
+    test_object_drupal_image_ARRAY:
+      title: 'Array of object, $ref=json-schema-definitions://canvas.module/image'
+      description: 'This is the description of Array of object, $ref=json-schema-definitions://canvas.module/image'
+      type: array
+      items:
+        $ref: json-schema-definitions://canvas.module/image
+        # @todo `type: object` should not be necessary, it's because \Drupal\sdc\Component\ComponentValidator::getClassProps() does not yet support $ref
+        type: object
+      maxItems: 2
+      examples:
+        - - src: https://example.com/cat.jpg
+            alt: 'A good cat'
+            width: 601
+            height: 402
+          - src: gracie.jpg
+            alt: 'Still a good cat'
+            width: 601
+            height: 402
+          # @todo This is an array with 3 items, even though `maxItems: 2` is specified. SDC should detect this, core bug: https://www.drupal.org/project/drupal/issues/3493086. SDC considers this valid, but then fails during rendering!
+          #- src: gracie.jpg
+          #  alt: 'The BEST cat!'
+          #  width: 601
+          #  height: 402
+    # The "video" predefined object format.
+    test_object_drupal_video:
+      title: 'Object, $ref=json-schema-definitions://canvas.module/video'
+      description: 'This is the description of Object, $ref=json-schema-definitions://canvas.module/video'
+      $ref: json-schema-definitions://canvas.module/video
+      type: object
+      examples:
+        - src: https://example.com/file.mp4
+          poster: /sites/default/files/600x400.png
+    # The "date-range" object format for this module.
+    test_object_drupal_date_range:
+      title: 'Object, $ref=json-schema-definitions://sdc_test_all_props.module/date-range'
+      description: 'This is the description of Object, $ref=json-schema-definitions://sdc_test_all_props.module/date-range'
+      $ref: json-schema-definitions://canvas.module/date-range
+      # @todo Remove in https://www.drupal.org/project/drupal/issues/3352063 — should not be necessary, but removing this causes \Drupal\Core\Theme\Component\ComponentMetadata::parseSchemaInfo() to generate `type = ['', 'object'] 🐛
+      type: object
+
+    #
+    # HTML props using `contentMediaType: text/html`
+    # @see docs/shape-matching.md#3.2.1
+    test_string_html_inline:
+      title: 'String with HTML formatting (inline)'
+      description: 'This is the description of String with HTML formatting (inline)'
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: inline
+      examples:
+        - 'This is <strong>bold</strong> and <em>italics</em> text with a <a href="https://example.com">link</a>'
+    test_string_html_block:
+      title: 'String with HTML formatting (block)'
+      description: 'This is the description of String with HTML formatting (block)'
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - '<p>This is a paragraph with <strong>bold</strong> text.</p><ul><li>List item 1</li><li>List item 2</li></ul>'
+    test_string_html:
+      title: 'String with HTML formatting (no formatting context, defaults to "block")'
+      description: 'This is the description of String with HTML formatting (no formatting context, defaults to "block")'
+      type: string
+      contentMediaType: text/html
+      examples:
+        - '<p>This is a paragraph with <strong>bold</strong> text.</p><ul><li>List item 1</li><li>List item 2</li></ul>'
+    test_REQUIRED_string_html_inline:
+      title: 'String with HTML formatting (inline, required)'
+      description: 'This is the description of String with HTML formatting (inline, required)'
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: inline
+      examples:
+        - 'This is <strong>required</strong> with <em>inline</em> formatting and a <a href="https://example.com">link</a>'
+    test_REQUIRED_string_html_block:
+      title: 'String with HTML formatting (block, required)'
+      description: 'This is the description of String with HTML formatting (block, required)'
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - '<p>This is a <strong>required</strong> paragraph.</p><ul><li>Required list item 1</li><li>Required list item 2</li></ul>'
+    test_REQUIRED_string_html:
+      title: 'String with HTML formatting (no formatting context, defaults to "block", required)'
+      description: 'This is the description of String with HTML formatting (no formatting context, defaults to "block", required)'
+      type: string
+      contentMediaType: text/html
+      examples:
+        - '<p>This is a <strong>required</strong> paragraph without formatting context.</p><ul><li>Another required list</li></ul>'
+
+    test_array_integer:
+      title: 'Array, integers'
+      description: 'This is the description of Array, integers'
+      type: array
+      items:
+        type: integer
+    test_array_integer_minItems:
+      title: 'Array, integers, min 1'
+      description: 'This is the description of Array, integers, min 1'
+      type: array
+      items:
+        type: integer
+      minItems: 1
+    test_array_integer_maxItems:
+      title: 'Array, integers, max 2'
+      description: 'This is the description of Array, integers, max 2'
+      type: array
+      items:
+        type: integer
+      maxItems: 2
+    test_array_integer_minItemsMultiple:
+      title: 'Array, integers, min 2'
+      description: 'This is the description of Array, integers, min 2'
+      type: array
+      items:
+        type: integer
+      minItems: 2
+    test_array_integer_minMaxItems:
+      title: 'Array, integers, min 1, max 20'
+      description: 'This is the description of Array, integers, min 1, max 20'
+      type: array
+      items:
+        type: integer
+      minItems: 1
+      maxItems: 20
+    test_array_string:
+      title: 'Test array, strings'
+      description: 'This is the description of Array, string'
+      type: array
+      items:
+        type: string
+    # @todo finish adding all other types + formats supported by JSON schema

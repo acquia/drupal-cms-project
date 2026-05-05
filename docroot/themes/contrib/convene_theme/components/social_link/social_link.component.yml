@@ -1,0 +1,25 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Social Link
+group: Atoms
+status: stable
+description: A social media link with icon.
+props:
+  type: object
+  properties:
+    platform:
+      title: Platform
+      type: string
+      enum: ['linkedin', 'twitter', 'website', 'facebook', 'instagram']
+      default: 'linkedin'
+    url:
+      title: URL
+      type: string
+      default: '#'
+    label:
+      title: Label
+      type: string
+      description: Accessible label for the link.
+library:
+  css:
+    component:
+      social_link.css: {}

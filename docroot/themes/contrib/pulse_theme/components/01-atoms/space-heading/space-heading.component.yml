@@ -1,0 +1,100 @@
+'$schema': https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+
+name: Space Heading
+
+description: A customizable heading component with configurable text, color, tag, font, and alignment options.
+
+status: stable
+
+group: Atoms
+
+props:
+  type: object
+
+  required:
+    - content
+
+  properties:
+    content:
+      type: string
+      title: Heading
+      description: The text displayed in the heading.
+      default: Add Heading
+      examples:
+        - 'SPACE is the Complete Team Collaboration Solution.'
+
+    title_color:
+      type: string
+      title: Heading color
+      description: The color of the heading text.
+      enum:
+        - text-sds-heading
+        - text-sds-neutral
+      meta:enum:
+        text-sds-heading: Heading
+        text-sds-neutral: Neutral
+      default: text-sds-heading
+      examples:
+        - 'text-sds-heading'
+
+    tag_name:
+      type: string
+      title: Tag
+      description: The HTML tag to be used for the heading (e.g., h1, h2).
+      enum:
+        - h1
+        - h2
+        - h3
+        - h4
+        - h5
+        - h6
+        - div
+      meta:enum:
+        h1: Heading 1
+        h2: Heading 2
+        h3: Heading 3
+        h4: Heading 4
+        h5: Heading 5
+        h6: Heading 6
+        div: Div
+      default: h1
+      examples:
+       - 'h1'
+
+    spacing_bottom:
+      type: string
+      title: Spacing bottom
+      description: The bottom spacing for the heading.
+      enum:
+        - none
+        - small
+        - medium
+        - large
+      default: none
+      examples:
+        - 'none'
+
+    align:
+      type: string
+      title: Align
+      description: The alignment of the heading (e.g., left, right, center).
+      default: left
+      enum:
+        - none
+        - left
+        - right
+        - center
+      examples:
+        - 'left'
+
+    url:
+      type: string
+      title: URL
+      description: The URL that the heading links to.
+      default: Add link
+
+    modifier_class:
+      type: string
+      title: Modifier class
+      description: Any additional CSS classes to modify the heading style.
+

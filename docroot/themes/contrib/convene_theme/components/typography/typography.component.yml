@@ -1,0 +1,55 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Typography
+group: Atoms
+status: stable
+description: A flexible typography component with Eyebrow, Heading, and Description.
+props:
+  type: object
+  properties:
+    eyebrow:
+      title: Eyebrow
+      description: Small uppercase text above the heading.
+      type: string
+    heading:
+      title: Heading
+      description: The main heading text.
+      type: string
+    description:
+      title: Description
+      description: Text below the heading (subtitle/body).
+      type: string
+    heading_tag:
+      title: Heading Tag
+      description: The HTML tag for the heading.
+      type: string
+      enum:
+        - h1
+        - h2
+        - h3
+        - h4
+        - h5
+        - h6
+        - p
+        - div
+      default: h2
+    align:
+      title: Alignment
+      description: Text alignment.
+      type: string
+      enum:
+        - left
+        - center
+        - right
+      default: left
+    color:
+      title: Color
+      description: Text color.
+      type: string
+      enum:
+        - black
+        - white
+      default: black
+library:
+  css:
+    component:
+      typography.css: {}

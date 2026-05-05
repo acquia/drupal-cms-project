@@ -1,0 +1,17 @@
+{
+    "name": "drupal/easy_encryption",
+    "description": "Sets up at-rest encryption for sensitive credentials, no configuration needed.",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "drupal/core": "^11.2",
+        "drupal/key": "^1.22",
+        "paragonie/sodium_compat": "^2.4"
+    },
+    "conflict": {
+        "drush/drush": "<13.7"
+    },
+    "require-dev": {
+        "drush/drush": "^13.7",
+        "drupal/config_inspector": "^2.1"
+    }
+}

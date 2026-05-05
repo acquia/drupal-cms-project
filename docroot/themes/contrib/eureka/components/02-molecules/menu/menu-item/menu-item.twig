@@ -1,0 +1,37 @@
+{% set item_modifiers = [] %}
+{% if item.in_active_trail == TRUE %}
+  {% set item_modifiers = item_modifiers|merge(['active']) %}
+{% endif %}
+{% if menu_level > 0 %}
+  {% set item_modifiers = item_modifiers|merge(['sub', 'sub-' ~ menu_level]) %}
+{% endif %}
+{% if item.below %}
+  {% set item_modifiers = item_modifiers|merge(['with-sub']) %}
+{% endif %}
+{% set item_modifiers = item_modifiers|merge(['level-' ~ menu_level]) %}
+
+{% set list_item_base_class = item_base_class|default(menu_class ~ '__item') %}
+
+<li {{ bem(list_item_base_class, item_modifiers) }}>
+  {% if not item.below %}
+    {{ include("eureka:link", {
+      link_content: item.title,
+      link_url: item.url,
+      link_base_class: item_base_class|default(menu_class ~ '__link'),
+      link_modifiers: item_modifiers,
+    }, with_context = false) }}
+  {% else %}
+    {{ include("eureka:button", {
+      button_content: item.title,
+      button_type: 'clean',
+      button_icon: true,
+      button_icon_name: 'chevron',
+      button_base_class: item_base_class|default(menu_class ~ '__link'),
+      button_modifiers: item_modifiers,
+      button_extra_classes: ['menu__sub-expand', 'js-submenu-expand', 'button--clean', 'button--icon'],
+      additional_attributes: { 'aria-expanded': 'false' },
+    }, with_context = false) }}
+    {% import 'eureka:menu' as menus %}
+    {{ menus.menu_links(item.below, attributes, menu_level + 1, menu_class, menu_modifiers, menu_blockname, menu_extra_classes, item_base_class, directory) }}
+  {% endif %}
+</li>

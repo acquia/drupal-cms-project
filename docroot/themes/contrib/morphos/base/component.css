@@ -1,0 +1,53 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: base/component.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+/**
+ * Component layer utilities with z-index stacking.
+ *
+ * Z-index hierarchy (within .component's stacking context):
+ * - backgrounds: z-1 (on modifier elements e.g. bg-image-wrap)
+ * - overlay: z-2 (on component__overlay, between backgrounds and content)
+ * - container: z-3 (on content container wrappers)
+ * - content: z-3 (on inner content wrappers)
+ */
+
+@reference "../tailwindcss";
+
+.component__backgrounds {
+  @apply z-1;
+}
+
+.component__overlay {
+  @apply z-2;
+}
+
+.component__container,
+.component__content {
+  @apply z-3;
+}
+
+/**
+ * Component styles
+ */
+.component {
+  @apply relative flex flex-col;
+}
+
+.component__overlay {
+  @apply pointer-events-none absolute inset-0;
+}
+
+/**
+ * Component preview.
+  * Display all component layers.
+ */
+.component--preview {
+  @apply w-full;
+
+  > * {
+    @apply w-full min-w-20;
+  }
+}

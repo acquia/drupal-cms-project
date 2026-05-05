@@ -1,0 +1,932 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.image.field_media_image
+    - field.field.media.svg_image.field_media_svg_image
+    - filter.format.canvas_html_block
+    - filter.format.canvas_html_inline
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - media.type.svg_image
+  module:
+    - file
+    - link
+    - media
+    - media_library
+    - options
+    - text
+  theme:
+    - eureka
+label: 'Text and image'
+id: sdc.eureka.text-and-image
+source: sdc
+source_local_id: 'eureka:text-and-image'
+provider: eureka
+active_version: 03045805f7f04a1a
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        text_and_image_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum dolor'
+          expression: ℹ︎string␟value
+        text_and_image_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '2'
+          expression: ℹ︎list_float␟value
+        text_and_image_description:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: 'Lorem ipsum <strong>dolor sit amet</strong>, consectetur adipiscing elit. Donec pellentesque pulvinar rutrum. Curabitur elementum condimentum fringilla. Duis eu erat at nulla ultricies posuere non pellentesque turpis.'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        text_and_image_media:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+        text_and_image_alignment:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: image-right
+          expression: ℹ︎list_string␟value
+        text_and_image_cta_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Call to action'
+          expression: ℹ︎string␟value
+        text_and_image_cta_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: 'https://uri.example.com'
+              options: {  }
+          expression: ℹ︎link␟url
+        text_and_image_cta_external:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+        text_and_image_message_section_title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Mrs. Jane Holloway'
+          expression: ℹ︎string␟value
+        text_and_image_message_section_subitle:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Headteacher
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  03045805f7f04a1a:
+    settings:
+      prop_field_definitions:
+        text_and_image_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum dolor'
+          expression: ℹ︎string␟value
+        text_and_image_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '2'
+          expression: ℹ︎list_float␟value
+        text_and_image_description:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: 'Lorem ipsum <strong>dolor sit amet</strong>, consectetur adipiscing elit. Donec pellentesque pulvinar rutrum. Curabitur elementum condimentum fringilla. Duis eu erat at nulla ultricies posuere non pellentesque turpis.'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        text_and_image_media:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+        text_and_image_alignment:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: image-right
+          expression: ℹ︎list_string␟value
+        text_and_image_cta_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Call to action'
+          expression: ℹ︎string␟value
+        text_and_image_cta_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: 'https://uri.example.com'
+              options: {  }
+          expression: ℹ︎link␟url
+        text_and_image_cta_external:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+        text_and_image_message_section_title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Mrs. Jane Holloway'
+          expression: ℹ︎string␟value
+        text_and_image_message_section_subitle:
+          default_value:
+            -
+              value: Headteacher
+          expression: ℹ︎string␟value
+          field_instance_settings: {  }
+          field_storage_settings: {  }
+          field_type: string
+          field_widget: string_textfield
+          required: false
+    fallback_metadata:
+      slot_definitions: {  }
+  5c89662c7a46a321:
+    settings:
+      prop_field_definitions:
+        text_and_image_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum dolor'
+          expression: ℹ︎string␟value
+        text_and_image_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '2'
+          expression: ℹ︎list_float␟value
+        text_and_image_description:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: 'Lorem ipsum <strong>dolor sit amet</strong>, consectetur adipiscing elit. Donec pellentesque pulvinar rutrum. Curabitur elementum condimentum fringilla. Duis eu erat at nulla ultricies posuere non pellentesque turpis.'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        text_and_image_media:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+        text_and_image_alignment:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: image-right
+          expression: ℹ︎list_string␟value
+        text_and_image_cta_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Call to action'
+          expression: ℹ︎string␟value
+        text_and_image_cta_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: 'https://uri.example.com'
+              options: {  }
+          expression: ℹ︎link␟url
+        text_and_image_cta_external:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+        text_and_image_message_section_title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Mrs. Jane Holloway'
+          expression: ℹ︎string␟value
+        text_and_image_message_section_subitle:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Headteacher
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  24e96f04aa850675:
+    settings:
+      prop_field_definitions:
+        text_and_image_alignment:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: image-right
+          expression: ℹ︎list_string␟value
+        text_and_image_cta_external:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+        text_and_image_cta_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Call to action'
+          expression: ℹ︎string␟value
+        text_and_image_cta_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: 'https://uri.example.com'
+              options: {  }
+          expression: ℹ︎link␟url
+        text_and_image_description:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: 'Lorem ipsum <strong>dolor sit amet</strong>, consectetur adipiscing elit. Donec pellentesque pulvinar rutrum. Curabitur elementum condimentum fringilla. Duis eu erat at nulla ultricies posuere non pellentesque turpis.'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        text_and_image_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum dolor'
+          expression: ℹ︎string␟value
+        text_and_image_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '2'
+          expression: ℹ︎list_float␟value
+        text_and_image_media:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+    fallback_metadata:
+      slot_definitions:
+        text_and_image_cta_block:
+          title: 'Text and image CTA'
+          description: 'Optional block to place a CTA inside - anything else will look odd'
+  b5b6bf0c0cb6b4e0:
+    settings:
+      prop_field_definitions:
+        text_and_image_alignment:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: image-right
+          expression: ℹ︎list_string␟value
+        text_and_image_cta_external:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+        text_and_image_cta_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Call to action'
+          expression: ℹ︎string␟value
+        text_and_image_cta_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 16
+          field_widget: link_default
+          default_value:
+            -
+              uri: 'https://uri.example.com'
+              options: {  }
+          expression: ℹ︎link␟url
+        text_and_image_description:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: 'Lorem ipsum <strong>dolor sit amet</strong>, consectetur adipiscing elit. Donec pellentesque pulvinar rutrum. Curabitur elementum condimentum fringilla. Duis eu erat at nulla ultricies posuere non pellentesque turpis.'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        text_and_image_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum dolor'
+          expression: ℹ︎string␟value
+        text_and_image_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '2'
+          expression: ℹ︎list_float␟value
+        text_and_image_media:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+    fallback_metadata:
+      slot_definitions:
+        text_and_image_cta_block:
+          title: 'Text and image CTA'
+          description: 'Optional block to place a CTA inside - anything else will look odd'
+  560ef564a9868af2:
+    settings:
+      prop_field_definitions:
+        text_and_image_alignment:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: image-right
+          expression: ℹ︎list_string␟value
+        text_and_image_cta_external:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: false
+          expression: ℹ︎boolean␟value
+        text_and_image_cta_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Call to action'
+          expression: ℹ︎string␟value
+        text_and_image_cta_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 16
+          field_widget: link_default
+          default_value:
+            -
+              uri: 'https://uri.example.com'
+              options: {  }
+          expression: ℹ︎link␟url
+        text_and_image_description:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: 'Lorem ipsum <strong>dolor sit amet</strong>, consectetur adipiscing elit. Donec pellentesque pulvinar rutrum. Curabitur elementum condimentum fringilla. Duis eu erat at nulla ultricies posuere non pellentesque turpis.'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        text_and_image_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum dolor'
+          expression: ℹ︎string␟value
+        text_and_image_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '2'
+          expression: ℹ︎list_float␟value
+        text_and_image_media:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+    fallback_metadata:
+      slot_definitions:
+        text_and_image_cta_block:
+          title: 'Text and image CTA'
+          description: 'Optional block to place a CTA inside - anything else will look odd'
+  28a980bf211924e5:
+    settings:
+      prop_field_definitions:
+        text_and_image_alignment:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: image-right
+          expression: ℹ︎list_string␟value
+        text_and_image_cta_external:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: false
+          expression: ℹ︎boolean␟value
+        text_and_image_cta_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Call to action'
+          expression: ℹ︎string␟value
+        text_and_image_cta_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 16
+          field_widget: link_default
+          default_value:
+            -
+              uri: 'https://uri.example.com'
+              options: {  }
+          expression: ℹ︎link␟url
+        text_and_image_description:
+          required: false
+          field_type: text
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_inline
+          field_widget: text_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum <strong>dolor sit amet</strong>, consectetur adipiscing elit. Donec pellentesque pulvinar rutrum. Curabitur elementum condimentum fringilla. Duis eu erat at nulla ultricies posuere non pellentesque turpis.'
+              format: canvas_html_inline
+          expression: ℹ︎text␟processed
+        text_and_image_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum dolor'
+          expression: ℹ︎string␟value
+        text_and_image_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '2'
+          expression: ℹ︎list_float␟value
+        text_and_image_media:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+    fallback_metadata:
+      slot_definitions:
+        text_and_image_cta_block:
+          title: 'Text and image CTA'
+          description: 'Optional block to place a CTA inside - anything else will look odd'
+  34020eabf339e30c:
+    settings:
+      prop_field_definitions:
+        text_and_image_alignment:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: image-right
+          expression: ℹ︎list_string␟value
+        text_and_image_cta_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Call to action'
+          expression: ℹ︎string␟value
+        text_and_image_cta_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 16
+          field_widget: link_default
+          default_value:
+            -
+              uri: 'https://uri.example.com'
+              options: {  }
+          expression: ℹ︎link␟url
+        text_and_image_description:
+          required: false
+          field_type: text
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_inline
+          field_widget: text_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum <strong>dolor sit amet</strong>, consectetur adipiscing elit. Donec pellentesque pulvinar rutrum. Curabitur elementum condimentum fringilla. Duis eu erat at nulla ultricies posuere non pellentesque turpis.'
+              format: canvas_html_inline
+          expression: ℹ︎text␟processed
+        text_and_image_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum dolor'
+          expression: ℹ︎string␟value
+        text_and_image_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '2'
+          expression: ℹ︎list_float␟value
+        text_and_image_media:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+    fallback_metadata:
+      slot_definitions:
+        text_and_image_cta_block:
+          title: 'Text and image CTA'
+          description: 'Optional block to place a CTA inside - anything else will look odd'
+  fa2e1373db052579:
+    settings:
+      prop_field_definitions:
+        text_and_image_alignment:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: image-right
+          expression: ℹ︎list_string␟value
+        text_and_image_description:
+          required: false
+          field_type: text
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_inline
+          field_widget: text_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum <strong>dolor sit amet</strong>, consectetur adipiscing elit. Donec pellentesque pulvinar rutrum. Curabitur elementum condimentum fringilla. Duis eu erat at nulla ultricies posuere non pellentesque turpis.'
+              format: canvas_html_inline
+          expression: ℹ︎text␟processed
+        text_and_image_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum dolor'
+          expression: ℹ︎string␟value
+        text_and_image_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '2'
+          expression: ℹ︎list_float␟value
+        text_and_image_media:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+    fallback_metadata:
+      slot_definitions: {  }

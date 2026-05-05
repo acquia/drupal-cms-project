@@ -1,0 +1,612 @@
+eca.event.plugin.eca_base:eca_cron:
+  type: eca.event.plugin
+  label: 'ECA Cron'
+  mapping:
+    frequency:
+      type: string
+      label: 'Frequency'
+
+eca.event.plugin.eca_base:eca_custom:
+  type: eca.event.plugin
+  label: 'ECA Custom'
+  mapping:
+    event_id:
+      type: string
+      label: 'Event ID'
+
+eca.event.plugin.eca_base:eca_token_generate:
+  type: eca.event.plugin
+  label: 'ECA Token Generate'
+  mapping:
+    token_name:
+      type: required_label
+      label: 'Name of token'
+
+eca.condition.plugin.eca_state:
+  type: eca.condition.plugin
+  label: 'State condition'
+  mapping:
+    key:
+      type: string
+      label: 'Key'
+    value:
+      type: text
+      label: 'Value'
+    operator:
+      type: string
+      label: 'Comparison operator'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Plugin\ECA\Condition\StringComparisonBase::getAllValidOperators'
+    type:
+      type: string
+      label: 'Comparison type'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Plugin\ECA\Condition\StringComparisonBase::getAllValidTypes'
+    case:
+      type: boolean
+      label: 'Case sensitive comparison'
+
+eca.condition.plugin.eca_count:
+  type: eca.condition.plugin
+  label: 'Count condition'
+  mapping:
+    left:
+      type: string
+      label: 'Name of token containing the list'
+    right:
+      type: string
+      label: 'Second value'
+    operator:
+      type: string
+      label: 'Comparison operator'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Plugin\ECA\Condition\StringComparisonBase::getAllValidOperators'
+    type:
+      type: string
+      label: 'Comparison type'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Plugin\ECA\Condition\StringComparisonBase::getAllValidTypes'
+    case:
+      type: boolean
+      label: 'Case sensitive comparison'
+
+eca.condition.plugin.eca_list_contains:
+  type: eca.condition.plugin
+  label: 'List contains condition'
+  mapping:
+    list_token:
+      type: string
+      label: 'Name of token containing the list'
+    method:
+      type: string
+      label: 'Method'
+      constraints:
+        NotBlank: []
+        Choice:
+          - index
+          - value
+    value:
+      type: text
+      label: 'Value to lookup'
+
+eca.condition.plugin.eca_token_exists:
+  type: eca.condition.plugin
+  label: 'Token exists condition'
+  mapping:
+    token_name:
+      type: required_label
+      label: 'Name of token'
+
+eca.condition.plugin.eca_scalar:
+  type: eca.condition.plugin
+  label: 'Scalar condition'
+  mapping:
+    left:
+      type: text
+      label: 'First value'
+    right:
+      type: text
+      label: 'Second value'
+    operator:
+      type: string
+      label: 'Comparison operator'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Plugin\ECA\Condition\StringComparisonBase::getAllValidOperators'
+    type:
+      type: string
+      label: 'Comparison type'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Plugin\ECA\Condition\StringComparisonBase::getAllValidTypes'
+    case:
+      type: boolean
+      label: 'Case sensitive comparison'
+
+action.configuration.eca_warning_message:
+  type: mapping
+  label: 'Configuration for the "Warning message" action'
+  mapping:
+    message:
+      type: text
+      label: 'Message'
+      constraints:
+        NotBlank: []
+    replace_tokens:
+      type: boolean
+      label: 'Replace tokens'
+
+action.configuration.eca_error_message:
+  type: mapping
+  label: 'Configuration for the "Error message" action'
+  mapping:
+    message:
+      type: text
+      label: 'Message'
+      constraints:
+        NotBlank: []
+    replace_tokens:
+      type: boolean
+      label: 'Replace tokens'
+
+action.configuration.eca_keyvalueexpirablestore_delete:
+  type: mapping
+  label: 'Configuration for the "Keyvalue Expirable Store Delete" action'
+  mapping:
+    collection:
+      type: string
+      label: 'Collection'
+    key:
+      type: string
+      label: 'Store key'
+
+action.configuration.eca_keyvalueexpirablestore_read:
+  type: mapping
+  label: 'Configuration for the "Keyvalue Expirable Store Read" action'
+  mapping:
+    collection:
+      type: string
+      label: 'Collection'
+    key:
+      type: string
+      label: 'Store key'
+    token_name:
+      type: label
+      label: 'Name of token'
+
+action.configuration.eca_keyvalueexpirablestore_write:
+  type: mapping
+  label: 'Configuration for the "Keyvalue Expirable Store Write" action'
+  mapping:
+    expires:
+      type: integer
+      label: 'Expiration'
+    collection:
+      type: string
+      label: 'Collection'
+    key:
+      type: string
+      label: 'Store key'
+    value:
+      type: text
+      label: 'Value'
+    use_yaml:
+      type: boolean
+      label: 'Interpret above value as YAML format'
+    validate_yaml:
+      type: boolean
+      label: 'Validate YAML to prevent this from being executed when invalid'
+    ifnotexists:
+      type: boolean
+      label: 'Only if new'
+
+action.configuration.eca_keyvaluestore_delete:
+  type: mapping
+  label: 'Configuration for the "Keyvalue Store Delete" action'
+  mapping:
+    collection:
+      type: string
+      label: 'Collection'
+    key:
+      type: string
+      label: 'Store key'
+
+action.configuration.eca_keyvaluestore_read:
+  type: mapping
+  label: 'Configuration for the "Keyvalue Store Read" action'
+  mapping:
+    collection:
+      type: string
+      label: 'Collection'
+    key:
+      type: string
+      label: 'Store key'
+    token_name:
+      type: label
+      label: 'Name of token'
+
+action.configuration.eca_keyvaluestore_write:
+  type: mapping
+  label: 'Configuration for the "Keyvalue Store Write" action'
+  mapping:
+    collection:
+      type: string
+      label: 'Collection'
+    key:
+      type: string
+      label: 'Store key'
+    value:
+      type: text
+      label: 'Value'
+    use_yaml:
+      type: boolean
+      label: 'Interpret above value as YAML format'
+    validate_yaml:
+      type: boolean
+      label: 'Validate YAML to prevent this from being executed when invalid'
+    ifnotexists:
+      type: boolean
+      label: 'Only if new'
+
+action.configuration.eca_list_add:
+  type: mapping
+  label: 'Configuration for the "List Add" action'
+  mapping:
+    value:
+      type: text
+      label: 'Value to add'
+    method:
+      type: string
+      label: 'Method'
+      constraints:
+        NotBlank: []
+        Choice:
+          - append
+          - prepend
+          - set
+    index:
+      type: string
+      label: 'Index key'
+    list_token:
+      type: string
+      label: 'Token containing the list'
+
+action.configuration.eca_list_compare:
+  type: mapping
+  label: 'Configuration for the "List Compare" action'
+  mapping:
+    secondary_list_token:
+      type: string
+      label: 'Token containing the secondary list'
+      constraints:
+        NotBlank: []
+    method:
+      type: string
+      label: 'Array Function'
+      constraints:
+        NotBlank: []
+        Choice:
+          - array_diff
+          - array_intersect
+    result_token_name:
+      type: label
+      label: 'Name of result token'
+      constraints:
+        NotBlank: []
+    list_token:
+      type: string
+      label: 'Token containing the primary list'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_count:
+  type: mapping
+  label: 'Configuration for the "Count" action'
+  mapping:
+    token_name:
+      type: label
+      label: 'Name of token'
+    list_token:
+      type: string
+      label: 'Token containing the list'
+
+action.configuration.eca_list_delete_data:
+  type: mapping
+  label: 'Configuration for the "List Delete Data" action'
+  mapping:
+    list_token:
+      type: string
+      label: 'Token containing the list'
+
+action.configuration.eca_list_remove:
+  type: mapping
+  label: 'Configuration for the "List Remove" action'
+  mapping:
+    value:
+      type: text
+      label: 'Value to remove'
+    token_name:
+      type: label
+      label: 'Name of token'
+    method:
+      type: string
+      label: 'Method'
+      constraints:
+        NotBlank: []
+        Choice:
+          - first
+          - last
+          - index
+          - value
+    index:
+      type: string
+      label: 'Index key'
+    list_token:
+      type: string
+      label: 'Token containing the list'
+
+action.configuration.eca_list_save_data:
+  type: mapping
+  label: 'Configuration for the "List Save Data" action'
+  mapping:
+    list_token:
+      type: string
+      label: 'Token containing the list'
+
+action.configuration.eca_lock_acquire:
+  type: mapping
+  label: 'Configuration for the "Lock Acquire" action'
+  mapping:
+    lock_name:
+      type: string
+      label: 'Lock name'
+      constraints:
+        NotBlank: []
+    lock_timeout:
+      type: integer
+      label: 'Lock timeout in seconds'
+      constraints:
+        NotBlank: []
+    lock_wait:
+      type: boolean
+      label: 'Wait for lock until timeout exceeded'
+    token_name:
+      type: label
+      label: 'Name of token'
+
+action.configuration.eca_state_read:
+  type: mapping
+  label: 'Configuration for the "State Read" action'
+  mapping:
+    key:
+      type: string
+      label: 'State key'
+    token_name:
+      type: label
+      label: 'Name of token'
+
+action.configuration.eca_state_write:
+  type: mapping
+  label: 'Configuration for the "State Write" action'
+  mapping:
+    key:
+      type: string
+      label: 'State key'
+    value:
+      type: text
+      label: 'The value of the state'
+    use_yaml:
+      type: boolean
+      label: 'Interpret above config value as YAML format'
+    validate_yaml:
+      type: boolean
+      label: 'Validate YAML to prevent this from being executed when invalid'
+
+action.configuration.eca_privatetempstore_delete:
+  type: mapping
+  label: 'Configuration for the "Private Tempstore Delete" action'
+  mapping:
+    collection:
+      type: string
+      label: 'Collection'
+    key:
+      type: string
+      label: 'Store key'
+
+action.configuration.eca_privatetempstore_read:
+  type: mapping
+  label: 'Configuration for the "Private Tempstore Read" action'
+  mapping:
+    collection:
+      type: string
+      label: 'Collection'
+    key:
+      type: string
+      label: 'Store key'
+    token_name:
+      type: label
+      label: 'Name of token'
+
+action.configuration.eca_privatetempstore_write:
+  type: mapping
+  label: 'Configuration for the "Private Tempstore Write" action'
+  mapping:
+    collection:
+      type: string
+      label: 'Collection'
+    key:
+      type: string
+      label: 'Store key'
+    value:
+      type: text
+      label: 'Value'
+    use_yaml:
+      type: boolean
+      label: 'Interpret above value as YAML format'
+    validate_yaml:
+      type: boolean
+      label: 'Validate YAML to prevent this from being executed when invalid'
+
+action.configuration.eca_set_eca_log_level:
+  type: mapping
+  label: 'Configuration for the "Set ECA Log Level" action'
+  mapping:
+    log_level:
+      type: string
+      label: 'Log level'
+      constraints:
+        # @see \Drupal\Core\Logger::getLevels()
+        Choice: [0, 1, 2, 3, 4, 5, 6, 7]
+
+action.configuration.eca_sharedtempstore_delete:
+  type: mapping
+  label: 'Configuration for the "Shared Tempstore Delete" action'
+  mapping:
+    collection:
+      type: string
+      label: 'Collection'
+    key:
+      type: string
+      label: 'Store key'
+
+action.configuration.eca_sharedtempstore_read:
+  type: mapping
+  label: 'Configuration for the "Shared Tempstore Read" action'
+  mapping:
+    collection:
+      type: string
+      label: 'Collection'
+    key:
+      type: string
+      label: 'Store key'
+    token_name:
+      type: label
+      label: 'Name of token'
+
+action.configuration.eca_sharedtempstore_write:
+  type: mapping
+  label: 'Configuration for the "Shared Tempstore Write" action'
+  mapping:
+    collection:
+      type: string
+      label: 'Collection'
+    key:
+      type: string
+      label: 'Store key'
+    value:
+      type: text
+      label: 'Value'
+    use_yaml:
+      type: boolean
+      label: 'Interpret above value as YAML format'
+    validate_yaml:
+      type: boolean
+      label: 'Validate YAML to prevent this from being executed when invalid'
+
+action.configuration.eca_token_replace:
+  type: mapping
+  label: 'Configuration for the "Token Replace" action'
+  mapping:
+    token_name:
+      type: label
+      label: 'Name of token'
+    token_value:
+      type: text
+      label: 'Value of the token'
+    use_yaml:
+      type: boolean
+      label: 'Interpret above value as YAML format'
+    validate_yaml:
+      type: boolean
+      label: 'Validate YAML to prevent this from being executed when invalid'
+
+action.configuration.eca_token_set_random_value:
+  type: mapping
+  label: 'Configuration for the "Token Set Random Value" action'
+  mapping:
+    token_name:
+      type: required_label
+      label: 'Name of token'
+    mode:
+      type: string
+      label: 'Mode'
+      constraints:
+        NotBlank: []
+        Choice:
+          - image
+          - integer
+          - machine_name unique
+          - machine_name
+          - name unique
+          - name
+          - paragraphs
+          - password
+          - sentences capitalize
+          - sentences
+          - string unique
+          - string
+          - word
+    length:
+      type: string
+      label: 'Length or min/max'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_token_set_value:
+  type: mapping
+  label: 'Configuration for the "Token Set Value" action'
+  mapping:
+    token_name:
+      type: label
+      label: 'Name of token'
+    token_value:
+      type: text
+      label: 'Value of the token'
+    use_yaml:
+      type: boolean
+      label: 'Interpret above value as YAML format'
+    validate_yaml:
+      type: boolean
+      label: 'Validate YAML to prevent this from being executed when invalid'
+
+action.configuration.eca_translate:
+  type: mapping
+  label: 'Configuration for the "Translate" action'
+  mapping:
+    token_name:
+      type: label
+      label: 'Name of token'
+    value:
+      type: text
+      label: 'Value to translate'
+    use_yaml:
+      type: boolean
+      label: 'Interpret above value as YAML format'
+    validate_yaml:
+      type: boolean
+      label: 'Validate YAML to prevent this from being executed when invalid'
+    target_langcode:
+      type: string
+      label: 'Target language'
+      constraints:
+        NotBlank: []
+        Choice: []
+
+action.configuration.eca_trigger_custom_event:
+  type: mapping
+  label: 'Configuration for the "Trigger Custom Event" action'
+  mapping:
+    event_id:
+      type: string
+      label: 'Event ID'
+    tokens:
+      type: text
+      label: 'Tokens to forward'
+
+action.configuration.eca_void_and_condition:
+  type: mapping
+  label: 'Chain action for AND condition'

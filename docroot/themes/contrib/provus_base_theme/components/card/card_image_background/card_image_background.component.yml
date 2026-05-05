@@ -1,0 +1,46 @@
+$schema: 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+name: Card Image Background
+status: stable
+description: Card component with background image, title, and optional link
+group: Provus Components
+
+variants:
+  default:
+    title: Default
+    description: Standard card with background image overlay and title
+
+props:
+  type: object
+  required:
+    - bg_image_path
+    - title
+  properties:
+    title:
+      type: string
+      title: 'Title'
+      description: 'Main card title displayed over the background image'
+      examples:
+        - 'Welcome to Our Services'
+      default: ''
+    bg_image_path:
+      type: object
+      $ref: json-schema-definitions://canvas.module/image
+      title: 'Background Image'
+      description: 'Background image displayed behind the card content'
+      examples:
+        - src: 'https://placehold.co/400x300'
+          alt: 'Background image'
+      default: ''
+    link:
+      type: string
+      format: uri-reference
+      title: 'Link'
+      description: 'Optional URL to link the entire card. Leave empty if no link is needed.'
+      examples:
+        - '/about'
+      default: ''
+    content_attributes:
+      type: string
+      title: 'Content attributes'
+      description: 'Drupal template function placeholder — no content is required here. Please leave this section blank.'
+      default: ''

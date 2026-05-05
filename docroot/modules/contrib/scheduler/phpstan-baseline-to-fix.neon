@@ -1,0 +1,18 @@
+# ------------------------------------------------------------------------------
+# This phpstan-baseline-to-fix.neon file contains messages for code which should
+# be worked on, and ultimately removed from here when the source is corrected.
+# If the occurrence cannot be fixed, the warning should be moved out of here and
+# into the phpstan-baseline.neon file of permanently ignored warnings.
+# ------------------------------------------------------------------------------
+parameters:
+  ignoreErrors:
+
+    -
+      message: "#^\\\\Drupal calls should be avoided in classes, use dependency injection instead$#"
+      count: 6
+      path: src/SchedulerManager.php
+
+    -
+      message: "#^\\\\Drupal calls should be avoided in classes, use dependency injection instead$#"
+      count: 3
+      path: src/Theme/SchedulerThemeNegotiator.php

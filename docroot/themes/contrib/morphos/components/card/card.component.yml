@@ -1,0 +1,150 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Card
+description: A versatile UI container for grouping related information into a single visual unit.
+group: Display
+status: stable
+props:
+  type: object
+  properties:
+    heading:
+      type: string
+      title: Heading
+      description: The heading content.
+      examples:
+        - Card title
+    heading_level:
+      type: number
+      title: Heading level
+      description: Select the heading level.
+      enum: [1, 2, 3, 4, 5, 6]
+      default: 3
+      examples:
+        - 3
+    image:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Image
+      description: The image to display in the card.
+      type: object
+    body:
+      type: string
+      title: Body
+      description: Content for the card.
+      contentMediaType: text/html
+    center:
+      type: boolean
+      title: Center
+      description: Center the content in the card.
+    card_side:
+      type: boolean
+      title: Card side
+      description: Arrange the card with the image on the side.
+    text_alignment:
+      type: string
+      title: Text alignment
+      description: Select the alignment of the content.
+      enum:
+        - text-start
+        - items-center
+      meta:enum:
+        text-start: Start
+        items-center: Center
+    actions_alignment:
+      type: string
+      title: Actions alignment
+      description: Select the alignment of the buttons.
+      enum:
+        - justify-start
+        - items-center
+        - justify-end
+      meta:enum:
+        justify-start: Start
+        items-center: Center
+        justify-end: End
+    style:
+      type: string
+      title: Style
+      description: Select the card style.
+      enum:
+        - card-border
+        - card-dash
+      meta:enum:
+        card-border: Border
+        card-dash: Dash
+    size:
+      type: string
+      title: Size
+      description: Select the card size.
+      enum:
+        - card-xs
+        - card-sm
+        - card-md
+        - card-lg
+        - card-xl
+      meta:enum:
+        card-xs: Extra small
+        card-sm: Small
+        card-md: Medium
+        card-lg: Large
+        card-xl: Extra large
+    palette:
+      type: string
+      title: Palette
+      description: Select the colour palette for the content.
+      enum:
+        - color--standard
+        - color--alternate
+        - color--primary
+        - color--secondary
+        - color--accent
+        - color--neutral
+      meta:enum:
+        color--standard: Standard
+        color--alternate: Alternate
+        color--primary: Primary
+        color--secondary: Secondary
+        color--accent: Accent
+        color--neutral: Neutral
+    texture:
+      type: string
+      title: Texture
+      description: Select the texture to apply to the palette.
+      enum:
+        - texture--linear-start
+        - texture--linear-end
+        - texture--linear-top
+        - texture--linear-bottom
+        - texture--linear-top-start
+        - texture--linear-top-end
+        - texture--linear-bottom-start
+        - texture--linear-bottom-end
+        - texture--radial-spotlight
+        - texture--radial-vignette
+        - texture--conic-top-start
+        - texture--conic-top-end
+        - texture--conic-bottom-start
+        - texture--conic-bottom-end
+      meta:enum:
+        texture--linear-start: 'Linear: Start'
+        texture--linear-end: 'Linear: End'
+        texture--linear-top: 'Linear: Top'
+        texture--linear-bottom: 'Linear: Bottom'
+        texture--linear-top-start: 'Linear: Top start'
+        texture--linear-top-end: 'Linear: Top end'
+        texture--linear-bottom-start: 'Linear: Bottom start'
+        texture--linear-bottom-end: 'Linear: Bottom end'
+        texture--radial-spotlight: 'Radial: Spotlight'
+        texture--radial-vignette: 'Radial: Vignette'
+        texture--conic-top-start: 'Conic: Top start'
+        texture--conic-top-end: 'Conic: Top end'
+        texture--conic-bottom-start: 'Conic: Bottom start'
+        texture--conic-bottom-end: 'Conic: Bottom end'
+slots:
+  badge_items:
+    title: Badge items
+    description: Add badge item.
+  body_items:
+    title: Body items
+    description: Add content items.
+  actions:
+    title: Actions
+    description: Add button items.

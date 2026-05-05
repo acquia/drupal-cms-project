@@ -1,0 +1,44 @@
+{% set items = service_items %}
+{% set top_task_count = node.field_top_task_count.value|default(0)|number_format(0) %}
+{% set total = items|length %}
+<article>
+  {% if node.field_description.value %}
+    <p class="mb-8 text-grey-1 max-w-description">{{ content.field_description }}</p>
+  {% endif %}
+
+  {% if total > 0 %}
+
+    {% if top_task_count > 0 %}
+      <hr class="border-0 border-t border-border mb-8">
+      <h2 class="text-xl font-bold mb-4">{{ 'Most popular'|t }}</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-10">
+        {% for item in items %}
+          {% if loop.index <= top_task_count %}
+            {% include 'consistent:top-task' with {
+              top_task_label: item.entity.field_link.title,
+              top_task_url: item.entity.field_link.0.url,
+            } only %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if total > top_task_count %}
+      <hr class="border-0 border-t border-border mb-8">
+      <h2 class="text-xl font-bold mb-4">{{ 'Topics'|t }}</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {% for item in items %}
+          {% if loop.index > top_task_count %}
+            {% set summary = item.entity.field_summary_override.value ?: item.entity.field_summary.value %}
+            {% include 'consistent:link-summary' with {
+              link_summary_label: item.entity.field_link.title,
+              link_summary_url: item.entity.field_link.0.url,
+              link_summary_text: summary|default(''),
+            } only %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+  {% endif %}
+</article>

@@ -1,0 +1,59 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.system_branding_block
+    - canvas.component.block.system_menu_block.banner-menu
+    - canvas.component.block.system_menu_block.main
+    - canvas.component.sdc.diagnosis.button
+    - canvas.component.sdc.diagnosis.menu-container
+    - canvas.component.sdc.diagnosis.navbar
+  module:
+    - link
+    - options
+  theme:
+    - diagnosis
+id: diagnosis.header
+region: header
+theme: diagnosis
+component_tree:
+  0:
+    uuid: aa0ebfeb-fdbf-40f6-af42-b2dd9614a71e
+    component_id: sdc.diagnosis.navbar
+    component_version: 15d46685b4985e53
+    inputs: '{"menu_align":"right"}'
+  '0:links:0':
+    parent_uuid: aa0ebfeb-fdbf-40f6-af42-b2dd9614a71e
+    slot: links
+    uuid: 62d5dad1-91e1-4a61-95bc-715d39bb5bad
+    component_id: sdc.diagnosis.button
+    component_version: 8886a0097e12e915
+    inputs: '{"variant":"primary","label":"Book Appointment","size":"medium","icon":"arrow-right","href":{"uri":"internal:\/contact","options":[]},"icon_first":false}'
+  '0:logo:0':
+    parent_uuid: aa0ebfeb-fdbf-40f6-af42-b2dd9614a71e
+    slot: logo
+    uuid: 4c4cf74f-930d-421f-973c-80788d00bdd4
+    component_id: block.system_branding_block
+    component_version: b168140fdcaebae5
+    inputs: '{"label":"Site branding","label_display":"0","use_site_logo":true,"use_site_name":true,"use_site_slogan":false}'
+  '0:navigation:0':
+    parent_uuid: aa0ebfeb-fdbf-40f6-af42-b2dd9614a71e
+    slot: navigation
+    uuid: 30af8f2c-cb4a-4e35-9807-6083fbea1ffb
+    component_id: sdc.diagnosis.menu-container
+    component_version: 7d6e0926d925f5a6
+    inputs: '[]'
+  '0:navigation:0:banner_menu:0':
+    parent_uuid: 30af8f2c-cb4a-4e35-9807-6083fbea1ffb
+    slot: banner_menu
+    uuid: 75a273e3-2887-4363-8e56-77a45bdb1537
+    component_id: block.system_menu_block.banner-menu
+    component_version: c6560cbcbe08d68a
+    inputs: '{"label":"Banner Menu","label_display":"0","level":1,"depth":1,"expand_all_items":false}'
+  '0:navigation:0:main_menu:0':
+    parent_uuid: 30af8f2c-cb4a-4e35-9807-6083fbea1ffb
+    slot: main_menu
+    uuid: 7bd381a9-f42c-4067-9115-b3368efe2103
+    component_id: block.system_menu_block.main
+    component_version: 023ff7ba63f80798
+    inputs: '{"label":"Main navigation","label_display":"0","level":1,"depth":2,"expand_all_items":true}'

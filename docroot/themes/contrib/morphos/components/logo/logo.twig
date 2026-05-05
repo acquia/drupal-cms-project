@@ -1,0 +1,81 @@
+{# Double image size to ensure retina display #}
+{% set logo_width =  width * 2 %}
+{% set logo_small_width =  width_small * 2 %}
+
+<div{{ attributes.addClass('logo') }}>
+  <style>
+    .logo__large {
+      display: none;
+      max-width: {{- width -}}px;
+    }
+    .logo__small {
+      display: block;
+      max-width: {{- width_small -}}px;
+    }
+
+    {% if breakpoint %}
+    @media (min-width: {{- breakpoint -}}px) {
+      .logo__large { display: block; }
+      .logo__small { display: none; }
+    }
+    {% endif %}
+  </style>
+
+  <div class="logo__large">
+    <div class="logo__image logo__image--light">
+      {% if logo_light.src %}
+        {{ include('morphos:image', {
+          image: logo_light,
+          width: logo_width,
+          url: url|default(''),
+          alt: '',
+          loading: 'eager',
+        },
+          with_context: false
+        ) }}
+      {% endif %}
+    </div>
+    <div class="logo__image logo__image--dark">
+      {% if logo_dark.src %}
+        {{ include('morphos:image', {
+          image: logo_dark,
+          width: logo_width,
+          url: url|default(''),
+          alt: '',
+          loading: 'eager',
+        },
+          with_context: false
+        ) }}
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="logo__small">
+    <div class="logo__image logo__image--light">
+      {% if logo_light_small.src %}
+        {{ include('morphos:image', {
+          image: logo_light_small,
+          width: logo_small_width,
+          url: url|default(''),
+          alt: '',
+          loading: 'eager',
+        },
+          with_context: false
+        ) }}
+      {% endif %}
+    </div>
+    <div class="logo__image logo__image--dark">
+      {% if logo_dark_small.src %}
+        {{ include('morphos:image', {
+          image: logo_dark_small,
+          width: logo_small_width,
+          url: url|default(''),
+          alt: '',
+          loading: 'eager',
+        },
+          with_context: false
+        ) }}
+      {% endif %}
+    </div>
+  </div>
+</div>

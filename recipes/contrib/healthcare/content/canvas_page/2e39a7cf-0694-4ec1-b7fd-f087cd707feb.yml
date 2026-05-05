@@ -1,0 +1,151 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 2e39a7cf-0694-4ec1-b7fd-f087cd707feb
+  default_langcode: en
+  depends:
+    708e1f1d-3a74-4189-8fc7-b14dab396f3f: file
+    f9015589-a3a9-4bf5-abb2-194d443eecff: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Patient Rights & Responsibilities'
+  description:
+    -
+      value: 'Your rights as a patient at Saltmarsh Island Health.'
+  components:
+    -
+      uuid: ff3d5111-c1c2-4fe4-b48f-e6fb45d418b8
+      component_id: sdc.diagnosis.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        background: secondary
+        padding_block_start: '32'
+        padding_block_end: '32'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        image_size: '4:3'
+        image_position: right
+        image_radius: extra-large
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: f9015589-a3a9-4bf5-abb2-194d443eecff
+            target_type: media
+    -
+      parent_uuid: ff3d5111-c1c2-4fe4-b48f-e6fb45d418b8
+      slot: hero_slot
+      uuid: f9d5f6dc-b298-416c-876a-714d3321d62e
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Patient Rights & Responsibilities'
+        level: 1
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ff3d5111-c1c2-4fe4-b48f-e6fb45d418b8
+      slot: hero_slot
+      uuid: 1b74076f-e2c5-4c45-904a-d7054cf9db38
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Your rights as a patient at Saltmarsh Island Health.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: a3f3e043-1436-4094-af8c-f83583aaf106
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: a3f3e043-1436-4094-af8c-f83583aaf106
+      slot: main_slot
+      uuid: 29c58dd2-e56d-4a49-aa02-53e19d3dff68
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Your Rights as a Patient'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: a3f3e043-1436-4094-af8c-f83583aaf106
+      slot: main_slot
+      uuid: 993b7884-bd6c-40d4-a9b6-c67c8f590115
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>At Saltmarsh Island Health, you have the right to:</p><ul><li data-list-item-id="e2964c11e7bd158653f76214312f0b2bf"><strong>Respectful Care:</strong> Receive considerate and respectful care regardless of age, race, ethnicity, religion, culture, language, physical or mental disability, socioeconomic status, sex, sexual orientation, or gender identity.</li><li data-list-item-id="efbea4aa9334a043864b47c46153521ca"><strong>Privacy and Confidentiality:</strong> Have your health information kept private and confidential in accordance with state and federal law.</li><li data-list-item-id="ef5ea4db4b30a4ddf943869c67e7df0d9"><strong>Information:</strong> Receive information about your diagnosis, treatment, and prognosis in terms you can understand.</li><li data-list-item-id="e4a2a4a2471e70824f1ed93700f470a8b"><strong>Participation in Care:</strong> Participate in decisions about your care, treatment, and services.</li><li data-list-item-id="e824c44390d392cdcc46a1870d6bab0eb"><strong>Refuse Treatment:</strong> Refuse treatment to the extent permitted by law and to be informed of the medical consequences.</li><li data-list-item-id="ea5504ceb1deba80731d37cedf8ec6337"><strong>Access to Records:</strong> Access your medical records and request amendments as permitted by law.</li><li data-list-item-id="e19c11832469b87420f082846d6883f73"><strong>Voice Concerns:</strong> Voice complaints about the care you receive without fear of reprisal.</li></ul>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: a3f3e043-1436-4094-af8c-f83583aaf106
+      slot: main_slot
+      uuid: 342a3ec8-eea7-4483-9b0f-c60b6c86cd16
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Your Responsibilities as a Patient'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: a3f3e043-1436-4094-af8c-f83583aaf106
+      slot: main_slot
+      uuid: 2ae176ff-953f-4296-8967-23814a92d628
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>To help us provide the best care, we ask that you:</p><ul><li data-list-item-id="ebe6cd20e53da40c9df1e38c68d2161d3">Provide complete and accurate information about your health</li><li data-list-item-id="e1485d44d0d4344b76e8f2b70278f96de">Follow the treatment plan agreed upon with your healthcare provider</li><li data-list-item-id="e2e92b45b260f32eee267056721e1a210">Keep scheduled appointments or notify us if you cannot</li><li data-list-item-id="e3600d2b09633ecd3ef7553d1ca48bedf">Ask questions if you do not understand your care</li><li data-list-item-id="e3e1123d78c1ca286f315fd847ade227e">Treat staff, other patients, and visitors with courtesy and respect</li><li data-list-item-id="ee9ba64526d3f46a72c93a38c4ced63a1">Meet your financial obligations</li></ul>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: a3f3e043-1436-4094-af8c-f83583aaf106
+      slot: main_slot
+      uuid: 3016aeec-5210-4e8c-86b1-139271b859bf
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Questions or Concerns?'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: a3f3e043-1436-4094-af8c-f83583aaf106
+      slot: main_slot
+      uuid: 05d71309-e170-4890-92e7-d129e722281a
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Contact our Patient Relations department at (555) 123-4576 or patientrelations@saltmarshhealth.org.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+  path:
+    -
+      alias: /patient-rights
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

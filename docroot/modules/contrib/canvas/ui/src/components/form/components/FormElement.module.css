@@ -1,0 +1,30 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--space-4);
+  gap: var(--space-1);
+  & > :first-child {
+    position: relative;
+  }
+}
+
+.inline {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.checkbox {
+  /* stylelint-disable-next-line value-keyword-case */
+  composes: inline;
+  flex-wrap: wrap;
+  :global(.description) {
+    flex-basis: 100%;
+  }
+}
+
+.radio {
+  /* stylelint-disable-next-line value-keyword-case */
+  composes: inline;
+}

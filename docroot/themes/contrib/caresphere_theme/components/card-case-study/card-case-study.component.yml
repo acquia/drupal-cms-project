@@ -1,0 +1,44 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Case study card
+group: Card
+description: "Testimonial/case study card with logo, quote, author avatar and CTA. Figma desktop 1:9573, mobile 1:9326."
+props:
+  type: object
+  properties:
+    logo_media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Logo
+      type: object
+    quote:
+      type: string
+      title: Quote
+      pattern: "(.|\\r?\\n)*"
+      default: ""
+      examples:
+        - '"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare."'
+    avatar_media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Author image
+      type: object
+    author_name:
+      type: string
+      title: Author name
+      default: ""
+      examples:
+        - "Maria Rodriguez"
+    author_position:
+      type: string
+      title: Position, company
+      default: ""
+      examples:
+        - "Community Member"
+    cta_label:
+      type: string
+      title: Button label
+      default: "Button"
+      examples:
+        - "Join Our Mission"
+    cta_url:
+      type: string
+      title: Button link
+      default: ""

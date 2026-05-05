@@ -1,0 +1,78 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.system_breadcrumb_block
+    - canvas.component.block.system_menu_block.main
+    - canvas.component.block.views_block.mc_content_fields_node-attachments
+    - canvas.component.sdc.morphos.banner
+    - canvas.component.sdc.morphos.content
+    - canvas.component.sdc.morphos.layout
+    - canvas.component.sdc.morphos.toc
+    - core.entity_view_mode.node.full
+    - field.field.media.image.field_media_image
+    - field.field.node.mc_section.field_mc_banner_image
+    - field.field.node.mc_section.field_mc_banner_title
+    - field.field.node.mc_section.field_mc_content
+    - field.field.node.mc_section.field_mc_intro
+    - field.field.node.mc_section.field_mc_toc
+    - field.field.node.mc_section.field_mc_updated_date
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - node.type.mc_section
+  module:
+    - file
+    - media
+    - node
+    - options
+id: node.mc_section.full
+content_entity_type_id: node
+content_entity_type_bundle: mc_section
+content_entity_type_view_mode: full
+component_tree:
+  0:
+    uuid: 0a5e8f5a-afc6-4593-9569-efc4607c2d1c
+    component_id: sdc.morphos.banner
+    component_version: 9b5c82290dafa0f4
+    inputs: '{"title":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_section\u241dtitle\u241e\u241fvalue"},"padding_top":"12","padding_bottom":"12","banner_title":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_section\u241dfield_mc_banner_title\u241e\u241fvalue"},"introduction":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_section\u241dfield_mc_intro\u241e\u241fprocessed"},"featured_image":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_section\u241dfield_mc_banner_image\u241e\u241fentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241f{src\u21a0src_with_alternate_widths,alt\u21a0alt,width\u21a0width,height\u21a0height}"},"palette":"color--primary","texture":"texture--conic-bottom-end","date":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_section\u241dfield_mc_updated_date\u241e\u241fvalue"}}'
+  '0:breadcrumb:0':
+    parent_uuid: 0a5e8f5a-afc6-4593-9569-efc4607c2d1c
+    slot: breadcrumb
+    uuid: f847bd5d-2268-466e-a5aa-d27aad6768cc
+    component_id: block.system_breadcrumb_block
+    component_version: ad6359c331fc7c45
+    inputs: '{"label":"Breadcrumbs","label_display":"0"}'
+  1:
+    uuid: 373b8ad2-ef57-4d8b-9f45-7307f3115e6c
+    component_id: sdc.morphos.layout
+    component_version: d2a5f1008f68c839
+    inputs: '{"layout":"layout--4-1-7","padding_top":"12","padding_bottom":"12","container":"container--normal"}'
+  '1:main:0':
+    parent_uuid: 373b8ad2-ef57-4d8b-9f45-7307f3115e6c
+    slot: main
+    uuid: 58f9a71b-88d1-4343-8fd7-34a98720bb1c
+    component_id: sdc.morphos.content
+    component_version: aca7da150405d653
+    inputs: '{"content":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_section\u241dfield_mc_content\u241e\u241fprocessed"}}'
+  '1:main:1':
+    parent_uuid: 373b8ad2-ef57-4d8b-9f45-7307f3115e6c
+    slot: main
+    uuid: bd8c931d-6985-45f6-83c1-3e6930737c56
+    component_id: block.views_block.mc_content_fields_node-attachments
+    component_version: 2cd5793eba124031
+    inputs: '{"label":"Content fields Node: attachments","label_display":"0","views_label":"","items_per_page":null}'
+  '1:side:0':
+    parent_uuid: 373b8ad2-ef57-4d8b-9f45-7307f3115e6c
+    slot: side
+    uuid: fbc60c92-cd35-4fef-9d2c-237cbfb70ed5
+    component_id: block.system_menu_block.main
+    component_version: 023ff7ba63f80798
+    inputs: '{"label":"Main navigation","label_display":"0","level":"2","depth":"4","expand_all_items":true}'
+  '1:side:1':
+    parent_uuid: 373b8ad2-ef57-4d8b-9f45-7307f3115e6c
+    slot: side
+    uuid: fb3148f7-c9b7-424d-bf9a-e89e86b52eda
+    component_id: sdc.morphos.toc
+    component_version: b084e4ab88d027b3
+    inputs: '{"show":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_section\u241dfield_mc_toc\u241e\u241fvalue"},"content_selector":".layout__container .layout__content","heading_levels":"h2,h3","sticky":true,"heading":"On this page","heading_level":3}'
+exposed_slots: {  }

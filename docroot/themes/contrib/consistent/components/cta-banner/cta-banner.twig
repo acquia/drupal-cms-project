@@ -1,0 +1,31 @@
+<div class="stwl-container">
+  <div class="flex flex-col md:flex-row bg-primary rounded-[var(--radius-sm)] overflow-hidden">
+    <div class="flex flex-col justify-center p-8 md:w-2/5 text-background">
+      {% if heading_text is not empty %}
+        <h2 class="text-2xl font-bold mb-3 text-background">{{ heading_text }}</h2>
+      {% endif %}
+      {% if text is not empty %}
+        <p class="text-base mb-6 text-background opacity-90">{{ text }}</p>
+      {% endif %}
+      {% if cta_label is not empty and cta_url is not empty %}
+        <div>
+          <a href="{{ cta_url }}" class="inline-flex items-center gap-2 px-5 py-3 font-bold no-underline text-base transition duration-200 bg-yellow text-foreground rounded-[var(--radius)] cursor-pointer hover:brightness-90 focus:outline-none focus:bg-focus focus:text-focus-text focus:shadow-[0_2px_0_0_var(--color-foreground)]">
+            {{ cta_label }}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+        </div>
+      {% endif %}
+    </div>
+    {% if media is not empty and media.src is not empty %}
+      <div class="md:w-3/5 overflow-hidden min-h-[300px]">
+        {% include 'canvas:image' ignore missing with {
+          src: media.src,
+          alt: media.alt,
+          class: 'object-cover w-full h-full block',
+          width: media.width,
+          height: media.height
+        } only %}
+      </div>
+    {% endif %}
+  </div>
+</div>

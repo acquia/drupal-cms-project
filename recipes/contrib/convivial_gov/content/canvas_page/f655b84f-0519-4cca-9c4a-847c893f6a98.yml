@@ -1,0 +1,549 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: f655b84f-0519-4cca-9c4a-847c893f6a98
+  default_langcode: en
+  depends:
+    b6bf9f86-e49f-4d0f-8834-3f08fdd8b8eb: file
+    c2205fed-268e-457a-a382-7a928e33ddc4: media
+    4251749d-7454-4819-b209-d7e159f2be4d: file
+    a93b4602-ec03-4375-96d3-16c0f65864fc: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Containers
+  components:
+    -
+      uuid: f442850d-308a-4900-9870-1090cb654411
+      component_id: sdc.morphos.banner
+      inputs:
+        padding_top: '12'
+        padding_bottom: '12'
+        palette: color--primary
+        title: Containers
+        texture: texture--conic-top-start
+    -
+      parent_uuid: f442850d-308a-4900-9870-1090cb654411
+      slot: breadcrumb
+      uuid: 6d265d92-7439-41e2-9540-db04ce4da9fe
+      component_id: block.system_breadcrumb_block
+      inputs:
+        label: Breadcrumbs
+        label_display: '0'
+    -
+      uuid: 878d4df7-2699-49fb-a9c2-2bf256c0e321
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading: 'Section: Header (12) Main (12)'
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--standard
+        layout: layout--12
+    -
+      parent_uuid: 878d4df7-2699-49fb-a9c2-2bf256c0e321
+      slot: main_items
+      uuid: e836aed8-57cf-40df-8de4-e09d8c77cd51
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>This is a section component using the "Layout: Header (12) Main (12)".</p>'
+          format: canvas_html_block
+    -
+      uuid: 400620e8-ad68-4fe2-b259-8399553eac17
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading: 'Section: Header (3) Main (9)'
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--alternate
+        layout: layout--3-9
+    -
+      parent_uuid: 400620e8-ad68-4fe2-b259-8399553eac17
+      slot: main_items
+      uuid: 3aa9ce7f-1ead-49ca-835c-b3caaf975215
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>This is a section component using the "Layout: Header (3) Main (9)".</p>'
+          format: canvas_html_block
+    -
+      uuid: 41d8a484-0365-4bff-9dd0-3c1a7aff4be0
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading: 'Section: Header (3) Gap (1) Main (8)'
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--primary
+        layout: layout--3-1-8
+    -
+      parent_uuid: 41d8a484-0365-4bff-9dd0-3c1a7aff4be0
+      slot: main_items
+      uuid: a06a79e5-7342-42ce-8ceb-36d9cc96d9ad
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>This is a section component using the "Layout: Header (3) Gap (1) Main (8)".</p>'
+          format: canvas_html_block
+    -
+      uuid: f4634236-5406-4eb3-a955-e76166a5b03c
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading: 'Section: Header (4) Main (8) '
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--secondary
+        layout: layout--4-8
+    -
+      parent_uuid: f4634236-5406-4eb3-a955-e76166a5b03c
+      slot: main_items
+      uuid: 24811c94-ccce-432d-9608-52462c10704c
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>This is a section component using the "Layout: Header (4) Main (8) ".</p>'
+          format: canvas_html_block
+    -
+      uuid: c0c36580-3a87-4259-bb2c-2938b86e8899
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading: 'Section: Header (4) Gap (1) Main (7)'
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--accent
+        layout: layout--4-1-7
+    -
+      parent_uuid: c0c36580-3a87-4259-bb2c-2938b86e8899
+      slot: main_items
+      uuid: 5e307358-e8ca-4287-8e29-eafe8eb745a1
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>This is a section component using the "Layout: Header (4) Gap (1) Main (7)".</p>'
+          format: canvas_html_block
+    -
+      uuid: df0e13ff-d7f6-4ecc-8b6b-b8ba9eb9be26
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading: 'Section: Main (9) Header (3)'
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--neutral
+        layout: layout--9-3
+    -
+      parent_uuid: df0e13ff-d7f6-4ecc-8b6b-b8ba9eb9be26
+      slot: main_items
+      uuid: f5580bdf-9a44-44f9-90ac-678cd17b520e
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>This is a section component using the "Header position: Main (9) Header (3)".</p>'
+          format: canvas_html_block
+    -
+      uuid: df6155b9-1092-475d-a3fc-74b0b7ff0bf5
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading: 'Section: Header (4) Gap (1) Main (7)'
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--standard
+        layout: layout--4-1-7
+    -
+      parent_uuid: df6155b9-1092-475d-a3fc-74b0b7ff0bf5
+      slot: main_items
+      uuid: 7b76e9fd-63b9-498e-929e-ae08b8f467fe
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>This is a section component using the "Header position: Header (4) Gap (1) Main (7)".</p>'
+          format: canvas_html_block
+    -
+      uuid: 550f6dcc-53b4-4506-9813-5bc38e7b9da4
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading: 'Section: Main (8) Header (4)'
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--alternate
+        layout: layout--8-4
+    -
+      parent_uuid: 550f6dcc-53b4-4506-9813-5bc38e7b9da4
+      slot: main_items
+      uuid: 24367561-8da1-4cbe-91ca-a109aefa293b
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>This is a section component using the "Layout: Main (8) Header (4)".</p>'
+          format: canvas_html_block
+    -
+      uuid: b22503b9-1b90-45dd-ba12-e94f1bc26de7
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading: 'Section: Main (7) Gap (1) Header (4)'
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--primary
+        layout: layout--7-1-4
+    -
+      parent_uuid: b22503b9-1b90-45dd-ba12-e94f1bc26de7
+      slot: main_items
+      uuid: 281f1d9f-bd26-40fb-93f5-401c7e12246e
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>This is a section component using the "Layout: Main (7) Gap (1) Header (4)".</p>'
+          format: canvas_html_block
+    -
+      uuid: 7c3abc28-b55c-4e35-99d4-f27e1e31823c
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--secondary
+        heading: Grid
+    -
+      parent_uuid: 7c3abc28-b55c-4e35-99d4-f27e1e31823c
+      slot: main_items
+      uuid: 8c01a766-0bd8-402b-acec-810a77f191b5
+      component_id: sdc.morphos.grid
+      inputs:
+        padding_bottom: '12'
+        row_count: 1
+        container: container--normal
+        padding_top: '12'
+    -
+      parent_uuid: 8c01a766-0bd8-402b-acec-810a77f191b5
+      slot: cell_1
+      uuid: b5912ce6-0e21-4ed8-a732-825cb6815560
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>Grid cel 1 content.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 8c01a766-0bd8-402b-acec-810a77f191b5
+      slot: cell_2
+      uuid: c3364d71-8dd9-4224-80ea-13479b744e1d
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>Grid cel 2 content.</p>'
+          format: canvas_html_block
+    -
+      uuid: ee86b04f-606c-4813-b1fa-999a4d3f4c11
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--accent
+        heading: Layout
+    -
+      parent_uuid: ee86b04f-606c-4813-b1fa-999a4d3f4c11
+      slot: main_items
+      uuid: c0f6409e-8226-469e-b354-b7cf57054539
+      component_id: sdc.morphos.layout
+      inputs:
+        layout: layout--7-1-4
+        margin_top: '12'
+        margin_bottom: '12'
+        padding_top: '0'
+        padding_bottom: '0'
+        container: container--normal
+    -
+      parent_uuid: c0f6409e-8226-469e-b354-b7cf57054539
+      slot: main
+      uuid: 22fefb36-edf4-4fe7-a740-fdd3d71cb3f3
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>Layout main content.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: c0f6409e-8226-469e-b354-b7cf57054539
+      slot: side
+      uuid: 0c5a0565-7ab6-4ed1-8e71-9ee86c61984a
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>Layout side content.</p>'
+          format: canvas_html_block
+    -
+      uuid: aea5b8a4-32e3-499a-a7e3-513cb87be80e
+      component_id: sdc.morphos.hero
+      inputs:
+        content_width: content-width--100
+        padding_top: '32'
+        padding_bottom: '32'
+        container: container--normal
+        palette: color--primary
+        overlay: overlay--radial-center
+    -
+      parent_uuid: aea5b8a4-32e3-499a-a7e3-513cb87be80e
+      slot: items
+      uuid: c6348d5d-b75f-4ea3-a704-2f65c6469104
+      component_id: sdc.morphos.heading
+      inputs:
+        heading: Hero
+        level: 2
+        use_display_font: false
+    -
+      parent_uuid: aea5b8a4-32e3-499a-a7e3-513cb87be80e
+      slot: items
+      uuid: 539c589a-4635-48ae-83af-ba696fa36cd8
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>Hero content.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: aea5b8a4-32e3-499a-a7e3-513cb87be80e
+      slot: backgrounds
+      uuid: a5bc59da-bbb9-4e94-b52c-5ae2ca76240f
+      component_id: sdc.morphos.image_background
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: c2205fed-268e-457a-a382-7a928e33ddc4
+            target_type: media
+        position: 'center center'
+        style: cover
+    -
+      uuid: dc227b65-8f16-4c7f-b52f-300464936d71
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading: Group
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--accent
+    -
+      parent_uuid: dc227b65-8f16-4c7f-b52f-300464936d71
+      slot: main_items
+      uuid: 203e2f24-b8f3-4cca-84e0-a992e3db361f
+      component_id: sdc.morphos.group
+      inputs:
+        allow_wrap: true
+        gap: '4'
+        palette: color--secondary
+        padding: '12'
+    -
+      parent_uuid: 203e2f24-b8f3-4cca-84e0-a992e3db361f
+      slot: items
+      uuid: 7a3d6962-cabe-4cb3-8892-b35377a498ef
+      component_id: sdc.morphos.card
+      inputs:
+        heading: 'This is your card title'
+        heading_level: 3
+        center: false
+        card_side: false
+        palette: color--primary
+    -
+      parent_uuid: dc227b65-8f16-4c7f-b52f-300464936d71
+      slot: main_items
+      uuid: 47b00385-fb95-40ea-99a2-a9fc1b5fef92
+      component_id: sdc.morphos.group
+      inputs:
+        allow_wrap: true
+        gap: '4'
+        margin_top: '8'
+    -
+      parent_uuid: 47b00385-fb95-40ea-99a2-a9fc1b5fef92
+      slot: items
+      uuid: d1efe308-c39e-4f2c-a681-5bbd1e32dd43
+      component_id: sdc.morphos.button
+      inputs:
+        text: 'Button text'
+    -
+      parent_uuid: 47b00385-fb95-40ea-99a2-a9fc1b5fef92
+      slot: items
+      uuid: 4223cb43-3625-41e0-9a87-02c71a648a5c
+      component_id: sdc.morphos.button
+      inputs:
+        text: 'Button text'
+        style: btn-outline
+    -
+      parent_uuid: 47b00385-fb95-40ea-99a2-a9fc1b5fef92
+      slot: items
+      uuid: 3b4a0f0d-dff7-4703-8fa4-6cfb51fa492f
+      component_id: sdc.morphos.button
+      inputs:
+        text: 'Button text'
+        style: btn-dash
+    -
+      parent_uuid: 47b00385-fb95-40ea-99a2-a9fc1b5fef92
+      slot: items
+      uuid: bee56808-afd5-4840-853b-2e9fa5a7c910
+      component_id: sdc.morphos.button
+      inputs:
+        text: 'Button text'
+        style: btn-ghost
+        icon: plus
+        shape: btn-square
+    -
+      uuid: 009ad931-4b68-4483-ac22-3de95a48c6df
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--standard
+        content_position: section-position--center
+        content_alignment: section-alignment--center
+    -
+      parent_uuid: 009ad931-4b68-4483-ac22-3de95a48c6df
+      slot: main_items
+      uuid: f5e3386c-613d-433f-8b19-374c7e85f487
+      component_id: sdc.morphos.hero
+      inputs:
+        content_width: content-width--50
+        padding_top: '32'
+        padding_bottom: '32'
+        container: container--normal
+        palette: color--primary
+        content_position: content-position--center
+        content_alignment: center
+        texture: texture--conic-top-end
+    -
+      parent_uuid: f5e3386c-613d-433f-8b19-374c7e85f487
+      slot: items
+      uuid: 0550e8e5-a8bc-4216-8f35-37d779c8bb6c
+      component_id: sdc.morphos.heading
+      inputs:
+        heading: 'Hero within section'
+        level: 1
+        use_display_font: false
+    -
+      parent_uuid: f5e3386c-613d-433f-8b19-374c7e85f487
+      slot: items
+      uuid: ae965bda-b25e-49e2-933a-e1e350e70b62
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>Intro text goes here</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: f5e3386c-613d-433f-8b19-374c7e85f487
+      slot: items
+      uuid: 5667f7be-42ce-4a64-b641-c0fe30e47a83
+      component_id: sdc.morphos.button
+      inputs:
+        text: 'Button text'
+    -
+      parent_uuid: f5e3386c-613d-433f-8b19-374c7e85f487
+      slot: backgrounds
+      uuid: 221031ed-f3ad-472d-815b-008490831c20
+      component_id: sdc.morphos.parallax_background
+      inputs:
+        speed: 150
+        opacity: 20
+        media_query: '(min-width:768px)'
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: a93b4602-ec03-4375-96d3-16c0f65864fc
+            target_type: media
+  path:
+    -
+      alias: /demo/containers
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

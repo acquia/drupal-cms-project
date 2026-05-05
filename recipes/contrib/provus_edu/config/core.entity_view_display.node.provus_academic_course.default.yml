@@ -1,0 +1,61 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.provus_academic_course.field_provus_ac_about
+    - field.field.node.provus_academic_course.field_provus_ac_credit
+    - field.field.node.provus_academic_course.field_provus_ac_program
+    - field.field.node.provus_academic_course.field_provus_ac_semester
+    - field.field.node.provus_academic_course.field_provus_ac_year_level
+    - node.type.provus_academic_course
+  module:
+    - options
+    - text
+    - user
+id: node.provus_academic_course.default
+targetEntityType: node
+bundle: provus_academic_course
+mode: default
+content:
+  field_provus_ac_about:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_provus_ac_credit:
+    type: number_integer
+    label: inline
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_provus_ac_program:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_provus_ac_semester:
+    type: list_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_provus_ac_year_level:
+    type: list_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  addtoany: true
+  links: true
+  search_api_excerpt: true

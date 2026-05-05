@@ -1,0 +1,26 @@
+{% set classes = [
+  'testimonial-module',
+  admin_theme ? 'testimonial-module--admin-theme' : 'testimonial-module--themed',
+] %}
+
+<section{{attributes.addClass(classes)}}>
+  <div class="testimonial-module__container">
+    <div class="testimonial-module__slider-wrapper">
+      <button class="testimonial-module__nav testimonial-module__nav--prev" aria-label="Previous slide" disabled>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+      </button>
+
+      <div class="testimonial-module__slider-track" role="region" aria-label="Testimonial Slider">
+        {{ items }}
+      </div>
+
+      <button class="testimonial-module__nav testimonial-module__nav--next" aria-label="Next slide">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+
+    <div class="testimonial-module__controls">
+      <div class="testimonial-module__dots"></div>
+    </div>
+  </div>
+</section>

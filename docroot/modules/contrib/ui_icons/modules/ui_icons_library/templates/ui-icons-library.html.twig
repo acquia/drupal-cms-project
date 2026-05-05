@@ -1,0 +1,43 @@
+{{ attach_library('ui_icons_library/ui_icons_library.admin') }}
+
+<div class="ui-icons-wrapper">
+  <div class="ui-icons-result">
+    {% if search is empty %}
+      {% if total > 0 %}
+        {% if total == 0 %}
+          No icons found!
+        {% else %}
+          {% trans %}
+            Total of <em>1</em> icon.
+          {% plural total %}
+            Total of <em>{{ total }}</em> icons.
+          {% endtrans %}
+        {% endif %}
+        </p>
+      {% endif %}
+    {% else %}
+      {% if total > 0 %}
+        <p>{{ 'Found %total icons for keyword: %search.'|t({'%total': total, '%search': search}) }}</p>
+      {% else %}
+        <p>{{ 'No icon found for keyword: %search.'|t({'%search': search}) }}</p>
+      {% endif %}
+    {% endif %}
+
+    {% if search is empty and total == 0 and available > 0 %}
+      <p>{{ 'There is a problem in search, reset this form.'|t }}</p>
+    {% endif %}
+    {% if search is empty and total == 0 and available == 0 %}
+      <p>{{ 'Could not find any icon, update your search or reset this form.'|t }}</p>
+    {% endif %}
+  </div>
+
+  <div class="ui-icons-grid">
+    {% for icon_full_id in icons %}
+      {% set icon_id = icon_full_id|split(':') %}
+      <div class="ui-icons-item" title="{{ icon_full_id }}">
+        {{ icon(icon_id.0, icon_id.1, settings) }}
+        <br><small>{{ icon_id.1 }}</small>
+      </div>
+    {% endfor %}
+  </div>
+</div>

@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 7d54a40b-7651-4ea3-bdd3-f5e63ed4ce5a
+  bundle: service_page
+  default_langcode: en
+  depends:
+    dc37eb59-6951-4d90-8fdd-e4bd7d88bfd5: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Apply for social housing'
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /housing/apply-social-housing
+      langcode: en
+  field_content:
+    -
+      value: '<h2>Who can apply</h2><p>You can apply if you are 18 or over and have a qualifying connection to the local area. A local connection is usually established through living, working, or having close family in the area for a set period. Some exceptions apply — for example, people fleeing domestic abuse or those referred through a statutory homelessness duty are assessed separately.</p><blockquote><p>Being registered on the housing list does not guarantee an offer. The time you wait depends on your assessed need and the availability of suitable properties. Some applicants may wait several years before a suitable property becomes available.</p></blockquote><h2>Priority bands</h2><table><thead><tr><th>Band</th><th>Priority level</th><th>Who qualifies</th></tr></thead><tbody><tr><td>Band 1</td><td>Urgent</td><td>Emergency rehousing, serious medical need, significant overcrowding</td></tr><tr><td>Band 2</td><td>High</td><td>Moderate medical need, statutory homelessness duty</td></tr><tr><td>Band 3</td><td>Standard</td><td>General housing need with local connection</td></tr><tr><td>Band 4</td><td>Low</td><td>Low need or limited local connection</td></tr></tbody></table><h2>How to apply</h2><p>Complete the online application form. You will need to provide proof of identity, evidence of your current address, and details of everyone who will live with you. Once assessed, you will be placed in a band and can begin expressing interest in available properties through the choice-based lettings system, where properties are advertised weekly.</p>'
+      format: content_format
+  field_description:
+    -
+      value: 'Register on the housing list to be considered for a council or housing association property in this area.'
+  field_parent:
+    -
+      entity: dc37eb59-6951-4d90-8fdd-e4bd7d88bfd5

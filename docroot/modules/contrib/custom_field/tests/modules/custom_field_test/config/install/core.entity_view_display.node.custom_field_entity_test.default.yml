@@ -1,0 +1,1297 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.custom_field_entity_test.field_test
+    - field.field.node.custom_field_entity_test.field_test_multiple
+    - field.field.node.custom_field_entity_test.field_test_unlimited
+    - node.type.custom_field_entity_test
+  module:
+    - custom_field
+    - user
+id: node.custom_field_entity_test.default
+targetEntityType: node
+bundle: custom_field_entity_test
+mode: default
+content:
+  field_test:
+    type: custom_formatter
+    label: above
+    settings:
+      fields:
+        string:
+          weight: 0
+          format_type: string
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            key_label: label
+            label_display: above
+            field_label: string
+            prefix_suffix: false
+        string_long:
+          weight: 0
+          format_type: text_default
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: string_long
+        integer:
+          weight: 0
+          format_type: number_integer
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            key_label: label
+            label_display: above
+            field_label: integer
+            prefix_suffix: false
+            thousand_separator: ','
+        decimal:
+          weight: 0
+          format_type: number_decimal
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            decimal_separator: .
+            key_label: label
+            label_display: above
+            field_label: decimal
+            prefix_suffix: true
+            scale: 2
+            thousand_separator: ''
+        float:
+          weight: 0
+          format_type: number_decimal
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            decimal_separator: .
+            key_label: label
+            label_display: above
+            field_label: float
+            prefix_suffix: true
+            scale: 2
+            thousand_separator: ''
+        email:
+          weight: 0
+          format_type: email_mailto
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: email
+        telephone:
+          weight: 0
+          format_type: telephone_link
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: telephone
+            title: ''
+        uri:
+          weight: 0
+          format_type: uri_link
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: uri
+            link_text: ''
+            title: ''
+            trim_length: 80
+            url_plain: false
+            url_only: false
+            rel: '0'
+            noopener: '0'
+            noreferrer: '0'
+            id: ''
+            class: ''
+            aria-label: ''
+            accesskey: ''
+            name: ''
+            target: '0'
+        boolean:
+          weight: 0
+          format_type: boolean
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            format: yes-no
+            format_custom_true: ''
+            format_custom_false: ''
+            label_display: above
+            field_label: boolean
+        uuid:
+          weight: 0
+          format_type: string
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            key_label: label
+            label_display: above
+            field_label: uuid
+            prefix_suffix: false
+        color:
+          weight: 0
+          format_type: string
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            key_label: label
+            label_display: above
+            field_label: color
+            prefix_suffix: false
+        map:
+          weight: 0
+          format_type: string
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            key_label: label
+            label_display: above
+            field_label: map
+            prefix_suffix: false
+        map_string:
+          weight: 0
+          format_type: map_list
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: map_string
+            list_type: ul
+        datetime:
+          weight: 0
+          format_type: datetime_default
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: datetime
+            timezone_override: ''
+            timezone_stored: false
+            display_timezone: false
+            timezone_format: abbreviation
+            user_timezone: false
+            format_type: medium
+        daterange:
+          weight: 0
+          format_type: daterange_default
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: daterange
+            timezone_override: ''
+            timezone_stored: false
+            display_timezone: false
+            timezone_format: abbreviation
+            user_timezone: false
+            from_to: both
+            separator: ' - '
+            end_date_fallback_text: TBD
+            date_format_parts:
+              month:
+                format: F
+                suffix: ' '
+              day:
+                format: jS
+                suffix: ', '
+              year:
+                format: 'Y'
+                suffix: ''
+            time_format_parts:
+              hour:
+                format: g
+                suffix: ':'
+              minute:
+                format: i
+                suffix: ''
+              second:
+                format: ''
+                suffix: ''
+              am_pm:
+                format: a
+                suffix: ''
+            date_first: date
+            date_time_separator: ' '
+            all_day_label: 'All day'
+            all_day_separator: ' | '
+        entity_reference:
+          weight: 0
+          format_type: entity_reference_label
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: entity_reference
+            link: true
+        file:
+          weight: 0
+          format_type: file_default
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: file
+        image:
+          weight: 0
+          format_type: image
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            image_link: ''
+            image_style: ''
+            image_loading:
+              attribute: lazy
+            label_display: above
+            field_label: image
+        link:
+          weight: 0
+          format_type: link
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: link
+            link_text: ''
+            title: ''
+            trim_length: 80
+            url_plain: false
+            url_only: false
+            rel: '0'
+            noopener: '0'
+            noreferrer: '0'
+            id: ''
+            class: ''
+            aria-label: ''
+            accesskey: ''
+            name: ''
+            target: '0'
+        time:
+          weight: 0
+          format_type: time
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: time
+            time_format: 'h:i a'
+        time_range:
+          weight: 0
+          format_type: time_range_default
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: 'Time range'
+            separator: ' - '
+            time_format_parts:
+              hour:
+                format: g
+                suffix: ':'
+              minute:
+                format: i
+                suffix: ''
+              second:
+                format: ''
+                suffix: ''
+              am_pm:
+                format: a
+                suffix: ''
+        viewfield:
+          weight: 0
+          format_type: viewfield_default
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: viewfield
+            always_build_output: false
+        duration:
+          weight: 0
+          format_type: duration
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: Duration
+            duration_granularity: 'days:hours:minutes'
+            duration_separator: ', '
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_test_multiple:
+    type: custom_formatter
+    label: above
+    settings:
+      fields:
+        string:
+          weight: 0
+          format_type: string
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            key_label: label
+            label_display: above
+            field_label: string
+            prefix_suffix: false
+        string_long:
+          weight: 0
+          format_type: text_default
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: string_long
+        integer:
+          weight: 0
+          format_type: number_integer
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            key_label: label
+            label_display: above
+            field_label: integer
+            prefix_suffix: false
+            thousand_separator: ','
+        decimal:
+          weight: 0
+          format_type: number_decimal
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            decimal_separator: .
+            key_label: label
+            label_display: above
+            field_label: decimal
+            prefix_suffix: true
+            scale: 2
+            thousand_separator: ''
+        float:
+          weight: 0
+          format_type: number_decimal
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            decimal_separator: .
+            key_label: label
+            label_display: above
+            field_label: float
+            prefix_suffix: true
+            scale: 2
+            thousand_separator: ''
+        email:
+          weight: 0
+          format_type: email_mailto
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: email
+        telephone:
+          weight: 0
+          format_type: telephone_link
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: telephone
+            title: ''
+        uri:
+          weight: 0
+          format_type: uri_link
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: uri
+            link_text: ''
+            title: ''
+            trim_length: 80
+            url_plain: false
+            url_only: false
+            rel: '0'
+            noopener: '0'
+            noreferrer: '0'
+            id: ''
+            class: ''
+            aria-label: ''
+            accesskey: ''
+            name: ''
+            target: '0'
+        boolean:
+          weight: 0
+          format_type: boolean
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            format: yes-no
+            format_custom_true: ''
+            format_custom_false: ''
+            label_display: above
+            field_label: boolean
+        uuid:
+          weight: 0
+          format_type: string
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            key_label: label
+            label_display: above
+            field_label: uuid
+            prefix_suffix: false
+        color:
+          weight: 0
+          format_type: string
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            key_label: label
+            label_display: above
+            field_label: color
+            prefix_suffix: false
+        map:
+          weight: 0
+          format_type: string
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            key_label: label
+            label_display: above
+            field_label: map
+            prefix_suffix: false
+        map_string:
+          weight: 0
+          format_type: map_list
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: map_string
+            list_type: ul
+        datetime:
+          weight: 0
+          format_type: datetime_default
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: datetime
+            timezone_override: ''
+            timezone_stored: false
+            display_timezone: false
+            timezone_format: abbreviation
+            user_timezone: false
+            format_type: medium
+        daterange:
+          weight: 0
+          format_type: daterange_default
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: daterange
+            timezone_override: ''
+            timezone_stored: false
+            display_timezone: false
+            timezone_format: abbreviation
+            user_timezone: false
+            from_to: both
+            separator: ' - '
+            end_date_fallback_text: TBD
+            date_format_parts:
+              month:
+                format: F
+                suffix: ' '
+              day:
+                format: jS
+                suffix: ', '
+              year:
+                format: 'Y'
+                suffix: ''
+            time_format_parts:
+              hour:
+                format: g
+                suffix: ':'
+              minute:
+                format: i
+                suffix: ''
+              second:
+                format: ''
+                suffix: ''
+              am_pm:
+                format: a
+                suffix: ''
+            date_first: date
+            date_time_separator: ' '
+            all_day_label: 'All day'
+            all_day_separator: ' | '
+        entity_reference:
+          weight: 0
+          format_type: entity_reference_label
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: entity_reference
+            link: true
+        file:
+          weight: 0
+          format_type: file_default
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: file
+        image:
+          weight: 0
+          format_type: image
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            image_link: ''
+            image_style: ''
+            image_loading:
+              attribute: lazy
+            label_display: above
+            field_label: image
+        link:
+          weight: 0
+          format_type: link
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: link
+            link_text: ''
+            title: ''
+            trim_length: 80
+            url_plain: false
+            url_only: false
+            rel: '0'
+            noopener: '0'
+            noreferrer: '0'
+            id: ''
+            class: ''
+            aria-label: ''
+            accesskey: ''
+            name: ''
+            target: '0'
+        time:
+          weight: 0
+          format_type: time
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: time
+            time_format: 'h:i a'
+        time_range:
+          weight: 0
+          format_type: time_range_default
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: 'Time range'
+            separator: ' - '
+            time_format_parts:
+              hour:
+                format: g
+                suffix: ':'
+              minute:
+                format: i
+                suffix: ''
+              second:
+                format: ''
+                suffix: ''
+              am_pm:
+                format: a
+                suffix: ''
+        viewfield:
+          weight: 0
+          format_type: viewfield_default
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: viewfield
+            always_build_output: false
+        duration:
+          weight: 0
+          format_type: duration
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: Duration
+            duration_granularity: 'days:hours:minutes'
+            duration_separator: ', '
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_test_unlimited:
+    type: custom_formatter
+    label: above
+    settings:
+      fields:
+        string:
+          weight: 0
+          format_type: string
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            key_label: label
+            label_display: above
+            field_label: string
+            prefix_suffix: false
+        string_long:
+          weight: 0
+          format_type: text_default
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: string_long
+        integer:
+          weight: 0
+          format_type: number_integer
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            key_label: label
+            label_display: above
+            field_label: integer
+            prefix_suffix: false
+            thousand_separator: ','
+        decimal:
+          weight: 0
+          format_type: number_decimal
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            decimal_separator: .
+            key_label: label
+            label_display: above
+            field_label: decimal
+            prefix_suffix: true
+            scale: 2
+            thousand_separator: ''
+        float:
+          weight: 0
+          format_type: number_decimal
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            decimal_separator: .
+            key_label: label
+            label_display: above
+            field_label: float
+            prefix_suffix: true
+            scale: 2
+            thousand_separator: ''
+        email:
+          weight: 0
+          format_type: email_mailto
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: email
+        telephone:
+          weight: 0
+          format_type: telephone_link
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: telephone
+            title: ''
+        uri:
+          weight: 0
+          format_type: uri_link
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: uri
+            link_text: ''
+            title: ''
+            trim_length: 80
+            url_plain: false
+            url_only: false
+            rel: '0'
+            noopener: '0'
+            noreferrer: '0'
+            id: ''
+            class: ''
+            aria-label: ''
+            accesskey: ''
+            name: ''
+            target: '0'
+        boolean:
+          weight: 0
+          format_type: boolean
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            format: yes-no
+            format_custom_true: ''
+            format_custom_false: ''
+            label_display: above
+            field_label: boolean
+        uuid:
+          weight: 0
+          format_type: string
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            key_label: label
+            label_display: above
+            field_label: uuid
+            prefix_suffix: false
+        color:
+          weight: 0
+          format_type: string
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            key_label: label
+            label_display: above
+            field_label: color
+            prefix_suffix: false
+        map:
+          weight: 0
+          format_type: string
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            key_label: label
+            label_display: above
+            field_label: map
+            prefix_suffix: false
+        map_string:
+          weight: 0
+          format_type: map_list
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: map_string
+            list_type: ul
+        datetime:
+          weight: 0
+          format_type: datetime_default
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: datetime
+            timezone_override: ''
+            timezone_stored: false
+            display_timezone: false
+            timezone_format: abbreviation
+            user_timezone: false
+            format_type: medium
+        daterange:
+          weight: 0
+          format_type: daterange_default
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: daterange
+            timezone_override: ''
+            timezone_stored: false
+            display_timezone: false
+            timezone_format: abbreviation
+            user_timezone: false
+            from_to: both
+            separator: ' - '
+            end_date_fallback_text: TBD
+            date_format_parts:
+              month:
+                format: F
+                suffix: ' '
+              day:
+                format: jS
+                suffix: ', '
+              year:
+                format: 'Y'
+                suffix: ''
+            time_format_parts:
+              hour:
+                format: g
+                suffix: ':'
+              minute:
+                format: i
+                suffix: ''
+              second:
+                format: ''
+                suffix: ''
+              am_pm:
+                format: a
+                suffix: ''
+            date_first: date
+            date_time_separator: ' '
+            all_day_label: 'All day'
+            all_day_separator: ' | '
+        entity_reference:
+          weight: 0
+          format_type: entity_reference_label
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: entity_reference
+            link: true
+        file:
+          weight: 0
+          format_type: file_default
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: file
+        image:
+          weight: 0
+          format_type: image
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            image_link: ''
+            image_style: ''
+            image_loading:
+              attribute: lazy
+            label_display: above
+            field_label: image
+        link:
+          weight: 0
+          format_type: link
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: link
+            link_text: ''
+            title: ''
+            trim_length: 80
+            url_plain: false
+            url_only: false
+            rel: '0'
+            noopener: '0'
+            noreferrer: '0'
+            id: ''
+            class: ''
+            aria-label: ''
+            accesskey: ''
+            name: ''
+            target: '0'
+        time:
+          weight: 0
+          format_type: time
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: time
+            time_format: 'h:i a'
+        time_range:
+          weight: 0
+          format_type: time_range_default
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: 'Time range'
+            separator: ' - '
+            time_format_parts:
+              hour:
+                format: g
+                suffix: ':'
+              minute:
+                format: i
+                suffix: ''
+              second:
+                format: ''
+                suffix: ''
+              am_pm:
+                format: a
+                suffix: ''
+        viewfield:
+          weight: 0
+          format_type: viewfield_default
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: viewfield
+            always_build_output: false
+        duration:
+          weight: 0
+          format_type: duration
+          wrappers:
+            field_wrapper_tag: ''
+            field_wrapper_classes: ''
+            field_tag: ''
+            field_classes: ''
+            label_tag: ''
+            label_classes: ''
+          formatter_settings:
+            label_display: above
+            field_label: Duration
+            duration_granularity: 'days:hours:minutes'
+            duration_separator: ', '
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

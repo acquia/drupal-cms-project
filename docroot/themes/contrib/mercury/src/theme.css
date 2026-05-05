@@ -1,0 +1,92 @@
+/**
+ * @file theme.css
+ * shadcn/ui-compatible theme variables for Mercury.
+ *
+ * You can customize these values without rebuilding the compiled CSS.
+ * Tools like https://tweakcn.com can help generate these values. Copy this
+ * file to your web root, so it sits next to index.php, and clear Drupal's
+ * cache. Then, any changes you make in this file should be reflected right away.
+ */
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.13 0.043 265.132);
+  --card: oklch(0.967 0.003 264.542);
+  --card-foreground: oklch(0.21 0.032 264.665);
+  --primary: oklch(0.547 0.246 262.866);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.9219 0 0);
+  --secondary-foreground: oklch(0.28 0.041 260.329);
+  --muted: oklch(0.967 0.003 264.542);
+  --muted-foreground: oklch(0.373 0.031 259.733);
+  --accent: oklch(0.932 0.032 255.585);
+  --accent-foreground: var(--foreground);
+  --destructive: oklch(0.6368 0.2078 25.3313);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.872 0.009 258.338);
+  --input: oklch(0.872 0.009 258.338);
+  --font-sans: "Outfit", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: "Fira Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+  --radius: 0.5rem;
+  --shadow-x: 0;
+  --shadow-y: 1px;
+  --shadow-blur: 3px;
+  --shadow-spread: 0px;
+  --shadow-opacity: 0.1;
+  --shadow-color: oklch(0 0 0);
+  --shadow-2xs: 0 1px 3px 1px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0 1px 3px 1px hsl(0 0% 0% / 0.05), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow-sm: 0 1px 3px 1px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
+  --shadow: 0 1px 3px 1px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
+  --shadow-md: 0 1px 3px 1px hsl(0 0% 0% / 0.1), 0 4px 6px -2px hsl(0 0% 0% / 0.1);
+  --shadow-lg: 0 1px 3px 1px hsl(0 0% 0% / 0.1), 0 8px 10px -2px hsl(0 0% 0% / 0.1);
+  --shadow-xl: 0 1px 3px 1px hsl(0 0% 0% / 0.1), 0 12px 14px -3px hsl(0 0% 0% / 0.1);
+  --shadow-2xl: 0 1px 3px 1px hsl(0 0% 0% / 0.1), 0 16px 18px -3px hsl(0 0% 0% / 0.1);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+
+  /* Set navbar height for hero billboard overlay */
+  --navbar-height: calc(var(--spacing) * 15);
+
+  @media (min-width: 768px) {
+    --navbar-height: calc(var(--spacing) * 18);
+  }
+}
+
+.dark {
+  --background: oklch(0.13 0.043 265.132);
+  --foreground: oklch(1 0 89.876);
+  --card: oklch(0.208 0.042 266.359);
+  --card-foreground: var(--foreground);
+  --primary: oklch(0.547 0.246 262.866);
+  --primary-foreground: var(--foreground);
+  --secondary: oklch(0.704 0.04 256.993);
+  --secondary-foreground: oklch(0.13 0.043 265.132);
+  --muted: oklch(0.28 0.041 260.329);
+  --muted-foreground: oklch(0.967 0.003 264.542);
+  --accent: oklch(0.932 0.032 255.585);
+  --accent-foreground: oklch(0.13 0.043 265.132);
+  --destructive: oklch(0.6368 0.2078 25.3313);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.373 0.031 259.733);
+  --input: oklch(0.373 0.031 259.733);
+  --font-sans: "Outfit", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: "Fira Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+  --radius: 0.5rem;
+  --shadow-x: 0;
+  --shadow-y: 1px;
+  --shadow-blur: 3px;
+  --shadow-spread: 0px;
+  --shadow-opacity: 0.1;
+  --shadow-color: oklch(0 0 0);
+  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
+  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
+  --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
+  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 12px 14px -1px hsl(0 0% 0% / 0.1);
+}

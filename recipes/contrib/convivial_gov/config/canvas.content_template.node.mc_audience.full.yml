@@ -1,0 +1,93 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.system_breadcrumb_block
+    - canvas.component.block.views_block.mc_audience_content-articles
+    - canvas.component.block.views_block.mc_audience_content-events
+    - canvas.component.block.views_block.mc_audience_content-resources
+    - canvas.component.block.views_block.mc_audience_content-tasks
+    - canvas.component.block.views_block.mc_content_fields_node-attachments
+    - canvas.component.sdc.morphos.banner
+    - canvas.component.sdc.morphos.content
+    - canvas.component.sdc.morphos.layout
+    - core.entity_view_mode.node.full
+    - field.field.media.image.field_media_image
+    - field.field.node.mc_audience.field_mc_banner_image
+    - field.field.node.mc_audience.field_mc_banner_title
+    - field.field.node.mc_audience.field_mc_content
+    - field.field.node.mc_audience.field_mc_intro
+    - field.field.node.mc_audience.field_mc_updated_date
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - node.type.mc_audience
+  module:
+    - file
+    - media
+    - node
+    - options
+id: node.mc_audience.full
+content_entity_type_id: node
+content_entity_type_bundle: mc_audience
+content_entity_type_view_mode: full
+component_tree:
+  0:
+    uuid: eca169f7-d741-45e2-8d10-a7770b1707c4
+    component_id: sdc.morphos.banner
+    component_version: 9b5c82290dafa0f4
+    inputs: '{"padding_top":"12","padding_bottom":"12","title":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_audience\u241dtitle\u241e\u241fvalue"},"banner_title":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_audience\u241dfield_mc_banner_title\u241e\u241fvalue"},"date":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_audience\u241dfield_mc_updated_date\u241e\u241fvalue"},"introduction":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_audience\u241dfield_mc_intro\u241e\u241fprocessed"},"palette":"color--primary","texture":"texture--conic-bottom-end","featured_image":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_audience\u241dfield_mc_banner_image\u241e\u241fentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241f{src\u21a0src_with_alternate_widths,alt\u21a0alt,width\u21a0width,height\u21a0height}"}}'
+  '0:breadcrumb:0':
+    parent_uuid: eca169f7-d741-45e2-8d10-a7770b1707c4
+    slot: breadcrumb
+    uuid: 443a7d7c-3de8-48d9-b1d6-b01d8cf83883
+    component_id: block.system_breadcrumb_block
+    component_version: ad6359c331fc7c45
+    inputs: '{"label":"Breadcrumbs","label_display":"0"}'
+  1:
+    uuid: fe9d8d6b-69d4-4def-b733-5ee99f813681
+    component_id: sdc.morphos.layout
+    component_version: d2a5f1008f68c839
+    inputs: '{"layout":"layout--12","padding_top":"12","padding_bottom":"12","container":"container--normal"}'
+  '1:main:0':
+    parent_uuid: fe9d8d6b-69d4-4def-b733-5ee99f813681
+    slot: main
+    uuid: e408a2e1-ab16-42c9-a069-43d4c4a21fb2
+    component_id: sdc.morphos.content
+    component_version: aca7da150405d653
+    inputs: '{"content":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_audience\u241dfield_mc_content\u241e\u241fprocessed"}}'
+  '1:main:1':
+    parent_uuid: fe9d8d6b-69d4-4def-b733-5ee99f813681
+    slot: main
+    uuid: f3a5610b-6b3d-4278-a60e-79b951c918b1
+    component_id: block.views_block.mc_content_fields_node-attachments
+    component_version: 2cd5793eba124031
+    inputs: '{"label":"Content fields Node: attachments","label_display":"0","views_label":"","items_per_page":null}'
+  '1:main:2':
+    parent_uuid: fe9d8d6b-69d4-4def-b733-5ee99f813681
+    slot: main
+    uuid: fdd50cc8-b9b7-4801-87bd-042997962bfd
+    component_id: block.views_block.mc_audience_content-articles
+    component_version: ddae71053847c261
+    inputs: '{"label":"Audience content: articles","label_display":"0","views_label":"","items_per_page":null}'
+  '1:main:3':
+    parent_uuid: fe9d8d6b-69d4-4def-b733-5ee99f813681
+    slot: main
+    uuid: 3c3f29bf-dca7-48b2-81c0-5d9fadb4a1c6
+    component_id: block.views_block.mc_audience_content-events
+    component_version: 8db90e4e5d557977
+    inputs: '{"label":"Audience content: events","label_display":"0","views_label":"","items_per_page":null}'
+  '1:main:4':
+    parent_uuid: fe9d8d6b-69d4-4def-b733-5ee99f813681
+    slot: main
+    uuid: b229434a-38bd-467d-9394-46553cd8dff3
+    component_id: block.views_block.mc_audience_content-resources
+    component_version: 15816498540ed678
+    inputs: '{"label":"Audience content: resources","label_display":"0","views_label":"","items_per_page":null}'
+  '1:main:5':
+    parent_uuid: fe9d8d6b-69d4-4def-b733-5ee99f813681
+    slot: main
+    uuid: 04ec9adf-9705-460f-b36c-d7e241ac3258
+    component_id: block.views_block.mc_audience_content-tasks
+    component_version: 46d3864cbce19f54
+    inputs: '{"label":"Audience content: tasks","label_display":"0","views_label":"","items_per_page":null}'
+exposed_slots: {  }

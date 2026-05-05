@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - provus_base_theme
+label: 'Stat Two Column'
+id: sdc.provus_base_theme.stat_two_column
+source: sdc
+source_local_id: 'provus_base_theme:stat_two_column'
+provider: provus_base_theme
+active_version: 78e46ad3297cb3ce
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Our Stats'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        stat_item_1:
+          title: 'Stat Item 1'
+          description: 'First stat item'
+        stat_item_2:
+          title: 'Stat Item 2'
+          description: 'Second stat item'

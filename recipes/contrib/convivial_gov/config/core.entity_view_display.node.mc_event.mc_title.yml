@@ -1,0 +1,82 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.mc_title
+    - field.field.node.mc_event.field_featured_image
+    - field.field.node.mc_event.field_mc_attachments
+    - field.field.node.mc_event.field_mc_audiences
+    - field.field.node.mc_event.field_mc_banner_featured_links
+    - field.field.node.mc_event.field_mc_banner_featured_title
+    - field.field.node.mc_event.field_mc_banner_image
+    - field.field.node.mc_event.field_mc_banner_title
+    - field.field.node.mc_event.field_mc_content
+    - field.field.node.mc_event.field_mc_description
+    - field.field.node.mc_event.field_mc_event_end_date
+    - field.field.node.mc_event.field_mc_event_location
+    - field.field.node.mc_event.field_mc_event_start_date
+    - field.field.node.mc_event.field_mc_event_type
+    - field.field.node.mc_event.field_mc_hide
+    - field.field.node.mc_event.field_mc_icon
+    - field.field.node.mc_event.field_mc_intent
+    - field.field.node.mc_event.field_mc_intents_satisfied
+    - field.field.node.mc_event.field_mc_intro
+    - field.field.node.mc_event.field_mc_keywords
+    - field.field.node.mc_event.field_mc_relateds
+    - field.field.node.mc_event.field_mc_review_date
+    - field.field.node.mc_event.field_mc_search_exclude
+    - field.field.node.mc_event.field_mc_thumbnail
+    - field.field.node.mc_event.field_mc_toc
+    - field.field.node.mc_event.field_mc_topics
+    - field.field.node.mc_event.field_mc_updated_date
+    - field.field.node.mc_event.field_seo_analysis
+    - field.field.node.mc_event.field_seo_description
+    - field.field.node.mc_event.field_seo_image
+    - field.field.node.mc_event.field_seo_title
+    - node.type.mc_event
+  module:
+    - layout_builder
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.mc_event.mc_title
+targetEntityType: node
+bundle: mc_event
+mode: mc_title
+content: {  }
+hidden:
+  content_moderation_control: true
+  field_featured_image: true
+  field_mc_attachments: true
+  field_mc_audiences: true
+  field_mc_banner_featured_links: true
+  field_mc_banner_featured_title: true
+  field_mc_banner_image: true
+  field_mc_banner_title: true
+  field_mc_content: true
+  field_mc_description: true
+  field_mc_event_end_date: true
+  field_mc_event_location: true
+  field_mc_event_start_date: true
+  field_mc_event_type: true
+  field_mc_hide: true
+  field_mc_icon: true
+  field_mc_intent: true
+  field_mc_intents_satisfied: true
+  field_mc_intro: true
+  field_mc_keywords: true
+  field_mc_relateds: true
+  field_mc_review_date: true
+  field_mc_search_exclude: true
+  field_mc_thumbnail: true
+  field_mc_toc: true
+  field_mc_topics: true
+  field_mc_updated_date: true
+  field_seo_analysis: true
+  field_seo_description: true
+  field_seo_image: true
+  field_seo_title: true
+  links: true
+  search_api_excerpt: true

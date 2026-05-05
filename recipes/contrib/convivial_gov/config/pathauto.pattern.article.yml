@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: article
+label: Article
+type: 'canonical_entities:node'
+pattern: '/news/[node:title]'
+selection_criteria:
+  1944f057-7e88-4bd9-9960-4d326640018e:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 1944f057-7e88-4bd9-9960-4d326640018e
+    context_mapping:
+      node: node
+    bundles:
+      mc_article: mc_article
+selection_logic: and
+weight: -9
+relationships: {  }

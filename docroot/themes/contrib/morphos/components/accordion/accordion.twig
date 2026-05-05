@@ -1,0 +1,22 @@
+{% set content_attributes = create_attribute() %}
+
+{% set classes = [
+  'collapse',
+  'join-item',
+  'bg-base-100',
+  'border',
+  'border-base-300',
+  icon ? icon : 'collapse-plus',
+] %}
+
+{% set content_classes = [
+  'collapse-content',
+  prose_size ? 'prose ' ~ prose_size,
+] %}
+
+<details{{ attributes.addClass(classes).setAttribute('open', force == 'collapse-open' ? true : null) }}>
+  <summary class="collapse-title font-semibold">{{ title }}</summary>
+  <div{{ content_attributes.addClass(content_classes) }}>
+    {{ content }}
+  </div>
+</details>

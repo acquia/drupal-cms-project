@@ -1,0 +1,114 @@
+{% set hero =
+  html_cva(
+    base: ['relative', 'h-full', 'flex'],
+    variants: {
+      imagePosition: {
+        left: 'md:flex-row',
+        right: 'md:flex-row-reverse'
+      },
+      heroFlexGap: {
+        large: 'gap-6 xl:gap-8',
+        'extra-large': 'gap-16 md:gap-24 xl:gap-32'
+      },
+      heroFlexDirectionMobile: {
+        vertical: 'flex-col',
+        'vertical-reverse': 'flex-col-reverse'
+      },
+      paddingBlockStart: {
+        '0': 'pt-0',
+        '16': 'pt-4',
+        '32': 'pt-6 md:pt-7 xl:pt-8',
+        '64': 'pt-10 md:pt-13 xl:pt-16'
+      },
+      paddingBlockEnd: {
+        '0': 'pb-0',
+        '16': 'pb-4',
+        '32': 'pb-6 md:pb-7 xl:pb-8',
+        '64': 'pb-10 md:pb-13 xl:pb-16'
+      }
+    }
+  )
+%}
+
+{% set bgd =
+  html_cva(
+    base: ['absolute', 'inset-0', 'z-[-1]'],
+    variants: {
+      background: {
+        primary: 'bg-primary text-primary-foreground',
+        secondary: 'bg-secondary text-secondary-foreground',
+        accent: 'bg-accent text-accent-foreground'
+      }
+    }
+  )
+%}
+
+{% set image =
+  html_cva(
+    base: ['flex-1', 'overflow-hidden', 'rounded-none'],
+    variants: {
+      imageSize: {
+        '2:1': 'aspect-2/1',
+        '16:9': 'aspect-16/9',
+        '3:2': 'aspect-3/2',
+        '4:3': 'aspect-4/3',
+        '1:1': 'aspect-1/1'
+      },
+      imageRadius: {
+        small: 'rounded-sm',
+        large: 'rounded-xl md:rounded-2xl',
+        'extra-large': 'rounded-[24px] md:rounded-[32px]'
+      }
+    }
+  )
+%}
+
+{% set hero_classes =
+  hero.apply({
+    imagePosition: image_position,
+    heroFlexGap: hero_flex_gap|default('large'),
+    heroFlexDirectionMobile: hero_flex_direction_mobile,
+    paddingBlockStart: padding_block_start,
+    paddingBlockEnd: padding_block_end
+  })
+%}
+
+{% set bgd_classes =
+  bgd.apply({
+    background: background
+  })
+%}
+
+{% set image_classes =
+  image.apply({
+    imageSize: image_size,
+    imageRadius: image_radius
+  })
+%}
+
+<section class="{{ hero_classes }}">
+  {% if background is not empty and background != 'None' %}
+    <div class="{{ bgd_classes }}"></div>
+  {% endif %}
+
+  <div class="{{ image_classes }}">
+    {% block hero_media %}
+      {% include 'canvas:image' ignore missing with {
+        src: media.src,
+        alt: media.alt,
+        class: 'object-cover w-full h-full',
+        width: media.width,
+        height: media.height,
+        loading: 'eager',
+        sizes: '50vw'
+      } only %}
+    {% endblock %}
+  </div>
+  <div class="flex flex-1 flex-col gap-2 md:gap-4">
+    {% block hero_content %}
+      {% block hero_slot %}
+
+      {% endblock %}
+    {% endblock %}
+  </div>
+</section>

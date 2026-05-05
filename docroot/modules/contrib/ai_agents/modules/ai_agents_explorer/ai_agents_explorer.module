@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Contains hooks for forms.
+ */
+
+use Drupal\ai_agents\Entity\AiAgent;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_entity_operation().
+ */
+function ai_agents_explorer_entity_operation(EntityInterface $entity): array {
+  return $entity instanceof AiAgent ? [
+    'explore' => [
+      'title' => t('Explore'),
+      'url' => Url::fromRoute('ai_agents_explorer.explorer', ['agent_id' => $entity->id()]),
+      'weight' => 31,
+    ],
+  ] : [];
+}

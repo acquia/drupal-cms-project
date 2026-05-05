@@ -1,0 +1,25 @@
+{% if link %}
+<a href="{{ link }}">
+{% endif %}
+  
+<div class="list">
+  <div class="list-icon">
+    {% if icon.src %}
+      <img src="{{ icon.src }}" alt="{{ icon.alt }}" width="{{ icon.width }}" height="{{ icon.height }}">
+    {% endif %}
+  </div>
+  <div class="list-text">
+    <div class="list-text-title">
+      {{ title }}
+    </div>
+    {% if body %}
+      <div class="list-text-text">
+        {{ body|raw }}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% if link %}
+</a>
+{% endif %}

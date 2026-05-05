@@ -1,0 +1,67 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 3c9645a0-81f6-4eab-a223-7138c6eea361
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Events
+  description:
+    -
+      value: 'The events section.'
+  components:
+    -
+      uuid: 369f8081-5100-4d9b-8387-6e99137fb055
+      component_id: sdc.morphos.banner
+      inputs:
+        title: Events
+        padding_top: '12'
+        padding_bottom: '12'
+        palette: color--primary
+        texture: texture--conic-top-start
+    -
+      parent_uuid: 369f8081-5100-4d9b-8387-6e99137fb055
+      slot: breadcrumb
+      uuid: 371ebdb4-73f1-42bc-9880-f006da28fa4c
+      component_id: block.system_breadcrumb_block
+      inputs:
+        label: Breadcrumbs
+        label_display: '0'
+    -
+      uuid: a2ba6085-39a4-456a-a0a4-6d8bfd323a30
+      component_id: sdc.morphos.layout
+      inputs:
+        layout: layout--4-1-7
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+    -
+      parent_uuid: a2ba6085-39a4-456a-a0a4-6d8bfd323a30
+      slot: main
+      uuid: b30da175-5cea-42a0-9a38-d3376abf8b64
+      component_id: block.views_block.mc_search-events
+      inputs:
+        label: 'Search: Events'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+  path:
+    -
+      alias: /events
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

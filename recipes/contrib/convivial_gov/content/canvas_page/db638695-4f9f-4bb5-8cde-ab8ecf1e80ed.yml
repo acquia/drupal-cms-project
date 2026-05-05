@@ -1,0 +1,814 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: db638695-4f9f-4bb5-8cde-ab8ecf1e80ed
+  default_langcode: en
+  depends:
+    83bf69a6-6172-4900-b4a2-f0487ddb2dc6: file
+    d713dc35-a701-44a0-bf39-460157320027: media
+    b6bf9f86-e49f-4d0f-8834-3f08fdd8b8eb: file
+    c2205fed-268e-457a-a382-7a928e33ddc4: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Patterns
+  description:
+    -
+      value: 'Demonstration of component patterns available in Convivial Template.'
+  components:
+    -
+      uuid: 60838359-ecad-4bc3-9226-ac5cbd63b19c
+      component_id: sdc.morphos.banner
+      inputs:
+        padding_top: '12'
+        padding_bottom: '12'
+        title: Patterns
+        palette: color--primary
+        texture: texture--conic-top-start
+    -
+      parent_uuid: 60838359-ecad-4bc3-9226-ac5cbd63b19c
+      slot: breadcrumb
+      uuid: 73f5d670-8785-40af-88da-756b471a812f
+      component_id: block.system_breadcrumb_block
+      inputs:
+        label: Breadcrumbs
+        label_display: '0'
+    -
+      uuid: c6eadbf9-1192-4812-b1be-e9934d280037
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: false
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--33-33-33
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--standard
+        layout: layout--12
+        heading: 'Image Cards section'
+        intro:
+          value: '<p>Three cards with images displayed in a section with heading and introduction. Used for important information.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: c6eadbf9-1192-4812-b1be-e9934d280037
+      slot: main_items
+      uuid: a4c5f9a5-bc49-4e00-b025-ca4c8611c073
+      component_id: sdc.morphos.card
+      inputs:
+        heading: 'This is your card title'
+        heading_level: 3
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: d713dc35-a701-44a0-bf39-460157320027
+            target_type: media
+        center: false
+        body:
+          value: '<p>Card summary text.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: a4c5f9a5-bc49-4e00-b025-ca4c8611c073
+      slot: badge_items
+      uuid: 18664e84-864c-4bd4-b8c5-657694d2643b
+      component_id: sdc.morphos.badge
+      inputs:
+        label: 'Badge text'
+        size: badge-md
+        icon_position: icon-position--start
+    -
+      parent_uuid: a4c5f9a5-bc49-4e00-b025-ca4c8611c073
+      slot: actions
+      uuid: 74914385-9bfa-4156-a4cb-989f579e4be2
+      component_id: sdc.morphos.button
+      inputs:
+        text: 'Button text'
+    -
+      parent_uuid: c6eadbf9-1192-4812-b1be-e9934d280037
+      slot: main_items
+      uuid: 7dd3d103-a86d-4ebb-8e69-a231b93ae8d9
+      component_id: sdc.morphos.card
+      inputs:
+        heading: 'This is your card title'
+        heading_level: 3
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: d713dc35-a701-44a0-bf39-460157320027
+            target_type: media
+        center: false
+        body:
+          value: '<p>Card summary text.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 7dd3d103-a86d-4ebb-8e69-a231b93ae8d9
+      slot: badge_items
+      uuid: 88add092-39fb-459b-94f2-6c676c51f03b
+      component_id: sdc.morphos.badge
+      inputs:
+        label: 'Badge text'
+        size: badge-md
+        icon_position: icon-position--start
+    -
+      parent_uuid: 7dd3d103-a86d-4ebb-8e69-a231b93ae8d9
+      slot: actions
+      uuid: 1a0ee0a3-fdfd-4803-a9ac-04e09c149867
+      component_id: sdc.morphos.button
+      inputs:
+        text: 'Button text'
+    -
+      parent_uuid: c6eadbf9-1192-4812-b1be-e9934d280037
+      slot: main_items
+      uuid: d8cf9d3c-8121-4068-b010-54115741080d
+      component_id: sdc.morphos.card
+      inputs:
+        heading: 'This is your card title'
+        heading_level: 3
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: d713dc35-a701-44a0-bf39-460157320027
+            target_type: media
+        center: false
+        body:
+          value: '<p>Card summary text.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: d8cf9d3c-8121-4068-b010-54115741080d
+      slot: badge_items
+      uuid: f40385f6-5ace-493d-937e-34ba3fddcea7
+      component_id: sdc.morphos.badge
+      inputs:
+        label: 'Badge text'
+        size: badge-md
+        icon_position: icon-position--start
+    -
+      parent_uuid: d8cf9d3c-8121-4068-b010-54115741080d
+      slot: actions
+      uuid: f24c3549-1e6f-48c8-b983-1380cb005ed0
+      component_id: sdc.morphos.button
+      inputs:
+        text: 'Button text'
+    -
+      uuid: 4056a117-b1f1-47c0-b0cc-94f0d68656e0
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: false
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--25-25-25-25
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--standard
+        layout: layout--12
+        heading: 'Icon Cards section'
+        intro:
+          value: '<p>Four cards with icons displayed in a section with heading and introduction. Used for important tasks.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 4056a117-b1f1-47c0-b0cc-94f0d68656e0
+      slot: main_items
+      uuid: 1f0d6ff9-b6f8-4cbe-98a4-fb49ec726516
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: rocket
+        icon_size: icon-size--xl
+        icon_align: left
+        heading: 'Card heading'
+        url: 'http://example.com'
+        summary:
+          value: '<p>Icon card summary text.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 4056a117-b1f1-47c0-b0cc-94f0d68656e0
+      slot: main_items
+      uuid: 05427ae6-7b21-4444-8113-42eea4ef1d01
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: rocket
+        icon_size: icon-size--xl
+        icon_align: left
+        heading: 'Card heading'
+        url: 'http://example.com'
+        summary:
+          value: '<p>Icon card summary text.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 4056a117-b1f1-47c0-b0cc-94f0d68656e0
+      slot: main_items
+      uuid: fee34588-d3e3-47e1-8cd1-a1b1421a061e
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: rocket
+        icon_size: icon-size--xl
+        icon_align: left
+        heading: 'Card heading'
+        url: 'http://example.com'
+        summary:
+          value: '<p>Icon card summary text.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 4056a117-b1f1-47c0-b0cc-94f0d68656e0
+      slot: main_items
+      uuid: 2c895310-29a6-488a-bea7-5521138f9512
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: rocket
+        icon_size: icon-size--xl
+        icon_align: left
+        heading: 'Card heading'
+        url: 'http://example.com'
+        summary:
+          value: '<p>Icon card summary text.</p>'
+          format: canvas_html_block
+    -
+      uuid: 480317b6-7887-466c-8b2e-306fdff430b5
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: false
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--primary
+        intro:
+          value: '<p>Section demonstrating accessible background.</p>'
+          format: canvas_html_block
+        heading: 'Background and overlay section'
+    -
+      parent_uuid: 480317b6-7887-466c-8b2e-306fdff430b5
+      slot: main_items
+      uuid: ca45ff15-2188-4a1e-8ae7-563e8719100e
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>Section content</p>'
+          format: canvas_html_block
+    -
+      uuid: 476062ae-905a-48c2-8bcb-cae777c61259
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: false
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--primary
+        intro:
+          value: '<p>Section demonstrating a colour option with texture variant.</p>'
+          format: canvas_html_block
+        heading: 'Palette and texture section'
+        texture: texture--linear-end
+    -
+      parent_uuid: 476062ae-905a-48c2-8bcb-cae777c61259
+      slot: main_items
+      uuid: 66325e06-5b4c-4148-ae6c-082fc319ed5c
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>Section content</p>'
+          format: canvas_html_block
+    -
+      uuid: 79000903-3315-4dd9-afb5-fd2472fe722a
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: false
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--standard
+        intro:
+          value: '<p>Section demonstrating one of the header variants with it on the side.</p>'
+          format: canvas_html_block
+        layout: layout--4-8
+        heading: 'Offset header section'
+        content_position: section-position--start
+        content_alignment: section-alignment--center
+    -
+      parent_uuid: 79000903-3315-4dd9-afb5-fd2472fe722a
+      slot: main_items
+      uuid: 52977274-f6da-49a5-ad2a-0d3376e79376
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>Section content</p>'
+          format: canvas_html_block
+    -
+      uuid: 072fe5ad-217a-441c-8aff-9d3f069af2d1
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: false
+        heading: 'Stats section'
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--33-33-33
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--standard
+        intro:
+          value: '<p>Statistics with animations displayed in a section. Used for conveying important, convincing, numerical data for key insights.</p>'
+          format: canvas_html_block
+        layout: layout--12
+    -
+      parent_uuid: 072fe5ad-217a-441c-8aff-9d3f069af2d1
+      slot: main_items
+      uuid: 55b572e1-bc37-41b1-8040-f0e0431a5ac8
+      component_id: sdc.morphos.stat
+      inputs:
+        title: 'Total page views'
+        value: 89400
+        prefix: $
+        suffix: '%'
+        size: stat--md
+        desc: '21% more than last month'
+    -
+      parent_uuid: 072fe5ad-217a-441c-8aff-9d3f069af2d1
+      slot: main_items
+      uuid: 3d767fe9-265b-43cb-9ee8-071fce25c1d9
+      component_id: sdc.morphos.stat
+      inputs:
+        title: 'Total page views'
+        value: 89400
+        prefix: $
+        suffix: '%'
+        size: stat--md
+        desc: '21% more than last month'
+    -
+      parent_uuid: 072fe5ad-217a-441c-8aff-9d3f069af2d1
+      slot: main_items
+      uuid: cdf83850-d301-4263-a153-3e6262ba2cb1
+      component_id: sdc.morphos.stat
+      inputs:
+        title: 'Total page views'
+        value: 89400
+        prefix: $
+        suffix: '%'
+        size: stat--md
+        desc: '21% more than last month'
+    -
+      uuid: bff23db7-ace8-4af1-aa33-ca747c42e3bc
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        layout: layout--12
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--standard
+        heading: 'Slider section'
+        intro:
+          value: '<p>Powerful slider section showcasings a list of items presenting key information.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: bff23db7-ace8-4af1-aa33-ca747c42e3bc
+      slot: main_items
+      uuid: 43edbcd9-b9d5-4dfa-bd2a-2d68976ec0c8
+      component_id: sdc.morphos.slider
+      inputs:
+        loop: false
+        navigation: true
+        effect: slide
+        direction: horizontal
+        pagination: bullets
+        speed: 300
+        slides_per_view: 3
+        slides_per_group: 1
+        space_between: 16
+        rows: 1
+        grid_fill: column
+    -
+      parent_uuid: 43edbcd9-b9d5-4dfa-bd2a-2d68976ec0c8
+      slot: slides
+      uuid: 79967ab0-cd6d-4bcb-9597-d314f6e8bfac
+      component_id: sdc.morphos.card
+      inputs:
+        heading: 'Card 1'
+        heading_level: 3
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: d713dc35-a701-44a0-bf39-460157320027
+            target_type: media
+        center: false
+        body:
+          value: '<p>Card summary text.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 79967ab0-cd6d-4bcb-9597-d314f6e8bfac
+      slot: badge_items
+      uuid: 5e7919ef-1f6f-4edd-bf84-be7f2e53e55f
+      component_id: sdc.morphos.badge
+      inputs:
+        label: 'Badge text'
+        size: badge-md
+        icon_position: icon-position--start
+    -
+      parent_uuid: 79967ab0-cd6d-4bcb-9597-d314f6e8bfac
+      slot: actions
+      uuid: c873d88a-de19-4a58-8e0f-5e674cc88c49
+      component_id: sdc.morphos.button
+      inputs:
+        text: 'Button text'
+    -
+      parent_uuid: 43edbcd9-b9d5-4dfa-bd2a-2d68976ec0c8
+      slot: slides
+      uuid: 62c41139-1d01-4f92-890f-7b3a25200a8b
+      component_id: sdc.morphos.card
+      inputs:
+        heading: 'Card 2'
+        heading_level: 3
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: d713dc35-a701-44a0-bf39-460157320027
+            target_type: media
+        center: false
+        body:
+          value: '<p>Card summary text.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 62c41139-1d01-4f92-890f-7b3a25200a8b
+      slot: badge_items
+      uuid: d6bbcdc7-1146-4762-892c-a61cb07ce9af
+      component_id: sdc.morphos.badge
+      inputs:
+        label: 'Badge text'
+        size: badge-md
+        icon_position: icon-position--start
+    -
+      parent_uuid: 62c41139-1d01-4f92-890f-7b3a25200a8b
+      slot: actions
+      uuid: 8c2cdede-187d-446b-861e-d63508f444b8
+      component_id: sdc.morphos.button
+      inputs:
+        text: 'Button text'
+    -
+      parent_uuid: 43edbcd9-b9d5-4dfa-bd2a-2d68976ec0c8
+      slot: slides
+      uuid: 50dfc745-1355-4ca3-ab87-e9f2ec233bda
+      component_id: sdc.morphos.card
+      inputs:
+        heading: 'Card '
+        heading_level: 3
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: d713dc35-a701-44a0-bf39-460157320027
+            target_type: media
+        center: false
+        body:
+          value: '<p>Card summary text.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 50dfc745-1355-4ca3-ab87-e9f2ec233bda
+      slot: badge_items
+      uuid: 472e2213-ae2a-45ae-a7a1-688f25bbb6fc
+      component_id: sdc.morphos.badge
+      inputs:
+        label: 'Badge text'
+        size: badge-md
+        icon_position: icon-position--start
+    -
+      parent_uuid: 50dfc745-1355-4ca3-ab87-e9f2ec233bda
+      slot: actions
+      uuid: 6107e6a8-a86a-4c51-a3ad-d15168705988
+      component_id: sdc.morphos.button
+      inputs:
+        text: 'Button text'
+    -
+      parent_uuid: 43edbcd9-b9d5-4dfa-bd2a-2d68976ec0c8
+      slot: slides
+      uuid: 56019dfe-7775-42c8-8587-4050b716b177
+      component_id: sdc.morphos.card
+      inputs:
+        heading: 'Card 4'
+        heading_level: 3
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: d713dc35-a701-44a0-bf39-460157320027
+            target_type: media
+        center: false
+        body:
+          value: '<p>Card summary text.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 56019dfe-7775-42c8-8587-4050b716b177
+      slot: badge_items
+      uuid: 6e3f933b-ff13-4304-bdb5-2cc1fc3d90c3
+      component_id: sdc.morphos.badge
+      inputs:
+        label: 'Badge text'
+        size: badge-md
+        icon_position: icon-position--start
+    -
+      parent_uuid: 56019dfe-7775-42c8-8587-4050b716b177
+      slot: actions
+      uuid: 18be9a11-8b36-45fc-8b0b-35a59835dc49
+      component_id: sdc.morphos.button
+      inputs:
+        text: 'Button text'
+    -
+      parent_uuid: 43edbcd9-b9d5-4dfa-bd2a-2d68976ec0c8
+      slot: slides
+      uuid: 406e6ae8-7cb5-47e7-9cc8-cd4edad94eeb
+      component_id: sdc.morphos.card
+      inputs:
+        heading: 'Card 5'
+        heading_level: 3
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: d713dc35-a701-44a0-bf39-460157320027
+            target_type: media
+        center: false
+        body:
+          value: '<p>Card summary text.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 406e6ae8-7cb5-47e7-9cc8-cd4edad94eeb
+      slot: badge_items
+      uuid: a80f83e2-d1eb-4247-9640-1a485c6ef4d2
+      component_id: sdc.morphos.badge
+      inputs:
+        label: 'Badge text'
+        size: badge-md
+        icon_position: icon-position--start
+    -
+      parent_uuid: 406e6ae8-7cb5-47e7-9cc8-cd4edad94eeb
+      slot: actions
+      uuid: 9db52f65-475a-4b63-8661-13b3839409fc
+      component_id: sdc.morphos.button
+      inputs:
+        text: 'Button text'
+    -
+      parent_uuid: 43edbcd9-b9d5-4dfa-bd2a-2d68976ec0c8
+      slot: slides
+      uuid: cfeea047-0269-458f-8338-a0410582bb6e
+      component_id: sdc.morphos.card
+      inputs:
+        heading: 'Card 6'
+        heading_level: 3
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: d713dc35-a701-44a0-bf39-460157320027
+            target_type: media
+        center: false
+        body:
+          value: '<p>Card summary text.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: cfeea047-0269-458f-8338-a0410582bb6e
+      slot: badge_items
+      uuid: 3192244d-20d1-497e-8fe8-e7e6339979bf
+      component_id: sdc.morphos.badge
+      inputs:
+        label: 'Badge text'
+        size: badge-md
+        icon_position: icon-position--start
+    -
+      parent_uuid: cfeea047-0269-458f-8338-a0410582bb6e
+      slot: actions
+      uuid: 9407d60b-d359-4117-9e95-1aaf83eaede5
+      component_id: sdc.morphos.button
+      inputs:
+        text: 'Button text'
+    -
+      uuid: 23437b7b-066f-4f45-a463-654941a0759c
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading: 'Accordion section'
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--standard
+        intro:
+          value: '<p>Collapsible accordions convey important information in a compact way. Used for checklists of data which require further explanation.</p>'
+          format: canvas_html_block
+        layout: layout--12
+    -
+      parent_uuid: 23437b7b-066f-4f45-a463-654941a0759c
+      slot: main_items
+      uuid: 802bf2ac-ce1a-4873-af5d-4e33636d9a21
+      component_id: sdc.morphos.accordion_group
+      inputs: {  }
+    -
+      parent_uuid: 802bf2ac-ce1a-4873-af5d-4e33636d9a21
+      slot: accordion_items
+      uuid: e63f6f70-69c8-4f9a-8dd6-1675a1d1034e
+      component_id: sdc.morphos.accordion
+      inputs:
+        title: 'Accordion title'
+        content:
+          value: '<p>Accordion content goes here.</p>'
+          format: canvas_html_block
+        icon: collapse-plus
+    -
+      parent_uuid: 802bf2ac-ce1a-4873-af5d-4e33636d9a21
+      slot: accordion_items
+      uuid: 69ea40bf-c5f3-41a4-9f7f-f17ed6d38cde
+      component_id: sdc.morphos.accordion
+      inputs:
+        title: 'Accordion title'
+        content:
+          value: '<p>Accordion content goes here.</p>'
+          format: canvas_html_block
+        icon: collapse-plus
+        force: collapse-open
+    -
+      parent_uuid: 802bf2ac-ce1a-4873-af5d-4e33636d9a21
+      slot: accordion_items
+      uuid: 785e979e-fa33-426e-b1ec-c13f331f7278
+      component_id: sdc.morphos.accordion
+      inputs:
+        title: 'Accordion title'
+        content:
+          value: '<p>Accordion content goes here.</p>'
+          format: canvas_html_block
+        icon: collapse-plus
+    -
+      parent_uuid: 802bf2ac-ce1a-4873-af5d-4e33636d9a21
+      slot: accordion_items
+      uuid: 57fbfaec-aa7f-491d-b03a-2f8337a6210a
+      component_id: sdc.morphos.accordion
+      inputs:
+        title: 'Accordion title'
+        content:
+          value: '<p>Accordion content goes here.</p>'
+          format: canvas_html_block
+        icon: collapse-plus
+    -
+      uuid: 38ec0c24-3329-46b5-9658-218ab5d561f6
+      component_id: sdc.morphos.hero
+      inputs:
+        content_width: content-width--50
+        padding_top: '32'
+        padding_bottom: '32'
+        container: container--normal
+        palette: color--primary
+        content_position: content-position--center
+        content_alignment: center
+    -
+      parent_uuid: 38ec0c24-3329-46b5-9658-218ab5d561f6
+      slot: items
+      uuid: 09bb1309-3dbf-4053-bd5b-542c67f8d366
+      component_id: sdc.morphos.heading
+      inputs:
+        heading: 'Hero simple'
+        level: 1
+        use_display_font: false
+    -
+      parent_uuid: 38ec0c24-3329-46b5-9658-218ab5d561f6
+      slot: items
+      uuid: 28ed5198-37c8-4746-bb20-bfa2f395754f
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>Simple hero with heading content and call to action link. Used for clear messaging.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 38ec0c24-3329-46b5-9658-218ab5d561f6
+      slot: items
+      uuid: 7495244e-705d-4597-a4bf-004aaca53e1c
+      component_id: sdc.morphos.button
+      inputs:
+        text: 'Button text'
+    -
+      uuid: 18fbb96a-fe4a-4a6f-b44d-71833216c165
+      component_id: sdc.morphos.hero
+      inputs:
+        content_width: content-width--50
+        padding_top: '32'
+        padding_bottom: '32'
+        container: container--normal
+        palette: color--primary
+        content_position: content-position--center
+        content_alignment: center
+    -
+      parent_uuid: 18fbb96a-fe4a-4a6f-b44d-71833216c165
+      slot: items
+      uuid: c9fe4f4d-c264-43c0-8022-3ad371f27cd7
+      component_id: sdc.morphos.heading
+      inputs:
+        heading: 'Hero with background'
+        level: 1
+        use_display_font: false
+    -
+      parent_uuid: 18fbb96a-fe4a-4a6f-b44d-71833216c165
+      slot: items
+      uuid: 1f167177-14e0-4553-b1b6-b528578587dd
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>Attractive hero with background image, heading content and call to action link. Used eye catching display at top of landing pages.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 18fbb96a-fe4a-4a6f-b44d-71833216c165
+      slot: items
+      uuid: 0af8e6fc-c5dd-4033-a183-fda8e17baf5f
+      component_id: sdc.morphos.button
+      inputs:
+        text: 'Button text'
+    -
+      parent_uuid: 18fbb96a-fe4a-4a6f-b44d-71833216c165
+      slot: backgrounds
+      uuid: 1a27607c-5366-48af-b6b0-053588d705d1
+      component_id: sdc.morphos.image_background
+      inputs:
+        position: 'center center'
+        style: cover
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: c2205fed-268e-457a-a382-7a928e33ddc4
+            target_type: media
+    -
+      uuid: f6f06680-7712-4598-b641-20d35d06b1f7
+      component_id: sdc.morphos.hero
+      inputs:
+        content_width: content-width--50
+        padding_top: '32'
+        padding_bottom: '32'
+        container: container--normal
+        palette: color--primary
+        content_position: content-position--center
+        content_alignment: center
+    -
+      parent_uuid: f6f06680-7712-4598-b641-20d35d06b1f7
+      slot: items
+      uuid: 88016037-8483-4213-96e6-590763c5092c
+      component_id: sdc.morphos.heading
+      inputs:
+        heading: 'Hero with parallax'
+        level: 1
+        use_display_font: false
+    -
+      parent_uuid: f6f06680-7712-4598-b641-20d35d06b1f7
+      slot: items
+      uuid: 1eece6ef-7867-42e7-85da-b414e81791ff
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>Compelling hero with parallax background images, heading content and call to action link. Used for playful and attractive content.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: f6f06680-7712-4598-b641-20d35d06b1f7
+      slot: items
+      uuid: 2451f8d9-2626-46b1-b397-ff9a4c78a737
+      component_id: sdc.morphos.button
+      inputs:
+        text: 'Button text'
+    -
+      parent_uuid: f6f06680-7712-4598-b641-20d35d06b1f7
+      slot: backgrounds
+      uuid: eb0cb10a-eb3c-45cb-a915-85e0f7ff8a97
+      component_id: sdc.morphos.parallax_background
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: d713dc35-a701-44a0-bf39-460157320027
+            target_type: media
+        speed: 1
+        media_query: '(min-width:768px)'
+  path:
+    -
+      alias: /demo/patterns
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

@@ -1,0 +1,45 @@
+@mixin button-outlined() {
+  background: $button-outline-background;
+  color: $button-outline-text;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid $button-outline-border;
+  &:hover,
+  &:focus {
+    background: $button-outline-background-hover;
+    border: 2px solid $button-outline-border-hover;
+    color: $button-outline-text-hover;
+  }
+}
+
+a:hover {
+  color: $button-transparent-text-hover;
+}
+
+.btn {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 2px;
+    box-shadow: none;
+    border-radius: $radius-radius-xxxl;
+    line-height: $line-height-button-md;
+    border: 0;
+
+    &:hover {
+        border: 0;
+        box-shadow: none;
+    }
+
+    &.btn-primary {
+        background-color: $button-primary-background;
+        color: $button-primary-text;
+
+        &:hover {
+            background-color: $button-primary-background-hover;
+            color: $button-primary-text-hover;
+        }
+    }
+}
+

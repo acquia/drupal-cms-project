@@ -1,0 +1,18 @@
+includes:
+  - phpstan-baseline.neon
+  - phpstan-baseline-to-fix.neon
+
+parameters:
+  level: 1
+
+  # Do not add 'paths: .' as this causes the gitlab pipeline job to fail.
+
+  excludePaths:
+    # Legacy code that produces warnings which cannot be added to a .baseline file.
+    - tests/src/Traits/PhpunitCompatibilityCore87Trait.php
+    # The bootstrap can exist as a symlink in the project folder when running phpunit locally, so ignore it.
+    - tests/bootstrap.php (?)
+
+  ignoreErrors:
+    # new static() is a best practice in Drupal. Core ignores this.
+    - "#^Unsafe usage of new static#"

@@ -1,0 +1,271 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Drupal\Tests\canvas\Kernel\Config;
+
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestWith;
+use Drupal\canvas\Entity\Component;
+use Drupal\canvas\PropSource\PropSource;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\canvas\Entity\ContentTemplate;
+use Drupal\canvas\Entity\Page;
+use Drupal\canvas\EntityHandlers\ContentTemplateAwareViewBuilder;
+use Drupal\node\Entity\Node;
+use Drupal\node\Entity\NodeType;
+use Drupal\Tests\canvas\Kernel\CanvasKernelTestBase;
+use Drupal\Tests\canvas\Traits\GenerateComponentConfigTrait;
+use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+
+/**
+ * Tests Drupal\canvas\Entity\ContentTemplate.
+ */
+#[RunTestsInSeparateProcesses]
+#[CoversClass(ContentTemplate::class)]
+#[Group('canvas')]
+final class ContentTemplateTest extends CanvasKernelTestBase {
+
+  use ContentTypeCreationTrait;
+  use GenerateComponentConfigTrait;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected static $modules = [
+    'node',
+    'field',
+  ];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp(): void {
+    parent::setUp();
+    $this->installEntitySchema('path_alias');
+    $this->installConfig(['node', 'user']);
+    NodeType::create(['type' => 'helpful', 'name' => 'Helpful'])->save();
+  }
+
+  /**
+   * Tests label.
+   *
+   * @legacy-covers ::label
+   */
+  #[TestWith(["node.helpful.full", "Helpful content items — Full content view"])]
+  #[TestWith(["user.user.compact", "Users — Compact view"])]
+  public function testLabel(string $id, string $expected_label): void {
+    [$entity_type_id, $bundle, $view_mode] = explode('.', $id, 3);
+
+    $template = ContentTemplate::create([
+      'id' => $id,
+      'content_entity_type_id' => $entity_type_id,
+      'content_entity_type_bundle' => $bundle,
+      'content_entity_type_view_mode' => $view_mode,
+    ]);
+    $this->assertSame($expected_label, (string) $template->label());
+  }
+
+  /**
+   * Tests only content entities can use templates.
+   *
+   * @legacy-covers \Drupal\canvas\Hook\ContentTemplateHooks::entityTypeAlter
+   */
+  public function testOnlyContentEntitiesCanUseTemplates(): void {
+    $manager = \Drupal::entityTypeManager();
+    $definition = $manager->getDefinition('node');
+    \assert($definition instanceof EntityTypeInterface);
+    $this->assertTrue($definition->hasHandlerClass(ContentTemplateAwareViewBuilder::DECORATED_HANDLER_KEY));
+    $this->assertSame(ContentTemplateAwareViewBuilder::class, $definition->getViewBuilderClass());
+
+    // Config entities have no view builder and Canvas doesn't touch them.
+    $definition = $manager->getDefinition('user_role');
+    \assert($definition instanceof EntityTypeInterface);
+    $this->assertFalse($definition->hasViewBuilderClass());
+    $this->assertFalse($definition->hasHandlerClass(ContentTemplateAwareViewBuilder::DECORATED_HANDLER_KEY));
+
+    // Canvas pages are left alone despite being content entities.
+    $definition = $manager->getDefinition(Page::ENTITY_TYPE_ID);
+    \assert($definition instanceof EntityTypeInterface);
+    $this->assertFalse($definition->hasHandlerClass(ContentTemplateAwareViewBuilder::DECORATED_HANDLER_KEY));
+  }
+
+  public function testTreeKeyOrdering(): void {
+    $this->installConfig('node');
+    $this->createContentType(['type' => 'alpha']);
+    $this->generateComponentConfig();
+    $template = ContentTemplate::create([
+      'content_entity_type_id' => 'node',
+      'content_entity_type_bundle' => 'alpha',
+      'content_entity_type_view_mode' => 'full',
+    ]);
+    $template->setComponentTree([
+      [
+        'uuid' => 'b7e2cf39-d62f-4ee8-99b2-27a89f1ac196',
+        'component_id' => 'sdc.canvas_test_sdc.props-no-slots',
+        'component_version' => 'b1e991f726a2a266',
+        'parent_uuid' => '3a76bf4f-9306-43e6-ba8f-cb4b5b6459df',
+        'slot' => 'the_body',
+        'inputs' => [
+          'heading' => 'Two layers deep.',
+        ],
+      ],
+      [
+        'uuid' => '4f785025-9bd9-4752-9dd6-068b957b03ee',
+        'component_id' => 'sdc.canvas_test_sdc.props-slots',
+        'component_version' => '85a5c0c7dd53e0bb',
+        'inputs' => [
+          'heading' => 'Hello, world!',
+        ],
+      ],
+      [
+        'uuid' => '5f1c5361-5658-467e-9c53-b0015d57945d',
+        'component_id' => 'block.system_powered_by_block',
+        'component_version' => Component::load('block.system_powered_by_block')?->getActiveVersion(),
+        'parent_uuid' => '4f785025-9bd9-4752-9dd6-068b957b03ee',
+        'slot' => 'the_footer',
+        'inputs' => [
+          'label' => '',
+          'label_display' => '0',
+        ],
+      ],
+      [
+        'uuid' => '3a76bf4f-9306-43e6-ba8f-cb4b5b6459df',
+        'component_id' => 'sdc.canvas_test_sdc.props-slots',
+        'component_version' => '85a5c0c7dd53e0bb',
+        'parent_uuid' => '4f785025-9bd9-4752-9dd6-068b957b03ee',
+        'slot' => 'the_body',
+        'inputs' => [
+          'heading' => 'Hello from the top of the body',
+        ],
+      ],
+      [
+        'uuid' => '5f71027b-d9d3-4f3d-8990-a6502c0ba676',
+        'component_id' => 'sdc.canvas_test_sdc.props-no-slots',
+        'component_version' => 'b1e991f726a2a266',
+        'inputs' => [
+          'heading' => [
+            'sourceType' => PropSource::EntityField->value,
+            'expression' => 'ℹ︎␜entity:node:alpha␝title␞␟value',
+          ],
+        ],
+      ],
+      [
+        'uuid' => '93af433a-8ab0-4dd9-912a-73a99c882347',
+        'component_id' => 'block.system_branding_block',
+        'component_version' => Component::load('block.system_branding_block')?->getActiveVersion(),
+        'parent_uuid' => '4f785025-9bd9-4752-9dd6-068b957b03ee',
+        'slot' => 'the_body',
+        'inputs' => [
+          'use_site_logo' => TRUE,
+          'use_site_name' => TRUE,
+          'use_site_slogan' => TRUE,
+          'label' => '',
+          'label_display' => '0',
+        ],
+      ],
+    ]);
+    self::assertSame(
+      [
+        '0' => [
+          'uuid' => '4f785025-9bd9-4752-9dd6-068b957b03ee',
+          'component_id' => 'sdc.canvas_test_sdc.props-slots',
+          'component_version' => '85a5c0c7dd53e0bb',
+          'inputs' => [
+            'heading' => 'Hello, world!',
+          ],
+        ],
+        '0:the_body:0' => [
+          'uuid' => '3a76bf4f-9306-43e6-ba8f-cb4b5b6459df',
+          'component_id' => 'sdc.canvas_test_sdc.props-slots',
+          'component_version' => '85a5c0c7dd53e0bb',
+          'parent_uuid' => '4f785025-9bd9-4752-9dd6-068b957b03ee',
+          'slot' => 'the_body',
+          'inputs' => [
+            'heading' => 'Hello from the top of the body',
+          ],
+        ],
+        '0:the_body:0:the_body:0' => [
+          'uuid' => 'b7e2cf39-d62f-4ee8-99b2-27a89f1ac196',
+          'component_id' => 'sdc.canvas_test_sdc.props-no-slots',
+          'component_version' => 'b1e991f726a2a266',
+          'parent_uuid' => '3a76bf4f-9306-43e6-ba8f-cb4b5b6459df',
+          'slot' => 'the_body',
+          'inputs' => [
+            'heading' => 'Two layers deep.',
+          ],
+        ],
+        '0:the_body:1' => [
+          'uuid' => '93af433a-8ab0-4dd9-912a-73a99c882347',
+          'component_id' => 'block.system_branding_block',
+          'component_version' => Component::load('block.system_branding_block')?->getActiveVersion(),
+          'parent_uuid' => '4f785025-9bd9-4752-9dd6-068b957b03ee',
+          'slot' => 'the_body',
+          'inputs' => [
+            'use_site_logo' => TRUE,
+            'use_site_name' => TRUE,
+            'use_site_slogan' => TRUE,
+            'label' => '',
+            'label_display' => '0',
+          ],
+        ],
+        '0:the_footer:0' => [
+          'uuid' => '5f1c5361-5658-467e-9c53-b0015d57945d',
+          'component_id' => 'block.system_powered_by_block',
+          'component_version' => Component::load('block.system_powered_by_block')?->getActiveVersion(),
+          'parent_uuid' => '4f785025-9bd9-4752-9dd6-068b957b03ee',
+          'slot' => 'the_footer',
+          'inputs' => [
+            'label' => '',
+            'label_display' => '0',
+          ],
+        ],
+        '1' => [
+          'uuid' => '5f71027b-d9d3-4f3d-8990-a6502c0ba676',
+          'component_id' => 'sdc.canvas_test_sdc.props-no-slots',
+          'component_version' => 'b1e991f726a2a266',
+          'inputs' => [
+            'heading' => [
+              'sourceType' => PropSource::EntityField->value,
+              'expression' => 'ℹ︎␜entity:node:alpha␝title␞␟value',
+            ],
+          ],
+        ],
+      ], $template->get('component_tree'),
+    );
+    // Sanity-check that the test template is valid.
+    self::assertEntityIsValid($template);
+  }
+
+  public function testAbsentContentTemplateKeepsCacheMetadata(): void {
+    $this->installEntitySchema('user');
+    $this->installEntitySchema('node');
+
+    $node = Node::create([
+      'title' => 'Some node',
+      'type' => 'helpful',
+    ]);
+    $node->save();
+    $view_builder = \Drupal::entityTypeManager()->getViewBuilder('node');
+    // Canvas' view builder is not used because there is no ContentTemplate yet.
+    $this->assertSame(ContentTemplateAwareViewBuilder::class, $view_builder::class);
+    $build = $view_builder->view($node);
+
+    // Assert the right cacheability.
+    $this->assertContains('without-canvas', $build['#cache']['keys']);
+    // Note: AutoSaveManager::CACHE_TAG is NOT present because we're not on a
+    // preview route. It's only added on preview routes to avoid invalidating
+    // all rendered nodes on the live site when auto-saves change.
+    // @see \Drupal\canvas\EntityHandlers\ContentTemplateAwareViewBuilder::getBuildDefaults()
+    $this->assertEqualsCanonicalizing([
+      'node_view',
+      'node:1',
+      'config:content_template_list',
+    ], $build['#cache']['tags']);
+    // Verify the specialized cache context is present.
+    $this->assertContains('route.name.is_canvas_editor_ui', $build['#cache']['contexts']);
+  }
+
+}

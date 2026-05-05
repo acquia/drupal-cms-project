@@ -1,0 +1,44 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - provus_base_theme
+label: Spacer
+id: sdc.provus_base_theme.spacer
+source: sdc
+source_local_id: 'provus_base_theme:spacer'
+provider: provus_base_theme
+active_version: 577128c484bb089e
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        padding_all:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: p-1
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  ed078794eb53ddfa:
+    settings:
+      prop_field_definitions:
+        padding_all:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions: {  }

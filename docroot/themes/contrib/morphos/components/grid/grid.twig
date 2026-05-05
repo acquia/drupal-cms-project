@@ -1,0 +1,135 @@
+{% set is_preview = canvas_is_preview or in_preview %}
+
+{% set container_attributes = create_attribute() %}
+{% set container_inner_attributes = create_attribute() %}
+{% set overlay_attributes = create_attribute() %}
+
+{% set slot_backgrounds %}{% block backgrounds %}{% endblock %}{% endset %}
+{% set slot_behaviors %}{% block behaviors %}{% endblock %}{% endset %}
+
+{% set margin = [
+  margin_top == '0' ? 'mt-0',
+  margin_top == '4' ? 'mt-4',
+  margin_top == '8' ? 'mt-6 lg:mt-8',
+  margin_top == '12' ? 'mt-8 md:mt-10 lg:mt-12',
+  margin_top == '16' ? 'mt-10 md:mt-12 lg:mt-16',
+  margin_top == '24' ? 'mt-16 md:mt-20 lg:mt-24',
+  margin_top == '32' ? 'mt-20 md:mt-24 lg:mt-32',
+  margin_bottom == '0' ? 'mb-0',
+  margin_bottom == '4' ? 'mb-4',
+  margin_bottom == '8' ? 'mb-6 lg:mb-8',
+  margin_bottom == '12' ? 'mb-8 md:mb-10 lg:mb-12',
+  margin_bottom == '16' ? 'mb-10 md:mb-12 lg:mb-16',
+  margin_bottom == '24' ? 'mb-16 md:mb-20 lg:mb-24',
+  margin_bottom == '32' ? 'mb-20 md:mb-24 lg:mb-32',
+] %}
+
+{% set padding = [
+  padding_top == '0' ? 'pt-0',
+  padding_top == '4' ? 'pt-4',
+  padding_top == '8' ? 'pt-6 lg:pt-8',
+  padding_top == '12' ? 'pt-8 md:pt-10 lg:pt-12',
+  padding_top == '16' ? 'pt-10 md:pt-12 lg:pt-16',
+  padding_top == '24' ? 'pt-16 md:pt-20 lg:pt-24',
+  padding_top == '32' ? 'pt-20 md:pt-24 lg:pt-32',
+  padding_bottom == '0' ? 'pb-0',
+  padding_bottom == '4' ? 'pb-4',
+  padding_bottom == '8' ? 'pb-6 lg:pb-8',
+  padding_bottom == '12' ? 'pb-8 md:pb-10 lg:pb-12',
+  padding_bottom == '16' ? 'pb-10 md:pb-12 lg:pb-16',
+  padding_bottom == '24' ? 'pb-16 md:pb-20 lg:pb-24',
+  padding_bottom == '32' ? 'pb-20 md:pb-24 lg:pb-32',
+] %}
+
+{% set classes = [
+  'grids',
+  'component',
+  is_preview ? 'component--preview',
+  'relative',
+  'flex',
+  'flex-col',
+  'items-stretch',
+  palette,
+  texture,
+  overlay ? 'has-overlay',
+]|merge(margin) %}
+
+{% set container_classes = [
+  'grids__container',
+  'component__container',
+  container == 'container--normal' or not container ? 'container mx-auto px-4',
+  container == 'container--edgy' ? 'w-full',
+  container == 'container--wide' ? 'w-full px-4',
+  container == 'container--narrow' ? 'container w-full lg:max-w-[80%] mx-auto px-4',
+]|merge(padding) %}
+
+{% set container_inner_classes = [
+  'grid',
+  'relative',
+  'w-full',
+  'gap-4',
+  'lg:gap-6',
+  'min-w-0',
+  '[&>*]:w-full',
+  '[&>*]:min-w-0',
+  column_widths == 'grid-col-widths--100' ? 'grid-cols-1',
+  column_widths == 'grid-col-widths--50-50' ? 'md:grid-cols-2',
+  column_widths == 'grid-col-widths--33-33-33' ? 'md:grid-cols-3',
+  column_widths == 'grid-col-widths--75-25' or not column_widths ? 'md:grid-cols-[minmax(0,3fr)_minmax(0,1fr)]',
+  column_widths == 'grid-col-widths--25-75' ? 'md:grid-cols-[minmax(0,1fr)_minmax(0,3fr)]',
+  column_widths == 'grid-col-widths--67-33' ? 'md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]',
+  column_widths == 'grid-col-widths--33-67' ? 'md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]',
+  column_widths == 'grid-col-widths--50-25-25' ? 'md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)]',
+  column_widths == 'grid-col-widths--25-25-50' ? 'md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,2fr)]',
+  column_widths == 'grid-col-widths--25-25-25-25' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
+] %}
+
+{# Derive column count from column_widths by counting hyphen-separated values #}
+{% set widths_value = column_widths|default('grid-col-widths--75-25') %}
+{% set widths_suffix = widths_value|replace({'grid-col-widths--': ''}) %}
+{% set column_count = widths_suffix|split('-')|length %}
+
+{% set grid_rows %}
+  {% for row in 1..row_count|default(1) %}
+    {% set prev_row_cell_count = (row - 1) * column_count %}
+    {% for col in 1..column_count %}
+      {% set current_cell = prev_row_cell_count + col %}
+      <div class="flex flex-col gap-4">
+        {% if block('cell_' ~ current_cell) is defined %}
+          {{ block('cell_' ~ current_cell) }}
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% endfor %}
+{% endset %}
+
+<div{{ attributes.addClass(classes) }}>
+  <div{{ container_attributes.addClass(container_classes) }}>
+    <div{{ container_inner_attributes.addClass(container_inner_classes) }}>
+      {{ grid_rows }}
+    </div>
+  </div>
+  {% if is_preview %}
+    <div class="component__backgrounds">
+      {{ slot_backgrounds }}
+    </div>
+    <div{{ overlay_attributes.addClass('component__overlay', overlay) }}></div>
+    <div class="component__behaviors">
+      {{ slot_behaviors }}
+    </div>
+  {% else %}
+    {% if slot_backgrounds|render|striptags('<drupal-render-placeholder><img><figure><div><button>')|trim %}
+      <div class="component__backgrounds">
+        {{ slot_backgrounds }}
+      </div>
+    {% endif %}
+    {% if overlay %}
+      <div{{ overlay_attributes.addClass('component__overlay', overlay) }}></div>
+    {% endif %}
+    {% if slot_behaviors|render|striptags('<drupal-render-placeholder><img><figure><div><button>')|trim %}
+      <div class="component__behaviors">
+        {{ slot_behaviors }}
+      </div>
+    {% endif %}
+  {% endif %}
+</div>

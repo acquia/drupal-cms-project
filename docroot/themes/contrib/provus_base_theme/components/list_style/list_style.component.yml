@@ -1,0 +1,114 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: List (li) Container
+status: stable
+description: A configurable list style with optional icon position and orientation.
+group: Provus Components
+
+variants:
+  default:
+    title: Default
+    description: Standard list with configurable style and display options
+
+props:
+  type: object
+  required:
+    - list_style
+  properties:
+    list_style:
+      type: string
+      title: List Style
+      description: The style of the list
+      enum:
+        - none
+        - circle
+        - square
+        - decimal
+        - lower-roman
+        - upper-roman
+        - lower-alpha
+        - upper-alpha
+      examples:
+        - circle
+      default: circle
+    additional_classes:
+      type: string
+      title: Additional classes
+      description: Additional classes to add to the list
+      examples:
+        - list-unstyled
+    text_color:
+      type: string
+      title: Text color
+      default: none
+      enum:
+        - text-primary
+        - text-secondary
+        - text-success
+        - text-danger
+        - text-warning
+        - text-info
+        - text-light
+        - text-dark
+        - text-body
+        - text-muted
+        - text-white
+      meta:enum:
+        text-primary: "Text-primary"
+        text-secondary: "Text-secondary"
+        text-success: "Text-success"
+        text-danger: "Text-danger"
+        text-warning: "Text-warning"
+        text-info: "Text-info"
+        text-light: "Text-light"
+        text-dark: "Text-dark"
+        text-body: "Text-body"
+        text-muted: "Text-muted"
+        text-white: "Text-white"
+    font_weight:
+      type: string
+      title: Font weight
+      default: normal
+      enum:
+        - fw-normal
+        - fw-light
+        - fw-medium
+        - fw-semibold
+        - fw-bold
+      meta:enum:
+        fw-normal: "Normal"
+        fw-light: "Light"
+        fw-medium: "Medium"
+        fw-semibold: "Semibold"
+        fw-bold: "Bold"
+      examples:
+        - fw-normal
+    font_size:
+      type: string
+      title: Font size
+      default: fs-6
+      enum:
+        - fs-1
+        - fs-2
+        - fs-3
+        - fs-4
+        - fs-5
+        - fs-6
+      meta:enum:
+        fs-1: "Fs-1"
+        fs-2: "Fs-2"
+        fs-3: "Fs-3"
+        fs-4: "Fs-4"
+        fs-5: "Fs-5"
+        fs-6: "Fs-6"
+      examples:
+        - fs-6
+
+slots:
+  list_items:
+    title: Items
+    description: List item components placed inside the list container
+
+libraryOverrides:
+  css:
+    component:
+      list_style.css: {}

@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: people
+label: People
+type: 'canonical_entities:node'
+pattern: 'people/[node:title]'
+selection_criteria:
+  c1ab08c8-5668-4227-93a1-4dbd74b3abd2:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: c1ab08c8-5668-4227-93a1-4dbd74b3abd2
+    context_mapping:
+      node: node
+    bundles:
+      provus_person: provus_person
+selection_logic: and
+weight: -5
+relationships: {  }

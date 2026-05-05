@@ -1,0 +1,15 @@
+{#
+/**
+ * Available variables:
+ * - desktop_size: sets size of the image for desktop
+ * - tablet_size: sets size of the image for tablet
+ * - mobile_size: sets size of the image for mobile
+ */
+#}
+
+<picture>
+  <source srcset="https://dummyimage.com/{{ desktop_size }}/d9d9d9/242424" media="(min-width: 998px)">
+  <source srcset="https://dummyimage.com/{{ tablet_size }}/d9d9d9/242424" media="(min-width: 600px)">
+  <source srcset="https://dummyimage.com/{{ mobile_size }}/d9d9d9/242424" media="(max-width: 600px)">
+  <img alt="Alt text">
+</picture>

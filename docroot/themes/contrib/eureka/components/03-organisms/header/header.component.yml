@@ -1,0 +1,40 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Header
+status: stable
+description: Header component
+# Overrides regular css with minified.
+libraryOverrides:
+  css:
+    component:
+      header.min.css: { minified: true }
+  js:
+    header.min.js: { minified: true }
+group: Eureka main components
+props:
+  type: object
+  properties:
+    header_telephone:
+      type: ['string', 'null']
+      title: Header telephone number
+      description: Telephone number placed in the header top bar
+      examples:
+        - '01234 567890'
+    header_email:
+      type: ['string', 'null']
+      title: Header contact info
+      description: E-mail address placed in the header top bar
+      examples:
+        - 'office@willowmeadow.sch.uk'
+    header_contact:
+      type: ['string', 'null']
+      title: Header contact info
+      description: Plain text contact information placed in the header top bar
+      examples:
+        - 'Emergency contact: 01234 567891'
+slots:
+  header_branding_block:
+    title: Header branding block
+    description: Block to include the site logo
+  header_menu_block:
+    title: Header menu
+    description: Block to include the site menu / navigation

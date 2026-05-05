@@ -1,0 +1,108 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.system_breadcrumb_block
+    - canvas.component.block.views_block.mc_content_fields_media-featured_image
+    - canvas.component.block.views_block.mc_content_fields_node-attachments
+    - canvas.component.block.views_block.mc_content_fields_node-audience
+    - canvas.component.block.views_block.mc_content_fields_node-relateds
+    - canvas.component.block.views_block.mc_content_fields_node-topics
+    - canvas.component.sdc.morphos.banner
+    - canvas.component.sdc.morphos.content
+    - canvas.component.sdc.morphos.layout
+    - canvas.component.sdc.morphos.section
+    - canvas.component.sdc.morphos.toc
+    - core.entity_view_mode.node.full
+    - field.field.media.image.field_media_image
+    - field.field.node.mc_resource.field_mc_banner_image
+    - field.field.node.mc_resource.field_mc_banner_title
+    - field.field.node.mc_resource.field_mc_content
+    - field.field.node.mc_resource.field_mc_intro
+    - field.field.node.mc_resource.field_mc_published_date
+    - field.field.node.mc_resource.field_mc_toc
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - node.type.mc_resource
+  module:
+    - file
+    - media
+    - node
+    - options
+id: node.mc_resource.full
+content_entity_type_id: node
+content_entity_type_bundle: mc_resource
+content_entity_type_view_mode: full
+component_tree:
+  0:
+    uuid: 077649fe-5fad-4853-9439-dad8004978d6
+    component_id: sdc.morphos.banner
+    component_version: 9b5c82290dafa0f4
+    inputs: '{"title":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_resource\u241dtitle\u241e\u241fvalue"},"padding_top":"12","padding_bottom":"12","banner_title":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_resource\u241dfield_mc_banner_title\u241e\u241fvalue"},"introduction":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_resource\u241dfield_mc_intro\u241e\u241fprocessed"},"featured_image":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_resource\u241dfield_mc_banner_image\u241e\u241fentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241f{src\u21a0src_with_alternate_widths,alt\u21a0alt,width\u21a0width,height\u21a0height}"},"palette":"color--primary","texture":"texture--conic-bottom-end","date":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_resource\u241dfield_mc_published_date\u241e\u241fvalue"},"kicker":"DOCUMENT"}'
+  '0:breadcrumb:0':
+    parent_uuid: 077649fe-5fad-4853-9439-dad8004978d6
+    slot: breadcrumb
+    uuid: 6091a052-d732-44bd-8ba5-89c3dfe9b4af
+    component_id: block.system_breadcrumb_block
+    component_version: ad6359c331fc7c45
+    inputs: '{"label":"Breadcrumbs","label_display":"0"}'
+  1:
+    uuid: c2d497f2-55b6-4388-bb0b-19e0271081de
+    component_id: sdc.morphos.layout
+    component_version: d2a5f1008f68c839
+    inputs: '{"layout":"layout--7-1-4","padding_top":"12","padding_bottom":"12","container":"container--normal"}'
+  '1:main:0':
+    parent_uuid: c2d497f2-55b6-4388-bb0b-19e0271081de
+    slot: main
+    uuid: 147897e5-4ede-4478-bb81-783a4de56636
+    component_id: block.views_block.mc_content_fields_media-featured_image
+    component_version: f35fa6bf5d3674cb
+    inputs: '{"label":"Content fields Media: featured_image","label_display":"0","views_label":"","items_per_page":null}'
+  '1:main:1':
+    parent_uuid: c2d497f2-55b6-4388-bb0b-19e0271081de
+    slot: main
+    uuid: bdd5ed06-1b0f-4899-926b-a79d0e1aa76f
+    component_id: sdc.morphos.content
+    component_version: aca7da150405d653
+    inputs: '{"content":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_resource\u241dfield_mc_content\u241e\u241fprocessed"}}'
+  '1:main:2':
+    parent_uuid: c2d497f2-55b6-4388-bb0b-19e0271081de
+    slot: main
+    uuid: 1efe389d-95e7-4c33-82f4-3c8c8d2f9ddb
+    component_id: block.views_block.mc_content_fields_node-attachments
+    component_version: 2cd5793eba124031
+    inputs: '{"label":"Content fields Node: attachments","label_display":"0","views_label":"","items_per_page":null}'
+  '1:main:3':
+    parent_uuid: c2d497f2-55b6-4388-bb0b-19e0271081de
+    slot: main
+    uuid: 66c6591a-c3b3-44af-99bd-ee20c750523a
+    component_id: block.views_block.mc_content_fields_node-topics
+    component_version: 85bffdde172fd1a4
+    inputs: '{"label":"Content fields Node: topics","label_display":"0","views_label":"","items_per_page":null}'
+  '1:main:4':
+    parent_uuid: c2d497f2-55b6-4388-bb0b-19e0271081de
+    slot: main
+    uuid: 006b72f1-0b9d-4ce0-b5be-9f9593491c0a
+    component_id: block.views_block.mc_content_fields_node-audience
+    component_version: c49b3b575bbc2351
+    inputs: '{"label":"Content fields Node: audience","label_display":"0","views_label":"","items_per_page":null}'
+  '1:side:0':
+    parent_uuid: c2d497f2-55b6-4388-bb0b-19e0271081de
+    slot: side
+    uuid: 318e517d-bf48-44b5-8b67-eb650b5b56d2
+    component_id: sdc.morphos.toc
+    component_version: b084e4ab88d027b3
+    inputs: '{"show":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:mc_resource\u241dfield_mc_toc\u241e\u241fvalue"},"content_selector":".layout__container .layout__content","heading_levels":"h2,h3","sticky":true,"heading":"On this page","heading_level":3}'
+  2:
+    uuid: f22ee9e4-e881-4790-bbe6-2c2bd31372b0
+    component_id: sdc.morphos.section
+    component_version: 32ebb6399d6fc06d
+    inputs: '{"show_header":false,"show_footer":false,"heading_level":2,"hide_heading":false,"content_width":"section-width--100","column_widths":"section-col-widths--100","padding_top":"12","padding_bottom":"12","container":"container--normal","palette":"color--alternate"}'
+  '2:main_items:0':
+    parent_uuid: f22ee9e4-e881-4790-bbe6-2c2bd31372b0
+    slot: main_items
+    uuid: a2a32f50-4beb-4349-aa89-f34dfcbbd745
+    component_id: block.views_block.mc_content_fields_node-relateds
+    component_version: aa6538cb3c0e0f95
+    inputs: '{"label":"Content fields Node: relateds","label_display":"0","views_label":"","items_per_page":null}'
+exposed_slots: {  }

@@ -1,0 +1,271 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_test_unlimited
+    - node.type.custom_field_entity_test
+    - views.view.custom_field_test
+    - views.view.custom_field_test_2
+  module:
+    - custom_field
+id: node.custom_field_entity_test.field_test_unlimited
+field_name: field_test_unlimited
+entity_type: node
+bundle: custom_field_entity_test
+label: 'Custom Field Test (Unlimited)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  field_settings:
+    string:
+      label: 'String (Unlimited)'
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+      prefix: ''
+      suffix: ''
+      allowed_values: { }
+    string_long:
+      label: 'String Long (Unlimited)'
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+      formatted: false
+      default_format: plain_text
+      format:
+        guidelines: true
+        help: true
+    integer:
+      label: 'Integer (Unlimited)'
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+      prefix: ''
+      suffix: ''
+      allowed_values: { }
+      min: null
+      max: null
+    decimal:
+      label: 'Decimal (Unlimited)'
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+      prefix: ''
+      suffix: ''
+      min: null
+      max: null
+    float:
+      label: 'Float (Unlimited)'
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+      prefix: ''
+      suffix: ''
+      allowed_values: { }
+      min: null
+      max: null
+    email:
+      label: 'Email (Unlimited)'
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+    telephone:
+      label: 'Telephone (Unlimited)'
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+      prefix: ''
+      suffix: ''
+      allowed_values: { }
+      pattern: ''
+    uri:
+      label: 'URI (Unlimited)'
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+      link_type: 17
+      field_prefix: default
+      field_prefix_custom: ''
+    boolean:
+      label: 'Boolean (Unlimited)'
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+    color:
+      label: 'Color (Unlimited)'
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+    map:
+      label: 'Map (Unlimited)'
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+      table_empty: ''
+    map_string:
+      label: 'Map String (Unlimited)'
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+      table_empty: ''
+    datetime:
+      label: 'Datetime (Unlimited)'
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+      timezone_enabled: false
+      timezone_options: { }
+    daterange:
+      label: 'Daterange (Unlimited)'
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+      seconds_enabled: true
+      timezone_enabled: false
+      timezone_options: { }
+      duration_enabled: false
+      duration_options: { }
+    entity_reference:
+      label: 'Entity Reference (Unlimited)'
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+      handler: 'default:node'
+      handler_settings:
+        sort:
+          field: _none
+          direction: ASC
+        auto_create: false
+        target_bundles:
+          article: article
+        auto_create_bundle: ''
+    file:
+      label: 'File (Unlimited)'
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+      file_directory: '[date:custom:Y]-[date:custom:m]'
+      file_extensions: txt
+      max_filesize: ''
+    image:
+      label: 'Image (Unlimited)'
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+      file_directory: '[date:custom:Y]-[date:custom:m]'
+      file_extensions: 'png gif jpg jpeg webp'
+      max_filesize: ''
+      max_resolution: ''
+      min_resolution: ''
+      alt_field: true
+      alt_field_required: true
+      title_field: false
+      title_field_required: false
+    link:
+      label: 'Link (Unlimited)'
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+      link_type: 17
+      field_prefix: default
+      field_prefix_custom: ''
+      title: 1
+      enabled_attributes:
+        target: true
+        class: true
+        rel: true
+        title: false
+        aria-label: false
+        id: false
+        name: false
+        accesskey: false
+      widget_default_open: expandIfValuesSet
+    time:
+      label: 'Time (Unlimited)'
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+      seconds_enabled: false
+      seconds_step: 5
+    time_range:
+      label: 'Time Range (Unlimited)'
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+      seconds_enabled: false
+      seconds_step: 5
+    viewfield:
+      label: 'Viewfield (Unlimited)'
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+      allowed_views:
+        custom_field_test:
+          block_1: block_1
+          default: default
+        custom_field_test_2:
+          block_1: block_1
+          default: default
+      force_default: false
+      token_browser:
+        recursion_limit: 3
+        global_types: false
+    duration:
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+      duration_options:
+        - key: 86400
+          label: '1 day'
+        - key: 604800
+          label: '1 week'
+        - key: 2592000
+          label: '1 month'
+field_type: custom

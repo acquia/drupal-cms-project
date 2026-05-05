@@ -1,0 +1,91 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.morphos.accordion
+    - canvas.component.sdc.morphos.accordion_group
+    - canvas.component.sdc.morphos.section
+    - filter.format.canvas_html_block
+  module:
+    - options
+    - text
+id: accordion_section
+label: 'Accordion section'
+component_tree:
+  0:
+    uuid: 68d6e4d9-2a52-4a6e-a656-362b3779c135
+    component_id: sdc.morphos.section
+    component_version: 32ebb6399d6fc06d
+    inputs:
+      show_header: true
+      show_footer: false
+      heading: 'Accordion section'
+      heading_level: 2
+      hide_heading: false
+      content_width: section-width--100
+      content_position: section-position--center
+      content_alignment: section-alignment--center
+      container: container--normal
+      padding_top: '12'
+      padding_bottom: '12'
+      intro:
+        value: '<p>Collapsible accordions convey important information in a compact way. Used for checklists of data which require further explanation.</p>'
+        format: canvas_html_block
+      palette: color--standard
+      column_widths: section-col-widths--100
+  '0:main_items:0':
+    parent_uuid: 68d6e4d9-2a52-4a6e-a656-362b3779c135
+    slot: main_items
+    uuid: 71896640-7a01-4522-a767-5b3fc2c97ba7
+    component_id: sdc.morphos.accordion_group
+    component_version: 15d2a2e4d0f67712
+    inputs: {  }
+  '0:main_items:0:accordion_items:0':
+    parent_uuid: 71896640-7a01-4522-a767-5b3fc2c97ba7
+    slot: accordion_items
+    uuid: c30abfee-c0a1-475c-945b-3d8a61372393
+    component_id: sdc.morphos.accordion
+    component_version: 13f690004239a43c
+    inputs:
+      title: 'Accordion title'
+      content:
+        value: '<p>Accordion content goes here.</p>'
+        format: canvas_html_block
+      icon: collapse-plus
+      force: collapse-open
+  '0:main_items:0:accordion_items:1':
+    parent_uuid: 71896640-7a01-4522-a767-5b3fc2c97ba7
+    slot: accordion_items
+    uuid: 1be9943f-751d-4167-9417-9237705258e0
+    component_id: sdc.morphos.accordion
+    component_version: 13f690004239a43c
+    inputs:
+      title: 'Accordion title'
+      content:
+        value: '<p>Accordion content goes here.</p>'
+        format: canvas_html_block
+      icon: collapse-plus
+  '0:main_items:0:accordion_items:2':
+    parent_uuid: 71896640-7a01-4522-a767-5b3fc2c97ba7
+    slot: accordion_items
+    uuid: 659c8101-4d33-4836-a214-4fc9e76fd5d1
+    component_id: sdc.morphos.accordion
+    component_version: 13f690004239a43c
+    inputs:
+      title: 'Accordion title'
+      content:
+        value: '<p>Accordion content goes here.</p>'
+        format: canvas_html_block
+      icon: collapse-plus
+  '0:main_items:0:accordion_items:3':
+    parent_uuid: 71896640-7a01-4522-a767-5b3fc2c97ba7
+    slot: accordion_items
+    uuid: 94edeb30-1044-48ec-a737-1d4ca7a67996
+    component_id: sdc.morphos.accordion
+    component_version: 13f690004239a43c
+    inputs:
+      title: 'Accordion title'
+      content:
+        value: '<p>Accordion content goes here.</p>'
+        format: canvas_html_block
+      icon: collapse-plus

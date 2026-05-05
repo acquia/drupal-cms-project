@@ -1,0 +1,32 @@
+action.configuration.eca_file_rename:
+  type: mapping
+  label: 'Configuration for the "File Rename" action'
+  mapping:
+    new_filename:
+      type: string
+      label: 'New file name'
+      constraints:
+        NotBlank: []
+    exists_behavior:
+      type: string
+      label: 'Behavior'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca_file\Plugin\Action\FileRename::getAllValidFileBehaviors'
+        NotBlank: []
+    object:
+      type: string
+      label: 'Token name holding the entity'
+
+action.configuration.eca_file_write:
+  type: mapping
+  label: 'Configuration for the "File Write" action'
+  mapping:
+    data:
+      type: text
+      label: 'File content'
+      constraints:
+        NotBlank: []
+    object:
+      type: string
+      label: 'Token name holding the entity'

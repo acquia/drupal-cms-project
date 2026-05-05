@@ -1,0 +1,103 @@
+{#
+/**
+ * @file
+ * Bootstrap Barrio's override to display a menu.
+ *
+ * Available variables:
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - below: The menu item child items.
+ *   - title: The menu link title.
+ *   - url: The menu link url, instance of \Drupal\Core\Url
+ *   - localized_options: Menu link localized options.
+ *   - is_expanded: TRUE if the link has visible children within the current
+ *     menu tree.
+ *   - is_collapsed: TRUE if the link has children within the current menu tree
+ *     that are not currently visible.
+ *   - in_active_trail: TRUE if the link is in the active trail.
+ */
+#}
+
+{{ attach_library('provus_mega_menu/main-nav') }}
+
+{% import _self as menus %}
+
+{#
+  We call a macro which calls itself to render the full tree.
+  @see http://twig.sensiolabs.org/doc/tags/macro.html
+#}
+{{ menus.menu_links(items, attributes, 0) }}
+
+{% macro menu_links(items, attributes, menu_level, parent_callout_image = null, parent_callout_link = null) %}
+  {% import _self as menus %}
+  {% if items %}
+
+    {% if menu_level == 0 %}
+      <ul{{ attributes.addClass('nav', 'navbar-nav').removeClass('clearfix')|without('id') }}>
+    {% elseif menu_level == 1 %}
+      <ul class="dropdown-cor-menu level-{{menu_level}} ">
+    {% else %}
+      <ul class="dropdown-menu level-{{menu_level}}">
+    {% endif %}
+
+    {% for item in items %}
+      {%
+        set classes = [
+          menu_level ? 'dropdown-item' : 'nav-item',
+          item.is_expanded ? 'menu-item--expanded',
+          item.is_collapsed ? 'menu-item--collapsed',
+          item.in_active_trail ? 'active',
+          item.below ? 'dropdown',
+          'init',
+        ]
+      %}
+
+      {% if menu_level == 0 %}
+        {# Capture callout data from top-level items only #}
+        {% set parent_callout_image = item.content.field_provus_menu_callout_image|default(null)|render %}
+        {% set parent_callout_link = item.content.field_provus_menu_callout_link|default(null)|render %}
+      {% else %}
+        {% set menu_icon = item.content.field_provus_menu_icon|default(null)|render %}
+      {% endif %}
+
+      <li{{ item.attributes.addClass(classes) }}>
+        {%
+          set link_classes = [
+            'nav-link',
+            item.in_active_trail ? 'active',
+            item.below ? 'dropdown-toggle-main',
+            item.url.getOption('attributes').class ? item.url.getOption('attributes').class | join(' '),
+            'nav-link-' ~ item.url.toString() | clean_class,
+            menu_icon ? 'has_icon',
+          ]
+        %}
+        {% if item.below %}
+          {{ link('', item.url, {'class': 'level-up', 'tabindex': '-1', 'aria-label': item.title}) }}
+          {{ link(item.title, item.url, {'class': link_classes, 'aria-haspopup': 'true', 'aria-expanded': 'false'}) }}
+          {{ link('', item.url, {'class': 'dropdown-toggle', 'data-bs-toggle': 'dropdown', 'tabindex': '-1', 'aria-label': item.title}) }}
+          {{ menus.menu_links(item.below, attributes, menu_level + 1, parent_callout_image, parent_callout_link) }}
+        {% else %}
+          {% if menu_icon %}
+            {{ menu_icon }}
+          {% endif %}
+          {{ link(item.title, item.url, {'class': link_classes}) }}
+        {% endif %}
+      </li>
+    {% endfor %}
+
+    {% if menu_level == 1 %}
+      {# Use parent callout information at level 1 #}
+      <div class="callout-container d-none d-lg-block" tabindex="-1">
+        {% if parent_callout_image %}
+          {{ parent_callout_image }}
+        {% endif %}
+        {% if parent_callout_link %}
+          {{ parent_callout_link }}
+        {% endif %}
+      </div>
+    {% endif %}
+
+    </ul>
+  {% endif %}
+{% endmacro %}

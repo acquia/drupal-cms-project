@@ -1,0 +1,75 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 7a0023b4-a7cb-451c-b6ea-5502aa7ef858
+  default_langcode: en
+  depends:
+    17cf8591-aa8d-4814-bcdf-7706d6be9fe6: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: News
+  description:
+    -
+      value: 'The news section.'
+  components:
+    -
+      uuid: 4f836127-793c-469e-9dbf-d8f64451af4f
+      component_id: sdc.morphos.banner
+      inputs:
+        title: News
+        padding_top: '12'
+        padding_bottom: '12'
+        palette: color--primary
+        introduction:
+          value: '<p>The latest news</p>'
+          format: canvas_html_block
+        texture: texture--conic-top-start
+    -
+      parent_uuid: 4f836127-793c-469e-9dbf-d8f64451af4f
+      slot: breadcrumb
+      uuid: 476831b9-16d8-4682-a0ba-950e56394ce5
+      component_id: block.system_breadcrumb_block
+      inputs:
+        label: Breadcrumbs
+        label_display: '0'
+    -
+      uuid: 9d18fb1e-d887-4bf1-8044-98a72e632d70
+      component_id: sdc.morphos.layout
+      inputs:
+        layout: layout--4-1-7
+        container: container--normal
+        padding_top: '12'
+        padding_bottom: '12'
+    -
+      parent_uuid: 9d18fb1e-d887-4bf1-8044-98a72e632d70
+      slot: main
+      uuid: 1700f89b-1819-4afd-b93f-c071acda32df
+      component_id: block.views_block.mc_search-articles
+      inputs:
+        label: 'Search: News'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+  path:
+    -
+      alias: /news
+      langcode: en
+  image:
+    -
+      entity: 17cf8591-aa8d-4814-bcdf-7706d6be9fe6
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

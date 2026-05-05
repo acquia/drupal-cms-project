@@ -1,0 +1,142 @@
+/**
+ * @file
+ * Stylesheet for the custom_field custom form display settings.
+ */
+.custom-field-row {
+  --custom-field-gutter-x: 1.5rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: calc(var(--custom-field-gutter-x) * -0.5);
+  margin-left: calc(var(--custom-field-gutter-x) * -0.5);
+}
+
+.custom-field-row > * {
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--custom-field-gutter-x) * 0.5);
+  padding-left: calc(var(--custom-field-gutter-x) * 0.5);
+}
+
+.custom-field-col.form-type--number:not(:has(span)) input,
+.custom-field-col.form-type--textfield:not(:has(span)) input,
+.custom-field-col.form-type--email input,
+.custom-field-col.form-type--textarea input,
+.custom-field-col.form-type--url input,
+.custom-field-col.form-type--tel:not(:has(span)) input,
+.custom-field-col.form-type--entity-autocomplete input,
+.custom-field-col.form-type--select select,
+.custom-field-col.form-type--date input,
+.custom-field-col.form-type--time-cf input,
+.custom-field-col.media-library-widget .media-library-selection .media-library-item--grid {
+  width: 100%;
+}
+
+.custom-field-col > .form-type--textarea {
+  margin-top: 0;
+}
+
+.custom-field-row > .custom-field-col-auto {
+  flex: 0 0 auto;
+  width: auto;
+}
+
+.custom-field-row > .custom-field-col-1 {
+  flex: 0 0 auto;
+  /* stylelint-disable-next-line */
+  width: 8.33333333%;
+}
+
+.custom-field-row > .custom-field-col-2 {
+  flex: 0 0 auto;
+  /* stylelint-disable-next-line */
+  width: 16.66666667%;
+}
+
+.custom-field-row > .custom-field-col-3 {
+  flex: 0 0 auto;
+  width: 25%;
+}
+
+.custom-field-row > .custom-field-col-4 {
+  flex: 0 0 auto;
+  /* stylelint-disable-next-line */
+  width: 33.33333333%;
+}
+
+.custom-field-row > .custom-field-col-5 {
+  flex: 0 0 auto;
+  /* stylelint-disable-next-line */
+  width: 41.66666667%;
+}
+
+.custom-field-row > .custom-field-col-6 {
+  flex: 0 0 auto;
+  width: 50%;
+}
+
+.custom-field-row > .custom-field-col-7 {
+  flex: 0 0 auto;
+  /* stylelint-disable-next-line */
+  width: 58.33333333%;
+}
+
+.custom-field-row > .custom-field-col-8 {
+  flex: 0 0 auto;
+  /* stylelint-disable-next-line */
+  width: 66.66666667%;
+}
+
+.custom-field-row > .custom-field-col-9 {
+  flex: 0 0 auto;
+  width: 75%;
+}
+
+.custom-field-row > .custom-field-col-10 {
+  flex: 0 0 auto;
+  /* stylelint-disable-next-line */
+  width: 83.33333333%;
+}
+
+.custom-field-row > .custom-field-col-11 {
+  flex: 0 0 auto;
+  /* stylelint-disable-next-line */
+  width: 91.66666667%;
+}
+
+.custom-field-row > .custom-field-col-12 {
+  flex: 0 0 auto;
+  width: 100%;
+}
+
+.custom-field-col.media-library-widget .media-library-selection .media-library-item--grid,
+.custom-field-col-6.media-library-widget .media-library-selection .media-library-item--grid,
+.custom-field-col-7.media-library-widget .media-library-selection .media-library-item--grid,
+.custom-field-col-8.media-library-widget .media-library-selection .media-library-item--grid,
+.custom-field-col-9.media-library-widget .media-library-selection .media-library-item--grid,
+.custom-field-col-10.media-library-widget .media-library-selection .media-library-item--grid,
+.custom-field-col-11.media-library-widget .media-library-selection .media-library-item--grid,
+.custom-field-col-12.media-library-widget .media-library-selection .media-library-item--grid {
+  max-width: 50%;
+}
+
+/* 768px on Seven theme */
+@media all and (max-width: 48em) {
+  .custom-field-flex--stack-medium .custom-field-col {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  .custom-field-col.media-library-widget .media-library-selection .media-library-item--grid {
+    max-width: initial;
+  }
+}
+
+/* 600px on Seven theme */
+@media screen and (max-width: 37.5em) {
+  .custom-field-flex--stack-small .custom-field-col {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+}

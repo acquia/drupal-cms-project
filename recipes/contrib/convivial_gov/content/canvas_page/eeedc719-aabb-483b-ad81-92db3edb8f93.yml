@@ -1,0 +1,333 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: eeedc719-aabb-483b-ad81-92db3edb8f93
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Behaviors
+  description:
+    -
+      value: 'Demonstration of the behavior components available in Convivial Template.'
+  components:
+    -
+      uuid: 3a15f897-dab4-4e78-affa-6a9bb39417b0
+      component_id: sdc.morphos.banner
+      inputs:
+        title: Behaviors
+        padding_top: '12'
+        padding_bottom: '12'
+        palette: color--primary
+        texture: texture--conic-top-start
+    -
+      parent_uuid: 3a15f897-dab4-4e78-affa-6a9bb39417b0
+      slot: breadcrumb
+      uuid: 1d15ee9e-20e5-4e6b-82a4-165221da65fb
+      component_id: block.system_breadcrumb_block
+      inputs:
+        label: Breadcrumbs
+        label_display: '0'
+    -
+      uuid: 2dbdc53f-1172-4b75-8565-c8de28d22e20
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: false
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--50-50
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--standard
+        heading: 'Section with no behaviors'
+        layout: layout--12
+    -
+      parent_uuid: 2dbdc53f-1172-4b75-8565-c8de28d22e20
+      slot: main_items
+      uuid: 533edc3d-63a3-49ed-bd5c-358050e48d7a
+      component_id: sdc.morphos.card_simple
+      inputs:
+        info: Info
+        heading: 'Card heading'
+        url: 'http://example.com'
+        summary:
+          value: '<p>Simple card summary text.</p>'
+          format: canvas_html_block
+        date: 13.01.2026
+    -
+      parent_uuid: 2dbdc53f-1172-4b75-8565-c8de28d22e20
+      slot: main_items
+      uuid: 130443ba-3656-4a59-b9fd-fd7d5a300c7f
+      component_id: sdc.morphos.card_simple
+      inputs:
+        info: Info
+        heading: 'Card heading'
+        url: 'http://example.com'
+        summary:
+          value: '<p>Simple card summary text.</p>'
+          format: canvas_html_block
+        date: 13.01.2026
+    -
+      uuid: 9c38b2bd-e0ae-43db-a1a2-2b79e8eea2ae
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--alternate
+        heading: 'Section 2 with no behaviors'
+        layout: layout--12
+    -
+      parent_uuid: 9c38b2bd-e0ae-43db-a1a2-2b79e8eea2ae
+      slot: main_items
+      uuid: 63ab91dd-2e4c-4f32-b0e1-474122246a86
+      component_id: sdc.morphos.card_simple
+      inputs:
+        info: Info
+        heading: 'Card heading'
+        url: 'http://example.com'
+        summary:
+          value: '<p>Simple card summary text.</p>'
+          format: canvas_html_block
+        date: 13.01.2026
+    -
+      parent_uuid: 9c38b2bd-e0ae-43db-a1a2-2b79e8eea2ae
+      slot: main_items
+      uuid: 987ab2d5-1882-48b6-ac88-26d3ccc34745
+      component_id: sdc.morphos.card_simple
+      inputs:
+        info: Info
+        heading: 'Card heading'
+        url: 'http://example.com'
+        summary:
+          value: '<p>Simple card summary text.</p>'
+          format: canvas_html_block
+        date: 13.01.2026
+    -
+      uuid: 450b4d05-7d2c-4107-a744-26599cb48806
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: false
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--50-50
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--secondary
+        heading: 'Section with Palette Swap Behavior'
+        layout: layout--12
+    -
+      parent_uuid: 450b4d05-7d2c-4107-a744-26599cb48806
+      slot: main_items
+      uuid: 53eefbe0-f430-44f6-bf3b-e31b370a6985
+      component_id: sdc.morphos.card_simple
+      inputs:
+        info: Info
+        heading: 'Card heading'
+        url: 'http://example.com'
+        summary:
+          value: '<p>Simple card summary text.</p>'
+          format: canvas_html_block
+        date: 13.01.2026
+    -
+      parent_uuid: 450b4d05-7d2c-4107-a744-26599cb48806
+      slot: main_items
+      uuid: 59c6ca07-812b-4354-a2b7-dc44719917a3
+      component_id: sdc.morphos.card_simple
+      inputs:
+        info: Info
+        heading: 'Card heading'
+        url: 'http://example.com'
+        summary:
+          value: '<p>Simple card summary text.</p>'
+          format: canvas_html_block
+        date: 13.01.2026
+    -
+      parent_uuid: 450b4d05-7d2c-4107-a744-26599cb48806
+      slot: behaviors
+      uuid: 7a1428a4-7069-48d1-b31e-b9e7c48b01be
+      component_id: sdc.morphos.palette_swap_behavior
+      inputs:
+        duration: 500
+        swap: primary
+        threshold: 75
+    -
+      uuid: 75f18394-8a96-4ad0-a5fc-74d07a22da5b
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: false
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--50-50
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--secondary
+        heading: 'Section with Palette Swap Behavior (Desktop Only)'
+        layout: layout--12
+    -
+      parent_uuid: 75f18394-8a96-4ad0-a5fc-74d07a22da5b
+      slot: main_items
+      uuid: 1ad540c5-ca12-4df3-9934-f27aaed7bc36
+      component_id: sdc.morphos.card_simple
+      inputs:
+        info: Info
+        heading: 'Card heading'
+        url: 'http://example.com'
+        summary:
+          value: '<p>Simple card summary text.</p>'
+          format: canvas_html_block
+        date: 13.01.2026
+    -
+      parent_uuid: 75f18394-8a96-4ad0-a5fc-74d07a22da5b
+      slot: main_items
+      uuid: 17d4156f-c2bc-44aa-8d13-bcaf5789d772
+      component_id: sdc.morphos.card_simple
+      inputs:
+        info: Info
+        heading: 'Card heading'
+        url: 'http://example.com'
+        summary:
+          value: '<p>Simple card summary text.</p>'
+          format: canvas_html_block
+        date: 13.01.2026
+    -
+      parent_uuid: 75f18394-8a96-4ad0-a5fc-74d07a22da5b
+      slot: behaviors
+      uuid: 43a846ca-fee1-4535-9a87-03f01339329c
+      component_id: sdc.morphos.palette_swap_behavior
+      inputs:
+        duration: 500
+        swap: primary
+        threshold: 75
+        media_query: '(min-width: 768px)'
+    -
+      uuid: 9ba9de8b-4242-4162-a69c-420fea2830a3
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--alternate
+        heading: ' Section 3 with no behaviors'
+        layout: layout--12
+    -
+      parent_uuid: 9ba9de8b-4242-4162-a69c-420fea2830a3
+      slot: main_items
+      uuid: 551c1cbd-989b-4520-aaee-4aad119eebb8
+      component_id: sdc.morphos.card_simple
+      inputs:
+        info: Info
+        heading: 'Card heading'
+        url: 'http://example.com'
+        summary:
+          value: '<p>Simple card summary text.</p>'
+          format: canvas_html_block
+        date: 13.01.2026
+    -
+      parent_uuid: 9ba9de8b-4242-4162-a69c-420fea2830a3
+      slot: main_items
+      uuid: 92174ce7-49a9-4f23-a03b-6575d0878d8d
+      component_id: sdc.morphos.card_simple
+      inputs:
+        info: Info
+        heading: 'Card heading'
+        url: 'http://example.com'
+        summary:
+          value: '<p>Simple card summary text.</p>'
+          format: canvas_html_block
+        date: 13.01.2026
+    -
+      uuid: 1e3f710d-7cce-4dae-b1d3-7f181cb7613f
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--50-50
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--accent
+        heading: 'Section with Scroll Reveal Behavior'
+        layout: layout--12
+    -
+      parent_uuid: 1e3f710d-7cce-4dae-b1d3-7f181cb7613f
+      slot: main_items
+      uuid: 93e8e006-4d98-4bf3-9006-6e22be89a8fe
+      component_id: sdc.morphos.card_simple
+      inputs:
+        info: Info
+        heading: 'Card heading'
+        url: 'http://example.com'
+        summary:
+          value: '<p>Simple card summary text.</p>'
+          format: canvas_html_block
+        date: 13.01.2026
+    -
+      parent_uuid: 1e3f710d-7cce-4dae-b1d3-7f181cb7613f
+      slot: main_items
+      uuid: bab91fee-6e0f-4c5d-af41-6fb5417dcdee
+      component_id: sdc.morphos.card_simple
+      inputs:
+        info: Info
+        heading: 'Card heading'
+        url: 'http://example.com'
+        summary:
+          value: '<p>Simple card summary text.</p>'
+          format: canvas_html_block
+        date: 13.01.2026
+    -
+      parent_uuid: 1e3f710d-7cce-4dae-b1d3-7f181cb7613f
+      slot: behaviors
+      uuid: c85f645f-d779-429e-a7d9-5facac9c3058
+      component_id: sdc.morphos.scroll_reveal_behavior
+      inputs:
+        distance: 50px
+        duration: 1000
+        mobile: true
+        origin: bottom
+        scale: 100
+        sequence_interval: 500
+        sequence_selector: .card
+  path:
+    -
+      alias: /demo/behaviors
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

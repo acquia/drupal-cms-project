@@ -1,0 +1,67 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Accordion Item
+status: stable
+description: Individual accordion item component with title, heading level, and collapsible content
+group: Provus Components
+
+variants:
+  default:
+    title: Default
+    description: Standard accordion item with collapsible content section
+
+props:
+  type: object
+  required:
+    - title
+    - heading_level
+    - body
+  properties:
+    title:
+      type: string
+      title: Heading
+      description: The title text displayed in the accordion header button
+      examples:
+        - Section title
+    heading_level:
+      type: string
+      title: 'Heading Level Tag'
+      description: 'HTML heading level tag (h1, h2, h3, h4, h5, or h6)'
+      examples:
+        - 'h2'
+      default: 'h2'
+      enum:
+        - 'h1'
+        - 'h2'
+        - 'h3'
+        - 'h4'
+        - 'h5'
+        - 'h6'
+      meta:enum:
+        h1: H1
+        h2: H2
+        h3: H3
+        h4: H4
+        h5: H5
+        h6: H6
+    open_by_default:
+      type: boolean
+      title: Expanded by default
+      description: Whether this accordion item should be expanded when the page loads
+      default: false
+      examples:
+        - false
+        - true
+    body:
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: block
+      title: Body
+      description: The body text displayed in the accordion item
+      examples:
+        - The body text displayed in the accordion item
+      default: ''
+
+slots:
+  more_content:
+    title: More content
+    description: Additional content to be displayed when the accordion item is expanded

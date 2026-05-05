@@ -1,0 +1,89 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: c5b0a0f8-b958-49ad-b2ca-81930195f7b8
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Page not found'
+  components:
+    -
+      uuid: aed88304-1401-484b-a7f9-734e420611de
+      component_id: sdc.haven_theme.section
+      inputs:
+        width: 80%
+        columns: '1 column'
+        mobile_columns: '1'
+        margin_block_start: '128'
+        margin_block_end: '128'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: true
+    -
+      parent_uuid: aed88304-1401-484b-a7f9-734e420611de
+      slot: main_slot
+      uuid: 782be960-bb11-4556-8852-2e30c1999d05
+      component_id: sdc.haven_theme.group
+      inputs:
+        flex_direction: column
+        flex_gap: lg
+        items_align: center
+        flex_align: center
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: 782be960-bb11-4556-8852-2e30c1999d05
+      slot: group_slot
+      uuid: 575f6c1a-2a60-4842-8ed8-f40822e92e39
+      component_id: sdc.haven_theme.icon
+      inputs:
+        icon: smiley-x-eyes
+        icon_size: extra-large
+    -
+      parent_uuid: 782be960-bb11-4556-8852-2e30c1999d05
+      slot: group_slot
+      uuid: 7f55c0d0-7f40-4bba-85cc-abfa617336ec
+      component_id: sdc.haven_theme.text
+      inputs:
+        text:
+          value: '<p class="text-align-center">The page you''re trying to find doesn''t exist.</p>'
+          format: canvas_html_block
+        text_size: text-lg
+        text_color: default
+        columns: '1 column'
+    -
+      parent_uuid: 782be960-bb11-4556-8852-2e30c1999d05
+      slot: group_slot
+      uuid: 3381af04-f8cb-4140-bec5-a0cadf2a8acf
+      component_id: sdc.haven_theme.button
+      inputs:
+        variant: light
+        outlined: false
+        label: 'Go back home'
+        size: medium
+        icon: arrow-right
+        icon_first: false
+        mobile_width: false
+        disabled: false
+        href: /
+  path:
+    -
+      alias: /404
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

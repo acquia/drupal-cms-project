@@ -1,0 +1,88 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.diagnosis.address
+    - canvas.component.sdc.diagnosis.button
+    - canvas.component.sdc.diagnosis.date
+    - canvas.component.sdc.diagnosis.heading
+    - canvas.component.sdc.diagnosis.hero-side-by-side
+    - canvas.component.sdc.diagnosis.plain-text
+    - canvas.component.sdc.diagnosis.section
+    - canvas.component.sdc.diagnosis.text
+    - core.entity_view_mode.node.full
+    - field.field.media.image.field_media_image
+    - field.field.node.event.field_description
+    - field.field.node.event.field_event_date
+    - field.field.node.event.field_featured_image
+    - field.field.node.event.field_location
+    - field.field.node.event.field_registration_link
+    - field.field.node.event.field_summary
+    - field.field.node.location.field_address
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - node.type.event
+    - node.type.location
+  module:
+    - file
+    - media
+    - node
+    - options
+id: node.event.full
+content_entity_type_id: node
+content_entity_type_bundle: event
+content_entity_type_view_mode: full
+component_tree:
+  0:
+    uuid: e88d105c-120e-41a7-b67c-8b258b015114
+    component_id: sdc.diagnosis.hero-side-by-side
+    component_version: 4b74bc8cb0425504
+    inputs: '{"hero_flex_gap":"large","hero_flex_direction_mobile":"vertical","background":"default","padding_block_start":"0","padding_block_end":"0","margin_block_start":"0","margin_block_end":"0","image_size":"4:3","image_position":"right","image_radius":"extra-large","media":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:event\u241dfield_featured_image\u241e\u241fentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241f{src\u21a0src_with_alternate_widths,alt\u21a0alt,width\u21a0width,height\u21a0height}"}}'
+  '0:hero_slot:0':
+    parent_uuid: e88d105c-120e-41a7-b67c-8b258b015114
+    slot: hero_slot
+    uuid: cb293632-82db-43c8-a7e5-884142217e6e
+    component_id: sdc.diagnosis.heading
+    component_version: d7c6acbc91a60ac1
+    inputs: '{"heading_text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:event\u241dtitle\u241e\u241fvalue"},"level":2,"text_size":"heading-responsive-4xl","text_color":"default","align":"left"}'
+  '0:hero_slot:1':
+    parent_uuid: e88d105c-120e-41a7-b67c-8b258b015114
+    slot: hero_slot
+    uuid: 1ee9fada-6516-4c82-8389-dce8dd5aacc7
+    component_id: sdc.diagnosis.plain-text
+    component_version: 8ac71b85056f21c6
+    inputs: '{"text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:event\u241dfield_summary\u241e\u241fvalue"},"text_size":"normal","text_color":"default"}'
+  '0:hero_slot:2':
+    parent_uuid: e88d105c-120e-41a7-b67c-8b258b015114
+    slot: hero_slot
+    uuid: c882fe0f-77db-4393-9fee-d834075cbb8a
+    component_id: sdc.diagnosis.address
+    component_version: 27472be308ee6f99
+    inputs: '{"organization":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:event\u241dfield_location\u241e\u241fentity\u241c\u241centity:node\u241dtitle\u241e\u241fvalue"},"address_line1":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:event\u241dfield_location\u241e\u241fentity\u241c\u241centity:node:location\u241dfield_address\u241e\u241faddress_line1"},"address_line2":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:event\u241dfield_location\u241e\u241fentity\u241c\u241centity:node:location\u241dfield_address\u241e\u241faddress_line2"},"locality":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:event\u241dfield_location\u241e\u241fentity\u241c\u241centity:node:location\u241dfield_address\u241e\u241flocality"},"administrative_area":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:event\u241dfield_location\u241e\u241fentity\u241c\u241centity:node:location\u241dfield_address\u241e\u241fadministrative_area"},"postal_code":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:event\u241dfield_location\u241e\u241fentity\u241c\u241centity:node:location\u241dfield_address\u241e\u241fpostal_code"},"text_color":"default","text_size":"normal"}'
+  '0:hero_slot:3':
+    parent_uuid: e88d105c-120e-41a7-b67c-8b258b015114
+    slot: hero_slot
+    uuid: 705477b8-6655-4276-bf4d-6c0062bb85ae
+    component_id: sdc.diagnosis.date
+    component_version: 0c3ed2df88b09b6f
+    inputs: '{"start_date":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:event\u241dfield_event_date\u241e\u241fvalue_date"},"end_date":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:event\u241dfield_event_date\u241e\u241fend_value_date"},"start_time":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:event\u241dfield_event_date\u241e\u241fvalue_time"},"end_time":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:event\u241dfield_event_date\u241e\u241fend_value_time"},"show_icon":true}'
+  '0:hero_slot:4':
+    parent_uuid: e88d105c-120e-41a7-b67c-8b258b015114
+    slot: hero_slot
+    uuid: f5668523-5322-466f-bca8-124f1ad986c7
+    component_id: sdc.diagnosis.button
+    component_version: 8886a0097e12e915
+    inputs: '{"variant":"primary","label":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:event\u241dfield_registration_link\u241e\u241ftitle"},"target":"_self","size":"medium","icon":"arrow-right","mobile_width":false,"icon_first":false,"disabled":false,"href":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:event\u241dfield_registration_link\u241e\u241furi"}}'
+  1:
+    uuid: 0c099dd8-2b67-4d74-a121-5ae879e3c1fb
+    component_id: sdc.diagnosis.section
+    component_version: 4e137b5efb1f5f5f
+    inputs: '{"width":"50%","columns":"100","mobile_columns":"1","margin_block_start":"48","margin_block_end":"48","padding_block_start":"0","padding_block_end":"0","section_header":false,"section_footer":false}'
+  '1:main_slot:0':
+    parent_uuid: 0c099dd8-2b67-4d74-a121-5ae879e3c1fb
+    slot: main_slot
+    uuid: 22e806be-5508-4dbd-ab9a-d3c1d5f927d6
+    component_id: sdc.diagnosis.text
+    component_version: a32701352f55e6f5
+    inputs: '{"text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:event\u241dfield_description\u241e\u241fprocessed"},"text_size":"normal","text_color":"default"}'
+exposed_slots: {  }

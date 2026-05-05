@@ -1,0 +1,21 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Text content
+status: stable
+description: Rich text component, to be used as main body of a page, not as part of other components
+# Overrides regular css with minified.
+libraryOverrides:
+  css:
+    component:
+      text.min.css: { minified: true }
+group: Eureka main components
+props:
+  type: object
+  properties:
+    text_content:
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: block
+      title: Rich text content
+      description: Main content of the component - fully formatted
+      examples:
+        - 'Lorem ipsum <strong>dolor sit amet</strong>, consectetur adipiscing elit. Donec pellentesque pulvinar rutrum. Curabitur elementum condimentum fringilla. Duis eu erat at nulla ultricies posuere non pellentesque turpis.'

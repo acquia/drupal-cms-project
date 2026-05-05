@@ -1,0 +1,817 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 5b605a46-c2ec-45eb-805c-e2b4d4b8d9de
+  default_langcode: en
+  depends:
+    d8dd50f2-5728-4ddb-997e-b20873477ffe: file
+    abbab624-d4f0-4447-bb4b-c749680f4e79: media
+    2be8cc5e-aa86-4d1d-8d7d-f1d52f94313a: file
+    dc18f39d-08ab-402d-9a5a-779d587e644a: media
+    0a744316-f4f2-4520-972d-1f5e2c2a45d9: file
+    f8f48a35-91f6-4769-9585-2773772fcd2d: media
+    a7bf7b6b-8912-4d06-9b11-0ec8a89a173a: file
+    17cf8591-aa8d-4814-bcdf-7706d6be9fe6: media
+    b6bf9f86-e49f-4d0f-8834-3f08fdd8b8eb: file
+    c2205fed-268e-457a-a382-7a928e33ddc4: media
+    db8439cb-d9aa-4d30-a955-a68025a5903c: file
+    797c4f70-52d1-43f8-9166-b01ccefff98e: media
+    b5073a65-ab38-4324-85ce-4fc9ccc7b501: file
+    fd82e5f6-f5dc-4a79-9f47-60955bd522a2: media
+    147603e6-ff27-405e-84b8-a4eee1370e74: file
+    bec68969-5767-4682-9c26-69937484f690: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Home
+  description:
+    -
+      value: 'Convivial Template - Flexible site building for Drupal CMS.'
+  components:
+    -
+      uuid: a46596f7-422d-42b3-8ffd-967c62d1259b
+      component_id: sdc.morphos.hero
+      inputs:
+        content_width: content-width--50
+        padding_top: '32'
+        padding_bottom: '32'
+        container: container--normal
+        content_position: content-position--start
+        palette: color--primary
+        overlay: overlay--linear-start
+    -
+      parent_uuid: a46596f7-422d-42b3-8ffd-967c62d1259b
+      slot: items
+      uuid: af2f93e6-fe46-4459-bdee-64149319e112
+      component_id: sdc.morphos.heading
+      inputs:
+        heading: 'Department of Health'
+        level: 1
+        use_display_font: false
+    -
+      parent_uuid: a46596f7-422d-42b3-8ffd-967c62d1259b
+      slot: items
+      uuid: 6297f548-ebe5-4186-b374-6b3696ff817a
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>Fostering healthy, thriving communities for today and tomorrow.</p>'
+          format: canvas_html_block
+        prose_size: prose-2xl
+    -
+      parent_uuid: a46596f7-422d-42b3-8ffd-967c62d1259b
+      slot: items
+      uuid: e5cf1ca1-6c93-4f17-adea-fad55a517846
+      component_id: sdc.morphos.group
+      inputs:
+        allow_wrap: true
+        gap: '4'
+        margin_top: '4'
+    -
+      parent_uuid: e5cf1ca1-6c93-4f17-adea-fad55a517846
+      slot: items
+      uuid: 5d302220-c334-4e07-92f1-cbd252d9a0af
+      component_id: sdc.morphos.button
+      inputs:
+        text: 'About us'
+        size: btn-xl
+        icon: arrow-right
+        icon_position: icon-position--end
+        url:
+          uri: 'entity:node/18'
+          options: {  }
+    -
+      parent_uuid: a46596f7-422d-42b3-8ffd-967c62d1259b
+      slot: backgrounds
+      uuid: d271f75c-ebe0-4fd0-aeae-4faa26524be2
+      component_id: sdc.morphos.image_background
+      inputs:
+        position: 'right center'
+        style: cover
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: abbab624-d4f0-4447-bb4b-c749680f4e79
+            target_type: media
+    -
+      uuid: 6711ea38-b447-4b98-9638-629f2f03e261
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: false
+        heading: Popular
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--25-25-25-25
+        padding_top: '16'
+        padding_bottom: '16'
+        container: container--normal
+        palette: color--secondary
+        content_position: section-position--start
+        content_alignment: section-alignment--start
+        texture: texture--conic-bottom-end
+        layout: layout--12
+    -
+      parent_uuid: 6711ea38-b447-4b98-9638-629f2f03e261
+      slot: main_items
+      uuid: f169c2c4-656a-47fa-a7dc-d7063860bc5c
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: heartbeat
+        icon_size: icon-size--xl
+        icon_align: left
+        heading: 'New Healthcare Standards'
+        url: /
+        summary:
+          value: '<p>The revised national healthcare standards came into effect recently. Explore the guidelines to understand the changes and how they impact patient care.</p>'
+          format: canvas_html_block
+        heading_level: 3
+    -
+      parent_uuid: 6711ea38-b447-4b98-9638-629f2f03e261
+      slot: main_items
+      uuid: 3bc3040f-0339-4d78-af8a-5c60f0b1d623
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: stethoscope
+        icon_size: icon-size--xl
+        icon_align: left
+        heading: 'Preventative Health Checks'
+        url: /
+        summary:
+          value: '<p>Discover what free health screenings are available to you. Read our comprehensive guides on maintaining your health at every stage of life.</p>'
+          format: canvas_html_block
+        heading_level: 3
+    -
+      parent_uuid: 6711ea38-b447-4b98-9638-629f2f03e261
+      slot: main_items
+      uuid: 4313b23b-02c2-49e4-90bf-9420805d95d6
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: syringe
+        icon_size: icon-size--xl
+        icon_align: left
+        heading: 'Vaccines and Immunisation'
+        url: /
+        summary:
+          value: '<p>Find out which vaccinations are recommended for your age group and which are fully funded. Access the latest seasonal vaccine schedules and book an appointment.</p>'
+          format: canvas_html_block
+        heading_level: 3
+    -
+      parent_uuid: 6711ea38-b447-4b98-9638-629f2f03e261
+      slot: main_items
+      uuid: 1d3cb149-2cee-4a3a-8eaa-12c5129e3c1f
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: currency-circle-dollar
+        icon_size: icon-size--xl
+        icon_align: left
+        heading: 'Annual Health Funding'
+        url: /
+        summary:
+          value: '<p>Review budget allocations and strategic priorities for the upcoming year. Download reports on infrastructure, primary care, and community wellbeing.</p>'
+          format: canvas_html_block
+        heading_level: 3
+    -
+      parent_uuid: 6711ea38-b447-4b98-9638-629f2f03e261
+      slot: behaviors
+      uuid: 4fee1b28-d5e9-46ec-85a4-7acb51c736f8
+      component_id: sdc.morphos.scroll_reveal_behavior
+      inputs:
+        delay: 500
+        distance: 50px
+        duration: 1000
+        mobile: true
+        origin: bottom
+        scale: 100
+        sequence_interval: 500
+        sequence_selector: .card
+    -
+      uuid: 4042e839-a61f-4376-94d7-e338f958212f
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: false
+        heading: 'Our work'
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--25-25-25-25
+        padding_top: '16'
+        padding_bottom: '16'
+        container: container--normal
+        palette: color--standard
+        content_position: section-position--start
+        content_alignment: section-alignment--start
+        layout: layout--12
+    -
+      parent_uuid: 4042e839-a61f-4376-94d7-e338f958212f
+      slot: main_items
+      uuid: 451b0e26-72ca-4d9e-9c78-7d28f12d0149
+      component_id: sdc.morphos.tile_canvas
+      inputs:
+        heading: Campaigns
+        url: /
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: dc18f39d-08ab-402d-9a5a-779d587e644a
+            target_type: media
+    -
+      parent_uuid: 4042e839-a61f-4376-94d7-e338f958212f
+      slot: main_items
+      uuid: d9c3c9df-07ca-47f5-ad1c-86cf81553b09
+      component_id: sdc.morphos.tile_canvas
+      inputs:
+        heading: Initiatives
+        url: /
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: f8f48a35-91f6-4769-9585-2773772fcd2d
+            target_type: media
+    -
+      parent_uuid: 4042e839-a61f-4376-94d7-e338f958212f
+      slot: main_items
+      uuid: 1cbd051d-1dd7-4f83-99ff-3d74f5a3238b
+      component_id: sdc.morphos.tile_canvas
+      inputs:
+        heading: Reviews
+        url: /
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 17cf8591-aa8d-4814-bcdf-7706d6be9fe6
+            target_type: media
+    -
+      parent_uuid: 4042e839-a61f-4376-94d7-e338f958212f
+      slot: main_items
+      uuid: d62b8ac7-30a2-4b53-bb1a-bb29e1890eda
+      component_id: sdc.morphos.tile_canvas
+      inputs:
+        heading: Programs
+        url: /
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: c2205fed-268e-457a-a382-7a928e33ddc4
+            target_type: media
+    -
+      parent_uuid: 4042e839-a61f-4376-94d7-e338f958212f
+      slot: behaviors
+      uuid: 29d29500-dcb2-4c9b-bf1d-74fe0601a1f0
+      component_id: sdc.morphos.scroll_reveal_behavior
+      inputs:
+        delay: 250
+        distance: 50px
+        duration: 500
+        mobile: true
+        origin: bottom
+        scale: 100
+        sequence_interval: 250
+        sequence_selector: .tile
+        opacity: 0
+    -
+      uuid: 12c79c59-f159-4e06-90dd-ec6d80794ce6
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: false
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--33-33-33
+        padding_top: '16'
+        padding_bottom: '16'
+        container: container--normal
+        palette: color--standard
+        heading: 'Annual report'
+        intro:
+          value: '<p>Read our annual report for 2025.</p>'
+          format: canvas_html_block
+        content_position: section-position--start
+        content_alignment: section-alignment--start
+        layout: layout--4-8
+        texture: texture--linear-end
+    -
+      parent_uuid: 12c79c59-f159-4e06-90dd-ec6d80794ce6
+      slot: header_items
+      uuid: bf26eac3-e356-4f65-bcfb-1061ba9956a4
+      component_id: sdc.morphos.button
+      inputs:
+        text: 'Read report'
+        size: btn-md
+        icon_position: icon-position--end
+        url:
+          uri: 'internal:/news/demo-article'
+          options: {  }
+    -
+      parent_uuid: 12c79c59-f159-4e06-90dd-ec6d80794ce6
+      slot: main_items
+      uuid: e3060e49-ff60-4673-8cd4-6c34647833e1
+      component_id: sdc.morphos.stat
+      inputs:
+        title: 'Budget Surplus'
+        value: 12
+        size: stat--xl
+        desc: 'Saved operational costs'
+        prefix: $
+        suffix: M
+    -
+      parent_uuid: 12c79c59-f159-4e06-90dd-ec6d80794ce6
+      slot: main_items
+      uuid: e86011f5-051d-4a08-829f-b8b58063ba8e
+      component_id: sdc.morphos.stat
+      inputs:
+        title: 'Project Completion'
+        value: 94
+        size: stat--xl
+        desc: 'Annual milestones achieved'
+        suffix: '%'
+    -
+      parent_uuid: 12c79c59-f159-4e06-90dd-ec6d80794ce6
+      slot: main_items
+      uuid: 0e9f8797-d47f-4234-ba53-c86466a21d3e
+      component_id: sdc.morphos.stat
+      inputs:
+        title: 'Backlog Cases'
+        value: 42
+        size: stat--xl
+        desc: 'Reduction in pending permits'
+    -
+      uuid: fedd7821-9bc4-4254-9b4a-06786fb19c41
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: false
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '16'
+        padding_bottom: '16'
+        container: container--normal
+        palette: color--standard
+        content_position: section-position--center
+        content_alignment: section-alignment--start
+        layout: layout--3-1-8
+        heading: 'We are here to help'
+        intro:
+          value: '<p>Find the health information that matters to you. We offer dedicated resources, guidance, and updates designed specifically for our community, industry partners, and the media.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: fedd7821-9bc4-4254-9b4a-06786fb19c41
+      slot: main_items
+      uuid: 77beea48-92a1-4577-9123-9c4e5d5c8594
+      component_id: sdc.morphos.group
+      inputs:
+        allow_wrap: true
+        gap: '4'
+    -
+      parent_uuid: 77beea48-92a1-4577-9123-9c4e5d5c8594
+      slot: items
+      uuid: 024ee865-6316-4160-95c8-71beeb76bcad
+      component_id: sdc.morphos.card
+      inputs:
+        heading: 'Information for'
+        heading_level: 3
+        center: false
+        card_side: true
+        body:
+          value: '<p>Select your profile to quickly access the resources, services, and information most relevant to your needs.</p>'
+          format: canvas_html_block
+        palette: color--primary
+        size: card-xl
+        style: card-border
+    -
+      parent_uuid: 024ee865-6316-4160-95c8-71beeb76bcad
+      slot: body_items
+      uuid: a89552a5-572c-47fc-884b-09546055a9a6
+      component_id: sdc.morphos.tabs
+      inputs:
+        placement: tabs-top
+        size: tabs-lg
+        style: tabs-border
+    -
+      parent_uuid: a89552a5-572c-47fc-884b-09546055a9a6
+      slot: items
+      uuid: 2b90ef74-0620-4af1-aa18-8a5fb11f60c1
+      component_id: sdc.morphos.tab
+      inputs:
+        label: Citizens
+        content:
+          value: '<p>Health advice, service directories, and public alerts for you and your family.</p><p><a href="/page/15" data-entity-type="canvas_page" data-entity-uuid="7a0023b4-a7cb-451c-b6ea-5502aa7ef858" data-entity-substitution="canonical">View news for citizens</a></p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 2b90ef74-0620-4af1-aa18-8a5fb11f60c1
+      slot: icon
+      uuid: db923df0-e08c-4bbb-8f22-728fdfa4e705
+      component_id: sdc.morphos.icon
+      inputs:
+        icon: users-three
+        icon_size: icon-size--sm
+    -
+      parent_uuid: a89552a5-572c-47fc-884b-09546055a9a6
+      slot: items
+      uuid: 86e1cdb8-fd52-4c3d-99c5-6d80ec24fe67
+      component_id: sdc.morphos.tab
+      inputs:
+        label: '       Sector'
+        content:
+          value: '<p>Clinical guidelines, policies, and resources for health professionals and industry.</p><p><a href="/page/16" data-entity-type="canvas_page" data-entity-uuid="be47ee41-c85c-4a85-8b14-6a013e18eac3" data-entity-substitution="canonical">View industry resources</a></p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 86e1cdb8-fd52-4c3d-99c5-6d80ec24fe67
+      slot: icon
+      uuid: 79789f33-3320-4b71-8c7f-1668c2ed4689
+      component_id: sdc.morphos.icon
+      inputs:
+        icon: chart-pie-slice
+        icon_size: icon-size--sm
+    -
+      parent_uuid: a89552a5-572c-47fc-884b-09546055a9a6
+      slot: items
+      uuid: bc35cdd4-f7c2-4147-a951-2ce0dfb884aa
+      component_id: sdc.morphos.tab
+      inputs:
+        label: Media
+        content:
+          value: '<p>Press releases, official news, and contact details for journalists.</p><p><a href="/page/17" data-entity-type="canvas_page" data-entity-uuid="3c9645a0-81f6-4eab-a223-7138c6eea361" data-entity-substitution="canonical">View events for media</a></p>'
+          format: canvas_html_block
+    -
+      parent_uuid: bc35cdd4-f7c2-4147-a951-2ce0dfb884aa
+      slot: icon
+      uuid: 5efd6c80-ac67-4811-a9cb-5a63700343fc
+      component_id: sdc.morphos.icon
+      inputs:
+        icon: identification-badge
+        icon_size: icon-size--sm
+    -
+      parent_uuid: 77beea48-92a1-4577-9123-9c4e5d5c8594
+      slot: behaviors
+      uuid: 92a40b32-9d1b-4e95-9b5f-42528b4c2396
+      component_id: sdc.morphos.scroll_reveal_behavior
+      inputs:
+        delay: 500
+        distance: 50px
+        duration: 1000
+        mobile: true
+        origin: bottom
+        scale: 100
+        sequence_selector: .card
+        opacity: 0
+    -
+      parent_uuid: fedd7821-9bc4-4254-9b4a-06786fb19c41
+      slot: behaviors
+      uuid: f0d602dd-5ae5-46a2-a190-43eeb3581b7e
+      component_id: sdc.morphos.palette_swap_behavior
+      inputs:
+        duration: 1000
+        swap: secondary
+        threshold: 50
+    -
+      uuid: d52b8cf4-0223-4649-8eee-b8a1df735075
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--75
+        column_widths: section-col-widths--50-50
+        padding_top: '16'
+        padding_bottom: '16'
+        container: container--normal
+        palette: color--primary
+        content_alignment: section-alignment--start
+        content_position: section-position--center
+        layout: layout--12
+        texture: texture--radial-vignette
+        heading: Consultations
+        readmore_text: 'Have your say'
+        readmore_url: /
+        intro:
+          value: '<p>Help shape health care by participating in our open public consultations.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: d52b8cf4-0223-4649-8eee-b8a1df735075
+      slot: main_items
+      uuid: 87e48862-f31c-4194-9dd4-f908767a9b31
+      component_id: sdc.morphos.card
+      inputs:
+        heading_level: 3
+        body:
+          value: '<p>Have your say on the new National Health Policy to improve preventive, person-centred and equitable care for all Australians. Feedback will help shape final priorities.</p>'
+          format: canvas_html_block
+        center: false
+        card_side: false
+        size: card-xl
+        palette: color--accent
+        style: card-border
+        heading: 'National health policy consultation'
+        text_alignment: text-start
+    -
+      parent_uuid: 87e48862-f31c-4194-9dd4-f908767a9b31
+      slot: badge_items
+      uuid: 847a3cd7-af1b-4d02-87ff-5c5fc79da373
+      component_id: sdc.morphos.badge
+      inputs:
+        label: Consultation
+        size: badge-md
+        icon_position: icon-position--start
+        icon: chat-centered-dots
+    -
+      parent_uuid: d52b8cf4-0223-4649-8eee-b8a1df735075
+      slot: main_items
+      uuid: edcda69b-7544-41b8-a3ff-cf43d740006f
+      component_id: sdc.morphos.card
+      inputs:
+        heading_level: 3
+        body:
+          value: '<p>Have your say on a new Aged Care Vaccination Policy to protect older people in care. Share your views to help shape safe, timely access to recommended vaccines.</p>'
+          format: canvas_html_block
+        center: false
+        card_side: false
+        size: card-xl
+        palette: color--accent
+        style: card-border
+        heading: 'Aged care vaccination policy'
+        text_alignment: text-start
+    -
+      parent_uuid: edcda69b-7544-41b8-a3ff-cf43d740006f
+      slot: badge_items
+      uuid: 763088e1-8112-4b11-bab0-c1149cf3645c
+      component_id: sdc.morphos.badge
+      inputs:
+        label: Consultation
+        size: badge-md
+        icon_position: icon-position--start
+        icon: chat-centered-dots
+    -
+      parent_uuid: d52b8cf4-0223-4649-8eee-b8a1df735075
+      slot: backgrounds
+      uuid: 89f85a26-034f-430a-9723-2095e01aac32
+      component_id: sdc.morphos.parallax_background
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 797c4f70-52d1-43f8-9166-b01ccefff98e
+            target_type: media
+        speed: 150
+        opacity: 30
+    -
+      parent_uuid: d52b8cf4-0223-4649-8eee-b8a1df735075
+      slot: behaviors
+      uuid: 121a492d-2d9a-4e6b-8b75-c8fd58d4e582
+      component_id: sdc.morphos.scroll_reveal_behavior
+      inputs:
+        distance: 50px
+        duration: 1000
+        mobile: true
+        origin: bottom
+        scale: 100
+        sequence_interval: 250
+        sequence_selector: .card
+        delay: 250
+    -
+      uuid: 89fd704c-52de-497f-a4fe-6418ab271eb8
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: false
+        show_footer: false
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '16'
+        padding_bottom: '16'
+        container: container--normal
+        palette: color--standard
+        heading: Resources
+        layout: layout--12
+        content_position: section-position--start
+        content_alignment: section-alignment--start
+    -
+      parent_uuid: 89fd704c-52de-497f-a4fe-6418ab271eb8
+      slot: main_items
+      uuid: 51c9b792-dc86-41bf-862c-e9f7620000ad
+      component_id: block.views_block.mc_homepage-resources
+      inputs:
+        label: 'Homepage: Latest resources'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      uuid: 58240365-9d93-4a70-a29f-953f0ecefd6a
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: false
+        show_footer: false
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '16'
+        padding_bottom: '16'
+        container: container--normal
+        palette: color--secondary
+        heading: 'Latest news'
+        layout: layout--12
+        content_position: section-position--start
+        content_alignment: section-alignment--start
+    -
+      parent_uuid: 58240365-9d93-4a70-a29f-953f0ecefd6a
+      slot: main_items
+      uuid: 6c690d9d-ab53-4c78-abc9-bcdba539fa9e
+      component_id: block.views_block.mc_homepage-articles
+      inputs:
+        label: 'Homepage: Latest news'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      uuid: e70673c5-248e-4d3a-bb71-d8bd31b9c57e
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: false
+        heading_level: 2
+        hide_heading: true
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '16'
+        padding_bottom: '16'
+        container: container--normal
+        palette: color--standard
+        heading: 'Upcoming events'
+        layout: layout--12
+        content_position: section-position--start
+        content_alignment: section-alignment--start
+        texture: texture--linear-bottom
+    -
+      parent_uuid: e70673c5-248e-4d3a-bb71-d8bd31b9c57e
+      slot: main_items
+      uuid: a819f6a6-205e-4c51-852d-c6c43aed0e41
+      component_id: block.views_block.mc_homepage-events
+      inputs:
+        label: 'Homepage: Upcoming events'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      parent_uuid: e70673c5-248e-4d3a-bb71-d8bd31b9c57e
+      slot: behaviors
+      uuid: 96290aeb-b77a-47ae-865d-418611556032
+      component_id: sdc.morphos.palette_swap_behavior
+      inputs:
+        duration: 500
+        swap: standard
+        threshold: 50
+    -
+      uuid: 1867605a-d89d-4f17-908f-0eed412fd6ec
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: false
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '16'
+        padding_bottom: '16'
+        container: container--normal
+        palette: color--alternate
+        heading: 'Our partner agencies'
+        layout: layout--12
+        readmore_text: 'Read more'
+        readmore_url: '<front>'
+        content_position: section-position--center
+        content_alignment: section-alignment--center
+        texture: texture--linear-top
+    -
+      parent_uuid: 1867605a-d89d-4f17-908f-0eed412fd6ec
+      slot: main_items
+      uuid: a28b494e-f4cb-4f54-a44f-13585df86c3c
+      component_id: sdc.morphos.logo_cloud
+      inputs:
+        size: logo-size--xl
+    -
+      parent_uuid: a28b494e-f4cb-4f54-a44f-13585df86c3c
+      slot: logo_images
+      uuid: 668ca003-2b41-43ea-88c6-2a0d441f2d51
+      component_id: sdc.morphos.image_canvas
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: fd82e5f6-f5dc-4a79-9f47-60955bd522a2
+            target_type: media
+        width: 800
+        loading: lazy
+    -
+      parent_uuid: a28b494e-f4cb-4f54-a44f-13585df86c3c
+      slot: logo_images
+      uuid: 0d07099b-8678-46e0-928a-06b806694934
+      component_id: sdc.morphos.image_canvas
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: bec68969-5767-4682-9c26-69937484f690
+            target_type: media
+        width: 800
+        loading: lazy
+    -
+      parent_uuid: a28b494e-f4cb-4f54-a44f-13585df86c3c
+      slot: logo_images
+      uuid: 6b09b59e-43dd-48fb-a3e1-88d57d686dc5
+      component_id: sdc.morphos.image_canvas
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: fd82e5f6-f5dc-4a79-9f47-60955bd522a2
+            target_type: media
+        width: 800
+        loading: lazy
+    -
+      parent_uuid: a28b494e-f4cb-4f54-a44f-13585df86c3c
+      slot: logo_images
+      uuid: 3cb083e7-b385-4f0f-84d4-fd066b46b699
+      component_id: sdc.morphos.image_canvas
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: bec68969-5767-4682-9c26-69937484f690
+            target_type: media
+        width: 800
+        loading: lazy
+    -
+      parent_uuid: a28b494e-f4cb-4f54-a44f-13585df86c3c
+      slot: logo_images
+      uuid: ebbd34df-7b15-4333-af4a-b0aa02416744
+      component_id: sdc.morphos.image_canvas
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: fd82e5f6-f5dc-4a79-9f47-60955bd522a2
+            target_type: media
+        width: 800
+        loading: lazy
+    -
+      parent_uuid: a28b494e-f4cb-4f54-a44f-13585df86c3c
+      slot: logo_images
+      uuid: ebf63937-72f5-442c-99a7-3c3b64658bec
+      component_id: sdc.morphos.image_canvas
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: bec68969-5767-4682-9c26-69937484f690
+            target_type: media
+        width: 800
+        loading: lazy
+    -
+      uuid: fc2bfcf0-5d4d-48d3-a069-90d4427543cb
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--50
+        column_widths: section-col-widths--100
+        padding_top: '16'
+        padding_bottom: '16'
+        container: container--normal
+        palette: color--accent
+        heading: 'Sign up for updates'
+        intro:
+          value: '<p>Get the latest updates from the Department of Health.</p>'
+          format: canvas_html_block
+        layout: layout--12
+        content_position: section-position--center
+        texture: texture--conic-bottom-end
+        content_alignment: section-alignment--center
+        prose_size: prose-lg
+    -
+      parent_uuid: fc2bfcf0-5d4d-48d3-a069-90d4427543cb
+      slot: header_items
+      uuid: 6fb95caf-8880-4357-8771-8687b873a94f
+      component_id: sdc.morphos.button
+      inputs:
+        text: 'Contact us'
+        url:
+          uri: 'https://www.morpht.com/contact'
+          options: {  }
+        size: btn-xl
+  path:
+    -
+      alias: /home
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

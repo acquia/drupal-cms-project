@@ -1,0 +1,9 @@
+services:
+  Drupal\canvas_full_html\Hook\CanvasFullHtmlHooks:
+    autowire: true
+    arguments:
+      $logger: '@logger.channel.canvas_full_html'
+
+  logger.channel.canvas_full_html:
+    parent: logger.channel_base
+    arguments: ['canvas_full_html']

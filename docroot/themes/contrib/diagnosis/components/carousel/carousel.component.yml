@@ -1,0 +1,41 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Carousel
+description: A fully accessible carousel using Swiper.js that displays one slide at a time with navigation controls
+group: Layout
+props:
+  type: object
+  properties:
+    aria_label:
+      type: string
+      title: Accessible label
+      description: Descriptive label for the carousel
+      examples:
+        - "Featured content carousel"
+    show_navigation:
+      type: boolean
+      title: Show navigation arrows
+      examples:
+        - true
+    show_pagination:
+      type: boolean
+      title: Show pagination indicators
+      examples:
+        - true
+slots:
+  slides:
+    title: Carousel slides
+    description: Add carousel-slide components here
+libraryOverrides:
+  css:
+    theme:
+      carousel.css: {}
+      ../../lib/swiper/swiper-bundle.min.css:
+        minified: true
+        preprocess: false
+  js:
+    ../../lib/swiper/swiper-bundle.min.js:
+      minified: true
+      preprocess: false
+    carousel.js: { attributes: { type: module } }
+  dependencies:
+    - core/drupal

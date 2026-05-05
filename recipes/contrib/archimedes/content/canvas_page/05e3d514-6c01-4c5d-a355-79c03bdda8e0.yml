@@ -1,0 +1,166 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 05e3d514-6c01-4c5d-a355-79c03bdda8e0
+  default_langcode: en
+  depends:
+    345b8816-a793-4034-bd32-09644261acbc: file
+    dcf02661-e80c-43c1-8a38-43c072e41b5f: media
+    7e21346e-95c1-4974-98d2-f7592f24d1f1: file
+    101c73e5-1da3-4046-b51b-9d28353f181d: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Landing Page'
+  components:
+    -
+      uuid: 43f13421-a893-476a-ace3-4387e99d7388
+      component_id: sdc.eureka.hero-primary
+      inputs:
+        hero_primary_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: dcf02661-e80c-43c1-8a38-43c072e41b5f
+            target_type: media
+        hero_primary_media_alt: 'Hero image alt text for screenreaders'
+        hero_primary_heading_white_words: 'Welcome to'
+        hero_primary_heading_colour_words: 'Willow Meadow Primary'
+        hero_primary_heading_level: 1
+        hero_primary_text: 'Where every child flourishes in a nurturing, inspiring environment. Building bright futures through excellent education and caring community.'
+        hero_primary_cta_text: 'Primary Call to Action'
+        hero_primary_cta_url:
+          uri: 'https://uri.example.com'
+          options: {  }
+        hero_primary_cta_secondary_text: 'Secondary Call to Action'
+        hero_primary_cta_secondary_url:
+          uri: 'https://uri.example.com'
+          options: {  }
+    -
+      uuid: f0bf1f05-9c6a-4c3d-82e2-2871070dd60d
+      component_id: sdc.eureka.text-and-image
+      inputs:
+        text_and_image_heading: 'A message from our Headteacher'
+        text_and_image_heading_level: 2
+        text_and_image_description:
+          value: '<p>At Willow Meadow, we believe every child is unique and capable of achieving amazing things. Our committed staff work hard to make sure every pupil feels safe, valued, and excited to learn each day. We’re proud of our strong sense of community and the close partnerships we build with our families. Together, we aim not only for academic success, but for the confidence, kindness, and curiosity that help our children thrive in life.</p>'
+          format: canvas_html_block
+        text_and_image_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 101c73e5-1da3-4046-b51b-9d28353f181d
+            target_type: media
+        text_and_image_alignment: image-right
+        text_and_image_cta_text: 'Call to action'
+        text_and_image_cta_url:
+          uri: 'https://uri.example.com'
+          options: {  }
+        text_and_image_cta_external: true
+        text_and_image_message_section_title: 'Mrs. Jane Holloway'
+        text_and_image_message_section_subitle: Headteacher
+    -
+      uuid: 4d84c2f5-d811-412c-996c-f949e1be96ec
+      component_id: sdc.eureka.quick-links
+      inputs:
+        quick_links_heading: 'Quick links'
+        quick_links_heading_level: '3'
+        quick_links_summary: 'Find what you need quickly with our convenient links to essential information and services.'
+    -
+      parent_uuid: 4d84c2f5-d811-412c-996c-f949e1be96ec
+      slot: quick_links_items_block
+      uuid: c9f03380-da3a-44b9-8f56-e0ab66c711e9
+      component_id: sdc.eureka.quick-link-item
+      inputs:
+        quick_link_item_icon_name: document
+        quick_link_item_heading: 'Ofset report'
+        quick_link_item_summary: 'View our Ofsted rating'
+        quick_link_item_link_text: 'Download report'
+        quick_link_item_link_url: 'https://zoocha.com'
+    -
+      parent_uuid: 4d84c2f5-d811-412c-996c-f949e1be96ec
+      slot: quick_links_items_block
+      uuid: 1c2ab4fa-5996-4779-bb6f-62f853cba081
+      component_id: sdc.eureka.quick-link-item
+      inputs:
+        quick_link_item_icon_name: credit-card
+        quick_link_item_heading: 'Parent Pay'
+        quick_link_item_summary: 'Pay online securely'
+        quick_link_item_link_text: 'Make a payment'
+        quick_link_item_link_url: 'https://zoocha.com'
+    -
+      parent_uuid: 4d84c2f5-d811-412c-996c-f949e1be96ec
+      slot: quick_links_items_block
+      uuid: 4a26f693-2a24-4673-b9d4-ddbb3599bbed
+      component_id: sdc.eureka.quick-link-item
+      inputs:
+        quick_link_item_icon_name: calendar
+        quick_link_item_heading: 'Term dates'
+        quick_link_item_summary: 'View term dates'
+        quick_link_item_link_text: 'See dates'
+        quick_link_item_link_url: 'https://zoocha.com'
+    -
+      parent_uuid: 4d84c2f5-d811-412c-996c-f949e1be96ec
+      slot: quick_links_items_block
+      uuid: d8308399-8135-4e97-8d95-a80a182d9210
+      component_id: sdc.eureka.quick-link-item
+      inputs:
+        quick_link_item_icon_name: status
+        quick_link_item_heading: 'Lunch menu'
+        quick_link_item_summary: 'See this week’s menu'
+        quick_link_item_link_text: 'View menu'
+        quick_link_item_link_url: 'https://zoocha.com'
+    -
+      parent_uuid: 4d84c2f5-d811-412c-996c-f949e1be96ec
+      slot: quick_links_items_block
+      uuid: 32d1b9c6-67a8-42bd-9df2-b1a6fc397ffb
+      component_id: sdc.eureka.quick-link-item
+      inputs:
+        quick_link_item_icon_name: document
+        quick_link_item_heading: Prospectus
+        quick_link_item_summary: 'Read our school prospectus'
+        quick_link_item_link_text: 'Download prospectus'
+        quick_link_item_link_url: 'https://zoocha.com'
+    -
+      parent_uuid: 4d84c2f5-d811-412c-996c-f949e1be96ec
+      slot: quick_links_items_block
+      uuid: f586042b-db3d-4ad5-876f-f3fe3c600ff3
+      component_id: sdc.eureka.quick-link-item
+      inputs:
+        quick_link_item_icon_name: palette
+        quick_link_item_heading: Gallery
+        quick_link_item_summary: 'View school photos'
+        quick_link_item_link_text: 'See photos'
+        quick_link_item_link_url: 'https://zoocha.com'
+    -
+      uuid: 7ca98ae4-48d9-44ca-b061-df6afff9d069
+      component_id: sdc.eureka.latest-news
+      inputs:
+        latest_news_heading: 'Latest news'
+        latest_news_heading_level: 3
+        latest_news_summary: 'Stay up to date with the latest news, events, and announcements from Willow Meadow Primary School.'
+    -
+      parent_uuid: 7ca98ae4-48d9-44ca-b061-df6afff9d069
+      slot: latest_news_items
+      uuid: 1dcc9be1-ce97-4cb1-bef4-6afd35a4fee9
+      component_id: block.views_block.news-latest
+      inputs:
+        label: 'News: Latest news'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+  path:
+    -
+      alias: /landing-page
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

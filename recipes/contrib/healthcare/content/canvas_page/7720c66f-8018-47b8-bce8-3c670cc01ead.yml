@@ -1,0 +1,254 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 7720c66f-8018-47b8-bce8-3c670cc01ead
+  default_langcode: en
+  depends:
+    05649c69-171a-4afc-9af7-b20274a78c22: file
+    7f64bad4-e9c5-4391-8a18-a92003ad037d: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Site Credits'
+  components:
+    -
+      uuid: 75e11a63-fd95-4f94-b0ee-df1b3ae45d64
+      component_id: sdc.diagnosis.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        padding_block_start: '0'
+        padding_block_end: '0'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        image_size: '4:3'
+        image_position: right
+        image_radius: extra-large
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 7f64bad4-e9c5-4391-8a18-a92003ad037d
+            target_type: media
+        background: default
+    -
+      parent_uuid: 75e11a63-fd95-4f94-b0ee-df1b3ae45d64
+      slot: hero_slot
+      uuid: 73886615-f89a-4403-8cdf-ce162a8822bf
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Site Credits'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 75e11a63-fd95-4f94-b0ee-df1b3ae45d64
+      slot: hero_slot
+      uuid: 3cb5615b-b433-4bfd-8e17-404ae5149a01
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>This website is built using the <a href="https://www.drupal.org/project/healthcare"><strong>Drupal Healthcare Site Template</strong></a> developed by <a href="https://kanopi.com/"><strong>Kanopi Studios</strong></a> and released under an open source license.</p><p>The template is freely available and designed to give healthcare organizations a strong, accessible, and scalable digital foundation.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: 6f926410-1e9d-403d-b48c-d61b782965e4
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: 6f926410-1e9d-403d-b48c-d61b782965e4
+      slot: main_slot
+      uuid: 0d6638eb-0b36-4d15-a239-f27289dccaae
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Built for Healthcare Organizations'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 6f926410-1e9d-403d-b48c-d61b782965e4
+      slot: main_slot
+      uuid: 389d66ac-9bf3-4ff4-a294-ef64a9442b79
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Modern healthcare websites must do more than look professional. They must build trust, support patients, meet accessibility standards, and adapt to evolving regulations and expectations.</p><p>Kanopi Studios partners with clinics, regional hospitals, healthcare systems, and mission-driven organizations to create digital experiences that:</p><ul><li data-list-item-id="edd7fe8b45f927b6b605e9ce850965a18">Build patient confidence and community trust</li><li data-list-item-id="e94c4add5e9ff6c24da1f26d0dc6dbe84">Support accessibility and compliance standards</li><li data-list-item-id="e35e9b440c1b85185cd907ee1437b4979">Improve findability of services and care providers</li><li data-list-item-id="ed5820603b0383e150fc51b6fdf6f4cbc">Scale with organizational growth</li><li data-list-item-id="e5762a1a7ba0b651caebe7a8350f7a9cd">Strengthen brand credibility</li></ul>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: 29f37327-a11b-4368-b85d-efe117a50fe2
+      component_id: sdc.diagnosis.hero-billboard
+      inputs:
+        height: ribbon
+        flex_position: center-left
+        overlay_opacity: 0%
+        object_position: center
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/luke-chesser-pJadQetzTkI-unsplash.jpg
+            alt: 'Green blue gradient placeholder image'
+            width: 1920
+            height: 1344
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.diagnosis.hero-billboard
+        overlap_navbar: false
+    -
+      parent_uuid: 29f37327-a11b-4368-b85d-efe117a50fe2
+      slot: hero_slot
+      uuid: 395b1560-d2dc-47cd-8151-46c45cceb697
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Long-Term Support That Drives Momentum'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      uuid: e6d9d82f-4799-48cd-9419-a45894ed1721
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: e6d9d82f-4799-48cd-9419-a45894ed1721
+      slot: main_slot
+      uuid: c9216ea2-0b06-4445-aea3-938c21dd7e56
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Our Support program is unmatched.</p><p>Support for us is not just a service. Websites are living ecosystems. To stay healthy and effective, they need to evolve — adapting to shifting goals, changing user needs, and the ever-moving landscape of the web.</p><p>At Kanopi, continuous improvement goes deeper. We incorporate all our services into support. From design and strategy to navigation updates and microsites, we provide smart, high-impact enhancements that strengthen your digital foundation.</p><p>Because your mission deserves more than maintenance. It deserves momentum.</p><p><a href="https://kanopi.com/services/support/"><strong>Learn more about Kanopi''s long-term Support program at kanopi.com</strong></a></p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: d55dc3a0-5f39-40cd-a7a5-e47b4cdb587e
+      component_id: sdc.diagnosis.cta
+      inputs:
+        heading_text: 'We build trust, not just websites.'
+        level: 2
+        text: 'If your organization is using this template and wants to tailor it to your brand, expand its capabilities, improve accessibility, or evolve your digital strategy, our team is ready to help.'
+        text_align: center
+        background_color: primary
+    -
+      parent_uuid: d55dc3a0-5f39-40cd-a7a5-e47b4cdb587e
+      slot: actions
+      uuid: d8e649d4-8bc7-49b5-b396-a986879835c3
+      component_id: sdc.diagnosis.button
+      inputs:
+        variant: primary-inverted
+        label: 'Contact Kanopi Today!'
+        size: medium
+        icon: arrow-right
+        mobile_width: false
+        icon_first: false
+        disabled: false
+        href: 'https://kanopi.com/'
+    -
+      uuid: 49a2451c-f566-406e-b4c7-0c84e056d532
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: 49a2451c-f566-406e-b4c7-0c84e056d532
+      slot: main_slot
+      uuid: 812f5c9c-1921-46f2-a07b-a990d5143239
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Project Team'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 49a2451c-f566-406e-b4c7-0c84e056d532
+      slot: main_slot
+      uuid: dce5fe8b-5d54-44fc-a93a-137fa65bc670
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>This Healthcare Site Template was created by the Kanopi Studios team:</p><ul><li data-list-item-id="ec042048b13d97561e9c6d2c8e1fa1c49"><strong>Design:</strong> Nicole Karhoff</li><li data-list-item-id="ee51037cad22fad985f13c6fa218bb0b9"><strong>Technical Lead:</strong> Jim Birch</li><li data-list-item-id="e03b6762d3b3a1df7a28ef4bf8f78d463"><strong>Development:</strong> Anne Bonham, Kerry Murphy, &amp; Nicole Karhoff</li><li data-list-item-id="e2e6d9196bf327fa266c33131c8e6bf18"><strong>Project Management:</strong> Ben Merkley</li></ul>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 49a2451c-f566-406e-b4c7-0c84e056d532
+      slot: main_slot
+      uuid: 069cd67f-72e1-4fa4-bb80-a37588287e58
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Image Credits'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 49a2451c-f566-406e-b4c7-0c84e056d532
+      slot: main_slot
+      uuid: dc7630e0-5d7d-4f18-b10e-a139245d8ec2
+      component_id: sdc.diagnosis.text
+      inputs:
+        text_size: normal
+        text_color: default
+        text:
+          value: '<p>Select custom illustrations for this template were conceptualized and generated using ChatGPT 5.2.</p><p>Thanks to these great photographers for open sourcing their images on Unsplash.</p><ul><li data-list-item-id="e3281815a4013827e20838c6db7f0880b"><a href="https://unsplash.com/@accuray?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Accuray, [2]</a></li><li data-list-item-id="e43b2332001ad2ef845987416e67e706c"><a href="https://unsplash.com/@iam_aspencer?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Andrew Spencer</a></li><li data-list-item-id="e3020c7710361af0e9071a1d8a4b8a65b"><a href="https://unsplash.com/@theurso?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Brian Urso</a></li><li data-list-item-id="e4cdf9f3dd9564788fa99f1ebc554d47a"><a href="https://unsplash.com/@betoframe?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Humberto Chávez</a></li><li data-list-item-id="e55ab02680fe9cceac12004bcb1b583ce"><a href="https://unsplash.com/@hush52?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Hush Naidoo Jade Photography</a></li><li data-list-item-id="e0457b437cdeeee46118d0865329bb97e"><a href="https://unsplash.com/@jennifire24?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Jennifer Marcus</a></li><li data-list-item-id="e8da99694f14cc56fa549064ca38617ff"><a href="https://unsplash.com/@stillrehellek?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">John Kelleher</a></li><li data-list-item-id="e28c15dab4a8110e097d1a9ae14a8a3a6"><a href="https://unsplash.com/@jonathanborba?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Jonathan Borba</a></li><li data-list-item-id="e29e46991b56fd5d88d117d738f522e42"><a href="https://unsplash.com/@byjonathanng?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Jonathan Ng</a></li><li data-list-item-id="e4dcd3a9d129e080c28cc3ad9c3ff7b3e"><a href="https://unsplash.com/@attentivesoul?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Lisa Forkner</a></li><li data-list-item-id="e0e3444192519dfbf2b4d268934360462"><a href="https://unsplash.com/@lcma1028?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Luis Melendez</a></li><li data-list-item-id="e6c3c7d4a2d56d78d17779a5463a6fcab"><a href="https://unsplash.com/@jccards?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Marek Studzinski</a></li><li data-list-item-id="eaf973b24cd9833890162b21999ad0f72"><a href="https://unsplash.com/@nappystudio?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Nappy, [2], [3]</a></li><li data-list-item-id="e05d604a722efc8b12b3e35850c292b4d"><a href="https://unsplash.com/@nci?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">National Cancer Institute, [2], [3]</a></li><li data-list-item-id="e9f24d7da45e2f034451aa725461fdfee"><a href="https://unsplash.com/@ridhwanjohnson?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Oluwaseyi Johnson</a></li><li data-list-item-id="e87fb97e68e778dc4a5d551c510120ea6"><a href="https://unsplash.com/@tranazh?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Q A Trần</a></li><li data-list-item-id="eb72324b5a66648c9b8398c08c5d9c87e"><a href="https://unsplash.com/@ruthc333?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Ruth H Curtis</a></li><li data-list-item-id="ed8228f3cf062e17bd937a3ffb1d79323"><a href="https://unsplash.com/@rustyct1?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Rusty Watson</a></li><li data-list-item-id="ef942a5a2ef3e34b0278b079e5ab69b4d"><a href="https://unsplash.com/@sixteenmilesout?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Sixteen Miles Out</a></li><li data-list-item-id="eccfc0aec1817421b657fe95ffa1f5c8c"><a href="https://unsplash.com/@solenfeyissa?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Solen Feyissa</a></li><li data-list-item-id="e13c9edb1372f2c82375bdfc328099afb"><a href="https://unsplash.com/@sml4878?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Susan Lindberg</a></li><li data-list-item-id="e0e33bb435d1c955d4b9a36b960bd8f00"><a href="https://unsplash.com/@silverkblack?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Vitaly Gariev, [2]</a></li></ul>'
+          format: canvas_html_block
+  path:
+    -
+      alias: /credits
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

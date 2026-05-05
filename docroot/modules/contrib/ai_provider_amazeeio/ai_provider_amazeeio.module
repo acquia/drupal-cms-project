@@ -1,0 +1,171 @@
+<?php
+
+/**
+ * @file
+ * Hook implementations for the amazee.ai AI provider.
+ */
+
+use Drupal\ai_provider_amazeeio\AmazeeIoApi\AmazeeClient;
+use Drupal\ai_search\Plugin\search_api\backend\SearchApiAiSearchBackend;
+use Drupal\config_ignore\ConfigIgnoreConfig;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\TempStore\TempStoreException;
+use Drupal\Core\Url;
+use Drupal\key\Entity\Key;
+use Drupal\key\Plugin\KeyProvider\ConfigKeyProvider;
+use Drupal\search_api\Entity\Server;
+use Drupal\search_api\IndexInterface;
+use Drupal\user\UserInterface;
+
+/**
+ * Implements hook_search_api_index_update().
+ *
+ * When the search API index is updated, check the fields are correctly
+ * setup in Postgres.
+ */
+function ai_provider_amazeeio_search_api_index_update(IndexInterface $index): void {
+  $server = $index->getServerInstance();
+  if (!$server || !$server->getBackend() instanceof SearchApiAiSearchBackend) {
+    return;
+  }
+  $backend_config = $server->getBackendConfig();
+  if (!isset($backend_config['database'])) {
+    return;
+  }
+  if ($backend_config['database'] !== 'amazeeio_vector_db') {
+    return;
+  }
+  $ai_vdb_provider_postgres = \Drupal::service('ai.vdb_provider')->createInstance('amazeeio_vector_db');
+  $connection = $ai_vdb_provider_postgres->getConnection($backend_config['database_settings']['database_name']);
+  \Drupal::service('ai_provider_amazeeio.postgres_client')->updateFields(
+    $index->getFields(),
+    $backend_config['database_settings']['collection'],
+    $connection,
+  );
+}
+
+/**
+ * Implements hook_user_logout().
+ */
+function ai_provider_amazeeio_user_logout(AccountInterface $account): void {
+  // Log the user out of amazee.ai during Drupal logout.
+  _ai_provider_amazeeio_amazee_logout();
+}
+
+/**
+ * Implements hook_user_login().
+ */
+function ai_provider_amazeeio_user_login(UserInterface $account): void {
+  // Log the user out of amazee.ai during log in in case the last Drupal
+  // logout was due to timeout/inactivity.
+  _ai_provider_amazeeio_amazee_logout();
+
+  // Trigger (flag) the redirect to the settings page, if needed.
+  $configFactory = \Drupal::configFactory();
+  // Only run this if config ai_provider_amazeeio.settings.redirect_on_login is
+  // TRUE.
+  $config = $configFactory->get('ai_provider_amazeeio.settings');
+  if ($config->get('redirect_on_login')) {
+    _ai_provider_amazeeio_redirect_to_settings_page();
+  }
+}
+
+/**
+ * Helper function to redirect the user to the amazee.ai AI settings page.
+ *
+ * The redirect happens after a login, if there is no API key.
+ *
+ * It is important to know that this function does not trigger the redirect
+ * itself, it just flags that a redirect to a specific page should be done.
+ * This method just adds the destination parameter, so it doesn't halt the
+ * execution of the process. It means that this will work for example on form
+ * submissions, or other types of operations that will trigger the redirect
+ * after they completed the execution.
+ */
+function _ai_provider_amazeeio_redirect_to_settings_page(): void {
+  $configFactory = \Drupal::configFactory();
+  $config = $configFactory->get('ai_provider_amazeeio.settings');
+
+  $currentUser = \Drupal::currentUser();
+  if ($currentUser->hasPermission('administer ai providers')) {
+    // Call ai_provider_amazeeio.api_client->getPrivateApiKeys() and log the
+    // result.
+    $apiClient = \Drupal::service('ai_provider_amazeeio.api_client');
+    $apiKey = $apiClient->getPrivateApiKey($config->get('api_key'));
+    $trial_account = \Drupal::state()->get('ai_provider_amazeeio.trial_account');
+    if (is_null($apiKey) || $trial_account) {
+      if ($trial_account) {
+        // @todo do we want to force logout the trial account?
+      }
+
+      // Redirect to the settings page.
+      //
+      // Using the lighter, 2nd approach from #107 in
+      // https://www.drupal.org/project/redirect_after_login/issues/3214949
+      $url = Url::fromRoute('ai_provider_amazeeio.settings_form')->toString();
+      \Drupal::service('request_stack')
+        ->getCurrentRequest()->query->set('destination', $url);
+    }
+  }
+}
+
+/**
+ * Helper function to log user out of amazee.ai system.
+ */
+function _ai_provider_amazeeio_amazee_logout(): void {
+  /** @var \Drupal\ai_provider_amazeeio\AmazeeIoApi\ClientInterface $amazee_client */
+  $amazee_client = \Drupal::service('ai_provider_amazeeio.api_client');
+  $amazee_client->setHost(AmazeeClient::AMAZEE_API_HOST);
+  $amazee_client->logout();
+
+  /** @var \Drupal\Core\TempStore\PrivateTempStoreFactory $temp_store */
+  $temp_store = \Drupal::service('tempstore.private');
+  try {
+    $temp_store->get('amazeeio_ai')->delete('access_token');
+  }
+  catch (TempStoreException $e) {
+    // Log error but do nothing as this shouldn't affect the user.
+    \Drupal::logger('ai_provider_amazeeio')->error('Failed to log out of amazee.ai: @error', ['@error' => $e->getMessage()]);
+  }
+}
+
+/**
+ * Implements hook_config_ignore_ignored_alter().
+ */
+function ai_provider_amazeeio_config_ignore_ignored_alter(ConfigIgnoreConfig $config): void {
+  $config_list = [
+    // Environment-specific information.
+    'ai_provider_amazeeio.settings:host',
+    'ai_provider_amazeeio.settings:postgres_default_database',
+    'ai_provider_amazeeio.settings:postgres_host',
+    // Credentials.
+    'ai_provider_amazeeio.settings:postgres_username',
+  ];
+  // More credentials.
+  $settings = \Drupal::config('ai_provider_amazeeio.settings');
+  $ai_key = Key::load($settings->get('api_key'));
+  if ($ai_key && $ai_key->getKeyProvider() instanceof ConfigKeyProvider) {
+    $config_list[] = 'key.key.amazeeio_ai:key_provider_settings.key_value';
+  }
+  $vdb_key = Key::load($settings->get('postgres_password'));
+  if ($vdb_key && $vdb_key->getKeyProvider() instanceof ConfigKeyProvider) {
+    $config_list[] = 'key.key.amazeeio_ai_database:key_provider_settings.key_value';
+  }
+
+  if (\Drupal::moduleHandler()->moduleExists('ai_search')) {
+    $ai_search_backends = \Drupal::entityQuery('search_api_server')
+      ->condition('backend', 'search_api_ai_search')
+      ->execute();
+
+    if ($ai_search_backends !== []) {
+      foreach (Server::loadMultiple($ai_search_backends) as $server) {
+        $database_backend = $server->getBackendConfig()['database'] ?? '';
+        if ($database_backend === 'amazeeio_vector_db') {
+          $config_list[] = sprintf('search_api.server.%s:backend_config.database_settings.database_name', $server->id());
+        }
+      }
+    }
+  }
+
+  $config->mergeWith(new ConfigIgnoreConfig('simple', $config_list));
+}

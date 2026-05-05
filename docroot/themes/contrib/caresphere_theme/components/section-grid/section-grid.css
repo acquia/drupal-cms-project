@@ -1,0 +1,122 @@
+/**
+ * @file section-grid.css
+ * Section Grid layout.
+ *
+ * Configurable grid system: 3 columns, or 2 columns (50/50, 66/33, 33/66).
+ * Mobile: single column, 32px gap.
+ */
+
+.section-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: var(--section-grid-row-gap, 2rem);
+  column-gap: var(--section-grid-column-gap, 2rem);
+  width: 100%;
+}
+
+@media (min-width: 62rem) {
+  .section-grid--layout-1_column {
+    grid-template-columns: 1fr;
+  }
+
+  .section-grid--layout-3_column {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .section-grid--layout-2_column_50_50 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section-grid--layout-2_column_66_33 {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  .section-grid--layout-2_column_33_66 {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+/* Alignment rules */
+.section-grid--align-start {
+  align-items: start;
+}
+.section-grid--align-center {
+  align-items: center;
+}
+.section-grid--align-end {
+  align-items: end;
+}
+.section-grid--align-stretch {
+  align-items: stretch;
+}
+
+/* Horizontal Alignment rules */
+.section-grid--justify-start {
+  justify-items: start;
+  text-align: left;
+}
+.section-grid--justify-center {
+  justify-items: center;
+  text-align: center;
+}
+.section-grid--justify-end {
+  justify-items: end;
+  text-align: right;
+}
+.section-grid--justify-stretch {
+  justify-items: stretch;
+  text-align: inherit;
+}
+
+.section-grid__col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.section-grid__col--stacked {
+  gap: var(--section-grid-row-gap, 2rem);
+}
+
+/* Tabs filter mode:
+   Flatten column wrappers so visible cards reflow row-wise from col 1 -> col 2. */
+.section-grid.section-grid--filtered .section-grid__col {
+  display: contents;
+}
+
+@media (min-width: 48rem) {
+  .section-grid__col--full > * {
+    flex: 1 0 0;
+  }
+}
+
+/* Empty state styling only shown inside the Canvas Editor */
+.section-grid__empty-state {
+  display: none;
+}
+.in-canvas .section-grid__col:empty::after {
+  content: "Drag component here";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed rgba(0, 0, 0, 0.2);
+  min-height: 120px;
+  background-color: rgba(0, 0, 0, 0.02);
+  color: rgba(0, 0, 0, 0.4);
+}
+.in-canvas .section-grid__empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed rgba(0, 0, 0, 0.2);
+  min-height: 120px;
+  background-color: rgba(0, 0, 0, 0.02);
+  color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+}
+.in-canvas
+  .section-grid__col
+  > *:not(.section-grid__empty-state)
+  ~ .section-grid__empty-state {
+  display: none;
+}

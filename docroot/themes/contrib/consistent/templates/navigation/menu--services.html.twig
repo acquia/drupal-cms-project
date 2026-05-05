@@ -1,0 +1,23 @@
+{% import _self as menus %}
+
+{% macro render_items(items) %}
+  {% for item in items %}
+    <a href="{{ item.url }}"
+       class="block px-4 py-3 text-base font-bold no-underline hover:underline text-foreground">
+      {{ item.title }}
+    </a>
+  {% endfor %}
+{% endmacro %}
+
+<nav aria-label="{{ 'Services'|t }}">
+  <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-border">
+    {% for item in items %}
+      <li class="bg-background">
+        <a href="{{ item.url }}"
+           class="block px-4 py-4 text-base font-bold no-underline hover:underline text-link">
+          {{ item.title }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</nav>

@@ -1,0 +1,14 @@
+parameters:
+    level: 0
+    fileExtensions:
+        - php
+        - module
+        - inc
+        - install
+    excludePaths:
+      # Exclude upgrade path removed in Drupal 11.
+      - src/Plugin/CKEditor4To5Upgrade/*
+    reportUnmatchedIgnoredErrors: false
+    ignoreErrors:
+        # new static() is a best practice in Drupal, so we cannot fix that.
+        - "#^Unsafe usage of new static#"

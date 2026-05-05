@@ -1,0 +1,7 @@
+services:
+  ai_provider_amazeeio_test.http_client:
+    class: Drupal\ai_provider_amazeeio_test\MockHttpClient
+    public: false
+    decorates: http_client
+    decoration_priority: 3
+    arguments: ['@ai_provider_amazeeio_test.http_client.inner', '@state']

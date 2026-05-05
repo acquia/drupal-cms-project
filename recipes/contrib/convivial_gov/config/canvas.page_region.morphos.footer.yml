@@ -1,0 +1,60 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.system_branding_block
+    - canvas.component.block.system_menu_block.footer
+    - canvas.component.block.system_menu_block.social
+    - canvas.component.sdc.morphos.content
+    - canvas.component.sdc.morphos.footer
+    - canvas.component.sdc.morphos.group
+    - filter.format.canvas_html_block
+  module:
+    - options
+    - text
+  theme:
+    - morphos
+id: morphos.footer
+region: footer
+theme: morphos
+component_tree:
+  0:
+    uuid: dd03dbc6-fdf2-463e-9fc9-8ce42b130d46
+    component_id: sdc.morphos.footer
+    component_version: 095b5f4bee988da6
+    inputs: '{"palette":"color--neutral","container":"container--normal","padding_top":"16","padding_bottom":"16"}'
+  '0:bottom_items:0':
+    parent_uuid: dd03dbc6-fdf2-463e-9fc9-8ce42b130d46
+    slot: bottom_items
+    uuid: d03f6f86-0234-4d9a-b6c5-30f335ea713a
+    component_id: sdc.morphos.group
+    component_version: 4bbb4b78a3877f4c
+    inputs: '{"allow_wrap":true,"gap":"4","direction":"vertical"}'
+  '0:bottom_items:0:items:0':
+    parent_uuid: d03f6f86-0234-4d9a-b6c5-30f335ea713a
+    slot: items
+    uuid: 10460913-11c9-4268-8685-b80297a067de
+    component_id: sdc.morphos.content
+    component_version: aca7da150405d653
+    inputs: '{"content":{"value":"\u003Cp\u003EFostering healthy, thriving communities for today and tomorrow.\u003C\/p\u003E","format":"canvas_html_block"}}'
+  '0:bottom_items:0:items:1':
+    parent_uuid: d03f6f86-0234-4d9a-b6c5-30f335ea713a
+    slot: items
+    uuid: 0b955aaf-44c6-48ae-8ba0-18a5379aee53
+    component_id: block.system_branding_block
+    component_version: b168140fdcaebae5
+    inputs: '{"label":"Site branding","label_display":"0","use_site_logo":true,"use_site_name":false,"use_site_slogan":false}'
+  '0:main_items:0':
+    parent_uuid: dd03dbc6-fdf2-463e-9fc9-8ce42b130d46
+    slot: main_items
+    uuid: ddf2e9b7-c1a2-4ec7-b0ab-ccf74e936f2f
+    component_id: block.system_menu_block.footer
+    component_version: 68bdb40e1ac48125
+    inputs: '{"label":"Footer","label_display":"0","level":"1","depth":null,"expand_all_items":true}'
+  '0:side_items:0':
+    parent_uuid: dd03dbc6-fdf2-463e-9fc9-8ce42b130d46
+    slot: side_items
+    uuid: 91524bb5-c208-4217-8fd0-ff50f9c3a30b
+    component_id: block.system_menu_block.social
+    component_version: 5b836f38bd8777d3
+    inputs: '{"label":"Socials","label_display":"0","level":1,"depth":null,"expand_all_items":false}'

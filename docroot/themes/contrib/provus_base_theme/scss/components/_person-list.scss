@@ -1,0 +1,76 @@
+.block-provus-person-list {
+  .card {
+    box-shadow: none;
+  }
+  .card-tall {
+    .card-img-top {
+      height: 100%;
+      width: 100%;
+      border-radius: $radius-radius-xxs;
+      .field--name-field-provus-media-image {
+        height: rem-calc(371);
+
+        @include media-breakpoint-up(lg) {
+          height: rem-calc(780);
+        }
+        img {
+          align-self: stretch;
+          height: 100%;
+          @include media-breakpoint-only(md) {
+            object-fit: scale-down;
+          }
+          @include media-breakpoint-up(lg) {
+            object-fit: cover;
+          }
+        }
+      }
+    }
+
+    .card-body {
+      padding: 0;
+
+      @include media-breakpoint-up(md) {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-content: center;
+      }
+
+      @include media-breakpoint-up(lg) {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+      }
+
+      .card-title  {
+        color: $text-colors-body-color;
+        padding-top: $padding-padding-md;
+        @include text-style-headline-h-5;
+      }
+    }
+  }
+}
+
+.col-lg-6 {
+  .block-provus-person-list {
+    .card-tall {
+      .card-img-top {
+        .field--name-field-provus-media-image {
+          height: rem-calc(371);
+        }
+      }
+    }
+  }
+}
+
+.col-lg-4, .col-lg-3 {
+  .block-provus-person-list {
+    .card-tall {
+      .card-img-top {
+        .field--name-field-provus-media-image {
+          height: rem-calc(240);
+        }
+      }
+    }
+  }
+}

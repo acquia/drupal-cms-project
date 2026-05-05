@@ -1,0 +1,44 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.morphos.content
+    - canvas.component.sdc.morphos.section
+    - filter.format.canvas_html_block
+  module:
+    - options
+    - text
+id: offset_header_section
+label: 'Offset header section'
+component_tree:
+  0:
+    uuid: bbd9c681-f0cf-4cb9-818f-de593998654d
+    component_id: sdc.morphos.section
+    component_version: 32ebb6399d6fc06d
+    inputs:
+      show_header: true
+      show_footer: false
+      heading: 'Offset header section'
+      heading_level: 2
+      hide_heading: false
+      content_width: section-width--100
+      content_position: section-position--start
+      content_alignment: section-alignment--start
+      palette: color--standard
+      container: container--normal
+      padding_top: '12'
+      padding_bottom: '12'
+      column_widths: section-col-widths--100
+      intro:
+        value: '<p>Section demonstrating one of the header variants with it on the side.</p>'
+        format: canvas_html_block
+  '0:main_items:0':
+    parent_uuid: bbd9c681-f0cf-4cb9-818f-de593998654d
+    slot: main_items
+    uuid: 52977274-f6da-49a5-ad2a-0d3376e79376
+    component_id: sdc.morphos.content
+    component_version: aca7da150405d653
+    inputs:
+      content:
+        value: '<p>Section content</p>'
+        format: canvas_html_block

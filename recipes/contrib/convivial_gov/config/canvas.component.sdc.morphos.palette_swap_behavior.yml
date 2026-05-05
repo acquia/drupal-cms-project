@@ -1,0 +1,130 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - morphos
+active_version: bccda0eaee9ece05
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        duration:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 500
+          expression: ℹ︎integer␟value
+        swap:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: standard
+          expression: ℹ︎list_string␟value
+        threshold:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 50
+          expression: ℹ︎integer␟value
+        media_query:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  50f25898e580f567:
+    settings:
+      prop_field_definitions:
+        duration:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 500
+          expression: ℹ︎integer␟value
+        swap:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: standard
+          expression: ℹ︎list_string␟value
+        threshold:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 50
+          expression: ℹ︎integer␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  ae53fe5c7a9e087a:
+    settings:
+      prop_field_definitions:
+        duration:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 500
+          expression: ℹ︎integer␟value
+        swap:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: primary
+          expression: ℹ︎list_string␟value
+        threshold:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 50
+          expression: ℹ︎integer␟value
+    fallback_metadata:
+      slot_definitions: {  }
+label: 'Palette Swap Behavior'
+id: sdc.morphos.palette_swap_behavior
+provider: morphos
+source: sdc
+source_local_id: 'morphos:palette_swap_behavior'

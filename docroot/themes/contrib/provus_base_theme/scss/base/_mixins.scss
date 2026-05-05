@@ -1,0 +1,203 @@
+@use 'sass:math';
+
+//rem-calc
+$rem-base: 16px;
+
+/* stylelint-disable */
+
+@function strip-unit($num) {
+  @if type-of($num) == 'number' and not unitless($num) {
+    @return math.div($num, ($num * 0 + 1));
+  }
+
+  @return $num;
+}
+
+@function convert-to-rem($value, $base-value: $rem-base)  {
+  $value: calc(strip-unit($value) / strip-unit($base-value)) * 1rem;
+  @if ($value == 0rem) { $value: 0; } // Turn 0rem into 0
+  @return $value;
+}
+
+@function rem-calc($values, $base-value: $rem-base) {
+  $max: length($values);
+  @if $max == 1 { @return convert-to-rem(nth($values, 1), $base-value); }
+  $remValues: ();
+  @for $i from 1 through $max {
+    $remValues: append($remValues, convert-to-rem(nth($values, $i), $base-value));
+  }
+  @return $remValues;
+}
+
+@mixin breakout {
+  width: 100vw;
+  position: relative;
+  left: calc(-1 * (100vw - 100%) / 2);
+  .gin--vertical-toolbar & {
+    margin-left: rem-calc(-33);
+  }
+}
+
+@mixin effect-style-elevation-xs() {
+  box-shadow: 0px 1px 2px rgba(0,0,0,0.060), 0px 5px 4px -4px rgba(0,0,0,0.020);
+}
+
+@mixin effect-style-elevation-sm() {
+  box-shadow: 0px 2px 2px rgba(0,0,0,0.080), 0px 0px 2px rgba(0,0,0,0.040);
+}
+
+@mixin effect-style-elevation-md() {
+  box-shadow: 0px 12px 12px -8px rgba(0,0,0,0.080), 0px 0px 4px rgba(0,0,0,0.040);
+}
+
+@mixin effect-style-elevation-lg() {
+  box-shadow: 0px 32px 40px -16px rgba(0,0,0,0.120), 0px 2px 6px rgba(0,0,0,0.060);
+}
+
+@mixin effect-style-elevation-xl() {
+  box-shadow: 0px 24px 48px -8px rgba(0,0,0,0.120), 0px 48px 64px -24px rgba(0,0,0,0.120);
+}
+
+@mixin effect-style-blur-small() {
+  backdrop-filter : blur(8px);
+}
+
+@mixin effect-style-blur-medium() {
+  backdrop-filter : blur(16px);
+}
+
+@mixin effect-style-blur-large() {
+  backdrop-filter : blur(24px);
+}
+
+@mixin effect-style-blur-large() {
+  backdrop-filter : blur(40px);
+}
+
+@mixin effect-style-text-drop-shadow() {
+  box-shadow: 0px 2px 10px rgba(0,0,0,0.400), 0px 0px 2px rgba(0,0,0,0.800);
+}
+
+@mixin pagination-padding-x() {
+  --bs-pagination-padding-x: 12px;
+}
+
+@mixin pagination-padding-mobile-x() {
+  --bs-pagination-padding-x: 3px;
+}
+
+@mixin pagination-padding-x-mobile-landscape() {
+  --bs-pagination-padding-x: 4px;
+}
+
+@mixin box-drop-shadow() {
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.15);
+}
+
+@mixin img-bg() {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+@mixin img-bg-hover() {
+  background: rgba(28,43,84, 0.6);
+}
+
+@mixin img-bg-title-width() {
+  max-width: 245px;
+}
+
+@mixin carousel-arrows() {
+  color: $primary;
+  font-weight: 900;
+  background: none;
+  font-size: 1.25rem;
+  font-family: $font-fontawesome;
+}
+
+@mixin carousel-controls() {
+  a {
+    width: rem-calc(20);
+    height: (40);
+    top: calc(50% - 25px);
+    background: none;
+    opacity: .5;
+    text-decoration: none;
+    &:before {
+      color: $black;
+      font-family: $font-fontawesome;
+      font-weight: 900;
+      background: none;
+      font-size: rem-calc(40);
+    }
+    &:hover {
+      opacity: .9;
+    }
+  }
+  .lSPrev {
+    left: 4px;
+    &:before {
+      content: "\f104";
+    }
+  }
+  .lSNext {
+    right: 4px;
+    &:before {
+      content: "\f105";
+    }
+  }
+}
+
+@mixin carousel-pager($color: $primary-shade, $hover-color: $secondary-shade, $size: 9px, $border-width: 1px, $dot-spacing: 3px) {
+  li {
+    padding: 0;
+    &::before {
+      display: none !important;
+    }
+  }
+  li > a {
+    width: #{$size};
+    height: #{$size};
+    border-width: #{$border-width};
+    border-style: solid;
+    border-color: #{$color};
+    background: transparent;
+    border-radius: 100%;
+    box-sizing: content-box;
+    margin-right: calc(#{$dot-spacing} / 2);
+    margin-left: calc(#{$dot-spacing} / 2);
+  }
+  li:hover a {
+    border-width: #{$border-width};
+    border-style: solid;
+    border-color: #{$hover-color};
+    background: #{$hover-color};
+  }
+  li.active > a {
+    border-width: #{$border-width};
+    border-style: solid;
+    border-color: #{$hover-color};
+    background: #{$hover-color};
+
+    &:hover {
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.5);
+      background: $primary-colors-primary-hover;
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.5);
+      background: $primary-accent;
+    }
+  }
+}
+
+@mixin btn-state-border($color: $background-lightblue, $state: hover) {
+  a.btn {
+    &.btn-primary,
+    &.btn-secondary,
+    &.btn-default {
+      &:#{$state} {
+        box-shadow: 0 0 0 3px #{$color};
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{% set is_preview = canvas_is_preview or in_preview %}
+
+{% set figure_attributes = create_attribute() %}
+
+{% set classes = [
+  'stat',
+  size
+] %}
+
+{% set figure_classes = [
+  'stat-figure',
+  is_preview ? 'min-h-10 min-w-10',
+] %}
+
+<div{{ attributes.addClass(classes) }}>
+  <div{{ figure_attributes.addClass(figure_classes) }}>
+    {% block figure %}{% endblock %}
+  </div>
+  {% if title %}
+    <div class="stat-title">{{ title }}</div>
+  {% endif %}
+  <div class="stat-value">
+    {% apply spaceless %}
+      {% if prefix %}<span class="stat-prefix">{{ prefix }}</span>{% endif %}
+      <span class="stat-number" data-value="{{ value }}">{{- value|number_format(0, '.', ',') -}}</span>
+      {% if suffix %}<span class="stat-suffix">{{ suffix }}</span>{% endif %}
+    {% endapply %}
+  </div>
+  {% if desc %}
+    <div class="stat-desc">{{ desc }}</div>
+  {% endif %}
+  <div class="stat-actions">
+    {% block actions %}{% endblock %}
+  </div>
+</div>

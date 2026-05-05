@@ -1,0 +1,63 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 4b7739c6-6fff-400f-88de-fd7d4cdbedfb
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: '404'
+  components:
+    -
+      uuid: 8ed9527e-4b07-4064-84b0-649b7acc5bd4
+      component_id: sdc.morphos.banner
+      inputs:
+        title: 'Page not found'
+        padding_top: '12'
+        padding_bottom: '12'
+        palette: color--primary
+        texture: texture--conic-top-start
+    -
+      parent_uuid: 8ed9527e-4b07-4064-84b0-649b7acc5bd4
+      slot: breadcrumb
+      uuid: bd9fd486-5419-4687-aa8a-d6f52368496d
+      component_id: block.system_breadcrumb_block
+      inputs:
+        label: Breadcrumbs
+        label_display: '0'
+    -
+      uuid: 4a7e8741-8356-4b56-a654-acaf031bb8fc
+      component_id: sdc.morphos.layout
+      inputs:
+        layout: layout--4-1-7
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+    -
+      parent_uuid: 4a7e8741-8356-4b56-a654-acaf031bb8fc
+      slot: main
+      uuid: d8e5297a-9767-48c7-831c-63d726ecc17a
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>We could not find the content you were looking for.</p>'
+          format: canvas_html_block
+  path:
+    -
+      alias: /page-not-found
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

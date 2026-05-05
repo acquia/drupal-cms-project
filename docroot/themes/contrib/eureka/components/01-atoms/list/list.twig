@@ -1,0 +1,39 @@
+{#
+/**
+ * Available variables:
+ * - list_base_class: the base classname
+ * - list_modifiers: array of modifiers to add to the base classname
+ * - list_blockname: blockname prepended to the base classname
+ * - list_extra_classes: extra classes added
+ *
+ * - list_type: defines the type of list (ol, ul)
+ * - list_style: defines the style of the list and adds a class accordingly
+ *     Options: ['none', 'inline', 'unstyled', 'icon']
+ * - list_items: array of items
+ * - list_items_icon
+ *
+ * Available blocks:
+ * - list_content_block: used to replace the content of the list
+ */
+#}
+
+{% set list_type = list_type|default('ul') %}
+{% if list_style %}
+  {% set list_modifiers = list_style == 'none' ? false : list_modifiers|default([])|merge([list_style]) %}
+{% endif %}
+{% set list_base_class = list_base_class|default(['list']) %}
+
+<{{ list_type }} {{ bem(list_base_class, list_modifiers, list_blockname, list_extra_classes) }}>
+  {% block list_content_block %}
+    {% for list_item in list_items %}
+      {{ include("eureka:list-item", {
+        list_item_icon: list_style == 'icon' ? list_items_icon : '',
+        list_item_label: list_item.label,
+        list_item_content: list_item.content,
+        list_item_base_class: list_item.list_item_base_class,
+        list_item_modifiers: list_item.list_item_modifiers,
+        list_item_blockname: list_item.list_item_blockname,
+      }, with_context = false) }}
+    {% endfor %}
+  {% endblock %}
+</{{ list_type }}>

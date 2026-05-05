@@ -1,0 +1,121 @@
+<?php
+
+/**
+ * @file
+ * Drupal UI Icons.
+ *
+ * @phpcs:disable Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Theme\Icon\IconDefinition;
+
+/**
+ * Implements hook_help().
+ */
+function ui_icons_help(string $route_name, RouteMatchInterface $route_match): ?string {
+  switch ($route_name) {
+    case 'help.page.ui_icons':
+      $output = '<h2>' . new TranslatableMarkup('About') . '</h2>';
+      $output .= '<p>' . new TranslatableMarkup('UI Icons is a module that aims to simplify the front-end management of icons. For more information, see the <a href=":docs">online documentation for the UI Icons module</a>.', [
+        ':docs' => 'https://git.drupalcode.org/project/ui_icons/-/blob/1.0.x/README.md',
+      ]) . '</p>';
+      $output .= '<dl>';
+      $output .= '<dt>' . new TranslatableMarkup('General') . '</dt>';
+      $output .= '<dd>' . new TranslatableMarkup('<a href=":docs">UI Icons</a> allow the declaration of icons in a Yaml file to be used globally on your website. The format allow to integrate many source provider for your icons and expose them in all Drupal display tools.', [
+        ':docs' => 'https://git.drupalcode.org/project/ui_icons/-/blob/1.0.x/README.md',
+      ]) . '</dd>';
+      $output .= '</dl>';
+      return $output;
+  }
+  return NULL;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function ui_icons_theme(array $existing, string $type, string $theme, string $path): array {
+  return [
+    'icon_selector' => [
+      'render element' => 'element',
+    ],
+    'icon_preview' => [
+      'variables' => [
+        'pack_id' => '',
+        'icon_id' => '',
+        'icon_label' => '',
+        'extractor' => NULL,
+        'source' => NULL,
+        'library' => NULL,
+        'settings' => [],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Prepares variables for input icon template.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - element: An associative array containing the properties of the element.
+ *
+ * @see src/Element/IconAutocomplete.php
+ */
+function template_preprocess_icon_selector(array &$variables): void {
+  $variables['has_settings'] = $variables['element']['#show_settings'] ?? FALSE;
+  $variables['icon_form'] = $variables['element']['icon_id'] ?? '';
+
+  if (_ui_icons_is_theme_active('gin')) {
+    $variables['icon_form']['#attached']['library'][] = 'ui_icons/ui_icons.gin_autocomplete';
+  }
+
+  if (_ui_icons_is_theme_active('ui_suite_daisyui')) {
+    $variables['icon_form']['#attached']['library'][] = 'ui_icons/ui_icons.daisyui_autocomplete';
+  }
+
+  if (_ui_icons_is_theme_active('ui_suite_dsfr')) {
+    $variables['icon_form']['#attached']['library'][] = 'ui_icons/ui_icons.dsfr_autocomplete';
+  }
+
+  if (isset($variables['element']['icon_id']['#value'])) {
+    if (!$icon_data = IconDefinition::getIconDataFromId($variables['element']['icon_id']['#value'])) {
+      return;
+    }
+    $variables['pack_id'] = $icon_data['pack_id'];
+    $variables['icon_id'] = $icon_data['icon_id'];
+  }
+  elseif (isset($variables['element']['#value']['object']) && is_object($variables['element']['#value']['object']) && method_exists($variables['element']['#value']['object'], 'getPackId') && method_exists($variables['element']['#value']['object'], 'getId')) {
+    $variables['pack_id'] = $variables['element']['#value']['object']->getPackId();
+    $variables['icon_id'] = $variables['element']['#value']['object']->getId();
+  }
+  elseif (!empty($variables['element']['#default_value'])) {
+    if (!$icon_data = IconDefinition::getIconDataFromId($variables['element']['#default_value'])) {
+      return;
+    }
+    $variables['pack_id'] = $icon_data['pack_id'];
+    $variables['icon_id'] = $icon_data['icon_id'];
+  }
+
+  if (isset($variables['element']['icon_settings']) && $variables['has_settings']) {
+    $variables['settings_form'] = $variables['element']['icon_settings'];
+  }
+
+}
+
+/**
+ * Determines whether the active theme or sub-theme of a specific theme name.
+ *
+ * @param string $name
+ *   Name of the theme or sub theme.
+ *
+ * @internal
+ */
+function _ui_icons_is_theme_active(string $name): bool {
+  $theme = Drupal::getContainer()->get('theme.manager')->getActiveTheme();
+  return $theme->getName() === $name ||
+    isset($theme->getBaseThemeExtensions()[$name]);
+}

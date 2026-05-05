@@ -1,0 +1,183 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: base/megamenu.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+@reference "../tailwindcss";
+
+@layer components {
+  /* Top-level menu list */
+  .megamenu__nav-menu {
+    @apply m-0 flex list-none items-center gap-1 p-0;
+  }
+
+  /* Top-level nav item */
+  .megamenu__nav-item {
+    @apply static;
+  }
+
+  /* Top-level link */
+  .megamenu__nav-link {
+    @apply block rounded-md px-3 py-2 text-sm font-medium no-underline;
+  }
+
+  .megamenu__nav-link:hover,
+  .megamenu__nav-link:focus {
+    background-color: var(--background);
+  }
+
+  /* Caret icon for expanded items */
+  .megamenu__menu-item--expanded {
+    > .megamenu__nav-link {
+      @apply flex items-center gap-2;
+
+      &:after {
+        content: '';
+        transform-origin: 50%;
+        pointer-events: none;
+        justify-self: flex-end;
+        width: 0.375rem;
+        height: 0.375rem;
+        transition-property: rotate, translate;
+        transition-duration: 0.2s;
+        display: block;
+        translate: 0 -1px;
+        rotate: -135deg;
+        box-shadow: inset 2px 2px;
+      }
+    }
+  }
+
+  .megamenu__nav-link.megamenu--open::after {
+    translate: 0 1px;
+    rotate: 45deg;
+  }
+
+  /* Submenu panel - hidden by default */
+  .megamenu__sub-nav {
+    @apply pointer-events-none invisible absolute top-[100%] right-0 left-0 z-50 overflow-hidden p-4 shadow-lg;
+
+    background-color: var(--background-strong);
+    display: grid;
+    grid-template-rows: 0fr;
+    transition:
+      grid-template-rows 0.3s ease-in-out,
+      visibility 0.3s ease-in-out;
+    border-bottom-left-radius: var(--radius-box, 0.5rem);
+    border-bottom-right-radius: var(--radius-box, 0.5rem);
+  }
+
+  /* Open state (applied by JS plugin) */
+  .megamenu__sub-nav.megamenu--open {
+    @apply pointer-events-auto visible;
+
+    grid-template-rows: 1fr;
+  }
+
+  /* Panel title */
+  .megamenu__sub-nav-title {
+    @apply mb-4;
+
+    a {
+      @apply text-lg font-bold no-underline;
+    }
+
+    .megamenu__description {
+      @apply mt-1 mb-0 text-sm;
+    }
+  }
+
+  /* Submenu list */
+  .megamenu__sub-nav-menu {
+    @apply m-0 flex list-none flex-wrap p-0;
+  }
+
+  /* Column variants */
+  .megamenu__sub-nav--cols-2 .megamenu__sub-nav-menu {
+    > li {
+      width: calc(50% - 0.5rem);
+    }
+  }
+
+  .megamenu__sub-nav--cols-3 .megamenu__sub-nav-menu {
+    > li {
+      width: calc(33.333% - 0.667rem);
+    }
+  }
+
+  .megamenu__sub-nav--cols-4 .megamenu__sub-nav-menu {
+    > li {
+      width: calc(25% - 0.75rem);
+    }
+  }
+
+  .megamenu__sub-nav--cols-5 .megamenu__sub-nav-menu {
+    > li {
+      width: calc(20% - 0.8rem);
+    }
+  }
+
+  .megamenu__sub-nav--cols-6 .megamenu__sub-nav-menu {
+    > li {
+      width: calc(16.666% - 0.833rem);
+    }
+  }
+
+  /* Menu item description */
+  .megamenu__description {
+    @apply mt-0 mb-2 block px-4 text-xs;
+  }
+
+  /* Sub-nav group heading */
+  .megamenu__sub-nav-group > a {
+    @apply block font-bold no-underline;
+  }
+
+  /* Nested sub-nav menu */
+  .megamenu__sub-nav-menu--level-2 {
+    @apply m-0 block list-none p-0;
+  }
+
+  /* Links within panels */
+  .megamenu__sub-nav a {
+    @apply rounded-md px-4 py-2 no-underline;
+  }
+
+  .megamenu__sub-nav a:hover,
+  .megamenu__sub-nav a:focus {
+    outline-offset: -2px;
+  }
+
+  .megamenu__sub-nav-menu a {
+    @apply text-sm;
+  }
+
+  /* Mobile: hide the desktop megamenu panels */
+  @media (max-width: 1023px) {
+    .megamenu__sub-nav {
+      @apply static pl-[1.25rem];
+
+      display: grid;
+      grid-template-rows: 0fr;
+
+      &.megamenu--open {
+        @apply pointer-events-auto visible;
+
+        grid-template-rows: 1fr;
+      }
+    }
+
+    .megamenu__sub-nav-menu {
+      @apply block;
+    }
+
+    .megamenu__sub-nav--cols-2 .megamenu__sub-nav-menu > li,
+    .megamenu__sub-nav--cols-3 .megamenu__sub-nav-menu > li,
+    .megamenu__sub-nav--cols-4 .megamenu__sub-nav-menu > li,
+    .megamenu__sub-nav--cols-5 .megamenu__sub-nav-menu > li,
+    .megamenu__sub-nav--cols-6 .megamenu__sub-nav-menu > li {
+      @apply w-full;
+    }
+  }
+}

@@ -1,0 +1,61 @@
+$schema: 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Accordion
+description: A collapsible content panel used to hide/show detailed information to save vertical space.
+group: Child
+status: stable
+props:
+  type: object
+  required:
+    - title
+  properties:
+    title:
+      type: string
+      title: Title
+      description: Title of the accordion.
+      examples:
+        - Accordion title
+    content:
+      type: string
+      title: Content
+      description: Content of the accordion.
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - <p>Accordion content.</p>
+    prose_size:
+      type: string
+      title: Prose size
+      description: Select the size of prose to make it bigger or smaller.
+      enum:
+        - prose-sm
+        - prose-base
+        - prose-lg
+        - prose-xl
+        - prose-2xl
+      meta:enum:
+        prose-sm: Small
+        prose-base: Base
+        prose-lg: Large
+        prose-xl: Extra large
+        prose-2xl: Extra extra large
+    icon:
+      type: string
+      title: Icon
+      description: Select the icon to use for the accordion.
+      enum:
+        - collapse-plus
+        - collapse-arrow
+      meta:enum:
+        collapse-plus: Plus/Minus
+        collapse-arrow: Arrow icon
+      default: collapse-plus
+    force:
+      type: string
+      title: Force
+      description: Select whether the accordion should be open or closed.
+      enum:
+        - collapse-open
+        - collapse-close
+      meta:enum:
+        collapse-open: Force open
+        collapse-close: Force close
