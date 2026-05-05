@@ -106,13 +106,10 @@ jobs:
               --account-pass=admin \
               --yes
 
-            # Apply the custom Acquia Trials recipe on top of the template install.
-            # This bakes trial-specific modules and dashboard config into the seed dump
-            # so they are not re-applied at runtime (faster hydration).
-            # NOTE: recipe must be idempotent — confirm with drupal-cms team.
-            php ./vendor/drush/drush/drush.php recipe ./recipes/custom/acquia_trials
-
             # Cache rebuild before dumping to ensure a clean state.
+            # NOTE: acquia_trials recipe is intentionally NOT applied here.
+            # It is applied at runtime by SiteInstallTrialsTask after dump restore,
+            # so it runs against the actual customer env (correct AH_* vars, realm, etc.).
             ./vendor/bin/drush cr
 
             # Dump the DB to a gzipped SQL file.
