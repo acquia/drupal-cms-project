@@ -2,6 +2,7 @@
 
 namespace Drupal\acquia_trials_cloud_platform\Plugin\Block;
 
+use Acquia\Drupal\RecommendedSettings\Helpers\EnvironmentDetector;
 use Drupal\Core\Block\Attribute\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
@@ -38,10 +39,14 @@ class TrialsCloudPlatformBlock extends BlockBase {
       ],
     ];
 
+    $cloud_api_base_uri = EnvironmentDetector::getAhRealm() === 'gardens'
+      ? 'https://staging.cloud.acquia.com'
+      : 'https://cloud.acquia.com';
+
     $subscription_id = getenv('AH_APPLICATION_UUID') ?: '';
     $cta_url = $subscription_id !== ''
-      ? 'https://cloud.acquia.com/a/applications/' . $subscription_id
-      : 'https://cloud.acquia.com';
+      ? $cloud_api_base_uri . '/a/applications/' . $subscription_id
+      : $cloud_api_base_uri;
 
     return [
       '#theme' => 'acquia_trials_cloud_platform',
