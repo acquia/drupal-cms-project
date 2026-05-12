@@ -1,0 +1,12 @@
+id: production
+label: Production
+description: 'Enables Acquia Purge (CDN cache invalidation) and syslog on production environments.'
+status: false
+folder: ../config/envs/prod
+module:
+  acquia_purge: 0
+  syslog: 0
+complete_split: true
+partial_list: {  }
+blacklist: {  }
+graylist: {  }

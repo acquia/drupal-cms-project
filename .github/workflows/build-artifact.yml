@@ -81,6 +81,23 @@ jobs:
             --account-pass=admin \
             --yes
 
+      - name: Inject Acquia environment detection into settings.php
+        run: |
+          cd $ARTIFACT_DIR
+          cat >> docroot/sites/default/settings.php << 'SETTINGS_EOF'
+
+// Acquia Cloud: Environment-aware config splits using AH_SITE_ENVIRONMENT.
+// On local (no AH_SITE_ENVIRONMENT), development split is active by default.
+if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
+  $env = $_ENV['AH_SITE_ENVIRONMENT'];
+  $config['config_split.config_split.development']['status'] = ($env == 'dev');
+  $config['config_split.config_split.stage']['status'] = ($env == 'test');
+  $config['config_split.config_split.production']['status'] = ($env == 'prod');
+} else {
+  $config['config_split.config_split.development']['status'] = TRUE;
+}
+SETTINGS_EOF
+
       - name: Remove values that should be unique.
         run: |
           cd $ARTIFACT_DIR

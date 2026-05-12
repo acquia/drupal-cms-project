@@ -1,0 +1,10 @@
+version: 1.0.0
+events:
+  build:
+    steps:
+      - guard-php-version:
+          script: |
+            php -v | grep -E "^PHP 8\.[3-9]" || (echo "ERROR: PHP 8.3+ required. Found: $(php -v | head -1)" && exit 1)
+      - composer-install:
+          script: |
+            composer install --no-dev --no-interaction --optimize-autoloader
