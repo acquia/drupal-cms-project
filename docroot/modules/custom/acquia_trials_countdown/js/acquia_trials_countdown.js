@@ -5,6 +5,14 @@
 (function (Drupal, drupalSettings) {
   'use strict';
 
+  // Initialize Qualified command queue so calls buffer until the SDK loads.
+  (function (w, q) {
+    w['QualifiedObject'] = q;
+    w[q] = w[q] || function () {
+      (w[q].q = w[q].q || []).push(arguments);
+    };
+  })(window, 'qualified');
+
   var endTimestamp = drupalSettings.trialsCountdown.endTimestamp;
   var bannerId = 'trials-countdown-banner';
   var intervalId;
@@ -59,13 +67,15 @@
     textWrap.appendChild(timeLeft);
     textWrap.appendChild(desc);
 
-    // CTA link.
+    // CTA triggers Qualified meeting scheduler experience.
     var cta = document.createElement('a');
-    cta.href = 'https://www.acquia.com/upgrade';
+    cta.href = '#';
+    cta.onclick = function (e) {
+      e.preventDefault();
+      window.qualified('showExperience', 'experience-1777986568977');
+    };
     cta.className = 'trials-countdown-cta';
     cta.textContent = 'Upgrade Now';
-    cta.target = '_blank';
-    cta.rel = 'noopener';
 
     var arrow = document.createElement('span');
     arrow.setAttribute('aria-hidden', 'true');

@@ -38,6 +38,8 @@ function acquia_trials_countdown_page_attachments(array &$attachments) {
   $trial_end = \Drupal::state()->get('acquia_trials_countdown.trial_end');
 
   $attachments['#attached']['library'][] = 'acquia_trials_countdown/countdown-banner';
+  $attachments['#attached']['library'][] = 'acquia_trials_countdown/qualified';
+
   $attachments['#attached']['drupalSettings']['trialsCountdown'] = [
     'endTimestamp' => $trial_end,
   ];
