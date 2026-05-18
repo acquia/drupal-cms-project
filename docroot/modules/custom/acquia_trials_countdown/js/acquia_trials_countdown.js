@@ -28,8 +28,8 @@
 
   function formatTimeLeft(seconds) {
     var days = Math.ceil(seconds / 86400);
-    if (days >= 1) {
-      return days + (days === 1 ? ' day' : ' days') + ' left in your trial.';
+    if (days > 1) {
+      return days + ' days left in your trial.';
     }
     return 'Expires today.';
   }
