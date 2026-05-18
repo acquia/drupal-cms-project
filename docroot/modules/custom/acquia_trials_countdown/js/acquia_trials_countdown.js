@@ -27,16 +27,11 @@
   }
 
   function formatTimeLeft(seconds) {
-    var days = Math.floor(seconds / 86400);
-    if (days >= 1) {
-      return days + (days === 1 ? ' day' : ' days') + ' left in your trial.';
+    var days = Math.ceil(seconds / 86400);
+    if (days > 1) {
+      return days + ' days left in your trial.';
     }
-    var hours = Math.floor(seconds / 3600);
-    if (hours >= 1) {
-      return hours + (hours === 1 ? ' hour' : ' hours') + ' left in your trial.';
-    }
-    var minutes = Math.max(1, Math.floor(seconds / 60));
-    return minutes + (minutes === 1 ? ' minute' : ' minutes') + ' left in your trial.';
+    return 'Expires today.';
   }
 
   function createBanner() {
