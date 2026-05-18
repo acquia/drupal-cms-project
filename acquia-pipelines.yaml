@@ -31,6 +31,16 @@
 version: 1.3.0
 
 # ---------------------------------------------------------------------------
+# Services: Explicitly set PHP version (required — PHP_VERSION variable alone
+# does NOT configure the runtime; the services key is needed for PHP 8.x).
+# ---------------------------------------------------------------------------
+services:
+  - php:
+      version: 8.3
+  - composer:
+      version: 2
+
+# ---------------------------------------------------------------------------
 # Global Variables
 # ---------------------------------------------------------------------------
 variables:
@@ -48,55 +58,37 @@ variables:
    PHPCS_DIRS: "docroot/modules/custom docroot/themes/custom"
 
 # ---------------------------------------------------------------------------
-# Events: Which Git actions trigger the pipeline
+# Events: The 'build' event is the only valid event in Acquia Pipelines.
+# All steps run sequentially on every pipeline trigger.
+# Branch/tag-specific logic is handled inside scripts via $ACQUIA_PIPELINE_BRANCH.
 # ---------------------------------------------------------------------------
 events:
- # Trigger on push to key branches
- push:
-   branches:
-     include:
-       - develop       # Auto-deploy to Dev
-       - stage         # Auto-deploy to Stage
-       - main          # Builds artifact (no auto-prod deploy — use tags)
-       - dist          # Trials branch 
-       - "feature/*"   # Run tests on feature branches (no deploy)
-       - "hotfix/*"    # Run tests on hotfix branches (no deploy)
-
- # Trigger on version tags — used for Production deployments
- tag:
-   include:
-     - "/^v[0-9]+\\.[0-9]+\\.[0-9]+.*/"   # e.g. v1.0.0, v2.1.3-rc1
-
-# ---------------------------------------------------------------------------
-# Pipeline Jobs
-# ---------------------------------------------------------------------------
-jobs:
-
- # =========================================================================
- # JOB 1: Validate — Code quality, standards, and security checks
- # Runs on ALL branches and tags before any deployment.
- # =========================================================================
- validate:
-   type: build
+ build:
    steps:
 
+     # -----------------------------------------------------------------------
+     # STEP 1: Setup — print environment info
+     # -----------------------------------------------------------------------
      - setup:
          type: script
          script:
-           - echo "=== Pipeline: Validate Job ==="
+           - echo "=== Pipeline Start ==="
            - echo "Branch/Tag: $ACQUIA_PIPELINE_BRANCH"
            - php --version
            - composer --version
 
-     # Install ALL dependencies (including dev) for linting & testing
+     # -----------------------------------------------------------------------
+     # STEP 2: Composer install (with dev deps for linting & testing)
+     # -----------------------------------------------------------------------
      - composer-install:
          type: script
          script:
            - composer validate --strict
            - composer install --no-interaction --prefer-dist --ansi
 
-     # PHP CodeSniffer — Drupal coding standards
-     # Fails the pipeline if custom code violates Drupal standards
+     # -----------------------------------------------------------------------
+     # STEP 3: PHP CodeSniffer — Drupal coding standards
+     # -----------------------------------------------------------------------
      - phpcs:
          type: script
          script:
@@ -112,7 +104,9 @@ jobs:
               echo "No custom code directories found — skipping PHPCS."
             fi
 
-     # PHP Mess Detector — detect overly complex or buggy code patterns
+     # -----------------------------------------------------------------------
+     # STEP 4: PHP Mess Detector
+     # -----------------------------------------------------------------------
      - phpmd:
          type: script
          script:
@@ -126,33 +120,24 @@ jobs:
               echo "No custom modules found — skipping PHPMD."
             fi
 
-     # Composer security audit — checks for known CVEs in dependencies
+     # -----------------------------------------------------------------------
+     # STEP 5: Composer security audit
+     # -----------------------------------------------------------------------
      - security-audit:
          type: script
          script:
            - echo "--- Running Composer Security Audit ---"
            - composer audit --no-dev
 
- # =========================================================================
- # JOB 2: Unit Tests — PHPUnit tests for custom Drupal modules
- # Runs after validate; only executes if tests exist.
- # =========================================================================
- unit-tests:
-   type: build
-   steps:
-
-     - composer-install:
-         type: script
-         script:
-           - composer install --no-interaction --prefer-dist --ansi
-
+     # -----------------------------------------------------------------------
+     # STEP 6: PHPUnit tests
+     # -----------------------------------------------------------------------
      - phpunit:
          type: script
          script:
-           - echo "=== Pipeline: Unit Tests Job ==="
+           - echo "--- Running PHPUnit (Unit Suite) ---"
            - |
             if [ -f "docroot/core/phpunit.xml.dist" ] && [ -d "docroot/modules/custom" ]; then
-              echo "--- Running PHPUnit (Unit Suite) ---"
               ./vendor/bin/phpunit \
                 --configuration docroot/core/phpunit.xml.dist \
                 --testsuite=unit \
@@ -163,148 +148,94 @@ jobs:
               echo "No PHPUnit config or custom modules found — skipping tests."
             fi
 
- # =========================================================================
- # JOB 3: Build Artifact — Production-ready build (no dev dependencies)
- # This job creates the deployable artifact that Acquia will serve.
- # Only runs on deployable branches (develop, stage, main) and tags.
- # =========================================================================
- build-artifact:
-   type: build
-   steps:
-
-     - build:
+     # -----------------------------------------------------------------------
+     # STEP 7: Build artifact (production-only, no dev deps)
+     # Skipped on feature/* and hotfix/* branches
+     # -----------------------------------------------------------------------
+     - build-artifact:
          type: script
          script:
-           - echo "=== Pipeline: Build Artifact Job ==="
-
-           # Install production-only Composer dependencies
+           - echo "--- Build Artifact ---"
+           - |
+            BRANCH="$ACQUIA_PIPELINE_BRANCH"
+            if echo "$BRANCH" | grep -qE '^(feature|hotfix)/'; then
+              echo "Feature/hotfix branch — skipping artifact build."
+              exit 0
+            fi
            - composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader --ansi
-
            # --- Optional: Compile frontend theme assets ---
-           # Uncomment and adjust path if you have a custom theme with npm build
            # - |
            #   THEME_DIR="docroot/themes/custom/MY_THEME"
            #   if [ -f "$THEME_DIR/package.json" ]; then
-           #     echo "--- Building theme assets ---"
-           #     cd $THEME_DIR
-           #     npm ci --silent
-           #     npm run build
-           #     rm -rf node_modules   # Remove node_modules from artifact
-           #     cd -
+           #     cd $THEME_DIR && npm ci --silent && npm run build && rm -rf node_modules && cd -
            #   fi
-
-           # Remove development-only files from the artifact
            - rm -rf tests/ docs/ .git/ *.md CHANGELOG.* phpunit.xml* .phpcs.xml*
-
            - echo "Artifact build complete."
 
- # =========================================================================
- # JOB 4: Deploy to Dev
- # Triggered automatically when code is pushed to the 'develop' branch.
- # Uses `acli push:artifact` to build and push the "-build" artifact branch.
- # =========================================================================
- deploy-dev:
-   type: build
-   steps:
+     # -----------------------------------------------------------------------
+     # STEP 8-10: Deploy steps — commented out for dist branch.
+     # Requires: acli installed + Pipeline variables set in the Acquia UI:
+     #   ACQUIA_DEV_ENV_UUID, ACQUIA_STAGE_ENV_UUID, ACQUIA_PROD_ENV_UUID
+     # Uncomment when running from develop / stage / version-tag branches.
+     # -----------------------------------------------------------------------
 
-     - deploy:
-         type: script
-         script:
-           - echo "=== Pipeline: Deploy to Dev ==="
-           - |
-            # Only deploy when on the 'develop' branch
-            if [ "$ACQUIA_PIPELINE_BRANCH" = "develop" ]; then
-              echo "--- Building & pushing artifact to develop-build ---"
+     # - deploy-dev:
+     #     type: script
+     #     script:
+     #       - |
+     #        if [ "$ACQUIA_PIPELINE_BRANCH" = "develop" ]; then
+     #          echo "=== Deploying to Dev ==="
+     #          acli push:artifact \
+     #            --destination-git-branch="develop-build" \
+     #            --no-interaction \
+     #            --ansi
+     #          acli api:environments:code-switch \
+     #            "$ACQUIA_DEV_ENV_UUID" \
+     #            "develop-build" \
+     #            --no-interaction
+     #          echo "Dev deployment triggered. Cloud Hooks will run drush updb + cim + cr."
+     #        else
+     #          echo "Not on 'develop' branch — skipping Dev deploy."
+     #        fi
 
-              # Push artifact to Acquia Git (develop-build branch)
-              acli push:artifact \
-                --destination-git-branch="develop-build" \
-                --no-interaction \
-                --ansi
+     # - deploy-stage:
+     #     type: script
+     #     script:
+     #       - |
+     #        if [ "$ACQUIA_PIPELINE_BRANCH" = "stage" ]; then
+     #          echo "=== Deploying to Stage ==="
+     #          acli push:artifact \
+     #            --destination-git-branch="stage-build" \
+     #            --no-interaction \
+     #            --ansi
+     #          acli api:environments:code-switch \
+     #            "$ACQUIA_STAGE_ENV_UUID" \
+     #            "stage-build" \
+     #            --no-interaction
+     #          echo "Stage deployment triggered."
+     #        else
+     #          echo "Not on 'stage' branch — skipping Stage deploy."
+     #        fi
 
-              echo "--- Switching Dev environment to develop-build ---"
-              acli api:environments:code-switch \
-                "$ACQUIA_DEV_ENV_UUID" \
-                "develop-build" \
-                --no-interaction
-
-              echo "Dev deployment triggered. Cloud Hooks will run drush updb + cim + cr."
-            else
-              echo "Not on 'develop' branch — skipping Dev deploy."
-            fi
-
- # =========================================================================
- # JOB 5: Deploy to Stage
- # Triggered automatically when code is pushed to the 'stage' branch.
- # Stage deployments run after tests pass.
- # =========================================================================
- deploy-stage:
-   type: build
-   steps:
-
-     - deploy:
-         type: script
-         script:
-           - echo "=== Pipeline: Deploy to Stage ==="
-           - |
-            if [ "$ACQUIA_PIPELINE_BRANCH" = "stage" ]; then
-              echo "--- Building & pushing artifact to stage-build ---"
-
-              acli push:artifact \
-                --destination-git-branch="stage-build" \
-                --no-interaction \
-                --ansi
-
-              echo "--- Switching Stage environment to stage-build ---"
-              acli api:environments:code-switch \
-                "$ACQUIA_STAGE_ENV_UUID" \
-                "stage-build" \
-                --no-interaction
-
-              echo "Stage deployment triggered."
-            else
-              echo "Not on 'stage' branch — skipping Stage deploy."
-            fi
-
- # =========================================================================
- # JOB 6: Deploy to Production
- # ONLY triggered by version tags (e.g. v1.2.0) pushed to the repository.
- # Production deploy requires a tag — this is an intentional safety gate.
- #
- # HOW TO DEPLOY TO PROD:
- #   git tag -a v1.2.0 -m "Release v1.2.0"
- #   git push origin v1.2.0
- # =========================================================================
- deploy-prod:
-   type: build
-   steps:
-
-     - deploy:
-         type: script
-         script:
-           - echo "=== Pipeline: Deploy to Production ==="
-           - |
-            # Tags are stored in ACQUIA_PIPELINE_BRANCH for tagged builds
-            TAG="$ACQUIA_PIPELINE_BRANCH"
-
-            if echo "$TAG" | grep -qE '^v[0-9]+\.[0-9]+\.[0-9]+'; then
-              echo "--- Deploying tag $TAG to Production ---"
-
-              # Push artifact to a prod-specific build branch
-              acli push:artifact \
-                --destination-git-branch="main-build" \
-                --no-interaction \
-                --ansi
-
-              echo "--- Switching Production environment to main-build ---"
-              acli api:environments:code-switch \
-                "$ACQUIA_PROD_ENV_UUID" \
-                "main-build" \
-                --no-interaction
-
-              echo "Production deployment triggered for tag: $TAG"
-              echo "Cloud Hooks will run: maintenance mode on → updb → cim → cr → maintenance off"
-            else
-              echo "Not a version tag — skipping Production deploy."
-            fi
-
+     # - deploy-prod:
+     #     type: script
+     #     script:
+     #       - |
+     #        # HOW TO DEPLOY TO PROD:
+     #        #   git tag -a v1.2.0 -m "Release v1.2.0" && git push origin v1.2.0
+     #        TAG="$ACQUIA_PIPELINE_BRANCH"
+     #        if echo "$TAG" | grep -qE '^v[0-9]+\.[0-9]+\.[0-9]+'; then
+     #          echo "=== Deploying tag $TAG to Production ==="
+     #          acli push:artifact \
+     #            --destination-git-branch="main-build" \
+     #            --no-interaction \
+     #            --ansi
+     #          acli api:environments:code-switch \
+     #            "$ACQUIA_PROD_ENV_UUID" \
+     #            "main-build" \
+     #            --no-interaction
+     #          echo "Production deployment triggered for tag: $TAG"
+     #          echo "Cloud Hooks: maintenance on → updb → cim → cr → maintenance off"
+     #        else
+     #          echo "Not a version tag — skipping Production deploy."
+     #        fi
