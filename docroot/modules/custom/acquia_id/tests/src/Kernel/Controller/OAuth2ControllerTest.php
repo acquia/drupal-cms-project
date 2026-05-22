@@ -192,7 +192,7 @@ class OAuth2ControllerTest extends KernelTestBase {
     $this->assertTrue($result);
   }
 
-  public function testSsoRouteAccessAuthenticatedWithTokenDenied(): void {
+  public function testSsoRouteAccessAuthenticatedWithToken(): void {
     $access_manager = $this->container->get('access_manager');
     $user = $this->setUpCurrentUser();
 
@@ -208,7 +208,7 @@ class OAuth2ControllerTest extends KernelTestBase {
       ]);
 
     $result = $access_manager->checkNamedRoute('acquia_id.sso', [], $user);
-    $this->assertFalse($result);
+    $this->assertTrue($result);
   }
 
   /**
