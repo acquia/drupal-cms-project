@@ -15,8 +15,6 @@ use Drupal\Core\Url;
 use Drupal\acquia_id\Events\OAuth2AuthorizationEvent;
 use Drupal\acquia_id\OAuth2\AccessTokenRepository;
 use Drupal\acquia_id\OAuth2\Provider\AcquiaIdProvider;
-use GuzzleHttp\Exception\RequestException;
-use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -40,6 +38,7 @@ final class OAuth2Controller implements ContainerInjectionInterface {
     private readonly EventDispatcherInterface $eventDispatcher,
     private readonly AccessTokenRepository $accessTokenRepository,
     private readonly string $idpLogoutRedirectUri,
+    private readonly AccountInterface $currentUser,
   ) {
   }
 
@@ -53,6 +52,7 @@ final class OAuth2Controller implements ContainerInjectionInterface {
       $container->get('event_dispatcher'),
       $container->get('acquia_id.oauth2.access_token_repository'),
       $container->getParameter('acquia_id.idp_logout_redirect_uri'),
+      $container->get('current_user'),
     );
   }
 
@@ -61,7 +61,23 @@ final class OAuth2Controller implements ContainerInjectionInterface {
    *
    * @link https://oauth.net/2/pkce/
    */
-  public function __invoke(Request $request): RedirectResponse {
+  public function __invoke(Request $request): RedirectResponse|array {
+    if (!$this->currentUser->isAnonymous()) {
+      $token = NULL;
+      try {
+        $token = $this->accessTokenRepository->get((int) $this->currentUser->id());
+      }
+      catch (\Exception) {
+      }
+      if ($token !== NULL) {
+        $destination = $request->query->get('destination', '');
+        $url = $destination ? Url::fromUserInput($destination) : Url::fromRoute('<front>');
+        return [
+          '#markup' => '<p>' . $this->t('You are already logged in.') . '</p><p><a href="' . $url->toString() . '">' . $this->t('Continue') . '</a></p>',
+        ];
+      }
+    }
+
     // Check if this is a subrequest being made on access denied exception.
     // @see \Drupal\Core\EventSubscriber\HttpExceptionSubscriberBase::onException().
     if ($request->attributes->has('exception')) {
@@ -135,17 +151,7 @@ final class OAuth2Controller implements ContainerInjectionInterface {
    * Checks access for the SSO route.
    */
   public function access(AccountInterface $account): AccessResultInterface {
-    $token = NULL;
-    try {
-      $token = $this->accessTokenRepository->get((int) $account->id());
-    }
-    catch (IdentityProviderException) {
-      return AccessResult::allowed();
-    }
-    catch (RequestException) {
-    }
-
-    return AccessResult::allowedIf($account->isAnonymous() || $token === NULL);
+    return AccessResult::allowed();
   }
 
   private function accessDeniedRedirect(string $logMessage = 'Access denied'): RedirectResponse {
