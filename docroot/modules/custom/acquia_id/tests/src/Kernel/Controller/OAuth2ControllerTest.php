@@ -211,6 +211,51 @@ class OAuth2ControllerTest extends KernelTestBase {
     $this->assertTrue($result);
   }
 
+  public function testAuthenticatedWithTokenShowsAlreadyLoggedIn(): void {
+    $user = $this->setUpCurrentUser();
+
+    $token = new AccessToken([
+      'access_token' => 'VALID_ACCESS_TOKEN',
+      'expires' => time() + 3600,
+    ]);
+    $this->container->get('user.data')
+      ->set('acquia_id', $user->id(), 'acquia_id_access_token', [
+        'access_token' => $token,
+        'timestamp' => time(),
+      ]);
+
+    $response = $this->doRequest(
+      Request::create(Url::fromRoute('acquia_id.sso')->toString()),
+    );
+
+    $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
+    $this->assertStringContainsString('You are already logged in.', $response->getContent());
+    $this->assertStringContainsString('Continue', $response->getContent());
+  }
+
+  public function testAuthenticatedWithTokenAndDestinationRedirects(): void {
+    $user = $this->setUpCurrentUser();
+
+    $token = new AccessToken([
+      'access_token' => 'VALID_ACCESS_TOKEN',
+      'expires' => time() + 3600,
+    ]);
+    $this->container->get('user.data')
+      ->set('acquia_id', $user->id(), 'acquia_id_access_token', [
+        'access_token' => $token,
+        'timestamp' => time(),
+      ]);
+
+    $response = $this->doRequest(
+      Request::create(Url::fromRoute('acquia_id.sso', [], [
+        'query' => ['destination' => '/admin'],
+      ])->toString()),
+    );
+
+    $this->assertSame(Response::HTTP_SEE_OTHER, $response->getStatusCode());
+    $this->assertStringContainsString('/admin', $response->headers->get('Location'));
+  }
+
   /**
    * Makes an HTTP request through the kernel.
    */

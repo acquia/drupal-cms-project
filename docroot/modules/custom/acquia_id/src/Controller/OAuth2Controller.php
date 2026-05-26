@@ -62,7 +62,8 @@ final class OAuth2Controller implements ContainerInjectionInterface {
    * @link https://oauth.net/2/pkce/
    */
   public function __invoke(Request $request): RedirectResponse|array {
-    if (!$this->currentUser->isAnonymous()) {
+    $isCallback = $request->query->has('code') || $request->query->has('state') || $request->query->has('error');
+    if (!$isCallback && !$this->currentUser->isAnonymous()) {
       $token = NULL;
       try {
         $token = $this->accessTokenRepository->get((int) $this->currentUser->id());
@@ -71,9 +72,11 @@ final class OAuth2Controller implements ContainerInjectionInterface {
       }
       if ($token !== NULL) {
         $destination = $request->query->get('destination', '');
-        $url = $destination ? Url::fromUserInput($destination) : Url::fromRoute('<front>');
+        if ($destination) {
+          return new RedirectResponse(Url::fromUserInput($destination)->toString(), Response::HTTP_SEE_OTHER);
+        }
         return [
-          '#markup' => '<p>' . $this->t('You are already logged in.') . '</p><p><a href="' . $url->toString() . '">' . $this->t('Continue') . '</a></p>',
+          '#markup' => '<p>' . $this->t('You are already logged in.') . '</p><p><a href="' . Url::fromRoute('<front>')->toString() . '">' . $this->t('Continue') . '</a></p>',
         ];
       }
     }
