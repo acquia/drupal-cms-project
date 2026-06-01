@@ -5,8 +5,9 @@
 # Run drush config:import in all environments post code deploy.
 
 # Map the script inputs to convenient names.
-site=$1
-target_env=$2
-drush_alias=$site'.'$target_env
+site="$1"
+target_env="$2"
 
-drush @$drush_alias config:import --yes
+repo_root="/var/www/html/$site.$target_env"
+
+$repo_root/vendor/bin/drush config:import --yes
