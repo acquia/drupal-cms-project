@@ -6,6 +6,9 @@
 
 site=$1
 target_env=$2
+repo_root="/var/www/html"
 
+echo "Current working directory: $(pwd)"
 echo "Importing config for $site.$target_env"
-./vendor/bin/drush @$site.$target_env config:import -y
+
+$repo_root/vendor/bin/drush @$site.$target_env config:import -y
