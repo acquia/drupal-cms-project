@@ -4,10 +4,14 @@
 #
 # Run drush config:import in all environments post code deploy.
 
-# Map the script inputs to convenient names.
 site="$1"
 target_env="$2"
 
-repo_root="/var/www/html/$site.$target_env"
+# Use vendor drush if available, otherwise fall back to drush9
+drush='drush9'
+if [ -e /var/www/html/vendor/bin/drush ]; then
+  drush='/var/www/html/vendor/bin/drush'
+fi
 
-$repo_root/vendor/bin/drush config:import --yes
+echo "Importing config for $site.$target_env"
+$drush @$site.$target_env cim -y
