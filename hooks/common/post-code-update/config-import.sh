@@ -8,7 +8,11 @@ site=$1
 target_env=$2
 repo_root="/var/www/html"
 
-echo "Current working directory: $(pwd)"
-echo "Importing config for $site.$target_env"
+# Skip if drush not available (fresh install)
+if [ ! -e $repo_root/vendor/bin/drush ]; then
+  echo "Drush not available, skipping config import"
+  exit 0
+fi
 
+echo "Importing config for $site.$target_env"
 $repo_root/vendor/bin/drush @$site.$target_env config:import -y
