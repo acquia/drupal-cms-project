@@ -9,4 +9,7 @@ site=$1
 target_env=$2
 drush_alias=$site'.'$target_env
 
-drush @$drush_alias config:import --yes
+if drush @$drush_alias status 2>/dev/null | grep -q "Successful"; then
+  drush @$drush_alias updatedb --yes
+  drush @$drush_alias config:import --yes
+fi
