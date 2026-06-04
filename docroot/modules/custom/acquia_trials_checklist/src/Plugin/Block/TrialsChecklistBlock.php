@@ -20,6 +20,15 @@ class TrialsChecklistBlock extends BlockBase {
   /**
    * {@inheritdoc}
    */
+  public function defaultConfiguration(): array {
+    return [
+      'label_display' => '0',
+    ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function build(): array {
     $items_def = acquia_trials_checklist_get_items();
     $state_key = 'checklistapi.progress.acquia_trials_checklist';

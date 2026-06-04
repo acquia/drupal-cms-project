@@ -34,7 +34,7 @@ function acquia_trials_checklist_checklistapi_checklist_info(): array {
     $checklist_items[$key] = [
       '#title' => $item['title'],
       '#description' => $item['description'],
-      '#url' => Url::fromUri('internal:' . $item['url']),
+      '#url' => Url::fromUserInput($item['url']),
     ];
   }
 
