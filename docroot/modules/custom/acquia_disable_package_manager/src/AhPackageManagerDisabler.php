@@ -45,7 +45,7 @@ final class AhPackageManagerDisabler implements ConfigFactoryOverrideInterface, 
   public function disable(SandboxValidationEvent $event): void {
     if (AcquiaDrupalEnvironmentDetector::isAhEnv()) {
       $event->addError([
-        $this->t('Package Manager is disabled on Acquia hosting.'),
+        $this->t('Acquia Cloud is write-protected by design. To add or update modules and recipes in your codebase, use a Cloud IDE. You can open or create a Cloud ID from your subscription.'),
       ]);
       // Stop all further validation.
       $event->stopPropagation();
