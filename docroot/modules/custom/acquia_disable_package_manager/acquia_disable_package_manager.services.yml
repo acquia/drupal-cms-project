@@ -1,0 +1,5 @@
+services:
+  Drupal\acquia_disable_package_manager\AhPackageManagerDisabler:
+    tags:
+      - { name: event_subscriber }
+      - { name: config.factory.override }

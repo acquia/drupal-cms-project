@@ -2,8 +2,9 @@ name: Acquia Trials
 type: Acquia
 description: 'Enables Acquia Trials extensions: countdown banner, getting-started checklist, and Cloud Platform promotion block.'
 install:
-  - acquia_trials_countdown
+  - acquia_disable_package_manager
   - acquia_trials_checklist
+  - acquia_trials_countdown
   - acquia_trials_cloud_platform
   - acquia_trials_id
 config:
