@@ -192,7 +192,7 @@ class OAuth2ControllerTest extends KernelTestBase {
     $this->assertTrue($result);
   }
 
-  public function testSsoRouteAccessAuthenticatedWithTokenDenied(): void {
+  public function testSsoRouteAccessAuthenticatedWithToken(): void {
     $access_manager = $this->container->get('access_manager');
     $user = $this->setUpCurrentUser();
 
@@ -208,7 +208,52 @@ class OAuth2ControllerTest extends KernelTestBase {
       ]);
 
     $result = $access_manager->checkNamedRoute('acquia_id.sso', [], $user);
-    $this->assertFalse($result);
+    $this->assertTrue($result);
+  }
+
+  public function testAuthenticatedWithTokenShowsAlreadyLoggedIn(): void {
+    $user = $this->setUpCurrentUser();
+
+    $token = new AccessToken([
+      'access_token' => 'VALID_ACCESS_TOKEN',
+      'expires' => time() + 3600,
+    ]);
+    $this->container->get('user.data')
+      ->set('acquia_id', $user->id(), 'acquia_id_access_token', [
+        'access_token' => $token,
+        'timestamp' => time(),
+      ]);
+
+    $response = $this->doRequest(
+      Request::create(Url::fromRoute('acquia_id.sso')->toString()),
+    );
+
+    $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
+    $this->assertStringContainsString('You are already logged in.', $response->getContent());
+    $this->assertStringContainsString('Continue', $response->getContent());
+  }
+
+  public function testAuthenticatedWithTokenAndDestinationRedirects(): void {
+    $user = $this->setUpCurrentUser();
+
+    $token = new AccessToken([
+      'access_token' => 'VALID_ACCESS_TOKEN',
+      'expires' => time() + 3600,
+    ]);
+    $this->container->get('user.data')
+      ->set('acquia_id', $user->id(), 'acquia_id_access_token', [
+        'access_token' => $token,
+        'timestamp' => time(),
+      ]);
+
+    $response = $this->doRequest(
+      Request::create(Url::fromRoute('acquia_id.sso', [], [
+        'query' => ['destination' => '/admin'],
+      ])->toString()),
+    );
+
+    $this->assertSame(Response::HTTP_SEE_OTHER, $response->getStatusCode());
+    $this->assertStringContainsString('/admin', $response->headers->get('Location'));
   }
 
   /**

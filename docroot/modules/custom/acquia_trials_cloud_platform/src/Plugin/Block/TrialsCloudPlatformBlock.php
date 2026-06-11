@@ -20,6 +20,15 @@ class TrialsCloudPlatformBlock extends BlockBase {
   /**
    * {@inheritdoc}
    */
+  public function defaultConfiguration(): array {
+    return [
+      'label_display' => '0',
+    ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function build(): array {
     $features = [
       [

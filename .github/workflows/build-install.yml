@@ -101,3 +101,5 @@ jobs:
             echo "Drush finished with hidden errors"
             exit 1
           fi
+          
+          ./vendor/bin/drush recipe ../recipes/custom/acquia_trials
