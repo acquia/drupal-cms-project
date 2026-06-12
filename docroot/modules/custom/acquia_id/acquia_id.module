@@ -7,8 +7,38 @@
 
 declare(strict_types=1);
 
+use Acquia\DrupalEnvironmentDetector\AcquiaDrupalEnvironmentDetector;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Url;
 use Drupal\user\UserInterface;
+
+/**
+ * Implements hook_form_FORM_ID_alter() for the user login form.
+ *
+ * Adds a "Sign in with Acquia ID" button that links users to the SSO flow.
+ * Users provisioned via Acquia ID have no local password, so the standard
+ * username/password fields are unusable for them. The button only appears on
+ * Acquia Hosting, where the SSO flow is available.
+ */
+function acquia_id_form_user_login_form_alter(array &$form, FormStateInterface $form_state, string $form_id): void {
+  if (!AcquiaDrupalEnvironmentDetector::isAhEnv()) {
+    return;
+  }
+
+  $form['acquia_id_sso'] = [
+    '#type' => 'link',
+    '#title' => t('Sign in with Acquia ID'),
+    '#url' => Url::fromRoute('acquia_id.sso', [], [
+      'query' => ['destination' => '/admin/dashboard'],
+    ]),
+    '#attributes' => [
+      'class' => ['button'],
+    ],
+    // Render just below the form actions (submit button), matching the mockup.
+    '#weight' => 100,
+  ];
+}
 
 /**
  * Implements hook_user_logout().
