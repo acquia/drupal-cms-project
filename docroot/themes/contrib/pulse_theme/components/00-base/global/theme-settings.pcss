@@ -1,0 +1,21 @@
+/* Style for SPACE Design System theme settings page 
+ * /admin/appearance/settings/pulse_theme 
+*/
+@reference "./global.pcss";
+
+.brand-colors-wrapper,
+.background-colors-wrapper {
+  @apply flex gap-4 flex-wrap;
+
+  .form-item {
+    @apply grow-0 shrink-0 basis-auto w-32 mb-6 mt-0;
+
+    label {
+      @apply block mb-1;
+    }
+
+    input[type="color"] {
+      @apply h-8 w-8 min-h-[2rem] min-w-[2rem] border-0 p-0 rounded-none;
+    }
+  }
+}

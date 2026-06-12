@@ -1,0 +1,373 @@
+// Tabs color changes
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+  background: $tabs-color-primary;
+  color: $white;
+}
+
+.nav-item {
+  .nav-link {
+    color: $tabs-color-secondary;
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+      color: $tabs-color-primary;
+    }
+  }
+}
+
+// Admin nav
+nav.tabs ul {
+  background: $tabs-background-color-secondary;
+  li.nav-item {
+    color: $tabs-color-primary;
+    border: 0.5px solid $tabs-border-color;
+    overflow: hidden;
+    border-radius: $padding-padding-xxs $padding-padding-xxs 0 0;
+    @include text-style-headline-h-5();
+    margin-top: 0;
+    margin-bottom: 0;
+
+    &.active {
+      a {
+        background: $tabs-background-color-primary;
+        color: $tabs-color-primary;
+        overflow: hidden;
+        position: relative;
+
+        &:before {
+          content: '';
+          width: 100%;
+          background: $tabs-color-primary;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          height: 8px;
+          transform: rotate(0deg);
+        }
+
+        &:hover::before {
+          content: '';
+          height: 0;
+        }
+
+        &:hover {
+          background: $tabs-background-color-secondary;
+          text-decoration: underline;
+          color: $tabs-color-primary;
+        }
+      }
+    }
+
+    .nav-link {
+      color: $tabs-color-primary;
+      padding: $padding-padding-xs $padding-padding-xlg;
+      &:hover,
+      &:focus {
+        border-color: $tabs-border-color-hover;
+      }
+    }
+  }
+}
+
+// Vertical Tabs
+
+.vertical-tabs {
+  flex-direction: column;
+  border: none;
+  @include media-breakpoint-up(md) {
+    font-size: 1rem;
+    border: none;
+    flex-direction: unset;
+  }
+
+  .nav-tabs, &__menu {
+    width: 100%;
+    border: none;
+    @include media-breakpoint-up(md) {
+      border: none;
+      width: rem-calc(240);
+    }
+
+    .nav-item, &-item {
+      border: none;
+      margin-bottom: $padding-padding-md;
+      border: 0.5px solid $tabs-border-color;
+      border-radius: $padding-padding-xxs;
+      background: transparent;
+
+      .nav-link, a {
+        padding: $padding-padding-xs $padding-padding-lg;
+        text-align: center;
+        color: $tabs-color-primary;
+        @include text-style-headline-h-5();
+        border: 0.5px solid $tabs-border-color;
+        position: relative;
+        margin-bottom: 0 !important;
+        margin-top: 0;
+
+        @include media-breakpoint-up(md) {
+          padding: $padding-padding-xs $padding-padding-xlg;
+        }
+
+        &.active {
+          background: $tabs-background-color-primary;
+          color: $tabs-color-primary;
+          overflow: hidden;
+
+          &:hover {
+            background: $tabs-background-color-secondary;
+            text-decoration: underline;
+          }
+
+          &:before {
+            content: '';
+            width: $padding-padding-xxs;
+            height: 100%;
+            background: $tabs-color-primary;
+            position: absolute;
+            left: 0;
+            top: 0;
+          }
+
+          &:hover::before {
+            content: '';
+            width: 0;
+          }
+        }
+
+        &:focus-visible {
+          box-shadow: 0 0 0 2px $tabs-color-primary;
+        }
+
+        &:focus {
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        &:hover {
+          outline: none;
+        }
+      }
+    }
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: calc(100% - 150px);
+    padding-left: rem-calc(30);
+    /*overflow: hidden;*/
+  }
+}
+
+.block-provus-tabs {
+  .horizontal-tabs {
+    display: block;
+    margin-top: unset;
+    .horizontal-tabs__menu {
+      flex-direction: column;
+      border: none;
+      @include media-breakpoint-up(md) {
+        background: $tabs-background-color-secondary;
+        border-bottom: none;
+        padding-bottom: $padding-padding-sm;
+        flex-direction: unset;
+      }
+
+      .horizontal-tabs__menu-item {
+        border: 1px solid $tabs-border-color;
+        border-radius: $padding-padding-xxs $padding-padding-xxs 0 0;
+        margin-bottom: $padding-padding-md;
+
+        @include media-breakpoint-up(md) {
+          border: 0.5px solid $tabs-border-color;
+          border-radius: $padding-padding-xxs $padding-padding-xxs 0 0;
+          margin-bottom: 0;
+        }
+
+        .nav-link, a {
+          color: $tabs-color-primary;
+          @include text-style-headline-h-5();
+          padding: $padding-padding-xs $padding-padding-lg;
+          position: relative;
+          text-align: center;
+          margin-top: 0;
+          margin-bottom: 0;
+
+          @include media-breakpoint-up(md) {
+            padding: $padding-padding-xs $padding-padding-xlg;
+            @include text-style-headline-h-5();
+            overflow: hidden;
+            position: relative;
+            text-align: start;
+            margin-top: 0;
+            margin-bottom: 0;
+          }
+
+          &:hover {
+            border-color: $tabs-border-color-hover;
+          }
+
+          &.active {
+            background: $tabs-background-color-primary;
+            color: $tabs-color-primary;
+            border: 0.5px solid $tabs-border-color;
+
+            &:before {
+              content: '';
+              width: 100%;
+              background: $tabs-color-primary;
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              height: 8px;
+              transform: rotate(0deg);
+            }
+
+            &:hover::before {
+              content: '';
+              height: 0;
+            }
+
+            &:hover {
+              background: $tabs-background-color-secondary;
+              text-decoration: underline;
+            }
+          }
+
+          &:focus {
+            text-decoration: none;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+
+          &:focus-visible {
+            box-shadow: 0 0 0 2px $tabs-color-primary;
+          }
+        }
+      }
+    }
+  }
+}
+
+.nav-tabs .nav-link {
+  border: none;
+}
+
+.tabs {
+  .tabs__nav {
+    border-radius: rem-calc(8);
+    width: 100%;
+
+    .tabs__button {
+      padding: rem-calc(20);
+      border-radius: 0;
+      background-color: transparent;
+      border: 0.0625rem solid $gray-lightest;
+      position: relative;
+      overflow: hidden;
+      color: $tabs-color-primary;
+      font-size: rem-calc(16);
+      line-height: rem-calc(19);
+      text-decoration: none;
+      font-weight: $font-weight-normal;
+
+      &.is-active {
+        background-color: $tabs-background-color-primary;
+        font-weight: $font-weight-medium;
+
+        &:hover {
+          background-color: $background-colors-background-white;
+          text-decoration: underline;
+
+          &::before {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  .tabs__content {
+    padding-left: rem-calc(30);
+    width: 100%;
+
+    .tab-item {
+      display: none;
+
+      &.is-active {
+        display: block;
+      }
+    }
+  }
+
+  &.tabs--horizontal {
+    .tabs__nav {
+      display: flex;
+      margin-bottom: rem-calc(20);
+
+      .tabs__button {
+        flex-grow: 1;
+
+        &.is-active::before {
+          content: "";
+          width: 100%;
+          height: 8px;
+          background-color: $primary-colors-primary;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+        }
+      }
+    }
+  }
+
+  &.tabs--vertical {
+    @include media-breakpoint-up(md) {
+      display: flex;
+    }
+
+    .tabs__nav {
+      flex-direction: column;
+      display: flex;
+
+      @include media-breakpoint-up(md) {
+        width: 15rem;
+      }
+
+      .tabs__button {
+        border-bottom: 0;
+
+        &:first-child {
+          border-radius: 8px 8px 0 0;
+        }
+
+        &:last-child {
+          border-radius: 0 0 8px 8px;
+          border-bottom: 0.0625rem solid $gray-lightest;
+        }
+
+        &.is-active::before {
+          content: "";
+          width: 8px;
+          height: 100%;
+          background-color: $primary-colors-primary;
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+      }
+    }
+
+    .tabs__content {
+      @include media-breakpoint-up(lg) {
+        width: calc(100% - 320px);
+      }
+    }
+  }
+}

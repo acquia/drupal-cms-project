@@ -1,0 +1,482 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.canvas_html_block
+  module:
+    - options
+    - text
+  theme:
+    - morphos
+active_version: 76c478792a19d7b0
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        icon:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: check-circle
+          expression: ℹ︎string␟value
+        message:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Alert message.</p>'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        style:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        color:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: color--info
+          expression: ℹ︎list_string␟value
+        direction:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        buttons:
+          title: Buttons
+          description: 'Add button items.'
+  48018ae748c944cc:
+    settings:
+      prop_field_definitions:
+        icon:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: check-circle
+          expression: ℹ︎string␟value
+        message:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Alert message goes here.</p>'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        style:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        color:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: color--info
+          expression: ℹ︎list_string␟value
+        direction:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        buttons:
+          title: Buttons
+          description: 'Add button items.'
+  5671717f34050d64:
+    settings:
+      prop_field_definitions:
+        icon:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: check-circle
+          expression: ℹ︎list_string␟value
+        message:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Alert message goes here.</p>'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        style:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        color:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: color--info
+          expression: ℹ︎list_string␟value
+        direction:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        buttons:
+          title: Buttons
+  fd5e09e3c767fe9c:
+    settings:
+      prop_field_definitions:
+        icon:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: check-circle
+          expression: ℹ︎list_string␟value
+        message:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Alert message goes here.</p>'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        style:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        color:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: color--info
+          expression: ℹ︎list_string␟value
+        direction:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        buttons:
+          title: Buttons
+  b4a442ede53ef946:
+    settings:
+      prop_field_definitions:
+        icon:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: check-circle
+          expression: ℹ︎list_string␟value
+        message:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Alert message goes here.</p>'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        style:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        color:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: color--info
+          expression: ℹ︎list_string␟value
+        direction:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        buttons:
+          title: Buttons
+  05277d62907632e9:
+    settings:
+      prop_field_definitions:
+        icon:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        message:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Alert message goes here.</p>'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        style:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        color:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        direction:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        buttons:
+          title: Buttons
+  bbe5be8116d0f9dd:
+    settings:
+      prop_field_definitions:
+        icon:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        message:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Alert message goes here.</p>'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        style:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        color:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        direction:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        buttons:
+          title: Buttons
+  36ec406cdb179937:
+    settings:
+      prop_field_definitions:
+        icon:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        message:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value: null
+          expression: ℹ︎text_long␟processed
+        style:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        color:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        direction:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        buttons:
+          title: Buttons
+label: Alert
+id: sdc.morphos.alert
+provider: morphos
+source: sdc
+source_local_id: 'morphos:alert'

@@ -1,0 +1,230 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 39913457-6c3d-4ac4-a660-cd443f6a02ea
+  default_langcode: en
+  depends:
+    30f90aba-4dcb-45a3-ba37-8b2bf47c1b81: file
+    f76fdd44-c626-4251-b3a9-3ff719e12d93: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Projects
+  description:
+    -
+      value: 'From restoring degraded habitat to bringing clean energy to the communities that need it most, our projects put the case for climate action into practice.'
+  components:
+    -
+      uuid: 6988fc38-af3e-4b50-84d6-6081ffd02c81
+      component_id: sdc.haven_theme.hero-billboard
+      inputs:
+        height: ribbon
+        flex_position: center-left
+        content_background: true
+        overlay_opacity: 0%
+        object_position: center
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: f76fdd44-c626-4251-b3a9-3ff719e12d93
+            target_type: media
+        overlap_navbar: true
+    -
+      parent_uuid: 6988fc38-af3e-4b50-84d6-6081ffd02c81
+      slot: hero_slot
+      uuid: 4a5701e5-69cd-4161-88a9-cd996d569828
+      component_id: sdc.haven_theme.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+    -
+      parent_uuid: 4a5701e5-69cd-4161-88a9-cd996d569828
+      slot: group_slot
+      uuid: d83b8e8b-d165-4b7d-b863-fbde8f54adb1
+      component_id: sdc.haven_theme.badge
+      inputs:
+        style: accent
+        icon_first: true
+        label: 'Our projects'
+    -
+      parent_uuid: 6988fc38-af3e-4b50-84d6-6081ffd02c81
+      slot: hero_slot
+      uuid: dda2ce4a-042c-498f-8ec3-17fdad60487f
+      component_id: sdc.haven_theme.heading
+      inputs:
+        heading_text: 'Our work in action'
+        text_size: heading-responsive-6xl
+        text_color: secondary
+        align: left
+        level: 1
+    -
+      parent_uuid: 6988fc38-af3e-4b50-84d6-6081ffd02c81
+      slot: hero_slot
+      uuid: 4c306b2e-7d46-4928-a1fb-d88b2fbe9fe4
+      component_id: sdc.haven_theme.text
+      inputs:
+        text:
+          value: '<p>From restoring degraded habitat to bringing clean energy to the communities that need it most, our projects put the case for climate action into practice.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+        columns: '1 column'
+    -
+      uuid: ff68353d-6319-479f-8dfe-0434cebfb1bc
+      component_id: sdc.haven_theme.section
+      inputs:
+        width: 100%
+        columns: '1 column'
+        mobile_columns: '1'
+        margin_block_start: '-20'
+        margin_block_end: '48'
+        padding_block_start: '32'
+        padding_block_end: '32'
+        restrict_width: true
+        section_header: false
+        section_footer: true
+        background_color: white
+        views_columns: '3 columns'
+    -
+      parent_uuid: ff68353d-6319-479f-8dfe-0434cebfb1bc
+      slot: main_slot
+      uuid: 1efb603c-ff7a-40c3-93b5-889addc6fcb6
+      component_id: block.views_block.projects-all
+      inputs:
+        label: 'Projects: All projects'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      uuid: a539cdc3-1ec2-41f8-8034-88a7f09adc78
+      component_id: sdc.haven_theme.section
+      inputs:
+        width: 100%
+        columns: '1 column'
+        mobile_columns: '1'
+        margin_block_start: '32'
+        margin_block_end: '48'
+        padding_block_start: '32'
+        padding_block_end: '32'
+        section_header: false
+        section_footer: false
+        restrict_width: false
+    -
+      parent_uuid: a539cdc3-1ec2-41f8-8034-88a7f09adc78
+      slot: main_slot
+      uuid: 075287e1-6e3a-42cc-8e33-da1f33034c5f
+      component_id: sdc.haven_theme.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: center
+        radius: sm
+        background: accent
+        padding: sm
+    -
+      parent_uuid: 075287e1-6e3a-42cc-8e33-da1f33034c5f
+      slot: group_slot
+      uuid: b369a0fb-d973-46c5-84be-cd33a6d4f3f9
+      component_id: sdc.haven_theme.grid
+      inputs:
+        width: 100%
+        columns: '2 columns 67%-33%'
+        mobile_columns: '1'
+    -
+      parent_uuid: b369a0fb-d973-46c5-84be-cd33a6d4f3f9
+      slot: main_slot
+      uuid: 72cc9b06-7924-4c0e-af46-ad70cb83f67a
+      component_id: sdc.haven_theme.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: center
+        radius: sm
+    -
+      parent_uuid: 72cc9b06-7924-4c0e-af46-ad70cb83f67a
+      slot: group_slot
+      uuid: 3d176474-00ae-4e69-8a5f-df10f662e375
+      component_id: sdc.haven_theme.heading
+      inputs:
+        heading_text: 'Join the fight against climate change'
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 72cc9b06-7924-4c0e-af46-ad70cb83f67a
+      slot: group_slot
+      uuid: 2b11b584-0e5a-42c1-9d83-94beaccdd4b5
+      component_id: sdc.haven_theme.heading
+      inputs:
+        heading_text: 'Your donation funds the campaigns, organizers, and tools that turn climate concern into climate action. Every dollar goes directly toward building a movement that wins.'
+        text_size: default
+        text_color: default
+        align: left
+    -
+      parent_uuid: b369a0fb-d973-46c5-84be-cd33a6d4f3f9
+      slot: main_slot
+      uuid: e84c8509-adcb-4d56-b9a0-9ab2b707f162
+      component_id: sdc.haven_theme.group
+      inputs:
+        flex_direction: row
+        flex_gap: md
+        items_align: start
+        flex_align: center
+    -
+      parent_uuid: e84c8509-adcb-4d56-b9a0-9ab2b707f162
+      slot: group_slot
+      uuid: 9a22aee9-9bdf-4db8-a1c9-919a968bed9f
+      component_id: sdc.haven_theme.button
+      inputs:
+        variant: primary
+        outlined: false
+        label: 'Donate now'
+        size: medium
+        icon: arrow-right
+        icon_first: false
+        disabled: false
+        mobile_width: false
+    -
+      parent_uuid: e84c8509-adcb-4d56-b9a0-9ab2b707f162
+      slot: group_slot
+      uuid: 7d9b83fd-979f-44cf-8369-09b4e1981ce3
+      component_id: sdc.haven_theme.button
+      inputs:
+        variant: primary
+        outlined: true
+        label: 'Learn more'
+        size: medium
+        icon_first: false
+        disabled: false
+        mobile_width: false
+    -
+      uuid: 2f98a848-d7d4-4f24-ba8d-15f71a3dbe3d
+      component_id: block.views_block.projects-featured
+      inputs:
+        label: 'Projects: Featured project'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+  path:
+    -
+      alias: /projects
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

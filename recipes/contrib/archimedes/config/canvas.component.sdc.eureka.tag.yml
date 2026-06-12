@@ -1,0 +1,40 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - eureka
+label: Tag
+id: sdc.eureka.tag
+source: sdc
+source_local_id: 'eureka:tag'
+provider: eureka
+active_version: d568f427a11ec9ee
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        tag_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Teaching
+          expression: ℹ︎string␟value
+        tag_type:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: primary
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions: {  }

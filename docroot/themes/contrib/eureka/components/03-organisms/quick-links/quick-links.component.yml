@@ -1,0 +1,41 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Quick links
+status: stable
+description: Quick links component
+# Overrides regular css with minified.
+libraryOverrides:
+  css:
+    component:
+      quick-links.min.css: { minified: true }
+group: Eureka main components
+props:
+  type: object
+  properties:
+    quick_links_heading:
+      type: string
+      title: Quick links heading
+      description: Heading for the quick links component
+      examples:
+        - Quick links
+    quick_links_heading_level:
+      type: ['number', 'null']
+      title: Quick links heading level
+      description: Heading level of the heading element - only change this if you know what you're doing, as it affects accessibility
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+      examples:
+        - 3
+    quick_links_summary:
+      type: ['string', 'null']
+      title: Quick links description
+      description: Description for the quick links component
+      examples:
+        - Find what you need quickly with our convenient links to essential information and services.
+slots:
+  quick_links_items_block:
+    title: Quick links items block
+    description: Block to hold quick link item components

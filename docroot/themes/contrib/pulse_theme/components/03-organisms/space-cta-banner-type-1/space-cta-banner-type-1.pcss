@@ -1,0 +1,122 @@
+@reference "../../00-base/global/global.pcss";
+
+/* CTA banner */
+
+.cta-banner {
+  .banner-cta,
+  .cta-button {
+    @apply w-full md:w-auto;
+
+    a {
+      @apply w-full md:w-auto;
+    }
+  }
+
+  &.type-1 {
+    .cta-banner-wrapper {
+      @apply relative;
+    }
+
+    .cta-banner-image {
+      @apply w-full object-cover rounded-t-[50px] min-h-[500px] max-h-[500px];
+    }
+
+    .overlay-content {
+      @apply absolute top-0 left-0 h-full w-full px-4 py-10 xl:py-20;
+
+      .content-container {
+        @apply gap-8 lg:gap-14;
+      }
+    }
+
+    .banner-content {
+      @apply lg:max-w-lg;
+    }
+
+    .headline {
+      @apply text-white;
+    }
+
+    .banner-description {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .left-align {
+      @apply grid grid-cols-1 lg:grid-cols-2 items-center h-full;
+    }
+
+    .center-align {
+      @apply flex flex-col text-center max-w-3xl mx-auto;
+
+      .banner-content {
+        @apply max-w-full;
+      }
+    }
+
+    .stacked {
+      @apply text-left flex flex-col items-start;
+    }
+
+    .banner-email-form {
+      @apply w-full md:w-auto;
+
+      .subscribe__block {
+        &--title {
+          @apply hidden;
+        }
+
+        &.subscribe__block--icon {
+          .email-icon-show {
+            .form-input {
+              @apply max-w-[22.5rem];
+            }
+          }
+        }
+      }
+
+      form {
+        @apply gap-4;
+
+        .field-label {
+          @apply hidden;
+        }
+
+        .form-input {
+          @apply py-[0.6875rem];
+
+          @media (width >= 768px) {
+            max-width: calc(360px - 16px);
+            min-width: calc(360px - 16px);
+          }
+        }
+
+        .form-actions input,
+        button {
+          @apply w-full md:w-auto py-2.5;
+        }
+      }
+    }
+  }
+
+  &.boxed-width {
+    .cta-banner-wrapper {
+      @apply lg:max-w-6xl xl:max-w-7xl mx-auto;
+    }
+  }
+
+  &.full-width {
+    .cta-banner-wrapper {
+      @apply w-full;
+    }
+  }
+
+  .subscribe__block {
+    &.subscribe__block--icon {
+      .email-icon-show {
+        .form-input {
+          @apply max-w-full;
+        }
+      }
+    }
+  }
+}

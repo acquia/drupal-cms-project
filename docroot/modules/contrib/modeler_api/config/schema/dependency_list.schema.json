@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Modeler API Dependency List",
+  "description": "A merged set of plugin dependency rules for a given model owner. Dependencies define predecessor constraints: a plugin matching a dependency key can only be used as a successor of one of its listed predecessor plugins. Glob-style wildcards are supported in both plugin ID keys and predecessor ID values.",
+  "type": "object",
+  "additionalProperties": false,
+  "propertyNames": {
+    "enum": ["start", "subprocess", "swimlane", "element", "link", "gateway", "annotation"]
+  },
+  "patternProperties": {
+    "^(start|subprocess|swimlane|element|link|gateway|annotation)$": {
+      "type": "object",
+      "description": "Dependency rules for a component type. Each key is a plugin ID pattern (glob-style wildcards supported).",
+      "additionalProperties": {
+        "type": "array",
+        "description": "A list of predecessor definitions. The plugin matching the key can only be used as a successor of one of these predecessors.",
+        "items": {
+          "type": "object",
+          "required": ["type", "id"],
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The component type name of the predecessor plugin.",
+              "enum": ["start", "subprocess", "swimlane", "element", "link", "gateway", "annotation"]
+            },
+            "id": {
+              "type": "string",
+              "description": "The plugin ID pattern of the predecessor. Glob-style wildcards (*) are supported."
+            }
+          }
+        },
+        "minItems": 1
+      }
+    }
+  }
+}

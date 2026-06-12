@@ -1,0 +1,22 @@
+{% set classes = [
+  'parallax-background',
+  'absolute',
+  'inset-0',
+  'overflow-hidden',
+  opacity ? 'opacity-' ~ opacity,
+] %}
+
+{# Only render if there is a background image #}
+{% if image.src %}
+  <div{{ attributes
+    .addClass(classes)
+    .setAttribute('data-parallax-background', true)
+    .setAttribute('data-parallax-speed', speed|default(150))
+    .setAttribute('data-background-media-query', media_query ? media_query : null) }}>
+    <img
+      class="jarallax-img"
+      src="{{ image.src }}"
+      alt="{{ image.alt|default('') }}"
+      loading="lazy">
+  </div>
+{% endif %}

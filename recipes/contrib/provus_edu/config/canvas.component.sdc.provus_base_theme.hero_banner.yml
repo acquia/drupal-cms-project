@@ -1,0 +1,264 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.image.field_media_image
+    - field.field.media.svg_image.field_media_svg_image
+    - filter.format.canvas_full_html
+    - filter.format.canvas_html_block
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - media.type.svg_image
+  module:
+    - file
+    - media
+    - media_library
+    - options
+    - text
+  theme:
+    - provus_base_theme
+label: 'Hero Banner'
+id: sdc.provus_base_theme.hero_banner
+source: sdc
+source_local_id: 'provus_base_theme:hero_banner'
+provider: provus_base_theme
+active_version: 5def019b7d062dab
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        subtitle:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Get Started'
+          expression: ℹ︎string␟value
+        title:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Welcome to Our Site'
+          expression: ℹ︎string␟value
+        body:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textarea
+          default_value:
+            -
+              value: |
+                <p>We provide exceptional services tailored to your needs.</p>
+                <p>Get started today!</p>
+              format: canvas_full_html
+          expression: ℹ︎text_long␟processed
+        image_url:
+          required: true
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+        is_short_banner:
+          required: true
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: false
+          expression: ℹ︎boolean␟value
+        image_position:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: full
+          expression: ℹ︎list_string␟value
+        background_color:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: primary
+          expression: ℹ︎list_string␟value
+        text_container_width:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: col-lg-6
+          expression: ℹ︎list_string␟value
+        text_alignment:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: left
+          expression: ℹ︎list_string␟value
+        content_attributes:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        hero_banner_buttons:
+          title: Buttons
+          description: 'Buttons components placed inside the Hero Banner container'
+  f2f5cf9029b1168d:
+    settings:
+      prop_field_definitions:
+        subtitle:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Get Started'
+          expression: ℹ︎string␟value
+        title:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Welcome to Our Site'
+          expression: ℹ︎string␟value
+        body:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: |
+                <p>We provide exceptional services tailored to your needs.</p>
+                <p>Get started today!</p>
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        image_url:
+          required: true
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+        is_short_banner:
+          required: true
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: false
+          expression: ℹ︎boolean␟value
+        image_position:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: full
+          expression: ℹ︎list_string␟value
+        background_color:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: primary
+          expression: ℹ︎list_string␟value
+        text_container_width:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: col-lg-6
+          expression: ℹ︎list_string␟value
+        text_alignment:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: left
+          expression: ℹ︎list_string␟value
+        content_attributes:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        hero_banner_buttons:
+          title: Buttons
+          description: 'Buttons components placed inside the Hero Banner container'

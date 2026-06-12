@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: b032b1f3-9446-428c-b806-bc78ec395cdb
+  bundle: main
+  default_langcode: en
+  depends:
+    e57e6515-049a-4cf6-8690-78124cb18ed1: menu_link_content
+    559287ee-9426-45dd-94f0-abe8fac4d8fa: canvas_page
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Emergency Information'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      title: ''
+      options: {  }
+      target_uuid: 559287ee-9426-45dd-94f0-abe8fac4d8fa
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -48
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:e57e6515-049a-4cf6-8690-78124cb18ed1'
+  revision_translation_affected:
+    -
+      value: true

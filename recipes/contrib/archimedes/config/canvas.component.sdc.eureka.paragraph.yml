@@ -1,0 +1,50 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - eureka
+label: Paragraph
+id: sdc.eureka.paragraph
+source: sdc
+source_local_id: 'eureka:paragraph'
+provider: eureka
+active_version: 718cff548cabddb0
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        paragraph_content:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin imperdiet sapien ac nunc gravida malesuada.'
+          expression: ℹ︎string␟value
+        paragraph_size:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: default
+          expression: ℹ︎list_string␟value
+        paragraph_icon:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: false
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions: {  }

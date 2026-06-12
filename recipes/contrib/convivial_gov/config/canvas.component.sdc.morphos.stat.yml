@@ -1,0 +1,274 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - morphos
+active_version: 545e7231c7ec0b85
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Revenue
+          expression: ℹ︎string␟value
+        prefix:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: $
+          expression: ℹ︎string␟value
+        value:
+          required: false
+          field_type: float
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 100.0
+          expression: ℹ︎float␟value
+        suffix:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: m
+          expression: ℹ︎string␟value
+        size:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        desc:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '21% increase'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        figure:
+          title: Figure
+          description: 'Add image item.'
+        actions:
+          title: Actions
+          description: 'Add button items.'
+  545e7231c7ec0b85:
+    settings:
+      prop_field_definitions:
+        title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Total page views'
+          expression: ℹ︎string␟value
+        prefix:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: $
+          expression: ℹ︎string␟value
+        value:
+          required: false
+          field_type: float
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 89400.0
+          expression: ℹ︎float␟value
+        suffix:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '%'
+          expression: ℹ︎string␟value
+        size:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: stat--md
+          expression: ℹ︎list_string␟value
+        desc:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '21% more than last month'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        figure:
+          title: Figure
+        actions:
+          title: Actions
+  abec14f57f64a6e6:
+    settings:
+      prop_field_definitions:
+        title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Total page views'
+          expression: ℹ︎string␟value
+        value:
+          required: true
+          field_type: float
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 89400.0
+          expression: ℹ︎float␟value
+        prefix:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: $
+          expression: ℹ︎string␟value
+        suffix:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '%'
+          expression: ℹ︎string␟value
+        size:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: stat--md
+          expression: ℹ︎list_string␟value
+        desc:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '21% more than last month'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        figure:
+          title: Figure
+        actions:
+          title: Actions
+  bc8a51ce65c35d27:
+    settings:
+      prop_field_definitions:
+        title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Total page views'
+          expression: ℹ︎string␟value
+        value:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '89,400'
+          expression: ℹ︎string␟value
+        size:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: stat--md
+          expression: ℹ︎list_string␟value
+        desc:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '21% more than last month'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        figure:
+          title: Figure
+        actions:
+          title: Actions
+label: Stat
+id: sdc.morphos.stat
+provider: morphos
+source: sdc
+source_local_id: 'morphos:stat'

@@ -1,0 +1,31 @@
+ui_suite.index:
+  path: "/admin/appearance/ui"
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: "UI libraries"
+  requirements:
+    _permission: "access patterns page+access components page+access_ui_styles_library+access_ui_examples_library+access ui icons library"
+
+ui_icons_library.index:
+  path: '/admin/appearance/ui/icons'
+  defaults:
+    _controller: 'Drupal\ui_icons_library\Controller\LibraryIndex::index'
+    _title: 'Icons packs'
+  requirements:
+    _permission: 'access ui icons library'
+
+ui_icons_library.mode:
+  path: '/admin/icons/{mode}'
+  defaults:
+    _controller: 'Drupal\ui_icons_library\Controller\LibraryIndex::modeLibrary'
+    mode: 'off'
+  requirements:
+    _permission: 'access ui icons library'
+
+ui_icons_library.pack:
+  path: '/admin/appearance/ui/icons/{pack_id}'
+  defaults:
+    _form: 'Drupal\ui_icons_library\Form\LibrarySearchForm'
+    _title_callback: 'Drupal\ui_icons_library\Controller\LibraryIndex::getTitle'
+  requirements:
+    _permission: 'access ui icons library'

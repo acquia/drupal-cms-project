@@ -1,0 +1,76 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+
+name: Space Stats KPI
+
+status: stable
+
+group: Molecules
+
+props:
+
+  type: object
+
+  required:
+    - keynumber
+    - subheading
+
+  properties:
+    keynumber:
+      type: integer
+      title: Key number
+      description: Key number
+      default: 400
+      examples:
+        - 400
+
+    subheading:
+      type: string
+      title: Sub headline
+      description: Sub headline
+      examples:
+        - 'Projects completed'
+
+    description:
+      type: string
+      title: Description
+      contentMediaType: text/html
+      x-formatting-context: block
+      description: Content
+      examples:
+        - 'We have helped build over 400 projects and have worked with some amazing companies.'
+
+    alignment:
+      type: string
+      title: Alignment
+      description: Alignment
+      enum:
+        - left
+        - center
+      default: left
+      examples:
+        - 'left'
+
+    extra_classes:
+      type: string
+      title: Class names (multiple class names separated by space). Only applied when custom style enabled.
+      description: Class names (multiple class names separated by space). Only applied when custom style enabled.
+
+slots:
+  link:
+    title: Link
+    description: An optional slot at the bottom of the card.
+
+thirdPartySettings:
+  sdcStorybook:
+    stories:
+      preview:
+        slots:
+          link:
+            - type: component
+              component: 'pulse_theme:space-button'
+              props:
+                url: '#'
+                text: 'Learn more'
+                button_type: 'only_text'
+                variant: 'link'
+                size: 'large'

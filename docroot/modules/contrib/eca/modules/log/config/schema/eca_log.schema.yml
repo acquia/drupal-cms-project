@@ -1,0 +1,30 @@
+eca.event.plugin.log:log_message:
+  type: eca.event.plugin
+  label: 'Log Message'
+  mapping:
+    channel:
+      type: string
+      label: 'Type'
+    min_severity:
+      type: integer
+      label: 'Minimum severity'
+      constraints:
+        # @see \Drupal\Core\Logger::getLevels()
+        Choice: [0, 1, 2, 3, 4, 5, 6, 7]
+
+action.configuration.eca_write_log_message:
+  type: mapping
+  label: 'Configuration for the "Write Log Message" action'
+  mapping:
+    channel:
+      type: string
+      label: 'Type'
+    severity:
+      type: integer
+      label: 'Severity'
+      constraints:
+        # @see \Drupal\Core\Logger::getLevels()
+        Choice: [0, 1, 2, 3, 4, 5, 6, 7]
+    message:
+      type: text
+      label: 'Message'

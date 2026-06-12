@@ -1,0 +1,110 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - custom_field
+    - node
+    - views
+id: node.field_test_unlimited
+field_name: field_test_unlimited
+entity_type: node
+type: custom
+settings:
+  columns:
+    string:
+      allowed_values: {  }
+      name: string
+      type: string
+      length: 255
+    string_long:
+      name: string_long
+      type: string_long
+    integer:
+      allowed_values: {  }
+      name: integer
+      type: integer
+      unsigned: false
+      size: normal
+    decimal:
+      name: decimal
+      type: decimal
+      unsigned: false
+      precision: 10
+      scale: 2
+    float:
+      allowed_values: {  }
+      name: float
+      type: float
+      unsigned: false
+      size: normal
+    email:
+      name: email
+      type: email
+    telephone:
+      allowed_values: {  }
+      name: telephone
+      type: telephone
+      length: 256
+    uri:
+      name: uri
+      type: uri
+    boolean:
+      name: boolean
+      type: boolean
+    uuid:
+      name: uuid
+      type: uuid
+    color:
+      name: color
+      type: color
+    map:
+      name: map
+      type: map
+    map_string:
+      name: map_string
+      type: map_string
+    datetime:
+      name: datetime
+      type: datetime
+      datetime_type: datetime
+    daterange:
+      name: daterange
+      type: daterange
+      datetime_type: datetime
+    entity_reference:
+      name: entity_reference
+      type: entity_reference
+      target_type: node
+    file:
+      name: file
+      type: file
+      target_type: file
+      uri_scheme: public
+    image:
+      name: image
+      type: image
+      target_type: file
+      uri_scheme: public
+    link:
+      name: link
+      type: link
+    time:
+      name: time
+      type: time
+    time_range:
+      name: time_range
+      type: time_range
+    viewfield:
+      name: viewfield
+      type: viewfield
+      target_type: view
+    duration:
+      name: duration
+      type: duration
+module: custom_field
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

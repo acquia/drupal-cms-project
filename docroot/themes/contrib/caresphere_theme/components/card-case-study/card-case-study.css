@@ -1,0 +1,179 @@
+/**
+ * @file card-case-study.css
+ * Case study / testimonial card — Figma Drupal Community NGO Theme
+ * Desktop node 1:9573, Mobile node 1:9326
+ */
+
+.card-case-study {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+  min-height: fit-content;
+  padding: 24px;
+  background-color: var(--background, #020704);
+  border: 1px solid var(--border-secondary, rgba(255, 255, 255, 0.2));
+  border-radius: var(--radius, 8px);
+  font-family: var(--font-sans);
+  color: var(--foreground);
+}
+
+.card-case-study__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  width: 100%;
+}
+
+.card-case-study__logo {
+  height: 48px;
+  overflow: hidden;
+  flex-shrink: 0;
+  width: 120px;
+}
+
+.card-case-study__logo-img {
+  display: block;
+  max-width: none;
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.card-case-study__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+}
+
+.card-case-study__quote {
+  margin: 0;
+  font-weight: var(--font-weight-normal, 400);
+  font-size: var(--text-base, 16px);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  width: 100%;
+}
+
+.card-case-study__author {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+}
+
+.card-case-study__avatar {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  border-radius: 50%;
+  position: relative;
+}
+
+.card-case-study__avatar-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-case-study__author-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.5;
+  font-size: var(--text-base, 16px);
+  width: 100%;
+}
+
+.card-case-study__author-name {
+  margin: 0;
+  font-weight: var(--font-weight-semibold, 600);
+  width: 100%;
+}
+
+.card-case-study__author-position {
+  margin: 0;
+  font-weight: var(--font-weight-normal, 400);
+  width: 100%;
+}
+
+.card-case-study__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+
+.card-case-study__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: var(--font-weight-medium, 500);
+  font-size: var(--text-base, 16px);
+  line-height: 1.5;
+  color: var(--foreground);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+a.card-case-study__cta:hover {
+  text-decoration: underline;
+}
+
+.card-case-study__cta-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-case-study__cta-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Desktop: 1:9573 — larger padding, content gap 48px, quote 18px, author row */
+@media (min-width: 48rem) {
+  .card-case-study {
+    padding: 32px;
+    gap: 32px;
+  }
+
+  .card-case-study__content {
+    gap: 48px;
+  }
+
+  .card-case-study__body {
+    gap: 24px;
+  }
+
+  .card-case-study__quote {
+    font-size: var(--text-lg, 18px);
+  }
+
+  .card-case-study__author {
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .card-case-study__author-info {
+    flex: 1 0 0;
+    min-width: 0;
+  }
+}

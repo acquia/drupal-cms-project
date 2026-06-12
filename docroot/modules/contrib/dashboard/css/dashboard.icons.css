@@ -1,0 +1,15 @@
+/**
+ * @file
+ * Dashboard toolbar icon styling.
+ */
+
+.toolbar .toolbar-bar .toolbar-icon.toolbar-icon-system-dashboard::before,
+.toolbar-tray .toolbar-icon-system-dashboard::before {
+  --icon: url("../icons/dashboard.svg");
+
+  mask-image: var(--icon);
+  mask-size: contain;
+  background-color: currentColor;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}

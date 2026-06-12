@@ -1,0 +1,36 @@
+/* Drag handle styles */
+.sortable-drag-handle {
+  flex-shrink: 0;
+  cursor: grab;
+}
+
+.sortable-drag-handle.disabled {
+  cursor: default;
+}
+
+.sortable-drag-handle svg {
+  opacity: 1;
+}
+
+.sortable-drag-handle.disabled svg {
+  opacity: 0.3;
+}
+
+/* Trash icon button styles */
+button.trash-icon-button {
+  color: #e5484d;
+  background-color: #feebec;
+}
+
+button.trash-icon-button.disabled {
+  color: #00083046;
+  background-color: #00005506;
+}
+
+button.trash-icon-button:not(.disabled):hover {
+  background-color: #ffdbdc;
+}
+
+button.trash-icon-button:not(.disabled):active {
+  background-color: #ffcdce;
+}

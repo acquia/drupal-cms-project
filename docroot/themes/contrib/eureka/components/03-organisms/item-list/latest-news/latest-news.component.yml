@@ -1,0 +1,36 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Latest news
+status: stable
+description: Latest news component
+group: Eureka main components
+props:
+  type: object
+  properties:
+    latest_news_heading:
+      type: string
+      title: Latest news heading
+      description: Heading for the latest news component
+      examples:
+        - Latest news
+    latest_news_heading_level:
+      type: ['number', 'null']
+      title: Latest news heading level
+      description: Heading level of the heading element - only change this if you know what you're doing, as it affects accessibility
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+      examples:
+        - 3
+    latest_news_summary:
+      type: ['string', 'null']
+      title: Latest news description
+      description: Description for the latest news component
+      examples:
+        - Find what you need quickly with our convenient links to essential information and services.
+slots:
+  latest_news_items:
+    title: Latest news items block
+    description: Block to hold List(Views) News Latest news

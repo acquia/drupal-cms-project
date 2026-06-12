@@ -1,0 +1,150 @@
+/**
+ * Carousel component styles
+ * Theme-aware Swiper.js carousel with accessible navigation
+ */
+
+/* Carousel container */
+.carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 3rem;
+  /* Use foreground color for all Swiper controls - adapts to light/dark mode */
+  --swiper-navigation-color: var(--foreground);
+  --swiper-pagination-color: var(--foreground);
+}
+
+/* Swiper wrapper and slides - handled by Swiper */
+.swiper-wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+/* Ensure slide content doesn't overflow */
+.carousel .swiper-slide {
+  overflow: hidden;
+}
+
+/* ========================================
+   Navigation Buttons (Theme-Aware)
+   ======================================== */
+
+.carousel-button-prev,
+.carousel-button-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  background: transparent;
+}
+
+
+.carousel-button-prev:hover,
+.carousel-button-next:hover {
+  opacity: 0.7;
+}
+
+/* Position buttons */
+.carousel-button-prev {
+  left: 1rem;
+}
+
+.carousel-button-next {
+  right: 1rem;
+}
+
+/* Disabled state */
+.carousel-button-prev:disabled,
+.carousel-button-next:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Focus states for accessibility */
+.carousel-button-prev:focus-visible,
+.carousel-button-next:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* ========================================
+   Pagination (Theme-Aware)
+   ======================================== */
+
+.carousel .carousel-pagination {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 0;
+  margin-top: 1.5rem;
+}
+
+.swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid;
+  opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+}
+
+/* Focus state for pagination bullets */
+.swiper-pagination-bullet:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+
+@media (max-width: 768px) {
+  .carousel-button-prev,
+  .carousel-button-next {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .carousel-button-prev {
+    left: 0.5rem;
+  }
+
+  .carousel-button-next {
+    right: 0.5rem;
+  }
+}
+
+/* ========================================
+   Canvas Editor Support
+   ======================================== */
+
+.carousel--canvas {
+  /* Show all slides stacked in Canvas editor */
+  overflow: visible;
+}
+
+.carousel--canvas .swiper-wrapper {
+  display: block;
+}
+
+.carousel--canvas .carousel-button-prev,
+.carousel--canvas .carousel-button-next,
+.carousel--canvas .carousel-pagination {
+  display: none;
+}

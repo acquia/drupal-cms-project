@@ -1,0 +1,45 @@
+ui_icons.autocomplete:
+  version: VERSION
+  js:
+    js/icon.autocomplete.js: {}
+  css:
+    component:
+      css/icon.autocomplete.css: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/once
+    - core/drupal.autocomplete
+
+ui_icons.gin_autocomplete:
+  version: VERSION
+  css:
+    component:
+      css/gin.icon.autocomplete.css: { }
+  dependencies:
+    - ui_icons/ui_icons.autocomplete
+
+ui_icons.daisyui_autocomplete:
+  version: VERSION
+  css:
+    component:
+      css/daisyui.icon.autocomplete.css: { }
+  dependencies:
+    - ui_icons/ui_icons.autocomplete
+
+ui_icons.dsfr_autocomplete:
+  version: VERSION
+  css:
+    component:
+      css/dsfr.icon.autocomplete.css: { }
+  dependencies:
+    - ui_icons/ui_icons.autocomplete
+
+ui_icons.preview:
+  version: VERSION
+  js:
+    js/icon.preview.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/once

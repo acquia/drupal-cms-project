@@ -1,0 +1,480 @@
+eca.event.eca_render_base:
+  type: eca.event.plugin
+  label: 'Entity'
+  mapping:
+    entity_type_id:
+      type: string
+      label: 'Restrict by entity type ID'
+    bundle:
+      type: string
+      label: 'Restrict by entity bundle'
+
+eca.event.plugin.eca_render:block:
+  type: eca.event.plugin
+  label: 'Block'
+  mapping:
+    block_name:
+      type: string
+      label: 'Block name'
+      constraints:
+        NotBlank: []
+    block_machine_name:
+      type: string
+      label: 'block_machine_name'
+
+eca.event.plugin.eca_render:contextual_links:
+  type: eca.event.eca_render_base
+  label: 'Contextual Links'
+  mapping:
+    group:
+      type: string
+      label: 'Restrict by link group'
+
+eca.event.plugin.eca_render:breakpoints_alter:
+  type: eca.event.plugin
+  label: 'Alter breakpoint definitions'
+
+eca.event.plugin.eca_render:alter_link:
+  type: eca.event.plugin
+  label: 'Alter Link'
+
+eca.event.plugin.eca_render:entity:
+  type: eca.event.eca_render_base
+  label: 'Entity'
+
+eca.event.plugin.eca_render:entity_operations:
+  type: eca.event.eca_render_base
+  label: 'Entity Operations'
+
+eca.event.plugin.eca_render:extra_field:
+  type: eca.event.eca_render_base
+  label: 'Extra Field'
+  mapping:
+    extra_field_name:
+      type: string
+      label: 'Machine name of the extra field'
+      constraints:
+        NotBlank: []
+    extra_field_label:
+      type: string
+      label: 'Label of the extra field'
+      constraints:
+        NotBlank: []
+    extra_field_description:
+      type: text
+      label: 'Description'
+    display_type:
+      type: string
+      label: 'Display type'
+      constraints:
+        Choice:
+          - display
+          - form
+        NotBlank: []
+    weight:
+      type: weight
+      label: 'Weight'
+    visible:
+      type: boolean
+      label: 'Default visible'
+
+eca.event.plugin.eca_render:views_field:
+  type: eca.event.plugin
+  label: 'Views Field'
+  mapping:
+    name:
+      type: string
+      label: 'Field name'
+      constraints:
+        NotBlank: []
+
+eca.event.plugin.eca_render:lazy_element:
+  type: eca.event.plugin
+  label: 'Lazy Element'
+  mapping:
+    name:
+      type: string
+      label: 'Element name'
+      constraints:
+        NotBlank: []
+    argument:
+      type: string
+      label: 'argument'
+
+eca.event.plugin.eca_render:local_tasks:
+  type:  mapping
+  label: 'Local Tasks'
+
+eca_render.action_base:
+  type: mapping
+  label: 'Render action base config'
+  mapping:
+    name:
+      type: machine_name
+      label: 'Machine name'
+    token_name:
+      type: label
+      label: 'Token name'
+    weight:
+      type: weight
+      label: 'Weight'
+    mode:
+      type: string
+      label: 'Mode'
+      constraints:
+        Choice:
+          - 'set:clear'
+          - 'set:clear:defined'
+          - 'merge'
+          - 'prepend'
+          - 'append'
+          - 'nothing'
+
+action.configuration.eca_get_active_theme:
+  type: mapping
+  label: 'Configuration for the "Get Active Theme" action'
+  mapping:
+    token_name:
+      type: required_label
+      label: 'Token name'
+
+action.configuration.eca_render_details:
+  type: eca_render.action_base
+  label: 'Configuration for the "Render Details" action'
+  mapping:
+    title:
+      type: string
+      label: 'Title'
+      constraints:
+        NotBlank: []
+    open:
+      type: boolean
+      label: 'Open'
+    introduction_text:
+      type: text
+      label: 'Introduction text'
+    summary_value:
+      type: text
+      label: 'Summary value'
+
+action.configuration.eca_render_twig:
+  type: eca_render.action_base
+  label: 'Configuration for the "Render Twig" action'
+  mapping:
+    template:
+      type: text
+      label: 'Template'
+      constraints:
+        NotBlank: []
+    value:
+      type: text
+      label: 'Context values'
+    use_yaml:
+      type: boolean
+      label: 'Interpret above value as YAML format'
+    validate_yaml:
+      type: boolean
+      label: 'Validate YAML to prevent this from being executed when invalid'
+
+action.configuration.eca_render_views:views:
+  type: eca_render.action_base
+  label: 'Configuration for the "Render Views" action'
+  mapping:
+    view_id:
+      type: string
+      label: 'View'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca_render\Plugin\Action\Views::getAllValidViews'
+        NotBlank: []
+    display_id:
+      type: string
+      label: 'Display'
+    arguments:
+      type: text
+      label: 'Arguments'
+
+action.configuration.eca_render_add_class:
+  type: mapping
+  label: 'Configuration for the "Render Add Class" action'
+  mapping:
+    name:
+      type: string
+      label: 'Machine name'
+      constraints:
+        NotBlank: []
+    class:
+      type: string
+      label: 'Class name'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_render_add_attached_library:
+  type: mapping
+  label: 'Configuration for the "Render Add Attached Library" action'
+  mapping:
+    name:
+      type: string
+      label: 'Machine name'
+      constraints:
+        NotBlank: []
+    value:
+      type: string
+      label: 'Library ID'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_render_add_attached_setting:
+  type: mapping
+  label: 'Configuration for the "Render Add Attached Setting" action'
+  mapping:
+    name:
+      type: string
+      label: 'Machine name'
+      constraints:
+        NotBlank: []
+    collection:
+      type: string
+      label: 'Collection name'
+      constraints:
+        NotBlank: []
+    key:
+      type: string
+      label: 'Setting key'
+      constraints:
+        NotBlank: []
+    value:
+      type: string
+      label: 'Setting value'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_render_build:
+  type: eca_render.action_base
+  label: 'Configuration for the "Render Build" action'
+  mapping:
+    value:
+      type: text
+      label: 'Value'
+    use_yaml:
+      type: boolean
+      label: 'Interpret above value as YAML format'
+    validate_yaml:
+      type: boolean
+      label: 'Validate YAML to prevent this from being executed when invalid'
+
+action.configuration.eca_render_cacheability:
+  type: mapping
+  label: 'Configuration for the "Render Cacheability" action'
+  mapping:
+    cache_type:
+      type: string
+      label: 'Type'
+      constraints:
+        Choice:
+          - 'tags'
+          - 'contexts'
+          - 'max-age'
+        NotBlank: []
+    cache_value:
+      type: string
+      label: 'Value'
+
+action.configuration.eca_render_custom_form:
+  type: eca_render.action_base
+  label: 'Configuration for the "Render Custom Form" action'
+  mapping:
+    custom_form_id:
+      type: string
+      label: 'Custom form ID'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_render_dropbutton:
+  type: eca_render.action_base
+  label: 'Configuration for the "Render Dropbutton" action'
+  mapping:
+    dropbutton_type:
+      type: string
+      label: 'Dropbutton type'
+    links:
+      type: text
+      label: 'Links'
+    use_yaml:
+      type: boolean
+      label: 'Interpret above specified links as YAML format'
+    validate_yaml:
+      type: boolean
+      label: 'Validate YAML to prevent this from being executed when invalid'
+
+action.configuration.eca_render_entity_form:
+  type: eca_render.action_base
+  label: 'Configuration for the "Render Entity Form" action'
+  mapping:
+    operation:
+      type: string
+      label: 'Operation'
+      constraints:
+        NotBlank: []
+    object:
+      type: string
+      label: 'Token name holding the entity'
+
+action.configuration.eca_render_entity_view:
+  type: eca_render.action_base
+  label: 'Configuration for the "Render Entity View" action'
+  mapping:
+    view_mode:
+      type: string
+      label: 'View mode'
+      constraints:
+        NotBlank: []
+    object:
+      type: string
+      label: 'Token name holding the entity'
+
+action.configuration.eca_render_entity_view_field:
+  type: eca_render.action_base
+  label: 'Configuration for the "Render Entity View Field" action'
+  mapping:
+    field_name:
+      type: string
+      label: 'Field name'
+      constraints:
+        NotBlank: []
+    view_mode:
+      type: string
+      label: 'View mode'
+    display_options:
+      type: text
+      label: 'Display options'
+    object:
+      type: string
+      label: 'Token name holding the entity'
+
+action.configuration.eca_set_active_theme:
+  type: mapping
+  label: 'Configuration for the "Set Active Theme" action'
+  mapping:
+    theme_name:
+      type: string
+      label: 'Theme name'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_render_serialize:serialization:
+  type: eca_render.action_base
+  label: 'Render: unserialize'
+  mapping:
+    value:
+      type: text
+      label: 'Value'
+    # @todo Add constraints.
+    format:
+      type: string
+      label: 'Format'
+    use_yaml:
+      type: boolean
+      label: 'Interpret above value as YAML format'
+    validate_yaml:
+      type: boolean
+      label: 'Validate YAML to prevent this from being executed when invalid'
+
+action.configuration.eca_render_unserialize:serialization:
+  type: eca_render.action_base
+  label: 'Render: unserialize'
+  mapping:
+    value:
+      type: text
+      label: 'Value'
+    # @todo Add constraints.
+    format:
+      type: string
+      label: 'Format'
+    # @todo Add constraints.
+    type:
+      type: string
+      label: 'Type'
+
+action.configuration.eca_render_alter_link_add_attribute:
+  type: eca_render.action_base
+  label: 'Render: alter link, add attribute'
+  mapping:
+    key:
+      type: string
+      label: 'Key'
+    value:
+      type: string
+      label: 'Value'
+    reset:
+      type: boolean
+      label: 'Reset'
+action.configuration.eca_render_alter_link_add_class:
+  type: eca_render.action_base
+  label: 'Render: alter link, add class'
+  mapping:
+    class:
+      type: string
+      label: 'Class'
+    reset:
+      type: boolean
+      label: 'Reset'
+action.configuration.eca_render_alter_link_add_query_argument:
+  type: eca_render.action_base
+  label: 'Render: alter link, add query argument'
+  mapping:
+    key:
+      type: string
+      label: 'Key'
+    value:
+      type: string
+      label: 'Value'
+    reset:
+      type: boolean
+      label: 'Reset'
+action.configuration.eca_render_alter_link_set_absolute:
+  type: eca_render.action_base
+  label: 'Render: alter link, set absolute'
+  mapping:
+    absolute:
+      type: boolean
+      label: 'Absolute'
+action.configuration.eca_render_alter_link_set_language:
+  type: eca_render.action_base
+  label: 'Render: alter link, set language'
+  mapping:
+    langcode:
+      type: string
+      label: 'Language'
+action.configuration.eca_render_alter_link_set_text:
+  type: eca_render.action_base
+  label: 'Render: alter link, set visible text'
+  mapping:
+    text:
+      type: label
+      label: 'Text'
+action.configuration.eca_render_alter_link_set_title:
+  type: eca_render.action_base
+  label: 'Render: alter link, set title'
+  mapping:
+    title:
+      type: label
+      label: 'title'
+action.configuration.eca_render_alter_link_url:
+  type: eca_render.action_base
+  label: 'Render: alter link, set url'
+  mapping:
+    url:
+      type: string
+      label: 'Url'
+
+action.configuration.eca_render_alter_breakpoint:
+  type: mapping
+  label: 'Render: alter breakpoint'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    definition:
+      type: text
+      label: 'Definition'

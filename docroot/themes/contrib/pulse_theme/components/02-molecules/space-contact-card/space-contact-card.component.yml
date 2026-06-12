@@ -1,0 +1,74 @@
+"$schema": https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+
+name: Space Contact Card
+
+description: Email contact card component with heading, button, and description text
+
+status: stable
+
+group: Molecules
+
+props:
+
+  type: object
+
+  properties:
+    heading:
+      type: string
+      title: Card Heading
+      description: Main heading text for the contact card
+      examples:
+        - "Email us"
+    
+    email:
+      type: string
+      title: Email Address
+      description: Email address to display and link to
+      examples:
+        - "business@qed42.com"
+
+    phone:
+      type: string
+      title: Phone Number
+      description: Phone number to display
+
+    help_faq_link:
+      type: string
+      title: Help FAQ Link
+      description: Link to help FAQ page
+    
+    description:
+      type: string
+      title: Description
+      contentMediaType: text/html
+      x-formatting-context: block
+      description: Supporting text explaining the contact method
+      examples:
+        - "For general queries and guidance"
+
+    icon_align:
+      type: string
+      title: Icon alignment
+      enum:
+        - left
+        - right
+      default: left
+      examples:
+        - "left"
+
+    alignment:
+      type: string
+      title: Alignment
+      description: Alignment of the contact card content
+      enum:
+        - left
+        - right
+        - center
+      default: left
+      examples:
+        - "left"
+    
+    modifier_class:
+      type: string
+      title: Modifier Class
+      description: Additional CSS classes for customization

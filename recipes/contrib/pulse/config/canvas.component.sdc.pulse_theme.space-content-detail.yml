@@ -1,0 +1,388 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.canvas_html_block
+  module:
+    - text
+  theme:
+    - pulse_theme
+label: 'Space Content Details'
+id: sdc.pulse_theme.space-content-detail
+source: sdc
+source_local_id: 'pulse_theme:space-content-detail'
+provider: pulse_theme
+active_version: 887db74e59ad4dd9
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        text:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique pretium pellentesque semper enim aliquam.</p>'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        date:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '20 Jan 2026'
+          expression: ℹ︎string␟value
+        tag_label1:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Category
+          expression: ℹ︎string␟value
+        tag_data1:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Pain & Inflammation'
+          expression: ℹ︎string␟value
+        tag_label2:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Prescription Required'
+          expression: ℹ︎string␟value
+        tag_data2:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'No'
+          expression: ℹ︎string␟value
+        tag_label3:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Typical Forms'
+          expression: ℹ︎string␟value
+        tag_data3:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Capsules
+          expression: ℹ︎string␟value
+        conclusion:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique pretium pellentesque semper enim aliquam.</p>'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        content_overlap:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        content:
+          title: Content
+          description: 'Add the **User Card** component into this slot.'
+        image:
+          title: Image
+          description: 'Add the **Image** component into this slot.'
+  5547a1dd69a13784:
+    settings:
+      prop_field_definitions:
+        text:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique pretium pellentesque semper enim aliquam.</p>'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        date:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '20 Jan 2026'
+          expression: ℹ︎string␟value
+        category:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Pain & Inflammation'
+          expression: ℹ︎string␟value
+        prescription_required:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'no'
+          expression: ℹ︎string␟value
+        typical_forms:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Capsules
+          expression: ℹ︎string␟value
+        conclusion:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique pretium pellentesque semper enim aliquam.</p>'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        content_overlap:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        content:
+          title: Content
+          description: 'Add the **User Card** component into this slot.'
+        image:
+          title: Image
+          description: 'Add the **Image** component into this slot.'
+  64a8e04807bc2865:
+    settings:
+      prop_field_definitions:
+        text:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique pretium pellentesque semper enim aliquam.</p>'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        date:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 1770856866
+          expression: ℹ︎integer␟value
+        category:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Pain & Inflammation'
+          expression: ℹ︎string␟value
+        prescription_required:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'no'
+          expression: ℹ︎string␟value
+        typical_forms:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Capsules
+          expression: ℹ︎string␟value
+        conclusion:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique pretium pellentesque semper enim aliquam.</p>'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        content_overlap:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        content:
+          title: Content
+          description: 'Add the **User Card** component into this slot.'
+        image:
+          title: Image
+          description: 'Add the **Image** component into this slot.'
+  0b1ebbf07bcd203b:
+    settings:
+      prop_field_definitions:
+        text:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique pretium pellentesque semper enim aliquam.</p>'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        date:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 1770856866
+          expression: ℹ︎integer␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  26e08336d0864221:
+    settings:
+      prop_field_definitions:
+        text:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique pretium pellentesque semper enim aliquam.</p>'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+    fallback_metadata:
+      slot_definitions: {  }
+  39f6de6561f7114e:
+    settings:
+      prop_field_definitions:
+        date:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '20 Jan 2026'
+          expression: ℹ︎string␟value
+        text:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '<h2>What Are Medicines Used For?</h2><p>Medicines are designed...</p>'
+          expression: ℹ︎string␟value
+        conclusion:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Medicines are most effective when used responsibly...'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }

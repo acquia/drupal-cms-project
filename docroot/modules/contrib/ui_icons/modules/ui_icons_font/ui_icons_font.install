@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the ui_icons_font module.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_requirements().
+ */
+function ui_icons_font_requirements(string $phase): array {
+  if ($phase != 'runtime') {
+    return [];
+  }
+
+  $requirements = [];
+  $library_exists = class_exists('\FontLib\Font');
+  $requirements['ui_icons_font'] = [
+    'title' => t('UI Icons Font'),
+    'value' => $library_exists ? t('Font library detected') : t('Missing Font library!'),
+    'description' => $library_exists ? '' : t('Install with: composer require dompdf/php-font-lib'),
+    'severity' => $library_exists ? REQUIREMENT_OK : REQUIREMENT_WARNING,
+  ];
+
+  return $requirements;
+}

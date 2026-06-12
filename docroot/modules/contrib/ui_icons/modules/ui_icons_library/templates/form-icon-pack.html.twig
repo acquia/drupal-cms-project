@@ -1,0 +1,20 @@
+<div class="card-page">
+  {{ form.form_build_id }}
+  {{ form.form_token }}
+  {{ form.form_id }}
+  <div class="sidebar">
+    {{ form.settings }}
+    {{ form.actions }}
+  </div>
+  <div class="content">
+    <div class="filters">
+      {{ form.search }}
+      {{ form.group }}
+      {{ form.num_per_page }}
+      {{ form.actions }}
+    </div>
+    {{ form.pager_top }}
+    {{ form.list }}
+    {{ form.pager }}
+  </div>
+</div>

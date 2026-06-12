@@ -1,0 +1,75 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.provus_academic_department.field_provus_ad_compact_name
+    - field.field.node.provus_academic_department.field_provus_ad_editorial_sect
+    - field.field.node.provus_academic_department.field_provus_ad_program_type
+    - field.field.node.provus_academic_department.field_provus_ad_sort_name
+    - field.field.node.provus_academic_department.field_provus_ad_summary
+    - field.field.node.provus_academic_department.field_provus_ad_thumbnail
+    - node.type.provus_academic_department
+  module:
+    - text
+    - user
+id: node.provus_academic_department.default
+targetEntityType: node
+bundle: provus_academic_department
+mode: default
+content:
+  field_provus_ad_compact_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_provus_ad_editorial_sect:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_provus_ad_program_type:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_provus_ad_sort_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  field_provus_ad_summary:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_provus_ad_thumbnail:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 107
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  addtoany: true
+  search_api_excerpt: true

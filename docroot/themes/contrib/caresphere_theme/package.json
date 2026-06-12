@@ -1,0 +1,23 @@
+{
+  "name": "caresphere_theme",
+  "private": true,
+  "version": "1.0.0",
+  "license": "GPL-2.0-or-later",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "postcss ./css/main.css -o ./build/main.min.css --watch",
+    "build": "postcss ./css/main.css -o ./build/main.min.css --env production"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.2.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "postcss-cli": "^11.0.0",
+    "postcss-import": "^16.1.0",
+    "postcss-nested": "^6.0.1",
+    "tailwindcss": "^4.2.1"
+  }
+}

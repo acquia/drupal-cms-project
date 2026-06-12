@@ -1,0 +1,14 @@
+{% set is_preview = canvas_is_preview or in_preview %}
+
+{% set classes = [
+  'stats',
+  direction,
+  is_preview ? 'min-h-20',
+  'shadow',
+  'w-full',
+  'has-rhythm',
+] %}
+
+<div{{ attributes.addClass(classes) }}>
+  {% block items %}{% endblock %}
+</div>

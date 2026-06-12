@@ -1,0 +1,59 @@
+.grid-speakers.grid-speakers--themed, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme {
+  background-color: #FFFFFF;
+  padding: 100px 64px;
+}
+
+.grid-speakers.grid-speakers--themed .grid-speakers__container, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme .grid-speakers__container, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme .grid-speakers__container {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.grid-speakers.grid-speakers--themed .grid-speakers__header, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme .grid-speakers__header, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme .grid-speakers__header {
+  margin-bottom: 64px;
+  text-align: left;
+}
+
+.grid-speakers.grid-speakers--themed .grid-speakers__heading, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme .grid-speakers__heading, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme .grid-speakers__heading {
+  font-family: inherit; /* Expecting typography atom */
+  margin-bottom: 16px;
+}
+
+.grid-speakers.grid-speakers--themed .grid-speakers__description, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme .grid-speakers__description, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme .grid-speakers__description {
+  font-family: inherit; /* Expecting typography atom */
+}
+
+.grid-speakers.grid-speakers--themed .grid-speakers__grid, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme .grid-speakers__grid, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme .grid-speakers__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+/* Responsiveness */
+@media (max-width: 1200px) {
+.grid-speakers.grid-speakers--themed .grid-speakers__grid, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme .grid-speakers__grid, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme .grid-speakers__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+.grid-speakers.grid-speakers--themed, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme {
+    padding: 80px 32px;
+  }
+.grid-speakers.grid-speakers--themed .grid-speakers__grid, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme .grid-speakers__grid, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme .grid-speakers__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+.grid-speakers.grid-speakers--themed, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme {
+    padding: 64px 24px;
+  }
+.grid-speakers.grid-speakers--themed .grid-speakers__header, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme .grid-speakers__header, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme .grid-speakers__header {
+    margin-bottom: 40px;
+  }
+.grid-speakers.grid-speakers--themed .grid-speakers__grid, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme .grid-speakers__grid, body:not(.canvas-page) .grid-speakers.grid-speakers--admin-theme .grid-speakers__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}

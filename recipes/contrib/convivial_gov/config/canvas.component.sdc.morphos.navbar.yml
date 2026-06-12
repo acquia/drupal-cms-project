@@ -1,0 +1,192 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - morphos
+active_version: 4639908f76cc69ed
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        container:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: container--normal
+          expression: ℹ︎list_string␟value
+        palette:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        texture:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        start:
+          title: Start
+          description: 'Add Logo or other content items.'
+        center:
+          title: Center
+          description: 'Add content items.'
+        end:
+          title: End
+          description: 'Add menu, search or other content items.'
+  8fde9420f4e6eb68:
+    settings:
+      prop_field_definitions:
+        is_sticky:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: false
+          expression: ℹ︎boolean␟value
+        container:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: container--normal
+          expression: ℹ︎list_string␟value
+        palette:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        texture:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        start:
+          title: Start
+          description: 'Add Logo or other content items.'
+        center:
+          title: Center
+          description: 'Add content items.'
+        end:
+          title: End
+          description: 'Add menu, search or other content items.'
+  d32cd48f6fcbca88:
+    settings:
+      prop_field_definitions:
+        is_sticky:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: false
+          expression: ℹ︎boolean␟value
+        palette:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        container:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: container--normal
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        start:
+          title: Start
+        center:
+          title: Center
+        end:
+          title: End
+  ca7fc53e13eef992:
+    settings:
+      prop_field_definitions:
+        is-sticky:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: false
+          expression: ℹ︎boolean␟value
+        palette:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        container:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: container--normal
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        start:
+          title: Start
+        center:
+          title: Center
+        end:
+          title: End
+label: Navbar
+id: sdc.morphos.navbar
+provider: morphos
+source: sdc
+source_local_id: 'morphos:navbar'

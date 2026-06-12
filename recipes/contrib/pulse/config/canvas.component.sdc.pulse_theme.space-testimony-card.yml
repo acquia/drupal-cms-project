@@ -1,0 +1,161 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.image.field_media_image
+    - field.field.media.svg_image.field_media_svg_image
+    - filter.format.canvas_html_block
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - media.type.svg_image
+  module:
+    - file
+    - media
+    - media_library
+    - text
+  theme:
+    - pulse_theme
+label: 'Space Testimonial Card'
+id: sdc.pulse_theme.space-testimony-card
+source: sdc
+source_local_id: 'pulse_theme:space-testimony-card'
+provider: pulse_theme
+active_version: 1581fa765fa238a2
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        image:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+        person_name:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'John Rambo'
+          expression: ℹ︎string␟value
+        text:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: 'The content published on the Pulse platform provided clarity about my health care. It made everything feel more structured and comprehensible.'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        designation:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Sales Manager'
+          expression: ℹ︎string␟value
+        company_logo:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+        extra_classes:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  47d8fcd36093adbf:
+    settings:
+      prop_field_definitions:
+        image:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+        person_name:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'John Rambo'
+          expression: ℹ︎string␟value
+        text:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: 'The content published on the Pulse platform provided clarity about my health care. It made everything feel more structured and comprehensible.'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        designation:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Sales Manager'
+          expression: ℹ︎string␟value
+        extra_classes:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        company_logo:
+          title: 'Branding logo'
+          description: 'A slot for inserting a **Space Image** component, typically used for displaying a company or brand logo alongside the testimonial.'

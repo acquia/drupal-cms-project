@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_top_task_count
+    - node.type.service_landing_page
+  module:
+    - options
+id: node.service_landing_page.field_top_task_count
+field_name: field_top_task_count
+entity_type: node
+bundle: service_landing_page
+label: 'Number of top tasks'
+description: 'The first n items will be displayed as prominent top task links.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 3
+default_value_callback: ''
+settings: {  }
+field_type: list_integer

@@ -1,0 +1,40 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Tagline bold
+group: Base
+status: stable
+props:
+  type: object
+  required:
+    - text
+  properties:
+    text:
+      type: string
+      title: Text
+      default: "Trusted by organizations and communities across the region"
+      examples:
+        - "Trusted by organizations and communities across the region"
+    font_size:
+      type: string
+      title: Font size
+      description: "Default matches the original component (larger on desktop, smaller on mobile). Other sizes use the same scale at all breakpoints."
+      enum:
+        - default
+        - xs
+        - sm
+        - base
+        - lg
+        - xl
+        - 2xl
+        - 3xl
+        - 4xl
+      meta:enum:
+        default: Default (responsive)
+        xs: Extra small
+        sm: Small
+        base: Base
+        lg: Large
+        xl: Extra large
+        2xl: 2XL
+        3xl: 3XL
+        4xl: 4XL
+      default: default

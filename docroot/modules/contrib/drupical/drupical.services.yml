@@ -1,0 +1,38 @@
+parameters:
+  drupical.feed_json_url: 'https://www.drupal.org/api-d7/node.json?type=event&sort=field_date_of_event&direction=DESC&page=0'
+  drupical.organize_link: 'https://www.drupal.org/community/contributor-guide/reference-information/event-plan'
+  drupical.drupalcon_link: 'https://events.drupal.org/'
+  drupical.camps_link: 'https://www.drupal.org/community/events'
+  drupical.drupical_link: 'https://www.drupical.com/'
+  drupical.add_event_link: 'https://www.drupal.org/node/add/event?og_group_ref=3129564&destination=node/3129564'
+
+services:
+  _defaults:
+    autoconfigure: true
+
+  logger.channel.drupical:
+    parent: logger.channel_base
+    arguments: ['drupical']
+    public: false
+
+  drupical.fetcher:
+    class: Drupal\drupical\EventsFetcher
+    arguments:
+      - '@http_client'
+      - '@config.factory'
+      - '@keyvalue.expirable'
+      - '@logger.channel.drupical'
+      - '%drupical.feed_json_url%'
+      - '@country_manager'
+  Drupal\drupical\EventsFetcher: '@drupical.fetcher'
+
+  drupical.renderer:
+    class: Drupal\drupical\EventsRenderer
+    arguments:
+      - '@drupical.fetcher'
+      - '%drupical.organize_link%'
+      - '%drupical.drupalcon_link%'
+      - '%drupical.camps_link%'
+      - '%drupical.drupical_link%'
+      - '%drupical.add_event_link%'
+  Drupal\drupical\EventsRenderer: '@drupical.renderer'

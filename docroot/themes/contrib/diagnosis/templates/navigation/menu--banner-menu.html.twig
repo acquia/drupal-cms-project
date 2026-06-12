@@ -1,0 +1,72 @@
+{#
+/**
+ * @file
+ * Theme override for the banner/utility menu.
+ *
+ * Desktop: Horizontal utility bar with smaller text, right-aligned
+ * Mobile: Vertical list inside mobile menu dropdown
+ */
+#}
+{% import _self as menus %}
+
+{#
+  We call a macro which calls itself to render the full tree.
+  @see https://twig.symfony.com/doc/1.x/tags/macro.html
+#}
+{{ menus.menu_links(items, attributes, 0) }}
+
+{% macro menu_links(items, attributes, menu_level) %}
+  {% import _self as menus %}
+  {% if items %}
+    <ul{{ attributes.addClass(
+      'menu-list',
+      'flex',
+      'flex-col',
+      'gap-2',
+      'md:flex-row',
+      'md:gap-4',
+      'md:text-sm',
+      'p-0',
+      'm-0',
+      'list-none',
+    ) }} data-level="{{ menu_level + 1 }}">
+      {% for item in items %}
+        {% set item_classes = [
+          'menu-item',
+          item.in_active_trail ? 'menu-item--active-trail',
+        ] %}
+        <li{{ item.attributes.addClass(item_classes) }}>
+          {{
+            link(
+              item.title,
+              item.url,
+              {
+                class: [
+                  'menu-link',
+                  'flex',
+                  'items-center',
+                  'gap-2',
+                  'p-2',
+                  'md:p-1',
+                  'min-h-[44px]',
+                  'md:min-h-0',
+                  'text-foreground',
+                  'hover:text-primary',
+                  'transition-colors',
+                  'no-underline',
+                ],
+              },
+            )
+          }}
+
+          {# Banner menu should not have submenus, but include support just in case #}
+          {% if item.below %}
+            <div class="submenu-wrapper hidden">
+              {{ menus.menu_links(item.below, attributes.removeClass('menu-list'), menu_level + 1) }}
+            </div>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}

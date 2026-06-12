@@ -1,0 +1,96 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - diagnosis
+active_version: 9041c0307dd8bb5a
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        background:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: default
+          expression: ℹ︎list_string␟value
+        padding:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: medium
+          expression: ℹ︎list_string␟value
+        width:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 100%
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        slide_content:
+          title: 'Slide content'
+          description: 'Add any components or content to this slide'
+  5d78eb6276babf11:
+    settings:
+      prop_field_definitions:
+        background:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: default
+          expression: ℹ︎list_string␟value
+        padding:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: medium
+          expression: ℹ︎list_string␟value
+        width:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 100%
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        slide_content:
+          title: 'Slide content'
+          description: 'Add any components or content to this slide'
+label: 'Carousel Slide'
+id: sdc.diagnosis.carousel-slide
+provider: diagnosis
+source: sdc
+source_local_id: 'diagnosis:carousel-slide'

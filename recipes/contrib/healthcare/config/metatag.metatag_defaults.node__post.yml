@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies: {  }
+id: node__post
+label: News
+tags:
+  article_author: '[node:field_author:entity:display-name]'
+  article_modified_time: '[node:changed:custom:c]'
+  article_published_time: '[node:field_post_date:custom:c]'
+  article_section: '[node:field_post_type:entity:name]'
+  article_tag: '[node:field_tags:entity:name]'
+  canonical_url: '[node:url]'
+  description: '[node:field_summary]'
+  og_description: '[node:field_summary]'
+  og_image: '[node:field_featured_image:entity:field_media_image:entity:url]'
+  og_title: '[node:title]'
+  og_type: article
+  og_url: '[node:url]'
+  schema_article_about: '[node:field_tags:0:entity:name]'
+  schema_article_date_modified: '[node:changed:custom:c]'
+  schema_article_date_published: '[node:field_post_date:custom:c]'
+  schema_article_description: '[node:field_summary]'
+  schema_article_headline: '[node:title]'
+  schema_article_id: '[node:url]'
+  schema_article_main_entity_of_page: '[node:url]'
+  schema_article_name: '[node:title]'
+  schema_article_publisher: 'a:5:{s:5:"@type";s:12:"Organization";s:3:"@id";s:15:"[site:base_url]";s:4:"name";s:11:"[site:name]";s:3:"url";s:15:"[site:base_url]";s:4:"logo";a:2:{s:5:"@type";s:11:"ImageObject";s:3:"url";s:11:"[site:logo]";}}'
+  schema_article_type: Article
+  title: '[node:title] | [site:name]'
+  twitter_cards_description: '[node:field_summary]'
+  twitter_cards_image: '[node:field_featured_image:entity:field_media_image:entity:url]'
+  twitter_cards_title: '[node:title]'
+  twitter_cards_type: summary_large_image

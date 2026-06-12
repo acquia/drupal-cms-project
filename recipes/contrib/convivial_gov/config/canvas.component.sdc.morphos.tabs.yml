@@ -1,0 +1,91 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - morphos
+active_version: c36e5870be81bcf0
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        placement:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        size:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        style:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: tabs-border
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        items:
+          title: Items
+          description: 'Add tab items.'
+  af0e0ba1b5a77e5b:
+    settings:
+      prop_field_definitions:
+        placement:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: tabs-top
+          expression: ℹ︎list_string␟value
+        size:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: tabs-md
+          expression: ℹ︎list_string␟value
+        style:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: tabs-border
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        items:
+          title: Items
+label: Tabs
+id: sdc.morphos.tabs
+provider: morphos
+source: sdc
+source_local_id: 'morphos:tabs'

@@ -1,0 +1,95 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.views_block.research-block_2
+    - canvas.component.sdc.pulse_theme.space-container
+    - canvas.component.sdc.pulse_theme.space-content-detail
+    - canvas.component.sdc.pulse_theme.space-hero-banner-with-media
+    - canvas.component.sdc.pulse_theme.space-section-heading
+    - canvas.component.sdc.pulse_theme.space-user-card
+    - core.entity_view_mode.node.full
+    - field.field.media.image.field_media_image
+    - field.field.node.researches.field_banner_label
+    - field.field.node.researches.field_conclusion_body
+    - field.field.node.researches.field_condition
+    - field.field.node.researches.field_content_description
+    - field.field.node.researches.field_date
+    - field.field.node.researches.field_image
+    - field.field.node.researches.field_institute_involved
+    - field.field.node.researches.field_primary_category
+    - field.field.node.researches.field_secondary_category
+    - field.field.node.researches.field_specialist_involved
+    - field.field.node.researches.field_typical_treatments
+    - field.field.node.researches.field_user_image
+    - field.field.node.researches.field_user_linkedin_link
+    - field.field.node.researches.field_user_name
+    - field.field.node.researches.field_user_short_description
+    - field.field.node.researches.field_user_twitter_link
+    - filter.format.canvas_html_block
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - node.type.researches
+    - taxonomy.vocabulary.primary_category
+    - taxonomy.vocabulary.secondary_category
+  module:
+    - file
+    - media
+    - node
+    - options
+    - taxonomy
+    - text
+id: node.researches.full
+content_entity_type_id: node
+content_entity_type_bundle: researches
+content_entity_type_view_mode: full
+component_tree:
+  0:
+    uuid: 658bcafc-c5d5-432c-8815-be18d66426c9
+    component_id: sdc.pulse_theme.space-hero-banner-with-media
+    component_version: eeeb0c7e1f444bfb
+    inputs: '{"image":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:researches\u241dfield_image\u241e\u241fentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241f{src\u21a0src_with_alternate_widths,alt\u21a0alt,width\u21a0width,height\u21a0height}"},"label":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:researches\u241dfield_banner_label\u241e\u241fvalue"},"title":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:researches\u241dtitle\u241e\u241fvalue"},"institute_involved":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:researches\u241dfield_institute_involved\u241e\u241fvalue"},"primary_category":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:researches\u241dfield_primary_category\u241e\u241fentity\u241c\u241centity:taxonomy_term\u241dname\u241e\u241fvalue"},"secondary_category":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:researches\u241dfield_secondary_category\u241e\u241fentity\u241c\u241centity:taxonomy_term\u241dname\u241e\u241fvalue"},"modifier_class":"custom-class","download_paper_link":"text"}'
+  1:
+    uuid: ecfd8e23-5493-4545-9e2a-a327a81b7971
+    component_id: sdc.pulse_theme.space-container
+    component_version: c403ad59c72d1f1d
+    inputs: '{"background_color":"transparent","width":"boxed-width","padding_left":"small","padding_right":"small","padding_top":"none","padding_bottom":"none","margin_top":"none","margin_bottom":"large"}'
+  '1:content:0':
+    parent_uuid: ecfd8e23-5493-4545-9e2a-a327a81b7971
+    slot: content
+    uuid: e37fa238-a94b-450c-8c4b-a9873f4a9dfb
+    component_id: sdc.pulse_theme.space-content-detail
+    component_version: 887db74e59ad4dd9
+    inputs: '{"text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:researches\u241dfield_content_description\u241e\u241fprocessed"},"date":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:researches\u241dfield_date\u241e\u241fvalue"},"tag_label1":"Condition","tag_data1":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:researches\u241dfield_condition\u241e\u241fvalue"},"tag_label2":"Specialist Involved","tag_data2":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:researches\u241dfield_specialist_involved\u241e\u241fvalue"},"tag_label3":"Typical Treatments","tag_data3":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:researches\u241dfield_typical_treatments\u241e\u241fvalue"},"conclusion":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:researches\u241dfield_conclusion_body\u241e\u241fprocessed"},"content_overlap":true}'
+  '1:content:0:content:0':
+    parent_uuid: e37fa238-a94b-450c-8c4b-a9873f4a9dfb
+    slot: content
+    uuid: c865bc7e-352c-4ff1-b7ab-764bd9d4f35c
+    component_id: sdc.pulse_theme.space-user-card
+    component_version: 0072d16559a935be
+    inputs: '{"image":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:researches\u241dfield_user_image\u241e\u241fentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241f{src\u21a0src_with_alternate_widths,alt\u21a0alt,width\u21a0width,height\u21a0height}"},"name":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:researches\u241dfield_user_name\u241e\u241fvalue"},"description":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:researches\u241dfield_user_short_description\u241e\u241fvalue"},"twitter_url":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:researches\u241dfield_user_twitter_link\u241e\u241ftitle"},"linkedin_url":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:researches\u241dfield_user_linkedin_link\u241e\u241ftitle"}}'
+  2:
+    uuid: c9b930b7-42e4-4b4f-b795-7eea0ec349d5
+    component_id: sdc.pulse_theme.space-container
+    component_version: c403ad59c72d1f1d
+    inputs: '{"background_color":"transparent","width":"boxed-width","padding_left":"small","padding_right":"small","padding_top":"none","padding_bottom":"none","margin_top":"none","margin_bottom":"small"}'
+  '2:content:0':
+    parent_uuid: c9b930b7-42e4-4b4f-b795-7eea0ec349d5
+    slot: content
+    uuid: fb7e7367-3a71-4d20-807e-906564f5c153
+    component_id: sdc.pulse_theme.space-section-heading
+    component_version: 7c6c7ad56f5fa5db
+    inputs: '{"title":"Related Research Papers","tag_name":"h2","description":{"value":"\u003Cp\u003EA focused selection of peer-reviewed studies and clinical findings\u2028 relevant to everyday health and care decisions.\u003C\/p\u003E","format":"canvas_html_block"},"alignment":"center"}'
+  3:
+    uuid: 4e46601a-f8ea-4413-bed3-3d3b9fa7caaa
+    component_id: sdc.pulse_theme.space-container
+    component_version: c403ad59c72d1f1d
+    inputs: '{"background_color":"transparent","width":"boxed-width","padding_left":"small","padding_right":"small","padding_top":"none","padding_bottom":"none","margin_top":"none","margin_bottom":"large"}'
+  '3:content:0':
+    parent_uuid: 4e46601a-f8ea-4413-bed3-3d3b9fa7caaa
+    slot: content
+    uuid: 5c7168dd-ffa1-48db-8bb2-2bb88bd16cca
+    component_id: block.views_block.research-block_2
+    component_version: 6528cda83b14c55e
+    inputs: '{"label":"Related Research Papers","label_display":"0","views_label":"","items_per_page":null}'
+exposed_slots: {  }

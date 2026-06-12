@@ -1,0 +1,22 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Video
+description: An embedded media player for hosting or streaming video content (e.g., YouTube or Vimeo).
+group: Content
+status: stable
+props:
+  type: object
+  properties:
+    url:
+      type: string
+      title: URL
+      description: URL of the video. Supports YouTube, Vimeo, and direct MP4 links.
+libraryOverrides:
+  dependencies:
+    - core/drupal
+    - core/once
+    - morphos/videojs_youtube_library
+  js:
+    ../../dist/js/video.js: { minified: true }
+  css:
+    component:
+      ../../dist/css/video.css: { minified: true }

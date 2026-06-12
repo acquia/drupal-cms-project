@@ -1,0 +1,104 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+
+name: Space Section heading
+
+description: |
+  The **Space Section Heading** is a component used to introduce and provide 
+  context for a section of a webpage. It allows adding a label, a main title, 
+  and a descriptive text block, with configurable alignment options.  
+
+  **Inputs:**
+  - `title`: Main heading text of the section.
+  - `label`: A short label or tagline displayed above the title.
+  - `description`: Supporting text or paragraph that elaborates on the section.
+  - `alignment`: Controls the layout of the section heading. Options include:
+    - `left`: Aligns all content to the left.
+    - `center`: Centers the heading and description.
+    - `split`: Splits the layout into two columns with the label and title 
+      on one side and the description on the other.
+
+  **Usage:**
+  - Provides context and structure for a section or fold on a page.
+  - Ensures consistency of headings across different patterns or components.
+
+status: stable
+
+group: Molecules
+
+props:
+
+  type: object
+
+  required:
+    - title
+    - tag_name
+    - description
+
+  properties:
+    label:
+      type: string
+      title: Label
+      description: The label of the section.
+      examples: 
+        - 'Launch faster'
+
+    title:
+      type: string
+      title: Title
+      description: The title of the section.
+      examples:
+        - 'Curabitur suscipit suscipit tellus'
+    
+    tag_name:
+      type: string
+      title: Tag
+      description: The HTML tag to be used for the heading (e.g., h1, h2).
+      enum:
+        - h1
+        - h2
+        - h3
+        - h4
+        - h5
+        - h6
+        - div
+      meta:enum:
+        h1: Heading 1
+        h2: Heading 2
+        h3: Heading 3
+        h4: Heading 4
+        h5: Heading 5
+        h6: Heading 6
+        div: Div
+      default: h2
+      examples:
+       - 'h2'
+
+    description:
+      type: string
+      title: Description
+      contentMediaType: text/html
+      x-formatting-context: block
+      description: The description of the section.
+      examples: 
+        - 'We understand human needs through empathy to design experiences
+          that improve conversion through practical strategies. We create integrated
+          design-driven digital solutions where form follows function across an entire
+          web product or through individual products and services.'
+
+    alignment:
+      type: string
+      title: Alignment
+      description: Alignment of the section content.
+      enum:
+        - left
+        - center
+        - split
+      default: left
+      examples:
+        - 'left'
+
+    with_image:
+      type: boolean
+      title: With Image
+      description: Enables or Disables image for the section heading title before and after.
+      default: false

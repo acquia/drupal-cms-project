@@ -1,0 +1,92 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - morphos
+label: Icon
+id: sdc.morphos.icon
+source: sdc
+source_local_id: 'morphos:icon'
+provider: morphos
+active_version: 764dcbdec103221f
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        icon:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: rocket
+          expression: ℹ︎string␟value
+        icon_size:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: icon-size--xs
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  750f6694f364d4e5:
+    settings:
+      prop_field_definitions:
+        icon:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: rocket
+          expression: ℹ︎string␟value
+        icon_size:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: icon-size--xl
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  b3a9614cacd7ac7f:
+    settings:
+      prop_field_definitions:
+        icon:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: rocket
+          expression: ℹ︎string␟value
+        icon_size:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: icon-size--md
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions: {  }

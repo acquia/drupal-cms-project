@@ -1,0 +1,7 @@
+services:
+  eca_misc.subscriber:
+    class: Drupal\eca_misc\EventSubscriber\ExceptionSubscriber
+    arguments:
+      - '@event_dispatcher'
+    tags:
+      - { name: event_subscriber }

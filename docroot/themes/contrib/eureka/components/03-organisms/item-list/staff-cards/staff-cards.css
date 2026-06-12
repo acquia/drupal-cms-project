@@ -1,0 +1,25 @@
+.item-list--staff__cta {
+  width: 100%;
+  margin: var(--spacing-5) auto;
+  text-align: center;
+}
+
+.item-list--staff__cta .button {
+  margin-bottom: var(--spacing-2);
+  width: auto;
+}
+
+.item-list--staff .item-list__items__list {
+  display: flex;
+  overflow: auto;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  min-width: 100%;
+}
+
+@media (min-width: 1200px) {
+  .item-list--staff .item-list__items__list {
+    justify-content: space-between;
+  }
+}

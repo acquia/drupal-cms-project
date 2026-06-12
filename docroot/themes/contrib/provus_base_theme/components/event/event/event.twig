@@ -1,0 +1,29 @@
+<div{% if content_attributes is defined and content_attributes %}{{ content_attributes.addClass('node__content') }}{% else %} class="node__content"{% endif %}>
+  <div class="row">
+    <div class="col-md-8">
+      <h2>{{ title }}</h2>
+      {{ body|raw }}
+
+      {% if footer_title %}
+      <h3>{{ footer_title }}</h3>
+      {% endif %}
+
+      {% if footer_content %}
+      {{ footer_content }}
+      {% endif %}
+    </div>
+    <div class="col-md-4">
+      {% if sidebar_title %}
+      <h3>{{ sidebar_title }}</h3>
+      {% endif %}
+
+      {% if sidebar_content %}
+      {{ sidebar_content|raw }}
+      {% endif %}
+
+      {% if image_url %}
+      <img src="{{ image_url.src }}" alt="{{ image_url.alt }}">
+      {% endif %}
+    </div>
+  </div>
+</div>

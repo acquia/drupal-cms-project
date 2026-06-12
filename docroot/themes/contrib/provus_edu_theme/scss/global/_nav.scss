@@ -1,0 +1,562 @@
+.navbar-brand img {
+  max-height: 58px;
+  width: auto;
+}
+
+.region-primary-menu {
+  margin-left: 5rem !important;
+}
+
+/* Search form */
+.navbar-form .nav-link {
+  display: none !important;
+}
+
+#searchCollapse {
+  position: relative !important;
+  top: unset; right: unset;
+  width: 225px !important;
+}
+
+.views-exposed-filter-blockprovus-basic-search-page-1 {
+  margin-bottom: 0 !important;
+}
+
+.views-exposed-filter-blockprovus-basic-search-page-1 .form-type-textfield .form-control {
+  width: 225px !important;
+  border: 1px solid #C1C1C1 !important;
+  border-radius: $images-border-radius-radius-xxl;
+}
+
+#searchCollapse.collapse:not(.show) {
+  display: block !important;
+}
+
+#searchCollapse input {
+  height: 40px !important;
+}
+
+.navbar.navbar-expand-lg .container {
+  position: relative;
+}
+
+
+.region-primary-menu {
+  margin-left: 0 !important;
+}
+
+.views-exposed-form .form-type-textfield, .views-exposed-form .form-type-select, .views-exposed-form .form-type-date {
+  margin-bottom: 0 !important;
+}
+
+/* Account menu */
+.menu--account {
+  //fix for provus_edu_theme
+  width: auto;
+
+  ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    margin: 0;
+  }
+}
+
+.region-secondary-menu {
+  display: flex;
+  align-items: center;
+}
+
+footer.site-footer h2, footer.site-footer .h2 {
+  @include text-style-subheadline-sub-2;
+  color: $text-colors-text-contrast;
+  margin-bottom: 16px;
+}
+
+footer.site-footer .site-footer__bottom {
+  border-top: 1px solid #ffffff50;
+  @include text-style-subheadline-sub-2;
+  font-weight: 400;
+}
+
+footer.site-footer p {
+  @include text-style-subheadline-sub-2;
+  font-weight: 400;
+}
+
+footer.site-footer .site-footer__top ul.nav {
+  margin: 0;
+}
+
+footer.site-footer p {
+  font-size: $footer-text-size;
+}
+
+.region-secondary-menu .google-translator-switch {
+  padding: 0 16px 0 !important;
+  background: transparent !important;
+  color: $text-colors-text-contrast !important;
+  border: 0;
+  display: block;
+  position: relative;
+  @include text-style-subheadline-sub-2;
+  font-weight: 500;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    background-image: url('/themes/contrib/provus_edu_theme/images/arrow_up.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
+.region-secondary-menu .block-google-translator {
+  margin-top: 0;
+}
+
+//fix for provus_edu_theme
+.region-footer-fourth ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    margin-bottom: rem-calc(12);
+
+    a {
+      font-size: 16px;
+      line-height: 24px;
+      display: block;
+      color: $footer-link;
+      padding: 0;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+body.scrolled {
+  #navbar-top {
+    z-index: 9;
+  }
+  #navbar-main {
+    margin-top: -3px;
+  }
+}
+
+.social-media-links--platforms {
+  a {
+    color: $text-colors-text-contrast;
+  }
+}
+
+.bg-grey {
+  .block-provus-tabs .horizontal-tabs .horizontal-tabs__menu {
+    background-color: $background-colors-background-light;
+  }
+}
+
+.block-provus-tabs .horizontal-tabs .horizontal-tabs__menu .horizontal-tabs__menu-item {
+  background-color: $background-colors-background-white;
+}
+
+.block-provus-tabs .horizontal-tabs .horizontal-tabs__menu .horizontal-tabs__menu-item .nav-link.active,
+.block-provus-tabs .horizontal-tabs .horizontal-tabs__menu .horizontal-tabs__menu-item a.active {
+  background-color: $background-colors-background-light;
+}
+
+.bg-grey .block-provus-tabs .horizontal-tabs .horizontal-tabs__menu {
+  justify-content: center;
+}
+
+#navbar-main {
+  background: $white;
+  padding: 0;
+
+  .navbar-nav {
+    @include media-breakpoint-down(lg) {
+      display: block;
+    }
+
+    li.nav-item {
+      @include media-breakpoint-down(lg) {
+        border-bottom: 1px solid $primary-accent;
+      }
+
+      a.nav-link {
+        padding: rem-calc(20 0);
+
+        @include media-breakpoint-down(lg) {
+          padding: rem-calc(15 0);
+          display: inline-block;
+        }
+      }
+    }
+
+    li.dropdown {
+
+      &:hover,
+      &:focus {
+        ul {
+          @include media-breakpoint-up(lg) {
+            display: block;
+          }
+        }
+      }
+
+      &.hovered {
+        ul {
+          @include media-breakpoint-up(lg) {
+            display: block;
+          }
+        }
+      }
+
+      a {
+
+        &:hover,
+        &:focus {
+          color: $primary-shade;
+        }
+
+        &.dropdown-toggle {
+          display: none;
+          color: $primary;
+
+          @include media-breakpoint-down(lg) {
+            float: right;
+            display: block;
+            padding: rem-calc(14);
+            color: $primary-accent;
+          }
+        }
+
+        &.dropdown-toggle-main {
+          &::after {
+            display: inline-block;
+            margin-left: 0.255em;
+            vertical-align: 0.255em;
+            content: "";
+            border-top: 0.3em solid;
+            border-right: 0.3em solid transparent;
+            border-bottom: 0;
+            border-left: 0.3em solid transparent;
+            color: $primary-accent;
+
+            @include media-breakpoint-down(lg) {
+              display: none;
+            }
+          }
+        }
+
+        .caret {
+          display: none;
+
+          @include media-breakpoint-down(lg) {
+            display: block;
+          }
+        }
+      }
+
+      &>ul.dropdown-menu {
+        background: $white;
+        box-shadow: 0px 12px 12px -8px rgba(0, 0, 0, 0.08), 0px 4px 4px rgba(0, 0, 0, 0.04);
+        border-radius: rem-calc(0 0 8 8);
+        top: rem-calc(60);
+        column-gap: rem-calc(16);
+        break-inside: avoid-column;
+        padding: rem-calc(25);
+        min-width: rem-calc(192);
+        border-top: none;
+
+        @include media-breakpoint-down(lg) {
+          box-shadow: none;
+          border: none;
+          padding: 0;
+          margin-bottom: rem-calc(20);
+        }
+
+        ul.dropdown-menu {
+          min-width: 0;
+        }
+
+        &>li {
+          padding: 0;
+          border: none;
+          background: transparent;
+          color: inherit;
+          margin-bottom: rem-calc(15);
+
+          &>a {
+            font-weight: 500;
+            font-size: rem-calc(15);
+            line-height: rem-calc(20);
+            letter-spacing: normal;
+            display: flex;
+            align-items: center;
+            text-transform: none;
+            text-decoration: none;
+            white-space: normal;
+            color: $body-color;
+            display: block;
+
+            &:hover,
+            &:focus {
+              color: $primary-shade;
+              text-decoration: underline;
+            }
+
+            svg.ext {
+              display: none;
+            }
+          }
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          .dropdown-toggle {
+            font-weight: 700;
+            font-size: rem-calc(12);
+            line-height: rem-calc(12);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: $body-color;
+            text-decoration: none;
+            white-space: normal;
+            margin-bottom: rem-calc(20);
+            padding: 0 !important;
+            display: block;
+
+            &:hover,
+            &:focus {
+              color: $primary-shade;
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .navbar-expand-lg {
+    padding: 20px 0 !important;
+  }
+}
+
+@include media-breakpoint-down(xl) {
+  .navbar-nav {
+    display: flex;
+
+    li.nav-item {
+      a.nav-link {
+        margin-right: 20px;
+      }
+    }
+  }
+}
+
+/***
+ * Override search form behaviour
+ */
+.navbar-form {
+  position: relative;
+  display: flex;
+
+  .nav-link {
+    color: $primary-accent;
+    position: relative;
+    z-index: 99;
+    width: rem-calc(50);
+
+    @include media-breakpoint-up(xxl) {
+      top: 0 !important;
+    }
+
+    .fa-xmark, .fa-times {
+      display: none;
+    }
+
+    &[aria-expanded="true"] {
+      .fa-xmark, .fa-times {
+        display: inline-block;
+      }
+
+      .fa-magnifying-glass, .fa-search {
+        display: none;
+      }
+    }
+  }
+
+  @include media-breakpoint-down(lg) {
+    height: 40px;
+
+    a[aria-expanded="false"] {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  @include media-breakpoint-between(lg, xl) {
+    bottom: 40px;
+  }
+
+  @include media-breakpoint-only(xl) {
+    bottom: 12px;
+  }
+}
+
+/***
+ * With the Provus Mega Menu override
+ */
+.navbar-form {
+  @include media-breakpoint-only(xl) {
+    bottom: 0px;
+  }
+}
+@include media-breakpoint-down(xl) {
+  #CollapsingNavbar {
+    z-index: 10;
+    background-color: white;
+    min-height: calc(100vh - 48px);
+    height: 30px;
+    overflow-y: scroll;
+  }
+
+  #navbar-main.navbar .desktop-nav .nav-item {
+    padding: 0 1em;
+    border-bottom: 0;
+  }
+
+  .navbar-expand-lg {
+    padding: 0 !important;
+  }
+}
+
+#CollapsingNavbar {
+  visibility: hidden !important;
+}
+
+#CollapsingNavbar.provus-mega-menu {
+  visibility: visible !important;
+}
+
+/**
+ * Show hamburber menu
+ */
+@media only screen and (min-width: 720px) and (max-width: 1439px) {
+  .navbar-expand-lg .navbar-toggler {
+    display: block;
+  }
+
+  .navbar-nav {
+    display: inline;
+  }
+
+  .navbar-expand-lg {
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+  }
+
+  .navbar-expand-lg .navbar-collapse:not(.show) {
+    display: none !important;
+  }
+
+  .navbar-expand-lg .navbar-collapse {
+    display: inline !important;
+  }
+
+  .navbar-collapse {
+    flex-basis: 100% !important;
+  }
+
+  #navbar-main .navbar-nav li.nav-item a.nav-link {
+    padding: 0.9375rem 0;
+    display: inline-block;
+  }
+
+  #navbar-main .navbar-nav li.dropdown a.dropdown-toggle {
+    float: right;
+    display: block;
+    padding: 0.875rem;
+    color: $text-colors-text-secondary;
+  }
+
+  #navbar-main .navbar-nav li.dropdown > ul.dropdown-menu {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    margin-bottom: 1.25rem;
+  }
+
+  .dropup, .dropend, .dropdown, .dropstart {
+    position: relative;
+  }
+
+  .navbar-nav .dropdown-menu {
+    position: static !important;
+  }
+
+  .dropdown-menu.show {
+    display: block !important;
+  }
+
+  .dropdown-menu:not(.show) {
+    display: none !important;
+  }
+
+  #navbar-main .navbar-nav li.dropdown a.dropdown-toggle-main::after {
+    display: none;
+  }
+  .navbar-form {
+     bottom: 0;
+  }
+
+  .region-primary-menu {
+    margin-bottom: 1.25rem;
+  }
+
+  .navbar-form a[aria-expanded="false"] {
+    width: 100%;
+    text-align: center;
+  }
+
+}
+
+@media only screen and (max-width: 1439px) {
+  .navbar-expand-lg .navbar-toggler {
+    order: 99;
+  }
+}
+
+//fix for provus_edu_theme
+.social-media-links--platforms a svg {
+  width: 24px;
+}
+
+.navbar-form {
+  .region-header-form {
+    margin: 0;
+  }
+
+  .search-block-form {
+    padding: 0;
+  }
+}
+
+//fix for provus_edu_theme
+header #search-block-form {
+  padding: 0;
+}

@@ -1,0 +1,63 @@
+name: {{ name }}
+type: profile
+
+# Change this to whatever your minimum required version of core is, depending on the
+# needs of the recipes you want to apply.
+core_version_requirement: '^11.1'
+
+# Change this to whatever you like. It's only visible to users in the installer's profile
+# selection step, which is skipped if you mark this profile as a distribution.
+description: 'Provides install-time tweaks. Not to be used in production.'
+
+# Remove this entire `distribution` section if you'd like users to choose which profile
+# to use at the start of the install.
+distribution:
+  name: {{ name }}
+  install:
+    theme: {{ theme }}
+{% if finish_url %}
+    finish_url: '{{ finish_url }}'
+{% endif %}
+
+# A list of forms that should be presented to the user before choosing database
+# settings and installing the system. Each of these forms must implement
+# \Drupal\RecipeKit\Installer\FormInterface.
+forms:
+  - '\Drupal\RecipeKit\Installer\Form\RecipesForm'
+  - '\Drupal\RecipeKit\Installer\Form\SiteNameForm'
+
+recipes:
+  # This should be a list of recipes' Composer package names that should always be
+  # applied during the install process.
+  required: []
+
+  # A list of recipe package names that will be applied if no additional recipes
+  # are chosen by the user.
+  default: []
+
+  # This should be a set of recipe combinations to show to the user as choices at the
+  # start of the install process. The keys can be any machine name (such as `blog`),
+  # and the values should be associative arrays with two elements:
+  # - `name`: The human-readable name of the combination, which will be shown to users.
+  # - `packages`: A list of the Composer package names of the recipes in this combination.
+  #
+  # Example:
+  #
+  # special:
+  #   name: Special Sauce
+  #   packages:
+  #     - drupal/drupal_cms_blog
+  #     - kanopi/gin-admin-experience
+  #
+  optional: {}
+
+# This allows you to suppress messages set by the Drupal installer, or various modules,
+# which you might not want to display to users during or after the install process.
+# Each item in this list can either be a string, which is the untranslated message
+# to suppress, or an array of two untranslated strings for pluralized messages which
+# have singular and plural forms.
+hide_messages: []
+
+# This allows the installer to download the appropriate translations if needed; don't
+# change it unless you know what you're doing.
+project: {{ machine_name }}

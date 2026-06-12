@@ -1,0 +1,79 @@
+{#
+  Case study card — Figma Drupal Community NGO Theme
+  Desktop (1:9573): 32px padding, gap 32px/48px, quote 18px, avatar row horizontal
+  Mobile (1:9326): 24px padding, gap 24px/32px, quote 16px, avatar block stacked
+#}
+{% set logo = logo_media|default({}) %}
+{% set avatar = avatar_media|default({}) %}
+{% set has_logo = logo.src is defined and logo.src is not empty %}
+{% set has_avatar = avatar.src is defined and avatar.src is not empty %}
+{% set has_author = author_name is not empty or author_position is not empty or has_avatar %}
+{% set has_cta = cta_label is not empty %}
+
+<article class="card-case-study" data-name="Column">
+  <div class="card-case-study__content">
+    {% if has_logo %}
+      <div class="card-case-study__logo">
+        {% include 'canvas:image' ignore missing with {
+          src: logo.src,
+          alt: logo.alt|default(''),
+          class: 'card-case-study__logo-img',
+          width: logo.width|default(120),
+          height: logo.height|default(48),
+          sizes: '120px'
+        } only %}
+      </div>
+    {% endif %}
+
+    <div class="card-case-study__body">
+      {% if quote is not empty %}
+        <p class="card-case-study__quote">{{ quote }}</p>
+      {% endif %}
+
+      {% if has_author %}
+        <div class="card-case-study__author">
+          {% if has_avatar %}
+            <div class="card-case-study__avatar">
+              {% include 'canvas:image' ignore missing with {
+                src: avatar.src,
+                alt: avatar.alt|default(author_name),
+                class: 'card-case-study__avatar-img',
+                width: avatar.width|default(48),
+                height: avatar.height|default(48),
+                sizes: '48px'
+              } only %}
+            </div>
+          {% endif %}
+          <div class="card-case-study__author-info">
+            {% if author_name is not empty %}
+              <p class="card-case-study__author-name">{{ author_name }}</p>
+            {% endif %}
+            {% if author_position is not empty %}
+              <p class="card-case-study__author-position">{{ author_position }}</p>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if has_cta %}
+    <div class="card-case-study__actions">
+      {% if cta_url is not empty %}
+        <a href="{{ cta_url }}" class="card-case-study__cta">
+          <span class="card-case-study__cta-label">{{ cta_label }}</span>
+          <span class="card-case-study__cta-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </span>
+        </a>
+      {% else %}
+        <span class="card-case-study__cta">
+          <span class="card-case-study__cta-label">{{ cta_label }}</span>
+          <span class="card-case-study__cta-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </span>
+        </span>
+      {% endif %}
+    </div>
+  {% endif %}
+</article>

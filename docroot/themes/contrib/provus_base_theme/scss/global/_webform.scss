@@ -1,0 +1,129 @@
+.subscription-webform {
+  padding: 4rem 0;
+  background: url('../images/webform-bg.png') no-repeat !important;
+  background-size: cover;
+  background-position: center center;
+
+    .field--name-field-title, h2 {
+      @include text-style-headline-h-3;
+      text-shadow: 0px 2px 10px rgba(0,0,0,0.400), 0px 0px 2px rgba(0,0,0,0.800);
+      text-align: center;
+      margin-bottom: 1rem;
+      color: $primary-contrast;
+    }
+
+    form {
+      max-width: 737px;
+      margin: 0 auto;
+      position: relative;
+
+
+      .form-control {
+        width: 100%;
+      }
+    }
+
+    #edit-submit {
+      position: absolute;
+      right: 3px;
+      width: 100px;
+      top: 3px;
+      margin: 0;
+      background-color: $primary;
+      color: $text-contrast;
+      text-align: center;
+      @include text-style-button-large;
+      line-height: rem-calc(16);
+    }
+  }
+
+  .path-frontpage .breadcrumb {
+    display: none;
+  }
+
+  .section-upcoming-events {
+    .container > .layout.row > div:first-child {
+      border-right: 1px solid $primary;
+      padding-right: 2rem;
+    }
+
+    .container > .layout.row > div:last-child {
+      padding-left: 4rem;
+    }
+  }
+
+.webform-submission-form {
+  .js-form-item {
+    label {
+      @include text-style-button-medium();
+
+      &::after {
+        background-image: url('../images/required.svg');
+      }
+    }
+
+    .form-control {
+      border: 1px solid $card-border-color;
+      @include effect-style-elevation-xs();
+      padding: $padding-padding-xxs;
+      border-radius: $padding-padding-xxs;
+      @include text-style-body-body-1();
+      color: $body-color;
+
+      &:hover {
+        border: 1px solid $primary;
+      }
+
+      &:focus,
+      &:active {
+        border: 1.6px solid $primary-colors-primary;
+      }
+
+      &:disabled {
+        border: 1px solid #d4d4d4;
+        background: rgba(0, 0, 0, 0.04);
+      }
+    }
+
+    .description .webform-element-description {
+      color: $text-secondary;
+      @include text-style-caption-caption-1();
+      margin-top: $padding-padding-xs;
+    }
+  }
+
+  .form-actions {
+    .webform-button--submit {
+      background: $white;
+      color: $text-primary;
+      border-color: $secondary;
+      border: 1px solid var(--border-light, #E7E8E9);
+
+      &:hover {
+        background: $background-light;
+        border: 1px solid var(--border-dark, #D9DBDD);
+        text-decoration: none;
+      }
+
+      &:focus {
+        box-shadow: 0 0 0 3px $background-grey;
+        text-decoration: none;
+      }
+
+      &:active {
+        background: $background-lightteal;
+      }
+    }
+  }
+}
+
+.block-webform {
+  .content {
+    .field {
+      .field__item {
+        @include text-style-headline-h-2();
+        color: $body-color;
+      }
+    }
+  }
+}

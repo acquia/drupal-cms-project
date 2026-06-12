@@ -1,0 +1,33 @@
+# This file is copied from ./core/phpstan.neon.dist then set to only
+# ignore errors applicable to this project rather than all errors ignored
+# from Core as phpstan throws errors when ignore lines here are unused.
+
+# Configuration file for PHPStan static code checking, see https://phpstan.org .
+# PHPStan is triggered on Drupal CI in commit-code-check.sh.
+includes:
+  - phar://phpstan.phar/conf/bleedingEdge.neon
+
+parameters:
+  level: 1
+
+  paths:
+    - .
+
+  fileExtensions:
+    - php
+    - module
+    - inc
+    - install
+
+  ignoreErrors:
+    # new static() is a best practice in Drupal, so we cannot fix that.
+    - "#^Unsafe usage of new static#"
+    # Test hook fixtures may use LegacyHook attributes that PHPStan cannot
+    # resolve in some analysis environments.
+    - message: "#Attribute class Drupal\\\\Core\\\\Hook\\\\Attribute\\\\LegacyHook does not exist#"
+      path: tests/modules/ai_agents_tools_test/ai_agents_tools_test.module
+      reportUnmatched: false
+    # Our own usage will be there for 1.x.
+    - '#^Call to method (.*) of deprecated class Drupal\\ai_agents\\PluginBase\\AiAgentBase#'
+    - '#^Access to property (.*) of deprecated class Drupal\\ai_agents\\PluginBase\\AiAgentBase#'
+    - '#^Class (.*) extends deprecated class Drupal\\ai_agents\\PluginBase\\AiAgentBase#'

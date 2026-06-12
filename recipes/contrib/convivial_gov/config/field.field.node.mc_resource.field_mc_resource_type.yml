@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_mc_resource_type
+    - node.type.mc_resource
+    - taxonomy.vocabulary.mc_resource_type
+id: node.mc_resource.field_mc_resource_type
+field_name: field_mc_resource_type
+entity_type: node
+bundle: mc_resource
+label: Type
+description: 'Classify the resource for filtering.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      mc_resource_type: mc_resource_type
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

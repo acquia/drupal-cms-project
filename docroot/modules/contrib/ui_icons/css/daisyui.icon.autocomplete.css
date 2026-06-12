@@ -1,0 +1,67 @@
+/* When tested and stable, open issue on ui_suite_daisyui to integrate in
+the theme */
+/* cspell:ignore daisyui */
+:root {
+  --ui-icons--wrapper-size: 3rem;
+  --ui-icons--preview-size: 2.89rem;
+  --ui-icons--result-size: 2.89rem;
+  --ui-icons--border-radius: var(--rounded-btn, 0.5rem);
+}
+
+.ui-autocomplete:has(.ui-icons-result) {
+  &.ui-widget.ui-widget-content {
+    border-bottom-right-radius: var(--ui-icons--border-radius);
+    border-bottom-left-radius: var(--ui-icons--border-radius);
+  }
+}
+
+/* Fix inline error message */
+.ui-icons-select {
+  .form-item--error-message {
+    --tw-text-opacity: 1;
+    --alert-bg: var(--fallback-er, oklch(var(--er) / 1));
+    --alert-bg-mix: var(--fallback-b1, oklch(var(--b1) / 1));
+
+    margin-top: 0.5rem;
+    padding: 1rem;
+    color: var(--fallback-erc, oklch(var(--erc) / var(--tw-text-opacity)));
+    border-width: 1px;
+    border-color: var(--fallback-er, oklch(var(--er) / 0.2));
+    border-radius: var(--rounded-box, 1rem);
+    background-color: var(--alert-bg);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .ui-icons-preview {
+    border-color: oklch(var(--bc) / 0.2);
+    background-color: oklch(var(--n));
+  }
+
+  .ui-autocomplete:has(.ui-icons-result) {
+    background-color: oklch(var(--n));
+
+    .ui-icons-result-icon-name {
+      color: oklch(var(--nc));
+    }
+
+    &.ui-widget.ui-widget-content {
+      border-color: oklch(var(--bc) / 0.2);
+    }
+  }
+}
+
+/* Icon picker fix */
+.ui-icons-picker-search {
+  input.button {
+    padding: 0.5rem 1rem;
+    border: 1px solid oklch(var(--bc) / 0.2);
+    border-radius: 4px;
+    background-color: var(--ui-icons--preview-bg-color);
+
+    &:hover {
+      cursor: pointer;
+      background-color: oklch(var(--bc) / 0.2);
+    }
+  }
+}

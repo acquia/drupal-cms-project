@@ -1,0 +1,69 @@
+/**
+ * @file theme.css
+ * shadcn/ui-compatible theme variables for Haven Theme.
+ *
+ * You can customize these values without rebuilding the compiled CSS.
+ * Tools like https://tweakcn.com can help generate these values. Copy this
+ * file to your web root, so it sits next to index.php, and clear Drupal's
+ * cache. Then, any changes you make in this file should be reflected right away.
+ */
+
+:root {
+  --background: oklch(0.952 0 89.876);
+  --foreground: oklch(0.321 0 89.876);
+  --card: oklch(1 0 89.876);
+  --card-foreground: oklch(0.321 0 89.876);
+  --primary: oklch(0.292 0.057 154.902);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.653 0.131 230.943);
+  --secondary-foreground: oklch(1 0 89.876);
+  --muted: oklch(0.925 0 89.876);
+  --muted-foreground: oklch(0.321 0 89.876);
+  --accent: oklch(0.935 0.163 102.299);
+  --accent-foreground: oklch(0.321 0 89.876);
+  --destructive: oklch(0.6368 0.2078 25.3313);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.321 0 89.876);
+  --input: oklch(0.872 0.009 258.338);
+  --font-sans: "Geist", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  --font-serif: "Gelasio", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: "Fira Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+  --radius: 1rem;
+  --shadow-x: 0;
+  --shadow-y: 1px;
+  --shadow-blur: 3px;
+  --shadow-spread: 0px;
+  --shadow-opacity: 0.1;
+  --shadow-color: oklch(0 0 0);
+  --shadow-2xs: 0 1px 3px 1px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0 1px 3px 1px hsl(0 0% 0% / 0.05), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow-sm: 0 1px 3px 1px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
+  --shadow: 0 1px 3px 1px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
+  --shadow-md: 0 1px 3px 1px hsl(0 0% 0% / 0.1), 0 4px 6px -2px hsl(0 0% 0% / 0.1);
+  --shadow-lg: 0 1px 3px 1px hsl(0 0% 0% / 0.1), 0 8px 10px -2px hsl(0 0% 0% / 0.1);
+  --shadow-xl: 0 1px 3px 1px hsl(0 0% 0% / 0.1), 0 12px 14px -3px hsl(0 0% 0% / 0.1);
+  --shadow-2xl: 0 1px 3px 1px hsl(0 0% 0% / 0.1), 0 16px 18px -3px hsl(0 0% 0% / 0.1);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+
+  /* Extra color variants for primary, secondary and accent */
+  /* color-mix() blends two colors in a specified color space. */
+  /* Syntax: color-mix(in <colorspace>, <color1> <percentage>, <color2>) */
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix */
+  --primary-light: color-mix(in oklch, var(--primary) 80%, white);
+  --primary-dark: color-mix(in oklch, var(--primary) 80%, black);
+  --secondary-light: color-mix(in oklch, var(--secondary) 90%, white);
+  --secondary-dark: color-mix(in oklch, var(--secondary) 85%, black);
+  --accent-light: color-mix(in oklch, var(--accent) 95%, white);
+  --accent-dark: color-mix(in oklch, var(--accent) 95%, black);
+
+  /* Set navbar height for hero billboard overlay */
+  --navbar-height: calc(var(--spacing) * 14);
+
+  @media (min-width: 768px) {
+    --navbar-height: calc(var(--spacing) * 20);
+  }
+  @media (min-width: 1280px) {
+    --navbar-height: calc(var(--spacing) * 22);
+  }
+}

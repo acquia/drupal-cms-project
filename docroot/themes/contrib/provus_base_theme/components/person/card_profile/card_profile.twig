@@ -1,0 +1,33 @@
+<div class="card-wrapper provus-card-tall">
+  <a href="{{ url }}" rel="bookmark">
+    <div{% if content_attributes is defined and content_attributes %}{{ content_attributes.addClass('card') }}{% else %} class="card"{% endif %}>
+      <div class="card-wrapper">
+        {% if image_url %}
+          <div class="card-img-top">
+            <img src="{{ image_url.src }}" alt="{{ image_url.alt ? image_url.alt : 'Image' }}">
+          </div>
+        {% endif %}
+        <div class="card-body">
+          <div class="card-title">{{ first_name }} {{ last_name }}</div>
+          {% if content or job_title or phone %}
+            <div class="card-text">
+              {% if job_title|render %}
+              <div>{{ job_title }}</div>
+              {% endif %}
+              {% if content %}
+              <div>{{ content }}</div>
+              {% endif %}
+              <div>
+              {% if phone %}
+                <p>
+                  <a href="tel:{{ phone|render|striptags|trim }}" aria-label="Telephone Number: {{ phone|render|striptags|trim }}">{{ phone|render|striptags }}</a>
+                </p>
+              {% endif %}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </a>
+</div>

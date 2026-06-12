@@ -1,0 +1,790 @@
+eca.event.content_entity_base:
+  type: eca.event.plugin
+  label: 'Content entity base event'
+  mapping:
+    type:
+      type: string
+      label: 'Type (and bundle)'
+      constraints:
+        NotNull: []
+        Choice:
+          callback: '\Drupal\eca\Validation\EcaConstraintCallbacks::getAllValidContentEntityTypesAndBundlesIncludeAny'
+
+eca.event.plugin.content_entity:bundlecreate:
+  type: eca.event.content_entity_base
+  label: 'Content Entity Bundle Create'
+
+eca.event.plugin.content_entity:bundledelete:
+  type: eca.event.content_entity_base
+  label: 'Content Entity Bundle Delete'
+
+eca.event.plugin.content_entity:create:
+  type: eca.event.content_entity_base
+  label: 'Content Entity Create'
+
+eca.event.plugin.content_entity:revisioncreate:
+  type: eca.event.content_entity_base
+  label: 'Content Entity Revision Create'
+
+eca.event.plugin.content_entity:preload:
+  type: eca.event.content_entity_base
+  label: 'Content Entity Preload'
+
+eca.event.plugin.content_entity:load:
+  type: eca.event.content_entity_base
+  label: 'Content Entity Load'
+
+eca.event.plugin.content_entity:storageload:
+  type: eca.event.content_entity_base
+  label: 'Content Entity Storage Load'
+
+eca.event.plugin.content_entity:presave:
+  type: eca.event.content_entity_base
+  label: 'Content Entity Presave'
+
+eca.event.plugin.content_entity:insert:
+  type: eca.event.content_entity_base
+  label: 'Content Entity Insert'
+
+eca.event.plugin.content_entity:update:
+  type: eca.event.content_entity_base
+  label: 'Content Entity Update'
+
+eca.event.plugin.content_entity:translationcreate:
+  type: eca.event.content_entity_base
+  label: 'Content Entity Translation Create'
+
+eca.event.plugin.content_entity:translationinsert:
+  type: eca.event.content_entity_base
+  label: 'Content Entity Translation Insert'
+
+eca.event.plugin.content_entity:translationdelete:
+  type: eca.event.content_entity_base
+  label: 'Content Entity Translation Delete'
+
+eca.event.plugin.content_entity:predelete:
+  type: eca.event.content_entity_base
+  label: 'Content Entity Predelete'
+
+eca.event.plugin.content_entity:delete:
+  type: eca.event.content_entity_base
+  label: 'Content Entity Delete'
+
+eca.event.plugin.content_entity:revisiondelete:
+  type: eca.event.content_entity_base
+  label: 'Content Entity Revision Delete'
+
+eca.event.plugin.content_entity:view:
+  type: eca.event.content_entity_base
+  label: 'Content Entity View'
+
+eca.event.plugin.content_entity:viewmodealter:
+  type: eca.event.content_entity_base
+  label: 'Content Entity View Mode Alter'
+
+eca.event.plugin.content_entity:prepareview:
+  type: eca.event.content_entity_base
+  label: 'Content Entity Prepare View'
+
+eca.event.plugin.content_entity:prepareform:
+  type: eca.event.content_entity_base
+  label: 'Content Entity Prepare Form'
+
+eca.event.plugin.content_entity:validate:
+  type: eca.event.content_entity_base
+  label: 'Content Entity Validate'
+
+eca.event.plugin.content_entity:fieldvaluesinit:
+  type: eca.event.content_entity_base
+  label: 'Content Entity Field Values Init'
+
+eca.event.plugin.content_entity:custom:
+  type: mapping
+  label: 'Content Entity Custom'
+  mapping:
+    event_id:
+      type: string
+      label: 'Event ID'
+
+eca.event.plugin.content_entity:reference_selection:
+  type: eca.event.content_entity_base
+  label: 'Content Entity Reference Selection'
+  mapping:
+    field_name:
+      type: string
+      label: 'Restrict by field (machine name)'
+    token_name:
+      type: label
+      label: 'Token name holding the selection'
+
+eca.event.plugin.content_entity:options_selection:
+  type: eca.event.content_entity_base
+  label: 'Content Entity Options Selection'
+  mapping:
+    field_name:
+      type: string
+      label: 'Restrict by field (machine name)'
+    token_name:
+      type: label
+      label: 'Token name holding the selection'
+
+eca.condition.plugin.eca_entity_field_is_accessible:
+  type: eca.condition.plugin
+  label: 'Entity Field Is Accessible'
+  mapping:
+    field_name:
+      type: string
+      label: 'Field machine name'
+      constraints:
+        NotBlank: []
+    operation:
+      type: string
+      label: 'Operation'
+      constraints:
+        Choice:
+          - 'view'
+          - 'update'
+          - 'delete'
+        NotBlank: []
+    entity:
+      type: string
+      label: 'Entity'
+
+eca.condition.plugin.eca_entity_exists:
+  type: eca.condition.plugin
+  label: 'Entity Exists'
+  mapping:
+    from:
+      type: string
+      label: 'Load entity from'
+      constraints:
+        Choice:
+          - current
+          - id
+          - properties
+    entity_type:
+      type: string
+      label: 'Entity type'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Validation\EcaConstraintCallbacks::getAllValidContentEntityTypesAndNone'
+    entity_id:
+      type: string
+      label: 'Entity ID'
+    revision_id:
+      type: string
+      label: 'Revision ID'
+    properties:
+      type: text
+      label: 'Property values'
+    langcode:
+      type: string
+      label: 'Language'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Validation\EcaConstraintCallbacks::getAllValidLangcodes'
+    latest_revision:
+      type: boolean
+      label: 'Load latest revision'
+    unchanged:
+      type: boolean
+      label: 'Load unchanged values'
+    entity:
+      type: string
+      label: 'Entity'
+
+eca.condition.plugin.eca_entity_diff:
+  type: eca.condition.plugin
+  label: 'Entity Diff'
+  mapping:
+    token_name:
+      type: required_label
+      label: 'Name of token'
+    compare_token_name:
+      type: string
+      label: 'compare_token_name'
+      constraints:
+        NotBlank: []
+    exclude_fields:
+      type: sequence
+      label: 'Exclude fields'
+      sequence:
+        type: string
+        label: 'Exclude field'
+    include_fields:
+      type: sequence
+      label: 'Include fields'
+      sequence:
+        type: string
+        label: 'Include field'
+    entity:
+      type: string
+      label: 'Entity'
+
+eca.condition.plugin.eca_entity_is_new:
+  type: eca.condition.plugin
+  label: 'Entity Is New'
+  mapping:
+    entity:
+      type: string
+      label: 'Entity'
+
+eca.condition.plugin.eca_entity_type_bundle:
+  type: eca.condition.plugin
+  label: 'Entity Type and Bundle'
+  mapping:
+    type:
+      type: string
+      label: 'Entity type (and bundle)'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Validation\EcaConstraintCallbacks::getAllValidContentEntityTypesAndBundles'
+    entity:
+      type: string
+      label: 'Entity'
+
+eca.condition.plugin.eca_content_form_display_mode:
+  type: eca.condition.plugin
+  label: 'Content Form Display Mode'
+  mapping:
+    display_mode:
+      type: string
+      label: 'Form display mode'
+    operator:
+      type: string
+      label: 'Comparison operator'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Plugin\ECA\Condition\StringComparisonBase::getAllValidOperators'
+    type:
+      type: string
+      label: 'Comparison type'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Plugin\ECA\Condition\StringComparisonBase::getAllValidTypes'
+    case:
+      type: boolean
+      label: 'Case sensitive comparison'
+
+eca.condition.plugin.eca_entity_field_value:
+  type: eca.condition.plugin
+  label: 'Entity Field Value'
+  mapping:
+    expected_value:
+      type: string
+      label: 'Expected field value'
+    field_name:
+      type: string
+      label: 'Field name'
+    operator:
+      type: string
+      label: 'Comparison operator'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Plugin\ECA\Condition\StringComparisonBase::getAllValidOperators'
+    type:
+      type: string
+      label: 'Comparison type'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Plugin\ECA\Condition\StringComparisonBase::getAllValidTypes'
+    case:
+      type: boolean
+      label: 'Case sensitive comparison'
+    entity:
+      type: string
+      label: 'Entity'
+
+eca.condition.plugin.eca_entity_original_field_value:
+  type: eca.condition.plugin
+  label: 'Entity Original Field Value'
+  mapping:
+    expected_value:
+      type: string
+      label: 'Expected field value'
+    field_name:
+      type: string
+      label: 'Field name'
+    operator:
+      type: string
+      label: 'Comparison operator'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Plugin\ECA\Condition\StringComparisonBase::getAllValidOperators'
+    type:
+      type: string
+      label: 'Comparison type'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Plugin\ECA\Condition\StringComparisonBase::getAllValidTypes'
+    case:
+      type: boolean
+      label: 'Case sensitive comparison'
+    entity:
+      type: string
+      label: 'Entity'
+
+eca.condition.plugin.eca_entity_field_value_changed:
+  type: eca.condition.plugin
+  label: 'Entity Field Value Changed'
+  mapping:
+    field_name:
+      type: string
+      label: 'Field name'
+    entity:
+      type: string
+      label: 'Entity'
+
+eca.condition.plugin.eca_entity_is_accessible:
+  type: eca.condition.plugin
+  label: 'Entity Is Accessible'
+  mapping:
+    operation:
+      type: string
+      label: 'Operation'
+      constraints:
+        Choice:
+          - 'view'
+          - 'update'
+          - 'delete'
+          - 'create'
+        NotBlank: []
+    entity:
+      type: string
+      label: 'Entity'
+
+eca.condition.plugin.eca_entity_field_value_empty:
+  type: eca.condition.plugin
+  label: 'Entity Field Value Empty'
+  mapping:
+    field_name:
+      type: string
+      label: 'Field name'
+    entity:
+      type: string
+      label: 'Entity'
+
+action.configuration.eca_content_validation_error:
+  type: mapping
+  label: 'Configuration for the "Content Validation Error" action'
+  mapping:
+    message:
+      type: text
+      label: 'Error message'
+      constraints:
+        NotBlank: []
+    property:
+      type: string
+      label: 'Property path'
+    object:
+      type: string
+      label: 'Token name holding the entity'
+
+action.configuration.eca_clone_entity:
+  type: mapping
+  label: 'Configuration for the "Clone Entity" action'
+  mapping:
+    token_name:
+      type: label
+      label: 'Name of token'
+    label:
+      type: string
+      label: 'Entity label'
+    published:
+      type: boolean
+      label: 'Published'
+    owner:
+      type: string
+      label: 'Owner UID'
+    object:
+      type: string
+      label: 'Token name holding the entity'
+
+action.configuration.eca_diff_entity:
+  type: mapping
+  label: 'Configuration for the "Diff Entity" action'
+  mapping:
+    return_values:
+      type: boolean
+      label: 'Return values'
+    token_name:
+      type: required_label
+      label: 'Name of token'
+    compare_token_name:
+      type: string
+      label: 'compare_token_name'
+      constraints:
+        NotBlank: []
+    exclude_fields:
+      type: sequence
+      label: 'Exclude fields'
+      sequence:
+        type: string
+        label: 'Exclude field'
+    include_fields:
+      type: sequence
+      label: 'Include fields'
+      sequence:
+        type: string
+        label: 'Include field'
+    object:
+      type: string
+      label: 'Token name holding the entity'
+
+action.configuration.eca_new_entity:
+  type: mapping
+  label: 'Configuration for the "New Entity" action'
+  mapping:
+    token_name:
+      type: label
+      label: 'Name of token'
+    type:
+      type: string
+      label: 'Entity Type'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Validation\EcaConstraintCallbacks::getAllValidContentEntityTypesAndBundles'
+    langcode:
+      type: string
+      label: 'Language'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Validation\EcaConstraintCallbacks::getAllValidLangcodes'
+    label:
+      type: string
+      label: 'Entity label'
+    published:
+      type: boolean
+      label: 'Published'
+    owner:
+      type: string
+      label: 'Owner UID'
+    object:
+      type: string
+      label: 'Token name holding the entity'
+
+action.configuration.eca_get_default_field_value:
+  type: mapping
+  label: 'Configuration for the "Get Default Field Value" action'
+  mapping:
+    field_name:
+      type: string
+      label: 'Field name'
+    token_name:
+      type: label
+      label: 'Name of token'
+    object:
+      type: string
+      label: 'Token name holding the entity'
+
+action.configuration.eca_get_field_value:
+  type: mapping
+  label: 'Configuration for the "Get Field Value" action'
+  mapping:
+    field_name:
+      type: string
+      label: 'Field name'
+    token_name:
+      type: label
+      label: 'Name of token'
+    object:
+      type: string
+      label: 'Token name holding the entity'
+
+action.configuration.eca_get_bundle_list:
+  type: mapping
+  label: 'Configuration for the "Get Bundle List" action'
+  mapping:
+    token_name:
+      type: required_label
+      label: 'Name of token'
+    type:
+      type: string
+      label: 'Type'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Validation\EcaConstraintCallbacks::getAllValidContentEntityTypes'
+    mode:
+      type: string
+      label: 'Mode'
+      constraints:
+        Choice:
+          - ids
+          - labels
+
+action.configuration.eca_get_entity_type_list:
+  type: mapping
+  label: 'Configuration for the "Get Entity Type List" action'
+  mapping:
+    token_name:
+      type: required_label
+      label: 'Name of token'
+    mode:
+      type: string
+      label: 'Mode'
+      constraints:
+        Choice:
+          - ids
+          - labels
+
+action.configuration.eca_token_load_entity:
+  type: mapping
+  label: 'Configuration for the "Token Load Entity" action'
+  mapping:
+    token_name:
+      type: label
+      label: 'Name of token'
+    from:
+      type: string
+      label: 'Load entity from'
+      constraints:
+        Choice:
+          - current
+          - id
+          - properties
+    entity_type:
+      type: string
+      label: 'Entity type'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Validation\EcaConstraintCallbacks::getAllValidContentEntityTypesAndNone'
+    entity_id:
+      type: string
+      label: 'Entity ID'
+    revision_id:
+      type: string
+      label: 'Revision ID'
+    properties:
+      type: text
+      label: 'Property values'
+    langcode:
+      type: string
+      label: 'Language'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Validation\EcaConstraintCallbacks::getAllValidLangcodes'
+    latest_revision:
+      type: boolean
+      label: 'Load latest revision'
+    unchanged:
+      type: boolean
+      label: 'Load unchanged values'
+    object:
+      type: string
+      label: 'Token name holding the entity'
+
+action.configuration.eca_token_load_entity_ref:
+  type: mapping
+  label: 'Configuration for the "Token Load Entity Reference" action'
+  mapping:
+    field_name_entity_ref:
+      type: string
+      label: 'Field name entity reference'
+    token_name:
+      type: label
+      label: 'Name of token'
+    from:
+      type: string
+      label: 'Load entity from'
+      constraints:
+        Choice:
+          - current
+          - id
+          - properties
+    entity_type:
+      type: string
+      label: 'Entity type'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Validation\EcaConstraintCallbacks::getAllValidContentEntityTypesAndNone'
+    entity_id:
+      type: string
+      label: 'Entity ID'
+    revision_id:
+      type: string
+      label: 'Revision ID'
+    properties:
+      type: text
+      label: 'Property values'
+    langcode:
+      type: string
+      label: 'Language'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Validation\EcaConstraintCallbacks::getAllValidLangcodes'
+    latest_revision:
+      type: boolean
+      label: 'Load latest revision'
+    unchanged:
+      type: boolean
+      label: 'Load unchanged values'
+    object:
+      type: string
+      label: 'Token name holding the entity'
+
+action.configuration.eca_set_field_value:
+  type: mapping
+  label: 'Configuration for the "Set Field Value" action'
+  mapping:
+    field_name:
+      type: string
+      label: 'Field name'
+    field_value:
+      type: text
+      label: 'Field value'
+    method:
+      type: string
+      label: 'Method'
+      constraints:
+        Choice:
+          # @see \Drupal\eca_content\Plugin\Action\FieldUpdateActionBase::buildConfigurationForm
+          - 'set:clear'
+          - 'set:force_clear'
+          - 'set:empty'
+          - 'append:not_full'
+          - 'append:drop_first'
+          - 'append:drop_last'
+          - 'prepend:not_full'
+          - 'prepend:drop_first'
+          - 'prepend:drop_last'
+          - 'remove'
+    strip_tags:
+      type: boolean
+      label: 'Strip tags'
+    trim:
+      type: boolean
+      label: 'Trim'
+    save_entity:
+      type: boolean
+      label: 'Save entity'
+    object:
+      type: string
+      label: 'Token name holding the entity'
+
+action.configuration.eca_content_set_form_display:
+  type: mapping
+  label: 'Configuration for the "Content Set Form Display" action'
+  mapping:
+    display_mode:
+      type: string
+      label: 'Form display mode'
+
+action.configuration.eca_set_new_revision:
+  type: mapping
+  label: 'Configuration for the "Set New Revision" action'
+  mapping:
+    new_revision:
+      type: boolean
+      label: 'Create new revision'
+    revision_log:
+      type: string
+      label: 'Revision Log'
+    revision_uid:
+      type: string
+      label: 'Revision user'
+    object:
+      type: string
+      label: 'Token name holding the entity'
+
+action.configuration.eca_set_view_mode:
+  type: mapping
+  label: 'Configuration for the "Set View Mode" action'
+  mapping:
+    new_view_mode:
+      type: string
+      label: 'View mode'
+
+action.configuration.eca_list_add_entity:
+  type: mapping
+  label: 'Configuration for the "List Add Entity" action'
+  mapping:
+    method:
+      type: string
+      label: 'Method'
+      constraints:
+        Choice:
+          # @see \Drupal\eca_content\Plugin\Action\FieldUpdateActionBase::buildConfigurationForm
+          - 'set:clear'
+          - 'set:force_clear'
+          - 'set:empty'
+          - 'append:not_full'
+          - 'append:drop_first'
+          - 'append:drop_last'
+          - 'prepend:not_full'
+          - 'prepend:drop_first'
+          - 'prepend:drop_last'
+          - 'remove'
+        NotBlank: []
+    index:
+      type: string
+      label: 'Index key'
+    list_token:
+      type: string
+      label: 'Token containing the list'
+    object:
+      type: string
+      label: 'Token name holding the entity'
+
+action.configuration.eca_list_remove_entity:
+  type: mapping
+  label: 'Configuration for the "List Remove Entity" action'
+  mapping:
+    token_name:
+      type: label
+      label: 'Name of token'
+    method:
+      type: string
+      label: 'Method'
+      constraints:
+        Choice:
+          # @see \Drupal\eca_content\Plugin\Action\FieldUpdateActionBase::buildConfigurationForm
+          - 'set:clear'
+          - 'set:force_clear'
+          - 'set:empty'
+          - 'append:not_full'
+          - 'append:drop_first'
+          - 'append:drop_last'
+          - 'prepend:not_full'
+          - 'prepend:drop_first'
+          - 'prepend:drop_last'
+          - 'remove'
+        NotBlank: []
+    index:
+      type: string
+      label: 'Index key'
+    list_token:
+      type: string
+      label: 'Token containing the list'
+    object:
+      type: string
+      label: 'Token name holding the entity'
+
+action.configuration.eca_trigger_content_entity_custom_event:
+  type: mapping
+  label: 'Configuration for the "Trigger Content Entity Custom Event" action'
+  mapping:
+    event_id:
+      type: string
+      label: 'Event ID'
+    tokens:
+      type: text
+      label: 'Tokens to forward'
+    object:
+      type: string
+      label: 'Token name holding the entity'
+
+action.configuration.eca_delete_entity:
+  type: mapping
+  label: 'Entity: delete'
+  mapping:
+    object:
+      type: string
+      label: 'Token name holding the entity'
+
+action.configuration.eca_save_entity:
+  type: mapping
+  label: 'Entity: save'
+  mapping:
+    object:
+      type: string
+      label: 'Token name holding the entity'

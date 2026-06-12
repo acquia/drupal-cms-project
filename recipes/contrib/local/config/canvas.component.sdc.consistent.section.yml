@@ -1,0 +1,67 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - consistent
+active_version: 7538f7577dc8b179
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        section_columns:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 33-33-33
+          expression: ℹ︎list_string␟value
+        section_background:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: none
+          expression: ℹ︎list_string␟value
+        section_header:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+        section_footer:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        section_header_slot:
+          title: Header
+        section_main_slot:
+          title: Grid
+        section_footer_slot:
+          title: Footer
+label: Section
+id: sdc.consistent.section
+provider: consistent
+source: sdc
+source_local_id: 'consistent:section'

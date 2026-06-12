@@ -1,0 +1,54 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - morphos
+active_version: f3bea52a1de2618d
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        placement:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        action_item:
+          title: Action
+          description: 'Add button item to open and close the modal.'
+        box_items:
+          title: Box
+          description: 'Add content items to the modal box.'
+  65d359cbfa7566a7:
+    settings:
+      prop_field_definitions:
+        placement:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        action_item:
+          title: Action
+          description: 'Add button item to open and close the modal.'
+        box_items:
+          title: Box
+          description: 'Add content items to the modal box.'
+label: Modal
+id: sdc.morphos.modal
+provider: morphos
+source: sdc
+source_local_id: 'morphos:modal'

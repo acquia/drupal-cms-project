@@ -1,0 +1,73 @@
+.block-provus-cta .cta-wrapper {
+  .cta-title {
+    @include text-style-headline-h-2;
+  }
+
+  .cta-body {
+    @include text-style-body-body-1;
+  }
+
+  &.Primary {
+    background-color: $background-colors-background-dark !important;
+
+    &.has-bg-image .cta-bg-image-container::before {
+      background: $background-colors-background-dark;
+      opacity: 0.5;
+    }
+  }
+
+  &.Secondary {
+    background-color: $background-colors-background-light !important;
+
+    &.has-bg-image .cta-bg-image-container::before {
+      background: $background-colors-background-light;
+      opacity: 0.5;
+    }
+
+    .cta-body {
+      color: $text-colors-text-primary !important;
+    }
+
+    .cta-title {
+      color: $primary-colors-primary !important;
+    }
+
+    .cta-links .btn.btn-primary {
+      @include text-style-button-secondary;
+      background: $background-colors-background-white;
+
+      &:hover {
+        box-shadow: 0 0 0 3px $primary-colors-primary-contrast;
+      }
+    }
+  }
+
+  &:not(.Primary):not(.Secondary) .cta-links .btn.btn-primary  {
+    color: $primary-colors-primary;
+    text-decoration: underline;
+    padding: 0;
+    background: no-repeat;
+    text-transform: none;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    border: 0;
+    box-shadow: none;
+    letter-spacing: normal;
+
+    &:hover {
+      text-decoration: none;
+      box-shadow: none;
+    }
+
+    &:active {
+      color: $primary-colors-primary-accent;
+    }
+
+    &:focus {
+      color: $primary-colors-primary-hover;
+      text-decoration: none;
+    }
+  }
+}
+

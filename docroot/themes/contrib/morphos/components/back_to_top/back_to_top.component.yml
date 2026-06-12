@@ -1,0 +1,26 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Back to top
+description: A floating button that appears on scroll to quickly return the user to the top of the page.
+group: Global
+status: stable
+props:
+  type: object
+  properties:
+    text:
+      type: string
+      title: Text
+      default: Back to top
+      examples:
+        - Back to top
+    anchor:
+      type: string
+      title: Anchor
+      default: '#top'
+      examples:
+        - '#top'
+libraryOverrides:
+  dependencies:
+    - core/drupal
+    - core/once
+  js:
+    ../../dist/js/back_to_top.js: {}

@@ -1,0 +1,9 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Scheme Switcher
+description: A toggle that allows users to switch between light, dark, or high-contrast visual themes.
+group: Global
+status: stable
+libraryOverrides:
+  css:
+    component:
+      ../../dist/css/scheme_switcher.css: { minified: true }

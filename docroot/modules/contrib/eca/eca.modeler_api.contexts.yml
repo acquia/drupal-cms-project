@@ -1,0 +1,128 @@
+eca_base:
+  topic: 'Commonly used ECA components'
+  model_owner: eca
+  components:
+    start:
+      plugins:
+        - kernel:controller
+    link:
+      plugins:
+        - eca_scalar
+        - eca_count
+        - eca_route_match
+    element:
+      plugins:
+        - action_message_action
+        - eca_token_set_value
+        - eca_switch_account
+        - eca_token_load_entity
+        - eca_list_remove
+        - action_send_email_action
+        - eca_views_query
+        - action_goto_action
+        - eca_token_load_route_param
+eca_form:
+  topic: 'Altering Drupal forms'
+  model_owner: eca
+  includes:
+    - eca_base
+  components:
+    start:
+      plugins:
+        - form:form_build
+        - form:form_submit
+        - form:form_validate
+    link:
+      plugins:
+        - eca_form_operation
+        - eca_form_field_value
+        - eca_form_field_exists
+        - eca_form_triggered
+        - eca_form_has_errors
+        - eca_form_submitted
+    element:
+      plugins:
+        - eca_form_add_ajax
+        - eca_form_add_container_element
+        - eca_form_add_group_element
+        - eca_form_add_hiddenfield
+        - eca_form_add_optionsfield
+        - eca_form_add_submit_button
+        - eca_form_add_textfield
+        - eca_form_build_entity
+        - eca_form_field_access
+        - eca_form_field_add_state
+        - eca_form_field_default_value
+        - eca_form_field_disable
+        - eca_form_field_get_default_value
+        - eca_form_field_get_options
+        - eca_form_field_get_value
+        - eca_form_field_require
+        - eca_form_field_set_error
+        - eca_form_field_set_label
+        - eca_form_field_set_options
+        - eca_form_field_set_value
+        - eca_form_field_set_weight
+        - eca_form_get_errors
+        - eca_form_set_action
+        - eca_form_set_method
+        - eca_form_state_get_property_value
+        - eca_form_state_set_property_value
+        - eca_form_state_set_rebuild
+        - eca_form_state_set_redirect
+eca_endpoint:
+  topic: 'Define routes'
+  model_owner: eca
+  includes:
+    - eca_base
+  components:
+    start:
+      plugins:
+        - eca_endpoint:access
+        - eca_endpoint:response
+    element:
+      plugins:
+        - eca_endpoint_get_client_ip
+        - eca_endpoint_get_path_argument
+        - eca_endpoint_get_query_parameter
+        - eca_endpoint_get_request_content
+        - eca_endpoint_get_request_content_type
+        - eca_endpoint_get_request_header
+        - eca_endpoint_get_request_method
+        - eca_endpoint_get_request_uri
+        - eca_endpoint_set_ajax_response_add_css
+        - eca_endpoint_set_ajax_response_add_js
+        - eca_endpoint_set_ajax_response_after
+        - eca_endpoint_set_ajax_response_alert
+        - eca_endpoint_set_ajax_response_announce
+        - eca_endpoint_set_ajax_response_append
+        - eca_endpoint_set_ajax_response_before
+        - eca_endpoint_set_ajax_response_changed
+        - eca_endpoint_set_ajax_response_close_dialog
+        - eca_endpoint_set_ajax_response_close_modal_dialog
+        - eca_endpoint_set_ajax_response_css
+        - eca_endpoint_set_ajax_response_data
+        - eca_endpoint_set_ajax_response_focus_first
+        - eca_endpoint_set_ajax_response_html
+        - eca_endpoint_set_ajax_response_insert
+        - eca_endpoint_set_ajax_response_invoke
+        - eca_endpoint_set_ajax_response_message
+        - eca_endpoint_set_ajax_response_open_dialog
+        - eca_endpoint_set_ajax_response_open_modal_dialog
+        - eca_endpoint_set_ajax_response_open_off_canvas_dialog
+        - eca_endpoint_set_ajax_response_prepend
+        - eca_endpoint_set_ajax_response_redirect
+        - eca_endpoint_set_ajax_response_replace
+        - eca_endpoint_set_ajax_response_restripe
+        - eca_endpoint_set_ajax_response_scroll_top
+        - eca_endpoint_set_ajax_response_set_dialog_option
+        - eca_endpoint_set_ajax_response_set_dialog_title
+        - eca_endpoint_set_ajax_response_settings
+        - eca_endpoint_set_ajax_response_tabledrag_warning
+        - eca_endpoint_set_ajax_response_update_build_id
+        - eca_endpoint_set_response_content
+        - eca_endpoint_set_response_content_type
+        - eca_endpoint_set_response_expires
+        - eca_endpoint_set_response_headers
+        - eca_endpoint_set_response_max_age
+        - eca_endpoint_set_response_status_code

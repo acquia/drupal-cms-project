@@ -1,0 +1,76 @@
+block.settings.canvas_test_block_input_validatable:
+  type: block_settings
+  label: 'Canvas Test Block settings'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    name:
+      type: string
+      label: 'Name'
+block.settings.canvas_test_block_input_unvalidatable:
+  type: block_settings
+  label: 'Canvas Test Block settings'
+  mapping:
+    name:
+      type: string
+      label: 'Name'
+block.settings.canvas_test_block_input_validatable_crash:
+  type: block_settings
+  label: 'Canvas Test Block settings'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    name:
+      type: string
+      label: 'Name'
+    crash:
+      type: boolean
+      label: 'Crash'
+block.settings.canvas_test_block_input_invalid_default:
+  type: block_settings
+  label: 'Canvas Test Block settings'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    name:
+      type: string
+      label: 'Name'
+    crash:
+      type: boolean
+      label: 'Crash'
+block.settings.canvas_test_block_input_schema_change_poc:
+  type: block_settings
+  label: 'Input Schema Change POC settings'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    foo:
+      type: string
+      label: 'Foo'
+      constraints:
+        Choice:
+          choices: [bar, baz]
+block.settings.canvas_test_block_input_translatability:
+  type: block_settings
+  label: 'Canvas Test Block for testing input translatability'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    top_level_translatable_regardless_of_type:
+      type: ignore
+      translatable: true
+      label: 'Translatable `type: ignore`'
+    deeply_nested_translatable:
+      type: sequence
+      constraints:
+        NotBlank: ~
+      sequence:
+        type: mapping
+        mapping:
+          foo:
+             type: string
+             label: 'Favorite Foo'
+          bar:
+            # 💡This is the nested translatable. Note translatability is inherited from the parent type (`type: label`).
+            type: required_label
+            label: 'Favorite Bar'

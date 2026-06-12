@@ -1,0 +1,232 @@
+/**
+ * @file stat-card.css
+ * SDC Stat Card component styles.
+ *
+ * Three cases — detected automatically in Twig:
+ *
+ *  text-only   — Figma nodes 1:11127 (desktop) / 1:10835 (mobile)
+ *                Single card panel, justified top↔bottom.
+ *                Desktop: value 80px, justify-between fills column height.
+ *                Mobile: value 56px, min-height 250px, gap 32px.
+ *
+ *  image-only  — Standalone image at 3:2 aspect, rounded corners.
+ *
+ *  combined    — Figma nodes 1:11134/1:11140 (desktop) / 1:10842/1:10848 (mobile)
+ *                Image stacked with stat panel (32px gap, both breakpoints).
+ *                Panel gap: 32px mobile → 48px desktop.
+ *                Desktop value 80px, mobile value 56px.
+ *
+ * Design tokens used:
+ *   --card              → #f2f2f2  (Figma: color-scheme-1/foreground)
+ *   --card-foreground   → #020704  (Figma: color-scheme-1/text)
+ *   --border            → rgba(2,7,4,0.15) (Figma: color-scheme-1/border)
+ *   --font-display      → "Roboto" (Figma: Roboto Bold for stat numbers)
+ *   --font-serif        → IBM Plex Serif (Figma: H6 heading)
+ *   --font-sans         → DM Sans (Figma: description body)
+ *   --radius            → 8px
+ */
+
+/* ============================================================
+   Shared outer wrapper
+   ============================================================ */
+
+.stat-card {
+  width: 100%;
+}
+
+/* When used in section-grid first column — stretch to fill column height */
+.stat-card--full-height {
+  height: 100%;
+  align-self: stretch;
+}
+
+.stat-card--full-height .stat-card__panel {
+  flex: 1;
+  min-height: 0;
+}
+
+/* ============================================================
+   IMAGE-ONLY case
+   Figma: aspect 405/270 desktop ≈ 335/225 mobile ≈ 3:2
+          border-radius 8px, object-cover, pointer-events none
+   ============================================================ */
+
+.stat-card--image-only {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* canvas:image may wrap in a <picture> or <img> directly */
+.stat-card--image-only picture,
+.stat-card--image-only img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ============================================================
+   TEXT-ONLY case
+   Outer wrapper stretches to fill parent flex column height
+   on desktop so the panel's justify-between works correctly.
+   ============================================================ */
+
+.stat-card--text-only {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+@media (min-width: 48rem) {
+  /* In a flex-row parent (the section grid), stretch to match siblings */
+  .stat-card--text-only {
+    align-self: stretch;
+  }
+}
+
+/* ============================================================
+   COMBINED case
+   Column: image + panel stacked, gap 32px between them
+   ============================================================ */
+
+.stat-card--combined {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 8); /* 32px */
+}
+
+/* ============================================================
+   Image wrapper (inside combined)
+   Figma: aspect-ratio 3:2, rounded, object-cover
+   ============================================================ */
+
+.stat-card__image-wrap {
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius);
+  overflow: hidden;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+/* canvas:image renders <picture> + <img> or just <img> */
+.stat-card__image-wrap picture,
+.stat-card__image-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* ============================================================
+   Stat panel — card surface (used by both text-only & combined)
+   Figma: bg #f2f2f2, border 1px rgba(2,7,4,0.15), radius 8px, padding 32px
+   ============================================================ */
+
+.stat-card__panel {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: calc(var(--spacing) * 8); /* 32px */
+  display: flex;
+  flex-direction: column;
+  color: var(--card-foreground);
+  width: 100%;
+}
+
+/* text-only: panel fills parent, value at top / content at bottom */
+.stat-card--text-only .stat-card__panel {
+  flex: 1;
+  min-height: 250px; /* Figma mobile: h-[250px]           */
+  gap: calc(var(--spacing) * 8); /* 32px gap when height is constrained */
+}
+
+@media (min-width: 48rem) {
+  .stat-card--text-only .stat-card__panel {
+    min-height: unset;
+    justify-content: space-between; /* number top ↔ content bottom  */
+  }
+}
+
+/* combined: fixed gap between value and content */
+.stat-card--combined .stat-card__panel {
+  gap: calc(var(--spacing) * 8); /* 32px mobile */
+}
+
+@media (min-width: 48rem) {
+  .stat-card--combined .stat-card__panel {
+    gap: calc(var(--spacing) * 12); /* 48px desktop */
+  }
+}
+
+/* ============================================================
+   Stat value (big number)
+   Figma: Roboto Bold, 80px desktop / 56px mobile, lh 1.3
+   Token: --font-display = "Roboto"
+   ============================================================ */
+
+.stat-card__value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--card-foreground);
+  margin: 0;
+  width: 100%;
+
+  /* Mobile: 56px as per Figma node 1:10836 */
+  font-size: 3.5rem;
+}
+
+@media (min-width: 48rem) {
+  /* Desktop: 80px as per Figma node 1:11128 */
+  .stat-card__value {
+    font-size: 5rem;
+  }
+}
+
+/* ============================================================
+   Content block (label + description)
+   Figma: flex-col gap 8px
+   ============================================================ */
+
+.stat-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 2); /* 8px */
+  width: 100%;
+}
+
+/* ============================================================
+   Stat label (H6)
+   Figma: IBM Plex Serif Regular, 22px (H6), lh 1.4, letter-spacing -0.22px
+   ============================================================ */
+
+.stat-card__label {
+  font-family: var(--font-serif);
+  font-weight: var(--font-weight-normal);
+  font-style: normal;
+  font-size: 1.375rem; /* 22px — Figma: text-sizes/heading-6 */
+  line-height: 1.4;
+  letter-spacing: -0.22px;
+  color: var(--card-foreground);
+  margin: 0;
+  width: 100%;
+}
+
+/* ============================================================
+   Description
+   Figma: DM Sans Regular, 16px, lh 1.5
+   ============================================================ */
+
+.stat-card__description {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--text-base); /* 16px */
+  line-height: 1.5;
+  color: var(--card-foreground);
+  margin: 0;
+  width: 100%;
+}

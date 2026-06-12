@@ -1,0 +1,452 @@
+langcode: en
+status: true
+dependencies: {  }
+id: eca_bpmn_io_user_register
+data: |
+  <?xml version="1.0" encoding="UTF-8"?>
+  <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:qa="http://some-company/schema/bpmn/qa" id="sample-diagram" targetNamespace="http://bpmn.io/schema/bpmn" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+    <bpmn2:process id="user_register" name="User registration" isExecutable="true" camunda:versionTag="">
+      <bpmn2:documentation />
+      <bpmn2:extensionElements>
+        <camunda:properties>
+          <camunda:property name="Tags" value="" />
+          <camunda:property name="Changelog" value="" />
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:startEvent id="form__form_build_1_1" name="Build user register form" camunda:modelerTemplate="org.drupal.event.form:form_build">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="form:form_build" />
+          </camunda:properties>
+          <camunda:field name="form_ids">
+            <camunda:string>user-register-form</camunda:string>
+          </camunda:field>
+          <camunda:field name="entity_type_id">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="bundle">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="operation">
+            <camunda:string></camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:outgoing>eca_current_user_id_1o2afkb</bpmn2:outgoing>
+      </bpmn2:startEvent>
+      <bpmn2:startEvent id="form__form_validate_form_1" name="Validate user register form" camunda:modelerTemplate="org.drupal.event.form:form_validate">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="form:form_validate" />
+          </camunda:properties>
+          <camunda:field name="form_ids">
+            <camunda:string>user-register-form</camunda:string>
+          </camunda:field>
+          <camunda:field name="entity_type_id">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="bundle">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="operation">
+            <camunda:string></camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:outgoing>eca_form_field_value_on</bpmn2:outgoing>
+      </bpmn2:startEvent>
+      <bpmn2:task id="eca_form_field_require_required" name="Set password as not required" camunda:modelerTemplate="org.drupal.action.eca_form_field_require">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_form_field_require" />
+          </camunda:properties>
+          <camunda:field name="flag">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="field_name">
+            <camunda:string>pass</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_0zbv0f5</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_17nc0ih</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_token_set_random_value_string" name="Get random string" camunda:modelerTemplate="org.drupal.action.eca_token_set_random_value">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_token_set_random_value" />
+          </camunda:properties>
+          <camunda:field name="token_name">
+            <camunda:string>password</camunda:string>
+          </camunda:field>
+          <camunda:field name="mode">
+            <camunda:string>password</camunda:string>
+          </camunda:field>
+          <camunda:field name="length">
+            <camunda:string>15</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>eca_current_user_id_0eeg9de</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_1fpncau</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_form_field_set_value_password" name="Set password" camunda:modelerTemplate="org.drupal.action.eca_form_field_set_value">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_form_field_set_value" />
+          </camunda:properties>
+          <camunda:field name="field_value">
+            <camunda:string>[password]</camunda:string>
+          </camunda:field>
+          <camunda:field name="use_yaml">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="validate_yaml">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="field_name">
+            <camunda:string>pass</camunda:string>
+          </camunda:field>
+          <camunda:field name="strip_tags">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="trim">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="xss_filter">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_1fpncau</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_11t0ux4</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_form_field_set_weight_mail" name="Set weight for mail" camunda:modelerTemplate="org.drupal.action.eca_form_field_set_weight">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_form_field_set_weight" />
+          </camunda:properties>
+          <camunda:field name="weight">
+            <camunda:string>-10</camunda:string>
+          </camunda:field>
+          <camunda:field name="field_name">
+            <camunda:string>mail</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>eca_current_user_id_1o2afkb</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_14xbotz</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_form_field_set_weight_name" name="Set weight for name" camunda:modelerTemplate="org.drupal.action.eca_form_field_set_weight">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_form_field_set_weight" />
+          </camunda:properties>
+          <camunda:field name="weight">
+            <camunda:string>-9</camunda:string>
+          </camunda:field>
+          <camunda:field name="field_name">
+            <camunda:string>name</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_14xbotz</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_0am2x8a</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_form_field_set_weight_notify" name="Set weight for notify" camunda:modelerTemplate="org.drupal.action.eca_form_field_set_weight">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_form_field_set_weight" />
+          </camunda:properties>
+          <camunda:field name="weight">
+            <camunda:string>-8</camunda:string>
+          </camunda:field>
+          <camunda:field name="field_name">
+            <camunda:string>notify</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_0am2x8a</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_1netuoh</bpmn2:outgoing>
+        <bpmn2:outgoing>Flow_0ehyvpl</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_form_field_set_weight_password" name="Set weight for password" camunda:modelerTemplate="org.drupal.action.eca_form_field_set_weight">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_form_field_set_weight" />
+          </camunda:properties>
+          <camunda:field name="weight">
+            <camunda:string>-7</camunda:string>
+          </camunda:field>
+          <camunda:field name="field_name">
+            <camunda:string>pass</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_1netuoh</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_0zbv0f5</bpmn2:outgoing>
+        <bpmn2:outgoing>Flow_1tsbpma</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_form_field_default_value_notify" name="Enable notify by default" camunda:modelerTemplate="org.drupal.action.eca_form_field_default_value">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_form_field_default_value" />
+          </camunda:properties>
+          <camunda:field name="value">
+            <camunda:string>1</camunda:string>
+          </camunda:field>
+          <camunda:field name="field_name">
+            <camunda:string>notify</camunda:string>
+          </camunda:field>
+          <camunda:field name="strip_tags">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="trim">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="xss_filter">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_0ehyvpl</bpmn2:incoming>
+      </bpmn2:task>
+      <bpmn2:task id="eca_form_field_add_state_status" name="Add invisible state for status" camunda:modelerTemplate="org.drupal.action.eca_form_field_add_state">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_form_field_add_state" />
+          </camunda:properties>
+          <camunda:field name="selector">
+            <camunda:string>:input[name="notify"]</camunda:string>
+          </camunda:field>
+          <camunda:field name="state">
+            <camunda:string>invisible</camunda:string>
+          </camunda:field>
+          <camunda:field name="condition">
+            <camunda:string>checked</camunda:string>
+          </camunda:field>
+          <camunda:field name="value">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="field_name">
+            <camunda:string>status</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_1tsbpma</bpmn2:incoming>
+      </bpmn2:task>
+      <bpmn2:task id="eca_form_field_add_state_password" name="Add invisible state for password" camunda:modelerTemplate="org.drupal.action.eca_form_field_add_state">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_form_field_add_state" />
+          </camunda:properties>
+          <camunda:field name="selector">
+            <camunda:string>:input[name="notify"]</camunda:string>
+          </camunda:field>
+          <camunda:field name="state">
+            <camunda:string>invisible</camunda:string>
+          </camunda:field>
+          <camunda:field name="condition">
+            <camunda:string>checked</camunda:string>
+          </camunda:field>
+          <camunda:field name="value">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="field_name">
+            <camunda:string>pass</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_17nc0ih</bpmn2:incoming>
+      </bpmn2:task>
+      <bpmn2:task id="eca_form_field_set_value_status" name="Set status" camunda:modelerTemplate="org.drupal.action.eca_form_field_set_value">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_form_field_set_value" />
+          </camunda:properties>
+          <camunda:field name="field_value">
+            <camunda:string>1</camunda:string>
+          </camunda:field>
+          <camunda:field name="use_yaml">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="validate_yaml">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="field_name">
+            <camunda:string>status</camunda:string>
+          </camunda:field>
+          <camunda:field name="strip_tags">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="trim">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="xss_filter">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_11t0ux4</bpmn2:incoming>
+      </bpmn2:task>
+      <bpmn2:exclusiveGateway id="Gateway_and_1">
+        <bpmn2:incoming>eca_form_field_value_on</bpmn2:incoming>
+        <bpmn2:outgoing>eca_current_user_id_0eeg9de</bpmn2:outgoing>
+      </bpmn2:exclusiveGateway>
+      <bpmn2:sequenceFlow id="eca_current_user_id_1o2afkb" name="authenticated?" camunda:modelerTemplate="org.drupal.condition.eca_current_user_id" sourceRef="form__form_build_1_1" targetRef="eca_form_field_set_weight_mail">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_current_user_id" />
+          </camunda:properties>
+          <camunda:field name="negate">
+            <camunda:string>yes</camunda:string>
+          </camunda:field>
+          <camunda:field name="user_id">
+            <camunda:string>0</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+      </bpmn2:sequenceFlow>
+      <bpmn2:sequenceFlow id="eca_form_field_value_on" name="notify?" camunda:modelerTemplate="org.drupal.condition.eca_form_field_value" sourceRef="form__form_validate_form_1" targetRef="Gateway_and_1">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_form_field_value" />
+          </camunda:properties>
+          <camunda:field name="negate">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="field_value">
+            <camunda:string>1</camunda:string>
+          </camunda:field>
+          <camunda:field name="field_name">
+            <camunda:string>notify</camunda:string>
+          </camunda:field>
+          <camunda:field name="strip_tags">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="trim">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="xss_filter">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="operator">
+            <camunda:string>equal</camunda:string>
+          </camunda:field>
+          <camunda:field name="type">
+            <camunda:string>numeric</camunda:string>
+          </camunda:field>
+          <camunda:field name="case">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+      </bpmn2:sequenceFlow>
+      <bpmn2:sequenceFlow id="Flow_17nc0ih" sourceRef="eca_form_field_require_required" targetRef="eca_form_field_add_state_password" />
+      <bpmn2:sequenceFlow id="Flow_1fpncau" sourceRef="eca_token_set_random_value_string" targetRef="eca_form_field_set_value_password" />
+      <bpmn2:sequenceFlow id="Flow_11t0ux4" sourceRef="eca_form_field_set_value_password" targetRef="eca_form_field_set_value_status" />
+      <bpmn2:sequenceFlow id="Flow_14xbotz" sourceRef="eca_form_field_set_weight_mail" targetRef="eca_form_field_set_weight_name" />
+      <bpmn2:sequenceFlow id="Flow_0am2x8a" sourceRef="eca_form_field_set_weight_name" targetRef="eca_form_field_set_weight_notify" />
+      <bpmn2:sequenceFlow id="Flow_1netuoh" sourceRef="eca_form_field_set_weight_notify" targetRef="eca_form_field_set_weight_password" />
+      <bpmn2:sequenceFlow id="Flow_0ehyvpl" sourceRef="eca_form_field_set_weight_notify" targetRef="eca_form_field_default_value_notify" />
+      <bpmn2:sequenceFlow id="Flow_0zbv0f5" sourceRef="eca_form_field_set_weight_password" targetRef="eca_form_field_require_required" />
+      <bpmn2:sequenceFlow id="Flow_1tsbpma" sourceRef="eca_form_field_set_weight_password" targetRef="eca_form_field_add_state_status" />
+      <bpmn2:sequenceFlow id="eca_current_user_id_0eeg9de" name="authenticated?" camunda:modelerTemplate="org.drupal.condition.eca_current_user_id" sourceRef="Gateway_and_1" targetRef="eca_token_set_random_value_string">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_current_user_id" />
+          </camunda:properties>
+          <camunda:field name="negate">
+            <camunda:string>yes</camunda:string>
+          </camunda:field>
+          <camunda:field name="user_id">
+            <camunda:string>0</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+      </bpmn2:sequenceFlow>
+    </bpmn2:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_user_register">
+      <bpmndi:BPMNPlane id="BPMNPlane_user_register" bpmnElement="user_register">
+        <bpmndi:BPMNShape id="form__form_build_1_1_di" bpmnElement="form__form_build_1_1">
+          <dc:Bounds x="57" y="52" width="36" height="36" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="form__form_validate_form_1_di" bpmnElement="form__form_validate_form_1">
+          <dc:Bounds x="57" y="192" width="36" height="36" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_form_field_require_required_di" bpmnElement="eca_form_field_require_required">
+          <dc:Bounds x="1075" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_token_set_random_value_string_di" bpmnElement="eca_token_set_random_value_string">
+          <dc:Bounds x="325" y="170" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_form_field_set_value_password_di" bpmnElement="eca_form_field_set_value_password">
+          <dc:Bounds x="475" y="170" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_form_field_set_weight_mail_di" bpmnElement="eca_form_field_set_weight_mail">
+          <dc:Bounds x="175" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_form_field_set_weight_name_di" bpmnElement="eca_form_field_set_weight_name">
+          <dc:Bounds x="325" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_form_field_set_weight_notify_di" bpmnElement="eca_form_field_set_weight_notify">
+          <dc:Bounds x="775" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_form_field_set_weight_password_di" bpmnElement="eca_form_field_set_weight_password">
+          <dc:Bounds x="925" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_form_field_default_value_notify_di" bpmnElement="eca_form_field_default_value_notify">
+          <dc:Bounds x="925" y="170" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_form_field_add_state_status_di" bpmnElement="eca_form_field_add_state_status">
+          <dc:Bounds x="1075" y="170" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_form_field_add_state_password_di" bpmnElement="eca_form_field_add_state_password">
+          <dc:Bounds x="1225" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_form_field_set_value_status_di" bpmnElement="eca_form_field_set_value_status">
+          <dc:Bounds x="625" y="170" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Gateway_and_1_di" bpmnElement="Gateway_and_1" isMarkerVisible="true">
+          <dc:Bounds x="200" y="185" width="50" height="50" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNEdge id="eca_current_user_id_1o2afkb_di" bpmnElement="eca_current_user_id_1o2afkb">
+          <di:waypoint x="93" y="70" />
+          <di:waypoint x="175" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="eca_form_field_value_on_di" bpmnElement="eca_form_field_value_on">
+          <di:waypoint x="93" y="210" />
+          <di:waypoint x="200" y="210" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_17nc0ih_di" bpmnElement="Flow_17nc0ih">
+          <di:waypoint x="1175" y="70" />
+          <di:waypoint x="1225" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_1fpncau_di" bpmnElement="Flow_1fpncau">
+          <di:waypoint x="425" y="210" />
+          <di:waypoint x="475" y="210" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_11t0ux4_di" bpmnElement="Flow_11t0ux4">
+          <di:waypoint x="575" y="210" />
+          <di:waypoint x="625" y="210" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_14xbotz_di" bpmnElement="Flow_14xbotz">
+          <di:waypoint x="275" y="70" />
+          <di:waypoint x="325" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_0am2x8a_di" bpmnElement="Flow_0am2x8a">
+          <di:waypoint x="425" y="70" />
+          <di:waypoint x="775" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_1netuoh_di" bpmnElement="Flow_1netuoh">
+          <di:waypoint x="875" y="70" />
+          <di:waypoint x="925" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_0ehyvpl_di" bpmnElement="Flow_0ehyvpl">
+          <di:waypoint x="825" y="110" />
+          <di:waypoint x="825" y="210" />
+          <di:waypoint x="925" y="210" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_0zbv0f5_di" bpmnElement="Flow_0zbv0f5">
+          <di:waypoint x="1025" y="70" />
+          <di:waypoint x="1075" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_1tsbpma_di" bpmnElement="Flow_1tsbpma">
+          <di:waypoint x="1025" y="70" />
+          <di:waypoint x="1050" y="70" />
+          <di:waypoint x="1050" y="140" />
+          <di:waypoint x="1050" y="140" />
+          <di:waypoint x="1050" y="210" />
+          <di:waypoint x="1075" y="210" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="eca_current_user_id_0eeg9de_di" bpmnElement="eca_current_user_id_0eeg9de">
+          <di:waypoint x="250" y="210" />
+          <di:waypoint x="325" y="210" />
+        </bpmndi:BPMNEdge>
+      </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+  </bpmn2:definitions>

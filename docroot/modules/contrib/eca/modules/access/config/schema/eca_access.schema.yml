@@ -1,0 +1,59 @@
+# Schema for configuration plugins of the eca_access module.
+
+eca.event.plugin.access:entity:
+  type: eca.event.plugin
+  label: 'Access restrictions by entity'
+  mapping:
+    entity_type_id:
+      type: string
+      label: 'Restrict by entity type ID'
+    bundle:
+      type: string
+      label: 'Restrict by entity bundle'
+    operation:
+      type: string
+      label: 'Restrict by operation'
+
+eca.event.plugin.access:field:
+  type: eca.event.plugin
+  label: 'Access restrictions by field'
+  mapping:
+    field_name:
+      type: string
+      label: 'Restrict by field name'
+    entity_type_id:
+      type: string
+      label: 'Restrict by entity type ID'
+    bundle:
+      type: string
+      label: 'Restrict by entity bundle'
+    operation:
+      type: string
+      label: 'Restrict by operation'
+
+eca.event.plugin.access:create:
+  type: eca.event.plugin
+  label: 'Access restrictions on create'
+  mapping:
+    entity_type_id:
+      type: string
+      label: 'Restrict by entity type ID'
+    bundle:
+      type: string
+      label: 'Restrict by entity bundle'
+    langcode:
+      type: string
+      label: 'Restrict by language code'
+
+action.configuration.eca_access_set_result:
+  type: mapping
+  label: 'Configuration for the "Access set result" action'
+  mapping:
+    access_result:
+      type: string
+      label: 'Access result'
+      constraints:
+        Choice:
+          - forbidden
+          - allowed
+          - neutral

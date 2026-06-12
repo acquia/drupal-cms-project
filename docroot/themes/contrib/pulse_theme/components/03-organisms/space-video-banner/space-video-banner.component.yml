@@ -1,0 +1,64 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+
+name: Space Video Banner
+
+description: This component renders a prominent Detail Page Hero Banner, designed for the top of a page to create a strong initial impact. It integrates a background video with a main title and sub-headline, effectively communicating a key message to the user.
+
+status: stable
+
+group: Organisms
+
+props:
+
+  type: object
+
+  required:
+    - title
+
+  properties:
+    video:
+      type: string
+      title: Video
+      description: The source URL or path of the video.
+      examples:
+        - '<iframe width="560" height="315" src="https://www.youtube.com/embed/EngW7tLk6R8?si=j0XxXvQKW3cWDS2V" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
+    
+    label:
+      type: string
+      title: Label
+      description: The label of the section.
+      examples:
+        - "Video"
+
+    title:
+      type: string
+      title: Title
+      description: Title of the banner.
+      examples:
+        - "Understanding Common Medicines: What They Do and How to Use Them Safely"
+
+    primary_category:
+      type: string
+      title: Primary Category
+      description: Primary category of the card.
+      examples:
+        - "Everyday health"
+
+    secondary_category:
+      type: string
+      title: Secondary Category
+      description: Secondary category of the card.
+      examples:
+        - "Care Decisions"
+
+    modifier_class:
+      type: string
+      title: Modifier class
+      description: Additional classes.
+      examples:
+        - "custom-class"
+
+thirdPartySettings:
+  sdcStorybook:
+    stories:
+      preview: {}

@@ -1,0 +1,656 @@
+eca.event.plugin.eca_endpoint:response:
+  type: eca.event.plugin
+  label: 'ECA Endpoint Response'
+  mapping:
+    first_path_argument:
+      type: string
+      label: 'First path argument'
+      constraints:
+        NotBlank: []
+    second_path_argument:
+      type: string
+      label: 'Second path argument'
+
+eca.event.plugin.eca_endpoint:access:
+  type: eca.event.plugin
+  label: 'ECA Endpoint Access'
+  mapping:
+    first_path_argument:
+      type: string
+      label: 'First path argument'
+      constraints:
+        NotBlank: []
+    second_path_argument:
+      type: string
+      label: 'Second path argument'
+
+action.configuration.eca_endpoint_set_ajax_response_add_css:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Add CSS" action'
+  mapping:
+    href:
+      type: string
+      label: 'CSS file'
+      constraints:
+        NotBlank: []
+    media:
+      type: string
+      label: 'Media'
+
+action.configuration.eca_endpoint_set_ajax_response_add_js:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Add JS" action'
+  mapping:
+    url:
+      type: string
+      label: 'URL'
+      constraints:
+        NotBlank: []
+    defer:
+      type: boolean
+      label: 'Clear previous messages'
+    selector:
+      type: string
+      label: 'CSS Selector'
+
+action.configuration.eca_endpoint_set_ajax_response_append:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Append" action'
+  mapping:
+    selector:
+      type: string
+      label: 'CSS Selector'
+      constraints:
+        NotBlank: []
+    content:
+      type: text
+      label: 'Content'
+      constraints:
+        NotBlank: []
+    settings:
+      type: text
+      label: 'Settings'
+
+action.configuration.eca_endpoint_set_ajax_response_html:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response HTML" action'
+  mapping:
+    selector:
+      type: string
+      label: 'CSS Selector'
+      constraints:
+        NotBlank: []
+    content:
+      type: text
+      label: 'Content'
+      constraints:
+        NotBlank: []
+    settings:
+      type: text
+      label: 'Settings'
+
+action.configuration.eca_endpoint_set_ajax_response_close_dialog:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Close Dialog" action'
+  mapping:
+    selector:
+      type: string
+      label: 'CSS Selector'
+      constraints:
+        NotBlank: []
+    persist:
+      type: boolean
+      label: 'Persist dialog in DOM'
+
+action.configuration.eca_endpoint_set_ajax_response_close_modal_dialog:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Close Modal Dialog" action'
+  mapping:
+    persist:
+      type: boolean
+      label: 'Persist dialog in DOM'
+
+action.configuration.eca_endpoint_set_ajax_response_css:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response CSS" action'
+  mapping:
+    selector:
+      type: string
+      label: 'CSS Selector'
+      constraints:
+        NotBlank: []
+    css:
+      type: text
+      label: 'CSS'
+
+action.configuration.eca_endpoint_set_ajax_response_before:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Before" action'
+  mapping:
+    selector:
+      type: string
+      label: 'CSS Selector'
+      constraints:
+        NotBlank: []
+    content:
+      type: text
+      label: 'Content'
+      constraints:
+        NotBlank: []
+    settings:
+      type: text
+      label: 'Settings'
+
+action.configuration.eca_endpoint_set_ajax_response_insert:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Insert" action'
+  mapping:
+    selector:
+      type: string
+      label: 'CSS Selector'
+      constraints:
+        NotBlank: []
+    content:
+      type: text
+      label: 'Content'
+      constraints:
+        NotBlank: []
+    settings:
+      type: text
+      label: 'Settings'
+
+action.configuration.eca_endpoint_set_ajax_response_after:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response After" action'
+  mapping:
+    selector:
+      type: string
+      label: 'CSS Selector'
+      constraints:
+        NotBlank: []
+    content:
+      type: text
+      label: 'Content'
+      constraints:
+        NotBlank: []
+    settings:
+      type: text
+      label: 'Settings'
+
+action.configuration.eca_endpoint_set_ajax_response_invoke:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Invoke" action'
+  mapping:
+    selector:
+      type: string
+      label: 'CSS Selector'
+      constraints:
+        NotBlank: []
+    method:
+      type: string
+      label: 'Method'
+      constraints:
+        NotBlank: []
+    arguments:
+      type: text
+      label: 'Arguments'
+
+action.configuration.eca_endpoint_set_ajax_response_open_dialog:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Open Dialog" action'
+  mapping:
+    selector:
+      type: string
+      label: 'CSS Selector'
+      constraints:
+        NotBlank: []
+    title:
+      type: string
+      label: 'Title'
+      constraints:
+        NotBlank: []
+    content:
+      type: text
+      label: 'Content'
+      constraints:
+        NotBlank: []
+    options:
+      type: text
+      label: 'Dialog options'
+    settings:
+      type: text
+      label: 'Settings'
+
+action.configuration.eca_endpoint_set_ajax_response_open_modal_dialog:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Open Modal Dialog" action'
+  mapping:
+    title:
+      type: string
+      label: 'Title'
+      constraints:
+        NotBlank: []
+    content:
+      type: text
+      label: 'Content'
+      constraints:
+        NotBlank: []
+    options:
+      type: text
+      label: 'Dialog options'
+    settings:
+      type: text
+      label: 'Settings'
+
+action.configuration.eca_endpoint_set_ajax_response_open_off_canvas_dialog:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Open Off Canvas Dialog" action'
+  mapping:
+    position:
+      type: string
+      label: 'Position'
+      constraints:
+        Choice:
+          - side
+          - top
+        NotBlank: []
+    title:
+      type: string
+      label: 'Title'
+      constraints:
+        NotBlank: []
+    content:
+      type: text
+      label: 'Content'
+      constraints:
+        NotBlank: []
+    options:
+      type: text
+      label: 'Dialog options'
+    settings:
+      type: text
+      label: 'Settings'
+
+action.configuration.eca_endpoint_set_ajax_response_prepend:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Prepend" action'
+  mapping:
+    selector:
+      type: string
+      label: 'CSS Selector'
+      constraints:
+        NotBlank: []
+    content:
+      type: text
+      label: 'Content'
+      constraints:
+        NotBlank: []
+    settings:
+      type: text
+      label: 'Settings'
+
+action.configuration.eca_endpoint_set_ajax_response_redirect:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Redirect" action'
+  mapping:
+    url:
+      type: string
+      label: 'URL'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_endpoint_set_ajax_response_replace:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Replace" action'
+  mapping:
+    selector:
+      type: string
+      label: 'CSS Selector'
+      constraints:
+        NotBlank: []
+    content:
+      type: text
+      label: 'Content'
+      constraints:
+        NotBlank: []
+    settings:
+      type: text
+      label: 'Settings'
+
+action.configuration.eca_endpoint_set_ajax_response_restripe:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Restripe" action'
+  mapping:
+    selector:
+      type: string
+      label: 'CSS Selector'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_endpoint_set_ajax_response_scroll_top:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Scroll Top" action'
+  mapping:
+    selector:
+      type: string
+      label: 'CSS Selector'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_endpoint_set_ajax_response_alert:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Alert" action'
+  mapping:
+    message:
+      type: string
+      label: 'Message'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_endpoint_set_ajax_response_announce:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Announce" action'
+  mapping:
+    message:
+      type: string
+      label: 'Message'
+      constraints:
+        NotBlank: []
+    priority:
+      type: string
+      label: 'Announce priority'
+
+action.configuration.eca_endpoint_set_ajax_response_changed:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Changed" action'
+  mapping:
+    selector:
+      type: string
+      label: 'CSS Selector'
+      constraints:
+        NotBlank: []
+    asterisk:
+      type: string
+      label: 'Asterisk'
+
+action.configuration.eca_endpoint_set_ajax_response_data:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Data" action'
+  mapping:
+    selector:
+      type: string
+      label: 'Selector'
+      constraints:
+        NotBlank: []
+    name:
+      type: string
+      label: 'Name'
+      constraints:
+        NotBlank: []
+    value:
+      type: string
+      label: 'Value'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_endpoint_set_ajax_response_set_dialog_option:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Set Dialog Option" action'
+  mapping:
+    selector:
+      type: string
+      label: 'Selector'
+    name:
+      type: string
+      label: 'Name'
+      constraints:
+        NotBlank: []
+    value:
+      type: string
+      label: 'Value'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_endpoint_set_ajax_response_set_dialog_title:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Set Dialog Title" action'
+  mapping:
+    selector:
+      type: string
+      label: 'Selector'
+    title:
+      type: string
+      label: 'Title'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_endpoint_set_ajax_response_focus_first:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Focus First" action'
+  mapping:
+    selector:
+      type: string
+      label: 'Selector'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_endpoint_set_ajax_response_message:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Message" action'
+  mapping:
+    message:
+      type: string
+      label: 'Message'
+      constraints:
+        NotBlank: []
+    wrapper:
+      type: string
+      label: 'Wrapper Selector'
+    id:
+      type: string
+      label: 'ID'
+    type:
+      type: string
+      label: 'Type'
+      constraints:
+        Choice:
+          - status
+          - warning
+          - error
+        NotBlank: []
+    announce:
+      type: string
+      label: 'Announce'
+    priority:
+      type: string
+      label: 'Announce priority'
+    clear:
+      type: boolean
+      label: 'Clear previous messages'
+
+action.configuration.eca_endpoint_set_ajax_response_settings:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Settings" action'
+  mapping:
+    settings:
+      type: text
+      label: 'Settings'
+      constraints:
+        NotBlank: []
+    merge:
+      type: boolean
+      label: 'Merge'
+
+action.configuration.eca_endpoint_set_ajax_response_tabledrag_warning:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Tabledrag Warning" action'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+      constraints:
+        NotBlank: []
+    instance:
+      type: string
+      label: 'Table instance'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_endpoint_set_ajax_response_update_build_id:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Ajax Response Update Build ID" action'
+  mapping:
+    old:
+      type: string
+      label: 'old'
+    new:
+      type: string
+      label: 'new'
+
+action.configuration.eca_endpoint_get_query_parameter:
+  type: mapping
+  label: 'Configuration for the "Endpoint Get Query Parameter" action'
+  mapping:
+    name:
+      type: string
+      label: 'Query parameter name'
+    token_name:
+      type: required_label
+      label: 'Name of token'
+
+action.configuration.eca_endpoint_get_client_ip:
+  type: mapping
+  label: 'Configuration for the "Endpoint Get Client IP" action'
+  mapping:
+    token_name:
+      type: required_label
+      label: 'Name of token'
+
+action.configuration.eca_endpoint_get_request_content:
+  type: mapping
+  label: 'Configuration for the "Endpoint Get Request Content" action'
+  mapping:
+    token_name:
+      type: required_label
+      label: 'Name of token'
+
+action.configuration.eca_endpoint_get_request_content_type:
+  type: mapping
+  label: 'Configuration for the "Endpoint Get Request Content Type" action'
+  mapping:
+    token_name:
+      type: required_label
+      label: 'Name of token'
+
+action.configuration.eca_endpoint_get_request_header:
+  type: mapping
+  label: 'Configuration for the "Endpoint Get Request Header" action'
+  mapping:
+    name:
+      type: string
+      label: 'Header name'
+    token_name:
+      type: required_label
+      label: 'Name of token'
+
+action.configuration.eca_endpoint_get_request_method:
+  type: mapping
+  label: 'Configuration for the "Endpoint Get Request Method" action'
+  mapping:
+    token_name:
+      type: required_label
+      label: 'Name of token'
+
+action.configuration.eca_endpoint_get_path_argument:
+  type: mapping
+  label: 'Configuration for the "Endpoint Get Path Argument" action'
+  mapping:
+    index:
+      type: integer
+      label: 'Index position'
+    token_name:
+      type: required_label
+      label: 'Name of token'
+
+action.configuration.eca_endpoint_get_request_uri:
+  type: mapping
+  label: 'Configuration for the "Endpoint Get Request URI" action'
+  mapping:
+    token_name:
+      type: required_label
+      label: 'Name of token'
+
+action.configuration.eca_endpoint_set_response_content:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Response Content" action'
+  mapping:
+    content:
+      type: text
+      label: 'Content'
+
+action.configuration.eca_endpoint_set_response_content_type:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Response Content Type" action'
+  mapping:
+    content_type:
+      type: string
+      label: 'content_type'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_endpoint_set_response_expires:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Response Expires" action'
+  mapping:
+    expires:
+      type: string
+      label: 'Expires'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_endpoint_set_response_headers:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Response Headers" action'
+  mapping:
+    headers:
+      type: text
+      label: 'Headers'
+      constraints:
+        NotBlank: []
+    use_yaml:
+      type: boolean
+      label: 'Interpret above value as YAML format'
+    validate_yaml:
+      type: boolean
+      label: 'Validate YAML to prevent this from being executed when invalid'
+
+action.configuration.eca_endpoint_set_response_max_age:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Response Max Age" action'
+  mapping:
+    max_age:
+      type: string
+      label: 'Client value (max-age)'
+      constraints:
+        NotBlank: []
+    s_max_age:
+      type: string
+      label: 'Shared value (s-max-age)'
+      constraints:
+        NotBlank: []
+    set_public:
+      type: boolean
+      label: 'Set public'
+    set_expires:
+      type: boolean
+      label: 'Set expires'
+
+action.configuration.eca_endpoint_set_response_status_code:
+  type: mapping
+  label: 'Configuration for the "Endpoint Set Response Status Code" action'
+  mapping:
+    code:
+      type: string
+      label: 'Status code'
+      constraints:
+        NotBlank: []

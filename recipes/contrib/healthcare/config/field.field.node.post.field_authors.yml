@@ -1,0 +1,56 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_authors
+    - node.type.person
+    - node.type.post
+  module:
+    - custom_field
+id: node.post.field_authors
+field_name: field_authors
+entity_type: node
+bundle: post
+label: Author
+description: 'Reference either a Drupal user or a Person node.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  add_more_label: ''
+  field_settings:
+    user:
+      label: User
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+      handler: 'default:user'
+      handler_settings:
+        include_anonymous: true
+        filter:
+          type: _none
+        sort:
+          field: _none
+          direction: ASC
+        auto_create: false
+        target_bundles: {  }
+    person:
+      label: Person
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+      handler: 'default:node'
+      handler_settings:
+        sort:
+          field: field_last_name
+          direction: ASC
+        auto_create: false
+        target_bundles:
+          person: person
+        auto_create_bundle: ''
+field_type: custom

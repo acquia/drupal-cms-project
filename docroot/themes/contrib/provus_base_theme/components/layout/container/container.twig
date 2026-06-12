@@ -1,0 +1,43 @@
+{% set html_tag = html_tag ?? 'div' %}
+{% set width_class = width_class|default('w-100') %}
+{% set height_class = height_class|default('none') %}
+{% set container_class = container_type != 'none' ? container_type : '' %}
+{% set classes = [
+  container_class,
+  width_class != 'none' ? width_class : '',
+  height_class != 'none' ? height_class : '',
+  margin_for_all,
+  margin_top,
+  margin_bottom,
+  margin_start,
+  margin_end,
+  padding_all,
+  padding_top,
+  padding_bottom,
+  padding_start,
+  padding_end,
+] %}
+
+{% if flex_enabled %}
+  {% set flex_classes = [
+    'd-flex',
+    flex_direction,
+    flex_gap != 'none' ? flex_gap : '',
+    flex_width != 'none' ? flex_width : '',
+    justify_content != 'none' ? justify_content : '',
+    align_items != 'none' ? align_items : '',
+  ] %}
+  {% set classes = classes|merge(flex_classes) %}
+{% endif %}
+
+{% if custom_class %}
+<div class="{{ custom_class }}">
+{% endif %}
+
+<{{ html_tag }}{{ attributes.addClass(classes|filter(v => v)) }}>
+  {% block content %}{% endblock %}
+</{{ html_tag }}>
+
+{% if custom_class %}
+</div>
+{% endif %}

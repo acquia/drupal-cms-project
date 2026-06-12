@@ -1,0 +1,218 @@
+.accordion-item.accordion-item--themed,
+body:not(.canvas-page) .accordion-item.accordion-item--admin-theme,
+.accordion-item {
+  background-color: transparent;
+}
+
+.accordion-item.accordion-item--themed .accordion-item__trigger,
+body:not(.canvas-page) .accordion-item.accordion-item--admin-theme .accordion-item__trigger,
+.accordion-item .accordion-item__trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  background: none;
+  border: none;
+  cursor: default;
+  text-align: left;
+  font-family: inherit;
+  color: #030804;
+  font-size: 20px;
+  font-weight: 600;
+  transition: color 0.2s ease;
+  padding-bottom: 5px;
+}
+
+.accordion-item .accordion-item__title {
+  flex: 1;
+  min-height: 24px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.accordion-item.accordion-item--themed .accordion-item__content,
+body:not(.canvas-page) .accordion-item.accordion-item--admin-theme .accordion-item__content,
+.accordion-item .accordion-item__content {
+  overflow: hidden;
+}
+
+.accordion-item.accordion-item--admin-theme .accordion-item__content {
+  display: none;
+  /* Only hide visually by default when Admin Theme toggle is ON (frontend behavior) */
+}
+
+/* Show content ONLY when trigger says true AND Admin Theme is ON */
+.accordion-item.accordion-item--admin-theme .accordion-item__trigger[aria-expanded="true"]+.accordion-item__content {
+  display: block;
+}
+
+.accordion-item.accordion-item--themed .accordion-item__inner,
+body:not(.canvas-page) .accordion-item.accordion-item--admin-theme .accordion-item__inner,
+.accordion-item .accordion-item__inner {
+  padding-bottom: 24px;
+  color: #4b5563;
+  font-family: inherit;
+  line-height: 1.6;
+  min-height: 48px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* Add +/- indicator using ::after pseudo-element - ONLY for Admin Theme OR Dark Theme */
+.accordion-item.accordion-item--admin-theme .accordion-item__trigger::after {
+  content: '+';
+  font-size: 24px;
+  font-weight: 400;
+  transition: transform 0.2s ease;
+}
+
+.accordion-item.accordion-item--admin-theme .accordion-item__trigger[aria-expanded="true"]::after {
+  content: '-';
+}
+
+/* =========================================
+   DARK THEME (Card Style)
+   ========================================= */
+/* The dark container injects a class into the child item context */
+.accordion-container--dark .accordion-item.accordion-item--themed,
+body:not(.canvas-page) .accordion-container--dark .accordion-item.accordion-item--admin-theme,
+.accordion-container--dark .accordion-item {
+  background-color: #1B3B5A;
+  /* exact opaque solid blue card from figma */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  /* very subtle card stroke */
+  border-radius: 8px;
+  margin-bottom: 0;
+  /* Clear margin, Container handles gap */
+  overflow: hidden;
+}
+
+.accordion-container--dark .accordion-item.accordion-item--themed .accordion-item__trigger,
+body:not(.canvas-page) .accordion-container--dark .accordion-item.accordion-item--admin-theme .accordion-item__trigger,
+.accordion-container--dark .accordion-item .accordion-item__trigger {
+  color: #ffffff;
+  padding: 32px 64px 32px 32px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Force nested typography components to be white/gray in dark theme */
+.accordion-container--dark .accordion-item .typography__heading {
+  color: #ffffff !important;
+  font-size: 20px;
+  font-weight: 500;
+  /* Regular/Medium weight for dark theme */
+}
+
+.accordion-container--dark .accordion-item .typography__description {
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* Override the trigger icon to match Figma 'x' when opened */
+/* Ensure dark mode content is hidden by default */
+.accordion-container--dark .accordion-item .accordion-item__content {
+  display: none;
+}
+
+/* Show content ONLY when trigger says true */
+.accordion-container--dark .accordion-item .accordion-item__trigger[aria-expanded="true"]+.accordion-item__content {
+  display: block;
+}
+
+/* Default state: Plus icon */
+.accordion-container--dark .accordion-item.accordion-item--themed .accordion-item__trigger::after,
+.accordion-container--dark .accordion-item.accordion-item--admin-theme .accordion-item__trigger::after,
+.accordion-container--dark .accordion-item .accordion-item__trigger::after {
+  content: '+' !important;
+  font-size: 32px !important;
+  font-weight: 300 !important;
+  transition: transform 0.3s ease !important;
+  color: #ffffff !important;
+  line-height: 1 !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 12%;
+  top: 50%;
+  transform: translateY(-50%) !important;
+  width: 32px;
+  height: 32px;
+}
+
+/* Expanded state: Rotate 45 degrees to become an 'x' */
+.accordion-container--dark .accordion-item.accordion-item--themed .accordion-item__trigger[aria-expanded="true"]::after,
+.accordion-container--dark .accordion-item.accordion-item--admin-theme .accordion-item__trigger[aria-expanded="true"]::after,
+.accordion-container--dark .accordion-item .accordion-item__trigger[aria-expanded="true"]::after {
+  transform: translateY(-50%) rotate(45deg) !important;
+  content: '+' !important;
+}
+
+.accordion-container--dark .accordion-item.accordion-item--themed .accordion-item__inner,
+body:not(.canvas-page) .accordion-container--dark .accordion-item.accordion-item--admin-theme .accordion-item__inner,
+.accordion-container--dark .accordion-item .accordion-item__inner {
+  color: rgba(255, 255, 255, 0.7);
+  padding: 0 32px 32px 32px;
+  /* text sits inside card matching trigger */
+}
+
+
+.accordion-container--dark .accordion-item__trigger:hover,
+.accordion-container--dark .accordion-item__trigger:hover * {
+  color: #FFF !important;
+}
+
+.accordion-container--dark .typography__description {
+  opacity: 1;
+  color: #ffffff;
+}
+
+.accordion-container--dark .accordion-container__help-description,
+.accordion-container--dark .accordion-container__help-description * {
+  opacity: 1 !important;
+  color: #ffffff !important;
+}
+
+.accordion-container--dark .accordion-container__help-button,
+.accordion-container--dark .accordion-container__help-button a {
+  box-shadow: 0px 1px 2px 0px #0308040D !important;
+  background-color: #0308040D !important;
+  color: #ffffff !important;
+  border: 1px solid #0308040D !important;
+}
+
+@media (max-width: 768px) {
+  .accordion-container--dark .accordion-item.accordion-item--themed .accordion-item__trigger,
+  body:not(.canvas-page) .accordion-container--dark .accordion-item.accordion-item--admin-theme .accordion-item__trigger,
+  .accordion-container--dark .accordion-item .accordion-item__trigger {
+    padding: 24px 48px 24px 24px;
+  }
+  
+  .accordion-container--dark .accordion-item.accordion-item--themed .accordion-item__inner,
+  body:not(.canvas-page) .accordion-container--dark .accordion-item.accordion-item--admin-theme .accordion-item__inner,
+  .accordion-container--dark .accordion-item .accordion-item__inner {
+    padding: 0 24px 24px 24px;
+  }
+
+  .accordion-container--dark .accordion-item.accordion-item--themed .accordion-item__trigger::after,
+  .accordion-container--dark .accordion-item.accordion-item--admin-theme .accordion-item__trigger::after,
+  .accordion-container--dark .accordion-item .accordion-item__trigger::after {
+    right: 20px;
+  }
+
+  .accordion-container--dark .accordion-item .typography__heading,
+  .accordion-item .accordion-item__title {
+    font-size: 16px !important;
+  }
+}
+
+.accordion-container__items {
+  .accordion-item {
+    cursor: default;
+  }
+}

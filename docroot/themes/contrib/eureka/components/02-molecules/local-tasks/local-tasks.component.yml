@@ -1,0 +1,19 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Local tasks
+status: stable
+description: Local tasks component
+# Overrides regular css with minified.
+libraryOverrides:
+  css:
+    component:
+      local-tasks.min.css: { minified: true }
+group: Eureka main components
+props:
+  type: object
+  properties:
+    local_tasks_contained:
+      type: boolean
+      title: Local tasks contained
+      description: Set this option to true if you want the component to sit within a container.
+      examples:
+        - false

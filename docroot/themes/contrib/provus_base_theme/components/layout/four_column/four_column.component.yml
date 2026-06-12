@@ -1,0 +1,103 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Four Column
+description: A Bootstrap row with four predefined column slots.
+type: component
+status: experimental
+group: Provus Layouts
+
+props:
+  type: object
+  properties:
+    desktop_width:
+      type: string
+      title: Desktop column width
+      description: Desktop column width.
+      enum:
+        - 25-25-25-25
+        - 33-33-17-17
+        - 17-33-17-33
+        - 17-33-33-17
+        - 33-17-17-33
+      meta:enum:
+        25-25-25-25: "25%/25%/25%/25%"
+        33-33-17-17: "33%/33%/17%/17%"
+        17-33-17-33: "17%/33%/17%/33%"
+        17-33-33-17: "17%/33%/33%/17%"
+        33-17-17-33: "33%/17%/17%/33%"
+      default: 25-25-25-25
+      examples:
+        - "25-25-25-25"
+    tablet_width:
+      type: string
+      title: Tablet column width
+      description: Tablet column width.
+      enum:
+        - 25-25-25-25
+        - 33-33-17-17
+        - 17-33-17-33
+        - 17-33-33-17
+        - 33-17-17-33
+        - 100-100-100-100
+      meta:enum:
+        25-25-25-25: "25%/25%/25%/25%"
+        33-33-17-17: "33%/33%/17%/17%"
+        17-33-17-33: "17%/33%/17%/33%"
+        17-33-33-17: "17%/33%/33%/17%"
+        33-17-17-33: "33%/17%/17%/33%"
+        100-100-100-100: "100%"
+      default: 25-25-25-25
+      examples:
+        - "25-25-25-25"
+    mobile_width:
+      type: string
+      title: Mobile column width
+      description: Mobile column width.
+      enum:
+        - 25-25-25-25
+        - 33-33-17-17
+        - 17-33-17-33
+        - 17-33-33-17
+        - 33-17-17-33
+        - 100-100-100-100
+      meta:enum:
+        25-25-25-25: "25%/25%/25%/25%"
+        33-33-17-17: "33%/33%/17%/17%"
+        17-33-17-33: "17%/33%/17%/33%"
+        17-33-33-17: "17%/33%/33%/17%"
+        33-17-17-33: "33%/17%/17%/33%"
+        100-100-100-100: "100%"
+      default: 100-100-100-100
+      examples:
+        - "100-100-100-100"
+    gap:
+      type: string
+      title: Gap between columns
+      description: Bootstrap gap utility for the row.
+      enum:
+        - g-0
+        - g-1
+        - g-2
+        - g-3
+        - g-4
+        - g-5
+      meta:enum:
+        g-0: "G-0"
+        g-1: "G-1"
+        g-2: "G-2"
+        g-3: "G-3"
+        g-4: "G-4"
+        g-5: "G-5"
+
+slots:
+  column_1:
+    title: Column 1
+    description: First column content
+  column_2:
+    title: Column 2
+    description: Second column content
+  column_3:
+    title: Column 3
+    description: Third column content
+  column_4:
+    title: Column 4
+    description: Fourth column content

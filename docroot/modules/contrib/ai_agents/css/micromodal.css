@@ -1,0 +1,121 @@
+/**************************\
+  Basic Modal Styles
+\**************************/
+
+.ai-modal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1300;
+}
+
+.ai-modal__container {
+  background-color: #fff;
+  width: 80vw;
+  max-height: 90vh;
+  border-radius: 4px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* Special gin solution */
+.gin--dark-mode .ai-modal__container {
+  background-color: rgb(var(--gin-bg-layer-rgb));
+}
+
+.ai-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  /* Base width on the .ai-modal__container width minus padding */
+  width: 80vw;
+  background: #ededed;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+  padding: 15px 30px;
+  box-sizing: border-box;
+  z-index: 1310;
+}
+
+/* Special gin solution */
+.gin--dark-mode .ai-modal__header {
+  background-color: rgba(var(--gin-bg-app-rgb), 1);
+}
+
+.ai-modal__title {
+  margin: 0;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.25;
+  box-sizing: border-box;
+}
+
+.ai-modal__close {
+  background: transparent;
+  border: 0;
+  color: black;
+}
+
+.ai-modal__header .ai-modal__close:before {
+  content: "\2715";
+}
+
+.ai-modal__content {
+  margin-top: 16px;
+  margin-bottom: 8px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, .8);
+  padding: 40px 20px 0;
+}
+
+.ai-modal__btn {
+  font-size: 12px;
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  background-color: #e6e6e6;
+  color: rgba(0, 0, 0, .8);
+  border-radius: 2px;
+  border-style: none;
+  border-width: 0;
+  cursor: pointer;
+  text-transform: none;
+  overflow: visible;
+  line-height: 1.15;
+  margin: 0;
+  will-change: transform;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  transition: -webkit-transform .25s ease-out;
+  transition: transform .25s ease-out;
+  transition: transform .25s ease-out, -webkit-transform .25s ease-out;
+}
+
+.ai-modal__btn:focus,
+.ai-modal__btn:hover {
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+.ai-modal__btn-primary {
+  background-color: #00449e;
+  color: #fff;
+}
+
+/* We reuse the close button style for the "x" in the header */
+.ai-modal__header .ai-tools-library-item__remove {
+  position: relative;
+  top: 0;
+  cursor: pointer;
+}

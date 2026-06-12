@@ -1,0 +1,171 @@
+langcode: en
+status: true
+dependencies: {  }
+id: eca_bpmn_io_unpublished_404
+data: |
+  <?xml version="1.0" encoding="UTF-8"?>
+  <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:qa="http://some-company/schema/bpmn/qa" id="sample-diagram" targetNamespace="http://bpmn.io/schema/bpmn" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+    <bpmn2:process id="unpublished_404" name="Unpublished 404" isExecutable="true" camunda:versionTag="">
+      <bpmn2:documentation />
+      <bpmn2:extensionElements>
+        <camunda:properties>
+          <camunda:property name="Tags" value="" />
+          <camunda:property name="Changelog" value="" />
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:startEvent id="kernel__exception_status_code_exception" name="Uncaught Exception" camunda:modelerTemplate="org.drupal.event.kernel:exception_status_code">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="kernel:exception_status_code" />
+          </camunda:properties>
+        </bpmn2:extensionElements>
+        <bpmn2:outgoing>eca_scalar_403</bpmn2:outgoing>
+      </bpmn2:startEvent>
+      <bpmn2:task id="eca_void_and_condition_and" name="AND" camunda:modelerTemplate="org.drupal.action.eca_void_and_condition">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_void_and_condition" />
+          </camunda:properties>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>eca_scalar_403</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_02cujo5</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_switch_account_1" name="Switch to user 1" camunda:modelerTemplate="org.drupal.action.eca_switch_account">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_switch_account" />
+          </camunda:properties>
+          <camunda:field name="user_id">
+            <camunda:string>1</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_02cujo5</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_1vh4eqo</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_token_load_route_param_route" name="Load node from route" camunda:modelerTemplate="org.drupal.action.eca_token_load_route_param">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_token_load_route_param" />
+          </camunda:properties>
+          <camunda:field name="token_name">
+            <camunda:string>node</camunda:string>
+          </camunda:field>
+          <camunda:field name="request">
+            <camunda:string>2</camunda:string>
+          </camunda:field>
+          <camunda:field name="parameter_name">
+            <camunda:string>node</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_1vh4eqo</bpmn2:incoming>
+        <bpmn2:outgoing>eca_entity_field_value_unpublished_1</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_throw_exception_exception" name="Not found exception" camunda:modelerTemplate="org.drupal.action.eca_throw_exception">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_throw_exception" />
+          </camunda:properties>
+          <camunda:field name="exception_type">
+            <camunda:string>Symfony\Component\HttpKernel\Exception\NotFoundHttpException</camunda:string>
+          </camunda:field>
+          <camunda:field name="response_message">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="log_exception">
+            <camunda:string>yes</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>eca_entity_field_value_unpublished_1</bpmn2:incoming>
+      </bpmn2:task>
+      <bpmn2:sequenceFlow id="eca_scalar_403" name="403?" camunda:modelerTemplate="org.drupal.condition.eca_scalar" sourceRef="kernel__exception_status_code_exception" targetRef="eca_void_and_condition_and">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_scalar" />
+          </camunda:properties>
+          <camunda:field name="negate">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="left">
+            <camunda:string>[event:code]</camunda:string>
+          </camunda:field>
+          <camunda:field name="right">
+            <camunda:string>403</camunda:string>
+          </camunda:field>
+          <camunda:field name="operator">
+            <camunda:string>equal</camunda:string>
+          </camunda:field>
+          <camunda:field name="type">
+            <camunda:string>value</camunda:string>
+          </camunda:field>
+          <camunda:field name="case">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+      </bpmn2:sequenceFlow>
+      <bpmn2:sequenceFlow id="Flow_02cujo5" sourceRef="eca_void_and_condition_and" targetRef="eca_switch_account_1" />
+      <bpmn2:sequenceFlow id="Flow_1vh4eqo" sourceRef="eca_switch_account_1" targetRef="eca_token_load_route_param_route" />
+      <bpmn2:sequenceFlow id="eca_entity_field_value_unpublished_1" name="unpublished?" camunda:modelerTemplate="org.drupal.condition.eca_entity_field_value" sourceRef="eca_token_load_route_param_route" targetRef="eca_throw_exception_exception">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_entity_field_value" />
+          </camunda:properties>
+          <camunda:field name="negate">
+            <camunda:string>yes</camunda:string>
+          </camunda:field>
+          <camunda:field name="expected_value">
+            <camunda:string>1</camunda:string>
+          </camunda:field>
+          <camunda:field name="field_name">
+            <camunda:string>status</camunda:string>
+          </camunda:field>
+          <camunda:field name="operator">
+            <camunda:string>equal</camunda:string>
+          </camunda:field>
+          <camunda:field name="type">
+            <camunda:string>value</camunda:string>
+          </camunda:field>
+          <camunda:field name="case">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="entity">
+            <camunda:string>node</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+      </bpmn2:sequenceFlow>
+    </bpmn2:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_unpublished_404">
+      <bpmndi:BPMNPlane id="BPMNPlane_unpublished_404" bpmnElement="unpublished_404">
+        <bpmndi:BPMNShape id="kernel__exception_status_code_exception_di" bpmnElement="kernel__exception_status_code_exception">
+          <dc:Bounds x="57" y="52" width="36" height="36" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_void_and_condition_and_di" bpmnElement="eca_void_and_condition_and">
+          <dc:Bounds x="175" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_switch_account_1_di" bpmnElement="eca_switch_account_1">
+          <dc:Bounds x="325" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_token_load_route_param_route_di" bpmnElement="eca_token_load_route_param_route">
+          <dc:Bounds x="475" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_throw_exception_exception_di" bpmnElement="eca_throw_exception_exception">
+          <dc:Bounds x="625" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNEdge id="eca_scalar_403_di" bpmnElement="eca_scalar_403">
+          <di:waypoint x="93" y="70" />
+          <di:waypoint x="175" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_02cujo5_di" bpmnElement="Flow_02cujo5">
+          <di:waypoint x="275" y="70" />
+          <di:waypoint x="325" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_1vh4eqo_di" bpmnElement="Flow_1vh4eqo">
+          <di:waypoint x="425" y="70" />
+          <di:waypoint x="475" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="eca_entity_field_value_unpublished_1_di" bpmnElement="eca_entity_field_value_unpublished_1">
+          <di:waypoint x="575" y="70" />
+          <di:waypoint x="625" y="70" />
+        </bpmndi:BPMNEdge>
+      </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+  </bpmn2:definitions>

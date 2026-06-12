@@ -1,0 +1,480 @@
+.card-wrapper {
+  margin-bottom: 20px;
+}
+
+// Default Card.
+.card {
+  @include box-drop-shadow;
+  background: $white;
+  border-radius: $cards-border-radius-radius-md;
+  border: none;
+  display: flex;
+  height: 100%;
+
+  &-border-radius {
+    &-xxxs {
+      border-radius: $cards-border-radius-radius-xxxs;
+    }
+    &-xxs {
+      border-radius: $cards-border-radius-radius-xxs;
+    }
+    &-xs {
+      border-radius: $cards-border-radius-radius-xs;
+    }
+    &-sm {
+      border-radius: $cards-border-radius-radius-sm;
+    }
+    &-md {
+      border-radius: $cards-border-radius-radius-md;
+    }
+    &-lg {
+      border-radius: $cards-border-radius-radius-lg;
+    }
+    &-xl {
+      border-radius: $cards-border-radius-radius-xl;
+    }
+    &-xxl {
+      border-radius: $cards-border-radius-radius-xxl;
+    }
+    &-xxxl {
+      border-radius: $cards-border-radius-radius-xxxl;
+    }
+  }
+
+  h2, h3, h4, h5, h6, p {
+    margin: 0;
+  }
+
+  .card-header {
+    @include text-style-headline-h-5;
+    // Layout.
+    display: flex;
+    padding: $padding-padding-md;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $padding-padding-md;
+    align-self: stretch;
+    background: transparent;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-bottom: 0;
+
+    @include media-breakpoint-up(md) {
+      padding: $padding-padding-xlg;
+    }
+  }
+
+  .field--type-entity-reference {
+    margin: 0;
+  }
+  .field--name-field-provus-links {
+    .field__item {
+      display: inline-block;
+      margin-right: $card-spacing;
+    }
+  }
+
+  .card-img-top {
+    overflow: hidden;
+    .field--type-image img,
+    .field--name-field-provus-media-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      margin-bottom: 0;
+    }
+
+    &.inset-media {
+      padding: $padding-padding-xlg $padding-padding-xlg 0 $padding-padding-xlg;
+      aspect-ratio: 0 !important;
+    }
+  }
+
+  .card-body {
+    padding: $padding-padding-md $padding-padding-md $padding-padding-xlg $padding-padding-md;
+
+    @include media-breakpoint-up(md) {
+      padding: $padding-padding-xxlg $padding-padding-xlg;
+    }
+
+    .card-content {
+      // Layout.
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $padding-padding-xxs;
+      align-self: stretch;
+      flex-grow: 1;
+    }
+
+    .card-title {
+      @include text-style-headline-h-4;
+      margin: 0;
+    }
+    .card-text {
+      @include text-style-body-body-1;
+      *{
+        margin: 0;
+      }
+    }
+
+    .field--name-field-provus-links {
+      padding-top: $padding-padding-md;
+
+      @include media-breakpoint-up(md) {
+        padding-top: $padding-padding-xlg;
+      }
+    }
+  }
+}
+
+.rounded-circle {
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 0 auto;
+  max-width: rem-calc(300);
+  max-height: rem-calc(300);
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1/1;
+  border: 1px solid $gray-lightest;
+}
+
+// Card bg.
+.card-wrapper.provus-card-bg {
+  .card {
+    height: auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .card-img-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    z-index: 0;
+    opacity: 1;
+    transition: all 0.3s;
+    border-radius: $card-border-radius;
+  }
+  .card-img-wrapper {
+    overflow: hidden;
+    border-radius: $card-border-radius;
+    aspect-ratio: 1.6;
+    img {
+      margin: 0;
+      width: 100%;
+      height: auto;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+  .card-img-overlay {
+    @include img-bg;
+    color: $white;
+    display: flex;
+    align-items: flex-end;
+    padding: $padding-padding-xlg;
+    transition: all 0.3s ease-in-out;
+  }
+  .card-body {
+    position: relative;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    word-wrap: break-word;
+    .card-title {
+      @include text-style-headline-h-5;
+      color: $white;
+      margin: 0;
+    }
+  }
+  a {
+    &:hover,
+    &:focus {
+      .card-title { 
+        color: $white;
+      }
+      .card-img-overlay {
+        @include img-bg-hover;
+      }
+      img {
+        transform: scale(1.05);
+      }
+      .card-body .arrow-right {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+// Card left and Card right.
+.card-wrapper {
+  &.provus-card-left,
+  &.provus-card-right {
+    .card-header {
+      padding: $padding-padding-xlg;
+      @include text-style-headline-h-5;
+      margin-top: 0;
+      margin-bottom: 0;
+      border-bottom: 1px solid #efefef;
+    }
+
+    .card-content {
+      position: relative;
+      overflow: hidden;
+
+      .card-title {
+        @include text-style-headline-h-4;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+
+    .card-img-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 0;
+      bottom: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .card-img {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 2/1;
+      overflow: hidden;
+      border-radius: 0;
+
+      img {
+        border-radius: 0;
+      }
+    }
+
+    .card-body {
+      width: 100%;
+    }
+
+    @include media-breakpoint-up(lg) {
+      .card-img {
+        position: absolute;
+        height: 100%;
+        aspect-ratio: 1/2;
+        width: 33%;
+      }
+
+      .card-body {
+        width: 66%;
+      }
+    }
+  }
+
+  &.provus-card-left {
+    .card-body {
+      margin-left: 0;
+    }
+  }
+
+  @include media-breakpoint-up(lg) {
+    &.provus-card-left {
+      .card-img {
+        left: 0;
+      }
+      .card-body {
+        margin-left: 33%;
+      }
+    }
+    &.provus-card-right {
+      .card-img {
+        right: 0;
+      }
+      
+    }
+  }
+}
+
+.card-wrapper.provus-card {
+  .card-img-top {
+    aspect-ratio: 2/1;
+    border-radius: 0;
+  }
+}
+
+// Card image circle.
+.card-wrapper.provus-card-image-circle {
+  .card-img-top {
+    margin-top: $padding-padding-sm;
+    @include media-breakpoint-up(md) {
+      margin-top: $padding-padding-xlg;
+    }
+  }
+  .card-title {
+    @include text-style-headline-h-5;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .card-header {
+    @include text-style-headline-h-5;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-bottom: 1px solid #efefef;
+  }
+  .card-img-top {
+    margin: $padding-padding-sm auto;
+    @include media-breakpoint-up(md) {
+      margin: $padding-padding-xlg auto;
+    }
+  }
+}
+
+// Card tall
+.provus-card-tall {
+  .card {
+    border: none;
+    box-shadow: none;
+    max-width: 280px;
+    margin: 0 auto;
+
+    .card-wrapper {
+      padding: 0;
+      width: 100%;
+      border-radius: 0;
+    }
+  }
+  .card-body {
+    padding: $padding-padding-md 0;
+
+    .card-title {
+      @include text-style-headline-h-5;
+      padding-top: $padding-padding-xxs;
+      margin: 0;
+    }
+  }
+
+  .card-date {
+    @include text-style-body-body-2;
+    color: $text-colors-text-secondary;
+    
+  }
+  .card-img-top {
+    border-radius: $card-border-radius;
+    height: 448px;
+    width: 280px;
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  a {
+    color: $text-primary;
+    text-decoration: none;
+
+    &:hover {
+      .card-title {
+        .field--name-field-provus-title,
+        .field--name-title {
+          color: $primary-colors-primary-hover;
+        }
+      }
+
+      .card-img-top {
+        box-shadow: 0px 0px 4px 0px $black;
+      }
+    }
+  }
+}
+
+// Card icon left.
+.card-wrapper.provus-card-icon-left {
+  .list {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: rem-calc(18);
+    &-icon {
+      width: 33px;
+      height: 33px;
+      overflow: hidden;
+      display: flex;
+      align-content: center;
+      justify-content: center;
+      align-items: flex-start;
+      flex-shrink: 0;
+
+      /*
+      @include media-breakpoint-up(xxl) {
+        width: 50px;
+        height: 50px;
+      }
+      */
+
+      span {
+        color: $primary-shade;
+      }
+    }
+    &-text {
+      padding-left: $padding-padding-sm;
+      &-text {
+        @include text-style-body-body-1;
+      }
+      &-title {
+        @include text-style-headline-h-4;
+        margin: 0;
+      }
+      .field--name-field-provus-links {
+        margin-top: $padding-padding-xlg;
+      }
+    }
+  }
+}
+
+.provus-card {
+  .card {
+    .card-body {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+.provus-card-basic,
+.provus-card-basic-plus {
+  .card-title {
+    @include text-style-headline-h-5;
+    margin-bottom: $padding-padding-xxs;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .card-text {
+    line-height: 32px;
+  }
+}
+
+.node .card {
+  .card-title a {
+    color: $primary;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+
+    &:hover {
+      color: $system-info-medium;
+    }
+
+    &:focus {
+      color: $primary-colors-primary-hover;
+    }
+  }
+}

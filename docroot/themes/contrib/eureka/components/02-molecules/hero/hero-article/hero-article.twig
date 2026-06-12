@@ -1,0 +1,74 @@
+{#
+/**
+ * Available variables:
+ * - hero_article_base_class: base classname of the wrapper.
+ * - hero_article_modifiers: array of modifiers to add to the base classname of the wrapper.
+ * - hero_article_blockname: blockname prepended to the base classname of the wrapper(s) and each component.
+ * - hero_article_extra_classes: array of extra classes to add to the base classes.
+ *
+ * - hero_article_media: url of the hero_article image.
+ * - hero_article_media_alt: alt of the hero_article image.
+ * - hero_article_heading: Title of the component
+ * - hero_article_heading_level: (default: 1) what level of heading to show on the hero_article
+ * - hero_article_text: Descriptive text
+ *
+ * Available blocks:
+ * - hero_article_media_block
+ * - hero_article_text_block
+ */
+#}
+{% set hero_article_base_class = 'hero-article' %}
+{% set hero_article_modifiers = hero_article_modifiers|default([]) %}
+
+<section {{ bem(hero_article_base_class, hero_article_modifiers, hero_article_blockname, hero_article_extra_classes) }}>
+  {# Image #}
+  {% if hero_article_media %}
+    {% block hero_article_media_block %}
+      <div {{ bem('media', [], hero_article_base_class) }}>
+        {% include 'canvas:image' with {
+          src: hero_article_media.src,
+          alt: hero_article_media.alt,
+          loading: 'lazy',
+          sizes: '(max-width: 480px) 100vw, (max-width: 768px) 50vw, 33vw',
+        } only %}
+      </div>
+    {% endblock %}
+  {% endif %}
+  {# Content #}
+  {% if hero_article_heading or hero_article_text %}
+    <div {{ bem('content', hero_article_content_modifiers, hero_article_base_class) }}>
+      {# Title #}
+      {% if hero_article_heading %}
+        {{ include("eureka:heading", {
+          heading_level: hero_article_heading_level|default(1),
+          heading: hero_article_heading,
+          heading_size_override: 'main',
+        }, with_context = false) }}
+      {% endif %}
+      {% if hero_article_autor or hero_article_date %}
+        <div {{ bem('content__art-info', [], hero_article_base_class) }}>
+          {% if hero_article_autor %}
+            <div>
+              {{ include("eureka:icon", {
+                icon_name: 'user',
+                icon_decorative: true,
+                icon_modifiers: ['before'],
+              }, with_context = false) }}
+              {{ hero_article_autor }}
+            </div>
+          {% endif %}
+          {% if hero_article_date %}
+            <div>
+              {{ include("eureka:icon", {
+                icon_name: 'calendar',
+                icon_decorative: true,
+                icon_modifiers: ['before'],
+              }, with_context = false) }}
+              {{ hero_article_date|date("D , d M, Y") }}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+</section>

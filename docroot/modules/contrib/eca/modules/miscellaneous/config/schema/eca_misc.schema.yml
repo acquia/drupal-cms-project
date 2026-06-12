@@ -1,0 +1,188 @@
+eca.event.plugin.drupal:block_content_get_dependency:
+  type: eca.event.plugin
+  label: 'Block content get dependency'
+
+eca.event.plugin.drupal:file_upload_sanitize_name_event:
+  type: eca.event.plugin
+  label: 'File Upload Sanitize Name Event'
+
+eca.event.plugin.drupal:select_page_display_variant:
+  type: eca.event.plugin
+  label: 'Select Page Display Variant'
+
+eca.event.plugin.drupal:build:
+  type: eca.event.plugin
+  label: 'Build resource type'
+
+eca.event.plugin.drupal:prepare_layout:
+  type: eca.event.plugin
+  label: 'Prepare Layout'
+
+eca.event.plugin.drupal:section_component_build_render_array:
+  type: eca.event.plugin
+  label: 'Section Component Build Render Array'
+
+eca.event.plugin.drupal:save_translation:
+  type: eca.event.plugin
+  label: 'Save translated string'
+
+eca.event.plugin.drupal:recipe_applied:
+  type: eca.event.plugin
+  label: 'Recipe Applied'
+  mapping:
+    recipe_base_path:
+      type: string
+      label: 'Base path of recipe'
+
+eca.event.plugin.kernel:view:
+  type: eca.event.plugin
+  label: 'Controller does not return a Response instance'
+
+eca.event.plugin.kernel:controller:
+  type: eca.event.plugin
+  label: 'Controller found to handle request'
+
+eca.event.plugin.kernel:controller_arguments:
+  type: eca.event.plugin
+  label: 'Controller arguments have been resolved'
+
+eca.event.plugin.kernel:exception:
+  type: eca.event.plugin
+  label: 'Uncaught exception'
+
+eca.event.plugin.kernel:finish_request:
+  type: eca.event.plugin
+  label: 'Response for request created'
+
+eca.event.plugin.kernel:request:
+  type: eca.event.plugin
+  label: 'Start dispatching request'
+
+eca.event.plugin.kernel:response:
+  type: eca.event.plugin
+  label: 'Response created'
+
+eca.event.plugin.kernel:terminate:
+  type: eca.event.plugin
+  label: 'Response was sent'
+
+eca.event.plugin.kernel:container_initialize_subrequest_finished:
+  type: eca.event.plugin
+  label: 'Service container finished initializing'
+
+eca.event.plugin.kernel:exception_status_code:
+  type: eca.event.plugin
+  label: 'Exception status code'
+
+eca.event.plugin.routing:alter:
+  type: eca.event.plugin
+  label: 'Alter route'
+
+eca.event.plugin.routing:dynamic:
+  type: eca.event.plugin
+  label: 'Allow new routes'
+
+eca.event.plugin.routing:finished:
+  type: eca.event.plugin
+  label: 'Route building finished'
+
+eca.condition.plugin.eca_route_match:
+  type: eca.condition.plugin
+  label: 'Route Match'
+  mapping:
+    request:
+      type: integer
+      label: 'Request'
+      constraints:
+        Choice: [0, 1, 2]
+    route:
+      type: string
+      label: 'Route name'
+    operator:
+      type: string
+      label: 'Comparison operator'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Plugin\ECA\Condition\StringComparisonBase::getAllValidOperators'
+    type:
+      type: string
+      label: 'Comparison type'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Plugin\ECA\Condition\StringComparisonBase::getAllValidTypes'
+    case:
+      type: boolean
+      label: 'Case sensitive comparison'
+
+eca.condition.plugin.eca_recipe_uses_config_action:
+  type: eca.condition.plugin
+  label: 'Recipe Uses Config Action'
+  mapping:
+    recipe_package_name:
+      type: string
+      label: 'Recipe package name'
+      constraints:
+        NotBlank: []
+    config_action:
+      type: string
+      label: 'Config Action'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_apply_recipe:
+  type: mapping
+  label: 'Configuration for the "Apply Recipe" action'
+  mapping:
+    recipe_package_name:
+      type: string
+      label: 'Recipe package name'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_throw_exception:
+  type: mapping
+  label: 'Configuration for the "Throw Exception" action'
+  mapping:
+    exception_type:
+      type: string
+      label: 'Exception type'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca_misc\Plugin\Action\ThrowException::getAllValidExceptionTypes'
+        NotBlank: []
+    response_message:
+      type: string
+      label: 'Response message'
+    log_exception:
+      type: boolean
+      label: 'Log as an error'
+
+action.configuration.eca_token_load_query_arg:
+  type: mapping
+  label: 'Configuration for the "Token Load Query Arg" action'
+  mapping:
+    token_name:
+      type: label
+      label: 'Name of token'
+    argument_name:
+      type: string
+      label: 'Name of query argument'
+
+action.configuration.eca_token_load_route_param:
+  type: mapping
+  label: 'Configuration for the "Token Load Route Param" action'
+  mapping:
+    token_name:
+      type: label
+      label: 'Name of token'
+    request:
+      type: integer
+      label: 'Request'
+      constraints:
+        Choice: [0, 1, 2]
+    parameter_name:
+      type: string
+      label: 'Name of route parameter'
+    raw_value:
+      type: boolean
+      label: 'Get raw value'

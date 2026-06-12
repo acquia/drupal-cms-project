@@ -1,0 +1,45 @@
+field.formatter.settings.icon_linkit_formatter:
+  type: field.formatter.settings.linkit
+  label: 'Icon linkit with icon format settings'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    icon_settings:
+      type: sequence
+      label: 'Icon extractor settings'
+      sequence:
+        type: ui_icons.icon_pack_options.[%key]
+    icon_display:
+      type: string
+      label: 'Icon display position'
+
+field.widget.settings.icon_linkit_widget:
+  type: field.widget.settings.linkit
+  label: 'Icon widget Linkit settings'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    allowed_icon_pack:
+      type: sequence
+      label: 'Icon pack limitation for selection'
+      sequence:
+        type: string
+        label: 'Icon pack id'
+    show_settings:
+      type: boolean
+      label: 'Show extractor settings'
+    icon_required:
+      type: boolean
+      label: 'Set icon required'
+    icon_position:
+      type: boolean
+      label: 'Allow icon pack display selection'
+    icon_selector:
+      type: string
+      label: 'Icon FormElement name'
+    result_format:
+      type: string
+      label: 'Autocomplete format'
+    max_result:
+      type: integer
+      label: 'Maximum result'

@@ -1,0 +1,362 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Section
+description: A high-level vertical block used to divide a page into distinct thematic areas with consistent padding.
+group: Container
+status: stable
+props:
+  type: object
+  properties:
+    show_header:
+      type: boolean
+      title: Show header
+      description: Show the header elements.
+      default: true
+      examples:
+        - true
+    show_footer:
+      type: boolean
+      title: Show footer
+      description: Show the footer elements.
+      default: true
+      examples:
+        - true
+    layout:
+      type: string
+      title: Layout
+      description: Select the layout for the section.
+      enum:
+        - layout--12
+        - layout--3-9
+        - layout--3-1-8
+        - layout--4-8
+        - layout--4-1-7
+        - layout--5-7
+        - layout--5-1-6
+        - layout--6-6m
+        - layout--9-3
+        - layout--8-1-3
+        - layout--8-4
+        - layout--7-1-4
+        - layout--7-5
+        - layout--6-1-5
+        - layout--6m-6
+      meta:enum:
+        layout--12: 'Header (12) Main (12)'
+        layout--3-9: 'Header (3) Main (9)'
+        layout--3-1-8: 'Header (3) Gap (1) Main (8)'
+        layout--4-8: 'Header (4) Main (8)'
+        layout--4-1-7: 'Header (4) Gap (1) Main (7)'
+        layout--5-7: 'Header (5) Main (7)'
+        layout--5-1-6: 'Header (5) Gap (1) Main (6)'
+        layout--6-6m: 'Header (6) Main (6)'
+        layout--9-3: 'Main (9) Header (3)'
+        layout--8-1-3: 'Main (8) Gap (1) Header (3)'
+        layout--8-4: 'Main (8) Header (4)'
+        layout--7-1-4: 'Main (7) Gap (1) Header (4)'
+        layout--7-5: 'Main (7) Header (5)'
+        layout--6-1-5: 'Main (6) Gap (1) Header (5)'
+        layout--6m-6: 'Main (6) Header (6)'
+    heading:
+      type: string
+      title: Heading
+      description: The heading content.
+    heading_level:
+      type: number
+      title: Heading level
+      description: Select the heading level.
+      enum: [1, 2, 3, 4, 5, 6]
+      default: 2
+      examples:
+        - 2
+    hide_heading:
+      type: boolean
+      title: Hide heading
+      description: Hide the heading from being visible.
+      default: false
+      examples:
+        - false
+    intro:
+      type: string
+      title: Intro
+      description: Introduction content for the section.
+      contentMediaType: text/html
+    prose_size:
+      type: string
+      title: Prose size
+      description: Select the size of prose to make it bigger or smaller.
+      enum:
+        - prose-sm
+        - prose-base
+        - prose-lg
+        - prose-xl
+        - prose-2xl
+      meta:enum:
+        prose-sm: Small
+        prose-base: Base
+        prose-lg: Large
+        prose-xl: Extra large
+        prose-2xl: Extra extra large
+    readmore_text:
+      type: string
+      title: Readmore Text
+      description: Call to action text.
+    readmore_url:
+      type: string
+      title: Readmore URL
+      description: Call to action URL.
+    content_width:
+      type: string
+      title: Content width
+      description: Select the width of the content.
+      enum:
+        - section-width--100
+        - section-width--75
+        - section-width--66
+        - section-width--50
+      meta:enum:
+        section-width--100: 100%
+        section-width--75: 75%
+        section-width--66: 66%
+        section-width--50: 50%
+      examples:
+        - section-width--100
+    content_position:
+      type: string
+      title: Content position
+      description: Select the position of the content.
+      enum:
+        - section-position--start
+        - section-position--center
+        - section-position--end
+      meta:enum:
+        section-position--start: Start
+        section-position--center: Center
+        section-position--end: End
+    content_alignment:
+      type: string
+      title: Content alignment
+      description: Select the alignment of the content.
+      enum:
+        - section-alignment--start
+        - section-alignment--center
+        - section-alignment--end
+        - section-alignment--justify
+      meta:enum:
+        section-alignment--start: Start
+        section-alignment--center: Center
+        section-alignment--end: End
+        section-alignment--justify: Justify
+    column_widths:
+      type: string
+      title: Column widths
+      description: Select the column width of the items.
+      enum:
+        - section-col-widths--100
+        - section-col-widths--50-50
+        - section-col-widths--33-33-33
+        - section-col-widths--25-25-25-25
+      meta:enum:
+        section-col-widths--100: Full
+        section-col-widths--50-50: Halves
+        section-col-widths--33-33-33: Thirds
+        section-col-widths--25-25-25-25: Quarters
+      examples:
+        - section-col-widths--100
+    margin_top:
+      type: string
+      title: Margin top
+      description: 'Select the margin top for the container - the space above the top.'
+      enum:
+        - '0'
+        - '4'
+        - '8'
+        - '12'
+        - '16'
+        - '24'
+        - '32'
+      meta:enum:
+        '0': '0 (0px)'
+        '4': '4 (16px)'
+        '8': '8 (32px)'
+        '12': '12 (48px)'
+        '16': '16 (64px)'
+        '24': '24 (96px)'
+        '32': '32 (128px)'
+    margin_bottom:
+      type: string
+      title: Margin bottom
+      description: 'Select the margin bottom for the container - the space below the bottom.'
+      enum:
+        - '0'
+        - '4'
+        - '8'
+        - '12'
+        - '16'
+        - '24'
+        - '32'
+      meta:enum:
+        '0': '0 (0px)'
+        '4': '4 (16px)'
+        '8': '8 (32px)'
+        '12': '12 (48px)'
+        '16': '16 (64px)'
+        '24': '24 (96px)'
+        '32': '32 (128px)'
+    padding_top:
+      type: string
+      title: Padding top
+      description: 'Select the padding top for the container - the space beneath the top.'
+      enum:
+        - '0'
+        - '4'
+        - '8'
+        - '12'
+        - '16'
+        - '24'
+        - '32'
+      meta:enum:
+        '0': '0 (0px)'
+        '4': '4 (16px)'
+        '8': '8 (32px)'
+        '12': '12 (48px)'
+        '16': '16 (64px)'
+        '24': '24 (96px)'
+        '32': '32 (128px)'
+      examples:
+        - '12'
+    padding_bottom:
+      type: string
+      title: Padding bottom
+      description: Select the padding bottom for the container - the space beneath the bottom.
+      enum:
+        - '0'
+        - '4'
+        - '8'
+        - '12'
+        - '16'
+        - '24'
+        - '32'
+      meta:enum:
+        '0': '0 (0px)'
+        '4': '4 (16px)'
+        '8': '8 (32px)'
+        '12': '12 (48px)'
+        '16': '16 (64px)'
+        '24': '24 (96px)'
+        '32': '32 (128px)'
+      examples:
+        - '12'
+    container:
+      type: string
+      title: Container
+      description: Select how the content is to be contained.
+      enum:
+        - container--edgy
+        - container--wide
+        - container--normal
+        - container--narrow
+      meta:enum:
+        container--edgy: Edgy
+        container--wide: Wide
+        container--normal: Normal
+        container--narrow: Narrow
+      examples:
+        - container--normal
+    palette:
+      type: string
+      title: Palette
+      description: Select the colour palette for the content.
+      enum:
+        - color--standard
+        - color--alternate
+        - color--primary
+        - color--secondary
+        - color--accent
+        - color--neutral
+      meta:enum:
+        color--standard: Standard
+        color--alternate: Alternate
+        color--primary: Primary
+        color--secondary: Secondary
+        color--accent: Accent
+        color--neutral: Neutral
+      examples:
+        - color--standard
+    texture:
+      type: string
+      title: Texture
+      description: Select the texture to apply to the palette.
+      enum:
+        - texture--linear-start
+        - texture--linear-end
+        - texture--linear-top
+        - texture--linear-bottom
+        - texture--linear-top-start
+        - texture--linear-top-end
+        - texture--linear-bottom-start
+        - texture--linear-bottom-end
+        - texture--radial-spotlight
+        - texture--radial-vignette
+        - texture--conic-top-start
+        - texture--conic-top-end
+        - texture--conic-bottom-start
+        - texture--conic-bottom-end
+      meta:enum:
+        texture--linear-start: 'Linear: Start'
+        texture--linear-end: 'Linear: End'
+        texture--linear-top: 'Linear: Top'
+        texture--linear-bottom: 'Linear: Bottom'
+        texture--linear-top-start: 'Linear: Top start'
+        texture--linear-top-end: 'Linear: Top end'
+        texture--linear-bottom-start: 'Linear: Bottom start'
+        texture--linear-bottom-end: 'Linear: Bottom end'
+        texture--radial-spotlight: 'Radial: Spotlight'
+        texture--radial-vignette: 'Radial: Vignette'
+        texture--conic-top-start: 'Conic: Top start'
+        texture--conic-top-end: 'Conic: Top end'
+        texture--conic-bottom-start: 'Conic: Bottom start'
+        texture--conic-bottom-end: 'Conic: Bottom end'
+    overlay:
+      type: string
+      title: Overlay
+      description: Select the overlay to use for accessibility when a background is in use.
+      enum:
+        - overlay--linear-start
+        - overlay--linear-end
+        - overlay--linear-top
+        - overlay--linear-bottom
+        - overlay--linear-top-start
+        - overlay--linear-top-end
+        - overlay--linear-bottom-start
+        - overlay--linear-bottom-end
+        - overlay--radial-center
+      meta:enum:
+        overlay--linear-start: 'Linear: Start'
+        overlay--linear-end: 'Linear: End'
+        overlay--linear-top: 'Linear: Top'
+        overlay--linear-bottom: 'Linear: Bottom'
+        overlay--linear-top-start: 'Linear: Top start'
+        overlay--linear-top-end: 'Linear: Top end'
+        overlay--linear-bottom-start: 'Linear: Bottom start'
+        overlay--linear-bottom-end: 'Linear: Bottom end'
+        overlay--radial-center: 'Radial: Center'
+slots:
+  header_items:
+    title: Header items
+    description: Add content items.
+  main_items:
+    title: Main Items
+    description: Add content items.
+  footer_items:
+    title: Footer items
+    description: Add content items.
+  backgrounds:
+    title: Backgrounds
+    description: Add background items to this slot.
+  behaviors:
+    title: Behaviors
+    description: Add behavior items to this slot.
+libraryOverrides:
+  css:
+    component:
+      ../../dist/css/section.css: { minified: true }

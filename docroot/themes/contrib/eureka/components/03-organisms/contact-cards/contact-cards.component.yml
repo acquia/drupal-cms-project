@@ -1,0 +1,41 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Contact Cards
+status: stable
+description: Contact cards component
+# Overrides regular css with minified.
+libraryOverrides:
+  css:
+    component:
+      contact-cards.min.css: { minified: true }
+group: Eureka main components
+props:
+  type: object
+  properties:
+    contact_cards_heading:
+      type: string
+      title: Contact cards heading
+      description: Heading for the contact cards component
+      examples:
+        - Key contacts
+    contact_cards_heading_level:
+      type: ['number', 'null']
+      title: Contact cards heading level
+      description: Heading level of the heading element - only change this if you know what you're doing, as it affects accessibility
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+      examples:
+        - 2
+    contact_cards_summary:
+      type: ['string', 'null']
+      title: Contact cards summary
+      description: Summary for the contact cards component
+      examples:
+        - If you need to speak to a specific member of staff, please contact the school office who will be happy to direct your call or arrange a meeting.
+slots:
+  contact_cards_items_block:
+    title: Contact cards items block
+    description: Block to hold contact card items

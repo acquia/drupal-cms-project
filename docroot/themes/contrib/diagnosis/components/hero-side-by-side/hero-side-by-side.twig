@@ -1,0 +1,164 @@
+{% set wrapper =
+  html_cva(
+    base: ['cq-full'],
+    variants: {
+      background: {
+        default: 'bg-default text-secondary-foreground',
+        primary: 'bg-primary text-primary-foreground',
+        secondary: 'bg-secondary text-secondary-foreground',
+        accent: 'bg-accent text-accent-foreground',
+        muted: 'bg-muted text-muted-foreground',
+        bright: 'bg-bright text-bright-foreground',
+        light: 'bg-light text-light-foreground'
+      },
+      paddingBlockStart: {
+        0: 'pt-0',
+        16: 'pt-4',
+        32: 'pt-6 md:pt-7 xl:pt-8',
+        64: 'pt-10 md:pt-13 xl:pt-16'
+      },
+      paddingBlockEnd: {
+        0: 'pb-0',
+        16: 'pb-4',
+        32: 'pb-6 md:pb-7 xl:pb-8',
+        64: 'pb-10 md:pb-13 xl:pb-16'
+      },
+      marginBlockStart: {
+        0: 'mt-0',
+        8: 'mt-2',
+        20: 'mt-5',
+        32: 'mt-6 md:mt-7 xl:mt-8',
+        48: 'mt-8 md:mt-10 xl:mt-12',
+        64: 'mt-10 md:mt-13 xl:mt-16',
+        96: 'mt-16 md:mt-20 xl:mt-24',
+        128: 'mt-20 md:mt-24 xl:mt-32'
+      },
+      marginBlockEnd: {
+        0: 'mb-0',
+        8: 'mb-2',
+        20: 'mb-5',
+        32: 'mb-6 md:mb-7 xl:mb-8',
+        48: 'mb-8 md:mb-10 xl:mb-12',
+        64: 'mb-10 md:mb-13 xl:mb-16',
+        96: 'mb-16 md:mb-20 xl:mb-24',
+        128: 'mb-20 md:mb-24 xl:mb-32'
+      }
+    }
+  )
+%}
+
+{% set hero =
+  html_cva(
+    base: ['h-full', 'flex', 'md:items-center'],
+    variants: {
+      imagePosition: {
+        left: 'md:flex-row',
+        right: 'md:flex-row-reverse'
+      },
+      heroFlexGap: {
+        large: 'gap-6 xl:gap-8',
+        'extra-large': 'gap-16 md:gap-24 xl:gap-32'
+      },
+      heroFlexDirectionMobile: {
+        vertical: 'flex-col',
+        'vertical-reverse': 'flex-col-reverse'
+      }
+    }
+  )
+%}
+
+{% set image =
+  html_cva(
+    base: ['flex-1', 'rounded-none', 'hero-image-overlap'],
+    variants: {
+      imageSize: {
+        '2:1': 'aspect-2/1',
+        '16:9': 'aspect-16/9',
+        '3:2': 'aspect-3/2',
+        '4:3': 'aspect-4/3',
+        '1:1': 'aspect-1/1'
+      },
+      imageRadius: {
+        small: 'rounded-sm',
+        large: 'rounded-xl md:rounded-2xl',
+        'extra-large': 'rounded-[24px] md:rounded-[32px]'
+      }
+    }
+  )
+%}
+
+{% set wrapper_classes =
+  wrapper.apply({
+    background: background,
+    paddingBlockStart: padding_block_start,
+    paddingBlockEnd: padding_block_end,
+    marginBlockStart: margin_block_start,
+    marginBlockEnd: margin_block_end
+  })
+%}
+
+{% set hero_classes =
+  hero.apply({
+    imagePosition: image_position,
+    heroFlexGap: hero_flex_gap|default('large'),
+    heroFlexDirectionMobile: hero_flex_direction_mobile
+  })
+%}
+
+{% set image_classes =
+  image.apply({
+    imageSize: image_size,
+    imageRadius: image_radius
+  })
+%}
+
+{# Full-width outer wrapper with background color #}
+<div class="hero-side-by-side-wrapper {{ wrapper_classes }}{{ media.src is empty ? ' no-image pt-6 pb-6' : '' }}">
+  {# Container to constrain content width #}
+  <div class="container mx-auto px-4 md:px-6">
+    <section class="{{ hero_classes }}">
+      {% if media.src is not empty %}
+        <div class="{{ image_classes }}">
+          {% block hero_media %}
+            {{
+              include(
+                'canvas:image',
+                {
+                  src: media.src,
+                  alt: media.alt,
+                  class: 'object-cover w-full h-full',
+                  width: media.width,
+                  height: media.height,
+                  loading: 'eager',
+                  sizes: '50vw'
+                },
+                false,
+                true
+              )
+            }}
+          {% endblock %}
+        </div>
+      {% endif %}
+      <div class="flex flex-1 flex-col justify-center gap-6">
+        {% block hero_content %}
+          {# Title #}
+          {% if title is not empty %}
+            <h1 class="heading-responsive-6xl font-bold">{{ title }}</h1>
+          {% endif %}
+
+          {# Description #}
+          {% if description is not empty %}
+            <div class="text-lg opacity-90 md:text-xl">
+              {{ description }}
+            </div>
+          {% endif %}
+
+          {# Additional content slot #}
+          {% block hero_slot %}
+
+          {% endblock %}
+        {% endblock %}
+      </div>
+    </section>
+  </div>
+</div>

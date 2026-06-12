@@ -1,0 +1,13 @@
+{#
+/**
+ * @file
+ * Default twig file for providing a flex-based wrapper around form elements.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the parent form element.
+ * - elements: The form elements.
+ */
+#}
+<div{{ attributes.addClass('custom-field-element-flex') }}>
+  {{ elements }}
+</div>

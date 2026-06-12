@@ -1,0 +1,77 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - dashboard.dashboard.welcome
+    - filter.format.full_html
+    - media.type.document
+    - media.type.document_private
+    - media.type.image
+    - media.type.remote_video
+    - media.type.svg_image
+    - media.type.video
+    - workflows.workflow.basic_editorial
+  module:
+    - canvas
+    - content_moderation
+    - dashboard
+    - filter
+    - media
+    - media_library_bulk_upload
+    - node
+    - path
+    - redirect
+    - scheduler
+    - system
+    - trash
+id: content_editor
+label: 'Content editor'
+weight: 2
+is_admin: false
+permissions:
+  - 'access administration pages'
+  - 'access content overview'
+  - 'access media overview'
+  - 'access trash'
+  - 'administer menu'
+  - 'administer redirects'
+  - 'administer url aliases'
+  - 'create canvas_page'
+  - 'create document media'
+  - 'create document_private media'
+  - 'create image media'
+  - 'create remote_video media'
+  - 'create svg_image media'
+  - 'create url aliases'
+  - 'create video media'
+  - 'delete any document media'
+  - 'delete any document_private media'
+  - 'delete any image media'
+  - 'delete any remote_video media'
+  - 'delete any svg_image media'
+  - 'delete any video media'
+  - 'delete canvas_page'
+  - 'edit any document_private media'
+  - 'edit any image media'
+  - 'edit any remote_video media'
+  - 'edit any svg_image media'
+  - 'edit any video media'
+  - 'edit canvas_page'
+  - 'revert all revisions'
+  - 'schedule publishing of nodes'
+  - 'use basic_editorial transition create_new_draft'
+  - 'use basic_editorial transition publish'
+  - 'use basic_editorial transition unpublish'
+  - 'use media document bulk upload form'
+  - 'use media document_private bulk upload form'
+  - 'use media image bulk upload form'
+  - 'use media remote_video bulk upload form'
+  - 'use media svg_image bulk upload form'
+  - 'use media video bulk upload form'
+  - 'use text format full_html'
+  - 'view all revisions'
+  - 'view any unpublished content'
+  - 'view own unpublished content'
+  - 'view own unpublished media'
+  - 'view scheduled content'
+  - 'view welcome dashboard'

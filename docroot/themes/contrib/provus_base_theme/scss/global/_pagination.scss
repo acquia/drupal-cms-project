@@ -1,0 +1,57 @@
+.pagination {
+  flex-wrap: wrap;
+  padding: 0;
+
+  .page-item {
+    place-content: center;
+    padding: $padding-padding-xxs $padding-padding-xxxs;
+
+    @include media-breakpoint-up (lg) {
+      padding-left: $padding-padding-xs;
+      padding-right: $padding-padding-xs;
+    }
+
+    .page-link {
+      @include text-style-button-medium;
+      color: $text-colors-body-color;
+      white-space: nowrap;
+      text-align: center;
+      padding-left: $padding-padding-xxs;
+      padding-right: $padding-padding-xxs;
+      background-color: transparent;
+    }
+
+    a:hover {
+      color: $primary-colors-primary;
+    }
+
+    &.active {
+      > span.page-link {
+        position: relative;
+        color: $primary-colors-primary;
+        background-color: $background-colors-background-white;
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -11px;
+          left: 0;
+          width: 100%;
+          height: 4px;
+          background-color: $primary;
+        }
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+}

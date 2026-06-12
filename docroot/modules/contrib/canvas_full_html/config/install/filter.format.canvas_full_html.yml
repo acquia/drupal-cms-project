@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - canvas_full_html
+name: 'Canvas Full HTML'
+format: canvas_full_html
+weight: 1
+roles:
+  - administrator
+filters:
+  filter_htmlcorrector:
+    id: filter_htmlcorrector
+    provider: filter
+    status: true
+    weight: 10
+    settings: {}

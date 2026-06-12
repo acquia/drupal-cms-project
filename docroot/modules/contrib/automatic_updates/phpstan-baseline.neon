@@ -1,0 +1,52 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Function update_calculate_project_data not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: src/Form/ExtensionsUpdaterForm.php
+
+		-
+			message: '#^Class Drupal\\automatic_updates\\Validator\\PhpExtensionsValidator extends @internal class Drupal\\package_manager\\Validator\\PhpExtensionsValidator\.$#'
+			identifier: classExtendsInternalClass.classExtendsInternalClass
+			count: 1
+			path: src/Validator/PhpExtensionsValidator.php
+
+		-
+			message: '#^\\Drupal calls should be avoided in classes, use dependency injection instead$#'
+			identifier: globalDrupalDependencyInjection.useDependencyInjection
+			count: 1
+			path: tests/modules/automatic_updates_test/src/Datetime/TestTime.php
+
+		-
+			message: '''
+				#^Call to deprecated method get\(\) of class Symfony\\Component\\HttpFoundation\\Request\:
+				since Symfony 7\.4, use properties `\-\>attributes`, `query` or `request` directly instead$#
+			'''
+			identifier: method.deprecated
+			count: 1
+			path: tests/modules/automatic_updates_test_api/src/ApiController.php
+
+		-
+			message: '#^\\Drupal calls should be avoided in classes, use dependency injection instead$#'
+			identifier: globalDrupalDependencyInjection.useDependencyInjection
+			count: 1
+			path: tests/modules/automatic_updates_test_api/src/ApiController.php
+
+		-
+			message: '#^Class Drupal\\Tests\\automatic_updates\\Kernel\\TestConsoleUpdateStage extends @internal class Drupal\\automatic_updates\\ConsoleUpdateSandboxManager\.$#'
+			identifier: classExtendsInternalClass.classExtendsInternalClass
+			count: 1
+			path: tests/src/Kernel/AutomaticUpdatesKernelTestBase.php
+
+		-
+			message: '#^Class Drupal\\Tests\\automatic_updates\\Kernel\\TestCronUpdateRunner extends @internal class Drupal\\automatic_updates\\CronUpdateRunner\.$#'
+			identifier: classExtendsInternalClass.classExtendsInternalClass
+			count: 1
+			path: tests/src/Kernel/AutomaticUpdatesKernelTestBase.php
+
+		-
+			message: '#^\\Drupal calls should be avoided in classes, use dependency injection instead$#'
+			identifier: globalDrupalDependencyInjection.useDependencyInjection
+			count: 2
+			path: tests/src/Kernel/AutomaticUpdatesKernelTestBase.php

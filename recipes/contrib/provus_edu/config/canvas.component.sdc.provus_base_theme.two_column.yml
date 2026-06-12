@@ -1,0 +1,233 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - provus_base_theme
+label: 'Two Column'
+id: sdc.provus_base_theme.two_column
+source: sdc
+source_local_id: 'provus_base_theme:two_column'
+provider: provus_base_theme
+active_version: d9139a03a4ec4675
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        desktop_width:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 50-50
+          expression: ℹ︎list_string␟value
+        tablet_width:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 50-50
+          expression: ℹ︎list_string␟value
+        mobile_width:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 100-100
+          expression: ℹ︎list_string␟value
+        gap:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        column_1:
+          title: 'Column 1'
+          description: 'First column content'
+        column_2:
+          title: 'Column 2'
+          description: 'Second column content'
+  4aeec3c478dc25d1:
+    settings:
+      prop_field_definitions:
+        gap:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        desktop_width:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 50-50
+          expression: ℹ︎list_string␟value
+        tablet_width:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 50-50
+          expression: ℹ︎list_string␟value
+        mobile_width:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 100-100
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        column_1:
+          title: 'Column 1'
+          description: 'First column content'
+        column_2:
+          title: 'Column 2'
+          description: 'Second column content'
+  671cc0091db8bb7b:
+    settings:
+      prop_field_definitions:
+        gap:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        desktop_width:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 50-50
+          expression: ℹ︎list_string␟value
+        tablet_width:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 50-50
+          expression: ℹ︎list_string␟value
+        mobile_width:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 100-0
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        column_1:
+          title: 'Column 1'
+          description: 'First column content'
+        column_2:
+          title: 'Column 2'
+          description: 'Second column content'
+  7c4a22df6181eeac:
+    settings:
+      prop_field_definitions:
+        gap:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        desktop_width:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 50-50
+          expression: ℹ︎list_string␟value
+        mobile_width:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        column_1:
+          title: 'Column 1'
+          description: 'First column content'
+        column_2:
+          title: 'Column 2'
+          description: 'Second column content'
+  289ffe91946a2537:
+    settings:
+      prop_field_definitions:
+        gap:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        column_1:
+          title: 'Column 1'
+          description: 'First column content'
+        column_2:
+          title: 'Column 2'
+          description: 'Second column content'

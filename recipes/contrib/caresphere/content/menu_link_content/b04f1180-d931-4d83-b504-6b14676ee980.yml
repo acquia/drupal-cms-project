@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: b04f1180-d931-4d83-b504-6b14676ee980
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    f766b126-4401-43f4-93f5-9f21d1b54e87: menu_link_content
+    ced96d70-45b0-4bf2-9de3-5de6c9870a57: canvas_page
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'All programs'
+  menu_name:
+    -
+      value: footer-programs
+  link:
+    -
+      title: ''
+      options: {  }
+      target_uuid: ced96d70-45b0-4bf2-9de3-5de6c9870a57
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -50
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:f766b126-4401-43f4-93f5-9f21d1b54e87'
+  revision_translation_affected:
+    -
+      value: true

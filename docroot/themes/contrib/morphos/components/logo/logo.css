@@ -1,0 +1,72 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: components/logo/logo.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+.logo {
+  a {
+    display: inline-block;
+    text-decoration: none;
+  }
+}
+
+.logo__image img {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Default: show large, hide small */
+.logo__large {
+  display: inline-block;
+}
+
+.logo__small {
+  display: none;
+}
+
+/* Dark image hidden by default */
+.logo__image--dark {
+  display: none;
+}
+
+/* Dark schema */
+[data-scheme='dark'] .logo__image--light {
+  display: none;
+}
+
+[data-scheme='dark'] .logo__image--dark {
+  display: inline-block;
+}
+
+/* prefers-color-scheme fallback */
+@media (prefers-color-scheme: dark) {
+  .logo__image--default {
+    display: none;
+  }
+
+  .logo__image--dark {
+    display: inline-block;
+  }
+}
+
+/* Reset for explicit non-dark schemes */
+[data-scheme]:not([data-scheme='dark']) .logo__image--light {
+  display: inline-block;
+}
+
+[data-scheme]:not([data-scheme='dark']) .logo__image--dark {
+  display: none;
+}
+
+/* Forced colors: always show light image for accessibility */
+@media (forced-colors: active) {
+  .logo__image--light {
+    display: inline-block !important;
+  }
+
+  .logo__image--dark {
+    display: none !important;
+  }
+}

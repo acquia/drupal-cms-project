@@ -1,0 +1,174 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 9c1aac72-b2b9-40eb-bb41-d047cce54dc0
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Resource
+  components:
+    -
+      uuid: cd95372e-a4aa-41aa-acce-e7484ccfc170
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: full-width
+        padding_left: none
+        padding_right: none
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: none
+    -
+      parent_uuid: cd95372e-a4aa-41aa-acce-e7484ccfc170
+      slot: content
+      uuid: b35feb43-a5f2-4862-9227-a72bd46625e3
+      component_id: sdc.pulse_theme.space-flexi
+      inputs:
+        no_of_columns: two
+        vertical: top
+        horizontal: left
+        direction: across
+        gap: medium
+        wrap: wrap
+        margin_top: none
+        margin_bottom: none
+    -
+      parent_uuid: b35feb43-a5f2-4862-9227-a72bd46625e3
+      slot: column_one
+      uuid: d31d4b32-7f83-4fca-bed0-a804856e0150
+      component_id: sdc.pulse_theme.space-dark-bg-imagecard
+      inputs:
+        title: 'Explore Nutrition'
+        url: /event/building-sustainable-workout
+        image:
+          sourceType: default-relative-url
+          value:
+            src: images/city.jpg
+            alt: 'Boring placeholder'
+            width: 336
+            height: 392
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.pulse_theme.space-dark-bg-imagecard
+        text:
+          value: 'Explore the world of balanced eating, mindful choices, and science-backed advice—no fads, just facts.'
+          format: canvas_html_block
+        alignment: vertical
+        horizontal_column_alignment: left-image
+        vertical_column_alignment: top-image
+        card_size: large
+        full_box_link: false
+    -
+      parent_uuid: b35feb43-a5f2-4862-9227-a72bd46625e3
+      slot: column_two
+      uuid: 14ac1327-8a89-43f2-b85d-04ab03b96bd4
+      component_id: sdc.pulse_theme.space-dark-bg-imagecard
+      inputs:
+        title: 'Explore Nutrition'
+        url: /event/building-sustainable-workout
+        image:
+          sourceType: default-relative-url
+          value:
+            src: images/city.jpg
+            alt: 'Boring placeholder'
+            width: 336
+            height: 392
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.pulse_theme.space-dark-bg-imagecard
+        text:
+          value: 'Explore the world of balanced eating, mindful choices, and science-backed advice—no fads, just facts.'
+          format: canvas_html_block
+        alignment: vertical
+        horizontal_column_alignment: left-image
+        vertical_column_alignment: top-image
+        card_size: large
+        full_box_link: false
+    -
+      uuid: 69227561-a86e-4c4f-ad76-87c28be840b3
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: none
+        padding_right: none
+        padding_top: none
+        padding_bottom: none
+        margin_top: large
+        margin_bottom: large
+    -
+      parent_uuid: 69227561-a86e-4c4f-ad76-87c28be840b3
+      slot: content
+      uuid: 8d85b1e0-27fa-4378-8c57-6458fb0954e9
+      component_id: block.views_block.resources-block_1
+      inputs:
+        label: Resources
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      uuid: 214a4003-ea19-416b-9bb4-0914f80c3da5
+      component_id: sdc.pulse_theme.space-flexi
+      inputs:
+        no_of_columns: two
+        column_width: '100'
+        vertical: top
+        horizontal: left
+        direction: across
+        gap: medium
+        wrap: wrap
+        margin_top: none
+        margin_bottom: none
+  path:
+    -
+      alias: /resource
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

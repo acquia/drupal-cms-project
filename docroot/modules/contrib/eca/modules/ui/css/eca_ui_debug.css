@@ -1,0 +1,133 @@
+/* Floating ECA icon bottom-right */
+#eca-ui-debug-applied-events {
+  position: fixed;
+  z-index: 9998;
+  right: 16px;
+  bottom: 16px;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  border-radius: 999px;
+  background: url(../../../logo.png) center / 70% no-repeat #048181;
+  box-shadow: 0 8px 24px rgb(0, 0, 0, 0.22);
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+}
+
+/* Title: hidden, shown via .item-list::before instead */
+#eca-ui-debug-applied-events > h2 {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+
+/* Popup */
+#eca-ui-debug-applied-events .item-list {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 10px);
+  display: flex;
+  visibility: hidden;
+  flex-direction: column;
+  min-width: 260px;
+  max-width: min(360px, calc(100vw - 32px));
+  padding: 14px;
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease,
+    visibility 0s linear 0.15s;
+  transform: translateY(6px);
+  opacity: 0;
+  color: #111;
+  border: 1px solid rgb(0, 0, 0, 0.12);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 14px 40px rgb(0, 0, 0, 0.25);
+}
+
+/* Show popup on hover / focus */
+#eca-ui-debug-applied-events:hover .item-list,
+#eca-ui-debug-applied-events:focus-within .item-list {
+  visibility: visible;
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease,
+    visibility 0s;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Title shown as header inside the popup */
+#eca-ui-debug-applied-events .item-list::after {
+  display: block;
+  order: -1;
+  margin: -14px -14px 10px;
+  padding: 10px 14px;
+  content: "ECA events applied on this page";
+  color: #048181;
+  border-bottom: 1px solid rgb(4, 129, 129, 0.12);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Remove bullets and left gap completely */
+#eca-ui-debug-applied-events .item-list ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#eca-ui-debug-applied-events .item-list li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#eca-ui-debug-applied-events .item-list li + li {
+  margin-top: 6px;
+}
+
+/* Links */
+#eca-ui-debug-applied-events .item-list a {
+  display: block;
+  overflow: hidden;
+  padding: 8px 10px;
+  white-space: nowrap;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  color: #048181;
+  border: 1px solid rgb(4, 129, 129, 0.18);
+  border-radius: 10px;
+  background: rgb(4, 129, 129, 0.06);
+}
+
+#eca-ui-debug-applied-events .item-list a:hover,
+#eca-ui-debug-applied-events .item-list a:focus-visible {
+  border-color: rgb(4, 129, 129, 0.35);
+  outline: none;
+  background: rgb(4, 129, 129, 0.12);
+}
+
+/* Arrow */
+#eca-ui-debug-applied-events .item-list::before {
+  position: absolute;
+  right: 16px;
+  bottom: -7px;
+  width: 14px;
+  height: 14px;
+  content: "";
+  transform: rotate(45deg);
+  border-right: 1px solid rgb(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgb(0, 0, 0, 0.12);
+  background: #fff;
+}

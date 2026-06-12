@@ -1,0 +1,342 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 0c0a44fa-147b-471a-82a2-51099a35124e
+  default_langcode: en
+  depends:
+    a122bd25-46fa-4bbe-8d83-4c5fe70bff4c: file
+    e03c5670-c10e-4d72-9680-3a3254f1b09a: media
+    6c65703d-c267-4290-9da2-8e72234bab5f: file
+    ceb04550-df6a-4029-b7a3-3febfbeaad03: media
+    b52d8a59-4f97-4b77-8435-850e7ffe425e: file
+    24c7ee02-b08e-472b-9ecd-30c9a3591645: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'News and Events'
+  description:
+    -
+      value: 'Discover the latest news, upcoming events, and achievements happening at Windy City Community College.'
+  components:
+    -
+      uuid: 2120206d-5c27-419f-8187-2995b82db846
+      component_id: sdc.provus_base_theme.hero_banner
+      inputs:
+        title: 'Stay Informed, Stay Engaged'
+        body:
+          value: '<p><strong>Discover the latest news, upcoming events, and achievements happening at Windy City Community College.</strong></p>'
+          format: canvas_full_html
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: e03c5670-c10e-4d72-9680-3a3254f1b09a
+            target_type: media
+        is_short_banner: false
+        image_position: full
+        background_color: primary
+        text_container_width: col-lg-6
+        text_alignment: left
+    -
+      uuid: 6e74e9f2-cc62-4909-87d8-5c31c3c363ee
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        padding_top: pt-5
+        padding_bottom: pb-5
+    -
+      parent_uuid: 6e74e9f2-cc62-4909-87d8-5c31c3c363ee
+      slot: content
+      uuid: 7712fc48-ac73-4753-9ccb-bda23ef694dc
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: 7712fc48-ac73-4753-9ccb-bda23ef694dc
+      slot: column_1
+      uuid: 4304e084-9753-47b0-89de-628c9efab564
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Latest News'
+        decorative_line: true
+        alignment: center
+    -
+      parent_uuid: 7712fc48-ac73-4753-9ccb-bda23ef694dc
+      slot: column_1
+      uuid: da0f5882-4f26-40b4-8413-efe8b025e728
+      component_id: block.views_block.provus_news-block_news_listing
+      inputs:
+        label: 'News: Block for page'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      parent_uuid: 7712fc48-ac73-4753-9ccb-bda23ef694dc
+      slot: column_1
+      uuid: 1b834310-451d-4d9f-bc5b-d0ae1e863bda
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'View all news'
+        url:
+          uri: 'internal:/news'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: auto
+        wrapper: div
+        alignment: center
+    -
+      uuid: ec9b01fd-d85d-4e24-a9b6-eaaefd3356fc
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        custom_class: bg-grey
+    -
+      parent_uuid: ec9b01fd-d85d-4e24-a9b6-eaaefd3356fc
+      slot: content
+      uuid: 625a157c-92ac-4ab5-90c9-25bcc56a729a
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: 625a157c-92ac-4ab5-90c9-25bcc56a729a
+      slot: column_1
+      uuid: 8d1f8631-2d19-4a14-9cfc-52ade808848a
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Mark Your Calendar'
+        decorative_line: false
+        alignment: center
+    -
+      parent_uuid: ec9b01fd-d85d-4e24-a9b6-eaaefd3356fc
+      slot: content
+      uuid: 24edec71-9a7e-48d1-878e-84338b1661bd
+      component_id: block.views_block.provus_events-block_events_upcoming
+      inputs:
+        label: 'Provus Events: Upcoming Events List'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      parent_uuid: ec9b01fd-d85d-4e24-a9b6-eaaefd3356fc
+      slot: content
+      uuid: 1a81f211-7627-4ca3-943e-f32909baaaf4
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'View all events'
+        url:
+          uri: 'internal:/event-calendar'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: auto
+        wrapper: div
+        alignment: center
+    -
+      uuid: 042d6fe7-8fec-48c5-86ee-a05193c38c49
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        padding_bottom: pb-5
+        padding_top: pt-5
+    -
+      parent_uuid: 042d6fe7-8fec-48c5-86ee-a05193c38c49
+      slot: content
+      uuid: 867c3d94-86dc-440f-b152-193a61df6770
+      component_id: sdc.provus_base_theme.two_column
+      inputs:
+        desktop_width: 50-50
+        tablet_width: 50-50
+        mobile_width: 100-100
+    -
+      parent_uuid: 867c3d94-86dc-440f-b152-193a61df6770
+      slot: column_1
+      uuid: 9bdde80c-5385-481a-a3e5-ac43dcea788e
+      component_id: sdc.provus_base_theme.card_image_top
+      inputs:
+        title: 'Faculty Research Showcase: Innovating Education'
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: ceb04550-df6a-4029-b7a3-3febfbeaad03
+            target_type: media
+        is_image_circle: false
+        link_style: default
+    -
+      parent_uuid: 867c3d94-86dc-440f-b152-193a61df6770
+      slot: column_2
+      uuid: 58fa5050-74dd-4168-b736-8911653fac32
+      component_id: sdc.provus_base_theme.card_image_top
+      inputs:
+        title: 'Community Outreach Programs Making a Difference'
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 24c7ee02-b08e-472b-9ecd-30c9a3591645
+            target_type: media
+        is_image_circle: false
+        link_style: default
+    -
+      uuid: 89b56f28-c3f5-429a-9189-3d3966e0fe78
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        custom_class: bg-plus
+        flex_enabled: false
+        container_type: container
+    -
+      parent_uuid: 89b56f28-c3f5-429a-9189-3d3966e0fe78
+      slot: content
+      uuid: 360ae247-f3eb-46d0-a2e4-aa9c94713ae6
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Never Miss an Update'
+        decorative_line: false
+        alignment: center
+    -
+      parent_uuid: 89b56f28-c3f5-429a-9189-3d3966e0fe78
+      slot: content
+      uuid: 4746cc95-b4f8-4f3e-a434-cabbe0830560
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p class="text-align-center">Sign up for our newsletter to get the latest updates, news, and events delivered straight to your inbox.</p>'
+          format: canvas_full_html
+        margin_bottom: mb-4
+    -
+      parent_uuid: 89b56f28-c3f5-429a-9189-3d3966e0fe78
+      slot: content
+      uuid: 1a984655-e2c8-4149-a1b0-86df3a58c7a6
+      component_id: block.webform_block
+      inputs:
+        label: Webform
+        label_display: '0'
+        webform_id: newsletter
+        default_data: ''
+        redirect: true
+        lazy: false
+  path:
+    -
+      alias: /news-and-events
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

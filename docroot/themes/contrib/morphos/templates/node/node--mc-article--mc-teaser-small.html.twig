@@ -1,0 +1,8 @@
+{{ include('morphos:teaser_small', {
+  image: content.field_mc_thumbnail,
+  info: content.field_mc_article_type,
+  heading: label,
+  url: url,
+  summary: content.field_mc_description,
+  date: content.field_mc_published_date
+}, with_context = false) }}

@@ -1,0 +1,13 @@
+{% if image %}
+<picture class="media-picture" style="--aspect-ratio: {{ aspect_ratio|default('auto') }};">
+    {% include 'canvas:image' with {
+      src: image.src,
+      alt: alt_tag|default(image.alt)|default(''),
+      width: image.width,
+      height: image.height,
+      loading: loading|default('lazy'),
+      class: 'image',
+      attributes: attributes,
+    } only %}
+</picture>
+{% endif %}

@@ -1,0 +1,143 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 3b4c5d6e-7f80-4901-bcde-f01234567891
+  default_langcode: en
+  depends:
+    962a70c6-150b-4134-8e6a-e504658496e8: file
+    10d11e7f-f74e-4b87-a23b-cb8608c4b49c: media
+    e163606a-6f88-47a5-bc07-c4e86eddd0e3: file
+    4cfcdec4-ab83-482d-a919-a23216445f71: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'About this site template'
+  components:
+    -
+      uuid: f82a9a55-82e2-43c8-af04-50736061216a
+      component_id: sdc.consistent.hero-banner
+      inputs:
+        heading_text: 'About this site template'
+        subtitle: 'A open-source local government website template built on Drupal CMS'
+        show_search: false
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 10d11e7f-f74e-4b87-a23b-cb8608c4b49c
+            target_type: media
+    -
+      uuid: cbad4487-3b2d-4783-8670-f98a582a2968
+      component_id: sdc.consistent.section
+      inputs:
+        section_columns: '100'
+        section_background: none
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: cbad4487-3b2d-4783-8670-f98a582a2968
+      slot: section_header_slot
+      uuid: 45630e2c-5a9d-47b5-ae47-686f8359782f
+      component_id: sdc.consistent.heading
+      inputs:
+        heading_text: 'What this template is'
+        heading_level: 2
+    -
+      parent_uuid: cbad4487-3b2d-4783-8670-f98a582a2968
+      slot: section_main_slot
+      uuid: d4d5d6d7-e8e9-4f0f-a1a1-b2b2c3c3d4d4
+      component_id: sdc.consistent.text
+      inputs:
+        text_content: '<p>This is a demonstration site template for local government organisations built on <a href="https://www.drupal.org/project/drupal_cms">Drupal CMS</a>. It shows how Drupal CMS — combined with a purpose-built theme and a small set of content types — can deliver a modern, accessible, and maintainable council website.</p><p>The template is designed to be installed quickly and then customised. The content, images, and branding you see here are placeholders — they are intended to demonstrate the structure and capabilities of the template, not to represent a real council.</p><p>This template was built by <a href="https://www.annertech.com">Annertech</a>, a specialist Drupal agency with extensive experience working with local government organisations.</p>'
+    -
+      uuid: e5e6e7e8-f9f0-4a1a-b2b2-c3c3d4d4e5e5
+      component_id: sdc.consistent.section
+      inputs:
+        section_columns: 33-33-33
+        section_background: none
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: e5e6e7e8-f9f0-4a1a-b2b2-c3c3d4d4e5e5
+      slot: section_header_slot
+      uuid: 207ec3b8-86a4-4f4b-be80-23c354721bfa
+      component_id: sdc.consistent.heading
+      inputs:
+        heading_text: 'Content types included'
+        heading_level: 2
+    -
+      parent_uuid: e5e6e7e8-f9f0-4a1a-b2b2-c3c3d4d4e5e5
+      slot: section_main_slot
+      uuid: b69400b7-1d4a-4abd-86ae-51527749b0ba
+      component_id: sdc.consistent.card
+      inputs:
+        card_heading: 'Service landing page'
+        card_url: /waste-and-recycling
+        card_text: 'A top-level section page for a service area. Lists the service pages beneath it, with configurable top task links. Populated automatically by ECA when service pages are published.'
+    -
+      parent_uuid: e5e6e7e8-f9f0-4a1a-b2b2-c3c3d4d4e5e5
+      slot: section_main_slot
+      uuid: fd6ec825-5be8-4502-a5e0-4275a168c3cc
+      component_id: sdc.consistent.card
+      inputs:
+        card_heading: 'Service page'
+        card_url: /waste-and-recycling/check-your-collection-schedule
+        card_text: 'An individual service page with a title, short description, and rich body content. Supports headings, tables, blockquotes, and lists. Linked to its parent landing page.'
+    -
+      parent_uuid: e5e6e7e8-f9f0-4a1a-b2b2-c3c3d4d4e5e5
+      slot: section_main_slot
+      uuid: e87ace84-a297-4806-901a-1982712688ca
+      component_id: sdc.consistent.card
+      inputs:
+        card_heading: 'Canvas page'
+        card_url: /whats-on
+        card_text: "A flexible full-page layout built using Canvas components — hero banners, sections, cards, top tasks, and CTA banners. This page, the home page, and What's on are all Canvas pages."
+    -
+      uuid: d0d1d2d3-e4e5-4f6f-a7a7-b8b8c9c9d0d0
+      component_id: sdc.consistent.section
+      inputs:
+        section_columns: '100'
+        section_background: none
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: d0d1d2d3-e4e5-4f6f-a7a7-b8b8c9c9d0d0
+      slot: section_header_slot
+      uuid: e1e2e3e4-f5f6-4a7a-b8b8-c9c9d0d0e1e1
+      component_id: sdc.consistent.heading
+      inputs:
+        heading_text: 'How it works'
+        heading_level: 2
+    -
+      parent_uuid: d0d1d2d3-e4e5-4f6f-a7a7-b8b8c9c9d0d0
+      slot: section_main_slot
+      uuid: f7594ae7-5654-424e-b82d-9e9226fcb1fb
+      component_id: sdc.consistent.text
+      inputs:
+        text_content: "<p><strong>Canvas</strong> is the page builder included with Drupal CMS. It allows editors to compose pages from a library of components without writing any code. The home page, this page, and the What's on page are all built with Canvas. The service landing pages and service pages use standard Drupal node rendering with a custom theme.</p><p><strong>ECA (Event-Condition-Action)</strong> is used to automate the relationship between service pages and their parent landing pages. When a service page is published, ECA automatically creates a summary card on the relevant landing page. When the service page is updated, ECA keeps the card in sync. This means editors only need to manage one piece of content — the service page itself.</p><p><strong>Pathauto</strong> generates clean URLs automatically based on the content title and parent section, so editors do not need to set paths manually.</p>"
+    -
+      uuid: 317e38b0-fb0d-4faf-948a-2eaed27c8c9a
+      component_id: sdc.consistent.cta-banner
+      inputs:
+        heading_text: 'Get the template'
+        text: 'The Local Council site template is available on Drupal.org. Install it on a fresh Drupal CMS site to get started.'
+        cta_label: 'View on Drupal.org'
+        cta_url: 'https://www.drupal.org/project/local'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 4cfcdec4-ab83-482d-a919-a23216445f71
+            target_type: media
+  path:
+    -
+      alias: /about
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

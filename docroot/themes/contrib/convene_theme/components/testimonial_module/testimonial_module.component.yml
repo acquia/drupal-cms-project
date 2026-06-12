@@ -1,0 +1,23 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Testimonial Module
+group: Organisms
+status: stable
+description: A slider module for grouping multiple Testimonial Items.
+props:
+  type: object
+  properties:
+    admin_theme:
+      title: Admin Theme
+      type: boolean
+      default: false
+      description: Check to enable Admin Theme styles.
+slots:
+  items:
+    title: Testimonial Items
+    description: Slot for one or more Testimonial Item components.
+library:
+  css:
+    component:
+      testimonial_module.css: {}
+  js:
+    testimonial_module.js: {}

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+# To use:
+$ ln -sv /PATH/TO/DRUPAL/ROOT/core/core/phpcs.xml.dist core.phpcs.xml.dist
+core.phpcs.xml.dist -> /PATH/TO/DRUPAL/ROOT/core/phpcs.xml.dist
+-->
+<ruleset name="canvas">
+  <arg name="cache" value=".cache/phpcs/.phpcs.cache" />
+  <exclude-pattern>.cache/*</exclude-pattern>
+  <exclude-pattern>*/modules/canvas_vite/*</exclude-pattern>
+  <!-- Drupal (core) uses stylelint: https://www.drupal.org/list-changes/drupal/published?keywords_description=stylelint-->
+  <exclude-pattern>*.css$</exclude-pattern>
+  <!-- Drupal (core) uses eslint: https://www.drupal.org/list-changes/drupal/published?keywords_description=eslint-->
+  <exclude-pattern>*.js$</exclude-pattern>
+  <!-- YAML files that create PHP scripts can trigger phpcs -->
+  <exclude-pattern>*.yaml$</exclude-pattern>
+  <exclude-pattern>*.yml$</exclude-pattern>
+
+  <!-- Use the Drupal coding standard, but … -->
+  <rule ref="./core.phpcs.xml.dist">
+    <!-- … don't require boilerplate docs *yet*. -->
+    <exclude name="Drupal.Commenting.FunctionComment.MissingParamComment"/>
+    <exclude name="Drupal.Commenting.FunctionComment.ParamMissingDefinition"/>
+    <exclude name="Drupal.Commenting.FunctionComment.MissingReturnComment"/>
+    <exclude name="Drupal.Commenting.FileComment.Missing"/>
+    <exclude name="Drupal.Commenting.FunctionComment.Missing">
+      <exclude-pattern>*/Functional/*</exclude-pattern>
+      <exclude-pattern>*/tests/modules/*</exclude-pattern>
+    </exclude>
+    <exclude name="Drupal.Commenting.VariableComment.Missing"/>
+    <exclude name="Drupal.Commenting.ClassComment.Missing">
+      <include-pattern>*/Functional/*</include-pattern>
+      <include-pattern>*/tests/modules/*</include-pattern>
+    </exclude>
+  </rule>
+  <!-- … allow long-line array declarations where they are useful: in test expectations. -->
+  <rule ref="Drupal.Arrays.Array.LongLineDeclaration">
+    <exclude-pattern>*/tests/*</exclude-pattern>
+  </rule>
+  <rule ref="Drupal.Files.EndFileNewline">
+    <exclude-pattern>*/config/install/*\.yml$</exclude-pattern>
+  </rule>
+  <!-- @todo eventually apply stricter rules to canvas_ai, too. -->
+  <rule ref="Drupal.Files.LineLength.TooLong">
+    <exclude-pattern>*/canvas_ai/*</exclude-pattern>
+  </rule>
+
+  <!-- Canvas' additional coding standards. -->
+  <rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses"/>
+  <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
+    <properties>
+      <property name="spacesCountAroundEqualsSign" value="0"></property>
+    </properties>
+    <exclude-pattern>*.api.php</exclude-pattern>
+    <exclude-pattern>*/tests/fixtures/update/*</exclude-pattern>
+    <!-- @todo eventually apply stricter rules to canvas_ai, too. -->
+    <exclude-pattern>*/canvas_ai/*</exclude-pattern>
+  </rule>
+  <rule ref="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalFunctions">
+    <properties>
+      <!-- See https://github.com/php/php-src/blob/PHP-8.4.18/Zend/zend_compile.c#L4962 -->
+      <property name="include" type="array">
+        <element value="assert"/>
+        <element value="sprintf"/>
+        <element value="array_map"/>
+        <element value="array_keys"/>
+        <element value="array_key_exists"/>
+        <element value="is_array"/>
+        <element value="is_bool"/>
+        <element value="is_callable"/>
+        <element value="is_countable"/>
+        <element value="is_double"/>
+        <element value="is_float"/>
+        <element value="is_int"/>
+        <element value="is_integer"/>
+        <element value="is_iterable"/>
+        <element value="is_long"/>
+        <element value="is_null"/>
+        <element value="is_numeric"/>
+        <element value="is_object"/>
+        <element value="is_resource"/>
+        <element value="is_scalar"/>
+        <element value="is_string"/>
+        <element value="in_array"/>
+      </property>
+    </properties>
+  </rule>
+  <rule ref="./coding_standards/Canvas" />
+</ruleset>

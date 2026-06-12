@@ -1,0 +1,30 @@
+langcode: en
+status: false
+dependencies:
+  module:
+    - options
+  theme:
+    - eureka
+label: Menu
+id: sdc.eureka.menu
+source: sdc
+source_local_id: 'eureka:menu'
+provider: eureka
+active_version: ef11d01b827a0fcb
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        menu_type:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: default
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions: {  }

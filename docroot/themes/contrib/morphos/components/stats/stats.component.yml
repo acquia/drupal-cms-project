@@ -1,0 +1,22 @@
+$schema: 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Stats
+description: A layout wrapper for displaying multiple numerical data points in a row.
+group: Content
+status: stable
+props:
+  type: object
+  properties:
+    direction:
+      type: string
+      title: Direction
+      description: Select the direction of the stats.
+      enum:
+        - stats-horizontal
+        - stats-vertical
+      meta:enum:
+        stats-horizontal: Horizontal
+        stats-vertical: Vertical
+slots:
+  items:
+    title: Items
+    description: Add stat items.

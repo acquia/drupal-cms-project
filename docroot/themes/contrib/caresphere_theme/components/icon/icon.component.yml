@@ -1,0 +1,44 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Icon
+group: Base
+status: stable
+props:
+  type: object
+  required:
+    - icon_size
+  properties:
+    media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Icon media
+      description: "Upload an SVG icon image."
+      type: object
+    icon:
+      type: string
+      title: Legacy Icon Name (do not use)
+      description: "Retained to prevent 500 crash on older saved versions."
+    custom_width:
+      type: integer
+      title: Custom Width (px)
+      description: "Optional precision width in pixels. Overrides icon size dropdown."
+    custom_height:
+      type: integer
+      title: Custom Height (px)
+      description: "Optional precision height in pixels. Overrides icon size dropdown."
+    icon_size:
+      type: string
+      title: Icon size
+      enum:
+        - extra-small
+        - small
+        - medium
+        - large
+        - extra-large
+      meta:enum:
+        extra-small: Extra small
+        small: Small
+        medium: Medium
+        large: Large
+        extra-large: Extra large
+      default: small
+      examples:
+        - small

@@ -1,0 +1,94 @@
+#navbar-main.navbar {
+  height: auto;
+  padding: $padding-padding-xxs 0 !important;
+}
+#navbar-main.navbar .desktop-nav .nav-item > .dropdown-cor-menu.level-1 {
+  min-height: 22.25rem;
+  .callout-container {
+    background-color: $background-colors-background-light;
+    box-shadow: none;
+  }
+
+  .field--name-field-provus-menu-callout-link {
+    border-bottom: 2px solid $text-colors-text-secondary;
+    @include text-style-body-body-1;
+    font-weight: 600;
+  }
+}
+
+#navbar-main.navbar .desktop-nav .nav-item > .dropdown-cor-menu.level-1 .callout-container .field--name-field-provus-menu-callout-link a {
+  @include text-style-body-body-1;
+  font-weight: 600;
+  color: $text-colors-text-primary;
+  text-decoration: none;
+}
+
+#navbar-main.navbar .desktop-nav .nav-item > .dropdown-cor-menu.level-1 > li.dropdown-item > .nav-link {
+  @include text-style-body-body-1;
+  font-weight: 600;
+  border: 1px solid #fff;
+  &:hover {
+    outline: 1px solid #601B2A;
+    background-color: #AD1A161A;
+    border: 1px solid #601B2A;
+    color: $text-colors-text-primary;
+  }
+}
+
+#navbar-main.navbar .desktop-nav .nav-item > .dropdown-cor-menu.level-1 > li.dropdown-item > .nav-link:hover,
+#navbar-main.navbar .desktop-nav .nav-item > .dropdown-cor-menu.level-1 > li.dropdown-item > .nav-link:focus {
+  background-color: #AD1A161A;
+  background-image: url(/themes/contrib/provus_edu_theme/images/chevron-primary.svg) !important;
+}
+
+#navbar-main.navbar .nav-item .dropdown-cor-menu.level-1 > li.dropdown-item .field--name-field-provus-menu-icon,
+#navbar-main.navbar .nav-item .dropdown-menu.level-2 > li.dropdown-item .field--name-field-provus-menu-icon {
+  top: 0.85rem;
+}
+
+#navbar-main.navbar .desktop-nav > .nav-item.active::after {
+  display: none !important;
+}
+
+#navbar-main.navbar .desktop-nav > li.nav-item:hover::after,
+#navbar-main.navbar .desktop-nav > li.nav-item a.nav-link:hover::after {
+  display: none !important;
+}
+
+#navbar-main .navbar-collapse.justify-content-end {
+  justify-content: center !important;
+}
+
+#navbar-main.navbar .desktop-nav .nav-item .nav-link {
+  @include text-style-body-body-1;
+  font-weight: 600;
+  color: $header-navigation-link;
+  text-transform: none;
+}
+
+#navbar-top .nav-link {
+  @include text-style-subheadline-sub-2;
+  font-weight: 500;
+}
+
+#navbar-main .navbar-toggler:not(.collapsed) {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+
+#navbar-main .navbar-toggler .navbar-toggler-icon {
+  filter: none;
+}
+
+#navbar-main.navbar .mobile-nav li.nav-item a.nav-link,
+#navbar-main.navbar .mobile-nav li.nav-item.item-open > a.nav-link,
+#navbar-main .navbar-toggler .navbar-toggler-icon {
+  color: $header-navigation-link;
+}
+@media (min-width: 90rem) {
+  #navbar-main.navbar .desktop-nav .nav-item > .dropdown-cor-menu.level-1 {
+    min-height: 23rem;
+  }
+}
+

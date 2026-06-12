@@ -1,0 +1,1 @@
+((c,a)=>{c.behaviors.accordion_group={attach:r=>{a("accordion_group","[data-accordion-group-id]",r).forEach(o=>{const d=o.dataset.accordionGroupId;o.querySelectorAll("details").forEach(t=>{t.setAttribute("name",`accordion--${d}`)})})}}})(Drupal,once);

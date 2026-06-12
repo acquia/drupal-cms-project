@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.footer-1
+  module:
+    - system
+  theme:
+    - provus_edu_theme
+id: provus_edu_theme_footer1_2
+theme: provus_edu_theme
+region: footer_third
+weight: 0
+provider: null
+plugin: 'system_menu_block:footer-1'
+settings:
+  id: 'system_menu_block:footer-1'
+  label: 'Quick Links'
+  label_display: visible
+  provider: system
+  level: 1
+  depth: null
+  expand_all_items: false
+visibility: {  }

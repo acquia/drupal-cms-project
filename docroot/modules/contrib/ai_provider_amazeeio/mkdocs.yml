@@ -1,0 +1,44 @@
+site_name: Amazee.ai Private AI Provider module for Drupal
+repo_url: https://git.drupalcode.org/project/ai_provider_amazeeio
+repo_name: drupal/ai_provider_amazeeio
+edit_uri: -/tree/1.3.x/docs/
+theme:
+  name: material
+  font:
+    code: Roboto Mono
+  palette:
+    primary: indigo
+  features:
+    - header.autohide
+    - navigation.footer
+    - content.action.edit
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.blocks.caption
+nav:
+  - Home: index.md
+  - Advanced Configuration: advanced-configuration.md
+  - Deployment Guide: deployment.md
+docs_dir: docs
+site_dir: site
+plugins:
+  - glightbox
+  # Include Markdown: Allows embedding markdown files in one another with {% include-markdown "file.md" %}
+  # https://github.com/mondeja/mkdocs-include-markdown-plugin
+  - include-markdown:
+      encoding: ascii
+  - search:
+      lang: en
+  - mike:
+      alias_type: redirect
+      # This is for SEO reasons, not redirects.
+      canonical_version: 1.3.x
+      version_selector: true
+      deploy_prefix: "mkdocs"
+extra:
+  social:
+    - icon: fontawesome/brands/gitlab
+      link: https://git.drupalcode.org/project/ai_provider_amazeeio
+  version:
+    provider: mike

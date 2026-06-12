@@ -1,0 +1,228 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 4042c88d-443e-492b-8f8e-ac734af72fd3
+  default_langcode: en
+  depends:
+    d8730102-0d0e-4c9c-b4aa-b83a4edb090c: file
+    e17c894c-2dc6-4284-bfd5-84bbaad72f38: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Price Transparency'
+  description:
+    -
+      value: 'Standard charges for hospital services.'
+  components:
+    -
+      uuid: c40b7856-53df-4f90-8749-1bee7d98e66b
+      component_id: sdc.diagnosis.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        background: secondary
+        padding_block_start: '32'
+        padding_block_end: '32'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        image_size: '4:3'
+        image_position: right
+        image_radius: extra-large
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: e17c894c-2dc6-4284-bfd5-84bbaad72f38
+            target_type: media
+    -
+      parent_uuid: c40b7856-53df-4f90-8749-1bee7d98e66b
+      slot: hero_slot
+      uuid: 799e8a46-ca28-4c09-b64f-c4f43b6b5148
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Price Transparency'
+        level: 1
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: c40b7856-53df-4f90-8749-1bee7d98e66b
+      slot: hero_slot
+      uuid: dd426b3f-e5a5-4e63-82cb-ccf25110c649
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Standard charges for hospital services.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: 518df0c0-f88c-45d9-8084-6b6fbb2285b8
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: 518df0c0-f88c-45d9-8084-6b6fbb2285b8
+      slot: main_slot
+      uuid: 1ada8e70-d376-4b0b-a644-752c6ec8e99a
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>In compliance with federal price transparency requirements, Saltmarsh Island Health publishes standard charges for hospital services.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 518df0c0-f88c-45d9-8084-6b6fbb2285b8
+      slot: main_slot
+      uuid: e061d75b-0924-42da-a7f6-2280fa987d3b
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Understanding Healthcare Pricing'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 518df0c0-f88c-45d9-8084-6b6fbb2285b8
+      slot: main_slot
+      uuid: cc7958ff-49fb-4535-aa22-fa3d94036b1f
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Healthcare pricing can be complex. The "standard charge" for a service is not necessarily what you will pay. Your actual out-of-pocket cost depends on:</p><ul><li data-list-item-id="e4b36917f4d733b7e7bcd75d9b0b8c144">Your insurance plan and coverage</li><li data-list-item-id="e7c46a50dc15c54adadf0efda8aed8f01">Whether you have met your deductible</li><li data-list-item-id="e4423db0f66e774f8967f148b89bdb5bb">Your copay and coinsurance amounts</li><li data-list-item-id="e8576e95db0b368acd43ad1848556905d">Whether providers are in-network</li><li data-list-item-id="e4ed493d6f06e6ef00f4608ffb083396f">Whether services are medically necessary as determined by your insurance</li></ul>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 518df0c0-f88c-45d9-8084-6b6fbb2285b8
+      slot: main_slot
+      uuid: d30ec714-0772-4787-837c-0f9a9b1a20cb
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Machine-Readable Files'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 518df0c0-f88c-45d9-8084-6b6fbb2285b8
+      slot: main_slot
+      uuid: a7788c46-25b0-4c43-8c93-105b22b689b3
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Our machine-readable files containing standard charges for all items and services are available for download:</p><ul><li data-list-item-id="efd43c37e1f034968fe43b9823660d623"><a href="#">Download Standard Charges File (JSON)</a></li><li data-list-item-id="ea4467739727e87d892ca741de41adcb1"><a href="#">Download Shoppable Services File (CSV)</a></li></ul>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 518df0c0-f88c-45d9-8084-6b6fbb2285b8
+      slot: main_slot
+      uuid: 6bbe7c31-8453-4b37-8dce-1712bd440c87
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Estimate Your Costs'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 518df0c0-f88c-45d9-8084-6b6fbb2285b8
+      slot: main_slot
+      uuid: 5e28c2bd-b4b4-48f6-a5b1-96984d467e41
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>For a personalized estimate of your out-of-pocket costs for a specific service, contact our Patient Financial Services department at (555) 123-4578. Please have your insurance information ready.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 518df0c0-f88c-45d9-8084-6b6fbb2285b8
+      slot: main_slot
+      uuid: f8302dba-e044-4344-8b22-fd56e96a53fa
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Common Shoppable Services'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 518df0c0-f88c-45d9-8084-6b6fbb2285b8
+      slot: main_slot
+      uuid: 67f1ce8e-e70e-4411-83c8-99962ba929ff
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Below are standard charges for some commonly shopped services. Remember, your actual cost will depend on your insurance coverage.</p><p><strong>Service Standard Charges</strong></p><ul><li data-list-item-id="e976d3126a2ff86f00f62fb82271c67ce">Primary Care Visit (Established Patient) - $150</li><li data-list-item-id="edec777736e38c71f163a0d8421069582">Urgent Care Visit - $200</li><li data-list-item-id="e36f9da892922843d2cde5082f2cb959b">Blood Test Panel (Basic Metabolic) - $45</li><li data-list-item-id="e9664a990efd83f409af997958ea32024">X-Ray (Single View) - $125</li><li data-list-item-id="edcabfbc0081219dc6ddd0d27308cb5de">MRI (without contrast) - $1,200</li></ul>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 518df0c0-f88c-45d9-8084-6b6fbb2285b8
+      slot: main_slot
+      uuid: 0b5d4598-57fe-43a6-8021-2f86997fad3a
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Financial Assistance'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 518df0c0-f88c-45d9-8084-6b6fbb2285b8
+      slot: main_slot
+      uuid: 2846b065-0cb2-46fa-b707-efa71a6fc2f5
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>If you are uninsured or experiencing financial hardship, you may qualify for financial assistance. Learn more on our <a href="/billing-insurance">Billing &amp; Insurance</a> page.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 518df0c0-f88c-45d9-8084-6b6fbb2285b8
+      slot: main_slot
+      uuid: 4fc81b64-d504-4fc2-bad9-1a5d4e3e3c46
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Questions?'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 518df0c0-f88c-45d9-8084-6b6fbb2285b8
+      slot: main_slot
+      uuid: a58e7456-0d3e-48d4-8206-9dd8f1a96e01
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Contact Patient Financial Services at (555) 123-4578 or pricing@saltmarshhealth.org.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+  path:
+    -
+      alias: /pricing
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

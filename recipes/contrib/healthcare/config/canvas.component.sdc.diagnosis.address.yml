@@ -1,0 +1,101 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - diagnosis
+active_version: 27472be308ee6f99
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        organization:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Saltmarsh Island Health'
+          expression: ℹ︎string␟value
+        address_line1:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '123 Main Street'
+          expression: ℹ︎string␟value
+        address_line2:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Suite 100'
+          expression: ℹ︎string␟value
+        locality:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Charleston
+          expression: ℹ︎string␟value
+        administrative_area:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: SC
+          expression: ℹ︎string␟value
+        postal_code:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '29401'
+          expression: ℹ︎string␟value
+        text_color:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: default
+          expression: ℹ︎list_string␟value
+        text_size:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: normal
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+label: Address
+id: sdc.diagnosis.address
+provider: diagnosis
+source: sdc
+source_local_id: 'diagnosis:address'

@@ -1,0 +1,157 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.system_breadcrumb_block
+    - canvas.component.block.views_block.projects-featured
+    - canvas.component.block.views_block.projects-related
+    - canvas.component.sdc.haven_theme.button
+    - canvas.component.sdc.haven_theme.grid
+    - canvas.component.sdc.haven_theme.group
+    - canvas.component.sdc.haven_theme.heading
+    - canvas.component.sdc.haven_theme.hero-billboard
+    - canvas.component.sdc.haven_theme.section
+    - canvas.component.sdc.haven_theme.text
+    - core.entity_view_mode.node.full
+    - field.field.media.image.field_media_image
+    - field.field.node.project.field_content
+    - field.field.node.project.field_featured_image
+    - field.field.node.project.field_introduction
+    - filter.format.content_format
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - node.type.project
+  module:
+    - file
+    - media
+    - node
+    - options
+id: node.project.full
+content_entity_type_id: node
+content_entity_type_bundle: project
+content_entity_type_view_mode: full
+component_tree:
+  0:
+    uuid: ba81b4e9-dc67-4702-99f5-6c97bbf15a59
+    component_id: sdc.haven_theme.hero-billboard
+    component_version: 1d223068bd6931f9
+    inputs: '{"height":"large","flex_position":"center-left","content_background":true,"overlay_opacity":"0%","object_position":"center","media":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:project\u241dfield_featured_image\u241e\u241fentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241f{src\u21a0src_with_alternate_widths,alt\u21a0alt,width\u21a0width,height\u21a0height}"},"overlap_navbar":true}'
+  '0:hero_slot:0':
+    parent_uuid: ba81b4e9-dc67-4702-99f5-6c97bbf15a59
+    slot: hero_slot
+    uuid: 27e14d8a-7bb4-4355-b51e-db5e48316a82
+    component_id: sdc.haven_theme.heading
+    component_version: 75ccc4c28f5e3f12
+    inputs: '{"heading_text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:project\u241dtitle\u241e\u241fvalue"},"level":2,"text_size":"heading-responsive-5xl","text_color":"secondary","align":"left"}'
+  '0:hero_slot:1':
+    parent_uuid: ba81b4e9-dc67-4702-99f5-6c97bbf15a59
+    slot: hero_slot
+    uuid: 5aa64ce0-de28-4ffe-8ddf-5e0fc8ecc673
+    component_id: sdc.haven_theme.text
+    component_version: 16c79c28a4108f9b
+    inputs: '{"text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:project\u241dfield_introduction\u241e\u241fprocessed"},"text_size":"normal","text_color":"default"}'
+  1:
+    uuid: 11e06ea9-332b-4d86-b261-9fed63e27620
+    component_id: sdc.haven_theme.section
+    component_version: 5b4b8ecb2a253440
+    inputs: '{"width":"100%","columns":"1 column","mobile_columns":"1","margin_block_start":"-48","margin_block_end":"0","padding_block_start":"32","padding_block_end":"64","section_header":true,"section_footer":false,"restrict_width":true,"background_color":"white"}'
+  '1:header_slot:0':
+    parent_uuid: 11e06ea9-332b-4d86-b261-9fed63e27620
+    slot: header_slot
+    uuid: df7fd2fd-fd48-4985-852a-cabec3ff6b34
+    component_id: block.system_breadcrumb_block
+    component_version: ad6359c331fc7c45
+    inputs: '{"label":"Breadcrumbs","label_display":"0"}'
+  '1:main_slot:0':
+    parent_uuid: 11e06ea9-332b-4d86-b261-9fed63e27620
+    slot: main_slot
+    uuid: 92975931-4641-4918-a0bc-7f3d389b3d13
+    component_id: sdc.haven_theme.grid
+    component_version: d3e0565623935449
+    inputs: '{"width":"70%","columns":"1 column","mobile_columns":"1"}'
+  '1:main_slot:0:main_slot:0':
+    parent_uuid: 92975931-4641-4918-a0bc-7f3d389b3d13
+    slot: main_slot
+    uuid: 4dc07531-10a3-4612-b3e9-f2d5f9cd0321
+    component_id: sdc.haven_theme.text
+    component_version: 16c79c28a4108f9b
+    inputs: '{"text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:project\u241dfield_content\u241e\u241fprocessed"},"text_size":"normal","text_color":"default"}'
+  2:
+    uuid: 60d97ba7-c1d3-4533-9491-40076dfe544f
+    component_id: sdc.haven_theme.section
+    component_version: 5b4b8ecb2a253440
+    inputs: '{"width":"100%","columns":"1 column","mobile_columns":"1","margin_block_start":"48","margin_block_end":"48","padding_block_start":"0","padding_block_end":"0","section_header":true,"section_footer":true,"views_columns":"3 columns","restrict_width":false}'
+  '2:header_slot:0':
+    parent_uuid: 60d97ba7-c1d3-4533-9491-40076dfe544f
+    slot: header_slot
+    uuid: a7f95691-931b-4fc5-b247-cf9f43eed040
+    component_id: sdc.haven_theme.heading
+    component_version: f463a8803de8d3f1
+    inputs: '{"heading_text":"Explore similar projects","level":2,"text_size":"heading-responsive-4xl","text_color":"text-default","align":"left"}'
+  '2:main_slot:0':
+    parent_uuid: 60d97ba7-c1d3-4533-9491-40076dfe544f
+    slot: main_slot
+    uuid: 402e2f9b-5fe5-48a8-97ce-b8762946476c
+    component_id: block.views_block.projects-related
+    component_version: 2edec858a19c40a0
+    inputs: '{"label":"Projects: Related projects","label_display":"0","views_label":"","items_per_page":null}'
+  3:
+    uuid: 6ebea812-1513-413f-98a6-a31d22d07ee6
+    component_id: sdc.haven_theme.section
+    component_version: 5b4b8ecb2a253440
+    inputs: '{"width":"100%","columns":"2 columns 67-33","mobile_columns":"1","margin_block_start":"32","margin_block_end":"32","padding_block_start":"32","padding_block_end":"32","section_header":false,"section_footer":false,"restrict_width":true,"background_color":"accent"}'
+  '3:main_slot:0':
+    parent_uuid: 6ebea812-1513-413f-98a6-a31d22d07ee6
+    slot: main_slot
+    uuid: 85efe9c2-efd7-49b9-bef5-b16c634337f5
+    component_id: sdc.haven_theme.group
+    component_version: 7a3163ee5e2a1c66
+    inputs: '{"flex_direction":"column","flex_gap":"md","items_align":"start","flex_align":"center","radius":"sm"}'
+  '3:main_slot:0:group_slot:0':
+    parent_uuid: 85efe9c2-efd7-49b9-bef5-b16c634337f5
+    slot: group_slot
+    uuid: 528722dd-0822-4372-9ab2-ee699387c10a
+    component_id: sdc.haven_theme.heading
+    component_version: f463a8803de8d3f1
+    inputs: '{"heading_text":"Join the fight against climate change","text_size":"heading-responsive-2xl","text_color":"default","align":"left"}'
+  '3:main_slot:0:group_slot:1':
+    parent_uuid: 85efe9c2-efd7-49b9-bef5-b16c634337f5
+    slot: group_slot
+    uuid: 2b73bd14-bfb8-45b1-a44e-7d38764cc465
+    component_id: sdc.haven_theme.heading
+    component_version: f463a8803de8d3f1
+    inputs: '{"heading_text":"Lorem ipsum dolor sit amet senectus malesuada maximus imperdiet. Lorem ipsum dolor sit amet senectus malesuada maximus imperdiet. ","text_size":"default","text_color":"default","align":"left"}'
+  '3:main_slot:1':
+    parent_uuid: 6ebea812-1513-413f-98a6-a31d22d07ee6
+    slot: main_slot
+    uuid: 5050826a-4a01-494b-ad71-9fe50354154d
+    component_id: sdc.haven_theme.group
+    component_version: 7a3163ee5e2a1c66
+    inputs: '{"flex_direction":"row","flex_gap":"md","items_align":"start","flex_align":"center"}'
+  '3:main_slot:1:group_slot:0':
+    parent_uuid: 5050826a-4a01-494b-ad71-9fe50354154d
+    slot: group_slot
+    uuid: e9ff3c2b-4bab-4ffd-970a-eae645dc36bf
+    component_id: sdc.haven_theme.button
+    component_version: 32e33be7067aa921
+    inputs: '{"variant":"primary","outlined":false,"label":"Donate now","size":"medium","icon":"arrow-right","icon_first":false,"disabled":false,"mobile_width":false}'
+  '3:main_slot:1:group_slot:1':
+    parent_uuid: 5050826a-4a01-494b-ad71-9fe50354154d
+    slot: group_slot
+    uuid: d375cd4b-2beb-4df7-bf3e-33608b6c0a60
+    component_id: sdc.haven_theme.button
+    component_version: 32e33be7067aa921
+    inputs: '{"variant":"primary","outlined":true,"label":"Learn more","size":"medium","icon_first":false,"disabled":false,"mobile_width":false}'
+  4:
+    uuid: 313d93e6-3848-45c4-8297-1159412ceba0
+    component_id: sdc.haven_theme.section
+    component_version: 5b4b8ecb2a253440
+    inputs: '{"width":"100%","columns":"1 column","mobile_columns":"1","margin_block_start":"48","margin_block_end":"48","padding_block_start":"0","padding_block_end":"0","section_header":true,"section_footer":true}'
+  '4:main_slot:0':
+    parent_uuid: 313d93e6-3848-45c4-8297-1159412ceba0
+    slot: main_slot
+    uuid: 5357b105-e21d-432b-ba35-033fb9635c4f
+    component_id: block.views_block.projects-featured
+    component_version: bc4898d0e83aeb22
+    inputs: '{"label":"Projects: Featured project","label_display":"0","views_label":"","items_per_page":null}'
+exposed_slots: {  }

@@ -1,0 +1,149 @@
+eca.event.plugin.user:login:
+  type: eca.event.plugin
+  label: 'Login of a user'
+
+eca.event.plugin.user:logout:
+  type: eca.event.plugin
+  label: 'Logout of a user'
+
+eca.event.plugin.user:cancel:
+  type: eca.event.plugin
+  label: 'Cancelling a user'
+
+eca.event.plugin.user:floodblockip:
+  type: eca.event.plugin
+  label: 'Flood blocked IP'
+
+eca.event.plugin.user:floodblockuser:
+  type: eca.event.plugin
+  label: 'Flood blocked user'
+
+eca.event.plugin.user:set_user:
+  type: eca.event.plugin
+  label: 'Set current user'
+
+eca.condition.plugin.eca_user_id:
+  type: eca.condition.plugin
+  label: 'User ID Condition'
+  mapping:
+    account:
+      type: string
+      label: 'User account'
+    user_id:
+      type: string
+      label: 'User ID'
+
+eca.condition.plugin.eca_current_user_role:
+  type: eca.condition.plugin
+  label: 'Current User Role'
+  mapping:
+    role:
+      type: string
+      label: 'User role'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca_user\Plugin\ECA\Condition\CurrentUserRole::getAllValidUserRoles'
+
+eca.condition.plugin.eca_current_user_id:
+  type: eca.condition.plugin
+  label: 'Current User ID'
+  mapping:
+    user_id:
+      type: string
+      label: 'User ID'
+
+eca.condition.plugin.eca_user_role:
+  type: eca.condition.plugin
+  label: 'User Role Condition'
+  mapping:
+    account:
+      type: string
+      label: 'User account'
+    role:
+      type: string
+      label: 'User role'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca_user\Plugin\ECA\Condition\CurrentUserRole::getAllValidUserRoles'
+
+eca.condition.plugin.eca_current_user_permission:
+  type: eca.condition.plugin
+  label: 'Current User Permission'
+  mapping:
+    permission:
+      type: string
+      label: 'Permission'
+      constraints:
+        Choice:
+          callback: [\Drupal\user\Entity\Role, getAllValidPermissions]
+
+eca.condition.plugin.eca_user_permission:
+  type: eca.condition.plugin
+  label: 'User Permission Condition'
+  mapping:
+    account:
+      type: string
+      label: 'User account'
+    permission:
+      type: string
+      label: 'Permission'
+      constraints:
+        Choice:
+          callback: [\Drupal\user\Entity\Role, getAllValidPermissions]
+
+action.configuration.eca_token_load_user_current:
+  type: mapping
+  label: 'Configuration for the "Token Load User Current" action'
+  mapping:
+    token_name:
+      type: label
+      label: 'Name of token'
+
+action.configuration.eca_new_user:
+  type: mapping
+  label: 'Configuration for the "New User" action'
+  mapping:
+    token_name:
+      type: label
+      label: 'Name of token'
+    name:
+      type: string
+      label: 'User name'
+      constraints:
+        NotBlank: []
+    mail:
+      type: string
+      label: 'Email address'
+      constraints:
+        NotBlank: []
+    status:
+      type: boolean
+      label: 'Status'
+    object:
+      type: string
+      label: 'Token name holding the entity'
+
+action.configuration.eca_get_preferred_langcode:
+  type: mapping
+  label: 'Configuration for the "Get Preferred Langcode" action'
+  mapping:
+    token_name:
+      type: required_label
+      label: 'Name of token'
+
+action.configuration.eca_switch_account:
+  type: mapping
+  label: 'Configuration for the "Switch Account" action'
+  mapping:
+    user_id:
+      type: string
+      label: 'User ID (UID)'
+      nullable: true
+
+action.configuration.eca_switch_service_account:
+  type: mapping
+  label: 'User: switch to service user'
+
+action.configuration.eca_switch_back:
+  type: mapping
+  label: 'User: switch back'

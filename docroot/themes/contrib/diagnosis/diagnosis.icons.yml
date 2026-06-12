@@ -1,0 +1,90 @@
+fontawesome_brands:
+  enabled: true
+  label: "Font Awesome Brands"
+  description: "Social media and brand icons from Font Awesome Free."
+  links:
+    - https://fontawesome.com
+    - https://github.com/FortAwesome/Font-Awesome
+  version: 6.x
+  license:
+    name: "Font Awesome Free License"
+    url: https://fontawesome.com/license/free
+    gpl-compatible: true
+  extractor: svg
+  config:
+    sources:
+      - icons/fontawesome-brands/{icon_id}.svg
+  settings:
+    size:
+      title: "Size"
+      type: "integer"
+      default: 24
+      minimum: 12
+      maximum: 96
+    alt:
+      title: "Alt text"
+      type: "string"
+      description: "Accessibility alternative text, leave empty for decorative icon."
+  template: >-
+    <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="{{ attributes.viewBox|default('0 0 512 512') }}"
+          width="{{ size|default(24) }}"
+          height="{{ size|default(24) }}"
+          fill="currentColor"
+          {% if alt %}
+            aria-label="{{ alt }}"
+          {% else %}
+            aria-hidden="true"
+          {% endif %}
+        >
+          {{ content }}
+        </svg>
+
+phosphor:
+  enabled: true
+  label: Phosphor
+  description: "A flexible icon family for interfaces, diagrams, presentations — whatever, really."
+  links:
+    - https://phosphoricons.com
+    - https://github.com/phosphor-icons/core
+  version: 2.1.1
+  license:
+    name: MIT
+    url: https://github.com/phosphor-icons/core/blob/main/LICENSE
+    gpl-compatible: true
+  extractor: svg
+  config:
+    sources:
+      - icons/phosphor/{icon_id}.svg
+  settings:
+    size:
+      title: "Size"
+      type: "integer"
+      default: 32
+      multipleOf: 4
+      minimum: 16
+      maximum: 96
+    color:
+      title: Color
+      type: string
+      format: color
+    alt:
+      title: "Alt text"
+      type: "string"
+      description: "Accessibility alternative text, leave empty for decorative icon."
+  template: >-
+    <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 256 256"
+          width="{{ size|default(32) }}"
+          height="{{ size|default(32) }}"
+          fill="{{ color|default('currentColor') }}"
+          {% if alt %}
+            aria-label="{{ alt }}"
+          {% else %}
+            aria-hidden="true"
+          {% endif %}
+        >
+          {{ content }}
+        </svg>

@@ -1,0 +1,29 @@
+{#
+/**
+ * Available variables:
+ * - map_base_class: base classname of the wrapper.
+ * - map_modifiers: array of modifiers to add to the base classname of the wrapper.
+ * - map_blockname: blockname prepended to the base classname of the wrapper(s) and each component.
+ * - map_extra_classes: array of extra classes to add to the base classes.
+ *
+ * - map_latitude: latitude of the geographical point.
+ * - map_longitude: longitude of the geographical point.
+ * - map_zoom: zoom level of the map.
+ * - map_marker_info: optional marker info
+ */
+#}
+
+{{ attach_library('eureka/leaflet') }}
+
+{% set map_base_class = 'map' %}
+{% set map_modifiers =  map_modifiers|default([]) %}
+{% set map_extra_classes =  map_extra_classes|default([])|merge(['js-map']) %}
+
+<div
+  {{ bem(map_base_class, map_modifiers, map_blockname, map_extra_classes) }}
+  data-map-lat="{{ map_latitude }}"
+  data-map-lon="{{ map_longitude }}"
+  data-map-zoom="{{ map_zoom }}"
+  data-map-popup="{{ map_marker_info }}"
+>
+</div>

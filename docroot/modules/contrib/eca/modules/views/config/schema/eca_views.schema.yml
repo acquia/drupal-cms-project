@@ -1,0 +1,135 @@
+eca.event.views_base:
+  type: eca.event.plugin
+  label: 'Views Base'
+  mapping:
+    view_id:
+      type: string
+      label: 'View'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca_views\Plugin\Action\ViewsQuery::getAllValidViews'
+        NotBlank: []
+    display_id:
+      type: string
+      label: 'Display'
+
+eca.event.plugin.eca_views:access:
+  type: eca.event.views_base
+  label: 'Views Access'
+
+eca.event.plugin.eca_views:query_substitutions:
+  type: eca.event.views_base
+  label: 'Views Query Substitutions'
+
+eca.event.plugin.eca_views:pre_view:
+  type: eca.event.views_base
+  label: 'Views Pre View'
+
+eca.event.plugin.eca_views:pre_build:
+  type: eca.event.views_base
+  label: 'Views Pre Build'
+
+eca.event.plugin.eca_views:post_build:
+  type: eca.event.views_base
+  label: 'Views Post Build'
+
+eca.event.plugin.eca_views:pre_execute:
+  type: eca.event.views_base
+  label: 'Views Pre Execute'
+
+eca.event.plugin.eca_views:post_execute:
+  type: eca.event.views_base
+  label: 'Views Post Execute'
+
+eca.event.plugin.eca_views:pre_render:
+  type: eca.event.views_base
+  label: 'Views Pre Render'
+
+eca.event.plugin.eca_views:post_render:
+  type: eca.event.views_base
+  label: 'Views Post Render'
+
+eca.event.plugin.eca_views:query_alter:
+  type: eca.event.views_base
+  label: 'Views Query Alter'
+
+action.configuration.eca_views_query:
+  type: mapping
+  label: 'Configuration for the "Views Query" action'
+  mapping:
+    token_name:
+      type: label
+      label: 'Name of token'
+    view_id:
+      type: string
+      label: 'View'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca_views\Plugin\Action\ViewsQuery::getAllValidViews'
+        NotBlank: []
+    display_id:
+      type: string
+      label: 'Display'
+    arguments:
+      type: string
+      label: 'Arguments'
+
+action.configuration.eca_views_export:
+  type: mapping
+  label: 'Configuration for the "Views Export" action'
+  mapping:
+    filename:
+      type: string
+      label: 'File name'
+    token_for_filename:
+      type: string
+      label: 'Token name for file name'
+    load_results_into_token:
+      type: boolean
+      label: 'Store results also in a token?'
+    token_name:
+      type: label
+      label: 'Name of token'
+    view_id:
+      type: string
+      label: 'View'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca_views\Plugin\Action\ViewsQuery::getAllValidViews'
+        NotBlank: []
+    display_id:
+      type: string
+      label: 'Display'
+    arguments:
+      type: string
+      label: 'Arguments'
+
+action.configuration.eca_views_query_substitution:
+  type: mapping
+  label: 'Configuration for the "Views Query Substitution" action'
+  mapping:
+    value_from:
+      type: string
+      label: 'Value to replace'
+      constraints:
+        NotBlank: []
+    value_to:
+      type: string
+      label: 'Replacement value'
+
+action.configuration.eca_views_set_filter_value:
+  type: mapping
+  label: 'Configuration for the "Views Set Filter Value" action'
+  mapping:
+    filter_id:
+      type: string
+      label: 'Filter ID'
+    value:
+      type: text
+      label: 'The value of the filter'
+    use_yaml:
+      type: boolean
+      label: 'Interpret above config value as YAML format'
+    validate_yaml:
+      type: boolean
+      label: 'Validate YAML to prevent this from being executed when invalid'

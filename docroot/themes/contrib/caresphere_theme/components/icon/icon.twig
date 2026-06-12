@@ -1,0 +1,34 @@
+{#
+  Icon component using SVG icons uploaded via Canvas media.
+
+  @param media (object) - Background image media object.
+  @param icon_size (string) - Size enum: 'extra-small', 'small', 'medium', 'large', 'extra-large'
+#}
+
+{% set size_map = {
+  'extra-extra-small': 16,
+  'extra-small': 20,
+  small: 24,
+  medium: 32,
+  large: 48,
+  'extra-large': 64
+} %}
+
+{% set resolved_width = custom_width ?: size_map[icon_size]|default(size_map['small']) %}
+{% set resolved_height = custom_height ?: size_map[icon_size]|default(size_map['small']) %}
+
+<span style="width: {{ resolved_width }}px; height: {{ resolved_height }}px; display: inline-flex;">
+	{% if media.src %}
+		{% set media_url = media.src ~ '' %}
+		{% if '.svg' in media_url|lower %}
+			<img src="{{ media_url }}" alt="{{ media.alt|default('') }}" style="width: 100%; height: 100%; object-fit: contain;" loading="lazy">
+		{% else %}
+			{% include 'canvas:image' ignore missing with {
+        src: media.src,
+        alt: media.alt|default(''),
+        width: resolved_width,
+        height: resolved_height
+      } only %}
+		{% endif %}
+	{% endif %}
+</span>

@@ -1,0 +1,11 @@
+<article>
+  {% if node.field_description.value %}
+    <p class="text-lg mb-8 text-grey-1 max-w-description">{{ content.field_description }}</p>
+  {% endif %}
+
+  {% if node.field_content.value %}
+    <div class="stwl-text-content">
+      {{ content.field_content }}
+    </div>
+  {% endif %}
+</article>

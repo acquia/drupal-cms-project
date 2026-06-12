@@ -1,0 +1,116 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.canvas_html_block
+  module:
+    - options
+    - text
+  theme:
+    - morphos
+active_version: aca7da150405d653
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        content:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Content.</p>'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        prose_size:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  aca7da150405d653:
+    settings:
+      prop_field_definitions:
+        content:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique pretium pellentesque semper enim aliquam.</p>'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        prose_size:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  51b780b1665d3d62:
+    settings:
+      prop_field_definitions:
+        content:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique pretium pellentesque semper enim aliquam.</p>'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        prose_size:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  59d1cd58b53ec653:
+    settings:
+      prop_field_definitions:
+        content:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique pretium pellentesque semper enim aliquam.</p>'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+    fallback_metadata:
+      slot_definitions: {  }
+label: Content
+id: sdc.morphos.content
+provider: morphos
+source: sdc
+source_local_id: 'morphos:content'

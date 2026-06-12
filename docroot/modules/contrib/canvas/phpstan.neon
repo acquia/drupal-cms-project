@@ -1,0 +1,150 @@
+parameters:
+  tmpDir: .cache/phpstan
+  level: 8
+  strictRules:
+    allRules: false
+    strictFunctionCalls: true
+  fileExtensions:
+    - php
+    - module
+    - inc
+    - install
+    - theme
+    - profile
+  excludePaths:
+    - '**/vendor/**'
+    # Sometimes npm packages include PHP files
+    - '**/node_modules/**'
+    # These are 1:1 copies from Drupal core, with trivial additions that cannot have significant PHPStan impact. PHPStan compliance should happen upstream.
+    - src/CoreBugFix/**
+    - src/Plugin/Field/FieldTypeOverride
+    - src/TypedData/BetterEntityDataDefinition.php
+    # This trait decorates core's \Drupal\Core\Test\FunctionalTestSetupTrait::prepareSettings(), which itself triggers a PHPStan warning that core ignores. Match that.
+    - tests/src/Traits/ContribStrictConfigSchemaTestTrait.php
+    # PHPCS rules are not executed in production, no need to comply.
+    - coding_standards/**
+    # PHPStan rules are not Drupal module code; only scanned for autoloading.
+    - phpstan_rules/**
+  treatPhpDocTypesAsCertain: false
+  drupal:
+    entityMapping:
+      asset_library:
+        class: Drupal\canvas\Entity\AssetLibrary
+      component:
+        class: Drupal\canvas\Entity\Component
+      js_component:
+        class: Drupal\canvas\Entity\JavaScriptComponent
+      canvas_page:
+        class: Drupal\canvas\Entity\Page
+      page_region:
+        class: Drupal\canvas\Entity\PageRegion
+      pattern:
+        class: Drupal\canvas\Entity\Pattern
+      staged_config_update:
+        class: Drupal\canvas\Entity\StagedConfigUpdate
+  ignoreErrors:
+    - identifier: missingType.iterableValue
+    - identifier: missingType.generics
+    # PHPStan finds many false positives for this, specifically when using the DIC or Typed Data.
+    - identifier: varTag.type
+    -
+      message: '#^Method Drupal\\canvas\\Plugin\\Field\\FieldType\\ComponentTreeItemList\:\:get\(\) has parameter \$index with no type specified\.$#'
+      identifier: missingType.parameter
+      count: 1
+      path: src/Plugin/Field/FieldType/ComponentTreeItemList.php
+    -
+      message: "#^Class .* extends @internal class#"
+      count: 1
+      path: src/MediaLibraryCanvasPropOpener.php
+    -
+      message: "#^Method Drupal\\\\canvas\\\\Entity\\\\ComponentTreeConfigEntityBase\\:\\:preCreate\\(\\) has no return type specified\\.$#"
+      identifier: missingType.return
+      count: 1
+      path: src/Entity/ComponentTreeConfigEntityBase.php
+    -
+      message: '#^Method Drupal\\canvas\\Entity\\ComponentTreeConfigEntityBase\:\:preSave\(\) has no return type specified\.$#'
+      identifier: missingType.return
+      count: 1
+      path: src/Entity/ComponentTreeConfigEntityBase.php
+    -
+      message: "#^Method Drupal\\\\canvas\\\\Entity\\\\Pattern\\:\\:preCreate\\(\\) has no return type specified\\.$#"
+      count: 1
+      path: src/Entity/Pattern.php
+    -
+      message: '#^Method Drupal\\canvas\\ConfigTranslation\\CanvasComponentTreeItemInputsMappingFormElement\:\:setConfig\(\) has no return type specified\.$#'
+      identifier: missingType.return
+      count: 1
+      path: src/ConfigTranslation/CanvasComponentTreeItemInputsMappingFormElement.php
+    # canvas_ai and canvas_personalization have their own dead code cleanup tasks.
+    - { message: '#^(Unused |Property .+ is never (read|written))#', path: modules/canvas_ai/** }
+    - { message: '#^(Unused |Property .+ is never (read|written))#', path: modules/canvas_personalization/** }
+    # canvas_ai code is not held to the same standard.
+    - { identifier: canvas.requireStaticMethods, path: modules/canvas_ai/** }
+# Canvas' custom PHPStan rules.
+rules:
+  - Canvas\PHPStan\Rules\DisallowDrupalFlushAllCachesRule
+  - Canvas\PHPStan\Rules\DisallowHookSchemaRule
+  - Canvas\PHPStan\Rules\NoDuplicateTraitUseRule
+  - Canvas\PHPStan\Rules\KernelTestsMustUseAssertEntityIsValidRule
+  - Canvas\PHPStan\Rules\NoOptionalParametersInDataProviderTestsRule
+  - Canvas\PHPStan\Rules\NoJsonEncodedHttpExceptionMessageInApiControllersRule
+  - Canvas\PHPStan\Rules\RequireStaticMethodsRule
+  - Canvas\PHPStan\Rules\ComponentPreSaveUpdateMethodsRule
+  - Canvas\PHPStan\Rules\ComponentConfigUpdaterMustDeclarePreSaveIntentRule
+  - mglaman\PHPStanDrupal\Rules\Drupal\TodoCommentWithIssueUrlRule
+# Run `composer run phpstan-regenerate-ignores-for-11.3-and-higher` to update this list of ignores for Drupal >=11.3.
+includes:
+  - phpstan-11.3-and-higher-ignores.neon
+services:
+  -
+    class: Canvas\PHPStan\Architecture\Layers
+    tags:
+      - phpat.test
+  -
+    class: Canvas\PHPStan\Architecture\Tests
+    tags:
+      - phpat.test
+  -
+    class: Canvas\PHPStan\UsageProvider\DrupalTestUsageProvider
+    tags:
+      - shipmonk.deadCode.memberUsageProvider
+  -
+    class: Canvas\PHPStan\UsageProvider\DrupalHookUsageProvider
+    tags:
+      - shipmonk.deadCode.memberUsageProvider
+  -
+    class: Canvas\PHPStan\UsageProvider\DrupalRoutingUsageProvider
+    tags:
+      - shipmonk.deadCode.memberUsageProvider
+  -
+    class: Canvas\PHPStan\UsageProvider\DrupalDynamicPropertyUsageProvider
+    tags:
+      - shipmonk.deadCode.memberUsageProvider
+  -
+    class: Canvas\PHPStan\UsageProvider\DrupalPolymorphicDispatchUsageProvider
+    tags:
+      - shipmonk.deadCode.memberUsageProvider
+  -
+    class: Canvas\PHPStan\UsageProvider\DrupalConfigTranslationUsageProvider
+    tags:
+      - shipmonk.deadCode.memberUsageProvider
+  -
+    class: Canvas\PHPStan\UsageProvider\DrupalServiceCallsUsageProvider
+    tags:
+      - shipmonk.deadCode.memberUsageProvider
+  -
+    class: Canvas\PHPStan\UsageProvider\ContribPluginsUsageProvider
+    tags:
+      - shipmonk.deadCode.memberUsageProvider
+  -
+    class: Canvas\PHPStan\UsageProvider\ConfigSchemaValidationUsageProvider
+    tags:
+      - shipmonk.deadCode.memberUsageProvider
+  -
+    class: Canvas\PHPStan\UsageProvider\CanvasApiContractUsageProvider
+    tags:
+      - shipmonk.deadCode.memberUsageProvider
+  -
+    class: Canvas\PHPStan\UsageProvider\CanvasTraitUsageProvider
+    tags:
+      - shipmonk.deadCode.memberUsageProvider

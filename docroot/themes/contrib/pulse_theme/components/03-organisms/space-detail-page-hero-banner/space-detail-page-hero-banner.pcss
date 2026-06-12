@@ -1,0 +1,64 @@
+@reference "../../00-base/global/global.pcss";
+
+/* Hero banner */
+
+.hero-banner.detail-page-banner {
+  @apply py-10 px-4 xl:py-[180px] relative;
+
+  .backgroundImage {
+    &:before {
+      @apply absolute left-0 top-0 w-full h-full z-10;
+
+      content: "";
+      background:
+      linear-gradient(
+        360deg,
+        transparent 0%,
+        color-mix(in srgb, var(--sds-accent-color-primary) 30%, black) 100%
+      ),
+      radial-gradient(
+        37.87% 60.57% at 96.79% 18%,
+        color-mix(in srgb, var(--sds-base-brand-color-light) 40%, transparent) 0%,
+        transparent 100%
+      );
+    }
+
+    img {
+      @apply absolute top-0 left-0 w-full h-full object-cover z-0;
+    }
+  }
+
+  &.style-2 {
+    @apply text-center h-full xl:h-screen;
+
+    .top-content {
+      @apply max-w-6xl mx-auto mb-10 xl:mb-21;
+    }
+
+    .intro-label {
+      @apply mb-6 block uppercase;
+
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .headline {
+      @apply mx-0 text-white;
+    }
+
+    .headline {
+      @apply break-words;
+    }
+  }
+
+  .category-wrapper {
+    @apply flex items-center gap-2 mb-6 justify-center;
+
+    span {
+      @apply inline-block px-4 py-1 rounded-full text-base font-normal bg-sds-gray;
+    }
+
+    .primary_category {
+      @apply bg-sds-bg-2;
+    }
+  }
+}

@@ -1,0 +1,59 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Button
+status: stable
+description: Default button component
+group: Eureka component items
+props:
+  type: object
+  properties:
+    button_content:
+      type: string
+      title: Button content
+      description: The text to print inside the button
+      examples:
+        - Call to action
+    button_type:
+      type: string
+      title: Button Type
+      description: Style of the button (e.g. primary, secondary, outlined)
+      enum:
+        - primary
+        - secondary
+        - clean
+      examples:
+        - primary
+    button_icon:
+      type: boolean
+      title: Button Icon
+      description: Whether there should be an icon on the button
+      examples:
+        - false
+    button_icon_before:
+      type: boolean
+      title: Button Icon Before
+      description: If enabled, the icon will print at the start of the button.
+      examples:
+        - false
+    button_icon_name:
+      type: string
+      title: Button Icon Name
+      description: Add an icon name to display it within the button e.g. "chevron",
+      examples:
+        - chevron
+    button_span:
+      type: boolean
+      title: Button Span
+      description: Wrap the button text in a span tag
+      examples:
+        - false
+    button_url:
+      type: ['string', 'null']
+      format: uri
+      title: Button URL
+      description: When a button URL is added, it uses a <a> instead of <button> tag,
+    button_visually_hidden_text:
+      type: boolean
+      title: Icon-only button
+      description: Visually hide the button text and only show the icon
+      examples:
+        - false

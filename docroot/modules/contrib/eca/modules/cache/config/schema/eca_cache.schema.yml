@@ -1,0 +1,135 @@
+action.configuration.eca_cache_invalidate:
+  type: mapping
+  label: 'Configuration for the "Cache Invalidate" action'
+  mapping:
+    tags:
+      type: text
+      label: 'Cache tags'
+    backend:
+      type: string
+      label: 'Cache backend'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca_cache\Plugin\Action\CacheActionBase::getAllValidCacheBackends'
+        NotBlank: []
+    key:
+      type: string
+      label: 'Cache key'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_cache_read:
+  type: mapping
+  label: 'Configuration for the "Cache Read" action'
+  mapping:
+    token_name:
+      type: required_label
+      label: 'Name of token'
+    backend:
+      type: string
+      label: 'Cache backend'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca_cache\Plugin\Action\CacheActionBase::getAllValidCacheBackends'
+        NotBlank: []
+    key:
+      type: string
+      label: 'Cache key'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_cache_write:
+  type: mapping
+  label: 'Configuration for the "Cache Write" action'
+  mapping:
+    value:
+      type: text
+      label: 'Cache item value'
+    expire:
+      type: integer
+      label: 'Lifetime until expiry'
+      constraints:
+        NotBlank: []
+    tags:
+      type: text
+      label: 'Cache tags'
+    use_yaml:
+      type: boolean
+      label: 'Interpret above config value as YAML format'
+    validate_yaml:
+      type: boolean
+      label: 'Validate YAML to prevent this from being executed when invalid'
+    backend:
+      type: string
+      label: 'Cache backend'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca_cache\Plugin\Action\CacheActionBase::getAllValidCacheBackends'
+        NotBlank: []
+    key:
+      type: string
+      label: 'Cache key'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_raw_cache_invalidate:
+  type: mapping
+  label: 'Configuration for the "Raw Cache Invalidate" action'
+  mapping:
+    tags:
+      type: text
+      label: 'Cache tags'
+
+action.configuration.eca_raw_cache_read:
+  type: mapping
+  label: 'Configuration for the "Raw Cache Read" action'
+  mapping:
+    token_name:
+      type: required_label
+      label: 'Name of token'
+    backend:
+      type: string
+      label: 'Cache backend'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca_cache\Plugin\Action\CacheActionBase::getAllValidCacheBackends'
+        NotBlank: []
+    key:
+      type: string
+      label: 'Cache key'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_raw_cache_write:
+  type: mapping
+  label: 'Configuration for the "Raw Cache Write" action'
+  mapping:
+    value:
+      type: text
+      label: 'Cache item value'
+    expire:
+      type: integer
+      label: 'Lifetime until expiry'
+      constraints:
+        NotBlank: []
+    tags:
+      type: text
+      label: 'Cache tags'
+    use_yaml:
+      type: boolean
+      label: 'Interpret above config value as YAML format'
+    validate_yaml:
+      type: boolean
+      label: 'Validate YAML to prevent this from being executed when invalid'
+    backend:
+      type: string
+      label: 'Cache backend'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca_cache\Plugin\Action\CacheActionBase::getAllValidCacheBackends'
+        NotBlank: []
+    key:
+      type: string
+      label: 'Cache key'
+      constraints:
+        NotBlank: []

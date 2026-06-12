@@ -1,0 +1,14 @@
+mercury.settings:
+  type: theme_settings
+  label: "Mercury settings"
+  mapping:
+    scheme:
+      type: string
+      label: Color scheme
+      constraints:
+        Choice:
+          # @see mercury_form_system_theme_settings_alter()
+          - vanilla-light
+          - vanilla-dark
+          - byte-light
+          - byte-dark

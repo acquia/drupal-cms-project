@@ -1,0 +1,1029 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - convene_theme
+label: 'SDC Grid'
+id: sdc.convene_theme.sdc_grid
+source: sdc
+source_local_id: 'convene_theme:sdc_grid'
+provider: convene_theme
+active_version: 6d867b6ba292ace8
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        columns:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '1'
+          expression: ℹ︎list_string␟value
+        gap:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 20px
+          expression: ℹ︎list_string␟value
+        margin_top:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+        margin_right:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+        margin_bottom:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+        margin_left:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+        padding_top:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+        padding_right:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+        padding_bottom:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+        padding_left:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        slot_1:
+          title: 'Column 1'
+          description: 'Content for the first column (always visible).'
+        slot_2:
+          title: 'Column 2'
+          description: 'Content for the second column (visible when columns >= 2).'
+        slot_3:
+          title: 'Column 3'
+          description: 'Content for the third column (visible when columns >= 3).'
+        slot_4:
+          title: 'Column 4'
+          description: 'Content for the fourth column (visible when columns = 4).'
+  521d7d08b24c2c32:
+    settings:
+      prop_field_definitions:
+        columns:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '1'
+          expression: ℹ︎list_string␟value
+        gap:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 20px
+          expression: ℹ︎list_string␟value
+        margin_top:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+        margin_right:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+        margin_bottom:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+        margin_left:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+        padding_top:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+        padding_right:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+        padding_bottom:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+        padding_left:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        slot_1:
+          title: 'Column 1'
+          description: 'Content for the first column (always visible).'
+        slot_2:
+          title: 'Column 2'
+          description: 'Content for the second column (visible when columns >= 2).'
+        slot_3:
+          title: 'Column 3'
+          description: 'Content for the third column (visible when columns >= 3).'
+        slot_4:
+          title: 'Column 4'
+          description: 'Content for the fourth column (visible when columns = 4).'
+  acca5058e239e29b:
+    settings:
+      prop_field_definitions:
+        columns:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '1'
+          expression: ℹ︎list_string␟value
+        gap:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 20px
+          expression: ℹ︎list_string␟value
+        margin_top:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+        margin_right:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+        margin_bottom:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+        margin_left:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+        padding_top:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+        padding_right:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+        padding_bottom:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+        padding_left:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 8px
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        slot_1:
+          title: 'Column 1'
+          description: 'Content for the first column (always visible).'
+        slot_2:
+          title: 'Column 2'
+          description: 'Content for the second column (visible when columns >= 2).'
+        slot_3:
+          title: 'Column 3'
+          description: 'Content for the third column (visible when columns >= 3).'
+        slot_4:
+          title: 'Column 4'
+          description: 'Content for the fourth column (visible when columns = 4).'
+  5a24a4bca84145b8:
+    settings:
+      prop_field_definitions:
+        columns:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '1'
+          expression: ℹ︎list_string␟value
+        gap:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        margin_top:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        margin_right:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        margin_bottom:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        margin_left:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        padding_top:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        padding_right:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        padding_bottom:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        padding_left:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        slot_1:
+          title: 'Column 1'
+          description: 'Content for the first column (always visible).'
+        slot_2:
+          title: 'Column 2'
+          description: 'Content for the second column (visible when columns >= 2).'
+        slot_3:
+          title: 'Column 3'
+          description: 'Content for the third column (visible when columns >= 3).'
+        slot_4:
+          title: 'Column 4'
+          description: 'Content for the fourth column (visible when columns = 4).'
+  e068494a4535265b:
+    settings:
+      prop_field_definitions:
+        columns:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '1'
+          expression: ℹ︎list_string␟value
+        gap:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 20px
+          expression: ℹ︎list_string␟value
+        margin_top:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        margin_right:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        margin_bottom:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        margin_left:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        padding_top:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        padding_right:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        padding_bottom:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        padding_left:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        slot_1:
+          title: 'Column 1'
+          description: 'Content for the first column (always visible).'
+        slot_2:
+          title: 'Column 2'
+          description: 'Content for the second column (visible when columns >= 2).'
+        slot_3:
+          title: 'Column 3'
+          description: 'Content for the third column (visible when columns >= 3).'
+        slot_4:
+          title: 'Column 4'
+          description: 'Content for the fourth column (visible when columns = 4).'
+  490d4c018720508e:
+    settings:
+      prop_field_definitions:
+        columns:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '2'
+          expression: ℹ︎list_string␟value
+        gap:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 20px
+          expression: ℹ︎list_string␟value
+        margin_top:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        margin_right:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        margin_bottom:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        margin_left:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        padding_top:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        padding_right:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        padding_bottom:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        padding_left:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        slot_1:
+          title: 'Column 1'
+          description: 'Content for the first column (always visible).'
+        slot_2:
+          title: 'Column 2'
+          description: 'Content for the second column (visible when columns >= 2).'
+        slot_3:
+          title: 'Column 3'
+          description: 'Content for the third column (visible when columns >= 3).'
+        slot_4:
+          title: 'Column 4'
+          description: 'Content for the fourth column (visible when columns = 4).'
+  928237059e1277bd:
+    settings:
+      prop_field_definitions:
+        columns:
+          required: true
+          field_type: float
+          field_storage_settings:
+            min: 1
+            max: 4
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 2.0
+          expression: ℹ︎float␟value
+        gap:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 20px
+          expression: ℹ︎list_string␟value
+        margin_top:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        margin_right:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        margin_bottom:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        margin_left:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        padding_top:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        padding_right:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        padding_bottom:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+        padding_left:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '0'
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        slot_1:
+          title: 'Column 1'
+          description: 'Content for the first column (always visible).'
+        slot_2:
+          title: 'Column 2'
+          description: 'Content for the second column (visible when columns >= 2).'
+        slot_3:
+          title: 'Column 3'
+          description: 'Content for the third column (visible when columns >= 3).'
+        slot_4:
+          title: 'Column 4'
+          description: 'Content for the fourth column (visible when columns = 4).'
+  a917d5c9be8f2830:
+    settings:
+      prop_field_definitions:
+        columns:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 50-50
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        header_slot:
+          title: Header
+        main_slot:
+          title: Grid
+        footer_slot:
+          title: Footer
+  9195c23d843f47e7:
+    settings:
+      prop_field_definitions:
+        columns:
+          required: false
+          field_type: float
+          field_storage_settings:
+            min: 1
+            max: 12
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 3.0
+          expression: ℹ︎float␟value
+        gap:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 20px
+          expression: ℹ︎string␟value
+        min_column_width:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 200px
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        content:
+          title: Content
+          description: 'The content to display in the grid.'
+  d54b181baa9953d9:
+    settings:
+      prop_field_definitions: {  }
+    fallback_metadata:
+      slot_definitions:
+        content:
+          title: Content
+          description: 'The content to display in the grid.'
+  f7822e5a60040d6d:
+    settings:
+      prop_field_definitions:
+        columns:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '1'
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        content:
+          title: Content
+          description: 'The content to display in the grid.'
+  71075fdfb8321c31:
+    settings:
+      prop_field_definitions:
+        columns:
+          required: true
+          field_type: list_integer
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 1
+          expression: ℹ︎list_integer␟value
+    fallback_metadata:
+      slot_definitions:
+        content:
+          title: Content
+          description: 'The content to display in the grid.'
+  fcd15b9b18ca0b41:
+    settings:
+      prop_field_definitions:
+        columns:
+          required: false
+          field_type: list_integer
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_integer␟value
+    fallback_metadata:
+      slot_definitions:
+        content:
+          title: Content
+          description: 'The content to display in the grid.'

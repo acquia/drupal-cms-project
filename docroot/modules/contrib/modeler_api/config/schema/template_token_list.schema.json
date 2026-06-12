@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Modeler API Template Token List",
+  "description": "A merged tree of template token definitions for a given model owner. Each entry represents a token with optional recursive children. The first level of children under each top-level indicator must declare a purpose. Plugins may provide additional properties beyond those defined here.",
+  "type": "object",
+  "additionalProperties": {
+    "$ref": "#/definitions/token_entry"
+  },
+  "definitions": {
+    "token_entry": {
+      "type": "object",
+      "required": ["name", "token", "raw token"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The human-readable name of the token."
+        },
+        "token": {
+          "type": "string",
+          "description": "The token identifier used in template expressions."
+        },
+        "raw token": {
+          "type": "string",
+          "description": "The full token expression including wrapper syntax, e.g. '[template:author]'."
+        },
+        "value": {
+          "type": "string",
+          "description": "An optional sample or default value for the token."
+        },
+        "purpose": {
+          "type": "string",
+          "enum": ["select", "config"],
+          "description": "The purpose of this token branch. Required on the first level of children under each top-level indicator. 'select' means the branch defines CSS selectors for DOM element selection. 'config' means the branch provides configuration values."
+        },
+        "selector": {
+          "type": "string",
+          "description": "A CSS selector string for select-purpose tokens. Each level's selector incrementally narrows the DOM selection within its parent's matched elements."
+        },
+        "target": {
+          "type": "string",
+          "description": "A CSS selector used to identify target elements within the matched context. The attribute in the bracket part (e.g. [name]) determines which attribute value is extracted as the target identifier."
+        },
+        "children": {
+          "type": "object",
+          "description": "Optional recursive child tokens in the same format.",
+          "additionalProperties": {
+            "$ref": "#/definitions/token_entry"
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

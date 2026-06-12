@@ -1,0 +1,159 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Group
+group: Layout
+status: stable
+props:
+  type: object
+  required:
+    - flex_direction
+    - flex_align
+    - items_align
+  properties:
+    flex_direction:
+      type: string
+      title: Item direction
+      enum:
+        - column
+        - row
+      meta:enum:
+        column: Vertical
+        row: Horizontal
+      default: "column"
+      examples:
+        - "column"
+    flex_gap:
+      type: string
+      title: Space between items
+      enum:
+        - sm
+        - md
+        - lg
+        - xl
+      meta:enum:
+        sm: Small
+        md: Medium
+        lg: Large
+        xl: Extra-Large
+      examples:
+        - md
+    items_align:
+      type: string
+      title: Alignment within group
+      enum:
+        - start
+        - center
+        - end
+      meta:enum:
+        start: Start
+        center: Center
+        end: End
+      default: "start"
+      examples:
+        - "start"
+    flex_align:
+      type: string
+      title: Alignment within parent
+      enum:
+        - start
+        - center
+        - end
+      meta:enum:
+        start: Start
+        center: Center
+        end: End
+      default: "center"
+      examples:
+        - "center"
+    radius:
+      type: string
+      title: Rounded corners
+      enum:
+        - sm
+        - md
+        - lg
+        - xl
+      meta:enum:
+        sm: Small
+        md: Medium
+        lg: Large
+        xl: Extra-Large
+      examples:
+        - sm
+    padding:
+      type: string
+      title: Padding
+      enum:
+        - sm
+        - md
+        - lg
+        - xl
+      meta:enum:
+        sm: Small
+        md: Medium
+        lg: Large
+        xl: Extra-Large
+      examples:
+        - sm
+    background:
+      type: string
+      title: Background color
+      enum:
+        - primary
+        - secondary
+        - accent
+        - white
+        - muted
+      meta:enum:
+        primary: Primary
+        secondary: Secondary
+        accent: Accent
+        white: White
+        muted: Muted
+    stretch:
+      type: boolean
+      title: Stretch group to fit container
+      examples:
+        - false
+      default:
+        - false
+    animation:
+      type: string
+      title: Animation
+      enum:
+        - fade_up
+        - fade_down
+        - fade_left
+        - fade_right
+      meta:enum:
+        fade_up: Fade up
+        fade_down: Fade down
+        fade_left: Fade left
+        fade_right: Fade right
+    animation_duration:
+      type: string
+      title: Animation duration
+      description: The amount of time (in milliseconds) the animation will take to complete.
+      enum:
+        - "150"
+        - "300"
+        - "600"
+      meta:enum:
+        150: Fast
+        300: Standard
+        600: Slow
+      default:
+        - Standard
+    animation_delay:
+      type: string
+      title: Animation delay
+      description: The amount of time (in milliseconds) to wait before starting the animation.
+      enum:
+        - "300"
+        - "600"
+      meta:enum:
+        300: Short
+        600: Long
+
+slots:
+  group_slot:
+    title: "Group items"

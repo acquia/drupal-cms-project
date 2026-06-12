@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 86d09b1e-b20a-4a48-93c3-117804ea5643
+  bundle: main
+  default_langcode: en
+  depends:
+    fb73f668-7ec2-46ba-9223-43c459375ddb: menu_link_content
+    e3c3bfb6-eb4b-443e-882e-95e4e246df5c: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Course Catalog'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      title: ''
+      options: {  }
+      target_uuid: e3c3bfb6-eb4b-443e-882e-95e4e246df5c
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -48
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:fb73f668-7ec2-46ba-9223-43c459375ddb'
+  revision_translation_affected:
+    -
+      value: true

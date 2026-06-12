@@ -1,0 +1,388 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: a0bda8e5-7073-4251-8904-d2b6a82fb39e
+  default_langcode: en
+  depends:
+    b102fa79-7baf-497d-9b15-7d77e7bae1f7: file
+    84ca57b2-8f30-4a6b-bc97-4216ab31036a: media
+    1129b06c-2aa9-4e4a-860c-f30c4f3875d2: file
+    e7dc118f-2051-4e71-b0f8-790fe4ea325e: media
+    fd45b1c0-e153-4e76-9c55-a60cd06a5134: file
+    ea5eb5b1-a175-417b-a72f-ac25db9240f6: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Tuition & Fees'
+  description:
+    -
+      value: 'Explore tuition rates, fees, and financial aid options to invest in your education at Windy City Community College.'
+  components:
+    -
+      uuid: d35bf739-de05-4f58-9bb6-11be2c152972
+      component_id: sdc.provus_base_theme.hero_banner
+      inputs:
+        title: 'Tuition & Fees'
+        body:
+          value: '<p><strong>Explore tuition rates, fees, and financial aid options to invest in your education at Windy City Community College.</strong></p>'
+          format: canvas_full_html
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 84ca57b2-8f30-4a6b-bc97-4216ab31036a
+            target_type: media
+        is_short_banner: true
+        image_position: full
+        background_color: primary
+        text_container_width: col-lg-6
+        text_alignment: left
+    -
+      parent_uuid: d35bf739-de05-4f58-9bb6-11be2c152972
+      slot: hero_banner_buttons
+      uuid: aed044cd-3cd9-4057-ab96-745a99adb717
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Apply Now'
+        url:
+          uri: 'internal:/'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: auto
+    -
+      uuid: 55d8722f-ed83-4e8d-9d3a-31dbe8fbf599
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: true
+        padding_top: pt-5
+        padding_bottom: pb-5
+        align_items: align-items-center
+    -
+      parent_uuid: 55d8722f-ed83-4e8d-9d3a-31dbe8fbf599
+      slot: content
+      uuid: 95a4ad6a-bc38-47a4-8b92-95e7dc1c7a2f
+      component_id: sdc.provus_base_theme.two_column
+      inputs:
+        desktop_width: 50-50
+        tablet_width: 50-50
+        mobile_width: 100-100
+    -
+      parent_uuid: 95a4ad6a-bc38-47a4-8b92-95e7dc1c7a2f
+      slot: column_1
+      uuid: 699fb956-b1b4-4d98-aa2c-98c998aaf8ef
+      component_id: sdc.provus_base_theme.image
+      inputs:
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: e7dc118f-2051-4e71-b0f8-790fe4ea325e
+            target_type: media
+        size: '4:3'
+        radius: rounded-0
+        margin_bottom: mb-0
+    -
+      parent_uuid: 95a4ad6a-bc38-47a4-8b92-95e7dc1c7a2f
+      slot: column_2
+      uuid: 12c8ace4-6f44-4637-81ee-64917a23b4a3
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Invest in Your Future with Affordable Education'
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 95a4ad6a-bc38-47a4-8b92-95e7dc1c7a2f
+      slot: column_2
+      uuid: dcf4514e-d2f9-463d-a436-58ff165a08d7
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p>At Windy City Community College, we believe in making quality education accessible and affordable for everyone. Explore our straightforward tuition and fees structure designed to fit your budget and educational goals.</p>'
+          format: canvas_full_html
+    -
+      uuid: 78bc4698-2831-4c8e-8244-de5b76d21914
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        custom_class: bg-grey
+    -
+      parent_uuid: 78bc4698-2831-4c8e-8244-de5b76d21914
+      slot: content
+      uuid: 3d9202a5-1a70-40b4-9edb-5ff98ea135e9
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: 3d9202a5-1a70-40b4-9edb-5ff98ea135e9
+      slot: column_1
+      uuid: 21974c05-59d8-467c-9d71-af1eb52457bc
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: '2025 Tuition Rates'
+        decorative_line: true
+        alignment: center
+    -
+      parent_uuid: 78bc4698-2831-4c8e-8244-de5b76d21914
+      slot: content
+      uuid: 03eeb4f6-2b9a-42cd-b976-896bcff7a918
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: 03eeb4f6-2b9a-42cd-b976-896bcff7a918
+      slot: column_1
+      uuid: 9b6258b9-d271-415b-b237-196462549917
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<table class="table"><thead><tr><th><span style="white-space:pre-wrap;">Title</span></th><th><span style="white-space:pre-wrap;">Per credit hour</span></th><th><span style="white-space:pre-wrap;">Full-time per semester</span></th></tr></thead><tbody><tr><td><span style="white-space:pre-wrap;">In-District Students</span></td><td><span style="white-space:pre-wrap;">$150 per credit hour</span></td><td><span style="white-space:pre-wrap;">Full-time (12+ credit hours): $1,800 per semester</span></td></tr><tr><td><span style="white-space:pre-wrap;">Out-of-District Students</span></td><td><span style="white-space:pre-wrap;">$250 per credit hour</span></td><td><span style="white-space:pre-wrap;">Full-time (12+ credit hours): $3,000 per semester</span></td></tr><tr><td><span style="white-space:pre-wrap;">Title Out-of-State/International Students</span></td><td><span style="white-space:pre-wrap;">$400 per credit hour</span></td><td><span style="white-space:pre-wrap;">Full-time (12+ credit hours): $4,800 per semester</span></td></tr></tbody></table><table class="table"><thead><tr><th colspan="2"><span style="white-space:pre-wrap;">Payment Deadlines</span></th></tr></thead><tbody><tr><td><span style="white-space:pre-wrap;">Spring Semester 2025</span></td><td><span style="white-space:pre-wrap;">January 10, 2025</span></td></tr><tr><td><span style="white-space:pre-wrap;">Summer Semester 2025</span></td><td><span style="white-space:pre-wrap;">May 20, 2025</span></td></tr><tr><td><span style="white-space:pre-wrap;">Fall Semester 2025</span></td><td><span style="white-space:pre-wrap;">August 15, 2025</span></td></tr></tbody></table><p><br><span style="white-space:pre-wrap;">Tuition must be paid in full or arranged through a payment plan by these deadlines to avoid late fees.</span></p>'
+          format: canvas_full_html
+    -
+      parent_uuid: 03eeb4f6-2b9a-42cd-b976-896bcff7a918
+      slot: column_1
+      uuid: 019a368b-77bb-44f8-91c2-fa85308fcc3b
+      component_id: sdc.provus_base_theme.spacer
+      inputs:
+        padding_all: p-3
+    -
+      parent_uuid: 78bc4698-2831-4c8e-8244-de5b76d21914
+      slot: content
+      uuid: fa150df8-7880-438d-9e4a-aaecd1d0c22e
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Additional Fees'
+        decorative_line: true
+        alignment: center
+    -
+      parent_uuid: 78bc4698-2831-4c8e-8244-de5b76d21914
+      slot: content
+      uuid: bdf9f8e6-b328-423f-9b14-1193ea131606
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<table class="table"><thead><tr><th><span style="white-space:pre-wrap;">Student Services</span></th><th>Cost</th></tr></thead><tbody><tr><td><span style="white-space:pre-wrap;">Student Services Fee</span></td><td><span style="white-space:pre-wrap;">$75 per semester (includes access to career services, counseling, and campus activities)</span></td></tr><tr><td><span style="white-space:pre-wrap;">Technology Fee</span></td><td><span style="white-space:pre-wrap;">$50 per semester</span></td></tr><tr><td><span style="white-space:pre-wrap;">Lab Fee (if applicable)</span></td><td><span style="white-space:pre-wrap;">$30 per lab course</span></td></tr><tr><td><span style="white-space:pre-wrap;">Parking Pass (optional)</span></td><td><span style="white-space:pre-wrap;">$25 per semester</span></td></tr></tbody></table>'
+          format: canvas_full_html
+    -
+      uuid: d9a88040-887b-48e2-ae00-49ef197d2601
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        padding_top: pt-5
+        padding_bottom: pb-5
+    -
+      parent_uuid: d9a88040-887b-48e2-ae00-49ef197d2601
+      slot: content
+      uuid: 6d8b8d4b-e71e-40dd-8bfb-3dcbe3d5eab9
+      component_id: sdc.provus_base_theme.two_column
+      inputs:
+        desktop_width: 50-50
+        tablet_width: 50-50
+        mobile_width: 100-100
+    -
+      parent_uuid: 6d8b8d4b-e71e-40dd-8bfb-3dcbe3d5eab9
+      slot: column_1
+      uuid: edc2146c-5918-4360-8285-72f2035772eb
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Financial Aid & Scholarships'
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 6d8b8d4b-e71e-40dd-8bfb-3dcbe3d5eab9
+      slot: column_1
+      uuid: 02031018-1fec-416d-a4f9-3e2598c710fc
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: "<p>We’re here to help you reduce the cost of your education!</p><p>Federal Financial Aid: Apply at <a href=\"https://FAFSA.gov%E2%80%A8/\"><u>FAFSA.gov\L</u></a></p><p>Scholarships: Explore a variety of merit- and need-based scholarships on our Scholarships Page\L</p><p>Grants: Learn more about state and federal grants available to eligible students</p>"
+          format: canvas_full_html
+    -
+      parent_uuid: 6d8b8d4b-e71e-40dd-8bfb-3dcbe3d5eab9
+      slot: column_2
+      uuid: d8094740-ef1e-491f-a8c8-077dd26f9d2f
+      component_id: sdc.provus_base_theme.image
+      inputs:
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: e7dc118f-2051-4e71-b0f8-790fe4ea325e
+            target_type: media
+        size: '4:3'
+        radius: rounded-0
+        margin_bottom: mb-0
+    -
+      uuid: 80a2beb1-3477-453f-9a48-17473c60a469
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: true
+        padding_bottom: pb-5
+        padding_top: pt-5
+        align_items: align-items-center
+    -
+      parent_uuid: 80a2beb1-3477-453f-9a48-17473c60a469
+      slot: content
+      uuid: c598c005-6f41-44fa-9b91-f1ec3dbe3bc3
+      component_id: sdc.provus_base_theme.two_column
+      inputs:
+        desktop_width: 50-50
+        tablet_width: 50-50
+        mobile_width: 100-100
+    -
+      parent_uuid: c598c005-6f41-44fa-9b91-f1ec3dbe3bc3
+      slot: column_1
+      uuid: d70510ac-1e85-4398-a0cf-1734cbd45b28
+      component_id: sdc.provus_base_theme.image
+      inputs:
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: ea5eb5b1-a175-417b-a72f-ac25db9240f6
+            target_type: media
+        size: '4:3'
+        radius: rounded-0
+        margin_bottom: mb-0
+    -
+      parent_uuid: c598c005-6f41-44fa-9b91-f1ec3dbe3bc3
+      slot: column_2
+      uuid: 15558c18-2e95-4232-8677-b8f8b72e6f78
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Need Help?'
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: c598c005-6f41-44fa-9b91-f1ec3dbe3bc3
+      slot: column_2
+      uuid: 9a46b4a8-6ea0-40cb-8c0c-1f2f5826f244
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p>Our Student Accounts Office is here to answer your questions about tuition, fees, or payment options.<br><br>Phone: <a href="tel:+1 (773)-525-8255"><u>(773)-525-8255</u></a><br><br>Email: <a href="mailto:ignite@prometsource.com"><u>ignite@prometsource.com</u></a><br><br>Office Hours: Monday–Friday, 9:00 AM – 5:00 PM CT</p>'
+          format: canvas_full_html
+  path:
+    -
+      alias: /tuition-fees
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

@@ -1,0 +1,35 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+name: Rich Text Block
+description: A rich text block component with full HTML support for Canvas.
+props:
+  type: object
+  required:
+    - heading
+  properties:
+    heading:
+      type: string
+      title: Heading
+      description: The heading text for the block.
+      examples:
+        - 'Welcome to our site'
+    content:
+      type: string
+      title: Content
+      description: Rich text content with full HTML formatting.
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - '<p>This is a <strong>rich text</strong> block with <em>full HTML</em> support.</p>'
+    background_color:
+      type: string
+      title: Background Color
+      description: Background color for the block.
+      enum:
+        - white
+        - light-gray
+        - light-blue
+      default: white
+slots:
+  footer:
+    title: Footer
+    description: Optional footer content.

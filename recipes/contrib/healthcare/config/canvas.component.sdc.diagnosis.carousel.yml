@@ -1,0 +1,50 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - diagnosis
+active_version: 36034ce4eaae8c25
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        aria_label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Featured content carousel'
+          expression: ℹ︎string␟value
+        show_navigation:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+        show_pagination:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        slides:
+          title: 'Carousel slides'
+          description: 'Add carousel-slide components here'
+label: Carousel
+id: sdc.diagnosis.carousel
+provider: diagnosis
+source: sdc
+source_local_id: 'diagnosis:carousel'

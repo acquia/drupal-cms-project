@@ -1,0 +1,31 @@
+.linker {
+  display: flex;
+  margin-bottom: 3px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1em;
+  margin-inline: 6px;
+  &:focus {
+    outline: 2px solid var(--blue-9);
+    outline-offset: 1px;
+  }
+}
+
+.default {
+  color: var(--slate-11);
+}
+
+.linkerOpen {
+  .default {
+    color: var(--blue-9);
+  }
+}
+
+.default:hover {
+  color: var(--blue-9);
+}
+
+/* Global as sometimes this class comes from a render array. */
+:global(.canvas-linked-prop-label-wrapper) {
+  display: flex;
+}

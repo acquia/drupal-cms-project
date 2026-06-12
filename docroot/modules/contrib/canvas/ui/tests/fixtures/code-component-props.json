@@ -1,0 +1,504 @@
+{
+  "deserialized": [
+    {
+      "name": "String with no example value",
+      "type": "string",
+      "example": "",
+      "id": "edd8f3d4-6853-44c7-92db-bbd86d9ba112",
+      "derivedType": "text"
+    },
+    {
+      "name": "String with example value",
+      "type": "string",
+      "example": "Drupal Canvas",
+      "id": "1c374686-8c73-4a01-8727-a36ff1cc59eb",
+      "derivedType": "text"
+    },
+    {
+      "name": "Integer with no example value",
+      "type": "integer",
+      "example": "",
+      "id": "962e2deb-078e-4436-a3f7-2a628f39bb8a",
+      "derivedType": "integer"
+    },
+    {
+      "name": "Integer with example value",
+      "type": "integer",
+      "example": "922",
+      "id": "720d5d79-eeb0-4f15-b29b-1eec6b1f588d",
+      "derivedType": "integer"
+    },
+    {
+      "name": "Number with no example value",
+      "type": "number",
+      "example": "",
+      "id": "2cb91003-b280-4f61-bba1-db90d20bb8dc",
+      "derivedType": "number"
+    },
+    {
+      "name": "Number with example value",
+      "type": "number",
+      "example": "9.22",
+      "id": "cb2f9dc3-30c2-4635-8013-79c2659e9808",
+      "derivedType": "number"
+    },
+    {
+      "name": "Boolean with example value (true)",
+      "type": "boolean",
+      "example": true,
+      "id": "5398f61d-5b99-4142-a438-f0e2cec6c567",
+      "derivedType": "boolean"
+    },
+    {
+      "name": "Boolean with example value (false)",
+      "type": "boolean",
+      "example": false,
+      "id": "c717e5e3-be92-4786-94be-75f231b97c96",
+      "derivedType": "boolean"
+    },
+    {
+      "name": "Text list with no example value",
+      "type": "string",
+      "enum": [
+        {
+          "label": "Pending",
+          "value": "Not Started"
+        },
+        {
+          "label": "Thinking",
+          "value": "In Progress"
+        },
+        {
+          "label": "Finished",
+          "value": "Completed"
+        }
+      ],
+      "example": "",
+      "id": "aa2e3ece-9431-4db9-a64e-1d2f0699912d",
+      "derivedType": "listText"
+    },
+    {
+      "name": "Text list with example value",
+      "type": "string",
+      "enum": [
+        {
+          "label": "Pending",
+          "value": "Not Started"
+        },
+        {
+          "label": "Thinking",
+          "value": "In Progress"
+        },
+        {
+          "label": "Finished",
+          "value": "Completed"
+        }
+      ],
+      "example": "In Progress",
+      "id": "80c7cc4c-4e84-41fc-a42e-2bfbc19f4a96",
+      "derivedType": "listText"
+    },
+    {
+      "name": "Integer list with no example value",
+      "type": "integer",
+      "enum": [
+        {
+          "label": "One",
+          "value": 1
+        },
+        {
+          "label": "Two",
+          "value": 2
+        },
+        {
+          "label": "Three",
+          "value": 3
+        }
+      ],
+      "example": "",
+      "id": "a361cca0-6aca-4d55-907d-10275df8c7fa",
+      "derivedType": "listInteger"
+    },
+    {
+      "name": "Integer list with example value",
+      "type": "integer",
+      "enum": [
+        {
+          "label": "One",
+          "value": 1
+        },
+        {
+          "label": "Two",
+          "value": 2
+        },
+        {
+          "label": "Three",
+          "value": 3
+        }
+      ],
+      "example": "2",
+      "id": "30b57352-8c6c-48b1-a782-8bcbc69d7df7",
+      "derivedType": "listInteger"
+    },
+    {
+      "name": "Formatted text with no example value",
+      "type": "string",
+      "example": "",
+      "id": "fgg0f3d4-6853-44c7-92db-bbd86d9ba112",
+      "derivedType": "formattedText",
+      "contentMediaType": "text/html",
+      "x-formatting-context": "block"
+    },
+    {
+      "name": "Formatted text with example value",
+      "type": "string",
+      "example": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+      "id": "5e894686-8c73-4a01-8727-a36ff1cc59eb",
+      "derivedType": "formattedText",
+      "contentMediaType": "text/html",
+      "x-formatting-context": "block"
+    },
+    {
+      "name": "Image with no example value",
+      "type": "object",
+      "$ref": "json-schema-definitions://canvas.module/image",
+      "example": "",
+      "id": "af004b63-5f58-4923-be8e-3249dde1b32e",
+      "derivedType": "image"
+    },
+    {
+      "name": "Image with example value",
+      "type": "object",
+      "$ref": "json-schema-definitions://canvas.module/image",
+      "example": {
+        "src": "https://placehold.co/1200x900@2x.png",
+        "width": 1200,
+        "height": 900,
+        "alt": "Example image placeholder"
+      },
+      "id": "4ea2a14d-7828-467c-a505-063f006f1ebf",
+      "derivedType": "image"
+    },
+    {
+      "name": "Relative path link with no example value",
+      "type": "string",
+      "example": "",
+      "format": "uri-reference",
+      "id": "9c71e89f-608b-49af-b0e6-6b4be58b538e",
+      "derivedType": "link"
+    },
+    {
+      "name": "Relative path link with example value",
+      "type": "string",
+      "example": "gerbeaud",
+      "format": "uri-reference",
+      "id": "09f656b3-3d4f-4e5b-8a1a-40f5f92345c2",
+      "derivedType": "link"
+    },
+    {
+      "name": "Full URL link with no example value",
+      "type": "string",
+      "example": "",
+      "format": "uri",
+      "id": "5c93d4ea-7f91-4c77-b4fd-bb1d67d9c88d",
+      "derivedType": "link"
+    },
+    {
+      "name": "Full URL link with example value",
+      "type": "string",
+      "example": "https://hazelnut.com",
+      "format": "uri",
+      "id": "51595746-4e2b-4ac0-81f5-b481e34b3712",
+      "derivedType": "link"
+    },
+    {
+      "name": "Deprecated text area with no example value",
+      "type": "string",
+      "example": "",
+      "id": "fgg0f3d4-6853-44c7-92db-bbd86d9ba112",
+      "derivedType": "formattedText",
+      "contentMediaType": "text/html",
+      "x-formatting-context": "block"
+    },
+    {
+      "name": "Deprecated text area with example value",
+      "type": "string",
+      "example": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+      "id": "5e894686-8c73-4a01-8727-a36ff1cc59eb",
+      "derivedType": "formattedText",
+      "contentMediaType": "text/html",
+      "x-formatting-context": "block"
+    },
+    {
+      "name": "Video with no example value",
+      "type": "object",
+      "$ref": "json-schema-definitions://canvas.module/video",
+      "example": "",
+      "id": "12af6543-df85-4e6f-9054-8b6617b02c25",
+      "derivedType": "video"
+    },
+    {
+      "name": "Video with example value",
+      "type": "object",
+      "$ref": "json-schema-definitions://canvas.module/video",
+      "example": {
+        "src": "/modules/contrib/canvas/ui/assets/videos/mountain_wide.mp4",
+        "poster": "https://placehold.co/1920x1080.png?text=Horizontal"
+      },
+      "id": "4ea2a14d-7828-467c-a505-063f006f1ebf",
+      "derivedType": "video"
+    },
+    {
+      "name": "Date with no example value",
+      "type": "string",
+      "format": "date",
+      "example": "",
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "derivedType": "date"
+    },
+    {
+      "name": "Date with example value",
+      "type": "string",
+      "format": "date",
+      "example": "2026-01-15",
+      "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+      "derivedType": "date"
+    },
+    {
+      "name": "DateTime with no example value",
+      "type": "string",
+      "format": "date-time",
+      "example": "",
+      "id": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+      "derivedType": "date"
+    },
+    {
+      "name": "DateTime with example value",
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T12:34:56.789Z",
+      "id": "d4e5f6a7-b8c9-0123-def1-234567890123",
+      "derivedType": "date"
+    },
+    {
+      "name": "Video gallery with no example value",
+      "type": "object",
+      "$ref": "json-schema-definitions://canvas.module/video",
+      "example": [],
+      "id": "e5f6a7b8-c9d0-1234-ef12-345678901234",
+      "derivedType": "video",
+      "allowMultiple": true,
+      "items": { "type": "object", "$ref": "json-schema-definitions://canvas.module/video" },
+      "valueMode": "unlimited",
+      "limitedCount": 1
+    },
+    {
+      "name": "Video gallery with example value",
+      "type": "object",
+      "$ref": "json-schema-definitions://canvas.module/video",
+      "example": [
+        { "src": "/modules/contrib/canvas/ui/assets/videos/mountain_wide.mp4", "poster": "https://placehold.co/1920x1080.png?text=Widescreen" },
+        { "src": "/modules/contrib/canvas/ui/assets/videos/bird_vertical.mp4", "poster": "https://placehold.co/1080x1920.png?text=Vertical" }
+      ],
+      "id": "f6a7b8c9-d0e1-2345-f123-456789012345",
+      "derivedType": "video",
+      "allowMultiple": true,
+      "items": { "type": "object", "$ref": "json-schema-definitions://canvas.module/video" },
+      "valueMode": "unlimited",
+      "limitedCount": 1
+    }
+  ],
+  "serialized": {
+    "stringWithNoExampleValue": {
+      "title": "String with no example value",
+      "type": "string"
+    },
+    "stringWithExampleValue": {
+      "title": "String with example value",
+      "type": "string",
+      "examples": ["Drupal Canvas"]
+    },
+    "integerWithNoExampleValue": {
+      "title": "Integer with no example value",
+      "type": "integer"
+    },
+    "integerWithExampleValue": {
+      "title": "Integer with example value",
+      "type": "integer",
+      "examples": [922]
+    },
+    "numberWithNoExampleValue": {
+      "title": "Number with no example value",
+      "type": "number"
+    },
+    "numberWithExampleValue": {
+      "title": "Number with example value",
+      "type": "number",
+      "examples": [9.22]
+    },
+    "booleanWithExampleValueTrue": {
+      "title": "Boolean with example value (true)",
+      "type": "boolean",
+      "examples": [true]
+    },
+    "booleanWithExampleValueFalse": {
+      "title": "Boolean with example value (false)",
+      "type": "boolean",
+      "examples": [false]
+    },
+    "textListWithNoExampleValue": {
+      "title": "Text list with no example value",
+      "type": "string",
+      "enum": ["Not Started", "In Progress", "Completed"],
+      "meta:enum": {
+        "Not Started": "Pending",
+        "In Progress": "Thinking",
+        "Completed": "Finished"
+      }
+    },
+    "textListWithExampleValue": {
+      "title": "Text list with example value",
+      "type": "string",
+      "enum": ["Not Started", "In Progress", "Completed"],
+      "examples": ["In Progress"],
+      "meta:enum": {
+        "Not Started": "Pending",
+        "In Progress": "Thinking",
+        "Completed": "Finished"
+      }
+    },
+    "integerListWithNoExampleValue": {
+      "title": "Integer list with no example value",
+      "type": "integer",
+      "enum": [1, 2, 3],
+      "meta:enum": {
+        "1": "One",
+        "2": "Two",
+        "3": "Three"
+      }
+    },
+    "integerListWithExampleValue": {
+      "title": "Integer list with example value",
+      "type": "integer",
+      "enum": [1, 2, 3],
+      "examples": [2],
+      "meta:enum": {
+        "1": "One",
+        "2": "Two",
+        "3": "Three"
+      }
+    },
+    "formattedTextWithNoExampleValue": {
+      "title": "Formatted text with no example value",
+      "type": "string",
+      "contentMediaType": "text/html",
+      "x-formatting-context": "block"
+    },
+    "formattedTextWithExampleValue": {
+      "title": "Formatted text with example value",
+      "type": "string",
+      "examples": ["Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."],
+      "contentMediaType": "text/html",
+      "x-formatting-context": "block"
+    },
+    "imageWithNoExampleValue": {
+      "title": "Image with no example value",
+      "type": "object",
+      "$ref": "json-schema-definitions://canvas.module/image"
+    },
+    "imageWithExampleValue": {
+      "title": "Image with example value",
+      "type": "object",
+      "examples": [{
+        "src": "https://placehold.co/1200x900@2x.png",
+        "width": 1200,
+        "height": 900,
+        "alt": "Example image placeholder"
+      }],
+      "$ref": "json-schema-definitions://canvas.module/image"
+    },
+    "relativePathLinkWithNoExampleValue": {
+      "title": "Relative path link with no example value",
+      "type": "string",
+      "format": "uri-reference"
+    },
+    "relativePathLinkWithExampleValue": {
+      "title": "Relative path link with example value",
+      "type": "string",
+      "examples": ["gerbeaud"],
+      "format": "uri-reference"
+    },
+    "fullUrlLinkWithNoExampleValue": {
+      "title": "Full URL link with no example value",
+      "type": "string",
+      "format": "uri"
+    },
+    "fullUrlLinkWithExampleValue": {
+      "title": "Full URL link with example value",
+      "type": "string",
+      "examples": ["https://hazelnut.com"],
+      "format": "uri"
+    },
+    "deprecatedTextAreaWithNoExampleValue": {
+      "title": "Deprecated text area with no example value",
+      "type": "string",
+      "$ref": "json-schema-definitions://canvas.module/textarea"
+    },
+    "deprecatedTextAreaWithExampleValue": {
+      "title": "Deprecated text area with example value",
+      "type": "string",
+      "examples": ["Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."],
+      "$ref": "json-schema-definitions://canvas.module/textarea"
+    },
+    "videoWithNoExampleValue": {
+      "title": "Video with no example value",
+      "type": "object",
+      "$ref": "json-schema-definitions://canvas.module/video"
+    },
+    "videoWithExampleValue": {
+      "title": "Video with example value",
+      "type": "object",
+      "examples": [{
+        "src": "/ui/assets/videos/mountain_wide.mp4",
+        "poster": "https://placehold.co/1920x1080.png?text=Horizontal"
+      }],
+      "$ref": "json-schema-definitions://canvas.module/video"
+    },
+    "dateWithNoExampleValue": {
+      "title": "Date with no example value",
+      "type": "string",
+      "format": "date"
+    },
+    "dateWithExampleValue": {
+      "title": "Date with example value",
+      "type": "string",
+      "format": "date",
+      "examples": ["2026-01-15"]
+    },
+    "dateTimeWithNoExampleValue": {
+      "title": "DateTime with no example value",
+      "type": "string",
+      "format": "date-time"
+    },
+    "dateTimeWithExampleValue": {
+      "title": "DateTime with example value",
+      "type": "string",
+      "format": "date-time",
+      "examples": ["2026-01-15T12:34:56.789Z"]
+    },
+    "videoGalleryWithNoExampleValue": {
+      "title": "Video gallery with no example value",
+      "type": "array",
+      "items": { "type": "object", "$ref": "json-schema-definitions://canvas.module/video" }
+    },
+    "videoGalleryWithExampleValue": {
+      "title": "Video gallery with example value",
+      "type": "array",
+      "items": { "type": "object", "$ref": "json-schema-definitions://canvas.module/video" },
+      "examples": [[
+        { "src": "/ui/assets/videos/mountain_wide.mp4", "poster": "https://placehold.co/1920x1080.png?text=Widescreen" },
+        { "src": "/ui/assets/videos/bird_vertical.mp4", "poster": "https://placehold.co/1080x1920.png?text=Vertical" }
+      ]]
+    }
+  }
+}

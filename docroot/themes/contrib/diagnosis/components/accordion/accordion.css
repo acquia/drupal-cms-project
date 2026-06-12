@@ -1,0 +1,26 @@
+/* Light theme: blue background */
+.accordion {
+  background-color: var(--default);
+  margin-bottom: 0.5rem;
+}
+
+.accordion--title {
+  background-color: var(--default-strong);
+}
+
+.accordion--title:hover {
+  background-color: var(--secondary);
+}
+
+/* Dark theme overrides */
+.dark .accordion {
+  background-color: var(--card);
+}
+
+.dark .accordion--title {
+  background-color: var(--card);
+}
+
+.dark .accordion--title:hover {
+  background-color: var(--muted);
+}

@@ -1,0 +1,33 @@
+{
+    "name": "drupal/project_browser",
+    "description": "A project browser embedded in the Drupal UI.",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "ext-simplexml": "*",
+        "composer-runtime-api": "^2"
+    },
+    "require-dev": {
+        "drush/drush": ">=12.5"
+    },
+    "conflict": {
+        "drupal/automatic_updates": "<4",
+        "drupal/gin": "<4.0.6"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "scripts": {
+        "cs": "phpcs -n --standard=PSR2 src --exclude=Generic.Files.LineLength",
+        "cbf": "phpcbf -n --standard=PSR2 src --exclude=Generic.Files.LineLength",
+        "unit": "phpunit",
+        "lint": [
+            "find src -name '*.php' -print0 | xargs -0 -n1 php -l"
+        ],
+        "test": [
+            "@lint",
+            "@cs"
+        ]
+    }
+}

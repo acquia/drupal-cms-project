@@ -1,0 +1,129 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.haven_theme.badge
+    - canvas.component.sdc.haven_theme.grid
+    - canvas.component.sdc.haven_theme.group
+    - canvas.component.sdc.haven_theme.heading
+    - canvas.component.sdc.haven_theme.image
+    - canvas.component.sdc.haven_theme.section
+    - canvas.component.sdc.haven_theme.text
+    - core.entity_view_mode.node.full
+    - field.field.media.image.field_media_image
+    - field.field.node.person_profile.field_badge
+    - field.field.node.person_profile.field_callout_content
+    - field.field.node.person_profile.field_callout_heading
+    - field.field.node.person_profile.field_content
+    - field.field.node.person_profile.field_featured_image
+    - field.field.node.person_profile.field_role
+    - field.field.node.person_profile.field_sidebar
+    - filter.format.content_format
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - node.type.person_profile
+  module:
+    - file
+    - media
+    - node
+    - options
+id: node.person_profile.full
+content_entity_type_id: node
+content_entity_type_bundle: person_profile
+content_entity_type_view_mode: full
+component_tree:
+  0:
+    uuid: 4737017c-a3bb-48d0-ab95-97e6732e7875
+    component_id: sdc.haven_theme.section
+    component_version: 5b4b8ecb2a253440
+    inputs: '{"width":"100%","columns":"2 columns 33-67","mobile_columns":"1","margin_block_start":"64","margin_block_end":"8","padding_block_start":"32","padding_block_end":"32","reverse_mobile":true,"restrict_width":true,"background_color":"white","section_header":false,"section_footer":false}'
+  '0:main_slot:0':
+    parent_uuid: 4737017c-a3bb-48d0-ab95-97e6732e7875
+    slot: main_slot
+    uuid: 65d450a4-c54f-4a1a-b370-d8144ba06634
+    component_id: sdc.haven_theme.image
+    component_version: d77451010df91d0e
+    inputs: '{"media":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person_profile\u241dfield_featured_image\u241e\u241fentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241f{src\u21a0src_with_alternate_widths,alt\u21a0alt,width\u21a0width,height\u21a0height}"},"size":"1:1","radius":"small"}'
+  '0:main_slot:1':
+    parent_uuid: 4737017c-a3bb-48d0-ab95-97e6732e7875
+    slot: main_slot
+    uuid: 4eb71b35-0336-4d93-ab5d-ead100954a8b
+    component_id: sdc.haven_theme.group
+    component_version: 7a3163ee5e2a1c66
+    inputs: '{"flex_direction":"column","flex_gap":"md","items_align":"start","flex_align":"center","radius":"sm","stretch":false}'
+  '0:main_slot:1:group_slot:0':
+    parent_uuid: 4eb71b35-0336-4d93-ab5d-ead100954a8b
+    slot: group_slot
+    uuid: 4cfc5181-636d-449a-b1e8-ace509cb6e4b
+    component_id: sdc.haven_theme.badge
+    component_version: b180b228e47a27ec
+    inputs: '{"label":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person_profile\u241dfield_badge\u241e\u241fvalue"},"style":"accent","icon_first":true}'
+  '0:main_slot:1:group_slot:1':
+    parent_uuid: 4eb71b35-0336-4d93-ab5d-ead100954a8b
+    slot: group_slot
+    uuid: 35db3e85-5ca6-446e-8ad1-1529749da3c0
+    component_id: sdc.haven_theme.heading
+    component_version: f463a8803de8d3f1
+    inputs: '{"heading_text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person_profile\u241dtitle\u241e\u241fvalue"},"level":2,"text_size":"heading-responsive-5xl","text_color":"secondary","align":"left"}'
+  '0:main_slot:1:group_slot:2':
+    parent_uuid: 4eb71b35-0336-4d93-ab5d-ead100954a8b
+    slot: group_slot
+    uuid: 88624013-40f3-465f-8433-7c156a672125
+    component_id: sdc.haven_theme.heading
+    component_version: f463a8803de8d3f1
+    inputs: '{"heading_text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person_profile\u241dfield_role\u241e\u241fvalue"},"text_size":"heading-responsive-xl","text_color":"text-default","align":"left"}'
+  1:
+    uuid: 6bb047dc-0553-4724-962f-bf9bb4bc1dc3
+    component_id: sdc.haven_theme.section
+    component_version: 5b4b8ecb2a253440
+    inputs: '{"width":"100%","columns":"2 columns 33-67","mobile_columns":"1","margin_block_start":"-48","margin_block_end":"48","padding_block_start":"64","padding_block_end":"32","reverse_mobile":true,"restrict_width":true,"section_header":false,"section_footer":false,"background_color":"white"}'
+  '1:main_slot:0':
+    parent_uuid: 6bb047dc-0553-4724-962f-bf9bb4bc1dc3
+    slot: main_slot
+    uuid: 28084d29-8410-402e-9550-ebd89db06492
+    component_id: sdc.haven_theme.grid
+    component_version: 0a5595fef10a7122
+    inputs: '{"width":"90%","columns":"1 column","mobile_columns":"1"}'
+  '1:main_slot:0:main_slot:0':
+    parent_uuid: 28084d29-8410-402e-9550-ebd89db06492
+    slot: main_slot
+    uuid: 2e98b501-55c4-4283-a8af-5cfafc4d9e56
+    component_id: sdc.haven_theme.text
+    component_version: 75c8d6e04ca4b729
+    inputs: '{"text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person_profile\u241dfield_sidebar\u241e\u241fprocessed"},"text_size":"normal","text_color":"default","columns":"1 column"}'
+  '1:main_slot:1':
+    parent_uuid: 6bb047dc-0553-4724-962f-bf9bb4bc1dc3
+    slot: main_slot
+    uuid: 8e826586-b1ad-4a3f-b67a-b2a1df61fc05
+    component_id: sdc.haven_theme.grid
+    component_version: 0a5595fef10a7122
+    inputs: '{"width":"100%","columns":"1 column","mobile_columns":"1"}'
+  '1:main_slot:1:main_slot:0':
+    parent_uuid: 8e826586-b1ad-4a3f-b67a-b2a1df61fc05
+    slot: main_slot
+    uuid: 0e20ea12-cd16-4591-ad52-3ce10dc55300
+    component_id: sdc.haven_theme.text
+    component_version: 75c8d6e04ca4b729
+    inputs: '{"text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person_profile\u241dfield_content\u241e\u241fprocessed"},"text_size":"normal","text_color":"default","columns":"1 column"}'
+  '1:main_slot:1:main_slot:1':
+    parent_uuid: 8e826586-b1ad-4a3f-b67a-b2a1df61fc05
+    slot: main_slot
+    uuid: 7f568bd9-9a67-493f-b02f-ab88068fb696
+    component_id: sdc.haven_theme.group
+    component_version: 7a3163ee5e2a1c66
+    inputs: '{"flex_direction":"column","flex_gap":"md","items_align":"start","flex_align":"center","radius":"sm","padding":"md","stretch":false,"background":"muted"}'
+  '1:main_slot:1:main_slot:1:group_slot:0':
+    parent_uuid: 7f568bd9-9a67-493f-b02f-ab88068fb696
+    slot: group_slot
+    uuid: e7900bf5-c9a3-425f-abc9-256424f95c0b
+    component_id: sdc.haven_theme.heading
+    component_version: f463a8803de8d3f1
+    inputs: '{"heading_text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person_profile\u241dfield_callout_heading\u241e\u241fvalue"},"level":2,"text_size":"heading-responsive-3xl","text_color":"default","align":"left"}'
+  '1:main_slot:1:main_slot:1:group_slot:1':
+    parent_uuid: 7f568bd9-9a67-493f-b02f-ab88068fb696
+    slot: group_slot
+    uuid: df1f6d60-2098-404f-a593-59bb90551c5b
+    component_id: sdc.haven_theme.text
+    component_version: 75c8d6e04ca4b729
+    inputs: '{"text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person_profile\u241dfield_callout_content\u241e\u241fprocessed"},"text_size":"normal","text_color":"default","columns":"2 columns"}'
+exposed_slots: {  }

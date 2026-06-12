@@ -1,0 +1,17 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: base/utility.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+@reference '../tailwindcss';
+
+@layer utilities {
+  .visually-hidden {
+    @apply sr-only;
+  }
+
+  .visually-hidden-focusable {
+    @apply sr-only focus:not-sr-only;
+  }
+}

@@ -1,0 +1,279 @@
+.familyList {
+  display: flex;
+  flex-direction: column;
+}
+
+.familyRow {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--space-6);
+  padding: 0 var(--space-2);
+  cursor: pointer;
+  color: var(--slate-12);
+  border-radius: var(--radius-2);
+  all: unset;
+}
+
+.familyRow:hover {
+  background: var(--blue-3);
+}
+
+.familyRow[data-state='active'] {
+  color: white;
+  background: var(--blue-9);
+}
+
+.familyRow:focus-visible {
+  outline: 2px solid var(--blue-8);
+  outline-offset: -2px;
+}
+
+.familyMeta {
+  flex: 1;
+  min-width: 0;
+  padding: 0 var(--space-2);
+}
+
+.familyName {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.familyCount {
+  border-radius: var(--radius-2);
+  background-color: var(--gray-3);
+}
+
+.familyRow:hover .familyCount {
+  color: var(--blue-11);
+  background-color: var(--blue-5);
+}
+
+.familyRow[data-state='active'] .familyCount {
+  color: white;
+  background-color: var(--blue-10);
+}
+
+.flyoutContent {
+  z-index: 20;
+  display: flex;
+  overflow: hidden;
+  width: min(380px, calc(100vw - 32px));
+  height: min(70vh, 760px);
+  max-height: min(70vh, 760px);
+  padding: 0;
+  transform-origin: var(--radix-popover-content-transform-origin);
+  border-radius: var(--radius-4);
+  box-shadow: var(--shadow-5);
+}
+
+.flyoutPanel {
+  display: flex !important;
+  overflow: hidden;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  border-radius: inherit;
+  background: var(--color-panel-solid);
+}
+
+.flyoutHeader {
+  flex-shrink: 0;
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--gray-4);
+}
+
+.flyoutHeaderMeta {
+  flex: 1;
+  min-width: 0;
+}
+
+.flyoutHeaderActions {
+  flex-shrink: 0;
+  margin-left: auto;
+  padding-left: var(--space-4);
+}
+
+.flyoutCloseButton {
+  margin-left: var(--space-1);
+}
+
+.flyoutScrollArea {
+  overflow-x: hidden;
+  overflow-y: auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+.flyoutBody {
+  min-width: 0;
+  padding: var(--space-4);
+}
+
+.flyoutBottomSpacer {
+  flex: 0 0 auto;
+  height: var(--space-4);
+}
+
+.previewSample {
+  line-height: 1.1;
+}
+
+.previewSecondary {
+  line-height: 1.3;
+}
+
+.variantList {
+  overflow: hidden;
+  border: 1px solid var(--gray-4);
+  border-radius: var(--radius-3);
+  background: var(--color-panel-solid);
+}
+
+.variantRow {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  cursor: pointer;
+  border-bottom: 1px solid var(--gray-4);
+  all: unset;
+  gap: var(--space-3);
+}
+
+.variantRow:last-child {
+  border-bottom: 0;
+}
+
+.variantRow:hover,
+.variantRow[data-state='active'] {
+  background: var(--gray-2);
+}
+
+.variantRow[data-state='active'] {
+  box-shadow: inset 2px 0 0 var(--accent-9);
+}
+
+.variantRow:focus-visible {
+  outline: 2px solid var(--blue-8);
+  outline-offset: -2px;
+}
+
+.variantRowMeta {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  gap: 2px;
+}
+
+.variantFilename {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.styleSelectContent {
+  z-index: 200;
+}
+
+.variantRowChevron {
+  flex-shrink: 0;
+  color: var(--gray-9);
+}
+
+.settingsSection,
+.previewSection {
+  padding: var(--space-3);
+  border: 1px solid var(--gray-4);
+  border-radius: var(--radius-3);
+  background: color-mix(
+    in sRGB,
+    var(--color-panel-solid) 92%,
+    var(--gray-2) 8%
+  );
+}
+
+.variantHeader {
+  align-items: flex-start;
+}
+
+.variantMeta {
+  flex: 1;
+  min-width: 0;
+}
+
+.deleteButton {
+  flex-shrink: 0;
+  margin-top: calc(var(--space-1) * -1);
+}
+
+.axisControl {
+  padding: var(--space-3);
+  border: 1px solid var(--gray-4);
+  border-radius: var(--radius-3);
+  background: var(--gray-2);
+}
+
+.axisSlider {
+  width: 100%;
+  accent-color: var(--accent-9);
+}
+
+.snippetBox {
+  overflow-x: auto;
+  padding: var(--space-3);
+  border: 1px solid var(--gray-5);
+  border-radius: var(--radius-3);
+  background: var(--gray-3);
+}
+
+.snippetWrapper {
+  position: relative;
+}
+
+.snippetCopyButton {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.snippetWrapper:hover .snippetCopyButton,
+.snippetWrapper:focus-within .snippetCopyButton {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.snippetWrapper:hover .snippetPre,
+.snippetWrapper:focus-within .snippetPre {
+  opacity: 0.4;
+}
+
+.snippetPre {
+  margin: 0;
+  white-space: pre;
+  color: var(--gray-12);
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    'Liberation Mono',
+    'Courier New',
+    monospace;
+  font-size: 12px;
+  line-height: 1.45;
+}

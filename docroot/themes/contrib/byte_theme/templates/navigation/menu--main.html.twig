@@ -1,0 +1,64 @@
+{#
+/**
+ * @file
+ * Theme override to display a menu.
+ *
+ * Available variables:
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - below: The menu item child items.
+ *   - title: The menu link title.
+ *   - url: The menu link url, instance of \Drupal\Core\Url
+ *   - localized_options: Menu link localized options.
+ *   - is_expanded: TRUE if the link has visible children within the current
+ *     menu tree.
+ *   - is_collapsed: TRUE if the link has children within the current menu tree
+ *     that are not currently visible.
+ *   - in_active_trail: TRUE if the link is in the active trail.
+ */
+#}
+
+{% set classes = 'flex justify-start relative' %}
+{% set attributes = attributes ? attributes.addClass(classes) : ' class="' ~ classes ~ '"' %}
+
+<nav {{ attributes }} aria-label="{{ menu_label }}">
+  <ul class="flex flex-col gap-1 p-0 md:w-auto md:flex-row" data-level="1">
+    {% for item in items %}
+      {% set title = item.title is not empty ? item.title : item.text %}
+      {# Capture the rendered URL before testing it for emptiness, since it's a Drupal object under the hood.
+      The - prefix and suffix prevent errant whitespace in the resulting `url` variable. #}
+      {% set url %}
+        {{- item.url -}}
+      {% endset %}
+
+      {% set item_classes =
+        [
+          item.in_active_trail ? 'bg-muted/50' : '',
+          'flex flex-wrap justify-between md:flex-nowrap',
+          'md:w-auto md:relative md:max-w-[375px]',
+          'text-base font-medium rounded-md'
+        ]|filter(c => c is not empty)
+      %}
+
+      {% if item.attributes %}
+        {% do item.attributes.addClass(item_classes) %}
+        {% do item.attributes.setAttribute('data-level', 1) %}
+      {% else %}
+        {% set item_attributes_string = 'class="' ~ (item_classes|join(' ')) ~ '" data-level="1"' %}
+      {% endif %}
+
+      <li {{ item.attributes ? : item_attributes_string }}>
+        {% if url is not empty %}
+          <a
+            href="{{ url }}"
+            class="flex min-h-[44px] shrink-1 grow-1 basis-0 items-center gap-1 rounded-md p-2 duration-300 md:min-h-auto hover:md:bg-primary hover:md:text-primary-foreground focus:md:bg-primary focus:md:text-primary-foreground xl:px-3"
+            data-level="1"
+          >
+            {{ title }}
+          </a>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</nav>

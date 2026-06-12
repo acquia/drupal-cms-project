@@ -1,0 +1,59 @@
+eca.event.plugin.eca_queue:processing_task:
+  type: eca.event.plugin
+  label: 'Queue Processing Task'
+  mapping:
+    task_name:
+      type: string
+      label: 'Task name'
+      constraints:
+        NotBlank: []
+    task_value:
+      type: string
+      label: 'Task value (optional)'
+    distribute:
+      type: boolean
+      label: 'Distribute: Process tasks of this name in their own queue.'
+    cron:
+      type: integer
+      label: 'Cron run time (seconds)'
+
+action.configuration.eca_enqueue_task:
+  type: mapping
+  label: 'Configuration for the "Enqueue Task" action'
+  mapping:
+    task_name:
+      type: string
+      label: 'Task name'
+      constraints:
+        NotBlank: []
+    task_value:
+      type: string
+      label: 'Task value (optional)'
+    tokens:
+      type: text
+      label: 'Tokens to forward'
+
+action.configuration.eca_enqueue_task_delayed:
+  type: mapping
+  label: 'Configuration for the "Enqueue Task Delayed" action'
+  mapping:
+    delay_value:
+      type: string
+      label: 'Delay value'
+    delay_unit:
+      type: integer
+      label: 'Delay unit'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca_queue\Plugin\Action\EnqueueTaskDelayed::getAllValidDelayUnits'
+    task_name:
+      type: string
+      label: 'Task name'
+      constraints:
+        NotBlank: []
+    task_value:
+      type: string
+      label: 'Task value (optional)'
+    tokens:
+      type: text
+      label: 'Tokens to forward'

@@ -1,0 +1,24 @@
+parameters:
+  level: 6
+  reportUnmatchedIgnoredErrors: false
+  scanDirectories:
+    - ../../../../vendor/drush/drush/src-symfony-compatibility
+  ignoreErrors:
+    - identifier: missingType.iterableValue
+    - identifier: missingType.generics
+    - '#^Call to method Drupal\\Core\\Entity\\Query\\QueryInterface::accessCheck\(\) with false will always evaluate to true.#'
+    - '#^Class Drupal\\eca_render\\Element\\EcaLazy extends @internal class Drupal\\Core\\Render\\Element\\RenderElementBase.#'
+    - '#^Cannot unset property Drupal\\eca_form\\Plugin\\Action\\FormAddAjax::\$currentForm because it might have hooks in a subclass.#'
+  excludePaths:
+    - 'src/Token/ContribToken.php'
+    - '*/tests/*.php'
+  stubFiles:
+    - './tests/phpstan/stubs/CacheableDependencyInterface.stub'
+    - './tests/phpstan/stubs/CachedDiscoveryInterface.stub'
+    - './tests/phpstan/stubs/DefaultPluginManager.stub'
+    - './tests/phpstan/stubs/FormStateInterface.stub'
+    - './tests/phpstan/stubs/LanguageNegotiationMethodInterface.stub'
+    - './tests/phpstan/stubs/LoggerInterface.stub'
+    - './tests/phpstan/stubs/Request.stub'
+    - './tests/phpstan/stubs/TokenInterface.stub'
+    - './tests/phpstan/stubs/ViewsPluginInterface.stub'

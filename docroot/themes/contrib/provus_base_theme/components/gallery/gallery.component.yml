@@ -1,0 +1,26 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Provus Blocks Gallery
+status: stable
+description: Gallery component that displays a collection of images in a grid or gallery layout
+group: Provus Components
+
+variants:
+  default:
+    title: Default
+    description: Standard gallery with collection of images
+
+props:
+  type: object
+  properties:
+    content_attributes:
+      type: string
+      title: 'Content attributes'
+      description: 'Same as attributes, except applied to the main content tag that appears in the template.'
+      default: ''
+    images:
+      type: array
+      title: 'Images'
+      description: 'Array of image items to display in the gallery. Each item should contain image URL and optional caption.'
+      default: []
+  required:
+    - images

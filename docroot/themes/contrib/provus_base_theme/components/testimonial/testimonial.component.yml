@@ -1,0 +1,74 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Testimonial
+status: stable
+description: Testimonial component displaying a quote, author image, name, and role
+group: Provus Components
+
+variants:
+  default:
+    title: Default
+    description: Standard testimonial with quote, author image, name and role
+
+props:
+  type: object
+  required:
+    - name
+    - display_type
+  properties:
+    display_type:
+      type: string
+      title: 'Image position (Desktop)'
+      description: 'Type of display for the testimonial'
+      examples:
+        - 'right'
+      default: 'right'
+      enum:
+        - 'left'
+        - 'right'
+        - 'full'
+      meta:enum:
+        left: 'Left position image'
+        right: 'Right position image'
+        full: 'No image'
+    name:
+      type: string
+      title: 'Full name / Header title'
+      description: 'Author name displayed below the testimonial'
+      examples:
+        - 'John Doe'
+        - 'Jane Smith'
+        - 'Robert Johnson'
+      default: ''
+    role:
+      type: string
+      title: 'Role / Position / Sub header'
+      description: 'Author role or title displayed below the name'
+      examples:
+        - 'CEO, Company Name'
+        - 'Marketing Director'
+        - 'Customer'
+      default: ''
+    image_url:
+      type: object
+      $ref: json-schema-definitions://canvas.module/image
+      title: 'Media Image'
+      description: 'Author image displayed with the testimonial'
+      examples:
+        - src: 'https://placehold.co/839x580'
+          alt: 'Image'
+      default: ''
+    body:
+      type: string
+      x-formatting-context: block
+      title: 'Testimonial content'
+      description: 'Testimonial quote or content. Supports multiple lines of text. Line breaks will be preserved in the display.'
+      examples:
+        - |
+          We've been using this product for over a year now.        
+          It has transformed how we work.
+      default: ''      
+    content_attributes:
+      type: string
+      title: 'Content attributes'
+      description: 'Drupal template function placeholder — no content is required here. Please leave this section blank.'
+      default: ''

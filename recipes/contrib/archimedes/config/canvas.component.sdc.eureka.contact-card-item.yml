@@ -1,0 +1,47 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - eureka
+label: 'Contact card item'
+id: sdc.eureka.contact-card-item
+source: sdc
+source_local_id: 'eureka:contact-card-item'
+provider: eureka
+active_version: a832901833b251c2
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        contact_card_item_job:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Deputy Headteacher'
+          expression: ℹ︎string␟value
+        contact_card_item_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Mr. David Williams'
+          expression: ℹ︎string␟value
+        contact_card_item_email:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: deputy@willowmeadow.sch.uk
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }

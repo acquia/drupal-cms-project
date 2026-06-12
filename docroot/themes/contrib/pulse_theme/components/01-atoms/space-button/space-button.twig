@@ -1,0 +1,214 @@
+{#
+/**
+ * @file
+ * Space Button Component.
+ *
+ * Props:
+ * - icon: Object. Defines the button icon.
+ *   - src: String. Path to the icon image.
+ *   - alt: String. Alternative text for the icon.
+ *   - width: Integer. Width of the icon.
+ *   - height: Integer. Height of the icon.
+ *
+ * - text: String. Defines the button text.
+ *   Example: 'Contact Us'.
+ *
+ * - url: String. The action URL of the button.
+ *   Example: 'https://www.qed42.com/contact'.
+ *
+ * - variant: String. Defines the button style variant.
+ *   Options:
+ *     - primary
+ *     - secondary
+ *     - tertiary
+ *     - ghost
+ *     - link
+ *   default: 'primary'.
+ *
+ * - size: String. Defines the button size.
+ *   Options:
+ *     - small
+ *     - medium
+ *     - large
+ *     - xlarge
+ *     - xxlarge
+ *     - xxxlarge
+ *   default: 'small'.
+ *
+ * - button_corners: String. Defines the button corner style.
+ *   Options:
+ *     - rectangle_corner: Square corners.
+ *     - rounded_half_circle: Rounded corners.
+ *   default: 'rounded_half_circle'.
+ *
+ * - button_type: String. Defines the button type.
+ *   Options:
+ *     - only_icon: Only an icon is displayed.
+ *     - text_with_icon: Displays text with an icon.
+ *     - only_text: Displays only text.
+ *   default: 'only_text'.
+ *
+ * - icon_alignment: String. Defines the icon position relative to the text.
+ *   Options:
+ *     - only-icon: No text, only icon.
+ *     - left: Icon is positioned to the left of the text.
+ *     - right: Icon is positioned to the right of the text.
+ *   default: 'right'.
+ *
+ * - expanded: String. Defines whether the button should take full width or auto width.
+ *   Options:
+ *     - yes: Full-width button.
+ *     - no: Auto-width button.
+ *   default: 'no'.
+ *
+ * - button_state: String. Defines the button state.
+ *   Options:
+ *     - focused: Button is focused.
+ *     - disabled: Button is disabled.
+ *   default: 'focused'.
+ *
+ * - classes: String. Custom class names (multiple class names separated by space).
+ *   Only applied when custom styling is enabled.
+ *
+ * Required Props:
+ * - text
+ * - url
+ * - button_type
+ * - size
+ */
+#}
+
+{# --- Defaults --- #}
+{% set tag_name = tag_name|default('div') %}
+{% set size = size|default('default') %}
+{% set attributes = attributes|default(create_attribute()).setAttribute('tabindex', '0') %}
+{% set icon_alignment = icon_alignment|default('right') %}
+{% set button_type = button_type|default('default') %}
+{% set expanded = expanded|default('no') %}
+{% set variant = variant|default('primary') %}
+{% set button_state = button_state|default('') %}
+{% set button_corners = button_corners|default('') %}
+{% set url = url|default('') %}
+{% set text = text|default('') %}
+
+{# --- Variant classes map --- #}
+{% set variant_classes = {
+  primary: 'btn-primary',
+  secondary: 'btn-secondary',
+} %}
+
+{# --- State-specific classes map --- #}
+{% set state_classes = {
+  primary: {
+    disabled: 'disabled',
+    focused: 'focused'
+  },
+  secondary: {
+    disabled: 'disabled',
+    focused: 'focused'
+  }
+} %}
+
+{# --- Corner classes map --- #}
+{% set corner_classes = {
+  rectangle_corner: 'rounded-none',
+  rounded_half_circle: 'rounded-full'
+} %}
+
+{# --- Base classes --- #}
+{% set classes = [
+  button_type,
+  'btn flex items-center justify-center inline-flex capitalize focus:outline-none transition-colors duration-500'
+] %}
+
+{% if expanded == 'yes' %}
+  {% set classes = classes|merge(['w-full']) %}
+{% endif %}
+
+{% set classes = classes|merge([variant_classes[variant]|default('')]) %}
+
+{% if state_classes[variant][button_state] is defined %}
+  {% set classes = classes|merge([state_classes[variant][button_state]]) %}
+{% endif %}
+
+{% if corner_classes[button_corners] is defined %}
+  {% set classes = classes|merge([corner_classes[button_corners]]) %}
+{% endif %}
+
+{% if icon_alignment == 'left' %}
+  {% set classes = classes|merge(['flex-row-reverse']) %}
+{% else %}
+  {% set classes = classes|merge(['flex-row']) %}
+{% endif %}
+
+{% if size is not empty %}
+  {% set classes = classes|merge([size]) %}
+{% endif %}
+
+{# --- Icon spacing --- #}
+{% set icon_size_map = {
+  small: 'small',
+  medium: 'medium',
+  large: 'large',
+  'extra-large': 'extra-large'
+} %}
+
+{% set icon_classes = [] %}
+{% if button_type != 'only_icon' and icon_alignment == 'left' %}
+  {% set icon_classes = icon_classes|merge(['mr-2.5']) %}
+{% endif %}
+{% if button_type != 'only_icon' and icon_alignment == 'right' %}
+  {% set icon_classes = icon_classes|merge(['ml-2.5']) %}
+{% endif %}
+
+{% set span_attributes = create_attribute().addClass(icon_classes) %}
+
+{# --- Link conversion --- #}
+{% if url is not empty %}
+  {% set attributes = attributes.setAttribute('href', url) %}
+  {% set tag_name = 'a' %}
+{% endif %}
+
+{# --- Output --- #}
+{% block button_block %}
+  <{{ tag_name }} {{ attributes.addClass(classes) }}>
+    {% if button_type == 'only_text' %}
+      <span>{{ text }}</span>
+
+    {% elseif button_type == 'only_icon' and icon is not null %}
+      <span {{ span_attributes }}>
+        {% if icon %}
+            {{
+              include(
+                '@pulse_theme/components/01-atoms/space-icon/space-icon.twig',
+                {
+                  icon: icon,
+                  icon_size: icon_size_map[icon_size]|default('medium')
+                },
+                with_context: false
+              )
+            }}
+          {% endif %}
+      </span>
+
+    {% else %}
+      <span>{{ text }}</span>
+      {% if icon is not null %}
+        <span {{ span_attributes }}>
+          {% if icon %}
+            {{
+              include(
+                '@pulse_theme/components/01-atoms/space-icon/space-icon.twig',
+                {
+                  icon: icon,
+                  icon_size: icon_size_map[icon_size]|default('medium')
+                },
+                with_context: false
+              )
+            }}
+          {% endif %}
+        </span>
+      {% endif %}
+    {% endif %}
+  </{{ tag_name }}>
+{% endblock %}

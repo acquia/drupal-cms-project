@@ -1,0 +1,15 @@
+services:
+  _defaults:
+    autoconfigure: true
+    autowire: true
+
+  dashboard.user_redirect:
+    class: Drupal\dashboard\DashboardRedirectHandler
+  Drupal\dashboard\DashboardRedirectHandler: '@dashboard.user_redirect'
+
+  dashboard.manager:
+    class: Drupal\dashboard\DashboardManager
+  Drupal\dashboard\DashboardManager: '@dashboard.manager'
+
+  dashboard.block_build_render_subscriber:
+    class: Drupal\dashboard\EventSubscriber\DashboardBlockBuildRenderSubscriber

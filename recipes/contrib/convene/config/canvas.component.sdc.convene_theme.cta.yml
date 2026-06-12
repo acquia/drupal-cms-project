@@ -1,0 +1,93 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - convene_theme
+label: 'CTA (Call To Action)'
+id: sdc.convene_theme.cta
+source: sdc
+source_local_id: 'convene_theme:cta'
+provider: convene_theme
+active_version: 14d781a4aa65502b
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+        eyebrow:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        action:
+          title: 'Action Slot'
+          description: 'Slot for primary and secondary action buttons.'
+  965895fac60885b0:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        heading:
+          title: 'Heading Slot'
+          description: 'Main CTA text (e.g. "Ready to join us?").'
+        actions:
+          title: 'Actions Slot'
+          description: 'Buttons for the CTA.'
+  9a90cfecc2320d5a:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+        disable_css:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value: null
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        heading:
+          title: 'Heading Slot'
+          description: 'Main CTA text (e.g. "Ready to join us?").'
+        actions:
+          title: 'Actions Slot'
+          description: 'Buttons for the CTA.'

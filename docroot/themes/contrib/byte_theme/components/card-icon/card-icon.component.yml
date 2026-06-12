@@ -1,0 +1,114 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Icon card
+group: Card
+props:
+  type: object
+  required:
+    - text_align
+    - icon_align
+  properties:
+    tile_size:
+      type: string
+      title: Aspect ratio
+      enum:
+        - square
+        - "4:3"
+        - "16:9"
+      meta:enum:
+        square: Square
+        "4:3": Rectangle 4 × 3
+        "16:9": Rectangle 16 × 9
+      examples:
+        - square
+    background_color:
+      type: string
+      title: Background color
+      enum:
+        - primary
+        - secondary
+        - accent
+        - muted
+      meta:enum:
+        primary: Primary
+        secondary: Secondary
+        accent: Accent
+        muted: Muted
+    border_radius:
+      type: string
+      title: Border radius
+      enum:
+        - small
+        - medium
+        - large
+      meta:enum:
+        small: Small
+        medium: Medium
+        large: Large
+      default: medium
+      examples:
+        - medium
+    icon:
+      type: string
+      title: Icon name
+      description: 'The ID of an icon from the <a href="https://phosphoricons.com/" target="_blank">Phosphor Icons</a> library.'
+      default: "rocket"
+      examples:
+        - "rocket"
+    icon_size:
+      type: string
+      title: Icon size
+      enum:
+        - small
+        - medium
+        - large
+        - extra-large
+      meta:enum:
+        small: Small
+        medium: Medium
+        large: Large
+        extra-large: Extra large
+      examples:
+        - large
+    icon_align:
+      type: string
+      title: Icon alignment
+      enum:
+        - left
+        - right
+        - center
+      meta:enum:
+        left: Left
+        center: Center
+        right: Right
+      default: center
+      examples:
+        - center
+    url:
+      type: string
+      title: Link
+    text:
+      type: string
+      title: Heading
+      examples:
+        - Your heading here
+    description:
+      type: string
+      title: Description
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - "<p>This is placeholder text.</p>"
+    text_align:
+      type: string
+      title: Text alignment
+      enum:
+        - left
+        - center
+        - right
+      meta:enum:
+        left: Left
+        center: Center
+        right: Right
+      default: center
+      examples:
+        - center

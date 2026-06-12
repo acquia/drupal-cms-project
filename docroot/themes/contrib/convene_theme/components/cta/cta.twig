@@ -1,0 +1,24 @@
+{% set classes = [
+  'cta-component',
+  admin_theme ? 'cta-component--admin-theme' : 'cta-component--themed',
+] %}
+
+<section{{attributes.addClass(classes)}}>
+  <div class="cta-component__inner">
+    {% if eyebrow %}
+      <div class="cta-component__eyebrow">
+        {{ eyebrow }}
+      </div>
+    {% endif %}
+    
+    {% if title %}
+      <h2 class="cta-component__title">
+        {{ title }}
+      </h2>
+    {% endif %}
+    
+    <div class="cta-component__actions">
+      {{ action }}
+    </div>
+  </div>
+</section>

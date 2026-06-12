@@ -1,0 +1,52 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.views_block.news-latest
+    - canvas.component.sdc.eureka.hero-article
+    - canvas.component.sdc.eureka.latest-news
+    - canvas.component.sdc.eureka.text
+    - core.entity_view_mode.node.full
+    - field.field.media.image.field_media_image
+    - field.field.node.news.field_body
+    - field.field.node.news.field_hero_image
+    - filter.format.canvas_html_block
+    - filter.format.canvas_html_inline
+    - filter.format.content_format
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - node.type.news
+  module:
+    - file
+    - media
+    - node
+    - options
+    - user
+id: node.news.full
+content_entity_type_id: node
+content_entity_type_bundle: news
+content_entity_type_view_mode: full
+component_tree:
+  0:
+    uuid: bf20c49f-ec11-4cf3-b15e-c23890494016
+    component_id: sdc.eureka.hero-article
+    component_version: 17c4c79d998a1b64
+    inputs: '{"hero_article_autor":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:news\u241duid\u241e\u241fentity\u241c\u241centity:user\u241dname\u241e\u241fvalue"},"hero_article_date":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node\u241dcreated\u241e\u241fvalue","adapter":"unix_to_date"},"hero_article_heading":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:news\u241dtitle\u241e\u241fvalue"},"hero_article_heading_level":1,"hero_article_media":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:news\u241dfield_hero_image\u241e\u241fentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241f{src\u21a0src_with_alternate_widths,alt\u21a0alt,width\u21a0width,height\u21a0height}"},"hero_article_media_alt":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:news\u241dfield_hero_image\u241e\u241fentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241falt"}}'
+  1:
+    uuid: 8edd71ea-b93d-41ab-97f2-fe5f96ccc2af
+    component_id: sdc.eureka.text
+    component_version: 63fb09d615e0db73
+    inputs: '{"text_content":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:news\u241dfield_body\u241e\u241fprocessed"}}'
+  2:
+    uuid: ecc74f4a-e231-4440-ba13-be09e350f9d3
+    component_id: sdc.eureka.latest-news
+    component_version: 1c70f9d49cfe7a66
+    inputs: '{"latest_news_heading":"Latest news","latest_news_heading_level":"3","latest_news_summary":"Find what you need quickly with our convenient links to essential information and services."}'
+  '2:latest_news_items:0':
+    parent_uuid: ecc74f4a-e231-4440-ba13-be09e350f9d3
+    slot: latest_news_items
+    uuid: 1fc76721-84b7-4973-a375-100b725e6707
+    component_id: block.views_block.news-latest
+    component_version: 0bdfba85b6e45854
+    inputs: '{"label":"News: Latest news","label_display":"0","views_label":"","items_per_page":null}'
+exposed_slots: {  }

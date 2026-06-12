@@ -1,0 +1,24 @@
+<div class="card-horizontal">
+	<div class="card-horizontal__content">
+		{% include 'convene_theme:typography' with {
+      eyebrow: eyebrow|default(''),
+      heading: heading|default(''),
+      description: description|default(''),
+      heading_tag: heading_tag|default('div'),
+      align: 'left',
+      color: 'black'
+    } only %}
+
+		{% if card_actions %}
+			<div class="card-horizontal__actions">
+				{{ card_actions }}
+			</div>
+		{% endif %}
+	</div>
+
+	{% if card_image %}
+		<div class="card-horizontal__image">
+			{{ card_image }}
+		</div>
+	{% endif %}
+</div>

@@ -1,0 +1,69 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.provus_blog.field_content
+    - field.field.node.provus_blog.field_featured_image
+    - field.field.node.provus_blog.field_provus_publish_date
+    - field.field.node.provus_blog.field_tags
+    - node.type.provus_blog
+  module:
+    - datetime
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.provus_blog.full
+targetEntityType: node
+bundle: provus_blog
+mode: full
+content:
+  addtoany:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_content:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_featured_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: hero
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_provus_publish_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  search_api_excerpt: true

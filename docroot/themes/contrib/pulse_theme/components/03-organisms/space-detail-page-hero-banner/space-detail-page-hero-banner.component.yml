@@ -1,0 +1,65 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+
+name: Space Detail Page Hero Banner
+
+description: This component renders a prominent Detail Page Hero Banner, designed for the top of a page to create a strong initial impact. It integrates a background image with a main title and sub-headline, effectively communicating a key message to the user. Use this component to introduce a page or section, drawing attention to its core purpose or offering.
+
+status: stable
+
+group: Organisms
+
+props:
+
+  type: object
+
+  required:
+    - title
+
+  properties:
+    background_image:
+      title: Background image
+      $ref: json-schema-definitions://canvas.module/image
+      type: object
+      examples:
+        - src: "images/city.jpg"
+          alt: "Boring placeholder"
+
+    label:
+      type: string
+      title: Label
+      description: The label of the section.
+      examples:
+        - "Article"
+
+    title:
+      type: string
+      title: Title
+      description: Title of the banner.
+      examples:
+        - "Understanding Common Medicines: What They Do and How to Use Them Safely"
+
+    primary_category:
+      type: string
+      title: Primary Category
+      description: Primary category of the card.
+      examples:
+        - "Everyday health"
+
+    secondary_category:
+      type: string
+      title: Secondary Category
+      description: Secondary category of the card.
+      examples:
+        - "Care Decisions"
+
+    modifier_class:
+      type: string
+      title: Modifier class
+      description: Additional classes.
+      examples:
+        - "custom-class"
+
+thirdPartySettings:
+  sdcStorybook:
+    stories:
+      preview: {}

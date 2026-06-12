@@ -1,0 +1,66 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: List (Div) Container
+status: stable
+description: List component that displays a collection of list items with configurable styling and layout
+group: Provus Components
+
+libraryOverrides:
+  css:
+    component:
+      list_div.css: {}
+
+variants:
+  default:
+    title: Default
+    description: Standard list with configurable style and display options
+
+props:
+  type: object
+  required:
+    - list_style
+    - list_orientation
+  properties:
+    list_style:
+      type: string
+      title: 'List Style'
+      description: 'CSS class for list styling'
+      examples:
+        - 'icon-left'
+      default: ''
+      enum:
+        - 'icon-left'
+        - 'icon-right'
+        - 'icon-top'
+      meta:enum:
+        icon-left: Icon Left
+        icon-right: Icon Right
+        icon-top: Icon Top
+    list_orientation:
+      type: string
+      title: 'List Orientation'
+      description: 'Display orientation for the list group (e.g., grid layout, column layout)'
+      examples:
+        - 'stacked'
+      default: ''
+      enum:
+        - 'stacked'
+        - 'grid_2'
+        - 'grid_3'
+        - 'grid_4'
+        - 'column-row'
+      meta:enum:
+        stacked: Stacked layout
+        grid_2: Grid 2-column layout
+        grid_3: Grid 3-column layout
+        grid_4: Grid 4-column layout
+        column-row: Column row layout
+    content_attributes:
+      type: string
+      title: 'Content attributes'
+      description: 'Drupal template function placeholder — no content is required here. Please leave this section blank.'
+      default: ''
+
+slots:
+  list_items:
+    title: List items
+    description: List item components placed inside the list container

@@ -1,0 +1,51 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+
+name: Space Breadcrumb
+
+status: obsolete
+
+group: Molecules
+
+props:
+
+  type: object
+
+  properties:
+    items:
+      type: array
+      title: "Breadcrumb items"
+      description: "An array of breadcrumb items with text and URL."
+      items:
+
+        type: object
+
+        properties:
+          text:
+            type: string
+            description: "The display title for the breadcrumb item."
+          
+          url:
+            type: string
+            description: "The URL for the breadcrumb item."
+          
+          title_text:
+            type: string
+            description: "The text for the breadcrumb item."
+
+    breadcrumb_style_options:
+      type: string
+      title: Breadcrumb Styles
+      description: Breadcrumb Styles
+      enum:
+        - no-fill
+        - primary-fill
+        - edge-lines
+      default: primary-fill
+      examples:
+        - 'no-fill'
+
+    breadcrumb_variation_options:
+      type: string
+      title: Breadcrumb Variation
+      description: Breadcrumb Variation
+      default: expanded

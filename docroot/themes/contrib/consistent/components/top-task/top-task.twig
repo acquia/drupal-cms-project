@@ -1,0 +1,11 @@
+{% if top_task_url is not empty %}
+  <a href="{{ top_task_url }}" class="stwl-top-task stwl-offset-shadow flex items-center justify-between w-full px-4 py-3 no-underline transition duration-200 bg-top-task-bg text-top-task-text border border-top-task-border rounded-[var(--radius)] hover:bg-focus hover:text-focus-text hover:border-focus focus:outline-none focus:bg-focus focus:text-focus-text focus:shadow-[0_2px_0_0_var(--color-foreground)]">
+    <span class="text-base">{{ top_task_label }}</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="shrink-0 ml-4" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+{% else %}
+  <div class="stwl-top-task flex items-center justify-between w-full px-4 py-3 bg-top-task-bg text-top-task-text border border-top-task-border rounded-[var(--radius)]">
+    <span class="text-base">{{ top_task_label }}</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="shrink-0 ml-4" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+  </div>
+{% endif %}

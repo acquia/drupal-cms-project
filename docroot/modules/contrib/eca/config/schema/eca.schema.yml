@@ -1,0 +1,202 @@
+eca.settings:
+  type: config_object
+  label: 'ECA settings'
+  mapping:
+    log_level:
+      type: integer
+      label: 'Log level'
+      constraints:
+        # @see \Drupal\Core\Logger::getLevels()
+        Choice: [0, 1, 2, 3, 4, 5, 6, 7]
+    documentation_domain:
+      type: string
+      label: 'Documentation domain'
+      constraints:
+        PrimitiveType: ~
+    user:
+      type: string
+      label: 'Execute models with user'
+    service_user:
+      type: string
+      label: 'Service user'
+    dependency_calculation:
+      type: sequence
+      label: 'Config dependency calculation'
+      sequence:
+        type: string
+        label: 'Enabled calculation setting'
+        constraints:
+          Choice:
+            - bundle
+            - field_storage
+            - field_config
+            - new_field_config
+
+eca.eca.*:
+  type: config_entity
+  label: ECA
+  mapping:
+    third_party_settings:
+      requiredKey: false
+      type: sequence
+      label: 'Third party settings'
+      sequence:
+        type: model_settings.third_party.[%key]
+    id:
+      type: machine_name
+      label: 'ID'
+      constraints:
+        Regex:
+          pattern: '/^[A-Za-z0-9_]+$/'
+          message: "The %value ID is not valid."
+    weight:
+      type: weight
+      label: 'Weight'
+    template:
+      type: boolean
+      label: 'Template'
+    events:
+      type: sequence
+      label: 'Events'
+      sequence:
+        type: mapping
+        label: 'Event'
+        mapping:
+          plugin:
+            type: string
+            label: 'Plugin ID'
+            constraints:
+              PluginExists:
+                manager: plugin.manager.eca.event
+                interface: 'Drupal\eca\Plugin\ECA\Event\EventInterface'
+          label:
+            type: text
+            label: 'Label'
+          configuration:
+            label: 'Configuration'
+            type: eca.event.plugin.[%parent.plugin]
+          successors:
+            type: sequence
+            label: 'Successors'
+            sequence:
+              type: eca.wrapper.successor
+          applied_templates:
+            type: sequence
+            label: 'Applied templates'
+            sequence:
+              type: string
+    conditions:
+      type: sequence
+      label: 'Conditions'
+      sequence:
+        type: mapping
+        label: 'Condition'
+        mapping:
+          plugin:
+            type: string
+            label: 'Plugin ID'
+            constraints:
+              PluginExists:
+                manager: plugin.manager.eca.condition
+                interface: 'Drupal\eca\Plugin\ECA\Condition\ConditionInterface'
+          original_id:
+            type: string
+            label: 'Original plugin ID'
+          label:
+            type: string
+            label: 'Label'
+          configuration:
+            label: 'Configuration'
+            type: eca.condition.plugin.[%parent.plugin]
+    gateways:
+      type: sequence
+      label: 'Gateways'
+      sequence:
+        type: mapping
+        label: 'Gateway'
+        mapping:
+          label:
+            type: string
+            label: 'Label'
+          type:
+            type: integer
+            label: 'Type'
+            constraints:
+              Choice: [0]
+          successors:
+            type: sequence
+            label: 'Successors'
+            sequence:
+              type: eca.wrapper.successor
+    actions:
+      type: sequence
+      label: 'Actions'
+      sequence:
+        type: mapping
+        label: 'Action'
+        mapping:
+          label:
+            type: text
+            label: 'Label'
+          plugin:
+            type: string
+            label: 'Plugin ID'
+            constraints:
+              PluginExists:
+                manager: plugin.manager.action
+                interface: 'Drupal\Core\Action\ActionInterface'
+          original_id:
+            type: string
+            label: 'Original plugin ID'
+          configuration:
+            type: action.configuration.[%parent.plugin]
+          successors:
+            type: sequence
+            label: 'Successors'
+            sequence:
+              type: eca.wrapper.successor
+
+eca.wrapper.successor:
+  type: mapping
+  label: 'Successor'
+  mapping:
+    id:
+      type: machine_name
+      label: 'ID'
+      constraints:
+        Regex:
+          pattern: '/^[A-Za-z0-9_]+$/'
+          message: "The %value ID is not valid."
+    condition:
+      type: machine_name
+      label: 'Condition'
+      constraints:
+        Regex:
+          pattern: '/^[A-Za-z0-9_]+$/'
+          message: "The %value Condition is not valid."
+  constraints:
+    FullyValidatable: ~
+
+eca.event.plugin:
+  type: mapping
+  label: 'ECA Event Plugin'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+      constraints:
+        PluginExists:
+          manager: plugin.manager.eca.event
+          interface: 'Drupal\eca\Plugin\ECA\Event\EventInterface'
+
+eca.condition.plugin:
+  type: mapping
+  label: 'Condition'
+  mapping:
+    negate:
+      type: boolean
+      label: 'Negate the Condition'
+
+action.configuration.eca_preconfigured_action:*:
+  type: mapping
+  label: 'Preconfigured actions from action entities'

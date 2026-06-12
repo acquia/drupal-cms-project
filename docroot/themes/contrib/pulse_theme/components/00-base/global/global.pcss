@@ -1,0 +1,196 @@
+@import "tailwindcss/preflight";
+@import "tailwindcss/theme";
+@import "tailwindcss/utilities";
+
+@theme {
+  /* Brand / Accent colors */
+  --color-sds-base-brand: var(--sds-base-brand-color);
+  --color-sds-base-brand-dark: var(--sds-base-brand-color-dark);
+  --color-sds-base-brand-light: var(--sds-base-brand-color-light);
+
+  --color-sds-primary: var(--sds-accent-color-primary);
+  --color-sds-primary-dark: var(--sds-accent-color-primary-dark);
+  --color-sds-primary-light: var(--sds-accent-color-primary-light);
+
+  --color-sds-secondary: var(--sds-accent-color-secondary);
+  --color-sds-secondary-dark: var(--sds-accent-color-secondary-dark);
+  --color-sds-secondary-light: var(--sds-accent-color-secondary-light);
+
+  --color-sds-neutral: var(--sds-neutral-color);
+  --color-sds-neutral-dark: var(--sds-neutral-color-dark);
+  --color-sds-neutral-light: var(--sds-neutral-color-light);
+
+  --color-sds-heading: var(--sds-heading-color);
+  --color-sds-heading-dark: var(--sds-heading-color-dark);
+  --color-sds-heading-light: var(--sds-heading-color-light);
+
+  --color-sds-border: var(--sds-border-color);
+  --color-sds-border-dark: var(--sds-border-color-dark);
+  --color-sds-border-light: var(--sds-border-color-light);
+
+  --color-sds-gray: var(--sds-gray-color);
+  --color-sds-gray-dark: var(--sds-gray-color-dark);
+  --color-sds-gray-light: var(--sds-gray-color-light);
+
+  --color-sds-success: var(--sds-success-color);
+  --color-sds-success-dark: var(--sds-success-color-dark);
+  --color-sds-success-light: var(--sds-success-color-light);
+
+  --color-sds-danger: var(--sds-danger-color);
+  --color-sds-danger-dark: var(--sds-danger-color-dark);
+  --color-sds-danger-light: var(--sds-danger-color-light);
+
+  --color-sds-warning: var(--sds-warning-color);
+  --color-sds-warning-dark: var(--sds-warning-color-dark);
+  --color-sds-warning-light: var(--sds-warning-color-light);
+
+  --color-sds-info: var(--sds-info-color);
+  --color-sds-info-dark: var(--sds-info-color-dark);
+  --color-sds-info-light: var(--sds-info-color-light);
+
+  /* Typography */
+  --text-sds-base-size: var(--sds-base-font-size);
+  --leading-sds-line-height: calc(var(--sds-base-font-size) * 1.5);
+  --font-sds-primary-font: var(--sds-font-family);
+
+  /* Background colors */
+  --color-sds-bg-0: var(--sds-background-color-0);
+  --color-sds-bg-1: var(--sds-background-color-1);
+  --color-sds-bg-2: var(--sds-background-color-2);
+  --color-sds-bg-3: var(--sds-background-color-3);
+  --color-sds-bg-4: var(--sds-background-color-4);
+  --color-sds-bg-5: var(--sds-background-color-5);
+  --color-sds-bg-6: var(--sds-background-color-6);
+  --color-sds-bg-7: var(--sds-background-color-7);
+  --color-sds-bg-8: var(--sds-background-color-8);
+  --color-sds-bg-9: var(--sds-background-color-9);
+
+  /* Navbar */
+  --navbar-height: 64px;
+  --navbar-bg: rgba(255, 255, 255, 0.95);
+  --navbar-text-color: inherit;
+  --hamburger-size: 24px;
+  --hamburger-thickness: 2px;
+  --hamburger-gap: 6px;
+}
+
+@layer base {
+  /* Generic */
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sds-primary-font text-base md:text-sds-base-size md:leading-sds-line-height text-sds-neutral;
+
+    word-break: break-word;
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+
+  main {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply mb-3 text-sds-heading;
+    }
+
+    h1,
+    .h1 {
+      @apply mb-6 text-5xl lg:text-6xl;
+    }
+
+    h2,
+    .h2 {
+      @apply mb-4 text-4xl lg:text-5xl;
+    }
+
+    h3 {
+      @apply text-3xl lg:text-4xl;
+    }
+
+    h4 {
+      @apply text-2xl lg:text-3xl;
+    }
+
+    h5 {
+      @apply text-xl lg:text-2xl;
+    }
+
+    h6 {
+      @apply text-lg lg:text-xl;
+    }
+
+    p {
+      @apply mb-[18px];
+
+      &:last-child {
+        @apply mb-0;
+      }
+    }
+
+    a:not(.btn):not(.toolbar-menu li a):not(#blocktabs__nav li a):not(
+        #tabs li a
+      ):not(.layout-builder__link):not(.ac-title):not(.tile-link) {
+      @apply underline hover:no-underline;
+    }
+
+    ul:not(.contextual-links):not(.toolbar-menu):not(#blocktabs__nav):not(
+        #tabs ul
+      ):not(.sub-menu):not(.sidebar__menu):not(.splide__pagination),
+    ol {
+      @apply mx-0 ml-4 mt-0;
+
+      &:last-child {
+        @apply mb-0;
+      }
+    }
+
+    ul:not(.contextual-links):not(.toolbar-menu):not(.splide__list):not(
+        .splide__pagination
+      ):not(#blocktabs__nav):not(#tabs ul):not(.sub-menu):not(.sidebar__menu) {
+      @apply list-disc list-outside;
+
+      li:not(.contextual-links li):not(.splide__slide):not(
+          .splide__pagination li
+        ) {
+        @apply relative;
+
+        &:last-child {
+          @apply !mb-0;
+        }
+      }
+    }
+
+    ol {
+      @apply mt-0 list-decimal list-outside;
+
+      &:first-child:last-child {
+        @apply !mt-0;
+      }
+
+      li:not(.contextual-links li) {
+        @apply relative;
+
+        &:last-child {
+          @apply !mb-0;
+        }
+      }
+    }
+
+    video {
+      @apply w-full;
+    }
+  }
+
+  strong {
+    @apply font-bold;
+  }
+
+  .dialog-off-canvas-main-canvas {
+    @apply min-h-screen;
+  }
+}

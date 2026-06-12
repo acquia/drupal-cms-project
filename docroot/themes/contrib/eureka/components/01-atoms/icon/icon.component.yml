@@ -1,0 +1,32 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Icon
+status: stable
+description: Default Icon element
+group: Eureka component items
+props:
+  type: object
+  properties:
+    icon_title:
+      title: Icon title
+      type: ['string', 'null']
+      description: Icon title
+    icon_role:
+      title: Icon role
+      type: ['string', 'null']
+      description: Role of the icon
+    icon_name:
+      title: Icon name
+      type: string
+      description: File name of the icon
+      examples:
+        - chevron
+    icon_desc:
+      title: Icon description
+      type: ['string', 'null']
+      description: Icon description
+    icon_decorative:
+      title: Icon decorative
+      type: boolean
+      description: Set it true to change the aria-hidden and role attributes
+      examples:
+        - true

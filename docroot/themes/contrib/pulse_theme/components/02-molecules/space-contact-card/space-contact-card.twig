@@ -1,0 +1,49 @@
+{#
+/**
+ * @file
+ * Space Contact Card component.
+ *
+ * Variables:
+ * - heading: [string] Card heading text
+ * - email: [string] Email address to display and link to
+ * - description: [string] Supporting descriptive text
+ * - icon: [string] Icon to show in button (default: 'email')
+ * - modifier_class: [string] Additional CSS classes
+ */
+#}
+
+{% set attributes = attributes|default(create_attribute()) %}
+{% set heading_value = heading|default('Email us') %}
+{% set description_value = description|default('For general queries and guidance') %}
+{% set icon_align_value = icon_align|default('left') %}
+{% set alignment_value = alignment|default('left') %}
+
+{% set classes = [
+  'space-contact-card',
+  modifier_class,
+  alignment_value ? 'space-contact-card--' ~ alignment_value : '',
+] %}
+
+<div {{ attributes.addClass(classes) }}>
+  {# Heading #}
+  <p class="space-contact-card__heading mb-0">
+    {{ heading_value }}
+  </p>
+
+  {% if email %}
+    {% include 'pulse_theme:space-button' with { text: email, url: 'mailto:' ~ email, variant: 'primary', icon: 'envelope-simple', icon_alignment: icon_align_value, icon_size: 'small', size: 'large', button_type: 'text_with_icon', button_corners: 'rounded_half_circle' } only %}
+  {% endif %}
+
+  {% if phone %}
+    {% include 'pulse_theme:space-button' with { text: phone, url: 'tel:' ~ phone, variant: 'primary', icon: 'phone', icon_alignment: icon_align_value, icon_size: 'small', size: 'large', button_type: 'text_with_icon', button_corners: 'rounded_half_circle' } only %}
+  {% endif %}
+
+  {% if help_faq_link %}
+    {% include 'pulse_theme:space-button' with { text: 'Help & FAQs', url: help_faq_link, variant: 'primary', icon: 'info', icon_alignment: icon_align_value, icon_size: 'small', size: 'large', button_type: 'text_with_icon', button_corners: 'rounded_half_circle' } only %}
+  {% endif %}
+  
+  {# Description text #}
+  <div class="space-contact-card__description">
+    {{- description_value -}}
+  </div>
+</div>

@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.diagnosis.heading
+    - canvas.component.sdc.diagnosis.hero-side-by-side
+    - canvas.component.sdc.diagnosis.text
+    - core.entity_view_mode.node.full
+    - field.field.node.internal_resource.field_description
+    - node.type.internal_resource
+  module:
+    - node
+    - options
+id: node.internal_resource.full
+content_entity_type_id: node
+content_entity_type_bundle: internal_resource
+content_entity_type_view_mode: full
+component_tree:
+  0:
+    uuid: a806c03f-fe9e-4510-b44b-b9583a46f6a4
+    component_id: sdc.diagnosis.hero-side-by-side
+    component_version: 24ec30ed61229bc1
+    inputs: '{"hero_flex_gap":"large","hero_flex_direction_mobile":"vertical","padding_block_start":"0","padding_block_end":"0","margin_block_start":"0","margin_block_end":"0","image_size":"4:3","image_position":"right","image_radius":"extra-large","media":{"sourceType":"default-relative-url","value":{"src":"assets\/luke-chesser-pJadQetzTkI-unsplash.jpg","alt":"Green blue gradient placeholder image","width":1920,"height":1344},"jsonSchema":{"type":"object","properties":{"src":{"type":"string","contentMediaType":"image\/*","format":"uri-reference","x-allowed-schemes":["http","https"]},"alt":{"type":"string"},"width":{"type":"integer"},"height":{"type":"integer"}},"required":["src"]},"componentId":"sdc.diagnosis.hero-side-by-side"},"background":"default"}'
+  '0:hero_slot:0':
+    parent_uuid: a806c03f-fe9e-4510-b44b-b9583a46f6a4
+    slot: hero_slot
+    uuid: f05e573b-d801-4be5-8db6-be130bffbbe1
+    component_id: sdc.diagnosis.heading
+    component_version: ac2434a43cc31431
+    inputs: '{"heading_text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:internal_resource\u241dtitle\u241e\u241fvalue"},"level":1,"text_size":"heading-responsive-4xl","text_color":"default","align":"left"}'
+  1:
+    uuid: 0891b037-d188-42c6-ae3c-e8869d90f1f1
+    component_id: sdc.diagnosis.text
+    component_version: 7f9becce9b9ef483
+    inputs: '{"text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:internal_resource\u241dfield_description\u241e\u241fprocessed"},"text_size":"normal","text_color":"default"}'
+exposed_slots: {  }

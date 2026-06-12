@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * Set the new 'position' setting based on the old 'positionLeft' setting.
+ */
+function toastify_update_8001(): void {
+  $config = \Drupal::configFactory()->getEditable('toastify.settings');
+
+  foreach (['status', 'warning', 'error'] as $type) {
+    $oldValue = $config->get($type . '.positionLeft');
+    $config->set($type . '.position', $oldValue ? 'left' : 'right');
+    $config->clear($type . '.positionLeft');
+  }
+
+  $config->save();
+}
+
+/**
+ * Set default values for the new offset settings.
+ */
+function toastify_update_8002(): void {
+  $config = \Drupal::configFactory()->getEditable('toastify.settings');
+
+  foreach (['status', 'warning', 'error'] as $type) {
+    foreach (['offsetX', 'offsetY'] as $key) {
+      $oldValue = $config->get($type . '.' . $key);
+      $config->set($type . '.' . $key, 0);
+    }
+  }
+
+  $config->save();
+}
+
+/**
+ * Set default values for the new enable_for settings.
+ */
+function toastify_update_8003() {
+  $config = \Drupal::configFactory()->getEditable('toastify.settings');
+  $config->set('enable_for.admin_theme', TRUE);
+  $config->set('enable_for.frontend_theme', TRUE);
+  $config->save();
+}

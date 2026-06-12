@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.system_messages_block
+  theme:
+    - gin
+id: gin.highlighted
+region: highlighted
+theme: gin
+component_tree:
+  -
+    uuid: 9f551468-ee18-4cc9-989c-af7ae218f4f5
+    component_id: block.system_messages_block
+    component_version: 0fd5234097704a5d
+    inputs:
+      label: 'Status messages'
+      label_display: '0'

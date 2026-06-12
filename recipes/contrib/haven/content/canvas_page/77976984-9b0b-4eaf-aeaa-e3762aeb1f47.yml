@@ -1,0 +1,320 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 77976984-9b0b-4eaf-aeaa-e3762aeb1f47
+  default_langcode: en
+  depends:
+    6bb82e0a-0f1e-42cb-b8c3-5504717c55fd: file
+    68bc665f-f66e-4aaf-855a-16008af28d5d: media
+    bbd5316c-84af-439b-8c4d-48b924ad0f7a: file
+    09c61b52-4cb0-4740-811e-91154cbbbcf9: media
+    0772a65f-b6fe-4c8e-97b8-45fc9bb3037b: file
+    24d3dcbb-f1fa-4174-8fb0-f6cad504cd96: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'About us'
+  description:
+    -
+      value: "Haven was founded on a simple belief: that climate change is not an unsolvable crisis — it's an urgent challenge that communities can rise to meet. We bring together people who are ready to act, connecting local efforts to a broader movement for a just and sustainable world."
+  components:
+    -
+      uuid: 8ffb6291-7be9-4f60-bde2-65de9989aa20
+      component_id: sdc.haven_theme.hero-billboard
+      inputs:
+        height: large
+        flex_position: hero-center
+        content_background: false
+        overlay_opacity: 20%
+        object_position: center
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 68bc665f-f66e-4aaf-855a-16008af28d5d
+            target_type: media
+        overlap_navbar: true
+    -
+      parent_uuid: 8ffb6291-7be9-4f60-bde2-65de9989aa20
+      slot: hero_slot
+      uuid: e0615a7e-c37c-442a-aea2-dcf2bb0c2849
+      component_id: sdc.haven_theme.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: center
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: e0615a7e-c37c-442a-aea2-dcf2bb0c2849
+      slot: group_slot
+      uuid: ac88dae6-8d21-40b6-993b-15a930a988dc
+      component_id: sdc.haven_theme.badge
+      inputs:
+        label: 'About Haven'
+        style: secondary
+        icon_first: true
+    -
+      parent_uuid: 8ffb6291-7be9-4f60-bde2-65de9989aa20
+      slot: hero_slot
+      uuid: 65b6a472-30a4-436e-94e2-ce3b800dcfe0
+      component_id: sdc.haven_theme.heading
+      inputs:
+        heading_text: "We're a community of advocates, organizers, and everyday people working together for a livable future."
+        text_size: heading-responsive-5xl
+        text_color: inverted
+        align: center
+    -
+      uuid: 367f55ea-281d-4c74-9a74-c962535a6b06
+      component_id: sdc.haven_theme.section
+      inputs:
+        width: 100%
+        columns: '1 column'
+        mobile_columns: '1'
+        margin_block_start: '32'
+        margin_block_end: '32'
+        padding_block_start: '64'
+        padding_block_end: '64'
+        restrict_width: false
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: 367f55ea-281d-4c74-9a74-c962535a6b06
+      slot: main_slot
+      uuid: 483cff6a-f4ba-4daf-ba28-c083a7ea1dd2
+      component_id: sdc.haven_theme.hero-side-by-side
+      inputs:
+        hero_flex_direction_mobile: vertical
+        padding: true
+        image_size: '1:1'
+        image_position: left
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 09c61b52-4cb0-4740-811e-91154cbbbcf9
+            target_type: media
+        background: white
+    -
+      parent_uuid: 483cff6a-f4ba-4daf-ba28-c083a7ea1dd2
+      slot: hero_slot
+      uuid: 7a65b1ef-2878-4a6d-8269-a166c727b0ce
+      component_id: sdc.haven_theme.heading
+      inputs:
+        heading_text: 'Our mission'
+        level: 2
+        text_size: heading-responsive-6xl
+        text_color: secondary
+        align: left
+    -
+      parent_uuid: 483cff6a-f4ba-4daf-ba28-c083a7ea1dd2
+      slot: hero_slot
+      uuid: f18f4c38-5737-49d8-85ec-d2df770383f8
+      component_id: sdc.haven_theme.text
+      inputs:
+        text:
+          value: "<p>Haven was founded on a simple belief: that climate change is not an unsolvable crisis — it's an urgent challenge that communities can rise to meet. We bring together people who are ready to act, connecting local efforts to a broader movement for a just and sustainable world.</p><p>We focus on what works. That means supporting proven solutions, amplifying the voices of those most affected by climate change, and making it easy for anyone — regardless of background or expertise — to get involved and make a difference.</p>"
+          format: canvas_html_block
+        text_size: text-lg
+        text_color: default
+        columns: '1 column'
+    -
+      uuid: 82c2b843-cfa3-4afb-b2ef-053711bcb58f
+      component_id: sdc.haven_theme.section
+      inputs:
+        width: 90%
+        columns: '3 columns'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '64'
+        padding_block_end: '64'
+        restrict_width: true
+        section_header: true
+        section_footer: true
+        background_color: primary
+        background_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 24d3dcbb-f1fa-4174-8fb0-f6cad504cd96
+            target_type: media
+    -
+      parent_uuid: 82c2b843-cfa3-4afb-b2ef-053711bcb58f
+      slot: header_slot
+      uuid: 72487e2d-ff56-412a-b020-98dadd1282d7
+      component_id: sdc.haven_theme.group
+      inputs:
+        flex_direction: column
+        flex_gap: lg
+        items_align: start
+        flex_align: center
+        radius: sm
+    -
+      parent_uuid: 72487e2d-ff56-412a-b020-98dadd1282d7
+      slot: group_slot
+      uuid: 0fb99738-9469-4e2a-af07-cf14519c96ba
+      component_id: sdc.haven_theme.badge
+      inputs:
+        label: 'Our values'
+        style: accent
+        icon_first: true
+    -
+      parent_uuid: 72487e2d-ff56-412a-b020-98dadd1282d7
+      slot: group_slot
+      uuid: c2cb1b44-ba48-4696-84dc-304268331f08
+      component_id: sdc.haven_theme.heading
+      inputs:
+        heading_text: 'Tackling global challenges, locally'
+        level: 2
+        text_size: heading-responsive-6xl
+        text_color: inverted
+        align: left
+    -
+      parent_uuid: 82c2b843-cfa3-4afb-b2ef-053711bcb58f
+      slot: main_slot
+      uuid: 1ddbbc0a-129c-4334-bf75-cbea0415a199
+      component_id: sdc.haven_theme.card-icon
+      inputs:
+        text_color: inverted
+        border_radius: medium
+        icon: users-four
+        icon_size: large
+        icon_align: center
+        text: 'Community first'
+        description:
+          value: '<p>Every campaign, event, and initiative we run is designed to strengthen the communities behind it. We believe lasting change starts locally.</p>'
+          format: canvas_html_block
+        text_align: center
+        background_color: primary
+    -
+      parent_uuid: 82c2b843-cfa3-4afb-b2ef-053711bcb58f
+      slot: main_slot
+      uuid: e817b99e-834d-4adc-8a7c-5f53891014f0
+      component_id: sdc.haven_theme.card-icon
+      inputs:
+        text_color: inverted
+        border_radius: medium
+        icon: atom
+        icon_size: large
+        icon_align: center
+        text: 'Grounded in science'
+        description:
+          value: '<p>Our advocacy is informed by the best available climate science. We translate complex data into clear, actionable priorities.</p>'
+          format: canvas_html_block
+        text_align: center
+        background_color: primary
+    -
+      parent_uuid: 82c2b843-cfa3-4afb-b2ef-053711bcb58f
+      slot: main_slot
+      uuid: bcde44eb-5f19-42c8-9afc-8e80c64f2aac
+      component_id: sdc.haven_theme.card-icon
+      inputs:
+        text_color: inverted
+        border_radius: medium
+        icon: clock-countdown
+        icon_size: large
+        icon_align: center
+        text: 'Built for the long haul'
+        description:
+          value: "<p>Changing systems takes time. We're committed to sustained, strategic action — not just awareness, but real and measurable progress.</p>"
+          format: canvas_html_block
+        text_align: center
+        background_color: primary
+    -
+      uuid: 0bcfe138-7829-44a3-9a9f-949cd8842a3a
+      component_id: sdc.haven_theme.section
+      inputs:
+        width: 100%
+        columns: '2 columns 67-33'
+        mobile_columns: '1'
+        margin_block_start: '64'
+        margin_block_end: '64'
+        padding_block_start: '32'
+        padding_block_end: '32'
+        section_header: false
+        section_footer: false
+        restrict_width: true
+        background_color: accent
+    -
+      parent_uuid: 0bcfe138-7829-44a3-9a9f-949cd8842a3a
+      slot: main_slot
+      uuid: a42b6ca1-9afa-4806-8399-dade9e6cd690
+      component_id: sdc.haven_theme.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: center
+        radius: sm
+    -
+      parent_uuid: a42b6ca1-9afa-4806-8399-dade9e6cd690
+      slot: group_slot
+      uuid: bde1fb5c-dc10-4a97-99de-08204b0c721f
+      component_id: sdc.haven_theme.heading
+      inputs:
+        heading_text: 'Join the fight against climate change'
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: a42b6ca1-9afa-4806-8399-dade9e6cd690
+      slot: group_slot
+      uuid: 851d142e-2c51-4ba7-8958-7b4dabf82549
+      component_id: sdc.haven_theme.heading
+      inputs:
+        heading_text: 'The window for meaningful climate action is narrow, and the work can’t wait. Your support keeps Haven on the ground, in the halls of power, and fighting for the future we need.'
+        text_size: default
+        text_color: default
+        align: left
+    -
+      parent_uuid: 0bcfe138-7829-44a3-9a9f-949cd8842a3a
+      slot: main_slot
+      uuid: 99723465-c90d-417e-869d-f7ea8c6b5171
+      component_id: sdc.haven_theme.group
+      inputs:
+        flex_direction: row
+        flex_gap: md
+        items_align: start
+        flex_align: center
+    -
+      parent_uuid: 99723465-c90d-417e-869d-f7ea8c6b5171
+      slot: group_slot
+      uuid: 4a1f91cb-02a6-478a-bb1e-818dc59a1b97
+      component_id: sdc.haven_theme.button
+      inputs:
+        variant: primary
+        outlined: false
+        label: 'Donate now'
+        size: medium
+        icon: arrow-right
+        icon_first: false
+        disabled: false
+        mobile_width: false
+    -
+      parent_uuid: 99723465-c90d-417e-869d-f7ea8c6b5171
+      slot: group_slot
+      uuid: 418e98e9-cdf0-4719-aa97-72ca2b1e9281
+      component_id: sdc.haven_theme.button
+      inputs:
+        variant: primary
+        outlined: true
+        label: 'Learn more'
+        size: medium
+        icon_first: false
+        disabled: false
+        mobile_width: false
+  path:
+    -
+      alias: /about
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

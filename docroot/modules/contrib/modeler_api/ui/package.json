@@ -1,0 +1,16 @@
+{
+  "name": "modeler-api-template-token-selector",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Preact app for selecting DOM elements based on template token definitions",
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --minify --outfile=../js/template-token-selector.js --format=iife --global-name=ModelerApiTokenSelector --define:process.env.NODE_ENV='\"production\"' --alias:react=preact/compat --alias:react-dom=preact/compat",
+    "dev": "esbuild src/index.js --bundle --outfile=../js/template-token-selector.js --format=iife --global-name=ModelerApiTokenSelector --sourcemap --watch --alias:react=preact/compat --alias:react-dom=preact/compat"
+  },
+  "dependencies": {
+    "preact": "^10.25.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0 || ^0.25.0 || ^0.26.0 || ^0.27.0"
+  }
+}

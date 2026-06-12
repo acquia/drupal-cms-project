@@ -1,0 +1,96 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.content_format
+  module:
+    - ckeditor5
+format: content_format
+editor: ckeditor5
+settings:
+  toolbar:
+    items:
+      - heading
+      - bold
+      - italic
+      - blockQuote
+      - link
+      - bulletedList
+      - numberedList
+      - indent
+      - outdent
+      - alignment
+      - insertTable
+      - drupalMedia
+      - undo
+      - redo
+      - removeFormat
+      - sourceEditing
+      - aickeditor
+      - ai_balloon_menu
+  plugins:
+    ai_ckeditor_ai:
+      dialog:
+        autoresize: 'min-width: 600px'
+        height: '750'
+        width: '900'
+        dialog_class: ai-ckeditor-modal
+      plugins:
+        ai_ckeditor_completion:
+          enabled: true
+          provider: ''
+        ai_ckeditor_help:
+          enabled: true
+        ai_ckeditor_modify_prompt:
+          enabled: true
+          provider: ''
+        ai_ckeditor_reformat_html:
+          enabled: true
+          provider: ''
+        ai_ckeditor_spellfix:
+          enabled: true
+          provider: ''
+        ai_ckeditor_summarize:
+          enabled: true
+          provider: ''
+        ai_ckeditor_tone:
+          enabled: true
+          provider: ''
+          autocreate: false
+          tone_vocabulary: tags
+          use_description: false
+        ai_ckeditor_translate:
+          enabled: true
+          provider: ''
+          language_source: tax
+          autocreate: false
+          translate_vocabulary: provus_cat_editorial_section
+          use_description: false
+    ckeditor5_alignment:
+      enabled_alignments:
+        - center
+        - justify
+        - left
+        - right
+    ckeditor5_heading:
+      enabled_headings:
+        - heading2
+        - heading3
+        - heading4
+        - heading5
+        - heading6
+    ckeditor5_list:
+      properties:
+        reversed: true
+        startIndex: true
+        styles: false
+      multiBlock: true
+    ckeditor5_sourceEditing:
+      allowed_tags: {  }
+    linkit_extension:
+      linkit_enabled: true
+      linkit_profile: default
+    media_media:
+      allow_view_mode_override: true
+image_upload:
+  status: false

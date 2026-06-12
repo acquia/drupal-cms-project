@@ -1,0 +1,49 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Story card
+group: Card
+status: stable
+description: "Story/article card with image, category tag, read time, title, description and CTA. Desktop Figma 1-11186 (horizontal), mobile Figma 1-10893 (stacked)."
+props:
+  type: object
+  properties:
+    media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Card image
+      type: object
+    tag:
+      type: string
+      title: Category tag
+      default: ""
+      examples:
+        - "Updates"
+        - "Category"
+    read_time:
+      type: string
+      title: Read time
+      default: ""
+      examples:
+        - "3 min read"
+    title:
+      type: string
+      title: Title
+      default: ""
+      examples:
+        - "How one family found stability"
+    description:
+      type: string
+      title: Description
+      default: ""
+      pattern: "(.|\\r?\\n)*"
+      examples:
+        - "Maria's story shows what support and opportunity can accomplish."
+    button_label:
+      type: string
+      title: Button label
+      default: "Read more"
+      examples:
+        - "Read more"
+        - "Button"
+    button_url:
+      type: string
+      title: Button link
+      default: ""

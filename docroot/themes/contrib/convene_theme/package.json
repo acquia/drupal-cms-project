@@ -1,0 +1,18 @@
+{
+  "name": "convene_theme",
+  "version": "1.2.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf css/* && sass scss:css components:components --no-source-map --style=compressed",
+    "watch": "sass scss:css --watch --style=compressed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "sass": "^1.97.3"
+  }
+}

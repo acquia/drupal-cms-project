@@ -1,0 +1,162 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 66025d34-24a4-4ab9-89a3-b1654b875505
+  default_langcode: en
+  depends:
+    ec07e5e9-d11e-4550-b528-66dffbc93527: file
+    3a63058d-4aa1-4b91-b530-28696677c56e: media
+    bca14119-609d-4148-98fb-cf5bb15349e5: file
+    3d674dc5-5a7a-4886-82d5-a2e579ece4eb: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'About'
+  components:
+    -
+      uuid: 1bd94caf-adbf-4b97-ab3e-75fd19860b03
+      component_id: sdc.byte_theme.hero-billboard
+      inputs:
+        height: large
+        flex_position: hero-center
+        overlay_opacity: 0%
+        object_position: bottom
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 3a63058d-4aa1-4b91-b530-28696677c56e
+            target_type: media
+        overlap_navbar: true
+    -
+      parent_uuid: 1bd94caf-adbf-4b97-ab3e-75fd19860b03
+      slot: hero_slot
+      uuid: f08be9dc-e328-4cb7-9499-df6db9bd8900
+      component_id: sdc.byte_theme.heading
+      inputs:
+        heading_text: 'Who we are'
+        level: 1
+        text_size: default
+        text_color: default
+        align: left
+    -
+      parent_uuid: 1bd94caf-adbf-4b97-ab3e-75fd19860b03
+      slot: hero_slot
+      uuid: 2c722338-b73d-45b6-8d8a-3d474adfaed1
+      component_id: sdc.byte_theme.text
+      inputs:
+        text:
+          value: "<p>We're a team of builders, dreamers, and problem-solvers who believe technology should make life easier.</p>"
+          format: canvas_html_block
+        text_size: text-lg
+        text_color: default
+    -
+      uuid: 79ce30fd-fa39-4a09-bede-21a29b9cceaf
+      component_id: sdc.byte_theme.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        padding_block_start: '64'
+        padding_block_end: '32'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: 79ce30fd-fa39-4a09-bede-21a29b9cceaf
+      slot: header_slot
+      uuid: 2dfdd7b9-1d08-4ba0-b2dc-e3f5578344e9
+      component_id: sdc.byte_theme.heading
+      inputs:
+        heading_text: 'Our mission'
+        level: 2
+        text_size: heading-responsive-6xl
+        text_color: default
+        align: center
+    -
+      parent_uuid: 79ce30fd-fa39-4a09-bede-21a29b9cceaf
+      slot: main_slot
+      uuid: 1c11d7da-63b7-4536-9ccb-6a255bada87b
+      component_id: sdc.byte_theme.heading
+      inputs:
+        heading_text: 'Make work simpler, for life.'
+        level: 3
+        text_size: heading-responsive-3xl
+        text_color: default
+        align: center
+    -
+      parent_uuid: 79ce30fd-fa39-4a09-bede-21a29b9cceaf
+      slot: main_slot
+      uuid: d7ace17f-9ad9-4c9d-806c-1f251a4db89e
+      component_id: sdc.byte_theme.text
+      inputs:
+        text:
+          value: '<p class="text-align-center">We started with a straightforward observation: the tools people use every day weren''t keeping up with how they actually work. So we set out to build something better. Our platform combines intuitive design with powerful functionality, giving teams the freedom to focus on what matters most—their work and their workflows working in harmony.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: b79d5ffc-1eed-46ce-a2f4-f70f1a815e45
+      component_id: sdc.byte_theme.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: b79d5ffc-1eed-46ce-a2f4-f70f1a815e45
+      slot: header_slot
+      uuid: eb0daa00-056e-40f0-bfbf-b1f9bf4ac667
+      component_id: sdc.byte_theme.heading
+      inputs:
+        heading_text: 'Meet the team'
+        level: 2
+        text_size: heading-responsive-6xl
+        text_color: default
+        align: center
+    -
+      parent_uuid: b79d5ffc-1eed-46ce-a2f4-f70f1a815e45
+      slot: main_slot
+      uuid: 3832a844-d678-4e83-8547-20adae315893
+      component_id: sdc.byte_theme.image
+      inputs:
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 3d674dc5-5a7a-4886-82d5-a2e579ece4eb
+            target_type: media
+        size: '2:1'
+        radius: small
+    -
+      parent_uuid: b79d5ffc-1eed-46ce-a2f4-f70f1a815e45
+      slot: main_slot
+      uuid: bc93b9ac-82a8-4298-9dc2-73cac0d5b80e
+      component_id: sdc.byte_theme.text
+      inputs:
+        text:
+          value: "<p class=\"text-align-center\">Our team brings together diverse perspectives from engineering, design, product, and customer success. We're distributed across continents, which gives us firsthand experience with the collaboration challenges we're solving. We're backed by experienced investors who share our vision for sustainable, thoughtful growth.</p>"
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+  path:
+    -
+      alias: /about
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

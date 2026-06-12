@@ -1,0 +1,41 @@
+.tool-wrapper-container {
+  /* grid of 3 columns */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.modal {
+  display: none;
+}
+
+.modal.is-open {
+  display: block;
+}
+
+.ai-tools-library-item h5 {
+  min-height: 60px;
+}
+
+.ai-tools-library-item p {
+  min-height: 60px;
+}
+
+.override-forced-enabled {
+  padding-left: 1rem;
+  border-left: 4px solid #28a745;
+}
+
+.override-forced-disabled {
+  padding-left: 1rem;
+  border-left: 4px solid #dc3545;
+}
+
+.ai-agent-property-restrictions-table td {
+  width: 40%;
+  vertical-align: top;
+}
+
+.ai-agent-property-restrictions-table td:nth-child(1) {
+  width: 20%;
+}

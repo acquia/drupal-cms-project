@@ -1,0 +1,101 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Card Default
+status: stable
+description: Card component with image at the top, title, body content, optional header, and circular image option
+group: Provus Components
+variants:
+  default:
+    title: Default
+    description: Standard card with top image, title and body content
+props:
+  type: object
+  required:
+    - image_url
+  properties:
+    header:
+      type: string
+      title: 'Header Content'
+      description: 'Optional header text displayed at the top of the card above the image'
+      examples:
+        - 'Featured'
+      default: ''
+    title:
+      type: string
+      title: 'Title'
+      description: 'Main card title displayed as a heading'
+      examples:
+        - 'Our Services'
+      default: ''
+    body:
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: block
+      title: 'Main Content'
+      description: 'Main content text displayed in the card body. Supports multiple lines of text. Line breaks will be preserved in the display.'
+      examples:
+        - "We provide exceptional services to help your business grow and succeed in today's competitive market."
+        - |
+          Our team of experts is dedicated to delivering high-quality solutions.
+          
+          Contact us today to learn more.
+      default: ''
+    image_url:
+      type: object
+      $ref: json-schema-definitions://canvas.module/image
+      title: 'Image'
+      description: 'Main image displayed at the top of the card'
+      examples:
+        - src: 'https://placehold.co/400x300'
+          alt: 'Image'
+      default: ''
+    is_image_circle:
+      type: boolean
+      title: 'Is image a circle'
+      description: 'Determines if the image should be displayed as a circle.'
+      examples:
+        - false
+      default: false
+    more_content:
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: block
+      title: 'Footer Content'
+      description: 'Additional content section displayed below the main body text. Supports HTML markup for rich content (lists, links, formatted text, etc.). HTML will be rendered as-is.'
+      examples:
+        - '<ul><li>Feature one</li><li>Feature two</li></ul>'
+      default: ''
+    link_text:
+      type: string
+      title: 'Link Text'
+      description: 'Link button displayed in the card'
+      examples:
+        - 'Action Button'
+      default: ''
+    link_url:
+      type: string
+      format: uri-reference
+      title: 'Link URL'
+      description: 'URL for the link button'
+      examples:
+        - '/contact'
+      default: ''
+    link_style:
+      type: string
+      enum:
+        - default
+        - primary
+        - secondary
+      meta:enum:
+        default: Default
+        primary: Primary
+        secondary: Secondary
+      title: 'Link Style'
+      description: 'Style of the link button'
+      default: 'default'
+      examples:
+        - 'default'
+    content_attributes:
+      type: string
+      title: 'Content attributes'
+      description: 'Drupal template function placeholder — no content is required here. Please leave this section blank.'
+      default: ''

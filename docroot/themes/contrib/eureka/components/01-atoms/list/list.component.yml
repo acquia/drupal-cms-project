@@ -1,0 +1,34 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: List
+status: stable
+description: Default list component
+group: Eureka component items
+props:
+  type: object
+  properties:
+    list_type:
+      type: string
+      title: List type
+      description: Type of list - ordered or unordered
+      enum:
+        - ol
+        - ul
+      examples:
+        - ul
+    list_style:
+      type: string
+      title: List style
+      description: Style of the list
+      enum:
+        - none
+        - inline
+        - unstyled
+        - icon
+      examples:
+        - none
+    list_items_icon:
+      type: ['string', 'null']
+      title: List items icon
+      description: Add an icon name to display it within the list item
+      examples:
+        - chevron

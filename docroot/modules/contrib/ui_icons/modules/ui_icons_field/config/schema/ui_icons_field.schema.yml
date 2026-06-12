@@ -1,0 +1,99 @@
+field.value.ui_icon:
+  type: mapping
+  label: 'Default icon value'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    target_id:
+      type: string
+      label: 'Default icon full ID'
+    settings:
+      type: sequence
+      label: 'Default icon settings'
+      sequence:
+        type: ui_icons.icon_pack_options.[%key]
+
+field.field_settings.ui_icon:
+  type: mapping
+  label: 'Icon settings'
+  mapping:
+    allowed_icon_pack:
+      type: sequence
+      label: 'Icon pack limitation for selection'
+      sequence:
+        type: string
+        label: 'Icon pack id'
+
+field.formatter.settings.icon_formatter:
+  type: mapping
+  label: 'icon formatter settings'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    icon_settings:
+      type: sequence
+      label: 'Icon extractor settings'
+      sequence:
+        type: ui_icons.icon_pack_options.[%key]
+
+field.formatter.settings.icon_link_formatter:
+  type: field.formatter.settings.link
+  label: 'icon formatter link settings'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    icon_settings:
+      type: sequence
+      label: 'Icon extractor settings'
+      sequence:
+        type: ui_icons.icon_pack_options.[%key]
+    icon_display:
+      type: string
+      label: 'Icon display position'
+
+field.widget.settings.icon_widget:
+  type: mapping
+  label: 'icon widget settings'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    icon_selector:
+      type: string
+      label: 'Icon FormElement name'
+    result_format:
+      type: string
+      label: 'Autocomplete format'
+    max_result:
+      type: integer
+      label: 'Maximum result'
+
+field.widget.settings.icon_link_widget:
+  type: field.widget.settings.link_default
+  label: 'icon widget link settings'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    allowed_icon_pack:
+      type: sequence
+      label: 'Icon pack limitation for selection'
+      sequence:
+        type: string
+        label: 'Icon pack id'
+    show_settings:
+      type: boolean
+      label: 'Show icon extractor settings'
+    icon_required:
+      type: boolean
+      label: 'Set icon required'
+    icon_position:
+      type: boolean
+      label: 'Allow icon pack display selection'
+    icon_selector:
+      type: string
+      label: 'Icon FormElement name'
+    result_format:
+      type: string
+      label: 'Autocomplete format'
+    max_result:
+      type: integer
+      label: 'Maximum result'

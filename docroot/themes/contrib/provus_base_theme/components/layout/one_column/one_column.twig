@@ -1,0 +1,10 @@
+{% set row_classes = [
+  'row',
+  gap ? gap : '',
+]|filter(v => v) %}
+
+<div class="{{ row_classes|join(' ') }}">
+  <div class="col-12">
+    {% block column_1 %}{% endblock %}
+  </div>
+</div>

@@ -1,0 +1,397 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - morphos
+active_version: 9c35672f37d356c8
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        loop:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value: null
+          expression: ℹ︎boolean␟value
+        navigation:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value: null
+          expression: ℹ︎boolean␟value
+        effect:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        direction:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        pagination:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        speed:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value: null
+          expression: ℹ︎integer␟value
+        slides_per_view:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 1
+          expression: ℹ︎integer␟value
+        slides_per_group:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 1
+          expression: ℹ︎integer␟value
+        space_between:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 16
+          expression: ℹ︎integer␟value
+        rows:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 1
+          expression: ℹ︎integer␟value
+        grid_fill:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: column
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        slides:
+          title: Slides
+          description: 'Add display or content items as slides.'
+  b6b8456c8e968781:
+    settings:
+      prop_field_definitions:
+        loop:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: false
+          expression: ℹ︎boolean␟value
+        navigation:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+        effect:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: slide
+          expression: ℹ︎list_string␟value
+        direction:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: horizontal
+          expression: ℹ︎list_string␟value
+        pagination:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: bullets
+          expression: ℹ︎list_string␟value
+        speed:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 300
+          expression: ℹ︎integer␟value
+        slides_per_view:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 1
+          expression: ℹ︎integer␟value
+        slides_per_group:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 1
+          expression: ℹ︎integer␟value
+        space_between:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 16
+          expression: ℹ︎integer␟value
+        rows:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 1
+          expression: ℹ︎integer␟value
+        grid_fill:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: column
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        slides:
+          title: Slides
+          description: 'Add display or content items as slides.'
+  308b28635f47ed3f:
+    settings:
+      prop_field_definitions:
+        loop:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: false
+          expression: ℹ︎boolean␟value
+        navigation:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+        effect:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: slide
+          expression: ℹ︎list_string␟value
+        direction:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: horizontal
+          expression: ℹ︎list_string␟value
+        pagination:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: bullets
+          expression: ℹ︎list_string␟value
+        speed:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 300
+          expression: ℹ︎integer␟value
+    fallback_metadata:
+      slot_definitions:
+        slides:
+          title: Slides
+          description: 'Add display or content items as slides.'
+  693a58f170b3fda1:
+    settings:
+      prop_field_definitions:
+        pagination_type:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: false
+          expression: ℹ︎string␟value
+        loop:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: false
+          expression: ℹ︎boolean␟value
+        navigation:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+        effect:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: slide
+          expression: ℹ︎list_string␟value
+        direction:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: horizontal
+          expression: ℹ︎list_string␟value
+        pagination:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: bullets
+          expression: ℹ︎list_string␟value
+        speed:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 300
+          expression: ℹ︎integer␟value
+    fallback_metadata:
+      slot_definitions:
+        slides:
+          title: Slides
+label: Slider
+id: sdc.morphos.slider
+provider: morphos
+source: sdc
+source_local_id: 'morphos:slider'

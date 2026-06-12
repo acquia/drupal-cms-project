@@ -1,0 +1,552 @@
+langcode: en
+status: true
+dependencies: {  }
+id: eca_bpmn_io_setup_seo_fields
+data: |
+  <?xml version="1.0" encoding="UTF-8"?>
+  <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:qa="http://some-company/schema/bpmn/qa" id="sample-diagram" targetNamespace="http://bpmn.io/schema/bpmn" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+    <bpmn2:process id="setup_seo_fields" name="Set up SEO fields" isExecutable="true" camunda:versionTag="1.0.0">
+      <bpmn2:documentation>Initializes SEO fields on new and existing content types.</bpmn2:documentation>
+      <bpmn2:extensionElements>
+        <camunda:properties>
+          <camunda:property name="Tags" value="" />
+          <camunda:property name="Changelog" value="" />
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:startEvent id="drupal__recipe_applied_1_1" name="SEO Tools recipe applied" camunda:modelerTemplate="org.drupal.event.drupal:recipe_applied">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="drupal:recipe_applied" />
+          </camunda:properties>
+          <camunda:field name="recipe_base_path">
+            <camunda:string>drupal_cms_seo_tools</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:outgoing>Flow_1ywv611</bpmn2:outgoing>
+      </bpmn2:startEvent>
+      <bpmn2:startEvent id="content_entity__bundlecreate_1_1" name="Content type created" camunda:modelerTemplate="org.drupal.event.content_entity:bundlecreate">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="content_entity:bundlecreate" />
+          </camunda:properties>
+          <camunda:field name="type">
+            <camunda:string>node _all</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:outgoing>Flow_0dhcst7</bpmn2:outgoing>
+      </bpmn2:startEvent>
+      <bpmn2:task id="eca_token_set_value_18gj2sf" name="Rename token" camunda:modelerTemplate="org.drupal.action.eca_token_set_value">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_token_set_value" />
+          </camunda:properties>
+          <camunda:field name="token_name">
+            <camunda:string>content_type</camunda:string>
+          </camunda:field>
+          <camunda:field name="token_value">
+            <camunda:string>[event:bundle]</camunda:string>
+          </camunda:field>
+          <camunda:field name="use_yaml">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="validate_yaml">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_0dhcst7</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_0fnyqyt</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_get_bundle_list_009fgt1" name="Find all content types" camunda:modelerTemplate="org.drupal.action.eca_get_bundle_list">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_get_bundle_list" />
+          </camunda:properties>
+          <camunda:field name="token_name">
+            <camunda:string>content_types</camunda:string>
+          </camunda:field>
+          <camunda:field name="type">
+            <camunda:string>node</camunda:string>
+          </camunda:field>
+          <camunda:field name="mode">
+            <camunda:string>ids</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_1jkjyte</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_0b8gjmk</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_list_remove_02x83vs" name="For each content type..." camunda:modelerTemplate="org.drupal.action.eca_list_remove">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_list_remove" />
+          </camunda:properties>
+          <camunda:field name="value">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="token_name">
+            <camunda:string>content_type</camunda:string>
+          </camunda:field>
+          <camunda:field name="method">
+            <camunda:string>first</camunda:string>
+          </camunda:field>
+          <camunda:field name="index">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="list_token">
+            <camunda:string>content_types</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>eca_count_0nzu2kw</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_1npd27f</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_config_action_06zpaqh" name="Group SEO fields on form" camunda:modelerTemplate="org.drupal.action.eca_config_action">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_config_action" />
+          </camunda:properties>
+          <camunda:field name="action_id">
+            <camunda:string>entity_method:core.entity_form_display:setThirdPartySetting</camunda:string>
+          </camunda:field>
+          <camunda:field name="config_name">
+            <camunda:string>core.entity_form_display.node.[content_type].default</camunda:string>
+          </camunda:field>
+          <camunda:field name="data">
+            <camunda:string>module: field_group
+  key: group_seo
+  value:
+    children:
+      - field_seo_title
+      - field_seo_description
+      - field_seo_image
+      - field_seo_analysis
+    label: 'Search Engine Optimization (SEO) Information'
+    region: content
+    parent_name: ''
+    weight: 50
+    format_type: details
+    format_settings:
+      classes: ''
+      show_empty_fields: false
+      id: group_seo
+      label_as_html: false
+      open: false
+      description: ''
+      required_fields: false</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_1ru59vq</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_1ju7prb</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_config_action_0sr2qee" name="Show field_seo_analysis on form" camunda:modelerTemplate="org.drupal.action.eca_config_action">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_config_action" />
+          </camunda:properties>
+          <camunda:field name="action_id">
+            <camunda:string>entity_method:core.entity_form_display:setComponent</camunda:string>
+          </camunda:field>
+          <camunda:field name="config_name">
+            <camunda:string>core.entity_form_display.node.[content_type].default</camunda:string>
+          </camunda:field>
+          <camunda:field name="data">
+            <camunda:string>name: field_seo_analysis
+  options:
+    type: yoast_seo_widget
+    weight: 18
+    region: content
+    settings:
+      render_theme: NULL
+      render_view_mode: default
+      edit_title: 0
+      edit_description: 0</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_19r011a</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_0iw1p51</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_config_action_1wxj5ei" name="Show field_seo_description on form" camunda:modelerTemplate="org.drupal.action.eca_config_action">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_config_action" />
+          </camunda:properties>
+          <camunda:field name="action_id">
+            <camunda:string>entity_method:core.entity_form_display:setComponent</camunda:string>
+          </camunda:field>
+          <camunda:field name="config_name">
+            <camunda:string>core.entity_form_display.node.[content_type].default</camunda:string>
+          </camunda:field>
+          <camunda:field name="data">
+            <camunda:string>name: field_seo_description
+  options:
+    type: string_textarea
+    weight: 16
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_0iw1p51</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_19fiq91</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_config_action_0x21fxa" name="Show field_seo_image on form" camunda:modelerTemplate="org.drupal.action.eca_config_action">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_config_action" />
+          </camunda:properties>
+          <camunda:field name="action_id">
+            <camunda:string>entity_method:core.entity_form_display:setComponent</camunda:string>
+          </camunda:field>
+          <camunda:field name="config_name">
+            <camunda:string>core.entity_form_display.node.[content_type].default</camunda:string>
+          </camunda:field>
+          <camunda:field name="data">
+            <camunda:string>name: field_seo_image
+  options:
+    type: media_library_widget
+    weight: 17
+    region: content
+    settings:
+      media_types: {  }</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_19fiq91</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_01jduf3</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_config_action_1wh8d86" name="Show field_seo_title on form" camunda:modelerTemplate="org.drupal.action.eca_config_action">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_config_action" />
+          </camunda:properties>
+          <camunda:field name="action_id">
+            <camunda:string>entity_method:core.entity_form_display:setComponent</camunda:string>
+          </camunda:field>
+          <camunda:field name="config_name">
+            <camunda:string>core.entity_form_display.node.[content_type].default</camunda:string>
+          </camunda:field>
+          <camunda:field name="data">
+            <camunda:string>name: field_seo_title
+  options:
+    type: string_textfield
+    weight: 15
+    region: content
+    settings:
+      size: 60
+      placeholder: ''</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_01jduf3</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_1ru59vq</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_config_action_0yj4bqb" name="Create field_seo_analysis" camunda:modelerTemplate="org.drupal.action.eca_config_action">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_config_action" />
+          </camunda:properties>
+          <camunda:field name="action_id">
+            <camunda:string>field_storage_config:addToAllBundles</camunda:string>
+          </camunda:field>
+          <camunda:field name="config_name">
+            <camunda:string>field.storage.node.field_seo_analysis</camunda:string>
+          </camunda:field>
+          <camunda:field name="data">
+            <camunda:string>label: 'SEO analysis'
+  description: 'Pick the main keyword this page is about.'</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_0fnyqyt</bpmn2:incoming>
+        <bpmn2:incoming>Flow_1npd27f</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_088m1bq</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_config_action_1v4877e" name="Create field_seo_image" camunda:modelerTemplate="org.drupal.action.eca_config_action">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_config_action" />
+          </camunda:properties>
+          <camunda:field name="action_id">
+            <camunda:string>field_storage_config:addToAllBundles</camunda:string>
+          </camunda:field>
+          <camunda:field name="config_name">
+            <camunda:string>field.storage.node.field_seo_image</camunda:string>
+          </camunda:field>
+          <camunda:field name="data">
+            <camunda:string>label: 'SEO image'
+  description: 'Upload an image to be used when the page is shared on social media sites.'</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_088m1bq</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_1h5g7ig</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_config_action_0r92fy7" name="Configure field_seo_image" camunda:modelerTemplate="org.drupal.action.eca_config_action">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_config_action" />
+          </camunda:properties>
+          <camunda:field name="action_id">
+            <camunda:string>entity_method:field.field:setSettings</camunda:string>
+          </camunda:field>
+          <camunda:field name="config_name">
+            <camunda:string>field.field.node.[content_type].field_seo_image</camunda:string>
+          </camunda:field>
+          <camunda:field name="data">
+            <camunda:string>handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_1h5g7ig</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_0ou002d</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_config_action_1x3vm8l" name="Create field_seo_description" camunda:modelerTemplate="org.drupal.action.eca_config_action">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_config_action" />
+          </camunda:properties>
+          <camunda:field name="action_id">
+            <camunda:string>field_storage_config:addToAllBundles</camunda:string>
+          </camunda:field>
+          <camunda:field name="config_name">
+            <camunda:string>field.storage.node.field_seo_description</camunda:string>
+          </camunda:field>
+          <camunda:field name="data">
+            <camunda:string>label: 'SEO description'
+  description: 'Write a description for search engines and social media sites.'</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_0ou002d</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_16gwwoq</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_config_action_1immo8n" name="Create field_seo_title" camunda:modelerTemplate="org.drupal.action.eca_config_action">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_config_action" />
+          </camunda:properties>
+          <camunda:field name="action_id">
+            <camunda:string>field_storage_config:addToAllBundles</camunda:string>
+          </camunda:field>
+          <camunda:field name="config_name">
+            <camunda:string>field.storage.node.field_seo_title</camunda:string>
+          </camunda:field>
+          <camunda:field name="data">
+            <camunda:string>label: 'SEO title'
+  description: 'Use this field to overwrite the default HTML page title for SEO.'</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_16gwwoq</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_0wder97</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_config_action_1jcz6wj" name="Create form display" camunda:modelerTemplate="org.drupal.action.eca_config_action">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_config_action" />
+          </camunda:properties>
+          <camunda:field name="action_id">
+            <camunda:string>entity_create:createIfNotExists</camunda:string>
+          </camunda:field>
+          <camunda:field name="config_name">
+            <camunda:string>core.entity_form_display.node.[content_type].default</camunda:string>
+          </camunda:field>
+          <camunda:field name="data">
+            <camunda:string>targetEntityType: node
+  bundle: '[content_type]'
+  mode: default
+  status: true</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_0wder97</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_19r011a</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_switch_account_0ef7w95" name="Temporarily become administrator" camunda:modelerTemplate="org.drupal.action.eca_switch_account">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_switch_account" />
+          </camunda:properties>
+          <camunda:field name="user_id">
+            <camunda:string>1</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_1ywv611</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_1jkjyte</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:exclusiveGateway id="Gateway_1jeiwyv">
+        <bpmn2:incoming>Flow_0b8gjmk</bpmn2:incoming>
+        <bpmn2:incoming>Flow_1ju7prb</bpmn2:incoming>
+        <bpmn2:outgoing>eca_count_0nzu2kw</bpmn2:outgoing>
+      </bpmn2:exclusiveGateway>
+      <bpmn2:sequenceFlow id="Flow_1ywv611" sourceRef="drupal__recipe_applied_1_1" targetRef="eca_switch_account_0ef7w95" />
+      <bpmn2:sequenceFlow id="Flow_0dhcst7" sourceRef="content_entity__bundlecreate_1_1" targetRef="eca_token_set_value_18gj2sf" />
+      <bpmn2:sequenceFlow id="Flow_0fnyqyt" sourceRef="eca_token_set_value_18gj2sf" targetRef="eca_config_action_0yj4bqb" />
+      <bpmn2:sequenceFlow id="Flow_0b8gjmk" sourceRef="eca_get_bundle_list_009fgt1" targetRef="Gateway_1jeiwyv" />
+      <bpmn2:sequenceFlow id="Flow_1npd27f" sourceRef="eca_list_remove_02x83vs" targetRef="eca_config_action_0yj4bqb" />
+      <bpmn2:sequenceFlow id="Flow_1ju7prb" sourceRef="eca_config_action_06zpaqh" targetRef="Gateway_1jeiwyv" />
+      <bpmn2:sequenceFlow id="Flow_0iw1p51" sourceRef="eca_config_action_0sr2qee" targetRef="eca_config_action_1wxj5ei" />
+      <bpmn2:sequenceFlow id="Flow_19fiq91" sourceRef="eca_config_action_1wxj5ei" targetRef="eca_config_action_0x21fxa" />
+      <bpmn2:sequenceFlow id="Flow_01jduf3" sourceRef="eca_config_action_0x21fxa" targetRef="eca_config_action_1wh8d86" />
+      <bpmn2:sequenceFlow id="Flow_1ru59vq" sourceRef="eca_config_action_1wh8d86" targetRef="eca_config_action_06zpaqh" />
+      <bpmn2:sequenceFlow id="Flow_088m1bq" sourceRef="eca_config_action_0yj4bqb" targetRef="eca_config_action_1v4877e" />
+      <bpmn2:sequenceFlow id="Flow_1h5g7ig" sourceRef="eca_config_action_1v4877e" targetRef="eca_config_action_0r92fy7" />
+      <bpmn2:sequenceFlow id="Flow_0ou002d" sourceRef="eca_config_action_0r92fy7" targetRef="eca_config_action_1x3vm8l" />
+      <bpmn2:sequenceFlow id="Flow_16gwwoq" sourceRef="eca_config_action_1x3vm8l" targetRef="eca_config_action_1immo8n" />
+      <bpmn2:sequenceFlow id="Flow_0wder97" sourceRef="eca_config_action_1immo8n" targetRef="eca_config_action_1jcz6wj" />
+      <bpmn2:sequenceFlow id="Flow_19r011a" sourceRef="eca_config_action_1jcz6wj" targetRef="eca_config_action_0sr2qee" />
+      <bpmn2:sequenceFlow id="Flow_1jkjyte" sourceRef="eca_switch_account_0ef7w95" targetRef="eca_get_bundle_list_009fgt1" />
+      <bpmn2:sequenceFlow id="eca_count_0nzu2kw" name="List not empty?" camunda:modelerTemplate="org.drupal.condition.eca_count" sourceRef="Gateway_1jeiwyv" targetRef="eca_list_remove_02x83vs">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_count" />
+          </camunda:properties>
+          <camunda:field name="negate">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="left">
+            <camunda:string>content_types</camunda:string>
+          </camunda:field>
+          <camunda:field name="right">
+            <camunda:string>0</camunda:string>
+          </camunda:field>
+          <camunda:field name="operator">
+            <camunda:string>greaterthan</camunda:string>
+          </camunda:field>
+          <camunda:field name="type">
+            <camunda:string>numeric</camunda:string>
+          </camunda:field>
+          <camunda:field name="case">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+      </bpmn2:sequenceFlow>
+    </bpmn2:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_setup_seo_fields">
+      <bpmndi:BPMNPlane id="BPMNPlane_setup_seo_fields" bpmnElement="setup_seo_fields">
+        <bpmndi:BPMNShape id="drupal__recipe_applied_1_1_di" bpmnElement="drupal__recipe_applied_1_1">
+          <dc:Bounds x="57" y="52" width="36" height="36" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="content_entity__bundlecreate_1_1_di" bpmnElement="content_entity__bundlecreate_1_1">
+          <dc:Bounds x="57" y="192" width="36" height="36" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_token_set_value_18gj2sf_di" bpmnElement="eca_token_set_value_18gj2sf">
+          <dc:Bounds x="175" y="170" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_get_bundle_list_009fgt1_di" bpmnElement="eca_get_bundle_list_009fgt1">
+          <dc:Bounds x="325" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_list_remove_02x83vs_di" bpmnElement="eca_list_remove_02x83vs">
+          <dc:Bounds x="2125" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_config_action_06zpaqh_di" bpmnElement="eca_config_action_06zpaqh">
+          <dc:Bounds x="1825" y="170" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_config_action_0sr2qee_di" bpmnElement="eca_config_action_0sr2qee">
+          <dc:Bounds x="1225" y="170" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_config_action_1wxj5ei_di" bpmnElement="eca_config_action_1wxj5ei">
+          <dc:Bounds x="1375" y="170" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_config_action_0x21fxa_di" bpmnElement="eca_config_action_0x21fxa">
+          <dc:Bounds x="1525" y="170" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_config_action_1wh8d86_di" bpmnElement="eca_config_action_1wh8d86">
+          <dc:Bounds x="1675" y="170" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_config_action_0yj4bqb_di" bpmnElement="eca_config_action_0yj4bqb">
+          <dc:Bounds x="325" y="170" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_config_action_1v4877e_di" bpmnElement="eca_config_action_1v4877e">
+          <dc:Bounds x="475" y="170" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_config_action_0r92fy7_di" bpmnElement="eca_config_action_0r92fy7">
+          <dc:Bounds x="625" y="170" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_config_action_1x3vm8l_di" bpmnElement="eca_config_action_1x3vm8l">
+          <dc:Bounds x="775" y="170" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_config_action_1immo8n_di" bpmnElement="eca_config_action_1immo8n">
+          <dc:Bounds x="925" y="170" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_config_action_1jcz6wj_di" bpmnElement="eca_config_action_1jcz6wj">
+          <dc:Bounds x="1075" y="170" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_switch_account_0ef7w95_di" bpmnElement="eca_switch_account_0ef7w95">
+          <dc:Bounds x="175" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Gateway_1jeiwyv_di" bpmnElement="Gateway_1jeiwyv" isMarkerVisible="true">
+          <dc:Bounds x="2000" y="45" width="50" height="50" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNEdge id="Flow_1ywv611_di" bpmnElement="Flow_1ywv611">
+          <di:waypoint x="93" y="70" />
+          <di:waypoint x="175" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_0dhcst7_di" bpmnElement="Flow_0dhcst7">
+          <di:waypoint x="93" y="210" />
+          <di:waypoint x="175" y="210" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_0fnyqyt_di" bpmnElement="Flow_0fnyqyt">
+          <di:waypoint x="275" y="210" />
+          <di:waypoint x="325" y="210" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_0b8gjmk_di" bpmnElement="Flow_0b8gjmk">
+          <di:waypoint x="425" y="70" />
+          <di:waypoint x="2000" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_1npd27f_di" bpmnElement="Flow_1npd27f">
+          <di:waypoint x="2175" y="30" />
+          <di:waypoint x="2175" y="0" />
+          <di:waypoint x="375" y="0" />
+          <di:waypoint x="375" y="170" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_1ju7prb_di" bpmnElement="Flow_1ju7prb">
+          <di:waypoint x="1925" y="210" />
+          <di:waypoint x="2025" y="210" />
+          <di:waypoint x="2025" y="95" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_0iw1p51_di" bpmnElement="Flow_0iw1p51">
+          <di:waypoint x="1325" y="210" />
+          <di:waypoint x="1375" y="210" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_19fiq91_di" bpmnElement="Flow_19fiq91">
+          <di:waypoint x="1475" y="210" />
+          <di:waypoint x="1525" y="210" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_01jduf3_di" bpmnElement="Flow_01jduf3">
+          <di:waypoint x="1625" y="210" />
+          <di:waypoint x="1675" y="210" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_1ru59vq_di" bpmnElement="Flow_1ru59vq">
+          <di:waypoint x="1775" y="210" />
+          <di:waypoint x="1825" y="210" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_088m1bq_di" bpmnElement="Flow_088m1bq">
+          <di:waypoint x="425" y="210" />
+          <di:waypoint x="475" y="210" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_1h5g7ig_di" bpmnElement="Flow_1h5g7ig">
+          <di:waypoint x="575" y="210" />
+          <di:waypoint x="625" y="210" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_0ou002d_di" bpmnElement="Flow_0ou002d">
+          <di:waypoint x="725" y="210" />
+          <di:waypoint x="775" y="210" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_16gwwoq_di" bpmnElement="Flow_16gwwoq">
+          <di:waypoint x="875" y="210" />
+          <di:waypoint x="925" y="210" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_0wder97_di" bpmnElement="Flow_0wder97">
+          <di:waypoint x="1025" y="210" />
+          <di:waypoint x="1075" y="210" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_19r011a_di" bpmnElement="Flow_19r011a">
+          <di:waypoint x="1175" y="210" />
+          <di:waypoint x="1225" y="210" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_1jkjyte_di" bpmnElement="Flow_1jkjyte">
+          <di:waypoint x="275" y="70" />
+          <di:waypoint x="325" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="eca_count_0nzu2kw_di" bpmnElement="eca_count_0nzu2kw">
+          <di:waypoint x="2050" y="70" />
+          <di:waypoint x="2125" y="70" />
+        </bpmndi:BPMNEdge>
+      </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+  </bpmn2:definitions>

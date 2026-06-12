@@ -1,0 +1,67 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.haven_theme.badge
+    - canvas.component.sdc.haven_theme.button
+    - canvas.component.sdc.haven_theme.group
+    - canvas.component.sdc.haven_theme.heading
+    - canvas.component.sdc.haven_theme.hero-side-by-side
+    - core.entity_view_mode.node.featured
+    - field.field.media.image.field_media_image
+    - field.field.node.project.field_description
+    - field.field.node.project.field_featured_image
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - node.type.project
+  module:
+    - file
+    - media
+    - node
+    - options
+id: node.project.featured
+content_entity_type_id: node
+content_entity_type_bundle: project
+content_entity_type_view_mode: featured
+component_tree:
+  0:
+    uuid: 6f21a174-5f80-40e2-bbaf-699d0ee42412
+    component_id: sdc.haven_theme.hero-side-by-side
+    component_version: 7b3e4a0b87c54bc7
+    inputs: '{"hero_flex_direction_mobile":"vertical","padding":true,"image_size":"1:1","image_position":"right","media":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:project\u241dfield_featured_image\u241e\u241fentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241f{src\u21a0src_with_alternate_widths,alt\u21a0alt,width\u21a0width,height\u21a0height}"},"background":"white"}'
+  '0:hero_slot:0':
+    parent_uuid: 6f21a174-5f80-40e2-bbaf-699d0ee42412
+    slot: hero_slot
+    uuid: 82da2afd-bdf7-40d6-add5-607893fa16a6
+    component_id: sdc.haven_theme.group
+    component_version: 671b7e47d5b61c8b
+    inputs: '{"flex_direction":"column","flex_gap":"md","items_align":"start","flex_align":"start","radius":"sm"}'
+  '0:hero_slot:0:group_slot:0':
+    parent_uuid: 82da2afd-bdf7-40d6-add5-607893fa16a6
+    slot: group_slot
+    uuid: 3147263e-589b-4f34-b6f0-caa2c125639c
+    component_id: sdc.haven_theme.badge
+    component_version: b180b228e47a27ec
+    inputs: '{"label":"Featured project","style":"secondary","icon_first":true}'
+  '0:hero_slot:1':
+    parent_uuid: 6f21a174-5f80-40e2-bbaf-699d0ee42412
+    slot: hero_slot
+    uuid: 2b76296e-0322-47f5-905b-a75731d06353
+    component_id: sdc.haven_theme.heading
+    component_version: f463a8803de8d3f1
+    inputs: '{"heading_text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:project\u241dtitle\u241e\u241fvalue"},"level":2,"text_size":"heading-responsive-5xl","text_color":"secondary","align":"left","url":{"sourceType":"host-entity-url","absolute":false}}'
+  '0:hero_slot:2':
+    parent_uuid: 6f21a174-5f80-40e2-bbaf-699d0ee42412
+    slot: hero_slot
+    uuid: 79f62c1b-0992-4f44-9860-084f3ac8edbe
+    component_id: sdc.haven_theme.heading
+    component_version: f463a8803de8d3f1
+    inputs: '{"heading_text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:project\u241dfield_description\u241e\u241fvalue"},"text_size":"heading-responsive-xl","text_color":"text-default","align":"left"}'
+  '0:hero_slot:3':
+    parent_uuid: 6f21a174-5f80-40e2-bbaf-699d0ee42412
+    slot: hero_slot
+    uuid: d063fbe5-7d83-4b38-80ce-592466f36121
+    component_id: sdc.haven_theme.button
+    component_version: 0e9e84d691ccddc4
+    inputs: '{"variant":"secondary","outlined":true,"label":"Project details","size":"medium","icon":"arrow-right","icon_first":false,"mobile_width":false,"disabled":false,"href":{"sourceType":"host-entity-url","absolute":false}}'
+exposed_slots: {  }

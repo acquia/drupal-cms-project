@@ -1,0 +1,33 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Staff card
+status: stable
+description: Staff card component
+# Overrides regular css with minified.
+libraryOverrides:
+  css:
+    component:
+      staff-card.min.css: { minified: true }
+group: Eureka component items
+props:
+  type: object
+  properties:
+    staff_card_heading:
+      type: string
+      title: Card heading
+      description: Title of the card
+      examples:
+        - Mrs. Nancy Gold
+    staff_card_text:
+      type: ['string', 'null']
+      title: Card text
+      description: Body of the card, usually HTML markup created in a WYSIWYG
+      examples:
+        - Year 2 Teacher
+    staff_card_image:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Card image
+      description: Image and alt text for the card.
+      type: object
+      examples:
+        - src: 'assets/277628-911758.jpg'
+          alt: 'Photo by gdtography: https://www.pexels.com/photo/long-exposure-photography-white-dome-building-interior-911758/'

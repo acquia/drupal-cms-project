@@ -1,0 +1,92 @@
+{#
+/**
+ * @file
+ * Theme override to display the main menu with submenu support.
+ *
+ * Available variables:
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - below: The menu item child items.
+ *   - title: The menu link title.
+ *   - url: The menu link url, instance of \Drupal\Core\Url
+ *   - localized_options: Menu link localized options.
+ *   - is_expanded: TRUE if the link has visible children within the current
+ *     menu tree.
+ *   - is_collapsed: TRUE if the link has children within the current menu tree
+ *     that are not currently visible.
+ *   - in_active_trail: TRUE if the link is in the active trail.
+ */
+#}
+{% import _self as menus %}
+
+<nav class="relative flex justify-start" aria-label="{{ menu_label|default('Main navigation') }}">
+  {{ menus.menu_links(items, attributes, 0) }}
+</nav>
+
+{% macro menu_links(items, attributes, menu_level) %}
+  {% import _self as menus %}
+  {% if items %}
+    <ul class="flex w-full flex-col gap-1 p-0 md:w-auto md:flex-row" data-level="{{ menu_level + 1 }}">
+      {% for item in items %}
+        {% set has_children = item.below ? true : false %}
+        {% set title = item.title is not empty ? item.title : item.text %}
+
+        {# Capture the rendered URL #}
+        {% set url %}
+          {{- item.url -}}
+        {% endset %}
+
+        {% set item_classes =
+          [
+            item.in_active_trail ? 'bg-muted/50' : '',
+            has_children ? 'menu-item--has-children' : '',
+            'flex flex-wrap justify-between md:flex-nowrap md:relative',
+            'w-full md:w-auto text-base font-medium rounded-md'
+          ]|filter(c => c is not empty)
+        %}
+
+        <li class="{{ item_classes|join(' ') }}" data-level="{{ menu_level + 1 }}">
+          {# Parent link - always clickable #}
+          {% if url is not empty %}
+            <a
+              href="{{ url }}"
+              class="menu-link flex min-h-[44px] shrink-1 grow-1 items-center gap-2 rounded-md p-2 duration-300 md:min-h-auto hover:md:bg-primary hover:md:text-primary-foreground focus:md:bg-primary focus:md:text-primary-foreground xl:px-3"
+              data-level="{{ menu_level + 1 }}"
+            >
+              <span class="menu-link--text">{{ title }}</span>
+            </a>
+          {% endif %}
+
+          {# Expand button - toggles submenu on both mobile and desktop #}
+          {% if has_children %}
+            <button
+              class="dropdown-menu__expand-button flex h-[44px] w-[44px] shrink-0 items-center justify-center p-2 md:h-auto md:w-auto md:px-2 md:py-1"
+              aria-expanded="false"
+              aria-label="{{ 'Toggle @title submenu'|t({
+                '@title': title
+              }) }}"
+            >
+              {{
+                include(
+                  '@diagnosis/components/icon/icon.twig',
+                  {
+                    icon: 'caret-down',
+                    icon_size: 'small'
+                  }
+                )
+              }}
+            </button>
+          {% endif %}
+
+          {# Recursive submenu - hidden by default, toggled by expand button #}
+          {% if has_children %}
+            <div class="submenu-wrapper hidden">
+              {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+            </div>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}

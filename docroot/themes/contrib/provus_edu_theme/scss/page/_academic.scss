@@ -1,0 +1,115 @@
+.node--type-provus-academic-course {
+  .field--label-inline {
+    .field__label, .field__item {
+      @include text-style-headline-h-5;
+      font-weight: 600;
+    }
+
+    .field__label {
+      &:after {
+        content: ":";
+      }
+    }
+
+    .field__item {
+      color: $text-colors-text-secondary;
+      margin-left: 20px;
+    }
+  }
+
+  .field--name-field-provus-ac-about {
+    margin-bottom: 60px;
+
+    .field__label {
+      @include text-style-headline-h-4;
+      font-weight: 600;
+      margin-top: 60px;
+      font-size: 24px !important;
+      color: $text-colors-text-secondary;
+    }
+
+    .field__item {
+      @include text-style-body-body-1;
+      font-weight: 400;
+    }
+  }
+
+  .field--type-entity-reference {
+    margin-bottom: 0;
+  }
+}
+
+.node--type-provus-academic-department {
+  .field--name-field-provus-ad-compact-name,
+  .field--name-field-provus-ad-sort-name,
+  .field--name-field-provus-ad-summary,
+  .field--name-field-provus-ad-thumbnail {
+    .field__label,
+    .field__item {
+      @include text-style-headline-h-5;
+      font-weight: 600;
+    }
+
+    .field__label {
+      &:after {
+        content: ":";
+      }
+    }
+
+    .field__item {
+      color: $text-colors-text-secondary;
+    }
+  }
+
+  .field--name-field-provus-ad-compact-name,
+  .field--name-field-provus-ad-sort-name {
+    .field__label,
+    .field__item {
+      display: inline-block;
+    }
+
+    .field__item {
+      margin-left: 20px;
+    }
+  }
+
+  .field--name-field-provus-ad-thumbnail {
+    margin: 60px 0;
+  }
+}
+
+.node--type-provus-academic-program {
+  .field--name-field-provus-ap-sort-name,
+  .field--name-field-provus-ap-summary {
+    .field__label,
+    .field__item {
+      @include text-style-headline-h-5;
+      font-weight: 600;
+    }
+
+    .field__label {
+      &:after {
+        content: ":";
+      }
+    }
+
+    .field__item {
+      color: $text-colors-text-secondary;
+    }
+  }
+
+  .field--name-field-provus-ap-sort-name {
+    .field__label,
+    .field__item {
+      display: inline-block;
+    }
+
+    .field__item {
+      margin-left: 20px;
+    }
+  }
+
+  .field--name-field-provus-ap-summary {
+    margin: 60px 0;
+  }
+}

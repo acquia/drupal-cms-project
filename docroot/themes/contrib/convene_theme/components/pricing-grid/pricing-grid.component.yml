@@ -1,0 +1,33 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Pricing Grid
+group: Organisms
+status: stable
+description: A 3-column grid component for displaying Simple Pricing tiers.
+props:
+  type: object
+  properties:
+    admin_theme:
+      title: Admin Theme
+      type: boolean
+      default: false
+      description: Check to enable Admin Theme styles (applies CSS only on frontend to preserve Canvas builder look).
+    eyebrow:
+      title: Eyebrow
+      type: string
+    title:
+      title: Title
+      type: string
+    description:
+      title: Description
+      type: string
+slots:
+  toggle:
+    title: Toggle Slot
+    description: Optional slot for the 'Early / Standard' toggle buttons below the description.
+  items:
+    title: Items Slot
+    description: Slot for individual pricing card components.
+library:
+  css:
+    component:
+      pricing-grid.css: {}

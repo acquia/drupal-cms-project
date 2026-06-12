@@ -1,0 +1,81 @@
+{#
+/**
+ * @file
+ * Theme override to display a single Drupal page with SDC components.
+ */
+#}
+
+<div class="layout-container">
+  {# Header using navbar SDC component #}
+  <header role="banner" class="site-header">
+    {# Banner menu bar - visible on desktop only, hidden on mobile #}
+    <div class="banner-menu-bar border-b border-border bg-accent max-md:hidden">
+      <div class="container mx-auto px-4 py-2">
+        <div class="flex items-center justify-end gap-4">
+          {{ banner_menu }}
+        </div>
+      </div>
+    </div>
+
+    {# Main navbar component #}
+    {% embed 'diagnosis:navbar'
+      with {
+        menu_align: 'right'
+      }
+    %}
+      {% block logo %}
+        <a href="{{ path('<front>') }}" class="inline-block" rel="home">{{ site_branding }}</a>
+      {% endblock %}
+      {% block navigation %}
+        {# Menu container for both mobile and desktop #}
+        {# Desktop: Only main menu visible (banner hidden via CSS since it shows above navbar) #}
+        {# Mobile: Both menus visible (main first, then banner) #}
+        {% embed 'diagnosis:menu-container' %}
+          {% block main_menu %}
+            {{ main_menu }}
+          {% endblock %}
+          {% block banner_menu %}
+            {{ banner_menu }}
+          {% endblock %}
+        {% endembed %}
+      {% endblock %}
+      {% block links %}
+        {# CTA buttons can be added here if needed #}
+      {% endblock %}
+    {% endembed %}
+  </header>
+
+  {# Main content area - Canvas pages will render here #}
+  <main role="main" class="site-main">
+    <a id="main-content" tabindex="-1"></a>
+
+    {{ page.highlighted }}
+    {{ page.breadcrumb }}
+    {{ page.help }}
+    {{ page.content }}
+  </main>
+
+  {# Footer using footer SDC component #}
+  <footer role="contentinfo" class="site-footer-wrapper bg-accent">
+    {% embed 'diagnosis:footer'
+      with {
+        align: true
+      }
+    %}
+      {% block footer_first %}
+        {{ site_branding }}
+      {% endblock %}
+      {% block footer_last %}
+        {{ social_menu }}
+      {% endblock %}
+      {% block footer_utility_first %}
+        {{ footer_menu }}
+      {% endblock %}
+      {% block footer_utility_last %}
+        <p class="text-sm">
+          © Copyright {{ 'now'|date('Y') }} {{ site_name }}. All rights reserved.
+        </p>
+      {% endblock %}
+    {% endembed %}
+  </footer>
+</div>

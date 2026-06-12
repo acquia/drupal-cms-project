@@ -1,0 +1,34 @@
+// Link styles.
+a {
+  color: $primary;
+  
+  &:hover {
+    color: $system-info-medium;
+  }
+
+  &:active {
+    color: $primary-colors-primary-accent;
+  }
+
+  &:focus {
+    color: $primary-colors-primary-hover;
+  }
+}
+
+// Node Teaser
+.node--view-mode-teaser h2 a {
+  color: $text-primary;
+  &:hover,
+  &:focus {
+    color: $primary-shade;
+  }
+}
+
+// List
+a.list-group-item {
+  color: $secondary-shade;
+  &:hover,
+  &:focus {
+    color: $primary-shade;
+  }
+}

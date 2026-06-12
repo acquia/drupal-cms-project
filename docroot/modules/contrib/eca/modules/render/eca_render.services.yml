@@ -1,0 +1,10 @@
+services:
+
+  eca_render.serializer:
+    class: Symfony\Component\Serializer\Serializer
+
+  # Fix autowiring for Hooks.
+  Symfony\Component\Serializer\Serializer: '@eca_render.serializer'
+
+parameters:
+  eca_render.skip_procedural_hook_scan: true
