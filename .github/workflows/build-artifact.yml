@@ -83,7 +83,7 @@ jobs:
             --account-pass=admin \
             --yes
           
-          ./vendor/bin/drush recipe ../recipes/custom/acquia_trials
+          ./vendor/bin/dr recipe:apply ../recipes/custom/acquia_trials
 
       - name: Remove values that should be unique.
         run: |
