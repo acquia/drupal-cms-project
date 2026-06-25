@@ -2,7 +2,7 @@
  * @file
  * Trials countdown banner.
  */
-(function (Drupal, drupalSettings) {
+(function (Drupal, drupalSettings, once) {
   'use strict';
 
   // Initialize Qualified command queue so calls buffer until the SDK loads.
@@ -15,11 +15,8 @@
 
   var endTimestamp = drupalSettings.trialsCountdown.endTimestamp;
   var bannerId = 'trials-countdown-banner';
+  var heightVar = '--acquia-trials-banner-height';
   var intervalId;
-  var adminUISelectors = [
-    '.top-bar.gin--navigation-top-bar',
-    'aside#admin-toolbar'
-  ];
 
   function getTimeLeft() {
     var now = Math.floor(Date.now() / 1000);
@@ -74,7 +71,7 @@
 
     var arrow = document.createElement('span');
     arrow.setAttribute('aria-hidden', 'true');
-    arrow.textContent = ' \u203A';
+    arrow.textContent = ' ›';
     cta.appendChild(arrow);
 
     inner.appendChild(textWrap);
@@ -85,51 +82,66 @@
     return timeLeft;
   }
 
-  function offsetAdminUI() {
+  /**
+   * Publishes the banner's measured height as a CSS custom property on <html>.
+   *
+   * CSS rules keyed off this variable reserve space for the banner (body
+   * padding) and offset the fixed admin chrome. Re-running this is the actual
+   * fix for content being covered after a re-render: the CSS recomputes the
+   * offsets from the up-to-date height regardless of what the theme/toolbar
+   * did during its own re-render.
+   */
+  function writeBannerHeight() {
     var banner = document.getElementById(bannerId);
-    var height = banner && banner.offsetHeight ? banner.offsetHeight : 0;
-    var value = height ? height + 'px' : '';
-    adminUISelectors.forEach(function (selector) {
-      var el = document.querySelector(selector);
-      if (el) {
-        el.style.marginTop = value;
-      }
-    });
+    var visible = banner && banner.style.display !== 'none';
+    var height = visible ? banner.getBoundingClientRect().height : 0;
+    document.documentElement.style.setProperty(heightVar, (height || 0) + 'px');
   }
 
   function updateBanner(timeLeftEl) {
     var seconds = getTimeLeft();
     if (seconds <= 0) {
-      timeLeftEl.parentElement.closest('#' + bannerId) &&
-        (document.getElementById(bannerId).style.display = 'none');
-      offsetAdminUI();
+      var banner = document.getElementById(bannerId);
+      if (banner) {
+        banner.style.display = 'none';
+      }
+      // Collapse the reserved space so the layout reverts cleanly.
+      writeBannerHeight();
       clearInterval(intervalId);
       return;
     }
     timeLeftEl.textContent = formatTimeLeft(seconds);
   }
 
-  // Initialize once the DOM is ready.
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  Drupal.behaviors.acquiaTrialsCountdown = {
+    attach: function () {
+      // The banner is a singleton living on <body>; create it (and start the
+      // countdown) exactly once even though attach() runs on every AJAX/
+      // BigPipe response.
+      once('acquia-trials-banner', 'body').forEach(function () {
+        var timeLeftEl = createBanner();
+        updateBanner(timeLeftEl);
+        writeBannerHeight();
 
-  function init() {
-    if (document.getElementById(bannerId)) {
-      return;
+        // Keep the published height accurate as the banner reflows (e.g. text
+        // wrapping at narrow widths) or the viewport changes.
+        if (window.ResizeObserver) {
+          var observer = new ResizeObserver(writeBannerHeight);
+          observer.observe(document.getElementById(bannerId));
+        }
+        window.addEventListener('resize', writeBannerHeight);
+        document.addEventListener('drupalViewportOffsetChange', writeBannerHeight);
+
+        intervalId = setInterval(function () {
+          updateBanner(timeLeftEl);
+        }, 60000);
+      });
+
+      // Re-assert the height on every attach. After a form save the toolbar
+      // re-renders and resets its position; re-publishing the height makes the
+      // CSS offsets re-apply so content is never left under the banner.
+      writeBannerHeight();
     }
-    var timeLeftEl = createBanner();
-    updateBanner(timeLeftEl);
-    offsetAdminUI();
+  };
 
-    // Recalculate offset on resize in case banner height changes.
-    window.addEventListener('resize', offsetAdminUI);
-
-    intervalId = setInterval(function () {
-      updateBanner(timeLeftEl);
-    }, 60000);
-  }
-
-})(Drupal, drupalSettings);
+})(Drupal, drupalSettings, once);
