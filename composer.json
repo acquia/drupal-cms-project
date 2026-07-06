@@ -30,10 +30,10 @@
         "drupal/config_sync_without_site_uuid": "^1.0@beta",
         "drupal/convene": "^1.2",
         "drupal/convivial_gov": "^1.1",
-        "drupal/core-composer-scaffold": "^11.3",
-        "drupal/core-recipe-unpack": "^11.3",
-        "drupal/core-recommended": "^11.3",
-        "drupal/core-vendor-hardening": "^11.3",
+        "drupal/core-composer-scaffold": "~11.3.13",
+        "drupal/core-recipe-unpack": "~11.3.13",
+        "drupal/core-recommended": "~11.3.13",
+        "drupal/core-vendor-hardening": "~11.3.13",
         "drupal/drupal_cms_accessibility_tools": "^2",
         "drupal/drupal_cms_ai": "^2",
         "drupal/drupal_cms_forms": "^2",
@@ -76,7 +76,10 @@
             "tbachert/spi": true
         },
         "sort-packages": true,
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "audit": {
+            "ignore": ["PKSA-jj5t-2zs1-dcfm", "PKSA-gm5x-j3mz-71n9"]
+        }
     },
     "extra": {
         "composer-exit-on-patch-failure": true,
