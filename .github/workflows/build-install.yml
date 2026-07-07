@@ -99,6 +99,7 @@ jobs:
           cat install.log
           if grep -q "\[error\]" install.log; then
             echo "Drush finished with hidden errors"
+            cat install.log
             exit 1
           fi
           
