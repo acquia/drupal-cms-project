@@ -24,7 +24,7 @@
         "composer/installers": "^2.3",
         "cweagans/composer-patches": "^2.0",
         "drupal/archimedes": "^1.0",
-        "drupal/byte": "^1",
+        "drupal/byte": "1.x-dev",
         "drupal/caresphere": "^1.2",
         "drupal/checklistapi": "^2.1",
         "drupal/config_sync_without_site_uuid": "^1.0@beta",
@@ -58,7 +58,7 @@
     "conflict": {
         "drupal/drupal": "*"
     },
-    "minimum-stability": "RC",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
         "allow-plugins": {
@@ -118,7 +118,11 @@
             "recipes/contrib/{$name}": ["type:drupal-recipe"],
             "docroot/themes/custom/{$name}": ["type:drupal-custom-theme"]
         },
-        "patches": {}
+        "patches": {
+            "drupal/core": {
+                "3594320 - Allow `dr install` to install when database is already configured": "https://git.drupalcode.org/project/drupal/-/merge_requests/16259/diffs.patch"
+            }
+        }
     },
     "scripts": {
         "post-create-project-cmd": "rm -rf .github/"
