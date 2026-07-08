@@ -95,9 +95,9 @@ jobs:
 
       - name: Install Drupal
         run: |
-          ./vendor/bin/drush site:install ./recipes/contrib/${{ matrix.site-template }} --yes 2>&1 | tee install.log
+          ./vendor/bin/dr install ../recipes/contrib/${{ matrix.site-template }} --yes 2>&1 | tee install.log
           if grep -q "\[error\]" install.log; then
-            echo "Drush finished with hidden errors"
+            echo "Install finished with hidden errors"
             exit 1
           fi
           
