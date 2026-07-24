@@ -30,10 +30,10 @@
         "drupal/config_sync_without_site_uuid": "^1.0@beta",
         "drupal/convene": "^1.2",
         "drupal/convivial_gov": "^1.1",
-        "drupal/core-composer-scaffold": "~11.3.13",
-        "drupal/core-recipe-unpack": "~11.3.13",
-        "drupal/core-recommended": "~11.3.13",
-        "drupal/core-vendor-hardening": "~11.3.13",
+        "drupal/core-composer-scaffold": "^11.4",
+        "drupal/core-recipe-unpack": "^11.4",
+        "drupal/core-recommended": "^11.4",
+        "drupal/core-vendor-hardening": "^11.4",
         "drupal/drupal_cms_accessibility_tools": "^2",
         "drupal/drupal_cms_ai": "^2",
         "drupal/drupal_cms_forms": "^2",
@@ -48,6 +48,7 @@
         "drupal/provus_edu": "^1.0",
         "drupal/pulse": "^1.0",
         "drupal/recipe_installer_kit": "^1.0.4",
+        "drupal/trash": "3.0.29",
         "drupal/webform": "@beta",
         "league/oauth2-client": "^2"
     },
@@ -73,6 +74,7 @@
             "drupal/site_template_helper": true,
             "php-http/discovery": true,
             "phpstan/extension-installer": true,
+            "symfony/runtime": true,
             "tbachert/spi": true
         },
         "sort-packages": true,
@@ -120,11 +122,7 @@
             "recipes/contrib/{$name}": ["type:drupal-recipe"],
             "docroot/themes/custom/{$name}": ["type:drupal-custom-theme"]
         },
-        "patches": {
-            "drupal/core": {
-                "3498026 - RecipeRunner::processInstall() installs modules one by one": "./patches/3498026.diff"
-            }
-        }
+        "patches": {}
     },
     "scripts": {
         "post-create-project-cmd": "rm -rf .github/"
