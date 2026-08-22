@@ -1,0 +1,34 @@
+{% set classes = [
+  'benefits-grid',
+  admin_theme ? 'benefits-grid--admin-theme' : 'benefits-grid--themed',
+] %}
+
+<section{{attributes.addClass(classes)}}>
+  <div class="benefits-grid__container">
+    
+    <div class="benefits-grid__header">
+      {% if eyebrow %}
+        <div class="benefits-grid__eyebrow">
+          {{ eyebrow }}
+        </div>
+      {% endif %}
+      
+      {% if title %}
+        <h2 class="benefits-grid__title">
+          {{ title }}
+        </h2>
+      {% endif %}
+      
+      {% if description %}
+        <div class="benefits-grid__description">
+          {{ description }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="benefits-grid__items">
+      {{ items }}
+    </div>
+    
+  </div>
+</section>

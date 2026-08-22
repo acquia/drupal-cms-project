@@ -1,0 +1,1750 @@
+<?php
+
+namespace Drupal\canvas_ai;
+
+use Drupal\canvas\Component\Schema\PropMetadataNormalizer;
+use Drupal\canvas\Controller\ApiConfigControllers;
+use Drupal\canvas\Entity\Component;
+use Drupal\canvas\Plugin\Canvas\ComponentSource\BlockComponent;
+use Drupal\canvas\Plugin\Canvas\ComponentSource\JsComponent;
+use Drupal\canvas\Plugin\Canvas\ComponentSource\SingleDirectoryComponent;
+use Drupal\Component\Render\MarkupInterface;
+use Drupal\Component\Serialization\Json;
+use Drupal\Component\Utility\DiffArray;
+use Drupal\Component\Utility\NestedArray;
+use Drupal\Component\Uuid\UuidInterface;
+use Drupal\Core\Cache\CacheableMetadata;
+use Drupal\Core\Cache\VariationCacheInterface;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Config\TypedConfigManagerInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Extension\ThemeHandlerInterface;
+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\Core\Template\Attribute as TemplateAttribute;
+use Drupal\Core\Theme\ComponentPluginManager;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\Yaml\Yaml;
+
+/**
+ * Provides helper methods for AI page builder.
+ */
+class CanvasAiPageBuilderHelper {
+
+  use StringTranslationTrait;
+
+  /**
+   * Cache key for storing all components keyed by source.
+   */
+  public const CACHE_KEY_ALL_COMPONENTS_BY_SOURCE = 'canvas_ai:all_components_by_source';
+
+  /**
+   * Constructor.
+   *
+   * @param \Drupal\Core\Theme\ComponentPluginManager $componentPluginManager
+   *   The component plugin manager.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   The entity type manager.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   *   The config factory.
+   * @param \Drupal\Component\Uuid\UuidInterface $uuidService
+   *   The UUID service.
+   * @param \Drupal\canvas_ai\CanvasAiTempStore $canvasAiTempstore
+   *   The Canvas AI tempstore.
+   * @param \Drupal\Core\Cache\VariationCacheInterface $variationCache
+   *   The persistent variation cache.
+   * @param \Drupal\Core\Cache\VariationCacheInterface $memoryVariationCache
+   *   The in-request variation cache, backed by the memory bin so it honors
+   *   tag invalidations that happen mid-request.
+   * @param \Drupal\Core\Extension\ThemeHandlerInterface $themeHandler
+   *   The theme handler.
+   * @param \Drupal\canvas\Component\Schema\PropMetadataNormalizer $propMetadataNormalizer
+   *   The prop metadata normalizer.
+   * @param \Drupal\canvas\Controller\ApiConfigControllers $apiConfigControllers
+   *   The API config controllers service.
+   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $loggerFactory
+   *   The logger channel factory.
+   * @param \Drupal\Core\Config\TypedConfigManagerInterface $typedConfigManager
+   *   The typed config manager.
+   */
+  public function __construct(
+    private readonly ComponentPluginManager $componentPluginManager,
+    private readonly EntityTypeManagerInterface $entityTypeManager,
+    private readonly ConfigFactoryInterface $configFactory,
+    private readonly UuidInterface $uuidService,
+    private readonly CanvasAiTempStore $canvasAiTempstore,
+    #[Autowire(service: 'cache.variation.canvas_ai')]
+    private readonly VariationCacheInterface $variationCache,
+    #[Autowire(service: 'cache.variation.canvas_ai_memory')]
+    private readonly VariationCacheInterface $memoryVariationCache,
+    private readonly ThemeHandlerInterface $themeHandler,
+    private readonly PropMetadataNormalizer $propMetadataNormalizer,
+    private readonly ApiConfigControllers $apiConfigControllers,
+    #[Autowire(service: 'logger.factory')]
+    private readonly LoggerChannelFactoryInterface $loggerFactory,
+    private readonly TypedConfigManagerInterface $typedConfigManager,
+  ) {
+  }
+
+  /**
+   * Combines all canvas page entity field updates under a single key.
+   *
+   * @param array $response
+   *   The current response array from the orchestrator.
+   *
+   * @return array
+   *   The modified response array.
+   *
+   * @see ui/src/components/aiExtension/AiWizard.tsx
+   * @see \Drupal\canvas_ai\Plugin\AiFunctionCall\CreateFieldContent
+   * @see \Drupal\canvas_ai\Plugin\AiFunctionCall\EditFieldContent
+   * @see \Drupal\canvas_ai\Plugin\AiFunctionCall\AddMetadata
+   */
+  public function processCanvasPageFields(array $response): array {
+    $canvasPageData = [];
+
+    // 'created_content' is set when the AI creates a new title; 'refined_text'
+    // when it edits an existing one. They come from separate tools, so only one
+    // is expected per response. If the AI returns both, prefer the created title
+    // and drop the refined one to keep the result deterministic.
+    if (!empty($response['created_content']) && !empty($response['refined_text'])) {
+      $this->loggerFactory->get('canvas_ai')->info('AI returned both created_content and refined_text; using created_content.');
+      unset($response['refined_text']);
+    }
+    if (!empty($response['created_content'])) {
+      $canvasPageData['title[0][value]'] = $response['created_content'];
+      unset($response['created_content']);
+    }
+    elseif (!empty($response['refined_text'])) {
+      $canvasPageData['title[0][value]'] = $response['refined_text'];
+      unset($response['refined_text']);
+    }
+    if (!empty($response['metadata']['metatag_description'])) {
+      $canvasPageData['description[0][value]'] = $response['metadata']['metatag_description'];
+      unset($response['metadata']['metatag_description']);
+      if (empty($response['metadata'])) {
+        unset($response['metadata']);
+      }
+    }
+
+    if (!empty($canvasPageData)) {
+      $response['canvas_page_data'] = $canvasPageData;
+    }
+    return $response;
+  }
+
+  /**
+   * Gets the data of all the usable component entities.
+   *
+   * The output will be used as the context for the AI agent.
+   */
+  public function getComponentContextForAi(): string {
+    $component_context = [];
+    $component_context_from_config = $this->getComponentContextFromConfig();
+    $available_components = !empty($component_context_from_config) ? $component_context_from_config : $this->getAllComponentsKeyedBySource();
+    foreach ($available_components as $components) {
+      // Component info would be under 'components' key, when not loaded from
+      // config.
+      if (isset($components['components'])) {
+        $component_context += $components['components'];
+      }
+      else {
+        $component_context += $components;
+      }
+
+    }
+    return Yaml::dump($component_context, 4, 2);
+  }
+
+  /**
+   * Converts a YAML string to an array format with calculated nodePaths.
+   *
+   * @param string $yaml_string
+   *   The YAML string to convert.
+   *
+   * @return array
+   *   Structured array with calculated nodePaths for components.
+   */
+  public function customYamlToArrayMapper(string $yaml_string): array {
+    $parsed_yaml = Yaml::parse($yaml_string);
+    $parsed_yaml = \is_array($parsed_yaml) ? $parsed_yaml : [];
+    return $this->computePlacement($parsed_yaml, FALSE)->operations;
+  }
+
+  /**
+   * Generates the placement data for a component structure request.
+   *
+   * @param array $operations_data
+   *   The operations structure, keyed by 'operations'.
+   *
+   * @return \Drupal\canvas_ai\CanvasAiPlacementResult
+   *   The operations (with assigned UUIDs) for the UI, plus the component
+   *   structure with those UUIDs and the predicted post-placement layout for
+   *   the model to reference in follow-up placements.
+   */
+  public function generateComponentPlacementData(array $operations_data): CanvasAiPlacementResult {
+    return $this->computePlacement($operations_data, TRUE);
+  }
+
+  /**
+   * Computes the operations, assigned UUIDs, and predicted layout for a request.
+   *
+   * @param array $data
+   *   The operations structure, keyed by 'operations'.
+   * @param bool $include_uuid
+   *   Whether to include each component's assigned UUID in the operations.
+   *
+   * @return \Drupal\canvas_ai\CanvasAiPlacementResult
+   *   The mapped placement result.
+   */
+  private function computePlacement(array $data, bool $include_uuid): CanvasAiPlacementResult {
+    $result = [
+      'operations' => [
+        [
+          'operation' => 'ADD',
+          'components' => [],
+        ],
+      ],
+    ];
+    // Add UUIDs to all components in the page builder output, so that their
+    // nodePaths can be extracted later from the expected layout.
+    $data_to_process = $this->addUuidToAllComponents($data);
+
+    $current_layout = $this->canvasAiTempstore->getData(CanvasAiTempStore::CURRENT_LAYOUT_KEY) ?? '';
+    $current_layout = Json::decode($current_layout);
+    $current_layout = \is_array($current_layout) ? $current_layout : [];
+
+    // Create the final layout structure by adding the components at the expected
+    // positions in the layout.
+    $predicted_layout = $this->createExpectedPageLayout($current_layout, $data_to_process);
+
+    // Get the nodePaths of newly added components from the predicted layout.
+    // Then append them to the result.
+    foreach ($data_to_process['operations'] as $operation) {
+      $target = strpos($operation['target'], '/') === FALSE ? $operation['target'] : NULL;
+      $this->appendComponentsRecursive($operation['components'], $predicted_layout, $target, $result['operations'][0]['components'], $include_uuid);
+    }
+
+    return new CanvasAiPlacementResult($result, $data_to_process, $predicted_layout);
+  }
+
+  /**
+   * Creates the expected output structure for each component.
+   *
+   * @param array $components
+   *   The array of components to process.
+   * @param array $predicted_layout
+   *   The predicted layout array used for nodePath calculation.
+   * @param string|null $target
+   *   The target region, if any.
+   * @param array &$result_components
+   *   Reference to array where processed components are collected.
+   * @param bool $include_uuid
+   *   Whether to include the component's assigned UUID in the output, so a tool
+   *   can echo it back to the model for reference_uuid chaining.
+   */
+  protected function appendComponentsRecursive(array $components, array $predicted_layout, ?string $target, array &$result_components, bool $include_uuid = FALSE): void {
+    foreach ($components as $component) {
+      foreach ($component as $id => $component_data) {
+        // Process the current component.
+        $component_data_to_append = [];
+        // Get the nodePath of the component from the predicted layout, using
+        // the uuid.
+        $node_path = $this->getCalculatedNodepath($predicted_layout, $component_data['uuid'], $target);
+        $component_data_to_append['id'] = $id;
+        if ($include_uuid) {
+          $component_data_to_append['uuid'] = $component_data['uuid'];
+        }
+        $component_data_to_append['nodePath'] = $node_path;
+        $component_data_to_append['fieldValues'] = $component_data['props'] ?? [];
+        $result_components[] = $component_data_to_append;
+
+        // Recursively process any components in slots.
+        if (!empty($component_data['slots'])) {
+          foreach ($component_data['slots'] as $slot_components) {
+            if (\is_array($slot_components)) {
+              $this->appendComponentsRecursive($slot_components, $predicted_layout, $target, $result_components, $include_uuid);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * Process component slots recursively.
+   *
+   * @param array $slots
+   *   The slots to process.
+   * @param array $parent_node_path
+   *   The parent component's nodePath.
+   * @param array &$result_components
+   *   The array to store processed components.
+   * @param string $component_id
+   *   The component ID for the component having this slot.
+   */
+  protected function processSlots(array $slots, array $parent_node_path, array &$result_components, $component_id): void {
+
+    foreach ($slots as $slot_name => $slot_components) {
+      if (!\is_array($slot_components)) {
+        continue;
+      }
+
+      $slot_index = $this->getSlotIndexFromSlotName($slot_name, $component_id);
+
+      foreach ($slot_components as $component_index => $component) {
+        foreach ($component as $component_type => $component_data) {
+          $node_path = $parent_node_path;
+          $node_path[] = $slot_index;
+          $node_path[] = $component_index;
+
+          $component_structure = [
+            'id' => $component_type,
+            'nodePath' => $node_path,
+            'fieldValues' => $component_data['props'] ?? [],
+          ];
+
+          $result_components[] = $component_structure;
+
+          if (isset($component_data['slots'])) {
+            $this->processSlots($component_data['slots'], $node_path, $result_components, $component_type);
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * Process components and calculate nodePaths.
+   *
+   * @param array $components
+   *   Components to process.
+   * @param array $first_node_path
+   *   First component's nodePath.
+   * @param array &$result_components
+   *   Array to store results.
+   */
+  protected function processComponents(array $components, array $first_node_path, array &$result_components): void {
+    $current_node_path = $first_node_path;
+
+    foreach ($components as $component) {
+      foreach ($component as $component_type => $component_data) {
+        $component_structure = [
+          'id' => $component_type,
+          'nodePath' => $current_node_path,
+          'fieldValues' => $component_data['props'] ?? [],
+        ];
+
+        $result_components[] = $component_structure;
+
+        if (isset($component_data['slots'])) {
+          $this->processSlots($component_data['slots'], $current_node_path, $result_components, $component_type);
+        }
+
+        $current_node_path[count($current_node_path) - 1]++;
+      }
+    }
+  }
+
+  /**
+   * Gets all the component entities keyed by source plugin id.
+   *
+   * @return array
+   *   The components keyed by source.
+   */
+  public function getAllComponentsKeyedBySource(): array {
+    $cache_keys = [self::CACHE_KEY_ALL_COMPONENTS_BY_SOURCE];
+    $initial_cacheability = $this->getComponentListCacheability();
+
+    // First check the memory cache.
+    $memory_hit = $this->memoryVariationCache->get($cache_keys, $initial_cacheability);
+    if ($memory_hit instanceof \stdClass) {
+      return $memory_hit->data;
+    }
+
+    // Then the persistent cache. On a hit, promote into the memory cache.
+    $cache = $this->variationCache->get($cache_keys, $initial_cacheability);
+    if ($cache instanceof \stdClass) {
+      $promoted_cacheability = (new CacheableMetadata())
+        ->setCacheTags((array) $cache->tags)
+        ->addCacheableDependency($initial_cacheability);
+      $this->memoryVariationCache->set($cache_keys, $cache->data, $promoted_cacheability, $initial_cacheability);
+      return $cache->data;
+    }
+
+    // Get the available components.
+    try {
+      $available_components_response = $this->apiConfigControllers->list(Component::ENTITY_TYPE_ID);
+      $available_components = Json::decode((string) $available_components_response->getContent());
+    }
+    catch (\Exception $e) {
+      $this->loggerFactory->get('canvas_ai')->error('Failed to load available components: @message', ['@message' => $e->getMessage()]);
+      // Cache the empty result in memory only so a failing call does not
+      // repeat within a single request, but is retried on the next one.
+      $this->memoryVariationCache->set($cache_keys, [], $initial_cacheability, $initial_cacheability);
+      return [];
+    }
+    if (empty($available_components)) {
+      $empty_cacheability = CacheableMetadata::createFromObject($available_components_response->getCacheableMetadata());
+      $empty_cacheability->addCacheableDependency($initial_cacheability);
+      $this->memoryVariationCache->set($cache_keys, [], $empty_cacheability, $initial_cacheability);
+      return [];
+    }
+
+    $output = [];
+
+    /** @var \Drupal\canvas\Entity\Component[] $component_entities */
+    $component_entities = $this->entityTypeManager->getStorage(Component::ENTITY_TYPE_ID)->loadMultiple(\array_keys($available_components));
+    $sdc_definitions = $this->componentPluginManager->getDefinitions();
+
+    foreach ($component_entities as $component) {
+      $source = $component->getComponentSource()->getPluginId();
+      // Currently the agents only work with SDC, block and JS components.
+      $supported_sources = [
+        SingleDirectoryComponent::SOURCE_PLUGIN_ID,
+        JsComponent::SOURCE_PLUGIN_ID,
+        BlockComponent::SOURCE_PLUGIN_ID,
+      ];
+      if (!\in_array($source, $supported_sources, TRUE)) {
+        continue;
+      }
+      $source_label = (string) $component->getComponentSource()->getPluginDefinition()['label'];
+      if (empty($source_label)) {
+        $source_label = $source;
+      }
+      $output[$source]['label'] = $source_label;
+      $component_id = $component->id();
+
+      if ($source === SingleDirectoryComponent::SOURCE_PLUGIN_ID) {
+        $this->processSdc($component, $sdc_definitions, $output);
+      }
+      elseif ($source === JsComponent::SOURCE_PLUGIN_ID) {
+        $this->processCodeComponents($component, $output, $available_components[$component_id]);
+      }
+      else {
+        $this->processBlock($component, $output);
+      }
+    }
+    $cacheability = CacheableMetadata::createFromObject($available_components_response->getCacheableMetadata());
+    $cacheability->addCacheableDependency($initial_cacheability);
+    $this->variationCache->set($cache_keys, $output, $cacheability, $initial_cacheability);
+    $this->memoryVariationCache->set($cache_keys, $output, $cacheability, $initial_cacheability);
+
+    return $output;
+  }
+
+  /**
+   * Loads all block components from storage, keyed by component id.
+   *
+   * Helper for the 0007 post_update hook. That hook runs via `drush updb` as
+   * the anonymous user, for which getAllComponentsKeyedBySource() returns
+   * nothing because it access-checks the component listing. This loads block
+   * components straight from storage instead, so it is independent of the
+   * current user.
+   *
+   * @return array
+   *   Enabled block components keyed by component id, including their props.
+   *
+   * @see canvas_ai_post_update_0007_add_block_props_to_component_description_settings()
+   */
+  public function getEnabledBlockComponentsFromStorage(): array {
+    $output = [];
+    $components = $this->entityTypeManager
+      ->getStorage(Component::ENTITY_TYPE_ID)
+      ->loadByProperties(['status' => TRUE]);
+    foreach ($components as $component) {
+      if ($component->getComponentSource()->getPluginId() === BlockComponent::SOURCE_PLUGIN_ID) {
+        $this->processBlock($component, $output);
+      }
+    }
+    return $output[BlockComponent::SOURCE_PLUGIN_ID]['components'] ?? [];
+  }
+
+  /**
+   * Builds cacheable metadata for the component listing.
+   */
+  private function getComponentListCacheability(): CacheableMetadata {
+    $component_entity_type = $this->entityTypeManager->getDefinition(Component::ENTITY_TYPE_ID);
+    $cacheability = new CacheableMetadata();
+    $cacheability->setCacheContexts($component_entity_type->getListCacheContexts());
+    $cacheability->setCacheTags($component_entity_type->getListCacheTags());
+    $cacheability->addCacheContexts(['user.permissions']);
+    return $cacheability;
+  }
+
+  /**
+   * Gets the component context from the config.
+   *
+   * @return array
+   *   The component context array.
+   */
+  public function getComponentContextFromConfig(): array {
+    $config = $this->configFactory->get('canvas_ai.component_description.settings');
+    $component_context = $config->get('component_context');
+
+    if (empty($component_context)) {
+      return [];
+    }
+
+    // Refresh the config to ensure it has the latest components.
+    $this->refreshComponentContext($component_context);
+
+    // Provide only the components from enabled sources.
+    foreach ($component_context as $source => $components) {
+      if ($components['enabled']) {
+        $enabled_sources[$source] = Yaml::parse($components['data']);
+      }
+    }
+
+    return $enabled_sources ?? [];
+  }
+
+  /**
+   * Updates the component context in the config, if there are changes.
+   *
+   * @param array $component_context
+   *   The component context array loaded from the config.
+   */
+  private function refreshComponentContext(array &$component_context): void {
+    // Update the config with the data of newly added/removed components.
+    $latest_components = $this->getAllComponentsKeyedBySource();
+    $resave_config = FALSE;
+    $has_changes = FALSE;
+
+    foreach ($component_context as $source => &$source_info) {
+      $source_components_in_config = $source_info['data'] ?? [];
+      $source_components_in_config = Yaml::parse($source_components_in_config);
+      $latest_components_under_source = $latest_components[$source]['components'] ?? [];
+      // Remove components that are not in the latest components.
+      $new_config = array_intersect_key($source_components_in_config, $latest_components_under_source);
+      // Add new components that are in the latest components but not in the config.
+      $new_config += array_diff_key($latest_components_under_source, $new_config);
+      // Refresh the props and slots for the components.
+      $has_changes = $this->refreshPropsAndSlots($new_config, $latest_components_under_source);
+      // Save the changes if there were differences.
+      if (array_diff_key($new_config, $source_components_in_config) || array_diff_key($source_components_in_config, $new_config) || $has_changes) {
+        $resave_config = TRUE;
+        $source_components_in_config = $new_config;
+        // Update the source info with the latest components.
+        $source_info['data'] = Yaml::dump($source_components_in_config);
+      }
+    }
+
+    // Save the updated component context to the config only if there were changes.
+    if ($resave_config) {
+      $this->configFactory->getEditable('canvas_ai.component_description.settings')
+        ->set('component_context', $component_context)
+        ->save();
+    }
+  }
+
+  /**
+   * Refreshes the props and slots for the components.
+   *
+   * @param array $new_config
+   *   The new config with the latest components.
+   * @param array $latest_components_under_source
+   *   The latest components under the source.
+   *
+   * @return bool
+   *   Returns TRUE if there were changes, FALSE otherwise.
+   */
+  private function refreshPropsAndSlots(array &$new_config, array $latest_components_under_source): bool {
+    $has_changes = FALSE;
+
+    foreach ($new_config as $component_id => &$component_data) {
+
+      // Refresh component props.
+      if (isset($component_data['props'])) {
+        // Check if any new props have been added or existing props have been modified.
+        $previous_props = \is_array($component_data['props']) ? $component_data['props'] : [];
+        $current_props = \is_array($latest_components_under_source[$component_id]['props']) ? $latest_components_under_source[$component_id]['props'] : [];
+
+        if (\array_keys($previous_props) != \array_keys($current_props)) {
+          // If the keys of the previous props and current props are different,
+          // then there are changes.
+          $has_changes = TRUE;
+        }
+
+        foreach ($current_props as $prop_name => &$prop_details) {
+
+          // Check if its a new prop.
+          if (!isset($previous_props[$prop_name])) {
+            continue;
+          }
+
+          if (isset($previous_props[$prop_name]) && isset($previous_props[$prop_name]['description'])) {
+            // If a description exists in the config for a prop, use that.
+            $prop_details['description'] = $previous_props[$prop_name]['description'];
+          }
+
+          // Check if any other data of the prop have been modified.
+          // Eg: Change in type, default value, enums, etc.
+          $previous_prop_data_without_description = array_diff_key($previous_props[$prop_name], ['description' => TRUE]);
+          $current_prop_data_without_description = array_diff_key($prop_details, ['description' => TRUE]);
+          $differences = DiffArray::diffAssocRecursive($previous_prop_data_without_description, $current_prop_data_without_description);
+          $differences += DiffArray::diffAssocRecursive($current_prop_data_without_description, $previous_prop_data_without_description);
+          // If there are differences, set has_changes to TRUE.
+          if (!empty($differences)) {
+            $has_changes = TRUE;
+          }
+        }
+        $component_data['props'] = !empty($current_props) ? $current_props : 'No props';
+      }
+
+      // Refresh component slots.
+      if (isset($component_data['slots'])) {
+        // Check if any new slots have been added or existing slots have been modified.
+        $previous_slots = \is_array($component_data['slots']) ? $component_data['slots'] : [];
+        $current_slots = \is_array($latest_components_under_source[$component_id]['slots']) ? $latest_components_under_source[$component_id]['slots'] : [];
+
+        if (\array_keys($previous_slots) != \array_keys($current_slots)) {
+          // If the keys of the previous slots and current slots are different,
+          // then there are changes.
+          $has_changes = TRUE;
+        }
+
+        foreach ($current_slots as $slot_name => &$slot_details) {
+          // Check if its a new slot.
+          if (!isset($previous_slots[$slot_name])) {
+            continue;
+          }
+
+          if (isset($previous_slots[$slot_name]) && isset($previous_slots[$slot_name]['description'])) {
+            // If a description exists in the config for a slot, use that.
+            $slot_details['description'] = $previous_slots[$slot_name]['description'];
+          }
+
+          // Check if any other slots data have been modified.
+          $previous_slot_data_without_description = array_diff_key($previous_slots[$slot_name], ['description' => TRUE]);
+          $current_slot_data_without_description = array_diff_key($slot_details, ['description' => TRUE]);
+          $differences = DiffArray::diffAssocRecursive($previous_slot_data_without_description, $current_slot_data_without_description);
+          $differences += DiffArray::diffAssocRecursive($current_slot_data_without_description, $previous_slot_data_without_description);
+          // If there are differences,.
+          if (!empty($differences)) {
+            $has_changes = TRUE;
+          }
+        }
+        $component_data['slots'] = !empty($current_slots) ? $current_slots : 'No slots';
+      }
+
+    }
+    return $has_changes;
+  }
+
+  /**
+   * Create the context data for SDCs.
+   *
+   * @param \Drupal\canvas\Entity\Component $component
+   *   The component entity.
+   * @param array $sdc_definitions
+   *   The SDC definitions.
+   * @param array &$output
+   *   The output array to store the SDC component data.
+   */
+  private function processSdc(Component $component, array $sdc_definitions, array &$output): void {
+    $sdc_definition = $sdc_definitions[$component->get('source_local_id')];
+    $component_id = $component->id();
+    $source_id = SingleDirectoryComponent::SOURCE_PLUGIN_ID;
+    $output[$source_id]['components'][$component_id] = [
+      'id' => $component_id,
+      'name' => $sdc_definition['name'],
+      'description' => $sdc_definition['description'] ?? $sdc_definition['name'],
+      'group' => $sdc_definition['group'] ?? '',
+      'props' => 'No props',
+      'slots' => 'No slots',
+    ];
+    // Get slots.
+    $slots = $sdc_definition['slots'] ?? [];
+    if ($slots) {
+      $output[$source_id]['components'][$component_id]['slots'] = [];
+      foreach ($slots as $slot => $details) {
+        $output[$source_id]['components'][$component_id]['slots'][$slot] = [
+          'name' => $details['title'] ?? $slot,
+          'description' => $details['description'] ?? 'No description available',
+        ];
+      }
+    }
+    // Get props.
+    $props = $sdc_definition['props']['properties'] ?? [];
+    if ($props) {
+      $client_normalized = $component->normalizeForClientSide()->values;
+      $output[$source_id]['components'][$component_id]['props'] = [];
+      foreach ($props as $prop_name => $prop_details) {
+        // Skip Drupal attributes prop.
+        if (($prop_details['type'] ?? NULL) === TemplateAttribute::class) {
+          continue;
+        }
+        $default_value = $client_normalized["propSources"][$prop_name]["default_values"]["resolved"] ?? $prop_details['default'] ?? $prop_details['examples'][0] ?? NULL;
+        // Default values of some props may have HTML markup as default value.
+        // Convert it to string so that it can be safely YAML encoded when saving
+        // the CanvasAiComponentDescriptionSettingsForm config.
+        if ($default_value instanceof MarkupInterface) {
+          $default_value = (string) $default_value;
+        }
+        $prop_metadata = [
+          'name' => $prop_details['title'] ?? $prop_name,
+          'description' => $prop_details['description'] ?? 'No description available',
+          'type' => $prop_details['type'],
+          'default' => $default_value,
+        ];
+
+        // Mark required props.
+        if (isset($sdc_definition['props']['required']) && \in_array($prop_name, $sdc_definition['props']['required'], TRUE)) {
+          $prop_metadata['required'] = TRUE;
+        }
+        if (isset($prop_details['enum'])) {
+          $prop_metadata['enum'] = $prop_details['enum'];
+        }
+        $output[$source_id]['components'][$component_id]['props'][$prop_name] = $this->propMetadataNormalizer->normalize($prop_metadata, $prop_details);
+      }
+    }
+  }
+
+  /**
+   * Create the context data for JS components.
+   *
+   * @param \Drupal\canvas\Entity\Component $component
+   *   The component entity.
+   * @param array &$output
+   *   The output array to store the JS component data.
+   * @param array $component_data
+   *   The component data array containing prop and slots metadata.
+   */
+  private function processCodeComponents(Component $component, &$output, array $component_data): void {
+    $component_id = $component->id();
+    $output[JsComponent::SOURCE_PLUGIN_ID]['components'][$component_id] = [
+      'id' => $component_id,
+      'name' => $component->label(),
+      'description' => $component->label(),
+    ];
+
+    // Get the descriptions for props of the JS component.
+    if (isset($component_data['propSources']) && \is_array($component_data['propSources'])) {
+      $output[JsComponent::SOURCE_PLUGIN_ID]['components'][$component_id]['props'] = [];
+      $metadata_properties = [];
+      $metadata_required = [];
+      $component_source = $component->getComponentSource();
+      if ($component_source instanceof JsComponent) {
+        $metadata_properties = $component_source->getMetadata()->schema['properties'] ?? [];
+        $metadata_required = $component_source->getMetadata()->schema['required'] ?? [];
+      }
+      foreach ($component_data['propSources'] as $prop_name => $prop_details) {
+        $prop_metadata = [
+          'name' => $prop_name,
+          // Keep the prop description as the prop name for as there is no
+          // option to provide a description in the JS component.
+          'description' => $prop_name,
+          'type' => $prop_details['jsonSchema']['type'],
+          'default' => $prop_details['default_values']['resolved'] ?? '',
+          'format' => $prop_details['jsonSchema']['format'] ?? '',
+          'enum' => $prop_details['jsonSchema']['enum'] ?? '',
+        ];
+        if (\in_array($prop_name, $metadata_required, TRUE)) {
+          $prop_metadata['required'] = TRUE;
+        }
+        $prop_schema = $prop_details['jsonSchema'] ?? [];
+        // The client-side prop schema strips meta:enum; pull labels from the
+        // component metadata to keep option labels aligned with the UI.
+        $metadata_schema = $metadata_properties[$prop_name] ?? [];
+        foreach (['meta:enum', 'x-translation-context'] as $key) {
+          if (!isset($prop_schema[$key]) && isset($metadata_schema[$key])) {
+            $prop_schema[$key] = $metadata_schema[$key];
+          }
+        }
+        $output[JsComponent::SOURCE_PLUGIN_ID]['components'][$component_id]['props'][$prop_name] = $this->propMetadataNormalizer->normalize($prop_metadata, $prop_schema);
+      }
+    }
+
+    // Get the descriptions for slots of the JS component.
+    if (isset($component_data['metadata']['slots']) && \is_array($component_data['metadata']['slots'])) {
+      $output[JsComponent::SOURCE_PLUGIN_ID]['components'][$component_id]['slots'] = [];
+      foreach ($component_data['metadata']['slots'] as $slot_name => $slot_details) {
+        $output[JsComponent::SOURCE_PLUGIN_ID]['components'][$component_id]['slots'][$slot_name] = [
+          'name' => $slot_details['title'] ?? $slot_name,
+          // Keep the slot description as the slot name for as there is no
+          // option to provide a description in the JS component.
+          'description' => $slot_name,
+        ];
+      }
+    }
+  }
+
+  /**
+   * Create the context data for Block components.
+   *
+   * @param \Drupal\canvas\Entity\Component $component
+   *   The component entity.
+   * @param array &$output
+   *   The output array to store the Block component data.
+   */
+  private function processBlock(Component $component, array &$output): void {
+    $component_id = $component->id();
+    $source_id = BlockComponent::SOURCE_PLUGIN_ID;
+    $output[$source_id]['components'][$component_id] = [
+      'id' => $component_id,
+      'name' => $component->label(),
+      'description' => $component->label(),
+    ];
+
+    $component_source = $component->getComponentSource();
+    if (!$component_source instanceof BlockComponent) {
+      return;
+    }
+
+    $raw_schema = $this->typedConfigManager->getDefinition('block.settings.' . $component->get('source_local_id'));
+    $mapping = $raw_schema['mapping'] ?? [];
+    if (!\is_array($mapping) || $mapping === []) {
+      return;
+    }
+
+    $settings = $component->getSettings();
+    $defaults = \is_array($settings['default_settings'] ?? NULL) ? $settings['default_settings'] : [];
+    $props = [];
+    foreach ($mapping as $prop_name => $prop_details) {
+      if (!\is_array($prop_details)) {
+        continue;
+      }
+      if (self::isBlockPropExcluded($prop_name)) {
+        continue;
+      }
+      $props[$prop_name] = [
+        'name' => $prop_details['label'] ?? $prop_name,
+        'description' => $prop_details['description'] ?? $prop_details['label'] ?? 'No description available',
+        'type' => $prop_details['type'] ?? 'string',
+        'default' => $defaults[$prop_name] ?? $prop_details['default'] ?? NULL,
+      ];
+      if (!\array_key_exists('requiredKey', $prop_details) || $prop_details['requiredKey'] !== FALSE) {
+        $props[$prop_name]['required'] = TRUE;
+      }
+      $enum = $this->getEnumFromSchemaConstraints($prop_details);
+      if (count($enum) > 0) {
+        $props[$prop_name]['enum'] = $enum;
+      }
+    }
+
+    if (!empty($props)) {
+      $output[$source_id]['components'][$component_id]['props'] = $props;
+    }
+  }
+
+  /**
+   * Returns TRUE if a block prop key should not be exposed to the agent.
+   *
+   * The context_mapping key is excluded because Canvas does not apply context
+   * mappings at render time, so any value written by the agent would have no
+   * effect.
+   *
+   * @see \Drupal\canvas\Plugin\Canvas\ComponentSource\BlockComponentInstanceInputsConfigSchemaGenerator::getConfigSchemaMapping()
+   */
+  private static function isBlockPropExcluded(string $prop_name): bool {
+    return \in_array($prop_name, ['id', 'provider', 'admin_label', 'context_mapping'], TRUE);
+  }
+
+  /**
+   * Extracts enum values from config schema constraints.
+   *
+   * @param array $prop_details
+   *   The config schema definition for a prop.
+   *
+   * @return array
+   *   The enum values, if any.
+   */
+  private function getEnumFromSchemaConstraints(array $prop_details): array {
+    $choices = $prop_details['constraints']['Choice']['choices'] ?? [];
+    return \is_array($choices) ? $choices : [];
+  }
+
+  /**
+   * Gets the index of a slot by its name for a given component ID.
+   *
+   * @param string $slot_name
+   *   The name of the slot.
+   * @param string $component_id
+   *   The ID of component with this slot.
+   *
+   * @return int
+   *   The index of the slot, or 0 if not found.
+   */
+  public function getSlotIndexFromSlotName(string $slot_name, string $component_id) : int {
+    $component_context = $this->getAllComponentsKeyedBySource();
+    if (empty($component_context)) {
+      return 0;
+    }
+
+    foreach ($component_context as $source_info) {
+      if (isset($source_info['components'][$component_id]['slots'][$slot_name])) {
+        $index = array_search($slot_name, \array_keys($source_info['components'][$component_id]['slots']), TRUE);
+        return ($index === FALSE) ? 0 : (int) $index;
+      }
+    }
+    return 0;
+  }
+
+  /**
+   * Creates the expected page layout structure.
+   *
+   * @param array $current_layout
+   *   The current layout structure.
+   * @param array $page_builder_output
+   *   The page builder output.
+   *
+   * @return array
+   *   The expected page layout structure after adding the components at the
+   *   expected positions.
+   */
+  public function createExpectedPageLayout(array $current_layout, array $page_builder_output) : array {
+    // Convert the current layout to another format that is easier to process.
+    $current_layout_tree = $this->convertCurrentLayoutToTree($current_layout);
+    $modified_layout = $this->placeComponentsInLayout($current_layout_tree, $page_builder_output);
+    return $modified_layout;
+  }
+
+  /**
+   * Converts the current layout structure into a region-keyed UUID tree.
+   *
+   * @param array $data
+   *   The layout array in the format described above.
+   *
+   * @return array
+   *   A region-keyed tree that only contains UUIDs, preserving
+   *   parent-child relationships per slot.
+   */
+  public function convertCurrentLayoutToTree(array $data): array {
+    if (!isset($data['regions']) || !\is_array($data['regions'])) {
+      return [];
+    }
+
+    $result = [];
+    foreach ($data['regions'] as $region => $region_data) {
+      if (!\is_array($region_data)) {
+        continue;
+      }
+
+      $components = $region_data['components'] ?? [];
+      if (!\is_array($components)) {
+        $components = [];
+      }
+
+      $result[$region] = $this->buildComponentUuidTree($components);
+    }
+
+    return $result;
+  }
+
+  /**
+   * Builds a UUID-only tree for a list of components.
+   *
+   * @param array $components
+   *   The components array at a given region or slot.
+   *
+   * @return array
+   *   An associative array keyed by component UUID. Values are either an empty
+   *   array (no slots) or an associative array keyed by slot name whose values
+   *   are themselves UUID-keyed arrays of child components.
+   */
+  private function buildComponentUuidTree(array $components): array {
+    $tree = [];
+
+    foreach ($components as $component) {
+      if (!\is_array($component) || !isset($component['uuid'])) {
+        continue;
+      }
+
+      $uuid = $component['uuid'];
+      $children_by_slot = [];
+
+      if (isset($component['slots']) && \is_array($component['slots'])) {
+        foreach ($component['slots'] as $slot_id => $slot_payload) {
+          $slot_name = $this->extractSlotNameFromId($slot_id);
+          $slot_components = [];
+          if (\is_array($slot_payload)) {
+            $slot_components = $slot_payload['components'] ?? [];
+          }
+          $children_by_slot[$slot_name] = $this->buildComponentUuidTree(
+            \is_array($slot_components) ? $slot_components : []
+          );
+        }
+      }
+
+      $tree[$uuid] = $children_by_slot;
+    }
+
+    return $tree;
+  }
+
+  /**
+   * Extracts the slot name from slot id.
+   *
+   * @param string $slot_id
+   *   The slot id.
+   *
+   * @return string
+   *   The extracted slot name.
+   */
+  private function extractSlotNameFromId(string $slot_id): string {
+    if (strpos($slot_id, '/') !== FALSE) {
+      $parts = explode('/', $slot_id);
+      $candidate = end($parts);
+      return $candidate === FALSE ? $slot_id : (string) $candidate;
+    }
+    return $slot_id;
+  }
+
+  /**
+   * Adds a UUID to every component in the page builder output.
+   *
+   * @param array $page_builder_output
+   *   The page builder output.
+   *
+   * @return array
+   *   The page builder output with UUIDs added to all components.
+   */
+  public function addUuidToAllComponents(array $page_builder_output): array {
+    if (!isset($page_builder_output['operations']) || !\is_array($page_builder_output['operations'])) {
+      return $page_builder_output;
+    }
+
+    foreach ($page_builder_output['operations'] as &$operation) {
+      if (!isset($operation['components']) || !\is_array($operation['components'])) {
+        continue;
+      }
+      $this->assignUuidsRecursively($operation['components']);
+    }
+
+    return $page_builder_output;
+  }
+
+  /**
+   * Recursively assigns UUIDs all the components.
+   *
+   * @param array $components
+   *   The list of components to process.
+   */
+  private function assignUuidsRecursively(array &$components): void {
+    foreach ($components as &$component_wrapper) {
+      if (!\is_array($component_wrapper)) {
+        continue;
+      }
+
+      foreach ($component_wrapper as &$component_details) {
+        if (!\is_array($component_details)) {
+          continue;
+        }
+
+        // Add UUID only if missing.
+        if (empty($component_details['uuid']) || !\is_string($component_details['uuid'])) {
+          $component_details['uuid'] = $this->uuidService->generate();
+        }
+
+        // Recurse into slots if present.
+        if (isset($component_details['slots']) && \is_array($component_details['slots'])) {
+          foreach ($component_details['slots'] as &$slot_components) {
+            if (!\is_array($slot_components)) {
+              continue;
+            }
+
+            $this->assignUuidsRecursively($slot_components);
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * Place the components in the layout.
+   *
+   * The page builder agent's output contains one or more operations, each
+   * corresponding to the component(s) to be added to the layout. Each operation
+   * has a target, placement, reference_uuid, and components. The target,
+   * placement, and reference_uuid are used to determine the position of the
+   * components in the layout.
+   *
+   * @param array $current_layout
+   *   The current layout structure with regions and components.
+   * @param array $operations
+   *   Array of operations containing target, placement, and components.
+   *
+   * @return array
+   *   Modified layout with components placed according to operations.
+   */
+  private function placeComponentsInLayout(array $current_layout, array $operations): array {
+    $modified_layout = $current_layout;
+
+    foreach ($operations['operations'] as $operation) {
+      $target = $operation['target'];
+      $placement = $operation['placement'];
+      $components = $operation['components'];
+
+      // Convert the components array to a tree structure. Output will have the
+      // same structure as returned by convertCurrentLayoutToTree method.
+      // This is done to make it easier to place the components in the layout to
+      // create the expected final layout.
+      $component_tree = $this->createInputComponentTree($components);
+
+      if ($placement === 'inside') {
+        // Placement inside is for adding components to an empty region or slot.
+        $modified_layout = $this->placeComponentsInside($modified_layout, $target, $component_tree);
+      }
+      elseif ($placement === 'below' || $placement === 'above') {
+        // Placement above or below is for adding components above or below
+        // an existing component in the current layout.
+        $reference_uuid = $operation['reference_uuid'];
+        $modified_layout = $this->placeComponentsAboveOrBelow($modified_layout, $reference_uuid, $placement, $component_tree);
+      }
+    }
+
+    return $modified_layout;
+  }
+
+  /**
+   * Creates a component tree structure from the components array.
+   *
+   * This method converts the component array returned by the page builder
+   * agent to the same structure as returned by convertCurrentLayoutToTree
+   * method.
+   *
+   * @param array $components
+   *   The components array returned by the page builder agent.
+   *
+   * @return array
+   *   The component tree with UUIDs as keys and slots/nested components as
+   *   values.
+   */
+  private function createInputComponentTree(array $components): array {
+    $tree = [];
+
+    foreach ($components as $component) {
+      foreach ($component as $component_id => $component_data) {
+        $uuid = $component_data['uuid'];
+        $slots = $component_data['slots'] ?? [];
+
+        // Initialize component entry.
+        $tree[$uuid] = [];
+
+        // Process slots if they exist.
+        if (!empty($slots)) {
+          foreach ($slots as $slot_name => $slot_components) {
+            if (!empty($slot_components)) {
+              $tree[$uuid][$slot_name]['slot_index'] = $this->getSlotIndexFromSlotName($slot_name, $component_id);
+              // Recursively build nested component tree.
+              $nested_tree = $this->createInputComponentTree($slot_components);
+              $tree[$uuid][$slot_name]['components'] = $nested_tree;
+            }
+            else {
+              $tree[$uuid][$slot_name] = [];
+            }
+          }
+        }
+      }
+    }
+
+    return $tree;
+  }
+
+  /**
+   * Places components to an empty region or slot.
+   *
+   * @param array $current_layout
+   *   The current layout structure.
+   * @param string $target
+   *   Target region name or slot ID (uuid/slot_name)
+   * @param array $component_tree
+   *   The component tree to place.
+   *
+   * @return array
+   *   The modified layout.
+   *
+   * @throws \Exception
+   *   If the component is not found.
+   */
+  private function placeComponentsInside(array $current_layout, string $target, array $component_tree): array {
+    $modified_layout = $current_layout;
+
+    // Check if target contains a slash (slot path)
+    if (strpos($target, '/') !== FALSE) {
+      [$parent_uuid, $slot_name] = explode('/', $target, 2);
+
+      // Find the parent component and place in its slot.
+      $path = $this->getPathFromUuid($modified_layout, $parent_uuid);
+      if (empty($path)) {
+        throw new \Exception(\sprintf('Component with UUID "%s" not found in layout', $parent_uuid));
+      }
+      $modified_layout = $this->insertComponentsAtSlot($modified_layout, $path, $slot_name, $component_tree);
+    }
+    else {
+      // Target is a region name.
+      $modified_layout[$target] = array_merge($component_tree, $modified_layout[$target]);
+    }
+
+    return $modified_layout;
+  }
+
+  /**
+   * Places components above or below a reference component in the layout.
+   *
+   * @param array $current_layout
+   *   The current layout structure.
+   * @param string $reference_uuid
+   *   UUID of the reference component.
+   * @param string $above_or_below
+   *   The placement type ('above' or 'below').
+   * @param array $component_tree
+   *   The component tree to place.
+   *
+   * @return array
+   *   The modified layout.
+   *
+   * @throws \Exception
+   *   If the component is not found.
+   */
+  private function placeComponentsAboveOrBelow(array $current_layout, string $reference_uuid, string $above_or_below, array $component_tree): array {
+    $modified_layout = $current_layout;
+
+    // Get path to the reference component.
+    $path = $this->getPathFromUuid($modified_layout, $reference_uuid);
+    if (empty($path)) {
+      throw new \Exception(\sprintf('Component with UUID "%s" not found in layout', $reference_uuid));
+    }
+
+    $modified_layout = $this->insertComponents($modified_layout, $path, $component_tree, $above_or_below);
+
+    return $modified_layout;
+  }
+
+  /**
+   * Finds the path to a component by its UUID in the layout.
+   *
+   * Recursively searches through the layout structure to find a component
+   * and returns the path as an array of keys.
+   *
+   * @param array $layout
+   *   The layout structure to search.
+   * @param string $target_uuid
+   *   UUID of the component to find.
+   * @param array $current_path
+   *   The current path being built during recursion.
+   *
+   * @return array|null
+   *   Path to the component or null if not found.
+   */
+  private function getPathFromUuid(array $layout, string $target_uuid, array $current_path = []): ?array {
+    foreach ($layout as $key => $value) {
+      $new_path = array_merge($current_path, [$key]);
+
+      // Check if current key is the target UUID.
+      if ($key === $target_uuid) {
+        return $new_path;
+      }
+
+      // If value is an array, search recursively.
+      if (\is_array($value)) {
+        $result = $this->getPathFromUuid($value, $target_uuid, $new_path);
+        if ($result !== NULL) {
+          return $result;
+        }
+      }
+    }
+
+    return NULL;
+  }
+
+  /**
+   * Inserts components at a specific path in the layout.
+   *
+   * Takes a path array and inserts components relative to the component at that
+   * path, based on the placement type.
+   *
+   * @param array $layout
+   *   The current layout structure.
+   * @param array $path
+   *   The path to the reference component.
+   * @param array $component_tree
+   *   The component tree to insert.
+   * @param string $placement
+   *   The placement type ('above' or 'below').
+   *
+   * @return array
+   *   The modified layout.
+   */
+  private function insertComponents(array $layout, array $path, array $component_tree, string $placement = 'above'): array {
+    $modified_layout = $layout;
+    // phpcs:ignore
+    $reference = &$modified_layout;
+
+    // Navigate to the parent of the target component.
+    $parent_path = array_slice($path, 0, -1);
+    foreach ($parent_path as $key) {
+      $reference = &$reference[$key];
+    }
+
+    // Get the position of the reference component.
+    $reference_key = end($path);
+    $keys = \array_keys($reference);
+    $reference_position = array_search($reference_key, $keys, TRUE);
+
+    if ($reference_position !== FALSE) {
+      // Split the array at the reference position.
+      if ($placement == 'above') {
+        $before = array_slice($reference, 0, $reference_position, TRUE);
+        $after = array_slice($reference, $reference_position, NULL, TRUE);
+      }
+      else {
+        $before = array_slice($reference, 0, $reference_position + 1, TRUE);
+        $after = array_slice($reference, $reference_position + 1, NULL, TRUE);
+      }
+
+      // Insert component tree between them.
+      $reference = array_merge($before, $component_tree, $after);
+    }
+
+    return $modified_layout;
+  }
+
+  /**
+   * Inserts components at a specific slot within a component.
+   *
+   * @param array $layout
+   *   The current layout structure.
+   * @param array $path
+   *   The path to the parent component.
+   * @param string $slot_name
+   *   The name of the slot.
+   * @param array $component_tree
+   *   The component tree to insert.
+   *
+   * @throws \Exception
+   *   If the slot is not found.
+   *
+   * @return array
+   *   The modified layout.
+   */
+  private function insertComponentsAtSlot(array $layout, array $path, string $slot_name, array $component_tree): array {
+    $modified_layout = $layout;
+    // phpcs:ignore
+    $reference = &$modified_layout;
+
+    // Navigate to the target component.
+    foreach ($path as $key) {
+      $reference = &$reference[$key];
+    }
+
+    // Ensure slot exists.
+    if (!isset($reference[$slot_name])) {
+      throw new \Exception(\sprintf('Slot "%s" not found in path "%s"', $slot_name, implode('/', $path)));
+    }
+
+    // Insert components to the slot.
+    $reference[$slot_name] = array_merge($component_tree, $reference[$slot_name]);
+
+    return $modified_layout;
+  }
+
+  /**
+   * Gets the nodePath of a component from the layout.
+   *
+   * @param array $layout
+   *   The layout structure to search.
+   * @param string $uuid
+   *   The UUID of the component to find.
+   * @param string|null $region
+   *   (optional) Limit search to a region.
+   *
+   * @return array
+   *   Returns [] if not found.
+   */
+  public function getCalculatedNodepath(array $layout, string $uuid, ?string $region = NULL): array {
+    $findPath = function ($array, $uuid, $path = []) use (&$findPath) {
+      $i = 0;
+      foreach ($array as $key => $value) {
+        if (isset($value['slot_index']) && !empty($value['components'])) {
+          $currentPath = array_merge($path, [$value['slot_index']]);
+          $value = $value['components'];
+        }
+        else {
+          $currentPath = array_merge($path, [$i]);
+        }
+
+        if ($key === $uuid) {
+          return $currentPath;
+        }
+
+        if (\is_array($value) && !empty($value)) {
+          $found = $findPath($value, $uuid, $currentPath);
+          if (!empty($found)) {
+            return $found;
+          }
+        }
+        $i++;
+      }
+      return [];
+    };
+
+    // If region specified, only search there.
+    if ($region !== NULL) {
+      if (!isset($layout[$region])) {
+        return [];
+      }
+      $path = $findPath($layout[$region], $uuid);
+      if (!empty($path)) {
+        $regionIndex = array_search($region, \array_keys($layout), TRUE);
+        if ($regionIndex !== FALSE) {
+          array_unshift($path, $regionIndex);
+        }
+      }
+      return $path;
+    }
+
+    // Otherwise search all regions.
+    $regionIndex = 0;
+    foreach ($layout as $regionArray) {
+      $path = $findPath($regionArray, $uuid);
+      if (!empty($path)) {
+        // Prepend the region index when found.
+        array_unshift($path, $regionIndex);
+        return $path;
+      }
+      $regionIndex++;
+    }
+
+    return [];
+  }
+
+  /**
+   * Checks whether a region or slot contains child components.
+   *
+   * @param string $target
+   *   The region name or slot id to check.
+   *
+   * @return bool
+   *   TRUE if the target has child components, FALSE otherwise.
+   */
+  public function hasChildComponents(string $target): bool {
+    $current_layout = $this->canvasAiTempstore->getData(CanvasAiTempStore::CURRENT_LAYOUT_KEY) ?? '';
+    $current_layout = Json::decode($current_layout);
+    $current_layout = \is_array($current_layout) ? $current_layout : [];
+
+    // Region case: no slash means region name.
+    if (strpos($target, '/') === FALSE) {
+      $region = $target;
+      $components = $current_layout['regions'][$region]['components'] ?? [];
+      return \is_array($components) && !empty($components);
+    }
+
+    // Slot case: formatted as "parent_uuid/slot_name".
+    [$parent_uuid, $slot_name] = explode('/', $target, 2);
+    if (empty($parent_uuid) || empty($slot_name)) {
+      return FALSE;
+    }
+
+    // Convert to UUID tree and locate the parent component path.
+    $layout_tree = $this->convertCurrentLayoutToTree($current_layout);
+    $path = $this->getPathFromUuid($layout_tree, $parent_uuid);
+    if (empty($path)) {
+      return FALSE;
+    }
+
+    // Traverse to the parent component's slots array in the tree.
+    $node = $layout_tree;
+    foreach ($path as $key) {
+      if (!isset($node[$key]) || !\is_array($node[$key])) {
+        return FALSE;
+      }
+      $node = $node[$key];
+    }
+
+    // In the tree, slots are keyed by slot name and contain child components
+    // keyed by their UUIDs. Non-empty means there are child components.
+    if (!isset($node[$slot_name]) || !\is_array($node[$slot_name])) {
+      return FALSE;
+    }
+
+    return !empty($node[$slot_name]);
+  }
+
+  /**
+   * Gets the region indices from the current layout.
+   *
+   * @param string $current_layout
+   *   The current layout JSON string.
+   *
+   * @return array
+   *   An array with region names as keys and their nodePathPrefix values.
+   */
+  public function getRegionIndex(string $current_layout): array {
+    $layout_array = Json::decode($current_layout);
+    $regions = [];
+
+    if (isset($layout_array['regions']) && \is_array($layout_array['regions'])) {
+      foreach ($layout_array['regions'] as $region_name => $region_data) {
+        if (isset($region_data['nodePathPrefix'][0])) {
+          $regions[$region_name] = $region_data['nodePathPrefix'][0];
+        }
+      }
+    }
+
+    return $regions;
+  }
+
+  /**
+   * Checks that a region exists in the current layout.
+   *
+   * @param string $region
+   *   The region name to check.
+   * @param string $current_layout
+   *   The current layout JSON string.
+   *
+   * @return string|null
+   *   An error message for the AI agent, or NULL when the region exists.
+   */
+  public function validateRegionExists(string $region, string $current_layout): ?string {
+    $layout_regions = $this->getRegionIndex($current_layout);
+    if (\array_key_exists($region, $layout_regions)) {
+      return NULL;
+    }
+    return \sprintf(
+      'Region "%s" does not exist. Available regions are: %s.',
+      $region,
+      implode(', ', \array_keys($layout_regions)),
+    );
+  }
+
+  /**
+   * Gets the available regions from the current layout along with their descriptions, if configured.
+   *
+   * @param string $current_layout
+   *   The current layout JSON string.
+   *
+   * @return array
+   *   An array with region names as keys and their nodePathPrefix values and descriptions.
+   */
+  public function getAvailableRegions(string $current_layout) : array {
+    $region_index_mapping = $this->getRegionIndex($current_layout);
+    $region_descriptions = $this->configFactory->get('canvas_ai.theme_region.settings')->get('region_descriptions') ?? [];
+    $available_regions = [];
+    $active_theme = $this->themeHandler->getDefault();
+    foreach ($region_index_mapping as $region_name => $region_index) {
+      $available_regions[$region_name] = [
+        'nodePathPrefix' => $region_index,
+        'info' => NestedArray::getValue($region_descriptions, [$active_theme, $region_name]),
+      ];
+    }
+    return $available_regions;
+  }
+
+  /**
+   * Processes the component structure array obtained from the set_template_data tool.
+   *
+   * Calculates the nodePath for each component suggested by the template
+   * builder agent.
+   *
+   * @param array $parsed_array
+   *   The parsed YAML array.
+   * @param string $current_layout
+   *   The current layout of the page.
+   *
+   * @return array
+   *   The processed operations array with calculated nodePaths for components.
+   */
+  public function processSetTemplateDataToolInput(array $parsed_array, string $current_layout): array {
+    $result = [
+      'operations' => [
+        [
+          'operation' => 'ADD',
+          'components' => [],
+        ],
+      ],
+    ];
+    foreach ($parsed_array as $region => $components) {
+      if (!\is_array($components)) {
+        continue;
+      }
+
+      $region_index_mapping = $this->getRegionIndex($current_layout);
+
+      $region_index = $region_index_mapping[$region];
+      $this->processComponents($components, [$region_index, 0], $result['operations'][0]['components']);
+    }
+
+    return $result;
+  }
+
+  /**
+   * Generate verbose context for Orchestrator.
+   *
+   * @param array $prompt
+   *   Array containing context details.
+   *
+   * @return string
+   *   Verbose context string.
+   */
+  public function generateVerboseContextForOrchestrator(array $prompt) : string {
+    // Check if selected_component exists.
+    if (!empty($prompt['selected_component'])) {
+      return 'User is now in the code component editor, viewing a code component with id ' . $prompt['selected_component'];
+    }
+
+    if (empty($prompt['entity_type'])) {
+      return 'User has not created any entities';
+    }
+
+    // If entity_type is node.
+    if ($prompt['entity_type'] === 'node') {
+      return 'The user is currently working on a \'node\' entity';
+    }
+
+    // If entity_type is canvas_page.
+    if ($prompt['entity_type'] === 'canvas_page') {
+      $has_active_component = !empty($prompt['active_component_uuid']) &&
+        $prompt['active_component_uuid'] !== 'None';
+
+      $base_message = 'The user is currently working on a canvas_page entity. ';
+
+      if ($has_active_component) {
+        $base_message .= 'User has selected a component in the page with uuid ' . $prompt['active_component_uuid'] . '. ';
+      }
+      else {
+        $base_message .= 'User has not selected any particular component from the page. ';
+      }
+
+      // Add page title.
+      if (empty($prompt['page_title']) || $prompt['page_title'] === 'Untitled page') {
+        $base_message .= 'Page title is empty. GENERATE THE TITLE FOR THE PAGE using canvas_title_generation_agent. This is a **CRITICAL** step to ensure that request is successful. ';
+      }
+      else {
+        $base_message .= 'Page title: ' . $prompt['page_title'] . '. ';
+      }
+
+      // Add page description.
+      if (!empty($prompt['page_description'])) {
+        $base_message .= 'Page description: ' . $prompt['page_description'];
+      }
+      else {
+        $base_message .= 'Page description is empty. GENERATE THE DESCRIPTION FOR THE PAGE using canvas_metadata_generation_agent. This is a **CRITICAL** step to ensure that request is successful.';
+      }
+
+      return $base_message;
+    }
+
+    // For any other entity_type.
+    return 'User has not created any entities';
+  }
+
+  /**
+   * Builds the state-specific prompt section for the component agent.
+   *
+   * Selects the prompt parts that match the current system state and returns
+   * them joined together, so the agent receives only the constraints that
+   * apply instead of evaluating the state itself.
+   *
+   * @param array $context
+   *   The current state, holding 'selected_component',
+   *   'selected_component_required_props', 'json_api_module_status' and
+   *   'menu_fetch_source'.
+   *
+   * @return string
+   *   The assembled prompt section.
+   *
+   * @see canvas_component_agent/dynamic_prompt_parts.yml
+   */
+  public function generateComponentAgentDynamicPromptSection(array $context): string {
+    $prompt_parts = Yaml::parseFile(__DIR__ . '/DynamicPrompts/canvas_component_agent/dynamic_prompt_parts.yml');
+
+    $selected_component = $context['selected_component'] ?? '';
+    $required_props = $context['selected_component_required_props'] ?? '';
+    $json_api_module_status = $context['json_api_module_status'] ?? '';
+    $menu_fetch_source = $context['menu_fetch_source'] ?? '';
+
+    $sections = [];
+
+    // Component editor state: which flow (create/edit) is available.
+    $sections[] = empty($selected_component)
+      ? $prompt_parts['selected_component']['empty']
+      : str_replace('{{selected_component}}', $selected_component, $prompt_parts['selected_component']['present']);
+
+    // Required props of the open component, when any are set.
+    if (!empty($selected_component) && !empty($required_props) && $required_props !== '[]') {
+      $sections[] = str_replace('{{required_props}}', $required_props, $prompt_parts['selected_component_required_props']);
+    }
+
+    // Content fetching constraints for the current JSON:API status.
+    if (isset($prompt_parts['json_api_module_status'][$json_api_module_status])) {
+      $sections[] = $prompt_parts['json_api_module_status'][$json_api_module_status];
+    }
+
+    // Menu fetching constraints for the current menu fetch source.
+    if (isset($prompt_parts['menu_fetch_source'][$menu_fetch_source])) {
+      $sections[] = $prompt_parts['menu_fetch_source'][$menu_fetch_source];
+    }
+
+    return implode("\n\n", \array_map('trim', $sections));
+  }
+
+  /**
+   * Formats user message and context into XML structure.
+   *
+   * @param string $context
+   *   The system context text.
+   * @param string $userMessage
+   *   The user message text.
+   *
+   * @return string
+   *   The formatted XML string with context and user message.
+   *
+   * @internal
+   */
+  public function formatMessageWithContext(string $context, string $userMessage): string {
+    return "<context>\n{$context}\n</context>\n\n<user_message>\n{$userMessage}\n</user_message>";
+  }
+
+  /**
+   * Indexes every component in the current layout by its UUID.
+   *
+   * Walks all regions and nested slots, collecting each component's id and its
+   * resolved prop values.
+   *
+   * @param array $current_layout
+   *   The decoded current layout, as stored under
+   *   \Drupal\canvas_ai\CanvasAiTempStore::CURRENT_LAYOUT_KEY.
+   *
+   * @return array
+   *   An array keyed by component UUID, each value being
+   *   ['component_id' => string, 'props' => array].
+   */
+  public function getComponentsByUuid(array $current_layout): array {
+    $components_by_uuid = [];
+    foreach ($current_layout['regions'] ?? [] as $region_data) {
+      if (!\is_array($region_data)) {
+        continue;
+      }
+      $this->collectComponentsByUuid($region_data['components'] ?? [], $components_by_uuid);
+    }
+    return $components_by_uuid;
+  }
+
+  /**
+   * Recursively collects components keyed by UUID.
+   *
+   * @param array $components
+   *   The components at a given region or slot.
+   * @param array $components_by_uuid
+   *   Reference to the accumulating UUID-keyed array.
+   */
+  private function collectComponentsByUuid(array $components, array &$components_by_uuid): void {
+    foreach ($components as $component) {
+      if (!\is_array($component) || !isset($component['uuid'])) {
+        continue;
+      }
+      $components_by_uuid[$component['uuid']] = [
+        'component_id' => $component['name'] ?? '',
+        'props' => \is_array($component['props'] ?? NULL) ? $component['props'] : [],
+      ];
+      foreach ($component['slots'] ?? [] as $slot_payload) {
+        if (\is_array($slot_payload) && \is_array($slot_payload['components'])) {
+          $this->collectComponentsByUuid($slot_payload['components'], $components_by_uuid);
+        }
+      }
+    }
+  }
+
+}

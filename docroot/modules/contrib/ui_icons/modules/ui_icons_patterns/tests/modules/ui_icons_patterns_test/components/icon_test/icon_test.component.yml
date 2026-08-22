@@ -1,0 +1,26 @@
+name: 'Test icons'
+slots:
+  label:
+    title: Label
+props:
+  type: object
+  properties:
+    icon1:
+      title: 'Icon 1, with explicit typing'
+      $ref: ui-patterns://icon
+    icon1_allowed:
+      title: 'Icon 1 allowed pack, with explicit typing'
+      $ref: ui-patterns://icon
+    icon2:
+      title: 'Icon 2, with implicit typing'
+      type: object
+      properties:
+        pack_id: {type: 'string'}
+        icon_id: {type: 'string'}
+    icon2_allowed:
+      title: 'Icon 2 allowed pack, with implicit typing'
+      type: object
+      properties:
+        pack_id:
+          type: string
+        icon_id: {type: 'string'}

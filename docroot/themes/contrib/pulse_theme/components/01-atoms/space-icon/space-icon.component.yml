@@ -1,0 +1,44 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json"
+
+name: Space Icon
+
+group: Atoms
+
+status: stable
+
+props:
+
+  type: object
+
+  required:
+    - icon
+    - icon_size
+
+  properties:
+    icon:
+      type: string
+      title: Icon name
+      description: 'The ID of an icon from the <a href="https://phosphoricons.com" target="_blank">Phosphor Icons</a> library.'
+      default: "rocket"
+      examples:
+        - "rocket"
+
+    icon_size:
+      type: string
+      title: Icon size
+      enum:
+        - extra-small
+        - small
+        - medium
+        - large
+        - extra-large
+      meta:enum:
+        extra-extra-small: Extra extra small - 16px
+        extra-small: Extra small - 20px
+        small: Small - 24px
+        medium: Medium - 28px
+        large: Large - 32px
+        extra-large: Extra large - 36px
+      default: medium
+      examples:
+        - medium

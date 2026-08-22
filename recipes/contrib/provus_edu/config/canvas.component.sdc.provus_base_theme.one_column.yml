@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - provus_base_theme
+label: 'One Column'
+id: sdc.provus_base_theme.one_column
+source: sdc
+source_local_id: 'provus_base_theme:one_column'
+provider: provus_base_theme
+active_version: 6dfca149d23990b0
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        gap:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        column_1:
+          title: 'Column 1'
+          description: 'Column content'

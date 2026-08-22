@@ -1,0 +1,19 @@
+parameters:
+  level: 0
+  fileExtensions:
+      - php
+      - module
+      - inc
+      - install
+  excludePaths:
+    # Exclude upgrade path removed in Drupal 11.
+    - src/Plugin/CKEditor4To5Upgrade/*
+  reportUnmatchedIgnoredErrors: false
+  ignoreErrors:
+    -
+      message: '#\Drupal calls should be avoided in classes, use dependency injection instead#'
+
+    # new static() is a best practice in Drupal, so we cannot fix that.
+    # @see https://www.drupal.org/docs/develop/development-tools/phpstan/handling-unsafe-usage-of-new-static
+    -
+      message: "#^Unsafe usage of new static#"

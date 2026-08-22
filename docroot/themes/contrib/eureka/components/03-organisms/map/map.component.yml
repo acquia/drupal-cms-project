@@ -1,0 +1,39 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Map
+status: stable
+description: Map component
+# Overrides regular css with minified.
+libraryOverrides:
+  css:
+    component:
+      map.min.css: { minified: true }
+  js:
+    map.min.js: { minified: true, attributes: { type: module } }
+group: Eureka main components
+props:
+  type: object
+  properties:
+    map_latitude:
+      type: string
+      title: Map point latitude
+      description: Value for the latitude of the geographical point
+      examples:
+        - '51.79686505401959'
+    map_longitude:
+      type: string
+      title: Map point longitude
+      description: Value for the longitude of the geographical point
+      examples:
+        - '-0.07924654430882785'
+    map_zoom:
+      type: string
+      title: Zoom level
+      description: Zoom level - reasonable default values should be within 0-25
+      examples:
+        - '12'
+    map_marker_info:
+      type: ['string', 'null']
+      title: Marker info
+      description: Plain text to go into the map marker
+      examples:
+        - 'Willow Meadow Primary, contact: 01234 567891'

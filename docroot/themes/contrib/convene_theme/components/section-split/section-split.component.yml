@@ -1,0 +1,38 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Split Section
+group: Organisms
+status: stable
+description: A two-column layout component with media on one side and content on the other.
+props:
+  type: object
+  properties:
+    variation:
+      title: Component Variation
+      type: string
+      enum:
+        - media-left
+        - media-right
+      default: media-left
+      description: Choose the placement of the media relative to the content.
+    admin_theme:
+      title: Admin Theme
+      type: boolean
+      default: false
+      description: Check to enable Admin Theme styles (applies CSS only on frontend to preserve Canvas builder look).
+slots:
+  heading:
+    title: Heading Slot
+    description: Slot for the main headline.
+  content:
+    title: Content Slot
+    description: Slot for the body text or description.
+  actions:
+    title: Actions Slot
+    description: Buttons or links.
+  media:
+    title: Media Slot
+    description: Image or video to be displayed alongside the content.
+library:
+  css:
+    component:
+      section-split.css: {}

@@ -1,0 +1,6 @@
+parameters:
+  acquia_trials_countdown.trial_end_client.base_url: 'https://api.acquia.com/v1/trials'
+services:
+  acquia_trials_countdown.trial_end_client:
+    class: Drupal\acquia_trials_countdown\TrialEndClient
+    arguments: ['@http_client', '%acquia_trials_countdown.trial_end_client.base_url%', '@logger.channel.default']

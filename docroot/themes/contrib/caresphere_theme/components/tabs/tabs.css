@@ -1,0 +1,112 @@
+/**
+ * @file tabs.css
+ * Two variants (Figma):
+ * - default: no container background — only active tab has bg (1-11183 desktop, 1-10890 mobile).
+ * - colored-background: container has gray bg + border (1-8895 desktop, 1-8492 mobile).
+ */
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.tabs__list {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  @media (max-width: 430px) {
+    justify-content: unset !important;
+  }
+}
+
+.tabs__list::-webkit-scrollbar {
+  height: 6px;
+}
+
+/* ========== Default: no container background (Figma 1-11183, 1-10890) ========== */
+.tabs--default .tabs__list {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.tabs--default .tabs__tab {
+  padding-inline: 16px;
+  padding-block: 10px;
+  font-family: var(--font-sans);
+  font-size: var(--text-base, 16px);
+  line-height: 1.5;
+  color: var(--card-foreground, #020704);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  appearance: none;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.tabs--default .tabs__tab--active {
+  background-color: var(--card, #f2f2f2);
+  border: 1px solid var(--border, rgba(2, 7, 4, 0.15));
+  font-weight: 500;
+}
+
+.tabs--default .tabs__tab:hover {
+  color: var(--card-foreground, #020704);
+}
+
+/* ========== Colored background (Figma 1-8895, 1-8492) ========== */
+.tabs--colored-background .tabs__list {
+  padding: 4px;
+  background-color: var(--background, #020704);
+  border: 1px solid var(--border, rgba(2, 7, 4, 0.15));
+  border-radius: 0;
+  width: fit-content;
+}
+
+.tabs--colored-background .tabs__tab {
+  padding-inline: 24px;
+  padding-block: 10px;
+  font-family: var(--font-sans);
+  font-size: var(--text-base, 16px);
+  line-height: 1.5;
+  color: var(--foreground, #fff);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;  
+  appearance: none;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.tabs--colored-background .tabs__tab--active {
+  background-color: var(--dark-gray, #1b1f1d);
+  border: 1px solid var(--border, rgba(2, 7, 4, 0.15));
+  font-weight: 500;
+}
+
+.tabs--colored-background .tabs__tab:hover {
+  color: var(--foreground, #fff);
+}
+
+/* Cards hidden when filtering by tab (JS toggles; used with Section Grid) */
+.tabs-filterable--hidden {
+  display: none !important;
+}

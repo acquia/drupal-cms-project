@@ -1,0 +1,237 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - eureka
+label: 'Contact Cards'
+id: sdc.eureka.contact-cards
+source: sdc
+source_local_id: 'eureka:contact-cards'
+provider: eureka
+active_version: c651557bf9827c68
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        contact_cards_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Key contacts'
+          expression: ℹ︎string␟value
+        contact_cards_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '2'
+          expression: ℹ︎list_float␟value
+        contact_cards_summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'If you need to speak to a specific member of staff, please contact the school office who will be happy to direct your call or arrange a meeting.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        contact_cards_items_block:
+          title: 'Contact cards items block'
+          description: 'Block to hold contact card items'
+  c651557bf9827c68:
+    settings:
+      prop_field_definitions:
+        contact_cards_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Key contacts'
+          expression: ℹ︎string␟value
+        contact_cards_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '2'
+          expression: ℹ︎list_float␟value
+        contact_cards_summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'If you need to speak to a specific member of staff, please contact the school office who will be happy to direct your call or arrange a meeting.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        contact_cards_items_block:
+          title: 'Contact cards items block'
+          description: 'Block to hold contact card items'
+  2cc7acb4ecb27244:
+    settings:
+      prop_field_definitions:
+        contact_cards_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Key contacts'
+          expression: ℹ︎string␟value
+        contact_cards_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: h2
+          expression: ℹ︎list_float␟value
+        contact_cards_summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'If you need to speak to a specific member of staff, please contact the school office who will be happy to direct your call or arrange a meeting.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        contact_cards_items_block:
+          title: 'Contact cards items block'
+          description: 'Block to hold contact card items'
+  d72a811f814dc1fe:
+    settings:
+      prop_field_definitions:
+        contact_cards_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Key contacts'
+          expression: ℹ︎string␟value
+        contact_cards_heading_level:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: h2
+          expression: ℹ︎list_string␟value
+        contact_cards_summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'If you need to speak to a specific member of staff, please contact the school office who will be happy to direct your call or arrange a meeting.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        contact_cards_items_block:
+          title: 'Contact cards items block'
+          description: 'Block to hold contact card items'
+  dd602a566dbb6778:
+    settings:
+      prop_field_definitions:
+        contact_cards_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Key contacts'
+          expression: ℹ︎string␟value
+        contact_cards_summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'If you need to speak to a specific member of staff, please contact the school office who will be happy to direct your call or arrange a meeting.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        contact_cards_items_block:
+          title: 'Contact cards items block'
+          description: 'Block to hold contact card items'
+  1f609824b300d258:
+    settings:
+      prop_field_definitions:
+        contact_cards_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Quick links'
+          expression: ℹ︎string␟value
+        contact_cards_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '3'
+          expression: ℹ︎list_float␟value
+        contact_cards_summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Find what you need quickly with our convenient links to essential information and services.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        contact_cards_items_block:
+          title: 'Quick links items block'
+          description: 'Block to hold quick link item components'

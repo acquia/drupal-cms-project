@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Drupal UI Icons Field.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_config_schema_info_alter().
+ */
+function ui_icons_field_config_schema_info_alter(array &$definitions): void {
+  if (!isset($definitions['field.value.link']['mapping']['options']['mapping'])) {
+    return;
+  }
+
+  $definitions['field.value.link']['mapping']['options']['mapping']['icon'] = [
+    'type' => 'field.value.ui_icon',
+  ];
+  $definitions['field.value.link']['mapping']['options']['mapping']['icon_display'] = [
+    'type' => 'string',
+    'label' => 'Icon display position',
+  ];
+}

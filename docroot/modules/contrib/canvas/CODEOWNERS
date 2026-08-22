@@ -1,0 +1,30 @@
+# Maintainers of the main module can approve any changes.
+* @amangrover90 @balintbrews @bnjmnm @effulgentsia @f.mazeikis @hooroomoo @isholgueras @jessebaker @jptaranto @justafish @larowlan @longwave @mglaman @narendrar @penyaskito @phenaproxima @tedbow @thoward216 @tim.plunkett @wimleers @wotnak @lauriii
+
+# Relevant configuration in GitLab:
+# https://git.drupalcode.org/project/canvas/-/settings/merge_requests
+# - One approval is required;
+# - Merge request creators are prevented from self-approving.
+
+# The only exception: changes that can cause data loss for end users: 3 approvals required.
+[End user disruption: data integrity/validation][3]
+# Issues are in one of the following issue queue components:
+# - https://www.drupal.org/project/issues/canvas?component=Config+management
+# - https://www.drupal.org/project/issues/canvas?component=Data+model
+# - https://www.drupal.org/project/issues/canvas?component=Component+sources
+/config/schema/
+/src/Plugin/DataType/ComponentInputs.php
+/src/Plugin/Field/FieldType/ComponentTreeItem.php
+/src/Plugin/Field/FieldType/ComponentTreeItemList.php
+/src/Plugin/Validation/
+/src/Plugin/Canvas/ComponentSource/JsonSchemaPropsComponentSourceBase.php
+/src/Plugin/Canvas/ComponentSource/*InstanceUpdater*.php
+
+[Component & Page Data forms] @bnjmnm @hooroomoo @effulgentsia
+/src/Theme/CanvasThemeNegotiator.php
+/ui/src/components/form/*.tsx
+/ui/src/components/form/twig-to-jsx-component-map.js
+
+^[Canvas AI] @tim.plunkett @Marcus_Johansson @NarendraR @Utkarsh_33 @kunal.sachdev @akhil_babu @tedbow @mglaman
+# Issues: https://www.drupal.org/project/issues/canvas?component=AI
+/modules/canvas_ai/

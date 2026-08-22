@@ -1,0 +1,509 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.image.field_media_image
+    - field.field.media.svg_image.field_media_svg_image
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - media.type.svg_image
+  module:
+    - file
+    - media
+    - media_library
+  theme:
+    - pulse_theme
+label: 'Space Video Banner'
+id: sdc.pulse_theme.space-video-banner
+source: sdc
+source_local_id: 'pulse_theme:space-video-banner'
+provider: pulse_theme
+active_version: 810d1481cce22e7c
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        video:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '<iframe width="560" height="315" src="https://www.youtube.com/embed/EngW7tLk6R8?si=j0XxXvQKW3cWDS2V" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
+          expression: ℹ︎string␟value
+        label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Video
+          expression: ℹ︎string␟value
+        title:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Understanding Common Medicines: What They Do and How to Use Them Safely'
+          expression: ℹ︎string␟value
+        primary_category:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Everyday health'
+          expression: ℹ︎string␟value
+        secondary_category:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Care Decisions'
+          expression: ℹ︎string␟value
+        modifier_class:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: custom-class
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  da4641f99043f579:
+    settings:
+      prop_field_definitions:
+        video:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '<iframe width="560" height="315" src="https://www.youtube.com/embed/EngW7tLk6R8?si=j0XxXvQKW3cWDS2V" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
+          expression: ℹ︎string␟value
+        video_embed:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '<iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>'
+          expression: ℹ︎string␟value
+        label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Video
+          expression: ℹ︎string␟value
+        title:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Understanding Common Medicines: What They Do and How to Use Them Safely'
+          expression: ℹ︎string␟value
+        primary_category:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Everyday health'
+          expression: ℹ︎string␟value
+        secondary_category:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Care Decisions'
+          expression: ℹ︎string␟value
+        modifier_class:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: custom-class
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  5a14eca87ec23515:
+    settings:
+      prop_field_definitions:
+        video:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: sample.mp4
+          expression: ℹ︎string␟value
+        video_embed:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '<iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>'
+          expression: ℹ︎string␟value
+        label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Video
+          expression: ℹ︎string␟value
+        title:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Understanding Common Medicines: What They Do and How to Use Them Safely'
+          expression: ℹ︎string␟value
+        primary_category:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Everyday health'
+          expression: ℹ︎string␟value
+        secondary_category:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Care Decisions'
+          expression: ℹ︎string␟value
+        modifier_class:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: custom-class
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  086704189fa9e926:
+    settings:
+      prop_field_definitions:
+        video:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: sample.mp4
+          expression: ℹ︎string␟value
+        label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Video
+          expression: ℹ︎string␟value
+        title:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Understanding Common Medicines: What They Do and How to Use Them Safely'
+          expression: ℹ︎string␟value
+        primary_category:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Everyday health'
+          expression: ℹ︎string␟value
+        secondary_category:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Care Decisions'
+          expression: ℹ︎string␟value
+        modifier_class:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: custom-class
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  f683aed1df0cf316:
+    settings:
+      prop_field_definitions:
+        video:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: sample.mp4
+          expression: ℹ︎string␟value
+        label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Article
+          expression: ℹ︎string␟value
+        title:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Understanding Common Medicines: What They Do and How to Use Them Safely'
+          expression: ℹ︎string␟value
+        primary_category:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Everyday health'
+          expression: ℹ︎string␟value
+        secondary_category:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Care Decisions'
+          expression: ℹ︎string␟value
+        modifier_class:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: custom-class
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  0236702842b8a04e:
+    settings:
+      prop_field_definitions:
+        video:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        src:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: sample.mp4
+          expression: ℹ︎string␟value
+        label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Article
+          expression: ℹ︎string␟value
+        title:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Understanding Common Medicines: What They Do and How to Use Them Safely'
+          expression: ℹ︎string␟value
+        primary_category:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Everyday health'
+          expression: ℹ︎string␟value
+        secondary_category:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Care Decisions'
+          expression: ℹ︎string␟value
+        modifier_class:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: custom-class
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  709a1d0d02d7b6f8:
+    settings:
+      prop_field_definitions:
+        background_video:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+        label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Article
+          expression: ℹ︎string␟value
+        title:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Understanding Common Medicines: What They Do and How to Use Them Safely'
+          expression: ℹ︎string␟value
+        primary_category:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Everyday health'
+          expression: ℹ︎string␟value
+        secondary_category:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Care Decisions'
+          expression: ℹ︎string␟value
+        modifier_class:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: custom-class
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }

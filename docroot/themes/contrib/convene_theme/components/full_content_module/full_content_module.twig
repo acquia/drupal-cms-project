@@ -1,0 +1,131 @@
+{% macro icon_svg(network) %}
+	{% if network == 'link' %}
+		<svg width="32" height="32" viewbox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<rect width="32" height="32" rx="16" fill="#F2F2F2"/>
+			<path d="M10.9991 21.1495C9.57144 21.1495 8.35628 20.6481 7.35361 19.6455C6.35094 18.643 5.84961 17.428 5.84961 16.0005C5.84961 14.573 6.35094 13.3568 7.35361 12.352C8.35628 11.347 9.57144 10.8445 10.9991 10.8445H14.3316C14.5721 10.8445 14.7742 10.9277 14.9379 11.0942C15.1015 11.2607 15.1834 11.4648 15.1834 11.7065C15.1834 11.9481 15.1015 12.1498 14.9379 12.3115C14.7742 12.473 14.5721 12.5537 14.3316 12.5537H10.9991C10.0388 12.5537 9.22436 12.8875 8.55586 13.555C7.88719 14.2225 7.55286 15.0355 7.55286 15.994C7.55286 16.9526 7.88719 17.7677 8.55586 18.4392C9.22436 19.1106 10.0388 19.4462 10.9991 19.4462H14.3316C14.5721 19.4462 14.7742 19.5285 14.9379 19.693C15.1015 19.8575 15.1834 20.0606 15.1834 20.3022C15.1834 20.5439 15.1015 20.7455 14.9379 20.907C14.7742 21.0686 14.5721 21.1495 14.3316 21.1495H10.9991ZM12.8084 16.7857C12.5864 16.7857 12.3999 16.7109 12.2489 16.5612C12.0979 16.4114 12.0224 16.2228 12.0224 15.9955C12.0224 15.7683 12.0969 15.5813 12.2459 15.4345C12.3949 15.2876 12.5824 15.2142 12.8084 15.2142H19.1899C19.4119 15.2142 19.5984 15.2891 19.7494 15.4387C19.9004 15.5886 19.9759 15.7771 19.9759 16.0045C19.9759 16.2316 19.9014 16.4186 19.7524 16.5655C19.6034 16.7123 19.4159 16.7857 19.1899 16.7857H12.8084ZM17.6724 21.1495C17.428 21.1495 17.224 21.0672 17.0604 20.9027C16.8967 20.7382 16.8149 20.5351 16.8149 20.2935C16.8149 20.0518 16.8967 19.8501 17.0604 19.6885C17.224 19.527 17.428 19.4462 17.6724 19.4462H20.9991C21.9594 19.4462 22.7739 19.1125 23.4424 18.445C24.111 17.7775 24.4454 16.9645 24.4454 16.006C24.4454 15.0473 24.111 14.2322 23.4424 13.5607C22.7739 12.8894 21.9594 12.5537 20.9991 12.5537H17.6724C17.428 12.5537 17.224 12.4715 17.0604 12.307C16.8967 12.1425 16.8149 11.9394 16.8149 11.6977C16.8149 11.4561 16.8967 11.2535 17.0604 11.09C17.224 10.9263 17.428 10.8445 17.6724 10.8445H20.9991C22.4268 10.8445 23.6429 11.3468 24.6476 12.3515C25.6523 13.356 26.1546 14.572 26.1546 15.9995C26.1546 17.427 25.6523 18.6421 24.6476 19.645C23.6429 20.648 22.4268 21.1495 20.9991 21.1495H17.6724Z" fill="#030804"/>
+		</svg>
+	{% elseif network == 'linkedin' %}
+		<svg width="32" height="32" viewbox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<rect width="32" height="32" rx="16" fill="#F2F2F2"/>
+			<path fill-rule="evenodd" clip-rule="evenodd" d="M8.5 7.24268C7.67157 7.24268 7 7.91425 7 8.74268V23.7427C7 24.5711 7.67157 25.2427 8.5 25.2427H23.5C24.3284 25.2427 25 24.5711 25 23.7427V8.74268C25 7.91425 24.3284 7.24268 23.5 7.24268H8.5ZM12.5208 11.2454C12.5264 12.2016 11.8106 12.7909 10.9612 12.7866C10.1611 12.7824 9.46357 12.1454 9.46779 11.2468C9.47201 10.4016 10.14 9.72243 11.0076 9.74212C11.8879 9.76181 12.5264 10.4073 12.5208 11.2454ZM16.2797 14.0044H13.7597H13.7583V22.5643H16.4217V22.3646C16.4217 21.9847 16.4214 21.6047 16.4211 21.2246C16.4203 20.2108 16.4194 19.1959 16.4246 18.1824C16.426 17.9363 16.4372 17.6804 16.5005 17.4455C16.7381 16.568 17.5271 16.0013 18.4074 16.1406C18.9727 16.2291 19.3467 16.5568 19.5042 17.0898C19.6013 17.423 19.6449 17.7816 19.6491 18.129C19.6605 19.1766 19.6589 20.2242 19.6573 21.2719C19.6567 21.6417 19.6561 22.0117 19.6561 22.3815V22.5629H22.328V22.3576C22.328 21.9056 22.3278 21.4537 22.3275 21.0018C22.327 19.8723 22.3264 18.7428 22.3294 17.6129C22.3308 17.1024 22.276 16.599 22.1508 16.1054C21.9638 15.3713 21.5771 14.7638 20.9485 14.3251C20.5027 14.0129 20.0133 13.8118 19.4663 13.7893C19.404 13.7867 19.3412 13.7833 19.2781 13.7799C18.9984 13.7648 18.7141 13.7494 18.4467 13.8033C17.6817 13.9566 17.0096 14.3068 16.5019 14.9241C16.4429 14.9949 16.3852 15.0668 16.2991 15.1741L16.2797 15.1984V14.0044ZM9.68164 22.5671H12.3324V14.01H9.68164V22.5671Z" fill="#030804"/>
+		</svg>
+	{% elseif network == 'x' %}
+		<svg width="32" height="32" viewbox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<rect width="32" height="32" rx="16" fill="#F2F2F2"/>
+			<path d="M21.1761 8.24268H23.9362L17.9061 15.0201L25 24.2427H19.4456L15.0951 18.6493L10.1172 24.2427H7.35544L13.8052 16.9935L7 8.24268H12.6954L16.6279 13.3553L21.1761 8.24268ZM20.2073 22.6181H21.7368L11.8644 9.78196H10.2232L20.2073 22.6181Z" fill="#030804"/>
+		</svg>
+	{% elseif network == 'facebook' %}
+		<svg width="32" height="32" viewbox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<rect width="32" height="32" rx="16" fill="#F2F2F2"/>
+			<path d="M26 16.3038C26 10.7472 21.5229 6.24268 16 6.24268C10.4771 6.24268 6 10.7472 6 16.3038C6 21.3255 9.65684 25.4879 14.4375 26.2427V19.2121H11.8984V16.3038H14.4375V14.0872C14.4375 11.5656 15.9305 10.1728 18.2146 10.1728C19.3088 10.1728 20.4531 10.3693 20.4531 10.3693V12.8453H19.1922C17.95 12.8453 17.5625 13.6209 17.5625 14.4166V16.3038H20.3359L19.8926 19.2121H17.5625V26.2427C22.3432 25.4879 26 21.3257 26 16.3038Z" fill="#030804"/>
+		</svg>
+	{% endif %}
+{% endmacro %}
+
+<article{{attributes.addClass('full-content-module')}}>
+
+	{# Top Meta Bar: Breadcrumbs and Social Icons #}
+	<div class="full-content-module__top-meta">
+		<div class="full-content-module__breadcrumbs">
+			<a href="/">Home</a>
+			<span class="full-content-module__breadcrumbs-divider">›</span>
+			<span class="full-content-module__breadcrumbs-current">Legal</span>
+		</div>
+
+		<div class="full-content-module__social-share full-content-module__social-share--plain">
+			<a href="https://web.com" aria-label="Convene NGO Website" target="_blank" rel="noopener noreferrer">
+				{{ _self.icon_svg('link') }}
+			</a>
+			<a href="https://linkedin.com" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+				{{ _self.icon_svg('linkedin') }}
+			</a>
+			<a href="https://twitter.com" aria-label="X (Twitter)" target="_blank" rel="noopener noreferrer">
+				{{ _self.icon_svg('x') }}
+			</a>
+			<a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+				{{ _self.icon_svg('facebook') }}
+			</a>
+		</div>
+	</div>
+
+	<div class="full-content-module__body text-block">
+		<h1>Introduction</h1>
+
+		<p>Welcome to Convene ("we," "our," or "us"). As a non-governmental organization committed to driving positive social impact, transparency and trust are at the core of everything we do. This document outlines our Privacy Policy, Terms and Conditions, and our compliance with international non-profit regulations.</p>
+
+		<p>By interacting with our platform, registering for our events, or contributing to our charitable initiatives, you agree to the ethical standards and operational policies defined herein. We value the privacy of our donors, volunteers, and beneficiaries and are fully compliant with standard global frameworks including the GDPR.</p>
+
+		<figure>
+			{% include 'canvas:image' with {
+				src: figure_image_url|default('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80'),
+				alt: 'Community gathering and collaboration',
+				loading: 'lazy',
+				class: '',
+			} only %}
+			<figcaption>Convene NGO Community Impact Gathering</figcaption>
+		</figure>
+
+		<p class="lead">Our commitment is to ensure that your personal information is processed lawfully, fairly, and with absolute transparency for specific, explicit, and legitimate developmental purposes.</p>
+
+		<p>We actively gather data strictly for the purposes of facilitating international aid events, processing tax-deductible contributions, and maintaining clear communication with our generous donor network. We do not sell, trade, or unfairly distribute personal supporter information to third-party marketing entities under any circumstances. Event attendance metrics and anonymous survey results are only utilized to measure the operational effectiveness of our campaigns.</p>
+
+		<blockquote>
+			"Transparency is the foundation of trust. We are dedicated to ensuring every supporter understands precisely how their actions and contributions empower our global missions."
+		</blockquote>
+
+		<p>If you are registering for one of our regional conferences or digital seminars, please note that photography and video recordings may take place for archival and grant-reporting purposes. You retain the full right to opt-out of media inclusion during the on-site registration process by speaking with one of our event coordinators.</p>
+
+		<h2>Conclusion & Contact Rights</h2>
+
+		<p>Under applicable international data protection laws, including the European Union's GDPR, you have the right to request access to the personal data we hold about you. You may also request corrections, restriction of processing, or full deletion of your records from our donor management systems at any time.</p>
+
+		<p>To exercise any of these rights, express concerns regarding our terms of representation, or to request our annual financial transparency reports, please reach out to our legal and compliance team at <strong>legal@convene-ngo.org</strong>.</p>
+
+		<p>We reserve the right to modify these operational and privacy terms periodically to align with evolving international non-profit regulations. Notice of significant changes will be communicated proactively via our official newsletter and across our verified social media channels.</p>
+	</div>
+
+	<div class="full-content-module__bottom-meta">
+		<div class="full-content-module__share-this">
+			<span class="share-label">Share this</span>
+			<div class="full-content-module__social-share full-content-module__social-share--circle">
+				<a href="https://web.com" aria-label="Convene NGO Website" target="_blank" rel="noopener noreferrer">
+					{{ _self.icon_svg('link') }}
+				</a>
+				<a href="https://linkedin.com" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+					{{ _self.icon_svg('linkedin') }}
+				</a>
+				<a href="https://x.com" aria-label="X (Twitter)" target="_blank" rel="noopener noreferrer">
+					{{ _self.icon_svg('x') }}
+				</a>
+				<a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+					{{ _self.icon_svg('facebook') }}
+				</a>
+			</div>
+		</div>
+
+		<div class="full-content-module__tags">
+			<span class="tag">Legal</span>
+			<span class="tag">Privacy</span>
+			<span class="tag">User Testing</span>
+			<span class="tag">Test Data</span>
+		</div>
+	</div>
+
+	<div class="full-content-module__event-team">
+		<div class="event-team-avatar event-team-avatar--placeholder">
+			<svg width="48" height="48" viewbox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+				<rect width="48" height="48" fill="url(#pattern0_14_1401)"/>
+				<defs>
+					<pattern id="pattern0_14_1401" patterncontentunits="objectBoundingBox" width="1" height="1">
+						<use xlink:href="#image0_14_1401" transform="scale(0.0208333)"/>
+					</pattern>
+					<image id="image0_14_1401" width="48" height="48" preserveaspectratio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAABBBJREFUaEPVWl1K5EAQrkpGERF/ERERHDARn9Y5weoN9AZ6gvUG6gl0T6B7At0T6J5A30TTkAEfRASNGgbRJL1UMz1kZuJMpzvqTL+ETPqnvvqquqqrB6GA5vv++Pv7+zoi/gCABc75imVZ45zzcTk957yKiFUAuEDEC9u2/5XLZXo3aqg7moSOomgbAH4CwKrOPJzzC8uyDkzA5AYgBUfEX2kN6wBIj0HEI9u29/KykguA53m7RQueAXzPcZxdVYUoAfB9fyGKomMAWFGd2KQf+Ypt22sqbHQFwBjbBID9Is1FEVyQJMnW0tLSSaf+HQGQyQDAjuKCn9Wto0l9CKBHhJdK+RBEJoCrq6t1y7LI5numIeLm4uLin1aB2gCQw8ZxfP4NNt9NWUGpVKq0OnYbAMaYzzlf6Dbbd3ynwOe6bqUpfqRfeszuP9LRruM4e/Jjg4H6Xu9/h2ZzrhmEYViuVCoBjWsAYIwdcs5pz++H1mBBAOgj7UvlNlgQAK6vrzcR8bAfVJ+SUbAgAHied/5VeU6BSjpzHGcNTczn7e0Nbm9vIUkSLblKpRLMzMzA4OCg1vgwDCfQxHxI+NfXV63F5aDh4WEBQqdRdEbP8/YBgE5WuZsqANIwabtWq7WtMTQ0BLOzs7nXpgGc8wMCcKp7JFQBYFkWzM/PAz3v7+8hDMMmYU0AAMAJmZCPiFqpgyqAubk5wUDRAEShwPM8rsUfgHDgLB8YGRkRGn9+fhZTk/D0Tk7f2gwZCAoHQMKSxklgFYYMAUChAEhoaS6k6SiKBAh6TkxMAAlL7+lmDIAx9qib+7dqeGpqCkZHR5sEJBN7eXmB6elp8fvT0xM8PDw0+hgDKMqJx8bGYHJyUsmd0s5sAkA4MWPsmHO+rrRySyfJQHqrVJmHIvfNzY2I4CYAAOCssEBGEZWAqDYZD0wAiEBmkkrc3d1lRldVENTPBIBIJeq1zsc8i8q+tK8TCNpldBoxRmmEbjIXRVFZptPa6YSO4EWMkQd8CYCqb8oF1SIEMJ1D1onkkXI8jmMqpzQuJEwX+OzxZD7Ly8vVxqHe87y+YYFzfuS67hYpKV1W6RsWpPabANBLn7CQXdiSNtvLB3xKHVzXLaf9q602enl5uTAwMNCTxd0oiirkuB0B0EeT6PxZu0+SJBtZtzWdLjh6aVdqsvuuDKT8oRdAfCh82y6URT9jjFJtKvx+dZALEHE761ZGmQHZkRzbtu1T3epFXr+gPCeO441Wh82ap+s1a3rQF8QJqvkfpC8wuoHPBYAmq7OxQ8lUt8lzfBeCh2H4W15cqI7NDaDFrFbprwcGle0zOhbqCC7l0AaQ1lCdFfrHyg9EXKFLwhZ/CTjngWVZF0mSVMnGa7Xa37zazmLlP2A1OStncwqjAAAAAElFTkSuQmCC"/>
+				</defs>
+			</svg>
+		</div>
+
+		<div class="event-team-name">Jane Doe</div>
+
+		<div class="event-team-role">Head of Events</div>
+	</div>
+</article>

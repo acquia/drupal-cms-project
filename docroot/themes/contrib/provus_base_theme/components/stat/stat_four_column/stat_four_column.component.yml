@@ -1,0 +1,30 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Stat Four Column
+description: A four-column stat group layout using Bootstrap grid.
+status: stable
+group: Provus Stat Components
+
+props:
+  type: object
+  properties:
+    title:
+      type: string
+      title: 'Title'
+      description: 'Title of the stat group'
+      examples:
+        - 'Our Stats'
+      default: ''
+
+slots:
+  stat_item_1:
+    title: Stat Item 1
+    description: First stat item
+  stat_item_2:
+    title: Stat Item 2
+    description: Second stat item
+  stat_item_3:
+    title: Stat Item 3
+    description: Third stat item
+  stat_item_4:
+    title: Stat Item 4
+    description: Fourth stat item

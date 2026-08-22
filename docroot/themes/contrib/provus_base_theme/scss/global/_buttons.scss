@@ -1,0 +1,304 @@
+// Button styles.
+@mixin button-primary() {
+  background: $button-primary-background;
+  color: $button-primary-text;
+  border-color: $button-primary-background;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    box-shadow: 0 0 0 3px transparentize($color: $button-primary-background-hover, $amount: 0.5);
+    background: $button-primary-background-hover;
+    text-decoration: none;
+    color: $button-primary-text-hover;
+  }
+  &:focus {
+    box-shadow: 0 0 0 3px transparentize($color: $button-primary-background-hover, $amount: 0.5);
+    background: $button-primary-background-hover;
+    text-decoration: none;
+    color: $button-primary-text-hover;
+  }
+  &:active {
+    box-shadow: 0 0 0 3px transparentize($color: $button-primary-background-hover, $amount: 0.5);
+    background: $button-primary-background-hover;
+    color: $button-primary-text-hover;
+    text-decoration: none;
+    border-color: transparent;
+  }
+}
+
+@mixin button-secondary() {
+  background: $button-secondary-background;
+  color: $button-secondary-text;
+  border-color: $button-secondary-background;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  &:hover,
+  &:focus {
+    box-shadow: 0 0 0 3px transparentize($color: $button-secondary-background-hover, $amount: 0.5);
+    background: $button-secondary-background-hover;
+    border-color: $button-secondary-background-hover;
+    text-decoration: none;
+    color: $button-secondary-text-hover;
+  }
+  &:focus {
+    box-shadow: 0 0 0 3px transparentize($color: $button-secondary-background-hover, $amount: 0.5);
+    color: $button-secondary-text-hover;
+    background: $button-secondary-background-hover;
+    text-decoration: none;
+  }
+  &:active {
+    box-shadow: 0 0 0 3px transparentize($color: $button-secondary-background-hover, $amount: 0.5);
+    background: $button-secondary-background-hover;
+    color: $button-secondary-text-hover;
+    text-decoration: none;
+    border-color: transparent;
+  }
+}
+
+@mixin button-default() {
+  background: $button-default-background;
+  color: $button-default-text;
+  border-color: $button-default-background;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    box-shadow: 0 0 0 3px transparentize($color: $button-default-background-hover, $amount: 0.5);
+    background: $button-default-background-hover;
+    text-decoration: none;
+    color: $button-default-text-hover;
+  }
+  &:focus {
+    box-shadow: 0 0 0 3px transparentize($color: $button-default-background-hover, $amount: 0.5);
+    background: $button-default-background-hover;
+    text-decoration: none;
+    color: $button-default-text-hover;
+  }
+  &:active {
+    box-shadow: 0 0 0 3px transparentize($color: $button-default-background-hover, $amount: 0.5);
+    background: $button-default-background-hover;
+    color: $button-default-text-hover;
+    text-decoration: none;
+    border-color: transparent;
+  }
+}
+
+@mixin button-outlined() {
+  background: $button-outline-background;
+  color: $button-outline-text;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $button-outline-border;
+  &:hover,
+  &:focus {
+    background: $button-outline-background-hover;
+    border: 1px solid $button-outline-border-hover;
+    color: $button-outline-text-hover;
+  }
+}
+
+@mixin button-icon() {
+  font-family: $font-fontawesome;
+  padding-right: $padding-padding-xxs;
+  font-size: $padding-padding-md;
+  font-style: normal;
+  max-width: $padding-padding-md;
+  max-height: $padding-padding-md;
+  width: 100%;
+  height: 100%;
+}
+
+/* Button sizes */
+@mixin text-style-button-xxsmall() {
+  font-size: rem-calc(10);
+  line-height: rem-calc(10);
+  letter-spacing: rem-calc(0.04);
+  border-radius: $button-border-radius-radius-xxs;
+  padding: $padding-padding-xxs;
+}
+@mixin text-style-button-xsmall() {
+  font-size: rem-calc(12);
+  line-height: rem-calc(12);
+  letter-spacing: rem-calc(0.04);
+  border-radius: $button-border-radius-radius-xs;
+  padding: $padding-padding-xs;
+}
+@mixin text-style-button-small() {
+  font-size: rem-calc(13);
+  line-height: rem-calc(12);
+  letter-spacing: rem-calc(0.04);
+  border-radius: $button-border-radius-radius-sm;
+  padding: $padding-padding-sm;
+}
+@mixin text-style-button-medium() {
+  font-size: rem-calc(16);
+  line-height: rem-calc(16);
+  letter-spacing: rem-calc(-0.13);
+  border-radius: $button-border-radius-radius-mg;
+  padding: $padding-padding-md;
+}
+@mixin text-style-button-large() {  
+  line-height: rem-calc(24);
+  letter-spacing: rem-calc(-0.18);
+  padding: $padding-padding-lg;
+  border-radius: $button-border-radius-radius-lg;
+}
+@mixin text-style-button-xlarge() {  
+  line-height: rem-calc(28);
+  letter-spacing: rem-calc(-0.20);
+  padding: $padding-padding-xlg;
+  border-radius: $button-border-radius-radius-xl;
+}
+@mixin text-style-button-xxlarge() {  
+  line-height: rem-calc(32);
+  letter-spacing: rem-calc(-0.24);
+  border-radius: $button-border-radius-radius-xxl;
+  padding: $padding-padding-xxlg;
+}
+
+// Global buttons styling.
+.btn, .btn.form-control {
+  border-radius: $radius-radius-xs;
+  padding: $padding-padding-xs;
+  font-size: 1rem;
+  font-family: $font-body;
+  font-style: normal;
+  line-height: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: none;
+  @include text-style-button-medium();
+  @include effect-style-elevation-xs();
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
+  &-xxsmall {
+    @include text-style-button-xxsmall();
+  }
+  &-xsmall {
+    @include text-style-button-xsmall();
+  }
+  &-small {
+    @include text-style-button-small();
+  }
+  &-medium {
+    @include text-style-button-medium();
+  }
+  &-large {
+    @include text-style-button-large();
+  }
+  &-xlarge {
+    @include text-style-button-xlarge();
+  }
+  &-xxlarge {
+    @include text-style-button-xxlarge();
+  }
+
+  &-default {
+    @include button-default;    
+  }
+
+  &-primary {
+    @include button-primary;
+  }
+
+  &-secondary {
+    @include button-secondary;
+  }
+
+  &-outlined {
+    @include button-outlined;
+  }
+
+  &.form-control {
+    width: auto;
+    display: inline-block;
+    margin-right: $card-spacing;
+  }
+  svg.svg-inline--fa {
+    @include button-icon();
+  }
+
+  i {
+    @include button-icon();
+  }
+}
+
+.icon-link {
+  visibility: collapse;
+  width: rem-calc(20);
+  height: rem-calc(25);
+  display: block;
+  svg {
+    visibility: visible;
+    width: rem-calc(20);
+    height: rem-calc(25);
+  }
+}
+
+// Button Small, Medium and Large styling for inline and stacked buttons.
+.button-align- {
+  .field {
+    .field__item {
+      margin-bottom: $padding-padding-xxs;
+
+      i {
+        @include button-icon();
+      }
+    }
+  }
+
+  &inline {
+    .field {
+      display: flex;
+      flex-direction: column;
+
+      @include media-breakpoint-up(sm) {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .field__item {
+        margin-right: $padding-padding-sm;
+        margin-bottom: $padding-padding-xs;
+        a {
+          i {
+            @include button-icon();
+          }
+        }
+      }
+    }
+  }
+  &stacked {
+    .field {
+      display: flex;
+      flex-direction: column;
+      .field__item {
+        margin-bottom: $padding-padding-md;
+        a {        
+          i {
+            @include button-icon();
+          }
+        }
+      }
+    }
+  }
+}
+
+.block-provus-button {
+  &.text-end {
+    .field--name-field-provus-links {
+      justify-content: end;
+    }
+  }
+  &.text-center {
+    .field--name-field-provus-links {
+      justify-content: center;
+    }
+  }
+}

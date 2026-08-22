@@ -1,0 +1,66 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Heading
+description: Structured text (H1–H6) used to define the information architecture of a page.
+group: Element
+status: stable
+props:
+  type: object
+  properties:
+    heading:
+      type: string
+      title: Heading
+      description: The heading.
+      examples:
+        - Heading
+    level:
+      type: number
+      title: Level
+      description: Select the heading level.
+      enum: [1, 2, 3, 4, 5, 6]
+      default: 2
+      examples:
+        - 2
+    color:
+      type: string
+      title: Color
+      description: Select the colour of the heading.
+      enum:
+        - primary
+        - secondary
+        - accent
+        - neutral
+        - info
+        - success
+        - warning
+        - error
+      meta:enum:
+        primary: Primary
+        secondary: Secondary
+        accent: Accent
+        neutral: Neutral
+        info: Info
+        success: Success
+        warning: Warning
+        error: Error
+    alignment:
+      type: string
+      title: Alignment
+      description: Select the alignment of the heading.
+      enum:
+        - start
+        - center
+        - end
+        - justify
+      meta:enum:
+        start: Start
+        center: Center
+        end: End
+        justify: Justify
+    url:
+      type: string
+      title: URL
+      description: Specify a URL to make the heading a link.
+    use_display_font:
+      type: boolean
+      title: Use display font
+      description: Enable to apply the display font settings to the heading.

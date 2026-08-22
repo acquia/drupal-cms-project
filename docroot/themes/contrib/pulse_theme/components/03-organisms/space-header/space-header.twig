@@ -1,0 +1,37 @@
+{#
+/**
+ * @file
+ * Template for space-header component.
+ */
+#}
+{% set alignment_class = 'menu-align-' ~ (menu_align|default('center')) %}
+
+<div class="space-navbar navbar {{ alignment_class }}" {{ attributes }}>
+  <div class="navbar--logo">
+    {% block logo %}
+      {{ include('@pulse_theme/templates/block/block--system-branding-block.html.twig') }}
+    {% endblock %}
+  </div>
+
+  <div class="navbar--hamburger-container">
+    <button class="navbar--hamburger" aria-controls="navbar-menu" aria-expanded="false" aria-label="{{ 'Show menu'|t }}">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <div id="navbar-menu" class="navbar--menu">
+    <div class="navbar--dropdown-menu-wrapper">
+      <div class="{{ dropdown_menu_classes }} navbar--dropdown-inner">
+        {% block navigation %}
+        {% endblock %}
+      </div>
+    </div>
+
+    <div class="navbar--links">
+      {% block links %}
+      {% endblock %}
+    </div>
+  </div>
+</div>

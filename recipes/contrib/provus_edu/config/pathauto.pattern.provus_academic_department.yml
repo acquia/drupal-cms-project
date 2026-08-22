@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: provus_academic_department
+label: 'Academic Department'
+type: 'canonical_entities:node'
+pattern: 'academics/[node:title]'
+selection_criteria:
+  638fd2ea-d1b6-4043-9019-7d8331e0ba0e:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 638fd2ea-d1b6-4043-9019-7d8331e0ba0e
+    context_mapping:
+      node: node
+    bundles:
+      provus_academic_department: provus_academic_department
+selection_logic: and
+weight: -5
+relationships: {  }

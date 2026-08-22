@@ -1,0 +1,99 @@
+request:
+  messages:
+    -
+      role: user
+      text: 'Describe this picture.'
+      images:
+        -
+          type: Drupal\ai\OperationType\GenericType\ImageFile
+          base64: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC'
+          mime_type: image/png
+          filename: picture.png
+      remote_files: {  }
+      tools: null
+      tool_id: null
+  debug_data: {  }
+  chat_tools:
+    -
+      type: function
+      function:
+        name: dummy_tool
+        description: 'A test plugin that echoes back the input string.'
+        parameters:
+          type: object
+          properties:
+            input:
+              name: input
+              type: string
+              description: 'Input The input string to echo back.'
+          required:
+            - input
+    -
+      type: function
+      function:
+        name: dummy_tool_two
+        description: 'A test plugin that echoes back the input string.'
+        parameters:
+          type: object
+          properties:
+            input:
+              name: input
+              type: string
+              description: 'Input The input string to echo back.'
+          required:
+            - input
+    -
+      type: function
+      function:
+        name: dummy_tool_three
+        description: 'A test plugin that echoes back the input string.'
+        parameters:
+          type: object
+          properties:
+            input:
+              name: input
+              type: string
+              description: 'Input The input string to echo back.'
+          required:
+            - input
+  chat_structured_json_schema: {  }
+  chat_strict_schema: false
+response:
+  normalized:
+    role: assistant
+    text: ''
+    images: {  }
+    remote_files: {  }
+    tools:
+      -
+        id: call_1
+        type: function
+        function:
+          name: dummy_tool
+          arguments: '{"input":"picture-alpha"}'
+    tool_id: null
+  rawOutput:
+    role: assistant
+    text: ''
+    tools:
+      -
+        id: call_1
+        type: function
+        function:
+          name: dummy_tool
+          arguments: '{"input":"picture-alpha"}'
+  metadata: {  }
+  tokenUsage:
+    input: null
+    output: null
+    total: null
+    reasoning: null
+    cached: null
+  rateLimits:
+    rateLimitMaxRequests: null
+    rateLimitMaxTokens: null
+    rateLimitRemainingRequests: null
+    rateLimitRemainingTokens: null
+    rateLimitResetRequests: null
+    rateLimitResetTokens: null
+operation_type: chat

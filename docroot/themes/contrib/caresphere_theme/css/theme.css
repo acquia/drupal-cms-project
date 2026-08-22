@@ -1,0 +1,123 @@
+/**
+ * @file theme.css
+ * Design tokens for caresphere_theme. Loaded first so all variables are
+ * available before component CSS runs.
+ *
+ * Tokens follow the shadcn/ui naming convention so they are compatible with
+ * Canvas variable-aware components.
+ */
+
+:root {
+  --background: #020704;
+  --dark-gray: #1b1f1d;
+  --gray-light: #d9d9d9;
+  --gray: #f2f2f2;
+  --foreground: #ffffff;
+  --card: #f2f2f2;
+  --card-foreground: #020704;
+  --primary: #c30000;
+  --primary-foreground: #ffffff;
+  --secondary: #d9d9d9;
+  --destructive: #9c0000;
+  --border: rgba(2, 7, 4, 0.15);
+  --border-secondary: rgba(255, 255, 255, 0.2);
+  --input: rgba(255, 255, 255, 0.6);
+  --input-background: rgba(255, 255, 255, 0.1);
+  --muted: #1a1f1c;
+  --muted-foreground: rgba(255, 255, 255, 0.6);
+
+  --font-sans: "DM Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  --font-serif:
+    "IBM Plex Serif", Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: "Fira Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+  --font-logo: "IBM Plex Serif", Georgia, serif;
+  --font-display: "Roboto", "Arial Black", Arial, sans-serif;
+
+  --button-font-family: var(--font-sans);
+  --button-font-weight: 600;
+  --button-letter-spacing: 0.02em;
+
+  --radius: 0.5rem;
+
+  --shadow-sm:
+    0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow-md:
+    0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
+  --shadow-lg:
+    0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
+
+  --spacing: 0.25rem;
+
+  /* Typography scale */
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1.5;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.5;
+  --text-base: 1rem;
+  --text-base--line-height: 1.5;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.5;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.35;
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 1.3333;
+  --text-3xl: 2rem;
+  --text-3xl--line-height: 1.3125;
+  --text-4xl: 2.75rem;
+  --text-4xl--line-height: 1.2;
+  --text-5xl: 3rem;
+  --text-5xl--line-height: 1.083333;
+  --text-6xl: 3.75rem;
+  --text-6xl--line-height: 1;
+  --text-7xl: 4.5rem;
+  --text-7xl--line-height: 1;
+  --text-8xl: 6rem;
+  --text-8xl--line-height: 1;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Computed from component layout; used for hero overlap */
+  --navbar-height: calc(var(--spacing) * 15);
+
+  /* Typography variables mapping to heading styles */
+  --h1-size: 2.75rem; /* 44px */
+  --h1-lh: 1.2;
+  --h2-size: 2.5rem; /* 40px */
+  --h2-lh: 1.2;
+  --h3-size: 2rem; /* 32px */
+  --h3-lh: 1.2;
+  --h4-size: 1.5rem; /* 24px */
+  --h4-lh: 1.3;
+  --h5-size: 1.25rem; /* 20px */
+  --h5-lh: 1.4;
+  --h6-size: 1.125rem; /* 18px */
+  --h6-lh: 1.4;
+  --p-size: 0.75rem; /* 12px */
+  --p-lh: 1.5;
+
+  @media (min-width: 768px) {
+    --navbar-height: calc(var(--spacing) * 18);
+    --h1-size: 4.5rem; /* 72px */
+    --h2-size: 3.25rem; /* 52px */
+    --h3-size: 2.75rem; /* 44px */
+    --h4-size: 2.25rem; /* 36px */
+    --h5-size: 1.75rem; /* 28px */
+    --h6-size: 1.375rem; /* 22px */
+    --p-size: 1rem; /* 16px */
+  }
+
+  /* Header colour tokens. Override per region for light/dark variants. */
+  --header-bg: #020704;
+  --header-fg: #ffffff;
+}
+
+.region-header {
+  --header-bg: #020704;
+  --header-fg: #ffffff;
+  background-color: var(--header-bg);
+  color: var(--header-fg);
+}

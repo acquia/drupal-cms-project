@@ -1,0 +1,26 @@
+{% set is_preview = canvas_is_preview or in_preview %}
+{% set url = url|default(null) %}
+
+{% set classes = [
+  'video',
+  'has-rhythm',
+] %}
+
+{% set video_attributes = url
+  ? attributes.setAttribute('data-video-url', url).addClass(classes)
+  : attributes.addClass(classes)
+%}
+
+{% if url or is_preview %}
+  {% if is_preview %}
+    <div{{ video_attributes }}>
+      <div class="video__placeholder">
+        <svg class="video__placeholder-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </div>
+    </div>
+  {% else %}
+    <div{{ video_attributes }}></div>
+  {% endif %}
+{% endif %}

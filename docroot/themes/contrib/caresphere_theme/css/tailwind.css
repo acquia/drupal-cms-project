@@ -1,0 +1,14 @@
+/**
+ * Tailwind CSS v4 — utilities only (no preflight) so existing component CSS is unchanged.
+ * Custom theme color "foreground" maps to design token --foreground.
+ * Content: theme components and templates (plugin discovers from CSS file location).
+ */
+@import "tailwindcss/theme.css" layer(theme);
+@theme inline {
+  --color-foreground: var(--foreground);
+}
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@source "../components/**/*.twig";
+@source "../templates/**/*.twig";
+@source "../**/*.js";

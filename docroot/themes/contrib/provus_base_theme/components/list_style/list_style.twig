@@ -1,0 +1,8 @@
+{% set is_ordered = list_style in ['decimal', 'lower-roman', 'upper-roman', 'lower-alpha', 'upper-alpha'] %}
+{% set tag = is_ordered ? 'ol' : 'ul' %}
+<div class="list-style-wrapper {{ text_color }} {{ font_weight }} {{ font_size }}">
+  <{{ tag }} class="list-style {{ additional_classes }}" style="list-style-type: {{ list_style }};">
+    {% block list_items %}
+    {% endblock %}
+  </{{ tag }}>
+</div>

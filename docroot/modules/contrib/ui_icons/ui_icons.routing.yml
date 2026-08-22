@@ -1,0 +1,14 @@
+ui_icons.autocomplete:
+  path: '/ui-icons/ajax/autocomplete/icons'
+  defaults:
+    _controller: '\Drupal\ui_icons\Controller\IconAutocompleteController::handleSearchIcons'
+  requirements:
+    _permission: 'access content'
+
+ui_icons.preview:
+  path: '/ui-icons/ajax/preview/icons'
+  defaults:
+    _controller: '\Drupal\ui_icons\Controller\IconPreviewController::preview'
+  requirements:
+    _permission: 'access content'
+    _method: 'POST'

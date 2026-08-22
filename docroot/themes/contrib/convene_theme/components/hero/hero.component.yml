@@ -1,0 +1,36 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Hero Banner
+group: Organisms
+status: stable
+props:
+  type: object
+  properties:
+    variation:
+      title: Hero Variation
+      type: string
+      enum:
+        - large
+        - small
+      default: large
+    admin_theme:
+      title: Admin Theme
+      type: boolean
+      default: false
+      description: Check to enable Admin Theme styles (applies CSS only on frontend to preserve Canvas builder look).
+slots:
+  background_media:
+    title: Background Image
+    description: Image to be displayed as background.
+  heading:
+    title: Heading Slot
+    description: Slot for the main headline (use Typography atom).
+  subheading:
+    title: Subheading Slot
+    description: Slot for the subheadline (use Typography atom).
+  actions:
+    title: Buttons
+    description: Buttons to be displayed in the hero section.
+library:
+  css:
+    component:
+      hero.css: {}

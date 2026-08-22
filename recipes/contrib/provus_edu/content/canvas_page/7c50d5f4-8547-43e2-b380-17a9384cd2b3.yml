@@ -1,0 +1,1117 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 7c50d5f4-8547-43e2-b380-17a9384cd2b3
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Basic Components'
+  components:
+    -
+      uuid: c35115c5-c88d-4176-8725-f6386cfcf274
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+    -
+      parent_uuid: c35115c5-c88d-4176-8725-f6386cfcf274
+      slot: content
+      uuid: 060ab1d2-6081-48eb-a1a5-ff15a276ce00
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h1
+        title: Components
+        decorative_line: false
+        alignment: left
+    -
+      uuid: 9d303444-31c1-486b-b232-4a06a3019f3b
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        padding_bottom: pb-5
+    -
+      parent_uuid: 9d303444-31c1-486b-b232-4a06a3019f3b
+      slot: content
+      uuid: 1030fa51-d36a-4e8d-bd97-4d97acfd13c6
+      component_id: sdc.provus_base_theme.two_column
+      inputs:
+        desktop_width: 50-50
+        tablet_width: 50-50
+        mobile_width: 100-100
+    -
+      parent_uuid: 1030fa51-d36a-4e8d-bd97-4d97acfd13c6
+      slot: column_1
+      uuid: dea0a1e1-87ee-4ea5-a8ee-62ce74ed2d8b
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: Heading
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 1030fa51-d36a-4e8d-bd97-4d97acfd13c6
+      slot: column_2
+      uuid: 926b659f-e9b0-480f-b19a-6f6f00ccdc30
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h1
+        title: H1
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 1030fa51-d36a-4e8d-bd97-4d97acfd13c6
+      slot: column_2
+      uuid: b8e0d91d-adf1-4db0-b465-05e750530dea
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: H2
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 1030fa51-d36a-4e8d-bd97-4d97acfd13c6
+      slot: column_2
+      uuid: d4b4575b-2d9b-455d-9d1c-0e9d95e20401
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h3
+        title: H3
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 1030fa51-d36a-4e8d-bd97-4d97acfd13c6
+      slot: column_2
+      uuid: 8fa256a5-c647-4b7c-96bf-ce29483781e5
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h4
+        title: H4
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 1030fa51-d36a-4e8d-bd97-4d97acfd13c6
+      slot: column_2
+      uuid: 17ea5ced-ef75-43ba-97dd-a7c4809b69ee
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h5
+        title: H5
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 1030fa51-d36a-4e8d-bd97-4d97acfd13c6
+      slot: column_2
+      uuid: cae39187-9a68-4854-bc17-4827d0a00980
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h6
+        title: H6
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 9d303444-31c1-486b-b232-4a06a3019f3b
+      slot: content
+      uuid: 822bbe5d-49cb-42fb-9be5-2126188ca6e9
+      component_id: sdc.provus_base_theme.two_column
+      inputs:
+        desktop_width: 50-50
+        tablet_width: 50-50
+        mobile_width: 100-100
+    -
+      parent_uuid: 822bbe5d-49cb-42fb-9be5-2126188ca6e9
+      slot: column_1
+      uuid: f47e31de-6a4f-476a-815c-4631bad2f43c
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: Divider
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 822bbe5d-49cb-42fb-9be5-2126188ca6e9
+      slot: column_2
+      uuid: 87b959a0-ac9c-43f5-82d3-580fdedc8e1d
+      component_id: sdc.provus_base_theme.divider
+      inputs:
+        padding_top: pt-5
+        padding_all: p-5
+    -
+      parent_uuid: 9d303444-31c1-486b-b232-4a06a3019f3b
+      slot: content
+      uuid: 7bce7061-5771-408f-9c9d-93ae46a11ebe
+      component_id: sdc.provus_base_theme.two_column
+      inputs:
+        desktop_width: 50-50
+        tablet_width: 50-50
+        mobile_width: 100-100
+    -
+      parent_uuid: 7bce7061-5771-408f-9c9d-93ae46a11ebe
+      slot: column_1
+      uuid: b38285ea-0a5c-4780-87b5-3e4bc711999d
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: Paragraph
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 7bce7061-5771-408f-9c9d-93ae46a11ebe
+      slot: column_2
+      uuid: cf0c7c06-8b99-4be0-98d7-c057071869ad
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: 'A paragraph element for text content.'
+          format: canvas_full_html
+    -
+      parent_uuid: 7bce7061-5771-408f-9c9d-93ae46a11ebe
+      slot: column_2
+      uuid: a73d053c-1412-4f1a-af46-63a9627eaaa3
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p>A paragraph element for text content with primary text color.</p>'
+          format: canvas_full_html
+        text_color: text-primary
+    -
+      parent_uuid: 7bce7061-5771-408f-9c9d-93ae46a11ebe
+      slot: column_2
+      uuid: 56094f5d-0313-490e-bb30-277e77e4630a
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p>A paragraph element for text content with secondary text color.</p>'
+          format: canvas_full_html
+        text_color: text-secondary
+    -
+      parent_uuid: 7bce7061-5771-408f-9c9d-93ae46a11ebe
+      slot: column_2
+      uuid: 40290b29-cada-4b4c-8eb9-d2958e53293b
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p>A paragraph element for text content with success text color.</p>'
+          format: canvas_full_html
+        text_color: text-success
+    -
+      parent_uuid: 7bce7061-5771-408f-9c9d-93ae46a11ebe
+      slot: column_2
+      uuid: 05f30fcb-c8e2-4078-b3d2-e228dcb2eab8
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p>A paragraph element for text content with danger text color.</p>'
+          format: canvas_full_html
+        text_color: text-danger
+    -
+      parent_uuid: 7bce7061-5771-408f-9c9d-93ae46a11ebe
+      slot: column_2
+      uuid: 37a2d2cc-b01f-4d06-ae98-51d10d6c46de
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p>A paragraph element for text content with info text color.</p>'
+          format: canvas_full_html
+        text_color: text-info
+    -
+      parent_uuid: 7bce7061-5771-408f-9c9d-93ae46a11ebe
+      slot: column_2
+      uuid: feaad1b3-1a0d-4d20-85e1-ba28310a9aa3
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p>A paragraph element for text content with light text color.</p>'
+          format: canvas_full_html
+        text_color: text-light
+    -
+      parent_uuid: 7bce7061-5771-408f-9c9d-93ae46a11ebe
+      slot: column_2
+      uuid: 2b0a58d3-fa03-4c2c-b06f-5766ddf47991
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p>A paragraph element for text content with dark text color.</p>'
+          format: canvas_full_html
+        text_color: text-dark
+    -
+      parent_uuid: 7bce7061-5771-408f-9c9d-93ae46a11ebe
+      slot: column_2
+      uuid: 614775d8-f1ce-4b4b-ae2a-7220e3da6a52
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p>A paragraph element for text content with muted text color.</p>'
+          format: canvas_full_html
+        text_color: text-muted
+    -
+      uuid: c0cb624e-4af4-4aa8-8974-6c8b2ff36b9a
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        custom_class: bg-primary
+    -
+      parent_uuid: c0cb624e-4af4-4aa8-8974-6c8b2ff36b9a
+      slot: content
+      uuid: de689e6c-96c2-4f79-ae85-8b9c186a0aee
+      component_id: sdc.provus_base_theme.three_column
+      inputs:
+        desktop_width: 33-33-33
+        tablet_width: 33-33-33
+        mobile_width: 100-100-100
+    -
+      parent_uuid: de689e6c-96c2-4f79-ae85-8b9c186a0aee
+      slot: column_1
+      uuid: dd50c17f-0a73-453b-b3ce-89f7bb7f6a14
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: Buttons
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: de689e6c-96c2-4f79-ae85-8b9c186a0aee
+      slot: column_1
+      uuid: f208ed4c-7b5c-425e-9efa-6fc71f6b0381
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p>Buttons have various different display options. Adjust size, icons, styles and palette. PS. This header has Extra Large prose style</p>'
+          format: canvas_full_html
+    -
+      parent_uuid: de689e6c-96c2-4f79-ae85-8b9c186a0aee
+      slot: column_2
+      uuid: 987eeb68-f1b7-48aa-a28f-0ad8888433e5
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Button - Large'
+        url:
+          uri: 'internal:/contact'
+          options: {  }
+        variant: default
+        id: my-button
+        size: large
+        width: full
+    -
+      parent_uuid: de689e6c-96c2-4f79-ae85-8b9c186a0aee
+      slot: column_2
+      uuid: d4723813-4537-4f11-97b5-3fc921492af5
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Button - Default'
+        url:
+          uri: 'internal:/contact'
+          options: {  }
+        variant: default
+        id: my-button
+        size: normal
+        width: full
+    -
+      parent_uuid: de689e6c-96c2-4f79-ae85-8b9c186a0aee
+      slot: column_2
+      uuid: fbfd4a15-2781-481e-bfd5-ec40832b1991
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Button - Small'
+        url:
+          uri: 'internal:/contact'
+          options: {  }
+        variant: default
+        id: my-button
+        width: full
+        size: small
+    -
+      parent_uuid: de689e6c-96c2-4f79-ae85-8b9c186a0aee
+      slot: column_3
+      uuid: 52c221fb-e954-4e24-8c1f-b72b870a1ae7
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: Primary
+        url:
+          uri: 'internal:/contact'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: full
+    -
+      parent_uuid: de689e6c-96c2-4f79-ae85-8b9c186a0aee
+      slot: column_3
+      uuid: 5356a4d3-463d-4a26-946b-84c1cb054244
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: Secondary
+        url:
+          uri: 'internal:/contact'
+          options: {  }
+        variant: secondary
+        id: my-button
+        size: normal
+        width: full
+    -
+      parent_uuid: de689e6c-96c2-4f79-ae85-8b9c186a0aee
+      slot: column_3
+      uuid: 51204334-c1bf-4b30-8182-148eb0a1cfee
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: Outlined
+        url:
+          uri: 'internal:/contact'
+          options: {  }
+        variant: outlined
+        id: my-button
+        size: normal
+        width: full
+    -
+      parent_uuid: de689e6c-96c2-4f79-ae85-8b9c186a0aee
+      slot: column_3
+      uuid: e45c3f9c-8360-47b8-a888-b1f5c75c47d7
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: Transparent
+        url:
+          uri: 'internal:/contact'
+          options: {  }
+        variant: transparent
+        id: my-button
+        size: normal
+        width: full
+    -
+      parent_uuid: c0cb624e-4af4-4aa8-8974-6c8b2ff36b9a
+      slot: content
+      uuid: 31d1dbf9-1646-45c4-a946-ec1c62ea677b
+      component_id: sdc.provus_base_theme.spacer
+      inputs:
+        include_divider: true
+        padding_all: p-1
+    -
+      parent_uuid: c0cb624e-4af4-4aa8-8974-6c8b2ff36b9a
+      slot: content
+      uuid: f605ca8e-0fc3-4ce6-8648-be3fea23d0de
+      component_id: sdc.provus_base_theme.three_column
+      inputs:
+        desktop_width: 33-33-33
+        tablet_width: 33-33-33
+        mobile_width: 100-100-100
+    -
+      parent_uuid: f605ca8e-0fc3-4ce6-8648-be3fea23d0de
+      slot: column_1
+      uuid: bc12c050-30cd-4607-a99a-8867de2a868e
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: List
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: f605ca8e-0fc3-4ce6-8648-be3fea23d0de
+      slot: column_1
+      uuid: 0bb34f6b-55f5-4f5c-8dd1-032f164d96cc
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p><span style="-webkit-text-stroke-width:0px;background-color:rgb(253, 252, 252);color:rgb(46, 46, 46);display:inline !important;float:none;font-family:Inter, ui-sans-serif, system-ui, sans-serif;font-size:20px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">Using DIV container</span></p>'
+          format: canvas_full_html
+    -
+      parent_uuid: f605ca8e-0fc3-4ce6-8648-be3fea23d0de
+      slot: column_2
+      uuid: 4d4ecc44-d30c-4ec0-897c-f4074e96f03c
+      component_id: sdc.provus_base_theme.list_div
+      inputs:
+        list_style: icon-left
+        list_orientation: stacked
+    -
+      parent_uuid: 4d4ecc44-d30c-4ec0-897c-f4074e96f03c
+      slot: list_items
+      uuid: a74a93c1-a4bf-4105-8358-2efc993e14f2
+      component_id: sdc.provus_base_theme.list_canvas_item
+      inputs:
+        title: 'Key Features'
+        body:
+          value: |
+            <p>Detailed description of the list item.</p>
+            <p>More information can be added here.</p>
+          format: canvas_full_html
+        icon:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/64x64'
+            alt: Icon
+            width: 64
+            height: 64
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.list_canvas_item
+        link:
+          uri: 'internal:/contact'
+          options: {  }
+    -
+      parent_uuid: 4d4ecc44-d30c-4ec0-897c-f4074e96f03c
+      slot: list_items
+      uuid: da29d045-07cb-4fb1-9aa2-fd48fe214c48
+      component_id: sdc.provus_base_theme.list_canvas_item
+      inputs:
+        title: 'Key Features'
+        body:
+          value: |
+            <p>Detailed description of the list item.</p>
+            <p>More information can be added here.</p>
+          format: canvas_full_html
+        icon:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/64x64'
+            alt: Icon
+            width: 64
+            height: 64
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.list_canvas_item
+        link:
+          uri: 'internal:/contact'
+          options: {  }
+    -
+      parent_uuid: f605ca8e-0fc3-4ce6-8648-be3fea23d0de
+      slot: column_3
+      uuid: 6bed047f-dfa7-475f-b63d-f743a662bdf5
+      component_id: sdc.provus_base_theme.list_div
+      inputs:
+        list_style: icon-top
+        list_orientation: grid_2
+    -
+      parent_uuid: 6bed047f-dfa7-475f-b63d-f743a662bdf5
+      slot: list_items
+      uuid: 42da45fc-9d72-4b72-9912-7d842a37aadb
+      component_id: sdc.provus_base_theme.list_canvas_item
+      inputs:
+        title: 'Key Features'
+        body:
+          value: |
+            <p>Detailed description of the list item.</p>
+            <p>More information can be added here.</p>
+          format: canvas_full_html
+        icon:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/64x64'
+            alt: Icon
+            width: 64
+            height: 64
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.list_canvas_item
+        link:
+          uri: 'internal:/contact'
+          options: {  }
+    -
+      parent_uuid: 6bed047f-dfa7-475f-b63d-f743a662bdf5
+      slot: list_items
+      uuid: 52aea538-e09a-4cc8-8e51-74dbdd1e7785
+      component_id: sdc.provus_base_theme.list_canvas_item
+      inputs:
+        title: 'Key Features'
+        body:
+          value: |
+            <p>Detailed description of the list item.</p>
+            <p>More information can be added here.</p>
+          format: canvas_full_html
+        icon:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/64x64'
+            alt: Icon
+            width: 64
+            height: 64
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.list_canvas_item
+        link:
+          uri: 'internal:/contact'
+          options: {  }
+    -
+      parent_uuid: c0cb624e-4af4-4aa8-8974-6c8b2ff36b9a
+      slot: content
+      uuid: a67e4967-786b-4f54-93a5-2825ee186593
+      component_id: sdc.provus_base_theme.three_column
+      inputs:
+        desktop_width: 33-33-33
+        tablet_width: 33-33-33
+        mobile_width: 100-100-100
+    -
+      parent_uuid: a67e4967-786b-4f54-93a5-2825ee186593
+      slot: column_1
+      uuid: 89a2597e-98ef-401a-bb61-50f75a140aad
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: List
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: a67e4967-786b-4f54-93a5-2825ee186593
+      slot: column_1
+      uuid: 38692213-a74d-4ee3-8488-66e21283a0b6
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p><span style="-webkit-text-stroke-width:0px;background-color:rgb(253, 252, 252);color:rgb(46, 46, 46);display:inline !important;float:none;font-family:Inter, ui-sans-serif, system-ui, sans-serif;font-size:20px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">Using LIST container</span></p>'
+          format: canvas_full_html
+    -
+      parent_uuid: a67e4967-786b-4f54-93a5-2825ee186593
+      slot: column_2
+      uuid: 0403b83f-db1b-4628-b2df-63f54e3fbb26
+      component_id: sdc.provus_base_theme.list_style
+      inputs:
+        list_style: circle
+        additional_classes: list-unstyled
+        font_weight: fw-normal
+        font_size: fs-6
+    -
+      parent_uuid: 0403b83f-db1b-4628-b2df-63f54e3fbb26
+      slot: list_items
+      uuid: f8afef5a-c9c5-42ba-a4f7-67e2a19fb7e1
+      component_id: sdc.provus_base_theme.list_style_item
+      inputs:
+        icon: fa-heart
+        body: 'List item'
+    -
+      parent_uuid: 0403b83f-db1b-4628-b2df-63f54e3fbb26
+      slot: list_items
+      uuid: f4c72f0b-e6f1-4678-b443-a4819c5a8b99
+      component_id: sdc.provus_base_theme.list_style_item
+      inputs:
+        icon: fa-heart
+        body: 'List item'
+    -
+      parent_uuid: a67e4967-786b-4f54-93a5-2825ee186593
+      slot: column_3
+      uuid: 56430407-afc3-4609-98aa-f51fe80d5234
+      component_id: sdc.provus_base_theme.list_style
+      inputs:
+        list_style: square
+        font_weight: fw-normal
+        font_size: fs-5
+        text_color: text-primary
+    -
+      parent_uuid: 56430407-afc3-4609-98aa-f51fe80d5234
+      slot: list_items
+      uuid: 380ff384-6092-4dca-95f5-29d6b853ca02
+      component_id: sdc.provus_base_theme.list_style_item
+      inputs:
+        icon: fa-heart
+        body: 'List item'
+    -
+      parent_uuid: 56430407-afc3-4609-98aa-f51fe80d5234
+      slot: list_items
+      uuid: 48504370-5335-4850-aed3-8812124ff925
+      component_id: sdc.provus_base_theme.list_style_item
+      inputs:
+        icon: fa-heart
+        body: 'List item'
+    -
+      parent_uuid: c0cb624e-4af4-4aa8-8974-6c8b2ff36b9a
+      slot: content
+      uuid: cf9aa393-3596-4286-aa70-a557db421941
+      component_id: sdc.provus_base_theme.spacer
+      inputs:
+        include_divider: true
+        padding_all: p-1
+    -
+      parent_uuid: c0cb624e-4af4-4aa8-8974-6c8b2ff36b9a
+      slot: content
+      uuid: 4c31ccf0-e30f-4f68-a79a-982cd017ec49
+      component_id: sdc.provus_base_theme.four_column
+      inputs:
+        desktop_width: 25-25-25-25
+        tablet_width: 25-25-25-25
+        mobile_width: 100-100-100-100
+    -
+      parent_uuid: 4c31ccf0-e30f-4f68-a79a-982cd017ec49
+      slot: column_1
+      uuid: b1c1759d-530c-4c95-8818-31ee76663474
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: Image
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 4c31ccf0-e30f-4f68-a79a-982cd017ec49
+      slot: column_2
+      uuid: 8a353873-18e6-4f57-b526-72497f2eeae7
+      component_id: sdc.provus_base_theme.image
+      inputs:
+        media:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.image
+        size: '4:3'
+        radius: rounded-0
+        margin_bottom: mb-0
+    -
+      parent_uuid: 4c31ccf0-e30f-4f68-a79a-982cd017ec49
+      slot: column_3
+      uuid: b9f159ce-2ecb-488e-95f7-9e6029555e90
+      component_id: sdc.provus_base_theme.image
+      inputs:
+        media:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.image
+        size: '16:9'
+        radius: rounded-0
+        margin_bottom: mb-0
+    -
+      parent_uuid: 4c31ccf0-e30f-4f68-a79a-982cd017ec49
+      slot: column_4
+      uuid: f7913520-2807-4e65-a9a9-df75a5918cf2
+      component_id: sdc.provus_base_theme.image
+      inputs:
+        media:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.image
+        size: '1:1'
+        radius: rounded-0
+        margin_bottom: mb-0
+    -
+      uuid: d21204a2-daf2-4f16-b2cd-f0be9ee19ca7
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        custom_class: bg-grey
+    -
+      parent_uuid: d21204a2-daf2-4f16-b2cd-f0be9ee19ca7
+      slot: content
+      uuid: 89366eb3-fdc2-4ca4-80d2-6e9676cd9877
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: 89366eb3-fdc2-4ca4-80d2-6e9676cd9877
+      slot: column_1
+      uuid: 587b3818-ab3b-4488-8579-78e842fbf93d
+      component_id: sdc.provus_base_theme.stat_four_column
+      inputs:
+        title: 'Stats - 4 Column'
+    -
+      parent_uuid: 587b3818-ab3b-4488-8579-78e842fbf93d
+      slot: stat_item_1
+      uuid: ace3a602-c068-426c-89ab-91d91acf1dcb
+      component_id: sdc.provus_base_theme.stat_item
+      inputs:
+        title: 100+
+        body: 'Stat description text'
+    -
+      parent_uuid: 587b3818-ab3b-4488-8579-78e842fbf93d
+      slot: stat_item_2
+      uuid: 95a42d17-cc10-4238-925c-02090c4d3753
+      component_id: sdc.provus_base_theme.stat_item
+      inputs:
+        title: 100+
+        body: 'Stat description text'
+    -
+      parent_uuid: 587b3818-ab3b-4488-8579-78e842fbf93d
+      slot: stat_item_3
+      uuid: 2d3d3688-38c3-4f29-964e-3200ea3463e1
+      component_id: sdc.provus_base_theme.stat_item
+      inputs:
+        title: 100+
+        body: 'Stat description text'
+    -
+      parent_uuid: 587b3818-ab3b-4488-8579-78e842fbf93d
+      slot: stat_item_4
+      uuid: c4c6daaf-ca95-4f8a-9bbb-2ceb0d826a50
+      component_id: sdc.provus_base_theme.stat_item
+      inputs:
+        title: 100+
+        body: 'Stat description text'
+    -
+      parent_uuid: 89366eb3-fdc2-4ca4-80d2-6e9676cd9877
+      slot: column_1
+      uuid: 60eedd8b-f038-4c65-a992-9482694162f1
+      component_id: sdc.provus_base_theme.spacer
+      inputs:
+        include_divider: true
+        padding_all: p-1
+    -
+      parent_uuid: 89366eb3-fdc2-4ca4-80d2-6e9676cd9877
+      slot: column_1
+      uuid: f318154c-e129-4f78-844d-4bed1972a58e
+      component_id: sdc.provus_base_theme.stat_six_column
+      inputs:
+        title: 'Stats - 6 Column'
+    -
+      parent_uuid: f318154c-e129-4f78-844d-4bed1972a58e
+      slot: stat_item_1
+      uuid: ac8c6e10-03ba-4b76-9e16-0032037680b5
+      component_id: sdc.provus_base_theme.stat_item
+      inputs:
+        title: 100+
+        body: 'Stat description text'
+    -
+      parent_uuid: f318154c-e129-4f78-844d-4bed1972a58e
+      slot: stat_item_2
+      uuid: cd432670-21e4-4f59-89d8-a7a99e4ebc19
+      component_id: sdc.provus_base_theme.stat_item
+      inputs:
+        title: 100+
+        body: 'Stat description text'
+    -
+      parent_uuid: f318154c-e129-4f78-844d-4bed1972a58e
+      slot: stat_item_3
+      uuid: 44bec267-3ba7-489f-8740-b9f7f2807972
+      component_id: sdc.provus_base_theme.stat_item
+      inputs:
+        title: 100+
+        body: 'Stat description text'
+    -
+      parent_uuid: f318154c-e129-4f78-844d-4bed1972a58e
+      slot: stat_item_4
+      uuid: 81a57929-684b-4a9f-b7da-02cc50be3656
+      component_id: sdc.provus_base_theme.stat_item
+      inputs:
+        title: 100+
+        body: 'Stat description text'
+    -
+      parent_uuid: f318154c-e129-4f78-844d-4bed1972a58e
+      slot: stat_item_5
+      uuid: 654bcd53-3df2-4715-945a-0373e3143662
+      component_id: sdc.provus_base_theme.stat_item
+      inputs:
+        title: 100+
+        body: 'Stat description text'
+    -
+      parent_uuid: f318154c-e129-4f78-844d-4bed1972a58e
+      slot: stat_item_6
+      uuid: 406f2c4a-5b8d-483f-aadf-04da1b05eaec
+      component_id: sdc.provus_base_theme.stat_item
+      inputs:
+        title: 100+
+        body: 'Stat description text'
+    -
+      parent_uuid: 89366eb3-fdc2-4ca4-80d2-6e9676cd9877
+      slot: column_1
+      uuid: 7f780e1b-f392-4a8b-8bab-cd6f10e0a746
+      component_id: sdc.provus_base_theme.spacer
+      inputs:
+        include_divider: true
+        padding_all: p-1
+    -
+      parent_uuid: 89366eb3-fdc2-4ca4-80d2-6e9676cd9877
+      slot: column_1
+      uuid: 81c287d4-1919-4844-bd49-57408b154dd0
+      component_id: sdc.provus_base_theme.stat_three_column
+      inputs:
+        title: 'Stats - 3 Column'
+    -
+      parent_uuid: 81c287d4-1919-4844-bd49-57408b154dd0
+      slot: stat_item_1
+      uuid: 67713a3b-6ba7-40de-8260-60b63bda00df
+      component_id: sdc.provus_base_theme.stat_item
+      inputs:
+        title: 100+
+        body: 'Stat description text'
+    -
+      parent_uuid: 81c287d4-1919-4844-bd49-57408b154dd0
+      slot: stat_item_2
+      uuid: 6d4f5f72-4237-4fe2-84e9-741ed6db023e
+      component_id: sdc.provus_base_theme.stat_item
+      inputs:
+        title: 100+
+        body: 'Stat description text'
+    -
+      parent_uuid: 81c287d4-1919-4844-bd49-57408b154dd0
+      slot: stat_item_3
+      uuid: d50a6574-df3e-42a2-a7bb-2b6e398c8e44
+      component_id: sdc.provus_base_theme.stat_item
+      inputs:
+        title: 100+
+        body: 'Stat description text'
+    -
+      parent_uuid: 89366eb3-fdc2-4ca4-80d2-6e9676cd9877
+      slot: column_1
+      uuid: 98e04055-c5da-46be-aa29-74e386de2a19
+      component_id: sdc.provus_base_theme.spacer
+      inputs:
+        include_divider: true
+        padding_all: p-1
+    -
+      parent_uuid: 89366eb3-fdc2-4ca4-80d2-6e9676cd9877
+      slot: column_1
+      uuid: 081109a8-ab64-41de-b079-2a02de12ba90
+      component_id: sdc.provus_base_theme.stat_two_column
+      inputs:
+        title: 'Stats - 2 Column'
+    -
+      parent_uuid: 081109a8-ab64-41de-b079-2a02de12ba90
+      slot: stat_item_1
+      uuid: 3b979b81-9b6b-43e6-942b-d6ac284547b5
+      component_id: sdc.provus_base_theme.stat_item
+      inputs:
+        title: 100+
+        body: 'Stat description text'
+    -
+      parent_uuid: 081109a8-ab64-41de-b079-2a02de12ba90
+      slot: stat_item_2
+      uuid: 39059ad9-d614-443e-81dc-a4c342d6a21d
+      component_id: sdc.provus_base_theme.stat_item
+      inputs:
+        title: 100+
+        body: 'Stat description text'
+  path:
+    -
+      alias: /demo/components
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

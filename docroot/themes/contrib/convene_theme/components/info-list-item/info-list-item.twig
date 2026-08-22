@@ -1,0 +1,11 @@
+<div{{attributes.addClass('info-list-item')}}>
+  {% if title %}
+    <h3 class="info-list-item__title">{{ title }}</h3>
+  {% endif %}
+  
+  {% if description %}
+    <div class="info-list-item__description">
+      {{ description }}
+    </div>
+  {% endif %}
+</div>

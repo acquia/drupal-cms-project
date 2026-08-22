@@ -1,0 +1,342 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 993707af-36b0-4b6d-bb57-f5e2747dc23f
+  default_langcode: en
+  depends:
+    81e8df1d-6e5e-4c40-bbb9-8965a13a7500: file
+    b2db6e04-bc38-407e-af13-8ea0019d0a73: media
+    b7d53ced-d13c-4b62-9114-89d604992e44: file
+    129628f8-b556-44f9-acef-26b889012d18: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Agenda Page'
+  description:
+    -
+      value: 'Explore the Convene Conference agenda including sessions, keynote talks, workshops, and networking events schedule.'
+  components:
+    -
+      uuid: b1cfc25c-4633-4181-acab-43f29405e281
+      component_id: sdc.convene_theme.sdc_grid
+      inputs:
+        columns: '1'
+    -
+      parent_uuid: b1cfc25c-4633-4181-acab-43f29405e281
+      slot: slot_1
+      uuid: f0012aea-31a0-4e30-9803-e2328dfd9635
+      component_id: sdc.convene_theme.hero
+      inputs:
+        variation: small
+    -
+      parent_uuid: f0012aea-31a0-4e30-9803-e2328dfd9635
+      slot: heading
+      uuid: 1b93941c-2f64-47e6-bbf9-d5c6cae54219
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        heading: Agenda
+        heading_tag: h1
+    -
+      parent_uuid: f0012aea-31a0-4e30-9803-e2328dfd9635
+      slot: subheading
+      uuid: a4ee367f-73ac-4ed3-84f8-f7aa411f540f
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        description: 'The full schedule of sessions, speakers, and timing for the event.'
+        heading_tag: div
+    -
+      parent_uuid: f0012aea-31a0-4e30-9803-e2328dfd9635
+      slot: background_media
+      uuid: e007e4ed-0944-4be6-b092-34568d6c3cea
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: b2db6e04-bc38-407e-af13-8ea0019d0a73
+            target_type: media
+        loading: eager
+    -
+      uuid: 21ebb940-3fc6-4d91-b257-7db195cbec05
+      component_id: sdc.convene_theme.sdc_grid
+      inputs:
+        columns: '1'
+    -
+      parent_uuid: 21ebb940-3fc6-4d91-b257-7db195cbec05
+      slot: slot_1
+      uuid: f0662e51-bf51-4438-a6b5-e2d07602317d
+      component_id: sdc.convene_theme.agenda_module
+      inputs:
+        title: 'Conference Timeline'
+        description: 'Follow the journey of our two-day conference experience, from registration and keynote sessions to technical workshops and networking events. Each day is carefully planned to deliver learning, collaboration, and meaningful connections.'
+    -
+      parent_uuid: f0662e51-bf51-4438-a6b5-e2d07602317d
+      slot: agenda_items
+      uuid: 688808aa-da23-4183-94c6-03a5ac73199e
+      component_id: sdc.convene_theme.agenda_item_molecule
+      inputs:
+        title: 'Day 1'
+        subtitle: 'Morning – Registration & Welcome Breakfast'
+        description: 'Participants arrive at the venue and complete registration. A light breakfast is served while attendees network with other participants and explore the conference area.'
+    -
+      parent_uuid: f0662e51-bf51-4438-a6b5-e2d07602317d
+      slot: agenda_items
+      uuid: fc078063-8973-4053-b1fc-770b24b105b9
+      component_id: sdc.convene_theme.agenda_item_molecule
+      inputs:
+        title: 'Day 1'
+        subtitle: 'Afternoon – Opening Keynote & Industry Trends'
+        description: 'The conference officially begins with an opening keynote from a leading industry expert discussing emerging technologies, market shifts, and the future of digital platforms.'
+    -
+      parent_uuid: f0662e51-bf51-4438-a6b5-e2d07602317d
+      slot: agenda_items
+      uuid: d832d827-5c2b-4961-af7d-ab901347c153
+      component_id: sdc.convene_theme.agenda_item_molecule
+      inputs:
+        title: 'Day 1'
+        subtitle: 'Evening – Networking Reception'
+        description: 'A relaxed networking session where attendees connect with speakers, sponsors, and fellow professionals over refreshments and informal discussions.'
+    -
+      parent_uuid: f0662e51-bf51-4438-a6b5-e2d07602317d
+      slot: agenda_items
+      uuid: b24480e4-3383-4bd3-85cd-e25e0c0cc88b
+      component_id: sdc.convene_theme.agenda_item_molecule
+      inputs:
+        title: 'Day 2'
+        subtitle: 'Morning – Technical Workshops'
+        description: 'Hands-on workshops led by experienced practitioners covering modern development practices, AI integration, and scalable architecture patterns.'
+    -
+      parent_uuid: f0662e51-bf51-4438-a6b5-e2d07602317d
+      slot: agenda_items
+      uuid: 660746f4-a5b5-4b14-890b-fee6ce14bfa0
+      component_id: sdc.convene_theme.agenda_item_molecule
+      inputs:
+        title: 'Day 2'
+        subtitle: 'Afternoon – Panel Discussions & Case Studies'
+        description: 'Industry leaders share real-world case studies and participate in panel discussions focusing on digital transformation, platform innovation, and community growth.'
+    -
+      parent_uuid: f0662e51-bf51-4438-a6b5-e2d07602317d
+      slot: agenda_items
+      uuid: 7cf0e783-157e-424c-bb44-95ec29811e23
+      component_id: sdc.convene_theme.agenda_item_molecule
+      inputs:
+        title: 'Day 2'
+        subtitle: 'Evening – Community Meetup & Social Event'
+        description: 'An informal meetup where participants share experiences, discuss collaboration opportunities, and build meaningful professional relationships.'
+    -
+      uuid: 1930e502-20f4-4afc-91b0-018979a52a09
+      component_id: sdc.convene_theme.accordion-container
+      inputs:
+        heading: Questions
+        dark_theme: false
+        description: 'Find answers to common questions about the summit and how to prepare.'
+    -
+      parent_uuid: 1930e502-20f4-4afc-91b0-018979a52a09
+      slot: items
+      uuid: 4ab67262-d19b-4fff-8113-2adc776283a7
+      component_id: sdc.convene_theme.accordion
+      inputs: {  }
+    -
+      parent_uuid: 4ab67262-d19b-4fff-8113-2adc776283a7
+      slot: title
+      uuid: ee2c38d0-9800-47d3-ac7d-4c104f262b02
+      component_id: sdc.convene_theme.typography
+      inputs:
+        heading: 'When does registration close?'
+        heading_tag: div
+    -
+      parent_uuid: 4ab67262-d19b-4fff-8113-2adc776283a7
+      slot: content
+      uuid: 570114b6-df53-4e71-b7d3-3fba915d17dc
+      component_id: sdc.convene_theme.typography
+      inputs:
+        description: 'Registration closes one month before the event. After that date, spots are no longer available. Plan ahead to secure your place.'
+        heading_tag: div
+    -
+      parent_uuid: 1930e502-20f4-4afc-91b0-018979a52a09
+      slot: items
+      uuid: 9cb10aa6-cca6-47b6-93dc-0603fed4b337
+      component_id: sdc.convene_theme.accordion
+      inputs: {  }
+    -
+      parent_uuid: 9cb10aa6-cca6-47b6-93dc-0603fed4b337
+      slot: title
+      uuid: 48245177-8849-46fe-ba75-358d30f2737c
+      component_id: sdc.convene_theme.typography
+      inputs:
+        heading: "What's included in each pass?"
+        heading_tag: div
+    -
+      parent_uuid: 9cb10aa6-cca6-47b6-93dc-0603fed4b337
+      slot: content
+      uuid: 8db83426-b03d-4b19-8cd7-fd4e08b4158f
+      component_id: sdc.convene_theme.typography
+      inputs:
+        description: 'All passes include access to keynotes, workshops, and networking events. Standard and premium tiers offer different seating and meal options. Check the pricing page for full details.'
+        heading_tag: div
+    -
+      parent_uuid: 1930e502-20f4-4afc-91b0-018979a52a09
+      slot: items
+      uuid: 0fbaa4a3-51a9-4025-81bd-1b034b51427b
+      component_id: sdc.convene_theme.accordion
+      inputs: {  }
+    -
+      parent_uuid: 0fbaa4a3-51a9-4025-81bd-1b034b51427b
+      slot: title
+      uuid: 13be327a-7e30-4e73-ae38-fc89268a7eb3
+      component_id: sdc.convene_theme.typography
+      inputs:
+        heading: 'Can I attend just one day?'
+        heading_tag: div
+    -
+      parent_uuid: 0fbaa4a3-51a9-4025-81bd-1b034b51427b
+      slot: content
+      uuid: e40df673-33ab-4edb-bdd0-0d5084730cf7
+      component_id: sdc.convene_theme.typography
+      inputs:
+        description: "Single-day passes are available at a reduced rate. You'll have full access to sessions on your chosen day, including meals and networking events."
+        heading_tag: div
+    -
+      parent_uuid: 1930e502-20f4-4afc-91b0-018979a52a09
+      slot: items
+      uuid: 49adbe76-c14c-47c6-ba39-3b89ad81881f
+      component_id: sdc.convene_theme.accordion
+      inputs: {  }
+    -
+      parent_uuid: 49adbe76-c14c-47c6-ba39-3b89ad81881f
+      slot: title
+      uuid: be5c22d4-10a7-4225-aa32-152ed177f06e
+      component_id: sdc.convene_theme.typography
+      inputs:
+        heading: 'Is there a refund policy?'
+        heading_tag: div
+    -
+      parent_uuid: 49adbe76-c14c-47c6-ba39-3b89ad81881f
+      slot: content
+      uuid: ab3ad55e-81ad-498d-81b7-56f3419427a8
+      component_id: sdc.convene_theme.typography
+      inputs:
+        description: 'Refunds are available up to two weeks before the event. Cancellations made closer to the date may not be eligible. Contact support for specific circumstances.'
+        heading_tag: div
+    -
+      parent_uuid: 1930e502-20f4-4afc-91b0-018979a52a09
+      slot: items
+      uuid: 9ceff71f-2254-44c0-ab97-b0afb7f53c53
+      component_id: sdc.convene_theme.accordion
+      inputs: {  }
+    -
+      parent_uuid: 9ceff71f-2254-44c0-ab97-b0afb7f53c53
+      slot: title
+      uuid: 1aa66e7f-6f30-41b5-94a8-c527d9c13f8d
+      component_id: sdc.convene_theme.typography
+      inputs:
+        heading: 'How do I get to the venue?'
+        heading_tag: div
+    -
+      parent_uuid: 9ceff71f-2254-44c0-ab97-b0afb7f53c53
+      slot: content
+      uuid: 7e8e4ae6-25ea-4c84-812b-13fd6c55cacf
+      component_id: sdc.convene_theme.typography
+      inputs:
+        description: 'The venue page includes the address, parking information, and public transit options. We recommend arriving early on day one to allow time for check-in.'
+        heading_tag: div
+    -
+      parent_uuid: 1930e502-20f4-4afc-91b0-018979a52a09
+      slot: help_heading
+      uuid: 4fc82e66-1927-4877-a04c-248337c6758a
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        heading: 'Need more help?'
+        heading_tag: div
+    -
+      parent_uuid: 1930e502-20f4-4afc-91b0-018979a52a09
+      slot: help_description
+      uuid: 8b0acebb-8b73-4941-81a1-4b3a27feb4ab
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        description: 'Reach out directly for questions not answered here.'
+        heading_tag: div
+    -
+      uuid: 95f5d680-b1d2-48f5-bbdb-4a99dc48338c
+      component_id: sdc.convene_theme.sdc_grid
+      inputs:
+        columns: '1'
+    -
+      parent_uuid: 95f5d680-b1d2-48f5-bbdb-4a99dc48338c
+      slot: slot_1
+      uuid: 83a59e75-155a-4c28-970f-3be9eac85654
+      component_id: sdc.convene_theme.hero
+      inputs:
+        variation: small
+    -
+      parent_uuid: 83a59e75-155a-4c28-970f-3be9eac85654
+      slot: heading
+      uuid: be75f425-0614-4921-b55e-8da002cf3c23
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        heading: 'Ready to join us'
+        heading_tag: div
+    -
+      parent_uuid: 83a59e75-155a-4c28-970f-3be9eac85654
+      slot: subheading
+      uuid: eecc9514-71ab-4876-bbf1-fc75b200a22b
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        description: 'Secure your spot before early-bird pricing ends next week.'
+        heading_tag: div
+    -
+      parent_uuid: 83a59e75-155a-4c28-970f-3be9eac85654
+      slot: actions
+      uuid: 575644e6-ba97-4815-8ea5-f51ee0ad5bdb
+      component_id: sdc.convene_theme.button
+      inputs:
+        url:
+          uri: 'internal:/registration'
+          options: {  }
+        text: Register
+        variant: primary
+    -
+      parent_uuid: 83a59e75-155a-4c28-970f-3be9eac85654
+      slot: actions
+      uuid: 4615cb1e-6db6-4b18-a418-c41c16ae1552
+      component_id: sdc.convene_theme.button
+      inputs:
+        url:
+          uri: 'internal:/pricing-passes'
+          options: {  }
+        text: Pricing
+        variant: primary
+    -
+      parent_uuid: 83a59e75-155a-4c28-970f-3be9eac85654
+      slot: background_media
+      uuid: 7dea0806-014b-4447-a604-7971506264eb
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 129628f8-b556-44f9-acef-26b889012d18
+            target_type: media
+  path:
+    -
+      alias: /agenda
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"title":"Agenda | Convene Conference Schedule"}'

@@ -1,0 +1,68 @@
+---
+title: "{{ label|raw }}"
+tags:
+- {{ type }}
+- {{ provider }}
+- {% if extension_info.standalone %}{{ provider }}{% else %}{{ extension_info.module }}{% endif %} {{ type }}{% if version_introduced != 'unknown' %} {{ version_introduced }}{% endif %}
+
+---
+# {{ label|raw }}
+
+Plugin ID: `{{ plugin_id }}`
+{% if version_introduced != 'unknown' %}
+
+Available since: {{ version_introduced }}
+{% endif %}
+
+{{ description|raw }}
+{% if tokens %}
+{% macro mProperty(prefix, token) %}{% import _self as macros %}{% for property in token %}{% set name = prefix ~ ':' ~ property.name %}
+    | `[{{ name }}]` | {{ property.description }}{% if property.aliases %}<br /> Alias: `{{ property.aliases|join(', ') }}`{% endif %} |
+{% if property.properties %}{{ macros.mProperty(name, property.properties) }}{% endif %}{% endfor %}{% endmacro %}
+{% import _self as macros %}
+
+!!! tip "Provided tokens"
+
+    | Token | Description |
+    | ----- | ----------- |
+{% for token in tokens %}
+    | `[{{ token.name }}]` | {{ token.description }}{% if token.aliases %}<br /> Alias: `{{ token.aliases|join(', ') }}`{% endif %} |
+{{ macros.mProperty(token.name, token.properties) }}{% endfor %}
+{% endif %}
+
+{!include/plugins/{{ provider }}/{{ type }}/{{ id_fs }}.md!}
+
+{% if fields or extraDescriptions %}
+## Fields
+{% for extraDescription in extraDescriptions %}
+
+{{ extraDescription }}
+{% endfor %}
+{% for field in fields %}
+{% set term = (field.label_display and field.label != field.name) ? field.label_display ~ ' — config key: `' ~ field.name ~ '`' : '`' ~ field.name ~ '`' %}
+{% set meta = 'Type: `' ~ field.form_type ~ '` · Required: ' ~ (field.required ? 'yes' : 'no') ~ (field.default_display ? ' · Default: ' ~ field.default_display : '') %}
+
+{{ term|raw }}
+
+{% if field.description %}
+:   {{ field.description|raw }}
+
+    {{ meta|raw }}
+{% else %}
+:   {{ meta|raw }}
+{% endif %}
+{% if field.options_display %}
+
+    Allowed values{% if field.options_truncated %} (first {{ field.options_display|length }} of a longer list){% endif %}: {{ field.options_display|join(', ')|raw }}
+{% elseif field.options_site_dependent %}
+
+    Allowed values depend on the configuration of the target site.
+{% endif %}
+{% if field.value_format %}
+
+    Value format: {{ field.value_format }}
+{% endif %}
+
+    {!include/plugins/{{ provider }}/{{ type }}/{{ id_fs }}/{{ field.name }}.md!}
+{% endfor %}
+{% endif %}

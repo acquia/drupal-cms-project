@@ -1,0 +1,41 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Date
+group: Base
+status: stable
+props:
+  type: object
+  properties:
+    start_date:
+      type:
+        - string
+        - "null"
+      title: Start date
+      examples:
+        - "February 27, 2026"
+    end_date:
+      type:
+        - string
+        - "null"
+      title: End date
+      examples:
+        - "February 28, 2026"
+    start_time:
+      type:
+        - string
+        - "null"
+      title: Start time
+      examples:
+        - "2:00 PM"
+    end_time:
+      type:
+        - string
+        - "null"
+      title: End time
+      examples:
+        - "4:00 PM"
+    show_icon:
+      type: boolean
+      title: Show calendar icon
+      default: true
+      examples:
+        - true

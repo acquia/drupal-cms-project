@@ -1,0 +1,46 @@
+<div class="block-provus-cta">
+  <div class="cta-wrapper has-bg-image {{ background_color }}">
+    {% if background_image_path %}
+      <div class="cta-bg-image-container" style="background-image: url({{ background_image_path.src }})"></div>
+    {% else %}
+      <div class="cta-bg-image-container"></div>
+    {% endif %}
+
+    {% if subtitle|render %}
+      <h3 class="cta-sub-title">{{ subtitle }}</h3>
+    {% endif %}
+
+    {% if title|render %}
+      <h2 class="cta-title">{{ title }}</h2>
+    {% endif %}
+
+    {% if body|render %}
+      <div class="cta-body">
+        {{ body|raw }}
+      </div>
+    {% endif %}
+    
+    <div class="cta-links">
+      <div class="field field--name-field-provus-links field--type-link field__items">
+      {% block cta_footer %}
+        {% embed 'provus_base_theme:button'
+          with {
+            text: 'Button 1',
+            url: 'https://example.com',
+            variant: 'primary'
+          }
+        %}
+        {% endembed %}
+        {% embed 'provus_base_theme:button'
+          with {
+            text: 'Button 2',
+            url: 'https://example.com',
+            variant: 'secondary'
+          }
+        %}
+        {% endembed %}
+      {% endblock %}
+      </div>
+    </div>
+  </div>
+</div>

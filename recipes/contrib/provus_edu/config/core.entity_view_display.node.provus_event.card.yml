@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.card
+    - field.field.node.provus_event.field_content
+    - field.field.node.provus_event.field_featured_image
+    - field.field.node.provus_event.field_provus_smartdate
+    - node.type.provus_event
+  module:
+    - user
+id: node.provus_event.card
+targetEntityType: node
+bundle: provus_event
+mode: card
+content:
+  field_featured_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: 16_9_medium
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  addtoany: true
+  field_content: true
+  field_provus_smartdate: true
+  search_api_excerpt: true

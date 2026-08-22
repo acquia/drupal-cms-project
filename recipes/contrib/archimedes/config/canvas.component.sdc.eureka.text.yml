@@ -1,0 +1,34 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.canvas_html_block
+  module:
+    - text
+  theme:
+    - eureka
+active_version: 63fb09d615e0db73
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        text_content:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: 'Lorem ipsum <strong>dolor sit amet</strong>, consectetur adipiscing elit. Donec pellentesque pulvinar rutrum. Curabitur elementum condimentum fringilla. Duis eu erat at nulla ultricies posuere non pellentesque turpis.'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+    fallback_metadata:
+      slot_definitions: {  }
+label: 'Text content'
+id: sdc.eureka.text
+provider: eureka
+source: sdc
+source_local_id: 'eureka:text'

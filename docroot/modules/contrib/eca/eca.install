@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Install file with update hooks for the ECA module.
+ */
+
+/**
+ * Implements hook_update_last_removed().
+ */
+function eca_update_last_removed(): int {
+  return 8011;
+}
+
+/**
+ * Install the Modeler API, which ECA 3 requires.
+ *
+ * A site coming from ECA 2 does not have the Modeler API installed, because
+ * back then ECA owned both the models and the modeler. ECA 3 hands the raw
+ * model data over to the Modeler API, so it has to be installed before
+ * eca_post_update_migrate_to_v3() can hand the models over to it. Drupal runs
+ * every hook_update_N() before the first hook_post_update_NAME(), which is what
+ * makes that ordering guaranteed rather than incidental.
+ *
+ * This is a no-op on a site that already installed the Modeler API, either as
+ * a dependency of a fresh ECA 3 install or on the way through ECA 3.0.
+ *
+ * @see eca_post_update_migrate_to_v3()
+ * @see https://www.drupal.org/project/eca/issues/3590389
+ */
+function eca_update_8012(): void {
+  \Drupal::service('module_installer')->install(['modeler_api']);
+}

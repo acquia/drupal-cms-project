@@ -1,0 +1,51 @@
+.provus-person-card.provus-card-tall {
+  .card {
+    max-width: unset;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.15);
+    border-radius: $images-border-radius-radius-xxl 4px $images-border-radius-radius-xxl 4px;
+  }
+
+  .card-img-top {
+    height: auto;
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .card-title {
+    @include text-style-headline-h-4;
+    padding: 0 $padding-padding-lg 0;
+    color: $text-colors-text-primary;
+  }
+
+  .card-text {
+    @include text-style-body-body-1;
+    padding: 0 $padding-padding-lg 0;
+    .title {
+      margin-bottom: $padding-padding-lg;
+    }
+
+    .link {
+
+      a {
+        @include text-style-secondary-link-text-button;
+      }
+
+      margin-top: $padding-padding-lg;
+    }
+  }
+}
+
+
+.person-node .person-image img {
+  height: auto;
+}
+
+//fix for provus_edu_theme
+.person--card-tall .provus-card-tall .card-img-top img {
+  object-fit: cover;
+}
+
+//fix for provus_edu_theme
+.person--full {
+  margin-bottom: 48px;
+}

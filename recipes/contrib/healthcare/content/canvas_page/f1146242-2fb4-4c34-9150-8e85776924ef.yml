@@ -1,0 +1,184 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: f1146242-2fb4-4c34-9150-8e85776924ef
+  default_langcode: en
+  depends:
+    113b7213-1581-4dc9-ab2f-b813daad8642: file
+    47494c5b-6c9d-40ff-86f5-e7e12ee8b332: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Billing & Insurance'
+  description:
+    -
+      value: 'Understanding your healthcare costs and coverage.'
+  components:
+    -
+      uuid: dc96428a-0591-45c3-b9f1-fa49f1482f8a
+      component_id: sdc.diagnosis.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        background: secondary
+        padding_block_start: '32'
+        padding_block_end: '32'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        image_size: '4:3'
+        image_position: right
+        image_radius: extra-large
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 47494c5b-6c9d-40ff-86f5-e7e12ee8b332
+            target_type: media
+    -
+      parent_uuid: dc96428a-0591-45c3-b9f1-fa49f1482f8a
+      slot: hero_slot
+      uuid: 2aca2628-914a-4096-99ea-3f943d8eee42
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Billing & Insurance Information'
+        level: 1
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: dc96428a-0591-45c3-b9f1-fa49f1482f8a
+      slot: hero_slot
+      uuid: a1111230-7946-4f4c-9bc2-f91d5d4f82c8
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Understanding your healthcare costs and coverage.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: 063a2b70-8dd2-4612-b2b6-c82f6a8ad823
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: 063a2b70-8dd2-4612-b2b6-c82f6a8ad823
+      slot: main_slot
+      uuid: 07d82ab4-ddf6-475f-8811-6591db0246ed
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Saltmarsh Island Health is committed to providing transparent, affordable healthcare. We accept most major insurance plans and offer financial assistance for qualifying patients.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 063a2b70-8dd2-4612-b2b6-c82f6a8ad823
+      slot: main_slot
+      uuid: 7c919c28-544a-49bd-b573-ce74f8cd98e2
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Accepted Insurance Plans'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 063a2b70-8dd2-4612-b2b6-c82f6a8ad823
+      slot: main_slot
+      uuid: 378f75a6-06d9-4130-8f38-0e7ca0fd2fd4
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<ul><li data-list-item-id="e5cb7389f22eced1343d73aa9491e5a06">Blue Cross Blue Shield</li><li data-list-item-id="e38f3ee074202742265d5c0b8cb0e8f68">Medicare &amp; Medicare Advantage</li><li data-list-item-id="e3c5e07d7c325fabd28a41d38f8026776">MassHealth (Medicaid)</li><li data-list-item-id="edcb4a32aa0e6950401df376a3635ba4b">Aetna</li><li data-list-item-id="ef4de5a12be6fba00d7bdfe075b002e23">Cigna</li><li data-list-item-id="ec3ab8c815e11d1142a4594967fd12076">United Healthcare</li><li data-list-item-id="edeed6dbe35f03ef172baa8246b8485cc">Tufts Health Plan</li><li data-list-item-id="e1a91ebf9b90c6ccb52936574844e2a04">Harvard Pilgrim</li></ul><p>Please call (555) 123-4572 to verify your specific plan is accepted.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 063a2b70-8dd2-4612-b2b6-c82f6a8ad823
+      slot: main_slot
+      uuid: 7749d995-db70-4746-b58d-7521678ccd12
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Billing Questions'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 063a2b70-8dd2-4612-b2b6-c82f6a8ad823
+      slot: main_slot
+      uuid: 8004ca4d-2016-49bd-8f78-9a010da8abdf
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>For questions about your bill, payment options, or financial assistance, contact our Billing Department at (555) 123-4569.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 063a2b70-8dd2-4612-b2b6-c82f6a8ad823
+      slot: main_slot
+      uuid: b226ecfd-4a48-4f54-b414-8a5c908dfe11
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Payment Options'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 063a2b70-8dd2-4612-b2b6-c82f6a8ad823
+      slot: main_slot
+      uuid: d93e2e7f-8a6f-4ca9-996f-d73c3f4711f2
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<ul><li data-list-item-id="eff3af31c1ede7df7482c9f1b0cdd0ae7">Pay online through MyChart</li><li data-list-item-id="e208955e07812605de87523cd3932c1e8">Pay by phone: (555) 123-4569</li><li data-list-item-id="e9d5b103496976cadd92dc569684c1dc6">Mail payment to: Saltmarsh Island Health, PO Box 12345, Saltmarsh Island, MA 02554</li><li data-list-item-id="e3f7ab4244ca3fce01ad3b3396af19536">Pay in person at any of our locations</li></ul>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 063a2b70-8dd2-4612-b2b6-c82f6a8ad823
+      slot: main_slot
+      uuid: 281f6844-cf03-45fb-a9ff-8df0f2cda7fc
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Financial Assistance'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 063a2b70-8dd2-4612-b2b6-c82f6a8ad823
+      slot: main_slot
+      uuid: eee6f21c-8083-4891-98da-67cce9fd73f4
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>If you are uninsured or underinsured, you may qualify for financial assistance. Our financial counselors can help you understand your options.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+  path:
+    -
+      alias: /patients/billing-insurance
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

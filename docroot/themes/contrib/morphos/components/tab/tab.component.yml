@@ -1,0 +1,42 @@
+$schema: 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Tab
+description: An individual clickable trigger within a Tabs component.
+group: Child
+status: stable
+props:
+  type: object
+  properties:
+    label:
+      type: string
+      title: Label
+      description: Label the tab content.
+      examples:
+        - Tab label
+    content:
+      type: string
+      title: Content
+      description: Content to display in the tab.
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - <p>Tab content.</p>
+    prose_size:
+      type: string
+      title: Prose size
+      description: Select the size of prose to make it bigger or smaller.
+      enum:
+        - prose-sm
+        - prose-base
+        - prose-lg
+        - prose-xl
+        - prose-2xl
+      meta:enum:
+        prose-sm: Small
+        prose-base: Base
+        prose-lg: Large
+        prose-xl: Extra large
+        prose-2xl: Extra extra large
+slots:
+  icon:
+    title: Icon
+    description: Add icon item.

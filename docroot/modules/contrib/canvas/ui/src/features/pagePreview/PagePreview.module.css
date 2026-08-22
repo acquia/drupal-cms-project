@@ -1,0 +1,54 @@
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.PagePreviewContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fade-in ease-in-out 0.5s;
+  background: white;
+}
+
+.PagePreviewIframe {
+  width: 100%;
+  height: calc(100vh - var(--topbar-height));
+  margin-top: var(--topbar-height);
+  transition: width ease-in-out 0.3s;
+  border: 0;
+}
+
+.headlessStatus {
+  position: fixed;
+  z-index: 200;
+  top: var(--topbar-height);
+  left: 0;
+  width: 100%;
+  margin: 0;
+  padding: 4px 8px;
+  color: #666;
+  border-bottom: 1px solid #eee;
+  background: white;
+  font-size: 12px;
+}
+
+.controls {
+  position: fixed;
+  z-index: 200;
+  top: 90px;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}

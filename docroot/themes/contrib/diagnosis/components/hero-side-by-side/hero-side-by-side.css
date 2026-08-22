@@ -1,0 +1,43 @@
+/**
+ * Hero Side-by-Side Component Styles
+ * Image overlap effect on desktop
+ */
+
+/* Ensure wrapper allows overflow for image overlap */
+.hero-side-by-side-wrapper {
+  overflow: visible;
+}
+
+/* Image container with overlap effect (desktop only) */
+@media (min-width: 768px) {
+  .hero-image-overlap {
+    img {
+      position: absolute;
+      top: 60px;
+    }
+  }
+}
+
+.hero-image-overlap {
+  overflow: visible !important;
+  position: relative;
+
+  img {
+      border-radius: 24px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* Add bottom padding on mobile so content doesn't slam against the edge */
+@media (max-width: 767px) {
+  .hero-side-by-side-wrapper:not(.no-image) .container {
+    padding-bottom: 2rem;
+  }
+}
+
+/* Add spacing below the hero to prevent content overlap (image overlap effect only) */
+@media (min-width: 768px) {
+  .hero-side-by-side-wrapper:not(.no-image) {
+    margin-bottom: 120px;
+  }
+}

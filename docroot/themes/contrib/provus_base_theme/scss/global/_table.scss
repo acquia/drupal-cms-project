@@ -1,0 +1,28 @@
+table {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid $table-body-border-color;
+  
+  thead {
+    th {
+      background-color: $table-header-background-color;
+      @include text-style-subheadline-sub-2();
+      color: $table-header-text-color;
+      padding: $table-header-padding;
+      border: 1px solid $table-header-border-color;
+    }
+  }
+  tr {
+    background-color: #fff;
+    &:nth-child(even) {
+      background-color: $table-body-background-zebra-color;
+    }
+  }
+
+  td {
+    @include text-style-subheadline-sub-2();
+    color: $table-body-text-color;
+    padding: $table-body-padding;
+    border: 1px solid $table-body-border-color;
+  }
+}

@@ -1,0 +1,37 @@
+library:
+  version: 1.12.0
+  # https://github.com/apvarun/toastify-js/releases/tag/1.12.0
+  # + https://github.com/apvarun/toastify-js/pull/112
+  # + https://github.com/apvarun/toastify-js/pull/109
+  # + https://github.com/apvarun/toastify-js/pull/113
+  js:
+    js/toastify.js: {}
+  css:
+    component:
+      css/toastify.css: {}
+
+gin:
+  css:
+    component:
+      css/gin.css: {}
+  dependencies:
+    - toastify/library
+
+toastify:
+  js:
+    js/toastify-attach.js: {}
+  dependencies:
+    - core/drupalSettings
+    - core/jquery
+    - core/jquery.once
+    - toastify/library
+
+toastify.messages:
+  js:
+    js/toastify.messages.js: {}
+  dependencies:
+    - core/drupalSettings
+    - core/jquery
+    - core/jquery.once
+    - toastify/library
+    - core/drupal.message

@@ -1,0 +1,66 @@
+{#
+  Donation card SDC: Figma desktop 1-8898, mobile 1-8495.
+  Dark-themed pricing column with plan title, price, includes list (CKEditor ul/li with check marker), CTA.
+#}
+{% set benefits_html = benefits|default('') %}
+{% set has_icon = plan_icon_media is defined and plan_icon_media is not empty and plan_icon_media.src is defined and plan_icon_media.src is not empty %}
+{% set default_plan_icon_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M12 8c0-1.5 1.5-3 3-3s3 1.5 3 3M12 8c0-1.5-1.5-3-3-3S6 6.5 6 8"/></svg>' %}
+
+<article class="card-donation"{% if tab_id is defined and tab_id is not empty %} data-tab-id="{{ tab_id|trim }}"{% endif %}>
+	<div class="card-donation__content">
+		<div class="card-donation__price">
+			<div class="card-donation__title-row">
+				<p class="card-donation__plan-title">{{ plan_title|default('One time') }}</p>
+				<div class="card-donation__plan-icon">
+					{% if has_icon %}
+						<img
+							class="card-donation__plan-icon-img"
+							src="{{ file_url(plan_icon_media.src) }}"
+							alt=""
+							width="24"
+							height="24"
+							loading="lazy"
+							onerror="this.style.display='none';var f=this.nextElementSibling;if(f)f.classList.add('card-donation__plan-icon-fallback--visible');"
+						/>
+					{% endif %}
+					<span class="card-donation__plan-icon-fallback{% if not has_icon %} card-donation__plan-icon-fallback--visible{% endif %}" aria-hidden="true">{{ default_plan_icon_svg|raw }}</span>
+				</div>
+			</div>
+			<p class="card-donation__price-line">
+				<span class="card-donation__price-amount">{{ currency_symbol|default('$') }}{{ price_amount|default('19') }}</span>
+				<span class="card-donation__price-suffix">{{ price_suffix|default('/mo') }}</span>
+			</p>
+		</div>
+
+		<div class="card-donation__divider" aria-hidden="true"></div>
+
+		<div class="card-donation__includes">
+			<p class="card-donation__includes-heading">{{ includes_heading|default('Includes') }}</p>
+			{% if benefits_html is not empty %}
+				<div class="card-donation__benefits">
+					{{ benefits_html|raw }}
+				</div>
+			{% endif %}
+		</div>
+	</div>
+
+	<div class="card-donation__actions">
+		{% if button_url is not empty and button_url|trim is not empty %}
+			{{
+        include(
+          'caresphere_theme:button',
+          {
+            href: button_url,
+            label: button_label|default('Donate now'),
+            variant: 'primary',
+            size: 'medium',
+            btn_classes: ['card-donation__btn', 'w-full']
+          },
+          with_context: false
+        )
+      }}
+		{% else %}
+			<span class="card-donation__btn card-donation__btn--static">{{ button_label|default('Donate now') }}</span>
+		{% endif %}
+	</div>
+</article>

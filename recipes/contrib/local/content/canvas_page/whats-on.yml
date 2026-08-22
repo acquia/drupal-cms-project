@@ -1,0 +1,141 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: e90cbf17-ee42-44c2-b25d-143f49910039
+  default_langcode: en
+  depends:
+    f2d2a533-3be5-40b5-8369-eb46454a1000: file
+    e3ffb657-5e78-4961-8594-ce7fe1dd0e56: media
+    430e7b12-bf8e-4d81-a316-076dec35cfd4: file
+    b720a82b-282a-4f77-a961-9ecac76b2d40: media
+    8456a0ed-b05e-4a36-baaa-7cd0a9088abf: file
+    4c17a760-379e-4d9a-a935-9325a69d8992: media
+    9bdd606c-305c-49dc-b71f-5f6430a8beb9: file
+    0c8c2fd2-bee3-494e-9eb7-d564936f54a2: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: "What's on"
+  components:
+    -
+      uuid: 8638f5f7-dbe7-47c2-b610-049bfab9f5be
+      component_id: sdc.consistent.hero-banner
+      inputs:
+        heading_text: "What's on"
+        subtitle: 'Events, activities, and community news across the area'
+        show_search: false
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: e3ffb657-5e78-4961-8594-ce7fe1dd0e56
+            target_type: media
+    -
+      uuid: 3a578237-f523-4f31-b1f4-f492e98297ce
+      component_id: sdc.consistent.section
+      inputs:
+        section_columns: 33-33-33
+        section_background: none
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: 3a578237-f523-4f31-b1f4-f492e98297ce
+      slot: section_header_slot
+      uuid: e1107fde-a9d0-40f9-b051-8d3912e547a2
+      component_id: sdc.consistent.heading
+      inputs:
+        heading_text: 'Community events'
+        heading_level: 2
+    -
+      parent_uuid: 3a578237-f523-4f31-b1f4-f492e98297ce
+      slot: section_main_slot
+      uuid: 99b97621-8911-4c30-8f52-17106878737f
+      component_id: sdc.consistent.card
+      inputs:
+        card_heading: 'Ashfield Park Summer Fair'
+        card_url: /parks-and-green-spaces/hire-park-space-event
+        card_text: "The annual summer fair returns with live music, local food stalls, children's activities, and a dog show. Free entry."
+        card_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: b720a82b-282a-4f77-a961-9ecac76b2d40
+            target_type: media
+    -
+      parent_uuid: 3a578237-f523-4f31-b1f4-f492e98297ce
+      slot: section_main_slot
+      uuid: 309f068b-d9da-4112-b1fa-fcd66c13247b
+      component_id: sdc.consistent.card
+      inputs:
+        card_heading: 'Digital Skills Drop-in — every Tuesday'
+        card_url: /library-services/learning-and-community-programmes
+        card_text: 'Free sessions at Westbrook Library for anyone wanting to get more confident online. No booking needed — just turn up.'
+        card_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 4c17a760-379e-4d9a-a935-9325a69d8992
+            target_type: media
+    -
+      parent_uuid: 3a578237-f523-4f31-b1f4-f492e98297ce
+      slot: section_main_slot
+      uuid: 5787c2fc-08a2-494e-aa94-40c0bbe7e0c6
+      component_id: sdc.consistent.card
+      inputs:
+        card_heading: 'Silver Readers Book Club'
+        card_url: /library-services/learning-and-community-programmes
+        card_text: 'Join the monthly book club at Central Library — first Wednesday of each month. All adults welcome. Current title available to borrow now.'
+        card_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 0c8c2fd2-bee3-494e-9eb7-d564936f54a2
+            target_type: media
+    -
+      uuid: 23c4e890-c6f4-4297-a398-ae1274eaa969
+      component_id: sdc.consistent.section
+      inputs:
+        section_columns: 33-33-33
+        section_background: none
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: 23c4e890-c6f4-4297-a398-ae1274eaa969
+      slot: section_header_slot
+      uuid: b3d6515a-9a40-4e55-b053-d40d18e3217a
+      component_id: sdc.consistent.heading
+      inputs:
+        heading_text: 'Activities for families'
+        heading_level: 2
+    -
+      parent_uuid: 23c4e890-c6f4-4297-a398-ae1274eaa969
+      slot: section_main_slot
+      uuid: ee5b88c9-5d33-428e-9ead-d2599b8b37e9
+      component_id: sdc.consistent.top-task
+      inputs:
+        top_task_label: 'Summer Reading Challenge'
+        top_task_url: /library-services/learning-and-community-programmes
+    -
+      parent_uuid: 23c4e890-c6f4-4297-a398-ae1274eaa969
+      slot: section_main_slot
+      uuid: 1bf3f687-42d9-4730-86ed-a61347ac85f9
+      component_id: sdc.consistent.top-task
+      inputs:
+        top_task_label: 'Baby Rhyme Time'
+        top_task_url: /library-services/learning-and-community-programmes
+    -
+      parent_uuid: 23c4e890-c6f4-4297-a398-ae1274eaa969
+      slot: section_main_slot
+      uuid: d39d6a8c-c95b-4880-a7b6-1c96eb31c4bd
+      component_id: sdc.consistent.top-task
+      inputs:
+        top_task_label: 'Parks and play areas'
+        top_task_url: /parks-and-green-spaces/find-park-or-green-space
+  path:
+    -
+      alias: /whats-on
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

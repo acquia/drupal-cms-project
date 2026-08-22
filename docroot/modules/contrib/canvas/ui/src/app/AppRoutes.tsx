@@ -1,0 +1,320 @@
+import {
+  createBrowserRouter,
+  Navigate,
+  Outlet,
+  RouterProvider,
+  useParams,
+} from 'react-router-dom';
+import { Flex } from '@radix-ui/themes';
+
+import App from '@/app/App';
+import CodeEditorRouteGuard from '@/app/CodeEditorRouteGuard';
+import ComponentInstanceForm from '@/components/ComponentInstanceForm';
+import { RouteErrorBoundary } from '@/components/error/ErrorBoundary';
+import ErrorCard from '@/components/error/ErrorCard';
+import ExtensionDialog from '@/components/extensions/ExtensionDialog';
+import ExtensionPage from '@/components/extensions/ExtensionPage';
+import PermissionCheck from '@/components/PermissionCheck';
+import SideMenu from '@/components/sideMenu/SideMenu';
+import PrimaryPanel from '@/components/sidePanel/PrimaryPanel';
+import CodeEditorContainer from '@/features/code-editor/CodeEditorContainer';
+import CodeComponentDialogs from '@/features/code-editor/dialogs/CodeComponentDialogs';
+import ConflictResolutionPage from '@/features/conflict/ConflictResolutionPage';
+import EditorLayout from '@/features/editor/EditorLayout';
+import TemplateRoot from '@/features/editor/TemplateRoot';
+import HeadlessFrontendsPage from '@/features/headlessFrontends/HeadlessFrontendsPage';
+import PagePreview from '@/features/pagePreview/PagePreview';
+import PatternDialogs from '@/features/pattern/PatternDialogs';
+import SegmentDashboard from '@/features/personalization/SegmentDashboard';
+import SegmentPanel from '@/features/personalization/SegmentPanel';
+import ReviewChangesPage from '@/features/review/ReviewChangesPage';
+import { EditorFrameContext } from '@/features/ui/uiSlice';
+import VersionPreview from '@/features/versionComparison/VersionPreview';
+import Welcome from '@/features/welcome/Welcome';
+import { getCanvasSettings } from '@/utils/drupal-globals';
+
+import type React from 'react';
+
+interface AppRoutesInterface {
+  basePath: string;
+}
+
+const UiShell = ({ children }: { children: React.ReactNode }) => (
+  <>
+    <SideMenu />
+    <PrimaryPanel />
+    <Flex flexGrow="1" style={{ overflow: 'hidden', position: 'relative' }}>
+      {children}
+    </Flex>
+    <Dialogs />
+  </>
+);
+
+const CodeEditorUi = (
+  <PermissionCheck
+    hasPermission="codeComponents"
+    denied={
+      <Flex align="center" justify="center" height="100vh" width="100%">
+        <ErrorCard
+          title="You do not have permission to access the code editor."
+          error="Please contact your site administrator if you believe this is an error."
+        />
+      </Flex>
+    }
+  >
+    <UiShell>
+      <CodeEditorContainer />
+    </UiShell>
+  </PermissionCheck>
+);
+
+const CodeEditorRoute = () => (
+  <CodeEditorRouteGuard>{CodeEditorUi}</CodeEditorRouteGuard>
+);
+
+const HeadlessFrontendsUi = () =>
+  getCanvasSettings()?.canAdministerHeadlessFrontends ? (
+    <UiShell>
+      <HeadlessFrontendsPage />
+    </UiShell>
+  ) : (
+    <Flex align="center" justify="center" height="100vh" width="100%">
+      <ErrorCard
+        title="You do not have permission to administer headless frontends."
+        error="Please contact your site administrator if you believe this is an error."
+      />
+    </Flex>
+  );
+
+const Dialogs = () => (
+  <div style={{ position: 'absolute' }}>
+    <PatternDialogs />
+    <CodeComponentDialogs />
+    <ExtensionDialog />
+  </div>
+);
+
+const LegacyCodeEditorRedirect: React.FC = () => {
+  const { codeComponentId } = useParams<{ codeComponentId: string }>();
+  return <Navigate to={`/code-editor/component/${codeComponentId}`} replace />;
+};
+
+const AppRoutes: React.FC<AppRoutesInterface> = ({ basePath }) => {
+  const router = createBrowserRouter(
+    [
+      {
+        path: '',
+        element: <App />,
+        errorElement: <RouteErrorBoundary />,
+        children: [
+          {
+            index: true, // base path
+            element:
+              basePath === '/canvas' ? (
+                <UiShell>
+                  <Welcome />
+                </UiShell>
+              ) : (
+                <Navigate to="/editor" replace />
+              ),
+          },
+          {
+            path: '/editor/',
+            element: (
+              <UiShell>
+                <Welcome />
+              </UiShell>
+            ),
+          },
+          {
+            path: '/editor/:entityType/:entityId',
+            element: (
+              <UiShell>
+                <EditorLayout context={EditorFrameContext.ENTITY} />
+              </UiShell>
+            ),
+            children: [
+              {
+                path: '/editor/:entityType/:entityId/region/:regionId/component/:componentId',
+                element: <ComponentInstanceForm />,
+              },
+              {
+                path: '/editor/:entityType/:entityId/region/:regionId',
+                element: <ComponentInstanceForm />,
+              },
+              {
+                path: '/editor/:entityType/:entityId/component/:componentId',
+                element: <ComponentInstanceForm />,
+              },
+            ],
+          },
+          {
+            path: '/template/:entityType/:bundle/:viewMode',
+            element: (
+              <UiShell>
+                <TemplateRoot />
+              </UiShell>
+            ),
+          },
+          {
+            path: '/template/:entityType/:bundle/:viewMode/:previewEntityId',
+            element: (
+              <UiShell>
+                <EditorLayout context={EditorFrameContext.TEMPLATE} />
+              </UiShell>
+            ),
+            children: [
+              {
+                path: '/template/:entityType/:bundle/:viewMode/:previewEntityId/region/:regionId/component/:componentId',
+                element: <ComponentInstanceForm />,
+              },
+              {
+                path: '/template/:entityType/:bundle/:viewMode/:previewEntityId/region/:regionId',
+                element: <ComponentInstanceForm />,
+              },
+              {
+                path: '/template/:entityType/:bundle/:viewMode/:previewEntityId/component/:componentId',
+                element: <ComponentInstanceForm />,
+              },
+            ],
+          },
+          {
+            path: '/pattern/:patternId',
+            element: (
+              <UiShell>
+                <EditorLayout context={EditorFrameContext.PATTERN} />
+              </UiShell>
+            ),
+            children: [
+              {
+                path: '/pattern/:patternId/component/:componentId',
+                element: <ComponentInstanceForm />,
+              },
+            ],
+          },
+          {
+            path: '/preview/:entityType/:entityId/',
+            element: <PagePreview />,
+          },
+          {
+            path: 'preview/:entityType/:entityId/:width',
+            element: <PagePreview />,
+          },
+          {
+            path: '/preview/template/:entityType/:bundle/:entityId/:viewMode',
+            element: <PagePreview />,
+          },
+          {
+            path: 'preview/template/:entityType/:bundle/:entityId/:viewMode/:width',
+            element: <PagePreview />,
+          },
+          {
+            path: '/version-preview/:entityType/:entityId',
+            element: <VersionPreview />,
+          },
+          {
+            path: '/version-preview/:entityType/:entityId/:width',
+            element: <VersionPreview />,
+          },
+          {
+            path: '/conflict',
+            element: (
+              <UiShell>
+                <ConflictResolutionPage />
+              </UiShell>
+            ),
+          },
+          {
+            path: '/conflict/:entityType/:entityId',
+            element: (
+              <UiShell>
+                <ConflictResolutionPage />
+              </UiShell>
+            ),
+          },
+          {
+            path: '/review',
+            element: (
+              <UiShell>
+                <ReviewChangesPage />
+              </UiShell>
+            ),
+          },
+          {
+            path: '/review/:entityType/:entityId',
+            element: (
+              <UiShell>
+                <ReviewChangesPage />
+              </UiShell>
+            ),
+          },
+          {
+            // belt and braces to catch navigation to /code-editor without component id rather than showing a 404
+            path: '/code-editor/',
+            element: <CodeEditorRoute />,
+          },
+          {
+            path: '/code-editor/component',
+            element: <CodeEditorRoute />,
+          },
+          {
+            // Legacy route for backward compatibility.
+            path: '/code-editor/code/:codeComponentId',
+            element: <LegacyCodeEditorRedirect />,
+          },
+          {
+            // Opens the code editor for an item under 'Components'.
+            path: '/code-editor/component/:codeComponentId',
+            element: <CodeEditorRoute />,
+          },
+          {
+            path: '/app/:extensionId/*',
+            element: (
+              <UiShell>
+                <ExtensionPage />
+              </UiShell>
+            ),
+          },
+          {
+            // Headless frontends configuration.
+            path: '/headless/',
+            element: <HeadlessFrontendsUi />,
+          },
+          {
+            // Personalization
+            path: '/segments/',
+            element: (
+              <SegmentPanel>
+                <Outlet />
+              </SegmentPanel>
+            ),
+            children: [
+              {
+                path: '/segments/',
+                element: <SegmentDashboard />,
+              },
+              {
+                path: '/segments/:segmentId',
+                element: <h1>Segment Details</h1>,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    {
+      basename: `${basePath}`,
+      future: {
+        v7_fetcherPersist: true,
+        v7_normalizeFormMethod: true,
+        v7_partialHydration: true,
+        v7_relativeSplatPath: true,
+        v7_skipActionErrorRevalidation: true,
+      },
+    },
+  );
+
+  return <RouterProvider router={router} />;
+};
+
+export default AppRoutes;

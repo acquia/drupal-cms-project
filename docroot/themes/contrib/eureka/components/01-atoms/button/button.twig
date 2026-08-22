@@ -1,0 +1,80 @@
+{#
+/**
+ * Available variables:
+ * - button_base_class: base classname of the wrapper.
+ * - button_modifiers: array of modifiers to add to the base classname of the wrapper.
+ * - button_blockname: blockname prepended to the base classname of the wrapper(s) and each component.
+ * - button_extra_classes: extra classes, optional for the component.
+ *
+ * - button_type: defines type of button (primary, secondary, etc)
+ * - additional_attributes: an array with all the attributes set to the button
+ * - button_aria_label: if set to true, it adds an aria-label attribute
+ * - button_url: when the button atom is used for links, a url will be passed on
+ * - button_content: the content of the button (typically text)
+ * - button_icon: if set to true, it will add an icon modifier class
+ * - button_icon_name: name of the svg icon used for an iconed button
+ * - button_icon_before: positions the icon at the right of the button and will add an icon-before modifier class.
+ *
+ * Available blocks:
+ * - button_content_block: used to replace the content of the button with something other than text
+ *   for example, to insert an icon
+ */
+#}
+
+{% set button_base_class = button_base_class|default('button') %}
+{% if button_type %}
+  {% set button_modifiers = button_modifiers|default([])|merge([button_type]) %}
+{% endif %}
+{% set additional_attributes = additional_attributes|default({}) %}
+{% if button_aria_label %}
+  {% set additional_attributes = additional_attributes|merge({"aria-label": button_aria_label }) %}
+{% endif %}
+{% if button_icon %}
+  {% set button_modifiers = button_modifiers|default([])|merge(['icon']) %}
+{% endif %}
+{% if button_icon_before %}
+  {% set button_modifiers = button_modifiers|default([])|merge(['icon-before']) %}
+{% endif %}
+{% if button_visually_hidden_text %}
+  {% set span_classes = 'sr-only' %}
+  {% set button_modifiers = button_modifiers|default([])|merge(['clean']) %}
+{% endif %}
+{% set additional_attributes = additional_attributes|merge({
+  class: bem(button_base_class, button_modifiers, button_blockname, button_extra_classes),
+}) %}
+{% set tag = 'button' %}
+{% if button_url %}
+  {% set tag = 'a' %}
+  {% set additional_attributes = additional_attributes|merge({
+    href: button_url
+  }) %}
+  {% set button_modifiers = button_modifiers|default([])|merge(['link']) %}
+{% endif %}
+{% set additional_attributes = additional_attributes|merge({
+  class: bem(button_base_class, button_modifiers, button_blockname, button_extra_classes),
+}) %}
+
+<{{ tag }} {{ add_attributes(additional_attributes) }}>
+  {% if button_icon and button_icon_before %}
+    {{ include("eureka:icon", {
+      icon_name: button_icon_name|default('chevron'),
+      icon_decorative: true,
+      icon_modifiers: ['before'],
+    }, with_context = false) }}
+  {% endif %}
+  {% if button_span or button_visually_hidden_text %}
+    <span class="{{ span_classes }}">
+   {% endif %}
+    {% block button_content_block %}
+      {{ button_content }}
+    {% endblock %}
+  {% if button_span or button_visually_hidden_text %}
+    </span>
+  {% endif %}
+  {% if button_icon and not button_icon_before %}
+    {{ include("eureka:icon", {
+      icon_name: button_icon_name|default('chevron'),
+      icon_decorative: true,
+    }, with_context = false) }}
+  {% endif %}
+</{{ tag }}>

@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_areas_of_interest
+    - node.type.person
+  module:
+    - text
+id: node.person.field_areas_of_interest
+field_name: field_areas_of_interest
+entity_type: node
+bundle: person
+label: 'Areas of Interest/Expertise'
+description: 'Professional interests, research areas, or specializations'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

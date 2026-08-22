@@ -1,0 +1,66 @@
+{#
+/**
+ * @file
+ * Space Breadcrumb Component.
+ *
+ * Description:
+ * A molecule-level component for displaying a breadcrumb navigation with customizable styles and variations.
+ *
+ * Variables:
+ * - items: [array] An array of breadcrumb items. Each item is an object with the following properties:
+ *   - text: [string] The display title for the breadcrumb item.
+ *     Example: 'Home'.
+ *   - url: [string] The URL for the breadcrumb item.
+ *     Example: 'https://example.com/home'.
+ *   - title_text: [string] Additional text for the breadcrumb item, usually for accessibility purposes.
+ *     Example: 'Go to Home'.
+ * - breadcrumb_style_options: [string] The style applied to the breadcrumb. Options:
+ *   - 'no-fill': No background or border styling.
+ *   - 'primary-fill': Primary-colored background.
+ *   - 'edge-lines': Styled with edge lines.
+ *   default: 'primary-fill'.
+ * - breadcrumb_variation_options: [string] The variation of the breadcrumb. default: 'expanded'.
+ */
+#}
+
+{# Default #}
+{% set breadcrumb_style_options = breadcrumb_style_options|default('primary-fill') %}
+{% set breadcrumb_variation_options = breadcrumb_variation_options|default('expanded') %}
+
+{% set classes = ['breadcrumb flex items-center flex-wrap leading-5', breadcrumb_variation_options] %}
+
+{% set attributes = attributes|default(create_attribute()).addClass(classes) %}
+
+{# Template #}
+{% block breadcrumb_block %}
+  <div class="breadcrumb-wrapper relative {{ breadcrumb_style_options }}">
+    <div class="container relative mx-auto">
+      <ul {{ attributes }}>
+        {% for item in items %}
+          {% if item.text == 'Home' %}
+            <li class="menu-home">
+              {% include 'pulse_theme:space-link' with { url: '/', text: 'Home', extra_classes: 'font-normal capitalize',title_text: 'Home Icon'} only %}
+            </li>
+          {% else %}
+            <li class="menu-items capitalize">
+              {% if loop.last %}
+                <span>{{ item.text }}</span>
+              {% else %}
+                {% include 'pulse_theme:space-link' with { url: item.url, text: item.text, extra_classes: 'breadcrumb__link no-underline font-normal capitalize'} only %}
+              {% endif %}
+            </li>
+          {% endif %}
+          {% if not loop.last %}
+            <li class="breadcrumb__separator flex items-center" aria-hidden="true">
+              {% include 'pulse_theme:space-icon' with {
+                icon: 'pill',
+                icon_size: 'extra-small',
+                icon_color: 'currentColor'
+              } only %}
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}

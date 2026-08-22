@@ -1,0 +1,84 @@
+<div class="banner text-{{ text_alignment }}">
+{% if is_short_banner == 'true' %}
+  <div class="smaller-banner">
+{% endif %}
+{% if image_position == 'full' %}
+  <div class="{{ background_color ? 'banner-color-' ~ background_color ~ ' ' : '' }}banner-background image-full">
+{% elseif image_position == 'left' %}
+  <div class="{{ background_color ? 'banner-color-' ~ background_color ~ ' ' : '' }}banner-background image-left">
+{% elseif image_position == 'right' %}
+  <div class="{{ background_color ? 'banner-color-' ~ background_color ~ ' ' : '' }}banner-background image-right">
+{% endif %}
+  {% if image_position == 'left' or image_position == 'right' %}
+    <div class="container">
+      <div{% if content_attributes is defined and content_attributes %}{{ content_attributes.addClass('banner-inner row') }}{% else %} class="banner-inner row"{% endif %}>
+  {% else %}
+    <div{% if content_attributes is defined and content_attributes %}{{ content_attributes.addClass('banner-inner') }}{% else %} class="banner-inner"{% endif %}>
+  {% endif %}
+      {% if image_url %}
+        <div class="banner-image-container position-{{ image_position }}">
+          <div>
+            <img src="{{ image_url.src }}" alt="{{ image_url.alt ? image_url.alt : 'Image' }}" />
+          </div>
+        </div>
+      {% endif %}
+    {% if image_position == 'left' or image_position == 'right' %}
+    <div class="banner-content col-lg-6 col-sm-12">
+    {% else %}
+    <div class="banner-content">
+    {% endif %}
+      <div class="container">
+        <div class="row">
+          {% if image_position == 'full' %}
+            <div class="col-sm-12 {{ text_container_width ? text_container_width : 'col-lg-6' }}">
+          {% else %}
+            <div class="col-sm-12">
+          {% endif %}
+            <div class="banner-content-body">
+            {% if subtitle|render %}
+              <div class="subheading">
+                {{ subtitle }}
+              </div>
+            {% endif %}
+            {% if title|render %}
+              <h1 class="banner-title">{{ title }}</h1>
+            {% endif %}
+            {% if body|render %}
+              <div class="banner-body">
+              {{ body }}
+              </div>
+            {% endif %}
+              <div class="banner-links">
+              {% block hero_banner_buttons %}
+                {% embed 'provus_base_theme:button'
+                  with {
+                    text: 'Button 1',
+                    url: 'https://example.com',
+                    variant: 'primary'
+                  }
+                %}
+                {% endembed %}
+                {% embed 'provus_base_theme:button'
+                  with {
+                    text: 'Button 2',
+                    url: 'https://example.com',
+                    variant: 'secondary'
+                  }
+                %}
+                {% endembed %}
+              {% endblock %}
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% if image_position == 'left' or image_position == 'right' %}
+    </div>
+  {% endif %}
+</div>
+</div>
+{% if is_short_banner == 'true' %}
+  </div>
+{% endif %}
+</div>

@@ -1,0 +1,384 @@
+$banner-height-desktop-lg: 740px;
+$banner-height-desktop-sm: 584px;
+
+$banner-height-tablet-lg: 480px;
+$banner-height-tablet-sm: 400px;
+
+$banner-height-mobile-lg: 282px;
+$banner-height-mobile-sm: 232px;
+
+@mixin adjust-full-banner-height() {
+  height: $banner-height-mobile-lg;
+
+  @include media-breakpoint-up(sm) {
+    height: $banner-height-tablet-lg;
+  }
+
+  @include media-breakpoint-up(lg) {
+    height: $banner-height-desktop-lg;
+  }
+}
+
+@mixin adjust-l-r-banner-height() {
+  @include media-breakpoint-down(sm) {
+    height: 274px;
+  }
+  @include media-breakpoint-up(sm) {
+    height: 400px;
+  }
+  @include media-breakpoint-up(lg) {
+    height: 740px;
+  }
+}
+
+@mixin adjust-short-banner-height() {
+  height: $banner-height-mobile-sm;
+
+  @include media-breakpoint-up(sm) {
+    height: $banner-height-tablet-sm;
+  }
+
+  @include media-breakpoint-up(lg) {
+    height: $banner-height-desktop-sm;
+  }
+}
+
+.banner-background {
+  overflow: hidden;
+
+  .banner-title {
+    @include text-style-display-headline-display-banner;
+    margin: 0 0 $padding-padding-xxs 0;
+  }
+
+  .banner-body {
+    @include text-style-subheadline-sub-1;
+  }
+
+  .banner-content {
+    padding: 0;
+  }
+
+  .banner-links {
+    margin-top: 48px;
+
+    .field--name-field-provus-links {
+      display: flex;
+      column-gap: $padding-padding-xxlg;
+      @include btn-state-border;
+    }
+  }
+
+  &.banner-color-primary {
+    background-color: $primary;
+
+    .banner-content {
+
+      h1,
+      p,
+      .subheading {
+        color: $text-contrast;
+      }
+    }
+
+    .btn-default {
+      @include button-outlined;
+    }
+  }
+
+  &.banner-color-secondary {
+    background-color: $secondary;
+
+    .banner-content {
+
+      h1,
+      p,
+      .subheading {
+        color: $text-contrast;
+      }
+    }
+
+    .btn-default {
+      @include button-outlined;
+    }
+  }
+
+  &.banner-color-light {
+    background-color: $background-colors-background-lightteal;
+
+    .btn-default {
+      @include button-primary;
+    }
+  }
+
+  &.banner-color-light,
+  &.banner-color-white {
+    .banner-links {
+      .field--name-field-provus-links {
+        @include btn-state-border($primary-colors-primary-accent);
+        @include btn-state-border($primary-colors-primary-accent, focus);
+      }
+    }
+  }
+
+  &.banner-color-dark {
+    background-color: $primary-accent;
+
+    .banner-content {
+
+      h1,
+      p,
+      .subheading {
+        color: $text-contrast;
+      }
+    }
+
+    .btn-default {
+      @include button-outlined;
+    }
+  }
+
+  // All banners.
+  .banner-image-container {
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+    overflow: hidden;
+    @include adjust-l-r-banner-height();
+
+    // Needed for admin side.
+    > div,
+    .contextual-region,
+    .field--name-thumbnail {
+      height: 100%;
+      width: 100%;
+      position: unset;
+    }
+
+    img {
+      width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      object-position: center;
+
+      @include media-breakpoint-up(lg) {
+        position: absolute;
+        top: 0;
+        left: 0;
+        max-height: 100%;
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
+
+      &.position-left {
+        width: 50%;
+      }
+
+      &.position-right {
+        width: 50%;
+        right: 0;
+        left: unset;
+      }
+    }
+  }
+
+  // Full banner.
+  &.image-full {
+    .banner-image-container {
+      position: absolute;
+      @include adjust-full-banner-height();
+
+      img {
+        @include adjust-full-banner-height();
+      }
+    }
+
+    .banner-image-container,
+    .banner-content {
+      display: flex;
+      align-items: center;
+      @include adjust-full-banner-height();
+    }
+  }
+
+  // Left - Right banners {
+  &.image-left,
+  &.image-right {
+    display: flex;
+    align-items: center;
+
+    .container {
+      padding-right: 0;
+      padding-left: 0;
+    }
+
+    .banner-image-container {
+      height: 100%;
+      @include adjust-l-r-banner-height;
+
+      > div,
+      .field--name-thumbnail {
+        img {
+          @include media-breakpoint-up(lg) {
+            width: 50%;
+          }
+        }
+      }
+    }
+  }
+
+  // Right banner.
+  &.image-right {
+    .banner-image-container {
+      order: 2;
+
+      img {
+        left: unset;
+        right: 0;
+      }
+    }
+    .banner-content {
+      order: 1;
+    }
+  }
+
+  // Left banner.
+  &.image-left {
+    .banner-image-container {
+      left: 0;
+    }
+  }
+}
+
+.banner-background {
+  @include breakout;
+
+  .gin--vertical-toolbar & {
+    margin-left: 0;
+  }
+
+  .banner-inner {
+    display: flex;
+    align-items: center;
+
+    .banner-img {
+      height: unset;
+    }
+  }
+
+  &.image-full {
+    .banner-inner {
+      height: unset;
+
+      .banner-content {
+        padding: $padding-padding-xs $padding-padding-xxs;
+
+        @include media-breakpoint-up(lg) {
+          padding: 0;
+        }
+
+        position: relative;
+        width: 100%;
+
+        h1,
+        p,
+        .subheading {
+          color: $text-contrast;
+          text-shadow: 0px 0px 10px #00000025;
+        }
+      }
+    }
+  }
+
+  &.image-left {
+    .banner-inner {
+      @include media-breakpoint-up(lg) {
+        justify-content: flex-end;
+      }
+    }
+
+    .banner-content-body {
+      padding: $padding-padding-xs $padding-padding-xlg;
+
+      @include media-breakpoint-up(lg) {
+        padding: $padding-padding-md;
+        padding-left: 100px;
+      }
+    }
+  }
+
+  &.image-right {
+    .banner-content-body {
+      padding: $padding-padding-xs $padding-padding-xlg;
+
+      @include media-breakpoint-up(lg) {
+        padding-left: 0px;
+        padding-right: 100px;
+        padding-top: $padding-padding-md;
+        padding-bottom: $padding-padding-md;
+      }
+    }
+  }
+}
+
+.smaller-banner .banner-background {
+  @include breakout;
+
+  .gin--vertical-toolbar & {
+    margin-left: 0;
+  }
+
+  .banner-image-container {
+    @include adjust-short-banner-height;
+  }
+
+  .banner-inner {
+    display: flex;
+    align-items: center;
+  }
+
+  .banner-links {
+    .field--name-field-provus-links {
+      display: flex;
+      column-gap: $padding-padding-md;
+    }
+  }
+
+  &.image-full {
+    .banner-inner {
+      @include adjust-short-banner-height;
+
+      @include media-breakpoint-up(lg) {
+        padding: 0;
+      }
+    }
+  }
+}
+
+.block-provus-banner {
+  // Text alignment.
+  &.text-start {
+    .banner-links {
+      .field--name-field-provus-links {
+        justify-content: start;
+      }
+    }
+  }
+
+  &.text-center {
+    .banner-links {
+      .field--name-field-provus-links {
+        justify-content: center;
+      }
+    }
+  }
+
+  &.text-end {
+    .banner-links {
+      .field--name-field-provus-links {
+        justify-content: end;
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ * Theme override to display a region.
+ *
+ * Available variables:
+ * - content: The content for this region, typically blocks.
+ * - attributes: HTML attributes for the region div.
+ * - region: The name of the region variable as defined in the theme's
+ *   .info.yml file.
+ *
+ * @see template_preprocess_region()
+ */
+#}
+
+{% embed "eureka:header" with {
+  header_telephone: global_phone,
+  header_email: global_email,
+  header_contact: header_info,
+} %}
+  {% block header_branding_block %}
+    {{ elements.eureka_sitebranding_header }}
+  {% endblock %}
+  {% block header_menu_block %}
+    {{ elements.eureka_mainnavigation }}
+  {% endblock %}
+{% endembed %}

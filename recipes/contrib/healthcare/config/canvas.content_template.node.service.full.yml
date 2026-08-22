@@ -1,0 +1,104 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.views_block.service_providers-block_1
+    - canvas.component.sdc.diagnosis.button
+    - canvas.component.sdc.diagnosis.cta
+    - canvas.component.sdc.diagnosis.heading
+    - canvas.component.sdc.diagnosis.hero-side-by-side
+    - canvas.component.sdc.diagnosis.plain-text
+    - canvas.component.sdc.diagnosis.section
+    - canvas.component.sdc.diagnosis.text
+    - core.base_field_override.node.service.title
+    - core.entity_view_mode.node.full
+    - field.field.media.image.field_media_image
+    - field.field.node.service.field_appointment_link
+    - field.field.node.service.field_description
+    - field.field.node.service.field_eligibility
+    - field.field.node.service.field_featured_image
+    - field.field.node.service.field_insurance
+    - field.field.node.service.field_related_conditions
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - node.type.service
+  module:
+    - file
+    - media
+    - node
+    - options
+id: node.service.full
+content_entity_type_id: node
+content_entity_type_bundle: service
+content_entity_type_view_mode: full
+component_tree:
+  0:
+    uuid: a774c2ad-a487-4afb-9eef-47868cad52d3
+    component_id: sdc.diagnosis.hero-side-by-side
+    component_version: 4b74bc8cb0425504
+    inputs: '{"hero_flex_gap":"large","hero_flex_direction_mobile":"vertical","background":"default","padding_block_start":"0","padding_block_end":"0","margin_block_start":"0","margin_block_end":"0","image_size":"4:3","image_position":"right","image_radius":"extra-large","media":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:service\u241dfield_featured_image\u241e\u241fentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241f{src\u21a0src_with_alternate_widths,alt\u21a0alt,width\u21a0width,height\u21a0height}"}}'
+  '0:hero_slot:0':
+    parent_uuid: a774c2ad-a487-4afb-9eef-47868cad52d3
+    slot: hero_slot
+    uuid: 5ebb6a5b-de7f-4c65-a8a2-6b2b1230c19b
+    component_id: sdc.diagnosis.heading
+    component_version: d7c6acbc91a60ac1
+    inputs: '{"heading_text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:service\u241dtitle\u241e\u241fvalue"},"level":2,"text_size":"heading-responsive-4xl","text_color":"default","align":"left"}'
+  1:
+    uuid: beae9be0-4c9c-4d2c-beca-415e4c1e841f
+    component_id: sdc.diagnosis.section
+    component_version: 4e137b5efb1f5f5f
+    inputs: '{"width":"75%","columns":"100","mobile_columns":"1","margin_block_start":"48","margin_block_end":"48","padding_block_start":"0","padding_block_end":"0","section_header":false,"section_footer":false}'
+  '1:main_slot:0':
+    parent_uuid: beae9be0-4c9c-4d2c-beca-415e4c1e841f
+    slot: main_slot
+    uuid: 8e292e2e-9c47-4544-9363-95fd66c6955a
+    component_id: sdc.diagnosis.text
+    component_version: a32701352f55e6f5
+    inputs: '{"text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:service\u241dfield_description\u241e\u241fprocessed"},"text_size":"normal","text_color":"default"}'
+  '1:main_slot:1':
+    parent_uuid: beae9be0-4c9c-4d2c-beca-415e4c1e841f
+    slot: main_slot
+    uuid: e7fa7713-6056-492c-9e33-7df7829ee595
+    component_id: sdc.diagnosis.text
+    component_version: a32701352f55e6f5
+    inputs: '{"label":"Insurance:","text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:service\u241dfield_insurance\u241e\u241fprocessed"},"text_size":"normal","text_color":"default"}'
+  '1:main_slot:2':
+    parent_uuid: beae9be0-4c9c-4d2c-beca-415e4c1e841f
+    slot: main_slot
+    uuid: d587d65b-ce31-453a-bb59-cee57e7ec632
+    component_id: sdc.diagnosis.text
+    component_version: a32701352f55e6f5
+    inputs: '{"label":"Eligibility:","text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:service\u241dfield_eligibility\u241e\u241fprocessed"},"text_size":"normal","text_color":"default"}'
+  '1:main_slot:3':
+    parent_uuid: beae9be0-4c9c-4d2c-beca-415e4c1e841f
+    slot: main_slot
+    uuid: 187ff382-1339-41ff-97a9-c90c6a48ed63
+    component_id: sdc.diagnosis.plain-text
+    component_version: 8ac71b85056f21c6
+    inputs: '{"text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:service\u241dfield_related_conditions\u241e\u241fvalue"},"text_size":"normal","text_color":"default"}'
+  2:
+    uuid: 8fd06eb3-bc11-4cb4-8c9d-639230460fc7
+    component_id: sdc.diagnosis.section
+    component_version: 4e137b5efb1f5f5f
+    inputs: '{"width":"75%","columns":"100","mobile_columns":"1","margin_block_start":"48","margin_block_end":"48","padding_block_start":"64","padding_block_end":"0","section_header":false,"section_footer":false,"views_columns":"33-33-33"}'
+  '2:main_slot:0':
+    parent_uuid: 8fd06eb3-bc11-4cb4-8c9d-639230460fc7
+    slot: main_slot
+    uuid: df65d4e2-a5ca-484d-b646-dec3e6044a52
+    component_id: block.views_block.service_providers-block_1
+    component_version: 633a4a2128643785
+    inputs: '{"label":"Service Providers","label_display":"0","views_label":"","items_per_page":null}'
+  3:
+    uuid: b741db46-1bad-42b4-acd3-4cf33c344fd3
+    component_id: sdc.diagnosis.cta
+    component_version: 85c3d4f60a48e2d1
+    inputs: '{"heading_text":"Book an Appointment","level":2,"text":"We\u0027re here when you need us. Book online to find a time that works for you.","text_align":"center","background_color":"secondary"}'
+  '3:actions:0':
+    parent_uuid: b741db46-1bad-42b4-acd3-4cf33c344fd3
+    slot: actions
+    uuid: 5641db41-bfe2-4d3b-a2cd-ceb95e056988
+    component_id: sdc.diagnosis.button
+    component_version: 8886a0097e12e915
+    inputs: '{"variant":"primary","label":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:service\u241dfield_appointment_link\u241e\u241ftitle"},"size":"medium","mobile_width":false,"icon_first":false,"disabled":false,"href":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:service\u241dfield_appointment_link\u241e\u241furi"},"icon":"arrow-right"}'
+exposed_slots: {  }

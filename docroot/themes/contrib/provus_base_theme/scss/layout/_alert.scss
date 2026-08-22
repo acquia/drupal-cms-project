@@ -1,0 +1,204 @@
+// Alert Banner
+.alert-banner, .views-element-container {
+  margin-left: rem-calc(16);
+  margin-right: rem-calc(16);
+
+  @include media-breakpoint-up(lg) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+.bs-site-alert {
+  display: flex;
+  align-items: center;
+  gap: $padding-padding-sm;
+  padding: 10px $padding-padding-xlg 10px $padding-padding-sm;
+  margin-top: rem-calc(16);
+  margin-bottom: rem-calc(16);
+  border-radius: $radius-radius-xxs;
+
+  @include text-style-button-medium;
+
+  p {
+    @include text-style-button-medium;
+  }
+
+  > * {
+    margin: 0;
+  }
+
+  &.alert-primary {
+    color: $white;
+    background-color: $primary;
+    border-color: $primary;
+    &::before {
+      color: $white;
+      font-family: $font-fontawesome;
+      font-size: $font-size-base;
+      content: "\f05a";
+      background: none;
+    }
+    p, h2, h3, h4, h5, h6 {
+      color: $white;
+    }
+  }
+  &.alert-secondary {
+    color: $white;
+    background-color: $secondary-shade;
+    border-color: $secondary-shade;
+    &::before {
+      color: $white;
+      font-family: $font-fontawesome;
+      font-size: $font-size-base;
+      content: "\f05a";
+      background: none;
+    }
+    p, h2, h3, h4, h5, h6 {
+      color: $white;
+    }
+  }
+  &.alert-success {
+    color: $white;
+    background-color: $success-primary;
+    border-color: $success-primary;
+    &::before {
+      color: $white;
+      font-family: $font-fontawesome;
+      font-size: $font-size-base;
+      content: "\f058";
+      background: none;
+    }
+    p, h2, h3, h4, h5, h6 {
+      color: $white;
+    }
+  }
+  &.alert-danger {
+    color: $white;
+    background-color: $error-primary;
+    border-color: $error-primary;
+    &::before {
+      color: $white;
+      font-family: $font-fontawesome;
+      font-size: $font-size-base;
+      content: "\f071";
+      background: none;
+    }
+    p, h2, h3, h4, h5, h6 {
+      color: $white;
+    }
+  }
+  &.alert-warning {
+    color: $text-primary;
+    background-color: $warning-primary;
+    border-color: $warning-primary;
+    &::before {
+      color: $text-primary;
+      font-family: $font-fontawesome;
+      font-size: $font-size-base;
+      content: "\f0f3";
+      background: none;
+    }
+    p, h2, h3, h4, h5, h6 {
+      color: $text-primary;
+    }
+  }
+  &.alert-info {
+    color: $white;
+    background-color: $system-primary;
+    border-color: $system-primary;
+    &::before {
+      color: $black;
+      font-family: $font-fontawesome;
+      font-size: $font-size-base;
+      content: "\f05a";
+      background: none;
+    }
+    p, h2, h3, h4, h5, h6 {
+      color: $black;
+    }
+  }
+  &.alert-light {
+    color: $text-colors-body-color;
+    background-color: $white;
+    border-color: $text-primary;
+    &::before {
+      color: $text-colors-body-color;
+      font-family: $font-fontawesome;
+      font-size: $font-size-base;
+      content: "\f05a";
+      background: none;
+    }
+    p, h2, h3, h4, h5, h6 {
+      color: $text-primary;
+    }
+  }
+  &.alert-dark {
+    color: $white;
+    background-color: $text-primary;
+    border-color: $text-primary;
+    &::before {
+      color: $white;
+      font-family: $font-fontawesome;
+      font-size: $font-size-base;
+      content: "\f05a";
+      background: none;
+    }
+    p, h2, h3, h4, h5, h6 {
+      color: $white;
+    }
+  }
+  &.alert-dismissible {
+    .btn-close {
+      opacity: 1;
+      padding: 0;
+      font-size: 12px;
+      color: $white;
+      background: url('../images/close-white.svg') no-repeat;
+      background-size: 14px;
+      top: 50%;
+      right:  $padding-padding-sm;
+      margin-top: -7px;
+      width: 14px;
+      height: 14px;
+
+      &:hover {
+        outline: 0;
+        box-shadow: var(--#{$prefix}btn-close-focus-shadow);
+        opacity: var(--#{$prefix}btn-close-focus-opacity);
+      }
+
+      &::before {
+        display: none;
+      }
+    }
+    &.alert-warning,
+    &.alert-light,
+    &.alert-info {
+      .btn-close {
+        color: $black;
+        background-image: url('../images/close.svg');
+
+        &:hover,
+        &:focus {
+          outline: 0;
+          box-shadow: 0 0 0 2px $black;
+          opacity: var(--#{$prefix}btn-close-focus-opacity);
+        }
+      }
+    }
+    &.alert-danger,
+    &.alert-dark,
+    &.alert-primary,
+    &.alert-secondary,
+    &.alert-success {
+      .btn-close {
+        &:hover,
+        &:focus {
+          outline: 0;
+          box-shadow: 0 0 0 2px $white;
+          opacity: var(--#{$prefix}btn-close-focus-opacity);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,220 @@
+/**
+ * Stats Section Component Styles
+ *
+ * A two-column responsive section with content card and stats grid.
+ * Uses CSS Grid with named areas for desktop layout.
+ */
+
+/* ========================================
+   Base Card Styles
+   Note: Card styling (padding, shadows, rounded corners, backgrounds)
+   are now handled via Tailwind utility classes in the template.
+   This file only contains layout-specific styles.
+   ======================================== */
+
+/* ========================================
+   Stats Section Layout
+   ======================================== */
+
+.stats-section {
+  width: 100%;
+}
+
+/* Mobile-first: single column stacked layout */
+.stats-section__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Desktop: two-column layout with named grid areas */
+@media (min-width: 768px) {
+  .stats-section__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "content stats"
+      "content stats";
+    gap: 2rem;
+    align-items: stretch;
+  }
+
+  .stats-section__content {
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stats-section__content .content-card {
+    flex: 1;
+  }
+
+  .stats-section__stats {
+    grid-area: stats;
+  }
+}
+
+/* ========================================
+   Content Card Styles
+   ======================================== */
+
+.content-card {
+  justify-content: center;
+}
+
+.content-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.content-card__heading {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+@media (min-width: 640px) {
+  .content-card__heading {
+    font-size: 1.875rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .content-card__heading {
+    font-size: 2.25rem;
+  }
+}
+
+.content-card__text {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+@media (min-width: 640px) {
+  .content-card__text {
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .content-card__text {
+    font-size: 1.25rem;
+  }
+}
+
+.content-card__text p {
+  margin-bottom: 0;
+}
+
+.content-card__button {
+  margin-top: 0.5rem;
+}
+
+.content-card__button .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  text-decoration: none;
+  transition: background-color 150ms;
+}
+
+.content-card__button .button:hover {
+  background-color: hsl(var(--primary) / 0.9);
+}
+
+/* ========================================
+   Stats Grid Layout
+   ======================================== */
+
+/* Mobile: single column stack */
+.stats-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Desktop: named grid areas for specific layout */
+@media (min-width: 768px) {
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "stat-main stat-main"
+      "stat-sub1 stat-sub2";
+    gap: 1.5rem;
+  }
+
+  .stats-grid__item--1 {
+    grid-area: stat-main;
+  }
+
+  .stats-grid__item--2 {
+    grid-area: stat-sub1;
+  }
+
+  .stats-grid__item--3 {
+    grid-area: stat-sub2;
+  }
+
+  /* Handle 4+ stats gracefully by continuing the grid */
+  .stats-grid__item:nth-child(n+4) {
+    grid-column: span 1;
+  }
+}
+
+/* ========================================
+   Stat Card Styles
+   ======================================== */
+
+.stat-card {
+  height: 100%;
+}
+
+.stat-card__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+  gap: 0.5rem;
+  min-height: 150px;
+}
+
+.stat-card__value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+@media (min-width: 640px) {
+  .stat-card__value {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .stat-card__value {
+    font-size: 3.75rem;
+  }
+}
+
+.stat-card__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+}
+
+@media (min-width: 640px) {
+  .stat-card__label {
+    font-size: 1rem;
+  }
+}

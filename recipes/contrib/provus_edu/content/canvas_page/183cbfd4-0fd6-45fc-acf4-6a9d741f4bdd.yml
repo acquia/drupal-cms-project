@@ -1,0 +1,449 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 183cbfd4-0fd6-45fc-acf4-6a9d741f4bdd
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Person and Events Components'
+  components:
+    -
+      uuid: c35115c5-c88d-4176-8725-f6386cfcf274
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+    -
+      parent_uuid: c35115c5-c88d-4176-8725-f6386cfcf274
+      slot: content
+      uuid: 060ab1d2-6081-48eb-a1a5-ff15a276ce00
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h1
+        title: 'Person and Event Components'
+        decorative_line: false
+        alignment: left
+    -
+      uuid: 9d303444-31c1-486b-b232-4a06a3019f3b
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+    -
+      parent_uuid: 9d303444-31c1-486b-b232-4a06a3019f3b
+      slot: content
+      uuid: 2bd2e0bb-da4f-4d26-80c0-c4d9bb27b9a8
+      component_id: sdc.provus_base_theme.three_column
+      inputs:
+        desktop_width: 33-33-33
+        tablet_width: 33-33-33
+        mobile_width: 100-100-100
+    -
+      parent_uuid: 2bd2e0bb-da4f-4d26-80c0-c4d9bb27b9a8
+      slot: column_1
+      uuid: 7ebb96a4-e17f-4d8c-8a04-3aeed04d1c7e
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Person Profile'
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 2bd2e0bb-da4f-4d26-80c0-c4d9bb27b9a8
+      slot: column_2
+      uuid: 232ea72a-7b9f-436b-9006-a28d74d9a422
+      component_id: sdc.provus_base_theme.card_profile
+      inputs:
+        first_name: John
+        last_name: Doe
+        job_title: CEO
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/280x448'
+            alt: Image
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.card_profile
+        url:
+          uri: 'internal:/people/john-doe'
+          options: {  }
+        phone: '(555) 123-4567'
+    -
+      parent_uuid: 2bd2e0bb-da4f-4d26-80c0-c4d9bb27b9a8
+      slot: column_3
+      uuid: 5010a3fe-c376-4141-aa33-56642e4df516
+      component_id: sdc.provus_base_theme.card_profile
+      inputs:
+        first_name: John
+        last_name: Doe
+        job_title: CEO
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/280x448'
+            alt: Image
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.card_profile
+        url:
+          uri: 'internal:/people/john-doe'
+          options: {  }
+    -
+      parent_uuid: 9d303444-31c1-486b-b232-4a06a3019f3b
+      slot: content
+      uuid: b3f2fa3c-2b10-4563-9aa3-f3b597ac3dae
+      component_id: sdc.provus_base_theme.spacer
+      inputs:
+        include_divider: false
+        padding_all: p-3
+    -
+      parent_uuid: 9d303444-31c1-486b-b232-4a06a3019f3b
+      slot: content
+      uuid: 06099c68-aaca-4933-a9af-1184c7a5e513
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: 06099c68-aaca-4933-a9af-1184c7a5e513
+      slot: column_1
+      uuid: 26e5acdd-3279-406b-8474-e008e8a321a3
+      component_id: sdc.provus_base_theme.spacer
+      inputs:
+        include_divider: false
+        padding_all: p-3
+    -
+      parent_uuid: 06099c68-aaca-4933-a9af-1184c7a5e513
+      slot: column_1
+      uuid: 2b0bacff-de9c-4de4-bb28-1332e49dda17
+      component_id: sdc.provus_base_theme.person
+      inputs:
+        first_name: John
+        last_name: Doe
+        about:
+          value: '<p>Person Full Profile</p><p>Dedicated team member focused on delivering exceptional results.</p><p>Passionate about innovation and collaboration.</p>'
+          format: canvas_full_html
+        job_title: CEO
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/280x448'
+            alt: Image
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.person
+        email: john.doe@example.com
+        phone: '(555) 123-4567'
+    -
+      parent_uuid: 06099c68-aaca-4933-a9af-1184c7a5e513
+      slot: column_1
+      uuid: d672b5f9-1e18-4fbf-b762-35e66627821e
+      component_id: sdc.provus_base_theme.spacer
+      inputs:
+        include_divider: false
+        padding_all: p-3
+    -
+      uuid: 8e99acf6-82b1-4874-8056-8d3f39038060
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        padding_top: pt-5
+        custom_class: bg-grey
+    -
+      parent_uuid: 8e99acf6-82b1-4874-8056-8d3f39038060
+      slot: content
+      uuid: a364b5c8-83fc-4195-bb7e-7a2875cb13f9
+      component_id: sdc.provus_base_theme.three_column
+      inputs:
+        desktop_width: 33-33-33
+        tablet_width: 33-33-33
+        mobile_width: 100-100-100
+    -
+      parent_uuid: a364b5c8-83fc-4195-bb7e-7a2875cb13f9
+      slot: column_1
+      uuid: ad19c8cf-3a79-4eaf-95d8-5079a74a98c9
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Event View'
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: a364b5c8-83fc-4195-bb7e-7a2875cb13f9
+      slot: column_1
+      uuid: d76b28e0-4b40-4942-a2d8-db2b51dd24e7
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p>Cards are used to group and display content in a way that is easily readable.</p>'
+          format: canvas_full_html
+    -
+      parent_uuid: a364b5c8-83fc-4195-bb7e-7a2875cb13f9
+      slot: column_2
+      uuid: cffa4e2f-f9cf-4fb2-a07c-8d8401e1dac5
+      component_id: sdc.provus_base_theme.list_item
+      inputs:
+        start_date: JAN
+        end_date: '01'
+        full_dates: 'March 15-17, 2024'
+        url:
+          uri: 'internal:/events/annual-conference-2024'
+          options: {  }
+        event_title: 'Annual Conference 2024'
+        summary:
+          value: 'Join us for an exciting event featuring keynote speakers and networking opportunities.'
+          format: canvas_full_html
+        extra_classes: custom-class
+    -
+      parent_uuid: a364b5c8-83fc-4195-bb7e-7a2875cb13f9
+      slot: column_3
+      uuid: c5a1dccb-ebc3-4352-baec-28cd5c4c015f
+      component_id: sdc.provus_base_theme.list_item
+      inputs:
+        start_date: JAN
+        end_date: '01'
+        full_dates: 'March 15-17, 2024'
+        url:
+          uri: 'internal:/events/annual-conference-2024'
+          options: {  }
+        event_title: 'Annual Conference 2024'
+        summary:
+          value: 'Join us for an exciting event featuring keynote speakers and networking opportunities.'
+          format: canvas_full_html
+        extra_classes: custom-class
+    -
+      uuid: 25f33ea4-150f-4b76-b30a-d750cd49ac3b
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        custom_class: bg-grey
+    -
+      parent_uuid: 25f33ea4-150f-4b76-b30a-d750cd49ac3b
+      slot: content
+      uuid: 052fd44e-a010-4fd8-821c-303d2097c357
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: 052fd44e-a010-4fd8-821c-303d2097c357
+      slot: column_1
+      uuid: 34d0ce56-a2ef-4c21-97ba-8d27e805f4d7
+      component_id: sdc.provus_base_theme.event
+      inputs:
+        title: 'Annual Conference 2024'
+        body:
+          value: 'Join us for an exciting event featuring keynote speakers and networking opportunities.'
+          format: canvas_full_html
+        sidebar_title: Dates
+        sidebar_content:
+          value: 'March 15-17, 2024'
+          format: canvas_full_html
+        footer_title: 'How to Attend'
+        footer_content:
+          value: '<a href="/events/annual-conference-2024" class="btn btn-primary">Register Now</a>'
+          format: canvas_full_html
+    -
+      parent_uuid: 052fd44e-a010-4fd8-821c-303d2097c357
+      slot: column_1
+      uuid: 6f3516c4-9058-4435-af13-5e45fac7298d
+      component_id: sdc.provus_base_theme.spacer
+      inputs:
+        include_divider: true
+        padding_all: p-1
+    -
+      parent_uuid: 052fd44e-a010-4fd8-821c-303d2097c357
+      slot: column_1
+      uuid: 2b10e169-7963-4bc6-8236-c474e5f74acd
+      component_id: sdc.provus_base_theme.spacer
+      inputs:
+        include_divider: false
+        padding_all: p-3
+    -
+      parent_uuid: 052fd44e-a010-4fd8-821c-303d2097c357
+      slot: column_1
+      uuid: 05ded117-e04e-4be1-88a7-ac2b16cc442d
+      component_id: sdc.provus_base_theme.mini
+      inputs:
+        start_date: JAN
+        end_date: '01'
+        full_dates: '10am to 8pm'
+        url:
+          uri: 'internal:/events/annual-conference-2024'
+          options: {  }
+        event_title: 'Annual Conference 2024'
+        body:
+          value: 'Join us for an exciting event featuring keynote speakers and networking opportunities.'
+          format: canvas_full_html
+  path:
+    -
+      alias: /demo/person-events-components
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

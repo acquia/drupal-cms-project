@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Contains test hooks.
+ */
+
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\link_attributes_test_alterinfo\Hook\LinkAttributesTestAlterinfoHooks;
+
+/**
+ * @file
+ * Link attributes test module.
+ */
+
+/**
+ * Implements hook_link_attributes_plugin_alter().
+ */
+#[LegacyHook]
+function link_attributes_test_alterinfo_link_attributes_plugin_alter(array &$definitions) {
+  \Drupal::service(LinkAttributesTestAlterinfoHooks::class)->linkAttributesPluginAlter($definitions);
+}

@@ -1,0 +1,75 @@
+{% set button_id = 'accordion--title'|clean_unique_id %}
+{% set content_id = 'accordion--content'|clean_unique_id %}
+{% set heading_level = heading_level|default('3') %}
+
+{% set section = html_cva(base: ['accordion', 'overflow-hidden', 'border-b border-border', 'bg-clip-padding', 'bg-background']) %}
+
+{% set section_classes = section.apply({}) %}
+
+{% set title_button =
+  html_cva(base: ['accordion--title', 'flex w-full cursor-pointer items-center justify-between', 'bg-card hover:bg-muted', 'p-4 text-left text-2xl'])
+%}
+
+{% set title_button_classes = title_button.apply({}) %}
+
+{% set content =
+  html_cva(
+    base: [
+      'accordion--content',
+      'h-0 overflow-hidden px-4 py-0',
+      'text-base text-foreground',
+      'transition-[height,padding] duration-0 in-[.accordion--animate]:duration-500',
+      '[&>:first-child]:mt-0 [&>:last-child]:mb-0',
+      'in-[.accordion--open]:overflow-visible in-[.accordion--open]:py-5',
+      'in-[.accordion--open:not(.accordion--js)]:h-auto',
+      'in-[.accordion--js.accordion--open]:h-(--natural-height)',
+      'in-[.accordion--resizing.accordion--open]:h-auto'
+    ]
+  )
+%}
+
+{% set content_classes = content.apply({}) %}
+
+<div class="{{ section_classes }}" data-open-by-default="{{ open_by_default ? 'true' : 'false' }}">
+  {# The heading tag is necessary for accessibility reasons. #}
+  {% set heading_class = 'text-2xl' %}
+  {% set button_content %}
+    <button id="{{ button_id }}" aria-controls="{{ content_id }}" class="{{ title_button_classes }}">
+      {{ title }}
+      <span class="accordion--icon transition-transform duration-500 in-[.accordion--js.accordion--open]:rotate-180">
+        {{
+          include(
+            '@byte_theme/components/icon/icon.twig',
+            {
+              icon: 'caret-down',
+              icon_size: 'small'
+            },
+            with_context: false
+          )
+        }}
+      </span>
+    </button>
+  {% endset %}
+
+  {% if heading_level == '1' %}
+    <h1 class="{{ heading_class }}">{{ button_content }}</h1>
+  {% elseif heading_level == '2' %}
+    <h2 class="{{ heading_class }}">{{ button_content }}</h2>
+  {% elseif heading_level == '3' %}
+    <h3 class="{{ heading_class }}">{{ button_content }}</h3>
+  {% elseif heading_level == '4' %}
+    <h4 class="{{ heading_class }}">{{ button_content }}</h4>
+  {% elseif heading_level == '5' %}
+    <h5 class="{{ heading_class }}">{{ button_content }}</h5>
+  {% elseif heading_level == '6' %}
+    <h6 class="{{ heading_class }}">{{ button_content }}</h6>
+  {% else %}
+    <h3 class="{{ heading_class }}">{{ button_content }}</h3>
+  {% endif %}
+
+  <div class="{{ content_classes }}" id="{{ content_id }}" role="region" aria-labelledby="{{ button_id }}">
+    {% block accordion_content %}
+
+    {% endblock %}
+  </div>
+</div>

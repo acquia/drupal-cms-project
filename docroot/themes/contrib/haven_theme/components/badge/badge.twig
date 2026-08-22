@@ -1,0 +1,57 @@
+{% set is_icon_first = icon_first is not empty ? 'yes' : 'no' %}
+
+{# Normalize badge_classes - handle both array and string formats #}
+{% set additional_classes = badge_classes|default('') %}
+{% if additional_classes is iterable %}
+  {% set additional_classes = additional_classes|join(' ') %}
+{% endif %}
+
+{% set badge =
+  html_cva(
+    base: [
+      'rounded-full',
+      'flex inline-flex items-center gap-[2px] lg:gap-1',
+      'px-5 py-2',
+      'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]'
+    ],
+    variants: {
+      style: {
+        primary: ['bg-primary text-primary-foreground'],
+        secondary: ['bg-secondary text-secondary-foreground'],
+        accent: ['bg-accent/75 text-primary']
+      },
+      iconFirst: {
+        yes: 'flex-row',
+        no: 'flex-row-reverse'
+      }
+    }
+  )
+%}
+
+{% set badge_classes =
+  badge.apply(
+    {
+      style: style|default('primary'),
+      iconFirst: is_icon_first
+    },
+    additional_classes
+  )
+%}
+
+{% if label is not empty %}
+  <span aria-label="{{ label }}" class="{{ badge_classes }}">
+    {% if icon is not empty %}
+      {{
+        include(
+          '@haven_theme/components/icon/icon.twig',
+          {
+            icon: icon,
+            icon_size: 'extra-small'
+          },
+          with_context: false
+        )
+      }}
+    {% endif %}
+    <span class="font-sans text-sm leading-none font-bold uppercase">{{ label }}</span>
+  </span>
+{% endif %}

@@ -1,0 +1,100 @@
+.toastify {
+  border-radius: .75em;
+  box-shadow: 0 6px 16px var(--gin-border-color-layer);
+  padding: 1em 3.25em 1em 1em;
+  overflow: hidden;
+  font-family: var(--gin-font);
+}
+
+.toastify.toastify--info {
+  background: var(--gin-bg-info) !important;
+  color: var(--gin-color-info-light) !important
+}
+
+.toastify.toastify--info .toast-close {
+  background: var(--gin-color-info-light)
+}
+
+.toastify.toastify--info .toast-progress {
+  background-image: linear-gradient(90deg, var(--gin-bg-info), var(--gin-bg-info));
+  filter: brightness(70%);
+}
+
+.toastify.toastify--status {
+  background: var(--gin-bg-green) !important;
+  color: var(--gin-color-green-light) !important
+}
+
+.toastify.toastify--status .toast-close {
+  background: var(--gin-color-green-light)
+}
+
+.toastify.toastify--status .toast-progress {
+  background-image: linear-gradient(90deg, var(--gin-bg-green), var(--gin-bg-green));
+  filter: brightness(70%);
+}
+
+.toastify.toastify--warning {
+  background: var(--gin-bg-warning) !important;
+  color: var(--gin-color-warning-light) !important;
+}
+
+.toastify.toastify--warning .toast-close {
+  background: var(--gin-color-warning-light)
+}
+
+.toastify.toastify--warning .toast-progress {
+  background-image: linear-gradient(90deg, var(--gin-bg-warning), var(--gin-bg-warning));
+  filter: brightness(70%);
+}
+
+.toastify.toastify--error {
+  background: var(--gin-bg-danger) !important;
+  color: var(--gin-color-danger-light) !important;
+}
+
+.toastify.toastify--error .toast-close {
+  background: var(--gin-color-danger-light)
+}
+
+.toastify.toastify--error .toast-progress {
+  background-image: linear-gradient(90deg, var(--gin-bg-danger), var(--gin-bg-danger));
+  filter: brightness(70%);
+}
+
+.toastify .toast-close {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #fff;
+  color: transparent;
+  height: 1.5em;
+  line-height: 1.5em;
+  margin-left: .75em;
+  -webkit-mask-image: url(/themes/contrib/gin/dist/media/sprite.svg#close-view);
+  mask-image: url(/themes/contrib/gin/dist/media/sprite.svg#close-view);
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 1.2em;
+  mask-size: 1.2em;
+  opacity: .6;
+  padding: 0;
+  position: absolute;
+  right: 1em;
+  text-indent: -99999px;
+  top: 1em;
+  transition: var(--gin-transition);
+  width: 1.5em
+}
+
+.toastify .toast-close:hover {
+  opacity: 1;
+}
+
+.toastify a,
+.toastify a:active,
+.toastify a:hover {
+  color: #fff;
+}

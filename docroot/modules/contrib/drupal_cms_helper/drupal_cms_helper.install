@@ -1,0 +1,15 @@
+<?php
+
+declare(strict_types=1);
+
+use Drupal\Core\Menu\MenuLinkManagerInterface;
+
+/**
+ * Implements hook_install().
+ */
+function drupal_cms_helper_install(): void {
+  // This is a shim to ensure that all menu link definitions are up-to-date so
+  // that, if they are involved in config actions (e.g., the config object
+  // `core.menu.static_menu_link_overrides`), the config will be valid.
+  Drupal::service(MenuLinkManagerInterface::class)->rebuild();
+}

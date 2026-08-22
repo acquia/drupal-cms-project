@@ -1,0 +1,71 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Card - Icon
+group: Display
+description: A descriptive block using a decorative or functional icon to represent a category or service.
+props:
+  type: object
+  properties:
+    heading:
+      title: Heading
+      description: The heading content.
+      type: string
+      examples:
+        - Card - Icon heading
+    heading_level:
+      type: number
+      title: Heading level
+      description: Select the heading level.
+      enum: [1, 2, 3, 4, 5, 6]
+      default: 3
+    url:
+      title: URL
+      description: The URL of the item.
+      type: string
+    summary:
+      title: Summary
+      description: Summary text describing the item.
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - <p>Card - Icon summary</p>
+    icon:
+      type:
+        - string
+        - 'null'
+      title: Icon name
+      description: Phosphor icon name for the item.
+      default: 'rocket'
+      examples:
+        - 'rocket'
+    icon_size:
+      type: string
+      title: Icon size
+      description: Select the icon size.
+      enum:
+        - icon-size--xs
+        - icon-size--sm
+        - icon-size--md
+        - icon-size--lg
+        - icon-size--xl
+      meta:enum:
+        icon-size--xs: Extra small
+        icon-size--sm: Small
+        icon-size--md: Medium
+        icon-size--lg: Large
+        icon-size--xl: Extra large
+      default: icon-size--xl
+    icon_align:
+      type: string
+      title: Icon alignment
+      description: Select the icon alignment.
+      enum:
+        - left
+        - center
+      meta:enum:
+        left: Left
+        center: Center
+libraryOverrides:
+  css:
+    component:
+      ../../../dist/css/card_icon.css: { minified: true }

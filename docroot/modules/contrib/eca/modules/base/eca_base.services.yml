@@ -1,0 +1,6 @@
+services:
+  # Fix autowiring for Hooks.
+  Drupal\eca\EcaState: '@eca.state'
+
+parameters:
+  eca_base.skip_procedural_hook_scan: true

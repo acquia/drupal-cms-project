@@ -1,0 +1,14 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Text
+group: Base
+status: stable
+props:
+  type: object
+  properties:
+    text_content:
+      type: string
+      title: Rich text
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>

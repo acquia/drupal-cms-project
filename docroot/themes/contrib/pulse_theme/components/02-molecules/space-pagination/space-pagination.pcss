@@ -1,0 +1,30 @@
+@reference "../../00-base/global/global.pcss";
+
+/* Pager */
+
+/* Type */
+.pager .card-default,
+.pager .card-minimal {
+  @apply justify-between;
+}
+
+/* Color - Light & Dark */
+.card-default .pager__item a.lightColor:hover,
+.card-default .pager__item a.lightColor:focus {
+  @apply lg:hover:bg-sds-bg-8;
+}
+.card-default .pager__item a.lightColor.is-active {
+  @apply bg-sds-bg-8;
+}
+
+.card-default .pager__item a.darkColor:hover,
+.card-default .pager__item a.darkColor:focus {
+  @apply lg:hover:bg-sds-primary-dark lg:hover:text-white;
+}
+.card-default .pager__item a.darkColor.is-active {
+  @apply bg-sds-primary-dark text-white lg:hover:bg-sds-primary-dark lg:hover:text-white;
+}
+
+.carousal-pagination ul {
+  @apply list-none ml-0;
+}

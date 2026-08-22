@@ -1,0 +1,31 @@
+entity.dashboard.edit:
+  route_name: entity.dashboard.edit_form
+  base_route: entity.dashboard.edit_form
+  title: 'Edit'
+
+layout_builder.dashboard.view:
+  route_name: layout_builder.dashboard.view
+  base_route: entity.dashboard.edit_form
+  title: 'Edit layout'
+  weight: 10
+
+entity.dashboard.preview:
+  route_name: entity.dashboard.preview
+  base_route: entity.dashboard.edit_form
+  title: 'Preview'
+  weight: 20
+
+entity.dashboard.permissions:
+  route_name: entity.dashboard.permissions_form
+  base_route: entity.dashboard.edit_form
+  title: 'Manage permissions'
+  weight: 100
+
+dashboard:
+  route_name: dashboard
+  base_route: dashboard
+  class: \Drupal\dashboard\Plugin\Menu\LocalTask\DashboardLocalTask
+
+dashboard.dashboards:
+  class: \Drupal\Core\Menu\LocalTaskDefault
+  deriver: \Drupal\dashboard\Plugin\Derivative\DashboardLocalTask

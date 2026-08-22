@@ -1,0 +1,231 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: base/textures.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+/**
+ * Textures CSS
+ *
+ * Gradient textures that provide visual depth using background and background-stronger
+ * CSS variables. Applied as classes on component wrappers alongside color palettes.
+ *
+ * RTL aware: Uses logical directions (start/end) with appropriate CSS for both LTR and RTL.
+ */
+
+@layer components {
+  /**
+   * Linear Gradients
+   */
+  /* Linear: Start - gradient from start edge (darker) to end edge */
+  .texture--linear-start {
+    background: linear-gradient(
+      to right,
+      var(--background-stronger),
+      var(--background)
+    );
+  }
+  [dir='rtl'] .texture--linear-start,
+  .texture--linear-start:dir(rtl) {
+    background: linear-gradient(
+      to left,
+      var(--background-stronger),
+      var(--background)
+    );
+  }
+
+  /* Linear: End - gradient from end edge (darker) to start edge */
+  .texture--linear-end {
+    background: linear-gradient(
+      to left,
+      var(--background-stronger),
+      var(--background)
+    );
+  }
+  [dir='rtl'] .texture--linear-end,
+  .texture--linear-end:dir(rtl) {
+    background: linear-gradient(
+      to right,
+      var(--background-stronger),
+      var(--background)
+    );
+  }
+
+  /* Linear: Top - gradient from top (darker) to bottom */
+  .texture--linear-top {
+    background: linear-gradient(
+      to bottom,
+      var(--background-stronger),
+      var(--background)
+    );
+  }
+
+  /* Linear: Bottom - gradient from bottom (darker) to top */
+  .texture--linear-bottom {
+    background: linear-gradient(
+      to top,
+      var(--background-stronger),
+      var(--background)
+    );
+  }
+
+  /* Linear: Top Start - diagonal gradient from top-start corner */
+  .texture--linear-top-start {
+    background: linear-gradient(
+      to bottom right,
+      var(--background-stronger),
+      var(--background)
+    );
+  }
+  [dir='rtl'] .texture--linear-top-start,
+  .texture--linear-top-start:dir(rtl) {
+    background: linear-gradient(
+      to bottom left,
+      var(--background-stronger),
+      var(--background)
+    );
+  }
+
+  /* Linear: Top End - diagonal gradient from top-end corner */
+  .texture--linear-top-end {
+    background: linear-gradient(
+      to bottom left,
+      var(--background-stronger),
+      var(--background)
+    );
+  }
+  [dir='rtl'] .texture--linear-top-end,
+  .texture--linear-top-end:dir(rtl) {
+    background: linear-gradient(
+      to bottom right,
+      var(--background-stronger),
+      var(--background)
+    );
+  }
+
+  /* Linear: Bottom Start - diagonal gradient from bottom-start corner */
+  .texture--linear-bottom-start {
+    background: linear-gradient(
+      to top right,
+      var(--background-stronger),
+      var(--background)
+    );
+  }
+  [dir='rtl'] .texture--linear-bottom-start,
+  .texture--linear-bottom-start:dir(rtl) {
+    background: linear-gradient(
+      to top left,
+      var(--background-stronger),
+      var(--background)
+    );
+  }
+
+  /* Linear: Bottom End - diagonal gradient from bottom-end corner */
+  .texture--linear-bottom-end {
+    background: linear-gradient(
+      to top left,
+      var(--background-stronger),
+      var(--background)
+    );
+  }
+  [dir='rtl'] .texture--linear-bottom-end,
+  .texture--linear-bottom-end:dir(rtl) {
+    background: linear-gradient(
+      to top right,
+      var(--background-stronger),
+      var(--background)
+    );
+  }
+
+  /**
+   * Radial Gradients
+   */
+  /* Radial: Spotlight - stronger from center, lighter edges */
+  .texture--radial-spotlight {
+    background: radial-gradient(
+      ellipse at center,
+      var(--background-stronger),
+      var(--background)
+    );
+  }
+
+  /* Radial: Vignette - lighter center, stronger on edges */
+  .texture--radial-vignette {
+    background: radial-gradient(
+      ellipse at center,
+      var(--background),
+      var(--background-stronger)
+    );
+  }
+
+  /**
+   * Conic Gradients
+   */
+  /* Conic: Top Start - conic gradient radiating from top-start */
+  .texture--conic-top-start {
+    background: conic-gradient(
+      from 315deg at 50% 50%,
+      var(--background-stronger) 0deg,
+      var(--background)
+    );
+  }
+  [dir='rtl'] .texture--conic-top-start,
+  .texture--conic-top-start:dir(rtl) {
+    background: conic-gradient(
+      from 45deg at 50% 50%,
+      var(--background-stronger) 0deg,
+      var(--background)
+    );
+  }
+
+  /* Conic: Top End - conic gradient radiating from top-end */
+  .texture--conic-top-end {
+    background: conic-gradient(
+      from 45deg at 50% 50%,
+      var(--background-stronger) 0deg,
+      var(--background)
+    );
+  }
+  [dir='rtl'] .texture--conic-top-end,
+  .texture--conic-top-end:dir(rtl) {
+    background: conic-gradient(
+      from 315deg at 50% 50%,
+      var(--background-stronger) 0deg,
+      var(--background)
+    );
+  }
+
+  /* Conic: Bottom Start - conic gradient radiating from bottom-start */
+  .texture--conic-bottom-start {
+    background: conic-gradient(
+      from 225deg at 50% 50%,
+      var(--background-stronger) 0deg,
+      var(--background)
+    );
+  }
+  [dir='rtl'] .texture--conic-bottom-start,
+  .texture--conic-bottom-start:dir(rtl) {
+    background: conic-gradient(
+      from 135deg at 50% 50%,
+      var(--background-stronger) 0deg,
+      var(--background)
+    );
+  }
+
+  /* Conic: Bottom End - conic gradient radiating from bottom-end */
+  .texture--conic-bottom-end {
+    background: conic-gradient(
+      from 135deg at 50% 50%,
+      var(--background-stronger) 0deg,
+      var(--background)
+    );
+  }
+  [dir='rtl'] .texture--conic-bottom-end,
+  .texture--conic-bottom-end:dir(rtl) {
+    background: conic-gradient(
+      from 225deg at 50% 50%,
+      var(--background-stronger) 0deg,
+      var(--background)
+    );
+  }
+}

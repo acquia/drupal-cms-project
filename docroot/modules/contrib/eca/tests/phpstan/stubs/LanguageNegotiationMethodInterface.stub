@@ -1,0 +1,15 @@
+<?php
+
+namespace Drupal\language;
+
+use Symfony\Component\HttpFoundation\Request;
+
+interface LanguageNegotiationMethodInterface {
+
+  /**
+   * @param \Symfony\Component\HttpFoundation\Request|null $request
+   * @return string|null
+   */
+  public function getLangcode(?Request $request = NULL);
+
+}

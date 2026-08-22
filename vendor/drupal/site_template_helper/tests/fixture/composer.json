@@ -1,0 +1,44 @@
+{
+    "name": "drupal/recommended-project",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./from_starterkit_theme"
+        },
+        {
+            "type": "path",
+            "url": "./info_only_theme"
+        },
+        {
+            "type": "path",
+            "url": "../.."
+        },
+        {
+            "type": "composer",
+            "url": "vendor.json"
+        },
+        {
+            "packagist.org": false
+        }
+    ],
+    "require": {
+        "composer/installers": "^2.3",
+        "drupal/core": "*",
+        "drupal/from_starterkit_theme": "*",
+        "drupal/info_only_theme": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "drupal/core-composer-scaffold": true,
+            "drupal/site_template_helper": true
+        }
+    },
+    "extra": {
+        "installer-paths": {
+            "core": ["type:drupal-core"]
+        }
+    }
+}

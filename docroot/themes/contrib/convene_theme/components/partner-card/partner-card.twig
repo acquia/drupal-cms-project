@@ -1,0 +1,8 @@
+{% set classes = [
+  'partner-card',
+  admin_theme ? 'partner-card--admin-theme' : 'partner-card--themed',
+] %}
+
+<div{{attributes.addClass(classes)}}>
+  {{ media }}
+</div>

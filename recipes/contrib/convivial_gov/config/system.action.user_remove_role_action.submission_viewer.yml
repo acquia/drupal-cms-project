@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.submission_viewer
+  module:
+    - user
+id: user_remove_role_action.submission_viewer
+label: 'Remove the Submission viewer role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: submission_viewer

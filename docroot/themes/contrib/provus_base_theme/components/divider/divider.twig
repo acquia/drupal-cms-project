@@ -1,0 +1,19 @@
+{% set spacing_position = spacing_position|default('both') %}
+{% set spacing_size = spacing_size|default('3') %}
+{% set spacing_class = {
+    none: '',
+    top: 'mt-' ~ spacing_size,
+    bottom: 'mb-' ~ spacing_size,
+    both: 'my-' ~ spacing_size,
+}[spacing_position]|default('') %}
+{% set classes = [
+    'divider',
+    spacing_class,
+    padding_all,
+    padding_top,
+    padding_bottom,
+    padding_start,
+    padding_end,
+] %}
+
+<hr{{ attributes.addClass(classes) }}>

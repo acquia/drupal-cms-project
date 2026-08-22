@@ -1,0 +1,361 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+
+name: Container
+description: A configurable wrapper with optional container and flex utilities.
+group: Provus Layouts
+
+props:
+  properties:
+    background_image:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Background image
+      description: 'The source image file. The image will be cropped to fit the wrapper.'
+      type: object
+      examples:
+        - src: "https://placehold.co/1920x1014"
+          alt: "Image alt text"
+          width: 1920
+          height: 1014
+    html_tag:
+      default: div
+      enum: ['div', 'section']
+      title: HTML Tag
+      type: string
+      examples: ['div', 'section']
+    align_items:
+      default: none
+      enum:
+        - align-items-start
+        - align-items-end
+        - align-items-center
+        - align-items-baseline
+        - align-items-stretch
+      meta:enum:
+        align-items-start: "Align-items-start"
+        align-items-end: "Align-items-end"
+        align-items-center: "Align-items-center"
+        align-items-baseline: "Align-items-baseline"
+        align-items-stretch: "Align-items-stretch"
+      title: Align items
+      type: string
+    attributes:
+      description: Container attributes.
+      title: Attributes
+      type: Drupal\Core\Template\Attribute
+    container_type:
+      default: none
+      description: Add a Bootstrap container class.
+      enum:
+        - container
+        - container-fluid
+      meta:enum:
+        container: "Container"
+        container-fluid: "Container-fluid"
+      title: Container
+      type: string
+    custom_class:
+      default: ''
+      description: Additional classes to add to the wrapper.
+      title: Custom classes
+      type: string
+    width_class:
+      default: w-100
+      description: Bootstrap width utility class.
+      enum:
+        - w-25
+        - w-50
+        - w-75
+        - w-100
+        - w-auto
+        - mw-100
+      meta:enum:
+        w-25: "W-25"
+        w-50: "W-50"
+        w-75: "W-75"
+        w-100: "W-100"
+        w-auto: "W-auto"
+        mw-100: "Mw-100"
+      title: Width
+      type: string
+    height_class:
+      default: none
+      description: Bootstrap height utility class.
+      enum:
+        - h-25
+        - h-50
+        - h-75
+        - h-100
+        - h-auto
+        - mh-100
+      meta:enum:
+        h-25: "H-25"
+        h-50: "H-50"
+        h-75: "H-75"
+        h-100: "H-100"
+        h-auto: "H-auto"
+        mh-100: "Mh-100"
+      title: Height
+      type: string
+    flex_direction:
+      default: flex-row
+      enum:
+        - flex-row
+        - flex-column
+      meta:enum:
+        flex-row: "Flex-row"
+        flex-column: "Flex-column"
+      title: Flex direction
+      type: string
+    flex_enabled:
+      default: false
+      description: Turn on flex utilities for this wrapper.
+      title: Enable flex
+      type: boolean
+    flex_gap:
+      default: none
+      enum:
+        - gap-0
+        - gap-1
+        - gap-2
+        - gap-3
+        - gap-4
+        - gap-5
+      meta:enum:
+        gap-0: "Gap-0"
+        gap-1: "Gap-1"
+        gap-2: "Gap-2"
+        gap-3: "Gap-3"
+        gap-4: "Gap-4"
+        gap-5: "Gap-5"
+      title: Flex gap
+      type: string
+    flex_width:
+      default: none
+      enum:
+        - w-100
+        - w-50
+        - w-25
+        - w-0
+      meta:enum:
+        w-100: "W-100"
+        w-50: "W-50"
+        w-25: "W-25"
+        w-0: "W-0"
+      title: Width
+      type: string
+    justify_content:
+      default: none
+      enum:
+        - justify-content-start
+        - justify-content-end
+        - justify-content-center
+        - justify-content-between
+        - justify-content-around
+        - justify-content-evenly
+      meta:enum:
+        justify-content-start: "Justify-content-start"
+        justify-content-end: "Justify-content-end"
+        justify-content-center: "Justify-content-center"
+        justify-content-between: "Justify-content-between"
+        justify-content-around: "Justify-content-around"
+        justify-content-evenly: "Justify-content-evenly"
+      title: Justify content
+      type: string
+    margin_for_all:
+      default: m-0
+      description: Bootstrap margin class.
+      enum:
+        - m-0
+        - m-1
+        - m-2
+        - m-3
+        - m-4
+        - m-5
+      meta:enum:
+        m-0: "M-0"
+        m-1: "M-1"
+        m-2: "M-2"
+        m-3: "M-3"
+        m-4: "M-4"
+        m-5: "M-5"
+      title: Margin
+      type: string
+    margin_bottom:
+      default: mb-0
+      description: Bootstrap margin-bottom class.
+      enum:
+        - mb-0
+        - mb-1
+        - mb-2
+        - mb-3
+        - mb-4
+        - mb-5
+      meta:enum:
+        mb-0: "Mb-0"
+        mb-1: "Mb-1"
+        mb-2: "Mb-2"
+        mb-3: "Mb-3"
+        mb-4: "Mb-4"
+        mb-5: "Mb-5"
+      title: Margin bottom
+      type: string
+    margin_end:
+      default: me-0
+      description: Bootstrap margin-end class.
+      enum:
+        - me-0
+        - me-1
+        - me-2
+        - me-3
+        - me-4
+        - me-5
+      meta:enum:
+        me-0: "Me-0"
+        me-1: "Me-1"
+        me-2: "Me-2"
+        me-3: "Me-3"
+        me-4: "Me-4"
+        me-5: "Me-5"
+      title: Margin end
+      type: string
+    margin_start:
+      default: ms-0
+      description: Bootstrap margin-start class.
+      enum:
+        - ms-0
+        - ms-1
+        - ms-2
+        - ms-3
+        - ms-4
+        - ms-5
+      meta:enum:
+        ms-0: "Ms-0"
+        ms-1: "Ms-1"
+        ms-2: "Ms-2"
+        ms-3: "Ms-3"
+        ms-4: "Ms-4"
+        ms-5: "Ms-5"
+      title: Margin start
+      type: string
+    margin_top:
+      default: mt-0
+      description: Bootstrap margin-top class.
+      enum:
+        - mt-0
+        - mt-1
+        - mt-2
+        - mt-3
+        - mt-4
+        - mt-5
+      meta:enum:
+        mt-0: "Mt-0"
+        mt-1: "Mt-1"
+        mt-2: "Mt-2"
+        mt-3: "Mt-3"
+        mt-4: "Mt-4"
+        mt-5: "Mt-5"
+      title: Margin top
+      type: string
+    padding_all:
+      default: p-0
+      description: Bootstrap padding class.
+      enum:
+        - p-0
+        - p-1
+        - p-2
+        - p-3
+        - p-4
+        - p-5
+      meta:enum:
+        p-0: "P-0"
+        p-1: "P-1"
+        p-2: "P-2"
+        p-3: "P-3"
+        p-4: "P-4"
+        p-5: "P-5"
+      title: Padding
+      type: string
+    padding_bottom:
+      default: pb-0
+      description: Bootstrap padding-bottom class.
+      enum:
+        - pb-0
+        - pb-1
+        - pb-2
+        - pb-3
+        - pb-4
+        - pb-5
+      meta:enum:
+        pb-0: "Pb-0"
+        pb-1: "Pb-1"
+        pb-2: "Pb-2"
+        pb-3: "Pb-3"
+        pb-4: "Pb-4"
+        pb-5: "Pb-5"
+      title: Padding bottom
+      type: string
+    padding_end:
+      default: pe-0
+      description: Bootstrap padding-end class.
+      enum:
+        - pe-0
+        - pe-1
+        - pe-2
+        - pe-3
+        - pe-4
+        - pe-5
+      meta:enum:
+        pe-0: "Pe-0"
+        pe-1: "Pe-1"
+        pe-2: "Pe-2"
+        pe-3: "Pe-3"
+        pe-4: "Pe-4"
+        pe-5: "Pe-5"
+      title: Padding end
+      type: string
+    padding_start:
+      default: ps-0
+      description: Bootstrap padding-start class.
+      enum:
+        - ps-0
+        - ps-1
+        - ps-2
+        - ps-3
+        - ps-4
+        - ps-5
+      meta:enum:
+        ps-0: "Ps-0"
+        ps-1: "Ps-1"
+        ps-2: "Ps-2"
+        ps-3: "Ps-3"
+        ps-4: "Ps-4"
+        ps-5: "Ps-5"
+      title: Padding start
+      type: string
+    padding_top:
+      default: pt-0
+      description: Bootstrap padding-top class.
+      enum:
+        - pt-0
+        - pt-1
+        - pt-2
+        - pt-3
+        - pt-4
+        - pt-5
+      meta:enum:
+        pt-0: "Pt-0"
+        pt-1: "Pt-1"
+        pt-2: "Pt-2"
+        pt-3: "Pt-3"
+        pt-4: "Pt-4"
+        pt-5: "Pt-5"
+      title: Padding top
+      type: string
+  type: object
+slots:
+  content:
+    description: The content
+    required: true
+    title: Content
+status: experimental
+type: component

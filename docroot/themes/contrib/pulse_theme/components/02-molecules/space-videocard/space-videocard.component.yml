@@ -1,0 +1,145 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+
+name: Space Video Card
+
+status: stable
+
+group: Molecules
+
+props:
+  type: object
+
+  properties:
+    title:
+      type: string
+      title: Title
+      description: Title
+      examples:
+        - "Building a sustainable workout plan Building a sustainable workout plan"
+
+    url:
+      type: string
+      title: Link URL
+      description: URL where the card should link.
+      examples:
+        - "/event/building-sustainable-workout"
+
+    image:
+      title: Image
+      $ref: json-schema-definitions://canvas.module/image
+      examples:
+        - src: "/themes/contrib/pulse_theme/components/02-molecules/space-videocard/images/city.jpg"
+          alt: "Boring placeholder"
+          width: 384
+          height: 223
+
+    date:
+      type: string
+      title: date
+      description: A date to be displayed in the card.
+      examples:
+        - "20 Jan 2026"
+
+    read_time:
+      type: string
+      title: Read time
+      description: Estimated read time to be displayed in the card.
+      examples:
+        - "15 min"
+
+    text:
+      type: string
+      title: Description
+      contentMediaType: text/html
+      x-formatting-context: block
+      description: Description text under the headline.
+      examples:
+        - "Signs that indicate it’s time to move beyond general care."
+
+    primary_category:
+      type: string
+      title: Primary Category
+      description: Primary category of the card.
+      examples:
+        - "Everyday health"
+
+    secondary_category:
+      type: string
+      title: Secondary Category
+      description: Secondary category of the card.
+      examples:
+        - "Care Decisions"
+
+    alignment:
+      type: string
+      title: Alignment
+      description: Alignment
+      enum:
+        - vertical
+        - horizontal
+      default: vertical
+      examples:
+        - vertical
+
+    horizontal_column_alignment:
+      type: string
+      title: Horizontal column alignment
+      description: Horizontal column alignment
+      enum:
+        - left-image
+        - right-image
+      default: left-image
+      examples:
+        - left-image
+
+    vertical_column_alignment:
+      type: string
+      title: Vertical column alignment
+      description: Vertical column alignment
+      enum:
+        - top-image
+        - bottom-image
+      default: top-image
+      examples:
+        - top-image
+
+    card_layout:
+      type: string
+      title: Layout of card
+      description: Layout of card
+      enum:
+        - default
+        - no-image
+      default: default
+      examples:
+        - default
+
+    card_size:
+      type: string
+      title: Card size
+      description: Card size
+      enum:
+        - large
+        - medium
+        - small
+      default: large
+      examples:
+        - large
+
+    full_box_link:
+      type: boolean
+      title: Full box link
+      description: Full box link
+      default: false
+      examples:
+        - false
+
+    extra_classes:
+      type: string
+      title: Class names (multiple class names separated by space). Only applied when custom style enabled.
+      description: Class names (multiple class names separated by space). Only applied when custom style enabled.
+
+thirdPartySettings:
+  sdcStorybook:
+    stories:
+      preview: {}

@@ -1,0 +1,466 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.image.field_media_image
+    - field.field.media.svg_image.field_media_svg_image
+    - filter.format.canvas_html_block
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - media.type.svg_image
+  module:
+    - file
+    - media
+    - media_library
+    - text
+  theme:
+    - pulse_theme
+label: 'Space Footer'
+id: sdc.pulse_theme.space-footer
+source: sdc
+source_local_id: 'pulse_theme:space-footer'
+provider: pulse_theme
+active_version: 65352048345cd7cd
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        brand_logo:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+        brand_name:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Pulse
+          expression: ℹ︎string␟value
+        brand_slogan:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Healthcare, made clear'
+          expression: ℹ︎string␟value
+        brand_description:
+          required: true
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: 'A modern healthcare platform to understand healthcare clearly and securely.'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        disclaimer:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: 'Your data is protected with industry-standard security. Pulse does not provide medical diagnosis.'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        copyright:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '2026 Pulse Health Technologies'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        social_links:
+          title: 'Social Media Links'
+          description: 'Place social media icon links here'
+        columns:
+          title: 'Navigation Columns'
+          description: 'Place footer navigation columns here'
+        footer_bottom_links:
+          title: 'Legal Links'
+          description: 'Place Privacy, Terms, Cookies links here'
+        cookie_section:
+          title: 'Cookie Section'
+          description: 'Place Cookie section here'
+  b70ae98a66d46e9d:
+    settings:
+      prop_field_definitions:
+        brand_logo:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+        brand_name:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Pulse
+          expression: ℹ︎string␟value
+        brand_slogan:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Healthcare, made clear'
+          expression: ℹ︎string␟value
+        brand_description:
+          required: true
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: 'A modern healthcare platform to understand healthcare clearly and securely.'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        disclaimer:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: 'Your data is protected with industry-standard security. Pulse does not provide medical diagnosis.'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        copyright:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '2026 Pulse Health Technologies'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        social_links:
+          title: 'Social Media Links'
+          description: 'Place social media icon links here'
+        columns:
+          title: 'Navigation Columns'
+          description: 'Place footer navigation columns here'
+        footer_bottom_links:
+          title: 'Legal Links'
+          description: 'Place Privacy, Terms, Cookies links here'
+  6688cea82991bde3:
+    settings:
+      prop_field_definitions:
+        brand_logo:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+        brand_name:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Pulse
+          expression: ℹ︎string␟value
+        brand_slogan:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Healthcare, made clear'
+          expression: ℹ︎string␟value
+        brand_description:
+          required: true
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: 'A modern healthcare platform to understand healthcare clearly and securely.'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        disclaimer:
+          required: true
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: 'Your data is protected with industry-standard security. Pulse does not provide medical diagnosis.'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        copyright:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '2026 Pulse Health Technologies'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        social_links:
+          title: 'Social Media Links'
+          description: 'Place social media icon links here'
+        columns:
+          title: 'Navigation Columns'
+          description: 'Place footer navigation columns here'
+        footer_bottom_links:
+          title: 'Legal Links'
+          description: 'Place Privacy, Terms, Cookies links here'
+  8dbc9474393bf39e:
+    settings:
+      prop_field_definitions:
+        brand_logo:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+        brand_name:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Pulse
+          expression: ℹ︎string␟value
+        brand_slogan:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Healthcare, made clear'
+          expression: ℹ︎string␟value
+        brand_description:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'A modern healthcare platform to understand healthcare clearly and securely.'
+          expression: ℹ︎string␟value
+        disclaimer:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Your data is protected with industry-standard security. Pulse does not provide medical diagnosis.'
+          expression: ℹ︎string␟value
+        copyright:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '2026 Pulse Health Technologies'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        social_links:
+          title: 'Social Media Links'
+          description: 'Place social media icon links here'
+        columns:
+          title: 'Navigation Columns'
+          description: 'Place footer navigation columns here'
+        footer_bottom_links:
+          title: 'Legal Links'
+          description: 'Place Privacy, Terms, Cookies links here'
+  fe3ee96bbad10261:
+    settings:
+      prop_field_definitions:
+        brand_logo:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        brand_name:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        brand_slogan:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        brand_description:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        disclaimer:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        copyright:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        social_links:
+          title: 'Social Media Links'
+          description: 'Place social media icon links here'
+        columns:
+          title: 'Navigation Columns'
+          description: 'Place footer navigation columns here'
+        footer_bottom_links:
+          title: 'Legal Links'
+          description: 'Place Privacy, Terms, Cookies links here'
+  3576c6e73db80714:
+    settings:
+      prop_field_definitions:
+        align:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        social_links:
+          title: 'Social Media Links'
+          description: 'Place social media icon links here'
+        columns:
+          title: 'Navigation Columns'
+          description: 'Place footer navigation columns here'
+        footer_bottom_links:
+          title: 'Legal Links'
+          description: 'Place Privacy, Terms, Cookies links here'
+  d696cea1796b650e:
+    settings:
+      prop_field_definitions:
+        align:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        footer_first:
+          title: 'Branding & Social'
+        footer_last:
+          title: 'Call to action'
+        footer_utility_first:
+          title: 'Utility links'
+        footer_utility_last:
+          title: 'Copyright text'

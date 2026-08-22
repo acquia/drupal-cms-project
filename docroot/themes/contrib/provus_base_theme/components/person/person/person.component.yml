@@ -1,0 +1,87 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Person Full Profile Card
+status: stable
+description: Person component displaying name, job title, image, contact information, and about content
+group: Provus Components
+
+libraryOverrides:
+  css:
+    component:
+      person.css: {}
+
+variants:
+  default:
+    title: Default
+    description: Standard person display with name, job title, image, and contact information
+
+props:
+  type: object
+  required:
+    - first_name
+    - last_name
+    - about
+    - image_url
+  properties:
+    first_name:
+      type: string
+      title: First Name
+      description: First name of the person
+      examples:
+        - 'John'
+        - 'Jane'
+        - 'Robert'
+      default: ''
+    last_name:
+      type: string
+      title: Last Name
+      description: Last name of the person
+      examples:
+        - 'Doe'
+        - 'Smith'
+        - 'Johnson'
+      default: ''
+    about:
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: block
+      title: About
+      description: Content about the person
+      examples:
+        - |
+          <p>Dedicated team member focused on delivering exceptional results.</p>
+          <p>Passionate about innovation and collaboration.</p>
+      default: ''
+    job_title:
+      type: string
+      title: Job title
+      description: Job title
+      examples:
+        - 'CEO'
+        - 'Marketing Director'
+        - 'Senior Developer'
+      default: ''
+    image_url:
+      type: object
+      $ref: json-schema-definitions://canvas.module/image
+      title: 'Image'
+      description: 'Person image displayed with the profile'
+      examples:
+        - src: 'https://placehold.co/280x448'
+          alt: 'Image'
+      default: ''
+    email:
+      type: string
+      title: Email address
+      description: Email address
+      examples:
+        - 'john.doe@example.com'
+        - 'jane.smith@company.com'
+      default: ''
+    phone:
+      type: string
+      title: Phone number
+      description: Phone number
+      examples:
+        - '(555) 123-4567'
+      default: ''
+

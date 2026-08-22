@@ -1,0 +1,38 @@
+{% set classes = [
+  'pricing-grid',
+  admin_theme ? 'pricing-grid--admin-theme' : 'pricing-grid--themed',
+] %}
+
+<section{{attributes.addClass(classes)}}>
+  <div class="pricing-grid__container">
+    
+    <div class="pricing-grid__header">
+      {% if eyebrow %}
+        <div class="pricing-grid__eyebrow">
+          {{ eyebrow }}
+        </div>
+      {% endif %}
+      
+      {% if title %}
+        <h2 class="pricing-grid__title">
+          {{ title }}
+        </h2>
+      {% endif %}
+      
+      {% if description %}
+        <div class="pricing-grid__description">
+          {{ description }}
+        </div>
+      {% endif %}
+
+      <div class="pricing-grid__toggle">
+        {{ toggle }}
+      </div>
+    </div>
+
+    <div class="pricing-grid__items">
+      {{ items }}
+    </div>
+    
+  </div>
+</section>

@@ -1,0 +1,271 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 6eea1c8f-f84a-49a2-877f-7abae9772ea3
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Demo
+  components:
+    -
+      uuid: bc36620b-4ba2-4322-aeb9-9f9b5bfced1e
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+    -
+      parent_uuid: bc36620b-4ba2-4322-aeb9-9f9b5bfced1e
+      slot: content
+      uuid: 0bcca430-6e67-4027-be3b-3304a7ee3bf6
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: 0bcca430-6e67-4027-be3b-3304a7ee3bf6
+      slot: column_1
+      uuid: e6ac2dc6-ad9d-4219-b357-28c230386938
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h1
+        title: 'Content Demo Pages'
+        decorative_line: false
+        alignment: left
+    -
+      uuid: 5d2cc60d-4fae-430f-b1f9-ad24a6212e51
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+    -
+      parent_uuid: 5d2cc60d-4fae-430f-b1f9-ad24a6212e51
+      slot: content
+      uuid: 2bc64b65-95a5-47ac-8385-0cfe2b98f81f
+      component_id: sdc.provus_base_theme.four_column
+      inputs:
+        desktop_width: 25-25-25-25
+        tablet_width: 25-25-25-25
+        mobile_width: 100-100-100-100
+    -
+      parent_uuid: 2bc64b65-95a5-47ac-8385-0cfe2b98f81f
+      slot: column_1
+      uuid: 39b706f2-fbdb-47ff-a522-b5ef6fe75b56
+      component_id: sdc.provus_base_theme.card_text
+      inputs:
+        card_type: basic
+        title: Page
+        link_text: View
+        link_url:
+          uri: 'internal:/'
+          options: {  }
+    -
+      parent_uuid: 2bc64b65-95a5-47ac-8385-0cfe2b98f81f
+      slot: column_2
+      uuid: 07f4abaa-629a-4862-a707-80bdc1dc30f5
+      component_id: sdc.provus_base_theme.card_text
+      inputs:
+        card_type: basic
+        title: Blog
+        link_text: View
+        link_url:
+          uri: 'internal:/blog'
+          options: {  }
+    -
+      parent_uuid: 2bc64b65-95a5-47ac-8385-0cfe2b98f81f
+      slot: column_3
+      uuid: 18eef12a-e9ca-4454-83cc-866361239b2b
+      component_id: sdc.provus_base_theme.card_text
+      inputs:
+        card_type: basic
+        title: 'News & Events'
+        link_text: View
+        link_url:
+          uri: 'internal:/news-and-events'
+          options: {  }
+    -
+      parent_uuid: 2bc64b65-95a5-47ac-8385-0cfe2b98f81f
+      slot: column_4
+      uuid: 5a837b0f-e48c-4832-bc35-508ad300235c
+      component_id: sdc.provus_base_theme.card_text
+      inputs:
+        card_type: basic
+        title: People
+        link_text: View
+        link_url:
+          uri: 'internal:/faculty-and-leadership'
+          options: {  }
+    -
+      uuid: fc999797-78a6-4416-9161-8b515c623033
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+    -
+      parent_uuid: fc999797-78a6-4416-9161-8b515c623033
+      slot: content
+      uuid: 181745c1-4583-4f84-b784-6384aafb572e
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: 181745c1-4583-4f84-b784-6384aafb572e
+      slot: column_1
+      uuid: 21782bea-e3a0-471d-8270-fa213d174c24
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: Components
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 181745c1-4583-4f84-b784-6384aafb572e
+      slot: column_1
+      uuid: 0a1d1d1a-f2d4-46bf-adb3-c644ff11388c
+      component_id: sdc.provus_base_theme.four_column
+      inputs:
+        desktop_width: 25-25-25-25
+        tablet_width: 25-25-25-25
+        mobile_width: 100-100-100-100
+    -
+      parent_uuid: 0a1d1d1a-f2d4-46bf-adb3-c644ff11388c
+      slot: column_1
+      uuid: 312461ca-5753-44db-ace2-75e14cf317f9
+      component_id: sdc.provus_base_theme.card_text
+      inputs:
+        card_type: basic
+        title: 'Basic Components'
+        link_text: View
+        link_url:
+          uri: 'internal:/demo/components'
+          options: {  }
+    -
+      parent_uuid: 0a1d1d1a-f2d4-46bf-adb3-c644ff11388c
+      slot: column_2
+      uuid: 8b37d7d1-d448-4d8f-985b-7c7a9a9b94e7
+      component_id: sdc.provus_base_theme.card_text
+      inputs:
+        card_type: basic
+        title: 'More Components'
+        link_text: View
+        link_url:
+          uri: 'internal:/demo/components-2'
+          options: {  }
+    -
+      parent_uuid: 0a1d1d1a-f2d4-46bf-adb3-c644ff11388c
+      slot: column_3
+      uuid: efb6e9df-2b53-4750-91d9-951080c1dd8e
+      component_id: sdc.provus_base_theme.card_text
+      inputs:
+        card_type: basic
+        title: 'Banner Components'
+        link_text: View
+        link_url:
+          uri: 'internal:/demo/banner-components'
+          options: {  }
+    -
+      parent_uuid: 0a1d1d1a-f2d4-46bf-adb3-c644ff11388c
+      slot: column_4
+      uuid: 3d900bfa-340d-4648-afe1-2fab66b5ad4b
+      component_id: sdc.provus_base_theme.card_text
+      inputs:
+        card_type: basic
+        title: 'Person and Events Components'
+        link_text: View
+        link_url:
+          uri: 'internal:/demo/person-events-components'
+          options: {  }
+  path:
+    -
+      alias: /demo
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

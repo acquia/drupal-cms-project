@@ -1,0 +1,51 @@
+langcode: en
+status: true
+dependencies: {  }
+id: eca_bpmn_io_auth_redirects
+data: |
+  <?xml version="1.0" encoding="UTF-8"?>
+  <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:qa="http://some-company/schema/bpmn/qa" id="sample-diagram" targetNamespace="http://bpmn.io/schema/bpmn" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+    <bpmn2:process id="auth_redirects" name="Authentication redirects" isExecutable="true" camunda:versionTag="">
+      <bpmn2:documentation />
+      <bpmn2:extensionElements>
+        <camunda:properties>
+          <camunda:property name="Tags" value="" />
+          <camunda:property name="Changelog" value="" />
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:startEvent id="user__logout" name="User logout" camunda:modelerTemplate="org.drupal.event.user:logout">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="user:logout" />
+          </camunda:properties>
+        </bpmn2:extensionElements>
+        <bpmn2:outgoing>Flow_1mqc3sb</bpmn2:outgoing>
+      </bpmn2:startEvent>
+      <bpmn2:task id="action_goto_action_login" name="Back to login after logout" camunda:modelerTemplate="org.drupal.action.action_goto_action">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="action_goto_action" />
+          </camunda:properties>
+          <camunda:field name="url">
+            <camunda:string>/user/login</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_1mqc3sb</bpmn2:incoming>
+      </bpmn2:task>
+      <bpmn2:sequenceFlow id="Flow_1mqc3sb" sourceRef="user__logout" targetRef="action_goto_action_login" />
+    </bpmn2:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_auth_redirects">
+      <bpmndi:BPMNPlane id="BPMNPlane_auth_redirects" bpmnElement="auth_redirects">
+        <bpmndi:BPMNShape id="user__logout_di" bpmnElement="user__logout">
+          <dc:Bounds x="57" y="52" width="36" height="36" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="action_goto_action_login_di" bpmnElement="action_goto_action_login">
+          <dc:Bounds x="175" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNEdge id="Flow_1mqc3sb_di" bpmnElement="Flow_1mqc3sb">
+          <di:waypoint x="93" y="70" />
+          <di:waypoint x="175" y="70" />
+        </bpmndi:BPMNEdge>
+      </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+  </bpmn2:definitions>

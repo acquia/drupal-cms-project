@@ -1,0 +1,23 @@
+@reference "../../00-base/global/global.pcss";
+
+/* Stats KPI */
+
+.stats-kpi {
+  @apply p-6 rounded-3xl bg-white;
+
+  .keyfact-figure {
+    @apply mb-3 text-sds-primary font-bold;
+
+    &:after {
+      content: "+";
+    }
+  }
+
+  .headline {
+    @apply text-3xl md:text-5xl mb-6;
+  }
+
+  .cta-btn {
+    @apply mt-6;
+  }
+}

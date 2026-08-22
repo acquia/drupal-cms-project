@@ -1,0 +1,73 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Heading Title
+status: stable
+description: Heading component with title, subtitle, and configurable heading level tag
+group: Provus Components
+
+variants:
+  default:
+    title: Default
+    description: Standard heading with title, subtitle and heading level
+
+props:
+  type: object
+  required:
+    - title
+    - level_tag
+  properties:
+    level_tag:
+      type: string
+      title: 'Heading Level Tag'
+      description: 'HTML heading level tag (h1, h2, h3, h4, h5, or h6)'
+      examples:
+        - 'h2'
+      default: 'h2'
+      enum:
+        - 'h1'
+        - 'h2'
+        - 'h3'
+        - 'h4'
+        - 'h5'
+        - 'h6'
+      meta:enum:
+        h1: H1
+        h2: H2
+        h3: H3
+        h4: H4
+        h5: H5
+        h6: H6
+    title:
+      type: string
+      title: 'Title'
+      description: 'Main heading text displayed as the primary heading'
+      examples:
+        - 'Welcome to Our Services'
+      default: ''
+    subtitle:
+      type: string
+      title: 'Subtitle'
+      description: 'Subtitle text displayed above the main heading'
+      examples:
+        - 'Get Started'
+      default: ''
+    decorative_line:
+      type: boolean
+      title: 'With Decorative Line'
+      default: false
+      examples:
+        - false
+    alignment:
+      type: string
+      title: 'Alignment'
+      description: 'Align the heading'
+      default: 'left'
+      examples:
+        - 'left'
+      enum:
+        - 'left'
+        - 'center'
+        - 'right'
+      meta:enum:
+        left: Left
+        center: Center
+        right: Right

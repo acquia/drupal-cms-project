@@ -1,0 +1,118 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.content_format
+  module:
+    - ckeditor5
+format: content_format
+editor: ckeditor5
+settings:
+  toolbar:
+    items:
+      - heading
+      - style
+      - '|'
+      - bold
+      - italic
+      - underline
+      - strikethrough
+      - '|'
+      - blockQuote
+      - link
+      - horizontalLine
+      - '|'
+      - bulletedList
+      - numberedList
+      - indent
+      - outdent
+      - '|'
+      - alignment
+      - insertTable
+      - drupalMedia
+      - '|'
+      - undo
+      - redo
+      - removeFormat
+      - sourceEditing
+  plugins:
+    ckeditor5_alignment:
+      enabled_alignments:
+        - center
+        - justify
+        - left
+        - right
+    ckeditor5_heading:
+      enabled_headings:
+        - heading2
+        - heading3
+        - heading4
+        - heading5
+        - heading6
+    ckeditor5_list:
+      properties:
+        reversed: true
+        startIndex: true
+        styles: false
+      multiBlock: true
+    ckeditor5_sourceEditing:
+      allowed_tags:
+        - '<div class="views-readmore">'
+        - '<h2 class="sr-only">'
+    ckeditor5_style:
+      styles:
+        -
+          label: Button
+          element: '<a class="btn">'
+        -
+          label: 'Button Default'
+          element: '<a class="btn btn-default">'
+        -
+          label: 'Button Primary'
+          element: '<a class="btn btn-primary">'
+        -
+          label: 'Button Secondary'
+          element: '<a class="btn btn-secondary">'
+        -
+          label: 'Button Accent'
+          element: '<a class="btn btn-accent">'
+        -
+          label: 'Button Neutral'
+          element: '<a class="btn btn-neutral">'
+        -
+          label: 'Button Info'
+          element: '<a class="btn btn-info">'
+        -
+          label: 'Button Success'
+          element: '<a class="btn btn-success">'
+        -
+          label: 'Button Warning'
+          element: '<a class="btn btn-warning">'
+        -
+          label: 'Button Error'
+          element: '<a class="btn btn-error">'
+        -
+          label: 'Button Ghost'
+          element: '<a class="btn btn-ghost">'
+        -
+          label: 'Button Outline'
+          element: '<a class="btn btn-outline">'
+        -
+          label: 'Button Small'
+          element: '<a class="btn btn-sm">'
+        -
+          label: 'Button Large'
+          element: '<a class="btn btn-lg">'
+        -
+          label: Table
+          element: '<table class="table">'
+        -
+          label: 'Table Zebra'
+          element: '<table class="table table-zebra">'
+    linkit_extension:
+      linkit_enabled: true
+      linkit_profile: default
+    media_media:
+      allow_view_mode_override: true
+image_upload:
+  status: false

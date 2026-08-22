@@ -1,0 +1,79 @@
+<section class="site-footer">
+  <div class="footer-container">
+    <div class="footer-grid">
+      {# Brand Section (Left) #}
+      <div class="footer-brand-column">
+        <div class="footer-brand-content">
+          {% if brand_logo.src %}
+            {% include 'canvas:image' ignore missing with {
+              src: brand_logo.src,
+              alt: brand_logo.alt|default(brand_name),
+              class: 'footer-brand-logo',
+              width: brand_logo.width,
+              height: brand_logo.height,
+              loading: loading|default('lazy')
+            } only %}
+          {% elseif brand_name %}
+            {% include 'pulse_theme:space-heading' with { content: brand_name, tag_name: 'h2', modifier_class: 'footer-brand-name', align: 'none' } only %} 
+          {% endif %}
+          
+          {% if brand_slogan %}
+            <p class="footer-brand-slogan mb-0">{{ brand_slogan }}</p>
+          {% endif %}
+          
+          {% if brand_description %}
+            <p class="footer-brand-description mb-0">{{ brand_description }}</p>
+          {% endif %}
+        </div>
+
+        {% if social_links %}
+          <div class="footer-social-links">
+            {% block social_links %}
+              {# Social links slot #}
+            {% endblock %}
+          </div>
+        {% endif %}
+      </div>
+
+      {# Navigation Columns (Right) #}
+      <div class="footer-nav-column-wrapper">
+        <div class="footer-nav-grid">
+          {% block columns %}
+            {# Navigation columns slot #}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+
+    {# Disclaimer #}
+    {% if disclaimer %}
+      <p class="footer-disclaimer">
+        {{ disclaimer }}
+      </p>
+    {% endif %}
+
+    {# Footer Bottom #}
+    <div class="footer-bottom">
+      {% if footer_bottom_links %}
+        <div class="footer-legal-links">
+          {% block footer_bottom_links %}
+            {# Legal links slot #}
+          {% endblock %}
+        </div>
+      {% endif %}
+
+      {% if copyright %}
+        <div class="footer-copyright">
+          <p>&copy; {{ copyright }}</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% if cookie_section %}
+  <div class="cookie-ui-section">
+    {% block cookie_section %}
+      {# Cookie section slot #}
+    {% endblock %}
+  </div>
+{% endif %}

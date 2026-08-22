@@ -1,0 +1,34 @@
+{% set classes = [
+  'passes-grid',
+  admin_theme ? 'passes-grid--admin-theme' : 'passes-grid--themed',
+] %}
+
+<section{{attributes.addClass(classes)}}>
+  <div class="passes-grid__container">
+    
+    <div class="passes-grid__header">
+      {% if eyebrow %}
+        <div class="passes-grid__eyebrow">
+          {{ eyebrow }}
+        </div>
+      {% endif %}
+      
+      {% if title %}
+        <h2 class="passes-grid__title">
+          {{ title }}
+        </h2>
+      {% endif %}
+      
+      {% if description %}
+        <div class="passes-grid__description">
+          {{ description }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="passes-grid__items">
+      {{ items }}
+    </div>
+    
+  </div>
+</section>

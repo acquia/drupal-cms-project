@@ -1,0 +1,336 @@
+.block-inline-blockprovus-group,
+.block-inline-blockprovus-group-automatic {
+
+  h3 > a {
+    text-decoration: none;
+    color: var(--bs-card-title-color);
+    &:hover,
+    &:focus {
+      color: $primary;
+    }
+  }
+  // Column row.
+  &.block-group-column {
+    .col {
+      @extend .px-0;
+    }
+  }
+
+  // Main title for all group blocks.
+  > .card-title {
+    > .field--name-field-provus-title {
+      text-align: center;
+      padding-bottom: $padding-padding-xlg;
+    }
+  }
+
+  // For all carousels.
+  &.block-carousel {
+    padding-right: $padding-padding-sm;
+    padding-left: $padding-padding-sm;
+    @include media-breakpoint-down(lg) {
+      width: 100vw;
+      position: relative;
+      left: calc(-1 * (100vw - 100%) / 2);
+    }
+    @include media-breakpoint-up(lg) {
+    }
+    @media (min-width: 1080px) {
+      padding: 0;
+    }
+    .provus-carousel {
+      @extend .px-0;
+      @include make-container();
+
+      .carousel-inner {
+        .lSSlideWrapper {
+          margin: 0 $padding-padding-xlg;
+
+          @include media-breakpoint-up(md) {
+            margin: 0 $padding-padding-xxlg;
+          }
+          @include media-breakpoint-up(lg) {
+            margin: 0 $padding-padding-xxs;
+          }
+          @media (min-width: 1080px) {
+            margin: 0;
+          }
+
+          .lightslider {
+            height: 100% !important;
+            .slide {
+              padding: $padding-padding-xxs;
+            }
+          }
+        }
+      }
+
+      // Allow arrows to be show outside of the slider.
+      .lSSlideOuter {
+        position: relative;
+        overflow: visible;
+      }
+      .lSSlideWrapper {
+        position: static;
+      }
+      .carousel-inner {
+        @include media-breakpoint-up(lg) {
+          overflow: visible;
+        }
+      }
+
+      .lSAction {
+        @include carousel-controls;
+        .lSPrev {
+          left: 14px;
+          @include media-breakpoint-up(md) {
+            left: 20px;
+          }
+          @include media-breakpoint-up(lg) {
+            left: -14px;
+          }
+          @media (min-width: 1080px) {
+            left: -28px;
+          }
+          &:before {
+            content: "\f053 ";
+            @include carousel-arrows;
+          }
+          &:hover::before {
+            color: $primary-hover;
+          }
+        }
+        .lSNext {
+          right: 7px;
+          @include media-breakpoint-up(md) {
+            right: 12px;
+          }
+          @include media-breakpoint-up(lg) {
+            right: -22px;
+          }
+          @media (min-width: 1080px) {
+            right: -34px;
+          }
+          &:before {
+            content: "\f054";
+            @include carousel-arrows;
+          }
+          &:hover::before {
+            color: $primary-hover;
+          }
+        }
+      }
+
+      .lSPager {
+        @include carousel-pager($primary, $primary-hover, 12px, 0, 16px);
+        li:not(.active) {
+          > a {
+            box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+
+            &:hover {
+              box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.5);
+            }
+          }
+        }
+      }
+
+    }
+  }
+
+  // Header.
+  .card-header {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: $padding-padding-lg;
+    padding-bottom: $padding-padding-lg;
+  }
+
+  // 4 Card featured
+  &.block-featured-4 {
+    .four-card-featured-group-wrapper {
+      display: block;
+      @include media-breakpoint-up(lg) {
+        display: flex;
+        align-items: self-start;
+      }
+      @include media-breakpoint-up(xl) {
+        padding-right: $padding-padding-xxxlg;
+        padding-left: $padding-padding-xxxlg;
+      }
+      .card {
+        border: none;
+      }
+      .content-left,
+      .content-right {
+        width: 100%;
+        @include media-breakpoint-up(lg) {
+          width: 50%;
+        }
+        .row > * {
+          padding: 0;
+        }
+      }
+
+      .content-left {
+        @include media-breakpoint-up(lg) {
+          display: flex;
+          align-items: center;
+        }
+        .card-wrapper {
+          @include media-breakpoint-down(lg) {
+            padding-bottom: $padding-padding-xxlg;
+            margin-bottom: $padding-padding-xxlg;
+            border-bottom: 2px solid $primary;
+          }
+          @include media-breakpoint-up(lg) {
+            margin-right: $padding-padding-xlg;
+            margin-bottom: 0;
+          }
+          .card-title {
+            @include text-style-headline-h-3;
+            margin-top: 0;
+            margin-bottom: $padding-padding-xxs;
+          }
+        }
+      }
+
+      .content-right {
+        $square-image-size: 212px;
+        @include media-breakpoint-up(lg) {
+          border-left: 2px solid $primary;
+        }
+        .card-wrapper {
+          margin-bottom: $padding-padding-xxlg;
+          @include media-breakpoint-up(lg) {
+            margin-bottom: $padding-padding-md;
+            padding-left: $padding-padding-xlg;
+          }
+          .card-content {
+            @include media-breakpoint-up(lg) {
+              display: flex;
+            }
+            .card-img {
+              position: relative;
+
+              @include media-breakpoint-up(lg) {
+                height: $square-image-size;
+                width: unset;
+                flex: 0 0 $square-image-size;
+              }
+            }
+          }
+          .card {
+            border-radius: $radius-radius-xxs;
+            @include media-breakpoint-up(lg) {
+              box-shadow: none;
+            }
+            .card-body {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              @include media-breakpoint-up(lg) {
+                padding-top: 0;
+                padding-bottom: 0;
+              }
+              .card-content {
+                display: block;
+                align-self: unset;
+                flex-grow: unset;
+                padding-left: $padding-padding-xxxs;
+                .card-title {
+                  margin-top: 0;
+                  margin-bottom: $padding-padding-xlg;
+                  @include media-breakpoint-up(lg) {
+                  }
+                }
+              }
+            }
+            .card-extra {
+              .field--name-field-provus-links {
+                margin-top: 0;
+                padding-top: 0;
+                .field__item {
+                  justify-content: unset;
+                }
+              }
+            }
+          }
+        }
+        > .card-mini-item:last-child {
+          .card-wrapper {
+            margin-bottom: 0;
+          }
+        }
+      }
+      .card-wrapper.provus-card-left,
+      .card-wrapper.provus-card-right {
+        position: relative;
+        .card-body {
+          margin: 0;
+          width: 100%;
+        }
+        .card-title {
+          @include text-style-headline-h-4;
+        }
+        .card-text {
+          display: none;
+        }
+      }
+
+      .card-wrapper.provus-card-left .card-img {
+        border-radius: 0 !important;
+      }
+    }
+    > .field--name-field-provus-links {
+      margin-top: $padding-padding-xxlg;
+      .field__item {
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
+
+  .provus-card-image-circle {
+    .card {
+      .card-img-top {
+        max-width: rem-calc(224);
+        max-height: rem-calc(224);
+      }
+
+      .card-title {
+        margin-bottom: $padding-padding-xxs;
+      }
+    }
+  }
+
+  .provus-card-tall {
+    .card {
+      max-width: unset;
+
+      .card-img-top {
+        height: unset;
+        width: unset;
+      }
+    }
+  }
+
+  > .field--name-field-provus-links a {
+    @extend .btn;
+    @extend .btn-primary;
+  }
+}
+
+.block-group-column {
+  .row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(232px, 1fr));
+    gap: $padding-padding-lg;
+  }
+
+  &.block-item-provus-card-left,
+  &.block-item-provus-card-right {
+    .row {
+      grid-template-columns: repeat(auto-fit,minmax(480px, 1fr));
+    }
+  }
+}
