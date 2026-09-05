@@ -1,0 +1,47 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Stat Card
+group: Card
+status: stable
+props:
+  type: object
+  properties:
+    value:
+      type: string
+      title: Stat value
+      description: "Large display number or figure (e.g. '1,200+', '85'). Roboto Bold 80px desktop / 56px mobile."
+      examples:
+        - "1,200+"
+    label:
+      type: string
+      title: Stat label
+      description: "Short heading beneath the value. IBM Plex Serif H6 22px."
+      examples:
+        - "Families served this year"
+    description:
+      type: string
+      title: Description
+      description: "One-sentence supporting text. DM Sans Regular 16px."
+      examples:
+        - "Direct assistance reached households in need across our region."
+    media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Image
+      type: object
+    image_position:
+      type: string
+      title: Image position (when image + text both present)
+      description: "Controls whether the image appears above or below the stat panel."
+      enum:
+        - top
+        - bottom
+      meta:enum:
+        top: Image on top
+        bottom: Image on bottom
+      default: top
+      examples:
+        - top
+    full_height:
+      type: boolean
+      title: Full height (in grid)
+      description: "When true, card stretches to fill column height (e.g. first column in stats grid)."
+      default: false

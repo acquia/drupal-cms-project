@@ -1,0 +1,116 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Toastify module.
+ *
+ * @DCG
+ * This file is no longer required in Drupal 8.
+ * @see https://www.drupal.org/node/2217931
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\toastify\Element\ToastifyStatusMessages;
+
+/**
+ * Implements hook_help().
+ */
+function toastify_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.toastify':
+      $text = file_get_contents(dirname(__FILE__) . '/README.md');
+      if (!\Drupal::moduleHandler()->moduleExists('markdown')) {
+        return '<pre>' . $text . '</pre>';
+      }
+      else {
+        // Use the Markdown filter to render the README.
+        $filter_manager = \Drupal::service('plugin.manager.filter');
+        $settings = \Drupal::configFactory()->get('markdown.settings')->getRawData();
+        $config = ['settings' => $settings];
+        $filter = $filter_manager->createInstance('markdown', $config);
+        return $filter->process($text, 'en');
+      }
+  }
+  return NULL;
+}
+
+/**
+ * Implements hook_element_plugin_alter().
+ */
+function toastify_element_plugin_alter(array &$definitions): void {
+  $definitions['status_messages']['class'] = ToastifyStatusMessages::class;
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function toastify_page_attachments(array &$page) {
+  if (!toastify_is_active()) {
+    return;
+  }
+
+  $settings = \Drupal::config('toastify.settings')->get();
+  $page['#attached']['drupalSettings']['toastify']['settings'] = $settings;
+  $page['#attached']['library'][] = 'toastify/toastify';
+  $page['#attached']['library'][] = 'toastify/toastify.messages';
+
+  if (_toastify_is_gin_theme_active()) {
+    $page['#attached']['library'][] = 'gin/gin_base';
+    $page['#attached']['library'][] = 'toastify/gin';
+  }
+}
+
+/**
+ * Determines whether the Toastify functionality is active.
+ */
+function toastify_is_active(): bool {
+  $hasPermission = \Drupal::currentUser()->hasPermission('show toastify messages');
+  if (!$hasPermission) {
+    return FALSE;
+  }
+
+  $settings = \Drupal::config('toastify.settings')->get();
+  $isAdminTheme = \Drupal::service('router.admin_context')->isAdminRoute();
+
+  $enableForAdminTheme = $settings['enable_for']['admin_theme'];
+  $enableForFrontendTheme = $settings['enable_for']['frontend_theme'];
+
+  return ($isAdminTheme && $enableForAdminTheme) || (!$isAdminTheme && $enableForFrontendTheme);
+}
+
+/**
+ * Determines whether the active theme is Gin, or a sub-theme of Gin.
+ */
+function _toastify_is_gin_theme_active(): bool {
+  $themeHandler = \Drupal::service('theme_handler')->listInfo();
+
+  // Check if set as frontend theme.
+  $frontendThemeName = \Drupal::config('system.theme')->get('default');
+
+  // Check if base themes are set.
+  if (isset($themeHandler[$frontendThemeName]->base_themes)) {
+    $frontendBaseThemes = $themeHandler[$frontendThemeName]->base_themes;
+  }
+
+  // Add theme name to base theme array.
+  $frontendBaseThemes[$frontendThemeName] = $frontendThemeName;
+
+  // Check if set as admin theme.
+  $adminThemeName = \Drupal::config('system.theme')->get('admin');
+
+  // Admin theme will have no value if is set to use the default theme.
+  if ($adminThemeName && isset($themeHandler[$adminThemeName]->base_themes)) {
+    $adminBaseThemes = $themeHandler[$adminThemeName]->base_themes;
+    $adminBaseThemes[$adminThemeName] = $adminThemeName;
+  }
+  else {
+    $adminBaseThemes = $frontendBaseThemes;
+  }
+
+  // Check if Gin is activated in the frontend.
+  if (\Drupal::currentUser()->isAuthenticated()) {
+    return array_key_exists('gin', $adminBaseThemes);
+  }
+
+  return array_key_exists('gin', $frontendBaseThemes);
+}

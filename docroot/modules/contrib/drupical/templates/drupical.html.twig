@@ -1,0 +1,64 @@
+{#
+/**
+ * @file
+ * Template for the events feed.
+ *
+ * Available variables:
+ * - featured: Array of featured Event objects.
+ * - standard: Array of standard Event objects.
+ * - count: Total number of events displayed.
+ * - has_more: Boolean indicating if there are more events.
+ * - offset: Current offset for pagination.
+ * - limit: Number of events per page.
+ * - feed_link: URL to view all events.
+ */
+#}
+{% if count %}
+<div class="events-feed">
+  <nav class="events-list">
+    <div class="events-community-info">
+      {% trans %}
+        Drupal communities are vibrant and world-wide. Find an <a href="https://www.drupal.org/community/events" target="_blank" rel="noopener">event</a> and <a href="https://www.drupal.org/community/user-groups" target="_blank" rel="noopener">connect</a> to a local or virtual user group today!
+      {% endtrans %}
+    </div>
+
+    <table class="events-table">
+      <tbody>
+        {% if featured|length %}
+          {% for event in featured %}
+            {% include '@drupical/drupical-item.html.twig' with {'event': event, 'featured': true} %}
+          {% endfor %}
+        {% endif %}
+        {% for event in standard %}
+          {% include '@drupical/drupical-item.html.twig' with {'event': event, 'featured': false} %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </nav>
+
+  <div class="events-footer">
+    {% if has_more %}
+      <div class="events-load-more">
+        <a href="/events-feed/load-more?offset={{ offset + limit }}&limit={{ limit }}" class="button button--extrasmall use-ajax">
+          {{ 'Load more events'|t }}
+        </a>
+      </div>
+    {% endif %}
+    <div class="events-footer-links">
+      <a href="{{ drupalcon_link }}" target="_blank" rel="noopener" class="events-footer-link">{{ 'DrupalCon'|t }}</a>
+      <span class="events-separator">·</span>
+      <a href="{{ camps_link }}" target="_blank" rel="noopener" class="events-footer-link">{{ 'Camps'|t }}</a>
+      <span class="events-separator">·</span>
+      <a href="{{ drupical_link }}" target="_blank" rel="noopener" class="events-footer-link">Drupical</a>
+      <span class="events-separator">·</span>
+      <a href="{{ add_event_link }}" target="_blank" rel="noopener" class="events-footer-link">{{ 'Add your Event'|t }}</a>
+    </div>
+  </div>
+
+  <div class="events-cta">
+    {{ 'Want more events?'|t }} <a href="{{ organize_link }}" target="_blank" rel="noopener">{{ 'Help organize the next one'|t }}</a>!
+  </div>
+</div>
+{% else %}
+  <div class="events-feed events--empty"><p>{{ 'No events available'|t }}</p></div>
+{% endif %}

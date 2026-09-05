@@ -1,0 +1,37 @@
+langcode: en
+status: false
+dependencies:
+  theme:
+    - eureka
+label: 'Local task'
+id: sdc.eureka.local-task
+source: sdc
+source_local_id: 'eureka:local-task'
+provider: eureka
+active_version: d5483bfc10bfff36
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        local_task_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: View
+          expression: ℹ︎string␟value
+        local_task_url:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'https://zoocha.com'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }

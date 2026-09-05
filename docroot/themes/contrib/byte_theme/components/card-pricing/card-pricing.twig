@@ -1,0 +1,89 @@
+{% set is_promoted = promote|default(false) ? 'yes' : 'no' %}
+{% set button_variant = promote|default(false) ? 'primary-inverted' : 'primary' %}
+
+{% set card =
+  html_cva(
+    base: ['group relative flex flex-col gap-4 rounded-sm p-5 shadow-lg transition-colors duration-300 md:gap-6 xl:gap-7 2xl:p-8'],
+    variants: {
+      promoted: {
+        no: ['bg-card text-card-foreground hover:bg-muted hover:text-muted-foreground'],
+        yes: ['bg-primary text-primary-foreground hover:bg-primary/80']
+      }
+    }
+  )
+%}
+
+{% set price_direction = (symbol_position|default('before')) == 'before' ? 'flex-row' : 'flex-row-reverse flex-align-start' %}
+
+{% set card_classes =
+  card.apply({
+    promoted: is_promoted
+  })
+%}
+
+<article class="{{ card_classes }}">
+  <header class="flex flex-col gap-2">
+    {{
+      include(
+        'byte_theme:heading',
+        {
+          heading_text: heading_text|default(''),
+          level: 3,
+          url: 'No URL',
+          text_color: 'default',
+          text_size: 'heading-responsive-4xl',
+          align: 'left',
+          heading_classes: ['text-[1.375rem]', 'leading-tight', 'font-bold', 'text-inherit']
+        },
+        with_context: false
+      )
+    }}
+
+    <p class="text-lg leading-[1.2]">
+      {{ description }}
+    </p>
+  </header>
+
+  <div>
+    <h4 class="flex text-4xl leading-none lg:text-5xl 2xl:text-[3.15rem] [&_sup]:!text-[60%]">
+      <data value="{{ price }}" data-currency="{{ currency_code|default('USD') }}" class="flex {{ price_direction }}">
+        <span>{{ currency_symbol }}</span>
+        <span>{{ price }}</span>
+      </data>
+    </h4>
+  </div>
+
+  {% if block('richtext') is defined and text is not empty %}
+    <div class="{{ features_hover_bg }} rich-text border-t border-foreground/50 pt-4 text-inherit md:pt-6 2xl:pt-7 [&_li]:text-base [&_ul]:my-0">
+      {% block richtext %}
+        {{
+          include(
+            'byte_theme:text',
+            {
+              text: text,
+              text_color: 'default',
+              text_size: 'normal'
+            },
+            with_context: false
+          )
+        }}
+      {% endblock %}
+    </div>
+  {% endif %}
+
+  <footer class="mt-auto">
+    {{
+      include(
+        'byte_theme:button',
+        {
+          href: button_url|default(''),
+          label: button_label,
+          variant: button_variant,
+          size: 'medium',
+          btn_classes: ['before:absolute', "before:content-['']", 'before:inset-0']
+        },
+        with_context: false
+      )
+    }}
+  </footer>
+</article>

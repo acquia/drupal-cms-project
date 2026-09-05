@@ -1,0 +1,37 @@
+{#
+/**
+ * Available variables:
+ * - staff_cards_heading: base classname of the wrapper.
+* - staff_cards_heading_level: heading level for the staff cards heading.
+* - staff_cards_summary: summary text for the staff cards section.
+ */
+#}
+
+{% embed "eureka:item-list" with {
+  item_list_type: 'column-cards',
+  item_list_modifiers: ['staff'],
+  item_list_title_centered: true,
+  item_list_heading_level: staff_cards_heading_level,
+  item_list_heading: staff_cards_heading,
+  item_list_summary: staff_cards_summary,
+}%}
+  {% block item_list_items_block %}
+    <div class="item-list__items__list">
+      {{ staff_cards_items_list }}
+    </div>
+    <div class="item-list--staff__cta">
+      {% if staff_cards_cta_url %}
+        {{ include("eureka:button", {
+          button_content: staff_cards_cta_text|default('Meet all our staff'|t),
+          button_url: staff_cards_cta_url,
+          button_type: 'secondary',
+        }, with_context = false) }}
+      {% endif %}
+      {% if staff_cards_text %}
+        {{ include("eureka:paragraph", {
+          paragraph_content: staff_cards_text,
+        }, with_context = false) }}
+      {% endif %}
+    </div>
+  {% endblock %}
+{% endembed %}

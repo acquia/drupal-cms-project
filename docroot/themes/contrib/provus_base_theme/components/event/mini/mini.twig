@@ -1,0 +1,23 @@
+<div class="mini-date">
+  <div class="mini-date-left">
+    <div class="mini-date-top">
+      {{ start_date }}
+    </div>
+    <div class="mini-date-bottom">
+      {{ end_date }}
+    </div>
+  </div>
+  <div class="mini-date-right">
+    <div class="mini-date-title">
+      <h3>
+        <a href="{{ url }}">{{ event_title }}</a>
+      </h3>
+    </div>
+    <div class="mini-date-fulldate">
+      {{ full_dates }}
+    </div>
+    {% if body %}
+      <div class="mini-date-text">{{ body }}</div>
+    {% endif %}
+  </div>
+</div>

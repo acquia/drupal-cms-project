@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 16_9_720x405_focal_point_webp
+label: '16:9 | 720x405 | Focal Point'
+effects:
+  0b39c115-5b73-46cf-8b05-c393f6f11070:
+    uuid: 0b39c115-5b73-46cf-8b05-c393f6f11070
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 720
+      height: 405
+      crop_type: focal_point

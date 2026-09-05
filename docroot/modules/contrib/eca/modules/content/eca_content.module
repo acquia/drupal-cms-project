@@ -1,0 +1,12 @@
+<?php
+
+/**
+ * @file
+ * ECA Content submodule.
+ */
+
+/* @noinspection ClassConstantCanBeUsedInspection */
+if (!class_exists('Drupal\Core\Field\FieldUpdateActionBase', FALSE)) {
+  /* @noinspection PhpIgnoredClassAliasDeclaration */
+  class_alias('Drupal\eca_content\Plugin\Action\FieldUpdateActionBase', 'Drupal\Core\Field\FieldUpdateActionBase');
+}

@@ -1,0 +1,9 @@
+services:
+  custom_field.updater_commands:
+    class: Drupal\custom_field\Commands\UpdaterCommands
+    arguments:
+      - '@custom_field.update_manager'
+      - '@plugin.manager.custom_field_type'
+      - '@entity_type.manager'
+    tags:
+      - { name: drush.command }

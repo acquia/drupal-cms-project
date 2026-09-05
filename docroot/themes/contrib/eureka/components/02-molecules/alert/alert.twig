@@ -1,0 +1,32 @@
+{#
+/**
+ * Available variables:
+ * - alert_base_class: the base classname
+ * - alert_modifiers: array of modifiers to add to the base classname to identify what type of alert (e.g. danger)
+ * - alert_blockname: blockname prepended to the base classname
+ *
+ * - alert_content: the content of the alert (typically text)
+ * - alert_type: defines the type of alert and adds a class accordingly
+ *     Options: 'info', 'warning', 'danger', 'notice', 'policy'].
+ *
+ * Available blocks:
+ * - alert_content_block: used to replace the content of the blockquote with something other than text
+ *   for example, A formatted text field in Drupal
+ */
+#}
+{% set alert_base_class = alert_base_class|default('alert') %}
+
+{% if alert_type %}
+  {% set alert_modifiers = alert_modifiers|default([])|merge([alert_type]) %}
+{% endif %}
+
+<div
+  {{ bem(alert_base_class, alert_modifiers, alert_blockname) }}
+  role="contentinfo"
+>
+  {% block alert_content_block %}
+    <div {{ bem('content', [], alert_base_class) }}>
+      {{ alert_content }}
+    </div>
+  {% endblock %}
+</div>

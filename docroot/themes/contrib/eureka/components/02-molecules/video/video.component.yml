@@ -1,0 +1,41 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Video
+status: stable
+description: Video component
+# Overrides regular css with minified.
+libraryOverrides:
+  css:
+    component:
+      video.min.css: { minified: true }
+  js:
+    video.min.js: { minified: true }
+group: Eureka component items
+props:
+  type: object
+  properties:
+    video_full_width:
+      type: boolean
+      title: Video full-width
+      description: Is the video going to display full width?
+      examples:
+        - false
+    video_type:
+      type: ['string', 'null']
+      title: Video type
+      description: Video source (youtube, vimeo, other)
+      enum:
+        - youtube
+        - vimeo
+        - other
+      examples:
+        - youtube
+    video_id:
+      type: ['string', 'null']
+      title: Video ID
+      description: The ID of the video (for remote videos)
+      examples:
+        - wDchsz8nmbo
+    video_content:
+      title: Video content
+      type: ['string', 'null']
+      description: Local video content or raw video content.

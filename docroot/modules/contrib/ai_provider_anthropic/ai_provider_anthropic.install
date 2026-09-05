@@ -1,0 +1,125 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for the Anthropic module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function ai_provider_anthropic_install() {
+  $config_factory = \Drupal::configFactory();
+
+  // Check if we have old configuration from the AI submodule.
+  $old_config = $config_factory->get('provider_anthropic.settings');
+  $old_data = $old_config->getRawData();
+  if (!empty($old_data['api_key'])) {
+    $new_config = $config_factory->getEditable('ai_provider_anthropic.settings');
+
+    // Bail if we already have data.
+    $new_data = $new_config->getRawData();
+    if (!empty($new_data['api_key'])) {
+      return;
+    }
+
+    // Copy the old configuration from the previous AI submodule into the new
+    // external module.
+    $new_config->setData($old_data);
+    $new_config->save();
+  }
+
+  // Uninstall the old submodule of AI core if it is still installed.
+  /** @var \Drupal\Core\Extension\ModuleHandlerInterface $handler */
+  $handler = \Drupal::service('module_handler');
+  if ($handler->moduleExists('ai_provider_anthropic')) {
+    /** @var \Drupal\Core\Extension\ModuleInstallerInterface $installer */
+    $installer = \Drupal::service('module_installer');
+    $installer->uninstall(['provider_anthropic']);
+  }
+}
+
+/**
+ * Implements hook_update_N().
+ *
+ * Set default model for chat_with_tools and chat_with_structured_response
+ * if not set.
+ */
+function ai_provider_anthropic_update_10001() {
+  $ai_provider = \Drupal::service('ai.provider');
+  // By default, it has not changed anything.
+  $return_message = t('No changes made to Anthropic provider default models.');
+  foreach (['chat_with_tools', 'chat_with_structured_response'] as $type) {
+    // If TRUE, it meant that it was needed to be set.
+    if ($ai_provider->defaultIfNone($type, 'anthropic', 'claude-3-7-sonnet-latest')) {
+      $return_message = t('Anthropic provider default model set for relevant chat operation types.');
+    }
+  }
+  return $return_message;
+}
+
+/**
+ * Enable dynamic model fetching for Anthropic provider.
+ */
+function ai_provider_anthropic_update_10002() {
+  // This is informational only - dynamic fetching is enabled by default.
+  return t('Anthropic provider now supports dynamic model detection. New models like Claude 4 (claude-opus-4-20250514, claude-sonnet-4-20250514) will be automatically available. You can disable this feature by setting "dynamic_models_enabled" to FALSE in the provider configuration.');
+}
+
+/**
+ * Updates default to use the actual model name for it.
+ */
+function ai_provider_anthropic_update_10003() {
+  // Load ai.settings.
+  $config_factory = \Drupal::configFactory();
+  $ai_settings = $config_factory->getEditable('ai.settings');
+  // We check the following.
+  $to_check = [
+    'chat',
+    'chat_with_complex_json',
+    'chat_with_tools',
+    'chat_with_structured_response',
+    'chat_with_image_vision',
+  ];
+  $actual_models = \Drupal::service('ai.provider')->createInstance('anthropic')->getConfiguredModels();
+  foreach ($to_check as $operation_type) {
+    if (!isset($ai_settings->get('default_providers')[$operation_type])) {
+      continue;
+    }
+    $setup = $ai_settings->get('default_providers')[$operation_type];
+    if (
+      $setup['provider_id'] == 'anthropic' &&
+      substr($setup["model_id"], -7) === '-latest'
+    ) {
+      // If a model exists that matches the latest pattern, we set it.
+      if (count($actual_models)) {
+        // Get the prefix.
+        $prefix = substr($setup["model_id"], 0, -7);
+        foreach ($actual_models as $model_id => $model_name) {
+          if (str_starts_with($model_id, $prefix)) {
+            // We found a match, set it.
+            $ai_settings->set("default_providers.$operation_type.model_id", $model_id);
+            $ai_settings->save();
+            break;
+          }
+        }
+      }
+      // Else use sonnet-4-5 as fallback.
+      else {
+        $ai_settings->set("default_providers.$operation_type.model_id", 'claude-sonnet-4-5-20250929');
+        $ai_settings->save();
+      }
+    }
+  }
+}
+
+/**
+ * Remove the dynamic_models_enabled flag if it exists.
+ */
+function ai_provider_anthropic_update_10004() {
+  $provider_config = \Drupal::configFactory()->getEditable('ai_provider_anthropic.settings');
+  if ($provider_config->get('dynamic_models_enabled') !== NULL) {
+    $provider_config->clear('dynamic_models_enabled');
+    $provider_config->save();
+  }
+}

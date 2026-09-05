@@ -1,0 +1,38 @@
+{#
+/**
+ * @file
+ * Template for a single event item.
+ *
+ * Available variables:
+ * - event: Event object.
+ * - featured: Boolean indicating if featured.
+ */
+#}
+<tr class="event {{ featured ? 'event-featured' : '' }}">
+  <td class="event-info">
+    <a href="{{ event.url }}" class="event-title" target="_blank" rel="noopener">{{ event.title }}</a>
+    {% if (not featured and event.type) or event.location %}
+      <div class="event-details">
+        {% if not featured and event.type %}
+          {{ event.type }}
+        {% endif %}
+        {% if not featured and event.type and event.location %}
+          <span class="event-separator"> · </span>
+        {% endif %}
+        {% if event.location %}
+          {{ event.location }}
+        {% endif %}
+      </div>
+    {% endif %}
+  </td>
+  <td class="event-meta">
+    {% set start_date = event.dateStartTimestamp|format_date('custom', 'Y-m-d') %}
+    {% set end_date = event.dateEndTimestamp|format_date('custom', 'Y-m-d') %}
+    {% if start_date != end_date %}
+      <span class="event-date">{{ event.dateStartTimestamp|format_date('custom', 'M j') }} - {{ event.dateEndTimestamp|format_date('custom', 'M j, Y') }}</span>
+    {% else %}
+      <span class="event-date">{{ event.dateStartTimestamp|format_date('custom', 'M j, Y') }}</span>
+      <span class="event-time">{{ event.dateStartTimestamp|format_date('custom', 'g:i a T') }}</span>
+    {% endif %}
+  </td>
+</tr>

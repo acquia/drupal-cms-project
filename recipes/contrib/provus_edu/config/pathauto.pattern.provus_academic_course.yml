@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: provus_academic_course
+label: 'Academic Course'
+type: 'canonical_entities:node'
+pattern: 'academics/[node:field_provus_ac_program:entity:title]/[node:field_provus_ap_department:entity:title]/[node:title]'
+selection_criteria:
+  e099fdb5-af0d-4660-8b2b-f221e78ee9b8:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: e099fdb5-af0d-4660-8b2b-f221e78ee9b8
+    context_mapping:
+      node: node
+    bundles:
+      provus_academic_course: provus_academic_course
+selection_logic: and
+weight: -5
+relationships: {  }

@@ -1,0 +1,209 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 832ced22-5411-4ef2-bac4-eab6ceeca21a
+  default_langcode: en
+  depends:
+    dff4c626-a52e-4de8-a7fe-b5d45735fecc: file
+    1852211b-caab-41a7-8c0e-7d9dcfdcf922: media
+    0a06e8a7-7954-42fa-9770-18b365ca4153: file
+    b61479f7-f97f-4993-b937-a8877fe51424: file
+    153d0922-a446-4a2e-abf3-f9ac43faff9b: media
+    ead7c0ea-588c-47f3-8b7b-a6ac4d07187d: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: News
+  components:
+    -
+      uuid: d413abae-7ea2-4f9f-b504-ffe38f55cca3
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        alignment: center
+        paddingtop: 14
+        marginbottom: 0
+        paddingbottom: 14
+        backgroundcolor: black
+        background_image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 1852211b-caab-41a7-8c0e-7d9dcfdcf922
+            target_type: media
+        use_custom_container: false
+    -
+      parent_uuid: d413abae-7ea2-4f9f-b504-ffe38f55cca3
+      slot: content
+      uuid: 67043bbd-10ce-442b-bfa2-7226d8d85106
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: 'Stories and news'
+          format: canvas_html_inline
+        tagline: Updates
+        description: 'Read about our work, recent achievements, and the people making change happen.'
+        heading_level: 1
+    -
+      parent_uuid: 67043bbd-10ce-442b-bfa2-7226d8d85106
+      slot: ctas
+      uuid: e1dc182e-82e8-41b3-bc70-8d37f9552b7c
+      component_id: sdc.caresphere_theme.button
+      inputs:
+        href: 'https://easebuzz.in/demo'
+        size: medium
+        label: Donate
+        variant: primary
+        disabled: false
+        icon_first: false
+        mobile_width: false
+        border_radius: default
+    -
+      parent_uuid: 67043bbd-10ce-442b-bfa2-7226d8d85106
+      slot: ctas
+      uuid: d931d9cb-8051-40b5-9a16-18586c5dcd63
+      component_id: sdc.caresphere_theme.button
+      inputs:
+        href: /get-involved
+        size: medium
+        label: 'Get involved'
+        variant: secondary-white
+        disabled: false
+        icon_first: false
+        mobile_width: false
+        border_radius: default
+    -
+      uuid: d45ab4d6-8e48-421d-b474-3480c619e2c0
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        paddingtop: 14
+        marginbottom: 0
+        paddingbottom: 14
+        backgroundcolor: dark-gray
+        use_custom_container: false
+    -
+      parent_uuid: d45ab4d6-8e48-421d-b474-3480c619e2c0
+      slot: content
+      uuid: 7de40bd1-a514-486f-9cb8-ba154efce6bb
+      component_id: sdc.caresphere_theme.section-stories
+      inputs:
+        heading: "What we're doing now"
+        tagline: Stories
+        description: "Follow our latest work and see the progress we're making."
+        card_1_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 153d0922-a446-4a2e-abf3-f9ac43faff9b
+            target_type: media
+        card_1_title: 'Volunteers transform neighborhood with new garden'
+        card_2_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: ead7c0ea-588c-47f3-8b7b-a6ac4d07187d
+            target_type: media
+        card_2_title: 'Youth mentorship program reaches milestone'
+        card_3_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 153d0922-a446-4a2e-abf3-f9ac43faff9b
+            target_type: media
+        card_3_title: 'Local food bank doubles distribution capacity'
+        view_all_url: /
+        heading_level: 2
+        view_all_label: 'View all'
+        card_1_category: Community
+        card_1_link_url: /
+        card_2_category: Programs
+        card_2_link_url: /
+        card_3_category: Impact
+        card_3_link_url: /
+        card_1_read_time: '3 min read'
+        card_2_read_time: '4 min read'
+        card_3_read_time: '6 min read'
+        card_1_link_label: 'Read more'
+        card_2_link_label: 'Read more'
+        card_3_link_label: 'Read more'
+        card_1_description: 'Thirty residents came together to build something lasting.'
+        card_2_description: 'One hundred young people now have mentors guiding their path.'
+        card_3_description: 'New partnerships bring fresh produce to five neighborhoods.'
+    -
+      uuid: 86ec6fbe-72d8-43d4-b58c-d6d1ec5a66d4
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        gap: 18
+        alignment: center
+        paddingtop: 14
+        marginbottom: 0
+        paddingbottom: 14
+        backgroundcolor: black
+        use_custom_container: false
+    -
+      parent_uuid: 86ec6fbe-72d8-43d4-b58c-d6d1ec5a66d4
+      slot: content
+      uuid: a5c54e00-e4b7-414b-96e5-c6f53e8b93e4
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: 'Join us in building change'
+          format: full_html
+        description: 'Your support creates opportunity and strengthens the community we serve together.'
+        heading_level: 2
+    -
+      parent_uuid: a5c54e00-e4b7-414b-96e5-c6f53e8b93e4
+      slot: ctas
+      uuid: 7422e050-fd11-4bf1-8b63-83c6649306e7
+      component_id: sdc.caresphere_theme.button
+      inputs:
+        href: 'https://easebuzz.in/demo'
+        size: medium
+        label: Donate
+        variant: primary
+        disabled: false
+        icon_first: false
+        mobile_width: false
+        border_radius: default
+    -
+      parent_uuid: a5c54e00-e4b7-414b-96e5-c6f53e8b93e4
+      slot: ctas
+      uuid: 4aa33224-e177-4de9-8824-0f926b4368c9
+      component_id: sdc.caresphere_theme.button
+      inputs:
+        href: /get-involved
+        size: medium
+        label: 'Get involved'
+        variant: secondary-white
+        disabled: false
+        icon_first: false
+        mobile_width: false
+        border_radius: default
+    -
+      parent_uuid: 86ec6fbe-72d8-43d4-b58c-d6d1ec5a66d4
+      slot: content
+      uuid: 8f85477b-1672-4aa9-b97c-06692e14f6a7
+      component_id: sdc.caresphere_theme.section-grid
+      inputs:
+        grid_layout: 1_column
+        is_small_container: false
+    -
+      parent_uuid: 8f85477b-1672-4aa9-b97c-06692e14f6a7
+      slot: slot_1
+      uuid: cd99ac2c-75a7-4e37-98a5-0fa3a7e9b37c
+      component_id: sdc.caresphere_theme.image
+      inputs:
+        size: '16:9'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 153d0922-a446-4a2e-abf3-f9ac43faff9b
+            target_type: media
+        radius: small
+        border_radius: 8
+  path:
+    -
+      alias: /news
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

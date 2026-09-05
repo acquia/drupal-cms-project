@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_honors_awards
+    - node.type.person
+  module:
+    - text
+id: node.person.field_honors_awards
+field_name: field_honors_awards
+entity_type: node
+bundle: person
+label: 'Honors & Awards'
+description: 'Professional honors and awards received'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

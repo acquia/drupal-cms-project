@@ -1,0 +1,50 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Provus Blocks Slideshow
+status: stable
+description: Slideshow component that displays a carousel of slide items with autoplay and speed controls
+group: Provus Components
+
+variants:
+  default:
+    title: Default
+    description: Standard slideshow with configurable autoplay and speed settings
+
+props:
+  type: object
+  properties:
+    content_attributes:
+      type: string
+      title: 'Content attributes'
+      description: 'Same as attributes, except applied to the main content tag that appears in the template.'
+      default: ''
+    autoplay:
+      type: string
+      title: 'Autoplay'
+      description: 'Enable or disable autoplay for the slideshow. Use "true" to enable, "false" to disable.'
+      examples:
+        - 'true'
+        - 'false'
+      default: 'false'
+    speed:
+      type: string
+      title: 'Speed'
+      description: 'Transition speed in milliseconds between slides'
+      examples:
+        - '3000'
+        - '5000'
+        - '1000'
+      default: '3000'
+    slide_items:
+      type: array
+      title: 'Slide Items'
+      description: 'Array of slide items to display in the slideshow'
+      default: []
+  required:
+    - autoplay
+    - speed
+    - slide_items
+libraryOverrides:
+  js:
+    slideshow.js: { minified: true }
+  dependencies:
+    - provus_base_theme/slick

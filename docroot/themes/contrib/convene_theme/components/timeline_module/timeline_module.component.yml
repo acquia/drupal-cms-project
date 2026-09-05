@@ -1,0 +1,32 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Timeline
+group: Organisms
+status: stable
+description: A timeline component displaying a sequence of events.
+props:
+  type: object
+  properties:
+    heading:
+      title: Component Heading
+      type: string
+      default: "Mark your calendar for what's ahead"
+    description:
+      title: Component Description
+      type: string
+      default: "Important dates to know. Register early, prepare well, and arrive ready to engage."
+    disable_css:
+      title: Disable CSS
+      type: boolean
+      default: false
+      description: Check to disable the custom styles.
+slots:
+  timeline_items:
+    title: Timeline Items
+    description: A list of Timeline Item molecules.
+  actions:
+    title: Actions
+    description: Buttons or links (e.g. Register, View).
+library:
+  css:
+    component:
+      timeline_module.css: {}

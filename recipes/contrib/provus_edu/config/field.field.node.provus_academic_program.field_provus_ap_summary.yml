@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_provus_ap_summary
+    - node.type.provus_academic_program
+  module:
+    - text
+id: node.provus_academic_program.field_provus_ap_summary
+field_name: field_provus_ap_summary
+entity_type: node
+bundle: provus_academic_program
+label: Summary
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

@@ -1,0 +1,6 @@
+services:
+  Drupal\custom_field_graphql\Hook\CustomFieldGraphqlHooks:
+    class: Drupal\custom_field_graphql\Hook\CustomFieldGraphqlHooks
+    autowire: true
+    arguments:
+      - '@plugin.manager.custom_field_type'

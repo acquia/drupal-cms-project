@@ -1,0 +1,377 @@
+/*
+ * Generic header styles:
+ * All arguments are optional. If not defined, the defaults below will be used
+*/
+
+@mixin heading-xl($color: $color-heading, $color-link: inherit, $color-link-hover: inherit, $margin: 0) {
+  @include text-style-headline-h-1;
+
+  color: $color;
+  margin-left: $margin;
+  margin-right: $margin;
+  width: auto;
+
+
+  &__link {
+    color: $color-link;
+
+    &:hover {
+      color: $color-link-hover;
+    }
+  }
+}
+
+@mixin heading-large($color: $color-heading, $color-link: inherit, $color-link-hover: inherit, $margin: 0) {
+  @include text-style-headline-h-2;
+
+  color: $color;
+  margin-left: $margin;
+  margin-right: $margin;
+  width: auto;
+
+  &__link {
+    color: $color-link;
+
+    &:hover {
+      color: $color-link-hover;
+    }
+  }
+}
+
+@mixin heading-medium($color: $color-heading, $color-link: inherit, $color-link-hover: inherit, $margin: 0) {
+  @include text-style-headline-h-3;
+
+  color: $color;
+  margin-left: $margin;
+  margin-right: $margin;
+  width: auto;
+
+  &__link {
+    color: $color-link;
+
+    &:hover {
+      color: $color-link-hover;
+    }
+  }
+}
+
+@mixin heading-small($color: $color-heading, $color-link: inherit, $color-link-hover: inherit, $margin: 0) {
+  @include text-style-headline-h-4;
+
+  color: $color;
+  margin-left: $margin;
+  margin-right: $margin;
+  width: auto;
+
+  &__link {
+    color: $color-link;
+
+    &:hover {
+      color: $color-link-hover;
+    }
+  }
+}
+
+@mixin heading-xs($color: $color-heading, $color-link: inherit, $color-link-hover: inherit, $margin: 0) {
+  @include text-style-headline-h-5;
+
+  color: $color;
+  margin-left: $margin;
+  margin-right: $margin;
+  width: auto;
+
+  &__link {
+    color: $color-link;
+
+    &:hover {
+      color: $color-link-hover;
+    }
+  }
+}
+
+h1,
+.h1,
+h1 .title,
+.h1 .title {
+  @include heading-xl;
+}
+
+h2,
+.h2 {
+  @include heading-large;
+}
+
+h3,
+.h3 {
+  @include heading-medium;
+}
+
+h4,
+.h4 {
+  @include heading-small;
+}
+
+h5,
+h6,
+.h5,
+.h6 {
+  @include heading-xs;
+}
+
+
+.text-long {
+  h1 {
+    @extend .h1;
+  }
+
+  h2 {
+    @extend .h2;
+  }
+
+  h3 {
+    @extend .h3;
+  }
+
+  h4 {
+    @extend .h4;
+  }
+
+  h5 {
+    @extend .h5;
+  }
+
+  h6 {
+    @extend .h6;
+  }
+}
+
+a {
+  h2, h3, h4, h5, h6 {
+    color: $text-primary;
+  }
+  &:hover,
+  &:focus {
+    h2, h3, h4, h5, h6 {
+      color: $secondary-shade;
+    }
+  }
+}
+
+// Heading block in colored section.
+.bg-primary {
+  .block-provus-heading {
+    .line-on {
+      h1,h2,h3,h4,h5,h6 {
+        &::before {
+          background: $primary-accent;
+        }
+      }
+    }
+  }
+}
+
+.bg-secondary {
+  .block-provus-heading {
+    h1,h2,h3,h4,h5, h6,.subheading {
+      color: $secondary-colors-secondary-contrast;
+    }
+
+    .line-on {
+      h1,h2,h3,h4,h5,h6 {
+        &::before {
+          background: $secondary-accent;
+        }
+      }
+    }
+  }
+}
+
+// Heading block.
+.block-provus-heading {
+  h1,h2,h3,h4,h5,h6 {
+    position: relative;
+    margin: 0;
+    div.field {
+      position: relative;
+      display: inline-block;
+      z-index: 2;
+    }
+  }
+
+  .line-on {
+    h1,h2,h3,h4,h5,h6 {
+      background: $white;
+      color: $text-colors-body-color;
+      &:before {
+        width: 100%;
+        height: rem-calc(2);
+        top: 50%;
+        content: '';
+        background: $primary;
+        z-index: 1;
+        position: absolute;
+      }
+      div.field {
+        background: $white;
+      }
+    }
+  }
+
+  .header-align-left {
+    text-align: left;
+    h1,h2,h3,h4,h5,h6 {
+      &:before {
+        left: 0;
+      }
+    }
+    div.field {
+      padding-right: $padding-padding-xxlg;
+      width: rem-calc(272);
+
+      @include media-breakpoint-up(sm) {
+        width: rem-calc(450);
+      }
+
+      @include media-breakpoint-up(md) {
+        width: rem-calc(600);
+      }
+
+      @include media-breakpoint-up(lg) {
+        width: auto;
+        max-width: rem-calc(750);
+      }
+
+      @include media-breakpoint-up(xl) {
+        width: auto;
+        max-width: rem-calc(950);
+      }
+
+      @include media-breakpoint-up(xxl) {
+        width: auto;
+        max-width: none;
+      }
+    }
+  }
+
+  .header-align-right {
+    text-align: right;
+    div.field--name-field-provus-title {
+      padding-left: $padding-padding-xxlg;
+      width: rem-calc(272);
+
+      @include media-breakpoint-up(sm) {
+        width: rem-calc(450);
+      }
+
+      @include media-breakpoint-up(md) {
+        width: rem-calc(600);
+      }
+
+      @include media-breakpoint-up(lg) {
+        width: auto;
+        max-width: rem-calc(750);
+      }
+
+      @include media-breakpoint-up(xl) {
+        width: auto;
+        max-width: rem-calc(950);
+      }
+
+      @include media-breakpoint-up(xxl) {
+        width: auto;
+        max-width: none;
+      }
+    }
+    &.line-on {
+      h1,h2,h3,h4,h5,h6 {
+        &:before {
+          right: 0;
+        }
+      }
+    }
+  }
+
+  .header-align-center {
+    width: 100%;
+    display: block;
+    margin-bottom: rem-calc(50);
+    .subheading {
+      text-align: center;
+    }
+    h1,h2,h3,h4,h5,h6 {
+      text-align: center;
+      &:before {
+        left: 0;
+      }
+      div.field {
+        padding-left: $padding-padding-md;
+        padding-right: $padding-padding-md;
+        width: rem-calc(240);
+
+        @include media-breakpoint-up(sm) {
+          width: rem-calc(450);
+        }
+
+        @include media-breakpoint-up(md) {
+          padding-left: $padding-padding-xxlg;
+          padding-right: $padding-padding-xxlg;
+          width: rem-calc(600);
+        }
+
+        @include media-breakpoint-up(lg) {
+          width: auto;
+          max-width: rem-calc(750);
+          padding-left: $padding-padding-xxlg;
+          padding-right: $padding-padding-xxlg;
+        }
+
+        @include media-breakpoint-up(xl) {
+          width: auto;
+          max-width: rem-calc(950);
+          padding-left: $padding-padding-xxlg;
+          padding-right: $padding-padding-xxlg;
+        }
+
+        @include media-breakpoint-up(xxl) {
+          width: auto;
+          max-width: none;
+          padding-left: $padding-padding-xxlg;
+          padding-right: $padding-padding-xxlg;
+        }
+      }
+    }
+    &.line-off {
+      h1,h2,h3,h4,h5,h6 {
+        div.field {
+          max-width: none;
+        }
+      }
+    }
+  }
+
+  .subheading {
+    @include text-style-eyebrow-eyebrow-1();
+    color: $primary;
+    margin: $padding-padding-md 0;
+  }
+}
+
+.block-provus-heading h1 {
+  @include text-style-headline-h-1();
+}
+
+.block-provus-heading h2 {
+  @include text-style-headline-h-2();
+}
+
+.block-provus-heading h3 {
+  @include text-style-headline-h-3();
+}
+
+.block-provus-heading h4 {
+  @include text-style-headline-h-4();
+}
+
+.block-provus-heading h5 {
+  @include text-style-headline-h-5();
+}

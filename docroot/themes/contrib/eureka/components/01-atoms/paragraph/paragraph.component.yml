@@ -1,0 +1,44 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Paragraph
+status: stable
+description: Default paragraph component
+group: Eureka component items
+props:
+  type: object
+  properties:
+    paragraph_content:
+      type: string
+      title: Paragraph content
+      description: Paragraph text (HTML markup allowed)
+      examples:
+        - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin imperdiet sapien ac nunc gravida malesuada.
+    paragraph_size:
+      type: ['string', 'null']
+      title: Paragraph size
+      description: Set different font size
+      enum:
+        - default
+        - xs
+        - small
+        - medium
+        - large
+      examples:
+        - default
+    paragraph_icon:
+      type: boolean
+      title: Paragraph icon
+      description: Optional paragraph icon
+      examples:
+        - false
+      paragraph_icon_before:
+        type: boolean
+        title: Paragraph icon before
+        description: Positions the icon before the paragraph text.
+        examples:
+          - false
+      paragraph_icon_name:
+        type: [ 'string', 'null' ]
+        title: Paragraph icon name
+        description: Add an icon name to display it within the paragraph
+        examples:
+          - time

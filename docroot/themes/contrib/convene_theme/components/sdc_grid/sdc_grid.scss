@@ -1,0 +1,39 @@
+  .sdc-grid {
+    display: grid;
+    width: 100%;
+
+    /* Apply spacing dynamically via custom properties */
+    margin-top: var(--sdc-margin-top);
+    margin-right: var(--sdc-margin-right);
+    margin-bottom: var(--sdc-margin-bottom);
+    margin-left: var(--sdc-margin-left);
+    padding-top: var(--sdc-padding-top);
+    padding-right: var(--sdc-padding-right);
+    padding-bottom: var(--sdc-padding-bottom);
+    padding-left: var(--sdc-padding-left);
+    gap: var(--sdc-gap);
+
+    &__item {
+      min-width: 0;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 991px) {
+    /* Responsive override: 112px becomes 48px */
+    .sdc-grid[style*="--sdc-margin-top: 112px"] { margin-top: 48px !important; }
+    .sdc-grid[style*="--sdc-margin-right: 112px"] { margin-right: 48px !important; }
+    .sdc-grid[style*="--sdc-margin-bottom: 112px"] { margin-bottom: 48px !important; }
+    .sdc-grid[style*="--sdc-margin-left: 112px"] { margin-left: 48px !important; }
+    .sdc-grid[style*="--sdc-padding-top: 112px"] { padding-top: 48px !important; }
+    .sdc-grid[style*="--sdc-padding-right: 112px"] { padding-right: 48px !important; }
+    .sdc-grid[style*="--sdc-padding-bottom: 112px"] { padding-bottom: 48px !important; }
+    .sdc-grid[style*="--sdc-padding-left: 112px"] { padding-left: 48px !important; }
+    .sdc-grid[style*="--sdc-gap: 112px"] { gap: 48px !important; }
+  }
+
+  @media (max-width: 767px) {
+    .sdc-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }

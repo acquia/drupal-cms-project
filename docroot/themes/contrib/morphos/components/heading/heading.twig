@@ -1,0 +1,14 @@
+{% set heading_level = 'h' ~ level|default(2) %}
+{% set classes = [
+  alignment ? 'text-' ~ alignment,
+  color ? 'text-' ~ color,
+  use_display_font ? 'font-display',
+] %}
+
+<{{- heading_level -}}{{ attributes.addClass(classes, additional_classes) }}>
+  {% if url %}
+    <a href="{{- url -}}">{{- heading -}}</a>
+  {% else %}
+    {{- heading -}}
+  {% endif %}
+</{{- heading_level -}}>

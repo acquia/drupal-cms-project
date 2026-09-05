@@ -1,0 +1,260 @@
+.provus-card {
+
+  .card {
+      border-radius: $images-border-radius-radius-xxl 4px $images-border-radius-radius-xxl 4px;
+      overflow: hidden;
+  }
+
+  .card-title {
+      @include text-style-headline-h-3;
+      color: $text-colors-text-primary;
+  }
+
+  .card-body {
+    padding: $padding-padding-xxlg;
+    justify-content: flex-end;
+    color: $text-colors-text-primary;
+
+    //fix for provus_edu_theme
+    @include media-breakpoint-down(lg) {
+      padding: $padding-padding-sm;
+    }
+
+    .card-text {
+      color: $text-colors-text-primary;
+    }
+  }
+
+
+  .card-extra {
+    .btn {
+      @include button-outlined;
+
+      //fix for provus_edu_theme
+      @include media-breakpoint-down(lg) {
+        font-size: $font-size-sub2-headline;
+        padding: $padding-padding-sm;
+      }
+    }
+  }
+
+  .field--name-field-provus-links {
+      a:not(.btn) {
+        text-transform: uppercase;
+        position: relative;
+        display: flex;
+        padding-right: 20px;
+        border-bottom: 1px solid $background-colors-background-dark;
+        text-decoration: none;
+
+        &:after {
+          content: '';
+          background-image: url('/themes/contrib/provus_edu_theme/images/arrow-right.svg');
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+          width: 12px;
+          height: 12px;
+          position: absolute;
+          right: 0;
+          bottom: 7px;
+        }
+      }
+  }
+}
+
+.provus-card-tall {
+  .card-img-top {
+    border-radius: $images-border-radius-radius-xxl 4px $images-border-radius-radius-xxl 4px;
+  }
+
+  .card-date {
+      @include text-style-body-body-1;
+      color: $text-colors-text-primary;
+  }
+
+  .card-body {
+    padding: $padding-padding-lg 0;
+    .card-title {
+      @include text-style-headline-h-4;
+      color: $text-colors-text-primary;
+    }
+  }
+}
+
+.provus-card-bg {
+  .card {
+      border-radius: $images-border-radius-radius-xxl 4px $images-border-radius-radius-xxl 4px;
+      overflow: hidden;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 26px;
+
+      .card-img-overlay {
+          padding: $padding-padding-xlg;
+      }
+
+  }
+}
+
+.card-title {
+  color: $text-colors-text-secondary;
+}
+
+.card-wrapper.provus-card-icon-left {
+  border-radius: $radius-radius-xxs;
+  @include box-drop-shadow;
+  width: 100%;
+
+  //fix for provus_edu_theme
+  height: calc(100% - 20px);
+
+  //fix for provus_edu_theme
+  .card-img.img-fluid {
+    margin-bottom: 20px;
+
+    img {
+      max-width: 50px;
+      max-height: 50px;
+      object-fit: contain;
+    }
+  }
+
+  .list {
+    margin-bottom: 0;
+    padding: $padding-padding-xxlg;
+    flex-direction: column;
+
+    .list-icon {
+      width: 70px;
+      height: 70px;
+    }
+
+    .list-text {
+      padding-left: 0;
+      text-transform: uppercase;
+      color: $text-colors-text-primary;
+    }
+  }
+}
+
+.provus-card-basic {
+  .card {
+    border-radius: $images-border-radius-radius-xxl 4px $images-border-radius-radius-xxl 4px;
+    background-color: $background-colors-background-dark;
+    color: $text-colors-text-contrast;
+
+    .card-title {
+        @include text-style-headline-h-3;
+    }
+
+    .card-body {
+        color: $text-colors-text-contrast;
+        font-size: $font-size-body-md;
+        text-transform: uppercase;
+    }
+  }
+
+}
+
+.provus-card-basic-plus {
+  .card {
+    background-color: $background-colors-background-light;
+    border-radius: 4px;
+    border: 0;
+    text-align: center;
+    box-shadow: none;
+
+    .card-title {
+        @include text-style-headline-h-2;
+    }
+
+    .card-body {
+      .card-text {
+        color: $text-colors-text-primary;
+      }
+    }
+
+    .btn-secondary {
+      background-color: $background-colors-background-white;
+    }
+  }
+}
+
+.node--view-mode-provus-card {
+  .card .card-title a {
+    text-decoration: none;
+    @include text-style-headline-h-4;
+    color: $text-colors-text-primary;
+
+    &:hover {
+        color: $text-colors-text-secondary;
+    }
+  }
+}
+
+.block-group-grid-4 {
+  .row {
+    > * {
+      display: flex;
+
+      .card-wrapper {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.card-wrapper.provus-card-bg .card-body .card-title {
+  align-items: center;
+  display: flex;
+}
+
+//fix for provus_edu_theme
+.two-card-tall,
+.four-card-tall {
+  .provus-card-tall {
+    .card {
+      background-color: transparent;
+      max-width: unset;
+    }
+
+    .card-img-top {
+      height: unset;
+      width: unset;
+    }
+  }
+}
+
+//fix for provus_edu_theme
+.two-card-tall {
+  > div > .row {
+    > div:first-of-type {
+      @include media-breakpoint-up(lg) {
+        border-right: 1px solid rgba(0, 0, 0, 0.1);
+        padding-right: $padding-padding-xxxlg;
+      }
+    }
+
+    > div:last-of-type {
+      @include media-breakpoint-up(lg) {
+        padding-left: $padding-padding-xxxlg;
+      }
+    }
+  }
+
+  .provus-card-tall .card-img-top img {
+    @include media-breakpoint-up(md) {
+      max-height: 227px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      max-height: 264px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      max-height: 454px;
+    }
+  }
+}

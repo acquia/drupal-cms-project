@@ -1,0 +1,108 @@
+# Schema for the configuration files of the Modeler API module.
+modeler_api.settings:
+  type: config_object
+  label: 'Modeler API settings'
+  mapping:
+    owner_modeler:
+      type: sequence
+      label: 'Owner IDs'
+      sequence:
+        type: sequence
+        label: 'Modeler IDs'
+        sequence:
+          type: mapping
+          mapping:
+            theme:
+              type: string
+              label: 'Theme'
+            storage:
+              type: string
+              label: 'Storage Mode'
+              constraints:
+                Choice:
+                  callback: '\Drupal\modeler_api\Form\Settings::validStorageOptions'
+
+modeler_api.data_model.*:
+  type: config_entity
+  label: Model
+  mapping:
+    id:
+      type: string
+      label: ID
+    data:
+      type: string
+      label: Data
+
+# Schema for model settings.
+model_settings.third_party.modeler_api:
+  type: mapping
+  mapping:
+    modeler_id:
+      type: string
+      label: ID
+    storage:
+      type: string
+      label: 'Override system-wide storage setting'
+    data:
+      type: string
+      label: 'Raw data, or an md5 hash of the raw data if that is stored externally'
+    changelog:
+      type: text
+      label: Changelog
+    label:
+      type: label
+      label: Label
+    documentation:
+      type: text
+      label: Documentation
+    tags:
+      type: sequence
+      label: Changelog
+      sequence:
+        type: string
+        label: Tag
+    version:
+      type: string
+      label: Version
+    annotations:
+      type: sequence
+      label: Annotations
+      sequence:
+        type: mapping
+        label: Annotation
+        mapping:
+          text:
+            type: label
+            label: Text
+          assigned_to:
+            type: sequence
+            label: 'Assigned to'
+            sequence:
+              type: string
+              label: 'Target ID'
+    colors:
+      type: sequence
+      label: Colors
+      sequence:
+        type: mapping
+        label: Color
+        mapping:
+          fill:
+            type: string
+            label: 'Fill color'
+          stroke:
+            type: string
+            label: 'Stroke color'
+    swimlanes:
+      type: sequence
+      label: Swimlanes
+      sequence:
+        type: mapping
+        label: Swimlane
+        mapping:
+          name:
+            type: string
+            label: Name
+          components:
+            type: sequence
+            label: Components

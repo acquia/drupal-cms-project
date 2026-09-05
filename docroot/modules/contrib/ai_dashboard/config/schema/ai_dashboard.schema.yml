@@ -1,0 +1,34 @@
+block.settings.module_list_packages:
+  type: block_settings
+  label: Module List Packages
+  mapping:
+    packages:
+      type: string
+      label: Packages List
+
+block.settings.ai_documentation:
+  type: block_settings
+  label: AI Documentation
+  mapping:
+    soft_limit:
+      type: integer
+      label: Documentation links soft limit
+    hard_limit:
+      type: integer
+      label: Documentation links hard limit
+
+project_browser.source.ai_dashboard_recommended:
+  type: project_browser.source.*
+  label: 'AI Recommended source settings'
+  mapping:
+    uri:
+      type: uri
+      label: 'URI of ai recommended projects data'
+    ttl:
+      type: integer
+      label: 'How long to cache the data for, in seconds'
+      constraints:
+        Range:
+          min: 1
+  constraints:
+    FullyValidatable: ~

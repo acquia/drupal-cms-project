@@ -1,0 +1,52 @@
+@reference "../../00-base/global/global.pcss";
+
+/* Hero banner with media */
+
+.hero-banner-with-media {
+  @apply py-10 px-4 xl:pb-[180px] xl:pt-[100px] relative h-full xl:h-screen bg-sds-base-brand;
+
+  &:before {
+    @apply absolute top-0 left-0 w-full h-full bg-no-repeat;
+
+    content: "";
+    background-image: url("./images/grid-pattern.png");
+    background-position: top -200px center;
+  }
+
+  .intro-label {
+    @apply mb-6 block uppercase font-light tracking-widest;
+  }
+
+  .headline {
+    @apply mx-0 break-words;
+  }
+
+  .category-wrapper {
+    @apply flex items-center gap-2 mb-9;
+
+    span {
+      @apply inline-block px-4 py-1 rounded-full text-base font-normal bg-sds-gray;
+
+      box-shadow: 0px 1px 3px 0px rgba(16, 24, 40, 0.1);
+    }
+
+    .primary_category {
+      @apply bg-black text-white;
+    }
+  }
+
+  .institute-involved {
+    @apply text-sds-heading;
+
+    .institute-label {
+      @apply text-slate-500;
+    }
+  }
+  .right-image {
+    img {
+      @apply rounded-3xl w-full h-auto border border-black/20;
+
+      box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+    }
+  }
+}

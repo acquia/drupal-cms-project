@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_provus_ac_year_level
+field_name: field_provus_ac_year_level
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: year_1
+      label: 'Year 1'
+    -
+      value: year_2
+      label: 'Year 2'
+    -
+      value: year_3
+      label: 'Year 3'
+    -
+      value: year_4
+      label: 'Year 4'
+    -
+      value: year_5
+      label: 'Year 5'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

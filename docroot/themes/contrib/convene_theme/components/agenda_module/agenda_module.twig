@@ -1,0 +1,31 @@
+{% set classes = [
+  'agenda-module',
+  admin_theme ? 'agenda-module--admin-theme' : 'agenda-module--themed',
+] %}
+
+<section{{attributes.addClass(classes)}}>
+  <div class="agenda-module__inner">
+    
+    <div class="agenda-module__header">
+      {% if eyebrow %}
+        <div class="agenda-module__eyebrow">{{ eyebrow }}</div>
+      {% endif %}
+      {% if title %}
+        <div class="agenda-module__title">{{ title }}</div>
+      {% endif %}
+      {% if description %}
+        <div class="agenda-module__description">{{ description }}</div>
+      {% endif %}
+      {% if actions %}
+        <div class="agenda-module__actions">
+          {{ actions }}
+        </div>
+      {% endif %}
+    </div>
+    
+    <div class="agenda-module__list">
+      {{ agenda_items }}
+    </div>
+
+  </div>
+</section>

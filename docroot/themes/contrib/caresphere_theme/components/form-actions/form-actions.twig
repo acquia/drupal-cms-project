@@ -1,0 +1,33 @@
+{#
+  Form actions SDC: desktop from Figma node 1-9153 (input + button row),
+  mobile from 1-8750 (stacked). Email input, CTA button, disclaimer text.
+#}
+{% set placeholder = input_placeholder|default('Enter your email') %}
+{% set btn_label = button_text|default('Get in touch') %}
+{% set disclaimer = disclaimer_text|default('By submitting this form you agree to our terms and privacy policy') %}
+{% set action_url = form_action|default('') %}
+{% set name_attr = input_name|default('email') %}
+{% set type_attr = input_type|default('email') %}
+
+<div class="form-actions" data-name="Actions">
+  <form class="form-actions__form" method="post" action="{{ action_url }}" data-name="Form">
+    <div class="form-actions__row">
+      <input
+        type="{{ type_attr }}"
+        name="{{ name_attr }}"
+        class="form-actions__input"
+        placeholder="{{ placeholder }}"
+        aria-label="{{ placeholder }}"
+        data-name="Text input"
+      />
+      <button type="submit" class="form-actions__btn button button--primary button--medium" data-name="Button">
+        {{ btn_label }}
+      </button>
+    </div>
+  </form>
+  {% if disclaimer is not empty %}
+    <p class="form-actions__disclaimer">
+      {{ disclaimer }}
+    </p>
+  {% endif %}
+</div>

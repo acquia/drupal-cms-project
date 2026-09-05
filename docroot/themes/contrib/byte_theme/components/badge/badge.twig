@@ -1,0 +1,73 @@
+{% set has_url = url is not empty and url != 'No URL' ? 'yes' : 'no' %}
+{% set is_icon_first = icon_first is not empty ? 'yes' : 'no' %}
+
+{# Normalize badge_classes - handle both array and string formats #}
+{% set additional_classes = badge_classes|default('') %}
+{% if additional_classes is iterable %}
+  {% set additional_classes = additional_classes|join(' ') %}
+{% endif %}
+
+{% set badge =
+  html_cva(
+    base: [
+      'rounded-sm border',
+      'flex inline-flex items-center gap-[2px] lg:gap-1',
+      'px-[6px] py-[5px] lg:px-2 lg:py-[6px] 2xl:px-3 2xl:py-2',
+      'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]'
+    ],
+    variants: {
+      style: {
+        primary: ['border-transparent bg-primary text-primary-foreground [a&]:hover:bg-primary/90'],
+        secondary: ['border-transparent bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90']
+      },
+      iconFirst: {
+        yes: 'flex-row',
+        no: 'flex-row-reverse'
+      }
+    }
+  )
+%}
+
+{% set badge_classes =
+  badge.apply(
+    {
+      style: style|default('primary'),
+      iconFirst: is_icon_first
+    },
+    additional_classes
+  )
+%}
+
+{% if has_url == 'yes' %}
+  <a href="{{ url }}" aria-label="{{ label }}" class="{{ badge_classes }}">
+    {% if icon is not empty %}
+      {{
+        include(
+          '@byte_theme/components/icon/icon.twig',
+          {
+            icon: icon,
+            icon_size: 'extra-small'
+          },
+          with_context: false
+        )
+      }}
+    {% endif %}
+    <span class="font-sans text-sm leading-none font-normal text-inherit select-none">{{ label }}</span>
+  </a>
+{% else %}
+  <span aria-label="{{ label }}" class="{{ badge_classes }}">
+    {% if icon is not empty %}
+      {{
+        include(
+          '@byte_theme/components/icon/icon.twig',
+          {
+            icon: icon,
+            icon_size: 'extra-small'
+          },
+          with_context: false
+        )
+      }}
+    {% endif %}
+    <span class="font-sans text-sm leading-none font-normal text-inherit select-none">{{ label }}</span>
+  </span>
+{% endif %}

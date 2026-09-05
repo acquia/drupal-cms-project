@@ -1,0 +1,166 @@
+{#
+/**
+ * @file
+ * Pagination Component.
+ *
+ * Description:
+ * Displays pagination to indicate a series of related content that spans multiple pages. 
+ * Includes options for various shapes, colors, and styles.
+ *
+ * Variables:
+ * - items: [array] List of pager items. Includes keys such as `first`, `previous`, `next`, `last`, and `pages`.
+ *   Each key contains:
+ *   - href: [string] The URL for the pagination link.
+ *   - attributes: [array] Optional attributes for the pagination link.
+ *   - text: [string] The display text for the link.
+ * - current: [number] The current page number.
+ * - shapes: [string] Shape of the pagination items. Possible values: `rounded-full`, `rounded-lg`.
+ * - color: [string] Color theme for pagination. Possible values: `lightColor`, `darkColor`.
+ * - type: [string] Pagination style type. Possible values: `card-default`, `card-minimal`.
+ * - shape: [string] Shape of pagination items. Possible values: `rounded-full`, `square`.
+ * - ellipses: [array] Ellipsis indicators for truncated pages.
+ * - attributes: [object] HTML attributes for the pagination wrapper.
+ */
+#}
+
+{# Classes #}
+{% set shape_classes = {
+  'rounded-full': 'rounded-full',
+  'square': 'square',
+} %}
+
+{% set shape_class = shape_classes[props.shape] ?? '' %}
+{% set utility_classes = props.utility_classes|join(' ') %}
+
+{% set classes = ([
+  'text-md font-primary w-10 h-10 flex',
+  shape_class,
+  utility_classes,
+] | join(' ') | trim) %}
+
+
+{# Template #}
+{% if items %}
+
+  {# Card Default #}
+  {% if type == 'card-default' %}
+    {% block pagination_card_default %}
+      <nav class="pager flex flex-col mt-10" role="navigation" aria-labelledby="{{ heading_id }}">
+        <h4 id="{{ heading_id }}" class="visually-hidden sr-only">{{ 'Pagination'|t }}</h4>
+        <ul class="pager__items js-pager__items flex items-center w-full splide__pagination {{ type }}" aria-label="Pagination">
+          {# Print previous item if we are not on the first page. #}
+          {% if items.previous %}
+            <li class="pager__item pager__item--action pager__item--previous flex justify-start flex-1">
+              <a href="{{ items.previous.href }}" class="pager__link pager__link--action-link btn-primary btn tile-link rounded-full flex" title="{{ 'Go to previous page'|t }}" rel="prev"{{ items.previous.attributes|without('href', 'title', 'rel') }}>
+                <span class="visually-hidden sr-only">{{ 'Previous page'|t }}</span>
+                {% include 'pulse_theme:space-icon' with {
+                  icon: 'arrow-left',
+                  icon_size: 'extra-small',
+                  alt: 'Previous page'
+                } only %}
+                <span class="pager__item-title pager__item-title--backwards text-base pl-3 hidden md:block" aria-hidden="true">
+                  {{ items.previous.text|default('Previous'|t)|replace({'‹': ''}) }}
+                </span>
+              </a>
+            </li>
+          {% else %}
+            <li class="flex-1"></li>
+          {% endif %}
+
+          <li class="hidden md:block flex-1 justify-center">
+            <ul class="pagination-items flex gap-1 justify-center splide__pagination">
+              {# Add an ellipsis if there are further previous pages. #}
+              {% if ellipses.previous %}
+                <li class="pager__item pager__item--ellipsis" role="presentation">&hellip;</li>
+              {% endif %}
+
+              {# Now generate the actual pager piece. #}
+              {% for key, item in items.pages %}
+                <li class="pager__item{{ current == key ? ' pager__item--active' : '' }} pager__item--number">
+                  {% if current == key %}
+                    {% set title = 'Current page'|t %}
+                  {% else %}
+                    {% set title = 'Go to page @key'|t({'@key': key}) %}
+                  {% endif %}
+                  <a href="{{ item.href }}" class="pager__link{{ current == key ? ' is-active' }} text-base justify-center items-center {{ classes }} {{ color }} tile-link font-medium rounded-full" title="{{ title }}"{{ item.attributes|without('href', 'title', 'class') }}>
+                    <span class="visually-hidden sr-only">
+                      {{ current == key ? 'Current page'|t : 'Page'|t }}
+                    </span>
+                    {{ key }}
+                  </a>
+                </li>
+              {% endfor %}
+
+              {# Add an ellipsis if there are further next pages. #}
+              {% if ellipses.next %}
+                <li class="pager__item pager__item--ellipsis" role="presentation">&hellip;</li>
+              {% endif %}
+            </ul>
+          </li>
+
+          {# Mobile view #}
+          <li class="text-sm text-text-heading md:hidden">
+            {{ 'Page'|t }} <span class="font-bold text-black">{{ current }}</span> {{ 'of'|t }} <span class="font-bold text-black">{{ items.pages|length }}</span>
+          </li>
+
+          {# Print next item if we are not on the last page. #}
+          {% if items.next %}
+            <li class="pager__item pager__item--action pager__item--next flex-1 flex justify-end">
+              <a href="{{ items.next.href }}" class="pager__link pager__link--action-link btn-primary btn tile-link rounded-full flex" title="{{ 'Go to next page'|t }}" rel="next"{{ items.next.attributes|without('href', 'title', 'rel') }}>
+                <span class="visually-hidden sr-only">{{ 'Next page'|t }}</span>
+                <span class="pager__item-title pager__item-title--forward pr-3 text-base hidden md:block" aria-hidden="true">
+                  {{ items.next.text|default('Next'|t)|replace({'›': ''}) }}
+                </span>
+                {% include 'pulse_theme:space-icon' with {
+                  icon: 'arrow-right',
+                  icon_size: 'extra-small',
+                  alt: 'Previous page'
+                } only %}
+              </a>
+            </li>
+          {% else %}
+            <li class="flex-1"></li>
+          {% endif %}
+        </ul>
+      </nav>
+    {% endblock %}
+  {% endif %}
+
+  {# Card Minimal #}
+  {% if type == 'card-minimal' %}
+    {% block pagination_card_minimal %}
+      <nav class="pager flex flex-col mt-10" role="navigation" aria-labelledby="{{ heading_id }}">
+        <h4 id="{{ heading_id }}" class="visually-hidden sr-only">{{ 'Pagination'|t }}</h4>
+        <ul class="pager__items js-pager__items flex flex-row justify-between items-center {{ type }}" aria-label="Pagination">
+          <li class="text-sm text-text-heading">
+            {{ 'Page'|t }} <span class="font-bold text-black">{{ current }}</span> {{ 'of'|t }} <span class="font-bold text-black">{{ items.pages|length }}</span>
+          </li>
+
+          {# Print previous item if we are not on the first page. #}
+          {% if items.previous %}
+            <li class="pager__item pager__item--action pager__item--previous order-first md:order-none md:ml-auto">
+              <a href="{{ items.previous.href }}" class="pager__link pager__link--action-link h-10 py-2 px-3 md:px-3.5 flex items-center border border-neutral-300 shadow-xs rounded-full bg-black text-white tile-link" title="{{ 'Go to previous page'|t }}" rel="prev"{{ items.previous.attributes|without('href', 'title', 'rel') }}>
+                <span class="visually-hidden sr-only">{{ 'Previous page'|t }}</span>
+                <span class="pager__item-title pager__item-title--backwards text-base hidden md:block" aria-hidden="true">
+                  {{ items.previous.text|default('Previous'|t)|replace({'‹': ''}) }}
+                </span>
+              </a>
+            </li>
+          {% endif %}
+
+          {# Print next item if we are not on the last page. #}
+          {% if items.next %}
+            <li class="pager__item pager__item--action pager__item--next pl-1">
+              <a href="{{ items.next.href }}" class="pager__link pager__link--action-link h-10 py-2 px-3 md:px-3.5 flex items-center border border-neutral-300 shadow-xs bg-black rounded-full text-white tile-link" title="{{ 'Go to next page'|t }}" rel="next"{{ items.next.attributes|without('href', 'title', 'rel') }}>
+                <span class="visually-hidden sr-only">{{ 'Next page'|t }}</span>
+                <span class="pager__item-title pager__item-title--forward text-base hidden md:block" aria-hidden="true">
+                  {{ items.next.text|default('Next'|t)|replace({'›': ''}) }}
+                </span>
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    {% endblock %}
+  {% endif %}
+{% endif %}

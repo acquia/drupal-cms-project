@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 400" font-family="system-ui, -apple-system, sans-serif" font-size="13">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="none" stroke="#546e7a" stroke-width="1.5"/>
+    </marker>
+    <marker id="arr-b" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
+      <path d="M8,0 L0,3 L8,6" fill="none" stroke="#546e7a" stroke-width="1.5"/>
+    </marker>
+    <marker id="arr-api" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="none" stroke="#3f51b5" stroke-width="1.5"/>
+    </marker>
+    <marker id="arr-api-b" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
+      <path d="M8,0 L0,3 L8,6" fill="none" stroke="#3f51b5" stroke-width="1.5"/>
+    </marker>
+  </defs>
+
+  <!-- Modeler API (center, top) -->
+  <rect x="220" y="16" width="260" height="68" rx="10" fill="#3f51b5" stroke="#283593" stroke-width="1.5"/>
+  <text x="350" y="42" text-anchor="middle" fill="#fff" font-weight="bold" font-size="16">Modeler API</text>
+  <text x="350" y="60" text-anchor="middle" fill="#c5cae9" font-size="11">Api service &#xB7; save cycle &#xB7; routing</text>
+  <text x="350" y="73" text-anchor="middle" fill="#c5cae9" font-size="11">permissions &#xB7; export &#xB7; templates</text>
+
+  <!-- Left interface label -->
+  <text x="195" y="112" text-anchor="middle" fill="#3f51b5" font-size="10" font-weight="600">ModelOwnerInterface</text>
+  <!-- Right interface label -->
+  <text x="505" y="112" text-anchor="middle" fill="#3f51b5" font-size="10" font-weight="600">ModelerInterface</text>
+
+  <!-- Left arm (API to Model Owner) -->
+  <line x1="280" y1="84" x2="170" y2="130" stroke="#3f51b5" stroke-width="2" marker-start="url(#arr-api-b)" marker-end="url(#arr-api)"/>
+  <!-- Right arm (API to Modeler) -->
+  <line x1="420" y1="84" x2="530" y2="130" stroke="#3f51b5" stroke-width="2" marker-start="url(#arr-api-b)" marker-end="url(#arr-api)"/>
+
+  <!-- Model Owner box -->
+  <rect x="30" y="130" width="260" height="60" rx="7" fill="#e8eaf6" stroke="#7986cb" stroke-width="1.3"/>
+  <text x="160" y="155" text-anchor="middle" font-weight="600" fill="#283593" font-size="14">Model Owner</text>
+  <text x="160" y="173" text-anchor="middle" fill="#546e7a" font-size="11">owns config entities &#xB7; defines components</text>
+
+  <!-- Modeler box -->
+  <rect x="410" y="130" width="260" height="60" rx="7" fill="#e8eaf6" stroke="#7986cb" stroke-width="1.3"/>
+  <text x="540" y="155" text-anchor="middle" font-weight="600" fill="#283593" font-size="14">Modeler</text>
+  <text x="540" y="173" text-anchor="middle" fill="#546e7a" font-size="11">provides UI &#xB7; parses &amp; serializes data</text>
+
+  <!-- Config Entity (below Model Owner) -->
+  <line x1="160" y1="190" x2="160" y2="226" stroke="#90a4ae" stroke-width="1.2"/>
+  <rect x="46" y="226" width="228" height="44" rx="5" fill="#fff" stroke="#b0bec5" stroke-width="1"/>
+  <text x="160" y="249" text-anchor="middle" fill="#455a64" font-size="12">Config Entity</text>
+  <text x="160" y="263" text-anchor="middle" fill="#90a4ae" font-size="10">Drupal configuration</text>
+
+  <!-- Raw Data (below Modeler) -->
+  <line x1="540" y1="190" x2="540" y2="226" stroke="#90a4ae" stroke-width="1.2"/>
+  <rect x="426" y="226" width="228" height="44" rx="5" fill="#fff" stroke="#b0bec5" stroke-width="1"/>
+  <text x="540" y="249" text-anchor="middle" fill="#455a64" font-size="12">Raw Data</text>
+  <text x="540" y="263" text-anchor="middle" fill="#90a4ae" font-size="10">XML, JSON, or other format</text>
+
+  <!-- Barrier / no-link zone -->
+  <line x1="350" y1="200" x2="350" y2="280" stroke="#ef9a9a" stroke-width="1" stroke-dasharray="6,4"/>
+  <text x="350" y="252" text-anchor="middle" fill="#c62828" font-size="10" font-weight="600">fully abstracted</text>
+  <text x="350" y="265" text-anchor="middle" fill="#c62828" font-size="10">no direct link</text>
+
+  <!-- Components (below Config Entity) -->
+  <line x1="160" y1="270" x2="160" y2="296" stroke="#cfd8dc" stroke-width="1"/>
+  <rect x="30" y="296" width="260" height="36" rx="4" fill="#f5f5f5" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="160" y="319" text-anchor="middle" fill="#78909c" font-size="11">Components &#xB7; Successors &#xB7; Colors &#xB7; Swimlanes</text>
+
+  <!-- N:M annotation -->
+  <text x="350" y="378" text-anchor="middle" fill="#78909c" font-size="11" font-style="italic">Many-to-many: any Model Owner works with any Modeler</text>
+  <text x="350" y="393" text-anchor="middle" fill="#78909c" font-size="11" font-style="italic">Neither side has any knowledge of the other</text>
+
+  <!-- Small N:M indicators -->
+  <text x="225" y="100" text-anchor="middle" fill="#7986cb" font-size="10">N</text>
+  <text x="475" y="100" text-anchor="middle" fill="#7986cb" font-size="10">M</text>
+</svg>

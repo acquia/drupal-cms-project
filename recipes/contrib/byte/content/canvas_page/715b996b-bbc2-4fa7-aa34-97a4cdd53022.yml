@@ -1,0 +1,434 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 715b996b-bbc2-4fa7-aa34-97a4cdd53022
+  default_langcode: en
+  depends:
+    ec07e5e9-d11e-4550-b528-66dffbc93527: file
+    3a63058d-4aa1-4b91-b530-28696677c56e: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Features
+  components:
+    -
+      uuid: f75d64f9-b975-43d0-a88a-b588e8bf9aad
+      component_id: sdc.byte_theme.hero-billboard
+      inputs:
+        height: large
+        flex_position: hero-center
+        overlay_opacity: 0%
+        object_position: bottom
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 3a63058d-4aa1-4b91-b530-28696677c56e
+            target_type: media
+        overlap_navbar: true
+    -
+      parent_uuid: f75d64f9-b975-43d0-a88a-b588e8bf9aad
+      slot: hero_slot
+      uuid: 43f8716b-db59-42b1-816e-bcb329533d14
+      component_id: sdc.byte_theme.heading
+      inputs:
+        heading_text: 'Track every dollar, in real time'
+        level: 1
+        text_size: heading-responsive-7xl
+        text_color: default
+        align: center
+    -
+      parent_uuid: f75d64f9-b975-43d0-a88a-b588e8bf9aad
+      slot: hero_slot
+      uuid: b1c0efe7-3b46-4d12-a553-e6378c8b6393
+      component_id: sdc.byte_theme.text
+      inputs:
+        text:
+          value: "<p>Your finance team is drowning in paper. Your employees are photographing receipts at dinner. And you? You're waiting weeks to find out what actually happened last month.</p>"
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: f75d64f9-b975-43d0-a88a-b588e8bf9aad
+      slot: hero_slot
+      uuid: 1a63444e-be9d-453e-92a3-53f4e6c23e43
+      component_id: sdc.byte_theme.button
+      inputs:
+        variant: primary
+        label: 'Find a better way'
+        size: large
+        icon: arrow-right
+        mobile_width: false
+        icon_first: false
+        disabled: false
+    -
+      uuid: 4a29edb2-ad50-43a4-b4bc-9c181b424bb0
+      component_id: sdc.byte_theme.section
+      inputs:
+        width: 100%
+        columns: 25-25-25-25
+        mobile_columns: '1'
+        margin_block_start: '128'
+        margin_block_end: '32'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: 4a29edb2-ad50-43a4-b4bc-9c181b424bb0
+      slot: header_slot
+      uuid: d123b84a-d557-461e-a0f4-614d9d3fd43c
+      component_id: sdc.byte_theme.heading
+      inputs:
+        heading_text: 'Enterprise-grade tools'
+        level: 2
+        text_size: heading-responsive-6xl
+        text_color: default
+        align: center
+    -
+      parent_uuid: 4a29edb2-ad50-43a4-b4bc-9c181b424bb0
+      slot: main_slot
+      uuid: ebd067dc-7381-4593-b566-511af46ff1ee
+      component_id: sdc.byte_theme.card-icon
+      inputs:
+        border_radius: medium
+        icon_size: large
+        icon_align: center
+        text: 'GDPR compliance'
+        text_align: center
+        icon: globe-hemisphere-east
+        description:
+          value: '<p>Our software complies with GDPR, and avoids anti-patterns by requiring affirmative consent.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 4a29edb2-ad50-43a4-b4bc-9c181b424bb0
+      slot: main_slot
+      uuid: 1ca00bb0-6f7e-405c-adc6-7417f8fbe4c4
+      component_id: sdc.byte_theme.card-icon
+      inputs:
+        border_radius: medium
+        icon_size: large
+        icon_align: center
+        text: 'Cyber security'
+        text_align: center
+        icon: shield-check
+        description:
+          value: "<p>We stay on top of what's happening in the ever-changing world of web security, so you don't have to.</p>"
+          format: canvas_html_block
+    -
+      parent_uuid: 4a29edb2-ad50-43a4-b4bc-9c181b424bb0
+      slot: main_slot
+      uuid: 9fc76510-5439-4c81-a055-73da60f2e939
+      component_id: sdc.byte_theme.card-icon
+      inputs:
+        border_radius: medium
+        icon_size: large
+        icon_align: center
+        text: 'ISO standards'
+        text_align: center
+        icon: code
+        description:
+          value: "<p>By maintaining the highest security standards, we're keeping you ten steps ahead of your competitors.</p>"
+          format: canvas_html_block
+    -
+      parent_uuid: 4a29edb2-ad50-43a4-b4bc-9c181b424bb0
+      slot: main_slot
+      uuid: e2648f0d-ebb9-4a7b-b06d-8b5eb7cdf669
+      component_id: sdc.byte_theme.card-icon
+      inputs:
+        border_radius: medium
+        icon_size: large
+        icon_align: center
+        text: Encryption
+        text_align: center
+        icon: lock
+        description:
+          value: '<p>Did we mention security? Never worry about your data ending up in the wrong hands.</p>'
+          format: canvas_html_block
+    -
+      uuid: 09d1ab19-6963-4951-940a-100ed0427f3a
+      component_id: sdc.byte_theme.section
+      inputs:
+        width: 80%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        padding_block_start: '16'
+        padding_block_end: '32'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: 09d1ab19-6963-4951-940a-100ed0427f3a
+      slot: main_slot
+      uuid: fdb06bad-6f56-4b94-aab7-204841eedd5d
+      component_id: sdc.byte_theme.section
+      inputs:
+        width: 80%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '64'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: fdb06bad-6f56-4b94-aab7-204841eedd5d
+      slot: main_slot
+      uuid: 1dcd89f3-de0d-42fa-9de3-2c94e8f87be7
+      component_id: sdc.byte_theme.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: center
+        flex_align: center
+        radius: md
+        padding: md
+    -
+      parent_uuid: 1dcd89f3-de0d-42fa-9de3-2c94e8f87be7
+      slot: group_slot
+      uuid: 86c56928-345d-4972-88b3-99b37f04fc4b
+      component_id: sdc.byte_theme.icon
+      inputs:
+        icon: rocket-launch
+        icon_size: extra-large
+    -
+      parent_uuid: 1dcd89f3-de0d-42fa-9de3-2c94e8f87be7
+      slot: group_slot
+      uuid: 38efae0a-ada3-4919-8cd0-416dae37e037
+      component_id: sdc.byte_theme.blockquote
+      inputs:
+        text: 'Our team was always wondering where the money went! Until we found this product and it boosted our productivity by 1000%.'
+        cite_name: 'Isiah Julio'
+        cite_text: 'Engineer, Technical Services'
+    -
+      parent_uuid: 09d1ab19-6963-4951-940a-100ed0427f3a
+      slot: main_slot
+      uuid: 4844c3d6-a4f9-45c2-9c03-03fb18abf10f
+      component_id: sdc.byte_theme.hero-side-by-side
+      inputs:
+        hero_flex_direction_mobile: vertical
+        padding_block_start: '0'
+        padding_block_end: '32'
+        image_size: '16:9'
+        image_position: left
+        image_radius: small
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 3a63058d-4aa1-4b91-b530-28696677c56e
+            target_type: media
+    -
+      parent_uuid: 4844c3d6-a4f9-45c2-9c03-03fb18abf10f
+      slot: hero_slot
+      uuid: e27f144c-6719-46f8-8f15-722e0fc0f0b3
+      component_id: sdc.byte_theme.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: center
+        flex_align: center
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: e27f144c-6719-46f8-8f15-722e0fc0f0b3
+      slot: group_slot
+      uuid: 50faac23-00b2-4417-9d05-8bb92a779384
+      component_id: sdc.byte_theme.badge
+      inputs:
+        label: 'New feature'
+        style: primary
+        icon: shooting-star
+        icon_first: true
+    -
+      parent_uuid: 4844c3d6-a4f9-45c2-9c03-03fb18abf10f
+      slot: hero_slot
+      uuid: 0bd601c3-f5d6-4720-8f30-eaf56d220eb9
+      component_id: sdc.byte_theme.heading
+      inputs:
+        heading_text: 'Real-time expense tracking'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: center
+    -
+      parent_uuid: 4844c3d6-a4f9-45c2-9c03-03fb18abf10f
+      slot: hero_slot
+      uuid: 6c7d97df-e300-413f-a7ca-03a198d0ed29
+      component_id: sdc.byte_theme.text
+      inputs:
+        text:
+          value: '<p class="text-align-center">Snap the receipt. The app reads it. Categorizes it. Syncs it. You know what''s happening <em>now</em>, not later. Finance sees the same thing you do. At the same time.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 09d1ab19-6963-4951-940a-100ed0427f3a
+      slot: main_slot
+      uuid: 2993b09e-5803-4854-8e78-631b85e06308
+      component_id: sdc.byte_theme.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        padding_block_start: '32'
+        padding_block_end: '32'
+        image_size: '16:9'
+        image_position: right
+        image_radius: small
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 3a63058d-4aa1-4b91-b530-28696677c56e
+            target_type: media
+    -
+      parent_uuid: 2993b09e-5803-4854-8e78-631b85e06308
+      slot: hero_slot
+      uuid: e73a2e74-a610-407a-aa9c-4d69692ee9fd
+      component_id: sdc.byte_theme.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: center
+        padding: sm
+    -
+      parent_uuid: e73a2e74-a610-407a-aa9c-4d69692ee9fd
+      slot: group_slot
+      uuid: 95556863-1537-4cc9-9cd8-28c1c8e985f8
+      component_id: sdc.byte_theme.badge
+      inputs:
+        label: 'Premium feature'
+        style: primary
+        icon: seal-check
+        icon_first: true
+    -
+      parent_uuid: 2993b09e-5803-4854-8e78-631b85e06308
+      slot: hero_slot
+      uuid: d6b8aca5-e4d3-40a0-a866-831ae011f795
+      component_id: sdc.byte_theme.heading
+      inputs:
+        heading_text: 'Effortless approval workflows'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 2993b09e-5803-4854-8e78-631b85e06308
+      slot: hero_slot
+      uuid: 83607710-5a57-43f9-b855-140f555b2ce3
+      component_id: sdc.byte_theme.text
+      inputs:
+        text:
+          value: '<p class="text-align-center">Your expense request knows where to go. It routes itself. The right person sees it. They tap once. Done. No email chains. No wondering. No bottlenecks killing momentum.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 09d1ab19-6963-4951-940a-100ed0427f3a
+      slot: main_slot
+      uuid: cd83988c-20e8-48d6-800e-46ea10052b68
+      component_id: sdc.byte_theme.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        padding_block_start: '32'
+        padding_block_end: '64'
+        image_size: '16:9'
+        image_position: left
+        image_radius: small
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 3a63058d-4aa1-4b91-b530-28696677c56e
+            target_type: media
+    -
+      parent_uuid: cd83988c-20e8-48d6-800e-46ea10052b68
+      slot: hero_slot
+      uuid: b1797b9b-f0b1-4c33-a6af-b434c0131e75
+      component_id: sdc.byte_theme.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: center
+        flex_align: center
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: b1797b9b-f0b1-4c33-a6af-b434c0131e75
+      slot: group_slot
+      uuid: cf78752e-1ed7-496a-b5e9-9cbc0bb3c685
+      component_id: sdc.byte_theme.badge
+      inputs:
+        label: 'Now with automation'
+        style: primary
+        icon: sparkle
+        icon_first: true
+    -
+      parent_uuid: cd83988c-20e8-48d6-800e-46ea10052b68
+      slot: hero_slot
+      uuid: 19bd7551-0ec9-406a-b6c2-2ab6e12e8b6c
+      component_id: sdc.byte_theme.heading
+      inputs:
+        heading_text: 'Smart card controls'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: center
+    -
+      parent_uuid: cd83988c-20e8-48d6-800e-46ea10052b68
+      slot: hero_slot
+      uuid: ae97aad2-759a-49f7-b5bc-04e6ec9b1c28
+      component_id: sdc.byte_theme.text
+      inputs:
+        text:
+          value: '<p class="text-align-center">Give your team cards they can actually use. Set limits that make sense. Block the stuff that doesn''t. When something looks weird, freeze it. No phone calls. No drama. Just control that feels like freedom.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: ff9628e8-5325-49eb-801f-5c5d92343a02
+      component_id: sdc.byte_theme.cta
+      inputs:
+        heading_text: 'Ready to stop chasing receipts?'
+        level: 2
+        text: 'See how teams are closing their books in half the time.'
+        text_align: center
+    -
+      parent_uuid: ff9628e8-5325-49eb-801f-5c5d92343a02
+      slot: actions
+      uuid: 29575c3d-1b94-4e4b-8919-e9552ad538ab
+      component_id: sdc.byte_theme.button
+      inputs:
+        variant: primary
+        label: 'Start free trial'
+        size: medium
+        icon: arrow-right
+        mobile_width: false
+        icon_first: false
+        disabled: false
+    -
+      parent_uuid: ff9628e8-5325-49eb-801f-5c5d92343a02
+      slot: actions
+      uuid: 61ca5e3c-d78c-4a03-82de-c2fe7e62ebd9
+      component_id: sdc.byte_theme.button
+      inputs:
+        variant: secondary
+        label: 'Book a demo'
+        size: medium
+        icon_first: false
+        disabled: false
+        mobile_width: false
+  path:
+    -
+      alias: /features
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

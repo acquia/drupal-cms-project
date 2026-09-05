@@ -1,0 +1,17 @@
+{% set classes = [
+  'video-background',
+  'absolute',
+  'inset-0',
+  'overflow-hidden',
+  opacity ? 'opacity-' ~ opacity,
+] %}
+
+{# Only render if there is a URL to display #}
+{% if url %}
+  <div{{ attributes
+    .addClass(classes)
+    .setAttribute('data-video-background', true)
+    .setAttribute('data-video-background-url', url ? url : null)
+    .setAttribute('data-background-media-query', media_query ? media_query : null) }}>
+  </div>
+{% endif %}

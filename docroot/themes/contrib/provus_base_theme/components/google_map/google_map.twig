@@ -1,0 +1,59 @@
+{% set width_class = width_class|default('w-100') %}
+{% set loading = loading|default('lazy') %}
+{% set allow_fullscreen = allow_fullscreen is defined ? allow_fullscreen : true %}
+{% set container_classes = [] %}
+{% if width_class != 'none' %}
+  {% set container_classes = container_classes|merge([width_class]) %}
+{% endif %}
+
+{% if size == '16:9' %}
+  {% set container_classes = container_classes|merge(['ratio ratio-16x9']) %}
+{% elseif size == '4:3' %}
+  {% set container_classes = container_classes|merge(['ratio ratio-4x3']) %}
+{% elseif size == '1:1' %}
+  {% set container_classes = container_classes|merge(['ratio ratio-1x1']) %}
+{% endif %}
+
+{% if radius is not empty %}
+  {% set container_classes = container_classes|merge(['overflow-hidden']) %}
+
+  {% if radius == 'small' %}
+    {% set container_classes = container_classes|merge(['rounded-1']) %}
+  {% elseif radius == 'large' %}
+    {% set container_classes = container_classes|merge(['rounded-3']) %}
+  {% elseif radius == 'extra-large' %}
+    {% set container_classes = container_classes|merge(['rounded-4']) %}
+  {% endif %}
+{% endif %}
+
+{% set figure_classes = [
+  'google-map',
+  margin_all and margin_all != 'none' ? margin_all : '',
+  margin_top and margin_top != 'none' ? margin_top : '',
+  margin_bottom and margin_bottom != 'none' ? margin_bottom : '',
+  margin_start and margin_start != 'none' ? margin_start : '',
+  margin_end and margin_end != 'none' ? margin_end : '',
+  padding_all and padding_all != 'none' ? padding_all : '',
+  padding_top and padding_top != 'none' ? padding_top : '',
+  padding_bottom and padding_bottom != 'none' ? padding_bottom : '',
+  padding_start and padding_start != 'none' ? padding_start : '',
+  padding_end and padding_end != 'none' ? padding_end : '',
+]|filter(v => v) %}
+
+<figure{{ attributes.addClass(figure_classes) }}>
+  <div class="{{ container_classes|join(' ') }}">
+    <iframe
+      src="{{ embed_url }}"
+      title="{{ title }}"
+      class="w-100 h-100"
+      loading="{{ loading }}"
+      referrerpolicy="no-referrer-when-downgrade"
+      {% if allow_fullscreen %}allowfullscreen{% endif %}></iframe>
+  </div>
+
+  {% if caption %}
+    <figcaption class="mt-2 text-muted small">
+      {{ caption }}
+    </figcaption>
+  {% endif %}
+</figure>

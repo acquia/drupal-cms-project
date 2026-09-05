@@ -1,0 +1,117 @@
+{#
+/**
+ * Available variables:
+ * - footer_base_class: base classname of the wrapper.
+ * - footer_modifiers: array of modifiers to add to the base classname of the wrapper.
+ * - footer_blockname: blockname prepended to the base classname of the wrapper(s) and each component.
+ * - footer_extra_classes: extra classes, optional for the component.
+ *
+ * - footer_contact_title: footer contact column title
+ * - footer_times_title: footer opening times column title
+ * - footer_quicklinks_title: footer quicklinks title
+ * - footer_location: footer location
+ * - footer_phone: footer contact phone
+ * - footer_email: footer contact email
+ * - footer_times: footer opening times
+ * - footer_copyright: footer copyright text
+ *
+ * Available blocks:
+ * - footer_branding_block: footer branding.
+ * - footer_quicklinks_block: footer column 4 quick links.
+ * - footer_social_block: footer social links.
+ * - footer_links_block: footer bottom links.
+ */
+#}
+
+{% set footer_base_class = 'footer' %}
+
+<footer {{ bem(footer_base_class, footer_modifier, footer_blockname, footer_extra_classes) }}>
+  <div class="container">
+    <div {{ bem('top', [], footer_base_class, ['row']) }}>
+      <div {{ bem('column', [], footer_base_class, ['col-lg']) }}>
+        <div {{ bem('branding', [], footer_base_class) }}>
+          {% block footer_branding_block %}
+          {% endblock %}
+        </div>
+      </div>
+      <div {{ bem('column', [], footer_base_class, ['col-lg']) }}>
+        {{ include('eureka:component-title', {
+          component_title_heading: footer_contact_title|default('Contact us'|t),
+          component_title_heading_level: 2,
+          component_title_small: true,
+        }, with_context = false) }}
+        <div>
+          {% if footer_location %}
+            {{ include("eureka:paragraph", {
+              paragraph_content: footer_location,
+              paragraph_size: 'small',
+              paragraph_icon: true,
+              paragraph_icon_before: true,
+              paragraph_icon_name: 'location',
+            }) }}
+          {% endif %}
+          {% if footer_phone %}
+            {{ include("eureka:paragraph", {
+              paragraph_content: footer_phone,
+              paragraph_size: 'small',
+              paragraph_icon: true,
+              paragraph_icon_before: true,
+              paragraph_icon_name: 'phone',
+            }) }}
+          {% endif %}
+          {% if footer_email %}
+            {{ include("eureka:paragraph", {
+              paragraph_content: footer_email,
+              paragraph_size: 'small',
+              paragraph_icon: true,
+              paragraph_icon_before: true,
+              paragraph_icon_name: 'mail',
+            }) }}
+          {% endif %}
+        </div>
+      </div>
+      <div {{ bem('column', [], footer_base_class, ['col-lg']) }}>
+        {{ include('eureka:component-title', {
+          component_title_heading: footer_times_title|default('Opening Times'|t),
+          component_title_heading_level: 2,
+          component_title_small: true,
+        }, with_context = false) }}
+        {% if footer_times %}
+          <div {{ bem('times', [], footer_base_class) }}>
+            {{ include("eureka:icon", {
+              icon_name: 'time',
+              icon_decorative: true,
+            }, with_context = false) }}
+            <div>
+              {{ footer_times }}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+      <div {{ bem('column', [], footer_base_class, ['col-lg']) }}>
+        {{ include('eureka:component-title', {
+          component_title_heading: footer_quicklinks_title|default('Quick Links'|t),
+          component_title_heading_level: 2,
+          component_title_small: true,
+        }, with_context = false) }}
+        {% block footer_quicklinks_block %}
+        {% endblock %}
+      </div>
+    </div>
+    <div {{ bem('social', [], footer_base_class) }}>
+      {% block footer_social_block %}
+      {% endblock %}
+    </div>
+    <div {{ bem('bottom', [], footer_base_class) }}>
+      <div {{ bem('links', [], footer_base_class) }}>
+        {% block footer_links_block %}
+        {% endblock %}
+      </div>
+      {{ include('eureka:paragraph', {
+        paragraph_content: '© @year @copy'|t({'@year' : 'now'|date('Y'), '@copy' : footer_copyright|default('Willow Meadow')}),
+        paragraph_modifiers: ['no-margin'],
+        paragraph_extra_classes: [footer_base_class ~ '__copyright'],
+      }, with_context = false) }}
+    </div>
+  </div>
+</footer>

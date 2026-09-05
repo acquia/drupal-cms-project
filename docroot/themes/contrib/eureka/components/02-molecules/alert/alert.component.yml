@@ -1,0 +1,31 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Alert
+status: stable
+description: Alert banner component
+# Overrides regular css with minified.
+libraryOverrides:
+  css:
+    component:
+      alert.min.css: { minified: true }
+group: Eureka component items
+props:
+  type: object
+  properties:
+    alert_content:
+      type: string
+      title: Alert content
+      description: Text content of the alert banner
+      examples:
+        - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra, tellus vitae bibendum egestas, nisl neque rhoncus enim, in vehicula ex mauris feugiat nunc.
+    alert_type:
+      type: string
+      title: Alert type
+      description: Type of the alert banner
+      enum:
+        - info
+        - warning
+        - danger
+        - notice
+        - policy
+      examples:
+        - info

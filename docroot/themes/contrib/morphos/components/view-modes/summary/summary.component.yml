@@ -1,0 +1,46 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Summary
+status: stable
+group: Display
+description: A short, impactful text block used to provide an overview summary.
+props:
+  type: object
+  properties:
+    info:
+      title: Info
+      description: Info text that describes the type or category of the item.
+      type: string
+    date:
+      type:
+        - string
+        - 'null'
+      title: Date
+      description: The most relevant date for the item.
+    heading:
+      title: Heading
+      description: The heading content.
+      type: string
+      examples:
+        - Summary heading
+    heading_level:
+      type: number
+      title: Heading level
+      description: Select the heading level.
+      enum: [1, 2, 3, 4, 5, 6]
+      default: 3
+    url:
+      title: URL
+      description: The URL of the item.
+      type: string
+    summary:
+      title: Summary
+      description: Summary text describing the item.
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - <p>Summary summary.</p>
+libraryOverrides:
+  css:
+    component:
+      ../../../dist/css/summary.css: { minified: true }

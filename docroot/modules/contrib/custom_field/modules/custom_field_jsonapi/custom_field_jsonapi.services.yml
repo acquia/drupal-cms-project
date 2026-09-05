@@ -1,0 +1,41 @@
+services:
+  custom_field_jsonapi.normalizer.string_long:
+    class: Drupal\custom_field_jsonapi\Normalizer\StringLongNormalizer
+    tags:
+      # Priority must be higher than serializer.normalizer.primitive_data.
+      - { name: normalizer, priority: 20 }
+
+  custom_field_jsonapi.normalizer.entity_reference:
+    class: Drupal\custom_field_jsonapi\Normalizer\EntityReferenceNormalizer
+    arguments:
+      - '@entity.repository'
+    tags:
+      # Priority must be higher than serializer.normalizer.primitive_data.
+      - { name: normalizer, priority: 20 }
+
+  custom_field_jsonapi.normalizer.uri:
+    class: Drupal\custom_field_jsonapi\Normalizer\UriNormalizer
+    arguments:
+      - '@entity_type.manager'
+      - '@entity.repository'
+    tags:
+      # Priority must be higher than serializer.normalizer.primitive_data.
+      - { name: normalizer, priority: 20 }
+
+  custom_field_jsonapi.normalizer.datetime:
+    class: Drupal\custom_field_jsonapi\Normalizer\DateTimeNormalizer
+    tags:
+      # Priority must be higher than serializer.normalizer.primitive_data.
+      - { name: normalizer, priority: 20 }
+
+  custom_field_jsonapi.normalizer.daterange:
+    class: Drupal\custom_field_jsonapi\Normalizer\DateRangeNormalizer
+    tags:
+      # Priority must be higher than serializer.normalizer.primitive_data.
+      - { name: normalizer, priority: 20 }
+
+  custom_field_jsonapi.normalizer.time_range:
+    class: Drupal\custom_field_jsonapi\Normalizer\TimeRangeNormalizer
+    tags:
+      # Priority must be higher than serializer.normalizer.primitive_data.
+      - { name: normalizer, priority: 20 }

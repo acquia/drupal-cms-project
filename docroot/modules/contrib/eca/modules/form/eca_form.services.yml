@@ -1,0 +1,29 @@
+services:
+  eca.token_data.current_form:
+    class: Drupal\eca_form\Token\CurrentFormDataProvider
+    tags:
+      - { name: eca.token_data_provider }
+
+  # Declared explicitly, even though \Drupal\Core\Hook\HookCollectorPass would
+  # otherwise register this hook class as an autowired service on its own. A
+  # site that upgrades directly from ECA 2 boots this code while "modeler_api"
+  # is still absent from core.extension, and autowiring cannot express an
+  # optional dependency: it fails the container build outright as soon as no
+  # service matches \Drupal\modeler_api\TemplateTokenResolver. The hook
+  # collector skips classes that already have a definition, so declaring it
+  # here is what makes the resolver optional. It also cannot be patched from a
+  # service provider, because the hook collector is a compiler pass and
+  # therefore runs after every ServiceProviderInterface::alter().
+  #
+  # @see \Drupal\eca\EcaServiceProvider::alter()
+  # @see eca_update_8012()
+  Drupal\eca_form\Hook\TemplateFormHooks:
+    class: Drupal\eca_form\Hook\TemplateFormHooks
+    arguments:
+      - '@?modeler_api.template_token_resolver'
+      - '@plugin.manager.eca.event'
+      - '@current_user'
+      - '@state'
+
+parameters:
+  eca_form.skip_procedural_hook_scan: true

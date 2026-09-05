@@ -1,0 +1,37 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Advocacy card
+group: Card
+status: stable
+description: "Card with tagline, headline, body text, CTA with chevron, and image. Desktop Figma 1-8248 (content | image), mobile Figma 1-7970 (stacked)."
+props:
+  type: object
+  properties:
+    tagline:
+      type: string
+      title: Tagline
+      description: "Category label above the headline (e.g. Advocacy)."
+      default: "Advocacy"
+    headline:
+      type: string
+      title: Headline
+      description: "Main heading text."
+      default: "Speak up and help us reach the people who need to hear this"
+    body_text:
+      type: string
+      title: Body text
+      description: "Short supporting text below the headline (e.g. Join)."
+      default: "Join"
+    button_label:
+      type: string
+      title: Button label
+      default: "Advocate"
+    button_url:
+      type: string
+      title: Button link
+      description: "URL for the CTA. Leave empty to show label only."
+      default: ""
+    image_media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Card image
+      type: object
+      description: "Image shown on the right (desktop) or below content (mobile)."

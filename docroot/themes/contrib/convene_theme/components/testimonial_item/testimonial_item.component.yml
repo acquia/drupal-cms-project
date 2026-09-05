@@ -1,0 +1,36 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Testimonial Item
+group: Molecules
+status: stable
+description: An individual testimonial slide.
+props:
+  type: object
+  properties:
+    admin_theme:
+      title: Admin Theme
+      type: boolean
+      default: false
+      description: Check to enable Admin Theme styles.
+    quote:
+      title: Quote
+      type: string
+      description: Main testimonial quote.
+    author_name:
+      title: Author Name
+      type: string
+      description: Name of the author.
+    author_role:
+      title: Author Role
+      type: string
+      description: Title and company.
+slots:
+  logo:
+    title: Logo Slot
+    description: Company logo above the quote.
+  author_media:
+    title: Author Image Slot
+    description: Author headshot.
+library:
+  css:
+    component:
+      testimonial_item.css: {}

@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: blog
+label: Blog
+type: 'canonical_entities:node'
+pattern: 'blog/[node:title]'
+selection_criteria:
+  4ecd48b1-942b-4111-b258-3a97668abd7f:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 4ecd48b1-942b-4111-b258-3a97668abd7f
+    context_mapping:
+      node: node
+    bundles:
+      provus_blog: provus_blog
+selection_logic: and
+weight: -5
+relationships: {  }

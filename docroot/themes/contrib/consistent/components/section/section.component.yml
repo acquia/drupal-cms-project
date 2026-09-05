@@ -1,0 +1,62 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Section
+group: Layout
+status: stable
+props:
+  type: object
+  properties:
+    section_columns:
+      type: string
+      title: Grid layout
+      enum:
+        - "100"
+        - "50-50"
+        - "33-33-33"
+        - "25-25-25-25"
+        - "75-25"
+        - "25-75"
+      meta:enum:
+        "100": Single column
+        "50-50": Two columns
+        "33-33-33": Three columns
+        "25-25-25-25": Four columns
+        "75-25": Wide left / narrow right
+        "25-75": Narrow left / wide right
+      default: "100"
+      examples:
+        - "33-33-33"
+    section_background:
+      type: string
+      title: Background
+      enum:
+        - none
+        - muted
+        - primary
+        - dark
+      meta:enum:
+        none: None
+        muted: Light grey
+        primary: Primary color
+        dark: Dark
+      examples:
+        - none
+    section_header:
+      type: boolean
+      title: Show header area
+      default: true
+      examples:
+        - true
+    section_footer:
+      type: boolean
+      title: Show footer area
+      default: true
+      examples:
+        - true
+
+slots:
+  section_header_slot:
+    title: Header
+  section_main_slot:
+    title: Grid
+  section_footer_slot:
+    title: Footer

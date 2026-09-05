@@ -1,0 +1,5 @@
+services:
+  custom_field_search_api.search_api_event_subscriber:
+    class: Drupal\custom_field_search_api\EventSubscriber\SearchApiEventSubscriber
+    tags:
+      - { name: event_subscriber }

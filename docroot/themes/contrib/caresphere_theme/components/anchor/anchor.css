@@ -1,0 +1,25 @@
+/**
+ * @file anchor.css
+ * SDC anchor component styles.
+ */
+
+.anchor--visible {
+  display: flex;
+  min-height: calc(var(--spacing) * 10);
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--spacing) * 1);
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+  color: var(--foreground);
+  border: 1px dotted var(--foreground);
+  opacity: 0.5;
+}
+
+.anchor--visible:is(span, a) {
+  display: inline-flex;
+}
+
+.anchor--visible .anchor--help-text {
+  display: inline;
+}

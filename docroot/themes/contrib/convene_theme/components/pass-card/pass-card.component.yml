@@ -1,0 +1,33 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Pass Card
+group: Molecules
+status: stable
+description: An individual ticket pass card component with a dark blue bottom text area and media top.
+props:
+  type: object
+  properties:
+    admin_theme:
+      title: Admin Theme
+      type: boolean
+      default: false
+      description: Check to enable Admin Theme styles (applies CSS only on frontend to preserve Canvas builder look).
+    eyebrow:
+      title: Eyebrow
+      type: string
+    title:
+      title: Title
+      type: string
+    description:
+      title: Description
+      type: string
+slots:
+  media:
+    title: Media Slot
+    description: Slot for the image placeholder at the top of the pass card.
+  action:
+    title: Action Slot
+    description: Slot for the action button or link text (e.g., 'Select >').
+library:
+  css:
+    component:
+      pass-card.css: {}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "minimumReleaseAge": "5 days",
+  "schedule": ["before 6am on Monday"],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+  "vulnerabilityAlerts": {
+    "minimumReleaseAge": "0 days"
+  },
+  "packageRules": [
+    {
+      "matchManagers": ["composer"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "enabled": false
+    },
+    {
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "npm minor and patch"
+    },
+    {
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["vite", "vite-*", "@vitejs/**", "astro", "@astrojs/**"],
+      "enabled": false
+    }
+  ]
+}

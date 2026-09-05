@@ -1,0 +1,21 @@
+{#
+/**
+ * @file
+ * Theme override for a branding block without standard block wrapping.
+ */
+#}
+{% set site_logo_url = site_logo ? file_url(site_logo) : '' %}
+
+<a href="{{ home_url|default('/') }}" class="branding__link" rel="home">
+  {% block branding %}
+    {% if site_logo %}
+      <div class="branding">
+        <img src="{{ site_logo_url }}" alt="{{ site_name }}" />
+      </div>
+    {% elseif site_name %}
+      <div class="branding__site-name">
+        {{ site_name }}
+      </div>
+    {% endif %}
+  {% endblock %}
+</a>

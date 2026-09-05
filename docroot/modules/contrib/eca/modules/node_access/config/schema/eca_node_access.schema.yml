@@ -1,0 +1,49 @@
+# Schema for configuration plugins of the eca_node_access module.
+
+eca.event.plugin.node_access:node_access_grants:
+  type: eca.event.plugin
+  label: 'Node access grants for an account'
+  mapping:
+    operation:
+      type: string
+      label: 'Restrict by operation'
+
+# The "node_access_records" event has no configuration of its own, but the
+# dynamic type "eca.event.plugin.[plugin]" still needs a concrete entry that
+# maps to the base "eca.event.plugin" type. This mirrors how the no-config
+# events of eca_misc (the "drupal:*" derivatives) each declare a per-derivative
+# schema entry that simply inherits "eca.event.plugin".
+eca.event.plugin.node_access:node_access_records:
+  type: eca.event.plugin
+  label: 'Node access records for a node'
+
+action.configuration.eca_node_access_set_node_grants:
+  type: mapping
+  label: 'Configuration for the "Set node grants" action'
+  mapping:
+    realm:
+      type: string
+      label: 'Realm'
+    grant_ids:
+      type: string
+      label: 'Grant IDs'
+
+action.configuration.eca_node_access_set_node_access_records:
+  type: mapping
+  label: 'Configuration for the "Set node access records" action'
+  mapping:
+    realm:
+      type: string
+      label: 'Realm'
+    grant_id:
+      type: string
+      label: 'Grant ID'
+    grant_view:
+      type: boolean
+      label: 'Grant view'
+    grant_update:
+      type: boolean
+      label: 'Grant update'
+    grant_delete:
+      type: boolean
+      label: 'Grant delete'

@@ -1,0 +1,15 @@
+services:
+  Drupal\navigation_extra_tools\Hook\NavigationExtraToolsHooks:
+    class: Drupal\navigation_extra_tools\Hook\NavigationExtraToolsHooks
+    autowire: true
+
+  navigation_extra_tools.access_checker:
+    class: Drupal\navigation_extra_tools\AccessChecks\ToolsAccess
+    arguments: ['@access_manager', '@menu.link_tree', '@module_handler']
+    tag:
+      - { name: access_check, applies_to: _navigation_extra_tools_access_check }
+
+  navigation_extra_tools.devel_menu:
+    class: Drupal\navigation_extra_tools\DevelMenu
+    arguments: ['@config.factory', '@module_handler', '@plugin.manager.menu.link']
+  Drupal\navigation_extra_tools\DevelMenu: '@navigation_extra_tools.devel_menu'

@@ -1,0 +1,19 @@
+@layer components {
+  .hero-blog {
+    @apply text-foreground;
+
+    .heading.heading--size-default {
+      --text-8xl: 3.5rem;
+      --text-6xl: 3rem;
+      --text-5xl: 2.5rem;
+    }
+
+    img {
+      @apply overflow-hidden rounded-md;
+    }
+  }
+
+  .hero-blog--author > a {
+    @apply text-foreground;
+  }
+}

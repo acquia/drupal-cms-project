@@ -1,0 +1,109 @@
+// Background Colors.
+
+[class^="bg-"] {
+  background-color: transparent !important;
+  position: relative;
+  padding: rem-calc(80 0);
+
+  @include media-breakpoint-down(md) {
+    padding: rem-calc(40 0);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100vw;
+    height: 100%;
+    transform: translateX(-50%);
+    z-index: -1;
+  }
+
+  .layout {
+    margin: 0;
+  }
+}
+
+.bg-primary::before {
+  background-color: $background-lightblue;
+}
+
+.bg-gray::before,
+.bg-grey::before {
+  background-color: $gray-100;
+}
+
+.bg-white::before {
+  background-color: $white;
+}
+
+.layout {
+  margin: rem-calc(80 0);
+  &:first-child {
+    margin: 0;
+  }
+  &.no-margin {
+    margin: 0;
+  }
+}
+
+[class^="_none"]:first-child {
+  padding: 0;
+  @include media-breakpoint-down(md) {
+    padding: rem-calc(40 0);
+  }
+  .layout {
+    margin: 0;
+  }
+}
+
+[class^="_none"] {
+  padding: rem-calc(80 0);
+  @include media-breakpoint-down(md) {
+    padding: rem-calc(40 0);
+  }
+  .layout {
+    margin: 0;
+  }
+}
+
+.background-local-video {
+  height: rem-calc(540) !important;
+  h1, h2, h3, h4, h5, h6, p, .subheading {
+    color: $white;
+    text-shadow: 0 0 rem-calc(8) $black, 0 0 rem-calc(20) $black;
+  }
+  .block-provus-heading  {
+    .title {
+      width: 100%;
+    }
+  }
+  .video-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    > div {
+      width: 100%;
+    }
+  }
+  // Special processing for search form inside a background video section.
+  .search-block-form {
+    form {
+      .form-actions {
+        display: none;
+      }
+    }
+  }
+}
+
+.section-background-image {
+  min-height: rem-calc(350);
+  padding: rem-calc(100 0);
+  h1, h2, h3, h4, h5, h6, p, .subheading {
+    color: $white;
+    text-shadow: 0 0 rem-calc(8) $black, 0 0 rem-calc(20) $black;
+    text-align: center;
+  }
+}

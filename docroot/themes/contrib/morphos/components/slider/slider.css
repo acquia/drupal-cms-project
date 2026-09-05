@@ -1,0 +1,28 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: components/slider/slider.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+.slider {
+  --swiper-navigation-size: 44px;
+  --swiper-theme-color: var(--link);
+
+  width: 100%;
+}
+
+/* Ensure slider has a minimum height for Canvas visibility */
+.slider--preview {
+  min-height: 100px;
+}
+
+/* Grid mode: prevent images from stretching to fill the calculated slide height */
+.slider .swiper-slide {
+  overflow: hidden;
+}
+
+.slider .swiper-slide img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}

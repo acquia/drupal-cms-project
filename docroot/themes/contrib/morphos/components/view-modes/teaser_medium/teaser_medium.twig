@@ -1,0 +1,38 @@
+<div{{ attributes.addClass('teaser teaser--medium') }}>
+  {% if image %}
+    <div class="teaser__image">
+      {{ include('morphos:image', { image }, with_context = false) }}
+    </div>
+  {% endif %}
+
+  <div class="teaser__content">
+    {% if info %}
+      <div class="teaser__info">
+        {{ info }}
+      </div>
+    {% endif %}
+
+    {% if heading %}
+      {{ include('morphos:heading', {
+        heading,
+        level: heading_level|default(3),
+        url: url|default(''),
+        additional_classes: 'teaser__title',
+      },
+        with_context: false
+      ) }}
+    {% endif %}
+
+    {% if summary %}
+      <div class="teaser__summary">
+        {{ summary }}
+      </div>
+    {% endif %}
+
+    {% if date %}
+      <div class="teaser__date">
+        {{ date }}
+      </div>
+    {% endif %}
+  </div>
+</div>
