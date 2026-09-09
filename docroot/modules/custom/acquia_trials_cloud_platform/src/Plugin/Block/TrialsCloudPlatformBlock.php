@@ -12,7 +12,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
  */
 #[Block(
   id: 'acquia_trials_cloud_platform',
-  admin_label: new TranslatableMarkup('Acquia Trials Cloud Platform'),
+  admin_label: new TranslatableMarkup('Acquia Trials Platform'),
   category: new TranslatableMarkup('Acquia Trials'),
 )]
 class TrialsCloudPlatformBlock extends BlockBase {
@@ -49,8 +49,8 @@ class TrialsCloudPlatformBlock extends BlockBase {
     ];
 
     $cloud_api_base_uri = EnvironmentDetector::getAhRealm() === 'gardens'
-      ? 'https://staging.cloud.acquia.com'
-      : 'https://cloud.acquia.com';
+      ? 'https://staging.source.acquia.com'
+      : 'https://source.acquia.com';
 
     $subscription_id = getenv('AH_APPLICATION_UUID') ?: '';
     return [
@@ -58,7 +58,7 @@ class TrialsCloudPlatformBlock extends BlockBase {
       '#features' => $features,
       '#cta_url' => $cloud_api_base_uri . '/a/applications/' . $subscription_id,
       '#attached' => [
-        'library' => ['acquia_trials_cloud_platform/cloud-platform'],
+        'library' => ['acquia_trials_cloud_platform/source-platform'],
       ],
     ];
   }
