@@ -1,0 +1,19 @@
+{% set size_map = {
+  'icon-size--xs': 16,
+  'icon-size--sm': 24,
+  'icon-size--md': 32,
+  'icon-size--lg': 48,
+  'icon-size--xl': 64,
+} %}
+
+{% set icon_size = size_map[icon_size]|default(size_map['icon-size--xs']) %}
+
+{{ icon(
+  'phosphor',
+  icon,
+  {
+    size: icon_size,
+    color: icon_color|default('currentColor'),
+    alt: alt|default('')
+  }
+) }}

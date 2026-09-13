@@ -1,0 +1,21 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: components/backgrounds/parallax_background/parallax_background.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+/* Create stacking context so Jarallax container (z-index: -100) stays within. */
+.parallax-background.jarallax {
+  z-index: 0;
+}
+
+/* Base image styles — covers the container before Jarallax JS initializes. */
+.parallax-background .jarallax-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}

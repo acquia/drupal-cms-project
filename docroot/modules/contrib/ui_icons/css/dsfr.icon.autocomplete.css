@@ -1,0 +1,33 @@
+/* When tested and stable, open issue on ui_suite_dsfr to integrate in
+the theme */
+:root {
+  --ui-icons--wrapper-size: 2.5rem;
+  --ui-icons--preview-size: 2.4rem;
+  --ui-icons--result-size: 2.4rem;
+  --ui-icons--border-radius: 0.25rem;
+  --ui-icons--preview-bg-color: var(--background-contrast-grey);
+}
+
+.ui-icons-input-wrapper {
+  /* Make size of input same as textfield */
+  .form-search {
+    width: 100%;
+  }
+}
+.ui-icons-preview {
+  margin-top: 0.5rem;
+  cursor: initial;
+  border: 0;
+}
+
+.ui-icons-select .description {
+  position: absolute;
+  top: 70%;
+  left: 0;
+}
+
+/* Icon picker fix */
+.icon-picker-modal__content .fr-radio-group input[type="radio"] + label {
+  padding-left: 0;
+  background: 0 none;
+}

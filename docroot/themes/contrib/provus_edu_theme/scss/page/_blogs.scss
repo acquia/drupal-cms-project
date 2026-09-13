@@ -1,0 +1,81 @@
+.node--type-provus-blog {
+  .node__content {
+    overflow: hidden;
+
+    .blog-image {
+      float: right;
+      width: 50%;
+      margin-left: 100px;
+
+      img {
+        width: 100%;
+        border-radius: rem-calc(8);
+      }
+    }
+
+    .body-text {
+      .field--type-datetime {
+        position: absolute;
+        bottom: 0;
+        @include text-style-eyebrow-eyebrow-1();
+      }
+
+      .a2a_kit {
+        position: absolute;
+        bottom: -19px;
+      }
+
+      .field--name-body p span {
+        @include text-style-body-body-1();
+      }
+    }
+  }
+  .block-page-title-block .title {
+    @include text-style-headline-h-2();
+  }
+}
+
+@media (min-width: 300px) and (max-width: 900px) {
+  .node--type-provus-blog {
+    .node__content {
+      overflow: hidden;
+
+      .blog-image {
+        width: auto;
+        margin-left: 0;
+        float: none;
+      }
+    }
+  }
+}
+
+@media (min-width: 910px) and (max-width: 1400px) {
+  .node--type-provus-blog {
+    .node__content {
+      overflow: hidden;
+
+      .blog-image {
+        width: auto;
+        margin-left: 0;
+        float: none;
+      }
+    }
+  }
+}
+
+//fix for provus_edu_theme
+.node--type-provus-blog.node--view-mode-card {
+  .card-wrapper {
+    height: calc(100% - 20px);
+  }
+
+  .card-img-top img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card-extra {
+    margin-top: 32px;
+  }
+}

@@ -1,0 +1,74 @@
+{#
+/**
+ * Available variables:
+ * - video_base_class: the base classname
+ * - video_modifiers: array of modifiers to add to the base classname
+ *   by default, videos are expected to be 16x9, include the modifier "full" to support a 4x3 video
+ * - video_blockname: blockname prepended to the base classname
+ * - video_extra_classes: array of extra classes, used to add container class if video isn't going to be
+ *   displayed as full size.
+ * - video_full_width: is the video going to be displayed full width or container width.
+ * - video_type: video source - vimeo, youtube, other, etc.
+ * - video_id: video ID.
+ * - video_controls: video controls.
+ * - video_content: the content of the video (typically an iframe)
+ *   the "|raw" filter is applied so that the iframe is rendered instead
+ *   of simply passing the iframe as plain text.
+ *
+ * Available blocks:
+ * - video_content_block: used to replace the content of the video with something other than the typical iframe
+ *   for example: to insert an html5 video component
+ * - video_custom_controls_block: place video controls or replace them.
+ */
+#}
+{% set video_base_class = video_base_class|default('video') %}
+
+{% if video_full_width == false %}
+  <div class="container">
+{% endif %}
+  <div {{ bem(video_base_class, video_modifiers|default([])|merge([video_type]), video_blockname, video_extra_classes) }}>
+    {# Print div to load YouTube API if it's from YouTube #}
+    {% if video_type == 'youtube' %}
+      <div class="js-ytvideo" id="{{ video_id }}"></div>
+      {# Print div to load Vimeo API if it's from Vimeo #}
+    {% elseif video_type == 'vimeo' %}
+      <div class="js-vimeovideo" data-vimeo-id="{{ video_id }}" id="vimeo--{{ video_id }}"></div>
+      {# Use raw output if not YT or Vimeo #}
+    {% else %}
+      <div class="js-local-video">
+        {% block video_content_block %}
+          {{ video_content|raw }}
+        {% endblock %}
+      </div>
+    {% endif %}
+  </div>
+
+  {% block video_custom_controls_block %}
+    {% if video_custom_controls %}
+      <div {{ bem('controls', [], video_base_class, video_extra_classes) }}>
+        {% if video_is_vimeo %}
+          {% set video_control_class = 'vimeo-desktop-control' %}
+        {% elseif video_youtube_id %}
+          {% set video_control_class = video_youtube_id %}
+        {% endif %}
+          <button class="button video__controls__button {{ video_id }}">
+            <span class="sr-only">
+              {{ 'Toggle that plays or pauses the video.'|t }}
+            </span>
+            {{ include("eureka:icon", {
+              icon_name: 'play',
+              icon_decorative: true,
+              icon_modifiers: ['play']
+            }, with_context = false) }}
+            {{ include("eureka:icon", {
+              icon_name: 'pause',
+              icon_decorative: true,
+              icon_modifiers: ['pause']
+            }, with_context = false) }}
+          </button>
+      </div>
+    {% endif %}
+  {% endblock %}
+{% if video_full_width == false %}
+  </div>
+{% endif %}

@@ -1,0 +1,85 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - convene_theme
+label: 'Testimonial Item'
+id: sdc.convene_theme.testimonial_item
+source: sdc
+source_local_id: 'convene_theme:testimonial_item'
+provider: convene_theme
+active_version: 5fc7c6629967e31b
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+        quote:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        author_name:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        author_role:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        logo:
+          title: 'Logo Slot'
+          description: 'Company logo above the quote.'
+        author_media:
+          title: 'Author Image Slot'
+          description: 'Author headshot.'
+  366e0e9d5687c140:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        logo:
+          title: 'Logo Slot'
+          description: 'Company logo above the quote.'
+        quote:
+          title: 'Quote Slot'
+          description: 'Main testimonial quote.'
+        author_media:
+          title: 'Author Image Slot'
+          description: 'Author headshot.'
+        author_name:
+          title: 'Author Name Slot'
+          description: 'Name of the author.'
+        author_role:
+          title: 'Author Role Slot'
+          description: 'Title and company.'

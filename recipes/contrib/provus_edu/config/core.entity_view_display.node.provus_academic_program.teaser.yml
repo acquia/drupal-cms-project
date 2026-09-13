@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.provus_academic_program.field_provus_ap_department
+    - field.field.node.provus_academic_program.field_provus_ap_editorial_sect
+    - field.field.node.provus_academic_program.field_provus_ap_program_level
+    - field.field.node.provus_academic_program.field_provus_ap_program_location
+    - field.field.node.provus_academic_program.field_provus_ap_program_type
+    - field.field.node.provus_academic_program.field_provus_ap_sort_name
+    - field.field.node.provus_academic_program.field_provus_ap_summary
+    - node.type.provus_academic_program
+  module:
+    - user
+id: node.provus_academic_program.teaser
+targetEntityType: node
+bundle: provus_academic_program
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  addtoany: true
+  field_provus_ap_department: true
+  field_provus_ap_editorial_sect: true
+  field_provus_ap_program_level: true
+  field_provus_ap_program_location: true
+  field_provus_ap_program_type: true
+  field_provus_ap_sort_name: true
+  field_provus_ap_summary: true
+  search_api_excerpt: true

@@ -1,0 +1,138 @@
+eca:
+  model_owner: eca
+  tokens:
+    eca-template:
+      name: 'ECA Templates'
+      token: eca-template
+      children:
+        config:
+          name: 'Configuration'
+          token: 'eca-template:config'
+          purpose: config
+          children:
+            global:
+              name: 'Global'
+              token: 'eca-template:config:global'
+              children:
+                value:
+                  name: 'Value'
+                  token: 'eca-template:config:global:value'
+                  children:
+                    VALUE:
+                      name: 'Value'
+                      token: 'eca-template:config:global:value:VALUE'
+                      value: 'Configurable value'
+
+eca_form:
+  model_owner: eca
+  tokens:
+    eca-template:
+      name: 'ECA Templates'
+      token: eca-template
+      children:
+        config:
+          name: 'Configuration'
+          token: 'eca-template:config'
+          purpose: config
+          children:
+            form:
+              name: 'Form'
+              token: 'eca-template:config:form'
+              children:
+                field:
+                  name: 'Field'
+                  token: 'eca-template:config:form:field'
+                  children:
+                    LABEL:
+                      name: 'Label'
+                      token: 'eca-template:config:form:field:LABEL'
+                      value: 'Select 1 field'
+                fields:
+                  name: 'Fields'
+                  token: 'eca-template:config:form:fields'
+                  children:
+                    LABEL:
+                      name: 'Label'
+                      token: 'eca-template:config:form:fields:LABEL'
+                      value: 'Select multiple fields'
+        select:
+          name: 'Select where template applies'
+          token: 'eca-template:select'
+          purpose: select
+          children:
+            form:
+              name: 'Forms'
+              token: 'eca-template:select:form'
+              selector: 'form'
+              children:
+                field:
+                  name: 'Field'
+                  token: 'eca-template:select:form:field'
+                  selector: '.form-item'
+                  children:
+                    all:
+                      name: 'All form fields'
+                      token: 'eca-template:select:form:field:all'
+                      selector: 'input, select, textarea'
+                      value: 'All form fields'
+                      target: '[name]'
+                    type:
+                      name: 'Form field type'
+                      token: 'eca-template:select:form:field:type'
+                      children:
+                        text:
+                          name: 'Text fields'
+                          token: 'eca-template:select:form:field:type:text'
+                          selector: 'input[type="text"]'
+                          value: 'Text fields'
+                          target: '[name]'
+                        textarea:
+                          name: 'Textarea fields'
+                          token: 'eca-template:select:form:field:type:textarea'
+                          selector: 'textarea'
+                          value: 'Textarea fields'
+                          target: '[name]'
+                        checkbox:
+                          name: 'Checkbox fields'
+                          token: 'eca-template:select:form:field:type:checkbox'
+                          selector: 'input[type="checkbox"]'
+                          value: 'Checkbox fields'
+                          target: '[name]'
+                        select:
+                          name: 'Select fields'
+                          token: 'eca-template:select:form:field:type:select'
+                          selector: 'select'
+                          value: 'Select fields'
+                          target: '[name]'
+                    required:
+                      name: 'Required status'
+                      token: 'eca-template:select:form:field:required'
+                      children:
+                        yes:
+                          name: 'Required'
+                          token: 'eca-template:select:form:field:required:yes'
+                          selector: ':is(input, select, textarea)[required]'
+                          value: 'Required'
+                          target: '[name]'
+                        no:
+                          name: 'Optional'
+                          token: 'eca-template:select:form:field:required:no'
+                          selector: ':is(input, select, textarea):not([required])'
+                          value: 'Optional'
+                          target: '[name]'
+                    disabled:
+                      name: 'Status'
+                      token: 'eca-template:select:form:field:disabled'
+                      children:
+                        yes:
+                          name: 'Disabled'
+                          token: 'eca-template:select:form:field:disabled:yes'
+                          selector: ':is(input, select, textarea)[disabled]'
+                          value: 'Disabled'
+                          target: '[name]'
+                        no:
+                          name: 'Enabled'
+                          token: 'eca-template:select:form:field:disabled:no'
+                          selector: ':is(input, select, textarea):not([disabled])'
+                          value: 'Enabled'
+                          target: '[name]'

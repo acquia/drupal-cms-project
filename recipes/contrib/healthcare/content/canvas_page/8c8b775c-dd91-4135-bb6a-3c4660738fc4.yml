@@ -1,0 +1,219 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 8c8b775c-dd91-4135-bb6a-3c4660738fc4
+  default_langcode: en
+  depends:
+    1f8df451-bea1-4c2e-9258-8bc8c158a1c9: file
+    caeea9de-a59b-487c-85b5-c3294e53200d: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Events & Classes'
+  description:
+    -
+      value: 'Free health screenings, educational seminars, and community events.'
+  components:
+    -
+      uuid: da19648b-a864-452a-973b-b107b78dd8ad
+      component_id: sdc.diagnosis.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        background: secondary
+        padding_block_start: '32'
+        padding_block_end: '32'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        image_size: '4:3'
+        image_position: right
+        image_radius: extra-large
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: caeea9de-a59b-487c-85b5-c3294e53200d
+            target_type: media
+    -
+      parent_uuid: da19648b-a864-452a-973b-b107b78dd8ad
+      slot: hero_slot
+      uuid: da610b8a-9355-4b5c-8430-330e9f2c942c
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Health Events & Classes'
+        level: 1
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: da19648b-a864-452a-973b-b107b78dd8ad
+      slot: hero_slot
+      uuid: a153e774-fa4d-4e37-aa3a-1f10840e3bdf
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Free health screenings, educational seminars, and community events.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: 2a6daf28-0350-49ba-964e-5acad2b51a22
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: 2a6daf28-0350-49ba-964e-5acad2b51a22
+      slot: main_slot
+      uuid: 7e32740f-c596-48ac-ac3d-a45de87b9847
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Saltmarsh Island Health is committed to keeping our community healthy through education and preventive care. Join us for free health screenings, educational seminars, support groups, and community events throughout the year.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 2a6daf28-0350-49ba-964e-5acad2b51a22
+      slot: main_slot
+      uuid: 4cfb2796-9355-48b2-b0bd-94ca20bb1418
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Upcoming Events'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 2a6daf28-0350-49ba-964e-5acad2b51a22
+      slot: main_slot
+      uuid: 24a3778a-bf8a-4771-9b69-6c856c3b7ad0
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Browse our calendar of upcoming health events, screenings, and educational programs. All events are free and open to the community unless otherwise noted.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 2a6daf28-0350-49ba-964e-5acad2b51a22
+      slot: main_slot
+      uuid: a67b0e73-773f-4213-8541-70d7ad227dc2
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Event Categories'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 2a6daf28-0350-49ba-964e-5acad2b51a22
+      slot: main_slot
+      uuid: a0ab2e04-0726-43c2-a091-ee848168d20e
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<ul><li data-list-item-id="ec50cd92220090a26c0034350df7efa9c"><strong>Health Screenings:</strong> Blood pressure, diabetes, cholesterol, and more</li><li data-list-item-id="e050b7189d98f87b67a5544f965396491"><strong>Educational Seminars:</strong> Learn about managing chronic conditions, healthy living, and disease prevention</li><li data-list-item-id="eddc9d7c4f07b71b07da2a8eb44b3385b"><strong>Support Groups:</strong> Connect with others facing similar health challenges</li><li data-list-item-id="e4c11a29ad5c9b0218356980db3bf8491"><strong>Community Events:</strong> Health fairs, wellness walks, and community celebrations</li></ul>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 2a6daf28-0350-49ba-964e-5acad2b51a22
+      slot: main_slot
+      uuid: b315973b-0d56-4950-9e8a-a2be8f90716b
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Register for an Event'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 2a6daf28-0350-49ba-964e-5acad2b51a22
+      slot: main_slot
+      uuid: ad072936-16a3-4251-8a07-dda231f80cbe
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Most events require registration. To register, call (555) 123-4567 or register online through our event calendar.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 2a6daf28-0350-49ba-964e-5acad2b51a22
+      slot: main_slot
+      uuid: bce66cbf-49ae-406f-b797-87976b8765f5
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Host an Event at Your Organization'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 2a6daf28-0350-49ba-964e-5acad2b51a22
+      slot: main_slot
+      uuid: 1b44b086-ad3d-4019-9b43-c593cf03db16
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>We offer free health screenings and educational presentations for community groups, employers, and schools. Contact our Community Health department at community@saltmarshhealth.org.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: 2e6c9a6c-917b-433d-aab2-0cb424309899
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: true
+        views_columns: 25-25-25-25
+    -
+      parent_uuid: 2e6c9a6c-917b-433d-aab2-0cb424309899
+      slot: header_slot
+      uuid: 6c46bb63-bb0a-4fa9-b3b4-3e5f578cf610
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Upcoming Events'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: center
+    -
+      parent_uuid: 2e6c9a6c-917b-433d-aab2-0cb424309899
+      slot: main_slot
+      uuid: e1553611-dd09-4a77-956a-2f19f5badac8
+      component_id: block.views_block.events-block_2
+      inputs:
+        label: 'All Events'
+        label_display: '0'
+        views_label: ''
+        items_per_page: 12
+  path:
+    -
+      alias: /events
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

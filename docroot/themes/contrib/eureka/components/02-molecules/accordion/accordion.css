@@ -1,0 +1,44 @@
+.accordion__heading {
+  color: var(--black);
+  border: 0.1rem solid var(--brand-primary);
+  margin: 0;
+  transition: all ease 0.4s;
+}
+
+.accordion__heading .icon {
+  height: 1.6rem;
+  width: 1.6rem;
+}
+
+/* When accordion is open */
+.accordion__heading.is-open:hover {
+  background-color: transparent;
+}
+
+.accordion__heading.is-open .icon {
+  transform: rotate(90deg);
+}
+
+.accordion__button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: var(--spacing-4);
+  cursor: pointer;
+  background: transparent;
+  box-shadow: none;
+  font-weight: var(--font-bold);
+  font-size: inherit;
+  border-color: transparent;
+}
+
+.accordion__content {
+  padding: var(--spacing-4);
+}
+
+/* When two accordions are together */
+.accordion + .accordion .accordion__heading {
+  margin-top: -0.1rem;
+}

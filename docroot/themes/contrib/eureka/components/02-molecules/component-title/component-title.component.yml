@@ -1,0 +1,42 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Component title
+status: stable
+description: Component title / intro (heading, summary and line)
+# Overrides regular css with minified.
+libraryOverrides:
+  css:
+    component:
+      component-title.min.css: { minified: true }
+group: Eureka component items
+props:
+  type: object
+  properties:
+    component_title_heading:
+      type: string
+      title: Component title heading
+      description: Heading element of the component title
+      examples:
+        - School Calendar
+    component_title_heading_level:
+      type: ['number', 'null']
+      title: Component title heading level
+      description: Heading level of the heading element - only change this if you know what you're doing, as it affects accessibility
+      enum:
+        - 2
+        - 3
+        - 4
+        - 5
+      examples:
+        - 2
+    component_title_summary:
+      type: ['string', 'null']
+      title: Component title summary
+      description: Summary / text of the component title
+      examples:
+        - Stay up to date with important dates, events, and school holidays. Subscribe to receive automatic updates to your personal calendar.
+    component_title_small:
+      title: Small variation
+      type: boolean
+      description: Set it true to set it to the small/alternate variation
+      examples:
+        - false

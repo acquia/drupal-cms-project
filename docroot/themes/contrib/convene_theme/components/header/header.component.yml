@@ -1,0 +1,14 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Header
+group: Layout
+description: The main site header component.
+slots:
+  header:
+    title: Header Content
+    description: Dynamic content for the header (logos, menus, buttons).
+library:
+  css:
+    component:
+      ../../css/header.css: {}
+  js:
+    ../../js/navigation.js: {}

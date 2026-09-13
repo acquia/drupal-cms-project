@@ -1,0 +1,40 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.card
+    - field.field.node.provus_news.field_content
+    - field.field.node.provus_news.field_featured_image
+    - field.field.node.provus_news.field_provus_publish_date
+    - field.field.node.provus_news.field_tags
+    - node.type.provus_news
+  module:
+    - text
+    - user
+id: node.provus_news.card
+targetEntityType: node
+bundle: provus_news
+mode: card
+content:
+  field_content:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_featured_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: 16_9_medium
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  addtoany: true
+  field_provus_publish_date: true
+  field_tags: true
+  links: true
+  search_api_excerpt: true

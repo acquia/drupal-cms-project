@@ -1,0 +1,37 @@
+.menu.list--inline .menu__item:not(:last-child) {
+  margin: 0 var(--spacing-2) 0 0;
+}
+
+.menu__item {
+  margin-bottom: var(--spacing-2);
+  font-size: 1.4rem;
+}
+
+.menu__link {
+  text-decoration: none;
+}
+
+.menu__link:hover,
+.menu__link:focus-visible {
+  text-decoration: underline;
+}
+
+.menu__sub-expand {
+  width: 100%;
+  justify-content: space-between;
+  font-size: inherit;
+}
+
+.menu__sub-expand[aria-expanded="true"] .icon {
+  transform: rotateZ(90deg);
+}
+
+@media (min-width: 1024px) {
+  .menu__sub-expand .icon {
+    transform: rotateZ(90deg);
+  }
+
+  .menu__sub-expand[aria-expanded="true"] .icon {
+    transform: rotateZ(270deg);
+  }
+}

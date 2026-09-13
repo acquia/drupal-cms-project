@@ -1,0 +1,26 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Accordion Item
+group: Molecules
+status: stable
+description: An individual collapsible accordion item.
+props:
+  type: object
+  properties:
+    admin_theme:
+      title: Admin Theme
+      type: boolean
+      default: false
+      description: Check to enable Admin Theme styles (applies CSS only on frontend to preserve Canvas builder look).
+slots:
+  title:
+    title: Title Slot
+    description: Slot for the accordion trigger text.
+  content:
+    title: Content Slot
+    description: Slot for the hidden/collapsible content.
+library:
+  css:
+    component:
+      accordion.css: {}
+  js:
+    accordion.js: {}

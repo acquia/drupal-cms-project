@@ -1,0 +1,37 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Hero Card
+group: Section
+status: stable
+props:
+  type: object
+  required:
+    - heading
+  properties:
+    heading:
+      type: string
+      title: Heading
+      examples:
+        - "Real change starts with people who care"
+    description:
+      type: string
+      title: Description
+      examples:
+        - "We build community solutions that matter. Join us in creating lasting impact where it's needed most."
+    media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Background Image
+      type: object
+    heading_level:
+      type: number
+      title: Heading level
+      enum:
+        - 1
+        - 2
+        - 3
+      default: 1
+      examples:
+        - 1
+slots:
+  ctas:
+    title: CTAs
+    description: "Call-to-action buttons displayed below the hero content."

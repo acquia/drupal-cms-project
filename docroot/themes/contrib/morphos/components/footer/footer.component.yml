@@ -1,0 +1,204 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Footer
+description: The site-wide bottom section containing copyright info, secondary links, and required government metadata.
+group: Global
+props:
+  type: object
+  properties:
+    palette:
+      type: string
+      title: Palette
+      description: Select the colour palette for the content.
+      enum:
+        - color--standard
+        - color--alternate
+        - color--primary
+        - color--secondary
+        - color--accent
+        - color--neutral
+      meta:enum:
+        color--standard: Standard
+        color--alternate: Alternate
+        color--primary: Primary
+        color--secondary: Secondary
+        color--accent: Accent
+        color--neutral: Neutral
+      examples:
+        - color--standard
+    texture:
+      type: string
+      title: Texture
+      description: Select the texture to apply to the palette.
+      enum:
+        - texture--linear-start
+        - texture--linear-end
+        - texture--linear-top
+        - texture--linear-bottom
+        - texture--linear-top-start
+        - texture--linear-top-end
+        - texture--linear-bottom-start
+        - texture--linear-bottom-end
+        - texture--radial-spotlight
+        - texture--radial-vignette
+        - texture--conic-top-start
+        - texture--conic-top-end
+        - texture--conic-bottom-start
+        - texture--conic-bottom-end
+      meta:enum:
+        texture--linear-start: 'Linear: Start'
+        texture--linear-end: 'Linear: End'
+        texture--linear-top: 'Linear: Top'
+        texture--linear-bottom: 'Linear: Bottom'
+        texture--linear-top-start: 'Linear: Top start'
+        texture--linear-top-end: 'Linear: Top end'
+        texture--linear-bottom-start: 'Linear: Bottom start'
+        texture--linear-bottom-end: 'Linear: Bottom end'
+        texture--radial-spotlight: 'Radial: Spotlight'
+        texture--radial-vignette: 'Radial: Vignette'
+        texture--conic-top-start: 'Conic: Top start'
+        texture--conic-top-end: 'Conic: Top end'
+        texture--conic-bottom-start: 'Conic: Bottom start'
+        texture--conic-bottom-end: 'Conic: Bottom end'
+    overlay:
+      type: string
+      title: Overlay
+      description: Select the overlay to use for accessibility when a background is in use.
+      enum:
+        - overlay--linear-start
+        - overlay--linear-end
+        - overlay--linear-top
+        - overlay--linear-bottom
+        - overlay--linear-top-start
+        - overlay--linear-top-end
+        - overlay--linear-bottom-start
+        - overlay--linear-bottom-end
+        - overlay--radial-center
+      meta:enum:
+        overlay--linear-start: 'Linear: Start'
+        overlay--linear-end: 'Linear: End'
+        overlay--linear-top: 'Linear: Top'
+        overlay--linear-bottom: 'Linear: Bottom'
+        overlay--linear-top-start: 'Linear: Top start'
+        overlay--linear-top-end: 'Linear: Top end'
+        overlay--linear-bottom-start: 'Linear: Bottom start'
+        overlay--linear-bottom-end: 'Linear: Bottom end'
+        overlay--radial-center: 'Radial: Center'
+    container:
+      type: string
+      title: Container
+      description: Select how the content is to be contained.
+      enum:
+        - container--edgy
+        - container--wide
+        - container--normal
+        - container--narrow
+      meta:enum:
+        container--edgy: Edgy
+        container--wide: Wide
+        container--normal: Normal
+        container--narrow: Narrow
+      examples:
+        - container--normal
+    margin_top:
+      type: string
+      title: Margin top
+      description: Select the margin top for the container - the space above the top.
+      enum:
+        - '0'
+        - '4'
+        - '8'
+        - '12'
+        - '16'
+        - '24'
+        - '32'
+      meta:enum:
+        '0': '0 (0px)'
+        '4': '4 (16px)'
+        '8': '8 (32px)'
+        '12': '12 (48px)'
+        '16': '16 (64px)'
+        '24': '24 (96px)'
+        '32': '32 (128px)'
+    margin_bottom:
+      type: string
+      title: Margin bottom
+      description: Select the margin bottom for the container - the space below the bottom.
+      enum:
+        - '0'
+        - '4'
+        - '8'
+        - '12'
+        - '16'
+        - '24'
+        - '32'
+      meta:enum:
+        '0': '0 (0px)'
+        '4': '4 (16px)'
+        '8': '8 (32px)'
+        '12': '12 (48px)'
+        '16': '16 (64px)'
+        '24': '24 (96px)'
+        '32': '32 (128px)'
+    padding_top:
+      type: string
+      title: Padding top
+      description: Select the padding top for the container - the space beneath the top.
+      enum:
+        - '0'
+        - '4'
+        - '8'
+        - '12'
+        - '16'
+        - '24'
+        - '32'
+      meta:enum:
+        '0': '0 (0px)'
+        '4': '4 (16px)'
+        '8': '8 (32px)'
+        '12': '12 (48px)'
+        '16': '16 (64px)'
+        '24': '24 (96px)'
+        '32': '32 (128px)'
+      examples:
+        - '4'
+    padding_bottom:
+      type: string
+      title: Padding bottom
+      description: Select the padding bottom for the container - the space beneath the bottom.
+      enum:
+        - '0'
+        - '4'
+        - '8'
+        - '12'
+        - '16'
+        - '24'
+        - '32'
+      meta:enum:
+        '0': '0 (0px)'
+        '4': '4 (16px)'
+        '8': '8 (32px)'
+        '12': '12 (48px)'
+        '16': '16 (64px)'
+        '24': '24 (96px)'
+        '32': '32 (128px)'
+      examples:
+        - '4'
+slots:
+  top_items:
+    title: Top items
+    description: Add content items.
+  main_items:
+    title: Main items
+    description: Add content items.
+  side_items:
+    title: Side items
+    description: Add content items.
+  bottom_items:
+    title: Bottom items
+    description: Add content items.
+  backgrounds:
+    title: Backgrounds
+    description: Add background items to this slot.
+  behaviors:
+    title: Behaviors
+    description: Add behavior items to this slot.

@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: cfbbe913-4127-45ef-a807-ce9c7d7fc02b
+  bundle: main
+  default_langcode: en
+  depends:
+    a69bd6ca-6021-4e92-8d5a-a64e0f3d1f5f: menu_link_content
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Blog
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      uri: 'internal:/blog'
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: true
+  weight:
+    -
+      value: -47
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:a69bd6ca-6021-4e92-8d5a-a64e0f3d1f5f'
+  revision_translation_affected:
+    -
+      value: true

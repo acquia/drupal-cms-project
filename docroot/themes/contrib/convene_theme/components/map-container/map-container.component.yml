@@ -1,0 +1,38 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Map Container
+group: Organisms
+status: stable
+description: A full-width component featuring a centered header and a large map/image placeholder block.
+props:
+  type: object
+  properties:
+    admin_theme:
+      title: Admin Theme
+      type: boolean
+      default: false
+      description: Check to enable Admin Theme styles.
+    alternate_bg:
+      title: Alternative Background
+      type: boolean
+      default: false
+      description: Use a light grey background instead of pure white.
+    eyebrow:
+      title: Eyebrow (e.g., 'Map')
+      type: string
+    title:
+      title: Title (e.g., 'Find us on the map')
+      type: string
+    description:
+      title: Description Paragraph
+      type: string
+slots:
+  actionButton:
+    title: Action Button
+    description: Slot for buttons (e.g., 'Explore', 'Open').
+  media:
+    title: Media Slot
+    description: Slot for the large map image or interactive embed block.
+library:
+  css:
+    component:
+      map-container.css: {}

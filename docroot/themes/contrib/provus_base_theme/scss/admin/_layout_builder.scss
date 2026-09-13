@@ -1,0 +1,1720 @@
+$lb-border-color: #D0D5DD;
+$lb-button-active: var(--gin-color-primary-light);
+$lb-button-hover: var(--gin-color-primary-hover);
+$lb-window-summary: #f2f2f2;
+$lb-window-gray-light: #f2f2f2;
+$lb-window-gray-dark: #d9d9d9;
+
+// Layout builder admin fixes.
+.layout-builder-add-block {
+  .table-striped > tbody > tr:nth-of-type(odd) > * {
+    --bs-table-accent-bg: $white !important;
+  }
+  table tbody tr {
+    td {
+      border-bottom: 1px solid $gray;
+    }
+  }
+  .tabledrag-toggle-weight-wrapper {
+    display: none;
+  }
+}
+
+.ui-dialog.ui-layout-builder-modal .ui-dialog-titlebar,
+.ui-dialog .ui-dialog-titlebar {
+  background: $gray-lightest !important;
+}
+
+.ui-dialog .ui-dialog-title {
+  color: $black !important;
+  margin: .5em 0 !important;
+  line-height: 1.2 !important;
+}
+
+#layout-builder-modal form > #bs_ui ~ button.button, #layout-builder-modal form > #bs_ui ~ input[type="submit"].button, #layout-builder-modal form > .form-wrapper ~ button.button, #layout-builder-modal form > .form-wrapper ~ input[type="submit"].button {
+  float: none;
+}
+
+// Tooptip fixes.
+.formtips-processed.filter-guidelines, div.description.formtips-processed, .form-item .description.formtips-processed, .form-item__description.formtips-processed {
+  background: $white;
+  color: $body-color;
+}
+.formtips-processed::before {
+  border-bottom-color: $white;
+}
+
+.js-hide {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  display: none;
+}
+
+.media-library-widget-modal .media-library-item--grid .field--name-thumbnail img {
+  position: relative;
+}
+
+#layout-builder-modal .media-library-item--grid .field--name-thumbnail img {
+  position: relative;
+}
+
+.media-library-item .media-library-item__preview {
+  padding: 0;
+}
+
+.layout-builder-block {
+  background: transparent;
+}
+
+.layout-builder-active {
+  #drupal-off-canvas-wrapper {
+    padding: 0;
+    background-color: #fff;
+    left: rem-calc(66) !important;
+    width: rem-calc(252) !important;
+
+    #drupal-off-canvas {
+      padding: 0px !important;
+
+      .glb-list svg {
+        fill: $lb-window-gray-dark;
+      }
+
+      form > .glb-form-wrapper {
+        padding: 0 20px;
+      }
+
+      .button {
+        text-decoration: none;
+      }
+
+      .section-library-add-section-to-library.glb-form,
+      .glb-layout-builder-browser,
+      .glb-form-no-label.glb-form-item,
+      .layout-builder-block-move.glb-form {
+        padding: 0 20px;
+      }
+
+      .layout-selection.glb-list {
+        margin: 20px !important;
+      }
+
+      .ajax-progress {
+        display: none;
+      }
+
+      .fieldgroup.blb_container_type .fieldset-wrapper > div > div .input-icon.container-extra:after,
+      #layout-builder-modal .fieldgroup.blb_container_type .fieldset-wrapper > div > div .input-icon.container-extra:after {
+        width: 40%;
+      }
+
+      .fieldgroup {
+        &.blb_container_type .fieldset-wrapper label,
+        &.blb_gutter_type .fieldset-wrapper label,
+        &.bs_background--type .fieldset-wrapper label {
+          display: block !important;
+          text-align: center !important;
+          height: auto !important;
+          padding: 1rem 0 !important;
+
+          &:hover {
+            background-color: $lb-button-active !important;
+          }
+        }
+
+        &.blb_container_type .fieldset-wrapper > div > div .input-icon {
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        &.blb_gutter_type .fieldset-wrapper label {
+          .input-icon {
+            width: 100% !important;
+          }
+        }
+
+        &.bs_background--type .fieldset-wrapper label {
+          svg {
+            height: 24px;
+            color: #383A40;
+            * {
+              color: #383A40;
+            }
+          }
+        }
+
+        &.blb_breakpoint_cols .fieldset-wrapper label {
+          .blb_breakpoint_col {
+            background-color: $lb-window-gray-light !important;
+
+            &.bp-selected {
+              background-color: $lb-window-gray-dark !important;
+              color: black;
+            }
+          }
+
+          &:hover {
+            .blb_breakpoint_col {
+              background-color: $lb-button-active !important;
+              color: black;
+            }
+          }
+        }
+
+        &.bs_input-circles label,
+        &.bs_background--position .form-radios input + label {
+          text-indent: -9999px;
+
+          .bs_tooltip {
+            text-indent: 0;
+          }
+        }
+
+        &.bs_background--attachment .fieldset-wrapper .form-radios input + label,
+        &.bs_background--size .fieldset-wrapper .form-radios input + label {
+          display: flex !important;
+          box-shadow: none !important;
+          background-color: $lb-window-gray-light !important;
+        }
+        &.bs_background--attachment .fieldset-wrapper .form-radios input:checked + label,
+        &.bs_background--size .fieldset-wrapper .form-radios input:checked + label {
+          display: flex !important;
+          box-shadow: none !important;
+          background-color: $lb-window-gray-dark !important;
+        }
+
+        &.bs_input-boxes .fieldset-wrapper .form-radios input + label {
+          display: flex !important;
+          box-shadow: none !important;
+          background-color: $lb-window-gray-light !important;
+        }
+
+        &.bs_background--type .fieldset-wrapper > div > div input:checked + label {
+          background-color: $lb-window-gray-dark !important;
+          box-shadow: none !important;
+        }
+
+        &.blb_gutter_type .fieldset-wrapper > div > div input:checked + label,
+        &.bs_background--attachment .fieldset-wrapper > div > div input:checked + label,
+        &.bs_background--size .fieldset-wrapper > div > div input:checked + label,
+        &.bs_input-boxes .fieldset-wrapper > div > div input:checked + label,
+        &.bs_background--position .fieldset-wrapper > div > div input:checked + label {
+          //background-color: $lb-button-hover !important;
+          box-shadow: none !important;
+        }
+
+        &.blb_gutter_type .fieldset-wrapper > div > div input:checked + label {
+          background-color: $lb-window-gray-dark !important;
+        }
+        &.blb_gutter_type .fieldset-wrapper > div > div input + label {
+          background-color: $lb-window-gray-light !important;
+        }
+
+        &.bs_background--repeat .fieldset-wrapper > div {
+          min-height: 70px;
+        }
+
+        .bs_tooltip {
+          background-color: $lb-window-summary !important;
+          color: black !important;
+          border-color: $lb-window-summary !important;
+
+          &::after {
+            border-top-color: $lb-window-summary !important;
+          }
+        }
+      }
+
+      tr td {
+        color: black;
+      }
+
+      summary {
+        min-height: auto;
+        border-radius: 0;
+        background-color: $lb-window-summary !important;
+        padding-bottom: .5rem !important;
+        padding-top: .5rem !important;
+        padding-left: 1rem !important;
+        margin: -1px 0 0 0 !important;
+        color: black !important;
+        font-size: .9rem !important;
+        font-weight: normal !important;
+
+        a {
+          color: black !important;
+          font-size: 12px;
+        }
+
+        &::after {
+          display: none;
+        }
+
+        &::before {
+          left: unset !important;
+          right: 1.25rem !important;
+        }
+
+        &:hover {
+          background-color: $lb-window-summary !important;
+        }
+      }
+
+      .inline-block-create-button {
+        display: block;
+        width: auto;
+      }
+
+      .inline-block-list li {
+        width: calc(50% - 20px);
+        padding: 10px;
+        margin-bottom: 20px;
+        height: 120px;
+        flex: none !important;
+      }
+
+      form {
+        margin: 0 !important;
+      }
+
+      .bs_input-circles > legend > .fieldset-legend {
+        margin-bottom: 5rem;
+      }
+
+      .bs_input-circles .fieldset-wrapper label {
+        border-color: $system-error-medium !important;
+        border-width: 3px;
+      }
+
+      .bs_input-circles input:checked + label {
+        border-color: $gradient-primary-gradient-2 !important;
+        border-width: 3px;
+      }
+
+      .bs_input-circles input:not(:checked) + label {
+        opacity: 1;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+
+      input[type="submit"].button {
+        width: auto;
+        background: var(--gin-color-primary);
+      }
+
+      .glb-media-library-selection .glb-media-library-item--grid {
+        width: 100%;
+      }
+
+      .media-library-item__remove {
+        font-size: initial;
+        height: initial;
+        width: initial !important;
+        margin: initial !important;
+      }
+
+      li {
+        margin: 0;
+
+        .inline-block-list__item {
+          background-color: $white !important;
+          background-size: 50% !important;
+          background-repeat: no-repeat !important;
+          background-position: center 15px !important;
+          justify-content: flex-end;
+          border: 2px solid $primary-shade !important;
+          color: $primary-shade !important;
+          font-weight: bold;
+          font-size: 13px;
+          height: 100% !important;
+          padding: 6px !important;
+
+          &.block-type- {
+            &accordion {
+              background-image: url('../images/components/accordion.svg') !important;
+            }
+
+            &basic-text {
+              background-image: url('../images/components/basic.svg') !important;
+            }
+
+            &button {
+              background-image: url('../images/components/button.svg') !important;
+            }
+
+            &card {
+              background-image: url('../images/components/card.svg') !important;
+            }
+
+            &cta {
+              background-image: url('../images/components/cta.svg') !important;
+            }
+
+            &divider-line {
+              background-image: url('../images/components/divider.svg') !important;
+            }
+
+            &files-list {
+              background-image: url('../images/components/files-list.svg') !important;
+            }
+
+            &group {
+              background-image: url('../images/components/group.svg') !important;
+            }
+
+            &group---automatic {
+              background-image: url('../images/components/group-auto.svg') !important;
+            }
+
+            &heading {
+              background-image: url('../images/components/heading.svg') !important;
+            }
+
+            &large-banner {
+              background-image: url('../images/components/banner.svg') !important;
+            }
+
+            &list {
+              background-image: url('../images/components/list.svg') !important;
+            }
+
+            &list-item {
+              display: none !important;
+            }
+
+            &media {
+              background-image: url('../images/components/media.svg') !important;
+            }
+
+            &short-banner {
+              background-image: url('../images/components/banner.svg') !important;
+            }
+
+            &stat-group {
+              background-image: url('../images/components/stat.svg') !important;
+            }
+
+            &stat-item {
+              display: none !important;
+            }
+
+            &tab-item {
+              display: none !important;
+            }
+
+            &tabs {
+              background-image: url('../images/components/tabs.svg') !important;
+            }
+
+            &testimonial {
+              background-image: url('../images/components/testimonial.svg') !important;
+            }
+
+            &photo-gallery {
+              background-image: url('../images/components/photogallery.svg') !important;
+            }
+          }
+
+          &:hover,
+          &:hover {
+            background-color: $primary-shade !important;
+            color: $white !important;
+            text-decoration: underline;
+            filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
+
+            &.block-type- {
+              &accordion {
+                background-image: url('../images/components/accordion-white.svg') !important;
+              }
+
+              &basic-text {
+                background-image: url('../images/components/basic-white.svg') !important;
+              }
+
+              &button {
+                background-image: url('../images/components/button-white.svg') !important;
+              }
+
+              &card {
+                background-image: url('../images/components/card-white.svg') !important;
+              }
+
+              &cta {
+                background-image: url('../images/components/cta-white.svg') !important;
+              }
+
+              &divider-line {
+                background-image: url('../images/components/divider-white.svg') !important;
+              }
+
+              &files-list {
+                background-image: url('../images/components/files-list-white.svg') !important;
+              }
+
+              &group {
+                background-image: url('../images/components/group-white.svg') !important;
+              }
+
+              &group---automatic {
+                background-image: url('../images/components/group-auto-white.svg') !important;
+              }
+
+              &heading {
+                background-image: url('../images/components/heading-white.svg') !important;
+              }
+
+              &large-banner {
+                background-image: url('../images/components/banner-white.svg') !important;
+              }
+
+              &list {
+                background-image: url('../images/components/list-white.svg') !important;
+              }
+
+              &media {
+                background-image: url('../images/components/media-white.svg') !important;
+              }
+
+              &short-banner {
+                background-image: url('../images/components/banner-white.svg') !important;
+              }
+
+              &stat-group {
+                background-image: url('../images/components/stat-white.svg') !important;
+              }
+
+              &tabs {
+                background-image: url('../images/components/tabs-white.svg') !important;
+              }
+
+              &testimonial {
+                background-image: url('../images/components/testimonial-white.svg') !important;
+              }
+
+              &photo-gallery {
+                background-image: url('../images/components/photogallery-white.svg') !important;
+              }
+            }
+          }
+        }
+      }
+
+      // Gin override for the fixed left sidebar (delete block).
+      .glb-canvas-form {
+        flex-grow: 0;
+      }
+      .glb-canvas-form__settings {
+        overflow: initial;
+      }
+    }
+  }
+
+  // Gin override for top bar on Layout builder.
+  @supports ((-webkit-backdrop-filter: blur()) or (backdrop-filter: blur())) {
+    .gin-secondary-toolbar--frontend {
+      position: fixed;
+      width: 100%;
+      top: rem-calc(40);
+
+      @include media-breakpoint-up(lg) {
+        width: calc(100% - 65px); /* Width of the vertical bar. */
+        top: 0;
+
+        @at-root body[data-toolbar-menu="open"] & {
+          width: calc(100% - 255px); /* Width of the opened vertical bar. */
+        }
+      }
+    }
+  }
+
+  .dialog-off-canvas-main-canvas {
+    margin-top: 59px;
+  }
+}
+
+#layout-builder-modal a.tabledrag-handle .handle {
+  background-size: 100px !important;
+}
+
+// Fixes for media library image display in lb modal.
+#drupal-off-canvas .media-library-item,
+#layout-builder-modal .media-library-item {
+  flex-grow: 0;
+}
+#drupal-off-canvas .media-library-item__preview,
+#layout-builder-modal .media-library-item__preview {
+  padding-bottom: 100%;
+}
+#drupal-off-canvas .media-library-item--grid .field--name-thumbnail img,
+#layout-builder-modal .media-library-item--grid .field--name-thumbnail img {
+  object-fit: cover;
+}
+
+
+// =============================================================================
+// LAYOUT BUILDER
+// =============================================================================
+
+.layout-builder-active .layout-builder__section > a.layout-builder__link,
+.layout-builder-active .layout-builder__section > div > a.layout-builder__link {
+  overflow: hidden;
+  padding-top: 13px !important;
+  transition: all 0.3s ease-in-out;
+  background-color: white !important;
+
+  &.layout-builder__link--remove {
+    &:hover,
+    &:focus {
+      background: white !important;
+      width: rem-calc(180);
+      box-shadow: none !important;
+      height: 40px;
+    }
+  }
+  &.layout-builder__link--configure {
+    &:hover,
+    &:focus {
+      background: $white !important;
+      width: rem-calc(200);
+      z-index: 99;
+      box-shadow: none !important;
+      height: 40px;
+    }
+  }
+  &.layout-builder__link--add-section-to-library {
+    &:hover,
+    &:focus {
+      background: $white !important;
+      width: rem-calc(150);
+      z-index: 99;
+      box-shadow: none !important;
+      height: 40px;
+    }
+  }
+  &.layout-builder__link--rearrange {
+    &:hover,
+    &:focus {
+      background: $white !important;
+      width: rem-calc(150);
+      z-index: 99;
+      box-shadow: none !important;
+      height: 40px;
+    }
+  }
+}
+
+.layout-builder-active .layout-builder__add-section > a.layout-builder__link {
+  text-indent: 30px;
+  overflow: hidden;
+  padding-top: 13px !important;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: -6px !important;
+
+  &.layout-builder__link--add {
+    &:hover,
+    &:focus {
+      width: rem-calc(150);
+      background: transparent !important;
+    }
+  }
+
+  &.layout-builder__link--import-from-library {
+    &:hover,
+    &:focus {
+      width: rem-calc(190);
+      background: transparent !important;
+    }
+  }
+
+  &.layout-builder__link--paste-section {
+    width: rem-calc(170);
+    word-wrap: break-word;
+    &:hover,
+    &:focus {
+      width: rem-calc(170);
+      background: transparent !important;
+    }
+  }
+
+}
+
+a > .layout-builder__link-wrapped {
+  position: absolute;
+  width: rem-calc(150);
+  height: auto;
+  text-indent: 0 !important;
+  top: rem-calc(12);
+  left: 45px;
+  z-index: 999;
+  text-align: left;
+  width: rem-calc(150);
+  font-weight: bold;
+  color: #000;
+}
+
+.layout-builder-active {
+
+  .region-title h1.title {
+    display: none;
+  }
+
+  nav.tabs {
+    border: none;
+    padding-left: 0;
+
+    ul {
+      background: transparent;
+      border: 0;
+
+      .nav-item, {
+        flex-grow: 0;
+        background-color: white;
+        border: 0.5px solid $background-colors-background-grey;
+        border-radius: $padding-padding-xxs $padding-padding-xxs 0 0;
+
+        a {
+          @include text-style-headline-h-5();
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+
+        &.active {
+          background-color: $lb-button-active;
+          border-color: $lb-border-color;
+
+          a {
+            border-radius: 0;
+            margin-bottom: 0 !important;
+            color: $primary;
+            margin-top: 0;
+          }
+        }
+      }
+    }
+  }
+
+
+
+  #block-provus-bootstrap-help {
+    display: none;
+  }
+
+  .layout-builder-form {
+    max-width: 540px;
+    width: 100%;
+    padding-right: var(--bs-gutter-x,0.75rem);
+    padding-left: var(--bs-gutter-x,0.75rem);
+    margin-right: auto;
+    margin-left: auto;
+    @include media-breakpoint-up(md) {
+      max-width: 720px;
+    }
+    @include media-breakpoint-up(lg) {
+      max-width: 960px;
+    }
+    @include media-breakpoint-up(xl) {
+      max-width: 1140px;
+    }
+    @include media-breakpoint-up(xxl) {
+      max-width: 1320px;
+    }
+  }
+
+  .hidden {
+    display: block;
+  }
+
+  // Show blocks hiddin by country.
+  [class*="hide-for-country"] {
+    display: block !important;
+  }
+
+  .region-content {
+    padding-top: 20px;
+
+    // Help block.
+    .block-help-block {
+      background: $gray;
+      border: 1px solid $gray-800;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 20px !important;
+      max-width: 1320px - (50 * 2) !important;
+      padding: 50px;
+
+      // Remove bottom margin from last element in the block.
+      *:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // Layout builder wrapper.
+  .layout-builder {
+    position: relative;
+    text-align: center;
+  }
+
+  // Layouts.
+  .layout-builder__layout {
+    margin-top: 0;
+
+    // Hover.
+    &:hover {
+
+      // Display "Add block" button.
+      .layout-builder__add-block {
+        opacity: 1;
+      }
+    }
+  }
+
+  // Section row.
+  .section-row {
+    position: relative;
+
+    // Two and three column.
+    &.l--two-column,
+    &.l--three-column {
+      .layout-builder__region {
+        position: relative;
+      }
+    }
+  }
+
+  // "Add block" section.
+  .layout-builder__add-block {
+    // @include horizontal-center;
+    bottom: 10px;
+    /*opacity: 0;*/
+    transition: opacity .3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+    padding: 0;
+    background: transparent;
+
+    // "Add" buttons.
+    .layout-builder__link--add,
+    .layout-builder__link--add:not(:focus) {
+      text-indent: 0;
+      color: $text-primary !important;
+      text-transform: lowercase;
+      font-weight: 600 !important;
+      width: auto !important;
+      z-index: 100;
+
+      .layout-builder__link-wrapped {
+        position: relative !important;
+        top: unset !important;
+        left: unset !important;
+      }
+
+
+      &:hover {
+        background-color: white;
+        text-decoration: none;
+      }
+
+      &:before {
+        left: -15px;
+        top: 50%;
+        margin-top: -12px;
+      }
+    }
+  }
+
+  .layout-builder {
+    padding: 0;
+    border: none;
+  }
+
+  .layout-builder__section {
+    position: relative;
+    margin: 0;
+    &:hover {
+      // Display "Add block" button.
+      .layout-builder__add-block {
+        opacity: 1;
+      }
+
+      .contextual, .contextual.open {
+        right: auto;
+        left: 0;
+
+        .trigger {
+          right: auto;
+          left: 40px;
+          float: left;
+        }
+
+        .contextual-links {
+          right: auto;
+          left: 40px;
+          float: left;
+        }
+      }
+    }
+
+
+  }
+
+  .layout-builder-block {
+    background: transparent;
+  }
+
+  // "Add section" section.
+  .layout-builder__add-section {
+    background: #fff;
+    display: block !important;
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    margin-left: -40px;
+    margin-top: -25px;
+    width: auto;
+    z-index: 2;
+    outline: none;
+    padding: 0;
+    border-radius: 8px;
+    border: 1px solid $lb-border-color;
+  }
+
+  .layout-builder__link,
+  .layout-builder__link:not(:focus) {
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    border-right: 1px solid $lb-border-color !important;
+    box-shadow: none !important;
+    display: inline-block !important;
+    font-size: 14px !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+    padding: 10px !important;
+    transition: border-color .3s ease;
+    width: auto;
+    position: relative;
+    text-indent: -9999px;
+    width: 40px;
+    height: 40px;
+    color: $primary-accent !important;
+    text-decoration: none;
+
+    /*&:last-child {
+      border-right:  0 !important;
+    }*/
+
+    &:focus {
+      text-decoration: underline;
+      color: $primary-hover;
+    }
+
+    &:hover {
+      text-decoration: underline;
+      color: $primary !important;
+
+      &:before {
+        color: $primary-hover !important;
+      }
+    }
+
+    &:before {
+      content: " ";
+      background: transparent url('../images/add.svg') no-repeat;
+      background-size: contain;
+      position: absolute;
+      top: 50%;
+      margin-top: -10px;
+      margin-left: 0;
+      left: 10px;
+      width: 20px;
+      height: 20px;
+      color: $primary-accent !important;
+    }
+
+    &.layout-builder__link--import-from-library {
+      &:before {
+        background: url('../images/layout_builder/import_template.svg') no-repeat;
+        background-size: contain;
+      }
+    }
+
+    &.layout-builder__link--configure {
+      &:before {
+        background: url('../images/layout_builder/section/edit.svg') no-repeat;
+        background-size: contain;
+      }
+    }
+
+    &.layout-builder__link--remove {
+      &:before {
+        background: url('../images/layout_builder/section/delete.svg') no-repeat;
+        background-size: contain;
+      }
+    }
+
+    &.layout-builder__link--add-section-to-library {
+      &:before {
+        background: url('../images/layout_builder/section/save.svg') no-repeat;
+        background-size: contain;
+      }
+    }
+    &.layout-builder__link--copy-section {
+      &:before {
+        background: url('../images/layout_builder/section/clone.svg') no-repeat;
+        background-size: contain;
+      }
+    }
+    &.layout-builder__link--paste-section {
+      &:before {
+        background: url('../images/layout_builder/section/paste.svg') no-repeat;
+        background-size: contain;
+      }
+    }
+  }
+
+  // Remove and configure.
+  .layout-builder__link--remove,
+  .layout-builder__link--configure,
+  .layout-builder__link--add-section-to-library,
+  .layout-builder__link.layout-builder__link--rearrange,
+  .layout-builder__link--copy-section {
+    /*opacity: 0;*/
+    transition: opacity .3s ease;
+    top: 25px;
+    left: unset;
+    z-index: 2;
+
+    &:after {
+      display: none;
+    }
+  }
+
+  // Remove.
+  .layout-builder__link--remove,
+  .layout-builder__link--remove:visited {
+    border: 2px solid transparent !important;
+    box-shadow: 0 2px 8px 0 rgba($black, .35) !important;
+    display: block !important;
+    margin: 0 !important;
+    mask-image: none !important;
+    padding: 10px 15px !important;
+    text-indent: -999em;
+    transition: border-color .3s ease;
+    width: 38px;
+    position: absolute !important;
+    right: 130px;
+
+    // Hover and focus.
+    &:focus {
+      border-color: rgba($white, .75) !important;
+    }
+  }
+
+  // Configure.
+  .layout-builder__link--configure,
+  .layout-builder__link--configure:visited {
+    background: $primary-shade !important;
+    border-radius: $card-border-radius !important;
+    border: 2px solid transparent !important;
+    box-shadow: 0 2px 8px 0 rgba($black, .35) !important;
+    color: $white !important;
+    display: inline-block !important;
+    font-size: 14px !important;
+    font-weight: 700;
+    line-height: 1 !important;
+    margin: 0 !important;
+    padding: 10px 15px !important;
+    text-decoration: none;
+    transition: border-color .3s ease;
+    display: block !important;
+    position: absolute !important;
+    right: 90px;
+
+    // Hover and focus.
+    &:focus {
+      border-color: rgba($white, .75) !important;
+      text-decoration: underline;
+      background: $primary-hover !important;
+    }
+    &:hover {
+      text-decoration: underline;
+      background: $primary-hover !important;
+    }
+  }
+
+  // Add section to library.
+  .layout-builder__link--add-section-to-library,
+  .layout-builder__link--add-section-to-library:visited {
+    background: $primary-shade !important;
+    border-radius: $card-border-radius !important;
+    border: 2px solid transparent !important;
+    box-shadow: 0 2px 8px 0 rgba($black, .35) !important;
+    color: $white !important;
+    display: block !important;
+    font-size: 14px !important;
+    font-weight: 700;
+    line-height: 1 !important;
+    margin: 0 !important;
+    padding: 10px 15px !important;
+    text-decoration: none;
+    transition: border-color .3s ease;
+    display: inline-block !important;
+    position: absolute !important;
+    right: 50px;
+
+    // Hover and focus.
+    &:focus {
+      border-color: rgba($white, .75) !important;
+      text-decoration: underline;
+      background: $primary-hover !important;
+    }
+    &:hover {
+      text-decoration: underline;
+      background: $primary-hover !important;
+    }
+
+    .layout-builder__link-wrapped {
+      top: .25rem;
+    }
+  }
+
+  // Section.
+  .layout-builder__section {
+    text-align: left;
+
+    > a.layout-builder__link {
+      border: 1px solid $lb-border-color !important;
+      border-right: 0 !important;
+      background-color: #fff;
+
+      &:first-child {
+        border-radius: 8px 0 0 8px !important;
+      }
+
+      &:last-of-type {
+        border-radius: 0 8px 8px 0 !important;
+        border-right: 1px solid $lb-border-color !important;
+      }
+    }
+
+    // Hover.
+    &:hover {
+
+      // "Remove" and "Cofigure" buttons.
+      .layout-builder__link--remove,
+      .layout-builder__link--configure,
+      .layout-builder__link--add-section-to-library {
+        opacity: 1;
+      }
+    }
+
+    a.layout-builder__link--copy-section {
+      &:hover {
+        width: rem-calc(170);
+      }
+    }
+  }
+
+  .layout-builder__section:not(.gin-lb--disable-section-focus):hover:after {
+    border: 0 !important;
+    box-shadow: 0 2px 8px 0 rgba($black, .35);
+    outline: 2px solid $primary-shade;
+    z-index: 1;
+  }
+
+  // Add template to library
+  .layout-builder__link.layout-builder__link--add-template-to-library,
+  .layout-builder__link.layout-builder__link--add-template-to-library:not(:focus) {
+    position: relative;
+    text-indent: 0;
+    width: auto;
+    padding-left: 40px !important;
+    color: $text-primary !important;
+    line-height: 1.5em !important;
+    text-align: center;
+    margin: 20px auto 60px !important;
+    display: inline-block !important;
+    border: 1px solid $lb-border-color !important;
+    border-radius: 5px !important;
+    font-weight: bold;
+    z-index: 100;
+
+    &:hover {
+      text-decoration: none;
+      color: $primary !important;
+    }
+
+    &:before {
+      background: url('../images/layout_builder/new_template.svg') no-repeat;
+      background-size: contain;
+    }
+
+    .layout-builder__link-wrapped {
+      position: relative;
+      top: unset;
+      left: unset;
+    }
+  }
+
+  // Rearrange
+  .layout-builder__link.layout-builder__link--rearrange{
+    border: 1px solid $lb-border-color !important;
+    border-radius: 5px !important;
+    left: 10px;
+
+    &:hover {
+      text-decoration: none;
+      color: $primary !important;
+    }
+
+    &:nth-of-type(1):has(+ .layout-builder__link--rearrange) {
+      border-radius: 5px 0 0 5px !important;
+      border-right: 0 !important;
+    }
+
+    &:nth-of-type(2) {
+      border-radius: 0 5px 5px 0 !important;
+    }
+
+    &.layout-builder__link--move-up:before {
+      background: url('../images/layout_builder/section/arrow_up.svg') no-repeat;
+      background-size: contain;
+      left: 9px !important;
+    }
+
+    &.layout-builder__link--move-down:before {
+      background: url('../images/layout_builder/section/arrow_down.svg') no-repeat;
+      background-size: contain;
+      left: 8px !important;
+    }
+
+    /*.layout-builder__link-wrapped {
+      position: relative;
+      top: unset;
+      left: unset;
+    }*/
+  }
+
+  // Add section to library.
+  .layout-builder__link--copy-section,
+  .layout-builder__link--copy-section:visited {
+    border-radius: $card-border-radius !important;
+    border: 2px solid transparent !important;
+    box-shadow: 0 2px 8px 0 rgba($black, .35) !important;
+    color: $white !important;
+    display: block !important;
+    font-size: 14px !important;
+    font-weight: 700;
+    line-height: 1 !important;
+    margin: 0 !important;
+    padding: 10px 15px !important;
+    text-decoration: none;
+    transition: border-color .3s ease;
+    display: inline-block !important;
+    position: absolute !important;
+    right: 10px;
+
+    // Hover and focus.
+    &:focus {
+      border-color: rgba($white, .75) !important;
+      text-decoration: underline;
+    }
+    &:hover {
+      text-decoration: underline;
+      background-color: white !important;
+    }
+  }
+
+  // Markup block.
+  .c--markup-block-block {
+    min-height: 50px;
+  }
+
+  // Layout Builder Browser.
+  #drupal-off-canvas .block-categories {
+    details .details-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0 !important;
+
+      .layout-builder-browser-block-item {
+        flex-basis: 33.33333333%;
+        width: 33.33333333%;
+        padding: 1rem 0;
+        font-size: rem-calc(12);
+        box-shadow: 0 0 0 1px $lb-border-color;
+        border-radius: 0;
+        text-decoration: none;
+        color: black;
+        text-align: center;
+        margin: 0 !important;
+
+        a {
+          color: black;
+          text-decoration: none;
+          display: block;
+          width: 100%;
+
+          &:hover, &:focus {
+            color: #7F56D9;
+            background-color: none;
+            box-shadow: none;
+          }
+        }
+
+        &:hover, &:focus {
+          box-shadow: 0 0 0 1px $lb-window-summary;
+          background-color: $lb-window-summary;
+          color: #7F56D9;
+        }
+
+        img {
+          width: 100%;
+          max-width: 32px;
+          display: block;
+          text-align: center;
+          margin: 0 auto;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
+.layout .block:not(:first-child) {
+  &:first-child {
+      margin: 0;
+  }
+    margin-bottom: 40px;
+}
+
+// Layout Builder form.
+.glb-toolbar .layout-builder-form {
+
+  // Make the submit button obvious when disabled by content_lock.
+  .form-submit {
+    &.is-disabled {
+      background-color: #8b0000 !important;
+      width: 80%;
+      height: 400px;
+    }
+  }
+}
+
+// Modal.
+#layout-builder-modal {
+
+  // Form item.
+  .form-item {
+    max-width: none;
+  }
+}
+
+// Discard changes page.
+.layout-builder-discard-changes {
+  // @include container;
+
+  // Buttons.
+  .form-actions {
+    .form-input-wrapper {
+      display: inline-block;
+    }
+
+    // "Cancel" button.
+    #edit-cancel {
+      // @include button--3;
+    }
+  }
+}
+
+// UI styles.
+.ui-dialog {
+  .layout-builder-remove-section .button,
+  .layout-builder-remove-section .button:not(:focus),
+  .layout-builder-remove-section .form-actions .button,
+  .layout-builder-remove-section .action-link--icon-trash.action-link  {
+    background-color: $white !important;
+    border-color: $black !important;
+    color: $black !important;
+  }
+
+  .layout-builder-remove-section .button:hover {
+    background-color: rgba($white, .8) !important;
+    color: $primary-shade !important;
+  }
+
+  .layout-builder-remove-section .button:focus {
+    background-color: $white !important;
+    box-shadow: 0 0 0 2px rgba($white, .2) !important;
+  }
+}
+
+.layout-builder__region {
+  border-radius: $card-border-radius;
+  padding: rem-calc(20);
+  min-height: 200px;
+  border: 0;
+}
+
+.toastify.on {
+  padding-right: rem-calc(50);
+  button {
+    top: rem-calc(12);
+  }
+}
+
+.layout-builder-active {
+  .ui-resizable-handle.ui-resizable-w {
+    display: none !important;
+  }
+  .button--primary {
+    @extend .btn;
+    @extend .btn-primary;
+    border-radius: $card-border-radius !important;
+  }
+  #edit-discard-changes {
+    @extend .btn;
+    @extend .btn-secondary;
+    border-radius: $card-border-radius !important;
+  }
+  #edit-revert {
+    @extend .btn;
+    @extend .btn-outline-primary;
+    border-radius: $card-border-radius !important;
+  }
+
+  .layout-builder__message {
+    display: none;
+  }
+  .layout .block:not(:first-child) {
+    margin-top: 0 !important;
+  }
+  .layout-builder-form .form-type-vertical-tabs {
+    display: none;
+  }
+  .ui-widget.ui-dialog.ui-dialog-off-canvas .ui-dialog-titlebar {
+    background-color: white !important;
+    height: auto !important;
+    border-bottom: 1px solid $lb-window-summary !important;
+
+    .ui-dialog-titlebar-close {
+      top: 70%;
+
+      &:after {
+        display: none;
+      }
+    }
+
+    .ui-dialog-title {
+      color: black !important;
+      margin-left: 0 !important;
+      padding-left: 0 !important;
+      font-size: 23px !important;
+      font-weight: bold;
+    }
+  }
+
+  .glb-preview-regions--enable {
+    .layout-builder__layout {
+      border: 2px dashed $lb-border-color;
+    }
+
+    .layout-builder-block {
+      outline: 0;
+      border: 2px dashed white;
+
+      &:hover {
+        border: 2px dashed $lb-border-color;
+      }
+    }
+  }
+
+  .glb-canvas-form {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .glb-canvas-form__actions {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+  }
+
+  .glb-canvas-form__settings {
+    padding: 0;
+  }
+
+  .glb-form-radios .glb-form-type--radio {
+    display: flex;
+    align-items: center;
+
+    label > span {
+      height: auto !important;
+      margin: 0 !important;
+    }
+
+    &:checked {
+      box-shadow: none !important;
+    }
+  }
+
+  .glb-form-boolean--type-radio:checked,
+  .glb-form-boolean--type-radio:checked:hover,
+  .glb-form-boolean--type-radio:checked:active,
+  .glb-form-boolean--type-radio:checked:focus,
+  .glb-form-boolean--type-radio:checked:hover:focus,
+  .glb-table .draggable a.tabledrag-handle:focus::before {
+    box-shadow: none !important;
+  }
+
+  .glb-form-element:focus, .glb-form-element:hover:focus {
+    box-shadow: none !important;
+  }
+
+  .glb-form.section-library-add-template-to-library {
+    padding: rem-calc(20);
+  }
+}
+
+.icons-selector {
+  color: #383A40 !important;
+
+  .selected-icon {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &.fip-grey {
+    .selector-button {
+      i {
+        color: #383A40 !important;
+      }
+    }
+    .selector-search {
+      .icons-search-input {
+        &::placeholder {
+          color: #383A40 !important;
+        }
+      }
+      i {
+        color: #383A40 !important;
+      }
+    }
+
+    .selector-footer {
+      span, i {
+        color: #383A40 !important;
+      }
+    }
+  }
+}
+
+.layout-builder__layout {
+  border: 0;
+}
+
+
+.ui-dialog.ui-layout-builder-modal {
+  .ui-dialog-titlebar {
+    height: auto !important;
+    background-color: white !important;
+    font-size: 100%;
+
+    .ui-dialog-titlebar-close:after {
+      background-color: white;
+      color: black;
+    }
+  }
+
+  #layout-builder-modal {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+
+    .form-type-search {
+      padding-bottom: 0 !important;
+      margin-bottom: 0 !important;
+    }
+  }
+}
+
+.section-library-filters {
+  margin: 1rem 0 0 0;
+
+  & > div {
+    margin: 0 !important;
+  }
+}
+
+.section-library-links {
+  align-items: self-start !important;
+}
+
+.section-library-links li {
+  width: 50%;
+
+  .js-layout-builder-section-library-link {
+    align-items: center;
+    padding: 1rem 0;
+  }
+}
+
+.section-library-links li a {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: start;
+  color: black;
+  text-decoration: none;
+  padding: 0;
+
+  &:hover {
+    background-color: transparent;
+    color: #7F56D9;
+  }
+
+  img {
+    margin-top: 1rem;
+    border-radius: 10px;
+    border: 1px solid $lb-border-color;
+
+    &:hover {
+      background-color: transparent;
+      box-shadow: 0px 4px 13px 0px $lb-button-hover;
+    }
+  }
+}
+
+.ui-dialog.ui-layout-builder-modal .ui-dialog-titlebar-close {
+  background: none;
+
+  &:focus, &:hover {
+    background: none;
+  }
+}
+
+.ui-dialog.ui-layout-builder-modal {
+  z-index: 10000 !important;
+}
+
+#layout-builder-modal {
+  .fieldset__wrapper > fieldset {
+    background-color: $lb-window-summary;
+  }
+
+  .glb-table {
+    td {
+      background: white !important;
+      border-bottom: 1px solid $lb-window-summary;
+    }
+
+    th {
+      padding: .5rem 1rem;
+      line-height: 1em;
+      h4 {
+        padding: 0; top: 0;
+        font-size: 1em;
+        font-weight: bold;
+      }
+    }
+
+    tr {
+      &:hover {
+        background: white !important;
+      }
+    }
+  }
+}
+
+.layout-builder-configure-block {
+  .glb-media-library-item__remove.icon-link {
+    visibility: visible !important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .layout-builder-active .ui-widget.ui-dialog.ui-dialog-off-canvas .ui-dialog-titlebar .ui-dialog-titlebar-close {
+    right: 30px;
+  }
+
+  .layout-builder-active nav.tabs ul .nav-item a {
+    padding: .5rem;
+  }
+
+  .glb-claro-details {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .ui-dialog-off-canvas #drupal-off-canvas .glb-layout-builder-browser {
+    padding: 0 !important;
+  }
+
+  .gin-sticky {
+    .glb-button--primary, .glb-button--primary:hover, .glb-button--primary:active, .glb-button--primary:focus, .glb-button--primary:not(:focus), .glb-button--primary:not(:focus):hover, .glb-button--primary:not(:focus):active, .glb-button--primary:not(:focus):focus {
+      padding: .5rem !important;
+    }
+  }
+}
+
+.layout-builder-active nav.tabs {
+  margin-bottom: 50px;
+}
+
+body.js-off-canvas-dialog-open::after {
+  content: '';
+  background: rgba(255,255,255,.9);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 100;
+}
+
+.media-library-widget-modal .ui-dialog-content {
+  height: auto !important;
+}
+
+.ui-dialog.ui-widget-content {
+  .ui-dialog-titlebar {
+    margin: 0 !important;
+    line-height: 1.2 !important;
+  }
+  .ui-dialog-titlebar-close {
+    top: 40%;
+  }
+  .ui-dialog-titlebar-close:after {
+    background-color: transparent !important;
+    color: $black !important;
+  }
+}
+
+.field-multiple-table tr .form-item {
+  display: block !important;
+}
+
+// Webform alert message.
+.webform-submission-form {
+  .alert {
+    font-size: $font-size-body-sm;
+    weight: $font-weight-base;
+    h2 {
+      font-size: $h6-font-size;
+      line-height: $h6-font-size;
+      margin-bottom: 0;
+      weight: $font-weight-bold;
+    }
+    svg {
+      height: 30px;
+    }
+  }
+
+}

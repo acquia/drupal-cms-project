@@ -1,0 +1,41 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Accordion Container
+status: stable
+description: Accordion container component that wraps multiple accordion items
+group: Provus Components
+
+variants:
+  default:
+    title: Default
+    description: Standard accordion container for collapsible content sections
+
+props:
+  type: object
+  properties:
+    accordion_id:
+      type: string
+      title: 'Unique Identifier'
+      description: 'Unique identifier for the accordion component. Used for accessibility and JavaScript functionality. Will be auto-generated if not provided.'
+      examples:
+        - 'faq'
+      default: ''
+    title:
+      type: string
+      title: 'Title'
+      description: 'Title of the accordion.'
+      examples:
+        - 'FAQ'
+      default: ''
+
+slots:
+  accordion_body:
+    title: Accordion items
+    description: Accordion item components placed inside the accordion container
+
+libraryOverrides:
+  js:
+    accordion.js: { minified: false }
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/once

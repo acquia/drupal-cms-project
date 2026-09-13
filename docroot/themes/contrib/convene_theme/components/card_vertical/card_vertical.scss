@@ -1,0 +1,103 @@
+.card-grid-section--themed .card-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #F2F2F2;
+  border-radius: 12px;
+  max-width: 608px;
+  height: 100%;
+
+  .card-vertical__content {
+    padding: 48px;
+
+    .typography__eyebrow {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 150%;
+      letter-spacing: 0%;
+      color: #030804;
+      margin: 0;
+      padding: 0;
+      margin-bottom: 8px;
+    }
+
+    .typography__heading {
+      font-weight: 400;
+      font-size: 44px;
+      color: #030804;
+      margin: 0;
+      padding: 0;
+    }
+
+    .typography__description {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 150%;
+      letter-spacing: 0%;
+      color: #030804;
+      margin: 0;
+      padding: 0;
+
+      * {
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .card-vertical__actions {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+
+      .button--secondary {
+        box-shadow: 0px 0px 0px 1px #0308040D inset;
+        background: #0308040D;
+        padding: 10px 24px;
+        border-radius: 12px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 150%;
+        color: #030804;
+      }
+
+      .button--tertiary {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 150%;
+        letter-spacing: 0%;
+        color: #030804;
+        padding: unset;
+        position: relative;
+
+        &:hover {
+          background-color: unset !important;
+          background: unset !important;
+          box-shadow: unset !important;
+          transform: unset !important;
+        }
+      }
+    }
+  }
+
+  .card-vertical__image {
+    max-width: 608px;
+    width: 100%;
+    height: 100%;
+
+    img {
+      aspect-ratio: 76 / 45;
+      width: 100%;
+      height: 100%;
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+      object-fit: cover;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .card-vertical__content {
+      padding: 32px 24px;
+    }
+  }
+}

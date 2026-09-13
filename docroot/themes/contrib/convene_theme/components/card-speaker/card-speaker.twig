@@ -1,0 +1,18 @@
+{% set classes = [
+  'card-speaker',
+  admin_theme ? 'card-speaker--admin-theme' : 'card-speaker--themed',
+] %}
+
+<div{{attributes.addClass(classes)}}>
+  <div class="card-speaker__media-wrapper">
+    {% if media %}
+      {{ media }}
+    {% endif %}
+  </div>
+  
+  <div class="card-speaker__content">
+    {% if content %}
+      {{ content }}
+    {% endif %}
+  </div>
+</div>

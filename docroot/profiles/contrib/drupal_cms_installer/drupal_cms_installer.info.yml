@@ -1,0 +1,17 @@
+name: Drupal CMS Installer
+type: profile
+core_version_requirement: '^11.3'
+description: 'Provides install-time tweaks for Drupal CMS. Not to be used in production.'
+
+# Use the `distribution` key to skip the installer's profile selection step.
+distribution:
+  name: Drupal CMS
+  install:
+    theme: drupal_cms_installer_theme
+    # When done, redirect to the dashboard included with drupal_cms_admin_ui.
+    finish_url: 'admin/dashboard/welcome'
+
+# Explicitly provide an empty list of themes -- this prevents the installer from
+# injecting Stark into it.
+# @see install_profile_info()
+themes: []

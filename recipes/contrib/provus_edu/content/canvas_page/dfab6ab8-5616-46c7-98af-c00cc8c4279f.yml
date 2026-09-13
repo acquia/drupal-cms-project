@@ -1,0 +1,450 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: dfab6ab8-5616-46c7-98af-c00cc8c4279f
+  default_langcode: en
+  depends:
+    c3493fd4-1bc3-4174-8766-93730f2392c3: file
+    11d193dc-502f-45bd-8a31-f9eb665de18d: media
+    39102023-993d-4db7-815a-c216f6a772be: file
+    56511d48-8b94-40de-a612-de1f30637a5d: media
+    fd45b1c0-e153-4e76-9c55-a60cd06a5134: file
+    ea5eb5b1-a175-417b-a72f-ac25db9240f6: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Admissions
+  description:
+    -
+      value: 'Find everything you need to apply, enroll, and take the first step toward your future at Windy City Community College.'
+  components:
+    -
+      uuid: d35bf739-de05-4f58-9bb6-11be2c152972
+      component_id: sdc.provus_base_theme.hero_banner
+      inputs:
+        title: Admissions
+        body:
+          value: '<p><strong>Find everything you need to apply, enroll, and take the first step toward your future at Windy City Community College.</strong></p>'
+          format: canvas_full_html
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 11d193dc-502f-45bd-8a31-f9eb665de18d
+            target_type: media
+        is_short_banner: true
+        image_position: full
+        background_color: primary
+        text_container_width: col-lg-6
+        text_alignment: left
+    -
+      parent_uuid: d35bf739-de05-4f58-9bb6-11be2c152972
+      slot: hero_banner_buttons
+      uuid: aed044cd-3cd9-4057-ab96-745a99adb717
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Apply Now'
+        url:
+          uri: 'internal:/contact'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: auto
+    -
+      parent_uuid: d35bf739-de05-4f58-9bb6-11be2c152972
+      slot: hero_banner_buttons
+      uuid: cf2f6e49-3c58-4e7e-ba82-4417c36f9a06
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Explore Programs'
+        url:
+          uri: 'internal:/contact'
+          options: {  }
+        variant: secondary
+        id: my-button
+        size: normal
+        width: auto
+    -
+      uuid: 55d8722f-ed83-4e8d-9d3a-31dbe8fbf599
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        padding_top: pt-5
+        padding_bottom: pb-5
+    -
+      parent_uuid: 55d8722f-ed83-4e8d-9d3a-31dbe8fbf599
+      slot: content
+      uuid: 95a4ad6a-bc38-47a4-8b92-95e7dc1c7a2f
+      component_id: sdc.provus_base_theme.two_column
+      inputs:
+        desktop_width: 50-50
+        tablet_width: 50-50
+        mobile_width: 100-100
+    -
+      parent_uuid: 95a4ad6a-bc38-47a4-8b92-95e7dc1c7a2f
+      slot: column_1
+      uuid: 12c8ace4-6f44-4637-81ee-64917a23b4a3
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Welcome to Windy City Community College'
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 95a4ad6a-bc38-47a4-8b92-95e7dc1c7a2f
+      slot: column_1
+      uuid: dcf4514e-d2f9-463d-a436-58ff165a08d7
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p>Welcome to Windy City Community College! We’re excited that you’re considering joining our vibrant community of learners, innovators, and achievers. Whether you’re starting your academic journey, seeking to transfer, or returning to education, we’re here to help you succeed.</p>'
+          format: canvas_full_html
+    -
+      parent_uuid: 95a4ad6a-bc38-47a4-8b92-95e7dc1c7a2f
+      slot: column_2
+      uuid: 699fb956-b1b4-4d98-aa2c-98c998aaf8ef
+      component_id: sdc.provus_base_theme.image
+      inputs:
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 56511d48-8b94-40de-a612-de1f30637a5d
+            target_type: media
+        size: '4:3'
+        radius: rounded-0
+        margin_bottom: mb-0
+    -
+      uuid: 78bc4698-2831-4c8e-8244-de5b76d21914
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        custom_class: bg-grey
+    -
+      parent_uuid: 78bc4698-2831-4c8e-8244-de5b76d21914
+      slot: content
+      uuid: 3d9202a5-1a70-40b4-9edb-5ff98ea135e9
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: 3d9202a5-1a70-40b4-9edb-5ff98ea135e9
+      slot: column_1
+      uuid: 21974c05-59d8-467c-9d71-af1eb52457bc
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Why Choose Windy City Community College?'
+        decorative_line: true
+        alignment: center
+    -
+      parent_uuid: 78bc4698-2831-4c8e-8244-de5b76d21914
+      slot: content
+      uuid: de0230c7-ebe4-4d1e-9522-34bcefac952b
+      component_id: sdc.provus_base_theme.three_column
+      inputs:
+        desktop_width: 33-33-33
+        tablet_width: 33-33-33
+        mobile_width: 100-100-100
+    -
+      parent_uuid: de0230c7-ebe4-4d1e-9522-34bcefac952b
+      slot: column_1
+      uuid: f523b769-abba-4317-93e0-e231e14456d4
+      component_id: sdc.provus_base_theme.card_text
+      inputs:
+        card_type: basic
+        title: 'Affordable Tuition'
+        link_style: default
+        more_content:
+          value: '<p>We offer competitive tuition rates, financial aid, and scholarship opportunities to make education accessible to all.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: de0230c7-ebe4-4d1e-9522-34bcefac952b
+      slot: column_2
+      uuid: 10049f4e-8b01-4e79-bbfb-6417f9c16cdd
+      component_id: sdc.provus_base_theme.card_text
+      inputs:
+        card_type: basic
+        title: 'Flexible Programs'
+        link_style: default
+        more_content:
+          value: "<p>Choose from day, evening, and online classes designed to fit your schedule.\L</p>"
+          format: canvas_html_block
+    -
+      parent_uuid: de0230c7-ebe4-4d1e-9522-34bcefac952b
+      slot: column_3
+      uuid: a44fc5fc-21cc-48c6-b374-052cf8fbd5cd
+      component_id: sdc.provus_base_theme.card_text
+      inputs:
+        card_type: basic
+        title: 'Supportive Environment'
+        link_style: default
+        more_content:
+          value: "<p>From academic advising to tutoring, we’re here to support your goals every step of the way.\L</p>"
+          format: canvas_html_block
+    -
+      parent_uuid: 78bc4698-2831-4c8e-8244-de5b76d21914
+      slot: content
+      uuid: fc3112de-51b2-4177-9e33-ec69e705aca9
+      component_id: sdc.provus_base_theme.three_column
+      inputs:
+        desktop_width: 33-33-33
+        tablet_width: 33-33-33
+        mobile_width: 100-100-100
+    -
+      parent_uuid: fc3112de-51b2-4177-9e33-ec69e705aca9
+      slot: column_1
+      uuid: 92620418-3054-4da7-89c2-1f812076d4a9
+      component_id: sdc.provus_base_theme.card_text
+      inputs:
+        card_type: basic
+        title: 'Transfer Opportunities'
+        link_style: default
+        more_content:
+          value: '<p>Seamlessly transfer credits to leading four-year institutions.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: fc3112de-51b2-4177-9e33-ec69e705aca9
+      slot: column_2
+      uuid: 45afb319-2921-4ddb-9e23-d103ef38c78c
+      component_id: sdc.provus_base_theme.card_text
+      inputs:
+        card_type: basic
+        title: 'Career Readiness'
+        link_style: default
+        more_content:
+          value: '<p>Gain hands-on experience and skills that prepare you for today’s job market.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 78bc4698-2831-4c8e-8244-de5b76d21914
+      slot: content
+      uuid: 03eeb4f6-2b9a-42cd-b976-896bcff7a918
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: 03eeb4f6-2b9a-42cd-b976-896bcff7a918
+      slot: column_1
+      uuid: 019a368b-77bb-44f8-91c2-fa85308fcc3b
+      component_id: sdc.provus_base_theme.spacer
+      inputs:
+        padding_all: p-3
+    -
+      parent_uuid: 03eeb4f6-2b9a-42cd-b976-896bcff7a918
+      slot: column_1
+      uuid: 0be941e8-0273-4bad-aecd-7865bd933680
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'View All Programs'
+        url:
+          uri: 'internal:/'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: auto
+        wrapper: div
+        alignment: center
+    -
+      uuid: 74125224-fc3c-4224-8aba-d2b2c227a9dd
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        padding_top: pt-5
+        padding_bottom: pb-5
+    -
+      parent_uuid: 74125224-fc3c-4224-8aba-d2b2c227a9dd
+      slot: content
+      uuid: f437cd89-25aa-4e05-981a-2d2bfbe16442
+      component_id: sdc.provus_base_theme.cta
+      inputs:
+        title: 'Visit Campus'
+        body:
+          value: '<p>Come see what makes Windy City Community College special! Schedule a campus tour and experience.</p>'
+          format: canvas_full_html
+        background_color: Secondary
+    -
+      parent_uuid: f437cd89-25aa-4e05-981a-2d2bfbe16442
+      slot: cta_footer
+      uuid: a6ffdd6b-33f3-4566-abfc-c1dcd22d4a88
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Schedule a tour'
+        url:
+          uri: 'internal:/'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: auto
+    -
+      uuid: 80a2beb1-3477-453f-9a48-17473c60a469
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        padding_bottom: pb-5
+        padding_top: pt-5
+    -
+      parent_uuid: 80a2beb1-3477-453f-9a48-17473c60a469
+      slot: content
+      uuid: c598c005-6f41-44fa-9b91-f1ec3dbe3bc3
+      component_id: sdc.provus_base_theme.two_column
+      inputs:
+        desktop_width: 50-50
+        tablet_width: 50-50
+        mobile_width: 100-100
+    -
+      parent_uuid: c598c005-6f41-44fa-9b91-f1ec3dbe3bc3
+      slot: column_1
+      uuid: d70510ac-1e85-4398-a0cf-1734cbd45b28
+      component_id: sdc.provus_base_theme.image
+      inputs:
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: ea5eb5b1-a175-417b-a72f-ac25db9240f6
+            target_type: media
+        size: '4:3'
+        radius: rounded-0
+        margin_bottom: mb-0
+    -
+      parent_uuid: c598c005-6f41-44fa-9b91-f1ec3dbe3bc3
+      slot: column_2
+      uuid: 15558c18-2e95-4232-8677-b8f8b72e6f78
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: Contact
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: c598c005-6f41-44fa-9b91-f1ec3dbe3bc3
+      slot: column_2
+      uuid: 9a46b4a8-6ea0-40cb-8c0c-1f2f5826f244
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p>Got questions? We’re here to help!<br><br>Phone: <a href="tel:+1 (773)-525-8255"><u>(773)-525-8255</u></a><br><br>Email: <a href="mailto:ignite@prometsource.com"><u>ignite@prometsource.com</u></a><br><br>Address: 4809 N. Ravenswood Ave. Suite 126, Chicago, IL 60640<br><br>Start your journey today and discover how Windy City Community College can help you achieve your dreams!</p>'
+          format: canvas_full_html
+  path:
+    -
+      alias: /admissions
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

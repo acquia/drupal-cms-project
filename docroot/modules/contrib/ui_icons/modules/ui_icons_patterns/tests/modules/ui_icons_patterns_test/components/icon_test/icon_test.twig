@@ -1,0 +1,16 @@
+<div class="" style="border: solid 1px blue; border-radius: 20px; padding: 5px">
+  {% if label %}Label: {{ label }}{% endif %}
+  {% if icon1 %}
+    <div class="icon" style="border: solid 1px red; border-radius: 20px; padding: 5px">Icon1: {{ icon1.pack_id ~ ':' ~ icon1.icon_id }}: {{ icon(icon1.pack_id, icon1.icon_id, icon1.settings) }}</div>
+  {% endif %}
+  {% if icon1_allowed %}
+    <div class="icon" style="border: solid 1px red; border-radius: 20px; padding: 5px">Icon1_allowed: {{ icon1_allowed.pack_id ~ ':' ~ icon1_allowed.icon_id }}: {{ icon(icon1_allowed.pack_id, icon1_allowed.icon_id, icon1_allowed.settings) }}</div>
+  {% endif %}
+
+  {% if icon2 %}
+    <div class="icon" style="border: solid 1px orange; border-radius: 20px; padding: 5px">Icon2: {{ icon2.pack_id ~ ':' ~ icon2.icon_id }}: {{ icon(icon2.pack_id, icon2.icon_id, icon2.settings) }}</div>
+  {% endif %}
+  {% if icon2_allowed %}
+    <div class="icon" style="border: solid 1px cyan; border-radius: 20px; padding: 5px">Icon2_allowed: {{ icon2_allowed.pack_id ~ ':' ~ icon2_allowed.icon_id }}: {{ icon(icon2_allowed.pack_id, icon2_allowed.icon_id, icon2_allowed.settings) }}</div>
+  {% endif %}
+</div>

@@ -1,0 +1,679 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: cae25fb3-bab9-462f-a180-c2222ca05991
+  default_langcode: en
+  depends:
+    103288a5-b703-42d5-b9d0-05250a8a001b: file
+    3133db7f-fc9f-40b2-9509-ae9b3eab5733: media
+    f95c82df-ca29-4504-9ce6-bfaaf6f452e1: file
+    7214cdd9-a0dc-40be-9e1d-bdfe1ff073fe: media
+    f85e4186-9a6c-4c55-9460-66c33a0ce07f: file
+    47a773c2-eaf2-4db2-9a7e-a24face61db4: media
+    3e3fe074-68ac-405b-b9f0-03e986e73a34: file
+    3775dc26-2a9e-4133-a7d8-973198346b92: media
+    d1b6c84c-f287-4923-b449-9261267f9f3d: file
+    a02a9a8c-a5b9-467f-85cf-b33e786f84de: media
+    c9f64139-7433-4945-9ac2-fb91c41994df: file
+    3dea7f7f-18c5-4e81-ae53-df55a9b76322: media
+    ac55298c-02fc-4c0d-b27b-3f2c60b23bf8: file
+    3247f03e-03b6-44f3-8b89-c4485a8e6382: media
+    6c65703d-c267-4290-9da2-8e72234bab5f: file
+    ceb04550-df6a-4029-b7a3-3febfbeaad03: media
+    aa878729-629a-4ab0-a238-51802bdda316: file
+    ba40d983-48f0-4798-92b1-1dc9d5b89e84: media
+    b25854c1-b621-4c55-b65c-455a0dae9ba9: file
+    7bb7f66a-d568-4baf-bce5-ab0a264bfcfd: media
+    5a93a8c7-f60f-4db8-8281-4918519f0e33: file
+    5ed4ae95-df5d-425d-8fd7-92da052e60e0: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Student Life'
+  description:
+    -
+      value: 'Explore a vibrant community where learning extends beyond the classroom. From clubs and events to sports and campus activities, Windy City offers endless opportunities to connect, grow, and thrive.'
+  components:
+    -
+      uuid: 229ae24d-1963-4254-83cc-227a0dab2b17
+      component_id: sdc.provus_base_theme.hero_banner
+      inputs:
+        title: 'Student Life at Windy City'
+        body:
+          value: '<p><strong>Explore a vibrant community where learning extends beyond the classroom. From clubs and events to sports and campus activities, Windy City offers endless opportunities to connect, grow, and thrive.</strong></p>'
+          format: canvas_full_html
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 3133db7f-fc9f-40b2-9509-ae9b3eab5733
+            target_type: media
+        is_short_banner: true
+        image_position: full
+        background_color: primary
+        text_container_width: col-lg-12
+        text_alignment: center
+    -
+      uuid: 1a462c81-c163-422d-b95a-8788785ad965
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        justify_content: justify-content-center
+        padding_top: pt-5
+        padding_bottom: pb-5
+    -
+      parent_uuid: 1a462c81-c163-422d-b95a-8788785ad965
+      slot: content
+      uuid: 7af1f7bc-8e96-4b40-a298-6b09ae214f8e
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: 7af1f7bc-8e96-4b40-a298-6b09ae214f8e
+      slot: column_1
+      uuid: c0d2dd27-9de8-4691-a909-1013b8a7cca0
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Campus Life'
+        decorative_line: true
+        alignment: center
+    -
+      parent_uuid: 7af1f7bc-8e96-4b40-a298-6b09ae214f8e
+      slot: column_1
+      uuid: e785d3df-148c-47f8-b776-582e036b67dc
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p class="text-align-center">Get involved with one of our many student-led clubs and organizations. From cultural and academic groups to special interest and volunteer clubs, there’s a place for you to connect with peers who share your passions.</p>'
+          format: canvas_full_html
+    -
+      parent_uuid: 7af1f7bc-8e96-4b40-a298-6b09ae214f8e
+      slot: column_1
+      uuid: a44babb1-4cf5-4f63-b370-2520846007a0
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h3
+        title: 'Popular clubs include:'
+        decorative_line: false
+        alignment: center
+    -
+      parent_uuid: 7af1f7bc-8e96-4b40-a298-6b09ae214f8e
+      slot: column_1
+      uuid: e292c912-6216-4356-a175-655ed50344d5
+      component_id: sdc.provus_base_theme.four_column
+      inputs:
+        desktop_width: 25-25-25-25
+        tablet_width: 25-25-25-25
+        mobile_width: 100-100-100-100
+    -
+      parent_uuid: e292c912-6216-4356-a175-655ed50344d5
+      slot: column_1
+      uuid: ed97078c-c9b8-4997-ac5f-f15b7ca27a35
+      component_id: sdc.provus_base_theme.card_icon
+      inputs:
+        title: 'Student Government Association'
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 7214cdd9-a0dc-40be-9e1d-bdfe1ff073fe
+            target_type: media
+        link_style: default
+    -
+      parent_uuid: e292c912-6216-4356-a175-655ed50344d5
+      slot: column_2
+      uuid: 294997ef-94e0-4469-9ffa-57c2837b5825
+      component_id: sdc.provus_base_theme.card_icon
+      inputs:
+        title: 'Cultural Heritage Club'
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 47a773c2-eaf2-4db2-9a7e-a24face61db4
+            target_type: media
+        link_style: default
+    -
+      parent_uuid: e292c912-6216-4356-a175-655ed50344d5
+      slot: column_3
+      uuid: 28a40d0b-77c0-4337-8761-be353d5dcc29
+      component_id: sdc.provus_base_theme.card_icon
+      inputs:
+        title: ' Gaming and Esports Club'
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 3775dc26-2a9e-4133-a7d8-973198346b92
+            target_type: media
+        link_style: default
+    -
+      parent_uuid: e292c912-6216-4356-a175-655ed50344d5
+      slot: column_4
+      uuid: 6d34330a-da85-4478-bba9-5a8955e7664c
+      component_id: sdc.provus_base_theme.card_icon
+      inputs:
+        title: 'Environmental Action Group'
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: a02a9a8c-a5b9-467f-85cf-b33e786f84de
+            target_type: media
+        link_style: default
+    -
+      parent_uuid: 1a462c81-c163-422d-b95a-8788785ad965
+      slot: content
+      uuid: 89879ce6-5b17-4964-b3b7-6e079b50e00e
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Explore Clubs'
+        url:
+          uri: 'internal:/'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: auto
+        alignment: center
+        wrapper: div
+    -
+      uuid: 39df7985-3bdb-47a5-ade0-7e04d31612ba
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        padding_top: pt-5
+        padding_bottom: pb-5
+    -
+      parent_uuid: 39df7985-3bdb-47a5-ade0-7e04d31612ba
+      slot: content
+      uuid: f73837b8-c7e5-4464-862f-9563f13fa0a2
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: f73837b8-c7e5-4464-862f-9563f13fa0a2
+      slot: column_1
+      uuid: 7bb90b10-5e39-4883-a833-fa93a6f69fcc
+      component_id: sdc.provus_base_theme.testimonial
+      inputs:
+        display_type: full
+        name: 'Maria Lopez'
+        role: 'Environmental Science Major'
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/839x580'
+            alt: Image
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.testimonial
+        body: 'Joining the Environmental Action Group was one of the best decisions I’ve made. I’ve made amazing friends and feel like I’m making a real difference in my community.'
+    -
+      uuid: 17b34a42-3d90-4f3b-9bdc-52ba8ac9ce86
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        custom_class: 'bg-grey four-card-tall card-tall-wrapper'
+    -
+      parent_uuid: 17b34a42-3d90-4f3b-9bdc-52ba8ac9ce86
+      slot: content
+      uuid: af8c31da-4414-4416-9f28-06e47f58dec2
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: af8c31da-4414-4416-9f28-06e47f58dec2
+      slot: column_1
+      uuid: b42e138a-bfc8-4d32-a021-34a145ab36fe
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Events and Activities'
+        decorative_line: false
+        alignment: center
+    -
+      parent_uuid: af8c31da-4414-4416-9f28-06e47f58dec2
+      slot: column_1
+      uuid: 432e95cc-7136-49a3-b32e-6faca9128fac
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: |-
+            <p class="text-align-center">There’s always something happening on campus! Join us for a mix of educational, social, and cultural events, including:</p>
+            <br/>
+          format: canvas_full_html
+    -
+      parent_uuid: af8c31da-4414-4416-9f28-06e47f58dec2
+      slot: column_1
+      uuid: 9c3eb771-b338-4451-82a4-f3beee587b9b
+      component_id: sdc.provus_base_theme.four_column
+      inputs:
+        desktop_width: 25-25-25-25
+        tablet_width: 25-25-25-25
+        mobile_width: 100-100-100-100
+    -
+      parent_uuid: 9c3eb771-b338-4451-82a4-f3beee587b9b
+      slot: column_1
+      uuid: f0798ac7-18f2-46a2-bcab-8f6d8c3ad84f
+      component_id: sdc.provus_base_theme.card_tall
+      inputs:
+        title: 'Welcome Week festivities'
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 3dea7f7f-18c5-4e81-ae53-df55a9b76322
+            target_type: media
+        header: 'Month Day, Year'
+        link:
+          uri: 'internal:/'
+          options: {  }
+    -
+      parent_uuid: 9c3eb771-b338-4451-82a4-f3beee587b9b
+      slot: column_2
+      uuid: baa06e23-cd96-4a13-9f3a-f5517ff3f802
+      component_id: sdc.provus_base_theme.card_tall
+      inputs:
+        title: 'Career fairs and workshops'
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 3247f03e-03b6-44f3-8b89-c4485a8e6382
+            target_type: media
+        header: 'Month Day, Year'
+        link:
+          uri: 'internal:/'
+          options: {  }
+    -
+      parent_uuid: 9c3eb771-b338-4451-82a4-f3beee587b9b
+      slot: column_3
+      uuid: ef90ab5f-ead1-4295-873a-c6593d829297
+      component_id: sdc.provus_base_theme.card_tall
+      inputs:
+        title: 'Guest speaker series'
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: ceb04550-df6a-4029-b7a3-3febfbeaad03
+            target_type: media
+        header: 'Month Day, Year'
+        link:
+          uri: 'internal:/'
+          options: {  }
+    -
+      parent_uuid: 9c3eb771-b338-4451-82a4-f3beee587b9b
+      slot: column_4
+      uuid: b052f8a7-1ee2-4771-8083-6cfba0af9e92
+      component_id: sdc.provus_base_theme.card_tall
+      inputs:
+        title: 'Movie nights and open mic events'
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: ba40d983-48f0-4798-92b1-1dc9d5b89e84
+            target_type: media
+        header: 'Month Day, Year'
+        link:
+          uri: 'internal:/'
+          options: {  }
+    -
+      parent_uuid: af8c31da-4414-4416-9f28-06e47f58dec2
+      slot: column_1
+      uuid: 072616c3-c8fa-4b17-ab8d-13f2c2bc6e60
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: 072616c3-c8fa-4b17-ab8d-13f2c2bc6e60
+      slot: column_1
+      uuid: 1e91c145-38f0-4e10-a80b-c9e408d7aad2
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p class="text-align-center">Stay up to date with our events calendar</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 072616c3-c8fa-4b17-ab8d-13f2c2bc6e60
+      slot: column_1
+      uuid: 4ecaa01d-eccd-4856-bd71-fd0114e9896b
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'View Event Calendar'
+        url:
+          uri: 'internal:/news-and-events'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: auto
+        wrapper: div
+        alignment: center
+    -
+      uuid: 4b6daa4a-7578-45af-8f2e-00855530156a
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        flex_enabled: false
+        padding_top: pt-5
+        padding_bottom: pb-5
+        container_type: container
+    -
+      parent_uuid: 4b6daa4a-7578-45af-8f2e-00855530156a
+      slot: content
+      uuid: 41cd25fc-95c4-4cbc-afc8-6976e9b2787f
+      component_id: sdc.provus_base_theme.two_column
+      inputs:
+        desktop_width: 50-50
+        tablet_width: 50-50
+        mobile_width: 100-100
+    -
+      parent_uuid: 41cd25fc-95c4-4cbc-afc8-6976e9b2787f
+      slot: column_1
+      uuid: 1bc3dc51-3117-4c1c-90f8-f0455e74ea5c
+      component_id: sdc.provus_base_theme.image
+      inputs:
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 7bb7f66a-d568-4baf-bce5-ab0a264bfcfd
+            target_type: media
+        size: '4:3'
+        radius: rounded-0
+        margin_bottom: mb-0
+    -
+      parent_uuid: 41cd25fc-95c4-4cbc-afc8-6976e9b2787f
+      slot: column_2
+      uuid: 0cf72310-793c-4d0e-9ab3-e1ef19db9352
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Recreation and Athletics'
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 41cd25fc-95c4-4cbc-afc8-6976e9b2787f
+      slot: column_2
+      uuid: 798e2ee0-9127-43e1-b803-8bb2485e5012
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: "<p>Stay active and have fun with our recreational activities and athletic programs. From intramural sports to competitive teams, we offer plenty of ways to play, compete, and stay fit.\L</p><p><br>Facilities Include:</p><ul><li data-list-item-id=\"e7fc90a96666526ff30fb99e40708d85b\">State-of-the-art fitness center</li><li data-list-item-id=\"eab9e0172ab0fe0c88842fbd14afe4273\">Outdoor sports fields</li><li data-list-item-id=\"e5adc4a4f616882ce840a39ab679f10fb\">Basketball and volleyball courts</li></ul>"
+          format: canvas_full_html
+    -
+      parent_uuid: 41cd25fc-95c4-4cbc-afc8-6976e9b2787f
+      slot: column_2
+      uuid: 784d711b-852d-40c7-b54a-1b167c6b7b14
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Explore More'
+        url:
+          uri: 'internal:/'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: auto
+    -
+      uuid: 7cc9054c-002e-4b4c-8b03-eaaeb713f4cc
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        padding_top: pt-5
+        padding_bottom: pb-5
+    -
+      parent_uuid: 7cc9054c-002e-4b4c-8b03-eaaeb713f4cc
+      slot: content
+      uuid: 09f751bb-9b93-4f4a-9372-c8c82c3073a2
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: 09f751bb-9b93-4f4a-9372-c8c82c3073a2
+      slot: column_1
+      uuid: 3f5eeb11-ffac-4f65-bb45-1ccd7e6c88b6
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Diversity and Inclusion'
+        decorative_line: true
+        alignment: center
+    -
+      parent_uuid: 09f751bb-9b93-4f4a-9372-c8c82c3073a2
+      slot: column_1
+      uuid: 34a7ea42-862a-4c0e-8e61-3b9a30675f29
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p class="text-align-center">At Windy City Community College, we celebrate diversity and foster an inclusive campus where everyone feels welcomed and valued. Through events, workshops, and support services, we embrace the unique perspectives that make our community stronger.</p>'
+          format: canvas_full_html
+    -
+      parent_uuid: 09f751bb-9b93-4f4a-9372-c8c82c3073a2
+      slot: column_1
+      uuid: 72f7accf-5e38-46d5-9f82-1dc6eb1cf34f
+      component_id: sdc.provus_base_theme.testimonial
+      inputs:
+        display_type: right
+        name: 'Amina Yusuf'
+        role: 'Psychology Major'
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 5ed4ae95-df5d-425d-8fd7-92da052e60e0
+            target_type: media
+        body: 'The multicultural events on campus helped me feel seen and celebrated. It’s amazing to be part of a college that truly values diversity.'
+    -
+      uuid: f5d61f99-f071-44c8-a134-52133b9ddcc0
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        padding_top: pt-5
+        padding_bottom: pb-5
+    -
+      parent_uuid: f5d61f99-f071-44c8-a134-52133b9ddcc0
+      slot: content
+      uuid: 2de35e87-873b-4309-8694-6a327bfb21ab
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: 2de35e87-873b-4309-8694-6a327bfb21ab
+      slot: column_1
+      uuid: 0af84e71-a81d-4f78-b05d-8fac5e465887
+      component_id: sdc.provus_base_theme.cta
+      inputs:
+        title: 'Become a Member'
+        body:
+          value: '<p>Join our student community today and unlock member perks. Get updates, useful resources, and invites to exclusive sessions. Meet peers, share ideas, and build skills together every week. Sign up now and belong with us.</p>'
+          format: canvas_full_html
+        background_color: Secondary
+    -
+      parent_uuid: 0af84e71-a81d-4f78-b05d-8fac5e465887
+      slot: cta_footer
+      uuid: 35b8a1a2-b974-48c9-90f6-e3cc9cd01486
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Apply now'
+        url:
+          uri: 'internal:/'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: auto
+  path:
+    -
+      alias: /student-life
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

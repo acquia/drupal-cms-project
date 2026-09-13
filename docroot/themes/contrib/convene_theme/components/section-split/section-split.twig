@@ -1,0 +1,35 @@
+{% set classes = [
+  'section-split',
+  'section-split--' ~ variation|default('media-left'),
+  admin_theme ? 'section-split--admin-theme' : 'section-split--themed',
+] %}
+
+<section{{attributes.addClass(classes)}}>
+  <div class="section-split__container">
+    <div class="section-split__grid">
+      
+      <div class="section-split__media">
+        {% if media %}
+          {{ media }}
+        {% endif %}
+      </div>
+
+      <div class="section-split__content-col">
+        {% if heading %}
+          <div class="section-split__heading">{{ heading }}</div>
+        {% endif %}
+        
+        {% if content %}
+          <div class="section-split__content">{{ content }}</div>
+        {% endif %}
+
+        {% if actions %}
+          <div class="section-split__actions">
+            {{ actions }}
+          </div>
+        {% endif %}
+      </div>
+      
+    </div>
+  </div>
+</section>

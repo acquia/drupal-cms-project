@@ -1,0 +1,67 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - diagnosis
+active_version: 0c3ed2df88b09b6f
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        start_date:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'February 27, 2026'
+          expression: ℹ︎string␟value
+        end_date:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'February 28, 2026'
+          expression: ℹ︎string␟value
+        start_time:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '2:00 PM'
+          expression: ℹ︎string␟value
+        end_time:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '4:00 PM'
+          expression: ℹ︎string␟value
+        show_icon:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: true
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions: {  }
+label: Date
+id: sdc.diagnosis.date
+provider: diagnosis
+source: sdc
+source_local_id: 'diagnosis:date'

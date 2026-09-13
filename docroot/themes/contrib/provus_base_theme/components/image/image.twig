@@ -1,0 +1,75 @@
+{% set width_class = width_class|default('w-100') %}
+{% set height_class = height_class|default('none') %}
+{% set container_classes = [] %}
+{% if width_class != 'none' %}
+  {% set container_classes = container_classes|merge([width_class]) %}
+{% endif %}
+{% if height_class != 'none' %}
+  {% set container_classes = container_classes|merge([height_class]) %}
+{% endif %}
+
+{% if size == '16:9' %}
+  {% set container_classes = container_classes|merge(['ratio ratio-16x9']) %}
+{% elseif size == '4:3' %}
+  {% set container_classes = container_classes|merge(['ratio ratio-4x3']) %}
+{% elseif size == '1:1' %}
+  {% set container_classes = container_classes|merge(['ratio ratio-1x1']) %}
+{% endif %}
+
+{% if radius is not empty %}
+  {# overflow-hidden ensures the image doesn't bleed past the rounded corners #}
+  {% set container_classes = container_classes|merge(['overflow-hidden']) %}
+
+  {% if radius == 'small' %}
+    {% set container_classes = container_classes|merge(['rounded-1']) %}
+  {% elseif radius == 'large' %}
+    {% set container_classes = container_classes|merge(['rounded-3']) %}
+  {% elseif radius == 'extra-large' %}
+    {% set container_classes = container_classes|merge(['rounded-4']) %}
+  {% endif %}
+{% endif %}
+
+{% set figure_classes = [
+  margin_all and margin_all != 'none' ? margin_all : '',
+  margin_top and margin_top != 'none' ? margin_top : '',
+  margin_bottom and margin_bottom != 'none' ? margin_bottom : '',
+  margin_start and margin_start != 'none' ? margin_start : '',
+  margin_end and margin_end != 'none' ? margin_end : '',
+  padding_all and padding_all != 'none' ? padding_all : '',
+  padding_top and padding_top != 'none' ? padding_top : '',
+  padding_bottom and padding_bottom != 'none' ? padding_bottom : '',
+  padding_start and padding_start != 'none' ? padding_start : '',
+  padding_end and padding_end != 'none' ? padding_end : '',
+]|filter(v => v) %}
+<figure class="block-provus-media{{ figure_classes is not empty ? ' ' ~ figure_classes|join(' ')|trim : '' }}">
+  <div class="{{ container_classes|join(' ') }}">
+
+    {# If a URL is provided, wrap the image in a link #}
+    {% if url is not empty %}
+      <a href="{{ url }}" class="d-block">
+        {% include 'canvas:image' ignore missing with {
+          src: media.src,
+          alt: media.alt,
+          class: 'img-fluid w-100 h-100 object-fit-cover',
+          width: media.width,
+          height: media.height
+        } only %}
+      </a>
+    {% else %}
+      {# Standard image output without link #}
+      {% include 'canvas:image' ignore missing with {
+        src: media.src,
+        alt: media.alt,
+        class: 'img-fluid w-100 h-100 object-fit-cover',
+        width: media.width,
+        height: media.height
+      } only %}
+    {% endif %}
+  </div>
+
+  {% if caption %}
+    <figcaption class="mt-2 text-muted small">
+      {{ caption }}
+    </figcaption>
+  {% endif %}
+</figure>

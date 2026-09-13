@@ -1,0 +1,92 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - eureka
+label: 'Latest news'
+id: sdc.eureka.latest-news
+source: sdc
+source_local_id: 'eureka:latest-news'
+provider: eureka
+active_version: 1c70f9d49cfe7a66
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        latest_news_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Latest news'
+          expression: ℹ︎string␟value
+        latest_news_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '3'
+          expression: ℹ︎list_float␟value
+        latest_news_summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Find what you need quickly with our convenient links to essential information and services.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        latest_news_items:
+          title: 'Latest news items block'
+          description: 'Block to hold List(Views) News Latest news'
+  1c70f9d49cfe7a66:
+    settings:
+      prop_field_definitions:
+        latest_news_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Latest news'
+          expression: ℹ︎string␟value
+        latest_news_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '3'
+          expression: ℹ︎list_float␟value
+        latest_news_summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Find what you need quickly with our convenient links to essential information and services.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        latest_news_items:
+          title: 'Latest news items block'
+          description: 'Block to hold List(Views) News Latest news'

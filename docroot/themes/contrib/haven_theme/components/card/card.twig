@@ -1,0 +1,87 @@
+{% set is_clickable = url is not empty ? 'yes' : 'no' %}
+
+{% set card =
+  html_cva(
+    base: [
+      'group relative',
+      'flex flex-col justify-between gap-8',
+      'rounded-[20px] bg-white',
+      'p-4',
+      'text-black',
+      'transition duration-300',
+      'in-[.views-row]:h-full'
+    ],
+    variants: {
+      clickable: {
+        yes: 'hover:scale-104 hover:shadow-2xl',
+        no: ''
+      }
+    }
+  )
+%}
+
+{% set card_media = html_cva(base: 'mt-auto aspect-video overflow-hidden rounded-sm', variants: {}) %}
+
+{% set card_content = html_cva(base: '@container flex w-full flex-col items-baseline gap-4', variants: {}) %}
+
+<div
+  class="{{
+  card.apply(
+    {
+      clickable: is_clickable
+    },
+    card_classes|default('')
+  )
+  }}"
+>
+  <div
+    class="{{
+    card_content.apply({
+      style: card_style
+    })
+    }}"
+  >
+    {% if category %}
+      <header class="flex items-center gap-x-2 text-sm text-accent-foreground">
+        {% include '@haven_theme/components/icon/icon.twig' ignore missing with {
+          icon: icon,
+          icon_size: 'extra-small',
+          icon_color: 'currentColor',
+          alt: category
+        } only %}
+        {{ category }}
+      </header>
+    {% endif %}
+    <h3 class="text-xl font-semibold text-primary @sm:text-2xl @2xl:text-3xl">
+      {% if is_clickable %}
+        <a href="{{ url }}" class="after:absolute after:inset-0 after:content-['']">{{ heading_text }}</a>
+      {% endif %}
+    </h3>
+  </div>
+
+  <div class="@container flex w-full flex-col gap-2 md:gap-3">
+    {% if date is not empty %}
+      <span class="text-xs @sm:text-sm">{{ date|date('j F Y') }}</span>
+    {% endif %}
+    {% if media.src is not empty %}
+      <div
+        class="{{
+        card_media.apply({
+          style: card_style
+        })
+        }}"
+      >
+        {% block media %}
+          {% include 'canvas:image' ignore missing with {
+            src: media.src,
+            alt: media.alt,
+            class: 'object-cover w-full h-full',
+            width: media.width,
+            height: media.height,
+            sizes: card_orientation == 'stacked' ? 'auto, 100vw' : '50vw'
+          } only %}
+        {% endblock %}
+      </div>
+    {% endif %}
+  </div>
+</div>

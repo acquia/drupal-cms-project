@@ -1,0 +1,76 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Event Full Content
+status: stable
+description: Event component displaying event title, dates, body content, and card titles
+group: Provus Components
+
+variants:
+  default:
+    title: Default
+    description: Standard event display with title, dates, body content, and card titles
+
+props:
+  type: object
+  required:
+    - title
+    - body
+  properties:
+    title:
+      type: string
+      title: Event title
+      description: Event title
+      examples:
+        - 'Annual Conference 2024'
+      default: ''
+    body:
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: block
+      title: Body
+      description: Content of the event
+      examples:
+        - 'Join us for an exciting event featuring keynote speakers and networking opportunities.'
+      default: ''
+    sidebar_title:
+      type: string
+      title: Sidebar title
+      description: Sidebar title
+      examples:
+        - 'Dates'
+      default: ''
+    sidebar_content:
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: block
+      title: Sidebar content
+      description: Sidebar content
+      examples:
+        - 'March 15-17, 2024'
+      default: ''
+    footer_title:
+      type: string
+      title: Footer title
+      description: Footer title
+      examples:
+        - 'How to Attend'
+      default: ''
+    footer_content:
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: block
+      title: Footer content
+      description: Footer content
+      examples:
+        - '<a href="/events/annual-conference-2024" class="btn btn-primary">Register Now</a>'
+      default: ''
+    image_url:
+      type: object
+      $ref: json-schema-definitions://canvas.module/image
+      title: 'Image URL'
+      description: 'Optional image URL displayed behind the event content'
+      default: ''
+    content_attributes:
+      type: string
+      title: 'Content attributes'
+      description: 'Drupal template function placeholder — no content is required here. Please leave this section blank.'
+      default: ''

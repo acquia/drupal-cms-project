@@ -1,0 +1,40 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - eureka
+label: Alert
+id: sdc.eureka.alert
+source: sdc
+source_local_id: 'eureka:alert'
+provider: eureka
+active_version: bf7047acbc4e22cc
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        alert_content:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra, tellus vitae bibendum egestas, nisl neque rhoncus enim, in vehicula ex mauris feugiat nunc.'
+          expression: ℹ︎string␟value
+        alert_type:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: info
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions: {  }

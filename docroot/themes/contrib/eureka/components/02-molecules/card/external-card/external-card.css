@@ -1,0 +1,22 @@
+.card--external {
+ border: 0.2rem solid var(--grey-light);
+  width: 100%;
+}
+
+.card--external::after {
+  content: "";
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  top: var(--spacing-2);
+  right: var(--spacing-2);
+  background-image: url('../../../../images/icons/external.svg');
+  background-repeat: no-repeat;
+  background-size: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .card--external {
+    flex-basis: calc(33% - 3.2rem/3); /* Three cards per row with 1.6rem spacing */
+  }
+}

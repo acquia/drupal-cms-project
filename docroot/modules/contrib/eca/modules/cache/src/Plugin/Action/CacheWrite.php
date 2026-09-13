@@ -1,0 +1,162 @@
+<?php
+
+namespace Drupal\eca_cache\Plugin\Action;
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Cache\CacheBackendInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\eca\Plugin\FormFieldYamlTrait;
+use Drupal\eca\Service\YamlParser;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Yaml\Exception\ParseException;
+
+/**
+ * Abstract action to write into cache.
+ */
+abstract class CacheWrite extends CacheActionBase {
+
+  use FormFieldYamlTrait;
+
+  /**
+   * The YAML parser.
+   *
+   * @var \Drupal\eca\Service\YamlParser
+   */
+  protected YamlParser $yamlParser;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
+    $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
+    $instance->setYamlParser($container->get('eca.service.yaml_parser'));
+    return $instance;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function access($object, ?AccountInterface $account = NULL, $return_as_object = FALSE) {
+    $result = parent::access($object, $account, TRUE);
+    if ($result->isAllowed() && $this->configuration['use_yaml'] && $this->configuration['validate_yaml']) {
+      try {
+        $this->yamlParser->parse($this->configuration['value']);
+      }
+      catch (ParseException) {
+        $result = AccessResult::forbidden('YAML data is not valid.');
+      }
+    }
+    return $return_as_object ? $result : $result->isAllowed();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function execute(?object $object = NULL): void {
+    if (!($cache = $this->getCacheBackend()) || !($key = $this->getCacheKey())) {
+      return;
+    }
+
+    $value = $this->configuration['value'];
+    if ($this->configuration['use_yaml']) {
+      try {
+        $value = $this->yamlParser->parse($value);
+      }
+      catch (ParseException $e) {
+        $this->logger->error('Tried parsing a cache value item in action "eca_cache_write" as YAML format, but parsing failed.');
+        return;
+      }
+    }
+    else {
+      $value = $this->tokenService->getOrReplace($value);
+    }
+
+    $expire = trim($this->tokenService->getOrReplace($this->configuration['expire']));
+    if ($expire === '') {
+      $expire = CacheBackendInterface::CACHE_PERMANENT;
+    }
+    else {
+      $expire = (int) $expire;
+    }
+    $tags = $this->getCacheTags();
+
+    $cache->set($key, $value, $expire, $tags);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function defaultConfiguration(): array {
+    return [
+      'value' => '',
+      'expire' => '-1',
+      'tags' => '',
+      'use_yaml' => FALSE,
+      'validate_yaml' => FALSE,
+    ] + parent::defaultConfiguration();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
+    $form['value'] = [
+      '#type' => 'textarea',
+      '#title' => $this->t('Cache item value'),
+      '#description' => $this->t('The value to cache.'),
+      '#default_value' => $this->configuration['value'],
+      '#weight' => -40,
+      '#eca_token_replacement' => TRUE,
+    ];
+    $this->buildYamlFormFields(
+      $form,
+      $this->t('Interpret above config value as YAML format'),
+      $this->t('Nested data can be set using YAML format, for example <em>mykey: myvalue</em>. When using this format, this option needs to be enabled. When using tokens and YAML altogether, make sure that tokens are wrapped as a string. Example: <em>title: "[node:title]"</em>'),
+      -30,
+    );
+    $form['expire'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Expiration time'),
+      '#description' => $this->t('The timestamp in seconds when the cached item expires. Set to -1 for unlimited lifetime.'),
+      '#default_value' => $this->configuration['expire'],
+      '#required' => TRUE,
+      '#weight' => -20,
+      '#eca_token_replacement' => TRUE,
+    ];
+    $form['tags'] = [
+      '#type' => 'textarea',
+      '#title' => $this->t('Cache tags'),
+      '#description' => $this->t('Optionally add cache tags for fine-granular cache invalidation. Separate multiple tags with commas. More information about cache tags can be found in the <a href=":url" target="_blank" rel="nofollow noreferrer">documentation</a>.', [
+        ':url' => 'https://www.drupal.org/docs/drupal-apis/cache-api/cache-tags',
+      ]),
+      '#default_value' => $this->configuration['tags'],
+      '#weight' => -10,
+      '#eca_token_replacement' => TRUE,
+    ];
+    return parent::buildConfigurationForm($form, $form_state);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
+    $this->configuration['value'] = $form_state->getValue('value');
+    $this->configuration['use_yaml'] = !empty($form_state->getValue('use_yaml'));
+    $this->configuration['validate_yaml'] = !empty($form_state->getValue('validate_yaml'));
+    $this->configuration['expire'] = $form_state->getValue('expire');
+    $this->configuration['tags'] = $form_state->getValue('tags');
+    parent::submitConfigurationForm($form, $form_state);
+  }
+
+  /**
+   * Set the YAML parser.
+   *
+   * @param \Drupal\eca\Service\YamlParser $yaml_parser
+   *   The YAML parser.
+   */
+  public function setYamlParser(YamlParser $yaml_parser): void {
+    $this->yamlParser = $yaml_parser;
+  }
+
+}

@@ -1,0 +1,33 @@
+<div class="card-wrapper provus-card-tall">
+  {% if link %}
+  <a href="{{ link }}" rel="bookmark">
+  {% endif %}
+  <div{% if content_attributes is defined and content_attributes %}{{ content_attributes.addClass('card') }}{% else %} class="card"{% endif %}>
+    <div class="card-wrapper">
+      {% if image_url %}
+        <div class="card-img-top">
+          {% include 'canvas:image' ignore missing with {
+            src: image_url.src,
+            alt: image_url.alt,
+            class: 'img-fluid w-100 h-100 object-fit-cover'
+          } only %}
+        </div>
+      {% endif %}
+      <div class="card-body">
+        {% if header|render %}
+          <div class="card-date">{{ header }}</div>
+        {% endif %}
+        {% if title|render %}
+          <div class="card-title">
+            <div class="field field--name-field-provus-title">
+            {{ title }}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% if link %}
+  </a>
+  {% endif %}
+</div>

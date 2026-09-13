@@ -1,0 +1,97 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+  theme:
+    - eureka
+label: 'External card'
+id: sdc.eureka.external-card
+source: sdc
+source_local_id: 'eureka:external-card'
+provider: eureka
+active_version: fea2cc1a63166f46
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        external_card_tag:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: New
+          expression: ℹ︎string␟value
+        external_card_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum'
+          expression: ℹ︎string␟value
+        external_card_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+          expression: ℹ︎string␟value
+        external_card_cta_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: 'https://zoocha.com'
+              options: {  }
+          expression: ℹ︎link␟url
+    fallback_metadata:
+      slot_definitions: {  }
+  6f7bd5009709b526:
+    settings:
+      prop_field_definitions:
+        external_card_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum'
+          expression: ℹ︎string␟value
+        external_card_tag:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: New
+          expression: ℹ︎string␟value
+        external_card_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }

@@ -1,0 +1,177 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Icon card
+group: Card
+props:
+  type: object
+  required:
+    - text_align
+    - icon_align
+  properties:
+    tile_size:
+      type: string
+      title: Aspect ratio
+      enum:
+        - square
+        - "4:3"
+        - "16:9"
+      meta:enum:
+        square: Square
+        "4:3": Rectangle 4 × 3
+        "16:9": Rectangle 16 × 9
+      examples:
+        - square
+    background_color:
+      type: string
+      title: Background color
+      enum:
+        - primary
+        - secondary
+        - accent
+        - muted
+        - bright
+        - light
+      meta:enum:
+        primary: Primary
+        secondary: Secondary
+        accent: Accent
+        muted: Muted
+        bright: Bright
+        light: Light
+    border_radius:
+      type: string
+      title: Border radius
+      enum:
+        - small
+        - medium
+        - large
+      meta:enum:
+        small: Small
+        medium: Medium
+        large: Large
+      default: medium
+      examples:
+        - medium
+    icon:
+      type: string
+      title: Icon name
+      description: 'The ID of an icon from the <a href="https://phosphoricons.com/" target="_blank">Phosphor Icons</a> library.'
+      default: "rocket"
+      examples:
+        - "rocket"
+    icon_size:
+      type: string
+      title: Icon size
+      enum:
+        - small
+        - medium
+        - large
+        - extra-large
+      meta:enum:
+        small: Small
+        medium: Medium
+        large: Large
+        extra-large: Extra large
+      examples:
+        - large
+    icon_align:
+      type: string
+      title: Icon alignment
+      enum:
+        - left
+        - right
+        - center
+      meta:enum:
+        left: Left
+        center: Center
+        right: Right
+      default: left
+      examples:
+        - left
+    url:
+      type: string
+      title: Link
+    text:
+      type: string
+      title: Heading
+      examples:
+        - Your heading here
+    description:
+      type: string
+      title: Description
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - "<p>This is placeholder text.</p>"
+    text_align:
+      type: string
+      title: Text alignment
+      enum:
+        - left
+        - center
+        - right
+      meta:enum:
+        left: Left
+        center: Center
+        right: Right
+      default: left
+      examples:
+        - left
+    button_text:
+      type: string
+      title: Button text
+      description: Optional button text (if empty, no button is shown)
+      examples:
+        - "Learn more"
+    button_variant:
+      type: string
+      title: Button style
+      enum:
+        - primary
+        - secondary
+        - primary-inverted
+        - secondary-inverted
+      meta:enum:
+        primary: Primary
+        secondary: Secondary
+        primary-inverted: Primary inverted
+        secondary-inverted: Secondary inverted
+      default: primary
+      examples:
+        - primary
+    button_size:
+      type: string
+      title: Button size
+      enum:
+        - small
+        - medium
+        - large
+      meta:enum:
+        small: Small
+        medium: Medium
+        large: Large
+      default: medium
+    button_icon:
+      type: string
+      title: Button icon
+      enum:
+        - arrow-right
+        - arrow-left
+        - caret-right
+        - caret-left
+        - download
+        - user-plus
+      meta:enum:
+        arrow-right: Arrow right
+        arrow-left: Arrow left
+        caret-right: Caret right
+        caret-left: Caret left
+        download: Download
+        user-plus: User plus
+    button_icon_first:
+      type: boolean
+      title: Display icon first
+      default: false
+    button_mobile_width:
+      type: boolean
+      title: Full width on mobile
+      default: false

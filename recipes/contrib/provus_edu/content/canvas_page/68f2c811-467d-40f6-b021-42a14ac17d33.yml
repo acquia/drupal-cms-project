@@ -1,0 +1,552 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 68f2c811-467d-40f6-b021-42a14ac17d33
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Banner Components'
+  components:
+    -
+      uuid: c35115c5-c88d-4176-8725-f6386cfcf274
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+    -
+      parent_uuid: c35115c5-c88d-4176-8725-f6386cfcf274
+      slot: content
+      uuid: 060ab1d2-6081-48eb-a1a5-ff15a276ce00
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h1
+        title: 'Banner Components'
+        decorative_line: false
+        alignment: left
+    -
+      uuid: 417521ce-a1d5-4749-b805-786d8261eb0f
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+    -
+      parent_uuid: 417521ce-a1d5-4749-b805-786d8261eb0f
+      slot: content
+      uuid: f415c8c6-ed0c-416a-9d71-cc5dd0bc0c2e
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: f415c8c6-ed0c-416a-9d71-cc5dd0bc0c2e
+      slot: column_1
+      uuid: cb239536-2865-45eb-8e87-23556fee2584
+      component_id: sdc.provus_base_theme.hero_banner
+      inputs:
+        subtitle: 'Get Started'
+        title: 'Default Banner'
+        body:
+          value: |
+            <p>We provide exceptional services tailored to your needs.</p>
+            <p>Get started today!</p>
+          format: canvas_full_html
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/400x300'
+            alt: Image
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.hero_banner
+        is_short_banner: false
+        image_position: full
+        background_color: primary
+        text_container_width: col-lg-6
+        text_alignment: left
+    -
+      parent_uuid: cb239536-2865-45eb-8e87-23556fee2584
+      slot: hero_banner_buttons
+      uuid: 3110c053-2f39-44e9-985f-8da01317d79d
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Click me'
+        url:
+          uri: 'internal:/contact'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: auto
+    -
+      parent_uuid: f415c8c6-ed0c-416a-9d71-cc5dd0bc0c2e
+      slot: column_1
+      uuid: f1f77b56-b731-4615-b880-fd984c225e56
+      component_id: sdc.provus_base_theme.hero_banner
+      inputs:
+        subtitle: 'Get Started'
+        title: 'Short Banner'
+        body:
+          value: |
+            <p>We provide exceptional services tailored to your needs.</p>
+            <p>Get started today!</p>
+          format: canvas_full_html
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/400x300'
+            alt: Image
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.hero_banner
+        is_short_banner: true
+        image_position: full
+        background_color: primary
+        text_container_width: col-lg-6
+        text_alignment: left
+    -
+      parent_uuid: f415c8c6-ed0c-416a-9d71-cc5dd0bc0c2e
+      slot: column_1
+      uuid: fe529ab4-8142-40a3-aa89-34333e0ee770
+      component_id: sdc.provus_base_theme.hero_banner
+      inputs:
+        subtitle: 'Get Started'
+        title: 'Short Banner - Right Image'
+        body:
+          value: |
+            <p>We provide exceptional services tailored to your needs.</p>
+            <p>Get started today!</p>
+          format: canvas_full_html
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/400x300'
+            alt: Image
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.hero_banner
+        is_short_banner: true
+        image_position: right
+        background_color: primary
+        text_container_width: col-lg-6
+        text_alignment: left
+    -
+      parent_uuid: f415c8c6-ed0c-416a-9d71-cc5dd0bc0c2e
+      slot: column_1
+      uuid: 51a4f7b2-2cd8-4daf-b18b-98c7975afc43
+      component_id: sdc.provus_base_theme.hero_banner
+      inputs:
+        subtitle: 'Get Started'
+        title: 'Short Banner - Left Image'
+        body:
+          value: |
+            <p>We provide exceptional services tailored to your needs.</p>
+            <p>Get started today!</p>
+          format: canvas_full_html
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/400x300'
+            alt: Image
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.hero_banner
+        is_short_banner: true
+        image_position: left
+        background_color: primary
+        text_container_width: col-lg-6
+        text_alignment: left
+    -
+      parent_uuid: f415c8c6-ed0c-416a-9d71-cc5dd0bc0c2e
+      slot: column_1
+      uuid: 5cf27500-5979-474e-9a2a-2fb9166d1180
+      component_id: sdc.provus_base_theme.hero_banner
+      inputs:
+        subtitle: 'Get Started'
+        title: 'Short Banner - Secondary Background'
+        body:
+          value: |
+            <p>We provide exceptional services tailored to your needs.</p>
+            <p>Get started today!</p>
+          format: canvas_full_html
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/400x300'
+            alt: Image
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.hero_banner
+        is_short_banner: true
+        image_position: right
+        background_color: secondary
+        text_container_width: col-lg-6
+        text_alignment: left
+    -
+      parent_uuid: f415c8c6-ed0c-416a-9d71-cc5dd0bc0c2e
+      slot: column_1
+      uuid: aa02a967-ac58-4e1f-9b6b-e933d597bfd5
+      component_id: sdc.provus_base_theme.hero_banner
+      inputs:
+        subtitle: 'Get Started'
+        title: 'Short Banner - Light Background'
+        body:
+          value: |
+            <p>We provide exceptional services tailored to your needs.</p>
+            <p>Get started today!</p>
+          format: canvas_full_html
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/400x300'
+            alt: Image
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.hero_banner
+        is_short_banner: true
+        image_position: right
+        background_color: light
+        text_container_width: col-lg-6
+        text_alignment: left
+    -
+      parent_uuid: f415c8c6-ed0c-416a-9d71-cc5dd0bc0c2e
+      slot: column_1
+      uuid: a880ebc3-8d6c-455b-8551-556e43346c40
+      component_id: sdc.provus_base_theme.hero_banner
+      inputs:
+        subtitle: 'Get Started'
+        title: 'Short Banner - White Background'
+        body:
+          value: |
+            <p>We provide exceptional services tailored to your needs.</p>
+            <p>Get started today!</p>
+          format: canvas_full_html
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/400x300'
+            alt: Image
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.hero_banner
+        is_short_banner: true
+        image_position: right
+        background_color: white
+        text_container_width: col-lg-6
+        text_alignment: left
+    -
+      parent_uuid: f415c8c6-ed0c-416a-9d71-cc5dd0bc0c2e
+      slot: column_1
+      uuid: 5a9d3f12-ae69-40a8-a307-d9900a7f8730
+      component_id: sdc.provus_base_theme.hero_banner
+      inputs:
+        subtitle: 'Get Started'
+        title: 'Short Banner - Dark Background'
+        body:
+          value: |
+            <p>We provide exceptional services tailored to your needs.</p>
+            <p>Get started today!</p>
+          format: canvas_full_html
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/400x300'
+            alt: Image
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.hero_banner
+        is_short_banner: true
+        image_position: right
+        background_color: dark
+        text_container_width: col-lg-6
+        text_alignment: left
+    -
+      parent_uuid: f415c8c6-ed0c-416a-9d71-cc5dd0bc0c2e
+      slot: column_1
+      uuid: 9d913c6f-2cac-4e06-8f40-e050cd584544
+      component_id: sdc.provus_base_theme.hero_banner
+      inputs:
+        subtitle: 'Get Started'
+        title: 'Short Banner - No Background'
+        body:
+          value: |
+            <p>We provide exceptional services tailored to your needs.</p>
+            <p>Get started today!</p>
+          format: canvas_full_html
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/400x300'
+            alt: Image
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.hero_banner
+        is_short_banner: true
+        image_position: right
+        text_container_width: col-lg-6
+        text_alignment: left
+    -
+      parent_uuid: f415c8c6-ed0c-416a-9d71-cc5dd0bc0c2e
+      slot: column_1
+      uuid: d410a19c-628d-4961-b5b6-e0e0f5df1d10
+      component_id: sdc.provus_base_theme.hero_banner
+      inputs:
+        subtitle: 'Get Started'
+        title: 'Short Banner - Center Aligned'
+        body:
+          value: |
+            <p>We provide exceptional services tailored to your needs.</p>
+            <p>Get started today!</p>
+          format: canvas_full_html
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/400x300'
+            alt: Image
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.hero_banner
+        is_short_banner: true
+        image_position: full
+        text_container_width: col-lg-12
+        text_alignment: center
+    -
+      parent_uuid: d410a19c-628d-4961-b5b6-e0e0f5df1d10
+      slot: hero_banner_buttons
+      uuid: d9f97ade-2ed8-4707-81a5-00ae234168d1
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Click me'
+        url:
+          uri: 'internal:/contact'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: auto
+  path:
+    -
+      alias: /demo/banner-components
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

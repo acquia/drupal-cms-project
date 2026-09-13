@@ -1,0 +1,286 @@
+langcode: en
+status: false
+dependencies:
+  config:
+    - filter.format.canvas_html_block
+  module:
+    - text
+  theme:
+    - eureka
+label: Footer
+id: sdc.eureka.footer
+source: sdc
+source_local_id: 'eureka:footer'
+provider: eureka
+active_version: a8202005f921f465
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        footer_contact_title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Contact Us'
+          expression: ℹ︎string␟value
+        footer_times_title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Opening Times'
+          expression: ℹ︎string␟value
+        footer_quicklinks_title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Contact Us'
+          expression: ℹ︎string␟value
+        footer_location:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '123 Meadow Lane Greenfield Meadowshire MD12 7AW'
+          expression: ℹ︎string␟value
+        footer_phone:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '01234 567890'
+          expression: ℹ︎string␟value
+        footer_email:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: office@willowmeadow.sch.uk
+          expression: ℹ︎string␟value
+        footer_times:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p><strong>School hours:</strong><br>Monday - Friday<br>8:45 AM - 3:15 PM</p><p><strong>Office hours:</strong><br>Monday - Friday<br>8:00 AM - 4:00 PM</p>'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        footer_copyright:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Willow Meadow Primary School. All rights reserved.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        footer_branding_block:
+          title: 'Footer branding block'
+          description: 'Block to include the site logo and slogan'
+        footer_quicklinks_block:
+          title: 'Footer quick links'
+          description: 'Quick links for the main footer content'
+        footer_social_block:
+          title: 'Footer social'
+          description: 'Social network links for the footer'
+        footer_links_block:
+          title: 'Footer links'
+          description: 'Bottom links next to the copyright'
+  b6d5a19e828adbc4:
+    settings:
+      prop_field_definitions:
+        footer_contact_title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Contact Us'
+          expression: ℹ︎string␟value
+        footer_times_title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Opening Times'
+          expression: ℹ︎string␟value
+        footer_quicklinks_title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Quick Links'
+          expression: ℹ︎string␟value
+        footer_location:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '123 Meadow Lane Greenfield Meadowshire MD12 7AW'
+          expression: ℹ︎string␟value
+        footer_phone:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '01234 567890'
+          expression: ℹ︎string␟value
+        footer_email:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: office@willowmeadow.sch.uk
+          expression: ℹ︎string␟value
+        footer_times:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p><strong>School hours:</strong><br>Monday - Friday<br>8:45 AM - 3:15 PM</p><p><strong>Office hours:</strong><br>Monday - Friday<br>8:00 AM - 4:00 PM</p>'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        footer_copyright:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Willow Meadow Primary School. All rights reserved.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        footer_branding_block:
+          title: 'Footer branding block'
+          description: 'Block to include the site logo and slogan'
+        footer_quicklinks_block:
+          title: 'Footer quick links'
+          description: 'Quick links for the main footer content'
+        footer_social_block:
+          title: 'Footer social'
+          description: 'Social network links for the footer'
+        footer_links_block:
+          title: 'Footer links'
+          description: 'Bottom links next to the copyright'
+  560f6df67e5ccfd3:
+    settings:
+      prop_field_definitions:
+        footer_copyright:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Willow Meadow Primary School. All rights reserved.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        footer_branding_block:
+          title: 'Footer branding block'
+          description: 'Block to include the site logo and slogan'
+        footer_col1_block:
+          title: 'Footer column one'
+          description: 'First footer content slot'
+        footer_col2_block:
+          title: 'Footer column two'
+          description: 'Second footer content slot'
+        footer_col3_block:
+          title: 'Footer column three'
+          description: 'Third footer content slot'
+        footer_col4_block:
+          title: 'Footer column four'
+          description: 'Fourth footer content slot'
+  3ab2520a5561633a:
+    settings:
+      prop_field_definitions:
+        footer_copyright:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Willow Meadow Primary School. All rights reserved.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  a4528759458c4eef:
+    settings:
+      prop_field_definitions:
+        footer_social_menu_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Our socials'
+          expression: ℹ︎string␟value
+        footer_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Copyright
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }

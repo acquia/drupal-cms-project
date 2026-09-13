@@ -1,0 +1,44 @@
+$schema: 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+name: Spacer
+description: An empty spacer element with configurable Bootstrap padding.
+status: stable
+group: Provus Components
+
+variants:
+  default:
+    title: Default
+    description: Empty spacer with configurable padding
+
+props:
+  type: object
+  properties:
+    include_divider:
+      type: boolean
+      title: Include divider line
+      description: Adds a horizontal divider line inside the spacer.
+      default: false
+      enum:
+        - true
+        - false
+      examples:
+        - false
+    padding_all:
+      type: string
+      title: Padding
+      description: Bootstrap padding class.
+      default: p-0
+      enum:
+        - p-1
+        - p-2
+        - p-3
+        - p-4
+        - p-5
+      meta:enum:
+        p-1: "P-1"
+        p-2: "P-2"
+        p-3: "P-3"
+        p-4: "P-4"
+        p-5: "P-5"
+      examples:
+        - p-1
+

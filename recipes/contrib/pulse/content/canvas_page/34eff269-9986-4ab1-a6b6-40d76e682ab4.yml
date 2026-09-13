@@ -1,0 +1,150 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 34eff269-9986-4ab1-a6b6-40d76e682ab4
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'video listing'
+  components:
+    -
+      uuid: 4b83dbcc-ad66-46ab-a52f-0a12dea05b11
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: small
+    -
+      parent_uuid: 4b83dbcc-ad66-46ab-a52f-0a12dea05b11
+      slot: content
+      uuid: 9605e058-c3ba-4775-8c05-73ecbe699a95
+      component_id: sdc.pulse_theme.space-section-heading
+      inputs:
+        title: 'Selected Videos'
+        tag_name: h1
+        description:
+          value: "<p>A focused selection of peer-reviewed studies and clinical findings\L relevant to everyday health and care decisions.</p>"
+          format: canvas_html_block
+        alignment: center
+    -
+      uuid: d4308f5a-3645-467e-b1b7-1025807c66d5
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: large
+    -
+      parent_uuid: d4308f5a-3645-467e-b1b7-1025807c66d5
+      slot: content
+      uuid: 9eb6f47f-0e5d-48db-905d-40553a7c4688
+      component_id: block.views_block.video-block_3
+      inputs:
+        label: 'Featured Video for listing page'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      uuid: b2fa3e2c-730f-44e8-9caf-cabe83068f71
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: large
+    -
+      parent_uuid: b2fa3e2c-730f-44e8-9caf-cabe83068f71
+      slot: content
+      uuid: b4313455-c7db-4924-8a4b-6596b629da8e
+      component_id: block.views_block.video-block_1
+      inputs:
+        label: 'Video List'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      uuid: 30ed363b-ab04-4fd4-b2d9-2a061ce9be84
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: full-width
+        padding_left: none
+        padding_right: none
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: none
+        background_pattern: false
+        pattern_image_position: bottom-right
+    -
+      parent_uuid: 30ed363b-ab04-4fd4-b2d9-2a061ce9be84
+      slot: content
+      uuid: 897f7a58-f076-4864-9c05-695877fbd96d
+      component_id: sdc.pulse_theme.space-cta-banner-type-1
+      inputs:
+        title: "Keep learning \Labout your health"
+        description:
+          value: "<p>A focused selection of peer-reviewed studies and clinical findings\L relevant to everyday health and care decisions.</p>"
+          format: canvas_html_block
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: images/cta_background.png
+            alt: 'CTA Banner placeholder'
+            width: 1440
+            height: 500
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.pulse_theme.space-cta-banner-type-1
+        width: full-width
+        alignment: stacked
+        modifier_class: custom-class
+  path:
+    -
+      alias: /video-listing
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

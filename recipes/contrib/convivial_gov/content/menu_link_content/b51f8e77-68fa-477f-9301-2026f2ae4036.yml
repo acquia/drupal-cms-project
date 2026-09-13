@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: b51f8e77-68fa-477f-9301-2026f2ae4036
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    1131d951-d275-4fb3-9a82-f2474ab5bb06: menu_link_content
+    ad9970d7-6e97-4f49-b8db-792801e38aee: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Demo person'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      title: null
+      options: {  }
+      target_uuid: ad9970d7-6e97-4f49-b8db-792801e38aee
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 0
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:1131d951-d275-4fb3-9a82-f2474ab5bb06'
+  revision_translation_affected:
+    -
+      value: true

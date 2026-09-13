@@ -1,0 +1,53 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Image
+group: Base
+props:
+  type: object
+  properties:
+    media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Image
+      type: object
+      examples:
+        - src: "assets/pexels-felix-mittermeier-1209650.jpg"
+          alt: "A purple, cloudy sky reflected on a calm lake"
+          width: 1920
+          height: 1014
+    size:
+      title: Aspect ratio
+      type: string
+      enum:
+        - "2:1"
+        - 16:9
+        - 3:2
+        - 4:3
+        - 1:1
+      meta:enum:
+        2:1: "2×1"
+        16:9: "16×9"
+        3:2: "3×2"
+        4:3: "4×3"
+        1:1: Square
+      default: "4:3"
+      examples:
+        - "4:3"
+    radius:
+      type: string
+      title: Corner radius
+      enum:
+        - small
+        - large
+        - extra-large
+      meta:enum:
+        small: Small
+        large: Large
+        extra-large: Extra large
+      examples:
+        - "small"
+    caption:
+      title: Caption
+      type: string
+    url:
+      type: string
+      title: Link
+      format: uri-reference

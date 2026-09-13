@@ -1,0 +1,8 @@
+services:
+  _defaults:
+    autoconfigure: true
+    autowire: true
+  Drupal\trash_test\EventSubscriber\TrashTestEventSubscriber: ~
+
+  Drupal\trash_test\TestTime:
+    decorates: datetime.time

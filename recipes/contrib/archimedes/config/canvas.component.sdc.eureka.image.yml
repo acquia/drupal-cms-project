@@ -1,0 +1,47 @@
+langcode: en
+status: false
+dependencies:
+  theme:
+    - eureka
+active_version: 4cdb137aba6bb93c
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        mobile_size:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 400x225
+          expression: ℹ︎string␟value
+        tablet_size:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 800x450
+          expression: ℹ︎string␟value
+        desktop_size:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 1440x810
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+label: Image
+id: sdc.eureka.image
+provider: eureka
+source: sdc
+source_local_id: 'eureka:image'

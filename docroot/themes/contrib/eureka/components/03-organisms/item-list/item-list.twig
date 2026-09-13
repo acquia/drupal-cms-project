@@ -1,0 +1,38 @@
+{#
+/**
+ * Available variables:
+ * - item_list_base_class: base classname of the wrapper.
+ * - item_list_modifiers: array of modifiers to add to the base classname of the wrapper.
+ * - item_list_blockname: blockname prepended to the base classname of the wrapper(s) and each component.
+ * - item_list_extra_classes: extra classes, optional for the component.
+ *
+ * - item_list_heading: heading for the component.
+ * - item_list_heading_level: heading level for the component - defaults to 2.
+ * - item_list_summary: text summary for the component.
+ * - item_list_type: item list type - @todo expand with future types.
+ * - item_list_items: item list items.
+ *
+ * Available blocks:
+ */
+#}
+
+{% set item_list_base_class = 'item-list' %}
+{% set item_list_modifiers = item_list_modifiers|default([])|merge([item_list_type]) %}
+{% set item_list_extra_classes = item_list_extra_classes|default([])|merge(['component']) %}
+
+<div {{ bem(item_list_base_class, item_list_modifiers, item_list_blockname, item_list_extra_classes) }}>
+  <div {{ bem('inner', [], item_list_base_class, ['container']) }}>
+    {{ include('eureka:component-title', {
+      component_title_heading: item_list_heading,
+      component_title_heading_level: item_list_heading_level,
+      component_title_summary: item_list_summary,
+      component_title_centered: item_list_title_centered|default(false),
+    }, with_context = false) }}
+
+    <div {{ bem('items', [], item_list_base_class) }}>
+      {% block item_list_items_block %}
+        {{ item_list_items }}
+      {% endblock %}
+    </div>
+  </div>
+</div>

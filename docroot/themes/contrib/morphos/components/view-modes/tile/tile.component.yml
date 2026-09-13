@@ -1,0 +1,30 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Tile
+status: stable
+group: Display
+description: A rectangular navigational block, often used in a grid to represent services or categories.
+props:
+  type: object
+  properties:
+    heading:
+      title: Heading
+      description: The heading content.
+      type: string
+      examples:
+        - Tile heading
+    info:
+      title: Info
+      description: Info text that describes the type or category of the item.
+      type: string
+    url:
+      title: URL
+      description: The URL of the item.
+      type: string
+    image:
+      title: Image
+      description: Image depicting the item.
+      type: object
+libraryOverrides:
+  css:
+    component:
+      ../../../dist/css/tile.css: { minified: true }

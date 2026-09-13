@@ -1,0 +1,59 @@
+{% if columns == '33-33-33' %}
+	{% set columns = 3 %}
+{% endif %}
+{% set grid_styles = [] %}
+
+{% if margin_top and margin_top != '0' %}
+	{% set grid_styles = grid_styles|merge(['--sdc-margin-top: ' ~ margin_top]) %}
+{% endif %}
+{% if margin_right and margin_right != '0' %}
+	{% set grid_styles = grid_styles|merge(['--sdc-margin-right: ' ~ margin_right]) %}
+{% endif %}
+{% if margin_bottom and margin_bottom != '0' %}
+	{% set grid_styles = grid_styles|merge(['--sdc-margin-bottom: ' ~ margin_bottom]) %}
+{% endif %}
+{% if margin_left and margin_left != '0' %}
+	{% set grid_styles = grid_styles|merge(['--sdc-margin-left: ' ~ margin_left]) %}
+{% endif %}
+
+{% if padding_top and padding_top != '0' %}
+	{% set grid_styles = grid_styles|merge(['--sdc-padding-top: ' ~ padding_top]) %}
+{% endif %}
+{% if padding_right and padding_right != '0' %}
+	{% set grid_styles = grid_styles|merge(['--sdc-padding-right: ' ~ padding_right]) %}
+{% endif %}
+{% if padding_bottom and padding_bottom != '0' %}
+	{% set grid_styles = grid_styles|merge(['--sdc-padding-bottom: ' ~ padding_bottom]) %}
+{% endif %}
+{% if padding_left and padding_left != '0' %}
+	{% set grid_styles = grid_styles|merge(['--sdc-padding-left: ' ~ padding_left]) %}
+{% endif %}
+
+{% if gap %}
+	{% set grid_styles = grid_styles|merge(['--sdc-gap: ' ~ gap]) %}
+{% endif %}
+{% if columns %}
+	{% set grid_styles = grid_styles|merge(['grid-template-columns: repeat(' ~ columns ~ ', 1fr)']) %}
+{% endif %}
+
+{% set column_count = columns|default('1')|number_format(0, '', '') %}
+
+<div class="sdc-grid" {% if grid_styles %} style="{{ grid_styles|join('; ') }}" {% endif %}>
+	<div class="sdc-grid__item"> {% block slot_1 %}{% endblock %}
+		</div>
+
+		{% if column_count >= 2 %}
+			<div class="sdc-grid__item"> {% block slot_2 %}{% endblock %}
+				</div>
+			{% endif %}
+
+			{% if column_count >= 3 %}
+				<div class="sdc-grid__item"> {% block slot_3 %}{% endblock %}
+					</div>
+				{% endif %}
+
+				{% if column_count == 4 %}
+					<div class="sdc-grid__item"> {% block slot_4 %}{% endblock %}
+						</div>
+					{% endif %}
+				</div>

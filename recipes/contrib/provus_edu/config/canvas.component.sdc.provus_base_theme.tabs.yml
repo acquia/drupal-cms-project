@@ -1,0 +1,40 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - provus_base_theme
+label: Tabs
+id: sdc.provus_base_theme.tabs
+source: sdc
+source_local_id: 'provus_base_theme:tabs'
+provider: provus_base_theme
+active_version: 8cfbb4ea53978377
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        id:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        orientation:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: horizontal
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        tabs_content:
+          title: 'Tab content'

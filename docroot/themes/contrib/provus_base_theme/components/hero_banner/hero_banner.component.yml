@@ -1,0 +1,142 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Hero Banner
+status: stable
+description: Hero banner component with configurable image position, background color, title, subtitle, body content, and call-to-action links
+group: Provus Components
+
+variants:
+  default:
+    title: Default
+    description: Standard hero banner with title, subtitle, body content, image, and links
+
+props:
+  type: object
+  required:
+    - is_short_banner
+    - image_position
+    - title
+    - image_url
+  properties:
+    subtitle:
+      type: string
+      title: 'Subtitle'
+      description: 'Subtitle text displayed above the main title'
+      examples:
+        - 'Get Started'
+      default: ''
+    title:
+      type: string
+      title: 'Title'
+      description: 'Main title of the banner displayed prominently'
+      examples:
+        - 'Welcome to Our Site'
+        - 'Transform Your Business'
+        - 'Join Us Today'
+      default: ''
+    body:
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: block
+      title: 'Body'
+      description: 'Main content text of the banner. Supports HTML markup and multiple lines of text'
+      examples:
+        - |
+          <p>We provide exceptional services tailored to your needs.</p>
+          <p>Get started today!</p>
+      default: ''
+    image_url:
+      type: object
+      $ref: json-schema-definitions://canvas.module/image
+      title: 'Image'
+      description: 'Main image displayed in the banner'
+      examples:
+        - src: 'https://placehold.co/400x300'
+          alt: 'Image'
+      default: ''
+    is_short_banner:
+      type: boolean
+      title: 'Short Banner'
+      description: 'Determines if the banner should be displayed in a short format. Set to "true" for short banner, empty string for full banner'
+      examples:
+        - false
+      default: false
+      enum:
+        - true
+        - false
+    image_position:
+      type: string
+      title: 'Image Position'
+      description: 'Specifies the position of the image in the banner'
+      examples:
+        - 'full'
+      default: 'full'
+      enum:
+        - 'full'
+        - 'left'
+        - 'right'
+      meta:enum:
+        full: 'Full background image'
+        left: 'Left position image'
+        right: 'Right position image'
+    background_color:
+      type: string
+      title: 'Background Color'
+      description: 'The background color class name for the banner'
+      examples:
+        - 'primary'
+      default: ''
+      enum:
+        - 'none'
+        - 'primary'
+        - 'secondary'
+        - 'light'
+        - 'white'
+        - 'dark'
+      meta:enum:
+        '': 'None'
+        primary: Primary
+        secondary: Secondary
+        light: Light
+        white: White
+        dark: Dark
+    text_container_width:
+      type: string
+      title: 'Text Container Width'
+      description: 'The width of the text container. This is the width of the text container relative to the image container.'
+      examples:
+        - 'col-lg-6'
+      default: ''
+      enum:
+        - 'col-lg-6'
+        - 'col-lg-9'
+        - 'col-lg-12'
+      meta:enum:
+        'col-lg-6': '50%'
+        'col-lg-9': '75%'
+        'col-lg-12': '100%'
+    text_alignment:
+      type: string
+      title: 'Text Alignment'
+      description: 'The alignment of the text in the banner'
+      examples:
+        - 'left'
+        - 'center'
+        - 'right'
+      default: 'left'
+      enum:
+        - 'left'
+        - 'center'
+        - 'end'
+      meta:enum:
+        left: 'Left aligned'
+        center: 'Center aligned'
+        end: 'Right aligned'
+    content_attributes:
+      type: string
+      title: 'Content attributes'
+      description: 'Drupal template function placeholder — no content is required here. Please leave this section blank.'
+
+slots:
+  hero_banner_buttons:
+    title: Buttons
+    description: Buttons components placed inside the Hero Banner container

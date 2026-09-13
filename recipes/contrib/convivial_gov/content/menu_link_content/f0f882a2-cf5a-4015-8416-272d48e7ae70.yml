@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: f0f882a2-cf5a-4015-8416-272d48e7ae70
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    21d58542-f91c-43cb-98fa-3884a60ae7aa: menu_link_content
+    ba39a731-0b88-46d3-a612-cf441a3d739b: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Nested 1'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      title: null
+      options: {  }
+      target_uuid: ba39a731-0b88-46d3-a612-cf441a3d739b
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -50
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:21d58542-f91c-43cb-98fa-3884a60ae7aa'
+  revision_translation_affected:
+    -
+      value: true

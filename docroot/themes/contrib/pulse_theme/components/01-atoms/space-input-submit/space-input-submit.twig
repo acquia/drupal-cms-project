@@ -1,0 +1,60 @@
+{#
+/**
+ * @file
+ * Space Form - Submit Component.
+ */
+#}
+
+{% set type = attributes.type|default(type|default('submit'))|render|trim %}
+
+{# ============================= #}
+{# SUBMIT / BUTTON TYPES        #}
+{# ============================= #}
+{% if type in ['submit', 'button', 'reset'] %}
+
+  {% set button_classes = [
+    'btn',
+    'btn-primary',
+    'small',
+    'rounded-full',
+    'focus:outline-none',
+    'focus:ring-2',
+    'focus:ring-offset-2',
+    'focus:ring-brand-500',
+    'cursor-pointer',
+    'transition-colors',
+    'duration-200',
+  ] %}
+
+  {# Icon configuration #}
+  {% set btn_icon = type == 'reset' ? 'arrows-clockwise' : 'arrow-right' %}
+  {% set btn_icon_position = 'after' %}
+
+  {# Adjust padding if icon exists #}
+  {% if btn_icon %}
+    {% if btn_icon_position == 'before' %}
+      {% set button_classes = button_classes|merge(['!pl-11']) %}
+    {% else %}
+      {% set button_classes = button_classes|merge(['!pr-11']) %}
+    {% endif %}
+  {% endif %}
+
+  <div class="relative inline-block">
+
+    <input{{ attributes.addClass(button_classes) }} />
+
+    {% if btn_icon %}
+      {% set icon_classes = [
+        'absolute',
+        'top-1/2',
+        '-translate-y-1/2',
+        'pointer-events-none',
+        'text-white',
+        btn_icon_position == 'before' ? 'left-4' : 'right-4',
+      ] %}
+      <div class="{{ icon_classes|join(' ') }}">
+        {% include 'pulse_theme:space-icon' with { icon: btn_icon, icon_size: 'extra-small' } only %}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}

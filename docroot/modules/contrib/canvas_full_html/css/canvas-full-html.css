@@ -1,0 +1,14 @@
+/**
+ * @file
+ * CSS fixes for CKEditor 5 toolbar in Canvas.
+ *
+ * Only applies overflow:visible when a CKEditor dropdown is open.
+ */
+
+body.ckeditor-dropdown-open .rt-ScrollAreaRoot {
+  overflow: visible !important;
+}
+
+body.ckeditor-dropdown-open .rt-ScrollAreaViewport {
+  overflow: visible !important;
+}

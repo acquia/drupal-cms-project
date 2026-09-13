@@ -1,0 +1,41 @@
+.list-wrapper {
+    .list-style {
+      &.icon-left, &.icon-right {
+        .list {
+          margin-bottom: 0;
+          align-items: self-start;
+          
+        }
+
+        .list-icon {
+          font-size: $h5-font-size;
+          width: 28px;
+          color: $text-colors-text-secondary;
+
+          svg {
+            width: 20px;
+          }
+        }
+
+        .list-text {
+          @include text-style-headline-h-5;
+          font-weight: 600;
+          margin-top: 0;
+          padding-top: 0;
+          color: $text-colors-text-secondary;
+        }
+      }
+
+      &.icon-left.grid_3 {
+        .list {
+          align-items: self-start;
+
+          .list-text {
+            margin-top: 0px;
+            padding-top: 0;
+          }
+        }
+      }
+
+    }
+}

@@ -1,0 +1,64 @@
+{#
+  Hero Card component.
+
+  Full-width hero section with a background image, dark overlay, centered
+  heading, description, and CTA buttons via the "ctas" slot.
+
+  Desktop: 640px tall, 64px side padding, 72px serif heading.
+  Mobile:  auto height, 32px padding all sides, smaller heading.
+
+  @prop heading (string) - Main heading text.
+  @prop description (string) - Supporting body text.
+  @prop media (object) - Background image media object.
+  @prop heading_level (number) - HTML heading level (1–3). Defaults to 1.
+  @slot ctas - Call-to-action buttons displayed below the hero content.
+#}
+
+{% set level = heading_level|default(1) %}
+{% set tag = 'h' ~ level %}
+
+<div{{ attributes.addClass('hero-card', 'custom-container') }}>
+	<div
+		class="hero-card__card">
+
+		{# Background image + overlay (aria-hidden so screen readers skip it) #}
+		{% if media.src %}
+			<div class="hero-card__bg" aria-hidden="true">
+				{% include 'canvas:image' ignore missing with {
+          src: media.src,
+          alt: media.alt|default(''),
+          class: 'hero-card__image',
+          width: media.width,
+          height: media.height
+        } only %}
+				<div class="hero-card__overlay"></div>
+			</div>
+		{% endif %}
+
+		<div class="hero-card__column">
+
+			<div class="hero-card__content">
+				{% if heading %}
+					<{{tag}} class="hero-card__heading">{{ heading }}</{{tag}}>
+				{% endif %}
+				{% if description %}
+					<p class="hero-card__description">{{ description }}</p>
+				{% endif %}
+			</div>
+
+		{# Anonymous users: hide empty slot entirely. Logged-in users: show editor fallback. #}
+		{% if ctas is not empty or logged_in %}
+			<div class="hero-card__actions">
+				{% block ctas %}
+				{% endblock %}
+				{% if ctas is empty and logged_in %}
+					<div class="hero-card__empty-state">
+						<em>{{ 'Drag Button components here'|t }}</em>
+					</div>
+				{% endif %}
+			</div>
+		{% endif %}
+
+		</div>
+	</div>
+</div>

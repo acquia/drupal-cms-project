@@ -1,0 +1,151 @@
+langcode: en
+status: true
+dependencies: {  }
+id: eca_bpmn_io_content_template_disable_preview
+data: |
+  <?xml version="1.0" encoding="UTF-8"?>
+  <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:qa="http://some-company/schema/bpmn/qa" id="sample-diagram" targetNamespace="http://bpmn.io/schema/bpmn" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+    <bpmn2:process id="content_template_disable_preview" name="Disable preview when Canvas is enabled" isExecutable="true" camunda:versionTag="1.0.0">
+      <bpmn2:documentation>Disables Drupal's built-in preview functionality when a Canvas content template is created for a content type.</bpmn2:documentation>
+      <bpmn2:extensionElements>
+        <camunda:properties>
+          <camunda:property name="Tags" value="" />
+          <camunda:property name="Changelog" value="" />
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:startEvent id="config__save_1_1" name="Content template created" camunda:modelerTemplate="org.drupal.event.config:save">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="config:save" />
+          </camunda:properties>
+          <camunda:field name="config_name">
+            <camunda:string>canvas.content_template.node.</camunda:string>
+          </camunda:field>
+          <camunda:field name="sync_mode">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="write_mode">
+            <camunda:string></camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:outgoing>eca_scalar_1svhele</bpmn2:outgoing>
+      </bpmn2:startEvent>
+      <bpmn2:task id="eca_config_action_1jfklob" name="Disable preview for content type" camunda:modelerTemplate="org.drupal.action.eca_config_action">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_config_action" />
+          </camunda:properties>
+          <camunda:field name="action_id">
+            <camunda:string>entity_method:node.type:setPreviewMode</camunda:string>
+          </camunda:field>
+          <camunda:field name="config_name">
+            <camunda:string>node.type.[config:content_entity_type_bundle]</camunda:string>
+          </camunda:field>
+          <camunda:field name="data">
+            <camunda:string>0</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_1r1f735</bpmn2:incoming>
+      </bpmn2:task>
+      <bpmn2:task id="eca_void_and_condition_0mr4y0c" name="and" camunda:modelerTemplate="org.drupal.action.eca_void_and_condition">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_void_and_condition" />
+          </camunda:properties>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>eca_scalar_1svhele</bpmn2:incoming>
+        <bpmn2:outgoing>eca_scalar_1cmipw9</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_switch_account_1q56yux" name="Temporarily become administrator" camunda:modelerTemplate="org.drupal.action.eca_switch_account">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_switch_account" />
+          </camunda:properties>
+          <camunda:field name="user_id">
+            <camunda:string>1</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>eca_scalar_1cmipw9</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_1r1f735</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:sequenceFlow id="eca_scalar_1svhele" name="Template enabled?" camunda:modelerTemplate="org.drupal.condition.eca_scalar" sourceRef="config__save_1_1" targetRef="eca_void_and_condition_0mr4y0c">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_scalar" />
+          </camunda:properties>
+          <camunda:field name="negate">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="left">
+            <camunda:string>[config:status]</camunda:string>
+          </camunda:field>
+          <camunda:field name="right">
+            <camunda:string>1</camunda:string>
+          </camunda:field>
+          <camunda:field name="operator">
+            <camunda:string>equal</camunda:string>
+          </camunda:field>
+          <camunda:field name="type">
+            <camunda:string>value</camunda:string>
+          </camunda:field>
+          <camunda:field name="case">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+      </bpmn2:sequenceFlow>
+      <bpmn2:sequenceFlow id="eca_scalar_1cmipw9" name="Template targets full view mode?" camunda:modelerTemplate="org.drupal.condition.eca_scalar" sourceRef="eca_void_and_condition_0mr4y0c" targetRef="eca_switch_account_1q56yux">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_scalar" />
+          </camunda:properties>
+          <camunda:field name="negate">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="left">
+            <camunda:string>[config:content_entity_type_view_mode]</camunda:string>
+          </camunda:field>
+          <camunda:field name="right">
+            <camunda:string>full</camunda:string>
+          </camunda:field>
+          <camunda:field name="operator">
+            <camunda:string>equal</camunda:string>
+          </camunda:field>
+          <camunda:field name="type">
+            <camunda:string>value</camunda:string>
+          </camunda:field>
+          <camunda:field name="case">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+      </bpmn2:sequenceFlow>
+      <bpmn2:sequenceFlow id="Flow_1r1f735" sourceRef="eca_switch_account_1q56yux" targetRef="eca_config_action_1jfklob" />
+    </bpmn2:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_content_template_disable_preview">
+      <bpmndi:BPMNPlane id="BPMNPlane_content_template_disable_preview" bpmnElement="content_template_disable_preview">
+        <bpmndi:BPMNShape id="config__save_1_1_di" bpmnElement="config__save_1_1">
+          <dc:Bounds x="57" y="52" width="36" height="36" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_config_action_1jfklob_di" bpmnElement="eca_config_action_1jfklob">
+          <dc:Bounds x="475" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_void_and_condition_0mr4y0c_di" bpmnElement="eca_void_and_condition_0mr4y0c">
+          <dc:Bounds x="175" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_switch_account_1q56yux_di" bpmnElement="eca_switch_account_1q56yux">
+          <dc:Bounds x="325" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNEdge id="eca_scalar_1svhele_di" bpmnElement="eca_scalar_1svhele">
+          <di:waypoint x="93" y="70" />
+          <di:waypoint x="175" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="eca_scalar_1cmipw9_di" bpmnElement="eca_scalar_1cmipw9">
+          <di:waypoint x="275" y="70" />
+          <di:waypoint x="325" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_1r1f735_di" bpmnElement="Flow_1r1f735">
+          <di:waypoint x="425" y="70" />
+          <di:waypoint x="475" y="70" />
+        </bpmndi:BPMNEdge>
+      </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+  </bpmn2:definitions>

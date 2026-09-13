@@ -1,0 +1,160 @@
+{% set card_orientation = orientation|default('vertical') %}
+{% set card_style = style|default('framed') %}
+{% set card_background = background|default('noColor') %}
+{% set is_text_centered = is_text_centered|default(false) ? 'yes' : 'no' %}
+{% set is_clickable = url is not empty and url != 'No URL' ? 'yes' : 'no' %}
+
+{% set card =
+  html_cva(
+    base: ['group relative flex rounded-xl shadow-lg in-[.views-row]:h-full'],
+    variants: {
+      orientation: {
+        vertical: 'flex-col',
+        horizontal: 'md:flex-row'
+      },
+      isTextCentered: {
+        yes: 'text-center',
+        no: 'text-left'
+      },
+      clickable: {
+        yes: 'cursor-pointer transition duration-300 hover:scale-103',
+        no: ''
+      },
+      style: {
+        framed: 'gap-4 p-4 lg:gap-4 lg:p-6',
+        full: ''
+      },
+      backgroundColor: {
+        default: 'bg-card text-card-foreground hover:bg-card/80 hover:text-card-foreground/80',
+        accent: 'bg-accent text-accent-foreground hover:bg-accent/80 hover:text-accent-foreground/80',
+        primary: 'bg-primary text-primary-foreground hover:bg-primary/80 hover:text-primary-foreground/80',
+        inverted: 'bg-foreground text-background hover:bg-foreground/80 hover:text-background/80',
+        noColor: 'shadow-none hover:text-foreground/80'
+      }
+    },
+    compound_variants: [
+      {
+        style: ['framed'],
+        backgroundColor: ['noColor'],
+        class: 'border border-secondary hover:border-secondary/80'
+      }
+    ]
+  )
+%}
+
+{% set card_media =
+  html_cva(
+    base: 'aspect-video overflow-hidden',
+    variants: {
+      orientation: {
+        vertical: '',
+        horizontal: 'md:aspect-auto md:flex-[0_1_50%]'
+      },
+      style: {
+        framed: 'rounded-lg',
+        full: 'rounded-xl'
+      }
+    }
+  )
+%}
+
+{% set card_content =
+  html_cva(
+    base: 'flex w-full flex-col items-baseline',
+    variants: {
+      orientation: {
+        vertical: '',
+        horizontal: 'md:flex-[0_1_50%]'
+      },
+      style: {
+        framed: '',
+        full: 'rounded-b p-4 lg:p-6'
+      }
+    },
+    compound_variants: [
+      {
+        orientation: ['horizontal'],
+        style: ['full'],
+        class: 'p-4 lg:p-6'
+      },
+      {
+        orientation: ['horizontal'],
+        style: ['framed'],
+        class: ''
+      },
+      {
+        orientation: ['vertical'],
+        backgroundColor: ['noColor'],
+        style: ['full'],
+        class: 'px-0!'
+      },
+      {
+        orientation: ['horizontal'],
+        backgroundColor: ['noColor'],
+        style: ['full'],
+        class: 'py-0!'
+      }
+    ]
+  )
+%}
+
+<div
+  class="{{
+  card.apply(
+    {
+      orientation: card_orientation,
+      isTextCentered: is_text_centered,
+      clickable: is_clickable,
+      style: card_style,
+      backgroundColor: card_background
+    },
+    card_classes|default('')
+  )
+  }}"
+>
+  {% if media.src is not empty %}
+    <div
+      class="{{
+      card_media.apply({
+        orientation: card_orientation,
+        style: card_style,
+        backgroundColor: card_background
+      })
+      }}"
+    >
+      {% block media %}
+        {% include 'canvas:image' ignore missing with {
+          src: media.src,
+          alt: media.alt,
+          class: 'object-cover w-full h-full',
+          width: media.width,
+          height: media.height,
+          sizes: card_orientation == 'stacked' ? 'auto, 100vw' : '50vw'
+        } only %}
+      {% endblock %}
+    </div>
+  {% endif %}
+
+  <div
+    class="{{
+    card_content.apply({
+      orientation: card_orientation,
+      style: card_style,
+      backgroundColor: card_background
+    })
+    }}"
+  >
+    <div class="@container flex w-full flex-col gap-1 md:gap-2">
+      <h3 class="text-xl font-semibold @sm:text-2xl @2xl:text-3xl">
+        {% if is_clickable %}
+          <a href="{{ url }}" class="after:absolute after:inset-0 after:content-['']">{{ heading_text }}</a>
+        {% endif %}
+      </h3>
+      {% if text is not empty %}
+        <p class="mb-0 text-md @sm:text-lg @2xl:text-xl">
+          {{ text }}
+        </p>
+      {% endif %}
+    </div>
+  </div>
+</div>

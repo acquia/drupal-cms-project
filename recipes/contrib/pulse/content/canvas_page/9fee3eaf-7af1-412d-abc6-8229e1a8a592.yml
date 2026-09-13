@@ -1,0 +1,282 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 9fee3eaf-7af1-412d-abc6-8229e1a8a592
+  default_langcode: en
+  depends:
+    0b8c018c-6684-41ee-959e-51dc92c6fc09: file
+    b86b6c83-6ca7-4485-ae8b-d2de774c8aff: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: faq
+  components:
+    -
+      uuid: 8e1230f2-4b48-426b-9a78-c26800ba99d8
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: small
+        background_pattern: false
+        pattern_image_position: bottom-right
+    -
+      parent_uuid: 8e1230f2-4b48-426b-9a78-c26800ba99d8
+      slot: content
+      uuid: 46925172-28c8-4858-9fe3-ef5be383e6fb
+      component_id: sdc.pulse_theme.space-section-heading
+      inputs:
+        title: 'Frequently Asked Questions'
+        tag_name: h2
+        description:
+          value: '<p>Clear answers to help you navigate healthcare, tools, and services on Pulse One.</p>'
+          format: canvas_html_block
+        alignment: center
+        with_image: false
+    -
+      uuid: a1aed887-4d96-4bbe-a9b9-f74eb52d177c
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: width-4xl
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: large
+        background_pattern: false
+        pattern_image_position: bottom-right
+    -
+      parent_uuid: a1aed887-4d96-4bbe-a9b9-f74eb52d177c
+      slot: content
+      uuid: c3536af5-3c93-4534-878a-1b044415d83e
+      component_id: sdc.pulse_theme.space-accordion
+      inputs:
+        icon_type: chevronDown
+        alignment: right
+        border: true
+        container_width: default
+    -
+      parent_uuid: c3536af5-3c93-4534-878a-1b044415d83e
+      slot: items
+      uuid: 51aa2609-2891-4bb0-a76a-a0c284cc91ae
+      component_id: sdc.pulse_theme.space-accordion-item
+      inputs:
+        label: 'What can I use Pulse for?'
+        content:
+          value: '<p>Pulse helps you understand symptoms, manage your health records, and find the right doctors or care—everything in one place.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: c3536af5-3c93-4534-878a-1b044415d83e
+      slot: items
+      uuid: aabc3a28-5089-4afb-b7f6-949871942c42
+      component_id: sdc.pulse_theme.space-accordion-item
+      inputs:
+        label: 'Do I need an account to search or explore?'
+        content:
+          value: '<p>Pulse helps you understand symptoms, manage your health records, and find the right doctors or care—everything in one place.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: c3536af5-3c93-4534-878a-1b044415d83e
+      slot: items
+      uuid: 5d65f653-74fe-494a-a337-9a636be706ca
+      component_id: sdc.pulse_theme.space-accordion-item
+      inputs:
+        label: 'How to create an account'
+        content:
+          value: '<p>Pulse helps you understand symptoms, manage your health records, and find the right doctors or care—everything in one place.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: c3536af5-3c93-4534-878a-1b044415d83e
+      slot: items
+      uuid: 3171d80b-018a-4bcc-91d1-10ccb397289a
+      component_id: sdc.pulse_theme.space-accordion-item
+      inputs:
+        label: 'Using Pulse One without signing up'
+        content:
+          value: '<p>Pulse helps you understand symptoms, manage your health records, and find the right doctors or care—everything in one place.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: c3536af5-3c93-4534-878a-1b044415d83e
+      slot: items
+      uuid: 49726747-7809-4eb1-980e-30ef5c625e73
+      component_id: sdc.pulse_theme.space-accordion-item
+      inputs:
+        label: 'What features are available for guest users?'
+        content:
+          value: '<p>Pulse helps you understand symptoms, manage your health records, and find the right doctors or care—everything in one place.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: c3536af5-3c93-4534-878a-1b044415d83e
+      slot: items
+      uuid: db60537f-4e6e-4db1-8e6b-a17e81c1ce74
+      component_id: sdc.pulse_theme.space-accordion-item
+      inputs:
+        label: 'How to reset your password if forgotten?'
+        content:
+          value: '<p>Pulse helps you understand symptoms, manage your health records, and find the right doctors or care—everything in one place.</p>'
+          format: canvas_html_block
+    -
+      uuid: 96b3e41c-96ae-41a8-8c95-428b78b1af99
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: full-width
+        padding_left: none
+        padding_right: none
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: large
+        background_pattern: false
+        pattern_image_position: bottom-right
+    -
+      parent_uuid: 96b3e41c-96ae-41a8-8c95-428b78b1af99
+      slot: content
+      uuid: ab49585a-1d21-4389-82c1-d03e4979c361
+      component_id: sdc.pulse_theme.space-flexi
+      inputs:
+        no_of_columns: three
+        column_width: 25-50-25
+        vertical: top
+        horizontal: left
+        direction: across
+        gap: medium
+        wrap: wrap
+        margin_top: none
+        margin_bottom: none
+    -
+      uuid: 504d0129-275c-4ca5-9f4c-ea347fdb89a9
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: option-8
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: large
+        padding_bottom: medium
+        margin_top: none
+        margin_bottom: none
+        background_pattern: false
+        pattern_image_position: bottom-right
+    -
+      parent_uuid: 504d0129-275c-4ca5-9f4c-ea347fdb89a9
+      slot: content
+      uuid: cde357e3-5a42-476f-ab0c-752873e3dba5
+      component_id: sdc.pulse_theme.space-section-heading
+      inputs:
+        title: 'Trending article'
+        tag_name: h2
+        description:
+          value: '<p>Clear, reliable articles to help you understand conditions, treatments, and care decisions—at your own pace.</p>'
+          format: canvas_html_block
+        alignment: center
+        with_image: false
+    -
+      uuid: 4242180e-e466-42b0-b852-ab5ab15681da
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: option-8
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: large
+        margin_top: none
+        margin_bottom: large
+        background_pattern: false
+        pattern_image_position: bottom-right
+    -
+      parent_uuid: 4242180e-e466-42b0-b852-ab5ab15681da
+      slot: content
+      uuid: 21f6a3d8-a286-4383-a028-5684e433a343
+      component_id: block.views_block.article-block_3
+      inputs:
+        label: 'Trending Article'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      uuid: 0f713c76-2692-4f01-b2f9-63aa8d4f2861
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        margin_top: none
+        background_pattern: false
+        pattern_image_position: bottom-right
+    -
+      parent_uuid: 0f713c76-2692-4f01-b2f9-63aa8d4f2861
+      slot: content
+      uuid: 7d5ba28d-1066-4290-b723-73808f2ea4ad
+      component_id: sdc.pulse_theme.space-section-heading
+      inputs:
+        title: 'Are you a health expert?'
+        tag_name: h2
+        description:
+          value: '<p>If you’re a medical professional, researcher, or health writer, you can contribute to our growing knowledge platform and help make reliable health information more accessible.</p>'
+          format: canvas_html_block
+        alignment: left
+    -
+      parent_uuid: 0f713c76-2692-4f01-b2f9-63aa8d4f2861
+      slot: content
+      uuid: 7b665d56-951f-4e35-aa6f-48f2a6c37223
+      component_id: sdc.pulse_theme.space-flexi
+      inputs:
+        no_of_columns: two
+        vertical: center
+        horizontal: left
+        direction: across
+        gap: medium
+        wrap: wrap
+        margin_top: small
+        margin_bottom: none
+    -
+      parent_uuid: 7b665d56-951f-4e35-aa6f-48f2a6c37223
+      slot: column_one
+      uuid: 32b4f4a7-eb9d-4658-8aab-b934cfd863b4
+      component_id: block.webform_block
+      inputs:
+        label: Webform
+        label_display: '0'
+        webform_id: work_with_us
+        default_data: ''
+        redirect: false
+        lazy: false
+    -
+      parent_uuid: 7b665d56-951f-4e35-aa6f-48f2a6c37223
+      slot: column_two
+      uuid: f7461b05-d608-406c-a96a-941e3760539a
+      component_id: sdc.pulse_theme.space-image
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: b86b6c83-6ca7-4485-ae8b-d2de774c8aff
+            target_type: media
+        corners: none
+  path:
+    -
+      alias: /faq
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

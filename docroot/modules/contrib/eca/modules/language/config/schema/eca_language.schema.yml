@@ -1,0 +1,44 @@
+eca.event.plugin.eca_language:negotiate:
+  type: eca.event.plugin
+  label: 'ECA language negotiation'
+
+action.configuration.eca_get_current_langcode:
+  type: mapping
+  label: 'Configuration for the "Get Current Langcode" action'
+  mapping:
+    token_name:
+      type: required_label
+      label: 'Name of token'
+
+action.configuration.eca_set_current_langcode:
+  type: mapping
+  label: 'Configuration for the "Set Current Langcode" action'
+  mapping:
+    langcode:
+      type: string
+      label: 'Language'
+      constraints:
+        EcaChoice:
+          callback: '\Drupal\eca\Validation\EcaConstraintCallbacks::getAllValidLangcodes'
+
+action.configuration.eca_reset_language_negotiation:
+  type: mapping
+  label: 'Configuration for the "Reset Language Negotiation" action'
+  mapping: {}
+
+action.configuration.eca_create_entity_translation:
+  type: mapping
+  label: 'Configuration for the "Create Entity Translation" action'
+  mapping:
+    source_langcode:
+      type: string
+      label: 'Source language'
+      constraints:
+        EcaChoice:
+          callback: '\Drupal\eca\Validation\EcaConstraintCallbacks::getAllValidLangcodes'
+    target_langcode:
+      type: string
+      label: 'Target language'
+      constraints:
+        EcaChoice:
+          callback: '\Drupal\eca\Validation\EcaConstraintCallbacks::getAllValidLangcodes'

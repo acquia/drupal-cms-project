@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * Default twig file for providing a daterange form elements.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the parent form element.
+ * - all_day: The all_day checkbox element.
+ * - same_day: The same_day checkbox element.
+ * - duration: The duration element.
+ * - start_value: The start date element.
+ * - end_value: The end date element.
+ * - timezone: The timezone element.
+ */
+#}
+
+<div{{ attributes }}>
+  {%- if all_day or same_day -%}
+    <div class="custom-field-element-flex">
+      {{ all_day }}
+      {{ same_day }}
+    </div>
+  {%- endif -%}
+  <div class="custom-field-element-flex">
+    {{ duration }}
+    {{ start_value }}
+    {{ end_value }}
+    {{ timezone }}
+  </div>
+</div>

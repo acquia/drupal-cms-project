@@ -1,0 +1,89 @@
+/**
+ * @file contact-email.css
+ * Contact email block — Figma desktop 1-6938, mobile 1-6684.
+ * Icon (24×24) + "Email" (Heading 6) + underlined email link.
+ * Tokens: --font-serif, --font-sans, dark #262626–#282828.
+ */
+
+.contact-email {
+  width: 100%;
+}
+
+.contact-email--dark {
+  background-color: transparent;
+  color: var(--background);
+}
+
+.contact-email--light {
+  background-color: transparent;
+  color: var(--foreground);
+}
+
+.contact-email__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+  padding: 0.75rem 0;
+}
+
+@media (min-width: 48rem) {
+  .contact-email__inner {
+    flex-direction: row;
+    gap: 1rem; /* 16px Figma */
+    align-items: flex-start;
+  }
+}
+
+.contact-email__icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-email--light .contact-email__icon img,
+.contact-email--light .contact-email__icon [style*="object-fit"] {
+  filter: brightness(0) invert(1);
+}
+
+.contact-email__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+/* Figma: IBM Plex Serif, Heading 6 (22px), line-height 1.4, letter-spacing -0.22px */
+.contact-email__label {
+  font-family: var(--font-serif);
+  font-size: 1.375rem; /* 22px — text-sizes/heading-6 */
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.22px;
+  margin: 0;
+}
+
+/* Figma: DM Sans, smaller sans-serif for link */
+.contact-email__link,
+.contact-email__text {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: inherit;
+}
+
+.contact-email__link {
+  text-decoration: underline;
+}
+
+.contact-email__link:hover {
+  color: inherit;
+  text-decoration-thickness: 2px;
+}
+
+.contact-email__link:focus-visible {
+  outline: 2px solid var(--primary, #c30000);
+  outline-offset: 2px;
+}

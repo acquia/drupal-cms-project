@@ -1,0 +1,43 @@
+{#
+  Slider SDC — Figma desktop 1-9547, mobile 1-9299.
+  Swiper carousel: desktop = arrows + multi-slide; mobile = touch swipe + pagination only.
+  Drop Image (or any) components into the Slides slot; JS wraps each in .swiper-slide.
+#}
+{% set autoplay_val = autoplay|default(false) %}
+{% set autoplay_delay_val = autoplay_delay|default(4000) %}
+{% set loop_val = loop|default(true) %}
+{% set show_arrows_val = show_arrows|default(true) %}
+{% set show_pagination_val = show_pagination|default(true) %}
+
+<div class="slider" data-slider data-slider-autoplay="{{ autoplay_val ? '1' : '0' }}" data-slider-delay="{{ autoplay_delay_val }}" data-slider-loop="{{ loop_val ? '1' : '0' }}" data-slider-arrows="{{ show_arrows_val ? '1' : '0' }}" data-slider-pagination="{{ show_pagination_val ? '1' : '0' }}">
+	<div class="slider__track">
+		<div class="swiper slider__swiper">
+			<div class="swiper-wrapper">
+				{% block slides %}
+					<div class="slider__empty-state">
+						<em>Drag Image components here</em>
+					</div>
+				{% endblock %}
+			</div>
+		</div>
+		{% if show_arrows_val %}
+			<button type="button" class="slider__arrow slider__arrow--prev" aria-label="{{ 'Previous slide'|t }}" data-slider-prev>
+				<span class="slider__arrow-icon" aria-hidden="true">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+						<path d="M7.09502 12.8518L12.5968 18.3533C12.7668 18.5236 12.8527 18.7236 12.8545 18.9533C12.8565 19.1829 12.7726 19.3836 12.6028 19.5553C12.4328 19.7274 12.2322 19.8125 12.001 19.8105C11.7699 19.8085 11.5686 19.7226 11.3973 19.5528L4.44727 12.6028C4.35627 12.5108 4.29011 12.4151 4.24877 12.3158C4.20727 12.2163 4.18652 12.1108 4.18652 11.9993C4.18652 11.8878 4.20727 11.7825 4.24877 11.6835C4.29011 11.5844 4.35627 11.4889 4.44727 11.3973L11.4033 4.44127C11.5791 4.27144 11.7805 4.18652 12.0075 4.18652C12.2344 4.18652 12.4328 4.27144 12.6028 4.44127C12.7726 4.61527 12.8575 4.81602 12.8575 5.04352C12.8575 5.27119 12.7726 5.47027 12.6028 5.64077L7.09502 11.1483H19.2978C19.5419 11.1483 19.7459 11.2291 19.9098 11.3908C20.0736 11.5524 20.1555 11.7555 20.1555 12C20.1555 12.2445 20.0736 12.4476 19.9098 12.6093C19.7459 12.7709 19.5419 12.8518 19.2978 12.8518H7.09502Z" fill="#020704"/>
+					</svg>
+				</span>
+			</button>
+			<button type="button" class="slider__arrow slider__arrow--next" aria-label="{{ 'Next slide'|t }}" data-slider-next>
+				<span class="slider__arrow-icon" aria-hidden="true">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+						<path d="M16.9051 12.8517H4.70234C4.45767 12.8517 4.25459 12.7709 4.09309 12.6092C3.93142 12.4476 3.85059 12.2445 3.85059 12C3.85059 11.7555 3.93142 11.5524 4.09309 11.3907C4.25459 11.2291 4.45767 11.1482 4.70234 11.1482H16.9051L11.4033 5.64674C11.2333 5.47674 11.1473 5.27649 11.1451 5.04599C11.1428 4.81532 11.2267 4.61457 11.3968 4.44374C11.5672 4.27224 11.7679 4.18749 11.9991 4.18949C12.2303 4.19149 12.4315 4.2774 12.6028 4.44724L19.5528 11.3972C19.6438 11.4892 19.71 11.5849 19.7513 11.6842C19.7928 11.7837 19.8136 11.8892 19.8136 12.0007C19.8136 12.1122 19.7928 12.2175 19.7513 12.3165C19.71 12.4157 19.6438 12.5111 19.5528 12.6027L12.5968 19.5527C12.421 19.7266 12.2196 19.8135 11.9926 19.8135C11.7658 19.8135 11.5673 19.7261 11.3973 19.5512C11.2275 19.3811 11.1426 19.1823 11.1426 18.955C11.1426 18.7278 11.2275 18.5292 11.3973 18.3592L16.9051 12.8517Z" fill="#020704"/>
+					</svg>
+				</span>
+			</button>
+		{% endif %}
+	</div>
+	{% if show_pagination_val %}
+		<div class="swiper-pagination slider__pagination" data-slider-pagination></div>
+	{% endif %}
+</div>

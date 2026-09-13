@@ -1,0 +1,73 @@
+ai_agents.ai_agent_override.*:
+  type: config_entity
+  label: AI Agent Override
+  mapping:
+    id:
+      type: machine_name
+      label: ID
+      description: 'The unique machine name of the AI agent override.'
+    uuid:
+      type: string
+      label: UUID
+    status:
+      type: boolean
+      label: Status
+      description: 'Whether the override is enabled.'
+    weight:
+      type: weight
+      label: Weight
+      description: 'Determines the order in which overrides are applied.'
+    label:
+      type: required_label
+      label: Label
+      description: 'Administrative label for the override - required.'
+    parent_agent:
+      type: machine_name
+      label: Parent Agent
+      description: 'The machine name of the agent that should receive this override.'
+    tools_add:
+      type: sequence
+      label: Tools To Add
+      description: 'List of tool plugin IDs that should be enabled on the parent agent.'
+      requiredKey: false
+      sequence:
+        type: string
+    tools_remove:
+      type: sequence
+      label: Tools To Remove
+      description: 'List of tool plugin IDs that should be removed from the parent agent.'
+      requiredKey: false
+      sequence:
+        type: string
+    prompt_extra_text:
+      type: text
+      label: Prompt Extra Text
+      description: 'Additional text that should be merged into the parent agent system prompt.'
+      requiredKey: false
+    prompt_mod_strategy:
+      type: string
+      label: Prompt Modification Strategy
+      description: 'Determines how the additional prompt text is merged. Allowed values: prefix, suffix, replace.'
+      requiredKey: false
+    prompt_replace_token:
+      type: string
+      label: Prompt Replace Token
+      description: 'Token within the prompt that should be replaced when using the replace strategy.'
+      requiredKey: false
+    fail_if_parent_missing:
+      type: boolean
+      label: Fail If Parent Missing
+      description: 'Whether configuration import should fail if the referenced parent agent does not exist.'
+      requiredKey: false
+    tool_settings:
+      type: mapping
+      label: Tool Settings Overrides
+      description: 'Optional tool settings that should override the parent configuration.'
+      requiredKey: false
+      mapping: {}
+    tool_usage_limits:
+      type: mapping
+      label: Tool Usage Limits Overrides
+      description: 'Optional tool usage limits that should override the parent configuration.'
+      requiredKey: false
+      mapping: {}

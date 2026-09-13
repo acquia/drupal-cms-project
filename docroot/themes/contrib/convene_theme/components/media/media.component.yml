@@ -1,0 +1,68 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Media
+group: Atoms
+status: stable
+description: A responsive image component using Drupal Media.
+props:
+  type: object
+  properties:
+    image:
+      $ref: json-schema-definitions://canvas.module/image
+      type: object
+      title: Image
+      description: The media image.
+      examples:
+        - src: "https://placehold.co/1280x720"
+          alt: "Placeholder image"
+          width: 1280
+          height: 720
+    loading:
+      title: 'Loading Attribute'
+      description: 'How the browser should load the image.'
+      type: string
+      enum:
+        - 'lazy'
+        - 'eager'
+      default: 'lazy'
+      examples:
+        - 'lazy'
+      meta:enum:
+        lazy: 'Lazy'
+        eager: 'Eager'
+    alt_tag:
+      title: Alt Tag
+      type: string
+      default: ""
+      examples:
+        - "Override Alt Text"
+      description: The Alternative text for this image.
+    aspect_ratio:
+      title: 'Aspect Ratio'
+      type: string
+      default: 'auto'
+      description: 'Select the aspect ratio for the image.'
+      enum:
+        - 'auto'
+        - '1 / 1'
+        - '16 / 9'
+        - '4 / 3'
+        - '3 / 2'
+        - '21 / 9'
+        - '9 / 16'
+        - '3 / 4'
+        - '2 / 3'
+      meta:enum:
+        auto: 'Original / Auto'
+        1 / 1: '1:1 | Square'
+        16 / 9: '16:9 | Cinematic'
+        4 / 3: '4:3 | Standard'
+        3 / 2: '3:2 | Photo'
+        21 / 9: '21:9 | Ultrawide'
+        9 / 16: '9:16 | Portrait'
+        3 / 4: '3:4 | Portrait'
+        2 / 3: '2:3 | Portrait'
+        
+library:
+  css:
+    component:
+      media.css: {}

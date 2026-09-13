@@ -1,0 +1,42 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Contact email
+group: Base
+description: Email contact block — icon + label (e.g. "Email") + underlined email link. Figma desktop 1-6938, mobile 1-6684.
+props:
+  type: object
+  properties:
+    icon_media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Icon
+      type: object
+      description: Envelope or contact icon (e.g. 24×24). Upload from Media Library.
+    label:
+      type: string
+      title: Label
+      description: Heading above the email (e.g. "Email").
+      default: Email
+      examples:
+        - Email
+    email_text:
+      type: string
+      title: Email or link text
+      description: Visible text for the link (e.g. the email address).
+      examples:
+        - hello@communityimpact.org
+    url:
+      type: string
+      title: Link URL
+      description: "Optional. Use mailto: for email links (e.g. mailto:hello@example.org)."
+      examples:
+        - "mailto:hello@communityimpact.org"
+    backgroundcolor:
+      type: string
+      title: Background
+      enum:
+        - dark
+        - light
+      meta:enum:
+        dark: Dark
+        light: Light
+      default: dark
+      description: Dark matches Figma (#262626–#282828); light for light sections.

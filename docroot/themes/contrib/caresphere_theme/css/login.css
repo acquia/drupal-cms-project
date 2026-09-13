@@ -1,0 +1,22 @@
+/**
+ * @file
+ * CSS for overriding gin_login styles.
+ */
+
+body.gin-login .toolbar-icon-default::before {
+  mask-image: url(../CareSphereLogo.svg) !important;
+  -webkit-mask-image: url(../CareSphereLogo.svg) !important;
+  background-color: var(--gin-color-text, #000) !important;
+  width: 200px !important;
+  height: 50px !important;
+  mask-size: contain !important;
+  mask-repeat: no-repeat !important;
+  mask-position: left center !important;
+  display: inline-block !important;
+}
+
+body.gin-login .toolbar-icon-default {
+  width: 200px !important;
+  height: 50px !important;
+  background-size: contain !important;
+}

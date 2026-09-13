@@ -1,0 +1,237 @@
+{#
+  Section Stories — Figma 1:7769 (desktop), 1:7583 (mobile).
+  Header (tagline, heading, description) + optional View all button.
+  Desktop: title row with button on right; row of 3 cards.
+  Mobile: title block; stacked cards; View all button at bottom.
+#}
+
+{% set text_color = textcolor|default('dark') %}
+{% set level = heading_level|default(2) %}
+{% set tag = 'h' ~ level %}
+
+{% set c1 = {
+  media: card_1_media|default({}),
+  category: card_1_category|default(''),
+  read_time: card_1_read_time|default(''),
+  title: card_1_title|default(''),
+  description: card_1_description|default(''),
+  link_label: card_1_link_label|default('Button'),
+  link_url: card_1_link_url|default('')
+} %}
+{% set c2 = {
+  media: card_2_media|default({}),
+  category: card_2_category|default(''),
+  read_time: card_2_read_time|default(''),
+  title: card_2_title|default(''),
+  description: card_2_description|default(''),
+  link_label: card_2_link_label|default('Button'),
+  link_url: card_2_link_url|default('')
+} %}
+{% set c3 = {
+  media: card_3_media|default({}),
+  category: card_3_category|default(''),
+  read_time: card_3_read_time|default(''),
+  title: card_3_title|default(''),
+  description: card_3_description|default(''),
+  link_label: card_3_link_label|default('Button'),
+  link_url: card_3_link_url|default('')
+} %}
+
+{% set m1 = c1.media %}
+{% set m2 = c2.media %}
+{% set m3 = c3.media %}
+{% set has1 = c1.title is not empty or c1.description is not empty or (m1.src is defined and m1.src is not empty) %}
+{% set has2 = c2.title is not empty or c2.description is not empty or (m2.src is defined and m2.src is not empty) %}
+{% set has3 = c3.title is not empty or c3.description is not empty or (m3.src is defined and m3.src is not empty) %}
+{% set has_any_card = has1 or has2 or has3 %}
+{% set has_header = tagline is not empty or heading is not empty or description is not empty %}
+{% set has_view_all = view_all_label is not empty %}
+{% set view_all_variant = text_color == 'dark' ? 'secondary-white' : 'secondary-dark' %}
+
+{% if has_header or has_any_card %}
+
+	<div
+		class="section-stories section-stories--text-{{ text_color }} custom-container">
+
+		{# ----- Title row: desktop = left col + right button; mobile = title then cards then button ----- #}
+		<div class="section-stories__header">
+			<div class="section-stories__title-block">
+				{% if tagline is not empty %}
+					<p class="section-stories__tagline">{{ tagline }}</p>
+				{% endif %}
+				{% if heading is not empty %}
+					<{{tag}} class="section-stories__heading">{{ heading }}</{{tag}}>
+				{% endif %}
+				{% if description is not empty %}
+					<p class="section-stories__description">{{ description }}</p>
+				{% endif %}
+			</div>
+			{% if has_view_all %}
+				<div class="section-stories__actions section-stories__actions--desktop">
+					{{ include('caresphere_theme:button', {
+          variant: view_all_variant,
+          label: view_all_label,
+          href: view_all_url|default(''),
+          size: 'medium'
+        }) }}
+				</div>
+			{% endif %}
+		</div>
+
+		{% if has_any_card %}
+			<div class="section-stories__content">
+				<div class="section-stories__grid">
+
+					{% if has1 %}
+						<article class="section-stories__card">
+							{% if m1.src is defined and m1.src is not empty %}
+								<div class="section-stories__card-image">
+									{% include 'canvas:image' ignore missing with { src: m1.src, alt: m1.alt|default(''), class: 'section-stories__card-img', width: m1.width, height: m1.height } only %}
+								</div>
+							{% endif %}
+							<div class="section-stories__card-body">
+								<div class="section-stories__card-meta">
+									{% if c1.category is not empty %}
+										<span class="section-stories__tag">{{ c1.category }}</span>
+									{% endif %}
+									{% if c1.read_time is not empty %}
+										<span class="section-stories__read-time">{{ c1.read_time }}</span>
+									{% endif %}
+								</div>
+								<div class="section-stories__card-text">
+									{% if c1.title is not empty %}
+										<h3 class="section-stories__card-title">{{ c1.title }}</h3>
+									{% endif %}
+									{% if c1.description is not empty %}
+										<p class="section-stories__card-description">{{ c1.description }}</p>
+									{% endif %}
+								</div>
+								{% if c1.link_label is not empty %}
+									{% if c1.link_url|default('') is not empty %}
+										<a href="{{ c1.link_url|default('') }}" class="section-stories__card-link">
+											<span class="section-stories__card-link-label">{{ c1.link_label }}</span>
+											<span class="section-stories__card-link-icon" aria-hidden="true">
+												<svg width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+											</span>
+										</a>
+									{% else %}
+										<span class="section-stories__card-link">
+											<span class="section-stories__card-link-label">{{ c1.link_label }}</span>
+											<span class="section-stories__card-link-icon" aria-hidden="true">
+												<svg width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+											</span>
+										</span>
+									{% endif %}
+								{% endif %}
+							</div>
+						</article>
+					{% endif %}
+
+					{% if has2 %}
+						<article class="section-stories__card">
+							{% if m2.src is defined and m2.src is not empty %}
+								<div class="section-stories__card-image">
+									{% include 'canvas:image' ignore missing with { src: m2.src, alt: m2.alt|default(''), class: 'section-stories__card-img', width: m2.width, height: m2.height } only %}
+								</div>
+							{% endif %}
+							<div class="section-stories__card-body">
+								<div class="section-stories__card-meta">
+									{% if c2.category is not empty %}
+										<span class="section-stories__tag">{{ c2.category }}</span>
+									{% endif %}
+									{% if c2.read_time is not empty %}
+										<span class="section-stories__read-time">{{ c2.read_time }}</span>
+									{% endif %}
+								</div>
+								<div class="section-stories__card-text">
+									{% if c2.title is not empty %}
+										<h3 class="section-stories__card-title">{{ c2.title }}</h3>
+									{% endif %}
+									{% if c2.description is not empty %}
+										<p class="section-stories__card-description">{{ c2.description }}</p>
+									{% endif %}
+								</div>
+								{% if c2.link_label is not empty %}
+									{% if c2.link_url|default('') is not empty %}
+										<a href="{{ c2.link_url|default('') }}" class="section-stories__card-link">
+											<span class="section-stories__card-link-label">{{ c2.link_label }}</span>
+											<span class="section-stories__card-link-icon" aria-hidden="true">
+												<svg width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+											</span>
+										</a>
+									{% else %}
+										<span class="section-stories__card-link">
+											<span class="section-stories__card-link-label">{{ c2.link_label }}</span>
+											<span class="section-stories__card-link-icon" aria-hidden="true">
+												<svg width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+											</span>
+										</span>
+									{% endif %}
+								{% endif %}
+							</div>
+						</article>
+					{% endif %}
+
+					{% if has3 %}
+						<article class="section-stories__card">
+							{% if m3.src is defined and m3.src is not empty %}
+								<div class="section-stories__card-image">
+									{% include 'canvas:image' ignore missing with { src: m3.src, alt: m3.alt|default(''), class: 'section-stories__card-img', width: m3.width, height: m3.height } only %}
+								</div>
+							{% endif %}
+							<div class="section-stories__card-body">
+								<div class="section-stories__card-meta">
+									{% if c3.category is not empty %}
+										<span class="section-stories__tag">{{ c3.category }}</span>
+									{% endif %}
+									{% if c3.read_time is not empty %}
+										<span class="section-stories__read-time">{{ c3.read_time }}</span>
+									{% endif %}
+								</div>
+								<div class="section-stories__card-text">
+									{% if c3.title is not empty %}
+										<h3 class="section-stories__card-title">{{ c3.title }}</h3>
+									{% endif %}
+									{% if c3.description is not empty %}
+										<p class="section-stories__card-description">{{ c3.description }}</p>
+									{% endif %}
+								</div>
+								{% if c3.link_label is not empty %}
+									{% if c3.link_url|default('') is not empty %}
+										<a href="{{ c3.link_url|default('') }}" class="section-stories__card-link">
+											<span class="section-stories__card-link-label">{{ c3.link_label }}</span>
+											<span class="section-stories__card-link-icon" aria-hidden="true">
+												<svg width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+											</span>
+										</a>
+									{% else %}
+										<span class="section-stories__card-link">
+											<span class="section-stories__card-link-label">{{ c3.link_label }}</span>
+											<span class="section-stories__card-link-icon" aria-hidden="true">
+												<svg width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+											</span>
+										</span>
+									{% endif %}
+								{% endif %}
+							</div>
+						</article>
+					{% endif %}
+
+				</div>
+			</div>
+		{% endif %}
+
+		{% if has_view_all %}
+			<div class="section-stories__button-wrapper section-stories__button-wrapper--mobile">
+				{{ include('caresphere_theme:button', {
+        variant: view_all_variant,
+        label: view_all_label,
+        href: view_all_url|default(''),
+        size: 'medium'
+      }) }}
+			</div>
+		{% endif %}
+
+	</div>
+
+{% endif %}

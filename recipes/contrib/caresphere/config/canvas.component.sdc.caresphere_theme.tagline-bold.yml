@@ -1,0 +1,53 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - caresphere_theme
+active_version: c1a6dc445010f198
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        text:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Trusted by organizations and communities across the region'
+          expression: ℹ︎string␟value
+        font_size:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  13758e96b5d167b2:
+    settings:
+      prop_field_definitions:
+        text:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Trusted by organizations and communities across the region'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+label: 'Tagline bold'
+id: sdc.caresphere_theme.tagline-bold
+provider: caresphere_theme
+source: sdc
+source_local_id: 'caresphere_theme:tagline-bold'

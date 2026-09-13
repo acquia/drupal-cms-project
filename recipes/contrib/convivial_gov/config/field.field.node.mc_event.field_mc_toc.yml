@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_mc_toc
+    - node.type.mc_event
+id: node.mc_event.field_mc_toc
+field_name: field_mc_toc
+entity_type: node
+bundle: mc_event
+label: 'On this page'
+description: 'Select to display a table of contents on the top of the page.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

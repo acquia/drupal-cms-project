@@ -1,0 +1,21 @@
+{% set classes = [
+  'typography',
+  'typography--align-' ~ align|default('left'),
+  'typography--color-' ~ color|default('black'),
+] %}
+
+<div{{attributes.addClass(classes)}}>
+	{% if eyebrow %}
+		<div class="typography__eyebrow">{{ eyebrow }}</div>
+	{% endif %}
+
+	{% if heading %}
+		<{{heading_tag|default('h2')}} class="typography__heading">
+			{{ heading }}
+		</{{heading_tag|default('h2')}}>
+	{% endif %}
+
+	{% if description %}
+		<div class="typography__description">{{ description }}</div>
+	{% endif %}
+</div>

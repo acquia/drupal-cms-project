@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 5a304e9a-d2ff-4157-8bf4-14722712cb7c
+  bundle: service_page
+  default_langcode: en
+  depends:
+    9afccbfc-f33d-4daf-a744-8c011581c3fa: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Tax bands and how your bill is calculated'
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /local-tax/tax-bands-and-how-your-bill-calculated
+      langcode: en
+  field_content:
+    -
+      value: '<h2>How bands work</h2><p>Every residential property is assigned to a valuation band, which reflects the estimated value of the property at a set reference date. The band determines the proportion of the standard charge you pay. Properties in higher bands pay more; properties in lower bands pay less.</p><h2>Annual charges by band</h2><table><thead><tr><th>Band</th><th>Relative charge</th><th>Example annual bill</th></tr></thead><tbody><tr><td>A</td><td>6/9 of Band D</td><td>Lower</td></tr><tr><td>B</td><td>7/9 of Band D</td><td>Lower</td></tr><tr><td>C</td><td>8/9 of Band D</td><td>Lower</td></tr><tr><td>D</td><td>Standard rate</td><td>Standard</td></tr><tr><td>E</td><td>11/9 of Band D</td><td>Higher</td></tr><tr><td>F</td><td>13/9 of Band D</td><td>Higher</td></tr><tr><td>G</td><td>15/9 of Band D</td><td>Higher</td></tr><tr><td>H</td><td>18/9 of Band D</td><td>Highest</td></tr></tbody></table><h2>Challenging your band</h2><p>If you believe your property has been placed in the wrong band, you can challenge the valuation through the independent valuation office. You should first check what band neighbouring similar properties are in — if yours appears higher, you may have grounds to appeal. Contact the valuation office directly; the council cannot change bands itself.</p>'
+      format: content_format
+  field_description:
+    -
+      value: 'Local property tax is based on an assessed valuation band for your property. Find your band and see how the annual charge is worked out.'
+  field_parent:
+    -
+      entity: 9afccbfc-f33d-4daf-a744-8c011581c3fa

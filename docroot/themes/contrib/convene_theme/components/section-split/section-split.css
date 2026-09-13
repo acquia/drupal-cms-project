@@ -1,0 +1,75 @@
+.section-split.section-split--themed, body:not(.canvas-page) .section-split.section-split--admin-theme, body:not(.canvas-page) .section-split.section-split--admin-theme {
+  background-color: #FFFFFF;
+  padding: 100px 64px;
+}
+
+.section-split.section-split--themed .section-split__container, body:not(.canvas-page) .section-split.section-split--admin-theme .section-split__container, body:not(.canvas-page) .section-split.section-split--admin-theme .section-split__container {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.section-split.section-split--themed .section-split__grid, body:not(.canvas-page) .section-split.section-split--admin-theme .section-split__grid, body:not(.canvas-page) .section-split.section-split--admin-theme .section-split__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.section-split--media-right.section-split--themed .section-split__media, body:not(.canvas-page) .section-split--media-right.section-split--admin-theme .section-split__media, body:not(.canvas-page) .section-split--media-right.section-split--admin-theme .section-split__media {
+  order: 2;
+}
+
+.section-split--media-right.section-split--themed .section-split__content-col, body:not(.canvas-page) .section-split--media-right.section-split--admin-theme .section-split__content-col, body:not(.canvas-page) .section-split--media-right.section-split--admin-theme .section-split__content-col {
+  order: 1;
+}
+
+.section-split.section-split--themed .section-split__media img,
+body:not(.canvas-page) .section-split.section-split--admin-theme .section-split__media img,
+body:not(.canvas-page) .section-split.section-split--admin-theme .section-split__media img,
+.section-split.section-split--themed .section-split__media video, body:not(.canvas-page) .section-split.section-split--admin-theme .section-split__media video, body:not(.canvas-page) .section-split.section-split--admin-theme .section-split__media video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+.section-split.section-split--themed .section-split__heading, body:not(.canvas-page) .section-split.section-split--admin-theme .section-split__heading, body:not(.canvas-page) .section-split.section-split--admin-theme .section-split__heading {
+  font-family: inherit; /* Expecting typography atom */
+  margin-bottom: 24px;
+}
+
+.section-split.section-split--themed .section-split__content, body:not(.canvas-page) .section-split.section-split--admin-theme .section-split__content, body:not(.canvas-page) .section-split.section-split--admin-theme .section-split__content {
+  font-family: inherit; /* Expecting typography atom */
+  color: #4b5563; /* Text regular color */
+}
+
+.section-split.section-split--themed .section-split__actions, body:not(.canvas-page) .section-split.section-split--admin-theme .section-split__actions, body:not(.canvas-page) .section-split.section-split--admin-theme .section-split__actions {
+  margin-top: 32px;
+  display: flex;
+  gap: 16px;
+}
+
+@media (max-width: 992px) {
+.section-split.section-split--themed, body:not(.canvas-page) .section-split.section-split--admin-theme, body:not(.canvas-page) .section-split.section-split--admin-theme {
+    padding: 80px 32px;
+  }
+  
+.section-split.section-split--themed .section-split__grid, body:not(.canvas-page) .section-split.section-split--admin-theme .section-split__grid, body:not(.canvas-page) .section-split.section-split--admin-theme .section-split__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+.section-split--media-right.section-split--themed .section-split__media, body:not(.canvas-page) .section-split--media-right.section-split--admin-theme .section-split__media, body:not(.canvas-page) .section-split--media-right.section-split--admin-theme .section-split__media {
+    order: 1; /* reset order on mobile stack */
+  }
+.section-split--media-right.section-split--themed .section-split__content-col, body:not(.canvas-page) .section-split--media-right.section-split--admin-theme .section-split__content-col, body:not(.canvas-page) .section-split--media-right.section-split--admin-theme .section-split__content-col {
+    order: 2;
+  }
+}
+
+@media (max-width: 768px) {
+.section-split.section-split--themed, body:not(.canvas-page) .section-split.section-split--admin-theme, body:not(.canvas-page) .section-split.section-split--admin-theme {
+    padding: 64px 24px;
+  }
+}

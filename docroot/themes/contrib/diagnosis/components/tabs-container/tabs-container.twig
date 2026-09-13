@@ -1,0 +1,72 @@
+{% set is_vertical = orientation == 'vertical' %}
+
+{% set container = html_cva(base: ['tabs-container', 'w-full']) %}
+{% set container_classes = container.apply({}) %}
+
+{% set tablist =
+  html_cva(base: ['tabs-container--tablist', 'hidden md:flex', 'border-b border-border', 'gap-0', 'mb-0', 'in-[.tabs-container--canvas]:hidden'])
+%}
+{% set tablist_classes = tablist.apply({}) %}
+
+{% set tabs_content_wrapper = html_cva(base: ['tabs-container--content', 'mt-0', 'in-[.tabs-container--canvas]:space-y-4']) %}
+{% set tabs_content_wrapper_classes = tabs_content_wrapper.apply({}) %}
+
+<div
+  class="{{ container_classes }} {{ is_vertical ? 'tabs-container--vertical' : 'tabs-container--horizontal' }}"
+  data-aria-label="{{ aria_label|default('Tabs') }}"
+  data-orientation="{{ orientation|default('horizontal') }}"
+>
+  {# Desktop tablist - will be populated by JavaScript #}
+  <div class="{{ tablist_classes }}" role="tablist" aria-label="{{ aria_label|default('Tabs') }}"></div>
+
+  {# Tab panels (mobile shows as accordion, desktop panels only) #}
+  <div class="{{ tabs_content_wrapper_classes }}">
+    {% block tabs_content %}
+      {% embed 'diagnosis:tab'
+        with {
+          title: 'Tab 1',
+          active_by_default: true
+        }
+      %}
+        {% block tab_content %}
+          <div class="rich-text">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+              minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+          </div>
+        {% endblock %}
+      {% endembed %}
+
+      {% embed 'diagnosis:tab'
+        with {
+          title: 'Tab 2'
+        }
+      %}
+        {% block tab_content %}
+          <div class="rich-text">
+            <p>
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
+              illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+            </p>
+          </div>
+        {% endblock %}
+      {% endembed %}
+
+      {% embed 'diagnosis:tab'
+        with {
+          title: 'Tab 3'
+        }
+      %}
+        {% block tab_content %}
+          <div class="rich-text">
+            <p>
+              At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et
+              quas molestias excepturi sint occaecati cupiditate non provident.
+            </p>
+          </div>
+        {% endblock %}
+      {% endembed %}
+    {% endblock %}
+  </div>
+</div>

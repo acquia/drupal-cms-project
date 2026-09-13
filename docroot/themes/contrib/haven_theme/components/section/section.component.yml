@@ -1,0 +1,172 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Section
+group: Layout
+status: stable
+props:
+  type: object
+  required:
+    - columns
+    - mobile_columns
+    - width
+    - margin_block_start
+    - margin_block_end
+    - padding_block_start
+    - padding_block_end
+  properties:
+    width:
+      type: string
+      title: Section width
+      enum:
+        - "100%"
+        - "90%"
+        - "80%"
+        - "70%"
+        - "60%"
+        - "50%"
+      default: "100%"
+      examples:
+        - "100%"
+    columns:
+      type: string
+      title: Grid layout
+      description: Layout selected applies on desktop and tablet.
+      enum:
+        - "1 column"
+        - "2 columns"
+        - "3 columns"
+        - "4 columns"
+        - "5 columns"
+        - "6 columns"
+        - "2 columns 75-25"
+        - "2 columns 25-75"
+        - "2 columns 67-33"
+        - "2 columns 33-67"
+      examples:
+        - "2 columns"
+      default:
+        - "2 columns"
+    views_columns:
+      type: string
+      title: Views grid
+      description: If you are using a view in this section, select the grid layout.
+      enum:
+        - "2 columns"
+        - "3 columns"
+        - "4 columns"
+        - "5 columns"
+        - "6 columns"
+    mobile_columns:
+      type: string
+      title: Columns on mobile
+      enum:
+        - "1"
+        - "2"
+        - "3"
+      examples:
+        - "1"
+    margin_block_start:
+      type: string
+      title: Margin top
+      enum:
+        - "-48"
+        - "-20"
+        - "0"
+        - "8"
+        - "20"
+        - "32"
+        - "48"
+        - "64"
+        - "96"
+        - "128"
+      examples:
+        - "48"
+    margin_block_end:
+      type: string
+      title: Margin bottom
+      enum:
+        - "0"
+        - "8"
+        - "20"
+        - "32"
+        - "48"
+        - "64"
+        - "96"
+        - "128"
+      examples:
+        - "48"
+    padding_block_start:
+      type: string
+      title: Padding top
+      enum:
+        - "0"
+        - "16"
+        - "32"
+        - "64"
+      examples:
+        - "0"
+    padding_block_end:
+      type: string
+      title: Padding bottom
+      enum:
+        - "0"
+        - "16"
+        - "32"
+        - "64"
+      examples:
+        - "0"
+    reverse_mobile:
+      type: boolean
+      title: Reverse direction on mobile
+      description: Swap the order of the first and last items on mobile.
+      examples:
+        - false
+      default:
+        - false
+    restrict_width:
+      type: boolean
+      title: Restrict background width
+      examples:
+        - false
+      default:
+        - false
+    background_color:
+      type: string
+      title: Background color
+      enum:
+        - primary
+        - secondary
+        - accent
+        - muted
+        - white
+      meta:enum:
+        primary: Primary
+        secondary: Secondary
+        accent: Accent
+        muted: Muted
+        white: White
+    background_media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Background image
+      type: object
+    section_header:
+      type: boolean
+      title: Show header region
+      examples:
+        - true
+      default:
+        - true
+    section_footer:
+      type: boolean
+      title: Show footer region
+      examples:
+        - true
+      default:
+        - true
+
+slots:
+  header_slot:
+    title: "Header"
+  main_slot:
+    title: "Grid"
+  footer_slot:
+    title: "Footer"

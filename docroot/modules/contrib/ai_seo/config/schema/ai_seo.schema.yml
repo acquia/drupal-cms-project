@@ -1,0 +1,40 @@
+ai_seo.settings:
+  label: 'AI Seo Settings'
+  type: config_object
+  mapping:
+    provider_and_model:
+      label: 'Provider and model'
+      type: string
+    custom_system_prompt:
+      label: 'Custom System Prompt'
+      type: text
+    custom_prompt:
+      label: 'Custom Prompt'
+      type: text
+    enable_field_buttons:
+      label: 'Enable inline field analysis buttons'
+      type: boolean
+ai_seo.report_type.*:
+  type: config_entity
+  label: 'AI SEO Report Type'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    description:
+      type: text
+      label: 'Description'
+    prompt:
+      type: text
+      label: 'Prompt'
+    status:
+      type: boolean
+      label: 'Status'
+    default_prompt_hash:
+      type: string
+      label: 'Default prompt hash'
+    uuid:
+      type: string

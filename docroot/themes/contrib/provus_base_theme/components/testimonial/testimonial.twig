@@ -1,0 +1,38 @@
+<div class="testimonial-wrapper image-location-{{ display_type }}">
+  <div class="card card-testimonial">
+    <div class="row">
+      {% if image_url %}
+        <div class="col-lg-6">
+      {% else %}
+        <div class="col-lg-12">
+      {% endif %}
+        <div class="testimonial-content">
+          {% if body|render %}
+            <div class="testimonial-body">{{ body }}</div>
+          {% endif %}
+          {% if name %}
+            <div class="testimonial-name">
+              {{ name }}
+            </div>
+          {% endif %}
+          {% if role %}
+            <div class="testimonial-role">
+              {{ role }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      {% if image_url %}
+        <div class="col-lg-6">
+            <div class="testimonial-image">
+              {% include 'canvas:image' ignore missing with {
+                src: image_url.src,
+                alt: image_url.alt,
+                class: 'img-fluid w-100 h-100 object-fit-cover'
+              } only %}
+            </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

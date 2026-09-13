@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_post_date
+    - node.type.post
+  module:
+    - datetime
+id: node.post.field_post_date
+field_name: field_post_date
+entity_type: node
+bundle: post
+label: 'Post Date'
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

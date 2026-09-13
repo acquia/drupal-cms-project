@@ -1,0 +1,21 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: base/steps.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+@reference "../tailwindcss";
+
+@layer utilities.daisy.l1.l2.l3 {
+  .steps {
+    .step {
+      --step-bg: var(--background-weak);
+      --step-fg: var(--foreground);
+    }
+
+    .step--active {
+      --step-bg: var(--highlight);
+      --step-fg: var(--highlight-contrast);
+    }
+  }
+}

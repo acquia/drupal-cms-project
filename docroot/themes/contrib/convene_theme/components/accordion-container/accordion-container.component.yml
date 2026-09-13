@@ -1,0 +1,43 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Accordion Container
+group: Organisms
+status: stable
+description: A container for a list of accordion items, usually for FAQs.
+props:
+  type: object
+  properties:
+    admin_theme:
+      title: Admin Theme
+      type: boolean
+      default: false
+      description: Check to enable Admin Theme styles (applies CSS only on frontend to preserve Canvas builder look).
+    dark_theme:
+      title: Dark Theme 
+      type: boolean
+      default: false
+      description: If checked the accordion will shift to the dark blue layout variation.
+    heading:
+      title: Heading
+      type: string
+      description: Section heading for the accordion group.
+    description:
+      title: Description
+      type: string
+      description: Optional text describing the FAQ section.
+slots:
+  items:
+    title: Items Slot
+    description: Slot for accordion-item child components.
+  help_heading:
+    title: Help Heading
+    description: Slot for the 'Need more help?' text.
+  help_description:
+    title: Help Description
+    description: Slot for the contact description text.
+  help_button:
+    title: Help Button
+    description: Slot for the Contact button.
+library:
+  css:
+    component:
+      accordion-container.css: {}

@@ -1,0 +1,95 @@
+{% set button_variant = variant|default('primary') %}
+{% set button_size = size|default('medium') %}
+{# `square` = explicit 0 radius. Legacy `none` kept for older saved content. #}
+{% set border_radius_mode = border_radius|default('default') %}
+{% if border_radius_mode == 'none' %}
+	{% set border_radius_mode = 'square' %}
+{% endif %}
+{% set is_disabled = disabled|default(false) %}
+{% set has_icon = icon is not empty %}
+{% set button_width = mobile_width|default(false) ? 'button--full' : '' %}
+{% set icon_position = icon_first|default(false) ? 'button--icon-first' : 'button--icon-last' %}
+
+{% macro button_icon(icon) %}
+	{% if icon == 'arrow-right' %}
+		<svg width="1em" height="1em" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+			<line x1="5" y1="12" x2="19" y2="12"></line>
+			<polyline points="12 5 19 12 12 19"></polyline>
+		</svg>
+	{% elseif icon == 'arrow-left' %}
+		<svg width="1em" height="1em" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+			<line x1="19" y1="12" x2="5" y2="12"></line>
+			<polyline points="12 19 5 12 12 5"></polyline>
+		</svg>
+	{% elseif icon == 'caret-right' %}
+		<svg width="1em" height="1em" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+			<polyline points="9 18 15 12 9 6"></polyline>
+		</svg>
+	{% elseif icon == 'caret-left' %}
+		<svg width="1em" height="1em" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+			<polyline points="15 18 9 12 15 6"></polyline>
+		</svg>
+	{% elseif icon == 'download' %}
+		<svg width="1em" height="1em" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+			<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+			<polyline points="7 10 12 15 17 10"></polyline>
+			<line x1="12" y1="15" x2="12" y2="3"></line>
+		</svg>
+	{% elseif icon == 'user-plus' %}
+		<svg width="1em" height="1em" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+			<path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+			<circle cx="8.5" cy="7" r="4"></circle>
+			<line x1="20" y1="8" x2="20" y2="14"></line>
+			<line x1="23" y1="11" x2="17" y2="11"></line>
+		</svg>
+	{% endif %}
+{% endmacro %}
+{% import _self as macros %}
+
+{% set button_class_list = ['button', 'button--' ~ button_variant, 'button--' ~ button_size] %}
+{% if button_width %}
+	{% set button_class_list = button_class_list|merge([button_width]) %}
+{% endif %}
+{% if has_icon %}
+	{% set button_class_list = button_class_list|merge([icon_position]) %}
+{% endif %}
+{% if border_radius_mode != 'default' %}
+	{% set button_class_list = button_class_list|merge(['button--radius-' ~ border_radius_mode]) %}
+{% endif %}
+{% set button_classes = button_class_list|join(' ') %}
+
+{% set additional_classes = btn_classes|default('') %}
+{% if additional_classes is iterable %}
+	{% set additional_classes = additional_classes|join(' ') %}
+{% endif %}
+{% set button_classes = (button_classes ~ ' ' ~ additional_classes)|trim %}
+
+{% set disabled_attr = is_disabled ? 'aria-disabled="true"' : '' %}
+{% set button_disabled_attr = is_disabled ? 'disabled' : '' %}
+{% set href = is_disabled ? null : href %}
+
+{% set icon_size_map = {
+  small: 'extra-extra-small',
+  medium: 'extra-small',
+  large: 'small'
+} %}
+
+{% if href %}
+	<a href="{{ href }}" class="{{ button_classes }}" {{ disabled_attr }}>
+		{% if has_icon %}
+			<span class="button__icon">
+				{{ macros.button_icon(icon) }}
+			</span>
+		{% endif %}
+		{{ label }}
+	</a>
+{% else %}
+	<button type="button" class="{{ button_classes }}" {{ button_disabled_attr }}>
+		{% if has_icon %}
+			<span class="button__icon">
+				{{ macros.button_icon(icon) }}
+			</span>
+		{% endif %}
+		{{ label }}
+	</button>
+{% endif %}

@@ -1,0 +1,184 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: a16fa04c-713b-4dd4-8d68-e5a948517b16
+  default_langcode: en
+  depends:
+    6ac2a80f-ff84-4142-abe0-20244172fe5f: file
+    9980dd4e-70cf-4e4d-977b-298af58ba81b: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Medical Records'
+  description:
+    -
+      value: 'Access and request copies of your medical records.'
+  components:
+    -
+      uuid: 0aff02dd-6fcc-4417-8b24-663aea2b5ff1
+      component_id: sdc.diagnosis.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        background: secondary
+        padding_block_start: '32'
+        padding_block_end: '32'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        image_size: '4:3'
+        image_position: right
+        image_radius: extra-large
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 9980dd4e-70cf-4e4d-977b-298af58ba81b
+            target_type: media
+    -
+      parent_uuid: 0aff02dd-6fcc-4417-8b24-663aea2b5ff1
+      slot: hero_slot
+      uuid: b790d783-3e92-4516-ae11-867416d8f2ce
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Request Medical Records'
+        level: 1
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 0aff02dd-6fcc-4417-8b24-663aea2b5ff1
+      slot: hero_slot
+      uuid: 59552342-d4b1-4726-a398-f402e2edb574
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Access and request copies of your medical records.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: c3b3c93f-b258-4e21-8a64-1cff23795ca2
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: c3b3c93f-b258-4e21-8a64-1cff23795ca2
+      slot: main_slot
+      uuid: fc0ba5ee-da8a-4a3f-80d5-7ec1e9ef1660
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>You have the right to access and obtain copies of your medical records. Saltmarsh Island Health makes it easy to request your records securely.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: c3b3c93f-b258-4e21-8a64-1cff23795ca2
+      slot: main_slot
+      uuid: 41bf7458-6052-4119-8806-82a1915590a7
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'How to Request Records'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: c3b3c93f-b258-4e21-8a64-1cff23795ca2
+      slot: main_slot
+      uuid: d70eb1d6-8ae5-4fe6-89b7-08332b73e6d8
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<ul><li data-list-item-id="e8bd61e14cf1231109496c2db8d736366"><strong>Online:</strong> Request through your MyChart patient portal</li><li data-list-item-id="e9042caf338eb715f69db16b8de4be0ee"><strong>Phone:</strong> (555) 123-4570</li><li data-list-item-id="e1e231166a31a49ed116acd7ff634beba"><strong>Fax:</strong> Complete authorization form and fax to (555) 123-4573</li><li data-list-item-id="e9cdf597e083ac56321c7132974fee1f0"><strong>In Person:</strong> Visit our Medical Records office at Harbor Hollow Hill Campus</li></ul>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: c3b3c93f-b258-4e21-8a64-1cff23795ca2
+      slot: main_slot
+      uuid: a1931e23-fb82-4eb1-8e52-4dfee812a1cc
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: "What You'll Need"
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: c3b3c93f-b258-4e21-8a64-1cff23795ca2
+      slot: main_slot
+      uuid: 6bd7bef4-d826-434d-960e-a7d6a1455c94
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<ul><li data-list-item-id="e869ede2ff747bc1e7e8d85e9a809480e">Completed Authorization for Release of Information form</li><li data-list-item-id="e182b3cc2bdb96e8e5cfef19ffa0343f1">Valid photo ID</li><li data-list-item-id="efcf11e39cdef70c81adb0057dab52414">Specific date range or records requested</li></ul>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: c3b3c93f-b258-4e21-8a64-1cff23795ca2
+      slot: main_slot
+      uuid: 546585b2-77ca-4715-87a6-d50f0f176f28
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Processing Times & Fees'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: c3b3c93f-b258-4e21-8a64-1cff23795ca2
+      slot: main_slot
+      uuid: 6a0d3e42-2168-46e2-a2e4-53b9f12438b1
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Most records requests are processed within 5-7 business days. There is no charge for the first 25 pages; additional pages are $0.25 per page. Electronic delivery via MyChart is free.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: c3b3c93f-b258-4e21-8a64-1cff23795ca2
+      slot: main_slot
+      uuid: 483462b3-cd00-4991-b22a-b183a4885138
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Questions?'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: c3b3c93f-b258-4e21-8a64-1cff23795ca2
+      slot: main_slot
+      uuid: 5c0a369c-0a77-4b06-a183-929fa0584c5f
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Contact our Medical Records department at (555) 123-4570 or medicalrecords@saltmarshhealth.org</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+  path:
+    -
+      alias: /patients/medical-records
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

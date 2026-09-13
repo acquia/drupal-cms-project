@@ -1,0 +1,68 @@
+{#
+  Story card — Figma Drupal Community NGO Theme
+  Desktop (1-11186): horizontal — 250px image left, content right, gap 24px
+  Mobile (1-10893): stacked — image top (1:1), content below, gap 24px
+#}
+{% set img = media|default({}) %}
+{% set has_image = img.src is defined and img.src is not empty %}
+{% set has_info = tag is not empty or read_time is not empty %}
+{% set has_cta = button_label is not empty %}
+
+<article class="card-story"{% if tag is not empty %} data-tab-id="{{ tag|trim }}"{% endif %}>
+  {% if has_image %}
+    <div class="card-story__image">
+      {% include 'canvas:image' ignore missing with {
+        src: img.src,
+        alt: img.alt|default(title),
+        class: 'card-story__image-img',
+        width: img.width|default(250),
+        height: img.height|default(250),
+        sizes: '(min-width: 48rem) 250px, 100vw'
+      } only %}
+    </div>
+  {% endif %}
+
+  <div class="card-story__content">
+    <div class="card-story__body">
+      {% if has_info %}
+        <div class="card-story__info">
+          {% if tag is not empty %}
+            <span class="card-story__tag">{{ tag }}</span>
+          {% endif %}
+          {% if read_time is not empty %}
+            <span class="card-story__read-time">{{ read_time }}</span>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      <div class="card-story__text">
+        {% if title is not empty %}
+          <h3 class="card-story__title">{{ title }}</h3>
+        {% endif %}
+        {% if description is not empty %}
+          <p class="card-story__description">{{ description }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if has_cta %}
+      <div class="card-story__actions">
+        {% if button_url is not empty %}
+          <a href="{{ button_url }}" class="card-story__cta">
+            <span class="card-story__cta-label">{{ button_label }}</span>
+            <span class="card-story__cta-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </span>
+          </a>
+        {% else %}
+          <span class="card-story__cta">
+            <span class="card-story__cta-label">{{ button_label }}</span>
+            <span class="card-story__cta-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </span>
+          </span>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</article>

@@ -1,0 +1,143 @@
+eca:
+  model_owner: eca
+  components:
+    link:
+      eca_route_match:
+        - type: start
+          id: kernel:controller
+      eca_form_operation:
+        - type: start
+          id: form:form_submit
+      eca_form_field_value:
+        - type: start
+          id: form:form_build
+        - type: start
+          id: form:form_submit
+        - type: start
+          id: form:form_validate
+      eca_form_field_exists:
+        - type: start
+          id: form:form_build
+        - type: start
+          id: form:form_submit
+        - type: start
+          id: form:form_validate
+      eca_form_triggered:
+        - type: start
+          id: form:form_submit
+      eca_form_has_errors:
+        - type: start
+          id: form:form_validate
+      eca_form_submitted:
+        - type: start
+          id: form:form_build
+        - type: start
+          id: form:form_submit
+        - type: start
+          id: form:form_validate
+    element:
+      eca_token_load_route_param:
+        - type: start
+          id: kernel:controller
+      eca_form_add_ajax:
+        - type: start
+          id: form:form_build
+      eca_form_add_container_element:
+        - type: start
+          id: form:form_build
+      eca_form_add_group_element:
+        - type: start
+          id: form:form_build
+      eca_form_add_hiddenfield:
+        - type: start
+          id: form:form_build
+      eca_form_add_optionsfield:
+        - type: start
+          id: form:form_build
+      eca_form_add_submit_button:
+        - type: start
+          id: form:form_build
+      eca_form_add_textfield:
+        - type: start
+          id: form:form_build
+      eca_form_build_entity:
+        - type: start
+          id: form:form_submit
+        - type: start
+          id: form:form_validate
+      eca_form_field_access:
+        - type: start
+          id: form:form_build
+      eca_form_field_add_state:
+        - type: start
+          id: form:form_build
+      eca_form_field_default_value:
+        - type: start
+          id: form:form_build
+      eca_form_field_disable:
+        - type: start
+          id: form:form_build
+      eca_form_field_get_default_value:
+        - type: start
+          id: form:form_build
+      eca_form_field_get_options:
+        - type: start
+          id: form:form_build
+      eca_form_field_get_value:
+        - type: start
+          id: form:form_submit
+        - type: start
+          id: form:form_validate
+      eca_form_field_require:
+        - type: start
+          id: form:form_build
+      eca_form_field_set_error:
+        - type: start
+          id: form:form_validate
+      eca_form_field_set_label:
+        - type: start
+          id: form:form_build
+      eca_form_field_set_options:
+        - type: start
+          id: form:form_build
+      eca_form_field_set_value:
+        - type: start
+          id: form:form_build
+        - type: start
+          id: form:form_submit
+        - type: start
+          id: form:form_validate
+      eca_form_field_set_weight:
+        - type: start
+          id: form:form_build
+      eca_form_get_errors:
+        - type: start
+          id: form:form_validate
+      eca_form_set_action:
+        - type: start
+          id: form:form_build
+      eca_form_set_method:
+        - type: start
+          id: form:form_build
+      eca_form_state_get_property_value:
+        - type: start
+          id: form:form_build
+        - type: start
+          id: form:form_submit
+        - type: start
+          id: form:form_validate
+      eca_form_state_set_property_value:
+        - type: start
+          id: form:form_build
+        - type: start
+          id: form:form_submit
+        - type: start
+          id: form:form_validate
+      eca_form_state_set_rebuild:
+        - type: start
+          id: form:form_submit
+      eca_form_state_set_redirect:
+        - type: start
+          id: form:form_submit
+        - type: start
+          id: form:form_validate

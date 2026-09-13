@@ -1,0 +1,75 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Event List View
+status: stable
+description: Event list item component displaying event title, dates, URL, summary, and optional extra classes
+group: Provus Components
+
+variants:
+  default:
+    title: Default
+    description: Standard event list item with title, dates, URL, and summary
+
+props:
+  type: object
+  required:
+    - start_date
+    - end_date
+    - url
+    - event_title
+    - full_dates
+    - summary
+  properties:
+    start_date:
+      type: string
+      title: Month
+      description: Month of the event
+      examples:
+        - 'JAN'
+      default: ''
+    end_date:
+      type: string
+      title: Day
+      description: Day of the event
+      examples:
+        - '01'
+      default: ''
+    full_dates:
+      type: string
+      title: Full dates
+      description: All the dates of the event
+      examples:
+        - 'March 15-17, 2024'
+      default: ''
+    url:
+      type: string
+      format: uri-reference
+      title: 'Link URL'
+      description: 'URL for the link button'
+      examples:
+        - '/events/annual-conference-2024'
+      default: ''
+    event_title:
+      type: string
+      title: Event title
+      description: Event title
+      examples:
+        - 'Annual Conference 2024'
+      default: ''
+    summary:
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: block
+      title: Summary
+      description: Summary of the event
+      examples:
+        - 'Join us for an exciting event featuring keynote speakers and networking opportunities.'
+        - 'Learn about the latest trends and best practices in web development.'
+      default: ''
+    extra_classes:
+      type: string
+      title: 'Content attributes'
+      description: 'Drupal template function placeholder — no content is required here. Please leave this section blank.'
+      examples:
+        - 'custom-class'
+        - 'highlighted-event'
+      default: ''

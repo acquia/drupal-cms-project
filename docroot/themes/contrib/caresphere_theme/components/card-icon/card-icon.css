@@ -1,0 +1,139 @@
+/**
+ * @file card-icon.css
+ * Icon card component — matches Figma Drupal Community NGO Theme
+ * node 1:11156 (Column: icon + heading + description).
+ *
+ * Layout: flex column, 24px gap, items and text centered.
+ * Typography: Heading 4 (IBM Plex Serif 36px), body (DM Sans 16px).
+ * Design tokens: --font-serif, --font-sans, --card-foreground.
+ */
+
+.card-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  width: 100%;
+  &.bg-gray, &.bg-gray-light, &.bg-dark-gray, &.bg-black, &.bg-white {
+    padding: 32px;
+  }
+}
+
+.card-icon__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+
+.card-icon__icon-wrap {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.card-icon__icon-wrap--left {
+  justify-content: flex-start;
+}
+
+.card-icon__icon-wrap--right {
+  justify-content: flex-end;
+}
+
+.card-icon__content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+}
+
+.card-icon__content--left {
+  text-align: left;
+  align-items: flex-start;
+}
+
+.card-icon__content--right {
+  text-align: right;
+  align-items: flex-end;
+}
+
+/* Figma: IBM Plex Serif, Text Sizes/Heading 4 (36px), letter-spacing -0.36px, line-height 1.3 */
+.card-icon__heading {
+  font-family: var(--font-serif);
+  font-size: 1.5rem; /* 24px mobile */
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.24px;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .card-icon__heading {
+    font-size: 2.25rem; /* 36px — Figma Heading 4 */
+    letter-spacing: -0.36px;
+  }
+}
+
+/* Figma: DM Sans Regular, Text Sizes/Text Regular (16px), line-height 1.5 */
+.card-icon__description {
+  font-family: var(--font-sans);
+  font-size: 0.75rem; /* 12px mobile */
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .card-icon__description {
+    font-size: 1rem; /* 16px */
+  }
+}
+
+.card-icon__description p {
+  margin: 0;
+}
+
+.card-icon__link {
+  position: absolute;
+  inset: 0;
+  color: inherit;
+  text-decoration: none;
+  z-index: -1;
+}
+
+.card-icon__link:hover {
+  color: inherit;
+}
+
+.card-icon__link:focus-visible {
+  outline: 2px solid var(--primary, #c30000);
+  outline-offset: 2px;
+}
+
+.card-icon__content-block {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: inherit;
+  width: 100%;
+  text-align: inherit;
+}
+
+.card-icon__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: inherit;
+  width: 100%;
+}
+
+.text-white {
+  h1,h2,h3,h4,h5,h6,p{
+    color: var(--foreground) !important;
+  }
+}

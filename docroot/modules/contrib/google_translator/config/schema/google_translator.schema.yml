@@ -1,0 +1,18 @@
+google_translator.settings:
+  type: config_object
+  mapping:
+    google_translator_active_languages_display_mode:
+      type: string
+      label: "Widget display mode"
+    google_translator_active_languages:
+      type: sequence
+      label: "Active languages for selection by the user"
+      sequence:
+        type: string
+        label: 'Language short code'
+    google_translator_disclaimer_title:
+      type: label
+      label: "Disclaimer title inside the disclaimer modal"
+    google_translator_disclaimer:
+      type: text
+      label: "Disclaimer text inside the disclaimer modal"

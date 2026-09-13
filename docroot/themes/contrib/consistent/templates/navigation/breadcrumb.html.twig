@@ -1,0 +1,15 @@
+{% if breadcrumb %}
+  <nav aria-label="{{ 'Breadcrumb'|t }}">
+    <ol class="flex flex-wrap items-center list-none p-0 m-0">
+      {% for item in breadcrumb %}
+        <li class="stwl-breadcrumb__item flex items-center text-base">
+          {% if not loop.last %}
+            <a href="{{ item.url }}" class="text-link">{{ item.text }}</a>
+          {% else %}
+            <span class="text-foreground" aria-current="page">{{ item.text }}</span>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ol>
+  </nav>
+{% endif %}

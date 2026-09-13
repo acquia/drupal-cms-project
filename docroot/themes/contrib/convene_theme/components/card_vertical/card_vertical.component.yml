@@ -1,0 +1,28 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Card Vertical
+group: Molecules
+status: stable
+description: A vertical card with content on top and image on the bottom.
+props:
+  type: object
+  properties:
+    eyebrow:
+      title: Card Eyebrow
+      type: string
+    heading:
+      title: Card Title
+      type: string
+    description:
+      title: Card Description
+      type: string
+slots:
+  vertical_card_image:
+    title: Card Image
+    description: The card image.
+  card_actions:
+    title: Card Actions
+    description: Buttons or links.
+library:
+  css:
+    component:
+      card_vertical.css: {}

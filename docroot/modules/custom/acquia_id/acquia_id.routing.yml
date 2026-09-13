@@ -1,0 +1,8 @@
+acquia_id.sso:
+  path: '/acquia-id/sso'
+  defaults:
+    _controller: Drupal\acquia_id\Controller\OAuth2Controller
+  requirements:
+    _custom_access: 'Drupal\acquia_id\Controller\OAuth2Controller::access'
+  options:
+    no_cache: TRUE

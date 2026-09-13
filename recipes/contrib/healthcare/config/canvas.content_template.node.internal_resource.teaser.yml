@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.diagnosis.card
+    - core.entity_view_mode.node.teaser
+    - field.field.node.internal_resource.field_summary
+    - node.type.internal_resource
+  module:
+    - node
+    - options
+id: node.internal_resource.teaser
+content_entity_type_id: node
+content_entity_type_bundle: internal_resource
+content_entity_type_view_mode: teaser
+component_tree:
+  -
+    uuid: f392f23b-2b15-4327-b102-1dab2fd36d19
+    component_id: sdc.diagnosis.card
+    component_version: b92bb1f5bbf9ce41
+    inputs: '{"background":"primary","style":"full","orientation":"vertical","heading_text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:internal_resource\u241dtitle\u241e\u241fvalue"},"level":3,"text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:internal_resource\u241dfield_summary\u241e\u241fvalue"},"url":{"sourceType":"host-entity-url","absolute":true},"is_text_centered":false}'
+exposed_slots: {  }

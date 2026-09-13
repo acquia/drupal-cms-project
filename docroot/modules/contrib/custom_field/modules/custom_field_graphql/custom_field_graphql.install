@@ -1,0 +1,66 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Custom Field Graphql module.
+ */
+
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\field\Entity\FieldConfig;
+
+/**
+ * Update GraphQL Compose settings to support new custom field features.
+ *
+ * @return \Drupal\Core\StringTranslation\TranslatableMarkup
+ *   A translated message detailing what was updated.
+ */
+function custom_field_graphql_update_10001(): TranslatableMarkup {
+  $entity_field_manager = \Drupal::service('entity_field.manager');
+  // Get the entity field map for fields of type 'custom'.
+  $entity_field_map = $entity_field_manager->getFieldMapByFieldType('custom');
+
+  // Get the editable configuration object for graphql_compose.settings.
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('graphql_compose.settings');
+  $updated = [];
+
+  foreach ($entity_field_map as $entity_type_id => $fields) {
+    foreach ($fields as $field_name => $field_info) {
+      foreach ($field_info['bundles'] as $bundle) {
+        $field = FieldConfig::loadByName($entity_type_id, $bundle, $field_name);
+        $config_path = "field_config.$entity_type_id.$bundle.$field_name";
+        $settings = $config->get($config_path);
+        if (!$field || !$settings) {
+          continue;
+        }
+        $columns = $field->getSetting('columns');
+        $subfields = [];
+        foreach ($columns as $name => $column) {
+          // Set subfield to enabled by default.
+          $subfields[$name] = [
+            'enabled' => TRUE,
+          ];
+          // Preserve original name as name_sdl if it contains an underscore.
+          if (str_contains($name, '_')) {
+            $subfields[$name]['name_sdl'] = (string) $name;
+          }
+        }
+        $settings['subfields'] = $subfields;
+        $config->set($config_path, $settings);
+        $updated[] = $config_path;
+      }
+    }
+  }
+
+  // Save all configuration changes.
+  if (!empty($updated)) {
+    $config->save();
+    return t('The following GraphQL Compose custom field configuration settings have been updated to support new advanced settings: @fields', [
+      '@fields' => implode(', ', $updated),
+    ]);
+  }
+  else {
+    return t('No GraphQL Compose custom field configuration settings were affected by this update.');
+  }
+
+}

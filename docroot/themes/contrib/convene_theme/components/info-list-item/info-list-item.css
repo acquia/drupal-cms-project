@@ -1,0 +1,28 @@
+.info-list-item {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.info-list-item__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 500; /* Regular/Medium weight */
+  color: #030804;
+}
+
+.info-list-item__description {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #4b5563; /* Gray text matching Figma */
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .info-list-item {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_mc_relateds
+    - node.type.mc_article
+    - node.type.mc_page
+    - node.type.mc_section
+    - node.type.mc_topic
+id: node.mc_article.field_mc_relateds
+field_name: field_mc_relateds
+entity_type: node
+bundle: mc_article
+label: Related
+description: 'Related content to be shown at the bottom of the page.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      mc_article: mc_article
+      mc_page: mc_page
+      mc_section: mc_section
+      mc_topic: mc_topic
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: mc_article
+field_type: entity_reference

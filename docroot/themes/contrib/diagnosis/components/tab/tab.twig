@@ -1,0 +1,78 @@
+{% set tab_id = 'tab--button'|clean_unique_id %}
+{% set panel_id = 'tab--panel'|clean_unique_id %}
+
+{% set tab_wrapper = html_cva(base: ['tab', 'border-b border-border md:border-b-0']) %}
+{% set tab_wrapper_classes = tab_wrapper.apply({}) %}
+
+{# Mobile accordion button (hidden on desktop, except in Canvas where it's always visible) #}
+{% set mobile_button =
+  html_cva(
+    base: [
+      'tab--mobile-button',
+      'flex w-full cursor-pointer items-center justify-between',
+      'bg-card hover:bg-muted',
+      'p-4 text-left text-2xl',
+      'border-b border-border',
+      'md:hidden',
+      'in-[.tab--canvas]:block'
+    ]
+  )
+%}
+{% set mobile_button_classes = mobile_button.apply({}) %}
+
+{# Tab panel content #}
+{% set panel =
+  html_cva(
+    base: [
+      'tab--panel',
+      'h-0 overflow-hidden px-4 py-0',
+      'text-base text-foreground',
+      'transition-[height,padding] duration-0 in-[.tab--animate]:duration-300',
+      '[&>:first-child]:mt-0 [&>:last-child]:mb-0',
+      'in-[.tab--active]:overflow-visible',
+      'in-[.tab--active]:py-5 in-[.tab--active:not(.tab--js)]:h-auto',
+      'in-[.tab--js.tab--active]:h-(--natural-height)',
+      'in-[.tab--resizing.tab--active]:h-auto',
+      'md:in-[.tab--active]:overflow-visible md:in-[.tab--active]:py-6',
+      'md:h-0 md:in-[.tab--active]:h-auto',
+      'in-[.tab--canvas]:h-auto in-[.tab--canvas]:overflow-visible in-[.tab--canvas]:py-4'
+    ]
+  )
+%}
+{% set panel_classes = panel.apply({}) %}
+
+<div
+  class="{{ tab_wrapper_classes }}"
+  data-tab-id="{{ tab_id }}"
+  data-panel-id="{{ panel_id }}"
+  data-active-by-default="{{ active_by_default ? 'true' : 'false' }}"
+>
+  {# Title heading (always visible in Canvas) #}
+  <div class="tab--title-wrapper mb-2 hidden in-[.tab--canvas]:block">
+    <h3 class="text-2xl text-foreground">{{ title }}</h3>
+  </div>
+
+  {# Mobile accordion-style button #}
+  <button id="{{ tab_id }}-mobile" class="{{ mobile_button_classes }}" aria-controls="{{ panel_id }}" aria-expanded="false">
+    {{ title }}
+    <span class="tab--icon transition-transform duration-300 in-[.tab--active]:rotate-180">
+      {{
+        include(
+          '@diagnosis/components/icon/icon.twig',
+          {
+            icon: 'caret-down',
+            icon_size: 'small'
+          },
+          with_context: false
+        )
+      }}
+    </span>
+  </button>
+
+  {# Tab panel content #}
+  <div id="{{ panel_id }}" class="{{ panel_classes }}" role="tabpanel" aria-labelledby="{{ tab_id }}" tabindex="0">
+    {% block tab_content %}
+
+    {% endblock %}
+  </div>
+</div>

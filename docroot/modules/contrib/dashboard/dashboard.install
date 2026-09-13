@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Dashboard module.
+ */
+
+use Drupal\Core\Plugin\Context\Context;
+use Drupal\Core\Plugin\Context\ContextDefinition;
+use Drupal\layout_builder\SectionStorage\SectionStorageManagerInterface;
+use Drupal\layout_builder\SectionStorageInterface;
+
+/**
+ * Implements hook_uninstall().
+ */
+function dashboard_uninstall($is_syncing) {
+  // Configuration is consolidated during a sync, so nothing to fix up.
+  if ($is_syncing) {
+    return;
+  }
+
+  // The "navigation_dashboard" block is placed in the navigation layout when
+  // the optional Navigation module is installed (see NavigationIntegration).
+  // Its plugin is provided by this module, so remove the placement to avoid a
+  // "plugin not found" error in the navigation after uninstall.
+  if (!\Drupal::moduleHandler()->moduleExists('navigation')) {
+    return;
+  }
+
+  $section_storage = \Drupal::service(SectionStorageManagerInterface::class)->load('navigation', [
+    'navigation' => new Context(new ContextDefinition('string'), 'navigation'),
+  ]);
+  if (!$section_storage instanceof SectionStorageInterface) {
+    return;
+  }
+
+  $changed = FALSE;
+  foreach ($section_storage->getSections() as $section) {
+    foreach ($section->getComponents() as $uuid => $component) {
+      if ($component->getPluginId() === 'navigation_dashboard') {
+        $section->removeComponent($uuid);
+        $changed = TRUE;
+      }
+    }
+  }
+  if ($changed) {
+    $section_storage->save();
+  }
+}

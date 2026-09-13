@@ -1,0 +1,19 @@
+{#
+/**
+ * Available variables:
+ * - latest_news_heading: The heading text for the latest news section.
+ * - latest_news_items: The rendered items for the latest news section.
+ */
+#}
+
+{% embed "eureka:item-list" with {
+  item_list_type: 'column-cards',
+  item_list_modifiers: ['news-cards'],
+  item_list_heading_level: latest_news_heading_level,
+  item_list_heading: latest_news_heading,
+  item_list_summary: latest_news_summary,
+}%}
+  {% block item_list_items_block %}
+    {{ latest_news_items }}
+  {% endblock %}
+{% endembed %}

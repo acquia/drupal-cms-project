@@ -1,0 +1,52 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: base/menu.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+@reference "../tailwindcss";
+
+.menu {
+  --menu-active-fg: var(--link-contrast);
+  --menu-active-bg: var(--link);
+
+  li > details {
+    @apply overflow-visible;
+
+    summary {
+      @apply flex;
+
+      color: var(--link);
+
+      &:hover,
+      &:focus {
+        color: var(--link-hover);
+      }
+
+      &.active,
+      &:active {
+        color: var(--link-contrast);
+        background-color: var(--link);
+      }
+
+      span {
+        @apply grow;
+      }
+    }
+  }
+}
+
+.navbar {
+  .dropdown {
+    @apply static lg:relative;
+  }
+
+  .dropdown-content {
+    background-color: var(--background-strong);
+  }
+}
+
+/* Overridden */
+.menu-horizontal > li > details > ul {
+  background-color: var(--background-weak);
+}

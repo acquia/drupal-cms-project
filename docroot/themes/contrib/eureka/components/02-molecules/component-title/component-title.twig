@@ -1,0 +1,46 @@
+{#
+/**
+ * Available variables:
+ * - component_title_base_class: base classname of the wrapper.
+ * - component_title_modifiers: array of modifiers to add to the base classname of the wrapper.
+ * - component_title_blockname: blockname prepended to the base classname of the wrapper(s) and each component.
+ * - component_title_extra_classes: extra classes, optional for the component.
+ *
+ * - component_title_centered: heading for the component.
+ * - component_title_small: small variation.
+ *
+ * - component_title_heading: heading for the component.
+ * - component_title_heading_level: heading level for the component - defaults to 2.
+ * - component_title_summary: text summary for the component.
+ *
+ * Available blocks:
+ */
+#}
+
+{% set component_title_base_class = 'component-title' %}
+{% set component_title_modifiers = component_title_modifiers|default([]) %}
+
+{% if component_title_centered %}
+  {% set component_title_modifiers = component_title_modifiers|merge(['centered']) %}
+{% endif %}
+
+{% if component_title_small %}
+  {% set component_title_modifiers = component_title_modifiers|merge(['small']) %}
+{% else %}
+  {% set component_title_modifiers = component_title_modifiers|merge(['default']) %}
+{% endif %}
+
+<div {{ bem(component_title_base_class, component_title_modifiers, component_title_blockname, component_title_extra_classes) }}>
+  {{ include('eureka:heading', {
+    heading: component_title_heading,
+    heading_level: component_title_heading_level|default(2),
+    heading_extra_classes: ['component-title__heading'],
+  }, with_context = false) }}
+  {% if component_title_summary %}
+    {{ include('eureka:paragraph', {
+      paragraph_content: component_title_summary,
+      paragraph_extra_classes: ['component-title__summary'],
+    }, with_context = false) }}
+  {% endif %}
+  <hr {{ bem('line', [], component_title_base_class) }}>
+</div>

@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Contains main module functions.
+ */
+
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\link_attributes\Hook\LinkAttributesHooks;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+#[LegacyHook]
+function link_attributes_help($route_name, RouteMatchInterface $route_match) {
+  return \Drupal::service(LinkAttributesHooks::class)->help($route_name, $route_match);
+}

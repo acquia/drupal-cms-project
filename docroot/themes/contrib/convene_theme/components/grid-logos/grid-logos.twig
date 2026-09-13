@@ -1,0 +1,20 @@
+{% set classes = [
+  'grid-logos',
+  admin_theme ? 'grid-logos--admin-theme' : 'grid-logos--themed',
+] %}
+
+<section{{attributes.addClass(classes)}}>
+  <div class="grid-logos__container">
+    
+    <div class="grid-logos__header">
+      <div class="grid-logos__eyebrow">
+        {{ eyebrow_slot }}
+      </div>
+    </div>
+
+    <div class="grid-logos__grid">
+      {{ items }}
+    </div>
+    
+  </div>
+</section>

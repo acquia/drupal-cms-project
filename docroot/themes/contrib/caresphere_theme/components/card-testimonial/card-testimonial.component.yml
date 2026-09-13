@@ -1,0 +1,43 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Testimonial card
+group: Card
+props:
+  type: object
+  properties:
+    text:
+      type: string
+      title: Bio / description
+      pattern: "(.|\\r?\\n)*"
+      examples:
+        - "Sarah has spent fifteen years building community programs across three states."
+    cite_name:
+      type: string
+      title: Name
+      examples:
+        - "Sarah Chen"
+    cite_text:
+      type: string
+      title: Job title
+      examples:
+        - "Executive director"
+    cite_url:
+      type: string
+      title: Citation link
+    link_linkedin:
+      type: string
+      title: LinkedIn URL
+    link_x:
+      type: string
+      title: X (Twitter) URL
+    link_dribbble:
+      type: string
+      title: Dribbble URL
+    media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Profile image
+      type: object
+      examples:
+        - src: "assets/portrait.png"
+          alt: "Placeholder"
+          width: 80
+          height: 80

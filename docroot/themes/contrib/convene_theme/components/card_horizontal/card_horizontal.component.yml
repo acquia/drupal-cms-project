@@ -1,0 +1,28 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Card Horizontal
+group: Molecules
+status: stable
+description: A horizontal card with content on the left and image on the right.
+props:
+  type: object
+  properties:
+    eyebrow:
+      title: Card Eyebrow
+      type: string
+    heading:
+      title: Card Title
+      type: string
+    description:
+      title: Card Description
+      type: string
+slots:
+  card_image:
+    title: Card Image
+    description: The card image.
+  card_actions:
+    title: Card Actions
+    description: Buttons or links.
+library:
+  css:
+    component:
+      card_horizontal.css: {}

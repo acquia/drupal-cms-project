@@ -1,0 +1,47 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function provus_mega_menu_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  switch ($form_id) {
+    case 'menu_link_content_main_form':
+      $states = [
+        'visible' => [
+          ':input[name="menu_parent"]' => [
+            ['value' => 'main:'],
+          ],
+        ],
+      ];
+
+      // Only show this field on 1st level.
+      $form['field_provus_menu_callout_image']['#states'] = $states;
+      $form['field_provus_menu_callout_link']['#states'] = $states;
+
+ 
+      // Only show this field on 2nd level.
+      $form['field_provus_menu_icon']['#states'] = [
+        'visible' => [
+          ':input[name="menu_parent"]' => [
+            ['!value' => 'main:'],
+          ],
+        ],
+      ];
+
+      break;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function provus_mega_menu_theme() {
+  return [
+    'menu__extras' => [
+      'template' => 'menu--extras',
+      'base hook' => 'menu_item_extras',
+    ],
+  ];
+}

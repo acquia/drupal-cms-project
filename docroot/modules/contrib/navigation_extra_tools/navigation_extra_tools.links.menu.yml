@@ -1,0 +1,96 @@
+navigation_extra_tools.help:
+  title: 'Tools'
+  description: Useful administration tools and shortcuts.
+  route_name: navigation_extra_tools.overview
+  menu_name: admin
+  parent: system.admin
+  weight: -100
+  options:
+    icon:
+      pack_id: navigation_extra_tools
+      icon_id: wrench
+
+navigation_extra_tools.flush:
+  title: 'Flush all caches'
+  description: Clear all caches; same as clearing from Performance page.
+  route_name: navigation_extra_tools.flush
+  menu_name: admin
+  parent: navigation_extra_tools.help
+  weight: -10
+
+navigation_extra_tools.flush.help:
+  title: 'Flush individual cache'
+  description: Clear specific cache.
+  route_name: navigation_extra_tools.individual
+  menu_name: admin
+  parent: navigation_extra_tools.help
+  weight: -9
+
+navigation_extra_tools.css_js:
+  title: 'Flush CSS and JavaScript'
+  route_name: navigation_extra_tools.css_js
+  menu_name: admin
+  parent: navigation_extra_tools.flush.help
+  weight: -17
+
+navigation_extra_tools.plugin:
+  title: 'Flush plugins cache'
+  route_name: navigation_extra_tools.plugin
+  parent: navigation_extra_tools.flush.help
+  menu_name: admin
+  weight: -16
+
+navigation_extra_tools.flush_static:
+  title: 'Flush static cache'
+  route_name: navigation_extra_tools.flush_static
+  parent: navigation_extra_tools.flush.help
+  menu_name: admin
+  weight: -15
+
+navigation_extra_tools.flush_menu:
+  title: 'Flush routing and links cache'
+  route_name: navigation_extra_tools.flush_menu
+  parent: navigation_extra_tools.flush.help
+  menu_name: admin
+  weight: -14
+
+navigation_extra_tools.flush_twig:
+  title: 'Flush twig cache'
+  route_name: navigation_extra_tools.flush_twig
+  parent: navigation_extra_tools.flush.help
+  menu_name: admin
+  weight: -13
+
+navigation_extra_tools.flush_render_cache:
+  title: 'Flush render cache'
+  route_name: navigation_extra_tools.flush_render_cache
+  parent: navigation_extra_tools.flush.help
+  menu_name: admin
+  weight: -12
+
+navigation_extra_tools.theme_rebuild:
+  title: 'Rebuild theme registry'
+  route_name: navigation_extra_tools.theme_rebuild
+  parent: navigation_extra_tools.flush.help
+  menu_name: admin
+  weight: -11
+
+navigation_extra_tools.run_cron:
+  title: 'Run cron'
+  description: Manually run the cron job to carry out background tasks.
+  route_name: navigation_extra_tools.run.cron
+  menu_name: admin
+  parent: navigation_extra_tools.help
+  weight: -8
+
+navigation_extra_tools.db_update:
+  title: 'Run updates'
+  description: Carry out any outstanding database updates.
+  route_name: system.db_update
+  menu_name: admin
+  parent: navigation_extra_tools.help
+  weight: -6
+
+navigation_extra_tools.extra_links:
+  deriver: \Drupal\navigation_extra_tools\Plugin\Derivative\ToolsMenuDeriver
+  menu_name: admin

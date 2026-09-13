@@ -1,0 +1,27 @@
+# This file contains patterns to be ignored while testing using deprecated code in 3rd-party modules.
+# It is merged with the Core .deprecations-ignore file in phpunit before_script.
+# See change record https://www.drupal.org/node/3285162 for more details.
+
+# cspell:disable
+# Credit for this idea to Mondrake in the TextImage module.
+
+%Method "Twig\\Extension\\ExtensionInterface.*" might add "array" .* Do the same in implementation .*\\(commerce|commerce_price)\\%
+
+%Method "Symfony\\Component\\Validator\\ConstraintValidatorInterface.*" might add "void" .* Do the same in .*\\(commerce_price|commerce_product|workbench_moderation)\\%
+
+%Using @.* annotation for plugin with ID ((A|a)ddress|(C|c)ommerce|inline|subdivision|(C|c)ountry|entity|administrative_area|moderation_state|ModerationState|latest_revision|state_change).* is deprecated%
+# https://www.drupal.org/node/3395575
+
+%Autoloading hooks in the file .*(address|commerce|entity|token|workbench_moderation).*(views|tokens).inc\) is deprecated%
+# https://www.drupal.org/node/3489765
+
+%The update to add a default table CSS class for view "commerce_(stores|products)" is deprecated%
+# https://www.drupal.org/node/3499943
+
+%Getting the original property is deprecated .* Use .*EntityInterface::getOriginal\(\) instead%
+# https://www.drupal.org/node/3295826
+
+%(address|workbench_moderation)_module_implements_alter without a #\[LegacyModuleImplementsAlter\] attribute is deprecated%
+# https://www.drupal.org/node/3496788
+
+# cspell:enable

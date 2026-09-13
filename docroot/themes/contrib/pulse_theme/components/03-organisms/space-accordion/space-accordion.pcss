@@ -1,0 +1,176 @@
+@reference "../../00-base/global/global.pcss";
+
+/* Accordion and Accordion items */
+.accordion {
+  @apply flex gap-8 flex-wrap;
+
+  &.PlusMinus {
+    .icon.circle-plus {
+      @apply inline-flex;
+    }
+  }
+
+  &.chevronDown {
+    .icon.chevronDown {
+      @apply inline-flex;
+    }
+  }
+}
+
+.closed {
+  .vertical {
+    @apply -rotate-90;
+
+    transition: all 0.5s ease-in-out;
+  }
+
+  .horizontal {
+    @apply opacity-100 -rotate-90;
+
+    transition: all 0.5s ease-in-out;
+  }
+
+  .chevronDown svg {
+    @apply opacity-100 rotate-0;
+
+    transition: all 0.5s ease-in-out;
+  }
+}
+
+.accordion-item-inner {
+  .accordion-content {
+    @apply text-base pr-14;
+  }
+
+  &.opened {
+    @apply opacity-100;
+
+    .vertical {
+      @apply rotate-90;
+
+      transition: all 0.5s ease-in-out;
+    }
+
+    .horizontal {
+      @apply opacity-0 rotate-90;
+
+      transition: all 0.5s ease-in-out;
+    }
+
+    .icon.chevronDown {
+      &::after {
+        @apply rotate-[180deg];
+
+        transition: all 0.5s ease-in-out;
+      }
+    }
+
+    > .accordion-content {
+      @apply h-auto opacity-100 pb-3;
+    }
+  }
+}
+
+.PlusMinus {
+  .icon.circle-plus {
+    @apply text-[1.1rem] opacity-100 hidden;
+
+    .circle {
+      @apply relative w-[2.25rem] h-[2.25rem] rounded-full border-solid border-[0.13rem] bg-black;
+
+      .horizontal {
+        @apply absolute w-[0.625rem] h-[0.107rem] m-auto top-0 bottom-0 left-[0.04rem] right-0 bg-white;
+      }
+
+      .vertical {
+        @apply absolute w-[0.107rem] h-[0.625rem] m-auto top-0 bottom-0 left-[0.04rem] right-0 bg-white;
+      }
+    }
+  }
+}
+
+.chevronDown {
+  .icon.chevronDown {
+    @apply hidden;
+
+    &::after {
+      @apply relative inline-block w-[1.25rem] h-[1.25rem] content-[''] bg-no-repeat bg-cover;
+
+      background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9L12 15L18 9' stroke='%2368737D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+      transition: all 0.5s ease-in-out;
+    }
+  }
+}
+
+.accordion-item {
+  .ac-title {
+    @apply text-3xl no-underline;
+
+    .icons {
+      @apply pl-6 mt-[0.125rem] mr-3;
+
+      .icon {
+        svg {
+          @apply w-20 h-20;
+        }
+      }
+    }
+  }
+
+  .accordion-content {
+    @apply h-0 opacity-0 transition-all duration-300 ease-in-out;
+  }
+}
+
+/* No Accordion Icon */
+.noIcon {
+  .ac-title {
+    .icons {
+      @apply hidden;
+    }
+  }
+}
+
+/* Accordion Left Side Icon */
+.icon-left {
+  .ac-title {
+    .ga-acc-title {
+      @apply pl-3;
+    }
+
+    .icons {
+      @apply order-first mx-0 ml-0 pl-0 pr-0;
+    }
+  }
+
+  .accordion-item-inner {
+    .accordion-content {
+      @apply px-8;
+    }
+  }
+}
+
+/* Accordion No Icon Icon */
+.noIcon {
+  .accordion-item-inner {
+    .accordion-content {
+      @apply px-0;
+    }
+  }
+}
+
+/* Accordion With Icon */
+.with-border {
+  .accordion-item {
+    @apply border-b pb-8;
+  }
+}
+
+/* Container custom */
+.half-width {
+  @apply md:w-50/100 md:m-auto;
+}
+
+.three-quarters-width {
+  @apply md:w-75/100 md:m-auto;
+}

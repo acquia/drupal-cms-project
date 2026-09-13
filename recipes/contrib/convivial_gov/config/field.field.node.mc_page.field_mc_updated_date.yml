@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_mc_updated_date
+    - node.type.mc_page
+  module:
+    - datetime
+id: node.mc_page.field_mc_updated_date
+field_name: field_mc_updated_date
+entity_type: node
+bundle: mc_page
+label: 'Last updated'
+description: 'The date the content was most recently updated.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

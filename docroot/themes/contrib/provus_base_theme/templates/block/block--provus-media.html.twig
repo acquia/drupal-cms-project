@@ -1,0 +1,80 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main content
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @see template_preprocess_block()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+  ]
+%}
+{% if image_style_src %}
+  {% set classes = classes|merge(['image_styles']) %}
+{% endif %}
+
+{# Process Media variables. #}
+{% set default_alt = '' %}
+{% set image_uri = '' %}
+{% if content.field_provus_media|render %}
+  {% set default_alt = content.field_provus_media.0['#media'].field_media_image.alt|default('') %}
+  {% set image_uri = content.field_provus_media.0['#media'].field_media_image|file_uri %}
+{% endif %}
+{# Alt text condition. #}
+{% set alt_text = (content.field_provus_alt_text.0 is not empty) ? content.field_provus_alt_text.0['#context'].value : default_alt %}
+{# Setup responsive. #}
+{% set responsive_image = content %}
+{% if image_uri is not empty %}
+  {% set responsive_image = {
+      '#theme': 'responsive_image',
+      '#responsive_image_style_id': 'provus_media_defaults',
+      '#uri': image_uri,
+      '#attributes': {
+        alt: alt_text,
+      },
+  } %}
+{% endif %}
+
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {% if label %}
+    <h2{{ title_attributes }}>{{ label }}</h2>
+  {% endif %}
+  {{ title_suffix }}
+  {% block content %}
+    <div{{ content_attributes.addClass('content') }}>
+      {% if image_style_src %}
+        <img src="{{ image_style_src }}" class="image_size" alt = "{{ alt_text }}"  />
+      {% else %}
+        {{ responsive_image }}
+      {% endif %}
+    </div>
+  {% endblock %}
+</div>

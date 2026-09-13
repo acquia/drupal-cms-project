@@ -1,0 +1,105 @@
+.card-horizontal {
+  display: flex;
+  align-items: center;
+  background-color: #F2F2F2;
+  border-radius: 12px;
+  max-width: 630px;
+
+  .card-horizontal__content {
+    max-width: 272px;
+    padding-left: 24px;
+    padding-right: 24px;
+
+    .typography__eyebrow {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 150%;
+      letter-spacing: 0%;
+      color: #030804;
+      margin: 0;
+      padding: 0;
+      margin-bottom: 8px;
+    }
+
+    .typography__heading {
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 140%;
+      letter-spacing: -1%;
+      color: #030804;
+      margin: 0;
+      padding: 0;
+      margin-bottom: 8px;
+    }
+
+    .typography__description {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 150%;
+      letter-spacing: 0%;
+      color: #030804;
+      margin: 0;
+      padding: 0;
+      margin-bottom: 24px;
+
+      * {
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .card-horizontal__actions {
+      .button--tertiary {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 150%;
+        letter-spacing: 0%;
+        color: #030804;
+        padding: unset;
+        position: relative;
+
+        &:hover {
+          background-color: unset !important;
+          background: unset !important;
+          box-shadow: unset !important;
+          transform: unset !important;
+        }
+      }
+    }
+
+
+  }
+
+  .card-horizontal__image {
+    max-width: 320px;
+
+    img {
+      aspect-ratio: 64 / 71;
+      border-top-right-radius: 12px;
+      border-bottom-right-radius: 12px;
+      object-fit: cover;
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column-reverse; /* Put image on top */
+    
+    .card-horizontal__content {
+      max-width: 100%;
+      padding: 32px 24px;
+    }
+
+    .card-horizontal__image {
+      max-width: 100%;
+      width: 100%;
+      
+      img {
+        border-top-right-radius: 12px;
+        border-top-left-radius: 12px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+        aspect-ratio: 16 / 9; /* More standard aspect ratio for mobile */
+      }
+    }
+  }
+}

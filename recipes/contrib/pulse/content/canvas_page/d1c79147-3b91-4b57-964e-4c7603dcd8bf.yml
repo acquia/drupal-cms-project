@@ -1,0 +1,134 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: d1c79147-3b91-4b57-964e-4c7603dcd8bf
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Research Listing'
+  components:
+    -
+      uuid: b90e1086-894e-4c08-9777-5a94574bf8b1
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: small
+    -
+      parent_uuid: b90e1086-894e-4c08-9777-5a94574bf8b1
+      slot: content
+      uuid: 6242efbe-57b0-41ea-b0b3-cceb0e7e9d1e
+      component_id: sdc.pulse_theme.space-section-heading
+      inputs:
+        title: 'Selected Research Studies'
+        tag_name: h1
+        description:
+          value: "<p>A focused selection of peer-reviewed studies and clinical findings\L relevant to everyday health and care decisions.</p>"
+          format: canvas_html_block
+        alignment: center
+    -
+      uuid: cc2a3ab3-05d8-440d-8202-ef9433fbd72a
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: small
+    -
+      parent_uuid: cc2a3ab3-05d8-440d-8202-ef9433fbd72a
+      slot: content
+      uuid: 43c06751-66e8-426f-8a2b-2066113632a5
+      component_id: block.views_block.research-block_5
+      inputs:
+        label: 'Featured Research for Listing page'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      uuid: 8c468360-c12a-4de1-9801-2732fedf7ca2
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: large
+    -
+      parent_uuid: 8c468360-c12a-4de1-9801-2732fedf7ca2
+      slot: content
+      uuid: 6dafbc92-2555-4349-bcf7-822acf739e30
+      component_id: block.views_block.research-block_1
+      inputs:
+        label: 'Research List'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      uuid: 13943aec-0bce-4af5-a5b7-822f7b685493
+      component_id: sdc.pulse_theme.space-cta-banner-type-1
+      inputs:
+        title: "Keep learning \Labout your health"
+        description:
+          value: "<p>A focused selection of peer-reviewed studies and clinical findings\L relevant to everyday health and care decisions.</p>"
+          format: canvas_html_block
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: images/cta_background.png
+            alt: 'CTA Banner placeholder'
+            width: 1440
+            height: 500
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.pulse_theme.space-cta-banner-type-1
+        width: full-width
+        alignment: stacked
+        modifier_class: custom-class
+  path:
+    -
+      alias: /research-listing
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

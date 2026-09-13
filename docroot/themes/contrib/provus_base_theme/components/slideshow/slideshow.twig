@@ -1,0 +1,30 @@
+<div{{ content_attributes.addClass('content') }}>
+  <div class="slide-show-with-items-container" data-autoplay="{{ autoplay }}" data-slide-speed="{{ speed }}">
+  {% for key, item in slide_items %}
+    {%  if key|first != '#' %}
+      <div class="slide-show-item-content">
+        <div class="image-container">
+          <picture>
+            <source srcset="{{ file_url(item.field_provus_media.0['#item'].entity.uri.value| image_style('provus_slideshow_block_mobile')) }}" media="(max-width: 978px)" />
+            <img src="{{ file_url(item.field_provus_media.0['#item'].entity.uri.value | image_style('provus_slideshow_block')) }}" alt="{{item.field_provus_slide_title.0}}">
+          </picture>
+        </div>
+        <div class="text-container">
+          <div class="container">
+            {% if item.field_provus_url_slide_show_item.0 is not empty %}
+            <div class="title">
+            {% else %}
+            <div class="title title-padding-bottom">
+            {% endif %}
+              {{ item.field_provus_slide_title.0 }}
+            </div>
+            {% if item.field_provus_url_slide_show_item.0 is not empty %}
+              <a href="{{ item.field_provus_url_slide_show_item[0]['#url'] }}" class="btn btn-primary">{{ item.field_provus_button_text.0 }}</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+  </div>
+</div>

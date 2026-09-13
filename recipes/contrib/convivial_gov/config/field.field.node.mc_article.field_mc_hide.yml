@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_mc_hide
+    - node.type.mc_article
+  module:
+    - options
+id: node.mc_article.field_mc_hide
+field_name: field_mc_hide
+entity_type: node
+bundle: mc_article
+label: Hide
+description: 'Hide various parts of the page.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

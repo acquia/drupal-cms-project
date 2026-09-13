@@ -1,0 +1,317 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.internal
+    - views.view.user_admin_people
+  module:
+    - eca_base
+    - eca_content
+    - eca_user
+    - eca_views
+    - modeler_api
+    - user
+third_party_settings:
+  modeler_api:
+    modeler_id: bpmn_io
+    data: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn2:definitions xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:bpmn2=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" xmlns:qa=\"http://some-company/schema/bpmn/qa\" id=\"sample-diagram\" targetNamespace=\"http://bpmn.io/schema/bpmn\" xsi:schemaLocation=\"http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd\">\n  <bpmn2:process id=\"eca_bpmn_io\" name=\"ECA Feature Demo - BPMN.io\" isExecutable=\"true\">\n    <bpmn2:startEvent id=\"Event_0erz1e4\" name=\"User Login\" camunda:modelerTemplate=\"org.drupal.event.user:login\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"user:login\" />\n        </camunda:properties>\n      </bpmn2:extensionElements>\n      <bpmn2:outgoing>Flow_1o433l9</bpmn2:outgoing>\n    </bpmn2:startEvent>\n    <bpmn2:startEvent id=\"Event_00dfxlw\" name=\"User Register\" camunda:modelerTemplate=\"org.drupal.event.content_entity:insert\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"content_entity:insert\" />\n        </camunda:properties>\n        <camunda:field name=\"type\">\n          <camunda:string>user user</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n      <bpmn2:outgoing>Flow_182dlgt</bpmn2:outgoing>\n      <bpmn2:outgoing>Flow_1lgqo3j</bpmn2:outgoing>\n    </bpmn2:startEvent>\n    <bpmn2:startEvent id=\"Event_04tl9lk\" name=\"Update User\" camunda:modelerTemplate=\"org.drupal.event.content_entity:update\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"content_entity:update\" />\n        </camunda:properties>\n        <camunda:field name=\"type\">\n          <camunda:string>user user</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n      <bpmn2:outgoing>Flow_0i16oab</bpmn2:outgoing>\n    </bpmn2:startEvent>\n    <bpmn2:task id=\"Activity_0l4w3fc\" name=\"Redirect to content overview\" camunda:modelerTemplate=\"org.drupal.action.action_goto_action\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"action_goto_action\" />\n        </camunda:properties>\n        <camunda:field name=\"replace_tokens\">\n          <camunda:string>no</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"url\">\n          <camunda:string>/admin/content</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n      <bpmn2:incoming>Flow_1hqinah</bpmn2:incoming>\n    </bpmn2:task>\n    <bpmn2:task id=\"Activity_182vndw\" name=\"Redirect to admin overview\" camunda:modelerTemplate=\"org.drupal.action.action_goto_action\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"action_goto_action\" />\n        </camunda:properties>\n        <camunda:field name=\"replace_tokens\">\n          <camunda:string>no</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"url\">\n          <camunda:string>/admin</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n      <bpmn2:incoming>Flow_0047zve</bpmn2:incoming>\n    </bpmn2:task>\n    <bpmn2:task id=\"Activity_1tfgvxt\" name=\"Redirect to&#10;user profile\" camunda:modelerTemplate=\"org.drupal.action.action_goto_action\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"action_goto_action\" />\n        </camunda:properties>\n        <camunda:field name=\"replace_tokens\">\n          <camunda:string>no</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"url\">\n          <camunda:string>/user</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n      <bpmn2:incoming>Flow_1j2h2dk</bpmn2:incoming>\n    </bpmn2:task>\n    <bpmn2:task id=\"Activity_07ksdyx\" name=\"Inform admins by email\" camunda:modelerTemplate=\"org.drupal.action.action_send_email_action\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"action_send_email_action\" />\n        </camunda:properties>\n        <camunda:field name=\"recipient\">\n          <camunda:string>[admin:mail]</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"subject\">\n          <camunda:string>[site:name] New user registered: [newuser:name]</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"message\">\n          <camunda:string>Please review here: [newuser:url]</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"replace_tokens\">\n          <camunda:string>yes</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n      <bpmn2:incoming>Flow_0w3x5jf</bpmn2:incoming>\n      <bpmn2:outgoing>Flow_1nt6drm</bpmn2:outgoing>\n    </bpmn2:task>\n    <bpmn2:task id=\"Activity_1w9sk6r\" name=\"Load all&#10;admin users\" camunda:modelerTemplate=\"org.drupal.action.eca_views_query\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"eca_views_query\" />\n        </camunda:properties>\n        <camunda:field name=\"token_name\">\n          <camunda:string>admins</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"view_id\">\n          <camunda:string>user_admin_people</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"display_id\">\n          <camunda:string>attachment_1</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"arguments\">\n          <camunda:string>administrator</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n      <bpmn2:incoming>Flow_1hfilr6</bpmn2:incoming>\n      <bpmn2:outgoing>Flow_1ijh8y5</bpmn2:outgoing>\n    </bpmn2:task>\n    <bpmn2:task id=\"Activity_0atqgae\" name=\"Pop an admin from the list\" camunda:modelerTemplate=\"org.drupal.action.eca_list_remove\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"eca_list_remove\" />\n        </camunda:properties>\n        <camunda:field name=\"value\">\n          <camunda:string></camunda:string>\n        </camunda:field>\n        <camunda:field name=\"token_name\">\n          <camunda:string>admin</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"method\">\n          <camunda:string>first</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"index\">\n          <camunda:string></camunda:string>\n        </camunda:field>\n        <camunda:field name=\"list_token\">\n          <camunda:string>admins</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n      <bpmn2:incoming>Flow_0a1zeo8</bpmn2:incoming>\n      <bpmn2:outgoing>Flow_0w3x5jf</bpmn2:outgoing>\n    </bpmn2:task>\n    <bpmn2:task id=\"Activity_0tlx3ln\" name=\"Save new user as token\" camunda:modelerTemplate=\"org.drupal.action.eca_token_set_value\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"eca_token_set_value\" />\n        </camunda:properties>\n        <camunda:field name=\"token_name\">\n          <camunda:string>newuser</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"token_value\">\n          <camunda:string>[entity]</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"use_yaml\">\n          <camunda:string>no</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n      <bpmn2:incoming>Flow_1lgqo3j</bpmn2:incoming>\n      <bpmn2:outgoing>Flow_0rk78r0</bpmn2:outgoing>\n    </bpmn2:task>\n    <bpmn2:task id=\"Activity_0xd3fam\" name=\"Switch user\" camunda:modelerTemplate=\"org.drupal.action.eca_switch_account\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"eca_switch_account\" />\n        </camunda:properties>\n        <camunda:field name=\"user_id\">\n          <camunda:string>1</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n      <bpmn2:incoming>Flow_0rk78r0</bpmn2:incoming>\n      <bpmn2:outgoing>Flow_1hfilr6</bpmn2:outgoing>\n    </bpmn2:task>\n    <bpmn2:task id=\"Activity_0nr4ng5\" name=\"Display link to Mailhog\" camunda:modelerTemplate=\"org.drupal.action.eca_warning_message\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"eca_warning_message\" />\n        </camunda:properties>\n        <camunda:field name=\"message\">\n          <camunda:string>Check emails in &lt;a href=\"https://mailhog-[site:url-brief]\" target=\"_blank\"&gt;Mailhog&lt;/a&gt;</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"replace_tokens\">\n          <camunda:string>yes</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n      <bpmn2:incoming>Flow_182dlgt</bpmn2:incoming>\n    </bpmn2:task>\n    <bpmn2:task id=\"Activity_19q8z5c\" name=\"Add internal role\" camunda:modelerTemplate=\"org.drupal.action.user_add_role_action\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"user_add_role_action\" />\n        </camunda:properties>\n        <camunda:field name=\"replace_tokens\">\n          <camunda:string>no</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"rid\">\n          <camunda:string>internal</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"object\">\n          <camunda:string>actuser</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n      <bpmn2:incoming>Flow_10zxcgn</bpmn2:incoming>\n      <bpmn2:outgoing>Flow_0vlcyrb</bpmn2:outgoing>\n    </bpmn2:task>\n    <bpmn2:task id=\"Activity_18vsxl7\" name=\"Remove internal role\" camunda:modelerTemplate=\"org.drupal.action.user_remove_role_action\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"user_remove_role_action\" />\n        </camunda:properties>\n        <camunda:field name=\"replace_tokens\">\n          <camunda:string>no</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"rid\">\n          <camunda:string>internal</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"object\">\n          <camunda:string>actuser</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n      <bpmn2:incoming>Flow_0c7hrjx</bpmn2:incoming>\n      <bpmn2:outgoing>Flow_132746b</bpmn2:outgoing>\n    </bpmn2:task>\n    <bpmn2:task id=\"Activity_1gige0f\" name=\"Switch user\" camunda:modelerTemplate=\"org.drupal.action.eca_switch_account\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"eca_switch_account\" />\n        </camunda:properties>\n        <camunda:field name=\"user_id\">\n          <camunda:string>1</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n      <bpmn2:incoming>Flow_0kijbkl</bpmn2:incoming>\n      <bpmn2:outgoing>Flow_1vczt3y</bpmn2:outgoing>\n      <bpmn2:outgoing>Flow_0xavi4t</bpmn2:outgoing>\n    </bpmn2:task>\n    <bpmn2:task id=\"Activity_1vtj47i\" name=\"Message\" camunda:modelerTemplate=\"org.drupal.action.action_message_action\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"action_message_action\" />\n        </camunda:properties>\n        <camunda:field name=\"replace_tokens\">\n          <camunda:string>no</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"message\">\n          <camunda:string>You have been added to the internal group. Welcome!</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n      <bpmn2:incoming>Flow_0vlcyrb</bpmn2:incoming>\n    </bpmn2:task>\n    <bpmn2:task id=\"Activity_0qzx0pp\" name=\"Warning\" camunda:modelerTemplate=\"org.drupal.action.eca_warning_message\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"eca_warning_message\" />\n        </camunda:properties>\n        <camunda:field name=\"replace_tokens\">\n          <camunda:string>no</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"message\">\n          <camunda:string>You are no longer part of the internal group.</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n      <bpmn2:incoming>Flow_132746b</bpmn2:incoming>\n    </bpmn2:task>\n    <bpmn2:task id=\"Activity_0bk309u\" name=\"Save user as token\" camunda:modelerTemplate=\"org.drupal.action.eca_token_set_value\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"eca_token_set_value\" />\n        </camunda:properties>\n        <camunda:field name=\"token_name\">\n          <camunda:string>actuser</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"token_value\">\n          <camunda:string>[entity]</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"use_yaml\">\n          <camunda:string>no</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n      <bpmn2:incoming>Flow_0i16oab</bpmn2:incoming>\n      <bpmn2:incoming>Flow_0kni1y9</bpmn2:incoming>\n      <bpmn2:outgoing>Flow_0kijbkl</bpmn2:outgoing>\n    </bpmn2:task>\n    <bpmn2:exclusiveGateway id=\"Gateway_1rthid4\">\n      <bpmn2:incoming>Flow_1nt6drm</bpmn2:incoming>\n      <bpmn2:incoming>Flow_1ijh8y5</bpmn2:incoming>\n      <bpmn2:outgoing>Flow_0a1zeo8</bpmn2:outgoing>\n    </bpmn2:exclusiveGateway>\n    <bpmn2:exclusiveGateway id=\"Gateway_14hq8dd\">\n      <bpmn2:incoming>Flow_0ijt8mj</bpmn2:incoming>\n      <bpmn2:outgoing>Flow_1j2h2dk</bpmn2:outgoing>\n      <bpmn2:outgoing>Flow_0kni1y9</bpmn2:outgoing>\n    </bpmn2:exclusiveGateway>\n    <bpmn2:exclusiveGateway id=\"Gateway_1lz4l89\">\n      <bpmn2:incoming>Flow_1vczt3y</bpmn2:incoming>\n      <bpmn2:outgoing>Flow_10zxcgn</bpmn2:outgoing>\n    </bpmn2:exclusiveGateway>\n    <bpmn2:exclusiveGateway id=\"Gateway_1o87unm\">\n      <bpmn2:incoming>Flow_0xavi4t</bpmn2:incoming>\n      <bpmn2:outgoing>Flow_0c7hrjx</bpmn2:outgoing>\n    </bpmn2:exclusiveGateway>\n    <bpmn2:exclusiveGateway id=\"Gateway_0hd8858\">\n      <bpmn2:incoming>Flow_1o433l9</bpmn2:incoming>\n      <bpmn2:outgoing>Flow_1hqinah</bpmn2:outgoing>\n      <bpmn2:outgoing>Flow_0047zve</bpmn2:outgoing>\n      <bpmn2:outgoing>Flow_0ijt8mj</bpmn2:outgoing>\n    </bpmn2:exclusiveGateway>\n    <bpmn2:sequenceFlow id=\"Flow_1o433l9\" camunda:modelerTemplate=\"org.drupal.condition.eca_scalar\" sourceRef=\"Event_0erz1e4\" targetRef=\"Gateway_0hd8858\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"eca_scalar\" />\n        </camunda:properties>\n        <camunda:field name=\"case\">\n          <camunda:string>no</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"left\">\n          <camunda:string>[current-page:url:path]</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"right\">\n          <camunda:string>/user/reset</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"operator\">\n          <camunda:string>beginswith</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"type\">\n          <camunda:string>value</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"negate\">\n          <camunda:string>yes</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n    </bpmn2:sequenceFlow>\n    <bpmn2:sequenceFlow id=\"Flow_182dlgt\" camunda:modelerTemplate=\"org.drupal.condition.eca_current_user_role\" sourceRef=\"Event_00dfxlw\" targetRef=\"Activity_0nr4ng5\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"eca_current_user_role\" />\n        </camunda:properties>\n        <camunda:field name=\"negate\">\n          <camunda:string>no</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"role\">\n          <camunda:string>administrator</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n    </bpmn2:sequenceFlow>\n    <bpmn2:sequenceFlow id=\"Flow_1lgqo3j\" sourceRef=\"Event_00dfxlw\" targetRef=\"Activity_0tlx3ln\" />\n    <bpmn2:sequenceFlow id=\"Flow_0i16oab\" sourceRef=\"Event_04tl9lk\" targetRef=\"Activity_0bk309u\" />\n    <bpmn2:sequenceFlow id=\"Flow_1nt6drm\" sourceRef=\"Activity_07ksdyx\" targetRef=\"Gateway_1rthid4\" />\n    <bpmn2:sequenceFlow id=\"Flow_1ijh8y5\" sourceRef=\"Activity_1w9sk6r\" targetRef=\"Gateway_1rthid4\" />\n    <bpmn2:sequenceFlow id=\"Flow_0w3x5jf\" sourceRef=\"Activity_0atqgae\" targetRef=\"Activity_07ksdyx\" />\n    <bpmn2:sequenceFlow id=\"Flow_0rk78r0\" sourceRef=\"Activity_0tlx3ln\" targetRef=\"Activity_0xd3fam\" />\n    <bpmn2:sequenceFlow id=\"Flow_1hfilr6\" sourceRef=\"Activity_0xd3fam\" targetRef=\"Activity_1w9sk6r\" />\n    <bpmn2:sequenceFlow id=\"Flow_0vlcyrb\" sourceRef=\"Activity_19q8z5c\" targetRef=\"Activity_1vtj47i\" />\n    <bpmn2:sequenceFlow id=\"Flow_132746b\" sourceRef=\"Activity_18vsxl7\" targetRef=\"Activity_0qzx0pp\" />\n    <bpmn2:sequenceFlow id=\"Flow_1vczt3y\" camunda:modelerTemplate=\"org.drupal.condition.eca_scalar\" sourceRef=\"Activity_1gige0f\" targetRef=\"Gateway_1lz4l89\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"eca_scalar\" />\n        </camunda:properties>\n        <camunda:field name=\"negate\">\n          <camunda:string>no</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"case\">\n          <camunda:string>no</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"left\">\n          <camunda:string>[actuser:mail]</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"right\">\n          <camunda:string>@example.com</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"operator\">\n          <camunda:string>contains</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"type\">\n          <camunda:string>value</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n    </bpmn2:sequenceFlow>\n    <bpmn2:sequenceFlow id=\"Flow_0xavi4t\" camunda:modelerTemplate=\"org.drupal.condition.eca_scalar\" sourceRef=\"Activity_1gige0f\" targetRef=\"Gateway_1o87unm\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"eca_scalar\" />\n        </camunda:properties>\n        <camunda:field name=\"case\">\n          <camunda:string>no</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"left\">\n          <camunda:string>[actuser:mail]</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"right\">\n          <camunda:string>@example.com</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"operator\">\n          <camunda:string>contains</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"type\">\n          <camunda:string>value</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"negate\">\n          <camunda:string>yes</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n    </bpmn2:sequenceFlow>\n    <bpmn2:sequenceFlow id=\"Flow_0kijbkl\" sourceRef=\"Activity_0bk309u\" targetRef=\"Activity_1gige0f\" />\n    <bpmn2:sequenceFlow id=\"Flow_0a1zeo8\" camunda:modelerTemplate=\"org.drupal.condition.eca_count\" sourceRef=\"Gateway_1rthid4\" targetRef=\"Activity_0atqgae\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"eca_count\" />\n        </camunda:properties>\n        <camunda:field name=\"negate\">\n          <camunda:string>no</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"case\">\n          <camunda:string>no</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"left\">\n          <camunda:string>admins</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"right\">\n          <camunda:string>0</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"operator\">\n          <camunda:string>greaterthan</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"type\">\n          <camunda:string>numeric</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n    </bpmn2:sequenceFlow>\n    <bpmn2:sequenceFlow id=\"Flow_1j2h2dk\" camunda:modelerTemplate=\"org.drupal.condition.eca_current_user_role\" sourceRef=\"Gateway_14hq8dd\" targetRef=\"Activity_1tfgvxt\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"eca_current_user_role\" />\n        </camunda:properties>\n        <camunda:field name=\"role\">\n          <camunda:string>content_editor</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"negate\">\n          <camunda:string>yes</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n    </bpmn2:sequenceFlow>\n    <bpmn2:sequenceFlow id=\"Flow_0kni1y9\" sourceRef=\"Gateway_14hq8dd\" targetRef=\"Activity_0bk309u\" />\n    <bpmn2:sequenceFlow id=\"Flow_10zxcgn\" camunda:modelerTemplate=\"org.drupal.condition.eca_user_role\" sourceRef=\"Gateway_1lz4l89\" targetRef=\"Activity_19q8z5c\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"eca_user_role\" />\n        </camunda:properties>\n        <camunda:field name=\"account\">\n          <camunda:string>[actuser]</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"role\">\n          <camunda:string>internal</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"negate\">\n          <camunda:string>yes</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n    </bpmn2:sequenceFlow>\n    <bpmn2:sequenceFlow id=\"Flow_0c7hrjx\" camunda:modelerTemplate=\"org.drupal.condition.eca_user_role\" sourceRef=\"Gateway_1o87unm\" targetRef=\"Activity_18vsxl7\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"eca_user_role\" />\n        </camunda:properties>\n        <camunda:field name=\"negate\">\n          <camunda:string>no</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"account\">\n          <camunda:string>[actuser]</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"role\">\n          <camunda:string>internal</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n    </bpmn2:sequenceFlow>\n    <bpmn2:sequenceFlow id=\"Flow_1hqinah\" camunda:modelerTemplate=\"org.drupal.condition.eca_current_user_role\" sourceRef=\"Gateway_0hd8858\" targetRef=\"Activity_0l4w3fc\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"eca_current_user_role\" />\n        </camunda:properties>\n        <camunda:field name=\"negate\">\n          <camunda:string>no</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"role\">\n          <camunda:string>content_editor</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n    </bpmn2:sequenceFlow>\n    <bpmn2:sequenceFlow id=\"Flow_0047zve\" camunda:modelerTemplate=\"org.drupal.condition.eca_current_user_role\" sourceRef=\"Gateway_0hd8858\" targetRef=\"Activity_182vndw\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"eca_current_user_role\" />\n        </camunda:properties>\n        <camunda:field name=\"negate\">\n          <camunda:string>no</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"role\">\n          <camunda:string>administrator</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n    </bpmn2:sequenceFlow>\n    <bpmn2:sequenceFlow id=\"Flow_0ijt8mj\" camunda:modelerTemplate=\"org.drupal.condition.eca_current_user_role\" sourceRef=\"Gateway_0hd8858\" targetRef=\"Gateway_14hq8dd\">\n      <bpmn2:extensionElements>\n        <camunda:properties>\n          <camunda:property name=\"pluginid\" value=\"eca_current_user_role\" />\n        </camunda:properties>\n        <camunda:field name=\"role\">\n          <camunda:string>administrator</camunda:string>\n        </camunda:field>\n        <camunda:field name=\"negate\">\n          <camunda:string>yes</camunda:string>\n        </camunda:field>\n      </bpmn2:extensionElements>\n    </bpmn2:sequenceFlow>\n  </bpmn2:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_eca_bpmn_io\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_eca_bpmn_io\" bpmnElement=\"eca_bpmn_io\">\n      <bpmndi:BPMNShape id=\"Event_0erz1e4_di\" bpmnElement=\"Event_0erz1e4\">\n        <dc:Bounds x=\"57\" y=\"52\" width=\"36\" height=\"36\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Event_00dfxlw_di\" bpmnElement=\"Event_00dfxlw\">\n        <dc:Bounds x=\"57\" y=\"192\" width=\"36\" height=\"36\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Event_04tl9lk_di\" bpmnElement=\"Event_04tl9lk\">\n        <dc:Bounds x=\"57\" y=\"332\" width=\"36\" height=\"36\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_0l4w3fc_di\" bpmnElement=\"Activity_0l4w3fc\">\n        <dc:Bounds x=\"325\" y=\"30\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_182vndw_di\" bpmnElement=\"Activity_182vndw\">\n        <dc:Bounds x=\"325\" y=\"170\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_1tfgvxt_di\" bpmnElement=\"Activity_1tfgvxt\">\n        <dc:Bounds x=\"1225\" y=\"170\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_07ksdyx_di\" bpmnElement=\"Activity_07ksdyx\">\n        <dc:Bounds x=\"925\" y=\"310\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_1w9sk6r_di\" bpmnElement=\"Activity_1w9sk6r\">\n        <dc:Bounds x=\"475\" y=\"310\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_0atqgae_di\" bpmnElement=\"Activity_0atqgae\">\n        <dc:Bounds x=\"775\" y=\"310\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_0tlx3ln_di\" bpmnElement=\"Activity_0tlx3ln\">\n        <dc:Bounds x=\"175\" y=\"310\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_0xd3fam_di\" bpmnElement=\"Activity_0xd3fam\">\n        <dc:Bounds x=\"325\" y=\"310\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_0nr4ng5_di\" bpmnElement=\"Activity_0nr4ng5\">\n        <dc:Bounds x=\"175\" y=\"170\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_19q8z5c_di\" bpmnElement=\"Activity_19q8z5c\">\n        <dc:Bounds x=\"1675\" y=\"310\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_18vsxl7_di\" bpmnElement=\"Activity_18vsxl7\">\n        <dc:Bounds x=\"1675\" y=\"450\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_1gige0f_di\" bpmnElement=\"Activity_1gige0f\">\n        <dc:Bounds x=\"1375\" y=\"310\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_1vtj47i_di\" bpmnElement=\"Activity_1vtj47i\">\n        <dc:Bounds x=\"1825\" y=\"310\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_0qzx0pp_di\" bpmnElement=\"Activity_0qzx0pp\">\n        <dc:Bounds x=\"1825\" y=\"450\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_0bk309u_di\" bpmnElement=\"Activity_0bk309u\">\n        <dc:Bounds x=\"1225\" y=\"310\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Gateway_1rthid4_di\" bpmnElement=\"Gateway_1rthid4\" isMarkerVisible=\"true\">\n        <dc:Bounds x=\"650\" y=\"325\" width=\"50\" height=\"50\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Gateway_14hq8dd_di\" bpmnElement=\"Gateway_14hq8dd\" isMarkerVisible=\"true\">\n        <dc:Bounds x=\"1100\" y=\"185\" width=\"50\" height=\"50\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Gateway_1lz4l89_di\" bpmnElement=\"Gateway_1lz4l89\" isMarkerVisible=\"true\">\n        <dc:Bounds x=\"1550\" y=\"325\" width=\"50\" height=\"50\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Gateway_1o87unm_di\" bpmnElement=\"Gateway_1o87unm\" isMarkerVisible=\"true\">\n        <dc:Bounds x=\"1550\" y=\"465\" width=\"50\" height=\"50\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Gateway_0hd8858_di\" bpmnElement=\"Gateway_0hd8858\" isMarkerVisible=\"true\">\n        <dc:Bounds x=\"200\" y=\"45\" width=\"50\" height=\"50\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNEdge id=\"Flow_1o433l9_di\" bpmnElement=\"Flow_1o433l9\">\n        <di:waypoint x=\"93\" y=\"70\" />\n        <di:waypoint x=\"200\" y=\"70\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_182dlgt_di\" bpmnElement=\"Flow_182dlgt\">\n        <di:waypoint x=\"93\" y=\"210\" />\n        <di:waypoint x=\"175\" y=\"210\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_1lgqo3j_di\" bpmnElement=\"Flow_1lgqo3j\">\n        <di:waypoint x=\"93\" y=\"210\" />\n        <di:waypoint x=\"150\" y=\"210\" />\n        <di:waypoint x=\"150\" y=\"280\" />\n        <di:waypoint x=\"150\" y=\"280\" />\n        <di:waypoint x=\"150\" y=\"350\" />\n        <di:waypoint x=\"175\" y=\"350\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0i16oab_di\" bpmnElement=\"Flow_0i16oab\">\n        <di:waypoint x=\"75\" y=\"368\" />\n        <di:waypoint x=\"75\" y=\"420\" />\n        <di:waypoint x=\"1275\" y=\"420\" />\n        <di:waypoint x=\"1275\" y=\"390\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_1nt6drm_di\" bpmnElement=\"Flow_1nt6drm\">\n        <di:waypoint x=\"975\" y=\"390\" />\n        <di:waypoint x=\"975\" y=\"420\" />\n        <di:waypoint x=\"675\" y=\"420\" />\n        <di:waypoint x=\"675\" y=\"375\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_1ijh8y5_di\" bpmnElement=\"Flow_1ijh8y5\">\n        <di:waypoint x=\"575\" y=\"350\" />\n        <di:waypoint x=\"650\" y=\"350\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0w3x5jf_di\" bpmnElement=\"Flow_0w3x5jf\">\n        <di:waypoint x=\"875\" y=\"350\" />\n        <di:waypoint x=\"925\" y=\"350\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0rk78r0_di\" bpmnElement=\"Flow_0rk78r0\">\n        <di:waypoint x=\"275\" y=\"350\" />\n        <di:waypoint x=\"325\" y=\"350\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_1hfilr6_di\" bpmnElement=\"Flow_1hfilr6\">\n        <di:waypoint x=\"425\" y=\"350\" />\n        <di:waypoint x=\"475\" y=\"350\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0vlcyrb_di\" bpmnElement=\"Flow_0vlcyrb\">\n        <di:waypoint x=\"1775\" y=\"350\" />\n        <di:waypoint x=\"1825\" y=\"350\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_132746b_di\" bpmnElement=\"Flow_132746b\">\n        <di:waypoint x=\"1775\" y=\"490\" />\n        <di:waypoint x=\"1825\" y=\"490\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_1vczt3y_di\" bpmnElement=\"Flow_1vczt3y\">\n        <di:waypoint x=\"1475\" y=\"350\" />\n        <di:waypoint x=\"1550\" y=\"350\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0xavi4t_di\" bpmnElement=\"Flow_0xavi4t\">\n        <di:waypoint x=\"1425\" y=\"390\" />\n        <di:waypoint x=\"1425\" y=\"490\" />\n        <di:waypoint x=\"1550\" y=\"490\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0kijbkl_di\" bpmnElement=\"Flow_0kijbkl\">\n        <di:waypoint x=\"1325\" y=\"350\" />\n        <di:waypoint x=\"1375\" y=\"350\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0a1zeo8_di\" bpmnElement=\"Flow_0a1zeo8\">\n        <di:waypoint x=\"700\" y=\"350\" />\n        <di:waypoint x=\"775\" y=\"350\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_1j2h2dk_di\" bpmnElement=\"Flow_1j2h2dk\">\n        <di:waypoint x=\"1150\" y=\"210\" />\n        <di:waypoint x=\"1225\" y=\"210\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0kni1y9_di\" bpmnElement=\"Flow_0kni1y9\">\n        <di:waypoint x=\"1125\" y=\"235\" />\n        <di:waypoint x=\"1125\" y=\"350\" />\n        <di:waypoint x=\"1225\" y=\"350\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_10zxcgn_di\" bpmnElement=\"Flow_10zxcgn\">\n        <di:waypoint x=\"1600\" y=\"350\" />\n        <di:waypoint x=\"1675\" y=\"350\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0c7hrjx_di\" bpmnElement=\"Flow_0c7hrjx\">\n        <di:waypoint x=\"1600\" y=\"490\" />\n        <di:waypoint x=\"1675\" y=\"490\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_1hqinah_di\" bpmnElement=\"Flow_1hqinah\">\n        <di:waypoint x=\"250\" y=\"70\" />\n        <di:waypoint x=\"325\" y=\"70\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0047zve_di\" bpmnElement=\"Flow_0047zve\">\n        <di:waypoint x=\"250\" y=\"70\" />\n        <di:waypoint x=\"300\" y=\"70\" />\n        <di:waypoint x=\"300\" y=\"140\" />\n        <di:waypoint x=\"300\" y=\"140\" />\n        <di:waypoint x=\"300\" y=\"210\" />\n        <di:waypoint x=\"325\" y=\"210\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0ijt8mj_di\" bpmnElement=\"Flow_0ijt8mj\">\n        <di:waypoint x=\"250\" y=\"70\" />\n        <di:waypoint x=\"300\" y=\"70\" />\n        <di:waypoint x=\"300\" y=\"140\" />\n        <di:waypoint x=\"1050\" y=\"140\" />\n        <di:waypoint x=\"1050\" y=\"210\" />\n        <di:waypoint x=\"1100\" y=\"210\" />\n      </bpmndi:BPMNEdge>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn2:definitions>\n"
+    changelog: ''
+    label: 'ECA Feature Demo - BPMN.io'
+    documentation: ''
+    tags: {  }
+    version: v2
+id: eca_bpmn_io
+weight: 0
+events:
+  Event_0erz1e4:
+    plugin: 'user:login'
+    label: 'User Login'
+    configuration: {  }
+    successors:
+      -
+        id: Gateway_0hd8858
+        condition: Flow_1o433l9
+  Event_00dfxlw:
+    plugin: 'content_entity:insert'
+    label: 'User Register'
+    configuration:
+      type: 'user user'
+    successors:
+      -
+        id: Activity_0nr4ng5
+        condition: Flow_182dlgt
+      -
+        id: Activity_0tlx3ln
+        condition: ''
+  Event_04tl9lk:
+    plugin: 'content_entity:update'
+    label: 'Update User'
+    configuration:
+      type: 'user user'
+    successors:
+      -
+        id: Activity_0bk309u
+        condition: ''
+conditions:
+  Flow_1hqinah:
+    plugin: eca_current_user_role
+    configuration:
+      negate: false
+      role: content_editor
+  Flow_0047zve:
+    plugin: eca_current_user_role
+    configuration:
+      negate: false
+      role: administrator
+  Flow_0a1zeo8:
+    plugin: eca_count
+    configuration:
+      negate: false
+      case: false
+      left: admins
+      right: '0'
+      operator: greaterthan
+      type: numeric
+  Flow_182dlgt:
+    plugin: eca_current_user_role
+    configuration:
+      negate: false
+      role: administrator
+  Flow_0ijt8mj:
+    plugin: eca_current_user_role
+    configuration:
+      role: administrator
+      negate: true
+  Flow_1j2h2dk:
+    plugin: eca_current_user_role
+    configuration:
+      role: content_editor
+      negate: true
+  Flow_1vczt3y:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[actuser:mail]'
+      right: '@example.com'
+      operator: contains
+      type: value
+  Flow_0xavi4t:
+    plugin: eca_scalar
+    configuration:
+      case: false
+      left: '[actuser:mail]'
+      right: '@example.com'
+      operator: contains
+      type: value
+      negate: true
+  Flow_10zxcgn:
+    plugin: eca_user_role
+    configuration:
+      account: '[actuser]'
+      role: internal
+      negate: true
+  Flow_0c7hrjx:
+    plugin: eca_user_role
+    configuration:
+      negate: false
+      account: '[actuser]'
+      role: internal
+  Flow_1o433l9:
+    plugin: eca_scalar
+    configuration:
+      case: false
+      left: '[current-page:url:path]'
+      right: /user/reset
+      operator: beginswith
+      type: value
+      negate: true
+gateways:
+  Gateway_1rthid4:
+    type: 0
+    successors:
+      -
+        id: Activity_0atqgae
+        condition: Flow_0a1zeo8
+  Gateway_14hq8dd:
+    type: 0
+    successors:
+      -
+        id: Activity_1tfgvxt
+        condition: Flow_1j2h2dk
+      -
+        id: Activity_0bk309u
+        condition: ''
+  Gateway_1lz4l89:
+    type: 0
+    successors:
+      -
+        id: Activity_19q8z5c
+        condition: Flow_10zxcgn
+  Gateway_1o87unm:
+    type: 0
+    successors:
+      -
+        id: Activity_18vsxl7
+        condition: Flow_0c7hrjx
+  Gateway_0hd8858:
+    type: 0
+    successors:
+      -
+        id: Activity_0l4w3fc
+        condition: Flow_1hqinah
+      -
+        id: Activity_182vndw
+        condition: Flow_0047zve
+      -
+        id: Gateway_14hq8dd
+        condition: Flow_0ijt8mj
+actions:
+  Activity_0l4w3fc:
+    plugin: action_goto_action
+    label: 'Redirect to content overview'
+    configuration:
+      replace_tokens: false
+      url: /admin/content
+    successors: {  }
+  Activity_182vndw:
+    plugin: action_goto_action
+    label: 'Redirect to admin overview'
+    configuration:
+      replace_tokens: false
+      url: /admin
+    successors: {  }
+  Activity_1tfgvxt:
+    plugin: action_goto_action
+    label: |-
+      Redirect to
+      user profile
+    configuration:
+      replace_tokens: false
+      url: /user
+    successors: {  }
+  Activity_07ksdyx:
+    plugin: action_send_email_action
+    label: 'Inform admins by email'
+    configuration:
+      recipient: '[admin:mail]'
+      subject: '[site:name] New user registered: [newuser:name]'
+      message: 'Please review here: [newuser:url]'
+      replace_tokens: true
+    successors:
+      -
+        id: Gateway_1rthid4
+        condition: ''
+  Activity_1w9sk6r:
+    plugin: eca_views_query
+    label: |-
+      Load all
+      admin users
+    configuration:
+      token_name: admins
+      view_id: user_admin_people
+      display_id: attachment_1
+      arguments: administrator
+    successors:
+      -
+        id: Gateway_1rthid4
+        condition: ''
+  Activity_0atqgae:
+    plugin: eca_list_remove
+    label: 'Pop an admin from the list'
+    configuration:
+      value: ''
+      token_name: admin
+      method: first
+      index: ''
+      list_token: admins
+    successors:
+      -
+        id: Activity_07ksdyx
+        condition: ''
+  Activity_0tlx3ln:
+    plugin: eca_token_set_value
+    label: 'Save new user as token'
+    configuration:
+      token_name: newuser
+      token_value: '[entity]'
+      use_yaml: false
+    successors:
+      -
+        id: Activity_0xd3fam
+        condition: ''
+  Activity_0xd3fam:
+    plugin: eca_switch_account
+    label: 'Switch user'
+    configuration:
+      user_id: '1'
+    successors:
+      -
+        id: Activity_1w9sk6r
+        condition: ''
+  Activity_0nr4ng5:
+    plugin: eca_warning_message
+    label: 'Display link to Mailhog'
+    configuration:
+      message: 'Check emails in <a href="https://mailhog-[site:url-brief]" target="_blank">Mailhog</a>'
+      replace_tokens: true
+    successors: {  }
+  Activity_19q8z5c:
+    plugin: user_add_role_action
+    label: 'Add internal role'
+    configuration:
+      replace_tokens: false
+      rid: internal
+      object: actuser
+    successors:
+      -
+        id: Activity_1vtj47i
+        condition: ''
+  Activity_18vsxl7:
+    plugin: user_remove_role_action
+    label: 'Remove internal role'
+    configuration:
+      replace_tokens: false
+      rid: internal
+      object: actuser
+    successors:
+      -
+        id: Activity_0qzx0pp
+        condition: ''
+  Activity_1gige0f:
+    plugin: eca_switch_account
+    label: 'Switch user'
+    configuration:
+      user_id: '1'
+    successors:
+      -
+        id: Gateway_1lz4l89
+        condition: Flow_1vczt3y
+      -
+        id: Gateway_1o87unm
+        condition: Flow_0xavi4t
+  Activity_1vtj47i:
+    plugin: action_message_action
+    label: Message
+    configuration:
+      replace_tokens: false
+      message: 'You have been added to the internal group. Welcome!'
+    successors: {  }
+  Activity_0qzx0pp:
+    plugin: eca_warning_message
+    label: Warning
+    configuration:
+      replace_tokens: false
+      message: 'You are no longer part of the internal group.'
+    successors: {  }
+  Activity_0bk309u:
+    plugin: eca_token_set_value
+    label: 'Save user as token'
+    configuration:
+      token_name: actuser
+      token_value: '[entity]'
+      use_yaml: false
+    successors:
+      -
+        id: Activity_1gige0f
+        condition: ''

@@ -1,0 +1,76 @@
+{#
+/**
+ * @file
+ * Default theme template for custom field items.
+ *
+ * To override output, copy the "custom-field-item.html.twig" from the templates directory
+ * to your theme's directory and customize it, just like customizing other
+ * Drupal templates such as page.html.twig or node.html.twig.
+ *
+ * Instead of overriding the theming for all fields, you can also just override
+ * theming for a subset of fields using
+ * @link themeable Theme hook suggestions. @endlink For example,
+ * here are some theme hook suggestions that can be used for a field_foo field
+ * on an article node type:
+ * Available variables:
+ * - custom-field-item--field-foo.html.twig
+ * - custom-field-item--field-foo--{type}.html.twig
+ * - custom-field-item--field-foo--{type}--{name}.html.twig
+ * - custom-field-item--field-foo--{name}.html.twig
+ * - value: The custom_field item value.
+ * - label: The custom_field item label.
+ * - label_hidden: Determines if label is hidden.
+ * - label_display: How to display the label.
+ * - type: The custom_field item field type.
+ * - name: The custom_field item name.
+ * - attributes: Attributes for the field wrapper.
+ * - title_attributes: Attributes for the label.
+ * - content_attributes: Attributes for the field.
+ * - field_name: The name of the field.
+ * - display_label_tag: Determines if label tag is output.
+ * - display_field_tag: Determines if field tag is output.
+ * - display_field_wrapper_tag: Determines if field wrapper tag is output.
+ * - field_wrapper_tag: The HTML tag wrapping the field + label.
+ * - field_tag: The HTML tag wrapping the field.
+ * - label_tag: The HTML tag wrapping the label.
+ *
+ * @see template_preprocess_custom_field_item()
+ */
+#}
+{%
+  set classes = [
+    'custom-field__item',
+    'field--name-' ~ name|clean_class,
+    'field--type-' ~ type|clean_class,
+    'field--label-' ~ label_display,
+    label_display == 'inline' ? 'clearfix',
+  ]
+%}
+{%
+  set title_classes = [
+    'field__label',
+    label_display == 'visually_hidden' ? 'visually-hidden',
+  ]
+%}
+{%- if display_field_wrapper_tag -%}
+  <{{ field_wrapper_tag|default('div') }}{{ attributes.addClass(classes) }}>
+{%- endif -%}
+  {%- if not label_hidden -%}
+    {%- if display_label_tag -%}
+      <{{ label_tag|default('div') }}{{ title_attributes.addClass(title_classes) }}>
+    {%- endif -%}
+    {{ label }}
+    {%- if display_label_tag -%}
+      </{{ label_tag|default('div') }}>
+    {%- endif -%}
+  {%- endif -%}
+  {%- if display_field_tag -%}
+    <{{ field_tag|default('div') }}{{ content_attributes.addClass('field__item') }}>
+  {%- endif -%}
+    {{ value }}
+  {%- if display_field_tag -%}
+    </{{ field_tag|default('div') }}>
+  {%- endif -%}
+{%- if display_field_wrapper_tag -%}
+  </{{ field_wrapper_tag|default('div') }}>
+{%- endif -%}

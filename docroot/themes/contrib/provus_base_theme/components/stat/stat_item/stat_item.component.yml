@@ -1,0 +1,41 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Stat item
+description: Individual stat item component with icon, title, and body content.
+status: stable
+group: Provus Stat Components
+
+libraryOverrides:
+  css:
+    component:
+      stat_item.css: {}
+
+variants:
+  default:
+    title: Default
+    description: Standard stat item with icon, title and body content
+
+props:
+  type: object
+  required:
+    - title
+    - body
+  properties:
+    title:
+      type: string
+      title: 'Title'
+      description: 'Title'
+      examples:
+        - '100+'
+      default: ''
+    icon:
+      $ref: json-schema-definitions://canvas.module/image
+      title: 'Icon'
+      description: 'Icon image for the stat item.'
+      type: object
+    body:
+      type: string
+      title: 'Body'
+      description: 'Body'
+      examples:
+        - 'Stat description text'
+      default: ''

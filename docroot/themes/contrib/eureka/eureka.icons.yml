@@ -1,0 +1,19 @@
+eureka:
+  enabled: true
+  label: 'Eureka'
+  description: 'A set of icons for the Eureka theme.'
+  version: 1.0.0
+  extractor: svg
+  config:
+    sources:
+      - 'images/icons/*.svg'
+  settings:
+    size:
+      title: Size
+      type: integer
+      default: 24
+  template: >-
+    {% set icon_url = (source|split('images/'))[0] ~ 'images/icons.svg' %}
+    <svg class="icon" width="{{ size|default(24) }}" height="{{ size|default(24) }}" aria-hidden="true" role="presentation">
+      <use xlink:href="{{ icon_url }}#{{ icon_id }}"></use>
+    </svg>

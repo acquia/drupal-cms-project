@@ -1,0 +1,40 @@
+core:
+  remote: https://github.com/bpmn-io/bpmn-js
+  version: 13.2.2
+  js:
+    js/bpmn-modeler.js: { preprocess: false }
+  css:
+    component:
+      css/bpmn-js.css: {}
+      css/color-picker.css: {}
+      css/diagram-js.css: {}
+      css/diagram-js-minimap.css: {}
+      css/element-templates.css: {}
+      css/element-template-chooser.css: {}
+      css/properties-panel.css: {}
+      css/bpmn-font/css/bpmn.css: {}
+      css/bpmn-font/css/bpmn-codes.css: {}
+      css/bpmn-font/css/bpmn-embedded.css: {}
+  license:
+    name: MIT
+    url: https://github.com/bpmn-io/bpmn-js/raw/develop/LICENSE
+    gpl-compatible: true
+
+ui:
+  js:
+    js/bpmn_io.js: {}
+  css:
+    component:
+      css/bpmn_io.css: {}
+  dependencies:
+    - bpmn_io/core
+    - core/drupal.ajax
+    - core/drupal.message
+    - core/drupalSettings
+    - core/jquery
+convert:
+  js:
+    js/bpmn_io.convert.js: {}
+  dependencies:
+    - bpmn_io/ui
+    - core/once

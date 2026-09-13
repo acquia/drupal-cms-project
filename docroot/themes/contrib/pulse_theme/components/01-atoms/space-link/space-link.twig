@@ -1,0 +1,58 @@
+{#
+/**
+ * @file
+ * Space Link Component.
+ *
+ * Description:
+ * An atom-level component for displaying a customizable link with various options such as target, title text, and custom styles.
+ *
+ * Variables:
+ * - text: [string] The text to display for the link.
+ *   Example: 'Learn more'.
+ * - url: [string] The URL the link points to.
+ *   Example: 'https://google.com'.
+ * - title_text: [string] The title attribute for the link.
+ *   Example: 'Visit Google'.
+ * - target: [string] The target attribute for the link. Options:
+ *   - 'self': Opens in the same window/tab (default).
+ *   - 'blank': Opens in a new window/tab.
+ *   - 'parent': Opens in the parent frame.
+ *   - 'top': Opens in the full body of the window.
+ *   default: 'self'.
+ * - custom_style: [boolean] Enables custom styling for the link. default: false.
+ * - extra_classes: [string] Additional classes for custom styling. Only applied when `custom_style` is enabled.
+ *   Example: 'btn-primary btn-large'.
+ */
+#}
+
+{# Default values #}
+{% set attributes = attributes|default(create_attribute()) %}
+{% set custom_style = custom_style|default(false) %}
+{% set extra_classes = extra_classes|default('') %}
+{% set tag_name = 'a' %}
+
+{% if target|default('self') is not empty %}
+  {% set attributes = attributes.setAttribute('target', '_' ~ target|default('self')).setAttribute('tabindex', '0') %}
+{% endif %}
+
+{% if title_text|default('') is not empty %}
+  {% set attributes = attributes.setAttribute('aria-label', title_text|default('')) %}
+{% endif %}
+
+{# Classes #}
+{% set link_classes = [] %}
+{% for class in [
+  'link-element inline-flex items-center',
+  extra_classes ? extra_classes
+] %}
+  {% if class is not null and class is not empty %}
+    {% set link_classes = link_classes|merge([class]) %}
+  {% endif %}
+{% endfor %}
+
+{# Render link #}
+{% block link_block %}
+  <{{ tag_name }} href="{{ url|default('#') }}" {{ attributes.addClass(link_classes|join(' ')|trim) }}>
+    {{ text|default('Link text') }}
+  </{{ tag_name }}>
+{% endblock %}

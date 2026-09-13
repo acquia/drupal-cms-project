@@ -1,0 +1,33 @@
+.card-speaker.card-speaker--themed, body:not(.canvas-page) .card-speaker.card-speaker--admin-theme, body:not(.canvas-page) .card-speaker.card-speaker--admin-theme {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  color: #030804;
+  height: 100%;
+}
+
+.card-speaker.card-speaker--themed .card-speaker__media-wrapper, body:not(.canvas-page) .card-speaker.card-speaker--admin-theme .card-speaker__media-wrapper, body:not(.canvas-page) .card-speaker.card-speaker--admin-theme .card-speaker__media-wrapper {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  background-color: #f3f4f6;
+}
+
+.card-speaker.card-speaker--themed .card-speaker__media-wrapper img,
+body:not(.canvas-page) .card-speaker.card-speaker--admin-theme .card-speaker__media-wrapper img,
+body:not(.canvas-page) .card-speaker.card-speaker--admin-theme .card-speaker__media-wrapper img,
+.card-speaker.card-speaker--themed .card-speaker__media-wrapper video, body:not(.canvas-page) .card-speaker.card-speaker--admin-theme .card-speaker__media-wrapper video, body:not(.canvas-page) .card-speaker.card-speaker--admin-theme .card-speaker__media-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-speaker.card-speaker--themed .card-speaker__content, body:not(.canvas-page) .card-speaker.card-speaker--admin-theme .card-speaker__content, body:not(.canvas-page) .card-speaker.card-speaker--admin-theme .card-speaker__content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: inherit;
+}

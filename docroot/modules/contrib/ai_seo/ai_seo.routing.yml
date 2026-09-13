@@ -1,0 +1,93 @@
+ai_seo.settings:
+  path: '/admin/config/ai/seo'
+  defaults:
+    _form: '\Drupal\ai_seo\Form\ConfigurationForm'
+    _title_callback: '\Drupal\ai_seo\Form\ConfigurationForm::getTitle'
+  requirements:
+    _permission: 'administer ai seo'
+  options:
+    _admin_route: TRUE
+entity.node.seo_analyzer:
+  path: '/node/{node}/seo'
+  defaults:
+    _title_callback: '\Drupal\ai_seo\Controller\AnalyzeContentController::getTitle'
+    _controller: '\Drupal\ai_seo\Controller\AnalyzeContentController::printReport'
+  requirements:
+    _permission: 'view seo reports'
+  options:
+    _admin_route: TRUE
+    parameters:
+      node:
+        type: entity:node
+entity.node.view_seo_report:
+  path: '/node/{node}/seo/{report_id}'
+  defaults:
+    _title_callback: '\Drupal\ai_seo\Controller\ViewReportController::getTitle'
+    _controller: '\Drupal\ai_seo\Controller\ViewReportController::printReport'
+  requirements:
+    _permission: 'view seo reports'
+    report_id: \d+
+  options:
+    _admin_route: TRUE
+    parameters:
+      node:
+        type: entity:node
+      report_id:
+        type: integer
+ai_seo.stream_analysis:
+  path: '/ai-seo/stream/{node}'
+  defaults:
+    _controller: '\Drupal\ai_seo\Controller\StreamAnalysisController::stream'
+  requirements:
+    _permission: 'create seo reports'
+  options:
+    _admin_route: TRUE
+    parameters:
+      node:
+        type: entity:node
+ai_seo.stream_draft:
+  path: '/ai-seo/stream-draft'
+  defaults:
+    _controller: '\Drupal\ai_seo\Controller\StreamAnalysisController::streamDraft'
+  requirements:
+    _permission: 'create seo reports'
+  options:
+    _admin_route: TRUE
+ai_seo.stream_field:
+  path: '/ai-seo/stream-field'
+  defaults:
+    _controller: '\Drupal\ai_seo\Controller\StreamAnalysisController::streamField'
+  requirements:
+    _permission: 'create seo reports'
+  options:
+    _admin_route: TRUE
+entity.ai_seo_report_type.collection:
+  path: '/admin/config/ai/seo/report-types'
+  defaults:
+    _entity_list: 'ai_seo_report_type'
+    _title: 'Report Types'
+  requirements:
+    _permission: 'administer ai seo settings'
+entity.ai_seo_report_type.add_form:
+  path: '/admin/config/ai/seo/report-types/add'
+  defaults:
+    _entity_form: 'ai_seo_report_type.add'
+    _title: 'Add Report Type'
+  requirements:
+    _permission: 'administer ai seo settings'
+  options:
+    _admin_route: TRUE
+entity.ai_seo_report_type.edit_form:
+  path: '/admin/config/ai/seo/report-types/{ai_seo_report_type}/edit'
+  defaults:
+    _entity_form: 'ai_seo_report_type.edit'
+    _title: 'Edit Report Type'
+  requirements:
+    _permission: 'administer ai seo settings'
+entity.ai_seo_report_type.delete_form:
+  path: '/admin/config/ai/seo/report-types/{ai_seo_report_type}/delete'
+  defaults:
+    _entity_form: 'ai_seo_report_type.delete'
+    _title: 'Delete Report Type'
+  requirements:
+    _permission: 'administer ai seo settings'

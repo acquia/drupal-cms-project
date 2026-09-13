@@ -1,0 +1,20 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Blockquote
+status: stable
+description: Default blockquote component
+group: Eureka component items
+props:
+  type: object
+  properties:
+    blockquote_content:
+      title: Blockquote content
+      type: string
+      description: Blockquote content
+      examples:
+        - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sollicitudin nisi in tellus sodales, id gravida massa volutpat. Ut eget massa nunc.
+    blockquote_citation:
+      title: Blockquote citation
+      type: string
+      description: Blockquote citation
+      examples:
+        - Author name

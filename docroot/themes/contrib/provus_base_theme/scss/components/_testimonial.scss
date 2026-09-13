@@ -1,0 +1,141 @@
+// Testimonial card
+.card.card-testimonial {
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.08), 0px 0px 2px rgba(0, 0, 0, 0.04);
+  border-radius: 2px;
+  background: $primary-shade;
+
+  > .row {
+    @include media-breakpoint-down (lg) {
+      flex-direction: column-reverse;
+    }
+  }
+
+  .testimonial-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: $padding-padding-lg $padding-padding-xlg;
+    color: $white;
+
+    @include media-breakpoint-up (lg) {
+      padding: $padding-padding-xxlg $padding-padding-xlg;
+    }
+  }
+
+  @include media-breakpoint-up(lg) {
+    .col-lg-12 .testimonial-content {
+      padding: $padding-padding-xxxlg;
+    }
+
+    .col-lg-6 .testimonial-content {
+      padding: $padding-padding-xxlg $padding-padding-xlg;
+    }
+  }
+
+  .testimonial-body {
+   @include text-style-headline-h-3;
+    margin-bottom: rem-calc(40);
+
+    &:before {
+      display: inline-block;
+      content: '“';
+    }
+
+    &:after {
+      display: inline-block;
+      content: '“';
+    }
+  }
+
+  .testimonial-name {
+    @include text-style-body-body-1;
+    font-weight: $font-weight-bold !important;
+  }
+
+  .testimonial-role {
+    @include text-style-subheadline-sub-2;
+    font-weight: $font-weight-medium;
+  }
+
+  .testimonial-image {
+    text-align: right;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    align-content: flex-end;
+
+    .field--name-field-provus-media-image {
+      width: inherit;
+      img {
+        height: auto;
+        width: 100%;
+        object-fit: cover;
+
+        @include media-breakpoint-up(lg) {
+          height: 100%;
+          width: 100%;
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
+  .image-location-left & {
+    >.row {
+      flex-direction: row-reverse;
+
+      .col-lg-6:first-child {
+        @include media-breakpoint-down(lg) {
+          order: 2;
+        }
+
+        .testimonial-content {
+          @include media-breakpoint-up(lg) {
+            padding: $padding-padding-xxlg $padding-padding-xlg;
+          }
+        }
+      }
+
+      .testimonial-image {
+        .field--name-field-provus-media-image {
+          img {
+            @include media-breakpoint-up(lg) {
+              margin-right: rem-calc(144);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .image-location-right & {
+    >.row {
+      .col-lg-6:first-child {
+        order: 2;
+        @include media-breakpoint-up(lg) {
+          order: unset;
+        }
+      }
+    }
+  }
+
+  .image-location-full & {
+    .row .col-lg-6 {
+      width: 100%;
+
+      .testimonial-content {
+        padding: $padding-padding-lg $padding-padding-xlg;
+
+        @include media-breakpoint-up(lg) {
+          padding: $padding-padding-xxxlg;
+        }
+      }
+    }
+
+    .row .col-lg-6 .testimonial-image {
+      display: none;
+    }
+  }
+}

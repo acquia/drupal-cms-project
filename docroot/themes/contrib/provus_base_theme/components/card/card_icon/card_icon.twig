@@ -1,0 +1,31 @@
+<div class="card-wrapper provus-card-icon-left">
+  <div class="list">
+    {% if image_url and image_url.src %}
+      <div class="list-icon">
+        <div class="card-img img-fluid">
+        <img src="{{ image_url.src }}" alt="{{ image_url.alt ? image_url.alt : '' }}"{% if image_url.width %} width="{{ image_url.width }}"{% endif %}{% if image_url.height %} height="{{ image_url.height }}"{% endif %}>
+        </div>
+      </div>
+    {% endif %}
+    <div class="list-text">
+      {% if title|render %}
+        <div class="list-text-title">{{ title }}</div>
+      {% endif %}
+      {% if body|render %}
+        <div class="list-text-text">{{ body|raw }}</div>
+      {% endif %}
+      {% if more_content|render or (link_text and link_url) %}
+      <div class="card-extra">
+        {% if more_content|render %}
+          {{ more_content|raw }}
+        {% endif %}
+        {% if link_text and link_url %}
+          <div class="field field--name-field-provus-links field--type-link field__items">
+            <a href="{{ link_url }}" class="{{ link_style ? 'btn btn-' ~ link_style : '' }}">{{ link_text }}</a>
+          </div>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

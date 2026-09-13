@@ -1,0 +1,980 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: aab6a5b0-fc0c-40c2-8486-7ea8c36aec03
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'More Components'
+  components:
+    -
+      uuid: c35115c5-c88d-4176-8725-f6386cfcf274
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+    -
+      parent_uuid: c35115c5-c88d-4176-8725-f6386cfcf274
+      slot: content
+      uuid: 060ab1d2-6081-48eb-a1a5-ff15a276ce00
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h1
+        title: 'More Components'
+        decorative_line: false
+        alignment: left
+    -
+      uuid: 9d303444-31c1-486b-b232-4a06a3019f3b
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+    -
+      parent_uuid: 9d303444-31c1-486b-b232-4a06a3019f3b
+      slot: content
+      uuid: 374eace8-4d5a-4aff-aa79-1b6a858a0c41
+      component_id: sdc.provus_base_theme.three_column
+      inputs:
+        desktop_width: 33-33-33
+        tablet_width: 33-33-33
+        mobile_width: 100-100-100
+    -
+      parent_uuid: 374eace8-4d5a-4aff-aa79-1b6a858a0c41
+      slot: column_1
+      uuid: c5e982a1-dda2-4da6-beed-e238cbadb77e
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Card default'
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 374eace8-4d5a-4aff-aa79-1b6a858a0c41
+      slot: column_2
+      uuid: 56344f6c-1df3-4d7b-85b0-8dcb280bc8cc
+      component_id: sdc.provus_base_theme.card_image_top
+      inputs:
+        title: 'Card Default'
+        body:
+          value: '<p>body text</p>'
+          format: canvas_full_html
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/400x300'
+            alt: Image
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.card_image_top
+        is_image_circle: false
+        link_text: 'Button Text'
+        link_url:
+          uri: 'internal:/contact'
+          options: {  }
+        link_style: default
+        header: Header
+        more_content:
+          value: '<p>footer content</p>'
+          format: canvas_full_html
+    -
+      parent_uuid: 374eace8-4d5a-4aff-aa79-1b6a858a0c41
+      slot: column_3
+      uuid: eb4ea7f1-6ad3-4e6a-8f5b-e3b0a4c2fa84
+      component_id: sdc.provus_base_theme.card_image_top
+      inputs:
+        title: 'Card Default'
+        body:
+          value: '<p>body text</p>'
+          format: canvas_full_html
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/400x300'
+            alt: Image
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.card_image_top
+        is_image_circle: false
+        link_text: 'Button Text'
+        link_url:
+          uri: 'internal:/contact'
+          options: {  }
+        more_content:
+          value: '<p>footer content</p>'
+          format: canvas_full_html
+    -
+      parent_uuid: 9d303444-31c1-486b-b232-4a06a3019f3b
+      slot: content
+      uuid: 4b1511d0-9323-445f-af74-de60652ea2c5
+      component_id: sdc.provus_base_theme.three_column
+      inputs:
+        desktop_width: 33-33-33
+        tablet_width: 33-33-33
+        mobile_width: 100-100-100
+    -
+      parent_uuid: 4b1511d0-9323-445f-af74-de60652ea2c5
+      slot: column_1
+      uuid: b9003622-5fa0-41d5-9c39-f8dcee125028
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Card Text'
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 4b1511d0-9323-445f-af74-de60652ea2c5
+      slot: column_2
+      uuid: cb1fc134-acba-4a97-8c1c-70dabda6a76d
+      component_id: sdc.provus_base_theme.card_text
+      inputs:
+        card_type: basic
+        title: 'Welcome to Our Services'
+        body:
+          value: |
+            We provide exceptional services to help your business grow and succeed in today's competitive market.
+
+            Our team of experts is dedicated to delivering high-quality solutions tailored to your needs.
+          format: canvas_full_html
+        link_text: 'Button Text'
+        link_url:
+          uri: 'internal:/contact'
+          options: {  }
+        link_style: default
+        more_content:
+          value: '<p>Footer</p>'
+          format: canvas_full_html
+    -
+      parent_uuid: 4b1511d0-9323-445f-af74-de60652ea2c5
+      slot: column_3
+      uuid: c017dad6-f7a5-4570-ac6a-c5779f729e17
+      component_id: sdc.provus_base_theme.card_text
+      inputs:
+        card_type: basic
+        title: 'Welcome to Our Services'
+        body:
+          value: |
+            We provide exceptional services to help your business grow and succeed in today's competitive market.
+
+            Our team of experts is dedicated to delivering high-quality solutions tailored to your needs.
+          format: canvas_full_html
+        link_text: 'Button Text'
+        link_url:
+          uri: 'internal:/contact'
+          options: {  }
+        more_content:
+          value: '<p>Footer</p>'
+          format: canvas_full_html
+    -
+      parent_uuid: 9d303444-31c1-486b-b232-4a06a3019f3b
+      slot: content
+      uuid: caf5b445-44e9-4cdc-89da-6ea90b6fb365
+      component_id: sdc.provus_base_theme.three_column
+      inputs:
+        desktop_width: 33-33-33
+        tablet_width: 33-33-33
+        mobile_width: 100-100-100
+    -
+      parent_uuid: caf5b445-44e9-4cdc-89da-6ea90b6fb365
+      slot: column_1
+      uuid: 38237d16-b100-4a48-a4c2-a090a77b1762
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Card Tall'
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: caf5b445-44e9-4cdc-89da-6ea90b6fb365
+      slot: column_2
+      uuid: d6573374-5c8a-4a7a-b050-9fd9a62453e6
+      component_id: sdc.provus_base_theme.card_tall
+      inputs:
+        title: 'Card Tall'
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/280x448'
+            alt: Image
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.card_tall
+        header: Header
+        link:
+          uri: 'internal:/contact'
+          options: {  }
+    -
+      parent_uuid: caf5b445-44e9-4cdc-89da-6ea90b6fb365
+      slot: column_3
+      uuid: dae07f5a-af58-4773-95b7-db74d264da8d
+      component_id: sdc.provus_base_theme.card_tall
+      inputs:
+        title: 'Card Tall'
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/280x448'
+            alt: Image
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.card_tall
+        link:
+          uri: 'internal:/contact'
+          options: {  }
+    -
+      parent_uuid: 9d303444-31c1-486b-b232-4a06a3019f3b
+      slot: content
+      uuid: 78d0edd3-b684-4507-bb95-e6fef4e93c31
+      component_id: sdc.provus_base_theme.three_column
+      inputs:
+        desktop_width: 33-33-33
+        tablet_width: 33-33-33
+        mobile_width: 100-100-100
+    -
+      parent_uuid: 78d0edd3-b684-4507-bb95-e6fef4e93c31
+      slot: column_1
+      uuid: 9061d173-e325-4440-a1cf-8ea1a39b101c
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Card Image Side'
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 78d0edd3-b684-4507-bb95-e6fef4e93c31
+      slot: column_2
+      uuid: 2eebfc7c-53c7-4e42-a4ec-d2e51b9c6be0
+      component_id: sdc.provus_base_theme.card_image_side
+      inputs:
+        header: Header
+        title: 'Card Image Side'
+        body:
+          value: '<p>Body Text</p>'
+          format: canvas_full_html
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/400x300'
+            alt: Image
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.card_image_side
+        image_position: left
+        link_text: 'Button Text'
+        link_url:
+          uri: 'internal:/contact'
+          options: {  }
+        link_style: default
+        more_content:
+          value: '<p>Footer</p>'
+          format: canvas_full_html
+    -
+      parent_uuid: 78d0edd3-b684-4507-bb95-e6fef4e93c31
+      slot: column_3
+      uuid: bf405e03-9104-4e0c-b8b0-3e7cd1c49917
+      component_id: sdc.provus_base_theme.card_image_side
+      inputs:
+        title: 'Card Image Side'
+        body:
+          value: '<p>Body Text</p>'
+          format: canvas_full_html
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/400x300'
+            alt: Image
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.card_image_side
+        image_position: left
+        link_text: 'Button Text'
+        link_url:
+          uri: 'internal:/contact'
+          options: {  }
+        more_content:
+          value: '<p>Footer</p>'
+          format: canvas_full_html
+    -
+      parent_uuid: 9d303444-31c1-486b-b232-4a06a3019f3b
+      slot: content
+      uuid: e69f73c5-331e-473e-ac2c-00ba14a89970
+      component_id: sdc.provus_base_theme.three_column
+      inputs:
+        desktop_width: 33-33-33
+        tablet_width: 33-33-33
+        mobile_width: 100-100-100
+    -
+      parent_uuid: e69f73c5-331e-473e-ac2c-00ba14a89970
+      slot: column_1
+      uuid: 0ceeab74-8854-4987-b167-4948304c478d
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Card Image Background'
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: e69f73c5-331e-473e-ac2c-00ba14a89970
+      slot: column_2
+      uuid: ec7487b4-0064-4fc8-a451-c07b46beb33e
+      component_id: sdc.provus_base_theme.card_image_background
+      inputs:
+        title: 'Card Image Background'
+        bg_image_path:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/400x300'
+            alt: 'Background image'
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.card_image_background
+        link:
+          uri: 'internal:/about'
+          options: {  }
+    -
+      parent_uuid: e69f73c5-331e-473e-ac2c-00ba14a89970
+      slot: column_3
+      uuid: af2e3418-8354-487c-a130-25c852e82a2d
+      component_id: sdc.provus_base_theme.card_image_background
+      inputs:
+        title: 'Card Image Background'
+        bg_image_path:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/400x300'
+            alt: 'Background image'
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.card_image_background
+        link:
+          uri: 'internal:/'
+          options: {  }
+    -
+      parent_uuid: 9d303444-31c1-486b-b232-4a06a3019f3b
+      slot: content
+      uuid: 1cd3387c-10ff-4b58-94c1-4e0ea062eea4
+      component_id: sdc.provus_base_theme.three_column
+      inputs:
+        desktop_width: 33-33-33
+        tablet_width: 33-33-33
+        mobile_width: 100-100-100
+    -
+      parent_uuid: 1cd3387c-10ff-4b58-94c1-4e0ea062eea4
+      slot: column_1
+      uuid: 42baf918-9d48-43ac-8adf-c797904ec9c5
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Card Icon'
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 1cd3387c-10ff-4b58-94c1-4e0ea062eea4
+      slot: column_2
+      uuid: 8fa42e2a-0241-4e8b-8a57-5f14722d1990
+      component_id: sdc.provus_base_theme.card_icon
+      inputs:
+        title: 'Card Icon'
+        body:
+          value: '<p>body text</p>'
+          format: canvas_full_html
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/400x300'
+            alt: 'Card placeholder image'
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.card_icon
+        link_text: 'Button Text'
+        link_url:
+          uri: 'internal:/contact'
+          options: {  }
+        link_style: default
+        more_content:
+          value: '<p>Additional information or <a href="#">call-to-action content</a>.</p>'
+          format: canvas_full_html
+    -
+      parent_uuid: 1cd3387c-10ff-4b58-94c1-4e0ea062eea4
+      slot: column_3
+      uuid: da674657-6174-4daa-b785-f8dc00339a2a
+      component_id: sdc.provus_base_theme.card_icon
+      inputs:
+        title: 'Card Icon'
+        body:
+          value: '<p>body text</p>'
+          format: canvas_full_html
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/400x300'
+            alt: 'Card placeholder image'
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.card_icon
+        link_text: 'Button Text'
+        link_url:
+          uri: 'internal:/contact'
+          options: {  }
+        more_content:
+          value: '<p>Additional information or <a href="#">call-to-action content</a>.</p>'
+          format: canvas_full_html
+    -
+      uuid: 7e75b8b6-81af-4dba-b4dc-7ac16e0c3b09
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        custom_class: bg-primary
+    -
+      parent_uuid: 7e75b8b6-81af-4dba-b4dc-7ac16e0c3b09
+      slot: content
+      uuid: 4a24ec72-1f21-4811-8ea7-8943f4a0f6e9
+      component_id: sdc.provus_base_theme.two_column
+      inputs:
+        desktop_width: 50-50
+        tablet_width: 50-50
+        mobile_width: 100-100
+    -
+      parent_uuid: 4a24ec72-1f21-4811-8ea7-8943f4a0f6e9
+      slot: column_1
+      uuid: 6f17621e-b703-4aea-878a-097782904b7f
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: Accordions
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 4a24ec72-1f21-4811-8ea7-8943f4a0f6e9
+      slot: column_2
+      uuid: 517ab913-95e7-4a18-b9eb-528e29dda11b
+      component_id: sdc.provus_base_theme.accordion
+      inputs:
+        accordion_id: faq
+        title: FAQ
+    -
+      parent_uuid: 517ab913-95e7-4a18-b9eb-528e29dda11b
+      slot: accordion_body
+      uuid: 20eb41fa-6021-409f-b0b2-2e626bfac09f
+      component_id: sdc.provus_base_theme.accordion_item
+      inputs:
+        title: 'Section title'
+        heading_level: h2
+        open_by_default: false
+        body:
+          value: 'The body text displayed in the accordion item'
+          format: canvas_full_html
+    -
+      parent_uuid: 517ab913-95e7-4a18-b9eb-528e29dda11b
+      slot: accordion_body
+      uuid: 8d42ee80-f03f-4255-b9dd-0b7522185726
+      component_id: sdc.provus_base_theme.accordion_item
+      inputs:
+        title: 'Section title'
+        heading_level: h2
+        open_by_default: false
+        body:
+          value: 'The body text displayed in the accordion item'
+          format: canvas_full_html
+    -
+      parent_uuid: 7e75b8b6-81af-4dba-b4dc-7ac16e0c3b09
+      slot: content
+      uuid: d28f3f99-15ce-492a-839e-723a14eeb584
+      component_id: sdc.provus_base_theme.divider
+      inputs:
+        padding_top: pt-5
+    -
+      parent_uuid: 7e75b8b6-81af-4dba-b4dc-7ac16e0c3b09
+      slot: content
+      uuid: 39026e19-7020-444a-a100-2cfac59176cd
+      component_id: sdc.provus_base_theme.two_column
+      inputs:
+        desktop_width: 50-50
+        tablet_width: 50-50
+        mobile_width: 100-100
+    -
+      parent_uuid: 39026e19-7020-444a-a100-2cfac59176cd
+      slot: column_1
+      uuid: ea5165d2-8dc3-48f6-a3ff-ed4fd1e03f6e
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: Tabs
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: 39026e19-7020-444a-a100-2cfac59176cd
+      slot: column_2
+      uuid: a4b4dcf4-1675-4724-bd95-a02518cdc27e
+      component_id: sdc.provus_base_theme.tabs
+      inputs:
+        orientation: horizontal
+    -
+      parent_uuid: a4b4dcf4-1675-4724-bd95-a02518cdc27e
+      slot: tabs_content
+      uuid: 89b55b25-487b-49a7-b85f-f998ce67ea37
+      component_id: sdc.provus_base_theme.tab_item
+      inputs:
+        label: 'Tab 1'
+        content:
+          value: '<p>Tab panel content goes here.</p>'
+          format: canvas_full_html
+    -
+      parent_uuid: a4b4dcf4-1675-4724-bd95-a02518cdc27e
+      slot: tabs_content
+      uuid: 09f1c19b-319c-417b-bd4c-c11d87e5f5e5
+      component_id: sdc.provus_base_theme.tab_item
+      inputs:
+        label: 'Tab 2'
+        content:
+          value: '<p>Tab panel content goes here.</p>'
+          format: canvas_full_html
+    -
+      parent_uuid: 39026e19-7020-444a-a100-2cfac59176cd
+      slot: column_2
+      uuid: ed002d20-5fec-493e-9458-41ee9bc93669
+      component_id: sdc.provus_base_theme.tabs
+      inputs:
+        orientation: vertical
+    -
+      parent_uuid: ed002d20-5fec-493e-9458-41ee9bc93669
+      slot: tabs_content
+      uuid: 50b90acc-9242-4233-b66d-36dec43e4da7
+      component_id: sdc.provus_base_theme.tab_item
+      inputs:
+        label: 'Tab 1'
+        content:
+          value: '<p>Tab panel content goes here.</p>'
+          format: canvas_full_html
+    -
+      parent_uuid: ed002d20-5fec-493e-9458-41ee9bc93669
+      slot: tabs_content
+      uuid: 02a5ad21-3e86-4e14-a15d-ce187edc72fd
+      component_id: sdc.provus_base_theme.tab_item
+      inputs:
+        label: 'Tab 2'
+        content:
+          value: '<p>Tab panel content goes here.</p>'
+          format: canvas_full_html
+    -
+      uuid: 06099c68-aaca-4933-a9af-1184c7a5e513
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: 06099c68-aaca-4933-a9af-1184c7a5e513
+      slot: column_1
+      uuid: 1b524612-b2ce-4531-a584-b9b0da6ca17d
+      component_id: sdc.provus_base_theme.cta
+      inputs:
+        subtitle: 'Get Started'
+        title: 'Ready to Get Started?'
+        body:
+          value: '<p>Take the next step and discover how we can help you achieve your goals.</p>'
+          format: canvas_full_html
+        background_color: Primary
+    -
+      parent_uuid: 1b524612-b2ce-4531-a584-b9b0da6ca17d
+      slot: cta_footer
+      uuid: 23339775-daf9-4706-a4e5-0f9ad0288ac1
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Click me'
+        url:
+          uri: 'internal:/contact'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: auto
+    -
+      parent_uuid: 06099c68-aaca-4933-a9af-1184c7a5e513
+      slot: column_1
+      uuid: 5cd7c1ac-5738-4f38-85be-e31a89993f4d
+      component_id: sdc.provus_base_theme.cta
+      inputs:
+        subtitle: 'Get Started'
+        title: 'Ready to Get Started?'
+        body:
+          value: '<p>Take the next step and discover how we can help you achieve your goals.</p>'
+          format: canvas_full_html
+        background_color: Secondary
+    -
+      parent_uuid: 5cd7c1ac-5738-4f38-85be-e31a89993f4d
+      slot: cta_footer
+      uuid: ee827c3b-5747-4736-a591-da9c9bcdc247
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Click me'
+        url:
+          uri: 'internal:/contact'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: auto
+    -
+      parent_uuid: 06099c68-aaca-4933-a9af-1184c7a5e513
+      slot: column_1
+      uuid: ff361556-80c3-4ad1-aaa7-357775cffccb
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: ff361556-80c3-4ad1-aaa7-357775cffccb
+      slot: column_1
+      uuid: c82a039d-c863-466f-8a03-c633b85751d1
+      component_id: sdc.provus_base_theme.testimonial
+      inputs:
+        display_type: right
+        name: 'John Doe'
+        role: 'CEO, Company Name'
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/839x580'
+            alt: Image
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.testimonial
+        body: "We've been using this product for over a year now.        It has transformed how we work."
+    -
+      parent_uuid: ff361556-80c3-4ad1-aaa7-357775cffccb
+      slot: column_1
+      uuid: 6ffb1de3-dc53-493d-9a92-77a8ca85a5b4
+      component_id: sdc.provus_base_theme.testimonial
+      inputs:
+        display_type: left
+        name: 'John Doe'
+        role: 'CEO, Company Name'
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/839x580'
+            alt: Image
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.testimonial
+        body: "We've been using this product for over a year now.        It has transformed how we work."
+    -
+      parent_uuid: ff361556-80c3-4ad1-aaa7-357775cffccb
+      slot: column_1
+      uuid: d0a38d97-be23-4373-8471-2808a288a54f
+      component_id: sdc.provus_base_theme.testimonial
+      inputs:
+        display_type: full
+        name: 'John Doe'
+        role: 'CEO, Company Name'
+        image_url:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/839x580'
+            alt: Image
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.testimonial
+        body: "We've been using this product for over a year now.        It has transformed how we work."
+  path:
+    -
+      alias: /demo/components-2
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

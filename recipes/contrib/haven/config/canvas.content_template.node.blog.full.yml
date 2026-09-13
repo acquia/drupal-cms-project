@@ -1,0 +1,158 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.system_breadcrumb_block
+    - canvas.component.block.views_block.blog-related
+    - canvas.component.sdc.haven_theme.button
+    - canvas.component.sdc.haven_theme.grid
+    - canvas.component.sdc.haven_theme.group
+    - canvas.component.sdc.haven_theme.heading
+    - canvas.component.sdc.haven_theme.hero-billboard
+    - canvas.component.sdc.haven_theme.section
+    - canvas.component.sdc.haven_theme.text
+    - core.entity_view_mode.node.full
+    - field.field.media.image.field_media_image
+    - field.field.node.blog.field_blog__byline
+    - field.field.node.blog.field_content
+    - field.field.node.blog.field_featured_image
+    - filter.format.content_format
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - node.type.blog
+  module:
+    - file
+    - media
+    - node
+    - options
+id: node.blog.full
+content_entity_type_id: node
+content_entity_type_bundle: blog
+content_entity_type_view_mode: full
+component_tree:
+  0:
+    uuid: fc509b13-e1e0-467c-b72d-3c56c59189e5
+    component_id: sdc.haven_theme.hero-billboard
+    component_version: 1d223068bd6931f9
+    inputs: '{"height":"ribbon","flex_position":"hero-center","content_background":false,"overlay_opacity":"0%","object_position":"center","media":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:blog\u241dfield_featured_image\u241e\u241fentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241f{src\u21a0src_with_alternate_widths,alt\u21a0alt,width\u21a0width,height\u21a0height}"},"overlap_navbar":true}'
+  1:
+    uuid: 0de59968-2760-41a3-bff9-2fb5c7939828
+    component_id: sdc.haven_theme.section
+    component_version: 5b4b8ecb2a253440
+    inputs: '{"width":"100%","columns":"1 column","mobile_columns":"1","margin_block_start":"-48","margin_block_end":"48","padding_block_start":"32","padding_block_end":"64","section_header":true,"section_footer":false,"restrict_width":true,"background_color":"white"}'
+  '1:header_slot:0':
+    parent_uuid: 0de59968-2760-41a3-bff9-2fb5c7939828
+    slot: header_slot
+    uuid: 866289d1-c67e-458b-8268-2c649449ddff
+    component_id: block.system_breadcrumb_block
+    component_version: ad6359c331fc7c45
+    inputs: '{"label":"Breadcrumbs","label_display":"0"}'
+  '1:main_slot:0':
+    parent_uuid: 0de59968-2760-41a3-bff9-2fb5c7939828
+    slot: main_slot
+    uuid: 47c657b5-8362-43d9-8dae-d3e602666419
+    component_id: sdc.haven_theme.grid
+    component_version: d3e0565623935449
+    inputs: '{"width":"80%","columns":"1 column","mobile_columns":"1"}'
+  '1:main_slot:0:main_slot:0':
+    parent_uuid: 47c657b5-8362-43d9-8dae-d3e602666419
+    slot: main_slot
+    uuid: 4a2d5303-1d23-4ef1-b8b0-6e32e8c279b2
+    component_id: sdc.haven_theme.group
+    component_version: 7a3163ee5e2a1c66
+    inputs: '{"flex_direction":"column","flex_gap":"lg","items_align":"start","flex_align":"center","radius":"sm","padding":"md"}'
+  '1:main_slot:0:main_slot:0:group_slot:0':
+    parent_uuid: 4a2d5303-1d23-4ef1-b8b0-6e32e8c279b2
+    slot: group_slot
+    uuid: 4f8d2b33-ddde-44b3-abe6-6838a7837c80
+    component_id: sdc.haven_theme.heading
+    component_version: 75ccc4c28f5e3f12
+    inputs: '{"heading_text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:blog\u241dtitle\u241e\u241fvalue"},"level":1,"text_size":"heading-responsive-5xl","text_color":"secondary","align":"left"}'
+  '1:main_slot:0:main_slot:0:group_slot:1':
+    parent_uuid: 4a2d5303-1d23-4ef1-b8b0-6e32e8c279b2
+    slot: group_slot
+    uuid: 3abe0713-0d2c-40f9-87b3-1a207730db62
+    component_id: sdc.haven_theme.heading
+    component_version: f463a8803de8d3f1
+    inputs: '{"heading_text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:blog\u241dfield_blog__byline\u241e\u241fvalue"},"text_size":"heading-responsive-lg","text_color":"text-default","align":"left"}'
+  '1:main_slot:1':
+    parent_uuid: 0de59968-2760-41a3-bff9-2fb5c7939828
+    slot: main_slot
+    uuid: 81168bb9-8339-4564-8606-c80c50a31d68
+    component_id: sdc.haven_theme.grid
+    component_version: d3e0565623935449
+    inputs: '{"width":"60%","columns":"1 column","mobile_columns":"1"}'
+  '1:main_slot:1:main_slot:0':
+    parent_uuid: 81168bb9-8339-4564-8606-c80c50a31d68
+    slot: main_slot
+    uuid: caa1e4b2-d58b-4140-b99b-ab3e1ce55ad5
+    component_id: sdc.haven_theme.text
+    component_version: 16c79c28a4108f9b
+    inputs: '{"text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:blog\u241dfield_content\u241e\u241fprocessed"},"text_size":"normal","text_color":"default"}'
+  2:
+    uuid: cf982ad7-f594-4fcd-9609-2bf883e522ec
+    component_id: sdc.haven_theme.section
+    component_version: 5b4b8ecb2a253440
+    inputs: '{"width":"100%","columns":"1 column","mobile_columns":"1","margin_block_start":"48","margin_block_end":"48","padding_block_start":"0","padding_block_end":"0","section_header":true,"section_footer":true,"views_columns":"3 columns"}'
+  '2:header_slot:0':
+    parent_uuid: cf982ad7-f594-4fcd-9609-2bf883e522ec
+    slot: header_slot
+    uuid: a01c674b-64b4-41ce-af6b-c7d6a220da60
+    component_id: sdc.haven_theme.heading
+    component_version: f463a8803de8d3f1
+    inputs: '{"heading_text":"Related articles","level":2,"text_size":"heading-responsive-3xl","text_color":"default","align":"left"}'
+  '2:main_slot:0':
+    parent_uuid: cf982ad7-f594-4fcd-9609-2bf883e522ec
+    slot: main_slot
+    uuid: 556af785-b8f2-4876-8372-b41e9bc7ef06
+    component_id: block.views_block.blog-related
+    component_version: d30c747ee7b1d2d7
+    inputs: '{"label":"Blog: Related blog posts","label_display":"0","views_label":"","items_per_page":null}'
+  3:
+    uuid: 241bbe4f-0d9a-4efb-9ab1-4c422caf7282
+    component_id: sdc.haven_theme.section
+    component_version: 5b4b8ecb2a253440
+    inputs: '{"width":"100%","columns":"2 columns 67-33","mobile_columns":"1","margin_block_start":"32","margin_block_end":"32","padding_block_start":"32","padding_block_end":"32","section_header":false,"section_footer":false,"restrict_width":true,"background_color":"accent"}'
+  '3:main_slot:0':
+    parent_uuid: 241bbe4f-0d9a-4efb-9ab1-4c422caf7282
+    slot: main_slot
+    uuid: 6b95b84e-1e06-4a5e-980b-e7fc9f61e086
+    component_id: sdc.haven_theme.group
+    component_version: 7a3163ee5e2a1c66
+    inputs: '{"flex_direction":"column","flex_gap":"md","items_align":"start","flex_align":"center","radius":"sm"}'
+  '3:main_slot:0:group_slot:0':
+    parent_uuid: 6b95b84e-1e06-4a5e-980b-e7fc9f61e086
+    slot: group_slot
+    uuid: af833fa2-d041-44a4-9512-dfa1c1e77a2b
+    component_id: sdc.haven_theme.heading
+    component_version: f463a8803de8d3f1
+    inputs: '{"heading_text":"Join the fight against climate change","text_size":"heading-responsive-2xl","text_color":"default","align":"left"}'
+  '3:main_slot:0:group_slot:1':
+    parent_uuid: 6b95b84e-1e06-4a5e-980b-e7fc9f61e086
+    slot: group_slot
+    uuid: 9dcaa96d-25cf-4f54-a2b2-c743ef77d1a9
+    component_id: sdc.haven_theme.heading
+    component_version: f463a8803de8d3f1
+    inputs: '{"heading_text":"Lorem ipsum dolor sit amet senectus malesuada maximus imperdiet. Lorem ipsum dolor sit amet senectus malesuada maximus imperdiet. ","text_size":"default","text_color":"default","align":"left"}'
+  '3:main_slot:1':
+    parent_uuid: 241bbe4f-0d9a-4efb-9ab1-4c422caf7282
+    slot: main_slot
+    uuid: 696668fa-1930-43a8-9088-82b0d5ce7526
+    component_id: sdc.haven_theme.group
+    component_version: 7a3163ee5e2a1c66
+    inputs: '{"flex_direction":"row","flex_gap":"md","items_align":"start","flex_align":"center"}'
+  '3:main_slot:1:group_slot:0':
+    parent_uuid: 696668fa-1930-43a8-9088-82b0d5ce7526
+    slot: group_slot
+    uuid: c9d253eb-d3ae-47e6-9c38-8cc772cefc10
+    component_id: sdc.haven_theme.button
+    component_version: 32e33be7067aa921
+    inputs: '{"variant":"primary","outlined":false,"label":"Donate now","size":"medium","icon":"arrow-right","icon_first":false,"disabled":false,"mobile_width":false}'
+  '3:main_slot:1:group_slot:1':
+    parent_uuid: 696668fa-1930-43a8-9088-82b0d5ce7526
+    slot: group_slot
+    uuid: f15c4c8c-86da-4419-a774-3fec6d078efd
+    component_id: sdc.haven_theme.button
+    component_version: 32e33be7067aa921
+    inputs: '{"variant":"primary","outlined":true,"label":"Learn more","size":"medium","icon_first":false,"disabled":false,"mobile_width":false}'
+exposed_slots: {  }

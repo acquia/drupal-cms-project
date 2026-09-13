@@ -1,0 +1,875 @@
+<?php
+
+use Drupal\ai_seo\Entity\ReportType;
+
+/**
+ * Implements hook_schema().
+ *
+ * Defines the database tables used by this module.
+ *
+ * @see hook_schema()
+ *
+ * @ingroup ai_seo
+ */
+function ai_seo_schema() {
+  $schema['ai_seo'] = [
+    'description' => 'Stores all SEO reports.',
+    'fields' => [
+      'rid' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => "Primary Key: Unique report ID",
+      ],
+      'entity_type_id' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => "Report entity: Entity type id",
+      ],
+      'entity_id' => [
+        'type' => 'int',
+        'not null' => FALSE,
+        'default' => NULL,
+        'description' => "Report entity: Matching {entity}.id",
+      ],
+      'revision_id' => [
+        'type' => 'int',
+        'not null' => FALSE,
+        'default' => NULL,
+        'description' => "Report entity: Matching {entity} revision.id",
+      ],
+      'langcode' => [
+        'type' => 'varchar',
+        'length' => 5,
+        'not null' => FALSE,
+        'description' => "Report entity: Langcode",
+      ],
+      'url' => [
+        'type' => 'varchar',
+        'length' => 500,
+        'not null' => FALSE,
+        'description' => "Report URL: The URL the report was generated from",
+      ],
+      'uid' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => "Report author: Matching {user}.id",
+      ],
+      'report' => [
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => FALSE,
+        'description' => "Full text of the SEO report",
+      ],
+      'report_type' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => 'full',
+        'description' => 'Reference to ai_seo_report_type entity ID',
+      ],
+      'prompt' => [
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => FALSE,
+        'description' => "Prompt used to generate this report",
+      ],
+      'html' => [
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => FALSE,
+        'description' => "HTML used to generate this report",
+      ],
+      'timestamp' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => "Timestamp of the report creation",
+      ],
+    ],
+    'primary key' => ['rid'],
+    'indexes' => [
+      'entity_id' => ['entity_id'],
+      'uid' => ['uid'],
+      'report_type' => ['report_type'],
+    ],
+  ];
+
+  return $schema;
+}
+
+/**
+ * Add report_type-column to schema.
+ */
+function ai_seo_update_10301() {
+  $database = \Drupal::database();
+
+  $spec_report_type = [
+    'type' => 'varchar',
+    'length' => 255,
+    'not null' => TRUE,
+    'default' => 'full',
+    'description' => "Report type",
+  ];
+
+  // Add the new 'report_type' column if it does not exist.
+  if (!$database->schema()->fieldExists('ai_seo', 'report_type')) {
+    $database->schema()->addField('ai_seo', 'report_type', $spec_report_type);
+  }
+}
+
+/**
+ * Rename configuration object.
+ */
+function ai_seo_update_10302() {
+  $old_config = \Drupal::configFactory()->getEditable('ai_seo.configuration');
+  $new_config = \Drupal::configFactory()->getEditable('ai_seo.settings');
+  $new_config->setData($old_config->getRawData());
+  $new_config->save(TRUE);
+  $old_config->delete();
+}
+
+/**
+ * Implements hook_update_10303().
+ *
+ * Create default report type entities from existing hardcoded types.
+ */
+function ai_seo_update_10303() {
+  // Define the default report types that were previously hardcoded.
+  $default_types = [
+    'full' => [
+      'id' => 'full',
+      'label' => 'Full SEO Analysis',
+      'description' => 'Comprehensive SEO audit covering all aspects including meta tags, content, structure, and technical elements.',
+      'prompt' => "**Objective:**  Assume the role of an expert SEO consultant specializing in Drupal websites. Your task is to conduct a comprehensive on-page SEO audit of the HTML page content provided below.  The goal is to produce a formal, actionable SEO audit report specifically tailored for Drupal, identifying areas for improvement to enhance search engine visibility and user engagement.
+
+**Context:**  The HTML content (provided separately) omits special characters like `<`, `>`, and `/`, which should be understood in their standard HTML context. This audit is for a Drupal website and recommendations should be Drupal-centric where applicable.
+
+**Instructions:**
+
+For each of the following on-page SEO elements, perform a detailed analysis, provide all examples in the same language as the content of the page is in and provide:
+
+1.  **[Keyword: Topic Authority] Content Depth & Topical Relevance:**
+
+    *   **Current State Assessment:**  Evaluate the provided HTML content for its demonstrably deep knowledge and comprehensive coverage of the target topic. Does it establish strong topical authority?
+    *   **Actionable Improvement Recommendations:**  Propose concrete, actionable strategies to deepen content and strengthen topical authority. Examples:
+        *   Suggest specific types of content to add (e.g., case studies, statistics, expert quotes, in-depth explanations, original research, frequently asked questions).
+        *   Recommend expanding on specific subtopics or related concepts.
+        *   Provide examples of authoritative sources or data to integrate.
+    *   **Justification (SEO & User Benefit):** Explain *why* enhancing topic authority is crucial for SEO (e.g., E-E-A-T, improved rankings for long-tail keywords, user trust, reduced bounce rate) and user experience (e.g., increased user satisfaction, establishing the website as a resource).
+
+2.  **[Keyword: Meta Tags Optimization] Meta Tag Analysis (Title, Description, Keywords - Where Applicable):**
+
+    *   **Critical Evaluation:**  Analyze the meta title, description, and (if present) meta keywords for relevance to the page content, optimal length for search engine display, and effectiveness in attracting clicks in search results.
+    *   **Specific, Actionable Improvements:**  Provide revised meta tag examples that are keyword-rich, compelling, and accurately summarize the page content.
+    *   **Rationale (SEO & CTR):** Explain the importance of optimized meta tags for SEO (e.g., direct ranking factor for title, indirect influence through CTR for description, historical keyword usage) and improving click-through rates (CTR) from search engine results pages (SERPs).
+
+3.  **[Keyword: Heading Structure] Heading Hierarchy & Keyword-Richness:**
+
+    *   **Hierarchical Examination:**  Examine the use of heading tags (H1-H6). Assess the logical hierarchy, clarity, and descriptive nature of headings.
+    *   **Enhanced Heading Structure Examples:**  Provide direct examples of improved heading structures using relevant keywords, demonstrating a clear content outline and logical flow.
+    *   **Importance (SEO & Readability):** Justify the significance of proper heading structure for SEO (e.g., signaling content structure to search engines, keyword relevance within headings) and enhancing readability and user navigation.
+
+4.  **[Keyword: Keyword Density] Detailed Content Analysis - Keyword Integration (Strategic & Balanced):**
+
+    *   **Quality & Relevance Evaluation:** Assess the textual content's quality and relevance to target keywords.
+    *   **Strategic Keyword Density Guidance:** While keyword density is not the sole factor, strategically integrate primary keywords (target: 1-3% density) and secondary keywords (target: 0.5-1% density) to signal topic relevance without keyword stuffing. *Note: Density ranges are guidelines, natural language integration is paramount.*
+    *   **Effective Keyword Integration Strategies:**  Offer direct, actionable strategies for incorporating keywords naturally and effectively. Emphasize placement in:
+        *   **Titles & Headings:** Explain how to naturally embed keywords in headings.
+        *   **Body Text:**  Demonstrate how to weave keywords seamlessly into paragraphs while maintaining readability.
+        *   **Strategic Locations:**  Highlight the impact of keywords in introductory paragraphs, conclusion, and image alt text.
+    *   **Impact on Rankings (SEO & User Experience):**  Explain how balanced keyword integration, focusing on strategic placement rather than just density, positively impacts search engine rankings (relevance signals) and user experience (natural, readable content).
+
+5.  **[Keyword: Natural Language SEO] Detailed Content Analysis - Natural Language & Readability (User-Centric Approach):**
+
+    *   **Natural Language Focus:**  Prioritize natural language use to maximize readability, user engagement, and usability, especially in generative search results.
+    *   **Seamless Keyword Incorporation:**  Reiterate the importance of seamlessly incorporating keywords so they blend naturally with the surrounding text, avoiding forced or robotic phrasing.
+    *   **Conversational Tone & Coherent Flow:** Emphasize maintaining a conversational tone, coherent flow, and engaging writing style.
+    *   **User Retention & Content Quality (User & SEO Benefit):** Explain how natural language and readability improve user retention (time on page, reduced bounce rate), overall content quality, and indirectly benefit SEO (positive user signals, potential for higher rankings).
+
+6.  **[Keyword: Image SEO] Image Optimization (Alt Text, File Name, Format):**
+
+    *   **Comprehensive Image Assessment:**  Assess all image elements within the HTML for:
+        *   **Alt Text Usage:**  Evaluate the presence and descriptiveness of alt text, including keyword relevance.
+        *   **File Name Optimization:** Analyze file names for keyword inclusion and clarity.
+        *   **Format Optimization:** Check for appropriate image formats (e.g., WebP, optimized JPEGs, PNGs) for performance.
+    *   **Specific Image Improvement Recommendations:**  Provide precise recommendations for optimizing each image element (alt text examples, file name suggestions, format adjustments).
+    *   **Image SEO Rationale (Accessibility & Search):** Explain the importance of image optimization for both accessibility (screen readers, users with visual impairments) and SEO (image search, contextual relevance for page content).
+
+7.  **[Keyword: Link Building] Link Analysis (Internal & External):**
+
+    *   **Quality & Relevance Review:**  Analyze internal and external links for quality, relevance to the content, and user value.
+    *   **Broken Link Identification:** Identify any broken links within the HTML.
+    *   **Anchor Text Assessment:**  Evaluate anchor text for relevance, natural variation, and SEO best practices.
+    *   **Improved Linking Practice Examples:**  Provide examples of enhanced internal linking (contextual, navigational) and external linking (authoritative, relevant resources), including anchor text suggestions.
+    *   **Link Value (SEO & User Navigation):** Explain the value of both internal links (site structure, user flow, SEO authority distribution) and external links (credibility, user resources, potential for backlinks) for SEO and user experience.
+
+8.  **[Keyword: URL Optimization] URL Structure (Conciseness, Readability, Keywords):**
+
+    *   **Scrutiny of URL Elements:** Examine URLs for conciseness, readability for users and search engines, and inclusion of relevant keywords.
+    *   **Definitive URL Improvement Proposals:**  Propose specific, improved URL structures that are SEO-friendly (keyword-rich, short, descriptive) and user-friendly (understandable, memorable).
+    *   **URL SEO Benefit (Clarity & Relevance Signals):** Explain how optimized URLs contribute to SEO by providing clear signals to search engines about page content and improving user understanding and memorability.
+
+9.  **[Keyword: Drupal Performance] Mobile Responsiveness & Load Time (Drupal-Specific Focus):**
+
+    *   **Performance Analysis:**  Analyze mobile-friendliness (using HTML analysis if possible, or suggest tools if needed) and loading speed, considering Drupal's specific architecture.
+    *   **Conclusive Drupal-Specific Optimization Tips:** Offer actionable, Drupal-specific tips to enhance mobile responsiveness and loading speed. Examples:
+        *   Drupal module recommendations (e.g., caching, image optimization).
+        *   Drupal theme considerations (responsive themes).
+        *   Drupal-specific hosting or CDN recommendations.
+    *   **Performance Impact (SEO & User Experience):**  Explain how mobile responsiveness and load time impact SEO (mobile-first indexing, ranking factors, Core Web Vitals) and user experience (bounce rate, satisfaction, conversions).
+
+10. **[Keyword: Website Accessibility] Accessibility (ARIA, Tab Order, WCAG Compliance):**
+
+    *   **Accessibility Evaluation:** Evaluate the HTML for:
+        *   **ARIA Label Usage:** Assess the use of ARIA attributes for screen readers.
+        *   **Logical Tab Order:** Check for a logical and navigable tab order for keyboard users.
+        *   **WCAG Compliance:** Evaluate overall adherence to WCAG (Web Content Accessibility Guidelines) principles relevant to the HTML structure.
+    *   **Clear Accessibility Improvement Suggestions:** Provide specific, clear suggestions for accessibility improvements, referencing WCAG guidelines where appropriate.
+    *   **Accessibility Importance (Ethical & SEO Considerations):** Explain the ethical and legal importance of accessibility, as well as its indirect SEO benefits (positive user experience, broader audience reach).
+
+11. **[Keyword: Schema Markup] Schema Markup (Accuracy & SEO Impact):**
+
+    *   **Schema Review (If Present):**  If schema markup is present in the HTML, review it for accuracy, completeness, and relevance to the page content.
+    *   **Detailed Schema Implementation Recommendations:**  Provide detailed recommendations for better schema implementation, including:
+        *   Suggesting appropriate schema types based on content.
+        *   Improving existing schema for richer results.
+        *   Highlighting the benefits of specific schema properties.
+    *   **Schema Impact on SERPs (Rich Results & Visibility):** Explain how accurate and relevant schema markup impacts search engine results pages (SERPs) by enabling rich results (e.g., star ratings, FAQs, knowledge panels) and potentially improving visibility and CTR.
+
+12. **[Keyword: Canonicalization] Canonical Tags & Redirects (Correct Usage & Optimization):**
+
+    *   **Canonical & Redirect Check:**  Check for the presence and correct usage of canonical tags (to address duplicate content) and redirects (301 for permanent redirects).
+    *   **Canonicalization Optimization Advice:** Advise on optimizing these elements for SEO, including:
+        *   Ensuring canonical tags point to the preferred version of content.
+        *   Using 301 redirects appropriately for site migrations or content consolidation.
+    *   **Canonicalization Benefits (Duplicate Content & Crawl Efficiency):** Explain how proper canonicalization and redirects help SEO by addressing duplicate content issues (avoiding ranking dilution) and improving crawl efficiency for search engines.
+
+**Report Conclusion:**
+
+Conclude your formal SEO audit report with:
+
+*   **Executive Summary of Strengths:**  Highlight the positive aspects of the HTML's SEO performance.
+*   **Key Areas Needing Improvement:**  Summarize the most critical areas requiring attention for SEO enhancement, **prioritized by potential impact**.
+*   **Detailed, Actionable, Drupal-Specific Recommendations:** Provide a comprehensive list of *directly actionable* recommendations, specifically tailored for a Drupal website, to address the identified areas for improvement.  These recommendations should be clear, concise, and ready for implementation by a Drupal developer or content editor.
+*   **Format:** Present your findings in a structured and professional format suitable for a formal SEO audit report (e.g., using headings, bullet points, and clear sections).
+
+**This analysis should be comprehensive, leaving no need for further queries, and deliver a fully actionable SEO audit report.**",
+      'status' => TRUE,
+    ],
+    'topic_authority' => [
+      'id' => 'topic_authority',
+      'label' => 'Topic Authority',
+      'description' => 'Analyze the content for topic authority and depth for SEO best practices.',
+      'prompt' => "**Objective:**  Assume the persona of a Senior SEO Content Strategist. Your mission is to rigorously audit the provided HTML page content specifically for **Topic Authority and Depth**.  The goal is to determine the current state of topical authority demonstrated by the content and to deliver a set of actionable recommendations to significantly enhance it.
+
+**Context:** You are analyzing the HTML content of a webpage (provided separately).  Focus exclusively on evaluating and improving the content's ability to establish strong topic authority and provide in-depth coverage of its subject matter.
+
+**Instructions:**
+
+Perform a detailed assessment of the HTML page content, focusing solely on the following aspects related to Topic Authority and Depth and provide all examples in the same language as the content of the page is in:
+
+1.  **Current State Assessment - Demonstrable Topical Expertise:**
+
+    *   **Evaluate Depth of Knowledge:**  Assess if the content demonstrates a thorough and deep understanding of the core topic. Consider:
+        *   **Breadth of Coverage:** Does it cover the main facets and subtopics comprehensively?
+        *   **Level of Detail:** Are explanations detailed and nuanced, going beyond surface-level information?
+        *   **Accuracy and Factual Basis:** Is the information presented accurate, well-researched, and supported by evidence (even if not explicitly cited in this HTML snippet, consider if the *style* suggests authority)?
+    *   **Assess Authority Signals:**  Identify any elements within the content that contribute to perceived authority on the topic. Examples:
+        *   **Expertise Indicators:**  Does the content demonstrate specialized knowledge or insights?
+        *   **Unique Perspectives:**  Does it offer original analysis, research, or viewpoints?
+        *   **Credibility Cues:** Are there implicit or explicit cues suggesting authoritativeness (tone, language, depth of analysis)?
+    *   **Overall Topical Authority Rating:**  Provide a concise rating (e.g., Low, Medium, High, or a score out of 5) of the *current* level of topic authority demonstrated by the content, based on your assessment.
+
+2.  **Actionable Improvement Recommendations - Enhancing Topic Authority & Depth:**
+
+    *   **Content Expansion Strategies:**  Propose concrete, actionable strategies to deepen the content and establish stronger topical authority.  Be specific. Examples:
+        *   **Suggest Specific Content Additions:**  Recommend adding particular sections, paragraphs, or types of content (e.g., 'Include a case study demonstrating X concept,' 'Expand on the section about Y by providing statistical data from Z source,' 'Add a Frequently Asked Questions section addressing common user queries related to this topic,' 'Incorporate quotes from industry experts or cite relevant research papers').
+        *   **Subtopic Deepening:** Identify specific subtopics or related concepts within the existing content that could be expanded upon to provide more in-depth coverage.
+        *   **Data & Evidence Integration:** Recommend specific types of data, statistics, examples, or sources that could be integrated to strengthen the factual basis and authority of the content.
+    *   **Content Format Diversification (Where Applicable):** Suggest exploring alternative content formats to enhance depth and engagement (e.g., 'Consider supplementing the text with an infographic to visually explain complex data,' 'Suggest creating a short video summarizing the key takeaways,' 'Explore embedding an interactive tool or calculator relevant to the topic').
+    *   **Author/Source Credibility Enhancement (If Possible within HTML Context):** If the HTML provides author information, suggest ways to strengthen the perceived credibility of the author or source (e.g., 'If an author bio is present, ensure it highlights relevant expertise and credentials,' 'If the content is attributed to an organization, emphasize their authority in the field').
+
+3.  **Justification - SEO and User Benefit of Topic Authority:**
+
+    *   **Explain SEO Importance:** Clearly articulate *why* enhancing topic authority is critical for SEO performance in today's search landscape.  Specifically address:
+        *   **E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness):** Explain how topic authority relates to Google's E-E-A-T guidelines and ranking algorithms.
+        *   **Long-Tail Keyword Performance:**  Discuss how deeper, more authoritative content can improve rankings for a wider range of long-tail keywords and complex queries.
+        *   **Search Engine Trust Signals:** Explain how strong topic authority signals trustworthiness and relevance to search engines.
+    *   **Explain User Benefit:**  Clearly explain *how* improved topic authority benefits users and enhances user experience.  Specifically address:
+        *   **User Trust and Credibility:**  Explain how authoritative content builds user trust and positions the website as a reliable resource.
+        *   **User Engagement and Satisfaction:** Discuss how in-depth, high-quality content can increase user engagement, reduce bounce rates, and improve overall user satisfaction.
+        *   **Value as a Resource:**  Emphasize how establishing topic authority positions the website as a valuable and go-to resource within its niche.
+
+**Report Output:**
+
+Conclude your analysis with a concise report that includes:
+
+*   **Current Topic Authority Rating:**  State the rating you assigned in section 1.
+*   **Summary of Strengths (If Any):** Briefly highlight any existing elements that already contribute positively to topic authority.
+*   **Prioritized Actionable Recommendations:** Present a bulleted list of your most impactful and *actionable* recommendations for enhancing topic authority and depth.  Prioritize recommendations based on their potential impact and feasibility of implementation.
+*   **Justification Summary:** Briefly summarize the key SEO and user benefits of focusing on topic authority.
+
+**Format:** Present your findings in a structured and professional format suitable for a focused SEO audit report section.
+
+**This analysis should provide a definitive assessment and clear, actionable path forward for improving the HTML page content's topic authority and depth.**",
+      'status' => TRUE,
+    ],
+    'natural_language' => [
+      'id' => 'natural_language',
+      'label' => 'Natural Language Use',
+      'description' => 'Analyze the natural language use, readability, and conversational tone for SEO best practices.',
+      'prompt' => "  **Objective:** Assume the role of a Content Readability and Natural Language SEO Specialist. Your task is to conduct a focused \"Detailed Content Analysis\" of the provided HTML page content, specifically evaluating its **Natural Language Use**.  The primary goal is to assess the content\'s readability, conversational tone, and seamless integration of keywords, and to recommend actionable improvements that enhance user engagement and usability in search, particularly in generative search results.
+
+**Context:** You are analyzing the textual content extracted from an HTML page (provided separately). Your sole focus is on the *linguistic qualities* of the text – how natural, readable, and user-friendly it is. Disregard other SEO elements for this specific analysis.
+
+**Instructions:**
+
+Perform a detailed linguistic analysis of the HTML page content, concentrating solely on the following aspects related to Natural Language Use:
+
+1.  **Current State Assessment - Natural Language & Readability Metrics:**
+
+    *   **Evaluate Readability:** Assess the overall readability of the content. Consider:
+        *   **Sentence Structure:** Analyze sentence length and complexity. Are sentences concise and easy to follow, or are they overly long and convoluted?
+        *   **Vocabulary and Language Complexity:**  Evaluate the vocabulary used. Is it accessible to a broad audience, or is it overly technical or jargon-heavy?
+        *   **Flow and Coherence:** Assess the logical flow of ideas and the coherence of the writing. Does the content progress smoothly and logically?
+    *   **Assess Conversational Tone:** Evaluate the tone of the writing. Is it conversational and engaging, or does it sound formal, robotic, or overly promotional?
+        *   **Use of Personal Pronouns & Direct Address:**  Is there use of \"you,\" \"we,\" \"us,\" to create a more direct and personal connection with the reader?
+        *   **Sentence Variety & Rhythm:** Is there variety in sentence structure to maintain reader interest and avoid monotony?
+        *   **Engagement Techniques:** Are there elements that encourage user engagement (e.g., rhetorical questions, calls to action – though focus primarily on *tone* for this section)?
+    *   **Keyword Integration Naturalness:**  Analyze how keywords are integrated into the text.
+        *   **Seamlessness of Keyword Incorporation:** Do keywords blend naturally into the surrounding text, or do they sound forced, unnatural, or \"stuffed\"?
+        *   **Contextual Relevance of Keywords:** Are keywords used in a contextually relevant and meaningful way?
+        *   **Avoidance of Keyword Stuffing:** Is there evidence of keyword stuffing or overuse that detracts from readability?
+    *   **Readability Score (Optional, if Feasible):**  If possible within your capabilities, provide an estimated readability score (e.g., Flesch Reading Ease, Flesch-Kincaid Grade Level) to quantify the content\'s readability level (note: this is less critical than qualitative assessment).
+
+2.  **Actionable Improvement Recommendations - Enhancing Natural Language & Readability:**
+
+    *   **Readability Enhancement Strategies:**  Propose concrete, actionable strategies to improve the readability of the content. Be specific. Examples:
+        *   **Sentence Simplification:**  Identify specific sentences or paragraphs that are overly complex and suggest simplified rewrites.
+        *   **Vocabulary Adjustment:** Recommend replacing jargon or technical terms with more accessible language where appropriate.
+        *   **Paragraph Restructuring for Flow:** Suggest reordering or restructuring paragraphs to improve the logical flow and coherence of the content.
+    *   **Conversational Tone Improvement Strategies:** Recommend specific techniques to inject a more conversational and engaging tone. Examples:
+        *   **Incorporating Conversational Phrases:** Suggest adding phrases that mimic natural speech patterns.
+        *   **Using More Active Voice:** Recommend shifting from passive to active voice for more direct and engaging writing.
+        *   **Injecting Personality (Where Appropriate):** Suggest ways to infuse the content with a more distinct brand voice or personality (while maintaining professionalism).
+    *   **Keyword Integration Refinement Strategies:** Provide actionable strategies for improving keyword integration. Examples:
+        *   **Natural Keyword Rephrasing:** Suggest rephrasing sentences to incorporate keywords more naturally.
+        *   **Synonym and Latent Semantic Keyword Use:** Recommend using synonyms and related terms to broaden keyword coverage without repetition.
+        *   **Contextual Keyword Placement Guidance:** Provide guidance on ensuring keywords are placed within contextually relevant sections of the text.
+
+3.  **Justification - User Engagement & SEO Benefits of Natural Language:**
+
+    *   **Explain User Engagement Benefits:** Clearly articulate *why* natural language and readability are crucial for user engagement and user experience. Specifically address:
+        *   **Improved User Comprehension:** Explain how clear, natural language enhances user understanding and information retention.
+        *   **Increased User Time on Page & Reduced Bounce Rate:** Discuss how readable and engaging content keeps users on the page longer and reduces bounce rates.
+        *   **Enhanced User Satisfaction & Trust:** Explain how user-friendly language contributes to user satisfaction and builds trust in the website\'s content.
+    *   **Explain SEO Benefits (Direct & Indirect):** Clearly explain *how* natural language and readability benefit SEO, both directly and indirectly. Specifically address:
+        *   **User-Centric Ranking Factors:** Explain how user engagement metrics (influenced by readability) are increasingly important ranking signals.
+        *   **Performance in Generative Search:** Discuss the importance of natural language for performing well in generative search results and conversational interfaces.
+        *   **Semantic SEO & Contextual Relevance:** Explain how natural language and contextual keyword use align with semantic SEO principles and help search engines understand the *meaning* of the content.
+
+**Report Output:**
+
+Conclude your analysis with a concise report that includes:
+
+*   **Readability Assessment Summary:** Summarize your overall assessment of the content\'s readability and natural language use, highlighting key strengths and weaknesses.
+*   **Areas for Improvement - Natural Language Focus:** Clearly identify the primary areas where the natural language and readability of the content need improvement.
+*   **Prioritized Actionable Recommendations:** Present a bulleted list of your most impactful and *actionable* recommendations for enhancing natural language use, readability, and conversational tone. Prioritize based on their potential to improve user engagement and SEO.
+*   **Justification Summary:** Briefly summarize the key user engagement and SEO benefits of focusing on natural language optimization.
+
+**Format:** Present your findings in a structured and professional format suitable for a focused content analysis report section.
+
+**This analysis should provide a definitive evaluation and clear, actionable guidance for optimizing the HTML page content\'s natural language use to enhance user experience and SEO performance, particularly in the context of evolving search engine algorithms and generative search.**",
+      'status' => TRUE,
+    ],
+    'link_analysis' => [
+      'id' => 'link_analysis',
+      'label' => 'Link Analysis',
+      'description' => 'Analyze the use of internal and external links for SEO best practices.',
+      'prompt' => "  **Objective:** Step into the role of a seasoned Link Building and Technical SEO Specialist. Your mission is to perform a comprehensive \"Link Analysis SEO Audit\" of the provided HTML page content, focusing on both **Internal and External Links**. The primary goal is to evaluate the current linking practices, identify areas for improvement, and deliver actionable recommendations to enhance site navigation, authority distribution, and overall SEO performance through strategic linking.
+
+**Context:** You are examining the HTML code of a webpage (provided separately).  Your analysis should be strictly limited to the **link elements** within this HTML – both internal links (linking to other pages within the same domain) and external links (linking to pages on different domains).  Disregard other aspects of the HTML content for this focused audit.
+
+**Instructions:**
+
+Conduct a detailed analysis of the HTML page content, specifically evaluating the following aspects related to Link Analysis (Internal & External):
+
+1.  **Current State Assessment - Internal Link Quality & Structure:**
+
+    *   **Evaluate Internal Link Relevance:** Assess the relevance and contextual appropriateness of internal links within the content. Consider:
+        *   **Contextual Linking:** Are internal links placed naturally within the text and relevant to the surrounding content?
+        *   **User Value of Internal Links:** Do internal links genuinely guide users to helpful and related content within the website?
+        *   **Avoidance of Excessive or Forced Linking:** Is internal linking done strategically and purposefully, or is it excessive or forced?
+    *   **Assess Internal Link Anchor Text:** Analyze the anchor text used for internal links. Consider:
+        *   **Relevance of Anchor Text:** Is the anchor text relevant to the target page and the linking context?
+        *   **Variety and Naturalness of Anchor Text:** Is there a natural variation in anchor text, or is it overly optimized or repetitive?
+        *   **Informative Anchor Text:** Is the anchor text descriptive and informative, giving users an idea of what to expect on the linked page?
+    *   **Evaluate Contribution to Site Structure (Implicit from Internal Links):**  While you are only analyzing a single page\'s HTML, infer from the *types* of internal links present whether they contribute to a logical and navigable site structure (e.g., links to category pages, related content, etc.).
+
+2.  **Current State Assessment - External Link Quality & Relevance:**
+
+    *   **Evaluate External Link Quality and Authority:** Assess the quality and authority of the websites being linked to externally. Consider:
+        *   **Relevance of External Links:** Are external links relevant to the page\'s topic and provide valuable supplementary information for users?
+        *   **Authority and Credibility of Linked Domains:** Are external links pointing to reputable, authoritative, and trustworthy websites within the relevant industry or niche?
+        *   **Avoidance of Low-Quality or Spammy Links:** Are there any external links that appear to be low-quality, irrelevant, or potentially spammy?
+    *   **Assess External Link Anchor Text:** Analyze the anchor text used for external links. Consider:
+        *   **Naturalness and Branding (Where Applicable):** Is the anchor text natural and, where appropriate, brand-focused when linking to external resources?
+        *   **Avoidance of Over-Optimization:** Is the anchor text for external links not overly optimized or aggressively keyword-rich?
+        *   **Clarity and User Expectation:** Does the anchor text clearly indicate that it is linking to an external website?
+
+3.  **Broken Link Identification:**
+
+    *   **Identify Broken Links (If Detectable from HTML):** Analyze the HTML for any indications of broken links (e.g., links to resources that are likely to be outdated or removed – though full broken link checking is beyond the scope of HTML analysis alone, flag any obvious potential issues).
+    *   **Suggest Tools/Methods for Comprehensive Broken Link Checking:** Recommend Drupal-specific tools or general methods for conducting a thorough broken link check across the entire website (as a follow-up action beyond this HTML-specific audit).
+
+4.  **Actionable Improvement Recommendations - Enhancing Linking Practices:**
+
+    *   **Internal Linking Strategy Enhancement:** Propose concrete, actionable strategies to improve internal linking. Be specific. Examples:
+        *   **Contextual Internal Link Insertion:** Recommend specific points within the content where relevant internal links could be added to related pages.
+        *   **Anchor Text Optimization for Internal Links:**  Suggest improved anchor text examples for existing or newly proposed internal links, emphasizing relevance and clarity.
+        *   **Content Clustering/Pillar Page Strategy (Inferred):**  If the content suggests it could be part of a broader topic cluster, recommend developing a pillar page and related cluster content with strategic internal linking.
+    *   **External Linking Best Practices:**  Provide actionable recommendations for improving external linking practices. Examples:
+        *   **Identifying Authoritative External Resources:** Suggest types of authoritative external resources that could be linked to enhance credibility and user value.
+        *   **External Link Anchor Text Guidelines:** Provide guidelines for choosing appropriate and natural anchor text for external links.
+        *   **Link Out to Complementary Content:** Recommend linking to high-quality external content that complements and expands upon the topics covered on the page.
+    *   **Broken Link Remediation Plan:** Outline a clear plan for identifying and fixing broken links on the website, including tool recommendations and ongoing maintenance suggestions.
+
+5.  **Justification - SEO and User Benefit of Strategic Linking:**
+
+    *   **Explain SEO Benefits of Internal Linking:** Clearly articulate *why* strategic internal linking is crucial for SEO performance. Specifically address:
+        *   **Site Structure & Crawlability:** Explain how internal links improve site structure and make it easier for search engines to crawl and index website content.
+        *   **Link Equity Distribution & PageRank Flow:** Discuss how internal links distribute link equity (PageRank) throughout the website, boosting the authority of important pages.
+        *   **Keyword Relevance & Topical Depth Signals:** Explain how relevant internal links reinforce keyword relevance and signal topical depth to search engines.
+    *   **Explain SEO Benefits of External Linking:** Clearly articulate *why* strategic external linking is beneficial for SEO. Specifically address:
+        *   **Authority Building & Credibility Signals:** Explain how linking to authoritative external websites enhances the credibility and trustworthiness of your own content.
+        *   **Content Quality & User Value Perception:** Discuss how relevant external links improve the perceived quality and value of your content by providing users with access to additional resources.
+        *   **Potential for Backlink Acquisition (Indirect):**  Mention the indirect potential for building relationships and even earning backlinks by linking to and referencing other authoritative websites in your niche.
+    *   **Explain User Benefits of Both Internal & External Linking:**  Clearly articulate *how* both internal and external links improve user experience. Specifically address:
+        *   **Enhanced Navigation & User Flow (Internal):** Explain how internal links improve website navigation and help users find related content easily.
+        *   **Access to Further Information & Resources (External):** Discuss how external links provide users with access to valuable supplementary information and resources beyond your own website, increasing user value.
+
+**Report Output:**
+
+Conclude your analysis with a concise report that includes:
+
+*   **Summary of Current Linking Practices:** Briefly summarize the current state of internal and external linking on the analyzed HTML page, highlighting key strengths and weaknesses.
+*   **Broken Link Status & Recommendations:** Report on any potential broken links identified and recommend tools/methods for a full site check.
+*   **Prioritized Actionable Recommendations:** Present a bulleted list of your most impactful and *actionable* recommendations for improving both internal and external linking practices. Prioritize recommendations based on their potential to enhance SEO and user experience.
+*   **Justification Summary:** Briefly summarize the key SEO and user benefits of focusing on strategic linking.
+
+**Format:** Present your findings in a structured and professional format suitable for a focused Link Analysis SEO audit report section.
+
+**This analysis should provide a definitive evaluation and clear, actionable guidance for optimizing the HTML page content\'s internal and external linking practices to enhance SEO performance, site navigation, and user experience.**",
+      'status' => TRUE,
+    ],
+    'headings_and_structure' => [
+      'id' => 'headings_and_structure',
+      'label' => 'Headings and Structure',
+      'description' => 'Analyze the use of headings (H1, H2, H3, etc.) and overall content structure for SEO best practices.',
+      'prompt' => "  **Objective:** Assume the role of an On-Page SEO and Content Structure Specialist. Your task is to conduct a comprehensive \"Keywords and Structure SEO Audit\" of the provided HTML page content.  The primary goal is to evaluate the effectiveness of keyword usage within the content\'s structure (headings) and body text, and to assess the overall hierarchical organization, delivering actionable recommendations to optimize both for improved search engine ranking and user experience.
+
+  **Context:** You are analyzing the textual content and HTML heading tags of a webpage (provided separately). Your focus is strictly limited to **keyword integration within the content structure and the hierarchical organization of the content** itself.  Disregard other SEO elements for this focused analysis.
+
+  **Instructions:**
+
+  Perform a detailed analysis of the HTML page content, specifically evaluating the following aspects related to Keywords and Structure:
+
+  1.  **Current State Assessment - Heading Structure and Hierarchy:**
+
+      *   **Examine Heading Hierarchy (H1-H6):** Assess the use of heading tags (H1, H2, H3, H4, H5, H6) within the HTML. Consider:
+          *   **Logical Hierarchy:** Is there a clear and logical hierarchical structure to the headings, reflecting the content\'s organization? Does it follow a natural flow from main topics to subtopics and sub-subtopics?
+          *   **Appropriate Heading Tag Usage:** Are heading tags used correctly to denote structural importance (H1 for main topic, H2 for major sections, H3 for subsections, etc.)?
+          *   **Avoidance of Heading Skipping or Misuse:** Are heading tags used consistently and avoid skipping levels (e.g., jumping from H2 to H4) or misusing them for stylistic purposes rather than structural significance?
+      *   **Evaluate Heading Descriptive Nature and Keyword Richness:** Analyze the content of the heading tags themselves. Consider:
+          *   **Descriptive Headings:** Are headings clear, concise, and descriptive of the content within each section? Do they accurately summarize the topic of the following text?
+          *   **Keyword Relevance in Headings:**  Are relevant primary and secondary keywords naturally incorporated into heading tags where contextually appropriate?
+          *   **Avoidance of Keyword Stuffing in Headings:** Are headings optimized for keywords in a natural way, or do they appear overly stuffed with keywords, sacrificing readability?
+
+  2.  **Current State Assessment - Keyword Integration in Body Text (Context & Density - as a signal within structure):**
+
+      *   **Evaluate Keyword Density and Contextual Relevance (within structured sections):** Assess the integration of primary and secondary keywords within the body text *underneath each heading*.  Consider:
+          *   **Keyword Density within Sections:** While density is not the primary focus, get a sense of keyword presence within each content section.  Is there a general presence of relevant keywords within the text under each heading? (Note: Do not rigidly calculate density at this stage, focus on *impression* of keyword integration within context.)
+          *   **Contextual Keyword Use:** Are keywords used in a contextually relevant and meaningful way within the body text sections? Do they naturally fit within the sentences and paragraphs?
+          *   **Varied Keyword Usage:** Is there a variation in keyword usage (e.g., use of synonyms, related terms) or is it overly repetitive and reliant on exact match keywords?
+      *   **Assess Keyword Placement within Structured Content:** Analyze the strategic placement of keywords within the structured content. Consider:
+          *   **Keywords in Key Structural Areas:** Are primary and secondary keywords strategically included in important structural areas such as:
+              *   **H1 Heading:** Is the primary keyword present in the main H1 heading?
+              *   **Initial Paragraphs of Sections:** Are keywords introduced early within the first few sentences of sections under each heading?
+              *   **Concluding Paragraphs of Sections:** Are keywords reinforced or naturally summarized in the concluding sentences of sections?
+
+  3.  **Actionable Improvement Recommendations - Enhancing Keywords and Structure:**
+
+      *   **Heading Structure Enhancement Strategies:** Propose concrete, actionable strategies to improve the heading structure and hierarchy. Be specific. Examples:
+          *   **Heading Hierarchy Revisions:** Suggest specific revisions to the heading hierarchy to create a more logical and user-friendly content outline (e.g., \"Demote H2 \'X\' to H3 under H2 \'Y\' as it\'s a subtopic,\" \"Introduce an H2 heading \'Z\' to break up the long section under \'A\'\").
+          *   **Heading Rewrites for Keyword and Clarity:** Provide examples of rewritten headings that are more descriptive, keyword-rich (where appropriate and natural), and user-friendly.
+          *   **Content Reorganization Suggestions:**  If the current structure is weak, suggest broader content reorganization strategies to improve flow and logic, reflected in the headings.
+      *   **Keyword Integration Strategy within Structure:** Provide actionable recommendations for improving keyword integration within the content\'s structural framework. Examples:
+          *   **Keyword Insertion in Headings (Where Missing and Relevant):** Suggest specific headings where primary or secondary keywords could be naturally incorporated.
+          *   **Strategic Keyword Placement Guidance for Body Text:** Provide guidance on where and how to strategically integrate keywords within the body text *under each heading* (e.g., \"Ensure the primary keyword appears in the first sentence of the section under H2 \'B\'\").
+          *   **Keyword Variation and LSI Keyword Use:** Recommend incorporating keyword variations and Latent Semantic Indexing (LSI) keywords within the headings and body text to broaden topical coverage and improve natural language flow.
+
+  4.  **Justification - SEO and User Benefit of Keywords and Structure:**
+
+      *   **Explain SEO Benefits of Heading Structure & Keywords:** Clearly articulate *why* effective heading structure and strategic keyword use within structure are crucial for SEO performance. Specifically address:
+          *   **Signaling Content Topic & Hierarchy to Search Engines:** Explain how headings and keyword usage within them help search engines understand the topic, subtopics, and hierarchical organization of the page content.
+          *   **Keyword Relevance Signals:** Discuss how keywords in headings and strategically placed within the text under headings reinforce topical relevance signals to search engines.
+          *   **Improved Crawlability & Indexing:** Explain how a clear heading structure can improve crawlability and indexing by making it easier for search engines to understand the content\'s organization.
+      *   **Explain User Benefits of Heading Structure & Keywords:** Clearly articulate *how* effective heading structure and keyword use enhance user experience. Specifically address:
+          *   **Improved Readability & Scanability:** Explain how clear headings make content more readable and scannable, allowing users to quickly grasp the main points and find information.
+          *   **Enhanced User Navigation & Understanding:** Discuss how a logical heading structure improves user navigation through the content and aids in overall comprehension of the topic.
+          *   **Meeting User Search Intent (Implicitly through relevant keywords):** Explain how incorporating relevant keywords in headings helps to align the content with user search intent and increases the likelihood of attracting the right audience.
+
+  **Report Output:**
+
+  Conclude your analysis with a concise report that includes:
+
+  *   **Summary of Current Keyword and Structure Effectiveness:** Briefly summarize the current state of keyword integration and heading structure, highlighting key strengths and weaknesses.
+  *   **Areas for Improvement - Keywords & Structure Focus:** Clearly identify the primary areas where keyword integration within the content structure and the heading hierarchy need improvement.
+  *   **Prioritized Actionable Recommendations:** Present a bulleted list of your most impactful and *actionable* recommendations for enhancing both keyword usage within the structure and the overall heading hierarchy. Prioritize recommendations based on their potential to improve both SEO and user experience.
+  *   **Justification Summary:** Briefly summarize the key SEO and user benefits of focusing on optimizing keywords and structure.
+
+  **Format:** Present your findings in a structured and professional format suitable for a focused Keywords and Structure SEO audit report section.
+
+  **This analysis should provide a definitive evaluation and clear, actionable guidance for optimizing the HTML page content\'s keyword integration within its structural framework and heading hierarchy to enhance SEO performance and user experience.**",
+      'status' => TRUE,
+    ],
+  ];
+
+  // Create report type entities for each default type.
+  foreach ($default_types as $type_data) {
+    // Check if the report type already exists.
+    $existing = \Drupal::entityTypeManager()
+      ->getStorage('ai_seo_report_type')
+      ->load($type_data['id']);
+
+    if (!$existing) {
+      $report_type = ReportType::create($type_data);
+      $report_type->save();
+    }
+  }
+
+  return t('Created default AI SEO report type entities.');
+}
+
+/**
+ * Implements hook_update_10304().
+ *
+ * Update existing report database entries to use new report_type field.
+ */
+function ai_seo_update_10304() {
+  $database = \Drupal::database();
+
+  // Work with your existing ai_seo table instead of ai_seo_reports
+  if ($database->schema()->tableExists('ai_seo')) {
+    // The report_type field already exists in your schema, so this update may not be needed
+    // unless you need to populate existing records
+
+    // Update all existing reports to use 'full' as default report type where empty
+    $database->update('ai_seo')
+      ->fields(['report_type' => 'full'])
+      ->isNull('report_type')
+      ->execute();
+  }
+
+  return t('Updated existing AI SEO report entries with report_type field.');
+}
+
+/**
+ * Implements hook_update_10305().
+ *
+ * Add foreign key constraint for report_type field.
+ */
+function ai_seo_update_10305() {
+  $database = \Drupal::database();
+
+  // Add index if it doesn't exist (needed for foreign key)
+  if (!$database->schema()->indexExists('ai_seo', 'report_type')) {
+    $database->schema()->addIndex('ai_seo', 'report_type', ['report_type'], [
+      'fields' => [
+        'report_type' => [
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => TRUE,
+        ],
+      ],
+    ]);
+  }
+
+  return t('Added foreign key constraint for report_type field.');
+}
+
+/**
+ * Implements hook_update_10306().
+ *
+ * Clean up any orphaned report_type references.
+ */
+function ai_seo_update_10306() {
+  $database = \Drupal::database();
+
+  // Get all existing report type entity IDs
+  $report_type_storage = \Drupal::entityTypeManager()->getStorage('ai_seo_report_type');
+  $existing_types = array_keys($report_type_storage->loadMultiple());
+
+  if (!empty($existing_types)) {
+    // Update any reports with invalid report_type to 'full'
+    $database->update('ai_seo')
+      ->fields(['report_type' => 'full'])
+      ->condition('report_type', $existing_types, 'NOT IN')
+      ->execute();
+  }
+
+  return t('Cleaned up orphaned report_type references.');
+}
+
+/**
+ * Add html-column to schema.
+ */
+function ai_seo_update_10307() {
+  $database = \Drupal::database();
+
+  $spec = [
+    'type' => 'text',
+    'size' => 'big',
+    'not null' => FALSE,
+    'description' => "HTML used to generate this report",
+  ];
+
+  // Add the new column if it does not exist.
+  if (!$database->schema()->fieldExists('ai_seo', 'html')) {
+    $database->schema()->addField('ai_seo', 'html', $spec);
+  }
+}
+
+
+/**
+ * Implements hook_update_10308().
+ *
+ * Create default report type entities from existing hardcoded types.
+ */
+function ai_seo_update_10308() {
+  // Define the default report types that were previously hardcoded.
+  $default_types = [
+    'full' => [
+      'id' => 'schema_org_markup',
+      'label' => 'Schema.org markup',
+      'description' => 'Use of Schema.org on current site along with additional suggestions.',
+      'prompt' => "**Objective:** Assume the role of an expert Technical SEO consultant specializing in structured data. Your task is to conduct a comprehensive audit of the `Schema.org` markup within the HTML page content provided below. The goal is to produce a formal, actionable schema audit report, identifying areas for improvement to enhance search engine understanding, entity recognition, and eligibility for rich results in the SERPs.
+
+**Context:** The HTML content (provided separately) omits special characters like `<`, `>`, and `/`, which should be understood in their standard HTML context. This audit should infer the primary purpose of the page (e.g., article, product page, local business) from its content and tailor recommendations accordingly.
+
+**Instructions:**
+
+For each of the following `Schema.org` elements, perform a detailed analysis, provide all examples in the same language as the content of the page, and include the following:
+
+---
+
+### **1. [Keyword: Schema Identification] Schema Type & Contextual Relevance**
+
+* **Current Schema Identification:** Identify all existing `Schema.org` types (e.g., `Article`, `Product`, `LocalBusiness`) present in the HTML.
+* **Contextual Relevance Assessment:** Evaluate if the implemented schema types accurately and comprehensively represent the page's main content. For example, is a product page correctly using `Product` schema, or is it using a less specific type?
+* **Actionable Improvement Recommendations:** Suggest more specific or additional schema types that would better represent the page's content. For instance, recommend changing a generic `Thing` to a `Recipe` or supplementing an `Article` schema with a `VideoObject` schema if a video is present.
+* **Justification (SEO & Clarity):** Explain why using the most specific and relevant schema type is crucial for search engines to accurately understand the page's purpose, which is the foundation for earning relevant rich results and building a strong entity in the Knowledge Graph.
+
+---
+
+### **2. [Keyword: Schema Properties] Property Completeness & Accuracy**
+
+* **Property Audit:** For each identified schema type, analyze the provided properties (e.g., `name`, `description`, `image`, `offers`, `author`). Are the core recommended and required properties present? Identify missing but highly valuable properties.
+* **Accuracy & Data Validation:** Verify that the data within the schema properties accurately reflects the visible content on the page (e.g., does the `price` in the schema match the price shown to the user? Does the `author` name match the byline?).
+* **Specific, Actionable Improvements:** Provide a clear list of missing properties that should be added to each schema type to make it more robust. For a `Product` schema, suggest adding `aggregateRating`, `review`, and `sku`. For an `Article`, suggest adding `datePublished`, `dateModified`, and `publisher`.
+* **Rationale (Rich Snippet Eligibility):** Explain how completing more properties increases the likelihood of qualifying for various rich snippet features (e.g., star ratings, price drops, article bylines) in the SERPs, providing a more informative and attractive search result.
+
+---
+
+### **3. [Keyword: Schema Nesting] Nested & Advanced Schema Structures**
+
+* **Structural Analysis:** Examine if the schema is flat or if it uses nesting to show relationships between entities. For example, is the `author` property a simple text string, or is it a nested `Person` schema with its own properties like `name` and `url`? Is an `Offer` correctly nested within a `Product`?
+* **Enhanced Structure Examples:** Provide concrete JSON-LD examples demonstrating how to properly nest related schema types to create a more sophisticated data structure. For instance, show how to nest `Brand` and `Person` (for a reviewer) within a `Product` schema.
+* **Importance (Entity Understanding):** Justify how nesting helps search engines understand the complex relationships between different entities on the page (e.g., this product is made by this brand and reviewed by this person), contributing to a richer Knowledge Graph representation and more advanced rich results.
+
+---
+
+### **4. [Keyword: Schema Suggestions] Identification of New Schema Opportunities**
+
+* **Content-Based Opportunity Analysis:** Based on the page's visible content (e.g., an FAQ section, a \"how-to\" guide, a video embed, a list of events), identify all relevant schema types that are *not* currently implemented.
+* **Prioritized Schema Recommendations:** Suggest new schema types to add, prioritized by their potential impact on SERP visibility. If the page has a Q&A section, strongly recommend `FAQPage` schema. If it contains step-by-step instructions, recommend `HowTo` schema.
+* **Full JSON-LD Implementation Examples:** Provide complete, ready-to-use JSON-LD snippets for the most impactful recommended schema types, populated with example data extracted directly from the page content.
+* **Impact on SERPs (Visibility & CTR):** Explain the specific rich result each new schema type can generate (e.g., FAQ accordions, video carousels, how-to carousels on mobile) and how this directly improves visibility, occupies more SERP real estate, and can significantly boost click-through rates (CTR).
+
+---
+
+### **5. [Keyword: Schema Validation] Technical Validation & Error Checking**
+
+* **Syntax & Structure Review:** Assess the provided schema markup (e.g., JSON-LD, Microdata) for syntactical correctness. Identify potential errors like missing commas, incorrect brackets, or misspelled property names.
+* **Tool-Based Validation Guidance:** Strongly recommend using official tools like Google's Rich Results Test and the Schema Markup Validator to formally validate the existing and proposed markup before deployment. Explain what each tool is best used for.
+* **Common Pitfalls & Best Practices:** List common errors to avoid (e.g., using `url` when `sameAs` is more appropriate for social profiles, incorrect date formatting) and highlight best practices (e.g., using `@id` to connect entities).
+* **Importance (Crawlability & Eligibility):** Explain that even minor syntax errors can cause search engines to ignore the structured data completely, rendering it useless. Proper validation is a non-negotiable final step to ensure eligibility for rich results.
+
+***
+
+### **Report Conclusion:**
+
+Conclude your formal schema audit report with:
+
+* **Executive Summary of Strengths:** Highlight the positive aspects of the current schema implementation, such as the correct use of a primary schema type.
+* **Key Areas for Schema Enhancement:** Summarize the most critical schema types to add or properties to complete, **prioritized by potential impact** on SERP appearance and CTR.
+* **Detailed, Actionable Implementation Plan:** Provide a comprehensive list of *directly actionable* recommendations and code snippets. This plan should be clear, concise, and ready for implementation by a developer.
+* **Format:** Present your findings in a structured and professional format suitable for a formal technical SEO audit report (e.g., using headings, bullet points, and clear code blocks for examples).
+
+**This analysis should be comprehensive, leaving no need for further queries, and deliver a fully actionable schema markup audit and implementation guide.**",
+      'status' => TRUE,
+    ]
+  ];
+
+  // Create report type entities for each default type.
+  foreach ($default_types as $type_data) {
+    // Check if the report type already exists.
+    $existing = \Drupal::entityTypeManager()
+      ->getStorage('ai_seo_report_type')
+      ->load($type_data['id']);
+
+    if (!$existing) {
+      $report_type = ReportType::create($type_data);
+      $report_type->save();
+    }
+  }
+
+  return t('Created default AI SEO report type entities.');
+}
+
+/**
+ * Add GEO report types and update existing report type prompts.
+ *
+ * - Creates ai_citability and agentic_readiness report types.
+ * - Updates full and schema_org_markup prompts only when the stored prompt
+ *   still matches the original shipped default (detected via MD5).
+ *   User-edited prompts are left untouched; a warning is logged instead.
+ *
+ * NOTE: This hook predates the default_prompt_hash field. Sites upgrading from
+ * this version will have hash tracking added by ai_seo_update_10311.
+ */
+function ai_seo_update_10310() {
+  $module_path = \Drupal::service('extension.list.module')->getPath('ai_seo');
+  $source = new \Drupal\Core\Config\FileStorage($module_path . '/config/install');
+  $storage = \Drupal::entityTypeManager()->getStorage('ai_seo_report_type');
+  $messages = [];
+
+  // Create new report types if they do not exist yet.
+  $new_types = ['ai_citability', 'agentic_readiness'];
+  foreach ($new_types as $type_id) {
+    if (!$storage->load($type_id)) {
+      $data = $source->read('ai_seo.report_type.' . $type_id);
+      if ($data) {
+        ReportType::create($data)->save();
+        $messages[] = "Created report type '{$type_id}'.";
+      }
+    }
+  }
+
+  // MD5 hashes of the original (pre-GEO) shipped default prompts.
+  // If the stored prompt's MD5 matches one of these, the admin has not
+  // modified it and we can safely apply the updated default.
+  $old_default_hashes = [
+    'full' => '89a1c6c44caab6d1065e9d5c4e91cbaa',
+    'schema_org_markup' => 'aabc09e9b2b193a9c04f81095a4d2fb3',
+  ];
+
+  foreach ($old_default_hashes as $type_id => $old_hash) {
+    $entity = $storage->load($type_id);
+    if (!$entity) {
+      continue;
+    }
+
+    $current_hash = md5($entity->getPrompt() ?? '');
+    $data = $source->read('ai_seo.report_type.' . $type_id);
+    if (!$data || empty($data['prompt'])) {
+      continue;
+    }
+
+    $new_hash = md5($data['prompt']);
+
+    if ($current_hash === $new_hash) {
+      $messages[] = "Skipped '{$type_id}': already up to date.";
+      continue;
+    }
+
+    if ($current_hash !== $old_hash) {
+      \Drupal::logger('ai_seo')->warning(
+        "ai_seo_update_10310: The '@type' report type prompt has been customised and was NOT updated automatically. Review the new default at /admin/config/ai/seo/report-types/@type/edit and merge any additions manually.",
+        ['@type' => $type_id]
+      );
+      $messages[] = "Skipped '{$type_id}': prompt appears customised — see Recent Log Messages.";
+      continue;
+    }
+
+    $entity->set('prompt', $data['prompt']);
+    $entity->save();
+    $messages[] = "Updated '{$type_id}' prompt with GEO content.";
+  }
+
+  return t('@messages', ['@messages' => implode(' ', $messages)]);
+}
+
+/**
+ * Backfill default_prompt_hash on all existing report type entities.
+ *
+ * From this point forward, update hooks use md5(current_prompt) vs
+ * default_prompt_hash to detect customisation safely — even when a user has
+ * added content on top of the default without replacing it entirely.
+ */
+function ai_seo_update_10311() {
+  $module_path = \Drupal::service('extension.list.module')->getPath('ai_seo');
+  $source = new \Drupal\Core\Config\FileStorage($module_path . '/config/install');
+  $storage = \Drupal::entityTypeManager()->getStorage('ai_seo_report_type');
+  $messages = [];
+
+  // Build a map of type_id => md5(current shipped default prompt).
+  $known_defaults = [];
+  foreach ($storage->loadMultiple() as $type_id => $entity) {
+    $data = $source->read('ai_seo.report_type.' . $type_id);
+    if ($data && !empty($data['prompt'])) {
+      $known_defaults[$type_id] = md5($data['prompt']);
+    }
+  }
+
+  foreach ($storage->loadMultiple() as $type_id => $entity) {
+    $current_prompt_hash = md5($entity->getPrompt() ?? '');
+
+    if (isset($known_defaults[$type_id]) && $current_prompt_hash === $known_defaults[$type_id]) {
+      // Prompt matches the current shipped default — set the hash so future
+      // hooks know this entity started from a known default.
+      $entity->setDefaultPromptHash($current_prompt_hash);
+      $entity->save();
+      $messages[] = "Set hash for '{$type_id}' (matches current default).";
+    }
+    else {
+      // Prompt doesn't match the current shipped default — either customised
+      // or a type with no matching install config. Leave hash empty; future
+      // update hooks will skip it and warn.
+      $messages[] = "Skipped hash for '{$type_id}' (no matching default or customised).";
+    }
+  }
+
+  return t('@messages', ['@messages' => implode(' ', $messages)]);
+}
+
+/**
+ * Install AI SEO Report Type entity type.
+ */
+function ai_seo_update_10309() {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $entity_type_manager->clearCachedDefinitions();
+
+  $entity_type_ids = [];
+  $change_summary = \Drupal::service('entity.definition_update_manager')->getChangeSummary();
+  foreach ($change_summary as $entity_type_id => $change_list) {
+    $entity_type = $entity_type_manager->getDefinition($entity_type_id);
+    \Drupal::entityDefinitionUpdateManager()->installEntityType($entity_type);
+    $entity_type_ids[] = $entity_type_id;
+  }
+
+  return t("Installed/Updated the entity type(s): @entity_type_ids", [
+    '@entity_type_ids' => implode(', ', $entity_type_ids),
+  ]);
+}

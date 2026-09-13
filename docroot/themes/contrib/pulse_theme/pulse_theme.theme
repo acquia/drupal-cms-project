@@ -1,0 +1,371 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_system_theme_settings_alter().
+ */
+function pulse_theme_form_system_theme_settings_alter(&$form, FormStateInterface $form_state)
+{
+  // Function to create a color field with attributes
+  function createColorField($key, $title, $default_value, $description = '') {
+    return [
+        '#type' => 'color',
+        '#title' => t($title),
+        '#default_value' => $default_value,
+        '#description' => t($description),
+    ];
+  }
+
+  // Brand colors - Accent Colors
+  $form['pulse_theme_settings'] = [
+    '#type' => 'details',
+    '#title' => t('Brand Colors'),
+    '#open' => TRUE,
+  ];
+
+  // Wrapper for brand color fields
+  $form['pulse_theme_settings']['brand_colors_wrapper'] = [
+    '#type' => 'container',
+    '#attributes' => ['class' => ['brand-colors-wrapper']],
+  ];
+
+  $config = \Drupal::configFactory()->getEditable('pulse_theme.settings');
+  // dump($config->get('accent_color_primary'));
+
+  // Define accent color fields with descriptions
+  $accent_colors = [
+    'base_brand_color' => ['Base Brand Color', 'Base brand color.'],
+    'accent_color_primary' => ['Primary Accent', 'Primary actions and links.'],
+    'accent_color_secondary' => ['Secondary Accent', 'Secondary actions and highlights.'],
+    'neutral_color' => ['Neutral', 'Body text and paragraphs.'],
+    'heading_color' => ['Heading', 'Headings and titles.'],
+    'border_color' => ['Border', 'Borders and dividers.'],
+    'gray_color' => ['Gray', 'For tags/pills or others gray colors.'],
+    'success_color' => ['Success', 'Successful actions or messages.'],
+    'danger_color' => ['Danger', 'Errors or critical alerts.'],
+    'warning_color' => ['Warning', 'Warnings and important notices.'],
+    'info_color' => ['Info', 'Informational messages and notifications.'],
+  ];
+
+  // Loop to create accent color fields
+  foreach ($accent_colors as $key => $color) {
+    $form['pulse_theme_settings']['brand_colors_wrapper'][$key] = createColorField($key, $color[0], $config->get($key), $color[1]);
+  }
+
+  // Background colors
+  $form['pulse_theme_settings']['background_colors'] = [
+    '#type' => 'details',
+    '#title' => t('Background Colors'),
+    '#description' => t('Choose from a list of background colors.'),
+  ];
+
+  // Separate wrapper for background colors
+  $form['pulse_theme_settings']['background_colors']['background_colors_wrapper'] = [
+    '#type' => 'container',
+    '#attributes' => ['class' => ['background-colors-wrapper']],
+  ];
+
+  // Loop to create background color fields
+  for ($i = 1; $i <= 10; $i++) {
+    $background_color_key = 'background_color_' . $i;
+    $form['pulse_theme_settings']['background_colors']['background_colors_wrapper'][$background_color_key] = createColorField($background_color_key, '' . $i, $config->get($background_color_key));
+  }
+
+  // Typography settings
+  $form['typography'] = [
+    '#type' => 'details',
+    '#title' => t('Typography Settings'),
+    '#open' => FALSE,
+  ];
+
+  $form['typography']['base_font_size'] = [
+    '#type' => 'textfield',
+    '#title' => t('Base Font Size (px)'),
+    '#default_value' => $config->get('base_font_size'),
+    '#description' => t('Set the foundational font size for the website.'),
+  ];
+
+  $form['typography']['font_family'] = [
+    '#type' => 'select',
+    '#title' => t('Font'),
+    '#description' => t('Set the primary font for the website.'),
+    '#options' => [
+      'Geist' => t('Geist'),
+      'sans-serif' => t('Sans-serif'),
+      'serif' => t('Serif'),
+    ],
+    '#default_value' => $config->get('font_family'),
+  ];
+
+  // Attach the custom CSS file for form styling.
+  $form['#attached']['library'][] = 'pulse_theme/theme-settings';
+
+  // Keep the original submit handler
+  $form['#submit'][] = 'pulse_theme_settings_submit';
+}
+
+function pulse_theme_settings_submit($form, FormStateInterface $form_state) {
+  // Get the editable configuration object.
+  $config = \Drupal::configFactory()->getEditable('pulse_theme.settings');
+
+  // Save brand colors.
+  $brand_colors = [
+    'base_brand_color' => $form_state->getValue('base_brand_color'),
+    'accent_color_primary' => $form_state->getValue('accent_color_primary'),
+    'accent_color_secondary' => $form_state->getValue('accent_color_secondary'),
+    'neutral_color' => $form_state->getValue('neutral_color'),
+    'heading_color' => $form_state->getValue('heading_color'),
+    'border_color' => $form_state->getValue('border_color'),
+    'gray_color' => $form_state->getValue('gray_color'),
+    'success_color' => $form_state->getValue('success_color'),
+    'danger_color' => $form_state->getValue('danger_color'),
+    'warning_color' => $form_state->getValue('warning_color'),
+    'info_color' => $form_state->getValue('info_color'),
+  ];
+
+  // Set each brand color in the configuration.
+  foreach ($brand_colors as $key => $value) {
+    if ($value !== NULL) { // Ensure the value is set
+      $config->set($key, $value);
+    }
+  }
+
+  // Save background colors.
+  for ($i = 1; $i <= 10; $i++) {
+    $background_color_key = 'background_color_' . $i;
+    if ($form_state->hasValue($background_color_key)) {
+      $background_color_value = $form_state->getValue($background_color_key);
+      if ($background_color_value !== NULL) {
+        $config->set($background_color_key, $background_color_value);
+      }
+    }
+  }
+
+  // Save typography settings.
+  if ($form_state->hasValue('base_font_size')) {
+    $config->set('base_font_size', $form_state->getValue('base_font_size'));
+  }
+
+  if ($form_state->hasValue('font_family')) {
+    $config->set('font_family', $form_state->getValue('font_family'));
+  }
+
+  // Save the configuration all at once.
+  $config->save();
+}
+
+/**
+ * Implements hook_preprocess_page() for front page.
+ */
+function pulse_theme_preprocess_page(array &$variables) {
+  // Check if Canvas/XB module is enabled.
+  $xb_enabled = \Drupal::moduleHandler()->moduleExists('canvas');
+
+  // Hide Hero Banner if Canvas is enabled.
+  $variables['show_hero_banner'] = !$xb_enabled;
+
+  // Function to darken a hex color by a percentage
+  function darken_color($hex, $percent) {
+    if (!is_string($hex)) {
+      return '#000000';
+    }
+    // Strip the leading # if present
+    $hex = str_replace('#', '', $hex);
+
+    // Convert the hex color to RGB
+    $r = hexdec(substr($hex, 0, 2));
+    $g = hexdec(substr($hex, 2, 2));
+    $b = hexdec(substr($hex, 4, 2));
+
+    // Darken the color by reducing RGB values by the percentage
+    $r = max(0, min(255, $r - ($r * $percent / 100)));
+    $g = max(0, min(255, $g - ($g * $percent / 100)));
+    $b = max(0, min(255, $b - ($b * $percent / 100)));
+
+    // Convert back to hex and return the darkened color
+    return sprintf("#%02x%02x%02x", $r, $g, $b);
+  }
+
+  // Function to lighten a hex color by a percentage
+  function lighten_color($hex, $percent) {
+    if (!is_string($hex)) {
+      return '#ffffff';
+    }
+    // Strip the leading # if present
+    $hex = str_replace('#', '', $hex);
+
+    // Convert the hex color to RGB
+    $r = hexdec(substr($hex, 0, 2));
+    $g = hexdec(substr($hex, 2, 2));
+    $b = hexdec(substr($hex, 4, 2));
+
+    // Lighten the color by increasing RGB values towards 255
+    $r = min(255, $r + ((255 - $r) * $percent / 100));
+    $g = min(255, $g + ((255 - $g) * $percent / 100));
+    $b = min(255, $b + ((255 - $b) * $percent / 100));
+
+    // Convert back to hex and return the lightened color
+    return sprintf("#%02x%02x%02x", $r, $g, $b);
+  }
+
+  // Fetch theme settings for colors and typography
+  $base_brand_color = theme_get_setting('base_brand_color');
+  $primary_accent_color = theme_get_setting('accent_color_primary');
+  $secondary_accent_color = theme_get_setting('accent_color_secondary');
+  $neutral_color = theme_get_setting('neutral_color');
+  $heading_color = theme_get_setting('heading_color');
+  $border_color = theme_get_setting('border_color');
+  $gray_color = theme_get_setting('gray_color');
+  $success_color = theme_get_setting('success_color');
+  $danger_color = theme_get_setting('danger_color');
+  $warning_color = theme_get_setting('warning_color');
+  $info_color = theme_get_setting('info_color');
+  $base_font_size = theme_get_setting('base_font_size');
+  $font_family = theme_get_setting('font_family');
+
+  // Background colors
+  $background_colors = [];
+  for ($i = 1; $i <= 10; $i++) {
+    $background_colors[] = theme_get_setting('background_color_' . $i);
+  }
+
+  // Darken/Lighten the primary, secondary, and other accent colors by 15%
+  $base_brand_color_dark = darken_color($base_brand_color, 15);
+  $base_brand_color_light = lighten_color($base_brand_color, 15);
+
+  $primary_accent_color_dark = darken_color($primary_accent_color, 15);
+  $primary_accent_color_light = lighten_color($primary_accent_color, 15);
+
+  $secondary_accent_color_dark = darken_color($secondary_accent_color, 15);
+  $secondary_accent_color_light = lighten_color($secondary_accent_color, 15);
+
+  $neutral_color_dark = darken_color($neutral_color, 15);
+  $neutral_color_light = lighten_color($neutral_color, 15);
+
+  $heading_color_dark = darken_color($heading_color, 15);
+  $heading_color_light = lighten_color($heading_color, 15);
+
+  $border_color_dark = darken_color($border_color, 15);
+  $border_color_light = lighten_color($border_color, 15);
+
+  $gray_color_dark = darken_color($gray_color, 15);
+  $gray_color_light = lighten_color($gray_color, 15);
+
+  $success_color_dark = darken_color($success_color, 15);
+  $success_color_light = lighten_color($success_color, 15);
+
+  $danger_color_dark = darken_color($danger_color, 15);
+  $danger_color_light = lighten_color($danger_color, 15);
+
+  $warning_color_dark = darken_color($warning_color, 15);
+  $warning_color_light = lighten_color($warning_color, 15);
+
+  $info_color_dark = darken_color($info_color, 15);
+  $info_color_light = lighten_color($info_color, 15);
+
+  // Build the CSS variables for colors and typography
+  $css_variables = ':root {';
+  $css_variables .= "--sds-base-brand-color: $base_brand_color;";
+  $css_variables .= "--sds-base-brand-color-dark: $base_brand_color_dark;";
+  $css_variables .= "--sds-base-brand-color-light: $base_brand_color_light;";
+
+  $css_variables .= "--sds-accent-color-primary: $primary_accent_color;";
+  $css_variables .= "--sds-accent-color-primary-dark: $primary_accent_color_dark;";
+  $css_variables .= "--sds-accent-color-primary-light: $primary_accent_color_light;";
+
+  $css_variables .= "--sds-accent-color-secondary: $secondary_accent_color;";
+  $css_variables .= "--sds-accent-color-secondary-dark: $secondary_accent_color_dark;";
+  $css_variables .= "--sds-accent-color-secondary-light: $secondary_accent_color_light;";
+
+  $css_variables .= "--sds-neutral-color: $neutral_color;";
+  $css_variables .= "--sds-neutral-color-dark: $neutral_color_dark;";
+  $css_variables .= "--sds-neutral-color-light: $neutral_color_light;";
+
+  $css_variables .= "--sds-heading-color: $heading_color;";
+  $css_variables .= "--sds-heading-color-dark: $heading_color_dark;";
+  $css_variables .= "--sds-heading-color-light: $heading_color_light;";
+
+  $css_variables .= "--sds-border-color: $border_color;";
+  $css_variables .= "--sds-border-color-dark: $border_color_dark;";
+  $css_variables .= "--sds-border-color-light: $border_color_light;";
+
+  $css_variables .= "--sds-gray-color: $gray_color;";
+  $css_variables .= "--sds-gray-color-dark: $gray_color_dark;";
+  $css_variables .= "--sds-gray-color-light: $gray_color_light;";
+
+  $css_variables .= "--sds-success-color: $success_color;";
+  $css_variables .= "--sds-success-color-dark: $success_color_dark;";
+  $css_variables .= "--sds-success-color-light: $success_color_light;";
+
+  $css_variables .= "--sds-danger-color: $danger_color;";
+  $css_variables .= "--sds-danger-color-dark: $danger_color_dark;";
+  $css_variables .= "--sds-danger-color-light: $danger_color_light;";
+
+  $css_variables .= "--sds-warning-color: $warning_color;";
+  $css_variables .= "--sds-warning-color-dark: $warning_color_dark;";
+  $css_variables .= "--sds-warning-color-light: $warning_color_light;";
+
+  $css_variables .= "--sds-info-color: $info_color;";
+  $css_variables .= "--sds-info-color-dark: $info_color_dark;";
+  $css_variables .= "--sds-info-color-light: $info_color_light;";
+
+  $css_variables .= "--sds-base-font-size: {$base_font_size}px;";
+  $css_variables .= "--sds-font-family: $font_family;";
+
+  // Add background colors dynamically
+  foreach ($background_colors as $index => $color) {
+    $css_variables .= "--sds-background-color-$index: $color;";
+  }
+  $css_variables .= '}';
+
+  // Attach the CSS variables to the head of the document
+  $variables['#attached']['html_head'][] = [
+    [
+      '#tag' => 'style',
+      '#value' => $css_variables,
+    ],
+    'custom-theme-settings',
+  ];
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for node.
+ */
+function pulse_theme_theme_suggestions_views_view_unformatted_alter(&$suggestions, &$variables) {
+  $viewId = $variables['view']->id();
+  $displayId = $variables['view']->current_display;
+  $suggestions[] = 'views_view_unformatted__' . $viewId;
+  $suggestions[] = 'views_view_unformatted__' . $viewId . '__' . $displayId;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for node.
+ */
+function pulse_theme_theme_suggestions_views_view_fields_alter(&$suggestions, &$variables) {
+  $viewId = $variables['view']->id();
+  $displayId = $variables['view']->current_display;
+  $suggestions[] = 'views_view_fields__' . $viewId . '__' . $displayId;
+}
+
+/**
+ * Implements hook_preprocess_html().
+ */
+function pulse_theme_preprocess_html(&$variables) {
+  $variables['#attached']['html_head_link'][] = [
+    [
+      'rel' => 'preconnect',
+      'href' => 'https://fonts.googleapis.com',
+    ],
+    TRUE,
+  ];
+
+  $variables['#attached']['html_head_link'][] = [
+    [
+      'rel' => 'preconnect',
+      'href' => 'https://fonts.gstatic.com',
+      'crossorigin' => 'anonymous',
+    ],
+    TRUE,
+  ];
+}

@@ -1,0 +1,116 @@
+.toastify {
+  overflow: hidden;
+  padding: 1em 3.25em 1em 1em;
+  border-radius: 0.75em;
+  box-shadow: 0 6px 16px var(--gin-border-color-layer);
+  font-family: var(--gin-font);
+}
+
+.toastify.toastify--info {
+  color: var(--gin-color-info-light) !important;
+  background: var(--gin-bg-info) !important;
+}
+
+.toastify.toastify--info .toast-close {
+  background: var(--gin-color-info-light);
+}
+
+.toastify.toastify--info .toast-progress {
+  filter: brightness(70%);
+  background-image: linear-gradient(
+    90deg,
+    var(--gin-bg-info),
+    var(--gin-bg-info)
+  );
+}
+
+.toastify.toastify--status {
+  color: var(--gin-color-green-light) !important;
+  background: var(--gin-bg-green) !important;
+}
+
+.toastify.toastify--status .toast-close {
+  background: var(--gin-color-green-light);
+}
+
+.toastify.toastify--status .toast-progress {
+  filter: brightness(70%);
+  background-image: linear-gradient(
+    90deg,
+    var(--gin-bg-green),
+    var(--gin-bg-green)
+  );
+}
+
+.toastify.toastify--warning {
+  color: var(--gin-color-warning-light) !important;
+  background: var(--gin-bg-warning) !important;
+}
+
+.toastify.toastify--warning .toast-close {
+  background: var(--gin-color-warning-light);
+}
+
+.toastify.toastify--warning .toast-progress {
+  filter: brightness(70%);
+  background-image: linear-gradient(
+    90deg,
+    var(--gin-bg-warning),
+    var(--gin-bg-warning)
+  );
+}
+
+.toastify.toastify--error {
+  color: var(--gin-color-danger-light) !important;
+  background: var(--gin-bg-danger) !important;
+}
+
+.toastify.toastify--error .toast-close {
+  background: var(--gin-color-danger-light);
+}
+
+.toastify .toast-close {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 1.5em;
+  color: transparent;
+  margin-left: 0.75em;
+  background: #fff;
+  position: absolute;
+  line-height: 1.5em;
+  -webkit-mask-image: url(/themes/contrib/gin/dist/media/sprite.svg#close-view);
+  mask-image: url(/themes/contrib/gin/dist/media/sprite.svg#close-view);
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 1.2em;
+  mask-size: 1.2em;
+  padding: 0;
+  top: 1em;
+  right: 1em;
+  opacity: 0.6;
+  width: 1.5em;
+  text-indent: -99999px;
+  transition: var(--gin-transition);
+}
+
+.toastify.toastify--error .toast-progress {
+  filter: brightness(70%);
+  background-image: linear-gradient(
+    90deg,
+    var(--gin-bg-danger),
+    var(--gin-bg-danger)
+  );
+}
+
+.toastify .toast-close:hover {
+  opacity: 1;
+}
+
+.toastify a,
+.toastify a:active,
+.toastify a:hover {
+  color: #fff;
+}

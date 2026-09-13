@@ -1,0 +1,87 @@
+import { http, HttpResponse } from 'msw';
+
+export const handlers = [
+  http.post('*/oauth/token', async ({ request }) => {
+    const body = await request.text();
+    const params = new URLSearchParams(body);
+
+    if (
+      params.get('client_id') === 'invalid' ||
+      params.get('client_secret') === 'invalid'
+    ) {
+      return HttpResponse.json({}, { status: 401 });
+    }
+
+    if (params.get('scope') === 'canvas:this-scope-is-invalid') {
+      return HttpResponse.json(
+        {
+          error: 'invalid_scope',
+          error_description:
+            'The requested scope is invalid, unknown, or malformed',
+          hint: 'Check the `canvas:invalid` scope',
+        },
+        { status: 400 },
+      );
+    }
+
+    if (
+      params.get('scope') === 'canvas:this-scope-is-valid-but-no-permission'
+    ) {
+      return HttpResponse.json({
+        access_token: 'test-access-token-no-permission',
+      });
+    }
+
+    if (params.get('client_id') === 'always-fail-refresh') {
+      return HttpResponse.json(
+        {
+          error: 'invalid_grant',
+          error_description: 'Token refresh failed',
+        },
+        { status: 401 },
+      );
+    }
+
+    return HttpResponse.json({ access_token: 'test-access-token' });
+  }),
+
+  http.get('*/canvas/api/v0/config/js_component', async ({ request }) => {
+    if (
+      request.headers.get('Authorization') ===
+      'Bearer test-access-token-no-permission'
+    ) {
+      return HttpResponse.json({}, { status: 403 });
+    }
+
+    if (
+      request.headers.get('Authorization') === 'Bearer initial-token' ||
+      request.headers.get('Authorization') === 'Bearer expired-token'
+    ) {
+      return HttpResponse.json({}, { status: 401 });
+    }
+
+    if (
+      request.headers.get('Authorization') === 'Bearer invalid-static-token'
+    ) {
+      return HttpResponse.json({}, { status: 401 });
+    }
+
+    return HttpResponse.json({});
+  }),
+
+  http.post('*/canvas/api/v0/media/:mediaType/upload', async ({ params }) => {
+    return HttpResponse.json(
+      {
+        id: 42,
+        uuid: 'media-uuid',
+        inputs_resolved: {
+          src: `/sites/default/files/${params.mediaType}/uploaded.jpg`,
+          alt: 'Uploaded image',
+          width: 1200,
+          height: 800,
+        },
+      },
+      { status: 201 },
+    );
+  }),
+];

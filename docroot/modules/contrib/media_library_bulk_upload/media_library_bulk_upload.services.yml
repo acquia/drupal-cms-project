@@ -1,0 +1,6 @@
+services:
+  _defaults:
+    autoconfigure: true
+  media_library.opener.bulk_upload:
+    class: Drupal\media_library_bulk_upload\MediaLibraryBulkUploadOpener
+    arguments: ['@entity_type.manager']

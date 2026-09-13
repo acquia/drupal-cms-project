@@ -1,0 +1,241 @@
+@reference "../../00-base/global/global.pcss";
+
+/*======================
+ Media card - Video
+=======================*/
+.media__card.video-card {
+  @apply relative h-full p-0 max-w-[50%] mb-2;
+
+  .top-section {
+    @apply w-full;
+  }
+
+  img {
+    @apply w-full rounded-3xl object-cover max-h-[280px];
+  }
+
+  .headline {
+    @apply font-semibold mb-3;
+
+    a {
+      @apply !no-underline hover:text-sds-heading-light;
+    }
+  }
+
+  .card_text {
+    @apply text-2xl;
+  }
+
+  .card_date-time-wrapper {
+    @apply text-slate-500;
+
+    > div:last-child:not(:first-child) {
+      &:before {
+        content: "•";
+        @apply mr-1 ml-2 inline-block;
+      }
+    }
+  }
+
+  .card_category-wrapper {
+    span {
+      @apply inline-block px-4 py-1 rounded-full text-base font-normal bg-sds-gray;
+    }
+    .card_primary_category {
+      @apply bg-sds-base-brand-light;
+    }
+  }
+
+  /* Video card */
+  &.video-card {
+    .card_image {
+      @apply relative rounded-3xl;
+      box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+
+      &::before {
+        @apply absolute inset-0 rounded-3xl h-full w-full top-0 left-0;
+
+        content: "";
+        background: radial-gradient(
+            50% 50% at 50% 50%,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.3) 100%
+          ),
+          radial-gradient(
+            50% 50% at 50% 50%,
+            rgba(0, 0, 0, 0.2) 0%,
+            rgba(0, 0, 0, 0) 100%
+          );
+      }
+
+      &::after {
+        @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+
+        content: "";
+        width: 60px;
+        height: 60px;
+        background-image: url("/themes/contrib/pulse_theme/components/02-molecules/space-videocard/images/play-button.svg");
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+    }
+    img {
+      @apply max-h-[341px];
+    }
+  }
+
+  &.horizontal {
+    @apply w-full flex-col flex md:flex-row p-0 justify-normal items-stretch border-0 rounded-none;
+
+    .top-section {
+      @apply mb-6 md:!mb-0 lg:w-5/12 lg:max-w-5/12;
+    }
+
+    .bottom-section {
+      @apply lg:w-7/12 lg:max-w-7/12 md:pl-8 lg:pl-12 flex flex-col h-auto;
+    }
+
+    .card_text {
+      @apply mb-6;
+    }
+
+    .card_category-wrapper {
+      @apply mt-auto;
+    }
+
+    &.large {
+      @apply w-full max-w-full;
+
+      .card_image {
+        @apply lg:mb-0;
+      }
+    }
+
+    &.medium,
+    &.small {
+      .top-section {
+        @apply lg:max-w-[17.5rem];
+      }
+
+      .card_image {
+        @apply lg:mb-0;
+      }
+    }
+
+    &.left-image .top-section {
+      @apply md:mb-6;
+    }
+
+    &.right-image {
+      @apply flex-col-reverse md:flex-row-reverse;
+
+      .top-section {
+        .card_image {
+          @apply md:mb-0;
+        }
+      }
+
+      .bottom-section {
+        @apply md:mb-6;
+      }
+    }
+  }
+
+  &.vertical {
+    &.top-image .top-section {
+      @apply mb-6;
+    }
+
+    &.bottom-image {
+      @apply flex-col-reverse;
+
+      .top-section {
+        .card_image {
+          @apply mb-0;
+        }
+      }
+
+      .bottom-section {
+        @apply mb-6;
+      }
+    }
+
+    .bottom-section {
+      @apply flex flex-col w-full h-full;
+
+      .card_text {
+        @apply mb-6;
+      }
+
+      .card_category-wrapper {
+        @apply mt-auto;
+      }
+    }
+
+    &.large {
+      @apply max-w-full;
+    }
+
+    &.medium {
+      @apply max-w-[75%];
+    }
+
+    &.small {
+      @apply max-w-[50%];
+    }
+  }
+
+  &.full_box_link {
+    a.btn {
+      @apply w-full h-full;
+    }
+  }
+}
+
+/* Mobile View */
+@media screen(max-width: 767px) {
+  .media__card {
+    &.vertical {
+      &.large,
+      &.medium,
+      &.small {
+        @apply max-w-full w-full;
+      }
+    }
+
+    &.horizontal {
+      @apply flex-col;
+
+      > div {
+        flex: 0 0 auto;
+      }
+
+      &.large,
+      &.medium,
+      &.small {
+        @apply max-w-full;
+
+        .card_image {
+          @apply mb-6 mr-0;
+        }
+
+        .bottom-section {
+          @apply px-0;
+        }
+      }
+    }
+  }
+}
+
+/* Vertical Border between card */
+.vertical-border {
+  .view-content {
+    .views-row:nth-child(odd) {
+      @apply relative;
+
+      &::after {
+        @apply absolute border-dashed border-sds-border border-b-2 lg:border-r-2 -bottom-3 lg:top-0 lg:-right-3 w-full lg:w-px h-px lg:h-full content-[""];
+      }
+    }
+  }
+}

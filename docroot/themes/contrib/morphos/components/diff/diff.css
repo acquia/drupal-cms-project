@@ -1,0 +1,19 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: components/diff/diff.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+/**
+ * Override Drupal's unlayered .image styles which break DaisyUI's diff
+ * component (it needs width: 100cqi and centered positioning on children).
+ */
+
+.diff-item-1 > *,
+.diff-item-2 > * {
+  max-width: none;
+  width: 100cqi;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}

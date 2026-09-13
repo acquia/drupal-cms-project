@@ -1,0 +1,44 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: af203a96-0f0f-4303-af09-6ec6b75cae91
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    42ea2048-ff3a-4158-bc4a-5bd875a0023f: menu_link_content
+    a16fa04c-713b-4dd4-8d68-e5a948517b16: canvas_page
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Medical Records'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      title: ''
+      options:
+        icon: null
+        icon_display: icon_only
+      target_uuid: a16fa04c-713b-4dd4-8d68-e5a948517b16
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 1
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:42ea2048-ff3a-4158-bc4a-5bd875a0023f'
+  revision_translation_affected:
+    -
+      value: true

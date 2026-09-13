@@ -1,0 +1,27 @@
+{% set is_clickable = card_url is not empty %}
+
+<article class="stwl-offset-shadow--static flex flex-col h-full border border-card-border bg-background rounded-[var(--radius-sm)] overflow-hidden">
+  {% if card_media is not empty and card_media.src is not empty %}
+    <div class="aspect-video overflow-hidden">
+      {% include 'canvas:image' ignore missing with {
+        src: card_media.src,
+        alt: card_media.alt,
+        class: 'object-cover w-full h-full block',
+        width: card_media.width,
+        height: card_media.height
+      } only %}
+    </div>
+  {% endif %}
+  <div class="p-5 flex flex-col flex-1">
+    <h3 class="font-bold text-base m-0 mb-2">
+      {% if is_clickable %}
+        <a href="{{ card_url }}" class="text-link">{{ card_heading }}</a>
+      {% else %}
+        {{ card_heading }}
+      {% endif %}
+    </h3>
+    {% if card_text is not empty %}
+      <p class="text-base m-0 text-foreground">{{ card_text }}</p>
+    {% endif %}
+  </div>
+</article>

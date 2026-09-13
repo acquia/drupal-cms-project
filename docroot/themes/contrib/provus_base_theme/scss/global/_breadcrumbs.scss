@@ -1,0 +1,61 @@
+.breadcrumb {
+  margin: $padding-padding-xxs 0 $padding-padding-xlg;
+
+  .breadcrumb-item {
+    position: relative;
+    padding-inline: $padding-padding-xxs;
+    line-height: $padding-padding-xlg;
+
+    &:hover {
+      background-color: $background-colors-background-lightblue;
+      border-radius: $radius-radius-xxs;
+      color: $text-colors-text-primary;
+    }
+
+    &:last-child {
+      background-color: $background-colors-background-lightblue;
+      border-radius: $radius-radius-xxs;
+
+      a {
+        color: $primary-colors-primary;
+      }
+    }
+
+    a {
+      color: $text-colors-text-secondary;
+      @include text-style-button-medium;
+      text-decoration: none;
+
+      &:active {
+        color: $primary-colors-primary;
+      }
+
+      &:hover {
+        color: $text-colors-text-primary;
+      }
+    }
+
+    &.active:last-child {
+      background-color: $gray-lightest;
+      border-radius: $radius-radius-xxs;
+      color: $primary;
+
+      a {
+        color: $text-colors-text-secondary;
+      }
+    }
+  }
+
+  .breadcrumb-item:first-child {
+    margin-right: $padding-padding-xxs;
+  }
+
+  .breadcrumb-item+.breadcrumb-item {
+    margin-inline: $padding-padding-xxs;
+    margin-left: 16px;
+    &::before {
+      position: absolute;
+      left: -16px;
+    }
+  }
+}

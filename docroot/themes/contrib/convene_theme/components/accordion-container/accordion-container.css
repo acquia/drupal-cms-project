@@ -1,0 +1,185 @@
+.accordion-container.accordion-container--themed,
+body:not(.canvas-page) .accordion-container.accordion-container--admin-theme,
+.accordion-container {
+  background-color: #ffffff;
+  padding: 0px 64px;
+  padding-bottom: 100px;
+  padding-top: 44px;
+}
+
+.accordion-container.accordion-container--themed .accordion-container__inner,
+body:not(.canvas-page)
+  .accordion-container.accordion-container--admin-theme
+  .accordion-container__inner,
+.accordion-container .accordion-container__inner {
+  max-width: 800px;
+  /* FAQs are usually narrower for reading length */
+  width: 100%;
+  margin: 0 auto;
+}
+
+.accordion-container.accordion-container--themed .accordion-container__header,
+body:not(.canvas-page)
+  .accordion-container.accordion-container--admin-theme
+  .accordion-container__header,
+.accordion-container .accordion-container__header {
+  margin-bottom: 48px;
+  text-align: left;
+}
+
+.accordion-container.accordion-container--themed .accordion-container__heading,
+body:not(.canvas-page)
+  .accordion-container.accordion-container--admin-theme
+  .accordion-container__heading,
+.accordion-container .accordion-container__heading {
+  font-family: inherit;
+  margin-bottom: 16px;
+  min-height: 24px;
+  width: 100%;
+  font-size: 48px;
+  font-weight: 300;
+  text-align: center;
+}
+
+.accordion-container.accordion-container--themed
+  .accordion-container__description,
+body:not(.canvas-page)
+  .accordion-container.accordion-container--admin-theme
+  .accordion-container__description,
+.accordion-container .accordion-container__description {
+  font-family: inherit;
+  color: #4b5563;
+  min-height: 24px;
+  width: 100%;
+  font-size: 18px;
+  text-align: center;
+}
+
+.accordion-container.accordion-container--themed .accordion-container__items,
+body:not(.canvas-page)
+  .accordion-container.accordion-container--admin-theme
+  .accordion-container__items,
+.accordion-container .accordion-container__items {
+  display: flex;
+  flex-direction: column;
+  min-height: 100px;
+  width: 100%;
+}
+
+.accordion-container.accordion-container--themed .accordion-container__help,
+body:not(.canvas-page)
+  .accordion-container.accordion-container--admin-theme
+  .accordion-container__help,
+.accordion-container .accordion-container__help {
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.accordion-container .accordion-container__help-heading {
+  font-family: inherit;
+  min-height: 24px;
+  width: 100%;
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.accordion-container .accordion-container__help-description {
+  font-family: inherit;
+  color: #030804;
+  min-height: 24px;
+  width: 100%;
+  font-size: 16px;
+
+  * {
+    color: #030804;
+  }
+}
+
+.accordion-container .accordion-container__help-button {
+  margin-top: 8px;
+
+  .button--secondary {
+    box-shadow: 0px 0px 0px 1px rgba(3, 8, 4, 0.0509803922) inset;
+    background: rgba(3, 8, 4, 0.0509803922);
+    padding: 10px 24px;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: #030804;
+    backdrop-filter: blur(10px);
+    display: inline-block;
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+/* =========================================
+   DARK THEME VARIATION
+   ========================================= */
+.accordion-container.accordion-container--dark {
+  background-color: #092845 !important;
+  color: #ffffff;
+}
+
+.accordion-container.accordion-container--dark .accordion-container__inner {
+  max-width: 900px;
+  /* Marginally wider for the dark card variant */
+}
+
+.accordion-container.accordion-container--dark .accordion-container__header,
+.accordion-container.accordion-container--dark .accordion-container__help {
+  text-align: left;
+  align-items: flex-start;
+}
+
+.accordion-container.accordion-container--dark .accordion-container__heading,
+.accordion-container.accordion-container--dark
+  .accordion-container__help-heading {
+  color: #ffffff;
+  text-align: left;
+}
+
+.accordion-container.accordion-container--dark
+  .accordion-container__description,
+.accordion-container.accordion-container--dark
+  .accordion-container__help-description {
+  color: rgba(255, 255, 255, 0.7);
+  text-align: left;
+}
+
+.accordion-container.accordion-container--dark .accordion-container__items {
+  gap: 16px;
+  /* Space between dark cards */
+}
+
+@media (max-width: 992px) {
+  .accordion-container.accordion-container--themed,
+  body:not(.canvas-page) .accordion-container.accordion-container--admin-theme,
+  body:not(.canvas-page) .accordion-container.accordion-container--admin-theme {
+    padding: 80px 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .accordion-container.accordion-container--themed,
+  body:not(.canvas-page) .accordion-container.accordion-container--admin-theme,
+  body:not(.canvas-page) .accordion-container.accordion-container--admin-theme {
+    padding: 64px 24px;
+  }
+}
+
+.accordion-container--dark .accordion-item__trigger {
+  cursor: pointer !important;
+}

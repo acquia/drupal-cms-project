@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Ui Icons Library module.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_theme().
+ */
+function ui_icons_library_theme(): array {
+  return [
+    'ui_icons_library' => [
+      'variables' => [
+        'icons' => [],
+        'settings' => [],
+        'search' => '',
+        'total' => 0,
+        'available' => 0,
+      ],
+    ],
+    'ui_icons_library_card' => [
+      'variables' => [
+        'icons' => [],
+        'label' => '',
+        'description' => '',
+        'version' => '',
+        'license_name' => '',
+        'license_url' => '',
+        'enabled' => TRUE,
+        'link' => NULL,
+        'total' => 0,
+      ],
+    ],
+    'form_icon_pack' => ['render element' => 'form'],
+  ];
+}

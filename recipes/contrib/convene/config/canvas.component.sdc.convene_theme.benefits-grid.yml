@@ -1,0 +1,53 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - convene_theme
+label: 'Benefits Grid'
+id: sdc.convene_theme.benefits-grid
+source: sdc
+source_local_id: 'convene_theme:benefits-grid'
+provider: convene_theme
+active_version: dd8d60d6db368663
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+        eyebrow:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        description:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        items:
+          title: 'Items Slot'
+          description: 'Slot for individual benefit card components.'

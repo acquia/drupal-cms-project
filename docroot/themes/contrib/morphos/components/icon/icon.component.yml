@@ -1,0 +1,33 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Icon
+description: A small vector graphicfrom the Phosphor library used to provide visual cues or represent specific actions.
+group: Element
+status: stable
+props:
+  type: object
+  properties:
+    icon:
+      type: string
+      title: Icon name
+      description: Specify the name of the icon.
+      default: rocket
+      examples:
+        - rocket
+    icon_size:
+      type: string
+      title: Icon size
+      enum:
+        - icon-size--xs
+        - icon-size--sm
+        - icon-size--md
+        - icon-size--lg
+        - icon-size--xl
+      meta:enum:
+        icon-size--xs: Extra small
+        icon-size--sm: Small
+        icon-size--md: Medium
+        icon-size--lg: Large
+        icon-size--xl: Extra large
+      default: icon-size--xs
+      examples:
+        - icon-size--xs

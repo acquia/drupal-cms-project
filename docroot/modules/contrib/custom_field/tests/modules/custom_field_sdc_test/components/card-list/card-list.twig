@@ -1,0 +1,19 @@
+<div {{ attributes }}>
+  <h2>{{ title }}</h2>
+  <div class="cards">
+    {% for card in cards %}
+      <article>
+        <header>
+          <h3>{{ card.heading }}</h3>
+        </header>
+        <div class="content">
+          <p>{{ card.content }}</p>
+          <div class="tags">
+            {{ card.tags|join(', ') }}
+          </div>
+        </div>
+        <footer>{{ card.footer }}</footer>
+      </article>
+    {% endfor %}
+  </div>
+</div>

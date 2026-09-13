@@ -1,0 +1,186 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: base/typography.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+@reference "../tailwindcss";
+
+@layer base {
+  p {
+    @apply mb-4;
+
+    &:last-child {
+      @apply mb-0;
+    }
+  }
+
+  ul,
+  ol {
+    @apply mb-4 list-disc ps-6;
+
+    &:last-child {
+      @apply mb-0;
+    }
+  }
+
+  code,
+  pre {
+    @apply font-mono text-sm text-inherit;
+  }
+
+  small {
+    @apply text-sm text-inherit;
+  }
+
+  strong,
+  b {
+    @apply font-semibold text-inherit;
+  }
+
+  em,
+  i {
+    @apply text-inherit italic;
+  }
+
+  hr {
+    @apply my-4 border-t;
+  }
+
+  sup {
+    font-size: 60%;
+    top: -0.5em;
+  }
+
+  a:not(.btn) {
+    color: var(--link);
+    text-decoration: underline;
+
+    &:hover,
+    &:focus {
+      color: var(--link-hover);
+    }
+
+    &.active,
+    &:active {
+      color: var(--link-active);
+    }
+  }
+
+  blockquote,
+  table {
+    @apply mb-4;
+
+    &:last-child {
+      @apply mb-0;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply mb-4;
+  }
+
+  * + h1,
+  * + h2,
+  * + h3,
+  * + h4,
+  * + h5,
+  * + h6 {
+    @apply mt-6;
+  }
+
+  h1 {
+    @apply text-[3rem] leading-[1.2] font-bold tracking-[-0.02em];
+  }
+
+  h2 {
+    @apply text-[2.5rem] leading-[1.2] font-bold tracking-[-0.002em];
+  }
+
+  h3 {
+    @apply text-[2rem] leading-[1.2] font-bold tracking-[-0.002em];
+  }
+
+  h4 {
+    @apply text-[1.5rem] leading-[1.2] font-bold tracking-[-0.008em];
+  }
+
+  h5 {
+    @apply text-[1.25rem] leading-[1.2] font-bold tracking-[-0.008em];
+  }
+
+  h6 {
+    @apply text-[1rem] leading-[1.2] font-bold;
+  }
+
+  .font-display {
+    @apply text-[5rem] font-normal;
+  }
+
+  /* Reset margin under grid, flex layout */
+  [class*='flex-'],
+  [class*='grid-'],
+  [class*='gap-'] {
+    > h1,
+    > h2,
+    > h3,
+    > h4,
+    > h5,
+    > h6 {
+      @apply m-0;
+    }
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-display {
+  --font-mobile-scale: 1;
+  --font-size-xs: calc(var(--font-size) * var(--font-mobile-scale));
+  font-family: var(--font-family, revert-layer);
+  font-size: var(--font-size, revert-layer);
+  letter-spacing: var(--font-tracking, revert-layer);
+  line-height: var(--font-leading, revert-layer);
+  font-weight: var(--font-weight, revert-layer);
+
+  @media (width < 64rem) {
+    font-size: var(--font-size-xs, var(--font-size, revert-layer));
+  }
+}
+
+h1 {
+  --font-mobile-scale: 0.8;
+}
+
+h2 {
+  --font-mobile-scale: 0.84;
+}
+
+h3 {
+  --font-mobile-scale: 0.88;
+}
+
+h4 {
+  --font-mobile-scale: 0.92;
+}
+
+h5 {
+  --font-mobile-scale: 0.96;
+}
+
+h6 {
+  --font-mobile-scale: 1;
+}
+
+.font-display {
+  --font-mobile-scale: 0.8;
+}
