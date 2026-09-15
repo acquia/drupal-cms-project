@@ -1,0 +1,51 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - morphos
+active_version: 5da9069e5f35ff84
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        direction:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+    fallback_metadata:
+      slot_definitions:
+        items:
+          title: Items
+          description: 'Add button items.'
+  564f8e20b7242095:
+    settings:
+      prop_field_definitions:
+        direction:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: join-horizontal
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+    fallback_metadata:
+      slot_definitions:
+        items:
+          title: Items
+label: Join
+id: sdc.morphos.join
+provider: morphos
+source: sdc
+source_local_id: 'morphos:join'

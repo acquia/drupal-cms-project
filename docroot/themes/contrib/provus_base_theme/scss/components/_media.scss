@@ -1,0 +1,164 @@
+/* Media */
+.block-provus-media {
+  margin-top: $padding-padding-xlg;
+  margin-bottom: $padding-padding-xlg;
+
+  @include media-breakpoint-up(lg) {
+    margin-top: 0;
+    margin-bottom: $padding-padding-xlg;
+  }
+
+  img {
+    width: 100%;
+    border-radius: $images-border-radius-radius-md;
+  }
+
+  &.border-radius {
+    &-xxxs {
+      img {
+        border-radius: $images-border-radius-radius-xxxs;
+      }
+    }
+    &-xxs {
+      img {
+        border-radius: $images-border-radius-radius-xxs;
+      }
+    }
+    &-xs {
+      img {
+        border-radius: $images-border-radius-radius-xs;
+      }
+    }
+    &-sm {
+      img {
+        border-radius: $images-border-radius-radius-sm;
+      }
+    }
+    &-md {
+      img {
+        border-radius: $images-border-radius-radius-md;
+      }
+    }
+    &-lg {
+      img {
+        border-radius: $images-border-radius-radius-lg;
+      }
+    }
+    &-xl {
+      img {
+        border-radius: $images-border-radius-radius-xl;
+      }
+    }
+    &-xxl {
+      img {
+        border-radius: $images-border-radius-radius-xxl;
+      }
+    }
+    &-xxxl {
+      img {
+        border-radius: $images-border-radius-radius-xxl;
+      }
+    }
+  }
+
+  .field--name-field-provus-alt-text, .field--name-field-provus-media-style {
+    display: none;
+  }
+
+  .field--name-field-media-document {
+    >.field__item {
+      background: $background-colors-background-lightblue;
+      border: .5px solid $background-colors-background-grey;
+      color: $primary;
+      position: relative;
+      padding: $padding-padding-xs $padding-padding-lg;
+      @include text-style-headline-h-5;
+      margin-bottom: $padding-padding-sm;
+      border-radius: 4px;
+
+      a {
+        color: $primary;
+        text-decoration: none;
+      }
+
+      .file {
+        padding-left: $padding-padding-xxs;
+
+        a {
+          padding-right: 20px;
+          position: relative;
+
+          @include media-breakpoint-up(lg) {
+            padding-right: 24px;
+          }
+
+          &:after {
+            content: '';
+            background: url('../images/download.svg') no-repeat;
+            background-size: 16px 16px;
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            margin-top: -8px;
+
+            @include media-breakpoint-up(lg) {
+              background-size: 20px 20px;
+              width: 20px;
+              height: 20px;
+              margin-top: -10px;
+            }
+          }
+        }
+      }
+
+      .file--application-pdf {
+        a {
+          padding-left: 30px;
+          position: relative;
+
+          @include media-breakpoint-up(lg) {
+            padding-left: 34px;
+          }
+
+          &:before {
+            content: '';
+            background: url('../images/pdf.svg') no-repeat;
+            background-size: 18px 24px;
+            width: 18px;
+            height: 24px;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            margin-top: -12px;
+
+            @include media-breakpoint-up(lg) {
+              background-size: 24px 32px;
+              width: 24px;
+              height: 32px;
+              margin-top: -16px;
+            }
+          }
+        }
+      }
+
+      &:before {
+        content: '';
+        width: $padding-padding-xxs;
+        height: 100%;
+        background: $primary;
+        position: absolute;
+        left: 0;
+        top: 0;
+        border-radius: 4px 0 0 4px;
+      }
+    }
+  }
+}
+
+.image_styles {
+  .image_size {
+    width: inherit;
+  }
+}

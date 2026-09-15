@@ -1,0 +1,40 @@
+{% extends 'block.html.twig' %}
+{#
+/**
+ * @file
+ * Theme override for a branding block.
+ *
+ * Each branding element variable (logo, name, slogan) is only available if
+ * enabled in the block configuration.
+ *
+ * Available variables:
+ * - site_logo: Logo for site as defined in Appearance or theme settings.
+ * - site_name: Name for site as defined in Site information settings.
+ * - site_slogan: Slogan for site as defined in Site information settings.
+ *
+ * Logo optimization:
+ * When replacing logo-light.svg and logo-dark.svg in the theme directory,
+ * ensure your SVG files include proper viewBox attributes for optimal
+ * performance and to minimize layout shift. For best results, use SVG files
+ * with a horizontal aspect ratio (e.g., 4:1 width-to-height ratio).
+ */
+#}
+
+{% block content %}
+  <a href="{{ path('<front>') }}" class="inline-block" rel="home">
+    {% block branding %}
+      {% if site_logo %}
+        <div class="branding">
+          <img
+            class="logo-light-mode"
+            src="{{ base_path }}{{ directory }}/logo-light.svg"
+            alt="{{ site_name }}"
+            loading="eager"
+            fetchpriority="high"
+          />
+          <img class="logo-dark-mode" src="{{ base_path }}{{ directory }}/logo-dark.svg" alt="{{ site_name }}" loading="eager" fetchpriority="high" />
+        </div>
+      {% endif %}
+    {% endblock %}
+  </a>
+{% endblock %}

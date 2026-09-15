@@ -1,0 +1,16 @@
+# Schema for configuration plugins of the eca_test_float_config module.
+#
+# No ECA plugin ships a "float" typed configuration key, which leaves the
+# "float" arm of ConfigSchemaHooksTrait::alterSchemaFieldType() unreachable and
+# the "eca_float_or_token" data type untestable through stored configuration.
+# This test module declares one so that arm is exercised.
+#
+# @see \Drupal\eca\Hook\ConfigSchemaHooksTrait::alterSchemaFieldType()
+
+action.configuration.eca_test_float_config_set:
+  type: mapping
+  label: 'Float config: set'
+  mapping:
+    ratio:
+      type: float
+      label: 'Ratio'

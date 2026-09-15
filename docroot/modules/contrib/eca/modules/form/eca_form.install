@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Install file for the ECA Form submodule.
+ */
+
+use Drupal\Core\Extension\ModuleWeight;
+
+/**
+ * Implements hook_install().
+ */
+function eca_form_install(): void {
+  // module_set_weight() is deprecated in drupal:11.5.0 and removed in
+  // drupal:13.0.0 in favour of the ModuleWeight service. Use the service when
+  // it is available and fall back to the deprecated function otherwise.
+  // @see https://www.drupal.org/node/3512508
+  if (class_exists(ModuleWeight::class)) {
+    \Drupal::service(ModuleWeight::class)->set('eca_form', 1);
+  }
+  else {
+    // @phpstan-ignore function.deprecated
+    module_set_weight('eca_form', 1);
+  }
+}

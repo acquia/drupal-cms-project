@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies: {  }
+id: node__person
+label: 'Content: Person'
+tags:
+  og_description: '[node:field_biography:summary]'
+  og_image: '[node:field_photo:entity:field_media_image:large:url]'
+  og_site_name: '[site:name]'
+  og_title: '[node:title]'
+  og_type: profile
+  og_url: '[node:url]'
+  schema_person_additional_name: '[node:field_middle_name]'
+  schema_person_alternate_name: '[node:field_preferred_name]'
+  schema_person_contact_point: 'a:4:{s:5:"@type";s:12:"ContactPoint";s:9:"telephone";s:18:"[node:field_phone]";s:5:"email";s:18:"[node:field_email]";s:17:"availableLanguage";s:29:"[node:field_languages_spoken]";}'
+  schema_person_description: '[node:field_biography]'
+  schema_person_email: '[node:field_email]'
+  schema_person_family_name: '[node:field_last_name]'
+  schema_person_given_name: '[node:field_first_name]'
+  schema_person_id: '[node:url]'
+  schema_person_image: 'a:5:{s:5:"@type";s:11:"ImageObject";s:20:"representativeOfPage";s:4:"True";s:3:"url";s:72:"[node:field_photo:entity:field_media_image:sa_social_media_facebook:url]";s:5:"width";s:74:"[node:field_photo:entity:field_media_image:sa_social_media_facebook:width]";s:6:"height";s:75:"[node:field_photo:entity:field_media_image:sa_social_media_facebook:height]";}'
+  schema_person_job_title: '[node:field_professional_title]'
+  schema_person_name: '[node:title]'
+  schema_person_same_as: '[node:field_social_media]'
+  schema_person_telephone: '[node:field_phone]'
+  schema_person_type: Person
+  schema_person_url: '[node:url]'
+  twitter_cards_description: '[node:field_biography:summary]'
+  twitter_cards_image: '[node:field_photo:entity:field_media_image:large:url]'
+  twitter_cards_title: '[node:title]'
+  twitter_cards_type: summary_large_image

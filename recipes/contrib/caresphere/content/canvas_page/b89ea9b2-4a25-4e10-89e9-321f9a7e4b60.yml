@@ -1,0 +1,261 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: b89ea9b2-4a25-4e10-89e9-321f9a7e4b60
+  default_langcode: en
+  depends:
+    f4f744f7-5c08-46ae-a756-64135c618e74: file
+    fd9d9609-cb07-4a7a-818c-91f8d0b44424: media
+    6e15c340-ff65-418c-951e-f2f5bd4a0d6b: file
+    7bae443a-7804-439a-82b8-1d7e083381d5: media
+    dacf7a13-e736-474a-81d4-db9ae03a0f6c: file
+    4c5386c9-a718-4c6a-91bc-63fa62251a46: media
+    8e373af0-2441-4366-8642-b9c70bdb7e62: file
+    165226ff-ec18-47f5-970d-20bf2ec4478b: media
+    dff4c626-a52e-4de8-a7fe-b5d45735fecc: file
+    1852211b-caab-41a7-8c0e-7d9dcfdcf922: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Contact
+  components:
+    -
+      uuid: 4bc57b77-289d-417d-8fb0-7318131f829b
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        alignment: center
+        paddingtop: 14
+        marginbottom: 0
+        paddingbottom: 14
+        backgroundcolor: black
+        background_image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: fd9d9609-cb07-4a7a-818c-91f8d0b44424
+            target_type: media
+        use_custom_container: false
+    -
+      parent_uuid: 4bc57b77-289d-417d-8fb0-7318131f829b
+      slot: content
+      uuid: 255350db-1845-4326-970a-8556f2a3cfb3
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: 'Get in touch'
+          format: canvas_html_inline
+        tagline: Connect
+        description: "We're here to answer your questions and hear what matters to you."
+        heading_level: 2
+    -
+      parent_uuid: 255350db-1845-4326-970a-8556f2a3cfb3
+      slot: ctas
+      uuid: ea29e59c-6135-4bd3-9bdd-066615c1d079
+      component_id: sdc.caresphere_theme.button
+      inputs:
+        href: /about
+        size: medium
+        label: 'Learn more'
+        variant: secondary-white
+        disabled: false
+        icon_first: false
+        mobile_width: false
+        border_radius: default
+    -
+      uuid: d132618a-2248-4544-bb00-1f18611ea353
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        paddingtop: 14
+        marginbottom: 0
+        paddingbottom: 10
+        backgroundcolor: dark-gray
+        use_custom_container: false
+    -
+      parent_uuid: d132618a-2248-4544-bb00-1f18611ea353
+      slot: content
+      uuid: 83e2387e-9852-4503-acd4-5e53862143f2
+      component_id: sdc.caresphere_theme.section-grid
+      inputs:
+        grid_layout: 2_column_66_33
+        grid_row_gap: 3
+        column_2_layout: stacked
+        grid_column_gap: 10
+        is_small_container: false
+    -
+      parent_uuid: 83e2387e-9852-4503-acd4-5e53862143f2
+      slot: slot_1
+      uuid: 4c468e99-760f-49c0-bbaf-e24899f8df1e
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: 'Direct contact'
+          format: full_html
+        tagline: Reach
+        textcolor: light
+        description: 'Find us through email, phone, or mail whenever you need us.'
+        heading_level: 2
+    -
+      parent_uuid: 83e2387e-9852-4503-acd4-5e53862143f2
+      slot: slot_2
+      uuid: d536f3e2-80de-44f7-8490-4279721acc45
+      component_id: sdc.caresphere_theme.contact-email
+      inputs:
+        url: 'mailto:hello@communityimpact.org'
+        label: Email
+        email_text: hello@communityimpact.org
+        icon_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 7bae443a-7804-439a-82b8-1d7e083381d5
+            target_type: media
+    -
+      parent_uuid: 83e2387e-9852-4503-acd4-5e53862143f2
+      slot: slot_2
+      uuid: fda00854-6f35-4061-8f3f-7235f10c3b54
+      component_id: sdc.caresphere_theme.contact-email
+      inputs:
+        url: 'tel:+15551234567'
+        label: Phone
+        email_text: '+1 (555) 123-4567'
+        icon_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 4c5386c9-a718-4c6a-91bc-63fa62251a46
+            target_type: media
+    -
+      parent_uuid: 83e2387e-9852-4503-acd4-5e53862143f2
+      slot: slot_2
+      uuid: 4f0d6fd0-3a37-4906-9822-9056ec2180bd
+      component_id: sdc.caresphere_theme.contact-email
+      inputs:
+        label: Office
+        email_text: '456 Main Street, Sydney NSW 2000 AU'
+        icon_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 165226ff-ec18-47f5-970d-20bf2ec4478b
+            target_type: media
+    -
+      uuid: 7128a645-27df-470a-b50f-69271762ce6e
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        marginbottom: 0
+        paddingbottom: 14
+        backgroundcolor: dark-gray
+        use_custom_container: false
+    -
+      parent_uuid: 7128a645-27df-470a-b50f-69271762ce6e
+      slot: content
+      uuid: 2ad4f73e-435a-462b-ba31-549084597419
+      component_id: sdc.caresphere_theme.section-grid
+      inputs:
+        grid_layout: 1_column
+        is_small_container: false
+    -
+      parent_uuid: 2ad4f73e-435a-462b-ba31-549084597419
+      slot: slot_1
+      uuid: cabce81f-220d-44a0-abeb-a17c3d961b4b
+      component_id: sdc.caresphere_theme.image
+      inputs:
+        size: '16:9'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 1852211b-caab-41a7-8c0e-7d9dcfdcf922
+            target_type: media
+        radius: small
+        border_radius: 8
+    -
+      uuid: 05599725-921b-4b38-99b9-03e37cb1bce2
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        paddingtop: 14
+        section_id: contact
+        paddingbottom: 14
+        use_custom_container: false
+    -
+      parent_uuid: 05599725-921b-4b38-99b9-03e37cb1bce2
+      slot: content
+      uuid: 186bef5e-4d0f-4f5b-ad57-12c0387e9f2f
+      component_id: sdc.caresphere_theme.section-grid
+      inputs:
+        grid_layout: 2_column_50_50
+        grid_row_gap: 4
+        column_1_layout: stacked
+        grid_column_gap: 10
+        is_small_container: false
+    -
+      parent_uuid: 186bef5e-4d0f-4f5b-ad57-12c0387e9f2f
+      slot: slot_1
+      uuid: 73fc1874-8a34-41b2-9a81-87076b483cba
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: 'Send us a message'
+          format: full_html
+        tagline: Message
+        description: "Tell us what's on your mind and we'll get back to you soon."
+        heading_level: 2
+    -
+      parent_uuid: 186bef5e-4d0f-4f5b-ad57-12c0387e9f2f
+      slot: slot_1
+      uuid: ebe07bcc-b413-4a08-aeef-5f46acf4319b
+      component_id: sdc.caresphere_theme.section
+      inputs: {  }
+    -
+      parent_uuid: ebe07bcc-b413-4a08-aeef-5f46acf4319b
+      slot: content
+      uuid: 89cac75a-0e4c-4e65-9b26-cdb26d5e808e
+      component_id: sdc.caresphere_theme.contact-email
+      inputs:
+        url: 'mailto:hello@communityimpact.org'
+        email_text: hello@communityimpact.org
+        icon_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 7bae443a-7804-439a-82b8-1d7e083381d5
+            target_type: media
+    -
+      parent_uuid: ebe07bcc-b413-4a08-aeef-5f46acf4319b
+      slot: content
+      uuid: 57f1e2d3-a06b-43ff-8528-b5f61c9a38fb
+      component_id: sdc.caresphere_theme.contact-email
+      inputs:
+        url: 'mailto:hello@communityimpact.org'
+        email_text: '+1 (555) 123-4567'
+        icon_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 4c5386c9-a718-4c6a-91bc-63fa62251a46
+            target_type: media
+    -
+      parent_uuid: ebe07bcc-b413-4a08-aeef-5f46acf4319b
+      slot: content
+      uuid: d9f39856-8997-4440-bf83-ef3d8c1bd20c
+      component_id: sdc.caresphere_theme.contact-email
+      inputs:
+        email_text: '456 Main Street, Sydney NSW 2000 AU'
+        icon_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 165226ff-ec18-47f5-970d-20bf2ec4478b
+            target_type: media
+    -
+      parent_uuid: 186bef5e-4d0f-4f5b-ad57-12c0387e9f2f
+      slot: slot_2
+      uuid: 9d69e4ec-6574-4344-b78b-1d331061ba9d
+      component_id: block.webform_block
+      inputs:
+        lazy: false
+        label: Webform
+        redirect: false
+        webform_id: send_us_a_message
+        default_data: ''
+        label_display: '0'
+  path:
+    -
+      alias: /contact
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

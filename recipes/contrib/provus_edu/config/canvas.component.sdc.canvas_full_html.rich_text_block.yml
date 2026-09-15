@@ -1,0 +1,56 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.canvas_full_html
+  module:
+    - canvas_full_html
+    - options
+    - text
+label: 'Rich Text Block'
+id: sdc.canvas_full_html.rich_text_block
+source: sdc
+source_local_id: 'canvas_full_html:rich_text_block'
+provider: canvas_full_html
+active_version: f464dad82c9c2e09
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        heading:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Welcome to our site'
+          expression: ℹ︎string␟value
+        content:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>This is a <strong>rich text</strong> block with <em>full HTML</em> support.</p>'
+              format: canvas_full_html
+          expression: ℹ︎text_long␟processed
+        background_color:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        footer:
+          title: Footer
+          description: 'Optional footer content.'

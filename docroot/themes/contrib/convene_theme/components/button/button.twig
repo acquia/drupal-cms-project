@@ -1,0 +1,17 @@
+{% set button_classes = ['button', 'button--' ~ variant] %}
+
+{% if url %}
+	<a href="{{ url }}" {{ attributes.addClass(button_classes).setAttribute('target', target|default('_self')) }}>
+		{{ text }}
+    {% if variant == 'tertiary' or variant == 'quaternary' %}
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button__icon"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    {% endif %}
+	</a>
+{% else %}
+	<button {{ attributes.addClass(button_classes) }} type="button">
+		{{ text }}
+    {% if variant == 'tertiary' %}
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button__icon"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    {% endif %}
+	</button>
+{% endif %}

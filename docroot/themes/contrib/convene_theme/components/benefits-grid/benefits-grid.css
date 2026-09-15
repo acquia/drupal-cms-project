@@ -1,0 +1,84 @@
+.benefits-grid.benefits-grid--themed, body:not(.canvas-page) .benefits-grid.benefits-grid--admin-theme, .benefits-grid {
+  padding: 80px 24px;
+}
+
+.benefits-grid .benefits-grid__container {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Header Section */
+.benefits-grid .benefits-grid__header {
+  margin-bottom: 64px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.benefits-grid .benefits-grid__eyebrow {
+  margin-bottom: 0;
+  width: 100%;
+  color: #030804; /* Dark per screenshot */
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.benefits-grid .benefits-grid__title {
+  margin-bottom: 0;
+  width: 100%;
+  font-size: 40px;
+  font-weight: 400; /* Regular per screenshot */
+  line-height: 1.2;
+  color: #030804;
+  margin-top: 0;
+}
+
+.benefits-grid .benefits-grid__description {
+  margin-bottom: 0;
+  width: 100%;
+  max-width: 800px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #4b5563; /* Grey text */
+}
+
+/* Grid Layout */
+.benefits-grid .benefits-grid__items {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns for desktop */
+  gap: 24px;
+  width: 100%;
+}
+
+/* Responsiveness */
+@media (max-width: 1024px) {
+  .benefits-grid .benefits-grid__items {
+    grid-template-columns: repeat(2, 1fr); /* Switch to 2 columns on tablet */
+    gap: 32px;
+  }
+}
+
+@media (max-width: 992px) {
+  .benefits-grid.benefits-grid--themed, body:not(.canvas-page) .benefits-grid.benefits-grid--admin-theme, .benefits-grid {
+    padding: 64px 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .benefits-grid.benefits-grid--themed, body:not(.canvas-page) .benefits-grid.benefits-grid--admin-theme, .benefits-grid {
+    padding: 48px 24px;
+  }
+  .benefits-grid .benefits-grid__items {
+    grid-template-columns: 1fr; /* Switch to single stack on mobile */
+    gap: 16px; 
+  }
+  .benefits-grid .benefits-grid__title {
+    font-size: 32px;
+  }
+  .benefits-grid .benefits-grid__description {
+    font-size: 16px;
+  }
+}

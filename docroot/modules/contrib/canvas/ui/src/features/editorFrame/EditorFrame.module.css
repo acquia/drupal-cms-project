@@ -1,0 +1,59 @@
+.editorFrameContainer {
+  position: relative;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.editorPane {
+  position: relative;
+  overflow: scroll;
+  box-sizing: content-box;
+  width: 100%;
+  height: 100%;
+  background: var(--gray-8);
+}
+
+.editorFrame {
+  --editor-frame-scale: 1;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: content-box;
+  min-width: fit-content;
+  min-height: fit-content;
+  padding: 80vh 80vw;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
+  background: var(--gray-4);
+  box-shadow: var(--shadow-3);
+
+  &.visible {
+    opacity: 1;
+  }
+}
+
+.zoomModifierKeyPressed * {
+  cursor: zoom-in;
+  user-select: none;
+}
+
+.isPanning .editorFrame {
+  user-select: none;
+}
+
+.spaceKeyPressed .editorFrame {
+  cursor: grab;
+}
+
+.panningMode .editorFrame {
+  cursor: grabbing;
+}
+
+.spaceKeyPressed .editorFrame *,
+.zoomModifierKeyPressed .editorFrame *,
+.isPanning .editorFrame * {
+  user-select: none;
+  pointer-events: none;
+}

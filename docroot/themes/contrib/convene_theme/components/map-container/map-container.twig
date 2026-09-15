@@ -1,0 +1,46 @@
+{% set classes = [
+  'map-container',
+  admin_theme ? 'map-container--admin-theme' : 'map-container--themed',
+  alternate_bg ? 'map-container--alternate-bg' : '',
+] %}
+
+<section{{attributes.addClass(classes)}}>
+  <div class="map-container__inner">
+    
+    <div class="map-container__header">
+      {% if eyebrow %}
+        <div class="map-container__eyebrow">
+          {{ eyebrow }}
+        </div>
+      {% endif %}
+      
+      {% if title %}
+        <h2 class="map-container__title">
+          {{ title }}
+        </h2>
+      {% endif %}
+      
+      {% if description %}
+        <div class="map-container__description">
+          {{ description }}
+        </div>
+      {% endif %}
+
+      <div class="map-container__action">
+        {{ actionButton }}
+      </div>
+    </div>
+
+    <div class="map-container__media-wrapper">
+      {% if media %}
+        <div class="map-container__media">
+          {{ media }}
+        </div>
+      {% else %}
+        {# Fallback placeholder matching Figma if empty #}
+        <div class="map-container__placeholder"></div>
+      {% endif %}
+    </div>
+    
+  </div>
+</section>

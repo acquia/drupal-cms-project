@@ -1,0 +1,169 @@
+/**
+ * @file button.css
+ * SDC button component styles.
+ */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--spacing) * 2);
+  padding-inline: calc(var(--spacing) * 5);
+  padding-block: calc(var(--spacing) * 2);
+  font-family: var(--button-font-family);
+  font-weight: var(--button-font-weight);
+  letter-spacing: var(--button-letter-spacing);
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  transition:
+    color 0.3s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.button:hover {
+  text-decoration: none;
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.button:disabled,
+.button[aria-disabled="true"] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* --- Sizes --- */
+
+.button--small {
+  gap: calc(var(--spacing) * 1);
+  padding-inline: calc(var(--spacing) * 4);
+  padding-block: calc(var(--spacing) * 1.5);
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+}
+
+.button--large {
+  gap: calc(var(--spacing) * 3);
+  padding-inline: calc(var(--spacing) * 6);
+  padding-block: calc(var(--spacing) * 3);
+  font-size: var(--text-lg);
+  line-height: var(--text-lg--line-height);
+}
+
+/* --- Variants --- */
+
+.button--primary {
+  color: var(--primary-foreground);
+  background: var(--primary);
+  border: 1.5px solid var(--destructive);
+  border-bottom-width: 4px;
+}
+
+.button--primary:hover {
+  background: var(--destructive);
+}
+
+.button--secondary-white {
+  color: #ffffff;
+  background: transparent;
+  border: 1.5px solid var(--border-secondary);
+  border-bottom-width: 4px;
+  border-radius: 0px;
+}
+
+.button--secondary-white:hover {
+  background: rgba(255, 255, 255, 0.08);
+  text-decoration: none;
+}
+
+.button--secondary-dark {
+  color: #020704;
+  background: transparent;
+  border: 1.5px solid var(--border);
+  border-bottom-width: 4px;
+  border-radius: 0px;
+}
+
+.button--secondary-dark:hover {
+  background-color: rgba(2, 7, 4, 0.06);
+  text-decoration: none;
+}
+
+.button--link {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  border: none;
+  text-underline-offset: 3px;
+}
+
+.button--link:hover {
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+/* --- Border radius (prop overrides variant defaults) --- */
+
+.button--radius-square {
+  border-radius: 0;
+}
+
+.button--radius-small {
+  border-radius: 0.25rem;
+}
+
+.button--radius-medium {
+  border-radius: var(--radius);
+}
+
+.button--radius-large {
+  border-radius: 0.75rem;
+}
+
+.button--radius-full {
+  border-radius: 9999px;
+}
+
+/* --- Width --- */
+
+.button--full {
+  width: 100%;
+}
+
+@media (min-width: 40rem) {
+  .button--full {
+    width: fit-content;
+  }
+}
+
+/* --- Icon position --- */
+
+.button--icon-first {
+  flex-direction: row;
+}
+
+.button--icon-last {
+  flex-direction: row-reverse;
+}
+
+.button__icon {
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.button:hover .button__icon {
+  transform: translateX(4px);
+}
+
+.button--icon-first:hover .button__icon {
+  transform: translateX(-4px);
+}

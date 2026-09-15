@@ -1,0 +1,54 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Quick link item
+status: stable
+description: Quick link item component
+# Overrides regular css with minified.
+libraryOverrides:
+  css:
+    component:
+      quick-link-item.min.css: { minified: true }
+group: Eureka component items
+props:
+  type: object
+  properties:
+    quick_link_item_icon_custom:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Quick link item CUSTOM icon
+      description: Custom icon for the quick link item. If not set, the icon name will be used.
+      type: object
+    quick_link_item_icon_name:
+      type: ['string', 'null']
+      title: Quick link item icon default list
+      description: Name of the icon for the quick link item
+      enum:
+        - document
+        - credit-card
+        - calendar
+        - status
+        - palette
+      examples:
+        - document
+    quick_link_item_heading:
+      type: string
+      title: Quick link item heading
+      description: Heading for the quick link item
+      examples:
+        - Ofset report
+    quick_link_item_summary:
+      type: ['string', 'null']
+      title: Quick link item summary
+      description: Summary text
+      examples:
+        - Lorem ipsum dolor sit amet
+    quick_link_item_link_text:
+      type: ['string', 'null']
+      title: Quick link item link text
+      description: Link text
+      examples:
+        - Download report here
+    quick_link_item_link_url:
+      title: Quick link item link url
+      description: Link url
+      type: ['string', 'null']
+      examples:
+        - https://zoocha.com

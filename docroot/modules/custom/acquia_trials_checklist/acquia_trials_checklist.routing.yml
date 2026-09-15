@@ -1,0 +1,7 @@
+acquia_trials_checklist.toggle:
+  path: '/api/acquia-trials-checklist/toggle/{item_id}'
+  defaults:
+    _controller: '\Drupal\acquia_trials_checklist\Controller\ChecklistToggleController::toggle'
+  methods: [POST]
+  requirements:
+    _permission: 'access administration pages'

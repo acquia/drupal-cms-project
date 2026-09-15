@@ -1,0 +1,48 @@
+views.argument.custom_field_datetime:
+  type: views.argument.date
+
+views.argument.custom_field_datetime_day:
+  type: views.argument.datetime
+
+views.argument.custom_field_datetime_full_date:
+  type: views.argument.datetime
+
+views.argument.custom_field_datetime_month:
+  type: views.argument.datetime
+
+views.argument.custom_field_datetime_week:
+  type: views.argument.datetime
+
+views.argument.custom_field_datetime_year:
+  type: views.argument.datetime
+
+views.argument.custom_field_datetime_year_month:
+  type: views.argument.datetime
+
+views.filter.custom_field_datetime:
+  type: views.filter.date
+  mapping:
+    expose:
+      mapping:
+        filter_type:
+          type: string
+          label: 'Filter type'
+
+views.filter.custom_field_entity_reference:
+  type: views.filter.entity_reference
+  label: 'Entity reference'
+
+views.filter_value.custom_field_datetime:
+  type: views.filter_value.date
+
+views.sort.custom_field_datetime:
+  type: views.sort.date
+
+views.sort_expose.custom_field_datetime:
+  type: views.sort_expose.date
+
+views.field.custom_field:
+  type: views.field.field
+  mapping:
+    settings:
+      type: custom_field.formatter_settings

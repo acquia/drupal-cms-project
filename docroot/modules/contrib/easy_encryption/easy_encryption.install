@@ -1,0 +1,209 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Easy Encryption module.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Url;
+use Drupal\Core\Utility\Error;
+use Drupal\Core\Extension\Requirement\RequirementSeverity;
+use Drupal\easy_encryption\Encryption\EncryptorInterface;
+use Drupal\easy_encryption\Encryption\EncryptionException;
+use Drupal\easy_encryption\KeyManagement\KeyActivatorException;
+use Drupal\easy_encryption\KeyManagement\KeyActivatorInterface;
+use Drupal\easy_encryption\KeyManagement\KeyGeneratorException;
+use Drupal\easy_encryption\KeyManagement\KeyGeneratorInterface;
+use Drupal\easy_encryption\KeyManagement\Port\KeyRegistryInterface;
+use Drupal\easy_encryption\Sodium\Exception\SodiumKeyPairNotFoundException;
+use Drupal\easy_encryption\Sodium\Exception\SodiumKeyPairOperationException;
+use Drupal\easy_encryption\Sodium\SodiumKeyPairReadRepositoryInterface;
+use Drupal\easy_encryption\Sodium\SodiumKeyPairRepositoryUsingKeyEntities;
+use Drupal\easy_encryption\Sodium\SodiumKeyPairWriteRepositoryInterface;
+
+/**
+ * Implements hook_install().
+ */
+function easy_encryption_install(bool $is_syncing): void {
+  // Do not generate keys during configuration synchronization.
+  if ($is_syncing) {
+    return;
+  }
+
+  $keypair_id = NULL;
+  /** @var \Drupal\easy_encryption\KeyManagement\KeyGeneratorInterface $key_generator */
+  $key_generator = \Drupal::service(KeyGeneratorInterface::class);
+
+  try {
+    $keypair_id = $key_generator->generate();
+
+    \Drupal::messenger()->addStatus(t(
+      'Easy Encryption has been installed and a new Sodium key pair (@id) has been generated.',
+      ['@id' => $keypair_id->value],
+    ));
+  }
+  catch (KeyGeneratorException $e) {
+    \Drupal::messenger()->addError(t(
+      'Easy Encryption was installed but encryption key generation failed. You must generate and activate an encryption key manually before using encryption. Check logs for details.'
+    ));
+
+    // Keep the detailed error out of the UI, but preserve it for logs.
+    \Drupal::logger('easy_encryption')->error(
+      'Failed to generate/activate initial Sodium key pair during installation: @message',
+      ['@message' => $e->getMessage()],
+    );
+  }
+
+  if ($keypair_id) {
+    /** @var \Drupal\easy_encryption\KeyManagement\KeyActivatorInterface $key_generator */
+    $key_activator = \Drupal::service(KeyActivatorInterface::class);
+    try {
+      $key_activator->activate($keypair_id);
+
+      \Drupal::logger('easy_encryption')->info(
+        'Initial Sodium key pair @id generated and activated during module installation.',
+        ['@id' => $keypair_id->value],
+      );
+    }
+    catch (KeyActivatorException $e) {
+      \Drupal::messenger()->addError(t(
+        'Easy Encryption was installed but encryption key activation failed. You must activate a Sodium key pair manually before using encryption. Check logs for details.'
+      ));
+
+      \Drupal::logger('easy_encryption')->error(
+        'Failed to activate initial Sodium key pair during installation: @message',
+        ['@message' => $e->getMessage()],
+      );
+    }
+  }
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function easy_encryption_requirements(string $phase): array {
+  $requirements = [];
+
+  if ($phase !== 'runtime') {
+    return $requirements;
+  }
+
+  $keyRegistry = \Drupal::service(KeyRegistryInterface::class);
+
+  $activeKeyId = $keyRegistry->getActiveKeyId()['result'];
+  if ($activeKeyId) {
+    $repository = \Drupal::service(SodiumKeyPairReadRepositoryInterface::class);
+
+    try {
+      $active_keypair = $repository->getKeyPairById($activeKeyId->value);
+
+      $requirements['easy_encryption_keypair'] = [
+        'title' => t('Easy Encryption: Active Sodium key pair'),
+        'value' => t('Sodium key pair @id is active', ['@id' => $active_keypair->id]),
+        'severity' => RequirementSeverity::OK,
+      ];
+
+      // Check availability of both keys and provide appropriate feedback.
+      $can_encrypt = $active_keypair->canEncrypt();
+      $can_decrypt = $active_keypair->canDecrypt();
+
+      if (!$can_encrypt && !$can_decrypt) {
+        $requirements['easy_encryption_keypair']['value'] = t('Sodium key pair @id is incomplete', ['@id' => $active_keypair->id]);
+        $requirements['easy_encryption_keypair']['description'] = t(
+          'Neither the public key nor the private key could be loaded. The encryption system cannot function.'
+        );
+        $requirements['easy_encryption_keypair']['severity'] = RequirementSeverity::Error;
+      }
+      elseif (!$can_encrypt && $can_decrypt) {
+        // Only private key available - both encryption and decryption fail.
+        $requirements['easy_encryption_keypair']['value'] = t('Sodium key pair @id is missing the public key', ['@id' => $active_keypair->id]);
+        $requirements['easy_encryption_keypair']['description'] = t(
+          'The public key for this Sodium key pair is missing. Without it, the system cannot encrypt new data or decrypt existing data. All encrypted credentials are currently inaccessible. You must restore the public key from a backup or regenerate the Sodium key pair and re-encrypt all credentials.'
+        );
+        $requirements['easy_encryption_keypair']['severity'] = RequirementSeverity::Error;
+      }
+      elseif ($can_encrypt && !$can_decrypt) {
+        // Only public key available (encrypt-only environment).
+        $requirements['easy_encryption_keypair']['value'] = t('Sodium key pair @id (encrypt-only)', ['@id' => $active_keypair->id]);
+        $requirements['easy_encryption_keypair']['description'] = t(
+          'The private key is not available on this server. The system can encrypt new data but cannot decrypt existing encrypted credentials. This is expected if this environment is configured as encrypt-only. If decryption is needed, ensure the private key is available in the configured location.'
+        );
+        $requirements['easy_encryption_keypair']['severity'] = RequirementSeverity::Warning;
+      }
+      else {
+        // Both keys available, run self-test to verify integrity.
+        $encryptor = \Drupal::service(EncryptorInterface::class);
+
+        try {
+          $encryptor->selfTest();
+          $requirements['easy_encryption_keypair']['description'] = t(
+            'The encryption system is working correctly. A self-test successfully encrypted and decrypted test data.'
+          );
+
+          // Check if private key is stored in an insecure provider.
+          $write_repository = \Drupal::service(SodiumKeyPairWriteRepositoryInterface::class);
+          // @phpstan-ignore instanceof.alwaysTrue
+          if ($write_repository instanceof SodiumKeyPairRepositoryUsingKeyEntities) {
+            $private_key_entity_id = SodiumKeyPairRepositoryUsingKeyEntities::privateKeyKeyEntityId($activeKeyId->value);
+            /** @var \Drupal\key\KeyInterface|null $private_key_entity */
+            $private_key_entity = \Drupal::entityTypeManager()->getStorage('key')->load($private_key_entity_id);
+
+            if ($private_key_entity && $private_key_entity->get('key_provider') === 'state') {
+              $requirements['easy_encryption_keypair']['severity'] = RequirementSeverity::Warning;
+              $requirements['easy_encryption_keypair']['description'] = t(
+                "The encryption system is working correctly. However, the site's private key is stored in the database. This will work, but it is strongly recommended to move the private key to the filesystem, or a more secure storage method, such as an environment variable or external key manager. <a href=\":url\">Migrate private key to filesystem.</a>",
+                [
+                  ':url' => Url::fromRoute('easy_encryption_admin.migrate_private_key')->toString(),
+                ]
+              );
+            }
+          }
+        }
+        catch (EncryptionException $e) {
+          $requirements['easy_encryption_keypair']['value'] = t('Sodium key pair @id failed self-test', ['@id' => $active_keypair->id]);
+          $requirements['easy_encryption_keypair']['description'] = t(
+            'The encryption self-test failed. The system cannot reliably encrypt or decrypt data. This may indicate corrupted keys or a server configuration problem. Technical details: @message',
+            Error::decodeException($e)
+          );
+          $requirements['easy_encryption_keypair']['severity'] = RequirementSeverity::Error;
+        }
+      }
+    }
+    catch (SodiumKeyPairNotFoundException) {
+      $requirements['easy_encryption_keypair'] = [
+        'title' => t('Easy Encryption: Active Sodium key pair'),
+        'value' => t('No active Sodium key pair configured'),
+        'description' => t(
+          'The module is installed but no Sodium key pair has been configured. The system cannot encrypt or decrypt data. This should have been created automatically during installation.'
+        ),
+        'severity' => RequirementSeverity::Error,
+      ];
+    }
+    catch (SodiumKeyPairOperationException $e) {
+      $active_key_id = \Drupal::configFactory()->get('easy_encryption.keys')->get('active_key_pair_id');
+      $requirements['easy_encryption_keypair'] = [
+        'title' => t('Easy Encryption: Active Sodium key pair'),
+        'value' => t('Sodium key pair @id cannot be loaded', ['@id' => $active_key_id]),
+        'description' => t(
+          'The active Sodium key pair is configured but could not be loaded from storage. This may indicate corrupted key files, incorrect file permissions, or database corruption. Technical details: @message',
+          Error::decodeException($e)
+        ),
+        'severity' => RequirementSeverity::Error,
+      ];
+    }
+  }
+  else {
+    $requirements['easy_encryption_keypair'] = [
+      'title' => t('Easy Encryption: Active encryption key'),
+      'value' => t('No active encryption key configured'),
+      'description' => t(
+        'The module is installed but no encryption key has been generated. The system cannot encrypt or decrypt data. This should have been created automatically during installation.'
+      ),
+      'severity' => RequirementSeverity::Error,
+    ];
+  }
+
+  return $requirements;
+}

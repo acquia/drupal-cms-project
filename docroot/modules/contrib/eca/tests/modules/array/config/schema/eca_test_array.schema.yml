@@ -1,0 +1,42 @@
+# Schema for configuration plugins of the eca_test_array module.
+
+eca.event.plugin.eca_test_array:write:
+  type: eca.event.plugin
+  label: 'Static array: write'
+  mapping:
+    key:
+      type: string
+      label: 'Key'
+    value:
+      type: string
+      label: 'Value'
+
+eca.condition.plugin.eca_test_array_has_key_and_value:
+  type: eca.condition.plugin
+  label: 'Static array: has key-value pair'
+  mapping:
+    key:
+      type: string
+      label: 'Key'
+    value:
+      type: string
+      label: 'Value'
+
+action.configuration.eca_test_array_increment:
+  type: mapping
+  label: 'Static array: increment'
+  mapping:
+    key:
+      type: string
+      label: 'Key'
+
+action.configuration.eca_test_array_write:
+  type: mapping
+  label: 'Static array: write'
+  mapping:
+    key:
+      type: string
+      label: 'Key'
+    value:
+      type: string
+      label: 'Value'

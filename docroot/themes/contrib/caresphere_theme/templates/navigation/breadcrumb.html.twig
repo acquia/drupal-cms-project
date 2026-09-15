@@ -1,0 +1,36 @@
+{#
+/**
+ * @file
+ * Theme override for a breadcrumb trail.
+ * Structure: parent (if any) then path — text only, no home icon.
+ * Separator: ">" matching text size (e.g. Home > Support > News Story).
+ *
+ * Available variables:
+ * - breadcrumb: Breadcrumb trail items.
+ */
+#}
+{% if breadcrumb %}
+  <nav aria-label="breadcrumb" class="breadcrumb container mx-auto my-2 w-full md:my-3 2xl:my-4">
+    <h2 id="system-breadcrumb" class="sr-only">{{ 'Breadcrumb'|t }}</h2>
+    <ol class="breadcrumb__list m-0 flex list-none flex-row flex-wrap items-center p-0">
+      {% for item in breadcrumb %}
+        {% set is_first = loop.first %}
+        {% set is_last = loop.last %}
+
+        {% if not is_first %}
+          <li class="breadcrumb__separator" aria-hidden="true">&gt;</li>
+        {% endif %}
+
+        <li class="breadcrumb__item{% if is_last %} breadcrumb__item--current{% endif %}"{% if is_last %} aria-current="page"{% endif %}>
+          {% if is_last %}
+            <span class="breadcrumb__current">{{ item.text }}</span>
+          {% elseif item.url %}
+            <a href="{{ item.url }}" class="breadcrumb__link no-underline hover:opacity-80">{{ item.text }}</a>
+          {% else %}
+            <span class="breadcrumb__label">{{ item.text }}</span>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ol>
+  </nav>
+{% endif %}

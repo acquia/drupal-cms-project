@@ -1,0 +1,104 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Section Grid
+group: Section
+status: stable
+description: "Three-slot grid section with 2-column options."
+props:
+  type: object
+  properties:
+    grid_layout:
+      type: string
+      title: Grid Layout
+      enum:
+        - 1_column
+        - 3_column
+        - 2_column_50_50
+        - 2_column_66_33
+        - 2_column_33_66
+      meta:enum:
+        1_column: "1 Column"
+        3_column: "3 Columns"
+        2_column_50_50: "2 Columns (50/50)"
+        2_column_66_33: "2 Columns (66/33)"
+        2_column_33_66: "2 Columns (33/66)"
+      default: 3_column
+    column_1_layout:
+      type: string
+      title: Column 1 Layout
+      enum:
+        - full
+        - stacked
+      default: stacked
+    column_2_layout:
+      type: string
+      title: Column 2 Layout
+      enum:
+        - full
+        - stacked
+      default: stacked
+    column_3_layout:
+      type: string
+      title: Column 3 Layout
+      enum:
+        - full
+        - stacked
+      default: stacked
+    alignment:
+      type: string
+      title: Vertical Alignment
+      enum:
+        - stretch
+        - start
+        - center
+        - end
+      meta:enum:
+        stretch: Stretch (Match heights)
+        start: Top
+        center: Center
+        end: Bottom
+      default: stretch
+    horizontal_alignment:
+      type: string
+      title: Horizontal Alignment
+      description: "Controls horizontal positioning (best suited for 1 Column layout)."
+      enum:
+        - stretch
+        - start
+        - center
+        - end
+      meta:enum:
+        stretch: Stretch (Full width)
+        start: Left
+        center: Center
+        end: Right
+      default: stretch
+    is_small_container:
+      type: boolean
+      title: Small Container
+      description: "If checked, use a narrower 768px container instead of the default."
+      default: false
+    grid_gap:
+      type: integer
+      title: Grid Gap
+      description: "Used for both row and column when row/column gap are not set. Enter a multiple of 8px (e.g. 4 = 32px / 2rem)."
+      default: 4
+    grid_row_gap:
+      type: integer
+      title: Row Gap
+      description: "Row gap as multiple of 8px (e.g. 4 = 32px). If only one of Row/Column is set, that value is used for both."
+      default: 4
+    grid_column_gap:
+      type: integer
+      title: Column Gap
+      description: "Column gap as multiple of 8px (e.g. 4 = 32px). If only one of Row/Column is set, that value is used for both."
+      default: 4
+slots:
+  slot_1:
+    title: Slot 1
+    description: "First slot content."
+  slot_2:
+    title: Slot 2
+    description: "Second slot content."
+  slot_3:
+    title: Slot 3
+    description: "Third slot content."

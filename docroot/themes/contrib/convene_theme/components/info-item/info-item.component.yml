@@ -1,0 +1,23 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Info Item
+group: Molecules
+status: stable
+description: An individual information column with a title, description, and an optional top border highlight.
+props:
+  type: object
+  properties:
+    title:
+      title: Title
+      type: string
+    description:
+      title: Description
+      type: string
+    highlight_border:
+      title: Highlight Border
+      description: Adds a light blue top border to this item if checked.
+      type: boolean
+      default: false
+library:
+  css:
+    component:
+      info-item.css: {}

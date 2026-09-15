@@ -1,0 +1,72 @@
+<?php
+
+/**
+ * @file
+ * Module file for the Trash Test module.
+ */
+
+use Drupal\views\Plugin\views\cache\CachePluginBase;
+use Drupal\views\ViewExecutable;
+
+/**
+ * Implements hook_views_data_alter().
+ */
+function trash_test_views_data_alter(array &$data) {
+  // Add a reverse relationship: show all entities that reference this entity.
+  $data['trash_test_field_data']['referenced_by'] = [
+    'title' => t('Referenced by TrashTestEntity'),
+    'help' => t('Entities that reference this entity via the reference field.'),
+    'relationship' => [
+      'id' => 'standard',
+      'label' => t('Referenced by TrashTestEntity'),
+      'base' => 'trash_test_field_data',
+      'base field' => 'reference',
+      'relationship field' => 'id',
+      'entity_type' => 'trash_test_entity',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_views_pre_execute().
+ */
+function trash_test_views_pre_execute(ViewExecutable $view) {
+  if (in_array($view->id(), ['trash_test_view', 'trash_test_view_relationship'], TRUE)) {
+    /** @var \Drupal\trash\TrashManagerInterface $trash_manager */
+    $trash_manager = \Drupal::service('trash.manager');
+    \Drupal::keyValue('trash_test')->set('views_pre_execute.trash_context', $trash_manager->getTrashContext());
+  }
+}
+
+/**
+ * Implements hook_views_post_execute().
+ */
+function trash_test_views_post_execute(ViewExecutable $view) {
+  if (in_array($view->id(), ['trash_test_view', 'trash_test_view_relationship'], TRUE)) {
+    /** @var \Drupal\trash\TrashManagerInterface $trash_manager */
+    $trash_manager = \Drupal::service('trash.manager');
+    \Drupal::keyValue('trash_test')->set('views_post_execute.trash_context', $trash_manager->getTrashContext());
+  }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function trash_test_views_pre_render(ViewExecutable $view) {
+  if (in_array($view->id(), ['trash_test_view', 'trash_test_view_relationship'], TRUE)) {
+    /** @var \Drupal\trash\TrashManagerInterface $trash_manager */
+    $trash_manager = \Drupal::service('trash.manager');
+    \Drupal::keyValue('trash_test')->set('views_pre_render.trash_context', $trash_manager->getTrashContext());
+  }
+}
+
+/**
+ * Implements hook_views_post_render().
+ */
+function trash_test_views_post_render(ViewExecutable $view, array &$output, CachePluginBase $cache) {
+  if (in_array($view->id(), ['trash_test_view', 'trash_test_view_relationship'], TRUE)) {
+    /** @var \Drupal\trash\TrashManagerInterface $trash_manager */
+    $trash_manager = \Drupal::service('trash.manager');
+    \Drupal::keyValue('trash_test')->set('views_post_render.trash_context', $trash_manager->getTrashContext());
+  }
+}

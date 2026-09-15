@@ -1,0 +1,63 @@
+<?php
+
+/**
+ * @file
+ * Hook functions of the  media_library_bulk_upload module.
+ */
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function media_library_bulk_upload_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the media_library_bulk_upload module.
+    case 'help.page.media_library_bulk_upload':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This module basically has the same idea as media_bulk_upload,
+      however it does not use DropzoneJS for the file upload and instead relies on the
+      Drupals file upload mechanism and utilizes the Media Library.') . '</p>';
+      $output .= '<p>' . t('After installing the module you will have to configure the
+      permissions which user roles should be able to utilize the bulk upload and for
+      which media types.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+/**
+ * Implements hook_ENTITY_TYPE_load() for view entities.
+ *
+ * Disables the selection functionality of the media library view when used by
+ * the bulk upload.
+ */
+function media_library_bulk_upload_view_load($entities) {
+  $route_match = \Drupal::routeMatch()->getCurrentRouteMatch();
+  $request = \Drupal::request();
+  // The route is not enough as when through ajax a Grid or Table is selected or
+  // the filter is applied, then a views route will be used in the ajax request.
+  if ($route_match->getRouteName() === 'media_library.bulk_upload.upload_form' || ($request->get('media_library_opener_id') === 'media_library.opener.bulk_upload')) {
+    foreach ($entities as $id => $entity) {
+      if ($id === 'media_library') {
+        foreach (['widget', 'widget_table'] as $display_id) {
+          $display =& $entity->getDisplay($display_id);
+          unset($display['display_options']['fields']['media_library_select_form']);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_menu_links_discovered_alter().
+ */
+function media_library_bulk_upload_menu_links_discovered_alter(&$links) {
+  if (isset($links['admin_toolbar_tools.extra_links:media_page'])) {
+    /*
+     * Add the menu link under the "Content" > "Media" menu item if the "Admin Toolbar Extra Tools" module is enabled.
+     * @see \Drupal\admin_toolbar_tools\Plugin\Derivative\ExtraLinks::getDerivativeDefinitions()
+     */
+    $links['media_library_bulk_upload.list']['parent'] = 'admin_toolbar_tools.extra_links:media_page';
+  }
+}

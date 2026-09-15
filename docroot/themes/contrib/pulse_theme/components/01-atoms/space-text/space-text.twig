@@ -1,0 +1,22 @@
+{% set text_text_size = text_size|default('normal') %}
+{% set heading_level = heading_level|default('h2') %}
+
+{% set size_classes = {
+  'text-xs': 'text-xs',
+  'text-sm': 'text-sm',
+  'normal': 'text-base',
+  'text-lg': 'text-base md:text-lg',
+  'text-xl': 'text-lg md:text-xl',
+  'text-2xl': 'text-xl md:text-2xl',
+  'text-3xl': 'text-2xl md:text-3xl',
+} %}
+
+<div class="space-text">
+  {% if title %}
+    <{{ heading_level }}>{{ title }}</{{ heading_level }}>
+  {% endif %}
+
+  <div class="{{ size_classes[text_text_size] }}">
+    {{ text }}
+  </div>
+</div>

@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: news
+label: News
+type: 'canonical_entities:node'
+pattern: 'news/[node:title]'
+selection_criteria:
+  b9de26ff-f533-438d-9756-0273092e5195:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: b9de26ff-f533-438d-9756-0273092e5195
+    context_mapping:
+      node: node
+    bundles:
+      provus_news: provus_news
+selection_logic: and
+weight: -5
+relationships: {  }

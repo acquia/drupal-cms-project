@@ -1,0 +1,46 @@
+{% set attributes = attributes.addClass('space-slider__wrapper w-full') %}
+{% if extra_classes %}
+  {% set attributes = attributes.addClass(extra_classes) %}
+{% endif %}
+{% set attributes = attributes.setAttribute('data-pagination-color', pagination_color|default('primary')) %}
+{% set attributes = attributes.setAttribute('data-pagination-alignment', pagination_alignment|default('center')) %}
+
+{% set slider_attributes = create_attribute() %}
+{% set slider_attributes = slider_attributes.addClass('splide space-slider w-full') %}
+
+{% set slider_attributes = slider_attributes.setAttribute('data-slides-per-view', slides_per_view_desktop|default(3)) %}
+{% set slider_attributes = slider_attributes.setAttribute('data-slides-per-view-tablet', slides_per_view_ipad|default(2)) %}
+{% set slider_attributes = slider_attributes.setAttribute('data-slides-per-view-mobile', slides_per_view_mobile|default(1)) %}
+{% set slider_attributes = slider_attributes.setAttribute('data-slide-type', slides_type|default('slide')) %}
+{% set slider_attributes = slider_attributes.setAttribute('data-autoplay', autoplay ? 'true' : 'false') %}
+{% set slider_attributes = slider_attributes.setAttribute('data-arrows', arrows ? 'true' : 'false') %}
+{% set slider_attributes = slider_attributes.setAttribute('data-pagination', pagination ? 'true' : 'false') %}
+{% set slider_attributes = slider_attributes.setAttribute('data-pagination-type', pagination_type|default('default')) %}
+{% set slider_attributes = slider_attributes.setAttribute('data-slide-focus', slide_focus|default('none')) %}
+{% set slider_attributes = slider_attributes.setAttribute('data-with-gradient', with_gradient ? 'true' : 'false') %}
+
+<div {{ attributes }}>
+  <div {{ slider_attributes }}>
+    <div class="splide__track w-full">
+      <div class="splide__list w-full">
+        {% block slide_item %}
+          {{ slide_item }}
+        {% endblock %}
+      </div>
+    </div>
+    
+    {% if arrows %}
+      <div class="splide__arrows splide__arrows--{{ arrows_alignment|default('left') }} splide__arrows--{{ arrows_color|default('primary') }}">
+        <button class="splide__arrow splide__arrow--prev" type="button" aria-label="Previous slide">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><line x1="216" y1="128" x2="40" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><polyline points="112 56 40 128 112 200" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+        </button>
+        {% if pagination_type == 'arrow-with-pagination' %}
+          <div class="splide__pagination-target"></div>
+        {% endif %}
+        <button class="splide__arrow splide__arrow--next" type="button" aria-label="Next slide">
+           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><polyline points="144 56 216 128 144 200" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+        </button>
+      </div>
+    {% endif %}
+  </div>
+</div>

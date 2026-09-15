@@ -1,0 +1,75 @@
+{#
+/**
+ * @file
+ * Theme override to display a pager.
+ */
+#}
+{% if items %}
+  <nav class="pager my-8 font-medium" role="navigation" aria-labelledby="{{ heading_id }}">
+    <h4 id="{{ heading_id }}" class="sr-only">{{ 'Pagination'|t }}</h4>
+    <ul class="flex list-none items-center justify-center gap-1 p-0">
+      {% if items.previous %}
+        <li>
+          <a
+            href="{{ items.previous.href }}"
+            title="{{ 'Go to previous page'|t }}"
+            rel="prev"
+            class="flex items-center gap-1 rounded-sm px-3 py-2 no-underline text-foreground hover:bg-grey-3"
+            {{ items.previous.attributes|without('href', 'title', 'rel') }}
+          >
+            <span aria-hidden="true">&lsaquo;</span>
+            {{ 'Previous'|t }}
+          </a>
+        </li>
+      {% endif %}
+
+      {% if ellipses.previous %}
+        <li class="px-2 py-1" role="presentation">&hellip;</li>
+      {% endif %}
+
+      {% for key, item in items.pages %}
+        <li>
+          {% if current == key %}
+            <a
+              href="{{ item.href }}"
+              title="{{ 'Current page'|t }}"
+              class="flex items-center justify-center rounded-sm px-3 py-2 no-underline border border-foreground text-foreground font-bold"
+              aria-current="page"
+              {{ item.attributes|without('href', 'title') }}
+            >
+              {{ key }}
+            </a>
+          {% else %}
+            <a
+              href="{{ item.href }}"
+              title="{{ 'Go to page @key'|t({'@key': key}) }}"
+              class="flex items-center justify-center rounded-sm px-3 py-2 no-underline text-foreground hover:bg-grey-3"
+              {{ item.attributes|without('href', 'title') }}
+            >
+              {{ key }}
+            </a>
+          {% endif %}
+        </li>
+      {% endfor %}
+
+      {% if ellipses.next %}
+        <li class="px-2 py-1" role="presentation">&hellip;</li>
+      {% endif %}
+
+      {% if items.next %}
+        <li>
+          <a
+            href="{{ items.next.href }}"
+            title="{{ 'Go to next page'|t }}"
+            rel="next"
+            class="flex items-center gap-1 rounded-sm px-3 py-2 no-underline text-foreground hover:bg-grey-3"
+            {{ items.next.attributes|without('href', 'title', 'rel') }}
+          >
+            {{ 'Next'|t }}
+            <span aria-hidden="true">&rsaquo;</span>
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endif %}

@@ -1,0 +1,37 @@
+/**
+ * @file
+ * Styles for Space Contact Card component.
+ */
+
+@reference "../../00-base/global/global.pcss";
+
+/* Container styles */
+.space-contact-card {
+  @apply bg-white border border-solid border-sds-border rounded-3xl shadow-md flex flex-col items-start gap-3 px-9 py-4;
+
+  .btn {
+    @apply text-base;
+  }
+
+  /* Heading styles */
+  &__heading {
+    @apply text-base font-bold w-full;
+  }
+
+  /* Description styles */
+  &__description {
+    @apply w-full;
+  }
+
+  &--left {
+    @apply items-start text-left;
+  }
+
+  &--right {
+    @apply items-end text-right;
+  }
+
+  &--center {
+    @apply items-center text-center;
+  }
+}

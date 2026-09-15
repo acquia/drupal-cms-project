@@ -1,0 +1,32 @@
+# This file is copied from ./core/phpstan.neon.dist then set to only
+# ignore errors applicable to this project rather than all errors ignored
+# from Core as phpstan throws errors when ignore lines here are unused.
+
+# Configuration file for PHPStan static code checking, see https://phpstan.org .
+# PHPStan is triggered on Drupal CI in commit-code-check.sh.
+includes:
+  - phar://phpstan.phar/conf/bleedingEdge.neon
+
+parameters:
+  level: 1
+
+  paths:
+    - .
+
+  fileExtensions:
+    - php
+    - module
+    - inc
+    - install
+
+  ignoreErrors:
+    # Tests deliberately use @internal OpenAI library interfaces/classes
+    # (TransporterContract, Response) to build a real Client with a mock
+    # transporter — this is the only type-safe way to intercept API calls
+    # without a live API key while satisfying getClient()'s Client return type.
+    - identifier: parameter.internalInterface
+      path: tests/*
+    - identifier: return.internalClass
+      path: tests/*
+    - identifier: classConstant.internalInterface
+      path: tests/*

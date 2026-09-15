@@ -1,0 +1,20 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Footer
+group: Layout
+props:
+  type: object
+  properties:
+    align:
+      type: boolean
+      title: Display links horizontally
+      examples:
+        - true
+slots:
+  footer_first:
+    title: Branding & Social
+  footer_last:
+    title: Call to action
+  footer_utility_first:
+    title: Utility links
+  footer_utility_last:
+    title: Copyright text

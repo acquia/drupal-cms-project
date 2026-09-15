@@ -1,0 +1,429 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 5534cac9-4603-481e-87ac-3d2ea3b3f3dd
+  default_langcode: en
+  depends:
+    58d252b5-c976-4678-887d-a4cc21dd1292: file
+    a111c616-c38a-48cd-8fc4-30ae046373f5: media
+    5d04cccc-230e-4501-baf9-70102785b8c9: file
+    2cac259f-0710-407b-837f-37f2a543d778: media
+    a49f4d88-b61f-446e-a0b9-550437d82aa7: file
+    efec4080-4870-4e13-9330-b6c5d8228804: media
+    fd45b1c0-e153-4e76-9c55-a60cd06a5134: file
+    ea5eb5b1-a175-417b-a72f-ac25db9240f6: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Faculty and Leadership'
+  description:
+    -
+      value: 'Learn about the passionate professionals who guide Windy City Community College towards academic excellence and community growth.'
+  components:
+    -
+      uuid: 2f1c1ab9-fc53-43ac-a5e7-62d462058b34
+      component_id: sdc.provus_base_theme.hero_banner
+      inputs:
+        title: 'Meet Our Dedicated Faculty and Leadership Team'
+        body:
+          value: '<p><strong>Learn about the passionate professionals who guide Windy City Community College towards academic excellence and community growth.</strong></p>'
+          format: canvas_full_html
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: a111c616-c38a-48cd-8fc4-30ae046373f5
+            target_type: media
+        is_short_banner: true
+        image_position: full
+        background_color: primary
+        text_container_width: col-lg-9
+        text_alignment: left
+    -
+      uuid: 7c5b212e-cf88-4904-8e5a-c971c1e713fa
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: true
+        padding_bottom: pb-5
+        padding_top: pt-5
+        align_items: align-items-center
+    -
+      parent_uuid: 7c5b212e-cf88-4904-8e5a-c971c1e713fa
+      slot: content
+      uuid: b8aa953f-0ba5-4d15-996d-a22497a24c82
+      component_id: sdc.provus_base_theme.two_column
+      inputs:
+        desktop_width: 50-50
+        tablet_width: 50-50
+        mobile_width: 100-100
+    -
+      parent_uuid: b8aa953f-0ba5-4d15-996d-a22497a24c82
+      slot: column_1
+      uuid: 39ef3450-2e0d-4d77-a0e5-d0ff5bcad27d
+      component_id: sdc.provus_base_theme.image
+      inputs:
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 2cac259f-0710-407b-837f-37f2a543d778
+            target_type: media
+        size: '4:3'
+        radius: rounded-0
+        margin_bottom: mb-0
+    -
+      parent_uuid: b8aa953f-0ba5-4d15-996d-a22497a24c82
+      slot: column_2
+      uuid: 671c5728-6e23-4461-b81c-ae728c0ee37e
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Leadership at Windy City Community College'
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: b8aa953f-0ba5-4d15-996d-a22497a24c82
+      slot: column_2
+      uuid: 1d81dbad-deb0-468b-bcb6-7ab66a2d241a
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p>At Windy City Community College, our leadership team is dedicated to providing innovative solutions and fostering an environment of academic success, inclusivity, and community service. Our faculty members and administrative leaders work tirelessly to ensure that students receive a world-class education, preparing them for both professional success and personal growth.</p>'
+          format: canvas_full_html
+    -
+      uuid: 8b2c4c73-b202-4009-806b-25f3891a4db8
+      component_id: sdc.bootstrap_barrio.container
+      inputs: {  }
+    -
+      uuid: cce69bf1-f12b-4679-917a-901d21d56b89
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        custom_class: bg-grey
+    -
+      parent_uuid: cce69bf1-f12b-4679-917a-901d21d56b89
+      slot: content
+      uuid: 69164cf1-773b-4b67-9c9d-0b12623307e9
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: 69164cf1-773b-4b67-9c9d-0b12623307e9
+      slot: column_1
+      uuid: df882754-12b0-46be-9835-fed5c730a221
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Meet Our Executive Team'
+        decorative_line: true
+        alignment: center
+    -
+      parent_uuid: cce69bf1-f12b-4679-917a-901d21d56b89
+      slot: content
+      uuid: c4831d52-ec26-40d2-ab4b-16c5b5b4122f
+      component_id: sdc.provus_base_theme.three_column
+      inputs:
+        desktop_width: 33-33-33
+        tablet_width: 33-33-33
+        mobile_width: 100-100-100
+    -
+      parent_uuid: cce69bf1-f12b-4679-917a-901d21d56b89
+      slot: content
+      uuid: c23cc0aa-ec54-44ab-b63f-a948857536ef
+      component_id: block.views_block.provus_people-block_1
+      inputs:
+        label: People
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      uuid: 851e0eae-68d9-4cff-ba8d-b3729a888abf
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        padding_top: pt-5
+        padding_bottom: pb-5
+    -
+      parent_uuid: 851e0eae-68d9-4cff-ba8d-b3729a888abf
+      slot: content
+      uuid: 38c5b54b-ee0c-492c-b082-11807c15aeac
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: 38c5b54b-ee0c-492c-b082-11807c15aeac
+      slot: column_1
+      uuid: 32a95873-1e5a-4c78-b84a-a1dadfab8bc5
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Exceptional Faculty, Dedicated to Student Success'
+        decorative_line: true
+        alignment: center
+    -
+      parent_uuid: 851e0eae-68d9-4cff-ba8d-b3729a888abf
+      slot: content
+      uuid: 3827b954-6e39-47d4-802b-991a8f5a8052
+      component_id: sdc.provus_base_theme.three_column
+      inputs:
+        desktop_width: 33-33-33
+        tablet_width: 33-33-33
+        mobile_width: 100-100-100
+    -
+      parent_uuid: 851e0eae-68d9-4cff-ba8d-b3729a888abf
+      slot: content
+      uuid: f8dba2c6-df1b-4f83-b667-6e4cfdafaf92
+      component_id: block.views_block.provus_people-block_1
+      inputs:
+        label: People
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      uuid: 15416012-5837-4c5e-bab1-5357c10765de
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        custom_class: bg-plus
+    -
+      parent_uuid: 15416012-5837-4c5e-bab1-5357c10765de
+      slot: content
+      uuid: 65a8d2b5-4277-4d7f-92d9-cb8f22237767
+      component_id: sdc.provus_base_theme.one_column
+      inputs: {  }
+    -
+      parent_uuid: 65a8d2b5-4277-4d7f-92d9-cb8f22237767
+      slot: column_1
+      uuid: 6eab1f7a-d165-4216-91da-1c6c1ba0c42d
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'What Our Students Say'
+        decorative_line: false
+        alignment: center
+    -
+      parent_uuid: 65a8d2b5-4277-4d7f-92d9-cb8f22237767
+      slot: column_1
+      uuid: 989aaa3d-799a-42b6-8a29-7f2daf5791f3
+      component_id: sdc.provus_base_theme.testimonial
+      inputs:
+        display_type: right
+        name: 'Sarah J.'
+        role: 'Biology Major'
+        image_url:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: efec4080-4870-4e13-9330-b6c5d8228804
+            target_type: media
+        body: 'The faculty at Windy City Community College go above and beyond. Their expertise and commitment to student success are unparalleled.'
+    -
+      uuid: 0a734f97-834a-4d86-a4f6-a802dd9fb66b
+      component_id: sdc.provus_base_theme.container
+      inputs:
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: 'https://placehold.co/1920x1014'
+            alt: 'Image alt text'
+            width: 1920
+            height: 1014
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.provus_base_theme.container
+        html_tag: div
+        container_type: container
+        flex_enabled: false
+        padding_top: pt-5
+        padding_bottom: pb-5
+    -
+      parent_uuid: 0a734f97-834a-4d86-a4f6-a802dd9fb66b
+      slot: content
+      uuid: d1758f2f-4f4c-42c1-ba5e-f908aa95444f
+      component_id: sdc.provus_base_theme.two_column
+      inputs:
+        desktop_width: 50-50
+        tablet_width: 50-50
+        mobile_width: 100-100
+    -
+      parent_uuid: d1758f2f-4f4c-42c1-ba5e-f908aa95444f
+      slot: column_1
+      uuid: e8baec06-cbcf-4cc1-b03b-2b93b3c8f9bb
+      component_id: sdc.provus_base_theme.image
+      inputs:
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: ea5eb5b1-a175-417b-a72f-ac25db9240f6
+            target_type: media
+        size: '4:3'
+        radius: rounded-0
+        margin_bottom: mb-0
+    -
+      parent_uuid: d1758f2f-4f4c-42c1-ba5e-f908aa95444f
+      slot: column_2
+      uuid: d1982112-622f-4c34-b6ad-5efc9ff7ed6c
+      component_id: sdc.provus_base_theme.heading
+      inputs:
+        level_tag: h2
+        title: 'Get in Touch with Our Faculty and Leadership'
+        decorative_line: false
+        alignment: left
+    -
+      parent_uuid: d1758f2f-4f4c-42c1-ba5e-f908aa95444f
+      slot: column_2
+      uuid: 34306acc-2576-4a43-96ca-35f2195b0384
+      component_id: sdc.provus_base_theme.paragraph
+      inputs:
+        text:
+          value: '<p>For any questions or more information about our faculty or leadership, feel free to reach out directly. We’re here to help!</p><p>Contact Information:<br><br>General Inquiries: <a href="mailto:ignite@prometsource.com"><u>ignite@prometsource.com&nbsp;</u></a><br>Leadership Team: <a href="mailto:ignite@prometsource.com"><u>ignite@prometsource.com&nbsp;</u></a><br>Office Hours: Monday – Friday, 9 AM – 5 PM</p>'
+          format: canvas_full_html
+    -
+      parent_uuid: d1758f2f-4f4c-42c1-ba5e-f908aa95444f
+      slot: column_2
+      uuid: 3ab17300-09f2-4b43-8352-2ee5a3c442e9
+      component_id: sdc.provus_base_theme.button
+      inputs:
+        text: 'Contact us'
+        url:
+          uri: 'internal:/contact'
+          options: {  }
+        variant: primary
+        id: my-button
+        size: normal
+        width: auto
+  path:
+    -
+      alias: /faculty-and-leadership
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

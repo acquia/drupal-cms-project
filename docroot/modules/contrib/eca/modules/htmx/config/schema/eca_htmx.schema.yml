@@ -1,0 +1,162 @@
+action.configuration.eca_htmx_poll:
+  type: eca_render.render_element_action_base
+  label: 'Configuration for the "HTMX: poll region" action'
+  mapping:
+    url:
+      type: string
+      label: 'Poll URL'
+      constraints:
+        NotBlank: []
+    interval:
+      type: string
+      label: 'Poll interval (seconds)'
+      constraints:
+        NotBlank: []
+    swap:
+      type: string
+      label: 'Swap strategy'
+      constraints:
+        NotBlank: []
+    target:
+      type: string
+      label: 'Swap target'
+    content:
+      type: text
+      label: 'Initial content'
+    wrapper_tag:
+      type: string
+      label: 'Wrapper tag'
+      constraints:
+        NotBlank: []
+    htmx_only:
+      type: boolean
+      label: 'Request only the main content'
+
+action.configuration.eca_htmx_element:
+  type: eca_render.render_element_action_base
+  label: 'Configuration for the "HTMX: render element" action'
+  mapping:
+    method:
+      type: string
+      label: 'Request method'
+    url:
+      type: string
+      label: 'Request URL'
+    trigger:
+      type: string
+      label: 'Trigger'
+    swap:
+      type: string
+      label: 'Swap strategy'
+    target:
+      type: string
+      label: 'Target'
+    select:
+      type: string
+      label: 'Select'
+    push_url:
+      type: string
+      label: 'Push URL'
+    confirm:
+      type: string
+      label: 'Confirm message'
+    indicator:
+      type: string
+      label: 'Indicator'
+    vals:
+      type: text
+      label: 'Values'
+    boost:
+      type: boolean
+      label: 'Boost'
+    htmx_only:
+      type: boolean
+      label: 'Request only the main content'
+    content:
+      type: text
+      label: 'Initial content'
+    wrapper_tag:
+      type: string
+      label: 'Wrapper tag'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_htmx_set_route:
+  type: mapping
+  label: 'Configuration for the "HTMX: mark route" action'
+  mapping:
+    route_name:
+      type: string
+      label: 'Route name'
+      constraints:
+        NotBlank: []
+
+action.configuration.eca_htmx_minimal_response:
+  type: mapping
+  label: 'Configuration for the "HTMX: minimal response" action'
+  mapping: {}
+
+action.configuration.eca_htmx_response_header:
+  type: mapping
+  label: 'Configuration for the "HTMX: set response header" action'
+  mapping:
+    header:
+      type: string
+      label: 'Response header'
+    value:
+      type: string
+      label: 'Value'
+    location_source:
+      type: string
+      label: 'Location: source'
+    location_event:
+      type: string
+      label: 'Location: event'
+    location_handler:
+      type: string
+      label: 'Location: handler'
+    location_target:
+      type: string
+      label: 'Location: target'
+    location_swap:
+      type: string
+      label: 'Location: swap'
+    location_select:
+      type: string
+      label: 'Location: select'
+    location_values:
+      type: text
+      label: 'Location: values'
+    location_headers:
+      type: text
+      label: 'Location: headers'
+
+eca.condition.plugin.eca_htmx_is_request:
+  type: eca.condition.plugin
+  label: 'HTMX is request condition'
+
+eca.condition.plugin.eca_htmx_header:
+  type: eca.condition.plugin
+  label: 'HTMX compare request value condition'
+  mapping:
+    value:
+      type: string
+      label: 'HTMX request value'
+    expected:
+      type: string
+      label: 'Expected value'
+    operator:
+      type: string
+      label: 'Comparison operator'
+      constraints:
+        EcaChoice:
+          callback: '\Drupal\eca\Plugin\ECA\Condition\StringComparisonBase::getAllValidOperators'
+    type:
+      type: string
+      label: 'Comparison type'
+      constraints:
+        EcaChoice:
+          callback: '\Drupal\eca\Plugin\ECA\Condition\StringComparisonBase::getAllValidTypes'
+    case:
+      type: boolean
+      label: 'Case sensitive comparison'

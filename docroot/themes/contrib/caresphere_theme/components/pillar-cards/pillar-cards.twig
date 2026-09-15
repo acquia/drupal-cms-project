@@ -1,0 +1,98 @@
+{#
+  Pillar cards — Figma 1:10066 (desktop), 1:9826 (mobile).
+  Three cards: desktop = row (first card featured 640px, others flex); mobile = column stack.
+  Each card: icon, heading (H3 featured / H5 standard), description, optional primary + secondary CTAs.
+#}
+
+{% set c1 = {
+  media: card_1_media|default({}),
+  heading: card_1_heading|default(''),
+  description: card_1_description|default(''),
+  primary_label: card_1_primary_label|default(''),
+  primary_url: card_1_primary_url|default(''),
+  secondary_label: card_1_secondary_label|default(''),
+  secondary_url: card_1_secondary_url|default(''),
+  featured: true
+} %}
+{% set c2 = {
+  media: card_2_media|default({}),
+  heading: card_2_heading|default(''),
+  description: card_2_description|default(''),
+  primary_label: card_2_primary_label|default(''),
+  primary_url: card_2_primary_url|default(''),
+  secondary_label: card_2_secondary_label|default(''),
+  secondary_url: card_2_secondary_url|default(''),
+  featured: false
+} %}
+{% set c3 = {
+  media: card_3_media|default({}),
+  heading: card_3_heading|default(''),
+  description: card_3_description|default(''),
+  primary_label: card_3_primary_label|default(''),
+  primary_url: card_3_primary_url|default(''),
+  secondary_label: card_3_secondary_label|default(''),
+  secondary_url: card_3_secondary_url|default(''),
+  featured: false
+} %}
+
+{% set cards = [c1, c2, c3] %}
+{% set has_any = (c1.heading is not empty or c1.description is not empty or (c1.media.src is defined and c1.media.src is not empty)) or (c2.heading is not empty or c2.description is not empty or (c2.media.src is defined and c2.media.src is not empty)) or (c3.heading is not empty or c3.description is not empty or (c3.media.src is defined and c3.media.src is not empty)) %}
+
+{% if has_any %}
+<div class="pillar-cards custom-container">
+  <div class="pillar-cards__row">
+    {% for card in cards %}
+      {% set has_content = card.heading is not empty or card.description is not empty or (card.media.src is defined and card.media.src is not empty) %}
+      {% if has_content %}
+        <div class="pillar-cards__card {{ card.featured ? 'pillar-cards__card--featured' : '' }}">
+          <div class="pillar-cards__content">
+            <div class="pillar-cards__top">
+              {% if card.media.src is defined and card.media.src is not empty %}
+                <div class="pillar-cards__icon">
+                  {{ include('caresphere_theme:icon', {
+                    media: card.media,
+                    icon_size: 'small'
+                  }, with_context = false) }}
+                </div>
+              {% endif %}
+              <div class="pillar-cards__text">
+                {% if card.heading is not empty %}
+                  {% if card.featured %}
+                    <h3 class="pillar-cards__heading pillar-cards__heading--h3">{{ card.heading }}</h3>
+                  {% else %}
+                    <h3 class="pillar-cards__heading pillar-cards__heading--h5">{{ card.heading }}</h3>
+                  {% endif %}
+                {% endif %}
+                {% if card.description is not empty %}
+                  <div class="pillar-cards__description">{{ card.description|raw }}</div>
+                {% endif %}
+              </div>
+            </div>
+            {% if card.primary_label is not empty or card.secondary_label is not empty %}
+              <div class="pillar-cards__actions">
+                {% if card.primary_label is not empty %}
+                  {{ include('caresphere_theme:button', {
+                    variant: 'secondary-dark',
+                    label: card.primary_label,
+                    href: card.primary_url,
+                    size: 'medium'
+                  }, with_context = false) }}
+                {% endif %}
+                {% if card.secondary_label is not empty %}
+                  {{ include('caresphere_theme:button', {
+                    variant: 'link',
+                    label: card.secondary_label,
+                    href: card.secondary_url,
+                    size: 'medium',
+                    icon: 'caret-right'
+                  }, with_context = false) }}
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endif %}

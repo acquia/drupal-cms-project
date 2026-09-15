@@ -1,0 +1,256 @@
+// Main header styles
+.navbar-brand {
+  img {
+    max-width: rem-calc(200);
+  }
+}
+
+// Top nav provus styles
+#navbar-top {
+  background: $header-utility-menu-background;
+  color: $header-utility-menu-text;
+  padding: .5rem 1rem;
+  > .container {
+    justify-content: flex-end;
+  }
+  .nav-link {
+    color: $header-utility-menu-link;
+    font-size: rem-calc(14);
+    text-decoration: none;
+    &:hover,
+    &:focus {
+      color: $header-utility-menu-link-hover;
+      text-decoration: underline;
+    }
+  }
+  .block-provus-button {
+    .field--name-field-provus-links {
+      display: flex;
+      gap: rem-calc(30);
+    }
+  }
+}
+
+// Search collapse in header
+#searchCollapse {
+  right: rem-calc(35);
+  width: calc(100% - 45px);
+  background: transparent;
+  top: rem-calc(2);
+  @include media-breakpoint-up(lg) {
+    top: rem-calc(-4);
+    width: rem-calc(460);
+  }
+  .views-exposed-form {
+    .form > div {
+      display: block !important;
+    }
+  }
+  input {
+    border-color: $gray-light;
+    height: 100%;
+    &:hover {
+      background-color: $white;
+    }
+  }
+}
+.navbar-form {
+  position: relative;
+  display: flex;
+  .nav-link {
+    color: $primary-accent;
+    position: relative;
+    z-index: 99;
+    width: rem-calc(50);
+    padding: rem-calc(14 16);
+    @include media-breakpoint-up(lg) {
+      padding: rem-calc(8 16);
+    }
+    .fa-xmark {
+      display: none;
+    }
+    &[aria-expanded="true"] {
+      .fa-xmark {
+        display: inline-block;
+      }
+      .fa-magnifying-glass {
+        display: none;
+      }
+    }
+  }
+  @include media-breakpoint-down(lg) {
+    height: 40px;
+    a[aria-expanded="false"] {
+      width: 100%;
+      text-align: right;
+    }
+  }
+}
+
+// Provus Menu
+#navbar-main {
+  background: $header-navigation-background;
+  box-shadow: inset 0px -1.0369px 0px #E5E7EB;
+  padding: $padding-padding-xxs 0;
+  .navbar-toggler {
+    border: none;
+    &.collapsed {
+      .navbar-toggler-icon {
+        background-image: url('../images/mobile.svg');
+      }
+    }
+    .navbar-toggler-icon {
+      background-image: url('../images/close.svg');
+    }
+  }
+
+  .navbar-collapse {
+    margin-bottom: 0;
+  }
+  .navbar-nav {
+    @include media-breakpoint-down(lg) {
+      display: block;
+    }
+    li.nav-item {
+      @include media-breakpoint-down(lg) {
+        border-bottom: 1px solid $primary-accent;
+      }
+      a.nav-link {
+        padding: $header-navigation-link-spacing;
+        color: $header-navigation-link;
+        font-size: $header-nav-menu-links-size;
+        &:hover,
+        &:focus {
+          color: $header-navigation-link-hover;
+        }
+        @include media-breakpoint-down(lg) {
+          padding: rem-calc(15 0);
+          display: inline-block;
+        }
+      }
+    }
+    li.dropdown {
+      &:hover,
+      &:focus {
+        ul {
+          @include media-breakpoint-up(lg) {
+            display: block;
+          }
+        }
+      }
+      &.hovered {
+        ul {
+          @include media-breakpoint-up(lg) {
+            display: block;
+          }
+        }
+      }
+      a {
+        &:hover,
+        &:focus {
+          color: $primary-shade;
+        }
+        &.dropdown-toggle  {
+          display: none;
+          color: $primary;
+          @include media-breakpoint-down(lg) {
+            float: right;
+            display: block;
+            padding: rem-calc(14);
+          }
+        }
+        &.dropdown-toggle-main {
+          &::after {
+            display: inline-block;
+            margin-left: 0.255em;
+            vertical-align: 0.255em;
+            content: "";
+            border-top: 0.3em solid;
+            border-right: 0.3em solid transparent;
+            border-bottom: 0;
+            border-left: 0.3em solid transparent;
+            color: $primary;
+            @include media-breakpoint-down(lg) {
+              display: none;
+            }
+          }
+        }
+        .caret {
+          display: none;
+          @include media-breakpoint-down(lg) {
+            display: block;
+          }
+        }
+      }
+      & > ul.dropdown-menu {
+        background: $white;
+        box-shadow: 0px 12px 12px -8px rgba(0, 0, 0, 0.08), 0px 4px 4px rgba(0, 0, 0, 0.04);
+        border-radius: rem-calc(0 0 8 8);
+        top: rem-calc(60);
+        column-gap: rem-calc(20);
+        break-inside: avoid-column;
+        padding: rem-calc(25);
+        min-width: rem-calc(250);
+        border-top: none;
+        @include media-breakpoint-down(lg) {
+          box-shadow: none;
+          border: none;
+          padding: 0;
+          margin-bottom: rem-calc(20);
+        }
+        ul.dropdown-menu {
+          min-width: 0;
+        }
+        & > li {
+          padding: 0;
+          border: none;
+          background: transparent;
+          color: inherit;
+          margin-bottom: rem-calc(15);
+          & > a {
+            font-weight: 500;
+            font-size: rem-calc(15);
+            line-height: rem-calc(20);
+            letter-spacing: normal;
+            display: flex;
+            align-items: center;
+            text-transform: none;
+            text-decoration: none;
+            white-space: normal;
+            color: $body-color;
+            display: block;
+            &:hover,
+            &:focus {
+              color: $primary-shade;
+              text-decoration: underline;
+            }
+            svg.ext {
+              display: none;
+            }
+          }
+          &:last-child {
+            margin-bottom: 0;
+          }
+          .dropdown-toggle {
+            font-weight: 700;
+            font-size: rem-calc(12);
+            line-height: rem-calc(12);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: $body-color;
+            text-decoration: none;
+            white-space: normal;
+            margin-bottom: rem-calc(20);
+            padding: 0 !important;
+            display: block;
+            &:hover,
+            &:focus {
+              color: $primary-shade;
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+}

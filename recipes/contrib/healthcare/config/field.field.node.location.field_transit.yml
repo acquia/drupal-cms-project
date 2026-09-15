@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_transit
+    - node.type.location
+  module:
+    - text
+id: node.location.field_transit
+field_name: field_transit
+entity_type: node
+bundle: location
+label: 'Public Transit'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

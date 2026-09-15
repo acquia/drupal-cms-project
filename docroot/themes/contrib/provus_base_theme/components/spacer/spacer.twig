@@ -1,0 +1,10 @@
+{% set classes = [
+    'spacer',
+    padding_all
+] %}
+
+<div{{ attributes.addClass(classes) }}>
+  {% if include_divider %}
+    <hr>
+  {% endif %}
+</div>

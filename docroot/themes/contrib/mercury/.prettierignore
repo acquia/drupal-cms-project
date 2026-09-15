@@ -1,0 +1,20 @@
+# The placeholder tokens in `html.html.twig` used to inject head, CSS, and JS
+# placeholders break Prettier's HTML parsing.
+templates/layout/html.html.twig
+# The setAttribute function is parsed poorly.
+components/video/video.twig
+AGENTS.md
+# The GitLab CI pipeline installs Drupal in a `web/` directory placed at the
+# root of this codebase and symlinks all files to the right place.
+web/**/**
+# Build assets are compiled files and should not be formatted by Prettier.
+# Formatting them causes changes to build assets even when source files haven't changed.
+build/
+# Component CSS files are compiled from .tailwind.css source files.
+# Only ignore .css files, not .tailwind.css source files.
+components/**/*.css
+!components/**/*.tailwind.css
+# We do not care about the lock file's formatting.
+package-lock.json
+# JSON files are indented differently according to Drupal coding standards.
+composer.json

@@ -1,0 +1,20 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Tables
+status: stable
+description: Default button component
+group: Eureka component items
+props:
+  type: object
+  properties:
+    table_non_responsive:
+      type: boolean
+      title: Non responsive table
+      description: If true it adds a class to the table doing it do not have the responsive style on mobile
+      examples:
+        - false
+    table_scrollable:
+      type: boolean
+      title: Scrollable table
+      description: If true it adds a div wrapping the table with style to make the table scrollable, only works if table_non_responsive is true
+      examples:
+        - false

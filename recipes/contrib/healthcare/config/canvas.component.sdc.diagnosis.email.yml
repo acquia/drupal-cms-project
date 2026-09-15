@@ -1,0 +1,125 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - diagnosis
+active_version: 38d542b05887d2ac
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        email:
+          required: false
+          field_type: email
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: email_default
+          default_value:
+            -
+              value: hello@example.com
+          expression: ℹ︎email␟value
+        text_size:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: normal
+          expression: ℹ︎list_string␟value
+        text_color:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: default
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  f64bc17592c4eecf:
+    settings:
+      prop_field_definitions:
+        email:
+          required: false
+          field_type: email
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: email_default
+          default_value:
+            -
+              value: hello@example.com
+          expression: ℹ︎email␟value
+        text_size:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: normal
+          expression: ℹ︎list_string␟value
+        text_color:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: default
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  f9c87a46bb1c695a:
+    settings:
+      prop_field_definitions:
+        email:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: hello@example.com
+          expression: ℹ︎string␟value
+        text_size:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: normal
+          expression: ℹ︎list_string␟value
+        text_color:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: default
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+label: Email
+id: sdc.diagnosis.email
+provider: diagnosis
+source: sdc
+source_local_id: 'diagnosis:email'

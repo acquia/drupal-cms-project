@@ -1,0 +1,83 @@
+<?php
+
+/**
+ * @file
+ * Install file for the OpenAI AI Provider.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function ai_provider_openai_install() {
+  $config_factory = \Drupal::configFactory();
+
+  // Check if we have old configuration from the AI submodule.
+  $old_config = $config_factory->get('provider_openai.settings');
+  $old_data = $old_config->getRawData();
+  if (!empty($old_data['api_key'])) {
+    $new_config = $config_factory->getEditable('ai_provider_openai.settings');
+
+    // Bail if we already have data.
+    $new_data = $new_config->getRawData();
+    if (!empty($new_data['api_key'])) {
+      return;
+    }
+
+    // Copy the old configuration from the previous AI submodule into the new
+    // external module.
+    $new_config->setData($old_data);
+    $new_config->save();
+  }
+
+  // Uninstall the old submodule of AI core if it is still installed.
+  /** @var \Drupal\Core\Extension\ModuleHandlerInterface $handler */
+  $handler = \Drupal::service('module_handler');
+  if ($handler->moduleExists('ai_provider_openai')) {
+    /** @var \Drupal\Core\Extension\ModuleInstallerInterface $installer */
+    $installer = \Drupal::service('module_installer');
+    $installer->uninstall(['provider_openai']);
+  }
+
+}
+
+/**
+ * Implements hook_update_N().
+ *
+ * Set default model for chat_with_tools and chat_with_structured_response
+ * if not set.
+ */
+function ai_provider_openai_update_10001() {
+  $ai_provider = \Drupal::service('ai.provider');
+  // By default, it has not changed anything.
+  $return_message = t('No changes made to OpenAI provider default models.');
+  foreach (['chat_with_tools', 'chat_with_structured_response'] as $type) {
+    // If TRUE, it meant that it was needed to be set.
+    if ($ai_provider->defaultIfNone($type, 'openai', 'gpt-4.1')) {
+      $return_message = t('OpenAI provider default model set for relevant chat operation types.');
+    }
+  }
+  return $return_message;
+}
+
+/**
+ * Implements hook_update_N().
+ *
+ * Migrate the default text_to_image model from dall-e-3 to gpt-image-1 for
+ * existing installs that still have the old default stored.
+ */
+function ai_provider_openai_update_10002() {
+  $ai_provider = \Drupal::service('ai.provider');
+  $config = \Drupal::configFactory()->getEditable('ai.settings');
+  $default_providers = $config->get('default_providers') ?? [];
+
+  // Only update if the stored default is still dall-e-3. Users who explicitly
+  // chose dall-e-3 keep their setting; this only replaces the old hard-coded
+  // default that was set automatically during initial setup.
+  if (!empty($default_providers['text_to_image']['model_id']) && $default_providers['text_to_image']['model_id'] === 'dall-e-3') {
+    $default_providers['text_to_image']['model_id'] = 'gpt-image-1';
+    $config->set('default_providers', $default_providers)->save();
+    return t('Updated default text_to_image model from dall-e-3 to gpt-image-1.');
+  }
+
+  return t('No changes made to OpenAI provider default text_to_image model.');
+}

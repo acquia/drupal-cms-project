@@ -1,0 +1,467 @@
+# Schema for Morphos theme settings.
+# @see https://www.drupal.org/docs/drupal-apis/configuration-api/configuration-schemametadata
+
+morphos.settings:
+  type: theme_settings
+  label: 'Morphos settings'
+  mapping:
+    morphos_settings__active_tab:
+      type: string
+      label: 'Active tab'
+    definition:
+      type: mapping
+      label: 'Definition'
+      mapping:
+        subtheme_acknowledgement:
+          type: boolean
+          label: 'Sub-theme acknowledgement'
+        enable:
+          type: boolean
+          label: 'Enable'
+        skins:
+          type: string
+          label: 'Skins'
+        default:
+          type: mapping
+          label: 'Default'
+          mapping:
+            skin:
+              type: string
+              label: 'Default skin'
+            scheme:
+              type: string
+              label: 'Default scheme'
+    licence:
+      type: mapping
+      label: 'Licence'
+      mapping:
+        licence_accept:
+          type: boolean
+          label: 'Licence accepted'
+    skins:
+      type: sequence
+      label: 'Skins'
+      sequence:
+        type: mapping
+        label: 'Skin'
+        mapping:
+          schemes:
+            type: sequence
+            label: 'Schemes'
+            sequence:
+              type: mapping
+              label: 'Scheme'
+              mapping:
+                colors:
+                  type: sequence
+                  label: 'Colors'
+                  sequence:
+                    type: mapping
+                    label: 'Color'
+                    mapping:
+                      base:
+                        type: mapping
+                        label: 'Base'
+                        mapping:
+                          is_dark:
+                            type: boolean
+                            label: 'Is dark'
+                          background_base:
+                            type: color_hex
+                            label: 'Background base'
+                          foreground_base:
+                            type: color_hex
+                            label: 'Foreground base'
+                          link_base:
+                            type: color_hex
+                            label: 'Link base'
+                          highlight_base:
+                            type: color_hex
+                            label: 'Highlight base'
+                      derivatives:
+                        type: mapping
+                        label: 'Derivatives'
+                        mapping:
+                          background:
+                            type: color_hex
+                            label: 'Background'
+                          background_strong:
+                            type: color_hex
+                            label: 'Background strong'
+                          background_stronger:
+                            type: color_hex
+                            label: 'Background stronger'
+                          background_weak:
+                            type: color_hex
+                            label: 'Background weak'
+                          background_weaker:
+                            type: color_hex
+                            label: 'Background weaker'
+                          foreground:
+                            type: color_hex
+                            label: 'Foreground'
+                          foreground_weak:
+                            type: color_hex
+                            label: 'Foreground weak'
+                          foreground_focus:
+                            type: color_hex
+                            label: 'Foreground focus'
+                          link:
+                            type: color_hex
+                            label: 'Link'
+                          link_hover:
+                            type: color_hex
+                            label: 'Link hover'
+                          link_active:
+                            type: color_hex
+                            label: 'Link active'
+                          link_contrast:
+                            type: color_hex
+                            label: 'Link contrast'
+                          highlight:
+                            type: color_hex
+                            label: 'Highlight'
+                          highlight_contrast:
+                            type: color_hex
+                            label: 'Highlight contrast'
+          radius:
+            type: mapping
+            label: 'Radius'
+            mapping:
+              boxes:
+                type: float
+                label: 'Boxes'
+              fields:
+                type: float
+                label: 'Fields'
+              selectors:
+                type: float
+                label: 'Selectors'
+          effects:
+            type: mapping
+            label: 'Effects'
+            mapping:
+              depth:
+                type: boolean
+                label: 'Depth'
+              noise:
+                type: boolean
+                label: 'Noise'
+          sizes:
+            type: mapping
+            label: 'Sizes'
+            mapping:
+              fields:
+                type: integer
+                label: 'Fields'
+              selectors:
+                type: integer
+                label: 'Selectors'
+              border-width:
+                type: integer
+                label: 'Border width'
+          typography:
+            type: mapping
+            label: 'Typography'
+            mapping:
+              imports:
+                type: string
+                label: 'Imports'
+              default_font:
+                type: string
+                label: 'Default font'
+              fonts:
+                type: mapping
+                label: 'Fonts'
+                mapping:
+                  font_sans:
+                    type: string
+                    label: 'Font sans'
+                  font_serif:
+                    type: string
+                    label: 'Font serif'
+                  font_mono:
+                    type: string
+                    label: 'Font mono'
+              font_sans:
+                type: string
+                label: 'Font sans'
+              font_serif:
+                type: string
+                label: 'Font serif'
+              font_mono:
+                type: string
+                label: 'Font mono'
+              h1:
+                type: mapping
+                label: 'H1'
+                mapping:
+                  h1_font:
+                    type: string
+                    label: 'H1 font'
+                  h1_size:
+                    type: float
+                    label: 'H1 size'
+                  h1_tracking:
+                    type: float
+                    label: 'H1 tracking'
+                  h1_leading:
+                    type: float
+                    label: 'H1 leading'
+                  h1_weight:
+                    type: integer
+                    label: 'H1 weight'
+              h1_font:
+                type: string
+                label: 'H1 font'
+              h1_size:
+                type: float
+                label: 'H1 size'
+              h1_tracking:
+                type: float
+                label: 'H1 tracking'
+              h1_leading:
+                type: float
+                label: 'H1 leading'
+              h1_weight:
+                type: integer
+                label: 'H1 weight'
+              h2:
+                type: mapping
+                label: 'H2'
+                mapping:
+                  h2_font:
+                    type: string
+                    label: 'H2 font'
+                  h2_size:
+                    type: float
+                    label: 'H2 size'
+                  h2_tracking:
+                    type: float
+                    label: 'H2 tracking'
+                  h2_leading:
+                    type: float
+                    label: 'H2 leading'
+                  h2_weight:
+                    type: integer
+                    label: 'H2 weight'
+              h2_font:
+                type: string
+                label: 'H2 font'
+              h2_size:
+                type: float
+                label: 'H2 size'
+              h2_tracking:
+                type: float
+                label: 'H2 tracking'
+              h2_leading:
+                type: float
+                label: 'H2 leading'
+              h2_weight:
+                type: integer
+                label: 'H2 weight'
+              h3:
+                type: mapping
+                label: 'H3'
+                mapping:
+                  h3_font:
+                    type: string
+                    label: 'H3 font'
+                  h3_size:
+                    type: float
+                    label: 'H3 size'
+                  h3_tracking:
+                    type: float
+                    label: 'H3 tracking'
+                  h3_leading:
+                    type: float
+                    label: 'H3 leading'
+                  h3_weight:
+                    type: integer
+                    label: 'H3 weight'
+              h3_font:
+                type: string
+                label: 'H3 font'
+              h3_size:
+                type: float
+                label: 'H3 size'
+              h3_tracking:
+                type: float
+                label: 'H3 tracking'
+              h3_leading:
+                type: float
+                label: 'H3 leading'
+              h3_weight:
+                type: integer
+                label: 'H3 weight'
+              h4:
+                type: mapping
+                label: 'H4'
+                mapping:
+                  h4_font:
+                    type: string
+                    label: 'H4 font'
+                  h4_size:
+                    type: float
+                    label: 'H4 size'
+                  h4_tracking:
+                    type: float
+                    label: 'H4 tracking'
+                  h4_leading:
+                    type: float
+                    label: 'H4 leading'
+                  h4_weight:
+                    type: integer
+                    label: 'H4 weight'
+              h4_font:
+                type: string
+                label: 'H4 font'
+              h4_size:
+                type: float
+                label: 'H4 size'
+              h4_tracking:
+                type: float
+                label: 'H4 tracking'
+              h4_leading:
+                type: float
+                label: 'H4 leading'
+              h4_weight:
+                type: integer
+                label: 'H4 weight'
+              h5:
+                type: mapping
+                label: 'H5'
+                mapping:
+                  h5_font:
+                    type: string
+                    label: 'H5 font'
+                  h5_size:
+                    type: float
+                    label: 'H5 size'
+                  h5_tracking:
+                    type: float
+                    label: 'H5 tracking'
+                  h5_leading:
+                    type: float
+                    label: 'H5 leading'
+                  h5_weight:
+                    type: integer
+                    label: 'H5 weight'
+              h5_font:
+                type: string
+                label: 'H5 font'
+              h5_size:
+                type: float
+                label: 'H5 size'
+              h5_tracking:
+                type: float
+                label: 'H5 tracking'
+              h5_leading:
+                type: float
+                label: 'H5 leading'
+              h5_weight:
+                type: integer
+                label: 'H5 weight'
+              h6:
+                type: mapping
+                label: 'H6'
+                mapping:
+                  h6_font:
+                    type: string
+                    label: 'H6 font'
+                  h6_size:
+                    type: float
+                    label: 'H6 size'
+                  h6_tracking:
+                    type: float
+                    label: 'H6 tracking'
+                  h6_leading:
+                    type: float
+                    label: 'H6 leading'
+                  h6_weight:
+                    type: integer
+                    label: 'H6 weight'
+              h6_font:
+                type: string
+                label: 'H6 font'
+              h6_size:
+                type: float
+                label: 'H6 size'
+              h6_tracking:
+                type: float
+                label: 'H6 tracking'
+              h6_leading:
+                type: float
+                label: 'H6 leading'
+              h6_weight:
+                type: integer
+                label: 'H6 weight'
+              display:
+                type: mapping
+                label: 'Display'
+                mapping:
+                  display_font:
+                    type: string
+                    label: 'Display font'
+                  display_size:
+                    type: float
+                    label: 'Display size'
+                  display_tracking:
+                    type: float
+                    label: 'Display tracking'
+                  display_leading:
+                    type: float
+                    label: 'Display leading'
+                  display_weight:
+                    type: integer
+                    label: 'Display weight'
+              display_font:
+                type: string
+                label: 'Display font'
+              display_size:
+                type: float
+                label: 'Display size'
+              display_tracking:
+                type: float
+                label: 'Display tracking'
+              display_leading:
+                type: float
+                label: 'Display leading'
+              display_weight:
+                type: integer
+                label: 'Display weight'
+          settings:
+            type: mapping
+            label: 'Settings'
+            mapping:
+              header_menu_style:
+                type: string
+                label: 'Header menu style'
+              header_menu_megamenu_cols:
+                type: string
+                label: 'Mega menu columns'
+              header_sticky:
+                type: boolean
+                label: 'Sticky header'
+              footer_sticky:
+                type: boolean
+                label: 'Sticky footer'
+              apply:
+                type: string
+                label: 'Apply'
+
+ui_icons.icon_pack_options.phosphor:
+  type: mapping
+  label: 'Phosphor icon settings'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    size:
+      type: integer
+      label: 'Size'
+    color:
+      type: string
+      label: 'Color'
+    alt:
+      type: string
+      label: 'Alt text'

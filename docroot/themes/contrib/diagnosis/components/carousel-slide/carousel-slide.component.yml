@@ -1,0 +1,64 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Carousel Slide
+description: A single slide for use within a carousel. Can contain any content.
+group: Layout
+props:
+  type: object
+  properties:
+    background:
+      type: string
+      title: Background color
+      enum:
+        - default
+        - muted
+        - bright
+        - light
+        - accent
+        - primary
+      meta:enum:
+        default: Default
+        muted: Muted
+        bright: Bright
+        light: Light
+        accent: Accent
+        primary: Primary
+      examples:
+        - default
+    padding:
+      type: string
+      title: Padding
+      description: Amount of padding around slide content
+      enum:
+        - none
+        - small
+        - medium
+        - large
+      meta:enum:
+        none: None
+        small: Small
+        medium: Medium
+        large: Large
+      examples:
+        - medium
+    width:
+      type: string
+      title: Content width
+      description: Maximum width of slide content
+      enum:
+        - "100%"
+        - "90%"
+        - "80%"
+        - "75%"
+        - "50%"
+      meta:enum:
+        "100%": Full width
+        "90%": 90%
+        "80%": 80%
+        "75%": 75%
+        "50%": 50%
+      examples:
+        - "100%"
+slots:
+  slide_content:
+    title: Slide content
+    description: Add any components or content to this slide

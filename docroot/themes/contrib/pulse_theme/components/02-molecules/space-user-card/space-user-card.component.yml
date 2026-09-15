@@ -1,0 +1,57 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+
+name: Space User Card
+
+description: Displays user image, name, short description and social media links.
+
+status: stable
+
+group: Molecules
+
+props:
+
+  type: object
+
+  properties:
+    image:
+      title: User image
+      $ref: json-schema-definitions://canvas.module/image
+      type: object
+      examples:
+        - src: "images/person.jpg"
+          alt: "Boring placeholder"
+          width: 56
+          height: 56
+
+    name:
+      type: string
+      title: Name
+      description: The name of the user.
+      examples:
+        - Priyanka Jeph
+
+    description:
+      type: string
+      title: Description
+      description: Short user information.
+      examples:
+        - Interested in medicine
+
+    twitter_url:
+      type: string
+      title: Twitter URL
+      description: Link to the Twitter profile.
+      examples:
+        - https://twitter.com/example
+
+    linkedin_url:
+      type: string
+      title: LinkedIn URL
+      description: Link to the LinkedIn profile.
+      examples:
+        - https://linkedin.com/in/example
+
+    extra_classes:
+      type: string
+      title: Class names
+      description: Additional CSS classes for custom styling.

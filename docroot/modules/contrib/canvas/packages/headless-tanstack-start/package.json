@@ -1,0 +1,86 @@
+{
+  "name": "@drupal-canvas/headless-tanstack-start",
+  "version": "0.4.0",
+  "engines": {
+    "node": ">=22.19.0 <23 || >=24.5.0"
+  },
+  "description": "TanStack Start adapter for the Drupal Canvas Headless SDK.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://git.drupalcode.org/project/canvas.git",
+    "directory": "packages/headless-tanstack-start"
+  },
+  "bugs": "https://git.drupalcode.org/project/canvas/-/work_items",
+  "files": [
+    "src",
+    "!src/**/*.test.*",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "main": "./src/index.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./middleware": {
+      "import": "./src/middleware.ts",
+      "types": "./src/middleware.ts",
+      "default": "./src/middleware.ts"
+    },
+    "./client": {
+      "import": "./src/client/index.ts",
+      "types": "./src/client/index.ts",
+      "default": "./src/client/index.ts"
+    },
+    "./head": {
+      "import": "./src/head.ts",
+      "types": "./src/head.ts",
+      "default": "./src/head.ts"
+    },
+    "./vite": {
+      "import": "./src/vite.ts",
+      "types": "./src/vite.ts",
+      "default": "./src/vite.ts"
+    },
+    "./CanvasComponentTree": {
+      "import": "./src/canvas-component-tree.tsx",
+      "types": "./src/canvas-component-tree.tsx",
+      "default": "./src/canvas-component-tree.tsx"
+    },
+    "./ComponentPreview": {
+      "import": "./src/component-preview.tsx",
+      "types": "./src/component-preview.tsx",
+      "default": "./src/component-preview.tsx"
+    }
+  },
+  "scripts": {
+    "test": "vitest run",
+    "type-check": "tsc --noEmit --pretty"
+  },
+  "dependencies": {
+    "@drupal-canvas/headless": "^0.5.0",
+    "@drupal-canvas/headless-react": "^0.3.1"
+  },
+  "peerDependencies": {
+    "@tanstack/react-router": ">=1.130.0",
+    "@tanstack/react-start": ">=1.130.0",
+    "react": ">=18.0.0",
+    "vite": ">=7.0.0"
+  },
+  "devDependencies": {
+    "@tanstack/react-router": "^1.132.0",
+    "@tanstack/react-start": "^1.168.27",
+    "@types/react": "^19.2.0",
+    "react": "^19.2.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.0.0",
+    "vitest": "^4.0.18"
+  }
+}

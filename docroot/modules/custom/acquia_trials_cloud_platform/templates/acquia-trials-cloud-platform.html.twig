@@ -1,0 +1,44 @@
+{#
+/**
+ * @file
+ * Template for the Acquia Trials Cloud Platform block.
+ *
+ * Variables:
+ * - features: Array of feature items (title, description, icon).
+ * - cta_url: URL for the Cloud Platform CTA button.
+ */
+#}
+<div class="acquia-trials-cloud-platform">
+  <div class="cloud-platform-header">
+    <h2 class="cloud-platform-header__title">{{ 'Manage Infrastructure on Acquia Cloud Platform'|t }}</h2>
+    <p class="cloud-platform-header__description">{{ "Your trial is running on the world's most secure, Drupal-optimized cloud."|t }}</p>
+  </div>
+
+  <div class="cloud-platform-features">
+    {% for feature in features %}
+      <div class="cloud-platform-feature">
+        <span class="cloud-platform-feature__icon cloud-platform-feature__icon--{{ feature.icon }}" aria-hidden="true">
+          {% if feature.icon == 'deploy' %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm3.707-8.707-3-3a1 1 0 0 0-1.414 0l-3 3a1 1 0 0 0 1.414 1.414L9 9.414V13a1 1 0 1 0 2 0V9.414l1.293 1.293a1 1 0 0 0 1.414-1.414z" clip-rule="evenodd"/></svg>
+          {% elseif feature.icon == 'secure' %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0 0 10 1.944 11.954 11.954 0 0 0 17.834 5c.11.65.166 1.32.166 2 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.68.056-1.35.166-2.001zm11.541 3.708a1 1 0 0 0-1.414-1.414L9 10.586 7.707 9.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4z" clip-rule="evenodd"/></svg>
+          {% elseif feature.icon == 'governance' %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0zm-6-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm-2 4a5 5 0 0 0-4.546 2.916A5.986 5.986 0 0 0 10 16a5.986 5.986 0 0 0 4.546-2.084A5 5 0 0 0 10 11z" clip-rule="evenodd"/></svg>
+          {% endif %}
+        </span>
+        <div class="cloud-platform-feature__content">
+          <span class="cloud-platform-feature__title">{{ feature.title }}</span>
+          <span class="cloud-platform-feature__description">{{ feature.description }}</span>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="cloud-platform-cta">
+    <a href="{{ cta_url }}" class="cloud-platform-cta__button" target="_blank" rel="noopener">
+      {{ 'Go to Cloud Platform'|t }}
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M11 3a1 1 0 1 0 0 2h2.586l-6.293 6.293a1 1 0 1 0 1.414 1.414L15 6.414V9a1 1 0 1 0 2 0V4a1 1 0 0 0-1-1h-5z"/><path d="M5 5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3a1 1 0 1 0-2 0v3H5V7h3a1 1 0 0 0 0-2H5z"/></svg>
+    </a>
+    <span class="cloud-platform-cta__powered">{{ 'POWERED BY ACQUIA'|t }}</span>
+  </div>
+</div>

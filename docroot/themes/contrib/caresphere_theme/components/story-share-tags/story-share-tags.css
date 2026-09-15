@@ -1,0 +1,127 @@
+/**
+ * @file story-share-tags.css
+ * Story Share & Tags — Figma desktop 1:7432 (horizontal), mobile 1:7218 (stacked).
+ *
+ * Desktop: row, justify-between, items-end. Share (heading + buttons) left, tags right.
+ * Mobile: column, gap 32px. Share block then tags row (wrap).
+ *
+ * Typography: Share heading DM Sans SemiBold 16px mobile / 18px desktop; tags 14px SemiBold.
+ * Colors: text white; share buttons dark circle; tags bg white/10, border white/20.
+ */
+
+/* ============================================================
+   Base wrapper
+   ============================================================ */
+
+.story-share-tags {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing, 8px) * 4); /* 32px mobile */
+  align-items: flex-start;
+  width: 100%;
+  color: var(--color-scheme-3-text, #ffffff);
+  border-bottom: 1px solid var(--border-secondary);
+  padding-bottom: 3rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 48rem) {
+  .story-share-tags {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+/* ============================================================
+   Share block (heading + buttons)
+   Figma: gap 16px between heading and buttons
+   ============================================================ */
+
+.story-share-tags__share {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+/* Share heading — Text/Regular 16px mobile, Text/Medium 18px desktop; Semi Bold */
+.story-share-tags__heading {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-semibold, 600);
+  font-size: 1rem; /* 16px mobile */
+  line-height: 1.5;
+  margin: 0;
+  color: inherit;
+}
+
+@media (min-width: 48rem) {
+  .story-share-tags__heading {
+    font-size: var(--text-lg, 1.125rem); /* 18px desktop */
+  }
+}
+
+/* Share buttons row — Figma: gap 8px */
+.story-share-tags__buttons {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* Share button — dark circle, 24px icon, 4px padding, rounded-full */
+.story-share-tags__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border-radius: 64px;
+  background: var(--color-scheme-3-foreground, #020704);
+  color: inherit;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.story-share-tags__btn:hover {
+  background: var(--muted, #1a1f1c);
+  color: inherit;
+}
+
+.story-share-tags__btn:focus-visible {
+  outline: 2px solid var(--primary, #c30000);
+  outline-offset: 2px;
+}
+
+.story-share-tags__btn svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   Tags row
+   Figma: gap 8px, tag pill — bg white/10, border white/20, px 10 py 4, 14px SemiBold
+   ============================================================ */
+
+.story-share-tags__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.story-share-tags__tag {
+  display: inline-block;
+  padding: 4px 10px;
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-semibold, 600);
+  font-size: var(--text-sm, 0.875rem); /* 14px */
+  line-height: 1.5;
+  color: var(--color-white, #ffffff);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0;
+  white-space: nowrap;
+}

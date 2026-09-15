@@ -1,0 +1,179 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Icon card
+group: Card
+props:
+  type: object
+  required:
+    - text_align
+    - icon_align
+  properties:
+    tile_size:
+      type: string
+      title: Aspect ratio
+      enum:
+        - square
+        - "4:3"
+        - "16:9"
+      meta:enum:
+        square: Square
+        "4:3": Rectangle 4 × 3
+        "16:9": Rectangle 16 × 9
+      examples:
+        - square
+    backgroundcolor:
+      type: string
+      title: Background Color
+      enum:
+        - white
+        - black
+        - dark-gray
+        - gray-light
+        - gray
+      default: white
+    border_radius:
+      type: string
+      title: Border radius
+      enum:
+        - small
+        - medium
+        - large
+      meta:enum:
+        small: Small
+        medium: Medium
+        large: Large
+      default: medium
+      examples:
+        - medium
+    media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Icon media
+      description: "Upload an SVG icon image."
+      type: object
+    icon:
+      type: string
+      title: Legacy Icon Name (do not use)
+      description: "Retained to prevent 500 crash on older saved versions."
+    custom_width:
+      type: integer
+      title: Custom Width (px)
+      description: "Optional precision width in pixels. Overrides icon size dropdown."
+    custom_height:
+      type: integer
+      title: Custom Height (px)
+      description: "Optional precision height in pixels. Overrides icon size dropdown."
+    icon_size:
+      type: string
+      title: Icon size
+      enum:
+        - small
+        - medium
+        - large
+        - extra-large
+      meta:enum:
+        small: Small
+        medium: Medium
+        large: Large
+        extra-large: Extra large
+      examples:
+        - large
+    icon_align:
+      type: string
+      title: Icon alignment
+      enum:
+        - left
+        - center
+        - right
+      meta:enum:
+        left: Left
+        center: Center
+        right: Right
+      default: center
+      examples:
+        - center
+    url:
+      type: string
+      title: Link
+      description: "Used when CTA button is not set. Makes the whole card clickable."
+    cta_variant:
+      type: string
+      title: CTA Button Style
+      enum:
+        - primary
+        - secondary-white
+        - secondary-dark
+        - link
+      meta:enum:
+        primary: Primary (filled)
+        secondary-white: Secondary (White)
+        secondary-dark: Secondary (Dark)
+        link: Link (text only)
+      default: primary
+    cta_label:
+      type: string
+      title: CTA button label
+      description: "When set, shows a button instead of a whole-card link."
+      examples:
+        - "Learn more"
+    cta_url:
+      type: string
+      title: CTA button URL
+      examples:
+        - "/learn"
+    cta_size:
+      type: string
+      title: CTA button size
+      enum:
+        - small
+        - medium
+        - large
+      meta:enum:
+        small: Small
+        medium: Medium
+        large: Large
+      default: medium
+    cta_icon:
+      type: string
+      title: CTA button icon
+      enum:
+        - none
+        - arrow-right
+        - arrow-left
+        - caret-right
+        - caret-left
+        - download
+        - user-plus
+      meta:enum:
+        none: None
+        arrow-right: Arrow right
+        arrow-left: Arrow left
+        caret-right: Caret right
+        caret-left: Caret left
+        download: Download
+        user-plus: User plus
+      default: none
+    text:
+      type: string
+      title: Heading
+      examples:
+        - Your heading here
+    description:
+      type: string
+      title: Description
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - "<p>This is placeholder text.</p>"
+    text_align:
+      type: string
+      title: Text alignment
+      enum:
+        - left
+        - center
+        - right
+      meta:enum:
+        left: Left
+        center: Center
+        right: Right
+      default: center
+      examples:
+        - center

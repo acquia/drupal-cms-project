@@ -1,0 +1,39 @@
+{#
+/**
+ * Available variables:
+ * - icon_base_class: base class name
+ * - icon_modifiers: modifiers for icons (array)
+ * - icon_blockname: blockname prepended to the base classname
+ *
+ * - icon_url: path of the icon
+ * - icon_decorative:
+ * - icon_name: the name of the icon
+ * - icon_role: a11y role - An SVG has an implicit WAI-ARIA role="graphics-document".
+ *    In general it is best not to change the implicit role of the SVG.
+ * - icon_title: a11y title
+ * - icon_desc: a11y description
+ */
+#}
+{% set icon_base_class = icon_base_class|default('icon') %}
+
+{# @TODO: Please review if we can remove with_context from components and get {{ directory }} here, approach is not ideal #}
+{% set icon_url = (componentMetadata.path|split('components/'))[0] ~ 'images/icons.svg' %}
+
+<svg {{ bem(icon_base_class, icon_modifiers, icon_blockname, icon_extra_class) }}
+
+  {% if icon_decorative %}
+    aria-hidden="true" role="presentation"
+  {% elseif icon_role %}
+    role="{{ icon_role }}"
+  {% endif %}
+
+  {% if icon_desc %}
+    aria-label="{{ icon_desc }}"
+  {% endif %}
+>
+  {% if icon_title %}
+    <title id="title-{{ icon_name }}">{{ icon_title }}</title>
+  {% endif %}
+
+  <use xlink:href="{{ icon_url }}#{{ icon_name }}"></use>
+</svg>

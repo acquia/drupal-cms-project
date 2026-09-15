@@ -1,0 +1,28 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Tab Item
+status: stable
+description: Individual tab item component with a tab label and tab panel content
+group: Provus Components
+
+props:
+  type: object
+  required:
+    - label
+    - content
+  properties:
+    label:
+      type: string
+      title: Label
+      description: Text shown in the tab navigation label
+      examples:
+        - Overview
+      default: ''
+    content:
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: block
+      title: Content
+      description: Content rendered in the tab panel
+      examples:
+        - '<p>Tab panel content goes here.</p>'
+      default: ''

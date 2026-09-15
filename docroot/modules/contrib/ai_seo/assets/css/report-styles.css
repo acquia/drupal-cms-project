@@ -1,0 +1,676 @@
+/* =============================================================================
+   AI SEO Analyzer — Report Styles
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   1.  Modal dialog shell
+   ----------------------------------------------------------------------------- */
+
+.seo-report-dialog.ui-dialog {
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .22);
+  border: none;
+}
+
+.seo-report-dialog .ui-dialog-titlebar {
+  background: #003cc5;
+  color: #fff;
+  border: none;
+  border-radius: 6px 6px 0 0;
+  padding: .875rem 1.25rem;
+  font-size: .9375rem;
+  font-weight: 700;
+}
+
+.seo-report-dialog .ui-dialog-title {
+  color: #fff;
+  font-size: .9375rem;
+}
+
+.seo-report-dialog .ui-dialog-titlebar-close {
+  color: rgba(255,255,255,.8);
+}
+
+.seo-report-dialog .ui-dialog-titlebar-close:hover {
+  color: #fff;
+  background: rgba(255,255,255,.15);
+  border-color: transparent;
+}
+
+.seo-report-dialog .ui-dialog-content {
+  padding: 0;
+  overflow-y: auto;
+  max-height: 78vh;
+}
+
+/* -----------------------------------------------------------------------------
+   2.  Report wrapper
+   ----------------------------------------------------------------------------- */
+
+.seo-report-body {
+  padding: 1.25rem 1.5rem 1.75rem;
+  font-size: .8125rem;
+  line-height: 1.55;
+  color: #1a1a1a;
+}
+
+/* Draft notice banner */
+.seo-report-draft-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: .625rem;
+  background: #fefce8;
+  border-left: 3px solid #f59e0b;
+  border-radius: 0 4px 4px 0;
+  padding: .625rem .875rem;
+  margin: 0 0 1.5rem;
+  font-size: .875rem;
+  color: #78350f;
+  line-height: 1.5;
+}
+
+/* Saved-report meta strip */
+.seo-report-meta-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .375rem .875rem;
+  align-items: center;
+  background: #f0f4fe;
+  border-bottom: 1px solid #c7d2fe;
+  padding: .75rem 1.75rem;
+  font-size: .8125rem;
+  color: #374151;
+}
+
+.seo-report-meta-strip strong {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* -----------------------------------------------------------------------------
+   3.  Headings
+   ----------------------------------------------------------------------------- */
+
+/* H2 — numbered section (e.g. "1. [Keyword: ...] Title") */
+.seo-report-body h2 {
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+  font-size: .875rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #1e2a4a;
+  background: #eef1fb;
+  border-left: 4px solid #003cc5;
+  border-radius: 0 6px 6px 0;
+  margin: 1.5rem 0 .625rem;
+  padding: .5rem .75rem;
+}
+
+.seo-report-body h2:first-child {
+  margin-top: 0;
+}
+
+/* H3 — sub-section label */
+.seo-report-body h3 {
+  font-size: .625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: #003cc5;
+  margin: 1rem 0 .25rem;
+  padding: 0;
+}
+
+/* H4 */
+.seo-report-body h4 {
+  font-size: .875rem;
+  font-weight: 600;
+  margin: 1rem 0 .375rem;
+  color: #1a1a1a;
+}
+
+/* Report conclusion / summary H2 variant */
+.seo-report-body h2:last-of-type {
+  background: #edfaf4;
+  border-color: #059669;
+  color: #064e35;
+}
+
+/* -----------------------------------------------------------------------------
+   4.  Body text & paragraphs
+   ----------------------------------------------------------------------------- */
+
+.seo-report-body p {
+  margin: 0 0 .5em;
+  line-height: 1.55;
+}
+
+.seo-report-body strong,
+.seo-report-body b {
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+/* -----------------------------------------------------------------------------
+   5.  Lists
+   ----------------------------------------------------------------------------- */
+
+.seo-report-body ul,
+.seo-report-body ol {
+  margin: .25em 0 .875em;
+  padding-left: 1.5em;
+}
+
+.seo-report-body ul {
+  list-style: disc;
+}
+
+.seo-report-body ol {
+  list-style: decimal;
+}
+
+.seo-report-body li {
+  margin-bottom: .25em;
+  line-height: 1.5;
+}
+
+/* Nested lists */
+.seo-report-body li > ul,
+.seo-report-body li > ol {
+  margin: .25em 0 .25em;
+}
+
+/* Ordered list at priority/conclusion section — make it pop */
+.seo-report-body h2 + ol {
+  counter-reset: priority-counter;
+  list-style: none;
+  padding-left: 0;
+}
+
+.seo-report-body h2 + ol > li {
+  counter-increment: priority-counter;
+  display: flex;
+  gap: .75rem;
+  align-items: flex-start;
+  padding: .5rem .75rem;
+  border-radius: 4px;
+  margin-bottom: .375rem;
+}
+
+.seo-report-body h2 + ol > li:nth-child(odd) {
+  background: #f8f9ff;
+}
+
+.seo-report-body h2 + ol > li::before {
+  content: counter(priority-counter);
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: #003cc5;
+  color: #fff;
+  border-radius: 50%;
+  font-size: .75rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-top: .075em;
+}
+
+/* -----------------------------------------------------------------------------
+   6.  Code blocks
+   ----------------------------------------------------------------------------- */
+
+.seo-report-body code {
+  background: #eef1fb;
+  border-radius: 3px;
+  padding: .1em .35em;
+  font-size: .875em;
+  font-family: 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+  color: #003cc5;
+}
+
+.seo-report-body pre {
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  font-size: .8125rem;
+  line-height: 1.6;
+  margin: .5rem 0 1.25rem;
+  border: none;
+}
+
+.seo-report-body pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+  border-radius: 0;
+}
+
+/* -----------------------------------------------------------------------------
+   7.  Blockquotes & callouts
+   ----------------------------------------------------------------------------- */
+
+.seo-report-body blockquote {
+  background: #fefce8;
+  border-left: 4px solid #f59e0b;
+  border-radius: 0 6px 6px 0;
+  margin: .75em 0 1em;
+  padding: .625em 1em;
+  color: #1a1a1a;
+  font-style: normal;
+}
+
+.seo-report-body blockquote p {
+  margin: 0;
+}
+
+/* Inline ">" paragraphs the AI sometimes emits instead of blockquotes */
+.seo-report-body p:has(strong:first-child) {
+  padding: .375em .75em;
+  background: #fefce8;
+  border-left: 3px solid #f59e0b;
+  border-radius: 0 4px 4px 0;
+  margin: .25em 0;
+}
+
+/* -----------------------------------------------------------------------------
+   8.  Tables
+   ----------------------------------------------------------------------------- */
+
+.seo-report-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1.25em;
+  font-size: .9rem;
+}
+
+.seo-report-body th,
+.seo-report-body td {
+  padding: .5em .75em;
+  border: 1px solid #d1d5db;
+  text-align: left;
+  vertical-align: top;
+}
+
+.seo-report-body th {
+  background: #eef1fb;
+  font-weight: 600;
+  font-size: .8125rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: #374151;
+}
+
+/* -----------------------------------------------------------------------------
+   9.  Report page (full-page view, /node/%/seo/%)
+   ----------------------------------------------------------------------------- */
+
+.ai-seo-intro {
+  background: #f0f4fe;
+  border-left: 4px solid #003cc5;
+  padding: .875rem 1.125rem;
+  margin: 0 0 1.75rem;
+  border-radius: 0 4px 4px 0;
+  font-size: .9375rem;
+  line-height: 1.55;
+  max-width: 60rem;
+  color: #1a1a1a;
+}
+
+.ai-seo-section-heading {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  margin: 2rem 0 1.25rem;
+  padding-bottom: .625rem;
+  border-bottom: 2px solid #d1d5db;
+  color: #1a1a1a;
+  max-width: 60rem;
+}
+
+.ai-seo-submit-notice {
+  font-size: .8125rem;
+  color: #6b7280;
+  margin: .25rem 0 .75rem;
+  max-width: 60rem;
+}
+
+/* Report meta row */
+.ai-seo-report-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .625rem 1rem;
+  align-items: center;
+  margin-bottom: 1.125rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #d1d5db;
+}
+
+.ai-seo-report-type-badge {
+  display: inline-block;
+  background: #003cc5;
+  color: #fff;
+  font-size: .6875rem;
+  font-weight: 700;
+  padding: .2rem .65rem;
+  border-radius: 2rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+.ai-seo-report-time {
+  font-size: .875rem;
+  color: #6b7280;
+}
+
+.report--revision-id {
+  font-size: .875rem;
+  color: #6b7280;
+}
+
+/* Report content containers */
+.reports__container {
+  max-width: 60rem;
+}
+
+/* Apply the same body styles on the full report page */
+.reports__container h2,
+.report-content h2 {
+  font-size: .9375rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #1e2a4a;
+  background: #eef1fb;
+  border-left: 4px solid #003cc5;
+  border-radius: 0 6px 6px 0;
+  margin: 2rem 0 .875rem;
+  padding: .625rem .875rem;
+}
+
+.reports__container h2:first-child,
+.report-content h2:first-child {
+  margin-top: 0;
+}
+
+.reports__container h3,
+.report-content h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: #003cc5;
+  margin: 1.375rem 0 .5rem;
+}
+
+.reports__container p,
+.report-content p {
+  line-height: 1.65;
+  margin-bottom: .75em;
+}
+
+.reports__container ul,
+.reports__container ol,
+.report-content ul,
+.report-content ol {
+  margin: .25em 0 .875em;
+  padding-left: 1.5em;
+}
+
+.reports__container li,
+.report-content li {
+  margin-bottom: .375em;
+  line-height: 1.55;
+}
+
+.reports__container pre,
+.report-content pre {
+  background: #0f172a;
+  color: #e2e8f0;
+  border: none;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  font-size: .8125rem;
+  line-height: 1.6;
+  margin: .5rem 0 1.25rem;
+}
+
+.reports__container code,
+.report-content code {
+  background: #eef1fb;
+  border-radius: 3px;
+  padding: .1em .35em;
+  font-size: .875em;
+  color: #003cc5;
+  font-family: 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+}
+
+.reports__container pre code,
+.report-content pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+.reports__container blockquote,
+.report-content blockquote {
+  background: #fefce8;
+  border-left: 4px solid #f59e0b;
+  border-radius: 0 6px 6px 0;
+  margin: .75em 0 1em;
+  padding: .625em 1em;
+  color: #1a1a1a;
+  font-style: normal;
+}
+
+.reports__container table,
+.report-content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1.25em;
+  font-size: .9rem;
+}
+
+.reports__container th,
+.reports__container td,
+.report-content th,
+.report-content td {
+  padding: .5em .75em;
+  border: 1px solid #d1d5db;
+  text-align: left;
+  vertical-align: top;
+}
+
+.reports__container th,
+.report-content th {
+  background: #eef1fb;
+  font-weight: 600;
+  font-size: .8125rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: #374151;
+}
+
+/* Older reports table */
+details.reports__container,
+details.older-reports__container {
+  max-width: 60rem;
+  margin-bottom: 1.25rem;
+}
+
+details.reports__container summary,
+details.older-reports__container summary {
+  font-weight: 600;
+}
+
+.older-reports-table {
+  width: 100%;
+  font-size: .9375rem;
+}
+
+/* Report view page */
+.ai-seo-back-link {
+  display: inline-block;
+  margin-bottom: 1.25rem;
+}
+
+.ai-seo-report-metadata {
+  margin: 0 0 1.5rem;
+  padding: 1rem 1.25rem;
+  background: #f0f4fe;
+  border-left: 4px solid #003cc5;
+  border-radius: 0 4px 4px 0;
+  max-width: 60rem;
+}
+
+.ai-seo-report-metadata .ai-seo-report-meta {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.ai-seo-report-metadata .ai-seo-node-title {
+  font-size: .875rem;
+  color: #6b7280;
+  margin-top: .375rem;
+}
+
+details.report-content,
+details.report-prompt,
+details.report-html {
+  max-width: 60rem;
+  margin-bottom: 1.25rem;
+}
+
+/* -----------------------------------------------------------------------------
+   Live streaming preview
+   ----------------------------------------------------------------------------- */
+
+@keyframes ai-seo-spin {
+  to { transform: rotate(360deg); }
+}
+
+.ai-seo-progress__spinner {
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid #c5d2f9;
+  border-top-color: #3b5bdb;
+  border-radius: 50%;
+  animation: ai-seo-spin .7s linear infinite;
+}
+
+/* Sticky header bar shown above the live preview */
+.ai-seo-stream-header {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  padding: .625rem 1.5rem;
+  background: #e8edff;
+  border: 1px solid #c7d2fe;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  font-size: .8125rem;
+  color: #1e3a8a;
+  font-weight: 600;
+  max-width: 60rem;
+}
+
+/* The scrollable preview area — mirrors the saved-report layout */
+.ai-seo-stream-preview {
+  max-height: 60vh;
+  overflow-y: auto;
+  border: 1px solid #c7d2fe;
+  border-radius: 0 0 4px 4px;
+  padding: 1.25rem 1.5rem;
+  background: #fff;
+  max-width: 60rem;
+}
+
+/* Wrap both header + preview */
+.ai-seo-stream-wrap {
+  margin: 1rem 0;
+}
+
+.btn--analyze.is-loading {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+/* -----------------------------------------------------------------------------
+   Node edit form sidebar panel
+   ----------------------------------------------------------------------------- */
+
+.ai-seo-sidebar-status {
+  margin: 0 0 .5rem;
+  font-size: .8125rem;
+  color: #374151;
+  line-height: 1.4;
+}
+
+.ai-seo-sidebar-all-link {
+  display: inline-block;
+  font-size: .8125rem;
+  margin-bottom: .625rem;
+}
+
+.ai-seo-sidebar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .375rem;
+  margin-bottom: .5rem;
+}
+
+/* -----------------------------------------------------------------------------
+   Field-level AI analyze button
+   ----------------------------------------------------------------------------- */
+
+/* Wrapper added by hook around each field delta.
+   position:relative gives the button its absolute-positioning anchor. */
+.ai-seo-field-outer {
+  position: relative;
+}
+
+/* Prevent the label text from running under the button */
+.ai-seo-field-outer .form-item__label,
+.ai-seo-field-outer > .form-item > label:first-child,
+.ai-seo-field-outer .js-form-item > label:first-child {
+  display: block;
+  padding-right: 5.5rem;
+}
+
+/* Button pinned to the top-right of the field delta — sits in the label row */
+.ai-seo-field-btn.button {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  font-size: .6875rem !important;
+  padding: .15rem .5rem !important;
+  line-height: 1.4;
+  margin: 0 !important;
+  z-index: 2;
+  background: #f0f4fe !important;
+  border: 1px solid #c7d2fe !important;
+  border-radius: 3px !important;
+  color: #003cc5 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  font-weight: 600;
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+
+.ai-seo-field-btn.button:hover,
+.ai-seo-field-btn.button:focus {
+  background: #e8edff !important;
+  border-color: #003cc5 !important;
+  color: #002a8a !important;
+  box-shadow: 0 0 0 2px rgba(0, 60, 197, .15) !important;
+}

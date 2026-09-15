@@ -1,0 +1,209 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: dcddc1dc-aaea-46ba-9a31-90dc5a496a85
+  default_langcode: en
+  depends:
+    ec07e5e9-d11e-4550-b528-66dffbc93527: file
+    3a63058d-4aa1-4b91-b530-28696677c56e: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Careers
+  components:
+    -
+      uuid: f7131670-17b1-4596-a559-ee153dd771d9
+      component_id: sdc.byte_theme.hero-billboard
+      inputs:
+        height: large
+        flex_position: hero-center
+        overlay_opacity: 0%
+        object_position: bottom
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 3a63058d-4aa1-4b91-b530-28696677c56e
+            target_type: media
+        overlap_navbar: true
+    -
+      parent_uuid: f7131670-17b1-4596-a559-ee153dd771d9
+      slot: hero_slot
+      uuid: f08be9dc-e328-4cb7-9499-df6db9bd8900
+      component_id: sdc.byte_theme.heading
+      inputs:
+        heading_text: 'Join us'
+        level: 1
+        text_size: default
+        text_color: default
+        align: left
+    -
+      parent_uuid: f7131670-17b1-4596-a559-ee153dd771d9
+      slot: hero_slot
+      uuid: 2c722338-b73d-45b6-8d8a-3d474adfaed1
+      component_id: sdc.byte_theme.text
+      inputs:
+        text:
+          value: "<p>We're always on the lookout for talented, curious people who care about craft and collaboration.</p>"
+          format: canvas_html_block
+        text_size: text-lg
+        text_color: default
+    -
+      uuid: 79ce30fd-fa39-4a09-bede-21a29b9cceaf
+      component_id: sdc.byte_theme.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        padding_block_start: '64'
+        padding_block_end: '64'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: 79ce30fd-fa39-4a09-bede-21a29b9cceaf
+      slot: header_slot
+      uuid: 2dfdd7b9-1d08-4ba0-b2dc-e3f5578344e9
+      component_id: sdc.byte_theme.heading
+      inputs:
+        heading_text: 'How we work'
+        level: 2
+        text_size: heading-responsive-6xl
+        text_color: default
+        align: center
+    -
+      parent_uuid: 79ce30fd-fa39-4a09-bede-21a29b9cceaf
+      slot: main_slot
+      uuid: d7ace17f-9ad9-4c9d-806c-1f251a4db89e
+      component_id: sdc.byte_theme.text
+      inputs:
+        text:
+          value: '<p class="text-align-center">Our distributed team spans multiple time zones, which means flexibility is built into our DNA. We communicate asynchronously when it makes sense and gather for real-time collaboration when it matters. You''ll have the tools and support to do great work from wherever you''re most productive.</p><p class="text-align-center">We invest in your growth through mentorship, learning budgets, and regular feedback cycles. Whether you''re early in your career or a seasoned expert, you''ll find opportunities to develop new skills and deepen existing ones.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: 5a379365-c781-4e0f-b630-e224dffe6d85
+      component_id: sdc.byte_theme.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: 5a379365-c781-4e0f-b630-e224dffe6d85
+      slot: header_slot
+      uuid: ce7742fb-8576-4a66-8082-bc237a959804
+      component_id: sdc.byte_theme.heading
+      inputs:
+        heading_text: 'Hear from our people'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: center
+    -
+      parent_uuid: 5a379365-c781-4e0f-b630-e224dffe6d85
+      slot: main_slot
+      uuid: 78d346b6-3551-48fd-9b48-e48fd66af44a
+      component_id: sdc.byte_theme.card-testimonial
+      inputs:
+        text: "This is the best job I ever had. I not only love the team, but the tools, and I've learned so many new things!"
+        cite_name: 'Isiah Julio'
+        cite_text: 'Engineer, Technical Services'
+        align: center
+        style: default
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/portrait.png
+            alt: Placeholder
+            width: 100
+            height: 100
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.byte_theme.card-testimonial
+    -
+      uuid: b79d5ffc-1eed-46ce-a2f4-f70f1a815e45
+      component_id: sdc.byte_theme.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '0'
+        margin_block_end: '48'
+        padding_block_start: '64'
+        padding_block_end: '64'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: b79d5ffc-1eed-46ce-a2f4-f70f1a815e45
+      slot: header_slot
+      uuid: eb0daa00-056e-40f0-bfbf-b1f9bf4ac667
+      component_id: sdc.byte_theme.heading
+      inputs:
+        heading_text: 'What we offer'
+        level: 2
+        text_size: heading-responsive-6xl
+        text_color: default
+        align: center
+    -
+      parent_uuid: b79d5ffc-1eed-46ce-a2f4-f70f1a815e45
+      slot: main_slot
+      uuid: 0cc7a5be-4587-4eff-99e8-9df50c422b0e
+      component_id: sdc.byte_theme.heading
+      inputs:
+        heading_text: 'Flexibility, growth and connection.'
+        level: 3
+        text_size: heading-responsive-3xl
+        text_color: default
+        align: center
+    -
+      parent_uuid: b79d5ffc-1eed-46ce-a2f4-f70f1a815e45
+      slot: main_slot
+      uuid: bc93b9ac-82a8-4298-9dc2-73cac0d5b80e
+      component_id: sdc.byte_theme.text
+      inputs:
+        text:
+          value: '<p class="text-align-center">Competitive compensation packages with equity, comprehensive health benefits, and generous parental leave ensure you''re supported in all aspects of life. We provide annual retreats for the whole team to connect in person, unlimited PTO because rest fuels creativity, and home office stipends to set up your ideal workspace.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+  path:
+    -
+      alias: /careers
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

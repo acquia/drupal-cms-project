@@ -1,0 +1,127 @@
+/* Acquia Trials Cloud Platform block
+ * Selectors use .block.block-acquia-trials-cloud-platform as the root scope
+ * to beat dashboard.css / dashboard.gin.css rules that load later.
+ */
+
+.block.block-acquia-trials-cloud-platform .acquia-trials-cloud-platform {
+  background: #1B3A5C;
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+/* Header */
+.block.block-acquia-trials-cloud-platform .cloud-platform-header {
+  background: #0F2A4A;
+  padding: 20px 24px 16px;
+}
+
+.block.block-acquia-trials-cloud-platform .cloud-platform-header h2.cloud-platform-header__title {
+  margin: 0 0 8px;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  margin-inline: 0;
+  margin-block-start: 0;
+}
+
+.block.block-acquia-trials-cloud-platform .cloud-platform-header__description {
+  margin: 0;
+  font-size: 13px;
+  color: #94A3C8;
+}
+
+/* Features */
+.block.block-acquia-trials-cloud-platform .cloud-platform-features {
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.block.block-acquia-trials-cloud-platform .cloud-platform-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.block.block-acquia-trials-cloud-platform .cloud-platform-feature__icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: #60A5FA;
+}
+
+.block.block-acquia-trials-cloud-platform .cloud-platform-feature__content {
+  min-width: 0;
+}
+
+.block.block-acquia-trials-cloud-platform .cloud-platform-feature__title {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+}
+
+.block.block-acquia-trials-cloud-platform .cloud-platform-feature__description {
+  display: block;
+  font-size: 12px;
+  color: #94A3C8;
+  margin-top: 2px;
+}
+
+/* CTA */
+.block.block-acquia-trials-cloud-platform .cloud-platform-cta {
+  padding: 16px 24px 20px;
+  text-align: center;
+}
+
+.block.block-acquia-trials-cloud-platform a.cloud-platform-cta__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 10px 20px;
+  background: #fff;
+  color: #1B3A5C;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+  box-sizing: border-box;
+}
+
+.block.block-acquia-trials-cloud-platform a.cloud-platform-cta__button:hover,
+.block.block-acquia-trials-cloud-platform a.cloud-platform-cta__button:focus {
+  background: #E2E8F0;
+  color: #1B3A5C;
+  text-decoration: none;
+}
+
+.block.block-acquia-trials-cloud-platform .cloud-platform-cta__button svg {
+  flex-shrink: 0;
+}
+
+.block.block-acquia-trials-cloud-platform .cloud-platform-cta__powered {
+  display: block;
+  margin-top: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #64748B;
+}

@@ -1,0 +1,48 @@
+/*
+* @todo: import this please
+* @import "accessible-autocomplete";
+*/
+
+.gov-major-worksmajor-works-autocomplete-search .form-item__dropdown {
+  border: none;
+}
+
+.gov-major-worksmajor-works-autocomplete-search .form-item__dropdown::after {
+  display: none;
+}
+
+.gov-major-worksmajor-works-autocomplete-search .autocomplete__input {
+  border-radius: var(--border-radius);
+  box-shadow: none;
+  background-color: var(--white);
+  border: 0.2rem solid var(--form-border);
+}
+
+.gov-major-worksmajor-works-autocomplete-search .autocomplete__input.autocomplete__input--focused {
+  border: 0.2rem solid var(--white);
+  border-radius: var(--border-radius);
+}
+
+.gov-major-worksmajor-works-autocomplete-search .autocomplete__input[aria-expanded="true"] {
+  border: none;
+  box-shadow: none;
+  border-radius: var(--border-radius);
+}
+
+.form-submit {
+  display: none;
+}
+
+.autocomplete__wrapper .autocomplete__menu {
+  border: 0.2rem solid var(--form-border);
+  border-radius: var(--border-radius);
+}
+
+.autocomplete__wrapper .autocomplete__menu.autocomplete__menu--visible {
+  border: none;
+  width: 100%;
+}
+
+.autocomplete__wrapper .autocomplete__menu.autocomplete__menu--visible li {
+  border: 0.2rem solid var(--form-border);
+}

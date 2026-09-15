@@ -1,0 +1,90 @@
+<?php
+
+/**
+ * @file
+ * Provides clean block template suggestions for Canvas-placed components.
+ *
+ * Canvas sets block #id to a component UUID. Core then generates a useless
+ * UUID-based template suggestion. This module:
+ * 1. Tracks which region is rendering via a #pre_render callback.
+ * 2. Strips the UUID-based suggestion.
+ * 3. Adds region-aware suggestions so identical blocks placed in different
+ *    regions can each have their own template.
+ */
+
+use Drupal\canvas_block_twig_suggestions\CanvasRegionTracker;
+
+/**
+ * Implements hook_preprocess_page().
+ *
+ * Injects a #pre_render callback into every region render array. Core's
+ * HtmlRenderer sets #region on each region after the display variant builds
+ * the page. Our #pre_render fires before the region's children (blocks)
+ * render, capturing the region name for use in theme_suggestions_block_alter.
+ */
+function canvas_block_twig_suggestions_preprocess_page(array &$variables): void {
+  $regions = \Drupal::theme()->getActiveTheme()->getRegions();
+  foreach ($regions as $region) {
+    if (!empty($variables['page'][$region])) {
+      $variables['page'][$region]['#pre_render'][] = [
+        CanvasRegionTracker::class,
+        'preRenderRegion',
+      ];
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_block_alter().
+ *
+ * For Canvas-placed blocks (where #id is a UUID):
+ * - Strips the UUID-based suggestion.
+ * - Adds a region-specific suggestion using the plugin ID, so the same block
+ *   type placed in two different regions gets two distinct template options.
+ *
+ * Result for system_branding_block in the header region:
+ *   block                                  (base)
+ *   block__system                          (core - provider)
+ *   block__system_branding_block           (core - plugin id)
+ *   block__header__system_branding_block   (this module - region + plugin)
+ *
+ * This means block--header--system-branding-block.html.twig wins over the
+ * generic block--system-branding-block.html.twig, allowing distinct markup
+ * per region placement.
+ */
+function canvas_block_twig_suggestions_theme_suggestions_block_alter(array &$suggestions, array $variables): void {
+  $elements = $variables['elements'];
+  $id = $elements['#id'] ?? NULL;
+
+  // Only act on Canvas-placed blocks. Canvas sets #id to a UUID which
+  // contains hyphens. Standard block placements use machine names without
+  // hyphens.
+  if ($id === NULL || !str_contains($id, '-')) {
+    return;
+  }
+
+  // Remove all suggestions containing the UUID. Core generates one
+  // (block__[uuid]), and the block_content module generates two more
+  // (block__block_content__id__[uuid] and
+  // block__block_content__id_view__[uuid]__[view_mode]). All are invalid
+  // because hyphens in UUIDs produce illegal template file names.
+  $suggestions = array_values(array_filter(
+    $suggestions,
+    static fn(string $s) => !str_contains($s, $id),
+  ));
+
+  // Build the plugin-id portion of the suggestion.
+  $plugin_id = $elements['#plugin_id'] ?? NULL;
+  if ($plugin_id === NULL) {
+    return;
+  }
+  $plugin_clean = strtr($plugin_id, [':' => '_', '-' => '_']);
+
+  // Get the current region from our tracker.
+  $region = CanvasRegionTracker::getCurrentRegion();
+  if ($region !== NULL) {
+    $region_clean = strtr($region, ['-' => '_']);
+    // Add region + plugin suggestion as the highest priority.
+    $suggestions[] = 'block__' . $region_clean . '__' . $plugin_clean;
+  }
+}

@@ -1,0 +1,98 @@
+{#
+/**
+ * @file
+ * Theme override for a breadcrumb trail.
+ *
+ * Available variables:
+ * - breadcrumb: Breadcrumb trail items.
+ */
+#}
+{{ attach_library('byte_theme/breadcrumb') }}
+{% if breadcrumb %}
+  {% set needs_truncation = (breadcrumb|length) > 3 %}
+
+  {% set item_classes = 'flex items-center text-sm md:text-md' %}
+
+  <nav aria-label="breadcrumb" class="container mx-auto my-2 w-full md:my-3 2xl:my-4">
+    <h2 id="system-breadcrumb" class="sr-only">{{ 'Breadcrumb' }}</h2>
+    <ol class="m-0 flex list-none flex-row items-center gap-1 p-0 leading-none text-foreground md:gap-2">
+      {% for item in breadcrumb %}
+        {% set is_first = loop.first %}
+        {% set is_last_two = loop.revindex <= 2 %}
+        {% set should_show = not needs_truncation or is_first or is_last_two %}
+
+        {% if loop.first %}
+          <li class="gap-1 md:gap-2 2xl:text-base" aria-labelledby="{{ item.text }}">
+            <a href="{{ item.url }}" class="flex items-center no-underline hover:opacity-80">
+              {{
+                include(
+                  '@byte_theme/components/icon/icon.twig',
+                  {
+                    weight: 'bold',
+                    icon: 'house',
+                    icon_size: 'extra-small'
+                  }
+                )
+              }}
+            </a>
+          </li>
+        {% endif %}
+
+        {# Insert ellipsis after first item if truncation is needed #}
+        {% if needs_truncation and loop.index == 2 %}
+          <li aria-hidden="true">
+            {{
+              include(
+                '@byte_theme/components/icon/icon.twig',
+                {
+                  weight: 'bold',
+                  icon: 'dots-three',
+                  icon_size: 'extra-small'
+                }
+              )
+            }}
+          </li>
+          <li aria-hidden="true">
+            {{
+              include(
+                '@byte_theme/components/icon/icon.twig',
+                {
+                  weight: 'bold',
+                  icon: 'caret-right',
+                  icon_size: 'extra-small'
+                }
+              )
+            }}
+          </li>
+        {% endif %}
+
+        {# Render breadcrumb item #}
+        {% if should_show %}
+          {% if loop.last %}
+            <li class="{{ item_classes }} active" aria-current="page">{{ item.text }}</li>
+          {% elseif item.url and not is_first %}
+            <li class="{{ item_classes }}">
+              <a href="{{ item.url }}" class="no-underline hover:underline hover:underline-offset-2 focus:underline">{{ item.text }}</a>
+            </li>
+          {% endif %}
+
+          {# Add chevron after item (except last) #}
+          {% if not loop.last and (not needs_truncation or is_last_two or is_first) %}
+            <li aria-hidden="true">
+              {{
+                include(
+                  '@byte_theme/components/icon/icon.twig',
+                  {
+                    weight: 'bold',
+                    icon: 'caret-right',
+                    icon_size: 'extra-small'
+                  }
+                )
+              }}
+            </li>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </ol>
+  </nav>
+{% endif %}

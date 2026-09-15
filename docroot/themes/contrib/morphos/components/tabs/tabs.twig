@@ -1,0 +1,15 @@
+{% set is_preview = canvas_is_preview or in_preview %}
+{% set id = id ?: canvas_uuid %}
+
+{% set classes = [
+  'tabs',
+  'has-rhythm',
+  placement,
+  size,
+  style|default('tabs-border'),
+  is_preview ? 'min-h-20',
+] %}
+
+<div{{ attributes.addClass(classes).setAttribute('data-tabs-id', id) }}>
+  {% block items %}{% endblock %}
+</div>

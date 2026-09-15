@@ -1,0 +1,156 @@
+$schema: 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Badge
+description: A small inline label used to highlight status, counts, or short categorical tags alongside other content.
+group: Element
+status: stable
+props:
+  type: object
+  properties:
+    label:
+      type: string
+      title: Label
+      description: Label for the badge.
+      examples:
+        - Badge label
+    color:
+      type: string
+      title: Color
+      description: Select the badge color.
+      enum:
+        - badge-primary
+        - badge-secondary
+        - badge-accent
+        - badge-neutral
+        - badge-info
+        - badge-success
+        - badge-warning
+        - badge-error
+      meta:enum:
+        badge-primary: Primary
+        badge-secondary: Secondary
+        badge-accent: Accent
+        badge-neutral: Neutral
+        badge-info: Info
+        badge-success: Success
+        badge-warning: Warning
+        badge-error: Error
+    style:
+      type: string
+      title: Style
+      description: Select the badge style.
+      enum:
+        - badge-outline
+        - badge-dash
+        - badge-soft
+        - badge-ghost
+      meta:enum:
+        badge-outline: Outline
+        badge-dash: Dash
+        badge-soft: Soft
+        badge-ghost: Ghost
+    size:
+      type: string
+      title: Size
+      description: Select the badge size.
+      enum:
+        - badge-xs
+        - badge-sm
+        - badge-md
+        - badge-lg
+        - badge-xl
+      meta:enum:
+        badge-xs: Extra small
+        badge-sm: Small
+        badge-md: Medium
+        badge-lg: Large
+        badge-xl: Extra large
+    icon:
+      type: string
+      title: Icon
+      description: Select the icon.
+      enum:
+        - plus
+        - plus-circle
+        - plus-square
+        - check
+        - check-circle
+        - floppy-disk
+        - trash
+        - trash-simple
+        - x
+        - x-circle
+        - pencil
+        - pencil-simple
+        - pencil-line
+        - magnifying-glass
+        - magnifying-glass-plus
+        - arrow-right
+        - caret-right
+        - arrow-left
+        - caret-left
+        - download-simple
+        - upload-simple
+        - export
+        - share-network
+        - sign-in
+        - sign-out
+        - heart
+        - thumbs-up
+        - star
+        - bookmark-simple
+        - gear
+        - sliders
+        - dots-three-outline
+        - chat-centered-dots
+        - paper-plane-tilt
+        - phone
+        - copy
+        - clipboard
+      meta:enum:
+        plus: 'Add: Plus'
+        plus-circle: 'Add: Plus circle'
+        plus-square: 'Add: Plus square'
+        check: 'Confirm: Check'
+        check-circle: 'Confirm: Check circle'
+        floppy-disk: 'Confirm: Floppy disk'
+        trash: 'Remove: Trash'
+        trash-simple: 'Remove: Trash simple'
+        x: 'Remove: X'
+        x-circle: 'Remove: X circle'
+        pencil: 'Edit: Pencil'
+        pencil-simple: 'Edit: Pencil simple'
+        pencil-line: 'Edit: Pencil line'
+        magnifying-glass: 'Search: Magnifying glass'
+        magnifying-glass-plus: 'Search: Magnifying glass plus'
+        arrow-right: 'Direction: Arrow right'
+        caret-right: 'Direction: Caret right'
+        arrow-left: 'Direction: Arrow left'
+        caret-left: 'Direction: Caret left'
+        download-simple: 'Transfer: Download simple'
+        upload-simple: 'Transfer: Upload simple'
+        export: 'Transfer: Export'
+        share-network: 'Transfer: Share network'
+        sign-in: 'Authenticate: Sign in'
+        sign-out: 'Authenticate: Sign out'
+        heart: 'Engagement: Heart'
+        thumbs-up: 'Engagement: Thumbs up'
+        star: 'Engagement: Star'
+        bookmark-simple: 'Engagement: Bookmark simple'
+        gear: 'Settings: Gear'
+        sliders: 'Settings: Sliders'
+        dots-three-outline: 'Settings: Dots three outline'
+        chat-centered-dots: 'Comms: Chat centered dots'
+        paper-plane-tilt: 'Comms: Paper plane tilt'
+        phone: 'Comms: Phone'
+        copy: 'Copy: Copy'
+        clipboard: 'Copy: Clipboard'
+    icon_position:
+      type: string
+      title: Icon position
+      description: Select the icon position.
+      enum:
+        - icon-position--start
+        - icon-position--end
+      meta:enum:
+        icon-position--start: Start
+        icon-position--end: End
