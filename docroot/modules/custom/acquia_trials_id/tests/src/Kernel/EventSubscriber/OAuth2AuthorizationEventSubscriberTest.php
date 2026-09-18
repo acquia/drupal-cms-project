@@ -66,7 +66,7 @@ class OAuth2AuthorizationEventSubscriberTest extends KernelTestBase {
       public function process(SymfonyContainerBuilder $container): void {
         $container->setParameter('acquia_id.idp_base_uri', 'https://id.acquia.com/oauth2/default');
         $container->setParameter('acquia_id.cloud_api_base_uri', 'https://cloud.acquia.com');
-        $container->setParameter('acquia_id.idp_logout_redirect_uri', 'https://cloud.acquia.com');
+        $container->setParameter('acquia_id.idp_logout_redirect_uri', 'https://source.acquia.com');
       }
     }, priority: -200);
   }

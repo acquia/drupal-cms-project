@@ -20,7 +20,7 @@ use PHPUnit\Framework\Attributes\Group;
 class LogoutResponseGeneratorTest extends UnitTestCase {
 
   private const IDP_BASE_URI = 'https://id.acquia.com/oauth2/default';
-  private const LOGOUT_REDIRECT_URI = 'https://cloud.acquia.com';
+  private const LOGOUT_REDIRECT_URI = 'https://source.acquia.com/cloud';
   private const USER_ID = 42;
   private const STORAGE_KEY = 'acquia_id_access_token';
 
