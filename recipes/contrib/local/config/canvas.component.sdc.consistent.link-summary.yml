@@ -1,0 +1,47 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - consistent
+active_version: d70da11eb91aaddc
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        link_summary_label:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Council Tax discounts and exemptions'
+          expression: ℹ︎string␟value
+        link_summary_url:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: /council-tax/discounts
+          expression: ℹ︎string␟value
+        link_summary_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Find out if you qualify for a discount or exemption.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+label: 'Link summary'
+id: sdc.consistent.link-summary
+provider: consistent
+source: sdc
+source_local_id: 'consistent:link-summary'

@@ -1,0 +1,23 @@
+{% set is_preview = canvas_is_preview or in_preview %}
+
+{% set classes = [
+  'toc',
+  sticky ? 'sticky top-20',
+  is_preview ? 'min-h-20',
+  'has-rhythm',
+] %}
+
+{% if show %}
+  <nav{{ attributes.addClass(classes)
+    .setAttribute('data-content-selector', content_selector|default('.layout__content'))
+    .setAttribute('data-heading-levels', heading_levels|default('h2'))
+    .setAttribute('data-ignore-selector', ignore_selector ? ignore_selector : null) }}>
+    {% if heading %}
+      {{ include('morphos:heading', {
+        heading,
+        level: heading_level|default(2),
+      }, with_context: false) }}
+    {% endif %}
+    <div class="toc__body"></div>
+  </nav>
+{% endif %}

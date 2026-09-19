@@ -1,0 +1,74 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Address
+group: Base
+props:
+  type: object
+  properties:
+    organization:
+      type:
+        - string
+        - "null"
+      title: Organization
+      examples:
+        - "Saltmarsh Island Health"
+    address_line1:
+      type:
+        - string
+        - "null"
+      title: Address line 1
+      examples:
+        - "123 Main Street"
+    address_line2:
+      type:
+        - string
+        - "null"
+      title: Address line 2
+      examples:
+        - "Suite 100"
+    locality:
+      type:
+        - string
+        - "null"
+      title: City
+      examples:
+        - "Charleston"
+    administrative_area:
+      type:
+        - string
+        - "null"
+      title: State
+      examples:
+        - "SC"
+    postal_code:
+      type:
+        - string
+        - "null"
+      title: ZIP code
+      examples:
+        - "29401"
+    text_color:
+      type: string
+      title: Text color
+      enum:
+        - default
+        - inverted
+        - primary
+      meta:enum:
+        default: Default text
+        inverted: Inverted text
+        primary: Primary
+      examples:
+        - default
+    text_size:
+      type: string
+      title: Text size
+      enum:
+        - text-sm
+        - normal
+        - text-lg
+      meta:enum:
+        text-sm: Small
+        normal: Normal
+        text-lg: Large
+      examples:
+        - normal

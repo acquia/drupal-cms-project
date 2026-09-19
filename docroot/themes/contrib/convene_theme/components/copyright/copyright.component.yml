@@ -1,0 +1,26 @@
+name: Copyright
+description: Editable copyright text for the footer.
+props:
+  type: object
+  properties:
+    text:
+      type: string
+      title: Copyright Text
+      default: '© 2026'
+    company_link:
+      type: object
+      title: Company Link
+      properties:
+        uri:
+          type: string
+          title: URI
+        title:
+          type: string
+          title: Link text
+      default:
+        uri: 'https://opensenselabs.com/'
+        title: 'OpenSense Labs'
+    suffix:
+      type: string
+      title: Suffix Text
+      default: 'Crafted together with the community.'

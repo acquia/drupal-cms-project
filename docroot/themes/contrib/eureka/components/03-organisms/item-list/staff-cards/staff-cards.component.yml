@@ -1,0 +1,62 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Staff cards list
+status: stable
+description: Listing to display different types of items
+# Overrides regular css with minified.
+libraryOverrides:
+  css:
+    component:
+      staff-cards.min.css: { minified: true }
+group: Eureka main components
+props:
+  type: object
+  properties:
+    staff_cards_heading:
+      type: string
+      title: Item list heading
+      description: Heading element of the component title
+      examples:
+        - Meet our staff
+    staff_cards_heading_level:
+      type: ['number', 'null']
+      title: Item list heading level
+      description: Heading level of the heading element - only change this if you know what you're doing, as it affects accessibility
+      enum:
+          - 2
+          - 3
+          - 4
+          - 5
+      examples:
+          - 2
+    staff_cards_summary:
+      type: ['string', 'null']
+      title: Item list summary
+      description: Summary / text intro
+      examples:
+          - Our dedicated team of teachers and staff are passionate about creating a nurturing environment where every child can thrive.
+    staff_cards_cta_text:
+        type: ['string', 'null']
+        title: Staff cards call to action text
+        description: Text for the call to action button
+        examples:
+            - Meet all our staff
+    staff_cards_cta_url:
+      type: string
+      format: uri-reference
+      title: Vacancy CTA URL
+      description: Link to the vacancy
+      x-allowed-schemes:
+        - http
+        - https
+      examples:
+        - 'https://zoocha.com'
+    staff_cards_text:
+      type: ['string', 'null']
+      title: Staff cards text
+      description: Text for the call to action button
+      examples:
+          - Learn more about our experienced and caring team.
+slots:
+  staff_cards_items_list:
+    title: staff cards list items
+    description: Block slot for staff cards list items

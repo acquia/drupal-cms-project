@@ -1,0 +1,55 @@
+{#
+/**
+ * @file
+ * Default theme implementation for webform wizard progress tracker.
+ *
+ * Available variables:
+ * - webform: A webform.
+ * - pages: Associative array of wizard pages.
+ * - progress: Array of wizard progress containing page titles.
+ * - current_page: Current wizard page key.
+ * - current_index: The current wizard page index.
+ * - max_pages: Maximum number of pages that progress text should be displayed on.
+ *
+ * @see template_preprocess_webform_progress_tracker()
+ * @see https://www.w3.org/WAI/tutorials/forms/multi-page/
+ *
+ */
+#}
+{{ attach_library('webform/webform.progress.tracker') }}
+
+{% set classes = [
+  'steps',
+  'w-full',
+  'p-0',
+  'mb-4 lg:mb-6',
+] %}
+
+<ul{{ attributes.addClass(classes).setAttribute('data-webform-progress-steps', true) }}>
+  {% for index, page in progress %}
+    {% set is_completed = index < current_index %}
+    {% set is_active = index == current_index %}
+    {% set step_classes = [
+      'step',
+      is_active or is_completed ? 'step--active',
+    ] %}
+    {% set step_attributes = create_attribute()
+      .setAttribute('data-webform-' ~ page.type, page.name)
+      .setAttribute('title', page.title)
+      .setAttribute('class', '')
+      .addClass(step_classes) %}
+    {% if is_active %}
+      {% set step_attributes = step_attributes.setAttribute('aria-current', 'step') %}
+    {% endif %}
+    <li{{ step_attributes }}>
+      {% if progress|length < max_pages %}
+        <div data-webform-progress-step data-webform-progress-link data-text="{{ index + 1 }}">
+          <span class="visually-hidden" data-webform-progress-state>
+            {% if is_active or is_completed %}{{- is_active ? 'Current'|t : 'Completed'|t -}}{% endif %}
+          </span>
+          {{ page.title }}
+        </div>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>

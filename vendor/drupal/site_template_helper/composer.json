@@ -1,0 +1,17 @@
+{
+  "type": "composer-plugin",
+  "name": "drupal/site_template_helper",
+  "description": "Provides tooling and scaffolding for setting up Drupal site templates.",
+  "require": {
+    "composer-plugin-api": "^2",
+    "drupal/core": ">=10.3",
+    "symfony/console": "^7"
+  },
+  "extra": {
+    "class": "Drupal\\site_template_helper\\Plugin"
+  },
+  "autoload": {
+    "classmap": ["src"]
+  },
+  "license": ["GPL-2.0-or-later"]
+}

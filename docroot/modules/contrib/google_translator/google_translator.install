@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Google Translator module.
+ */
+
+/**
+ * Sets default Google Translator disclaimer title.
+ */
+function google_translator_update_9001(&$sandbox): void {
+  $config = \Drupal::configFactory()->getEditable('google_translator.settings');
+  if (empty($config->get('google_translator_disclaimer_title'))) {
+    $config->set('google_translator_disclaimer_title', 'Automatic translation disclaimer');
+    $config->save(TRUE);
+  }
+}

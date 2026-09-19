@@ -1,0 +1,43 @@
+{% set row_classes = [
+  'row',
+  gap ? gap : '',
+]|filter(v => v) %}
+
+{% set desktop_col_map = {
+  '33-33-33': ['col-xl-4', 'col-xl-4', 'col-xl-4'],
+  '50-25-25': ['col-xl-6', 'col-xl-3', 'col-xl-3'],
+  '25-25-50': ['col-xl-3', 'col-xl-3', 'col-xl-6'],
+  '25-50-25': ['col-xl-3', 'col-xl-6', 'col-xl-3'],
+} %}
+
+{% set tablet_col_map = {
+  '33-33-33': ['col-md-4', 'col-md-4', 'col-md-4'],
+  '50-25-25': ['col-md-6', 'col-md-3', 'col-md-3'],
+  '25-25-50': ['col-md-3', 'col-md-3', 'col-md-6'],
+  '25-50-25': ['col-md-3', 'col-md-6', 'col-md-3'],
+  '100-100-100': ['col-md-12', 'col-md-12', 'col-md-12'],
+} %}
+
+{% set mobile_col_map = {
+  '33-33-33': ['col-4', 'col-4', 'col-4'],
+  '50-25-25': ['col-6', 'col-3', 'col-3'],
+  '25-25-50': ['col-3', 'col-3', 'col-6'],
+  '25-50-25': ['col-3', 'col-6', 'col-3'],
+  '100-100-100': ['col-12', 'col-12', 'col-12'],
+} %}
+
+{% set d_cols = desktop_col_map[desktop_width] ?? desktop_col_map['33-33-33'] %}
+{% set t_cols = tablet_col_map[tablet_width] ?? tablet_col_map['33-33-33'] %}
+{% set m_cols = mobile_col_map[mobile_width] ?? mobile_col_map['100-100-100'] %}
+
+<div class="{{ row_classes|join(' ') }}">
+  <div class="{{ m_cols[0] }} {{ t_cols[0] }} {{ d_cols[0] }}">
+    {% block column_1 %}{% endblock %}
+  </div>
+  <div class="{{ m_cols[1] }} {{ t_cols[1] }} {{ d_cols[1] }}">
+    {% block column_2 %}{% endblock %}
+  </div>
+  <div class="{{ m_cols[2] }} {{ t_cols[2] }} {{ d_cols[2] }}">
+    {% block column_3 %}{% endblock %}
+  </div>
+</div>

@@ -1,0 +1,103 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.person.field_accepting_new
+    - field.field.node.person.field_areas_of_interest
+    - field.field.node.person.field_biography
+    - field.field.node.person.field_certifications
+    - field.field.node.person.field_collaboration_interests
+    - field.field.node.person.field_credentials
+    - field.field.node.person.field_education
+    - field.field.node.person.field_email
+    - field.field.node.person.field_first_name
+    - field.field.node.person.field_honors_awards
+    - field.field.node.person.field_languages_spoken
+    - field.field.node.person.field_last_name
+    - field.field.node.person.field_locations
+    - field.field.node.person.field_middle_name
+    - field.field.node.person.field_office_hours
+    - field.field.node.person.field_person_type
+    - field.field.node.person.field_phone
+    - field.field.node.person.field_photo
+    - field.field.node.person.field_position_details
+    - field.field.node.person.field_preferred_name
+    - field.field.node.person.field_professional_memberships
+    - field.field.node.person.field_professional_title
+    - field.field.node.person.field_pronouns
+    - field.field.node.person.field_publications
+    - field.field.node.person.field_research_activities
+    - field.field.node.person.field_social_media
+    - field.field.node.person.field_specialties
+    - field.field.node.person.sa_seo_description
+    - field.field.node.person.sa_seo_image
+    - field.field.node.person.sa_seo_page_title
+    - node.type.person
+  module:
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.person.teaser
+targetEntityType: node
+bundle: person
+mode: teaser
+content:
+  field_biography:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 300
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_photo:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: tall_4_5
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_professional_title:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_accepting_new: true
+  field_areas_of_interest: true
+  field_certifications: true
+  field_collaboration_interests: true
+  field_credentials: true
+  field_education: true
+  field_email: true
+  field_first_name: true
+  field_honors_awards: true
+  field_languages_spoken: true
+  field_last_name: true
+  field_locations: true
+  field_middle_name: true
+  field_office_hours: true
+  field_person_type: true
+  field_phone: true
+  field_position_details: true
+  field_preferred_name: true
+  field_professional_memberships: true
+  field_pronouns: true
+  field_publications: true
+  field_research_activities: true
+  field_social_media: true
+  field_specialties: true
+  links: true
+  sa_seo_description: true
+  sa_seo_image: true
+  sa_seo_page_title: true

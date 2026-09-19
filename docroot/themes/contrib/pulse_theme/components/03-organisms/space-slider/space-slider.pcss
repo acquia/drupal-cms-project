@@ -1,0 +1,115 @@
+@reference "../../00-base/global/global.pcss";
+
+.space-slider__wrapper {
+  .splide {
+    &[data-with-gradient="true"] {
+      .splide__track {
+        &:before {
+          @apply content-[''] absolute left-0 top-0 bottom-0 w-[180px] z-[1];
+
+          background: linear-gradient(
+            270deg,
+            rgba(203, 221, 187, 0) 0%,
+            var(--sds-base-brand-color) 100%
+          );
+        }
+
+        &:after {
+          @apply content-[''] absolute right-0 top-0 bottom-0 w-[180px] z-[1];
+
+          background: linear-gradient(
+            90deg,
+            rgba(203, 221, 187, 0) 0%,
+            var(--sds-base-brand-color) 100%
+          );
+        }
+      }
+    }
+  }
+
+  .splide__arrows {
+    @apply flex items-center gap-4 lg:gap-10 mt-10;
+
+    &.splide__arrows--left {
+      @apply justify-start;
+    }
+    &.splide__arrows--center {
+      @apply justify-center;
+    }
+    &.splide__arrows--right {
+      @apply justify-end;
+    }
+
+    .splide__arrow {
+      @apply relative opacity-100 transform-none top-auto left-auto right-auto w-10 h-10 rounded-full flex items-center justify-center border transition-colors duration-300 cursor-pointer;
+
+      svg {
+        @apply w-5 h-5;
+      }
+
+      &[disabled] {
+        @apply opacity-50 cursor-default;
+      }
+    }
+
+    &.splide__arrows--primary {
+      .splide__arrow {
+        @apply border-sds-primary hover:border-sds-primary-dark text-white bg-sds-primary hover:bg-sds-primary-dark;
+      }
+    }
+
+    &.splide__arrows--secondary {
+      .splide__arrow {
+        @apply border-sds-secondary hover:border-sds-secondary-dark text-sds-neutral bg-sds-secondary hover:bg-sds-secondary-dark;
+      }
+    }
+  }
+
+  &[data-pagination-alignment="left"] .splide__pagination {
+    @apply justify-start;
+  }
+
+  &[data-pagination-alignment="center"] .splide__pagination {
+    @apply justify-center;
+  }
+
+  &[data-pagination-alignment="right"] .splide__pagination {
+    @apply justify-end;
+  }
+
+  .space-slider[data-pagination-type="arrow-with-pagination"]
+    .splide__pagination {
+    @apply relative bottom-auto p-0 m-0 flex items-center;
+  }
+
+  /* Default pagination styling */
+  .splide__pagination {
+    @apply relative p-0 w-full mt-10 flex bottom-auto w-full;
+
+    li {
+      @apply mx-1;
+    }
+
+    .splide__pagination__page {
+      @apply w-3 h-3 rounded-full bg-black/10 transition-colors duration-300 transform-none border-none m-0 cursor-pointer;
+    }
+  }
+
+  /* Color variants for pagination need to be handled via parent class or specific targeting if Splide moves them */
+  /* Splide puts pagination inside root, so we can target via wrapper */
+}
+
+/* Specific color overrides based on the wrapper class we add in Twig if we were to pass it down, 
+   but currently we only have `pagination_color` prop. 
+   We need to ensure the pagination is inside the wrapper to style it easily. 
+   Splide appends pagination to the slider root by default. */
+
+.space-slider__wrapper[data-pagination-color="primary"]
+  .splide__pagination__page.is-active {
+  @apply bg-black/70 transform-none scale-100;
+}
+
+.space-slider__wrapper[data-pagination-color="secondary"]
+  .splide__pagination__page.is-active {
+  @apply bg-sds-primary transform-none scale-100;
+}

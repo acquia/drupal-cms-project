@@ -1,0 +1,56 @@
+{% set is_preview = canvas_is_preview or in_preview %}
+
+{% set slot_slides %}{% block slides %}{% endblock %}{% endset %}
+
+{% if is_preview %}
+  <div{{ attributes.addClass(['slider', 'slider--preview', 'grid', 'grid-cols-3', 'gap-4', 'has-rhythm']) }}>
+    {{ slot_slides }}
+  </div>
+{% else %}
+  {% set config = {
+    loop,
+    navigation,
+    effect: effect|default('slide'),
+    direction: direction|default('horizontal'),
+    speed: speed|default(300),
+    slidesPerView: slides_per_view|default(1),
+    slidesPerGroup: slides_per_group|default(1),
+    spaceBetween: space_between|default(16),
+    pagination: {
+      type: pagination|default('bullets')
+    },
+  } %}
+
+  {% set rows_count = rows|default(1) %}
+  {% if rows_count > 1 %}
+    {% set config = config|merge({
+      grid: {
+        rows: rows_count,
+        fill: grid_fill|default('column')
+      }
+    }) %}
+  {% endif %}
+
+  {% set classes = [
+    'swiper',
+    'slider',
+    'has-rhythm',
+  ] %}
+
+  <div{{ attributes.setAttribute('data-swiper-config', config|json_encode).addClass(classes) }}>
+    <div class="swiper-wrapper">
+      {{ slot_slides }}
+    </div>
+
+    {% if pagination|default('bullets') %}
+      <div class="swiper-pagination"></div>
+    {% endif %}
+
+    {% if navigation|default(true) %}
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    {% endif %}
+
+    <div class="swiper-scrollbar"></div>
+  </div>
+{% endif %}

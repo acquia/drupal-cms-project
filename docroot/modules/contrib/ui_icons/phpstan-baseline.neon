@@ -1,0 +1,31 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Parameter \#2 \$content of class Drupal\\Core\\Ajax\\AppendCommand constructor expects array\|string, Drupal\\Component\\Render\\MarkupInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: modules/ui_icons_picker/src/Form/IconSelectForm.php
+
+		-
+			message: '#^Parameter \#2 \$content of class Drupal\\Core\\Ajax\\ReplaceCommand constructor expects array\|string, Drupal\\Component\\Render\\MarkupInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: modules/ui_icons_picker/src/Form/IconSelectForm.php
+
+		-
+			message: '#^Method Drupal\\ui_icons_text\\Plugin\\Filter\\IconEmbed\:\:tips\(\) should return string\|null but returns Drupal\\Core\\StringTranslation\\TranslatableMarkup\.$#'
+			identifier: return.type
+			count: 2
+			path: modules/ui_icons_text/src/Plugin/Filter/IconEmbed.php
+
+		-
+			message: '#^Variable \$app_root might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: sites/default/settings.php
+
+		-
+			message: '#^Variable \$site_path might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: sites/default/settings.php

@@ -1,0 +1,93 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - provus_base_theme
+label: 'Three Column'
+id: sdc.provus_base_theme.three_column
+source: sdc
+source_local_id: 'provus_base_theme:three_column'
+provider: provus_base_theme
+active_version: 4b5e7d64aeee8d20
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        desktop_width:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 33-33-33
+          expression: ℹ︎list_string␟value
+        tablet_width:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 33-33-33
+          expression: ℹ︎list_string␟value
+        mobile_width:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: 100-100-100
+          expression: ℹ︎list_string␟value
+        gap:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        column_1:
+          title: 'Column 1'
+          description: 'First column content'
+        column_2:
+          title: 'Column 2'
+          description: 'Second column content'
+        column_3:
+          title: 'Column 3'
+          description: 'Third column content'
+  09eb60ffd5d611a4:
+    settings:
+      prop_field_definitions:
+        gap:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        column_1:
+          title: 'Column 1'
+          description: 'First column content'
+        column_2:
+          title: 'Column 2'
+          description: 'Second column content'
+        column_3:
+          title: 'Column 3'
+          description: 'Third column content'

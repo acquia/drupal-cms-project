@@ -1,0 +1,1445 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 5ce16732-a71e-40ba-978d-8254f4941106
+  default_langcode: en
+  depends:
+    3ba6cd56-91e4-43e7-a529-58518be10b45: file
+    6828b674-a3b4-4366-afb0-69882f6f46e7: media
+    0bfef643-828e-4fc2-a6bb-39227e8db0c5: file
+    a1c43fb2-b456-4603-8f61-e36e91d079e0: media
+    a40d5528-892a-42cd-85a3-c78ebe916775: file
+    c885325d-5715-4c2f-8b84-b6fe99be24a7: media
+    85db539b-adb8-4e2c-b8e9-73cf75aa6557: file
+    9ac24a6e-0bcc-4c58-8737-a975dccc0480: media
+    24929179-dd4a-4a38-805a-bab3e0a48315: file
+    40684f60-ab1e-4dd2-b1f1-a68077eb0975: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Site Components'
+  components:
+    -
+      uuid: af810830-2559-4e55-8d29-8c917dae958b
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Site Components'
+        level: 1
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      uuid: bd8d2630-8e41-4231-9027-709a2e22c67a
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 100%
+        columns: 33-33-33
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: bd8d2630-8e41-4231-9027-709a2e22c67a
+      slot: header_slot
+      uuid: a627c8da-70a1-4676-a9e7-98432bd46108
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Base
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: bd8d2630-8e41-4231-9027-709a2e22c67a
+      slot: main_slot
+      uuid: 6eacba8e-d9f5-4a48-a9cd-a3ba46119895
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: 6eacba8e-d9f5-4a48-a9cd-a3ba46119895
+      slot: group_slot
+      uuid: 02e68ec0-0e03-487e-bd9e-c185d6a8000d
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Address
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 6eacba8e-d9f5-4a48-a9cd-a3ba46119895
+      slot: group_slot
+      uuid: 2ec242a9-4f27-463a-84ab-206466741b70
+      component_id: sdc.diagnosis.address
+      inputs:
+        organization: 'Saltmarsh Island Health'
+        address_line1: '123 Main Street'
+        address_line2: 'Suite 100'
+        locality: Charleston
+        administrative_area: SC
+        postal_code: '29401'
+        text_color: default
+        text_size: normal
+    -
+      parent_uuid: bd8d2630-8e41-4231-9027-709a2e22c67a
+      slot: main_slot
+      uuid: 0c97b5da-de77-4755-8d81-49679bc8d2b1
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: 0c97b5da-de77-4755-8d81-49679bc8d2b1
+      slot: group_slot
+      uuid: 959c53b8-fa0d-43a9-8d57-6edb7699ae8e
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Badge
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 0c97b5da-de77-4755-8d81-49679bc8d2b1
+      slot: group_slot
+      uuid: b3bdc59e-fe99-4570-a407-0abbc3127536
+      component_id: sdc.diagnosis.badge
+      inputs:
+        label: 'Badge text'
+        style: primary
+        icon: plus
+        icon_first: true
+    -
+      parent_uuid: bd8d2630-8e41-4231-9027-709a2e22c67a
+      slot: main_slot
+      uuid: 2b746fbe-c39c-4e8c-ac66-b7100d87b6ba
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: 2b746fbe-c39c-4e8c-ac66-b7100d87b6ba
+      slot: group_slot
+      uuid: d9cfd3c1-744c-4ef0-b2b1-07d41e5a977e
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Blockquote
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 2b746fbe-c39c-4e8c-ac66-b7100d87b6ba
+      slot: group_slot
+      uuid: b0cfb2ed-7e05-4d6d-8ef2-ed5ba6619a5a
+      component_id: sdc.diagnosis.blockquote
+      inputs:
+        text: '“To confine our attention to terrestrial matters would be to limit the human spirit.”'
+        cite_name: 'Isiah Julio'
+        cite_text: 'Engineer, Technical Services'
+    -
+      parent_uuid: bd8d2630-8e41-4231-9027-709a2e22c67a
+      slot: main_slot
+      uuid: 9c19426e-c25e-49b0-a60a-27e4d02fe829
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: 9c19426e-c25e-49b0-a60a-27e4d02fe829
+      slot: group_slot
+      uuid: e79019fe-192f-4b23-9701-81120929aa1b
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Button
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 9c19426e-c25e-49b0-a60a-27e4d02fe829
+      slot: group_slot
+      uuid: 7b8c8679-b914-4e54-8f62-eada847174b8
+      component_id: sdc.diagnosis.button
+      inputs:
+        variant: primary
+        label: 'Button label'
+        size: medium
+        icon: arrow-right
+        icon_first: false
+        disabled: false
+    -
+      parent_uuid: bd8d2630-8e41-4231-9027-709a2e22c67a
+      slot: main_slot
+      uuid: ed6a1f1a-3e4a-462f-a7ff-e0cbd9ffad90
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: ed6a1f1a-3e4a-462f-a7ff-e0cbd9ffad90
+      slot: group_slot
+      uuid: 4eaf348b-cd72-45e3-9e7a-60c6e7e1df0a
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Email
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ed6a1f1a-3e4a-462f-a7ff-e0cbd9ffad90
+      slot: group_slot
+      uuid: 1cbb97cd-fb42-440f-987c-5962acc8f6bb
+      component_id: sdc.diagnosis.email
+      inputs:
+        email: hello@example.com
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: bd8d2630-8e41-4231-9027-709a2e22c67a
+      slot: main_slot
+      uuid: adc9188c-9a36-4031-a769-bdc76948cde5
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: adc9188c-9a36-4031-a769-bdc76948cde5
+      slot: group_slot
+      uuid: f0465293-1405-4b4b-acf3-7a9b33c8ac99
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: heading
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: adc9188c-9a36-4031-a769-bdc76948cde5
+      slot: group_slot
+      uuid: 6c1ffcee-7305-4bcb-bf29-f8e3132d86a0
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Your heading goes here'
+        level: 4
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: bd8d2630-8e41-4231-9027-709a2e22c67a
+      slot: main_slot
+      uuid: 28627a63-662f-459e-8bb4-4354ada720d0
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: 28627a63-662f-459e-8bb4-4354ada720d0
+      slot: group_slot
+      uuid: 17d5d747-e235-4a8c-ba47-6945f1fca634
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Icon
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 28627a63-662f-459e-8bb4-4354ada720d0
+      slot: group_slot
+      uuid: 5d6bcf8d-f4f6-4130-9c61-8d98288560b0
+      component_id: sdc.diagnosis.icon
+      inputs:
+        icon: hospital
+        icon_size: extra-large
+    -
+      parent_uuid: bd8d2630-8e41-4231-9027-709a2e22c67a
+      slot: main_slot
+      uuid: 8a3a9d46-bbc3-4d6a-b97d-3910873af247
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: 8a3a9d46-bbc3-4d6a-b97d-3910873af247
+      slot: group_slot
+      uuid: 7a6ca8c7-5aaf-4305-9123-f388dd0bcd38
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Image
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 8a3a9d46-bbc3-4d6a-b97d-3910873af247
+      slot: group_slot
+      uuid: 1a9cb8f1-6e07-4588-99c6-f1d06e489841
+      component_id: sdc.diagnosis.image
+      inputs:
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 6828b674-a3b4-4366-afb0-69882f6f46e7
+            target_type: media
+        size: '4:3'
+        radius: extra-large
+    -
+      parent_uuid: bd8d2630-8e41-4231-9027-709a2e22c67a
+      slot: main_slot
+      uuid: 6a2b5aee-33a9-4c8e-a052-8ed49fe89749
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: 6a2b5aee-33a9-4c8e-a052-8ed49fe89749
+      slot: group_slot
+      uuid: 40d71b14-1485-4223-88f0-a82e0ee072b2
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Phone
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 6a2b5aee-33a9-4c8e-a052-8ed49fe89749
+      slot: group_slot
+      uuid: e464d094-57a9-49a3-992c-da9ad706f23a
+      component_id: sdc.diagnosis.phone
+      inputs:
+        label: Phone
+        phone: 555-867-5309
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: bd8d2630-8e41-4231-9027-709a2e22c67a
+      slot: main_slot
+      uuid: bf36c4bb-2cd7-43a2-b4ae-233805fb215c
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: bf36c4bb-2cd7-43a2-b4ae-233805fb215c
+      slot: group_slot
+      uuid: aee74095-2ca8-4c40-954b-ed59ca3ca649
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Plain text'
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: bf36c4bb-2cd7-43a2-b4ae-233805fb215c
+      slot: group_slot
+      uuid: 6482f3c9-c1f7-402a-8567-d3d4c3feb37b
+      component_id: sdc.diagnosis.plain-text
+      inputs:
+        text: 'Your text here'
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: bd8d2630-8e41-4231-9027-709a2e22c67a
+      slot: main_slot
+      uuid: 90136cc0-1567-4d7a-ae95-bda850ded323
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: 90136cc0-1567-4d7a-ae95-bda850ded323
+      slot: group_slot
+      uuid: 9e81f99a-91d2-44d8-b007-ec5443af2170
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Text
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 90136cc0-1567-4d7a-ae95-bda850ded323
+      slot: group_slot
+      uuid: b38e29ca-c4c4-462f-9cb7-cb437ba8dad1
+      component_id: sdc.diagnosis.text
+      inputs:
+        label: 'Label:'
+        text:
+          value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique pretium pellentesque semper enim aliquam.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: daa72009-2132-4d4e-9d9f-e3d7561eadc4
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 100%
+        columns: 33-33-33
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: daa72009-2132-4d4e-9d9f-e3d7561eadc4
+      slot: header_slot
+      uuid: 9e8147ec-089d-43a6-986f-676c974d3f0c
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Cards
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: daa72009-2132-4d4e-9d9f-e3d7561eadc4
+      slot: main_slot
+      uuid: e40bf596-a79d-4c86-8baf-a17fa910dcce
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: center
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: e40bf596-a79d-4c86-8baf-a17fa910dcce
+      slot: group_slot
+      uuid: d631d0a7-14ef-4614-b2e8-0df4c5e6a210
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Icon Card'
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: e40bf596-a79d-4c86-8baf-a17fa910dcce
+      slot: group_slot
+      uuid: ad3593fe-0b48-4ebe-9e4b-8ace8ff3679e
+      component_id: sdc.diagnosis.card-icon
+      inputs:
+        tile_size: square
+        border_radius: medium
+        icon: heart
+        icon_size: large
+        icon_align: center
+        text: 'Your heading here'
+        description:
+          value: '<p>This is placeholder text.</p>'
+          format: canvas_html_block
+        text_align: left
+        button_text: 'Learn more'
+        button_variant: primary
+        background_color: primary
+        button_icon_first: false
+        button_mobile_width: false
+    -
+      parent_uuid: daa72009-2132-4d4e-9d9f-e3d7561eadc4
+      slot: main_slot
+      uuid: c82411a4-6de0-4dec-9b59-8519832c3372
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: center
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: c82411a4-6de0-4dec-9b59-8519832c3372
+      slot: group_slot
+      uuid: 1974eba6-450d-4887-a200-c5b91fc08cfc
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Image Card'
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: c82411a4-6de0-4dec-9b59-8519832c3372
+      slot: group_slot
+      uuid: 0fcba7db-6748-492f-9d94-7a03bc48a703
+      component_id: sdc.diagnosis.card
+      inputs:
+        background: default
+        style: framed
+        orientation: vertical
+        heading_text: 'This is your card title'
+        level: '3'
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/gradient.png
+            width: 1200
+            height: 900
+            alt: Gradient
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.diagnosis.card
+        date: 'February 27, 2026'
+        start_date: 'February 27, 2026'
+        end_date: 'February 28, 2026'
+        start_time: '2:00 PM'
+        end_time: '4:00 PM'
+        text: 'Quaerat laborum rerum dolores dolores dolor qui.'
+        is_text_centered: false
+    -
+      parent_uuid: daa72009-2132-4d4e-9d9f-e3d7561eadc4
+      slot: main_slot
+      uuid: 27ca1b10-3eb2-4fa1-bc52-5f63c0fec2be
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: center
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: 27ca1b10-3eb2-4fa1-bc52-5f63c0fec2be
+      slot: group_slot
+      uuid: 8279945a-96ef-4148-b768-5b346ee7b313
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Logo Card'
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 27ca1b10-3eb2-4fa1-bc52-5f63c0fec2be
+      slot: group_slot
+      uuid: a1575ff3-a44f-4cae-afbb-f58558858edc
+      component_id: sdc.diagnosis.card-logo
+      inputs:
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/dark.png
+            alt: 'Placeholder brand logo'
+            width: 188
+            height: 113
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.diagnosis.card-logo
+        border_radius: small
+    -
+      parent_uuid: daa72009-2132-4d4e-9d9f-e3d7561eadc4
+      slot: main_slot
+      uuid: 2e076528-0886-4ac6-bde0-50d569574496
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: center
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: 2e076528-0886-4ac6-bde0-50d569574496
+      slot: group_slot
+      uuid: 14c11a7b-09ca-48b3-80bc-4f20903fe852
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Pricing Card'
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 2e076528-0886-4ac6-bde0-50d569574496
+      slot: group_slot
+      uuid: f52c46a2-d204-48d5-99ed-a78b3ce3f797
+      component_id: sdc.diagnosis.card-pricing
+      inputs:
+        heading_text: Premium
+        description: 'Curabitur nascetur non potenti pede luctus vivamus'
+        price: '159'
+        currency_code: USD
+        currency_symbol: $
+        symbol_position: before
+        text:
+          value: '<ul> <li>Example item 1</li> <li>Example item 2</li> </ul>'
+          format: canvas_html_block
+        button_label: 'Choose this plan'
+        promote: false
+    -
+      parent_uuid: daa72009-2132-4d4e-9d9f-e3d7561eadc4
+      slot: main_slot
+      uuid: 81de3776-98b9-4daa-8866-a96ae9ed5f0e
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: center
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: 81de3776-98b9-4daa-8866-a96ae9ed5f0e
+      slot: group_slot
+      uuid: adaa8598-4fbc-4807-a8c7-c81599aa47a8
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Testimonial Card'
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 81de3776-98b9-4daa-8866-a96ae9ed5f0e
+      slot: group_slot
+      uuid: 1b5adcd2-c9e6-489a-b712-d462b6251b59
+      component_id: sdc.diagnosis.card-testimonial
+      inputs:
+        text: 'The level of care and attention I received was exceptional. From my first appointment to follow-up visits, every member of the team made me feel heard and supported.'
+        cite_name: 'Sarah Mitchell'
+        cite_text: 'Patient since 2023'
+        align: center
+        style: default
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/portrait.png
+            alt: Placeholder
+            width: 100
+            height: 100
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.diagnosis.card-testimonial
+    -
+      uuid: cfee3ff1-9176-47fb-9d0e-80667bb4bee1
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: cfee3ff1-9176-47fb-9d0e-80667bb4bee1
+      slot: header_slot
+      uuid: e74e58aa-a7d0-4ac6-a929-392cfb4733b9
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Heros
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: cfee3ff1-9176-47fb-9d0e-80667bb4bee1
+      slot: main_slot
+      uuid: 03f572e4-b441-49c4-b269-4310444ea9f3
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: 03f572e4-b441-49c4-b269-4310444ea9f3
+      slot: group_slot
+      uuid: a517ba02-30fa-4c26-bc1b-061f716e2d0a
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Hero billboard'
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 03f572e4-b441-49c4-b269-4310444ea9f3
+      slot: group_slot
+      uuid: a84ddc5f-cce6-4ce0-971a-4bdad6f978c7
+      component_id: sdc.diagnosis.hero-billboard
+      inputs:
+        height: full
+        flex_position: center-left
+        overlay_opacity: 0%
+        object_position: center
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: a1c43fb2-b456-4603-8f61-e36e91d079e0
+            target_type: media
+        overlap_navbar: false
+    -
+      parent_uuid: a84ddc5f-cce6-4ce0-971a-4bdad6f978c7
+      slot: hero_slot
+      uuid: 5dad716d-2893-40ca-9e60-10b73a0ea48b
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Any components can be put in this slot.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: cfee3ff1-9176-47fb-9d0e-80667bb4bee1
+      slot: main_slot
+      uuid: 6a5c645d-916c-45da-8409-78f42bfa8f3d
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: 6a5c645d-916c-45da-8409-78f42bfa8f3d
+      slot: group_slot
+      uuid: 2d237d0b-a592-45e4-89fa-1485112a92be
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Hero Blog'
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 6a5c645d-916c-45da-8409-78f42bfa8f3d
+      slot: group_slot
+      uuid: 0d711809-35d4-4847-ad6d-0754c5c16d8f
+      component_id: sdc.diagnosis.hero-blog
+      inputs:
+        heading_text: 'Vivamus curae metus neque mollis orci ipsum sapien velit cursus'
+        level: 1
+        date: 1770856866
+        author: 'John Smith'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: c885325d-5715-4c2f-8b84-b6fe99be24a7
+            target_type: media
+    -
+      parent_uuid: cfee3ff1-9176-47fb-9d0e-80667bb4bee1
+      slot: main_slot
+      uuid: 2eccf66a-acd0-458c-90e6-485de4c3ab67
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: 2eccf66a-acd0-458c-90e6-485de4c3ab67
+      slot: group_slot
+      uuid: 36d1e5c5-b352-45d2-aaef-974ff9f76f42
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Hero CTA'
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 2eccf66a-acd0-458c-90e6-485de4c3ab67
+      slot: group_slot
+      uuid: f7ad88b2-d6d9-4b78-8bfd-c56022ee5f4a
+      component_id: sdc.diagnosis.cta
+      inputs:
+        heading_text: 'Your heading goes here'
+        level: 2
+        text: 'Lorem ipsum dolor sit amet.'
+        text_align: center
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 9ac24a6e-0bcc-4c58-8737-a975dccc0480
+            target_type: media
+    -
+      parent_uuid: f7ad88b2-d6d9-4b78-8bfd-c56022ee5f4a
+      slot: actions
+      uuid: 255d4a11-c0c1-44e7-89e5-c3d653129099
+      component_id: sdc.diagnosis.button
+      inputs:
+        variant: primary
+        label: 'Button label'
+        size: medium
+        icon: arrow-right
+        icon_first: false
+        disabled: false
+    -
+      parent_uuid: cfee3ff1-9176-47fb-9d0e-80667bb4bee1
+      slot: main_slot
+      uuid: 17c56033-00ab-4257-9bc3-8e6c05a92f00
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: 17c56033-00ab-4257-9bc3-8e6c05a92f00
+      slot: group_slot
+      uuid: 122b5e9a-ac4e-407a-9d12-c3e5842e3fad
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Hero Side by Side'
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 17c56033-00ab-4257-9bc3-8e6c05a92f00
+      slot: group_slot
+      uuid: a8a399cb-f2b1-42e2-9936-4eca298bb6ae
+      component_id: sdc.diagnosis.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        padding_block_start: '0'
+        padding_block_end: '0'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        image_size: '4:3'
+        image_position: right
+        image_radius: extra-large
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 40684f60-ab1e-4dd2-b1f1-a68077eb0975
+            target_type: media
+        background: default
+    -
+      parent_uuid: a8a399cb-f2b1-42e2-9936-4eca298bb6ae
+      slot: hero_slot
+      uuid: 756d7512-013a-4fc7-ba2a-fabbcc228878
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Any components can be put in this slot.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: cfee3ff1-9176-47fb-9d0e-80667bb4bee1
+      slot: main_slot
+      uuid: 686f6cd8-9c26-4813-a5d1-af2fd06da28a
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 100%
+        columns: 50-50
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: 686f6cd8-9c26-4813-a5d1-af2fd06da28a
+      slot: header_slot
+      uuid: 618154e6-ea2d-4f3d-a5c6-09c359c1ffc2
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Layout
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 686f6cd8-9c26-4813-a5d1-af2fd06da28a
+      slot: main_slot
+      uuid: f6dec699-6fba-45d1-aace-e332142ee6d4
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: f6dec699-6fba-45d1-aace-e332142ee6d4
+      slot: group_slot
+      uuid: a9d28537-04b3-4521-ad26-200a46e9ce0c
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Carousel
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: f6dec699-6fba-45d1-aace-e332142ee6d4
+      slot: group_slot
+      uuid: 305596d3-1db7-4ac6-bde1-2d98054bb839
+      component_id: sdc.diagnosis.carousel
+      inputs:
+        aria_label: 'Featured content carousel'
+        show_navigation: true
+        show_pagination: true
+    -
+      parent_uuid: 305596d3-1db7-4ac6-bde1-2d98054bb839
+      slot: slides
+      uuid: 69ae1ff8-8b26-4b7e-bd80-0c9ee193c89f
+      component_id: sdc.diagnosis.carousel-slide
+      inputs:
+        background: default
+        padding: medium
+        width: 100%
+    -
+      parent_uuid: 69ae1ff8-8b26-4b7e-bd80-0c9ee193c89f
+      slot: slide_content
+      uuid: 12a7e769-dd77-4456-8e60-78ab2fbef3be
+      component_id: sdc.diagnosis.card
+      inputs:
+        background: default
+        style: framed
+        orientation: vertical
+        heading_text: 'This is your card title'
+        level: '3'
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/gradient.png
+            width: 1200
+            height: 900
+            alt: Gradient
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.diagnosis.card
+        date: 'February 27, 2026'
+        start_date: 'February 27, 2026'
+        end_date: 'February 28, 2026'
+        start_time: '2:00 PM'
+        end_time: '4:00 PM'
+        text: 'Quaerat laborum rerum dolores dolores dolor qui.'
+        is_text_centered: false
+    -
+      parent_uuid: 305596d3-1db7-4ac6-bde1-2d98054bb839
+      slot: slides
+      uuid: 71d5a1d5-3f42-46b1-94e6-61b53f8e4ab6
+      component_id: sdc.diagnosis.carousel-slide
+      inputs:
+        background: default
+        padding: medium
+        width: 100%
+    -
+      parent_uuid: 71d5a1d5-3f42-46b1-94e6-61b53f8e4ab6
+      slot: slide_content
+      uuid: 63331c46-d3ff-45ba-838d-d904202182e3
+      component_id: sdc.diagnosis.card
+      inputs:
+        background: default
+        style: framed
+        orientation: vertical
+        heading_text: 'This is your card title'
+        level: '3'
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/gradient.png
+            width: 1200
+            height: 900
+            alt: Gradient
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.diagnosis.card
+        date: 'February 27, 2026'
+        start_date: 'February 27, 2026'
+        end_date: 'February 28, 2026'
+        start_time: '2:00 PM'
+        end_time: '4:00 PM'
+        text: 'Quaerat laborum rerum dolores dolores dolor qui.'
+        is_text_centered: false
+    -
+      parent_uuid: 686f6cd8-9c26-4813-a5d1-af2fd06da28a
+      slot: main_slot
+      uuid: 4108a675-00fe-4feb-90c4-c2314b63b035
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: 4108a675-00fe-4feb-90c4-c2314b63b035
+      slot: group_slot
+      uuid: 149e52d5-bac8-462d-940f-de139d9dd90f
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Accordion Container'
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 4108a675-00fe-4feb-90c4-c2314b63b035
+      slot: group_slot
+      uuid: 8c65bc90-3f32-4a9c-bb13-a77119829f46
+      component_id: sdc.diagnosis.accordion-container
+      inputs: {  }
+    -
+      parent_uuid: 8c65bc90-3f32-4a9c-bb13-a77119829f46
+      slot: accordion_content
+      uuid: b5e2208e-7fa1-4a91-9064-6f2786f64cf9
+      component_id: sdc.diagnosis.accordion
+      inputs:
+        title: 'First Accordion'
+        heading_level: 3
+        open_by_default: false
+    -
+      parent_uuid: b5e2208e-7fa1-4a91-9064-6f2786f64cf9
+      slot: accordion_content
+      uuid: ff795e98-d1ad-4033-ba0e-c3eddbc1315c
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique pretium pellentesque semper enim aliquam.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 8c65bc90-3f32-4a9c-bb13-a77119829f46
+      slot: accordion_content
+      uuid: cd8d496c-e393-4fef-a024-fd22a5d8ba03
+      component_id: sdc.diagnosis.accordion
+      inputs:
+        title: 'Second Accordion'
+        heading_level: 3
+        open_by_default: false
+    -
+      parent_uuid: cd8d496c-e393-4fef-a024-fd22a5d8ba03
+      slot: accordion_content
+      uuid: e1f8d08f-7653-44d4-923a-19651a5fa0a7
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique pretium pellentesque semper enim aliquam.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 8c65bc90-3f32-4a9c-bb13-a77119829f46
+      slot: accordion_content
+      uuid: f4c72a73-4c34-4e93-8ce5-725750c8ee08
+      component_id: sdc.diagnosis.accordion
+      inputs:
+        title: 'Third Accordion'
+        heading_level: 3
+        open_by_default: false
+    -
+      parent_uuid: f4c72a73-4c34-4e93-8ce5-725750c8ee08
+      slot: accordion_content
+      uuid: 5ba09c61-a11a-49e7-9cd5-a091c23fef6d
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique pretium pellentesque semper enim aliquam.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 686f6cd8-9c26-4813-a5d1-af2fd06da28a
+      slot: main_slot
+      uuid: 03c95904-560d-4ca3-a7b9-56c0d47c9665
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: 03c95904-560d-4ca3-a7b9-56c0d47c9665
+      slot: group_slot
+      uuid: 8d5df2d9-25ef-47ca-8ed7-5436929b9fb7
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Accordion
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 03c95904-560d-4ca3-a7b9-56c0d47c9665
+      slot: group_slot
+      uuid: 331b715d-3525-4b2c-a795-b2266c32b0fd
+      component_id: sdc.diagnosis.accordion
+      inputs:
+        title: 'Section title'
+        heading_level: '3'
+        open_by_default: false
+    -
+      parent_uuid: 331b715d-3525-4b2c-a795-b2266c32b0fd
+      slot: accordion_content
+      uuid: 0f61c6a4-a304-4a78-ad78-a274883bcff3
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Any components can be put in this slot.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 686f6cd8-9c26-4813-a5d1-af2fd06da28a
+      slot: main_slot
+      uuid: 59e50665-5afc-48ff-82ee-bbd87b0bf963
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: 59e50665-5afc-48ff-82ee-bbd87b0bf963
+      slot: group_slot
+      uuid: d54a6009-673d-4daa-8868-eb193b612bc3
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Navbar
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 59e50665-5afc-48ff-82ee-bbd87b0bf963
+      slot: group_slot
+      uuid: acc62122-d658-4a26-bed1-621888b226d8
+      component_id: sdc.diagnosis.navbar
+      inputs:
+        menu_align: right
+    -
+      parent_uuid: acc62122-d658-4a26-bed1-621888b226d8
+      slot: navigation
+      uuid: 06c5a378-a3b6-45a0-a3ad-2e04d7564957
+      component_id: sdc.diagnosis.button
+      inputs:
+        variant: primary
+        label: Button
+        size: small
+        icon: arrow-right
+        icon_first: false
+        disabled: false
+        mobile_width: false
+    -
+      parent_uuid: acc62122-d658-4a26-bed1-621888b226d8
+      slot: navigation
+      uuid: a802d433-93c1-4a9b-860c-b950fb3237ac
+      component_id: sdc.diagnosis.button
+      inputs:
+        variant: secondary
+        label: Button
+        size: small
+        icon: caret-right
+        mobile_width: false
+        icon_first: false
+        disabled: false
+    -
+      parent_uuid: acc62122-d658-4a26-bed1-621888b226d8
+      slot: navigation
+      uuid: a3c11425-2933-4fa9-ae72-4e9ffc25e563
+      component_id: sdc.diagnosis.button
+      inputs:
+        variant: primary-inverted
+        label: Button
+        size: small
+        icon: user-plus
+        icon_first: false
+        disabled: false
+        mobile_width: false
+    -
+      parent_uuid: acc62122-d658-4a26-bed1-621888b226d8
+      slot: navigation
+      uuid: 15c435a8-1ed9-48dd-9a8d-18148cc08801
+      component_id: sdc.diagnosis.button
+      inputs:
+        variant: secondary-inverted
+        label: Button
+        size: small
+        icon: download
+        icon_first: false
+        disabled: false
+        mobile_width: false
+    -
+      parent_uuid: 686f6cd8-9c26-4813-a5d1-af2fd06da28a
+      slot: main_slot
+      uuid: c577685a-069c-4c2e-a8ad-be56c75eedd5
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: c577685a-069c-4c2e-a8ad-be56c75eedd5
+      slot: group_slot
+      uuid: c47d0dca-2635-4af6-aa91-1541e06f1ca0
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Tab Container'
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: c577685a-069c-4c2e-a8ad-be56c75eedd5
+      slot: group_slot
+      uuid: f9ece339-1e06-4404-94c5-1f111fc1702c
+      component_id: sdc.diagnosis.tabs-container
+      inputs:
+        aria_label: 'Main navigation tabs'
+        orientation: horizontal
+    -
+      parent_uuid: f9ece339-1e06-4404-94c5-1f111fc1702c
+      slot: tabs_content
+      uuid: 097d168b-9a2d-43aa-955a-becc12c96e06
+      component_id: sdc.diagnosis.tab
+      inputs:
+        title: 'Tab 1'
+        active_by_default: false
+    -
+      parent_uuid: 097d168b-9a2d-43aa-955a-becc12c96e06
+      slot: tab_content
+      uuid: 94682d01-c2b4-43f4-a686-703bc20f305f
+      component_id: sdc.diagnosis.text
+      inputs:
+        label: 'Label:'
+        text:
+          value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique pretium pellentesque semper enim aliquam.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: f9ece339-1e06-4404-94c5-1f111fc1702c
+      slot: tabs_content
+      uuid: 86a7f4d0-c37e-4834-b4a9-3359fd9da8b2
+      component_id: sdc.diagnosis.tab
+      inputs:
+        title: 'Tab 2'
+        active_by_default: false
+    -
+      parent_uuid: 86a7f4d0-c37e-4834-b4a9-3359fd9da8b2
+      slot: tab_content
+      uuid: 8da1b3b2-425a-4ec1-8106-99755a9afb9b
+      component_id: sdc.diagnosis.text
+      inputs:
+        label: 'Label:'
+        text:
+          value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique pretium pellentesque semper enim aliquam.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 686f6cd8-9c26-4813-a5d1-af2fd06da28a
+      slot: main_slot
+      uuid: 74d530e0-ecbe-45d0-9280-5bfacf9a24ff
+      component_id: sdc.diagnosis.group
+      inputs:
+        flex_direction: column
+        flex_gap: md
+        items_align: start
+        flex_align: start
+        radius: sm
+        padding: sm
+    -
+      parent_uuid: 74d530e0-ecbe-45d0-9280-5bfacf9a24ff
+      slot: group_slot
+      uuid: 589a535d-9df5-475b-9edd-5f5fdbd2ff4b
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Stats
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 74d530e0-ecbe-45d0-9280-5bfacf9a24ff
+      slot: group_slot
+      uuid: c5f8a757-4c33-4118-8d93-6d1f6970b74b
+      component_id: sdc.diagnosis.stats-section
+      inputs:
+        content_heading: 'Our Impact'
+        content_body:
+          value: "<p>We're making a difference in communities across the country.</p>"
+          format: canvas_html_block
+        content_button_url: '#'
+        content_button_text: 'Learn More'
+        stat1_value: 10K+
+        stat1_label:
+          value: '<p>Happy Customers</p>'
+          format: canvas_html_block
+        stat2_value: 500+
+        stat2_label:
+          value: '<p>Projects Completed</p>'
+          format: canvas_html_block
+        stat3_value: 50+
+        stat3_label:
+          value: '<p>Team Members</p>'
+          format: canvas_html_block
+        margin_block_start: '48'
+        margin_block_end: '48'
+        rounded: true
+  path:
+    -
+      alias: /site-components
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_position_details
+    - node.type.person
+  module:
+    - text
+id: node.person.field_position_details
+field_name: field_position_details
+entity_type: node
+bundle: person
+label: 'Position Details'
+description: 'Additional information about role or responsibilities'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

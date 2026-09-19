@@ -1,0 +1,22 @@
+# The placeholder tokens in `html.html.twig` used to inject head, CSS, and JS
+# placeholders break Prettier's HTML parsing.
+templates/layout/html.html.twig
+AGENTS.md
+# The GitLab CI pipeline installs Drupal in a `web/` directory placed at the
+# root of this codebase and symlinks all files to the right place.
+web/**/**
+# Build assets are compiled files and should not be formatted by Prettier.
+# Formatting them causes changes to build assets even when source files haven't changed.
+build/
+# Component CSS files are compiled from .tailwind.css source files.
+# Only ignore .css files, not .tailwind.css source files.
+components/**/*.css
+!components/**/*.tailwind.css
+# We do not care about the lock file's formatting.
+package-lock.json
+# Files with Drupal Twig patterns that prettier-plugin-twig doesn't parse correctly
+components/carousel-slide/carousel-slide.twig
+templates/navigation/menu--banner-menu.html.twig
+templates/node/node--person.html.twig
+# File with coding standards violation - see ISSUES.md #1
+components/button/button.twig

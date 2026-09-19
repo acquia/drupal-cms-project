@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_mc_search_exclude
+    - node.type.mc_person
+id: node.mc_person.field_mc_search_exclude
+field_name: field_mc_search_exclude
+entity_type: node
+bundle: mc_person
+label: 'Search exclude'
+description: 'Do not show this content in search results.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

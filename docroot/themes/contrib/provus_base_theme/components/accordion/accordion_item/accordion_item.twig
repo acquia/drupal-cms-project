@@ -1,0 +1,41 @@
+{# Initialize unique IDs and default values. #}
+{% set item_id = 'accordion-item-' ~ random() %}
+{% set heading_id = 'heading-' ~ item_id %}
+{% set expanded = open_by_default ? 'true' : 'false' %}
+
+<div class="accordion-item">
+  <{{ heading_level }} class="accordion-header" id="{{ heading_id }}">
+    <button
+      class="accordion-button {% if not open_by_default %}collapsed{% endif %}"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#{{ item_id }}"
+      aria-expanded="{{ expanded }}"
+      aria-controls="{{ item_id }}"
+    >
+      <div class="open-close">
+        <i class="fa fa-solid fa-plus"></i>
+        <i class="fa fa-solid fa-minus"></i>
+      </div>
+      {{ title }}
+    </button>
+  </{{ heading_level }}>
+
+  <div
+    id="{{ item_id }}"
+    class="accordion-collapse collapse {% if open_by_default %}show{% endif %}"
+    aria-labelledby="{{ heading_id }}"
+    {% if accordion_id is defined and accordion_id|trim %}
+      data-bs-parent="#{{ accordion_id }}"
+    {% endif %}
+  >
+    <div class="accordion-body">
+      {% if body is defined and body|trim %}
+        {{ body }}
+      {% endif %}
+
+      {% block more_content %}
+      {% endblock %}
+    </div>
+  </div>
+</div>

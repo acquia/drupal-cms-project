@@ -1,0 +1,263 @@
+/**
+ * @file section-intro.css
+ * SDC Section Intro component styles.
+ *
+ * Centered layout — Figma nodes 1:10565 (desktop) / 1:10241 (mobile)
+ * Single centred column.
+ * Tagline + serif heading + optional description + CTAs.
+ * Desktop gap 32px, mobile gap 24px.
+ */
+
+/* ============================================================
+   Base wrapper
+   ============================================================ */
+
+.section-intro {
+  width: 100%;
+}
+
+/* ============================================================
+   CENTERED LAYOUT
+   Figma: single column, items-center, text-center
+   Mobile gap 24px, desktop gap 32px
+   ============================================================ */
+
+.section-intro--centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.section-intro--centered.section-intro--has-ctas {
+  gap: 0;
+}
+
+.section-intro--centered.section-intro--has-ctas:has(.section-intro__actions > *) {
+  gap: 2rem;
+}
+
+/* Inner content block (tagline, heading, description) */
+.section-intro__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 768px;
+  text-align: center;
+}
+
+/* Gap between tagline and either title or description */
+.section-intro__content > .section-intro__tagline-wrap + * {
+  margin-top: 1rem !important;
+}
+
+/* Gap between title and description when both are present */
+.section-intro__content
+  > .section-intro__heading
+  + .section-intro__description {
+  margin-top: 1.5rem;
+}
+
+/* ============================================================
+   Tagline wrapper
+   ============================================================ */
+
+.section-intro__tagline-wrap {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+
+/* ============================================================
+   Tagline text
+   Figma: DM Sans SemiBold, 16px, #020704, lh 1.5
+   ============================================================ */
+
+.section-intro__tagline {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  color: #020704;
+  margin: 0;
+  text-align: center;
+}
+
+.section-intro__heading {
+  font-family: var(--font-serif);
+  font-weight: var(--font-weight-normal);
+  font-style: normal;
+  color: #020704;
+  margin: 0;
+  width: 100%;
+}
+
+.section-intro__heading--h1 {
+  font-size: clamp(var(--text-4xl), 6vw, var(--h1-size));
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+@media (min-width: 48rem) {
+  .section-intro__heading--h1 {
+    font-size: var(--h1-size);
+    letter-spacing: -1.44px;
+  }
+}
+
+.section-intro__heading--h2 {
+  font-size: clamp(var(--text-3xl), 4vw, 3.25rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+@media (min-width: 48rem) {
+  .section-intro__heading--h2 {
+    font-size: 3.25rem;
+    letter-spacing: -0.52px;
+  }
+}
+
+.section-intro__heading--h3 {
+  font-size: var(--text-2xl);
+  line-height: 1.3;
+}
+
+@media (min-width: 48rem) {
+  .section-intro__heading--h3 {
+    font-size: var(--h3-size);
+  }
+}
+
+.section-intro__heading--h4 {
+  font-size: var(--text-xl);
+  line-height: 1.3;
+}
+
+@media (min-width: 48rem) {
+  .section-intro__heading--h4 {
+    font-size: var(--h4-size);
+  }
+}
+
+/* ============================================================
+   Heading — H5 style
+   Figma: IBM Plex Serif Regular, 28px, letter-spacing -0.28px, lh 1.4
+   ============================================================ */
+
+.section-intro__heading--h5 {
+  font-size: var(--text-2xl);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+@media (min-width: 48rem) {
+  .section-intro__heading--h5 {
+    font-size: 1.75rem;
+    letter-spacing: -0.28px;
+    max-width: 768px;
+  }
+}
+
+/* ============================================================
+   Description
+   Figma mobile: DM Sans Regular, 16px, lh 1.5, #020704
+   Figma desktop: 18px
+   ============================================================ */
+
+.section-intro__description {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  color: #020704;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+
+@media (min-width: 48rem) {
+  .section-intro__description {
+    font-size: var(--text-lg);
+  }
+}
+
+/* ============================================================
+   Actions row
+   Figma: gap 24px, items-center, flex-wrap for mobile safety
+   ============================================================ */
+
+.section-intro__actions {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--spacing) * 6);
+  align-items: center !important;
+  justify-content: center;
+}
+
+/* Empty slot fallback when no CTA content is provided. */
+.section-intro__empty-state {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.5rem;
+  width: 100%;
+  max-width: 28rem;
+  margin-inline: auto;
+  padding: calc(var(--spacing) * 2);
+  box-sizing: border-box;
+  border: 1px dashed rgba(2, 7, 4, 0.35);
+  border-radius: var(--radius, 0.25rem);
+  background-color: rgba(2, 7, 4, 0.06);
+  color: rgba(2, 7, 4, 0.65);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+.section-intro__actions {
+  width: 100%;
+}
+
+.section-intro--text-light .section-intro__empty-state {
+  border-color: rgba(255, 255, 255, 0.45);
+  background-color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ============================================================
+   Text Color Variant (Light)
+   ============================================================ */
+
+.section-intro--text-light .section-intro__tagline,
+.section-intro--text-light .section-intro__heading,
+.section-intro--text-light .section-intro__description {
+  color: #ffffff;
+}
+
+.section-intro--text-light .section-intro__actions .button--secondary-dark {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.section-intro--text-light
+  .section-intro__actions
+  .button--secondary-dark:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.section-intro--text-light .section-intro__actions .button--link {
+  color: #ffffff;
+}
+
+.section-intro--text-light .section-intro__actions .button--link:hover {
+  opacity: 0.75;
+}
+
+.section-intro--text-light .section-intro__actions .button__icon svg {
+  stroke: #ffffff;
+}

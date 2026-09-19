@@ -1,0 +1,276 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Grid
+description: A flexible layout wrapper used to arrange child elements into responsive columns and rows.
+group: Container
+status: stable
+props:
+  type: object
+  properties:
+    column_widths:
+      type: string
+      title: Column widths
+      description: Select the width of the columns.
+      enum:
+        - grid-col-widths--100
+        - grid-col-widths--50-50
+        - grid-col-widths--33-33-33
+        - grid-col-widths--75-25
+        - grid-col-widths--25-75
+        - grid-col-widths--67-33
+        - grid-col-widths--33-67
+        - grid-col-widths--50-25-25
+        - grid-col-widths--25-25-50
+        - grid-col-widths--25-25-25-25
+      meta:enum:
+        grid-col-widths--100: '100'
+        grid-col-widths--50-50: '50-50'
+        grid-col-widths--33-33-33: '33-33-33'
+        grid-col-widths--75-25: '75-25'
+        grid-col-widths--25-75: '25-75'
+        grid-col-widths--67-33: '67-33'
+        grid-col-widths--33-67: '33-67'
+        grid-col-widths--50-25-25: '50-25-25'
+        grid-col-widths--25-25-50: '25-25-50'
+        grid-col-widths--25-25-25-25: '25-25-25-25'
+      default: grid-col-widths--75-25
+    margin_top:
+      type: string
+      title: Margin top
+      description: 'Select the margin top for the container - the space above the top.'
+      enum:
+        - '0'
+        - '4'
+        - '8'
+        - '12'
+        - '16'
+        - '24'
+        - '32'
+      meta:enum:
+        '0': '0 (0px)'
+        '4': '4 (16px)'
+        '8': '8 (32px)'
+        '12': '12 (48px)'
+        '16': '16 (64px)'
+        '24': '24 (96px)'
+        '32': '32 (128px)'
+    margin_bottom:
+      type: string
+      title: Margin bottom
+      description: 'Select the margin bottom for the container - the space below the bottom.'
+      enum:
+        - '0'
+        - '4'
+        - '8'
+        - '12'
+        - '16'
+        - '24'
+        - '32'
+      meta:enum:
+        '0': '0 (0px)'
+        '4': '4 (16px)'
+        '8': '8 (32px)'
+        '12': '12 (48px)'
+        '16': '16 (64px)'
+        '24': '24 (96px)'
+        '32': '32 (128px)'
+    padding_top:
+      type: string
+      title: Padding top
+      description: 'Select the padding top for the container - the space beneath the top.'
+      enum:
+        - '0'
+        - '4'
+        - '8'
+        - '12'
+        - '16'
+        - '24'
+        - '32'
+      meta:enum:
+        '0': '0 (0px)'
+        '4': '4 (16px)'
+        '8': '8 (32px)'
+        '12': '12 (48px)'
+        '16': '16 (64px)'
+        '24': '24 (96px)'
+        '32': '32 (128px)'
+      examples:
+        - '12'
+    padding_bottom:
+      type: string
+      title: Padding bottom
+      description: Select the padding bottom for the container - the space beneath the bottom.
+      enum:
+        - '0'
+        - '4'
+        - '8'
+        - '12'
+        - '16'
+        - '24'
+        - '32'
+      meta:enum:
+        '0': '0 (0px)'
+        '4': '4 (16px)'
+        '8': '8 (32px)'
+        '12': '12 (48px)'
+        '16': '16 (64px)'
+        '24': '24 (96px)'
+        '32': '32 (128px)'
+      examples:
+        - '12'
+    row_count:
+      type: number
+      title: Row count
+      description: Select the number of rows to display.
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+      examples: [1]
+    container:
+      type: string
+      title: Container
+      description: Select how the content is to be contained.
+      enum:
+        - container--edgy
+        - container--wide
+        - container--normal
+        - container--narrow
+      meta:enum:
+        container--edgy: Edgy
+        container--wide: Wide
+        container--normal: Normal
+        container--narrow: Narrow
+      examples:
+        - container--normal
+    palette:
+      type: string
+      title: Palette
+      description: Select the colour palette for the content.
+      enum:
+        - color--standard
+        - color--alternate
+        - color--primary
+        - color--secondary
+        - color--accent
+        - color--neutral
+      meta:enum:
+        color--standard: Standard
+        color--alternate: Alternate
+        color--primary: Primary
+        color--secondary: Secondary
+        color--accent: Accent
+        color--neutral: Neutral
+    texture:
+      type: string
+      title: Texture
+      description: Select the texture to apply to the palette.
+      enum:
+        - texture--linear-start
+        - texture--linear-end
+        - texture--linear-top
+        - texture--linear-bottom
+        - texture--linear-top-start
+        - texture--linear-top-end
+        - texture--linear-bottom-start
+        - texture--linear-bottom-end
+        - texture--radial-spotlight
+        - texture--radial-vignette
+        - texture--conic-top-start
+        - texture--conic-top-end
+        - texture--conic-bottom-start
+        - texture--conic-bottom-end
+      meta:enum:
+        texture--linear-start: 'Linear: Start'
+        texture--linear-end: 'Linear: End'
+        texture--linear-top: 'Linear: Top'
+        texture--linear-bottom: 'Linear: Bottom'
+        texture--linear-top-start: 'Linear: Top start'
+        texture--linear-top-end: 'Linear: Top end'
+        texture--linear-bottom-start: 'Linear: Bottom start'
+        texture--linear-bottom-end: 'Linear: Bottom end'
+        texture--radial-spotlight: 'Radial: Spotlight'
+        texture--radial-vignette: 'Radial: Vignette'
+        texture--conic-top-start: 'Conic: Top start'
+        texture--conic-top-end: 'Conic: Top end'
+        texture--conic-bottom-start: 'Conic: Bottom start'
+        texture--conic-bottom-end: 'Conic: Bottom end'
+    overlay:
+      type: string
+      title: Overlay
+      description: Select the overlay to use for accessibility when a background is in use.
+      enum:
+        - overlay--linear-start
+        - overlay--linear-end
+        - overlay--linear-top
+        - overlay--linear-bottom
+        - overlay--linear-top-start
+        - overlay--linear-top-end
+        - overlay--linear-bottom-start
+        - overlay--linear-bottom-end
+        - overlay--radial-center
+      meta:enum:
+        overlay--linear-start: 'Linear: Start'
+        overlay--linear-end: 'Linear: End'
+        overlay--linear-top: 'Linear: Top'
+        overlay--linear-bottom: 'Linear: Bottom'
+        overlay--linear-top-start: 'Linear: Top start'
+        overlay--linear-top-end: 'Linear: Top end'
+        overlay--linear-bottom-start: 'Linear: Bottom start'
+        overlay--linear-bottom-end: 'Linear: Bottom end'
+        overlay--radial-center: 'Radial: Center'
+slots:
+  backgrounds:
+    title: Backgrounds
+    description: Add background items.
+  behaviors:
+    title: Behaviors
+    description: Add behavior items.
+  cell_1:
+    title: Cell 1
+    description: Add content items.
+  cell_2:
+    title: Cell 2
+    description: Add content items.
+  cell_3:
+    title: Cell 3
+    description: Add content items.
+  cell_4:
+    title: Cell 4
+    description: Add content items.
+  cell_5:
+    title: Cell 5
+    description: Add content items.
+  cell_6:
+    title: Cell 6
+    description: Add content items.
+  cell_7:
+    title: Cell 7
+    description: Add content items.
+  cell_8:
+    title: Cell 8
+    description: Add content items.
+  cell_9:
+    title: Cell 9
+    description: Add content items.
+  cell_10:
+    title: Cell 10
+    description: Add content items.
+  cell_11:
+    title: Cell 11
+    description: Add content items.
+  cell_12:
+    title: Cell 12
+    description: Add content items.
+  cell_13:
+    title: Cell 13
+    description: Add content items.
+  cell_14:
+    title: Cell 14
+    description: Add content items.
+  cell_15:
+    title: Cell 15
+    description: Add content items.
+  cell_16:
+    title: Cell 16
+    description: Add content items.

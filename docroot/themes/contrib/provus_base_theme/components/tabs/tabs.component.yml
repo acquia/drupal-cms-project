@@ -1,0 +1,35 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+
+name: Tabs
+description: Tabs component with JS
+group: Provus Components
+
+props:
+  type: object
+  required:
+    - orientation
+  properties:
+    id:
+      type: string
+      title: 'ID'
+      default: 'tabs-example'
+
+    orientation:
+      type: string
+      title: 'Orientation'
+      enum: ['horizontal', 'vertical']
+      default: 'horizontal'
+      examples:
+        - horizontal
+slots:
+  tabs_content:
+    title: Tab content
+    allowed_components:
+      - tab-item
+
+libraryOverrides:
+  js:
+    tabs.js: { minified: false }
+  dependencies:
+    - core/drupal
+    - core/once

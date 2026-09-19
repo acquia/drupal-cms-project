@@ -1,0 +1,124 @@
+{#
+/**
+ * @file
+ * Space Dark BG Image Card Component.
+ *
+ * Props:
+ * - title: String. The main heading of the card.
+ *   Example: 'Curabitur suscipit suscipit tellus'
+ *
+ * - image: Object. The image displayed in the card.
+ *   Example:
+ *     src: '/themes/contrib/pulse_theme/components/02-molecules/space-dark-bg-imagecard/images/city.jpg'
+ *     alt: 'Boring placeholder'
+ *     width: 300
+ *     height: 300
+ *
+ * - text: String. A descriptive paragraph under the title.
+ *   Example: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna ullamcorper laoreet in sagittis, sed aenean felis, a.'
+ *
+ * - alignment: String. Defines the overall alignment of the card.
+ *   Options: 'vertical', 'horizontal'
+ *   default: 'vertical'
+ *   Example: 'vertical'
+ *
+ * - horizontal_column_alignment: String. Defines how columns align in a horizontal layout.
+ *   Options: 'left-image', 'right-image'
+ *   default: 'left-image'
+ *   Example: 'left-image'
+ *
+ * - vertical_column_alignment: String. Defines how columns align in a vertical layout.
+ *   Options: 'top-image', 'bottom-image'
+ *   default: 'top-image'
+ *   Example: 'top-image'
+ *
+ * - card_size: String. Determines the size of the card.
+ *   Options: 'large', 'medium', 'small'
+ *   default: 'large'
+ *   Example: 'large'
+ *
+ * - full_box_link: Boolean. Enables the entire card to be a clickable link.
+ *   default: false
+ *   Example: false
+ *
+ * - extra_classes: String. Additional class names for custom styling.
+ *   Example: ''
+ */
+#}
+
+{# Default #}
+{% set element = element|default('article') %}
+
+{# Classes #}
+{% set classes = [
+  'media__card_dark_bg w-full overflow-hidden flex flex-col items-start card-component ga-image-card ga_space_component dark-background',
+  alignment,
+  card_layout,
+  horizontal_column_alignment|render|striptags|trim,
+  vertical_column_alignment|render|striptags|trim,
+  card_size,
+  full_box_link ? 'full_box_link' : '',
+  extra_classes ? extra_classes,
+] %}
+
+{% set attributes = attributes|default(create_attribute()).addClass(classes| sort | join(' ') | trim) %}
+
+{# Template #}
+{% block image_card_block %}
+  <{{ element }} {{ attributes }}>
+  {% if card_layout != 'no-image' %}
+    {% block image %}
+      {% if image is not empty %}
+        <div class="top-section w-full">
+          <div class="card_image" >
+            {% include 'canvas:image' ignore missing with {
+              src: image.src,
+              alt: image.alt,
+              width: image.width,
+              height: image.height,
+              loading: loading|default('lazy')
+            } only %}
+          </div>
+        </div>
+      {% endif %}
+    {% endblock %}
+  {% endif %}
+
+    <div class="bottom-section flex gap-2 w-full items-end justify-between">
+      <div class="bottom-content-wrap">
+        {% block title %}
+          {% if title|render|striptags|trim %}
+            {% if url is not empty %}
+              <a href="{{ url }}" class="tile-link">
+                {% include 'pulse_theme:space-heading' with { content: title, tag_name: 'h5', align: 'none' } only %}
+              </a>
+            {% else %}
+              {% include 'pulse_theme:space-heading' with { content: title, tag_name: 'h5', align: 'none' } only %}
+            {% endif %}
+          {% endif %}
+        {% endblock %}
+
+        {% if text|render|striptags|trim %}
+          <div class="card_text">
+            {{ text }}
+          </div>
+        {% endif %}
+      </div>
+
+      {% if url is not empty %}
+      <div class="w-9 h-9">
+        {% include 'pulse_theme:space-button' with {
+            text: 'Download paper',
+            url: url,
+            variant: 'primary',
+            size: 'small',
+            button_type: 'only_icon',
+            icon: 'arrow-up-right',
+            icon_size: 'small',
+            button_corners: 'rounded_half_circle'
+          } only %}
+      </div>
+      {% endif %}
+    </div>
+  </{{ element }}>
+{% endblock %}

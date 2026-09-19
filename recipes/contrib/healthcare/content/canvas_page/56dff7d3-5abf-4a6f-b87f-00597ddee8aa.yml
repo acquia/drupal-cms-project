@@ -1,0 +1,206 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 56dff7d3-5abf-4a6f-b87f-00597ddee8aa
+  default_langcode: en
+  depends:
+    e0de5487-45bf-400e-802e-cf18ff374385: file
+    c04a9506-0eae-42a6-9434-1559328ad31f: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Pay My Bill'
+  description:
+    -
+      value: 'Convenient, secure online bill payment.'
+  components:
+    -
+      uuid: b3ea84a2-99b1-4776-9833-0de20292c91f
+      component_id: sdc.diagnosis.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        background: secondary
+        padding_block_start: '32'
+        padding_block_end: '32'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        image_size: '4:3'
+        image_position: right
+        image_radius: extra-large
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: c04a9506-0eae-42a6-9434-1559328ad31f
+            target_type: media
+    -
+      parent_uuid: b3ea84a2-99b1-4776-9833-0de20292c91f
+      slot: hero_slot
+      uuid: 5865d334-dee1-4b59-b82a-6b1698ebc3ce
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Pay Your Bill Online'
+        level: 1
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: b3ea84a2-99b1-4776-9833-0de20292c91f
+      slot: hero_slot
+      uuid: 1badd7d5-ecf6-43db-935d-b91554783294
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Convenient, secure online bill payment.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: 93980095-da55-4b0b-b3bf-b9712849e82e
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: 93980095-da55-4b0b-b3bf-b9712849e82e
+      slot: main_slot
+      uuid: 714c5a68-a21a-4e39-a2d8-45a854045c74
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>The fastest and easiest way to pay your bill is through your MyChart patient portal. Simply log in, view your account balance, and make a payment using your credit card, debit card, or checking account.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 93980095-da55-4b0b-b3bf-b9712849e82e
+      slot: main_slot
+      uuid: ecfaa815-1867-4865-a1d0-54cfe7af5d88
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Pay Online Through MyChart'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 93980095-da55-4b0b-b3bf-b9712849e82e
+      slot: main_slot
+      uuid: 9f42acb7-ab7d-43b3-88d7-b69bd688f20c
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Saltmarsh Island Health offers several convenient ways to pay your medical bills online. All payments are processed securely through our encrypted payment portal.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 93980095-da55-4b0b-b3bf-b9712849e82e
+      slot: main_slot
+      uuid: aafc9890-6a44-40df-933d-bf09e33a6dc5
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'One-Time Payment (Without MyChart)'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 93980095-da55-4b0b-b3bf-b9712849e82e
+      slot: main_slot
+      uuid: 6b346a9d-1242-431c-b903-124753b3d880
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: "<p>Don't have a MyChart account? You can still pay your bill online using our guest payment portal. You'll need your account number from your billing statement.</p>"
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 93980095-da55-4b0b-b3bf-b9712849e82e
+      slot: main_slot
+      uuid: e394dc4d-b325-41de-94d7-df6c4e77f6f0
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Payment Plans'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 93980095-da55-4b0b-b3bf-b9712849e82e
+      slot: main_slot
+      uuid: 0afb7041-9735-4aa3-a407-abdb3325b892
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>If you need to set up a payment plan, please call our Billing Department at (555) 123-4569. We offer flexible payment arrangements to fit your budget.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 93980095-da55-4b0b-b3bf-b9712849e82e
+      slot: main_slot
+      uuid: 95f09f48-74a7-4ac3-926e-0e6ff78d619c
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Other Payment Options'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 93980095-da55-4b0b-b3bf-b9712849e82e
+      slot: main_slot
+      uuid: 6840be0c-70af-4d8c-b50d-8c6c585254d6
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Phone: (555) 123-4569 (credit/debit card accepted)</p><p>Mail: Saltmarsh Island Health, PO Box 12345, Saltmarsh Island, MA 02554</p><p>In Person: Visit any of our locations during business hours</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 93980095-da55-4b0b-b3bf-b9712849e82e
+      slot: main_slot
+      uuid: 134a832e-a962-4ca0-98cf-f22209ecdce4
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Questions About Your Bill?'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 93980095-da55-4b0b-b3bf-b9712849e82e
+      slot: main_slot
+      uuid: 6cd76813-b1ee-4b29-9ea5-5c92f707ab99
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Contact our Billing Department Monday-Friday 8:00 AM - 5:00 PM at (555) 123-4569.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+  path:
+    -
+      alias: /bill-payment
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

@@ -1,0 +1,11 @@
+{% set is_preview = canvas_is_preview or in_preview %}
+
+{% set classes = [
+  'join',
+  direction,
+  is_preview ? '[&>*]:min-w-20',
+] %}
+
+<div{{ attributes.addClass(classes) }}>
+  {% block items %}{% endblock %}
+</div>

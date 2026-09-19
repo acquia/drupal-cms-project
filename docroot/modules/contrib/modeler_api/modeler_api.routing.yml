@@ -1,0 +1,42 @@
+route_callbacks:
+  - '\Drupal\modeler_api\Routing\Routes::routes'
+
+modeler_api.settings:
+  path: '/admin/config/workflow/modeler_api'
+  defaults:
+    _title: 'Modeler API Settings'
+    _form: 'Drupal\modeler_api\Form\Settings'
+  requirements:
+    _permission: 'administer site configuration'
+
+modeler_api.global_tokens:
+  path: '/system/modeler_api/global_tokens'
+  defaults:
+    _controller: 'Drupal\modeler_api\Controller\ModelerApi::globalTokens'
+  requirements:
+    _custom_access: '\Drupal\modeler_api\Controller\ModelerApi::checkGlobalTokenAccess'
+  options:
+    _htmx_route: true
+
+modeler_api.template_tokens:
+  path: '/system/modeler_api/template_tokens/{owner_id}'
+  defaults:
+    _controller: 'Drupal\modeler_api\Controller\ModelerApi::templateTokens'
+  requirements:
+    _custom_access: '\Drupal\modeler_api\Controller\ModelerApi::checkTemplateTokenAccess'
+  options:
+    _htmx_route: true
+    parameters:
+      owner_id:
+        type: string
+
+modeler_api.apply_template:
+  path: '/system/modeler_api/apply_template'
+  defaults:
+    _controller: 'Drupal\modeler_api\Controller\Templates::apply'
+  requirements:
+    _custom_access: '\Drupal\modeler_api\Controller\Templates::checkAccess'
+    _csrf_request_header_token: true
+  options:
+    _admin_route: true
+    _method: 'POST'

@@ -1,0 +1,25 @@
+<div class="card-wrapper provus-card-bg">
+{% if link %}
+  <a href="{{ link }}">
+{% endif %}
+    <div{% if content_attributes is defined and content_attributes %}{{ content_attributes.addClass('card') }}{% else %} class="card"{% endif %}>
+      {% if bg_image_path %}
+        <div class="card-img-wrapper">
+          <div class="card-img-container" style="background-image: url({{ bg_image_path.src }})"></div>
+        </div>
+      {% endif %}
+      <div class="card-img-overlay">
+        <div class="card-body">
+          {% if title|render %}
+            <div class="card-title">{{ title }}</div>
+            <div class="arrow-right">
+              <i class="fa-solid fa-arrow-right"></i>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+{% if link %}
+  </a>
+{% endif %}
+</div>

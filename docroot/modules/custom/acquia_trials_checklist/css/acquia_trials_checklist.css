@@ -1,0 +1,221 @@
+/* Acquia Trials Checklist block
+ * Selectors use .block.block-acquia-trials-checklist as the root scope to beat
+ * dashboard.css / dashboard.gin.css rules (.dashboard .layout .block h2, etc.)
+ * which load later and have specificity 0-3-1.
+ */
+
+.block.block-acquia-trials-checklist .acquia-trials-checklist {
+  background: #fff;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+/* Header */
+.block.block-acquia-trials-checklist .checklist-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.block.block-acquia-trials-checklist .checklist-header h2.checklist-header__title {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1E293B;
+  margin-inline: 0;
+  margin-block-start: 0;
+}
+
+.block.block-acquia-trials-checklist .checklist-header__progress {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.block.block-acquia-trials-checklist .checklist-progress__label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #64748B;
+}
+
+.block.block-acquia-trials-checklist .checklist-progress__percentage {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1E293B;
+}
+
+/* Description */
+.block.block-acquia-trials-checklist .checklist-header__description {
+  margin: 0 0 20px;
+  color: #64748B;
+  font-size: 14px;
+}
+
+/* Progress bar */
+.block.block-acquia-trials-checklist .checklist-progress__bar {
+  width: 100%;
+  height: 6px;
+  background: #E2E8F0;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.block.block-acquia-trials-checklist .checklist-progress__fill {
+  height: 100%;
+  background: #2196F3;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+/* Checklist items */
+.block.block-acquia-trials-checklist .checklist-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.block.block-acquia-trials-checklist .checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 8px;
+  margin: 0 -8px;
+  border-top: 1px solid #F1F5F9;
+  border-radius: 6px;
+  transition: background-color 0.15s;
+}
+
+.block.block-acquia-trials-checklist .checklist-item:not(.checklist-item--completed):hover {
+  background: #F1F5F9;
+}
+
+.block.block-acquia-trials-checklist .checklist-item:first-child {
+  border-top: none;
+}
+
+/* Checkbox button */
+.block.block-acquia-trials-checklist .checklist-item__checkbox {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.block.block-acquia-trials-checklist .checklist-item__checkbox:focus-visible {
+  outline: 2px solid #3B82F6;
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+/* Toggle icon visibility */
+.block.block-acquia-trials-checklist .checklist-item .checklist-item__icon-complete {
+  display: none;
+}
+
+.block.block-acquia-trials-checklist .checklist-item .checklist-item__icon-pending {
+  display: block;
+}
+
+.block.block-acquia-trials-checklist .checklist-item--completed .checklist-item__icon-complete {
+  display: block;
+}
+
+.block.block-acquia-trials-checklist .checklist-item--completed .checklist-item__icon-pending {
+  display: none;
+}
+
+/* Content */
+.block.block-acquia-trials-checklist .checklist-item__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.block.block-acquia-trials-checklist .checklist-item__title {
+  display: block;
+  font-weight: 600;
+  color: #1E293B;
+}
+
+.block.block-acquia-trials-checklist .checklist-item--completed .checklist-item__title {
+  text-decoration: line-through;
+  color: #94A3B8;
+}
+
+.block.block-acquia-trials-checklist .checklist-item__description {
+  display: block;
+  font-size: 13px;
+  color: #64748B;
+  margin-top: 2px;
+}
+
+.block.block-acquia-trials-checklist .checklist-item--completed .checklist-item__description {
+  color: #CBD5E1;
+}
+
+/* START button – hidden by default, shown on row hover */
+.block.block-acquia-trials-checklist .checklist-item__start {
+  flex-shrink: 0;
+  display: none;
+  padding: 4px 16px;
+  background: transparent;
+  color: #2196F3;
+  border: 2px solid #2196F3;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  border-radius: 999px;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.block.block-acquia-trials-checklist .checklist-item:not(.checklist-item--completed):hover .checklist-item__start {
+  display: inline-block;
+}
+
+.block.block-acquia-trials-checklist .checklist-item__start:hover,
+.block.block-acquia-trials-checklist .checklist-item__start:focus {
+  background: #2196F3;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .block.block-acquia-trials-checklist .acquia-trials-checklist {
+    padding: 16px;
+  }
+
+  .block.block-acquia-trials-checklist .checklist-header {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .block.block-acquia-trials-checklist .checklist-item {
+    flex-wrap: wrap;
+  }
+
+  .block.block-acquia-trials-checklist .checklist-item__start {
+    margin-left: 36px;
+  }
+}

@@ -1,0 +1,294 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 5d0f4044-6b78-4757-a8ad-c8d2e5af3aac
+  default_langcode: en
+  depends:
+    005d4777-218a-4481-b6c2-673bb12bd21d: file
+    4a600c14-4655-4ffb-8b52-17a200810fa1: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Terms of Use'
+  description:
+    -
+      value: 'Terms and conditions for using the Saltmarsh Island Health website.'
+  components:
+    -
+      uuid: 2c335b4d-d32c-4706-8194-473d15029333
+      component_id: sdc.diagnosis.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        background: secondary
+        padding_block_start: '32'
+        padding_block_end: '32'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        image_size: '4:3'
+        image_position: right
+        image_radius: extra-large
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 4a600c14-4655-4ffb-8b52-17a200810fa1
+            target_type: media
+    -
+      parent_uuid: 2c335b4d-d32c-4706-8194-473d15029333
+      slot: hero_slot
+      uuid: 0e2dfdc0-d498-440c-8876-7d244779ca94
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Website Terms of Use'
+        level: 1
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 2c335b4d-d32c-4706-8194-473d15029333
+      slot: hero_slot
+      uuid: 670ea8f1-36a7-4e5a-a816-bad86766f548
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Terms and conditions for using the Saltmarsh Island Health website.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: ed0b4882-7c3f-4e9a-a04a-4357bcf2b010
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: ed0b4882-7c3f-4e9a-a04a-4357bcf2b010
+      slot: main_slot
+      uuid: ca8e7548-c1c3-483f-bb9a-e35a2c9180a6
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p><strong>Last Updated: January 1, 2024</strong></p><p>Welcome to the Saltmarsh Island Health website. By accessing or using this website, you agree to be bound by these Terms of Use.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: ed0b4882-7c3f-4e9a-a04a-4357bcf2b010
+      slot: main_slot
+      uuid: f84a193d-ba8e-4353-8672-1a2e3572511c
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Acceptance of Terms'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ed0b4882-7c3f-4e9a-a04a-4357bcf2b010
+      slot: main_slot
+      uuid: 330b4962-9d84-412c-97a1-c1f864bbc17f
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>By using this website, you acknowledge that you have read, understood, and agree to be bound by these Terms of Use and our Privacy Policy.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: ed0b4882-7c3f-4e9a-a04a-4357bcf2b010
+      slot: main_slot
+      uuid: 77ae4113-784d-40a5-8a4c-e3c2b220f48f
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Use of Website'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ed0b4882-7c3f-4e9a-a04a-4357bcf2b010
+      slot: main_slot
+      uuid: 22d42f0f-c361-4d14-8e73-c9360677ee1f
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>This website is provided for informational purposes only. The information on this website is not intended to replace professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: ed0b4882-7c3f-4e9a-a04a-4357bcf2b010
+      slot: main_slot
+      uuid: 71effdcd-6589-4a3e-be4c-ac541c9152d5
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Medical Emergencies'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ed0b4882-7c3f-4e9a-a04a-4357bcf2b010
+      slot: main_slot
+      uuid: f964619a-bb57-4b97-848c-71eb0c816aa7
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p><strong>If you are experiencing a medical emergency, call 911 immediately. Do not use this website for emergency medical needs.</strong></p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: ed0b4882-7c3f-4e9a-a04a-4357bcf2b010
+      slot: main_slot
+      uuid: 8c2af28a-0d0c-4385-b95f-b0603eb35557
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Accuracy of Information'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ed0b4882-7c3f-4e9a-a04a-4357bcf2b010
+      slot: main_slot
+      uuid: b9aaddff-f058-44a8-9b0a-18e433114374
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>While we strive to provide accurate and up-to-date information, we make no warranties or representations about the accuracy, completeness, or timeliness of the content on this website.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: ed0b4882-7c3f-4e9a-a04a-4357bcf2b010
+      slot: main_slot
+      uuid: 3123bbd9-da76-4dc7-850a-dd8212b13a56
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Intellectual Property'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ed0b4882-7c3f-4e9a-a04a-4357bcf2b010
+      slot: main_slot
+      uuid: 54806aec-fa9c-4eee-8bcb-db64659abaf7
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>All content on this website, including text, graphics, logos, images, and software, is the property of Saltmarsh Island Health and is protected by copyright and other intellectual property laws.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: ed0b4882-7c3f-4e9a-a04a-4357bcf2b010
+      slot: main_slot
+      uuid: ded912ee-78ef-4d4d-8a7b-329e2b31ce19
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Third-Party Links'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ed0b4882-7c3f-4e9a-a04a-4357bcf2b010
+      slot: main_slot
+      uuid: 01dee649-0012-4770-abc6-097a74f3b6c2
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>This website may contain links to third-party websites. We are not responsible for the content, privacy practices, or terms of use of any third-party websites.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: ed0b4882-7c3f-4e9a-a04a-4357bcf2b010
+      slot: main_slot
+      uuid: 0e252a47-c304-44e0-95c1-3d46db9b8cfa
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Limitation of Liability'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ed0b4882-7c3f-4e9a-a04a-4357bcf2b010
+      slot: main_slot
+      uuid: eed3c610-a13b-4d1d-9b6b-aa6b197839e3
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Saltmarsh Island Health shall not be liable for any direct, indirect, incidental, special, or consequential damages resulting from the use or inability to use this website.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: ed0b4882-7c3f-4e9a-a04a-4357bcf2b010
+      slot: main_slot
+      uuid: 7cf84d68-1fb8-400b-9e46-cad11a3dcebd
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Changes to Terms'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ed0b4882-7c3f-4e9a-a04a-4357bcf2b010
+      slot: main_slot
+      uuid: cf2f616e-0676-44e2-8066-33642009341e
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>We reserve the right to modify these Terms of Use at any time. Your continued use of the website following any changes constitutes acceptance of those changes.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: ed0b4882-7c3f-4e9a-a04a-4357bcf2b010
+      slot: main_slot
+      uuid: ff60242e-7f3a-40bb-9b78-4956f5b99e61
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Contact Us'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ed0b4882-7c3f-4e9a-a04a-4357bcf2b010
+      slot: main_slot
+      uuid: 3efe135f-2886-4a76-9239-cbddd73a8bba
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>If you have questions about these Terms of Use, contact us at legal@saltmarshhealth.org.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+  path:
+    -
+      alias: /terms
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

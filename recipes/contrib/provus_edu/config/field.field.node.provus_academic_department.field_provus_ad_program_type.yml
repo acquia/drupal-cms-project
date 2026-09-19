@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_provus_ad_program_type
+    - node.type.provus_academic_department
+    - taxonomy.vocabulary.provus_category_program_type
+id: node.provus_academic_department.field_provus_ad_program_type
+field_name: field_provus_ad_program_type
+entity_type: node
+bundle: provus_academic_department
+label: 'Program Type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      provus_category_program_type: provus_category_program_type
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

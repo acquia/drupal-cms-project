@@ -1,0 +1,119 @@
+/**
+ * Tab component styles
+ * Handles active tab state and responsive behavior
+ */
+
+/* Active tab panel - show content */
+.tab--active .tab--panel {
+  overflow: visible;
+  padding-top: 1.25rem; /* py-5 = 20px */
+  padding-bottom: 1.25rem;
+}
+
+/* Prevent content overflow in tab panels */
+.tab--panel {
+  overflow: hidden;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.tab--active .tab--panel {
+  overflow: visible;
+}
+
+/* In vertical tabs, ensure strict width containment */
+.tabs-container--vertical .tab--panel {
+  overflow: hidden !important;
+  contain: layout;
+}
+
+.tabs-container--vertical .tab--active .tab--panel {
+  overflow: auto;
+}
+
+/* Desktop: Active tab panel */
+@media (min-width: 768px) {
+  .tab--active .tab--panel {
+    height: auto;
+    padding-top: 1.5rem; /* py-6 = 24px */
+    padding-bottom: 1.5rem;
+  }
+}
+
+/* Mobile: Use natural height for animation */
+.tab--js.tab--active .tab--panel {
+  height: var(--natural-height, auto);
+}
+
+/* During resize, use auto height */
+.tab--resizing.tab--active .tab--panel {
+  height: auto;
+}
+
+/* Desktop: Always use auto height for active tabs */
+@media (min-width: 768px) {
+  .tab--panel {
+    height: 0;
+  }
+
+  .tab--active .tab--panel {
+    height: auto;
+  }
+}
+
+/* Canvas mode: Always show all content */
+.tab--canvas .tab--panel {
+  height: auto !important;
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+  overflow: visible !important;
+}
+
+/* ========================================
+   Content Constraints
+   ======================================== */
+
+/* Prevent images and media from overflowing tab panels */
+.tab--panel img,
+.tab--panel video,
+.tab--panel iframe,
+.tab--panel picture {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Ensure responsive images in vertical tabs */
+.tabs-container--vertical .tab--panel img,
+.tabs-container--vertical .tab--panel video,
+.tabs-container--vertical .tab--panel iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Handle figure elements with images */
+.tab--panel figure {
+  max-width: 100%;
+  margin: 0;
+}
+
+.tab--panel figure img {
+  width: 100%;
+  height: auto;
+}
+
+/* Constrain full-width utility classes within tab panels */
+.tab--panel .w-full,
+.tab--panel .cq-full,
+.tab--panel [class*="w-full"],
+.tab--panel [class*="cq-full"] {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* Ensure all children respect the tab panel width */
+.tab--panel > * {
+  max-width: 100%;
+  box-sizing: border-box;
+}

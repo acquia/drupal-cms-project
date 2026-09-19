@@ -1,0 +1,52 @@
+_meta:
+  version: '1.0'
+  entity_type: easy_email
+  uuid: 650280a9-bb5d-4d4f-8920-07b3e1244fb8
+  bundle: default
+default:
+  revision_user:
+    -
+      target_id: 0
+  label:
+    -
+      value: Default
+  creator_uid:
+    -
+      target_id: 0
+  recipient_uid:
+    -
+      target_id: 1
+  recipient_address:
+    -
+      value: admin@example.com
+  from_name:
+    -
+      value: 'Drush Site-Install'
+  from_address:
+    -
+      value: admin@example.com
+  subject:
+    -
+      value: 'New release(s) available for Drush Site-Install'
+  body_html:
+    -
+      value: |-
+        There are security updates available for one or more of your modules or themes. To ensure the security of your server, you should update immediately!<br />
+        <br />
+        See the available updates page for more information:<br />
+        http://provus-windy-demo-2.ddev.site:33000/admin/reports/updates<br />
+        <br />
+        Your site is currently configured to send these emails when any updates are available. To get notified only for security updates, http://provus-windy-demo-2.ddev.site:33000/admin/reports/updates/settings.
+      format: easy_email
+  body_plain:
+    -
+      value: |-
+        There are security updates available for one or more of your modules or themes. To ensure the security of your server, you should update immediately!
+
+        See the available updates page for more information:
+        http://provus-windy-demo-2.ddev.site:33000/admin/reports/updates
+
+        Your site is currently configured to send these emails when any updates are available. To get notified only for security updates, http://provus-windy-demo-2.ddev.site:33000/admin/reports/updates/settings.
+  sent:
+    -
+      value: 1773720377

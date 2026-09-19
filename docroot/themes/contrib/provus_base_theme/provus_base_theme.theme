@@ -1,0 +1,129 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the SASS Starterkit subtheme.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\Entity\Entity\EntityViewDisplay;
+use Drupal\file\Entity\File;
+
+/**
+ * Implements hook_form_system_theme_settings_alter() for settings form.
+ *
+ * Replace Barrio setting options with subtheme ones.
+ */
+function provus_base_theme_form_system_theme_settings_alter(&$form, FormStateInterface $form_state) {
+  $form['components']['navbar']['bootstrap_barrio_navbar_top_background']['#options'] = array(
+    'bg-primary' => t('Primary'),
+    'bg-secondary' => t('Secondary'),
+    'bg-light' => t('Light'),
+    'bg-dark' => t('Dark'),
+    'bg-white' => t('White'),
+    'bg-transparent' => t('Transparent'),
+  );
+  $form['components']['navbar']['bootstrap_barrio_navbar_background']['#options'] = array(
+    'bg-primary' => t('Primary'),
+    'bg-secondary' => t('Secondary'),
+    'bg-light' => t('Light'),
+    'bg-dark' => t('Dark'),
+    'bg-white' => t('White'),
+    'bg-transparent' => t('Transparent'),
+  );
+}
+
+/**
+ * Override or insert variables into the html templates.
+ *
+ * @param array $variables
+ *   Variables to pass to the theme template.
+ */
+function provus_base_theme_preprocess_html(array &$variables) {
+  $path = \Drupal::service('path.current')->getPath();
+  $path_args = explode('/', $path);
+  if (isset($path_args[1]) && isset($path_args[2]) && ($path_args[1] == 'node') && (is_numeric($path_args[2]))) {
+    $variables['attributes']['class'][] = 'page-node-' . $path_args[2];
+  }
+
+  // Add body class called "layout-builder-active" and load custom CSS file if
+  // layout builder is current page.
+  if (isset($path_args[1]) && isset($path_args[2]) && isset($path_args[3]) && ($path_args[1] == 'node') && (is_numeric($path_args[2])) && ($path_args[3] == 'layout')) {
+    $variables['attributes']['class'][] = 'layout-builder-active';
+  }
+}
+
+/**
+ * Implements template_preprocess_links().
+ */
+function provus_base_theme_preprocess_links(&$vars) {
+  if (!empty($vars['links'])) {
+    foreach ($vars['links'] as &$link) {
+      if (!empty($link['link']['#options']['attributes']['class'])
+        && in_array('js-layout-builder-block-link', $link['link']['#options']['attributes']['class'])
+        && in_array('inline-block-list__item', $link['link']['#options']['attributes']['class'])
+        && !empty($link['link']['#title'])) {
+        $link['link']['#options']['attributes']['class'][] = 'block-type-' . str_replace(' ', '-', strtolower($link['link']['#title']));
+      }
+    }
+  }
+}
+
+/**
+ * Implements template_preprocess_node().
+ */
+function provus_preprocess_node(&$vars) {
+  $node_type = $vars['node']->getType();
+  
+  $image_style = '';
+  $default_image_name = '';
+
+  if (in_array($node_type, ['provus_news', 'provus_blog', 'provus_person'])) {
+    if (!$vars['node']->field_provus_media_image->target_id && $vars['view_mode'] != 'full') {
+      $default_image_name = 'default_' . $node_type . '.jpg';
+      $image_style = (in_array($node_type, ['provus_person'])) ? 'provus_portrait_medium' : 'provus_landscape_medium';
+    }
+  }
+
+  if ($default_image_name && $image_style) {
+    $public_image_path = 'public://' . $default_image_name;
+    $file_system = \Drupal::service('file_system');
+    if ($file_system->getDestinationFilename($public_image_path, FileSystemInterface::EXISTS_ERROR)) {
+      $active_theme = \Drupal::theme()->getActiveTheme();
+      $theme_realpath = \Drupal::service('file_system')->realpath($active_theme->getPath());
+      $source_path = $theme_realpath . '/images/' . $default_image_name;
+
+      if (!$file_system->getDestinationFilename($source_path, FileSystemInterface::EXISTS_ERROR)) {
+        // Move default image from theme to the public directory
+        $file_system->copy($source_path, $public_image_path);
+      }
+    }
+
+    $image = [
+      '#theme' => 'image_style',
+      '#style_name' => $image_style,
+      '#uri' => $public_image_path,
+    ];
+
+    $vars['content']['image'] = $image;
+  }
+
+  $vars['content_image_uri'] = '';
+  if (in_array($node_type, ['provus_news', 'provus_blog', 'provus_person'])) {
+    if ($vars['node']->field_provus_media_image) {
+      $fid = $vars['node']->field_provus_media_image->target_id;
+      if (!empty($fid)) {
+        $file = \Drupal\file\Entity\File::load($fid);
+        $vars['content_image_uri'] = '';
+        if ($file) {
+          $vars['content_image_uri'] = $file->getFileUri();
+        }
+      }
+    }
+  }
+
+  if (!isset($vars['content']['date']) || !$vars['content']['date']) {
+    $vars['content_date'] = date('F d, Y', $vars['node']->getCreatedTime());
+  }
+}

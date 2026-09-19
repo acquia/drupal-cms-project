@@ -1,0 +1,44 @@
+{% set video_attributes = video_attributes|default(create_attribute()) %}
+
+{% set video_autoplay = autoplay ?: false %}
+{% set video_muted = muted ?: false %}
+{% set video_loop = loop ?: false %}
+{% set video_aria_label = caption ?: false %}
+{% set video_poster = poster.src ?: false %}
+
+<figure class="video-component cq-full grid w-full gap-2 relative">
+  <video
+    {{ video_attributes
+      .setAttribute('autoplay', video_autoplay)
+      .setAttribute('muted', video_muted)
+      .setAttribute('loop', video_loop)
+      .setAttribute('aria-label', video_aria_label)
+      .setAttribute('poster', video_poster)
+    }}
+    src="{{ media.src }}"
+    class="h-auto w-full rounded-lg aspect-video object-cover"
+  >
+    Your browser does not support the video tag.
+  </video>
+  {% if controls %}
+    <div class="video-controls absolute bottom-4 right-4 flex items-center gap-2">
+      <button
+        aria-label="{{ autoplay ? 'Pause video' : 'Play video' }}"
+        class="text-white cursor-pointer"
+      >
+        <span class="video-icon-play{{ autoplay ? ' hidden' : '' }}">
+          {% include "mercury:icon" with {
+            icon: "play-circle",
+            icon_size: "large",
+          } only %}
+        </span>
+        <span class="video-icon-pause{{ autoplay ? '' : ' hidden' }}">
+          {% include "mercury:icon" with {
+            icon: "pause-circle",
+            icon_size: "large",
+          } only %}
+        </span>
+      </button>
+    </div>
+  {% endif %}
+</figure>

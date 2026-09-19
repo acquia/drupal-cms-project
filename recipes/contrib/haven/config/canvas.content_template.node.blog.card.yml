@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.haven_theme.card
+    - core.entity_view_mode.node.card
+    - field.field.media.image.field_media_image
+    - field.field.node.blog.field_featured_image
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - node.type.blog
+  module:
+    - file
+    - media
+    - node
+    - options
+id: node.blog.card
+content_entity_type_id: node
+content_entity_type_bundle: blog
+content_entity_type_view_mode: card
+component_tree:
+  -
+    uuid: 986eb71c-e9f3-4aa9-b4e9-cbad39acca4d
+    component_id: sdc.haven_theme.card
+    component_version: 0c5fd99d8d37c291
+    inputs: '{"heading_text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:blog\u241dtitle\u241e\u241fvalue"},"level":3,"media":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:blog\u241dfield_featured_image\u241e\u241fentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241f{src\u21a0src_with_alternate_widths,alt\u21a0alt,width\u21a0width,height\u21a0height}"},"url":{"sourceType":"host-entity-url","absolute":false},"date":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node\u241dcreated\u241e\u241fvalue","adapter":"unix_to_date"}}'
+exposed_slots: {  }

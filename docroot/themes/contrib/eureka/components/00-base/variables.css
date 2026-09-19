@@ -1,0 +1,61 @@
+:root {
+  /* Mobile fonts */
+  --heading--title: 3.2rem;
+  --heading--main: 2.4rem;
+  --heading--sub: 2rem;
+  --heading--small: 1.6rem;
+  --heading--xsmall: 1.6rem;
+  --heading--tiny: 1.6rem;
+  --body-large: 1.6rem;
+  --body-copy: 1.4rem;
+  --body-small: 1.2rem;
+
+  /* Fonts */
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-extrabold: 800;
+  --font-bold: 700;
+  --font-medium: 500;
+  --font-weight-default: 400;
+
+  /* Spacing */
+  --spacing-0-5: calc(var(--spacing-1) / 2); /* 0.4rem (4px) */
+  --spacing-1: 0.8rem; /* Default Unit */
+  --spacing-1-5: calc(var(--spacing-1) * 1.5); /* 1.2rem (12px) */
+  --spacing-2: calc(var(--spacing-1) * 2); /* 1.6rem (16px) */
+  --spacing-3: calc(var(--spacing-1) * 3); /* 2.4rem (24px) */
+  --spacing-4: calc(var(--spacing-1) * 4); /* 3.2rem (32px) */
+  --spacing-5: calc(var(--spacing-1) * 5); /* 4rem (40px) */
+  --spacing-6: calc(var(--spacing-1) * 6); /* 4.8rem (48px) */
+  --spacing-7: calc(var(--spacing-1) * 7); /* 5.6rem (56px) */
+  --spacing-8: calc(var(--spacing-1) * 8); /* 6.4rem (64px) */
+  --spacing-9: calc(var(--spacing-1) * 9); /* 7.2rem (72px) */
+  --spacing-10: calc(var(--spacing-1) * 9); /* 8rem (80px) */
+
+  /* Component spacing */
+  --component-space: var(--spacing-5);
+
+  /* Borders, box shadows, etc */
+  --border-radius: 0.8rem;
+  --box-shadow-default: 0 1rem 1.5rem -0.3rem rgb(0 0 0 / 0.10), 0 0.4rem 0.6rem -0.4rem rgb(0 0 0 / 0.10);
+  --focus-outline: 0.2rem solid var(--brand-primary-dark);
+  --focus-shadow: 0 0 0 0.2rem var(--white)
+}
+
+@media (min-width: 768px) {
+  :root {
+    /* Desktop fonts */
+    --heading--title: 5.6rem;
+    --heading--main: 3.6rem;
+    --heading--sub: 2.8rem;
+    --heading--small: 1.8rem;
+    --heading--xsmall: 1.8rem;
+    --heading--tiny: 1.6rem;
+    --body-large: 1.8rem;
+    --body-copy: 1.6rem;
+    --body-small: 1.4rem;
+
+    /* Component spacing */
+    --component-space: var(--spacing-9);
+  }
+}

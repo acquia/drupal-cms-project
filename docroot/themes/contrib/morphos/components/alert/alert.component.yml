@@ -1,0 +1,73 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Alert
+description: A high-visibility box used to communicate success, info, warning, or error messages.
+group: Content
+status: stable
+props:
+  type: object
+  properties:
+    icon:
+      type: string
+      title: Icon
+      description: Select the icon for the alert.
+      default: check-circle
+      examples:
+        - check-circle
+    message:
+      type: string
+      title: Message
+      description: Message to display in the alert.
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - <p>Alert message.</p>
+    style:
+      type: string
+      title: Style
+      description: Select the style of the alert.
+      enum:
+        - alert-dash
+        - alert-soft
+      meta:enum:
+        alert-dash: Dash
+        alert-soft: Soft
+    color:
+      type: string
+      title: Color
+      description: Select the color of the alert.
+      enum:
+        - color--info
+        - color--success
+        - color--error
+        - color--warning
+      meta:enum:
+        color--info: Info
+        color--success: Success
+        color--error: Error
+        color--warning: Warning
+      default: color--info
+      examples:
+        - color--info
+    direction:
+      type: string
+      title: Direction
+      description: Select the direction of the alert.
+      enum:
+        - alert-vertical
+        - alert-horizontal
+      meta:enum:
+        alert-vertical: Vertical
+        alert-horizontal: Horizontal
+slots:
+  buttons:
+    title: Buttons
+    description: Add button items.
+libraryOverrides:
+  dependencies:
+    - core/drupal
+    - core/once
+  css:
+    component:
+      ../../dist/css/alert.css: { minified: true }
+  js:
+    ../../dist/js/alert.js: { minified: true }

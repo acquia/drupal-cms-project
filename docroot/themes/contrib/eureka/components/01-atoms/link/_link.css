@@ -1,0 +1,73 @@
+a,
+.link {
+  color: var(--link-default);
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+  transition:
+    color 0.2s ease-in-out,
+    gap 0.2s ease-in-out;
+}
+
+a:hover,
+a:active,
+.link:hover,
+.link:active {
+  text-decoration: none;
+}
+
+a:visited,
+.link:visited {
+  color: var(--link-visited);
+}
+
+/* Iconed link */
+.link--icon {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.link--icon .icon {
+  height: 2rem;
+  width: 2rem;
+}
+
+/* Inline link */
+.link--inline {
+  margin-right: var(--spacing-2);
+}
+
+/* Overlay link */
+.link--overlay {
+  color: transparent;
+  text-indent: -9999px;
+  font-size: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* CTA link */
+.link--cta {
+  font-weight: var(--font-extrabold);
+  text-decoration: none;
+  gap: var(--spacing-0-5);
+  font-size: 1.4rem;
+}
+
+.link--cta:hover,
+.link--cta:focus-visible {
+  gap: var(--spacing-1-5);
+  text-decoration: underline;
+}
+
+.link--text-inverse {
+  color: var(--text-light);
+}
+
+.link--text-inverse:hover,
+.link--text-inverse:active {
+  color: var(--text-light);
+}

@@ -1,0 +1,64 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Accordion
+status: stable
+description: Accordion component
+# Overrides regular css with minified.
+libraryOverrides:
+  css:
+    component:
+      accordion.min.css: { minified: true }
+  js:
+    accordion.min.js: { minified: true }
+group: Eureka component items
+props:
+  type: object
+  properties:
+    accordion_heading:
+      type: string
+      title: Accordion heading
+      description: Title of the accordion
+      examples:
+        - Lorem ipsum
+    accordion_expanded_heading:
+      type: ['string', 'null']
+      title: Accordion expanded heading
+      description: Expanded title of the accordion
+      examples:
+        - Lorem ipsum dolor sit amet
+    accordion_heading_level:
+      type: number
+      title: Accordion heading level
+      description: From H2 to H6
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+      examples:
+        - 3
+    accordion_icon_before:
+      type: boolean
+      title: Accordion icon before
+      description: Positions the icon before the heading text.
+      examples:
+        - false
+    accordion_icon_name:
+      type: ['string', 'null']
+      title: Accordion icon name
+      description: Name of the icon to use in the accordion heading / button
+      examples:
+        - chevron
+    accordion_content:
+      type: string
+      title: Accordion content
+      description: Accordion toggleable content (HTML markup allowed)
+      examples:
+        - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra, tellus vitae bibendum egestas, nisl neque rhoncus enim, in vehicula ex mauris feugiat nunc. Cras sagittis at ante quis tincidunt. Quisque venenatis pharetra nisl, ac tincidunt augue blandit quis. Ut ornare tristique odio, sit amet ultrices leo bibendum vitae.
+    accordion_contained:
+      type: boolean
+      title: Accordion contained
+      description: Set this option to true if you want the component to sit within a container.
+      examples:
+        - false

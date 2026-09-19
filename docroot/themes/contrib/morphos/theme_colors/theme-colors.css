@@ -1,0 +1,33 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: theme_colors/theme-colors.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+.palette {
+  --cols: 2;
+  --gap: 1rem;
+}
+
+.palette .details-wrapper {
+  display: flex;
+  gap: var(--gap);
+}
+
+.palette__item {
+  display: flex;
+  flex-direction: column;
+  flex-basis: calc(
+    100% / var(--cols) - var(--gap) / var(--cols) * (var(--cols) - 1)
+  );
+}
+
+@media (max-width: 768px) {
+  .palette .details-wrapper {
+    display: block;
+  }
+}
+
+.color-example {
+  padding: 0.5em 1em;
+}

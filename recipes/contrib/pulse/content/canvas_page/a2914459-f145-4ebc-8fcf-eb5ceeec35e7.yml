@@ -1,0 +1,237 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: a2914459-f145-4ebc-8fcf-eb5ceeec35e7
+  default_langcode: en
+  depends:
+    dcf00831-fe6e-4d14-af57-0bde2ea0ff89: file
+    8f853587-1987-4fbc-ac4f-cc8d15e6c1e3: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: contact-us
+  components:
+    -
+      uuid: 1b91d687-244c-4867-93bb-7dbb9188a34c
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        margin_top: none
+        background_pattern: false
+        pattern_image_position: bottom-right
+        margin_bottom: large
+    -
+      parent_uuid: 1b91d687-244c-4867-93bb-7dbb9188a34c
+      slot: content
+      uuid: a128b4c7-4302-4159-b646-9d93be521c09
+      component_id: sdc.pulse_theme.space-section-heading
+      inputs:
+        title: 'We’re here to help'
+        tag_name: h2
+        description:
+          value: "<p>Have a question, need guidance, or looking for support?\L Reach out — we’ll point you in the right direction.</p>"
+          format: canvas_html_block
+        alignment: center
+    -
+      parent_uuid: 1b91d687-244c-4867-93bb-7dbb9188a34c
+      slot: content
+      uuid: 099cab46-c752-4123-945d-90cc8f274f12
+      component_id: sdc.pulse_theme.space-flexi
+      inputs:
+        no_of_columns: two
+        vertical: center
+        horizontal: left
+        direction: across
+        gap: medium
+        wrap: wrap
+        margin_top: small
+        margin_bottom: none
+    -
+      parent_uuid: 099cab46-c752-4123-945d-90cc8f274f12
+      slot: column_one
+      uuid: 2901aab5-457b-4400-bd1d-ed682fbebc1f
+      component_id: block.webform_block
+      inputs:
+        label: Webform
+        label_display: '0'
+        webform_id: contact
+        default_data: ''
+        redirect: false
+        lazy: false
+    -
+      parent_uuid: 099cab46-c752-4123-945d-90cc8f274f12
+      slot: column_two
+      uuid: d02fd1dd-08a2-4057-be46-0688b25045fe
+      component_id: sdc.pulse_theme.space-image
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 8f853587-1987-4fbc-ac4f-cc8d15e6c1e3
+            target_type: media
+        corners: none
+    -
+      uuid: 6a91b8ba-d2aa-4984-a41e-961b0893cac2
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: large
+        background_pattern: false
+        pattern_image_position: bottom-right
+    -
+      parent_uuid: 6a91b8ba-d2aa-4984-a41e-961b0893cac2
+      slot: content
+      uuid: 1776b55e-43c2-40d3-867b-2a93290973c8
+      component_id: sdc.pulse_theme.space-heading
+      inputs:
+        content: 'Other ways to reach us'
+        title_color: text-sds-heading
+        tag_name: h2
+        spacing_bottom: medium
+        align: center
+    -
+      parent_uuid: 6a91b8ba-d2aa-4984-a41e-961b0893cac2
+      slot: content
+      uuid: 91ea8100-0b67-4269-80a9-e16bc2d50ba2
+      component_id: sdc.pulse_theme.space-flexi
+      inputs:
+        no_of_columns: two
+        column_width: 50-50
+        vertical: top
+        horizontal: left
+        direction: across
+        gap: medium
+        wrap: wrap
+        margin_top: none
+        margin_bottom: small
+    -
+      parent_uuid: 91ea8100-0b67-4269-80a9-e16bc2d50ba2
+      slot: column_one
+      uuid: 7e5f5f82-307b-4b3c-85b9-ac1fa6b61d2b
+      component_id: sdc.pulse_theme.space-contact-card
+      inputs:
+        heading: 'Email u'
+        email: support@pulseone.health
+        description:
+          value: '<p>For general queries and guidance</p>'
+          format: canvas_html_block
+        icon_align: left
+        alignment: left
+    -
+      parent_uuid: 91ea8100-0b67-4269-80a9-e16bc2d50ba2
+      slot: column_two
+      uuid: a7cc66c7-1abb-4458-8894-61d4be27b86e
+      component_id: sdc.pulse_theme.space-contact-card
+      inputs:
+        heading: 'Call Us'
+        description:
+          value: '<p>Available Mon–Fri, 9am–6pm</p>'
+          format: canvas_html_block
+        icon_align: left
+        alignment: left
+        phone: '+XX XXXXX XXXXX'
+    -
+      parent_uuid: 6a91b8ba-d2aa-4984-a41e-961b0893cac2
+      slot: content
+      uuid: 4684c428-4e6a-46af-82f0-ec2aa1c1d889
+      component_id: sdc.pulse_theme.space-flexi
+      inputs:
+        no_of_columns: two
+        column_width: 50-50
+        vertical: top
+        horizontal: left
+        direction: across
+        gap: medium
+        wrap: wrap
+        margin_top: none
+        margin_bottom: none
+    -
+      parent_uuid: 4684c428-4e6a-46af-82f0-ec2aa1c1d889
+      slot: column_one
+      uuid: aa4abf2c-b340-4e53-ac81-f287e7b4c9b7
+      component_id: sdc.pulse_theme.space-contact-card
+      inputs:
+        heading: 'Help Center'
+        description:
+          value: '<p>Find quick answers to common questions</p>'
+          format: canvas_html_block
+        icon_align: left
+        alignment: left
+        help_faq_link: /faq
+    -
+      uuid: 8a33b2ad-b9c9-406d-814f-192bddc68438
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: small
+        background_pattern: false
+        pattern_image_position: bottom-right
+    -
+      parent_uuid: 8a33b2ad-b9c9-406d-814f-192bddc68438
+      slot: content
+      uuid: 7bfe8b06-747e-49cd-91e0-79c76b184689
+      component_id: sdc.pulse_theme.space-section-heading
+      inputs:
+        title: 'Not sure where to start?'
+        tag_name: h2
+        description:
+          value: '<p>Explore health articles, manage your records, or find the right care — all in one place.</p>'
+          format: canvas_html_block
+        alignment: center
+        with_image: false
+    -
+      uuid: 49ab901d-dcda-40d9-a2e5-94d2d7f55a0c
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: none
+        background_pattern: false
+        pattern_image_position: bottom-right
+    -
+      parent_uuid: 49ab901d-dcda-40d9-a2e5-94d2d7f55a0c
+      slot: content
+      uuid: 5e5754bc-8ff2-417e-a260-36039327442e
+      component_id: block.views_block.article-block_3
+      inputs:
+        label: 'Trending Article'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+  path:
+    -
+      alias: /contact-us
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

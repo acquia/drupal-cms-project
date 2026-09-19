@@ -1,0 +1,192 @@
+.view-provus-basic-search {
+  .views-row {
+    margin-bottom: 2rem;
+  }
+  .view-header,
+  .view-empty {
+    font-size: 14px;
+    color: $text-primary;
+    line-height: 26px;
+    margin-bottom: 2rem;
+    margin-top: 0;
+    @include media-breakpoint-up(md) {
+      margin-top: $padding-padding-xxlg;
+    }
+  }
+  .views-field-title a {
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    color: $primary;
+    line-height: 24px;
+  }
+  .views-field-search-api-url,
+  .views-field-search-api-excerpt {
+    font-size: 14px;
+    color: $text-secondary;
+    line-height: 24px;
+    font-weight: 400;
+  }
+}
+
+.views-exposed-filter-blockprovus-basic-search-page-1 {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  h2 {
+    font-size: 46px;
+    color: $primary-accent;
+    line-height: 78px;
+    font-weight: 600;
+    border: 0;
+    text-transform: uppercase;
+  }
+  .fieldgroup {
+    width: 100%;
+    legend {
+      color: $text-primary;
+      font-size: 14px;
+      font-weight: 700;
+    }
+  }
+  .form-checkboxes {
+    .form-check {
+      input.form-checkbox {
+        border: 1px solid $black;
+      }
+      label.form-check-label {
+        padding-top: $padding-padding-xxxs;
+      }
+    }
+  }
+  .form-actions {
+    input.form-submit {
+      color: $white;
+    }
+  }
+  .form-item-sort-bef-combine {
+    margin-bottom: 0 !important;
+  }
+  .bef-toggle,
+  .form-select,
+  .form-control[type="submit"] {
+    border: 1px solid $text-hint;
+    color: $text-hint;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+  .form-type-select,
+  .form-type-textfield,
+  .form-control,
+  .form-actions {
+    width: 100% !important;
+    label {
+      color: $text-primary;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+  }
+  .form-type-textfield .form-control {
+    color: $text-secondary;
+    border: 1px solid $background-grey;
+    font-size: 16px;
+    font-weight: 400px;
+    background-image: url('data:image/svg+xml,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.9167 9.66667H10.2583L10.025 9.44167C10.8417 8.49167 11.3333 7.25833 11.3333 5.91667C11.3333 2.925 8.90833 0.5 5.91667 0.5C2.925 0.5 0.5 2.925 0.5 5.91667C0.5 8.90833 2.925 11.3333 5.91667 11.3333C7.25833 11.3333 8.49167 10.8417 9.44167 10.025L9.66667 10.2583V10.9167L13.8333 15.075L15.075 13.8333L10.9167 9.66667ZM5.91667 9.66667C3.84167 9.66667 2.16667 7.99167 2.16667 5.91667C2.16667 3.84167 3.84167 2.16667 5.91667 2.16667C7.99167 2.16667 9.66667 3.84167 9.66667 5.91667C9.66667 7.99167 7.99167 9.66667 5.91667 9.66667Z" fill="%23747474"/></svg>');
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    padding-left: 30px;
+  }
+
+  .form-type-textfield {
+    .form-control {
+      border: 1px solid $gray-light;
+      @include effect-style-elevation-xs();
+      @include text-style-body-body-1();
+      color: $body-color;
+      padding-left: $padding-padding-xlg;
+
+      &:hover {
+        background-color: rgba(16, 26, 35, 0.10);
+      }
+
+      &:focus,
+      &:active {
+        border: 1.6px solid $primary-colors-primary;
+      }
+    }
+  }
+
+  // Search button & Reset Button
+  .form-actions {
+    display: flex;
+    justify-content: center;
+    input {
+      width: 50% !important;
+      &:nth-child(odd) {
+        margin-left: 0;
+        margin-right: $padding-padding-xxxs;
+      }
+      &:nth-child(even) {
+        margin-right: 0;
+        margin-left: $padding-padding-xxxs;
+      }
+    }
+    @include media-breakpoint-up(md) {
+      display: block;
+      input {
+        width: 100% !important;
+        &:nth-child(odd) {
+          margin-right: 0;
+        }
+        &:nth-child(even) {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  .views-exposed-form {
+    margin-top: 5px !important;
+  }
+}
+
+.region-header-form {
+  margin-right: .1rem;
+
+  .form-type-textfield label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  fieldset,
+  .form-item-sort-bef-combine,
+  .form-actions {
+    display: none;
+  }
+}
+
+#block-provus-bootstrap-page-title {
+  display: none;
+}
+
+.path-search {
+  #block-provus-bootstrap-content {
+    margin-bottom: rem-calc(30);
+  }
+  .btn-primary {
+    &.form-submit {
+      padding: rem-calc(15);
+      border-radius: rem-calc(6);
+    }
+  }
+}
