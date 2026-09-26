@@ -1,0 +1,129 @@
+navigation_extra_tools.overview:
+  path: '/admin/tools'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Tools'
+  requirements:
+    _custom_access: 'navigation_extra_tools.access_checker::access'
+
+navigation_extra_tools.individual:
+  path: '/admin/tools/individual'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Flush Individual Cache'
+  requirements:
+    _permission: 'access navigation extra tools cache flushing'
+
+navigation_extra_tools.devel:
+  path: '/admin/tools/devel'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Development'
+  requirements:
+    _custom_access: 'navigation_extra_tools.access_checker::access'
+
+navigation_extra_tools.flush:
+  path: '/admin/flush'
+  defaults:
+    _controller: '\Drupal\navigation_extra_tools\Controller\NavigationExtraToolsController::flushAll'
+    _title: 'Flush all caches'
+  requirements:
+    _permission: 'access navigation extra tools cache flushing'
+    _csrf_token: 'TRUE'
+
+navigation_extra_tools.css_js:
+  path: '/admin/flush/css-js'
+  defaults:
+    _controller: '\Drupal\navigation_extra_tools\Controller\NavigationExtraToolsController::flushJsCss'
+    _title: 'Flush CSS and JavaScript'
+  requirements:
+    _permission: 'access navigation extra tools cache flushing'
+    _csrf_token: 'TRUE'
+
+navigation_extra_tools.plugin:
+  path: '/admin/flush/plugin'
+  defaults:
+    _controller: '\Drupal\navigation_extra_tools\Controller\NavigationExtraToolsController::flushPlugins'
+    _title: 'Plugin'
+  requirements:
+    _permission: 'access navigation extra tools cache flushing'
+    _csrf_token: 'TRUE'
+
+navigation_extra_tools.flush_static:
+  path: '/admin/flush/static-caches'
+  defaults:
+    _controller: '\Drupal\navigation_extra_tools\Controller\NavigationExtraToolsController::flushStatic'
+    _title: 'Static caches'
+  requirements:
+    _permission: 'access navigation extra tools cache flushing'
+    _csrf_token: 'TRUE'
+
+navigation_extra_tools.flush_menu:
+  path: '/admin/flush/menu'
+  defaults:
+    _controller: '\Drupal\navigation_extra_tools\Controller\NavigationExtraToolsController::flushMenu'
+    _title: 'Menu'
+  requirements:
+    _permission: 'access navigation extra tools cache flushing'
+    _csrf_token: 'TRUE'
+
+navigation_extra_tools.flush_render_cache:
+  path: '/admin/flush/render-cache'
+  defaults:
+    _controller: '\Drupal\navigation_extra_tools\Controller\NavigationExtraToolsController::cacheRender'
+    _title: 'Render cache'
+  requirements:
+    _permission: 'access navigation extra tools cache flushing'
+    _csrf_token: 'TRUE'
+
+navigation_extra_tools.flush_views:
+  path: '/admin/flush/views'
+  defaults:
+    _controller: '\Drupal\navigation_extra_tools\Controller\NavigationExtraToolsController::flushViews'
+    _title: 'Views'
+  requirements:
+    _permission: 'access navigation extra tools cache flushing'
+    _csrf_token: 'TRUE'
+
+navigation_extra_tools.flush_twig:
+  path: '/admin/flush/twig'
+  defaults:
+    _controller: '\Drupal\navigation_extra_tools\Controller\NavigationExtraToolsController::flushTwig'
+    _title: 'Twig'
+  requirements:
+    _permission: 'access navigation extra tools cache flushing'
+    _csrf_token: 'TRUE'
+
+navigation_extra_tools.theme_rebuild:
+  path: '/admin/flush/theme_rebuild'
+  defaults:
+    _controller: '\Drupal\navigation_extra_tools\Controller\NavigationExtraToolsController::themeRebuild'
+    _title: 'Theme Rebuild'
+  requirements:
+    _permission: 'access navigation extra tools cache flushing'
+    _csrf_token: 'TRUE'
+
+navigation_extra_tools.run.cron:
+  path: '/run-cron'
+  defaults:
+    _title: 'Run cron'
+    _controller: '\Drupal\navigation_extra_tools\Controller\NavigationExtraToolsController::runCron'
+  requirements:
+    _permission: 'access navigation extra tools cron'
+    _csrf_token: 'TRUE'
+
+navigation_extra_tools.project_browser:
+  path: '/admin/project_browser'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Project Browser'
+  requirements:
+    _permission: 'access project browser clear storage'
+
+navigation_extra_tools.project_browser.clear_storage:
+  path: '/admin/project_browser/clear'
+  defaults:
+    _controller: '\Drupal\navigation_extra_tools\Controller\NavigationProjectBrowserController::clearStorage'
+    _title: 'Clear storage'
+  requirements:
+    _permission: 'access project browser clear storage'

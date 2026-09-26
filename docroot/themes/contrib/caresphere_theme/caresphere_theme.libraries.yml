@@ -1,0 +1,28 @@
+global:
+  version: VERSION
+  css:
+    theme:
+      build/main.min.css:
+        preprocess: false
+        minified: true
+      css/hotfix.css: {}
+  js:
+    js/global.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+
+# Swiper: used by slider SDC component.
+swiper:
+  version: VERSION
+  css:
+    theme:
+      https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css: { type: external, minified: true }
+  js:
+    https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js: { type: external, minified: true }
+
+login:
+  version: VERSION
+  css:
+    theme:
+      css/login.css: {}

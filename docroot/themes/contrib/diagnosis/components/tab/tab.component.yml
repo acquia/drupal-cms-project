@@ -1,0 +1,30 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Tab
+description: A single tab panel with title and content.
+group: Layout
+props:
+  type: object
+  required:
+    - title
+  properties:
+    title:
+      type: string
+      title: Tab title
+      examples:
+        - Tab 1
+    active_by_default:
+      type: boolean
+      title: Active by default
+      examples:
+        - false
+
+slots:
+  tab_content:
+    title: Tab content
+    description: Content displayed when this tab is active.
+
+libraryOverrides:
+  css:
+    tab.css: {}
+  js:
+    tab.js: { attributes: { type: module } }

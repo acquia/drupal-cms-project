@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 260" font-family="Roboto, sans-serif">
+  <defs>
+    <style>
+      .box { fill: #fff; stroke: #b0bec5; stroke-width: 1.5; rx: 6; }
+      .header { fill: #009688; rx: 6; }
+      .toggle { fill: #e0f2f1; stroke: #009688; stroke-width: 1; }
+      .toggle-active { fill: #009688; }
+      .label { fill: #37474f; font-size: 14px; text-anchor: middle; dominant-baseline: central; }
+      .label-light { fill: #fff; font-size: 14px; font-weight: 600; text-anchor: middle; dominant-baseline: central; }
+      .toggle-label { fill: #00695c; font-size: 10px; font-weight: 600; text-anchor: middle; dominant-baseline: central; }
+      .toggle-label-active { fill: #fff; font-size: 10px; font-weight: 600; text-anchor: middle; dominant-baseline: central; }
+      .sublabel { fill: #78909c; font-size: 11px; text-anchor: middle; dominant-baseline: central; }
+    </style>
+  </defs>
+  <!-- Outer border -->
+  <rect x="10" y="10" width="660" height="240" rx="8" fill="none" stroke="#cfd8dc" stroke-width="2"/>
+  <!-- Toolbar -->
+  <rect x="10" y="10" width="660" height="44" class="header"/>
+  <text x="340" y="32" class="label-light">Toolbar</text>
+  <!-- Canvas -->
+  <rect x="10" y="54" width="430" height="196" class="box" rx="0"/>
+  <text x="225" y="150" class="label">Canvas</text>
+  <text x="225" y="170" class="sublabel">(React Flow)</text>
+  <!-- Unified Property Panel -->
+  <rect x="440" y="54" width="230" height="196" class="box" rx="0"/>
+  <!-- Header: component type label (left) + single "Review flow" button -->
+  <text x="468" y="79" class="toggle-label" text-anchor="start">⚡ Event</text>
+  <rect x="552" y="68" width="100" height="22" rx="4" class="toggle"/>
+  <text x="602" y="79" class="toggle-label">Review flow</text>
+  <text x="555" y="150" class="label">Property Panel</text>
+  <text x="555" y="170" class="sublabel">(properties / review)</text>
+</svg>

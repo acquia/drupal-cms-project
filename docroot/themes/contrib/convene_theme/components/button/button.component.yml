@@ -1,0 +1,58 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Button
+group: Atoms
+description: A reusable button component with primary and secondary variants.
+props:
+  type: object
+  required:
+    - text
+  properties:
+    text:
+      title: Button Text
+      description: The text displayed on the button.
+      type: string
+      examples:
+        - 'Click Me'
+    url:
+      title: URL
+      description: The URL the button links to (optional).
+      type: string
+      format: uri-reference
+      examples:
+        - '/about'
+        - 'https://example.com'
+    variant:
+      title: Variant
+      description: The button style variant.
+      type: string
+      enum:
+        - primary
+        - secondary
+        - tertiary
+        - quaternary
+      meta:enum:
+        primary: Primary
+        secondary: Secondary
+        tertiary: Tertiary (Link)
+        quaternary: Quaternary (Silver Link)
+      examples:
+        - primary
+    target:
+      title: Open In
+      description: Whether the link should open in the same page or a new tab.
+      type: string
+      enum:
+        - _self
+        - _blank
+      meta:enum:
+        _self: Same Page
+        _blank: New Page
+      default: _self
+slots:
+  content:
+    title: Content
+    description: Button content (auto-populated from text prop).
+library:
+  css:
+    component:
+      button.css: {}

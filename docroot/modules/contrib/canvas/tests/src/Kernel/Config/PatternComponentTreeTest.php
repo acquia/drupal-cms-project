@@ -1,0 +1,32 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Drupal\Tests\canvas\Kernel\Config;
+
+use Drupal\canvas\Entity\Pattern;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+
+/**
+ * Tests the component tree aspects of the Pattern config entity type.
+ */
+#[RunTestsInSeparateProcesses]
+#[CoversClass(Pattern::class)]
+#[Group('canvas')]
+#[Group('canvas_config_management')]
+final class PatternComponentTreeTest extends ConfigWithComponentTreeTestBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp(): void {
+    parent::setUp();
+    $this->entity = Pattern::create([
+      'id' => 'test_pattern',
+      'label' => 'Test pattern',
+    ]);
+  }
+
+}

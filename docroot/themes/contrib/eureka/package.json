@@ -1,0 +1,85 @@
+{
+  "name": "eureka",
+  "private": true,
+  "description": "A canvas-ready theme developed by Zoocha",
+  "version": "1.0.0",
+  "type": "module",
+  "keywords": [
+    "drupal",
+    "SDC",
+    "Single-directory components",
+    "Canvas",
+    "Drupal Canvas"
+  ],
+  "author": "Zoocha Ltd",
+  "license": "MIT",
+  "scripts": {
+    "prebuild": "npx only-allow pnpm",
+    "build": "pnpm svg && pnpm lint && pnpm minify",
+    "prestart": "npx only-allow pnpm",
+    "start": "pnpm watch",
+    "compile": "pnpm build",
+    "develop": "pnpm start",
+    "lint:css": "stylelint 'components/**/*.css' --ignore-pattern '**/*.min.css' || exit 0",
+    "lint:js": "eslint 'components/**/*.js' --ignore-pattern '**/*.min.js' || exit 0",
+    "prelint": "npx only-allow pnpm",
+    "lint": "pnpm lint:css && pnpm lint:js",
+    "minify": "node scripts/minify.cjs",
+    "svg": "node ./scripts/svg-sprite.cjs",
+    "prewatch": "npx only-allow pnpm",
+    "watch": "npm-watch"
+  },
+  "watch": {
+    "lint:css": {
+      "patterns": [
+        "components/**/*.css",
+        "!components/**/*.min.css"
+      ],
+      "extensions": [
+        "css"
+      ],
+      "run": "lint:css"
+    },
+    "lint:js": {
+      "patterns": [
+        "components/**/*.js",
+        "!components/**/*.min.js",
+        "!components/**/*.stories.js"
+      ],
+      "extensions": [
+        "js"
+      ],
+      "run": "lint:js"
+    },
+    "minify": {
+      "patterns": [
+        "components/**/*.css",
+        "!components/**/*.min.css",
+        "components/**/*.js",
+        "!components/**/*.min.js",
+        "!components/**/*.stories.js"
+      ],
+      "extensions": [
+        "css",
+        "js"
+      ],
+      "run": "minify"
+    }
+  },
+  "packageManager": "pnpm@10.20.0",
+  "dependencies": {
+    "@babel/eslint-parser": "^7.28.4",
+    "@babel/preset-env": "^7.28.5",
+    "eslint": "^9.38.0",
+    "eslint-plugin-prettier": "^5.5.4",
+    "fs-extra": "^11.3.2",
+    "glob": "^11.0.3",
+    "globals": "^16.4.0",
+    "minify": "^14.1.0",
+    "npm-watch": "^0.13.0",
+    "stylelint": "^16.25.0",
+    "stylelint-config-standard": "^39.0.1",
+    "svg-sprite": "^2.0.4",
+    "terser": "^5.44.0"
+  }
+}

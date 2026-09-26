@@ -1,0 +1,47 @@
+
+.bg-grey {
+  .block-provus-heading {
+    .line-on {
+      h1,h2,h3,h4,h5,h6 {
+        background: $background-colors-background-light;
+
+        .field--name-field-provus-title {
+          background: $background-colors-background-light;
+        }
+      }
+    }
+  }
+}
+
+//fix for provus_edu_theme
+.align-items-center .row {
+  align-items: center;
+}
+
+.block-provus-heading {
+  margin-bottom: $padding-padding-xlg;
+
+  .line-on {
+    h1,h2,h3,h4,h5,h6 {
+      color: $color-heading;
+    }
+  }
+}
+
+.block-provus-heading .header-align-left div.field {
+  width: auto;
+}
+
+.header-align-left {
+  div.field {
+    width: auto;
+
+    @include media-breakpoint-up(sm) {
+      width: auto;
+    }
+
+    @include media-breakpoint-up(md) {
+      width: auto;
+    }
+  }
+}

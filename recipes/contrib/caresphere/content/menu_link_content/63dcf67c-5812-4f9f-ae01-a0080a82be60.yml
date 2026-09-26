@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 63dcf67c-5812-4f9f-ae01-a0080a82be60
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    8f798572-6a5e-4d67-8916-872ad4c4b32c: menu_link_content
+    0bf3047d-9210-4851-9f50-25c51db29639: canvas_page
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'About us'
+  menu_name:
+    -
+      value: footer-organization
+  link:
+    -
+      title: ''
+      options: {  }
+      target_uuid: 0bf3047d-9210-4851-9f50-25c51db29639
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -50
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:8f798572-6a5e-4d67-8916-872ad4c4b32c'
+  revision_translation_affected:
+    -
+      value: true

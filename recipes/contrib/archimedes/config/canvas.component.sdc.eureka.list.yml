@@ -1,0 +1,51 @@
+langcode: en
+status: false
+dependencies:
+  module:
+    - options
+  theme:
+    - eureka
+active_version: 75073da968fab703
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        list_type:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: ul
+          expression: ℹ︎list_string␟value
+        list_style:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: none
+          expression: ℹ︎list_string␟value
+        list_items_icon:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: chevron
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+label: List
+id: sdc.eureka.list
+provider: eureka
+source: sdc
+source_local_id: 'eureka:list'

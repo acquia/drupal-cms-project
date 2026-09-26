@@ -1,0 +1,18 @@
+.breadcrumb__list {
+  padding: var(--spacing-4) 0;
+}
+
+.breadcrumb__item {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb__item:not(:last-child)::after {
+  content: "";
+  background-image: url('../../../../images/icons/chevron.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 1rem;
+  width: 1rem;
+  margin-left: var(--spacing-2);
+}

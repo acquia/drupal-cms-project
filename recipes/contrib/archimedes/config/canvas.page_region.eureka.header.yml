@@ -1,0 +1,26 @@
+langcode: en
+status: false
+dependencies:
+  config:
+    - canvas.component.block.page_title_block
+    - canvas.component.block.system_breadcrumb_block
+  theme:
+    - eureka
+id: eureka.header
+theme: eureka
+region: header
+component_tree:
+  -
+    uuid: 618acf45-889e-41c7-b783-fd8dee6c1ff5
+    component_id: block.system_breadcrumb_block
+    component_version: ad6359c331fc7c45
+    inputs:
+      label: Breadcrumbs
+      label_display: '0'
+  -
+    uuid: 0a6b09ac-8267-4d04-a382-7feef4c4b873
+    component_id: block.page_title_block
+    component_version: 90ce139b2d3e2601
+    inputs:
+      label: 'Page title'
+      label_display: '0'

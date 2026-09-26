@@ -1,0 +1,32 @@
+<div{{ attributes.addClass('summary') }}>
+  <div class="summary__content">
+    {% if info %}
+      <div class="summary__info">
+        {{ info }}
+      </div>
+    {% endif %}
+
+    {% if heading %}
+      {{ include('morphos:heading', {
+        heading,
+        level: heading_level|default(3),
+        url: url|default(''),
+        additional_classes: 'summary__title',
+      },
+        with_context: false
+      ) }}
+    {% endif %}
+
+    {% if summary %}
+      <div class="summary__summary">
+        {{ summary }}
+      </div>
+    {% endif %}
+
+    {% if date %}
+      <div class="summary__date">
+        {{ date }}
+      </div>
+    {% endif %}
+  </div>
+</div>

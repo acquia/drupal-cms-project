@@ -1,0 +1,173 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: ec22678e-0f5d-42cd-a73d-d04538c87b18
+  default_langcode: en
+  depends:
+    9ced66b3-014c-47dc-a3b8-465bd86b2a60: file
+    abebfff8-067c-41f3-9cf1-c0b9f52a12e5: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Contact Us'
+  description:
+    -
+      value: "We're here to help. Reach out to us for appointments, questions, or concerns."
+  components:
+    -
+      uuid: 9ce673df-a8f1-4cc2-9fc6-28c3e0f09759
+      component_id: sdc.diagnosis.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        background: secondary
+        padding_block_start: '32'
+        padding_block_end: '32'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        image_size: '4:3'
+        image_position: right
+        image_radius: extra-large
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: abebfff8-067c-41f3-9cf1-c0b9f52a12e5
+            target_type: media
+    -
+      parent_uuid: 9ce673df-a8f1-4cc2-9fc6-28c3e0f09759
+      slot: hero_slot
+      uuid: ff86fecb-680f-4cbf-b915-5683ad5d7d29
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Contact Saltmarsh Island Health'
+        level: 1
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 9ce673df-a8f1-4cc2-9fc6-28c3e0f09759
+      slot: hero_slot
+      uuid: 1869aa18-d721-45c9-bbe9-9c18518b77f8
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: "<p>We're here to help. Reach out to us for appointments, questions, or concerns.</p>"
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: bafd2507-b49a-4777-b571-1e177502aeb4
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: bafd2507-b49a-4777-b571-1e177502aeb4
+      slot: main_slot
+      uuid: e8105293-9904-49ce-a166-b89f0533d63f
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Schedule an Appointment'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: bafd2507-b49a-4777-b571-1e177502aeb4
+      slot: main_slot
+      uuid: 1a522517-cc27-4188-9d53-b1601055fc87
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p><strong>Phone:</strong> (555) 123-4567<br><strong>Hours:</strong> Monday-Friday 8:00 AM - 5:00 PM</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: bafd2507-b49a-4777-b571-1e177502aeb4
+      slot: main_slot
+      uuid: 05d93c97-7e2d-4fc8-8c6d-781b1e232c5b
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Emergency Care'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: bafd2507-b49a-4777-b571-1e177502aeb4
+      slot: main_slot
+      uuid: 493dc2fa-b0e0-45a5-bf02-9498832758d0
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>For life-threatening emergencies, call 911 or visit our Emergency Department at Harbor Hollow Hill Campus, open 24/7.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: bafd2507-b49a-4777-b571-1e177502aeb4
+      slot: main_slot
+      uuid: ed882b12-06af-4dd2-909b-82137b0cd4d5
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Main Office'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: bafd2507-b49a-4777-b571-1e177502aeb4
+      slot: main_slot
+      uuid: 493ef420-cd77-4d0c-9852-f801a13af52f
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Saltmarsh Island Health<br>123 Harbor View Drive<br>Saltmarsh Island, MA 02554<br>Phone: (555) 123-4567<br>Fax: (555) 123-4568</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: bafd2507-b49a-4777-b571-1e177502aeb4
+      slot: main_slot
+      uuid: b40812f4-9452-4f33-b492-1d20830934a6
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Department Directory'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: bafd2507-b49a-4777-b571-1e177502aeb4
+      slot: main_slot
+      uuid: ddf1ecf5-15fb-4cb5-9775-e0c2100b2cff
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<ul><li data-list-item-id="e56d960eaf7dae34d5fa9923dcad9b79d"><strong>Billing Questions:</strong> (555) 123-4569</li><li data-list-item-id="e9514ebb3adbb3a9db0b965640cce32ae"><strong>Medical Records:</strong> (555) 123-4570</li><li data-list-item-id="e282bd1c0c796e5d0766e6fd010c52ab2"><strong>Patient Portal Support:</strong> (555) 123-4571</li><li data-list-item-id="e2b0c6c938f8298a9e0f2b9e90982e742"><strong>Insurance Verification:</strong> (555) 123-4572</li></ul>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+  path:
+    -
+      alias: /contact
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

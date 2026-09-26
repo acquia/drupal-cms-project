@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ * Menu Container component template.
+ *
+ * Desktop: Shows only main menu (banner is hidden, displayed above navbar instead)
+ * Mobile: Shows main menu first, then banner menu second
+ */
+#}
+
+{% set component_classes = component_classes|default('') %}
+
+<div class="menu-container flex flex-col gap-2 {{ component_classes }}">
+  {# Main navigation menu - visible on both mobile and desktop #}
+  {% if main_menu %}
+    <div class="menu-container--main">
+      {{ main_menu }}
+    </div>
+  {% endif %}
+
+  {# Banner/utility menu - visible on mobile only (hidden on desktop where it shows above navbar) #}
+  {% if banner_menu %}
+    <div class="menu-container--banner mt-2 border-t border-border pt-2 md:hidden">
+      {{ banner_menu }}
+    </div>
+  {% endif %}
+</div>

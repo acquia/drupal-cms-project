@@ -1,0 +1,15 @@
+<div {{ attributes.addClass('rich-text-block', 'rich-text-block--bg-' ~ (background_color ?? 'white')) }}>
+  {% if heading %}
+    <h2 class="rich-text-block__title">{{ heading }}</h2>
+  {% endif %}
+
+  <div class="rich-text-block__content">
+    {{ content|raw }}
+  </div>
+
+  {% if footer %}
+    <div class="rich-text-block__footer">
+      {{ footer }}
+    </div>
+  {% endif %}
+</div>

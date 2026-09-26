@@ -1,0 +1,272 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: c38a791f-219a-4d6b-a044-2a85e97cdb85
+  default_langcode: en
+  depends:
+    2a6ae46d-b147-4419-b223-142a9bfa2308: file
+    6e2440bc-b39f-4687-8ca8-02b6f83580ee: media
+    cf3e04f2-fb6d-442c-aab7-362a166b3b4e: file
+    fa6889a0-6640-4474-83b8-6e5efc5e4c5e: media
+    c4fd2acb-9c98-4b18-b913-ffca9a9f16de: file
+    067cd5b3-58a0-442a-a2df-54881d7d4c83: media
+    068c2473-06a0-4a19-ac53-528fc797750e: file
+    710000fa-4845-446e-9652-4a811f509b52: media
+    10cbdc2c-66c0-438a-a5cc-cd3474c7d41a: file
+    710000fa-4845-446e-9652-4a811f509b54: media
+    5aaf4c74-bfd4-4b0a-be65-6edb5b63f01e: file
+    710000fa-4845-446e-9652-4a811f509b56: media
+    b7d53ced-d13c-4b62-9114-89d604992e44: file
+    710000fa-4845-446e-9652-4a811f509b58: media
+    129628f8-b556-44f9-acef-26b889012d18: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Sponsors Page'
+  description:
+    -
+      value: 'Meet the sponsors and partners supporting Convene Conference and helping make the events possible.'
+  components:
+    -
+      uuid: 552e7db2-91d8-42a5-a5c6-28a554e41c23
+      component_id: sdc.convene_theme.sdc_grid
+      inputs:
+        columns: '1'
+    -
+      parent_uuid: 552e7db2-91d8-42a5-a5c6-28a554e41c23
+      slot: slot_1
+      uuid: 10bf9210-6682-4fd9-ad9a-b867f4f1225b
+      component_id: sdc.convene_theme.hero
+      inputs:
+        variation: small
+    -
+      parent_uuid: 10bf9210-6682-4fd9-ad9a-b867f4f1225b
+      slot: heading
+      uuid: e9da986e-9e14-4f0b-8807-a082fd4d3a4c
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        heading: 'Our Sponsors'
+        heading_tag: div
+    -
+      parent_uuid: 10bf9210-6682-4fd9-ad9a-b867f4f1225b
+      slot: subheading
+      uuid: 8b3636a1-2736-4199-815d-ed5e44ff3963
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        description: 'Powering innovation and community through their support…'
+        heading_tag: div
+    -
+      parent_uuid: 10bf9210-6682-4fd9-ad9a-b867f4f1225b
+      slot: background_media
+      uuid: fb85bfae-2d47-413b-9895-c15ee0f0511f
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 6e2440bc-b39f-4687-8ca8-02b6f83580ee
+            target_type: media
+        loading: lazy
+    -
+      uuid: 75c2051a-57ac-40a2-b710-1af34eb72ed9
+      component_id: sdc.convene_theme.partners-split
+      inputs:
+        title: 'Platinum partners'
+        description: 'Leading organizations committed to advancing the industry and shaping the future.'
+    -
+      parent_uuid: 75c2051a-57ac-40a2-b710-1af34eb72ed9
+      slot: items
+      uuid: 35798155-20b7-4c65-854c-40f4fe5237d8
+      component_id: sdc.convene_theme.partner-card
+      inputs: {  }
+    -
+      parent_uuid: 35798155-20b7-4c65-854c-40f4fe5237d8
+      slot: media
+      uuid: aab75d57-5021-401e-9dd7-94116490c99e
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: fa6889a0-6640-4474-83b8-6e5efc5e4c5e
+            target_type: media
+        loading: lazy
+    -
+      parent_uuid: 75c2051a-57ac-40a2-b710-1af34eb72ed9
+      slot: items
+      uuid: 889e92a3-7268-46ab-8cac-2fd5be0a2c2f
+      component_id: sdc.convene_theme.partner-card
+      inputs: {  }
+    -
+      parent_uuid: 889e92a3-7268-46ab-8cac-2fd5be0a2c2f
+      slot: media
+      uuid: 48fdd961-07ca-4440-866e-437eae75f03b
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 067cd5b3-58a0-442a-a2df-54881d7d4c83
+            target_type: media
+        loading: lazy
+    -
+      uuid: 9ac04c8e-a0a4-4280-9cb1-b30a67c3204b
+      component_id: sdc.convene_theme.benefits-grid
+      inputs:
+        title: 'Sponsorship Benefits'
+        eyebrow: Partnership
+        description: 'Comprehensive benefits for our valued partners'
+    -
+      parent_uuid: 9ac04c8e-a0a4-4280-9cb1-b30a67c3204b
+      slot: items
+      uuid: b974d46a-a0f0-4d2a-af7e-6540701421e6
+      component_id: sdc.convene_theme.benefit-card
+      inputs:
+        title: 'Brand visibility'
+        admin_theme: false
+        description: 'Enhance brand awareness by connecting with attendees, partners, and industry leaders at the event.'
+    -
+      parent_uuid: b974d46a-a0f0-4d2a-af7e-6540701421e6
+      slot: icon
+      uuid: e946a078-6fd5-44ff-94b5-757a886f2d0e
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 710000fa-4845-446e-9652-4a811f509b52
+            target_type: media
+        alt_tag: 'Partner company logo placeholder'
+        loading: lazy
+    -
+      parent_uuid: 9ac04c8e-a0a4-4280-9cb1-b30a67c3204b
+      slot: items
+      uuid: 99b1b30e-333c-4632-9c7e-080f706ad770
+      component_id: sdc.convene_theme.benefit-card
+      inputs:
+        title: 'Targeted exposure'
+        admin_theme: false
+        description: 'Connect with the right audience and increase brand awareness through focused event exposure.'
+    -
+      parent_uuid: 99b1b30e-333c-4632-9c7e-080f706ad770
+      slot: icon
+      uuid: 89740cee-957d-4315-997c-b822a8c62bf0
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 710000fa-4845-446e-9652-4a811f509b54
+            target_type: media
+        alt_tag: 'Illustration representing maximum brand visibility and exposure'
+    -
+      parent_uuid: 9ac04c8e-a0a4-4280-9cb1-b30a67c3204b
+      slot: items
+      uuid: 5c4a26f9-cc17-4a0f-a20c-3cfe2b632f11
+      component_id: sdc.convene_theme.benefit-card
+      inputs:
+        title: 'Networking opportunities'
+        admin_theme: false
+        description: 'Meet decision-makers and potential partners during networking sessions.'
+    -
+      parent_uuid: 5c4a26f9-cc17-4a0f-a20c-3cfe2b632f11
+      slot: icon
+      uuid: bf026f4a-8e9c-4436-9ddb-28aa5c454be9
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 710000fa-4845-446e-9652-4a811f509b56
+            target_type: media
+        alt_tag: 'Illustration of interconnected nodes representing networking opportunities'
+    -
+      parent_uuid: 9ac04c8e-a0a4-4280-9cb1-b30a67c3204b
+      slot: items
+      uuid: 297fa0ee-94bc-465e-a448-1a3d391506eb
+      component_id: sdc.convene_theme.benefit-card
+      inputs:
+        title: 'Digital promotion'
+        admin_theme: false
+        description: 'Reach a wider audience through digital event marketing campaigns.'
+    -
+      parent_uuid: 297fa0ee-94bc-465e-a448-1a3d391506eb
+      slot: icon
+      uuid: 1d911104-6f89-40d5-b359-ed2897aafc07
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 710000fa-4845-446e-9652-4a811f509b58
+            target_type: media
+        alt_tag: 'Illustration showing promotional reach and digital marketing uplift'
+    -
+      uuid: 3750ddd4-f268-4e6d-b3af-56e9cbc7742c
+      component_id: sdc.convene_theme.hero
+      inputs:
+        variation: small
+    -
+      parent_uuid: 3750ddd4-f268-4e6d-b3af-56e9cbc7742c
+      slot: heading
+      uuid: c6e3b35a-ea87-4aca-b837-a0e034b94873
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        heading: 'Ready to join us'
+        heading_tag: div
+    -
+      parent_uuid: 3750ddd4-f268-4e6d-b3af-56e9cbc7742c
+      slot: subheading
+      uuid: 5281da0d-9265-4ed6-89da-f1aa5ea33f90
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        description: 'Secure your spot before early-bird pricing ends next week.'
+        heading_tag: div
+    -
+      parent_uuid: 3750ddd4-f268-4e6d-b3af-56e9cbc7742c
+      slot: actions
+      uuid: 62045a28-0911-4306-bac8-75ffb6064ebb
+      component_id: sdc.convene_theme.button
+      inputs:
+        url:
+          uri: 'internal:/about'
+          options: {  }
+        text: Register
+        variant: primary
+    -
+      parent_uuid: 3750ddd4-f268-4e6d-b3af-56e9cbc7742c
+      slot: actions
+      uuid: f61ac076-df8a-495e-8bd3-08824303c416
+      component_id: sdc.convene_theme.button
+      inputs:
+        url:
+          uri: 'internal:/pricing-passes'
+          options: {  }
+        text: Pricing
+        variant: primary
+    -
+      parent_uuid: 3750ddd4-f268-4e6d-b3af-56e9cbc7742c
+      slot: background_media
+      uuid: 8b4cfe1e-4817-4738-bc5e-8df0d904f357
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 129628f8-b556-44f9-acef-26b889012d18
+            target_type: media
+  path:
+    -
+      alias: /sponsors
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"title":"Sponsors | Convene Conference Partners"}'

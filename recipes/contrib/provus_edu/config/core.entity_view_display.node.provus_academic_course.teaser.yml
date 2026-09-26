@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.provus_academic_course.field_provus_ac_about
+    - field.field.node.provus_academic_course.field_provus_ac_credit
+    - field.field.node.provus_academic_course.field_provus_ac_program
+    - field.field.node.provus_academic_course.field_provus_ac_semester
+    - field.field.node.provus_academic_course.field_provus_ac_year_level
+    - node.type.provus_academic_course
+  module:
+    - user
+id: node.provus_academic_course.teaser
+targetEntityType: node
+bundle: provus_academic_course
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  addtoany: true
+  field_ac_year_level: true
+  field_provus_ac_about: true
+  field_provus_ac_credit: true
+  field_provus_ac_program: true
+  field_provus_ac_semester: true
+  field_provus_ac_year_level: true
+  search_api_excerpt: true

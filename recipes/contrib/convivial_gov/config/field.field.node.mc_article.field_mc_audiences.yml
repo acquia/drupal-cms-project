@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_mc_audiences
+    - node.type.mc_article
+    - node.type.mc_audience
+id: node.mc_article.field_mc_audiences
+field_name: field_mc_audiences
+entity_type: node
+bundle: mc_article
+label: Audiences
+description: 'Audiences which this content is for.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      mc_audience: mc_audience
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

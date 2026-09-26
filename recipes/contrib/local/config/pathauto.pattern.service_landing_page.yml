@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: service_landing_page
+label: 'Service landing page'
+type: 'canonical_entities:node'
+pattern: '[node:title]'
+selection_criteria:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    bundles:
+      service_landing_page: service_landing_page
+selection_logic: and
+weight: 0
+relationships: {  }

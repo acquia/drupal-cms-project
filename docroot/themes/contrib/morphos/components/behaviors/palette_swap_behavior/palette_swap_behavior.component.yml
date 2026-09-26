@@ -1,0 +1,50 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Palette Swap Behavior
+description: Dynamically changes the color theme or CSS variables of a component based on user interaction or context.
+group: Behavior
+status: stable
+props:
+  type: object
+  properties:
+    duration:
+      type: integer
+      title: Duration
+      description: Duration (ms) of the transition.
+      default: 500
+      examples:
+        - 500
+    swap:
+      type: string
+      title: Swap
+      description: Select the palette to swap into.
+      enum:
+        - standard
+        - alternate
+        - primary
+        - secondary
+        - accent
+        - neutral
+      meta:enum:
+        standard: Standard
+        alternate: Alternate
+        primary: Primary
+        secondary: Secondary
+        accent: Accent
+        neutral: Neutral
+      default: standard
+      examples:
+        - standard
+    threshold:
+      type: integer
+      title: Threshold
+      description: Threshold for the amount of the element to be within the view port.
+      default: 50
+      examples:
+        - 50
+    media_query:
+      type: string
+      title: Media query
+      description: Define media query to control the application of the behavior.
+libraryOverrides:
+  js:
+    ../../../dist/js/palette_swap_behavior.js: {}

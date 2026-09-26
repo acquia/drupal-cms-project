@@ -1,0 +1,42 @@
+{% set seachbox_size = size|default('xl') %}
+{% set seachbox_size_input = 'input-' ~ seachbox_size %}
+{% set seachbox_size_btn = 'btn-' ~ seachbox_size %}
+
+{% set seachbox_size_icon = {
+  'xs': 'icon-size--xs',
+  'sm': 'icon-size--xs',
+  'md': 'icon-size--sm',
+  'lg': 'icon-size--sm',
+  'xl': 'icon-size--md'
+} %}
+
+<form{{ attributes.addClass(['searchbox', 'join']) }}
+  accept-charset="UTF-8"
+  action="{{ action_url|default('/search') }}"
+  method="{{ method|default('GET') }}">
+  <label class="join-item rounded-l-full rtl:rounded-l-none rtl:rounded-r-full input {{ seachbox_size_input }}">
+    {% if placeholder_icon %}
+      <span class="searchbox__icon">
+        {{ include('morphos:icon', {
+          icon: placeholder_icon,
+          icon_size: seachbox_size_icon[seachbox_size],
+        },
+          with_context: false
+        ) }}
+      </span>
+    {% endif %}
+    <input
+      class="searchbox__query input {{ seachbox_size_input }}"
+      aria-label="{{ placeholder_text|default('What are you looking for?') }}"
+      maxlength="128"
+      name="{{ query_name|default('keywords') }}"
+      placeholder="{{ placeholder_text|default('What are you looking for?') }}"
+      type="text">
+  </label>
+  <button
+    class="searchbox__button btn btn-primary join-item rounded-r-full rtl:rounded-r-none rtl:rounded-l-full {{ seachbox_size_btn }}"
+    type="submit"
+    value="{{ button_label|default('Search') }}">
+    {{ button_label|default('Search') }}
+  </button>
+</form>

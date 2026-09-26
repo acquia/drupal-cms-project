@@ -1,0 +1,29 @@
+<article class="speaker-card">
+	{% if speaker_card_image %}
+		<div class="speaker-card__image-wrapper">
+			{{ speaker_card_image }}
+		</div>
+	{% endif %}
+
+	<div class="speaker-card__content">
+		{% if name %}
+			<h3 class="speaker-card__name">{{ name }}</h3>
+		{% endif %}
+
+		{% if role %}
+			<div class="speaker-card__role">{{ role }}</div>
+		{% endif %}
+
+		{% if description %}
+			<div class="speaker-card__description">
+				{{ description }}
+			</div>
+		{% endif %}
+
+		{% if social_items %}
+			<div class="speaker-card__social">
+				{{ social_items }}
+			</div>
+		{% endif %}
+	</div>
+</article>

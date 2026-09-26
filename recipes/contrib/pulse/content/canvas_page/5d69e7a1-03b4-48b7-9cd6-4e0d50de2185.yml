@@ -1,0 +1,148 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 5d69e7a1-03b4-48b7-9cd6-4e0d50de2185
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Article Listing'
+  components:
+    -
+      uuid: a8afed0a-3903-4f9b-b789-2bb1bddd3396
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: small
+        margin_bottom: small
+    -
+      parent_uuid: a8afed0a-3903-4f9b-b789-2bb1bddd3396
+      slot: content
+      uuid: 5032473f-2b19-430c-9e41-3436edbaec2a
+      component_id: sdc.pulse_theme.space-section-heading
+      inputs:
+        title: 'Selected Research Studies'
+        tag_name: h1
+        description:
+          value: "<p>A focused selection of peer-reviewed studies and clinical findings\L relevant to everyday health and care decisions.</p>"
+          format: canvas_html_block
+        alignment: center
+    -
+      uuid: ee762a53-3cfa-4f20-bbc0-38bbf6a25816
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: small
+    -
+      parent_uuid: ee762a53-3cfa-4f20-bbc0-38bbf6a25816
+      slot: content
+      uuid: 450e9b0b-d247-4800-a435-bb37ecd7437c
+      component_id: block.views_block.article-block_5
+      inputs:
+        label: 'Featured Article for listing page'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      uuid: a3ee2c51-c9bc-4c65-b185-d7da5ac17fa3
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: large
+    -
+      parent_uuid: a3ee2c51-c9bc-4c65-b185-d7da5ac17fa3
+      slot: content
+      uuid: 62d717be-cb88-448a-a2e2-aac3a1340d65
+      component_id: block.views_block.article-block_1
+      inputs:
+        label: 'Article List'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      uuid: e6a313c8-0d8f-401c-8255-233de09238d4
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: full-width
+        padding_left: none
+        padding_right: none
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: none
+    -
+      parent_uuid: e6a313c8-0d8f-401c-8255-233de09238d4
+      slot: content
+      uuid: 7811652b-adbc-473f-b2fd-64e9fa7e8096
+      component_id: sdc.pulse_theme.space-cta-banner-type-1
+      inputs:
+        title: "Keep learning \Labout your health"
+        description:
+          value: "<p>A focused selection of peer-reviewed studies and clinical findings\L relevant to everyday health and care decisions.</p>"
+          format: canvas_html_block
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: images/cta_background.png
+            alt: 'CTA Banner placeholder'
+            width: 1440
+            height: 500
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.pulse_theme.space-cta-banner-type-1
+        width: full-width
+        alignment: stacked
+        modifier_class: custom-class
+  path:
+    -
+      alias: /article-listing
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

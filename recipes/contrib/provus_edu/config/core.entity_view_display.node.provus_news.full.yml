@@ -1,0 +1,54 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.provus_news.field_content
+    - field.field.node.provus_news.field_featured_image
+    - field.field.node.provus_news.field_provus_publish_date
+    - field.field.node.provus_news.field_tags
+    - node.type.provus_news
+  module:
+    - datetime
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.provus_news.full
+targetEntityType: node
+bundle: provus_news
+mode: full
+content:
+  field_content:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_featured_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: hero
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_provus_publish_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: provus_event_date
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  addtoany: true
+  field_tags: true
+  links: true
+  search_api_excerpt: true

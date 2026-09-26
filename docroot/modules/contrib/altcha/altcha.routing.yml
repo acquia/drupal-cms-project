@@ -1,0 +1,15 @@
+altcha.challenge:
+  path: '/altcha/v1/challenge'
+  defaults:
+    _controller: '\Drupal\altcha\Controller\ChallengeController::getChallenge'
+    _title: 'ALTCHA Challenge'
+  requirements:
+    _access: 'TRUE'
+
+altcha.settings:
+  path: '/admin/config/people/captcha/altcha'
+  defaults:
+    _form: '\Drupal\altcha\Form\AltchaSettingsForm'
+    _title: 'ALTCHA'
+  requirements:
+    _permission: 'administer altcha'

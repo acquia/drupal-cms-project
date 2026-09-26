@@ -1,0 +1,65 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - bootstrap_barrio
+label: Card
+id: sdc.bootstrap_barrio.card
+source: sdc
+source_local_id: 'bootstrap_barrio:card'
+provider: bootstrap_barrio
+active_version: 678d99c1f63032b9
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        card_img_top:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        card_img_alt:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        card_header:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        card_body:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        card_footer:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        card_img_top_block:
+          title: Image
+        card_header_block:
+          title: 'Card Header'
+        card_body_block:
+          title: 'Card Body'
+        card_footer_block:
+          title: 'Card Footer'

@@ -1,0 +1,30 @@
+{
+  "name": "drupal/altcha",
+  "description": "Provides a free, open-source Captcha alternative utilizing a proof-of-work mechanism to safeguard your website against spam and unwanted content.",
+  "type": "drupal-module",
+  "homepage": "https://drupal.org/project/altcha",
+  "support": {
+    "issues": "https://drupal.org/project/issues/altcha",
+    "source": "https://git.drupalcode.org/project/altcha"
+  },
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Filip Heymans",
+      "role": "Maintainer"
+    },
+    {
+      "name": "Jeremy Declerck",
+      "role": "Maintainer"
+    },
+    {
+      "name": "Robin De Herdt",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "drupal/captcha": "^1.15 || ^2.0",
+    "altcha-org/altcha": "^1.3.1",
+    "ext-openssl": "*"
+  }
+}

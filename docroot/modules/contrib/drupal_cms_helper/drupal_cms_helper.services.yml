@@ -1,0 +1,30 @@
+parameters:
+  # A list of entity types that should not be exported by the site exporter.
+  # @see \Drupal\drupal_cms_helper\ContentLoader
+  content_export.reject:
+    # Path aliases are created when the content is, and therefore should not be exported.
+    - path_alias
+    # Redirects don't really make sense as exported content; they're a consistency layer for content that has published for a while..
+    - redirect
+    # An internal entity type used by Search API to assist in indexing and has no business being exported.
+    - search_api_task
+    # It is highly unlikely that anyone wants to export emails.
+    - easy_email
+    # Transactional commerce data that generally should not be found in a site template, and might not be serializable anyway.
+    - commerce_order
+    - commerce_order_item
+    - commerce_payment
+    - commerce_payment_method
+    # A site-specific customer/checkout profile. Not desirable in an export.
+    - profile
+
+services:
+  _defaults:
+    autoconfigure: true
+    autowire: true
+  Drupal\drupal_cms_helper\SiteExporter: ~
+  # These event subscribers are internal and may be changed, or removed,
+  # at any time without warning. External code should not touch them.
+  Drupal\drupal_cms_helper\EventSubscriber\DefaultContentSubscriber: ~
+  Drupal\drupal_cms_helper\EventSubscriber\RecipeSubscriber: ~
+  Drupal\drupal_cms_helper\EventSubscriber\RouteSubscriber: ~

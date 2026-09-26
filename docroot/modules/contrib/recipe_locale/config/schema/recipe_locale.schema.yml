@@ -1,0 +1,54 @@
+recipe_locale.recipes:
+  type: config_object
+  label: 'Recipes with interface translations'
+  mapping:
+    recipes:
+      type: sequence
+      label: 'Recipes, keyed by drupal.org project name'
+      sequence:
+        type: mapping
+        label: 'Recipe'
+        mapping:
+          package:
+            type: string
+            label: 'Composer package name'
+            constraints:
+              NotBlank: {  }
+              Regex:
+                pattern: '/^drupal\/[a-z0-9_]+$/'
+          version:
+            type: string
+            label: 'Version, as Composer knows it, or empty when unknown'
+          label:
+            type: string
+            label: 'Recipe name'
+            constraints:
+              NotBlank: {  }
+
+# One object per applied recipe: the translatable values of the config the
+# recipe shipped itself, as they were shipped. Locale compares the site's
+# config with this copy to decide what to translate, long after the recipe
+# directory is gone. Only config shipped in English is stored, because Locale
+# only translates from English.
+recipe_locale.shipped.*:
+  type: config_object
+  label: 'Translatable values of the configuration a recipe shipped'
+  mapping:
+    recipe:
+      type: string
+      label: 'Recipe name'
+    config:
+      type: sequence
+      label: 'Config objects'
+      sequence:
+        type: mapping
+        label: 'Config object'
+        mapping:
+          name:
+            type: string
+            label: 'Config name'
+            constraints:
+              NotBlank: {  }
+          data:
+            type: ignore
+            label: 'Translatable values, as shipped'

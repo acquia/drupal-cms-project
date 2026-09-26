@@ -1,0 +1,42 @@
+{% set classes = [
+  'pass-card',
+  admin_theme ? 'pass-card--admin-theme' : 'pass-card--themed',
+] %}
+
+<div{{attributes.addClass(classes)}}>
+  <div class="pass-card__top">
+    {% if media %}
+      <div class="pass-card__media">
+        {{ media }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="pass-card__bottom">
+    <div class="pass-card__content">
+      {% if eyebrow %}
+        <div class="pass-card__eyebrow">
+          {{ eyebrow }}
+        </div>
+      {% endif %}
+      
+      {% if title %}
+        <h3 class="pass-card__title">
+          {{ title }}
+        </h3>
+      {% endif %}
+
+      {% if description %}
+        <div class="pass-card__description">
+          {{ description }}
+        </div>
+      {% endif %}
+
+      {% if action %}
+        <div class="pass-card__action">
+          {{ action }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

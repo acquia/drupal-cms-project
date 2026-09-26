@@ -1,0 +1,14 @@
+diagnosis.settings:
+  type: theme_settings
+  label: "Diagnosis settings"
+  mapping:
+    scheme:
+      type: string
+      label: Color scheme
+      constraints:
+        Choice:
+          # @see diagnosis_form_system_theme_settings_alter()
+          - vanilla-light
+          - vanilla-dark
+          - byte-light
+          - byte-dark

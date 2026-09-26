@@ -1,0 +1,23 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: List (li) Item
+status: stable
+description: An individual list style item with optional icon and body content.
+group: Provus Components
+
+props:
+  type: object
+  required:
+    - body
+  properties:
+    icon:
+      type: string
+      title: Font Awesome Icon
+      description: The Font Awesome icon for the list style item
+      examples:
+        - 'fa-heart'
+    body:
+      type: string
+      title: Body
+      description: The body content for the list style item
+      examples:
+        - 'List item'

@@ -1,0 +1,4 @@
+{% set attributes = attributes ?? create_attribute() %}
+<dialog {{ attributes.addClass('cms-installer__dialog') }}>
+  {%- block body -%}{%- endblock -%}
+</dialog>

@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: easy_email
+  uuid: 99b5038d-bda5-408d-95bf-d9a8bb9905fd
+  bundle: default
+default:
+  revision_user:
+    -
+      target_id: 0
+  label:
+    -
+      value: Default
+  creator_uid:
+    -
+      target_id: 0
+  recipient_uid:
+    -
+      target_id: 1
+  recipient_address:
+    -
+      value: admin@example.com
+  from_name:
+    -
+      value: 'Drush Site-Install'
+  from_address:
+    -
+      value: admin@example.com
+  subject:
+    -
+      value: 'New release(s) available for Drush Site-Install'
+  body_html:
+    -
+      value: |-
+        There are updates available for one or more of your modules or themes. To ensure the proper functioning of your site, you should update as soon as possible.<br />
+        <br />
+        See the available updates page for more information:<br />
+        https://testing-one.lndo.site/admin/reports/updates<br />
+        <br />
+        Your site is currently configured to send these emails when any updates are available. To get notified only for security updates, https://testing-one.lndo.site/admin/reports/updates/settings.
+      format: easy_email
+  body_plain:
+    -
+      value: |-
+        There are updates available for one or more of your modules or themes. To ensure the proper functioning of your site, you should update as soon as possible.
+
+        See the available updates page for more information:
+        https://testing-one.lndo.site/admin/reports/updates
+
+        Your site is currently configured to send these emails when any updates are available. To get notified only for security updates, https://testing-one.lndo.site/admin/reports/updates/settings.

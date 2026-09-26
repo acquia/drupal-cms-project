@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 116964db-cbe0-4de2-a03f-3ad3c91cc4b2
+  bundle: main
+  default_langcode: en
+  depends:
+    e57e6515-049a-4cf6-8690-78124cb18ed1: menu_link_content
+    559287ee-9426-45dd-94f0-abe8fac4d8fa: canvas_page
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'General Inquiries'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      title: ''
+      options: {  }
+      target_uuid: 559287ee-9426-45dd-94f0-abe8fac4d8fa
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -50
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:e57e6515-049a-4cf6-8690-78124cb18ed1'
+  revision_translation_affected:
+    -
+      value: true

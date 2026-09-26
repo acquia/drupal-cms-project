@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: provus_academic_program
+label: 'Academic Program'
+type: 'canonical_entities:node'
+pattern: 'academics/[node:field_provus_ap_department:entity:title]/[node:title]'
+selection_criteria:
+  59f7cd30-adbd-4d2e-9c9f-1f78ed820b0e:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 59f7cd30-adbd-4d2e-9c9f-1f78ed820b0e
+    context_mapping:
+      node: node
+    bundles:
+      provus_academic_program: provus_academic_program
+selection_logic: and
+weight: -5
+relationships: {  }

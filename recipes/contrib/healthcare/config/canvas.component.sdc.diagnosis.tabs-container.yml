@@ -1,0 +1,43 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - diagnosis
+active_version: 54577b4dc518fedd
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        aria_label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Main navigation tabs'
+          expression: ℹ︎string␟value
+        orientation:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: horizontal
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        tabs_content:
+          title: 'Tabs content'
+          description: 'Add tab components here. Only one can be active at a time.'
+label: 'Tabs container'
+id: sdc.diagnosis.tabs-container
+provider: diagnosis
+source: sdc
+source_local_id: 'diagnosis:tabs-container'

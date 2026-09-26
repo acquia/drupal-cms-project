@@ -1,0 +1,95 @@
+@reference "../../00-base/global/global.pcss";
+
+/* Hero banner */
+
+.hero-banner {
+  @apply py-10 px-4 xl:pt-[180px] md:pb-[180px] mb-8 md:mb-[180px] relative;
+
+  .backgroundImage {
+    &:before {
+      @apply absolute left-0 top-0 w-full h-full z-10;
+
+      content: "";
+    }
+
+    img {
+      @apply absolute top-0 left-0 w-full h-full object-cover z-0;
+    }
+  }
+
+  &.style-2 {
+    @apply text-center h-full xl:h-screen;
+
+    .top-content {
+      @apply max-w-3xl mx-auto mb-10 xl:mb-21;
+    }
+
+    .intro-label {
+      @apply mb-4 block uppercase;
+
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .headline {
+      @apply mx-0 text-white;
+    }
+
+    .sub-headline {
+      @apply text-2xl;
+
+      color: rgba(255, 255, 255, 0.87);
+    }
+
+    .headline,
+    .sub-headline {
+      @apply break-words;
+    }
+  }
+
+  .bottom-info {
+    @apply max-w-5xl mx-auto absolute left-0 right-0 bottom-0 z-10 -mb-[100px] text-left px-4 hidden md:block;
+
+    .media__card_dark_bg.dark-background {
+      img {
+        @apply max-h-[120px];
+      }
+
+      .top-section {
+        @apply mb-2;
+      }
+
+      .space-heading {
+        @apply mb-0;
+      }
+    }
+  }
+}
+
+/* Storybook */
+.hero-banner .email-form {
+  .wrapper {
+    @apply block md:flex;
+
+    button {
+      @apply w-full md:w-auto;
+    }
+  }
+
+  .form-input {
+    @apply max-w-full;
+
+    @media (min-width: 768px) {
+      max-width: calc(100% - 16px);
+    }
+  }
+
+  .input-wrapper {
+    @apply mb-3 md:mb-0;
+  }
+}
+
+.hide-bottom-info {
+  .bottom-info {
+    @apply hidden;
+  }
+}

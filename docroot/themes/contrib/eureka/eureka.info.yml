@@ -1,0 +1,30 @@
+name: Eureka
+type: theme
+description: A canvas-ready theme for the Archimedes site template.
+base theme: false
+core_version_requirement: ^11
+# version: "1.0"
+
+dependencies:
+  - emulsify_tools
+
+regions:
+  header: Header
+  system: System
+  content: Content
+  sidebar: Sidebar
+  footer: Footer
+
+logo: images/logo.png
+
+libraries:
+  - 'eureka/global'
+
+# To re-visit approach in the future, as base font size change messes with the admin theme
+#ckeditor5-stylesheets:
+#  - components/00-base/global.min.css
+
+# Information added by Drupal.org packaging script on 2026-03-17
+version: '1.0.0'
+project: 'eureka'
+datestamp: 1773768873

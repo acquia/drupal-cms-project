@@ -1,0 +1,49 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Testimonial card
+group: Card
+props:
+  type: object
+  required:
+    - style
+  properties:
+    text:
+      type: string
+      title: Quote text
+      pattern: "(.|\\r?\\n)*"
+      examples:
+        - "Every small action counts, from reducing waste to supporting sustainable practices. Let's unite for a greener tomorrow!"
+    cite_name:
+      type: string
+      title: Citation name
+      examples:
+        - "Isiah Julio"
+    cite_text:
+      type: string
+      title: Citation text
+      examples:
+        - "Climate policy advocate"
+    cite_url:
+      type: string
+      title: Citation link
+      format: uri-reference
+    style:
+      type: string
+      title: Style
+      enum:
+        - default
+        - white
+      meta:enum:
+        default: Default
+        white: White
+      default: default
+      examples:
+        - default
+    media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Image
+      type: object
+      examples:
+        - src: "assets/portrait.png"
+          alt: "Placeholder"
+          width: 100
+          height: 100

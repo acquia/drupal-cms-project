@@ -1,0 +1,64 @@
+<div id="language-switcher" class="cms-installer__language-switcher">
+  <button class="button" aria-haspopup="dialog" aria-expanded="false" type="button" command="show-modal" commandfor="language-switcher-dialog">
+    <span aria-hidden="true">
+      {% include active_theme_path() ~ "/images/translate.svg" %}
+    </span>
+    <span>
+      {{ 'Change language'|t }}
+    </span>
+    <span aria-hidden="true" class="cms-installer__language-switcher-button-indicator">
+      {% include active_theme_path() ~ "/images/chevron-down.svg" %}
+    </span>
+  </button>
+  {% embed 'drupal_cms_installer_theme:dialog' with {
+    attributes: create_attribute({
+      id: 'language-switcher-dialog',
+      closedby: 'any',
+      class: 'cms-installer__language-switcher-dialog'
+    })
+  } %}
+    {% block body %}
+      <div class="cms-installer__dialog-header-group">
+        <h2 id="language-switcher-dialog-label">{{ 'Install your site in a different language'|t }}</h2>
+        <button class="button cms-installer__language-switcher-close" type="button" command="close" commandfor="language-switcher-dialog" aria-label="{{ 'Close dialog'|t }}">
+          <span aria-hidden="true">
+            {% include active_theme_path() ~ "/images/x-circle.svg" %}
+          </span>
+        </button>
+      </div>
+      <form class="cms-installer__form-group">
+      <label>
+        <span class="hidden">{{ 'Search'|t }}</span>
+        <input class="form-element" autofocus id="language-switcher-search" type="search" name="search" placeholder="{{ 'Search'|t }}" />
+        </label>
+        <ul aria-live="polite" role="list" id="language-switcher-list" aria-labelledby="language-switcher-dialog-label" class="cms-installer__language-switcher-list">
+          {% for langcode, language in languages %}
+            {% set button_attributes = create_attribute({
+              'aria-label': 'Select @language and close dialog'|t({'@language': language.name}),
+              href: language.url,
+              autofocus: active_langcode == langcode ? 'true' : 'false',
+              'data-keywords': language.name|lower|replace({' ': ''}),
+              'dir': language.direction
+            }) %}
+            {% if active_langcode == langcode %}
+              {% set button_attributes = button_attributes.setAttribute('class', 'is-selected') %}
+            {% endif %}
+            <li>
+              <a {{ button_attributes }}>
+                {{ language.name }}
+                {% if active_langcode == langcode %}
+                  <span aria-hidden="true">
+                    {% include active_theme_path() ~ "/images/check.svg" %}
+                  </span>
+                {% endif %}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </form>
+    {% endblock %}
+  {% endembed %}
+  <div class="cms-installer__language-loading" hidden role="status" aria-label="{{ 'Downloading selected language'|t }}">
+    {% include active_theme_path() ~ "/images/spinner.svg" %}
+  </div>
+</div>

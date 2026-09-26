@@ -1,0 +1,31 @@
+{#
+  Accordion SDC — One expandable panel. 
+  Drag multiple Accordion components into a column to form a group.
+  The JS handles closing siblings automatically.
+#}
+{% set id_trigger = 'accordion-trigger'|clean_unique_id %}
+{% set id_panel = 'accordion-panel'|clean_unique_id %}
+{% set default_state = default_state|default('expanded') %}
+{% set open_default = default_state == 'expanded' %}
+
+<div class="accordion__item" data-accordion-item {{ open_default ? 'data-accordion-open-default' : '' }}>
+	<div class="accordion__header">
+		<button type="button" class="accordion__trigger" id="{{ id_trigger }}" aria-expanded="{{ open_default ? 'true' : 'false' }}" aria-controls="{{ id_panel }}" data-accordion-trigger>
+			<span class="accordion__question">{{ question|default('How does it work?') }}</span>
+		</button>
+		<button type="button" class="accordion__close" aria-label="{{ 'Collapse'|t }}" data-accordion-close tabindex="-1">
+			<span class="accordion__close-icon" aria-hidden="true">
+				<svg width="24" height="24" viewbox="0 0 24 24" fill="currentColor" aria-hidden="true">
+					<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+				</svg>
+			</span>
+		</button>
+	</div>
+	<div class="accordion__panel" id="{{ id_panel }}" role="region" aria-labelledby="{{ id_trigger }}" data-accordion-panel {{ not open_default ? 'hidden' : '' }}>
+		<div class="accordion__content">
+			{% if answer|default('') is not empty %}
+				<p class="accordion__answer">{{ answer }}</p>
+			{% endif %}
+		</div>
+	</div>
+</div>

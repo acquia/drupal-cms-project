@@ -1,0 +1,28 @@
+/**
+ * Menu Container Component Styles
+ *
+ * Handles responsive ordering of dual menu display:
+ * - Mobile: Natural flex-col order (main, then banner)
+ * - Desktop: flex-col-reverse (banner, then main)
+ */
+
+.menu-container {
+  @apply flex flex-col gap-2;
+}
+
+/* Desktop: reverse order to show banner menu above main menu */
+@screen md {
+  .menu-container {
+    @apply flex-col-reverse;
+  }
+}
+
+/* Banner menu wrapper */
+.menu-container--banner {
+  @apply w-full;
+}
+
+/* Main menu wrapper */
+.menu-container--main {
+  @apply w-full;
+}

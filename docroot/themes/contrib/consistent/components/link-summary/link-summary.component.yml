@@ -1,0 +1,24 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Link summary
+group: Navigation
+status: stable
+props:
+  type: object
+  required:
+    - link_summary_label
+  properties:
+    link_summary_label:
+      type: string
+      title: Label
+      examples:
+        - "Council Tax discounts and exemptions"
+    link_summary_url:
+      type: string
+      title: URL
+      examples:
+        - "/council-tax/discounts"
+    link_summary_text:
+      type: string
+      title: Summary
+      examples:
+        - "Find out if you qualify for a discount or exemption."

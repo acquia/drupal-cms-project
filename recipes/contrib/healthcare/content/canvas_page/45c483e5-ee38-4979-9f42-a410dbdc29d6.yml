@@ -1,0 +1,184 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 45c483e5-ee38-4979-9f42-a410dbdc29d6
+  default_langcode: en
+  depends:
+    85db539b-adb8-4e2c-b8e9-73cf75aa6557: file
+    9ac24a6e-0bcc-4c58-8737-a975dccc0480: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Careers
+  description:
+    -
+      value: 'Build your career at Saltmarsh Island Health.'
+  components:
+    -
+      uuid: 41673dff-e969-49a4-8642-16887d42f294
+      component_id: sdc.diagnosis.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        background: secondary
+        padding_block_start: '32'
+        padding_block_end: '32'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        image_size: '4:3'
+        image_position: right
+        image_radius: extra-large
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 9ac24a6e-0bcc-4c58-8737-a975dccc0480
+            target_type: media
+    -
+      parent_uuid: 41673dff-e969-49a4-8642-16887d42f294
+      slot: hero_slot
+      uuid: 3c2b5cf8-25ec-4c93-bbc0-1e28625d441e
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Join Our Team'
+        level: 1
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 41673dff-e969-49a4-8642-16887d42f294
+      slot: hero_slot
+      uuid: a8e9c053-3761-4999-b407-86b6004ef794
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Build your career at Saltmarsh Island Health.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: ca21436c-ccd3-4c18-a2b6-bcb27ef8012a
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: ca21436c-ccd3-4c18-a2b6-bcb27ef8012a
+      slot: main_slot
+      uuid: 01b1a2ef-7f91-4ee2-8f1b-3f7794f678fd
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Saltmarsh Island Health is always looking for talented, compassionate healthcare professionals to join our team. We offer competitive salaries, excellent benefits, and opportunities for professional growth and development.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: ca21436c-ccd3-4c18-a2b6-bcb27ef8012a
+      slot: main_slot
+      uuid: 2d28e40c-e3a2-48ba-857a-9ac75039ab46
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Why Work at Saltmarsh Island Health?'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ca21436c-ccd3-4c18-a2b6-bcb27ef8012a
+      slot: main_slot
+      uuid: e1cc9bdc-2080-459a-a326-800cb1e083b1
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<ul><li data-list-item-id="efa533b1b98a09437a5f5ad8ec4830f6a"><strong>Mission-Driven:</strong> Make a real difference in your community</li><li data-list-item-id="e86b9cfd4b0add4f55be57c8030c4ae71"><strong>Comprehensive Benefits:</strong> Health, dental, vision, retirement, and more</li><li data-list-item-id="ecee09c63dead96c4033d58bd2744c9d5"><strong>Work-Life Balance:</strong> Flexible scheduling and generous PTO</li><li data-list-item-id="e85c63692ad6fa88c1c648d1fd314eec7"><strong>Professional Development:</strong> Continuing education, tuition reimbursement, and career advancement</li><li data-list-item-id="eb5f0ffbcf05a8b73273a4506c64dffa2"><strong>Supportive Environment:</strong> Collaborative, team-oriented culture</li></ul>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: ca21436c-ccd3-4c18-a2b6-bcb27ef8012a
+      slot: main_slot
+      uuid: e7744e68-ef25-4433-bd44-1184e06e7777
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Current Openings'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ca21436c-ccd3-4c18-a2b6-bcb27ef8012a
+      slot: main_slot
+      uuid: 88758e0d-fc0c-4355-b30d-864cae84f7d0
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>We are currently hiring for the following positions:</p><ul><li data-list-item-id="e7f6d238436642f8e432cc22acbf88ea2">Registered Nurses (Emergency Department)</li><li data-list-item-id="ef0481e818ab02361f9c25daa188f2dd5">Medical Assistants (Primary Care)</li><li data-list-item-id="ebefdbd584e7db1089d366de6aec9d0ca">Physical Therapist</li><li data-list-item-id="e8d82d626c68f06067d6129932d77c8c7">Radiologic Technologist</li><li data-list-item-id="e298b066622c59f7f193a8a9b8fc337be">Medical Billing Specialist</li><li data-list-item-id="e4f00d2c8faf3a9abc7871cda390b5d58">Patient Access Representative</li></ul>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: ca21436c-ccd3-4c18-a2b6-bcb27ef8012a
+      slot: main_slot
+      uuid: 3f6fa9ef-5e0c-465f-bca8-280e4b1b5482
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'How to Apply'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ca21436c-ccd3-4c18-a2b6-bcb27ef8012a
+      slot: main_slot
+      uuid: bab57491-316f-42e6-9e55-70207aac71c4
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>To view all current job openings and apply online, visit our career portal or send your resume to careers@saltmarshhealth.org.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: ca21436c-ccd3-4c18-a2b6-bcb27ef8012a
+      slot: main_slot
+      uuid: 4e49423e-2f18-4dbf-b4cf-29508e731235
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Questions?'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ca21436c-ccd3-4c18-a2b6-bcb27ef8012a
+      slot: main_slot
+      uuid: 00384946-9d12-4b69-8f3f-505e28872a93
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Contact our Human Resources department at (555) 123-4574 or hr@saltmarshhealth.org.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+  path:
+    -
+      alias: /careers
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

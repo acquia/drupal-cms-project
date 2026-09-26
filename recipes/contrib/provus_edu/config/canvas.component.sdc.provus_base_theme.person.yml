@@ -1,0 +1,193 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.image.field_media_image
+    - field.field.media.svg_image.field_media_svg_image
+    - filter.format.canvas_full_html
+    - filter.format.canvas_html_block
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - media.type.svg_image
+  module:
+    - file
+    - media
+    - media_library
+    - text
+  theme:
+    - provus_base_theme
+label: 'Person Full Profile Card'
+id: sdc.provus_base_theme.person
+source: sdc
+source_local_id: 'provus_base_theme:person'
+provider: provus_base_theme
+active_version: 08a5cd5f22550271
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        first_name:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: John
+          expression: ℹ︎string␟value
+        last_name:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Doe
+          expression: ℹ︎string␟value
+        about:
+          required: true
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textarea
+          default_value:
+            -
+              value: |
+                <p>Dedicated team member focused on delivering exceptional results.</p>
+                <p>Passionate about innovation and collaboration.</p>
+              format: canvas_full_html
+          expression: ℹ︎text_long␟processed
+        job_title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: CEO
+          expression: ℹ︎string␟value
+        image_url:
+          required: true
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+        email:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: john.doe@example.com
+          expression: ℹ︎string␟value
+        phone:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '(555) 123-4567'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  c2cc515e3f2c1d1e:
+    settings:
+      prop_field_definitions:
+        first_name:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: John
+          expression: ℹ︎string␟value
+        last_name:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Doe
+          expression: ℹ︎string␟value
+        about:
+          required: true
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: |
+                <p>Dedicated team member focused on delivering exceptional results.</p>
+                <p>Passionate about innovation and collaboration.</p>
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+        job_title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: CEO
+          expression: ℹ︎string␟value
+        image_url:
+          required: true
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+        email:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: john.doe@example.com
+          expression: ℹ︎string␟value
+        phone:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '(555) 123-4567'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }

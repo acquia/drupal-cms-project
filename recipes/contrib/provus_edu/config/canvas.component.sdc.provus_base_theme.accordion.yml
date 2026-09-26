@@ -1,0 +1,40 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - provus_base_theme
+label: 'Accordion Container'
+id: sdc.provus_base_theme.accordion
+source: sdc
+source_local_id: 'provus_base_theme:accordion'
+provider: provus_base_theme
+active_version: b235e771578f5fe2
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        accordion_id:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: faq
+          expression: ℹ︎string␟value
+        title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: FAQ
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        accordion_body:
+          title: 'Accordion items'
+          description: 'Accordion item components placed inside the accordion container'

@@ -1,0 +1,228 @@
+/**
+ * @file slider.css
+ * Slider SDC — Figma desktop 1-9547, mobile 1-9299.
+ * Swiper carousel: arrows (desktop only) + pagination dots; responsive slide size and gaps.
+ */
+
+/* -----------------------------------------------------------------------------
+   Wrapper — align with .custom-container left space; no right padding, no max-width
+   ----------------------------------------------------------------------------- */
+.slider {
+  position: relative;
+  width: 100%;
+  max-width: none;
+  padding-left: 1.25rem;
+  padding-right: 0;
+}
+
+@media (min-width: 576px) {
+  .slider {
+    padding-left: calc((100vw - 540px) / 2);
+  }
+}
+
+@media (min-width: 768px) {
+  .slider {
+    padding-left: calc((100vw - 720px) / 2);
+  }
+}
+
+@media (min-width: 992px) {
+  .slider {
+    padding-left: calc((100vw - 960px) / 2);
+  }
+}
+
+@media (min-width: 1200px) {
+  .slider {
+    padding-left: calc((100vw - 1140px) / 2);
+  }
+}
+
+@media (min-width: 1400px) {
+  .slider {
+    padding-left: calc((100vw - 1312px) / 2);
+  }
+}
+
+/* Track: swiper + arrows; arrows are positioned relative to this so they align with slide area only */
+.slider__track {
+  position: relative;
+  width: 100%;
+}
+
+.slider__swiper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.slider__empty-state {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  width: 100%;
+  border: 2px dashed rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.02);
+  color: rgba(0, 0, 0, 0.35);
+  font-style: italic;
+  padding: 20px;
+}
+
+/* In Canvas editor, allow wrapper to show items normally since Swiper is disabled (mobile layout: gap 24px) */
+.in-canvas .slider .swiper-wrapper {
+  display: flex;
+  overflow-x: auto;
+  gap: 24px;
+  padding: 10px 0;
+}
+
+.in-canvas .slider .swiper-slide {
+  flex-shrink: 0;
+}
+
+/* -----------------------------------------------------------------------------
+   Slides — mobile first (Figma 1-9299): 144px, gap 24px, bottom gap 20px
+   ----------------------------------------------------------------------------- */
+.slider__slide-inner {
+  position: relative;
+  width: 144px;
+  height: 144px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.slider__slide-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.slider .swiper-wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+.slider .swiper-slide {
+  width: 144px;
+  flex-shrink: 0;
+  height: auto;
+}
+
+/* Prevent default figure/figcaption margins from inflating caption-to-dots spacing. */
+.slider .swiper-slide figure,
+.slider .swiper-slide figcaption {
+  margin: 0;
+}
+
+/* Desktop (Figma 1-9547): slide 405.3px, gap 32px, content gap 48px to dots */
+@media (min-width: 48rem) {
+  .slider__slide-inner {
+    width: 405.3px;
+    height: 405.3px;
+  }
+
+  .slider .swiper-slide {
+    width: 405.3px;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   Arrows — Figma: 50px pill, 12px padding, 24px icon, border, centered
+   Hidden on mobile; show on desktop
+   ----------------------------------------------------------------------------- */
+.slider__arrow {
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid rgba(2, 7, 4, 0.15);
+  background: var(--color-scheme-1-foreground, #f2f2f2);
+  color: currentColor;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+}
+
+.slider__arrow:hover {
+  opacity: 0.85;
+}
+
+.slider__arrow:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.slider__arrow-icon {
+  display: block;
+  line-height: 0;
+}
+
+.slider__arrow-icon svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+@media (min-width: 48rem) {
+  .slider__arrow {
+    display: flex;
+    left: auto;
+    right: auto;
+  }
+
+  /* Both arrows vertically centered in .slider__track (slide area); prev in left zone, next at right */
+  .slider__arrow--prev {
+    left: -28px;
+  }
+
+  .slider__arrow--next {
+    right: 70px;
+    left: auto;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   Pagination dots — 8px, 9px gap, centered; Figma Slider Dots
+   ----------------------------------------------------------------------------- */
+.slider__pagination {
+  position: relative;
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+  padding: 10px 0;
+}
+
+@media (min-width: 48rem) {
+  .slider__pagination {
+    margin-top: 24px;
+  }
+}
+
+.slider__pagination .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  margin: 0;
+  background: rgba(2, 7, 4, 0.2);
+  opacity: 1;
+  transition: background 0.2s ease;
+}
+
+.slider__pagination .swiper-pagination-bullet-active {
+  background: var(--color-scheme-1-foreground-inverse, #020704);
+}
+
+.swiper-pagination-horizontal{
+  bottom: unset !important;
+}

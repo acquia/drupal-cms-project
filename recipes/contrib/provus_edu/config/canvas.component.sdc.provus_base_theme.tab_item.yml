@@ -1,0 +1,44 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.canvas_full_html
+  module:
+    - text
+  theme:
+    - provus_base_theme
+label: 'Tab Item'
+id: sdc.provus_base_theme.tab_item
+source: sdc
+source_local_id: 'provus_base_theme:tab_item'
+provider: provus_base_theme
+active_version: 9cb895f5360693b1
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        label:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Overview
+          expression: ℹ︎string␟value
+        content:
+          required: true
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Tab panel content goes here.</p>'
+              format: canvas_full_html
+          expression: ℹ︎text_long␟processed
+    fallback_metadata:
+      slot_definitions: {  }

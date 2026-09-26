@@ -1,0 +1,24 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: List item
+status: stable
+description: Default list item component
+group: Eureka main components
+props:
+  type: object
+  properties:
+    list_item_icon:
+      type: ['string', 'null']
+      title: List item icon
+      description: Icon for the list item
+      examples:
+        - chevron
+    list_item_label:
+      type: ['string', 'null']
+      title: List item label
+      description: Label of the list item - optional
+    list_item_content:
+      type: ['string', 'null']
+      title: List item content
+      description: Text content of the list item
+      examples:
+        - List item text

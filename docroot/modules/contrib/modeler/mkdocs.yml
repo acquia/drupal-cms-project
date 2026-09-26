@@ -1,0 +1,90 @@
+# Screenshots contained in docs/assets/screenshots
+site_name: Modeler for Drupal
+site_url: https://project.pages.drupalcode.org/modeler
+repo_url: https://git.drupalcode.org/project/modeler
+repo_name: drupal/modeler
+docs_dir: docs
+site_dir: site
+edit_uri: -/tree/1.0.x/docs/
+theme:
+  name: material
+  font:
+    code: Roboto Mono
+  logo: assets/logo.svg
+  favicon: assets/favicon.ico
+  palette:
+    primary: teal
+  features:
+    - header.autohide
+    - navigation.footer
+    - navigation.sections
+    - navigation.expand
+    - content.action.edit
+    - content.code.copy
+plugins:
+  - search:
+      lang: en
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.blocks.caption
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
+extra:
+  social:
+    - icon: fontawesome/brands/gitlab
+      link: https://git.drupalcode.org/project/modeler
+    - icon: fontawesome/brands/slack
+      link: https://drupal.slack.com/archives/C08K6KX2EHH
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Interface:
+      - interface/index.md
+      - Canvas: interface/canvas.md
+      - Property Panel: interface/property-panel.md
+      - Toolbar: interface/toolbar.md
+      - Replay Panel: interface/replay-panel.md
+  - Working with Models:
+      - working-with-models/index.md
+      - Creating a Model: working-with-models/creating.md
+      - Editing a Model: working-with-models/editing.md
+      - Saving & Closing: working-with-models/saving.md
+  - Components:
+      - components/index.md
+      - Nodes: components/nodes.md
+      - Edges & Conditions: components/edges.md
+      - Configuration Forms: components/configuration.md
+  - Features:
+      - features/index.md
+      - Keyboard Shortcuts: features/keyboard-shortcuts.md
+      - Search & Find: features/search.md
+      - Dark Mode: features/dark-mode.md
+      - Flow Filtering: features/flow-filtering.md
+      - Export: features/export.md
+      - Standalone Viewer: features/standalone-viewer.md
+      - View Modes: features/view-modes.md
+      - Permissions: features/permissions.md
+  - Replay & Testing:
+      - replay/index.md
+      - Viewing Replay Data: replay/viewing.md
+      - Live Testing: replay/testing.md
+      - Tokens & Data: replay/tokens.md
+  - Accessibility: accessibility.md
+  - UI Development:
+      - development/index.md
+      - Architecture: development/architecture.md
+      - Plugin API: development/plugin-api.md
+      - Component Development: development/components.md
+      - State Management: development/state-management.md
+      - Testing: development/testing.md
+      - Build & Quality: development/build.md
+      - Security: development/security.md

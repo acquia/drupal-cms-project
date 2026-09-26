@@ -1,0 +1,20 @@
+<section class="timeline-component {{ not disable_css ? 'timeline-component--themed' : '' }}">
+	<div class="timeline-component__header">
+		{% if heading %}
+			<div class="timeline-component__label">Timeline</div>
+			<h2 class="timeline-component__title">{{ heading }}</h2>
+		{% endif %}
+		{% if description %}
+			<p class="timeline-component__description">{{ description }}</p>
+		{% endif %}
+		{% if actions %}
+			<div class="timeline-component__actions">
+				{{ actions }}
+			</div>
+		{% endif %}
+	</div>
+
+	<div class="timeline-component__items">
+		{{ timeline_items }}
+	</div>
+</section>

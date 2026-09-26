@@ -1,0 +1,13 @@
+config_language_lock_test_recipe_ext_config.apply_recipe_valid_langcode_ext_config:
+  path: '/admin/config/regional/config-language-lock/test-recipe-ext-config/apply-recipe-valid-langcode-ext-config'
+  defaults:
+    _controller: '\Drupal\config_language_lock_test_recipe_ext_config\Controller\RecipeExtConfigTestController::applyValidLangcodeExtConfigRecipe'
+  requirements:
+    _permission: 'administer site configuration'
+
+config_language_lock_test_recipe_ext_config.apply_recipe_ext_invalid_langcode:
+  path: '/admin/config/regional/config-language-lock/test-recipe-ext-config/apply-recipe-ext-invalid-langcode'
+  defaults:
+    _controller: '\Drupal\config_language_lock_test_recipe_ext_config\Controller\RecipeExtConfigTestController::applyExtInvalidLangcodeRecipe'
+  requirements:
+    _permission: 'administer site configuration'

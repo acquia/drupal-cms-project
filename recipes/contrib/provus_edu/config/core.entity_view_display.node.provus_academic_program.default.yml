@@ -1,0 +1,83 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.provus_academic_program.field_provus_ap_department
+    - field.field.node.provus_academic_program.field_provus_ap_editorial_sect
+    - field.field.node.provus_academic_program.field_provus_ap_program_level
+    - field.field.node.provus_academic_program.field_provus_ap_program_location
+    - field.field.node.provus_academic_program.field_provus_ap_program_type
+    - field.field.node.provus_academic_program.field_provus_ap_sort_name
+    - field.field.node.provus_academic_program.field_provus_ap_summary
+    - node.type.provus_academic_program
+  module:
+    - text
+    - user
+id: node.provus_academic_program.default
+targetEntityType: node
+bundle: provus_academic_program
+mode: default
+content:
+  field_provus_ap_department:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_provus_ap_editorial_sect:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_provus_ap_program_level:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_provus_ap_program_location:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  field_provus_ap_program_type:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_provus_ap_sort_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 107
+    region: content
+  field_provus_ap_summary:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 108
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  addtoany: true
+  search_api_excerpt: true

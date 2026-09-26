@@ -1,0 +1,15 @@
+field.widget.settings.icon_link_attributes_widget:
+  type: field.widget.settings.icon_link_widget
+  label: 'Icon link attributes widget settings'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    # @see link_attributes/config/schema/link_attributes.schema.yml
+    enabled_attributes:
+      type: sequence
+      sequence:
+        type: boolean
+        label: 'Enabled'
+    widget_default_open:
+      type: string
+      label: 'Widget expand behavior'

@@ -1,0 +1,49 @@
+{# 
+/**
+ * @file
+ * space Heading component.
+ *
+ * Variables:
+ * - content: [string] Heading text content.
+ * - title_color: [string] Title colors.
+ * - tag_name: [string] HTML tag for the heading: h1, h2, h3, h4, h5, h6, div.
+ * - spacing_bottom: [string] Bottom spacing: none, small, medium, large.
+ * - url: [string] Optional link for the heading.
+ * - modifier_class: [string] Additional modifier classes.
+ */
+#}
+
+{# Default #}
+{% set attributes = attributes|default(create_attribute()) %}
+{% set link_attributes = link_attributes|default(create_attribute()) %}
+{% set tag_name = tag_name|default('h1') %}
+{% set spacing_bottom = 'spacing-bottom-%s'|format(spacing_bottom|default('small')) %}
+{% set align = 'align-%s'|format(align|default('left')) %}
+
+{% if url is not empty %}
+  {% set link_attributes = link_attributes.setAttribute('href', url) %}
+  {% set link_tag_name = 'a' %}
+{% endif %}
+
+{# Classes #}
+{% set classes = [
+  'space-heading',
+  'headline',
+  title_color,
+  spacing_bottom,
+  align,
+  modifier_class,
+] %}
+
+{# Template #}
+{% block headline_block %}
+  <{{ tag_name }} {{ attributes.addClass(classes| sort | join(' ') | trim) }}>
+    {%- if url is not empty -%}
+      <{{ link_tag_name }} {{ link_attributes}}>
+    {%- endif -%}
+      {{- content -}}
+    {%- if url is not empty -%}
+      </{{ link_tag_name -}}>
+    {%- endif %}
+  </{{ tag_name }}>
+{% endblock %}

@@ -1,0 +1,7 @@
+drupical.load_more:
+  path: '/events-feed/load-more'
+  defaults:
+    _controller: '\Drupal\drupical\Controller\EventsController::loadMore'
+    _title: 'Load More Events'
+  requirements:
+    _permission: 'access events'

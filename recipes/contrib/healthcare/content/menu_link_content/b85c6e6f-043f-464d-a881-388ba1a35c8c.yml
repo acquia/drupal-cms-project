@@ -1,0 +1,44 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: b85c6e6f-043f-464d-a881-388ba1a35c8c
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    42ea2048-ff3a-4158-bc4a-5bd875a0023f: menu_link_content
+    7374b175-9e6e-4514-aa22-d3d2977fa6ad: canvas_page
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Plan Your Visit'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      title: ''
+      options:
+        icon: null
+        icon_display: icon_only
+      target_uuid: 7374b175-9e6e-4514-aa22-d3d2977fa6ad
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 3
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:42ea2048-ff3a-4158-bc4a-5bd875a0023f'
+  revision_translation_affected:
+    -
+      value: true

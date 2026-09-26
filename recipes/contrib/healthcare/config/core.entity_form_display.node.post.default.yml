@@ -1,0 +1,335 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.post.body
+    - field.field.node.post.field_authors
+    - field.field.node.post.field_featured_image
+    - field.field.node.post.field_post_date
+    - field.field.node.post.field_post_type
+    - field.field.node.post.field_related_services
+    - field.field.node.post.field_summary
+    - field.field.node.post.field_tags
+    - field.field.node.post.sa_seo_description
+    - field.field.node.post.sa_seo_image
+    - field.field.node.post.sa_seo_page_title
+    - node.type.post
+  module:
+    - custom_field
+    - datetime
+    - field_group
+    - media_library
+    - media_library_edit
+    - path
+    - tagify
+    - text
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_content
+        - group_classification
+        - group_publishing_data
+        - group_advanced_seo
+      label: Tabs
+      region: content
+      parent_name: ''
+      weight: 1
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        direction: horizontal
+        width_breakpoint: 640
+    group_content:
+      children:
+        - field_summary
+        - body
+        - field_featured_image
+      label: Content
+      region: content
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: open
+        description: ''
+        required_fields: true
+    group_classification:
+      children:
+        - field_post_type
+        - field_tags
+        - field_related_services
+      label: Classification
+      region: content
+      parent_name: group_tabs
+      weight: 21
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_publishing_data:
+      children:
+        - field_authors
+        - field_post_date
+      label: 'Publishing Data'
+      region: content
+      parent_name: group_tabs
+      weight: 22
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_publishing:
+      children:
+        - status
+        - uid
+        - created
+        - promote
+        - sticky
+      label: Publishing
+      region: content
+      parent_name: ''
+      weight: 2
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        open: true
+        description: ''
+        required_fields: true
+        weight: 0
+    group_advanced_seo:
+      children:
+        - sa_seo_page_title
+        - sa_seo_description
+        - sa_seo_image
+      label: 'Advanced SEO'
+      region: content
+      parent_name: group_tabs
+      weight: 23
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+id: node.post.default
+targetEntityType: node
+bundle: post
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 5
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_authors:
+    type: custom_stacked
+    weight: 11
+    region: content
+    settings:
+      wrapper: details
+      label_value: ''
+      label_limit: 60
+      label_prefix: Item
+      auto_collapse: false
+      open: true
+      fields:
+        user:
+          weight: 0
+          type: entity_reference_autocomplete
+          label: ''
+          size: 60
+          placeholder: ''
+          match_operator: CONTAINS
+          match_limit: 10
+        person:
+          weight: 0
+          type: entity_reference_autocomplete
+          label: ''
+          size: 60
+          placeholder: ''
+          match_operator: CONTAINS
+          match_limit: 10
+    third_party_settings: {  }
+  field_featured_image:
+    type: media_library_widget
+    weight: 6
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_post_date:
+    type: datetime_default
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_post_type:
+    type: tagify_select_widget
+    weight: 3
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 0
+      placeholder: ''
+    third_party_settings: {  }
+  field_related_services:
+    type: tagify_entity_reference_autocomplete_widget
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      placeholder: ''
+      suggestions_dropdown: 1
+      show_entity_id: 0
+      show_info_label: 0
+      info_label: ''
+      parent_selection: 1
+    third_party_settings: {  }
+  field_summary:
+    type: string_textarea
+    weight: 4
+    region: content
+    settings:
+      rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+  field_tags:
+    type: tagify_entity_reference_autocomplete_widget
+    weight: 4
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      placeholder: ''
+      suggestions_dropdown: 1
+      show_entity_id: 0
+      show_info_label: 0
+      info_label: ''
+      parent_selection: 1
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 13
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sa_seo_description:
+    type: string_textarea
+    weight: 3
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  sa_seo_image:
+    type: media_library_widget
+    weight: 4
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: true
+  sa_seo_page_title:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 9
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 14
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 10
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  publish_on: true
+  publish_state: true
+  unpublish_on: true
+  unpublish_state: true

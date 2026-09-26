@@ -1,0 +1,82 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+
+name: Space Testimonial Card
+
+description: |
+  The **Space Testimonial Card** is a component used to display customer or 
+  partner testimonials with support for avatar images, name, designation, and 
+  descriptive text.  
+
+  **Inputs:**
+  - `image`: Avatar image object (`src`, `alt`, `width`, `height`).
+  - `person_name`: Name of the person giving the testimonial.
+  - `text`: Testimonial content or feedback text.
+  - `designation`: Role, position, or title of the person.
+  - `extra_classes`: Additional class names for custom styling (applied only when custom style is enabled).  
+
+  **Slots:**
+  - `company_logo`: A slot for inserting a **Space Image** component, 
+    typically used for displaying a company or brand logo alongside the testimonial.
+
+status: stable
+
+group: Molecules
+
+props:
+
+  type: object
+
+  properties:
+    image:
+      title: 'Avatar Image'
+      $ref: json-schema-definitions://canvas.module/image
+      type: object
+      examples:
+        - src: 'images/avatar.jpg'
+          alt: 'Boring placeholder'
+          width: 96
+          height: 96
+
+    person_name:
+      type: string
+      title: Headline - Name
+      description: The main headline.
+      examples:
+        - 'John Rambo'
+
+    text:
+      type: string
+      title: Description
+      contentMediaType: text/html
+      x-formatting-context: block
+      description: A long text under the headline.
+      examples:
+        - 'The content published on the Pulse platform provided clarity about my health care. It made everything feel more structured and comprehensible.'
+
+    designation:
+      type: string
+      title: Designation
+      description: A long text under the headline.
+      examples: 
+        - 'Sales Manager'
+
+    company_logo:
+      title: 'Company Logo'
+      $ref: json-schema-definitions://canvas.module/image
+      type: object
+      examples:
+        - src: 'images/logo.png'
+          alt: 'Logo'
+          width: 172
+          height: 54
+
+    extra_classes:
+      type: string
+      title: Class names (multiple class names separated by space). Only applied when custom style enabled.
+      description: Class names (multiple class names separated by space). Only applied when custom style enabled.
+
+
+thirdPartySettings:
+  sdcStorybook:
+    stories:
+      preview: {}

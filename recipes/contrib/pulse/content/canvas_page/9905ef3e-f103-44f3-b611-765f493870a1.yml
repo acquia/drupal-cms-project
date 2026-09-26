@@ -1,0 +1,1027 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 9905ef3e-f103-44f3-b611-765f493870a1
+  default_langcode: en
+  depends:
+    d18c6d35-d540-499a-977d-51929c466f88: file
+    df10400c-dda9-46ba-9973-0edc84ae17b0: media
+    01029cd5-7d58-41a7-9cf5-9db46dcfc254: file
+    70383f91-47fc-4ee5-9fee-29d7abba91c2: media
+    72806530-a62c-426c-af69-65ea2bf6eda6: file
+    a70cab2d-f671-4fef-a89a-5cc230e98d9f: media
+    46a159fa-a79e-4f96-bd78-4d1a3af3c0ab: file
+    00591372-ca29-48ff-aeef-47d0f150bce2: media
+    5a488c9a-c00a-4e2f-a4b7-2a03c20b2e09: file
+    508de90e-d5e7-4973-a736-4631df0cc94e: media
+    79c4fc10-86f9-4385-81a8-333b2e1d22a8: file
+    7657582b-23fd-4902-99d4-0c22cea22ca4: media
+    a05ac8b6-60bb-4c43-9789-3e674b8b4f1a: file
+    ce406055-cc1d-478f-b1df-a9f5f3b6abe4: media
+    d134e05d-aa28-484c-acce-23ebb8e67796: file
+    e85471d9-a3fe-47e3-8b4a-9de4ee93af55: file
+    520e4954-3193-464e-b5ff-3150435eb9d8: media
+    880b57b6-1857-49cf-a004-58c6f490de11: media
+    0b8c018c-6684-41ee-959e-51dc92c6fc09: file
+    b86b6c83-6ca7-4485-ae8b-d2de774c8aff: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Home page'
+  components:
+    -
+      uuid: f9af7494-2031-456c-9108-763c00fbe1f0
+      component_id: sdc.pulse_theme.space-hero-banner-style-02
+      inputs:
+        background_image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: df10400c-dda9-46ba-9973-0edc84ae17b0
+            target_type: media
+        label: 'Your health, explained'
+        title: "Find out what’s going on \Lin your body"
+        sub_headline:
+          value: "<p>Simple, reliable health information to help you understand symptoms, \Lconditions, and treatments, at your own pace.</p>"
+          format: canvas_html_block
+        modifier_class: custom-class
+    -
+      parent_uuid: f9af7494-2031-456c-9108-763c00fbe1f0
+      slot: items
+      uuid: 5ef6ba75-f908-4914-9af3-8d3be4a47617
+      component_id: sdc.pulse_theme.space-flexi
+      inputs:
+        no_of_columns: three
+        column_width: 33-33-33
+        horizontal: left
+        direction: across
+        gap: medium
+        wrap: wrap
+        margin_top: none
+        margin_bottom: none
+    -
+      parent_uuid: 5ef6ba75-f908-4914-9af3-8d3be4a47617
+      slot: column_one
+      uuid: cea9986b-1442-4ad4-81f0-91e3ff378fea
+      component_id: sdc.pulse_theme.space-dark-bg-imagecard
+      inputs:
+        title: 'Build Your Workout Routine'
+        url: /developing-workout-routine-fits-your-lifestyle
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 70383f91-47fc-4ee5-9fee-29d7abba91c2
+            target_type: media
+        alignment: vertical
+        horizontal_column_alignment: left-image
+        vertical_column_alignment: top-image
+        card_layout: default
+        card_size: large
+        full_box_link: false
+    -
+      parent_uuid: 5ef6ba75-f908-4914-9af3-8d3be4a47617
+      slot: column_two
+      uuid: 29efe8ec-9d6d-4ed6-b604-70ec9065f458
+      component_id: sdc.pulse_theme.space-dark-bg-imagecard
+      inputs:
+        title: 'The Science of Sleep'
+        url: /science-behind-sleep-and-recovery
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: a70cab2d-f671-4fef-a89a-5cc230e98d9f
+            target_type: media
+        alignment: vertical
+        horizontal_column_alignment: left-image
+        vertical_column_alignment: top-image
+        card_layout: default
+        card_size: large
+        full_box_link: false
+    -
+      parent_uuid: 5ef6ba75-f908-4914-9af3-8d3be4a47617
+      slot: column_three
+      uuid: c0d7c2fc-2beb-4558-855f-0f032930381f
+      component_id: sdc.pulse_theme.space-dark-bg-imagecard
+      inputs:
+        title: 'Stay Healthy with Exercise'
+        url: /importance-regular-exercise-healthy-lifestyle
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 00591372-ca29-48ff-aeef-47d0f150bce2
+            target_type: media
+        alignment: vertical
+        horizontal_column_alignment: left-image
+        vertical_column_alignment: top-image
+        card_layout: default
+        card_size: large
+        full_box_link: false
+    -
+      uuid: 27c0d1e8-11c9-439c-b8c3-80bb046163ed
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: x-large
+        margin_bottom: small
+    -
+      parent_uuid: 27c0d1e8-11c9-439c-b8c3-80bb046163ed
+      slot: content
+      uuid: 4928b203-fff3-496a-85bf-26c8a53ba014
+      component_id: sdc.pulse_theme.space-section-heading
+      inputs:
+        title: 'Health topics that matter to you'
+        tag_name: h2
+        description:
+          value: '<p>Evidence-based reads to help you understand your health better.</p>'
+          format: canvas_html_block
+        alignment: center
+        with_image: true
+    -
+      uuid: e32001c4-8878-49aa-b480-7ab8e9f2cd04
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: large
+        margin_top: none
+        background_pattern: true
+        pattern_image_position: bottom-center
+        modifier_class: highlighted-content
+    -
+      parent_uuid: e32001c4-8878-49aa-b480-7ab8e9f2cd04
+      slot: content
+      uuid: 9f6efdfe-c774-4129-b23a-b0ab8c3bc99c
+      component_id: sdc.pulse_theme.space-flexi
+      inputs:
+        no_of_columns: two
+        vertical: top
+        horizontal: left
+        direction: across
+        gap: medium
+        wrap: wrap
+        margin_top: none
+        margin_bottom: none
+    -
+      parent_uuid: 9f6efdfe-c774-4129-b23a-b0ab8c3bc99c
+      slot: column_one
+      uuid: f063bd40-6e08-45c2-972a-3fb737c721cb
+      component_id: sdc.pulse_theme.space-text
+      inputs:
+        text:
+          value: '<p>ARTICLE</p><p>&nbsp;</p>'
+          format: canvas_html_block
+        text_size: normal
+    -
+      parent_uuid: 9f6efdfe-c774-4129-b23a-b0ab8c3bc99c
+      slot: column_one
+      uuid: 5249904d-3130-425e-a41a-dbc62703d7d0
+      component_id: block.views_block.article-block_4
+      inputs:
+        label: 'Featured Article'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      parent_uuid: 9f6efdfe-c774-4129-b23a-b0ab8c3bc99c
+      slot: column_two
+      uuid: 7091d14f-80cd-411b-b4dd-4defe5b06db2
+      component_id: sdc.pulse_theme.space-text
+      inputs:
+        text:
+          value: '<p>RESEARCH</p><p>&nbsp;</p>'
+          format: canvas_html_block
+        text_size: normal
+    -
+      parent_uuid: 9f6efdfe-c774-4129-b23a-b0ab8c3bc99c
+      slot: column_two
+      uuid: 4bc84e36-ff58-4063-91e7-97a4ac7d6a5a
+      component_id: block.views_block.research-block_4
+      inputs:
+        label: 'Trending Research Papers'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      uuid: 59ea6416-ccae-4822-aadf-3fe7ece4a6c6
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: option-8
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: medium
+        padding_bottom: medium
+        margin_top: none
+        margin_bottom: large
+        background_pattern: true
+        pattern_image_position: bottom-right
+    -
+      parent_uuid: 59ea6416-ccae-4822-aadf-3fe7ece4a6c6
+      slot: content
+      uuid: 4d4c19ee-40b1-4b50-a011-fa17a46d5515
+      component_id: sdc.pulse_theme.space-flexi
+      inputs:
+        no_of_columns: two
+        column_width: 33-66
+        vertical: top
+        horizontal: left
+        direction: across
+        gap: medium
+        wrap: wrap
+        margin_top: none
+        margin_bottom: none
+    -
+      parent_uuid: 4d4c19ee-40b1-4b50-a011-fa17a46d5515
+      slot: column_one
+      uuid: 5ed858f4-463c-4a7b-b5e0-b8eb1d54a45f
+      component_id: sdc.pulse_theme.space-stats-kpi
+      inputs:
+        keynumber: 3420
+        subheading: 'Editor’s Picks'
+        description:
+          value: '<p>Our editorial team curates these resources in collaboration with trusted healthcare institutions and medical experts. Each piece is selected for clarity, relevance, and real-world usefulness—so you can explore health topics with confidence.</p>'
+          format: canvas_html_block
+        alignment: left
+    -
+      parent_uuid: 4d4c19ee-40b1-4b50-a011-fa17a46d5515
+      slot: column_two
+      uuid: 38538dc3-8ab8-4c6e-ad9d-88e5568424f5
+      component_id: block.views_block.resources-block_1
+      inputs:
+        label: Resources
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      uuid: 92f1bad0-f595-4e03-b25a-f59c5b26972b
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: small
+    -
+      parent_uuid: 92f1bad0-f595-4e03-b25a-f59c5b26972b
+      slot: content
+      uuid: a395aee4-d139-4fed-8d91-fb734c6007e6
+      component_id: sdc.pulse_theme.space-section-heading
+      inputs:
+        title: 'Selected Research Studies'
+        tag_name: h1
+        description:
+          value: '<p>Clear, reliable articles to help you understand conditions, treatments, and care decisions—at your own pace.</p>'
+          format: canvas_html_block
+        alignment: center
+    -
+      uuid: 4dac2792-248a-4e97-93c6-9b8dffcaabd2
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: large
+    -
+      parent_uuid: 4dac2792-248a-4e97-93c6-9b8dffcaabd2
+      slot: content
+      uuid: 8040ec49-64db-4cf7-8840-2b3d275a706e
+      component_id: block.views_block.research-block_3
+      inputs:
+        label: 'Selected Research Papers'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      uuid: cf7ca503-a61c-4353-bb43-11325d5cb3e0
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: option-8
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: medium
+        padding_bottom: medium
+        margin_top: none
+        margin_bottom: large
+        background_pattern: true
+        pattern_image_position: bottom-right
+    -
+      parent_uuid: cf7ca503-a61c-4353-bb43-11325d5cb3e0
+      slot: content
+      uuid: 908a5f59-2c0e-48b8-9b69-7882ed1f3cb0
+      component_id: sdc.pulse_theme.space-logo-section
+      inputs:
+        pre_heading: 'Knowledge Shaped by'
+        heading: "Trusted \Lhealthcare \Lexperts"
+        tag_name: h2
+        description:
+          value: "<p>Pulse collaborates with leading healthcare institutions, research organizations, and medical partners\L to ensure the content you explore is accurate, responsible, and grounded in real-world medical knowledge.</p>"
+          format: canvas_html_block
+    -
+      parent_uuid: 908a5f59-2c0e-48b8-9b69-7882ed1f3cb0
+      slot: content
+      uuid: 04795238-063c-4f09-80a8-a1c9e059c6ba
+      component_id: sdc.pulse_theme.space-slider
+      inputs:
+        slides_type: slide
+        slide_focus: none
+        slides_per_view_desktop: 3
+        slides_per_view_ipad: 2
+        slides_per_view_mobile: 1
+        autoplay: false
+        arrows: true
+        arrows_color: primary
+        arrows_alignment: center
+        pagination: true
+        pagination_color: primary
+        pagination_alignment: center
+        pagination_type: arrow-with-pagination
+        with_gradient: true
+        extra_classes: my-custom-slider
+    -
+      parent_uuid: 04795238-063c-4f09-80a8-a1c9e059c6ba
+      slot: slide_item
+      uuid: a5839bda-2bbe-4f83-8c3a-43fa96b8de05
+      component_id: sdc.pulse_theme.space-image
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 508de90e-d5e7-4973-a736-4631df0cc94e
+            target_type: media
+        corners: none
+        loading: lazy
+    -
+      parent_uuid: 04795238-063c-4f09-80a8-a1c9e059c6ba
+      slot: slide_item
+      uuid: 7a23e5be-d8a8-4f05-87a0-dd3907169576
+      component_id: sdc.pulse_theme.space-image
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 508de90e-d5e7-4973-a736-4631df0cc94e
+            target_type: media
+        corners: none
+        loading: lazy
+    -
+      parent_uuid: 04795238-063c-4f09-80a8-a1c9e059c6ba
+      slot: slide_item
+      uuid: 82ee0368-bb2e-400b-9dd2-ec8b156bf8c3
+      component_id: sdc.pulse_theme.space-image
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 508de90e-d5e7-4973-a736-4631df0cc94e
+            target_type: media
+        corners: none
+        loading: lazy
+    -
+      parent_uuid: 04795238-063c-4f09-80a8-a1c9e059c6ba
+      slot: slide_item
+      uuid: b76e65ca-f3d7-4c16-8246-15264e5c4299
+      component_id: sdc.pulse_theme.space-image
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 508de90e-d5e7-4973-a736-4631df0cc94e
+            target_type: media
+        corners: none
+        loading: lazy
+    -
+      parent_uuid: 04795238-063c-4f09-80a8-a1c9e059c6ba
+      slot: slide_item
+      uuid: 0db9e40a-45a9-49d1-84d1-63795940e05c
+      component_id: sdc.pulse_theme.space-image
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 508de90e-d5e7-4973-a736-4631df0cc94e
+            target_type: media
+        corners: none
+        loading: lazy
+    -
+      parent_uuid: 04795238-063c-4f09-80a8-a1c9e059c6ba
+      slot: slide_item
+      uuid: 1401b3b8-c823-49aa-b5c8-c7a35219c301
+      component_id: sdc.pulse_theme.space-image
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 508de90e-d5e7-4973-a736-4631df0cc94e
+            target_type: media
+        corners: none
+        loading: lazy
+    -
+      uuid: f3a5a142-5adf-4c18-bed7-c89326e42fe6
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: small
+    -
+      parent_uuid: f3a5a142-5adf-4c18-bed7-c89326e42fe6
+      slot: content
+      uuid: 0b54f579-803d-48ac-a264-8c7ae7c32a2e
+      component_id: sdc.pulse_theme.space-section-heading
+      inputs:
+        title: 'Your health. One board.'
+        tag_name: h2
+        description:
+          value: "<p>Clear, reliable health information—organized so you can explore, \Lunderstand, and make sense of what’s happening in your body.</p>"
+          format: canvas_html_block
+        alignment: left
+    -
+      uuid: 5ceb6371-5e1f-4ba2-adc4-b86efeeaf918
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: large
+    -
+      parent_uuid: 5ceb6371-5e1f-4ba2-adc4-b86efeeaf918
+      slot: content
+      uuid: 9dbc3c99-fa12-4df4-bac6-4659bfa35497
+      component_id: sdc.pulse_theme.space-flexi
+      inputs:
+        no_of_columns: two
+        column_width: 33-66
+        horizontal: left
+        direction: across
+        gap: small
+        wrap: wrap
+        margin_top: none
+        margin_bottom: x-small
+    -
+      parent_uuid: 9dbc3c99-fa12-4df4-bac6-4659bfa35497
+      slot: column_one
+      uuid: 751cc63f-0eb6-4d7d-9288-bf36131874fb
+      component_id: sdc.pulse_theme.space-dark-bg-imagecard
+      inputs:
+        title: 'Explore Articles'
+        url: /article-listing
+        text:
+          value: '<p>Browse the latest stories, explainers, and expert perspectives across health, science, and everyday wellbeing.</p>'
+          format: canvas_html_block
+        alignment: vertical
+        horizontal_column_alignment: left-image
+        vertical_column_alignment: top-image
+        card_size: large
+        full_box_link: false
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 7657582b-23fd-4902-99d4-0c22cea22ca4
+            target_type: media
+    -
+      parent_uuid: 9dbc3c99-fa12-4df4-bac6-4659bfa35497
+      slot: column_two
+      uuid: 3a979be6-358c-4665-a10e-3d5fef0176b2
+      component_id: sdc.pulse_theme.space-dark-bg-imagecard
+      inputs:
+        title: 'Explore Research & Guides'
+        url: /research-listing
+        text:
+          value: '<p>Browse in-depth research, practical guides, and evidence-based insights across health topics and medical science.</p>'
+          format: canvas_html_block
+        alignment: vertical
+        horizontal_column_alignment: left-image
+        vertical_column_alignment: top-image
+        card_size: large
+        full_box_link: false
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: ce406055-cc1d-478f-b1df-a9f5f3b6abe4
+            target_type: media
+    -
+      parent_uuid: 5ceb6371-5e1f-4ba2-adc4-b86efeeaf918
+      slot: content
+      uuid: a4f6854a-22a1-4573-94b5-2827b569787b
+      component_id: sdc.pulse_theme.space-flexi
+      inputs:
+        no_of_columns: one
+        vertical: top
+        horizontal: left
+        direction: across
+        gap: medium
+        wrap: wrap
+    -
+      parent_uuid: a4f6854a-22a1-4573-94b5-2827b569787b
+      slot: column_one
+      uuid: a32b9a3d-5932-455e-a68c-ed29681f403b
+      component_id: sdc.pulse_theme.space-dark-bg-imagecard
+      inputs:
+        title: 'Explore Videos'
+        url: /video-listing
+        text:
+          value: '<p>Watch expert interviews, visual explainers, and short features designed to make complex health topics easier to understand.</p>'
+          format: canvas_html_block
+        alignment: vertical
+        horizontal_column_alignment: left-image
+        vertical_column_alignment: top-image
+        card_size: large
+        full_box_link: false
+    -
+      uuid: 4f2b417a-6390-4ee6-a4a5-8135610ad1b0
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: small
+    -
+      parent_uuid: 4f2b417a-6390-4ee6-a4a5-8135610ad1b0
+      slot: content
+      uuid: 637f0c7b-6a9f-4dfa-a509-8b4ee3ce5e59
+      component_id: sdc.pulse_theme.space-section-heading
+      inputs:
+        title: 'Featured Video Insights'
+        tag_name: h2
+        description:
+          value: "<p>A focused selection of peer-reviewed studies and clinical findings\L relevant to everyday health and care decisions.</p>"
+          format: canvas_html_block
+        alignment: center
+    -
+      uuid: dc2316cb-4c40-46e0-a37a-1422851e4d49
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: large
+        modifier_class: verticle-border
+    -
+      parent_uuid: dc2316cb-4c40-46e0-a37a-1422851e4d49
+      slot: content
+      uuid: bd7d28a2-aa29-4481-b6f1-7d81d9bf7e8e
+      component_id: block.views_block.video-block_2
+      inputs:
+        label: 'Featured Video Insights'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      uuid: f0adec10-f297-4f3c-97c7-05305edea4ad
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: full-width
+        padding_left: none
+        padding_right: none
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: large
+    -
+      parent_uuid: f0adec10-f297-4f3c-97c7-05305edea4ad
+      slot: content
+      uuid: 1ef03d72-dd81-405c-9d7c-83c04d99f059
+      component_id: sdc.pulse_theme.space-section-heading
+      inputs:
+        title: 'Reviews by Readers'
+        tag_name: h2
+        description:
+          value: '<p>Real experiences from people managing their health with Pulse.</p>'
+          format: canvas_html_block
+        alignment: center
+    -
+      uuid: b88fbeb7-be3b-4917-bf42-8f48da7d1023
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: large
+        background_pattern: true
+        pattern_image_position: both-bottom-right-left
+    -
+      parent_uuid: b88fbeb7-be3b-4917-bf42-8f48da7d1023
+      slot: content
+      uuid: 5def47f1-c821-4fb0-8b47-696b36be1316
+      component_id: sdc.pulse_theme.space-slider
+      inputs:
+        slides_type: slide
+        slide_focus: none
+        slides_per_view_desktop: 1
+        slides_per_view_ipad: 1
+        slides_per_view_mobile: 1
+        autoplay: false
+        arrows: false
+        arrows_color: primary
+        arrows_alignment: center
+        pagination: true
+        pagination_color: primary
+        pagination_alignment: center
+        pagination_type: default
+        extra_classes: my-custom-slider
+    -
+      parent_uuid: 5def47f1-c821-4fb0-8b47-696b36be1316
+      slot: slide_item
+      uuid: 549544bc-859d-4166-8601-d6e0f0187607
+      component_id: sdc.pulse_theme.space-testimony-card
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 520e4954-3193-464e-b5ff-3150435eb9d8
+            target_type: media
+        person_name: 'Rohini K'
+        text:
+          value: '<p>The content published on the Pulse platform provided clarity about my health care. It made everything feel more structured and comprehensible.</p>'
+          format: canvas_html_block
+        designation: 'Content Manager'
+        company_logo:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 880b57b6-1857-49cf-a004-58c6f490de11
+            target_type: media
+    -
+      parent_uuid: 5def47f1-c821-4fb0-8b47-696b36be1316
+      slot: slide_item
+      uuid: 81f7bfff-cf0c-4a64-9532-ff250f4b5395
+      component_id: sdc.pulse_theme.space-testimony-card
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 520e4954-3193-464e-b5ff-3150435eb9d8
+            target_type: media
+        person_name: 'Rohini K'
+        text:
+          value: '<p>The content published on the Pulse platform provided clarity about my health care. It made everything feel more structured and comprehensible.</p>'
+          format: canvas_html_block
+        designation: 'Content Manager'
+        company_logo:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 880b57b6-1857-49cf-a004-58c6f490de11
+            target_type: media
+    -
+      parent_uuid: 5def47f1-c821-4fb0-8b47-696b36be1316
+      slot: slide_item
+      uuid: c75be18c-b453-47fb-a3db-2bf5b0c4547f
+      component_id: sdc.pulse_theme.space-testimony-card
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 520e4954-3193-464e-b5ff-3150435eb9d8
+            target_type: media
+        person_name: 'Rohini K'
+        text:
+          value: '<p>The content published on the Pulse platform provided clarity about my health care. It made everything feel more structured and comprehensible.</p>'
+          format: canvas_html_block
+        designation: 'Content Manager'
+        company_logo:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 880b57b6-1857-49cf-a004-58c6f490de11
+            target_type: media
+    -
+      parent_uuid: 5def47f1-c821-4fb0-8b47-696b36be1316
+      slot: slide_item
+      uuid: 16282f2e-7946-4a37-894f-15251b59dc13
+      component_id: sdc.pulse_theme.space-testimony-card
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 520e4954-3193-464e-b5ff-3150435eb9d8
+            target_type: media
+        person_name: 'Rohini K'
+        text:
+          value: '<p>The content published on the Pulse platform provided clarity about my health care. It made everything feel more structured and comprehensible.</p>'
+          format: canvas_html_block
+        designation: 'Content Manager'
+        company_logo:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 880b57b6-1857-49cf-a004-58c6f490de11
+            target_type: media
+    -
+      parent_uuid: 5def47f1-c821-4fb0-8b47-696b36be1316
+      slot: slide_item
+      uuid: 9d9950d2-23bb-42ba-8c4e-025ec32ec87d
+      component_id: sdc.pulse_theme.space-testimony-card
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 520e4954-3193-464e-b5ff-3150435eb9d8
+            target_type: media
+        person_name: 'Rohini K'
+        text:
+          value: '<p>The content published on the Pulse platform provided clarity about my health care. It made everything feel more structured and comprehensible.</p>'
+          format: canvas_html_block
+        designation: 'Content Manager'
+        company_logo:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 880b57b6-1857-49cf-a004-58c6f490de11
+            target_type: media
+    -
+      uuid: ffd239ce-64e6-4587-9871-232afd351b63
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: full-width
+        padding_left: none
+        padding_right: none
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: large
+        background_pattern: false
+        pattern_image_position: bottom-right
+    -
+      parent_uuid: ffd239ce-64e6-4587-9871-232afd351b63
+      slot: content
+      uuid: 87f30b70-cdf8-49fe-a2fe-9c243dd1d077
+      component_id: sdc.pulse_theme.space-cta-banner-type-1
+      inputs:
+        title: "Keep learning \Labout your health"
+        description:
+          value: "<p>A focused selection of peer-reviewed studies and clinical findings\L relevant to everyday health and care decisions.</p>"
+          format: canvas_html_block
+        background_image:
+          sourceType: default-relative-url
+          value:
+            src: images/cta_background.png
+            alt: 'CTA Banner placeholder'
+            width: 1440
+            height: 500
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.pulse_theme.space-cta-banner-type-1
+        width: full-width
+        alignment: stacked
+        modifier_class: custom-class
+    -
+      uuid: 08d57b8f-5953-4c27-a85d-8d099cb6a206
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: large
+        margin_bottom: small
+    -
+      parent_uuid: 08d57b8f-5953-4c27-a85d-8d099cb6a206
+      slot: content
+      uuid: 3d157b9f-586e-4152-ae1a-87becc15efd4
+      component_id: sdc.pulse_theme.space-section-heading
+      inputs:
+        title: 'Trending Article'
+        tag_name: h2
+        description:
+          value: '<p>Clear, reliable articles to help you understand conditions, treatments, and care decisions—at your own pace.</p>'
+          format: canvas_html_block
+        alignment: center
+    -
+      uuid: 3329c025-62ae-4eca-9b8f-5fd7278e4558
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: large
+    -
+      parent_uuid: 3329c025-62ae-4eca-9b8f-5fd7278e4558
+      slot: content
+      uuid: f92b48b1-6f20-4f09-9342-4fbbcd03d9bb
+      component_id: block.views_block.article-block_3
+      inputs:
+        label: 'Trending Article'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      uuid: 2c86f44c-8083-4e8d-9e81-96d2bd7a37d5
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: option-8
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: medium
+        padding_bottom: medium
+        margin_top: none
+        margin_bottom: large
+        background_pattern: true
+        pattern_image_position: bottom-right
+    -
+      parent_uuid: 2c86f44c-8083-4e8d-9e81-96d2bd7a37d5
+      slot: content
+      uuid: 05370121-4dbd-47b6-aad8-ccad6749ba85
+      component_id: sdc.pulse_theme.space-section-heading
+      inputs:
+        title: 'Are you a health expert?'
+        tag_name: h2
+        description:
+          value: '<p>If you’re a medical professional, researcher, or health writer, you can <strong>contribute</strong> to our growing <strong>knowledge platform</strong> and help make reliable health information more accessible.</p>'
+          format: canvas_html_block
+        alignment: left
+    -
+      parent_uuid: 2c86f44c-8083-4e8d-9e81-96d2bd7a37d5
+      slot: content
+      uuid: de6aff09-c2f9-4265-9775-56ed126330be
+      component_id: sdc.pulse_theme.space-flexi
+      inputs:
+        no_of_columns: two
+        vertical: center
+        horizontal: left
+        direction: across
+        gap: medium
+        wrap: wrap
+        margin_top: small
+        margin_bottom: none
+    -
+      parent_uuid: de6aff09-c2f9-4265-9775-56ed126330be
+      slot: column_one
+      uuid: 4db135ed-57f6-44b1-9cb5-a017a31e526c
+      component_id: block.webform_block
+      inputs:
+        label: Webform
+        label_display: '0'
+        webform_id: work_with_us
+        default_data: ''
+        redirect: false
+        lazy: false
+    -
+      parent_uuid: de6aff09-c2f9-4265-9775-56ed126330be
+      slot: column_two
+      uuid: 544bdd17-daad-43fc-93cb-2fcd1733d7dd
+      component_id: sdc.pulse_theme.space-image
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: b86b6c83-6ca7-4485-ae8b-d2de774c8aff
+            target_type: media
+        corners: none
+    -
+      uuid: 6aec5e49-7a3c-4ebe-bdef-2655812db01c
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: small
+    -
+      parent_uuid: 6aec5e49-7a3c-4ebe-bdef-2655812db01c
+      slot: content
+      uuid: bb50a81d-2435-4655-8fed-d9f155086acb
+      component_id: sdc.pulse_theme.space-section-heading
+      inputs:
+        title: 'Questions, Answered'
+        tag_name: h2
+        description:
+          value: '<p>Everything you need to know before getting started with Pulse.</p>'
+          format: canvas_html_block
+        alignment: center
+    -
+      uuid: 84ce0874-29ed-4a2a-9ab8-1302e8fd10eb
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: width-4xl
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: small
+    -
+      parent_uuid: 84ce0874-29ed-4a2a-9ab8-1302e8fd10eb
+      slot: content
+      uuid: 3f17c24d-457e-4976-92c3-3c203583e831
+      component_id: sdc.pulse_theme.space-accordion
+      inputs:
+        icon_type: chevronDown
+        alignment: right
+        border: true
+        container_width: default
+    -
+      parent_uuid: 3f17c24d-457e-4976-92c3-3c203583e831
+      slot: items
+      uuid: 1dbfc708-7e0c-4fe5-805c-8e38c71180b1
+      component_id: sdc.pulse_theme.space-accordion-item
+      inputs:
+        label: 'What can I use Pulse for?'
+        content:
+          value: '<p>Pulse helps you understand symptoms, manage your health records, and find the right doctors or care—everything in one place.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 3f17c24d-457e-4976-92c3-3c203583e831
+      slot: items
+      uuid: b7347aff-5ee0-401d-ab8e-bad8227803c9
+      component_id: sdc.pulse_theme.space-accordion-item
+      inputs:
+        label: 'Do I need an account to search or explore?'
+        content:
+          value: '<p>Tempus praesent gravida tortor lectus litora mollis habitant aliquet penatibus ipsum mauris. Ornare ullamcorper vitae ligula ridiculus mattis euismod id maecenas.</p>'
+          format: canvas_html_block
+    -
+      uuid: 88f07406-414a-4c0b-b40b-302684e62ae7
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: width-4xl
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: none
+    -
+      parent_uuid: 88f07406-414a-4c0b-b40b-302684e62ae7
+      slot: content
+      uuid: ed787b69-c1fd-4971-ac03-8424bb620d34
+      component_id: sdc.pulse_theme.space-flexi
+      inputs:
+        no_of_columns: three
+        column_width: 25-50-25
+        vertical: top
+        horizontal: left
+        direction: across
+        gap: medium
+        wrap: wrap
+        margin_top: none
+        margin_bottom: none
+    -
+      parent_uuid: ed787b69-c1fd-4971-ac03-8424bb620d34
+      slot: column_two
+      uuid: edd4b682-ab81-48bb-b026-ff481267bbd7
+      component_id: sdc.pulse_theme.space-contact-card
+      inputs:
+        heading: 'Help Center'
+        description:
+          value: '<p>Find quick answers to common questions</p>'
+          format: canvas_html_block
+        icon_align: left
+        alignment: center
+        help_faq_link: /faq
+  path:
+    -
+      alias: /home-page
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

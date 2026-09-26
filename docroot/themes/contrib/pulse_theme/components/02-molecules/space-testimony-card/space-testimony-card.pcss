@@ -1,0 +1,58 @@
+@reference "../../00-base/global/global.pcss";
+
+/* ======================
+ Testimonial card
+======================= */
+.testimonial-card {
+  @apply h-full;
+
+  &-inner {
+    @apply mx-auto max-w-[946px] p-6 md:p-12 rounded-3xl border border-sds-border bg-clip-padding;
+
+    background: radial-gradient(
+        50% 50% at 50% 50%,
+        rgba(255, 255, 255, 0) 0%,
+        #fff 100%
+      ),
+      radial-gradient(
+        27.52% 74.81% at 2.72% 95.33%,
+        rgba(219, 236, 201, 0.32) 0%,
+        rgba(219, 236, 201, 0) 100%
+      ),
+      radial-gradient(
+        42.38% 88.02% at 94.73% 3.2%,
+        rgba(244, 235, 189, 0.32) 0%,
+        rgba(244, 235, 189, 0) 100%
+      );
+  }
+
+  .avatar-image-wrapper {
+    @apply mb-3;
+
+    img {
+      @apply rounded-full w-[96px] h-[96px] object-cover;
+    }
+  }
+
+  .avatar-text-wrapper {
+    @apply mb-8;
+
+    .card_text {
+      @apply font-light text-2xl;
+    }
+  }
+
+  .avatar-info-wrapper {
+    @apply mb-8 text-2xl lg:text-3xl font-semibold;
+
+    .avatar-designation {
+      @extend h4;
+    }
+  }
+
+  .company-logo-wrapper {
+    img {
+      @apply max-h-[74px] object-cover;
+    }
+  }
+}

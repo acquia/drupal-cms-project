@@ -1,0 +1,114 @@
+{#
+/** Available variables:
+ * - card_base_class: base classname of the wrapper.
+ * - card_modifiers: array of modifiers to add to the base classname of the wrapper.
+ * - card_blockname: blockname prepended to the base classname of the wrapper(s) and each component.
+ * - card_extra_classes: extra classes, optional for the component.
+ *
+ * - card_image_src: the actual image file location.
+ *
+ * - card_content_modifiers: array of modifiers to add to the base classname of the copy wrapper.
+ *
+ * - card_heading_level: (default: 3) what level of heading to show on the card
+ * - card_heading_extra_classes: base classname of the title component. Defaults to "title".
+ * - card_heading: the content of the title component.
+ * - card_heading_link: (optional) the url the title should link to. Defaults to card_link_url.
+ * - card_link_url: url of the card
+ *
+ * - card_subheading_level: (default: 4) what level of subheading to show on the card
+ * - card_subheading: the content of the subheading component.
+ *
+ * - card_text: the content of the body component.
+ *
+ * - card_date: (optional) Show a date field in the card
+ * - card_date_icon: allows to modify the default icon (calendar)
+ *
+ * Available blocks:
+ * - card_image_block
+ * - card_heading_block
+ * - card_subheading_block
+ * - card_text_block
+ */
+#}
+{% set card_base_class = 'card' %}
+
+<div {{ bem(card_base_class, card_modifiers, card_blockname, card_extra_classes) }}>
+  {# Tags #}
+  {% if card_tag_text and card_tag_top %}
+    <div {{ bem('tag', [], card_base_class) }}>
+      {# Dummy tag to check FE #}
+      {{ include("eureka:tag", {
+        tag_text: card_tag_text,
+        tag_type: 'primary',
+        tag_extra_classes: 'card__tag',
+        tag_modifiers: ['top'],
+      }, with_context = false) }}
+    </div>
+  {% endif %}
+  {# Image #}
+  {% if card_image %}
+    {% block card_image_block %}
+      <div {{ bem('media', [], card_base_class) }}>
+        {% include 'canvas:image' with {
+          src: card_image.src,
+          alt: card_image.alt,
+          loading: 'lazy',
+        } only %}
+      </div>
+    {% endblock %}
+  {% endif %}
+  {# Content #}
+  <div {{ bem('content', card_content_modifiers|default([]), card_base_class) }}>
+    {# Tag inside content #}
+    {% if card_tag_text and card_tag_content %}
+      <div {{ bem('tag', [], card_base_class) }}>
+        {# Dummy tag to check FE #}
+        {{ include("eureka:tag", {
+          tag_text: card_tag_text,
+          tag_type: 'primary',
+          tag_extra_classes: 'card__tag',
+          tag_modifiers: ['content'],
+        }, with_context = false) }}
+      </div>
+    {% endif %}
+    {# Date #}
+    {% if card_date %}
+      <span {{ bem('date', [], card_base_class) }}>
+        {{ include("eureka:icon", {
+          icon_name: card_date_icon|default('calendar'),
+          icon_role: item.role,
+          icon_decorative: true,
+        }, with_context = false) }}
+        {{ card_date }}
+      </span>
+    {% endif %}
+    {# Heading #}
+    {% if card_heading %}
+      {% block card_heading_block %}
+        {{ include("eureka:heading", {
+          heading_level: card_heading_level|default(3),
+          heading_size_override: card_heading_size_override|default('sub'),
+          heading_extra_classes: ['card__heading'],
+          heading: card_heading,
+        }, with_context = false) }}
+      {% endblock %}
+    {% endif %}
+    {# Body #}
+    {% if card_text %}
+      {% block card_text_block %}
+        {{ include("eureka:paragraph", {
+          paragraph_content: card_text,
+        }, with_context = false) }}
+      {% endblock %}
+    {% endif %}
+    {# CTA #}
+    {% if show_card_link_cta %}
+      {{ include("eureka:link", {
+        link_cta: true,
+        link_content:  card_link_text,
+        link_url: card_link_url,
+        link_extra_classes: 'card__cta',
+      }, with_context = false) }}
+    {% endif %}
+  </div>
+</div>

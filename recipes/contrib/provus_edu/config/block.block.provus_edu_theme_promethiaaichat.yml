@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic_text:59f7575b-1e82-4ed9-ab9c-81db92488cf1'
+  module:
+    - block_content
+    - system
+  theme:
+    - provus_edu_theme
+id: provus_edu_theme_promethiaaichat
+theme: provus_edu_theme
+region: content
+weight: 0
+provider: null
+plugin: 'block_content:59f7575b-1e82-4ed9-ab9c-81db92488cf1'
+settings:
+  id: 'block_content:59f7575b-1e82-4ed9-ab9c-81db92488cf1'
+  label: 'Promethia AI Chat'
+  label_display: '0'
+  provider: block_content
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'

@@ -1,0 +1,23 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Tag
+status: stable
+description: Tag component
+group: Eureka component items
+props:
+  type: object
+  properties:
+    tag_text:
+      type: string
+      title: Tag text
+      description: Text content of the tag
+      examples:
+        - Teaching
+    tag_type:
+      type: string
+      title: Tag type
+      description: Type of the tag
+      enum:
+        - primary
+        - secondary
+      examples:
+        - primary

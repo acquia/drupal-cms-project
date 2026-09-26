@@ -1,0 +1,609 @@
+<?php
+
+use Drupal\Component\Utility\NestedArray;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\OpenModalDialogCommand;
+use Drupal\Core\Entity\EntityFormInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_help().
+ */
+function ai_seo_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.ai_seo':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Analyze your page SEO and receive recommendations on how to improve it.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_contextual_links_view_alter().
+ */
+function ai_seo_contextual_links_view_alter(&$element, $items) {
+  if (!\Drupal::currentUser()->hasPermission('view seo reports')) {
+    return;
+  }
+
+  if (isset($element['#contextual_links']['node'])) {
+    $id = $element['#contextual_links']['node']['route_parameters']['node'];
+    if (!empty($id)) {
+      $url_params = [
+        'node' => $id,
+      ];
+
+      $url = Url::fromRoute('entity.node.seo_analyzer', $url_params);
+
+      $element['#links']['ai_seo'] = [
+        'title' => t('Analyze SEO'),
+        'url'   => $url,
+      ];
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_operation().
+ */
+function ai_seo_entity_operation(EntityInterface $entity) {
+  $operations = [];
+  if (!\Drupal::currentUser()->hasPermission('view seo reports')) {
+    return $operations;
+  }
+
+  if (!empty($entity->getEntityTypeId()) && !empty($entity->id()) && $entity->getEntityTypeId() === 'node') {
+    $url_params = [
+      'node' => $entity->id(),
+    ];
+
+    $url_options = [
+      'query' => [
+        'destination' => \Drupal::request()->getRequestUri(),
+      ],
+    ];
+
+    $url = Url::fromRoute('entity.node.seo_analyzer', $url_params, $url_options);
+
+    $operations['ai_seo'] = [
+      'title'  => t('Analyze SEO'),
+      'url'    => $url,
+      'weight' => 100,
+    ];
+  }
+  return $operations;
+}
+
+/**
+ * Implements hook_form_node_form_alter().
+ *
+ * Adds an "AI SEO Analysis" panel to the node edit form advanced sidebar with:
+ *  - "View latest report" — opens the most recent saved report in a modal.
+ *  - "Analyze draft" — renders the current (unsaved) form content, sends it
+ *    to the AI, and shows the result in a modal without touching the DB.
+ *  - "Run analysis after saving" checkbox — persists a report on save.
+ */
+function ai_seo_form_node_form_alter(array &$form, FormStateInterface $form_state, string $form_id): void {
+  if (!\Drupal::currentUser()->hasPermission('view seo reports')) {
+    return;
+  }
+
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $form_state->getFormObject()->getEntity();
+  $is_new = $node->isNew();
+  $can_create = \Drupal::currentUser()->hasPermission('create seo reports');
+
+  $form['ai_seo'] = [
+    '#type' => 'details',
+    '#title' => t('AI SEO/GEO Analysis'),
+    '#group' => 'advanced',
+    '#weight' => 20,
+  ];
+
+  // Inner container gives the AJAX framework a stable DOM target.
+  $form['ai_seo']['panel'] = [
+    '#type' => 'container',
+    '#attributes' => ['id' => 'ai-seo-panel'],
+  ];
+
+  // -- Saved-reports section (existing nodes only) -------------------------
+  if (!$is_new) {
+    /** @var \Drupal\ai_seo\ReportService $report_service */
+    $report_service = \Drupal::service('ai_seo.report_service');
+    $formatted_reports = $report_service->getFormattedReports($node->id());
+    $report_count = count($formatted_reports);
+
+    if (!empty($formatted_reports)) {
+      $latest = $formatted_reports[0];
+      $form['ai_seo']['panel']['status'] = [
+        '#markup' => '<p class="ai-seo-sidebar-status">'
+          . t('<strong>@count</strong> reports · @time ago', [
+            '@count' => $report_count,
+            '@time'  => $latest['time_ago'],
+          ])
+          . '</p>',
+        '#weight' => 0,
+      ];
+      $form['ai_seo']['panel']['all_reports'] = [
+        '#type' => 'link',
+        '#title' => t('View all reports →'),
+        '#url' => Url::fromRoute('entity.node.seo_analyzer', ['node' => $node->id()]),
+        '#attributes' => [
+          'target' => '_blank',
+          'class'  => ['ai-seo-sidebar-all-link'],
+        ],
+        '#weight' => 6,
+      ];
+    }
+    else {
+      $form['ai_seo']['panel']['status'] = [
+        '#markup' => '<p class="ai-seo-sidebar-status">' . t('No reports yet.') . '</p>',
+        '#weight' => 0,
+      ];
+    }
+  }
+
+  // -- Action buttons row -------------------------------------------------
+  if ($can_create) {
+    $form['ai_seo']['panel']['actions_row'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['ai-seo-sidebar-actions']],
+      '#weight' => 10,
+    ];
+
+    if (!$is_new && !empty($formatted_reports)) {
+      $form['ai_seo']['panel']['actions_row']['view_btn'] = [
+        '#type' => 'submit',
+        '#value' => t('View latest'),
+        '#name' => 'ai_seo_view_latest',
+        '#ajax' => [
+          'callback' => 'ai_seo_view_latest_report_ajax',
+          'wrapper' => 'ai-seo-panel',
+          'progress' => [
+            'type' => 'throbber',
+            'message' => t('Loading report…'),
+          ],
+          'disable-refocus' => TRUE,
+        ],
+        '#limit_validation_errors' => [],
+        '#submit' => [],
+        '#attributes' => ['class' => ['button--small']],
+      ];
+    }
+
+    $form['ai_seo']['panel']['actions_row']['analyze_draft_btn'] = [
+      '#type' => 'submit',
+      '#value' => t('Analyze draft'),
+      '#name' => 'ai_seo_analyze_draft',
+      '#ajax' => [
+        'callback' => 'ai_seo_analyze_draft_ajax',
+        'wrapper' => 'ai-seo-panel',
+        'progress' => [
+          'type' => 'throbber',
+          'message' => t('Preparing draft analysis…'),
+        ],
+        'disable-refocus' => TRUE,
+      ],
+      '#limit_validation_errors' => [],
+      '#submit' => [],
+      '#attributes' => ['class' => ['button--primary', 'button--small']],
+    ];
+  }
+
+  // -- Run-after-save checkbox --------------------------------------------
+  if ($can_create) {
+    $form['ai_seo']['run_after_save'] = [
+      '#type' => 'checkbox',
+      '#title' => $is_new ? t('Queue SEO analysis after creating') : t('Queue SEO analysis after saving'),
+      '#default_value' => FALSE,
+      '#description' => t('Runs in background via cron.'),
+      '#weight' => 20,
+    ];
+    $form['actions']['submit']['#submit'][] = 'ai_seo_node_form_after_save_submit';
+  }
+
+  $form['#attached']['library'][] = 'core/drupal.dialog.ajax';
+  $form['#attached']['library'][] = 'ai_seo/report_styles';
+  $form['#attached']['library'][] = 'ai_seo/stream_analyze';
+}
+
+/**
+ * AJAX callback: opens the latest saved report in a modal dialog.
+ */
+function ai_seo_view_latest_report_ajax(array &$form, FormStateInterface $form_state): AjaxResponse {
+  $response = new AjaxResponse();
+  $node = $form_state->getFormObject()->getEntity();
+
+  /** @var \Drupal\ai_seo\ReportService $report_service */
+  $report_service = \Drupal::service('ai_seo.report_service');
+  $formatted_reports = $report_service->getFormattedReports($node->id());
+
+  if (empty($formatted_reports)) {
+    $response->addCommand(new OpenModalDialogCommand(
+      t('SEO Report'),
+      ['#markup' => '<p>' . t('No saved reports found for this node.') . '</p>'],
+      ['width' => 500]
+    ));
+    return $response;
+  }
+
+  $latest = $formatted_reports[0];
+
+  $content = [
+    '#type' => 'container',
+    'meta' => [
+      '#markup' => '<div class="seo-report-meta-strip">'
+        . '<strong>' . t('Type') . ':</strong> ' . $latest['report_type']
+        . ' &nbsp;|&nbsp; <strong>' . t('Created') . ':</strong> ' . $latest['time_ago']
+        . $latest['revision_row']
+        . '</div>',
+    ],
+    'report' => [
+      '#markup' => '<div class="seo-report-body">' . $latest['report'] . '</div>',
+    ],
+    '#attached' => ['library' => ['ai_seo/report_styles']],
+  ];
+
+  $response->addCommand(new OpenModalDialogCommand(
+    t('SEO Report: @title', ['@title' => $node->getTitle()]),
+    $content,
+    ['width' => 960, 'dialogClass' => 'seo-report-dialog']
+  ));
+
+  return $response;
+}
+
+/**
+ * AJAX callback: starts a streaming draft analysis of the current form content.
+ *
+ * Renders the current (unsaved) entity to HTML, stores it in the private
+ * tempstore under a one-time UUID key, then opens a modal and passes the key
+ * to the streaming behavior via data attributes — so the browser opens its own
+ * EventSource and the AI response streams in without blocking this request.
+ */
+function ai_seo_analyze_draft_ajax(array &$form, FormStateInterface $form_state): AjaxResponse {
+  $response = new AjaxResponse();
+
+  $form_object = $form_state->getFormObject();
+  if (!($form_object instanceof EntityFormInterface)) {
+    $response->addCommand(new OpenModalDialogCommand(
+      t('SEO Analysis'),
+      ['#markup' => '<p>' . t('Unexpected form type.') . '</p>'],
+      ['width' => 400]
+    ));
+    return $response;
+  }
+
+  // Build entity with current form values (does NOT save).
+  $entity = $form_object->buildEntity($form, $form_state);
+
+  // Render to HTML using the standard entity view builder.
+  $view_builder = \Drupal::entityTypeManager()->getViewBuilder($entity->getEntityTypeId());
+  $render_array = $view_builder->view($entity, 'full');
+  $html = (string) \Drupal::service('renderer')->renderRoot($render_array);
+
+  if (empty(trim(strip_tags($html)))) {
+    $response->addCommand(new OpenModalDialogCommand(
+      t('SEO Analysis'),
+      ['#markup' => '<p>' . t('Add some content before analyzing.') . '</p>'],
+      ['width' => 400]
+    ));
+    return $response;
+  }
+
+  // Store rendered HTML in private tempstore — the streaming endpoint will
+  // fetch and delete it, so it is used exactly once.
+  $key = \Drupal::service('uuid')->generate();
+  \Drupal::service('tempstore.private')->get('ai_seo')->set($key, $html);
+
+  $stream_url = Url::fromRoute('ai_seo.stream_draft')->toString();
+  $csrf_token = \Drupal::csrfToken()->get('ai-seo-draft-stream');
+
+  $content = [
+    '#type' => 'container',
+    '#attributes' => ['class' => ['ai-seo-stream-wrap']],
+    'header' => [
+      '#type' => 'container',
+      '#attributes' => ['id' => 'ai-seo-draft-stream-header', 'class' => ['ai-seo-stream-header']],
+      'spinner' => ['#markup' => '<div class="ai-seo-progress__spinner" aria-hidden="true"></div>'],
+      'label' => ['#markup' => '<span>' . t('Generating draft report…') . '</span>'],
+    ],
+    'preview' => [
+      '#type' => 'container',
+      '#attributes' => [
+        'id' => 'ai-seo-draft-stream-preview',
+        'class' => ['ai-seo-stream-preview', 'seo-report-body'],
+        'data-ai-seo-stream-url' => $stream_url,
+        'data-ai-seo-stream-token' => $csrf_token,
+        'data-ai-seo-stream-key' => $key,
+      ],
+    ],
+    '#attached' => ['library' => ['ai_seo/report_styles', 'ai_seo/stream_analyze']],
+  ];
+
+  $response->addCommand(new OpenModalDialogCommand(
+    t('Draft SEO Analysis: @title', ['@title' => $entity->label() ?? t('(untitled)')]),
+    $content,
+    ['width' => 960, 'dialogClass' => 'seo-report-dialog']
+  ));
+
+  return $response;
+}
+
+/**
+ * Implements hook_field_widget_single_element_form_alter().
+ *
+ * Adds a small "✦ AI" button inside each text-type field widget delta,
+ * including fields inside paragraph sub-forms. Clicking opens a compact
+ * streaming modal with focused SEO/GEO advice for that specific field.
+ *
+ * Uses hook_field_widget_SINGLE_ELEMENT_form_alter (not complete_form_alter)
+ * because the complete-form alter targets the widget container whose
+ * field_multiple_value_form theme only renders integer-keyed delta items —
+ * extra keys there are silently ignored.
+ */
+function ai_seo_field_widget_single_element_form_alter(array &$element, FormStateInterface $form_state, array $context): void {
+  if (!\Drupal::config('ai_seo.settings')->get('enable_field_buttons')) {
+    return;
+  }
+
+  if (!\Drupal::currentUser()->hasPermission('create seo reports')) {
+    return;
+  }
+
+  // Only on content entity forms (covers nodes, paragraphs via parent form).
+  $form_object = $form_state->getFormObject();
+  if (!($form_object instanceof \Drupal\Core\Entity\ContentEntityFormInterface)) {
+    return;
+  }
+
+  $field_definition = $context['items']->getFieldDefinition();
+  $field_type = $field_definition->getType();
+  $field_name = $field_definition->getName();
+
+  $applicable_types = ['string', 'text', 'text_long', 'text_with_summary'];
+  if (!in_array($field_type, $applicable_types, TRUE)) {
+    return;
+  }
+
+  // Skip system/tracking fields (including paragraph parent-reference strings).
+  $skip_fields = [
+    'langcode', 'status', 'promote', 'sticky', 'uid',
+    'revision_log', 'revision_uid', 'path',
+    'parent_id', 'parent_type', 'parent_field_name',
+  ];
+  if (in_array($field_name, $skip_fields, TRUE)) {
+    return;
+  }
+
+  $field_label = (string) $field_definition->getLabel();
+  $delta = $context['delta'];
+
+  // Build the form-state value path for this specific delta so the AJAX
+  // callback can retrieve the current (unsaved) value without buildEntity().
+  // field_parents is [] for root node fields, or e.g. ['field_sections', 0, 'subform']
+  // for fields inside paragraph sub-forms.
+  $field_parents = $context['field_parents'] ?? [];
+  $value_parents = array_merge($field_parents, [$field_name, $delta, 'value']);
+  $summary_parents = array_merge($field_parents, [$field_name, $delta, 'summary']);
+
+  // Unique button name per field+delta (multiple deltas on multi-value fields).
+  $btn_name = 'ai_seo_analyze_field__' . $field_name . '__' . $delta;
+
+  $btn = [
+    '#type' => 'submit',
+    '#value' => t('SEO/GEO ✦'),
+    '#name' => $btn_name,
+    '#ajax' => [
+      'callback' => 'ai_seo_analyze_field_ajax',
+      'progress' => [
+        'type' => 'throbber',
+        'message' => t('Preparing field analysis…'),
+      ],
+      'disable-refocus' => TRUE,
+    ],
+    '#limit_validation_errors' => [],
+    '#submit' => [],
+    '#attributes' => [
+      'class' => ['button', 'button--small', 'ai-seo-field-btn'],
+      'data-field-name' => $field_name,
+      'data-field-label' => $field_label,
+      'data-field-type' => $field_type,
+      'data-value-parents' => json_encode($value_parents),
+      'data-summary-parents' => json_encode($summary_parents),
+      'title' => t('AI SEO/GEO: analyze "@label"', ['@label' => $field_label]),
+    ],
+    '#weight' => 100,
+  ];
+
+  // IMPORTANT: do NOT add the button as a child of $element['value'] (the
+  // textfield/textarea) — Drupal merges children into the element value, turning
+  // it from a string into an array and breaking entity validation.
+  // Instead, add it as a sibling at $element level and wrap the whole delta in a
+  // positioned container via #prefix/#suffix so CSS absolute positioning works.
+  $element['#prefix'] = ($element['#prefix'] ?? '') . '<div class="ai-seo-field-outer">';
+  $element['#suffix'] = '</div>' . ($element['#suffix'] ?? '');
+  $element['ai_seo_field_btn'] = $btn;
+}
+
+/**
+ * AJAX callback: starts a streaming field-level SEO analysis.
+ *
+ * Uses data attributes written by the hook to locate the current (unsaved)
+ * field value directly in form_state — this works for both top-level node
+ * fields and fields nested inside paragraph sub-forms without buildEntity().
+ */
+function ai_seo_analyze_field_ajax(array &$form, FormStateInterface $form_state): AjaxResponse {
+  $response = new AjaxResponse();
+
+  $triggering = $form_state->getTriggeringElement();
+  $field_name = $triggering['#attributes']['data-field-name'] ?? '';
+  $field_label = $triggering['#attributes']['data-field-label'] ?? $field_name;
+  $field_type = $triggering['#attributes']['data-field-type'] ?? 'string';
+
+  // Retrieve the value path written by the hook (works for node + paragraph fields).
+  $value_parents = json_decode($triggering['#attributes']['data-value-parents'] ?? '[]', TRUE) ?: [];
+  $summary_parents = json_decode($triggering['#attributes']['data-summary-parents'] ?? '[]', TRUE) ?: [];
+
+  // Use raw user input (direct $_POST equivalent) — more reliable than
+  // getValue() across different field widget / entity form configurations.
+  $user_input = $form_state->getUserInput();
+
+  $field_value = '';
+  if (!empty($value_parents)) {
+    $raw = NestedArray::getValue($user_input, $value_parents) ?? '';
+    $field_value = is_array($raw) ? ($raw['value'] ?? '') : (string) $raw;
+
+    if ($field_type === 'text_with_summary' && !empty($summary_parents)) {
+      $summary_raw = NestedArray::getValue($user_input, $summary_parents) ?? '';
+      $summary = is_array($summary_raw) ? ($summary_raw['value'] ?? '') : (string) $summary_raw;
+      if (!empty($summary)) {
+        $field_value = "Summary: {$summary}\n\n{$field_value}";
+      }
+    }
+  }
+
+  $field_value = trim(strip_tags($field_value));
+
+  // Fields inside nested Paragraphs subforms often do not appear in the raw
+  // POST data that getUserInput() reads — either because CKEditor 5 hides the
+  // textarea with display:none (excluded from jQuery serialization) or because
+  // of how Drupal serializes deeply nested paragraph subforms.
+  //
+  // The JS mousedown handler reads the value directly from the DOM (CKE5
+  // editor.getData() or element.value by name) and stores it in a hidden input
+  // keyed by the value-parents path so we can match it to this specific field.
+  if (empty($field_value)) {
+    $js_override_json = $user_input['_ai_seo_value_override'] ?? '';
+    if (!empty($js_override_json)) {
+      $override = json_decode($js_override_json, TRUE);
+      if (is_array($override) && isset($override['value'])) {
+        $override_path = json_decode($override['path'] ?? '[]', TRUE) ?: [];
+        if ($override_path === $value_parents) {
+          $field_value = trim(strip_tags($override['value']));
+        }
+      }
+    }
+  }
+
+  if (empty($field_value)) {
+    $response->addCommand(new OpenModalDialogCommand(
+      t('AI Field Analysis'),
+      ['#markup' => '<p>' . t('The "@label" field is empty. Add some content before analyzing.', ['@label' => $field_label]) . '</p>'],
+      ['width' => 400]
+    ));
+    return $response;
+  }
+
+  // Page title always lives at ['title', 0, 'value'] on the root node form.
+  $page_title = (string) (NestedArray::getValue($user_input, ['title', 0, 'value']) ?? '');
+
+  // Content type from the entity (safe for both node and paragraph contexts).
+  $form_object = $form_state->getFormObject();
+  $content_type = ($form_object instanceof \Drupal\Core\Entity\ContentEntityFormInterface)
+    ? $form_object->getEntity()->bundle()
+    : '';
+
+  // Site name is appended to the browser <title> tag — needed for accurate
+  // length analysis when analyzing the title field.
+  $site_name = (string) (\Drupal::config('system.site')->get('name') ?? '');
+
+  // Metatag module may override the page title completely. Read it from the
+  // form input so the AI analyses what Google actually sees, not just the node
+  // title field. Values containing [node:title] are token-based defaults
+  // (they inherit from the title field) and are not treated as overrides.
+  $metatag_title = '';
+  if (\Drupal::moduleHandler()->moduleExists('metatag')) {
+    $metatag_raw = (string) (NestedArray::getValue($user_input, ['metatag', 0, 'value', 'title']) ?? '');
+    if (!empty($metatag_raw) && !str_contains($metatag_raw, '[node:title]')) {
+      $metatag_title = trim($metatag_raw);
+    }
+  }
+
+  $data = [
+    'field_name' => $field_name,
+    'field_label' => $field_label,
+    'field_value' => $field_value,
+    'field_type' => $field_type,
+    'page_title' => $page_title,
+    'content_type' => $content_type,
+    'site_name' => $site_name,
+    'metatag_title' => $metatag_title,
+  ];
+
+  $key = \Drupal::service('uuid')->generate();
+  \Drupal::service('tempstore.private')->get('ai_seo')->set($key, $data);
+
+  $stream_url = Url::fromRoute('ai_seo.stream_field')->toString();
+  $csrf_token = \Drupal::csrfToken()->get('ai-seo-field-stream');
+
+  $content = [
+    '#type' => 'container',
+    '#attributes' => ['class' => ['ai-seo-stream-wrap']],
+    'header' => [
+      '#type' => 'container',
+      '#attributes' => ['id' => 'ai-seo-draft-stream-header', 'class' => ['ai-seo-stream-header']],
+      'spinner' => ['#markup' => '<div class="ai-seo-progress__spinner" aria-hidden="true"></div>'],
+      'label' => ['#markup' => '<span>' . t('Analyzing "@label"…', ['@label' => $field_label]) . '</span>'],
+    ],
+    'preview' => [
+      '#type' => 'container',
+      '#attributes' => [
+        'id' => 'ai-seo-draft-stream-preview',
+        'class' => ['ai-seo-stream-preview', 'seo-report-body'],
+        'data-ai-seo-stream-url' => $stream_url,
+        'data-ai-seo-stream-token' => $csrf_token,
+        'data-ai-seo-stream-key' => $key,
+      ],
+    ],
+    '#attached' => ['library' => ['ai_seo/report_styles', 'ai_seo/stream_analyze']],
+  ];
+
+  $response->addCommand(new OpenModalDialogCommand(
+    t('AI Analysis: @label', ['@label' => $field_label]),
+    $content,
+    ['width' => 700, 'dialogClass' => 'seo-report-dialog']
+  ));
+
+  return $response;
+}
+
+/**
+ * Submit handler: queues an SEO analysis job after a node is saved.
+ *
+ * Only executes when the "Run SEO analysis after saving" checkbox is checked.
+ * Pushes to the ai_seo_analysis queue so the page redirects immediately; cron
+ * processes the job in the background.
+ */
+function ai_seo_node_form_after_save_submit(array &$form, FormStateInterface $form_state): void {
+  if (!$form_state->getValue(['ai_seo', 'run_after_save'])) {
+    return;
+  }
+
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $form_state->getFormObject()->getEntity();
+
+  if (!$node->id()) {
+    return;
+  }
+
+  \Drupal::queue('ai_seo_analysis')->createItem([
+    'report_type' => 'full',
+    'entity_type_id' => 'node',
+    'entity_id' => (int) $node->id(),
+    'revision_id' => $node->getRevisionId() ? (int) $node->getRevisionId() : NULL,
+    'langcode' => $node->language()->getId(),
+    'options' => [
+      'request_as_anonymous' => TRUE,
+      'report_type' => 'full',
+    ],
+  ]);
+
+  \Drupal::messenger()->addStatus(t('SEO analysis has been queued and will run in the background.'));
+}
