@@ -25,7 +25,7 @@
         "cweagans/composer-patches": "^2.0",
         "drupal/archimedes": "^1.0",
         "drupal/byte": "^1.0.3",
-        "drupal/canvas": "1.11.0",
+        "drupal/canvas": "^1.12.0",
         "drupal/caresphere": "^1.2",
         "drupal/checklistapi": "^2.1",
         "drupal/config_sync_without_site_uuid": "^1.0@beta",
@@ -78,10 +78,7 @@
             "tbachert/spi": true
         },
         "sort-packages": true,
-        "optimize-autoloader": true,
-        "audit": {
-            "ignore": ["PKSA-jj5t-2zs1-dcfm", "PKSA-gm5x-j3mz-71n9"]
-        }
+        "optimize-autoloader": true
     },
     "extra": {
         "composer-exit-on-patch-failure": true,
@@ -122,11 +119,7 @@
             "recipes/contrib/{$name}": ["type:drupal-recipe"],
             "docroot/themes/custom/{$name}": ["type:drupal-custom-theme"]
         },
-        "patches": {
-            "drupal/canvas": {
-                "3591996": "patches/3591996.patch"
-            }
-        }
+        "patches": {}
     },
     "scripts": {
         "post-create-project-cmd": "rm -rf .github/"
