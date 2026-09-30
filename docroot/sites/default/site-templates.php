@@ -97,23 +97,6 @@ return [
     ],
     'creator' => 'Annertech',
   ],
-  'provus_edu' => [
-    'name' => 'Provus EDU',
-    'description' => 'Built for higher education institutions, including landing pages, course listings, news and events functionality, and a range of tools tailored to the needs of colleges and universities.',
-    'screenshot' => 'https://git.drupalcode.org/project/provus_edu/-/raw/main/screenshot.webp?ref_type=heads',
-    'package' => 'drupal/provus_edu',
-    'links' => [
-      [
-        'text' => 'Demo',
-        'url' => 'https://edu-windy-cms.provusdemo.com',
-      ],
-      [
-        'text' => 'Learn more',
-        'url' => 'https://new.drupal.org/site-template/provus-edu',
-      ],
-    ],
-    'creator' => 'Promet Source',
-  ],
   'caresphere' => [
     'name' => 'CareSphere',
     'description' => 'Designed for non-profit organizations, community groups, and social initiatives that need a clear and effective online presence.',
