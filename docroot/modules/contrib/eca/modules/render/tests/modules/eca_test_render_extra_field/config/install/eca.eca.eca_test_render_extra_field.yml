@@ -1,0 +1,56 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - eca_base
+    - eca_render
+id: eca_test_render_extra_field
+modeller: bpmn_io
+label: 'ECA render extra field test'
+version: v1
+weight: null
+events:
+  Event_display:
+    plugin: 'eca_render:extra_field'
+    label: 'Extra field on view display'
+    configuration:
+      entity_type_id: node
+      bundle: article
+      extra_field_name: eca_test_display
+      extra_field_label: 'ECA test display'
+      extra_field_description: ''
+      display_type: display
+      weight: 0
+      visible: true
+    successors:
+      -
+        id: Activity_noop
+        condition: ''
+  Event_form:
+    plugin: 'eca_render:extra_field'
+    label: 'Extra field on form display'
+    configuration:
+      entity_type_id: node
+      bundle: article
+      extra_field_name: eca_test_form
+      extra_field_label: 'ECA test form'
+      extra_field_description: ''
+      display_type: form
+      weight: 0
+      visible: true
+    successors:
+      -
+        id: Activity_noop
+        condition: ''
+conditions: {  }
+gateways: {  }
+actions:
+  Activity_noop:
+    plugin: eca_token_set_value
+    label: 'No-op token set'
+    configuration:
+      token_name: eca_test_render_extra_field_noop
+      token_value: noop
+      use_yaml: false
+      validate_yaml: false
+    successors: {  }

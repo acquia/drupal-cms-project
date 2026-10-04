@@ -1,0 +1,40 @@
+{% set classes = [
+  'partners-split',
+  admin_theme ? 'partners-split--admin-theme' : 'partners-split--themed',
+] %}
+
+<section{{attributes.addClass(classes)}}>
+  <div class="partners-split__container">
+    
+    <div class="partners-split__content-side">
+      {% if eyebrow %}
+        <div class="partners-split__eyebrow">
+          {{ eyebrow }}
+        </div>
+      {% endif %}
+      
+      {% if title %}
+        <h2 class="partners-split__title">
+          {{ title }}
+        </h2>
+      {% endif %}
+      
+      {% if description %}
+        <div class="partners-split__description">
+          {{ description }}
+        </div>
+      {% endif %}
+      
+      <div class="partners-split__actions">
+        {{ action_cta }}
+      </div>
+    </div>
+
+    <div class="partners-split__grid-side">
+      <div class="partners-split__grid">
+        {{ items }}
+      </div>
+    </div>
+    
+  </div>
+</section>

@@ -1,0 +1,89 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Hero Primary
+status: stable
+description: Hero Primary component
+# Overrides regular css with minified.
+libraryOverrides:
+  css:
+    component:
+      hero-primary.min.css: { minified: true }
+group: Eureka main components
+props:
+  type: object
+  properties:
+    hero_primary_media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Hero image media
+      description: Media and alt text for the hero image.
+      type: object
+      examples:
+        - src: 'assets/277628-911758.jpg'
+          alt: 'Photo by gdtography: https://www.pexels.com/photo/long-exposure-photography-white-dome-building-interior-911758/'
+    hero_primary_media_alt:
+      type: ['string', 'null']
+      title: Hero image alt
+      description: Image alt text
+      examples:
+        - Hero image alt text for screenreaders
+    hero_primary_heading_white_words:
+      type: string
+      title: Heading heading white words
+      description: Words in the heading that should be white
+      examples:
+        - Welcome to
+    hero_primary_heading_colour_words:
+      type: string
+      title: Hero heading colour words
+      description: Words in the heading that should be colourful
+      examples:
+        - Lorem ipsum
+    hero_primary_heading_level:
+      type: ['number', 'null']
+      title: Hero heading level
+      description: Heading level of the heading element - only change this if you know what you're doing, as it affects accessibility
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+      examples:
+        - 1
+    hero_primary_text:
+      type: ['string', 'null']
+      title: Hero text
+      description: Hero strapline
+      examples:
+        - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed blandit turpis. Nunc diam urna, tristique quis semper quis, interdum ac nunc.
+    hero_primary_cta_text:
+      type: ['string', 'null']
+      title: Hero CTA text
+      description: CTA Text
+      examples:
+        - Call to action
+    hero_primary_cta_url:
+      title: Hero CTA url
+      description: CTA Url
+      type: string
+      format: uri-reference
+      x-allowed-schemes:
+        - http
+        - https
+      examples:
+        - https://uri.example.com
+    hero_primary_cta_secondary_text:
+      type: ['string', 'null']
+      title: Hero CTA secondary text
+      description: CTA secondary Text
+      examples:
+        - Call to action
+    hero_primary_cta_secondary_url:
+      title: Hero CTA secondary url
+      description: CTA secondary Url
+      type: string
+      format: uri-reference
+      x-allowed-schemes:
+        - http
+        - https
+      examples:
+        - https://uri.example.com

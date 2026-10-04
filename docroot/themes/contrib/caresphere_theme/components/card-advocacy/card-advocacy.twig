@@ -1,0 +1,58 @@
+{#
+  Advocacy card SDC — Figma desktop 1-8248, mobile 1-7970.
+  Card with tagline, headline, body text, CTA (chevron), and image.
+  Desktop: content left | image right. Mobile: content top, image bottom.
+#}
+{% set has_image = image_media is defined and image_media is not empty and image_media.src is defined and image_media.src is not empty %}
+{% set has_button = button_label is defined and button_label is not empty %}
+
+<article class="card-advocacy">
+  <div class="card-advocacy__wrapper">
+    <div class="card-advocacy__content-top">
+      {% if tagline is defined and tagline is not empty %}
+        <p class="card-advocacy__tagline">{{ tagline }}</p>
+      {% endif %}
+      <div class="card-advocacy__text">
+        {% if headline is defined and headline is not empty %}
+          <p class="card-advocacy__headline">{{ headline }}</p>
+        {% endif %}
+        {% if body_text is defined and body_text is not empty %}
+          <p class="card-advocacy__body">{{ body_text }}</p>
+        {% endif %}
+      </div>
+    </div>
+    {% if has_button %}
+      <div class="card-advocacy__actions">
+        {% if button_url is defined and button_url is not empty and button_url|trim is not empty %}
+          {{
+            include(
+              'caresphere_theme:button',
+              {
+                href: button_url,
+                label: button_label,
+                variant: 'link',
+                size: 'medium',
+                icon: 'caret-right',
+                btn_classes: ['card-advocacy__btn']
+              },
+              with_context: false
+            )
+          }}
+        {% else %}
+          <span class="card-advocacy__btn card-advocacy__btn--static">{{ button_label }}</span>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+  {% if has_image %}
+    <div class="card-advocacy__media">
+      {% include 'canvas:image' ignore missing with {
+        src: image_media.src,
+        alt: image_media.alt|default(''),
+        class: 'card-advocacy__image',
+        width: image_media.width,
+        height: image_media.height
+      } only %}
+    </div>
+  {% endif %}
+</article>

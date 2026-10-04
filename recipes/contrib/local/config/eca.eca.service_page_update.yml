@@ -1,0 +1,120 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.service_page.field_description
+    - field.field.node.service_page.field_parent
+    - field.field.paragraph.service_in_this_section.field_link
+    - field.field.paragraph.service_in_this_section.field_summary
+    - field.storage.node.field_description
+    - field.storage.node.field_parent
+    - field.storage.paragraph.field_link
+    - field.storage.paragraph.field_summary
+    - node.type.service_page
+  module:
+    - eca_content
+    - modeler_api
+third_party_settings:
+  modeler_api:
+    modeler_id: bpmn_io
+    label: 'Service page: update'
+id: service_page_update
+weight: 0
+template: null
+events:
+  content_entity__update_service_page:
+    plugin: 'content_entity:update'
+    label: 'Update service page'
+    configuration:
+      type: 'node service_page'
+    successors:
+      -
+        id: find_paragraph
+        condition: ''
+conditions: {  }
+gateways: {  }
+actions:
+  find_paragraph:
+    label: 'Entity: find paragraph by link URI'
+    plugin: eca_token_load_entity
+    configuration:
+      token_name: existing_paragraph
+      from: properties
+      entity_type: paragraph
+      entity_id: ''
+      revision_id: ''
+      properties: |-
+        type: service_in_this_section
+        field_link.uri: "entity:node/[node:nid]"
+      langcode: _interface
+      latest_revision: true
+      unchanged: false
+      object: ''
+    successors:
+      -
+        id: sync_summary
+        condition: ''
+  sync_summary:
+    label: 'Entity: sync summary'
+    plugin: eca_set_field_value
+    configuration:
+      field_name: field_summary
+      field_value: '[node:field_description:value]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: false
+      object: existing_paragraph
+    successors:
+      -
+        id: sync_link_title
+        condition: ''
+  sync_link_title:
+    label: 'Entity: sync link title'
+    plugin: eca_set_field_value
+    configuration:
+      field_name: field_link.title
+      field_value: '[node:title]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: false
+      object: existing_paragraph
+    successors:
+      -
+        id: save_paragraph
+        condition: ''
+  save_paragraph:
+    label: 'Entity: save paragraph'
+    plugin: eca_save_entity
+    configuration:
+      object: existing_paragraph
+    successors:
+      -
+        id: load_parent_node
+        condition: ''
+  load_parent_node:
+    label: 'Entity: load parent landing page'
+    plugin: eca_token_load_entity_ref
+    configuration:
+      field_name_entity_ref: field_parent
+      token_name: parent_node
+      from: current
+      entity_type: _none
+      entity_id: ''
+      revision_id: ''
+      properties: ''
+      langcode: _interface
+      latest_revision: false
+      unchanged: false
+      object: ''
+    successors:
+      -
+        id: save_parent_node
+        condition: ''
+  save_parent_node:
+    label: 'Entity: save parent landing page to refresh render cache'
+    plugin: eca_save_entity
+    configuration:
+      object: parent_node
+    successors: {  }

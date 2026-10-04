@@ -1,0 +1,36 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Agenda Module
+group: Organisms
+status: stable
+description: A dark-themed timeline component displaying a sequence of events.
+props:
+  type: object
+  properties:
+    admin_theme:
+      title: Admin Theme
+      type: boolean
+      default: false
+      description: Check to enable Admin Theme styles.
+    eyebrow:
+      title: Eyebrow
+      type: string
+      description: The centered section eyebrow (Day one).
+    title:
+      title: Title
+      type: string
+      description: The centered section title.
+    description:
+      title: Description
+      type: string
+      description: The centered description text.
+slots:
+  actions:
+    title: Actions
+    description: Centered action buttons below description.
+  agenda_items:
+    title: Agenda Items
+    description: A list of Agenda Item molecules dropped here.
+library:
+  css:
+    component:
+      agenda_module.css: {}

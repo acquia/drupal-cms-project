@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_mc_intents_satisfied
+    - node.type.mc_person
+    - taxonomy.vocabulary.mc_intent
+id: node.mc_person.field_mc_intents_satisfied
+field_name: field_mc_intents_satisfied
+entity_type: node
+bundle: mc_person
+label: 'Intents satisfied'
+description: 'The intents which are satisfied when the content is viewed.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      mc_intent: mc_intent
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

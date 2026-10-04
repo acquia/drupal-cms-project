@@ -1,0 +1,23 @@
+bpmn_io:
+  label: "Drupal BPMN.iO"
+  description: "Icons available within Drupal bpmn_io module."
+  license:
+    name: MIT
+    url: https://icon-sets.iconify.design/mingcute/
+    gpl-compatible: true
+  extractor: svg
+  config:
+    sources:
+      - icons/*.svg
+  template: >
+    <svg
+      {{ attributes
+          .setAttribute('viewBox', attributes.viewBox|default('0 0 24 24'))
+          .setAttribute('class', class)
+          .setAttribute('width', size|default('20'))
+          .setAttribute('height', size|default('20'))
+          .setAttribute('aria-hidden', 'true')
+      }}
+    >
+      {{ content }}
+    </svg>

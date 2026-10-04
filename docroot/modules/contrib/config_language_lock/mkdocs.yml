@@ -1,0 +1,28 @@
+site_name: Config Language Lock
+docs_dir: docs
+
+nav:
+  - Overview: index.md
+  - Issues addressed: issues.md
+  - Install paths:
+      - Module install: module-install.md
+      - Theme install: theme-install.md
+      - Recipes: recipes.md
+      - Config actions: config-actions.md
+  - Runtime:
+      - UI forms: ui-forms.md
+  - Lifecycle:
+      - Lock switch: lock-switch-lifecycle.md
+      - Site default: site-default-lifecycle.md
+      - Language management: language-management.md
+
+theme:
+  name: material
+  logo: logo.png
+  favicon: logo.png
+
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid

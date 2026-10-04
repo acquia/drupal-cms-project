@@ -1,0 +1,73 @@
+{#
+/**
+ * @file
+ * Theme override to display a menu.
+ *
+ * Available variables:
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - below: The menu item child items.
+ *   - title: The menu link title.
+ *   - url: The menu link URL, instance of \Drupal\Core\Url
+ *   - localized_options: Menu link localized options.
+ *   - is_expanded: TRUE if the link has visible children within the current menu tree.
+ *   - is_collapsed: TRUE if the link has children within the current menu tree
+ *     that are not currently visible.
+ *   - in_active_trail: TRUE if the link is in the active trail.
+ */
+#}
+{% import _self as menus %}
+{{ menus.menu_links(items, attributes, 0) }}
+
+{% macro menu_links(items, attributes, menu_level) %}
+  {% set level_class = 'menu--level-' ~ (menu_level + 1) %}
+  {% import _self as menus %}
+
+  {% if items %}
+    <ul {{ attributes.addClass('menu', level_class) }}>
+      {% set attributes = attributes.removeClass(level_class) %}
+      {% for item in items %}
+        {% if item.url.isRouted and item.url.routeName == '<nolink>' %}
+          {% set menu_item_type = 'nolink' %}
+        {% elseif item.url.isRouted and item.url.routeName == '<button>' %}
+          {% set menu_item_type = 'button' %}
+        {% else %}
+          {% set menu_item_type = 'link' %}
+        {% endif %}
+
+        {% set item_classes = [
+          'menu__item',
+          'menu__item--' ~ menu_item_type,
+          'menu__item--level-' ~ (menu_level + 1),
+          item.in_active_trail ? 'menu__item--active-trail',
+          item.below ? 'menu__item--has-children'
+        ] %}
+
+        {% set link_classes = [
+          'menu__link',
+          'menu__link--' ~ menu_item_type,
+          'menu__link--level-' ~ (menu_level + 1),
+          item.in_active_trail ? 'menu__link--active-trail',
+          item.below ? 'menu__link--has-children'
+        ] %}
+
+        <li {{ item.attributes.addClass(item_classes) }}>
+          {{
+            link(
+              item.title,
+              item.url,
+              { class: link_classes }
+            )
+          }}
+          {% if item.below %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12.3977 15.6629C12.178 15.8826 11.8219 15.8826 11.6022 15.6629L5.86739 9.92804C5.64772 9.70837 5.64772 9.35227 5.86739 9.13259L6.13256 8.86739C6.35222 8.64772 6.70838 8.64772 6.92805 8.86739L12 13.9393L17.0719 8.86739C17.2916 8.64772 17.6477 8.64772 17.8674 8.86739L18.1326 9.13259C18.3522 9.35227 18.3522 9.70837 18.1326 9.92804L12.3977 15.6629Z" fill="white"/>
+            </svg>
+            {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}

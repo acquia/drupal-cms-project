@@ -1,0 +1,35 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: components/layout/layout.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+@reference "../../tailwindcss";
+
+.layout {
+  @apply relative;
+}
+
+.layout__backgrounds {
+  @apply z-1;
+}
+
+.layout__overlay {
+  @apply z-2;
+}
+
+.layout__container {
+  @apply z-3;
+}
+
+.layout__overlay {
+  @apply pointer-events-none absolute inset-0;
+}
+
+.layout--preview {
+  @apply w-full;
+
+  > * {
+    @apply w-full min-w-20;
+  }
+}

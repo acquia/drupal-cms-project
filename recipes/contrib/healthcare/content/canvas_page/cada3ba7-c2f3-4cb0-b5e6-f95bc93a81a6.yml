@@ -1,0 +1,236 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: cada3ba7-c2f3-4cb0-b5e6-f95bc93a81a6
+  default_langcode: en
+  depends:
+    7829e8ca-15a4-45a0-91fb-558f92dc7723: file
+    418764ae-41da-4400-b335-a2b71f953287: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Accessibility Statement'
+  components:
+    -
+      uuid: a5dd9b57-5200-473b-97f1-add8e0ecbc57
+      component_id: sdc.diagnosis.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        background: default
+        padding_block_start: '0'
+        padding_block_end: '0'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        image_size: '4:3'
+        image_position: right
+        image_radius: extra-large
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 418764ae-41da-4400-b335-a2b71f953287
+            target_type: media
+    -
+      parent_uuid: a5dd9b57-5200-473b-97f1-add8e0ecbc57
+      slot: hero_slot
+      uuid: 5d616d72-b138-4ece-b3ce-c17b226998c6
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Accessibility Statement'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: a5dd9b57-5200-473b-97f1-add8e0ecbc57
+      slot: hero_slot
+      uuid: dd651990-b9ab-429e-af26-1551e341b07b
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>[Organization Name] is committed to ensuring digital accessibility for people with disabilities. We are continually improving the user experience for everyone and applying relevant accessibility standards to achieve this.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: ef3e5c00-0406-4d3d-8699-d36152aef4a5
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: ef3e5c00-0406-4d3d-8699-d36152aef4a5
+      slot: main_slot
+      uuid: d6bca113-c25d-459b-9287-324e33fe16ad
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Conformance Status'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ef3e5c00-0406-4d3d-8699-d36152aef4a5
+      slot: main_slot
+      uuid: 7b5af338-b19c-4984-a515-88e58f1869f0
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>This website is designed to conform to:</p><ul><li data-list-item-id="e1f1688985632452b6d24549830c11d16"><strong>Web Content Accessibility Guidelines (WCAG) 2.1</strong>, Level AA</li><li data-list-item-id="ec175e4b7fb2cded9d3fa24886ceac956">Applicable accessibility regulations such as the <strong>Americans with Disabilities Act (ADA)</strong> and other relevant regional standards, where applicable</li></ul><p>While we strive to ensure full accessibility, some content provided by third parties or customized after launch may not yet fully conform.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: ef3e5c00-0406-4d3d-8699-d36152aef4a5
+      slot: main_slot
+      uuid: ba040522-5cff-4365-b36b-34876eab3b96
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Accessibility Features'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ef3e5c00-0406-4d3d-8699-d36152aef4a5
+      slot: main_slot
+      uuid: adb8a390-87b9-468f-82ad-292750f01d16
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>This website includes:</p><ul><li data-list-item-id="e05147de5d13d3f2e66625501d8e5cfb6">Semantic HTML structure for screen reader compatibility</li><li data-list-item-id="e038881dc8424d6d38a1cef8d5a7e7687">Proper heading hierarchy and landmark regions</li><li data-list-item-id="ec8fec2eeb7d8704bd68e9de74367cf56">Keyboard navigable menus and interactive elements</li><li data-list-item-id="eb0820723f077e1c3b6445a39aefe672e">Visible focus indicators</li><li data-list-item-id="eef71d29aa94104accbe8b99b5e4476a7">Color contrast ratios that meet WCAG 2.1 AA standards</li><li data-list-item-id="e5599615446b411f65908fdcf8629a868">Accessible form labels and error messaging</li><li data-list-item-id="ed14c501f728f165ab8c162ee3b3317c7">Alternative text support for images</li><li data-list-item-id="e0efcc4caf5dea915a49cc77d3882d387">ARIA attributes where appropriate</li><li data-list-item-id="e44cc691ac3001946a1386a9b17fd9a52">Responsive design for use on mobile devices and assistive technologies</li></ul><p>&nbsp;</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: ef3e5c00-0406-4d3d-8699-d36152aef4a5
+      slot: main_slot
+      uuid: 50fb3bfd-2632-4090-b498-3e6f0c4d5815
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Ongoing Efforts'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ef3e5c00-0406-4d3d-8699-d36152aef4a5
+      slot: main_slot
+      uuid: 53fda769-00fb-4498-a6d4-ffba2fe1e2af
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Accessibility is an ongoing effort. We regularly:</p><ul><li data-list-item-id="e55463d0c3cf6685713dd64920ba2e731">Test using automated accessibility tools</li><li data-list-item-id="e3f3d9e180614e83e0b3838b201396f58">Conduct manual keyboard-only navigation testing</li><li data-list-item-id="e12b3e260b60696a19ba33bda800c02af">Review screen reader compatibility</li><li data-list-item-id="e7691a8c0330d300673a5c21c3d24b13b">Address reported accessibility barriers promptly</li></ul>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: ef3e5c00-0406-4d3d-8699-d36152aef4a5
+      slot: main_slot
+      uuid: 0cad0b6d-4102-44ab-b7b0-5a017ba480db
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Third-Party Content'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ef3e5c00-0406-4d3d-8699-d36152aef4a5
+      slot: main_slot
+      uuid: 49bc1aee-c09d-4163-8b67-219c8592af05
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Some third-party integrations or embedded content may not fully conform to accessibility standards. We encourage vendors to provide accessible solutions and work to remediate issues where possible.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: ef3e5c00-0406-4d3d-8699-d36152aef4a5
+      slot: main_slot
+      uuid: 7d933425-a9ca-4d36-abe7-1877413ae614
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Feedback
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ef3e5c00-0406-4d3d-8699-d36152aef4a5
+      slot: main_slot
+      uuid: 1b48caf7-9a26-44b1-a18d-1c46d0b8936c
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>We welcome your feedback on the accessibility of this website. If you encounter accessibility barriers, please contact us:</p><p><strong>Email:</strong> [accessibility@organization.com]</p><p><strong>Phone:</strong> [Phone Number]</p><p><strong>Mailing Address:</strong> [Organization Address]</p><p>When contacting us, please include:</p><ul><li data-list-item-id="e26ad8c4c9eb827494dc05d4fd1674aeb">The web page URL</li><li data-list-item-id="ed68854d5f59665d841f81c6df165dc58">A description of the issue</li><li data-list-item-id="ed8be8e3fe1019875cca5848db8a20f23">The assistive technology used (if applicable)</li></ul><p>We aim to respond within [X business days].</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: ef3e5c00-0406-4d3d-8699-d36152aef4a5
+      slot: main_slot
+      uuid: f14e6e9e-1b45-4148-91be-0f86af44fd44
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Compatibility
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ef3e5c00-0406-4d3d-8699-d36152aef4a5
+      slot: main_slot
+      uuid: 02cb3451-8dd5-417b-9d3e-faa09af9542c
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>This website is designed to be compatible with:</p><ul><li data-list-item-id="e2a4b2628d43534023191d2688ac9bdcd">Recent versions of major browsers (Chrome, Firefox, Safari, Edge)</li><li data-list-item-id="e35fc2db47b493d36c100e7fb8e648fde">Screen readers such as NVDA, JAWS, and VoiceOver</li><li data-list-item-id="ec6800d9b310cb0ef4e4e9fbb7c137b4e">Keyboard-only navigation</li></ul>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: ef3e5c00-0406-4d3d-8699-d36152aef4a5
+      slot: main_slot
+      uuid: 470e3503-3bb7-4c5c-bcd5-6fba51ba4bb7
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Limitations and Alternatives'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ef3e5c00-0406-4d3d-8699-d36152aef4a5
+      slot: main_slot
+      uuid: 59febfda-d875-4ead-9964-f1a9cf560b9c
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Despite our best efforts, some content may not yet be fully accessible. If you need assistance accessing any information, please contact us and we will provide the content in an accessible alternative format.</p><p><strong>Date of last update:</strong> [Month Day, Year]</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+  path:
+    -
+      alias: /accessibility
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

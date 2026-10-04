@@ -1,0 +1,119 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Slider
+description: An interactive carousel that allows users to swipe through a sequence of images or content cards.
+group: Content
+status: stable
+props:
+  type: object
+  properties:
+    loop:
+      type: boolean
+      title: Loop
+      description: Enable to loop the slider.
+    navigation:
+      type: boolean
+      title: Show navigation
+      description: Enable to show navigation for the slides.
+    effect:
+      type: string
+      title: Transition effect
+      description: Select the transition effect of the slides.
+      enum:
+        - slide
+        - fade
+        - cube
+        - coverflow
+        - flip
+        - cards
+      meta:enum:
+        slide: Slide
+        fade: Fade
+        cube: Cube
+        coverflow: Coverflow
+        flip: Flip
+        cards: Cards
+      default: slide
+    direction:
+      type: string
+      title: Direction
+      description: Select the direction of the slides.
+      enum:
+        - horizontal
+        - vertical
+      meta:enum:
+        horizontal: Horizontal
+        vertical: Vertical
+      default: horizontal
+    pagination:
+      type: string
+      title: Pagination
+      description: Select the pagination of the slides.
+      enum:
+        - bullets
+        - fraction
+        - progressbar
+      meta:enum:
+        bullets: Bullets
+        fraction: Fraction
+        progressbar: Progress bar
+      default: bullets
+    speed:
+      type: integer
+      title: Speed
+      description: Enter the speed of the slides in millisecond e.g. 300
+      default: 300
+    slides_per_view:
+      type: integer
+      title: Slides per view
+      description: Number of slides visible at the same time.
+      default: 1
+      examples:
+        - 1
+    slides_per_group:
+      type: integer
+      title: Slides per group
+      description: Number of slides to advance per swipe.
+      default: 1
+      examples:
+        - 1
+    space_between:
+      type: integer
+      title: Space between
+      description: Gap (px) between slides.
+      default: 16
+      examples:
+        - 16
+    rows:
+      type: integer
+      title: Rows
+      description: Number of slide rows for multi-row layout. Not compatible with loop mode.
+      default: 1
+      examples:
+        - 1
+    grid_fill:
+      type: string
+      title: Fill
+      description: 'Select how slides should fill rows, by column or by row'
+      enum:
+        - column
+        - row
+      meta:enum:
+        column: Column
+        row: Row
+      default: column
+      examples:
+        - column
+slots:
+  slides:
+    title: Slides
+    description: Add display or content items as slides.
+libraryOverrides:
+  dependencies:
+    - core/drupal
+    - core/once
+    - morphos/swiper_library
+  js:
+    ../../dist/js/slider.js: { minified: true }
+  css:
+    component:
+      ../../dist/css/slider.css: { minified: true }

@@ -1,0 +1,44 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Form actions
+group: Base
+description: Email input + CTA button + disclaimer. Desktop layout from Figma node 1-9153 (row); mobile from 1-8750 (stacked).
+props:
+  type: object
+  properties:
+    input_placeholder:
+      type: string
+      title: Input placeholder
+      default: "Enter your email"
+      examples:
+        - "Enter your email"
+    button_text:
+      type: string
+      title: Button label
+      default: "Get in touch"
+      examples:
+        - "Get in touch"
+    disclaimer_text:
+      type: string
+      title: Disclaimer text
+      default: "By submitting this form you agree to our terms and privacy policy"
+      description: Shown below the form, e.g. terms/privacy notice.
+    form_action:
+      type: string
+      title: Form action URL
+      description: Optional. Leave empty for same-page or use a path (e.g. /newsletter/subscribe).
+      default: ""
+    input_name:
+      type: string
+      title: Input name attribute
+      default: "email"
+      description: Name used when submitting the form.
+    input_type:
+      type: string
+      title: Input type
+      enum:
+        - email
+        - text
+      meta:enum:
+        email: Email
+        text: Text
+      default: email

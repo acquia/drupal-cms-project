@@ -1,0 +1,115 @@
+{#
+/**
+ * This is strictly an exmaple file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+{% if table_non_responsive %}
+  {% set table_classes = 'table--non-responsive' %}
+  {% if table_scrollable %}
+    {% set table_classes = 'table--non-responsive table--scroll' %}
+  {% endif %}
+{% endif %}
+
+<h3 class="heading"> Default - First row is the header - with all proper classes</h3>
+<table class="{{ table_classes }}">
+	<thead>
+		<tr>
+			<th scope="col" class="table__heading-cell">Heading</th>
+			<th scope="col" class="table__heading-cell">Description</th>
+			<th scope="col" class="table__heading-cell">More</th>
+		</tr>
+	</thead>
+	<tbody>
+  	<tr class="table__row">
+  		<td class="table__cell">Row 1</td>
+  		<td class="table__cell">Information about something</td>
+  		<td class="table__cell">And this is important</td>
+  	</tr>
+  	<tr class="table__row">
+      <td class="table__cell">Row 2</td>
+  		<td class="table__cell">And this is important</td>
+  		<td class="table__cell">Information about something</td>
+  	</tr>
+  	<tr class="table__row">
+      <td class="table__cell">Row 3</td>
+  		<td class="table__cell">Information about something</td>
+  		<td class="table__cell">And this is important</td>
+  	</tr>
+  	<tr class="table__row">
+      <td class="table__cell">Row 4</td>
+  		<td class="table__cell">Information about something</td>
+  		<td class="table__cell">And this is important</td>
+  	</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="4" class="table__heading-cell table__footer-cell">This is a table footer</td>
+		</tr>
+	</tfoot>
+</table>
+
+<h3 class="heading">(WYSIWYG) First column is the header - without proper classes</h3>
+<table class="{{ table_classes }}">
+  <tbody>
+  <tr>
+    <th>Header column one</th>
+    <td>Content text line one - column two</td>
+  </tr>
+  <tr>
+    <th>Header column two</th>
+    <td>Content text line two - column two</td>
+  </tr>
+  <tr>
+    <th>Header column three</th>
+    <td>Content text line three - column two</td>
+  </tr>
+  </tbody>
+</table>
+</br>
+
+<h3 class="heading">(W3C) Example proper table, doesn't have a thead - without proper classes</h3>
+<table class="{{ table_classes }}">
+  <tr>
+    <th>Date</th>
+    <th>Event</th>
+    <th>Venue</th>
+  </tr>
+  <tr>
+    <td>12 February</td>
+    <td>Waltz with Strauss</td>
+    <td>Main Hall</td>
+  </tr>
+</table>
+
+<h3 class="heading">(W3C) Table with irregular headers, doesn't have a thead - without proper classes</h3>
+<table class="{{ table_classes }}">
+  <col>
+  <colgroup span="2"></colgroup>
+  <colgroup span="2"></colgroup>
+  <tr>
+    <td rowspan="2"></td>
+    <th colspan="2" scope="colgroup">Mars</th>
+    <th colspan="2" scope="colgroup">Venus</th>
+  </tr>
+  <tr>
+    <th scope="col">Produced</th>
+    <th scope="col">Sold</th>
+    <th scope="col">Produced</th>
+    <th scope="col">Sold</th>
+  </tr>
+  <tr>
+    <th scope="row">Teddy Bears</th>
+    <td>50,000</td>
+    <td>30,000</td>
+    <td>100,000</td>
+    <td>80,000</td>
+  </tr>
+  <tr>
+    <th scope="row">Board Games</th>
+    <td>10,000</td>
+    <td>5,000</td>
+    <td>12,000</td>
+    <td>9,000</td>
+  </tr>
+</table>

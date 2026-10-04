@@ -1,0 +1,24 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Logos Grid
+group: Organisms
+status: stable
+description: A grid layout component for displaying Logo Cards (e.g., Sponsors).
+props:
+  type: object
+  properties:
+    admin_theme:
+      title: Admin Theme
+      type: boolean
+      default: false
+      description: Check to enable Admin Theme styles (applies CSS only on frontend to preserve Canvas builder look).
+slots:
+  eyebrow_slot:
+    title: Eyebrow Slot
+    description: The section eyebrow, typically a typography element.
+  items:
+    title: Items Slot
+    description: Slot for individual logo card components.
+library:
+  css:
+    component:
+      grid-logos.css: {}

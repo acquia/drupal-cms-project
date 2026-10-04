@@ -1,0 +1,117 @@
+body.header-is-open {
+  overflow: hidden;
+}
+
+.header {
+  margin: 0 var(--spacing-1) var(--spacing-1) var(--spacing-1);
+  background-color: var(--brand-primary-dark);
+  border-radius: 0 0 var(--spacing-2) var(--spacing-2);
+}
+
+.header__info {
+  display: none;
+  padding: var(--spacing-1) var(--spacing-2);
+  background-color: var(--black);
+  color: var(--white);
+  font-weight: var(--font-bold);
+}
+
+.header__info .link {
+  color: var(--white);
+  text-decoration: none;
+}
+
+.header__info-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.header__main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-1-5) var(--spacing-2);
+}
+
+.header__open {
+  color: var(--white);
+  font-size: 0;
+}
+
+.header__open .icon {
+  color: var(--white);
+  margin: 0;
+}
+
+.header__close {
+  padding: var(--spacing-4);
+  justify-content: space-between;
+  border-bottom: 0.1rem solid var(--grey-light);
+  border-radius: 0;
+  outline-offset: -0.8rem;
+  font-size: 1.8rem;
+}
+
+.header__menu-inner {
+  visibility: hidden;
+  opacity: 0;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--white);
+  transition: 0.25s ease-in-out all;
+}
+
+.header__menu-inner.is-open {
+  visibility: visible;
+  opacity: 1;
+  z-index: 5000; /* Needs to go over leaflet's elements */
+}
+
+.header__menu-inner nav {
+  flex-grow: 1;
+  margin: var(--spacing-4) var(--spacing-1) var(--spacing-3);
+}
+
+.header__menu-inner .header__info {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--spacing-1);
+  margin: var(--spacing-1);
+  border-radius: var(--spacing-1-5);
+}
+
+@media (min-width: 1024px) {
+  .header__info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .header__info-links {
+    flex-direction: row;
+    gap: var(--spacing-4);
+  }
+
+  .header__open,
+  .header__close {
+    display: none;
+  }
+
+  .header__menu-inner {
+    position: static;
+    visibility: visible;
+    opacity: 1;
+    background-color: transparent;
+  }
+
+  .header__menu-inner nav {
+    margin: 0;
+  }
+
+  .header__menu-inner .header__info {
+    display: none;
+  }
+}

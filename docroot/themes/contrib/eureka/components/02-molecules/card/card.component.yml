@@ -1,0 +1,71 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Card
+status: stable
+description: Card component
+# Overrides regular css with minified.
+libraryOverrides:
+  css:
+    component:
+      card.min.css: { minified: true }
+  js:
+    card.min.js: { minified: true }
+group: Eureka component items
+props:
+  type: object
+  properties:
+    card_tag_text:
+      type: ['string', 'null']
+      title: Card tag text
+      description: Text for the card tag
+      examples:
+        - New
+    card_image:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Card image
+      description: Image and alt text for the card.
+      type: object
+      examples:
+        - src: 'assets/277628-911758.jpg'
+          alt: 'Photo by gdtography: https://www.pexels.com/photo/long-exposure-photography-white-dome-building-interior-911758/'
+    card_heading:
+      type: string
+      title: Card heading
+      description: Title of the card
+      examples:
+        - Lorem ipsum
+    card_heading_level:
+      title: Card heading level
+      type: number
+      description: From H1 to H6
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+      examples:
+        - 3
+    card_heading_size_override:
+      title: Card heading size override
+      type: ['string', 'null']
+      description: From H1 to H6
+      enum:
+        - title
+        - main
+        - sub
+        - small
+        - xsmall
+        - tiny
+    card_text:
+      type: ['string', 'null']
+      title: Card text
+      description: Body of the card, usually HTML markup created in a WYSIWYG
+      examples:
+        - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    card_date:
+      type: ['string', 'null']
+      title: Card date
+      description: Card date in 'j M Y' format
+      examples:
+        - 8 Oct 2025

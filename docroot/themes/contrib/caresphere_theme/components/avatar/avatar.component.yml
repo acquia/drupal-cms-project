@@ -1,0 +1,23 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Avatar
+group: Content
+status: stable
+description: "Profile avatar with name and title/role. Figma node 1:7450 — 56px circle, name (SemiBold 16px), title (Regular 16px), gap 16px."
+props:
+  type: object
+  properties:
+    image_media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Avatar image
+      description: "Profile image. Shown as 56×56 circle. Leave empty for placeholder."
+      type: object
+    name:
+      type: string
+      title: Name
+      description: "Person's name (e.g. Sarah Mitchell)."
+      default: ""
+    title:
+      type: string
+      title: Title / role
+      description: "Job title or affiliation (e.g. Communications director, Community Impact Network)."
+      default: ""

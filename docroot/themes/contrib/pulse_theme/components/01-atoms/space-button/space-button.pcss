@@ -1,0 +1,87 @@
+@reference "../../00-base/global/global.pcss";
+
+/* Button */
+
+.btn {
+  @apply transition-colors;
+
+  /* Size */
+  &.small {
+    @apply min-h-[2.125rem] py-[0.4375rem] px-3.5 leading-5;
+
+    &.only_icon {
+      @apply p-0 h-9 w-9;
+    }
+  }
+
+  &.medium {
+    @apply min-h-[2.375rem] py-[0.5625rem] px-4 leading-5;
+
+    &.only_icon {
+      @apply p-0 h-10 w-10;
+    }
+  }
+
+  &.large {
+    @apply min-h-[2.625rem] py-[0.5625rem] px-[1.125rem] leading-6;
+
+    &.only_icon {
+      @apply p-0 h-11 w-11;
+    }
+  }
+
+  &.xlarge {
+    @apply min-h-[2.875rem];
+
+    &.only_icon {
+      @apply p-0 h-[2.75rem] w-[2.75rem] min-h-full;
+    }
+  }
+
+  &.xxlarge {
+    @apply min-h-[2.875rem] md:min-h-[3.625rem];
+
+    &.only_icon {
+      @apply p-0 h-[3.5rem] w-[3.5rem] min-h-full;
+    }
+  }
+
+  &.xxxlarge {
+    @apply min-h-[2.875rem] md:min-h-[3.875rem];
+
+    &.only_icon {
+      @apply p-0 h-[4rem] w-[4rem] min-h-full;
+    }
+  }
+
+  /* Type */
+  &.btn-primary {
+    @apply text-white bg-sds-primary lg:hover:bg-sds-primary-dark border-solid border-sds-primary border-1 py-[0.5625rem] px-4;
+
+    &.disabled {
+      @apply pointer-events-none cursor-default border-transparent shadow-2xl;
+    }
+  }
+
+  &.btn-secondary {
+    @apply text-sds-neutral mix-blend-difference bg-sds-secondary lg:hover:bg-sds-secondary-dark border-solid border-sds-secondary border-1 py-[0.5625rem] px-4;
+
+    &.disabled {
+      @apply pointer-events-none cursor-default border-transparent shadow-2xl;
+    }
+  }
+}
+
+/* Button component */
+.btn-comp-wrapper {
+  @apply flex flex-wrap gap-x-4 gap-y-4;
+}
+
+/* More link */
+.more-link {
+  @apply text-center mt-14;
+
+  a {
+    @apply text-sds-neutral bg-sds-secondary lg:hover:bg-sds-secondary-dark border-solid border-sds-secondary border-1 py-[0.5625rem] px-4 rounded-4xl !no-underline shadow-sm;
+  }
+}

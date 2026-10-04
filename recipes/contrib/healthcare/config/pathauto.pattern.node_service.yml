@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node_service
+label: 'Service URL Pattern'
+type: 'canonical_entities:node'
+pattern: 'services/[node:title]'
+selection_criteria:
+  s0efd833-3db0-4df9-9fef-ced42c1e888s:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      service: service
+selection_logic: and
+weight: -5
+relationships: {  }

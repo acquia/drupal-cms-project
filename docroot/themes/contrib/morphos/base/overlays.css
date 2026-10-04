@@ -1,0 +1,171 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: base/overlays.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+/*
+ * Component content styles when an overlay is present.
+ * Applies a text shadow to improve readability against the overlay.
+ */
+.has-overlay {
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-shadow: 0 0 0.5rem var(--background);
+  }
+}
+
+/**
+ * Component overlay styles.
+ * Overlays use background-XXX CSS variables (010-100) for smooth transitions.
+ * RTL aware using logical start/end terminology.
+ */
+
+/* Linear: Start - gradient from start edge to end */
+.overlay--linear-start {
+  background: linear-gradient(
+    to right,
+    var(--background-060) 0%,
+    var(--background-040) 70%,
+    transparent 100%
+  );
+}
+
+[dir='rtl'] .overlay--linear-start {
+  background: linear-gradient(
+    to left,
+    var(--background-060) 0%,
+    var(--background-040) 70%,
+    transparent 100%
+  );
+}
+
+/* Linear: End - gradient from end edge to start */
+.overlay--linear-end {
+  background: linear-gradient(
+    to left,
+    var(--background-060) 0%,
+    var(--background-040) 70%,
+    transparent 100%
+  );
+}
+
+[dir='rtl'] .overlay--linear-end {
+  background: linear-gradient(
+    to right,
+    var(--background-060) 0%,
+    var(--background-040) 70%,
+    transparent 100%
+  );
+}
+
+/* Linear: Top - gradient from top to bottom */
+.overlay--linear-top {
+  background: linear-gradient(
+    to bottom,
+    var(--background-060) 0%,
+    var(--background-040) 70%,
+    transparent 100%
+  );
+}
+
+/* Linear: Bottom - gradient from bottom to top */
+.overlay--linear-bottom {
+  background: linear-gradient(
+    to top,
+    var(--background-060) 0%,
+    var(--background-040) 70%,
+    transparent 100%
+  );
+}
+
+/* Linear: Top start - diagonal from top-start corner */
+.overlay--linear-top-start {
+  background: linear-gradient(
+    to bottom right,
+    var(--background-060) 0%,
+    var(--background-040) 50%,
+    transparent 100%
+  );
+}
+
+[dir='rtl'] .overlay--linear-top-start {
+  background: linear-gradient(
+    to bottom left,
+    var(--background-060) 0%,
+    var(--background-040) 50%,
+    transparent 100%
+  );
+}
+
+/* Linear: Top end - diagonal from top-end corner */
+.overlay--linear-top-end {
+  background: linear-gradient(
+    to bottom left,
+    var(--background-060) 0%,
+    var(--background-040) 50%,
+    transparent 100%
+  );
+}
+
+[dir='rtl'] .overlay--linear-top-end {
+  background: linear-gradient(
+    to bottom right,
+    var(--background-060) 0%,
+    var(--background-040) 50%,
+    transparent 100%
+  );
+}
+
+/* Linear: Bottom start - diagonal from bottom-start corner */
+.overlay--linear-bottom-start {
+  background: linear-gradient(
+    to top right,
+    var(--background-060) 0%,
+    var(--background-040) 50%,
+    transparent 100%
+  );
+}
+
+[dir='rtl'] .overlay--linear-bottom-start {
+  background: linear-gradient(
+    to top left,
+    var(--background-060) 0%,
+    var(--background-040) 50%,
+    transparent 100%
+  );
+}
+
+/* Linear: Bottom end - diagonal from bottom-end corner */
+.overlay--linear-bottom-end {
+  background: linear-gradient(
+    to top left,
+    var(--background-060) 0%,
+    var(--background-040) 50%,
+    transparent 100%
+  );
+}
+
+[dir='rtl'] .overlay--linear-bottom-end {
+  background: linear-gradient(
+    to top right,
+    var(--background-060) 0%,
+    var(--background-040) 50%,
+    transparent 100%
+  );
+}
+
+/* Radial: Center - radial gradient from center outward */
+.overlay--radial-center {
+  background: radial-gradient(
+    circle at center,
+    var(--background-060) 0%,
+    var(--background-040) 70%,
+    transparent 100%
+  );
+}

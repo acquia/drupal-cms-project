@@ -1,0 +1,24 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: base/button.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+@reference "../tailwindcss";
+
+@layer utilities.daisyui.l1.l2.l3 {
+  .btn-default {
+    --btn-bg: var(--link);
+    --btn-color: var(--link);
+    --btn-fg: var(--link-contrast);
+    --btn-border: var(--btn-color);
+
+    &:hover {
+      --btn-bg: var(--link-hover);
+    }
+
+    &:active {
+      --btn-bg: var(--link-active);
+    }
+  }
+}

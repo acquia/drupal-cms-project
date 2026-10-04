@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node_location
+label: 'Location URL Pattern'
+type: 'canonical_entities:node'
+pattern: 'locations/[node:title]'
+selection_criteria:
+  g0efd833-3db0-4df9-9fef-ced42c1e777a:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      location: location
+selection_logic: and
+weight: -5
+relationships: {  }

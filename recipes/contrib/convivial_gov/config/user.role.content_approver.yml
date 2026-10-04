@@ -1,0 +1,118 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.content_format
+    - media.type.document
+    - media.type.image
+    - media.type.remote_video
+    - media.type.svg_image
+    - media.type.video
+    - node.type.mc_alert
+    - node.type.mc_article
+    - node.type.mc_audience
+    - node.type.mc_event
+    - node.type.mc_page
+    - node.type.mc_person
+    - node.type.mc_resource
+    - node.type.mc_section
+    - node.type.mc_topic
+    - taxonomy.vocabulary.tags
+    - workflows.workflow.editorial
+  module:
+    - content_moderation
+    - contextual
+    - file
+    - filter
+    - media
+    - node
+    - path
+    - redirect
+    - scheduler
+    - system
+    - taxonomy
+    - trash
+id: content_approver
+label: 'Content approver'
+weight: -7
+is_admin: false
+permissions:
+  - 'access administration pages'
+  - 'access content'
+  - 'access content overview'
+  - 'access contextual links'
+  - 'access files overview'
+  - 'access media overview'
+  - 'access taxonomy overview'
+  - 'access trash'
+  - 'administer menu'
+  - 'administer redirects'
+  - 'create media'
+  - 'create terms in tags'
+  - 'create url aliases'
+  - 'delete any document media'
+  - 'delete any file'
+  - 'delete any image media'
+  - 'delete any mc_alert content'
+  - 'delete any mc_article content'
+  - 'delete any mc_audience content'
+  - 'delete any mc_event content'
+  - 'delete any mc_page content'
+  - 'delete any mc_person content'
+  - 'delete any mc_resource content'
+  - 'delete any mc_section content'
+  - 'delete any mc_topic content'
+  - 'delete any media'
+  - 'delete any remote_video media'
+  - 'delete any svg_image media'
+  - 'delete any video media'
+  - 'delete own files'
+  - 'edit any document media'
+  - 'edit any image media'
+  - 'edit any mc_alert content'
+  - 'edit any mc_article content'
+  - 'edit any mc_audience content'
+  - 'edit any mc_event content'
+  - 'edit any mc_page content'
+  - 'edit any mc_person content'
+  - 'edit any mc_resource content'
+  - 'edit any mc_section content'
+  - 'edit any mc_topic content'
+  - 'edit any remote_video media'
+  - 'edit any svg_image media'
+  - 'edit any video media'
+  - 'revert mc_alert revisions'
+  - 'revert mc_article revisions'
+  - 'revert mc_audience revisions'
+  - 'revert mc_event revisions'
+  - 'revert mc_page revisions'
+  - 'revert mc_person revisions'
+  - 'revert mc_resource revisions'
+  - 'revert mc_section revisions'
+  - 'revert mc_topic revisions'
+  - 'schedule publishing of nodes'
+  - 'update any media'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition needs_review'
+  - 'use editorial transition publish'
+  - 'use editorial transition restore'
+  - 'use editorial transition restore_to_draft'
+  - 'use editorial transition send_back_to_draft'
+  - 'use editorial transition unpublish'
+  - 'use text format content_format'
+  - 'view all media revisions'
+  - 'view all revisions'
+  - 'view any unpublished content'
+  - 'view deleted entities'
+  - 'view latest version'
+  - 'view mc_alert revisions'
+  - 'view mc_article revisions'
+  - 'view mc_audience revisions'
+  - 'view mc_event revisions'
+  - 'view mc_page revisions'
+  - 'view mc_person revisions'
+  - 'view mc_resource revisions'
+  - 'view mc_section revisions'
+  - 'view mc_topic revisions'
+  - 'view scheduled content'
+  - 'view the administration theme'

@@ -1,0 +1,100 @@
+{#
+/**
+ * Available variables:
+ * - header_base_class: base classname of the wrapper.
+ * - header_modifiers: array of modifiers to add to the base classname of the wrapper.
+ * - header_blockname: blockname prepended to the base classname of the wrapper(s) and each component.
+ * - header_extra_classes: extra classes, optional for the component.
+ *
+ * - header_logo_src: url of the logo.
+ * - header_logo_link: homepage link.
+ *
+ * - header_telephone: header telephone number.
+ * - header_email: header email address.
+ * - header_contact: homepage link.
+ *
+ * Available blocks:
+ * - header_info_block: header info block (telephone, email, contact).
+ * - header_logo_block: header logo block.
+ * - header_menu_block: header menu block.
+ */
+#}
+
+{% set header_base_class = 'header' %}
+{% set header_extra_classes = header_extra_classes|default([])|merge(['js-header']) %}
+{% set header_logo_src = directory ? '/' ~ directory ~ '/images/logo.svg' : 'logo.svg' %}
+
+<header {{ bem(header_base_class, header_modifier, header_blockname, header_extra_classes) }}>
+  {% block header_info_block %}
+    {% if header_telephone or header_email or header_contact %}
+      <div {{ bem('info', [], header_base_class) }}>
+        {% if header_telephone or header_email %}
+          <div {{ bem('info-links', [], header_base_class) }}>
+            {% if header_telephone %}
+              {{ include("eureka:link", {
+                link_content: header_telephone,
+                link_url: 'tel:' ~ header_telephone|trim|render,
+                link_icon: true,
+                link_icon_before: true,
+                link_icon_name: 'phone',
+                link_extra_classes: ['paragraph--small'],
+              }, with_context = false) }}
+            {% endif %}
+            {% if header_email %}
+              {{ include("eureka:link", {
+                link_content: header_email,
+                link_url: 'mailto:' ~ header_email|trim|render,
+                link_icon: true,
+                link_icon_before: true,
+                link_icon_name: 'mail',
+                link_extra_classes: ['paragraph--small'],
+              }, with_context = false) }}
+            {% endif %}
+          </div>
+        {% endif %}
+        {% if header_contact %}
+          {{ include("eureka:paragraph", {
+            paragraph_content: header_contact,
+            paragraph_modifiers: ['no-margin', 'small'],
+            paragraph_extra_classes: [header_base_class ~ '__top__text'],
+          }, with_context = false) }}
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endblock %}
+  <div {{ bem('main', [], header_base_class) }}>
+    <div {{ bem('branding', [], header_base_class) }}>
+      {% block header_branding_block %}
+        <a href="{{ header_logo_link|default('/') }}">
+          <img class="header__logo" src="{{ header_logo_src }}" alt="{{ 'Website logo' }}">
+        </a>
+      {% endblock %}
+    </div>
+    <div {{ bem('menu', [], header_base_class) }}>
+      {{ include("eureka:button", {
+        button_content: 'Open main navigation'|t,
+        button_icon: true,
+        button_icon_name: 'hamburger',
+        button_type: 'clean',
+        button_extra_classes: ['header__open', 'js-header-open'],
+        additional_attributes: { 'aria-controls': 'header-menu', 'aria-expanded': 'false' },
+      }) }}
+      <div id="header-menu" {{ bem('menu-inner', [], header_base_class) }}>
+        {{ include("eureka:button", {
+          button_content: 'Menu'|t,
+          button_icon: true,
+          button_icon_name: 'close',
+          button_type: 'clean',
+          button_extra_classes: ['header__close', 'js-header-close'],
+          additional_attributes: { 'aria-controls': 'header-menu', 'aria-expanded': 'true', 'aria-label': 'Close main navigation'|t },
+        }) }}
+        {% block header_menu_block %}
+          {{ include("eureka:menu--main", {
+            menu_items: header_menu_items,
+          }) }}
+        {% endblock %}
+        {{ block('header_info_block') }}
+      </div>
+    </div>
+  </div>
+</header>

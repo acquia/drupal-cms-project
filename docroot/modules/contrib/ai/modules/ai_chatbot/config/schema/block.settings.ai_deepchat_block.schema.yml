@@ -1,0 +1,78 @@
+block.settings.ai_deepchat_block:
+  type: block_settings
+  label: DeepChat Chatbot Block
+  mapping:
+    bot_name:
+      type: string
+      label: Bot Name
+    bot_image:
+      type: text
+      label: Bot Image
+    use_username:
+      type: integer
+      label: Use Username
+    default_username:
+      type: text
+      label: Default Username
+    use_avatar:
+      type: integer
+      label: Use Avatar
+    default_avatar:
+      type: string
+      label: Default Avatar
+    first_message:
+      type: text
+      label: First Message
+    loading_message:
+      type: text
+      label: Loading Message
+    agent_delegation_message:
+      type: text
+      label: Agent Delegation Message
+    stream:
+      type: integer
+      label: Stream
+    toggle_state:
+      type: string
+      label: Toggle State
+    width:
+      type: string
+      label: Width
+    height:
+      type: string
+      label: Height
+    placement:
+      type: string
+      label: Placement
+    show_copy_icon:
+      type: boolean
+      label: Show Copy Icon
+    collapse_minimal:
+      type: boolean
+      label: Collapse Minimal
+    style_file:
+      type: string
+      label: Style File
+    disable_csrf:
+      type: boolean
+      label: Disable CSRF Protection
+    chat_processor_plugin:
+      type: string
+      label: ChatProcessor Plugin
+    plugin_configuration:
+      type: ai_chat_processor.configuration.[%parent.chat_processor_plugin]
+      label: Plugin Configuration
+    expansion_method:
+      type: string
+      label: Expansion Method
+    # Deprecated settings from before the ChatProcessor plugins existed. They
+    # are kept - and ignored - so that block config that predates
+    # ai_chatbot_post_update_chat_processor() still validates, and so that
+    # DeepChatFormBlock can rebuild the plugin configuration from it. The keys
+    # are dropped the next time the block is saved.
+    ai_assistant:
+      type: ignore
+    verbose_mode:
+      type: ignore
+    show_structured_results:
+      type: ignore

@@ -1,0 +1,88 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Scroll Reveal Behavior
+description: Applies animation effects (like fade or slide) to elements as they enter the user's viewport.
+group: Behavior
+status: stable
+props:
+  type: object
+  properties:
+    delay:
+      type: integer
+      title: Delay
+      description: 'Delay (ms) before the animation. Default: "0".'
+      default: 0
+      examples:
+        - 0
+    distance:
+      type: string
+      title: Distance
+      description: 'Starting displacement distance (e.g. 100%, 50px). Default: "50px".'
+      default: '50px'
+      examples:
+        - '50px'
+    duration:
+      type: integer
+      title: Duration
+      description: 'Duration (ms) of the animation. Default: "500".'
+      default: 500
+      examples:
+        - 500
+    mobile:
+      type: boolean
+      title: Mobile
+      description: Enable on Mobile.
+      default: true
+      examples:
+        - true
+    opacity:
+      type: integer
+      title: Opacity
+      description: 'Starting opacity (0 - 100). Default: "0".'
+      default: 0
+      examples:
+        - 0
+    origin:
+      type: string
+      title: Origin
+      description: Select the direction the object moves from.
+      enum:
+        - bottom
+        - left
+        - top
+        - right
+      meta:enum:
+        bottom: Bottom
+        left: Left
+        top: Top
+        right: Right
+      default: bottom
+      examples:
+        - bottom
+    scale:
+      type: integer
+      title: Scale
+      description: 'Starting zoom factor (0 - 100). Default: "100".'
+      default: 100
+      examples:
+        - 100
+    sequence_interval:
+      type: integer
+      title: Sequence interval
+      description: Duration (ms) between items displaying.
+      default: 0
+      examples:
+        - 0
+    sequence_selector:
+      type: string
+      title: Sequence selector
+      description: Child selector to select the items contained in the object.
+      default: ''
+      examples:
+        - '.reveal-item'
+    media_query:
+      type: string
+      title: Media query
+      description: Define media query to control the application of the behavior.
+libraryOverrides:
+  js:
+    ../../../dist/js/scroll_reveal_behavior.js: {}

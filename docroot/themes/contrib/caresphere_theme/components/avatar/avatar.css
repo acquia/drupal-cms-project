@@ -1,0 +1,75 @@
+/**
+ * @file avatar.css
+ * Avatar — Figma node 1:7450.
+ * Layout: flex row, gap 16px, items-center. 56px circle, name SemiBold 16px, title Regular 16px.
+ * Colors: text uses --color-scheme-3-text (white on dark).
+ */
+
+.avatar {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  width: 100%;
+  color: var(--color-scheme-3-text, #ffffff);
+}
+
+/* 56px circular image */
+.avatar__image {
+  flex-shrink: 0;
+}
+
+.avatar__image-inner,
+.avatar__placeholder {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--dark-gray, #1b1f1d);
+}
+
+.avatar__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar__placeholder {
+  color: var(--muted-foreground, rgba(255, 255, 255, 0.6));
+}
+
+.avatar__placeholder svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Content: name + title */
+.avatar__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+/* Figma: Text/Regular Semi Bold — DM Sans 16px */
+.avatar__name {
+  font-family: var(--font-sans);
+  font-size: var(--text-base, 1rem);
+  font-weight: var(--font-weight-semibold, 600);
+  line-height: 1.5;
+  margin: 0;
+  letter-spacing: 0;
+}
+
+/* Figma: Text/Regular Normal — DM Sans 16px */
+.avatar__title {
+  font-family: var(--font-sans);
+  font-size: var(--text-base, 1rem);
+  font-weight: var(--font-weight-normal, 400);
+  line-height: 1.5;
+  margin: 0;
+  letter-spacing: 0;
+}

@@ -1,0 +1,20 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Skip
+description: An accessibility link that allows keyboard users to bypass navigation and jump directly to the main content.
+group: Global
+status: stable
+props:
+  type: object
+  properties:
+    text:
+      type: string
+      title: Text
+      default: Skip to main content
+      examples:
+        - Skip to main content
+    anchor:
+      type: string
+      title: Anchor
+      default: '#main-content'
+      examples:
+        - '#main-content'

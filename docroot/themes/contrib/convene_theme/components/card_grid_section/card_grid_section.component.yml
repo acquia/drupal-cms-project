@@ -1,0 +1,33 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Card Grid Section
+group: Organisms
+status: stable
+description: A section containing a grid of cards (Horizontal or Vertical).
+slots:
+  eyebrow:
+    title: Eyebrow Slot
+    description: Slot for the eyebrow (use Typography atom).
+  heading:
+    title: Heading Slot
+    description: Slot for the main headline (use Typography atom).
+  description:
+    title: Description Slot
+    description: Slot for the subheadline (use Typography atom).
+  horizontal_cards:
+    title: Horizontal Cards Slot
+    description: Slot for the horizontal cards.
+  vertical_cards:
+    title: Vertical Cards Slot
+    description: Slot for the vertical cards.
+props:
+  type: object
+  properties:
+    admin_theme:
+      title: Admin Theme
+      type: boolean
+      default: false
+      description: Check to enable Admin Theme styles (applies CSS only on frontend to preserve Canvas builder look).
+library:
+  css:
+    component:
+      card_grid_section.css: {}

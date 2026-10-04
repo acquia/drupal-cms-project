@@ -1,0 +1,25 @@
+{% set classes = [
+  'hero',
+  'hero--' ~ variation|default('large'),
+  admin_theme ? 'hero--admin-theme' : 'hero--themed',
+] %}
+<div{{attributes.addClass(classes)}}>
+	{% if background_media %}
+		<div class="hero__background">
+			{{ background_media }}
+		</div>
+	{% endif %}
+	<div class="hero__content">
+		{% if heading %}
+			<div class="hero__heading">{{ heading }}</div>
+		{% endif %}
+		{% if subheading %}
+			<div class="hero__subheading">{{ subheading }}</div>
+		{% endif %}
+		{% if actions %}
+			<div class="hero__actions">
+				{{ actions }}
+			</div>
+		{% endif %}
+	</div>
+</div>

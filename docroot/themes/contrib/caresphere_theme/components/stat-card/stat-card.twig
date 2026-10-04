@@ -1,0 +1,136 @@
+{# ── Case detection ──────────────────────────────────────────── #}
+{% set has_text  = value is not empty or label is not empty or description is not empty %}
+{% set has_image = media.src is not empty %}
+{% set img_pos   = image_position|default('top') %}
+{% set is_full_height = full_height|default(false) %}
+{% set full_class = is_full_height ? ' stat-card--full-height' : '' %}
+
+{# ── Shared image block macro (avoid repetition) ─────────────── #}
+{% macro render_image(media) %}
+  <div class="stat-card__image-wrap">
+    {% include 'canvas:image' ignore missing with {
+      src: media.src,
+      alt: media.alt|default(''),
+      class: 'stat-card__image',
+      width: media.width,
+      height: media.height
+    } only %}
+  </div>
+{% endmacro %}
+
+{# ── Shared panel block macro ─────────────────────────────────── #}
+{% macro render_panel(value, label, description) %}
+  <div class="stat-card__panel">
+    {% if value is not empty %}
+      <p class="stat-card__value">{{ value }}</p>
+    {% endif %}
+    {% if label is not empty or description is not empty %}
+      <div class="stat-card__content">
+        {% if label is not empty %}
+          <p class="stat-card__label">{{ label }}</p>
+        {% endif %}
+        {% if description is not empty %}
+          <p class="stat-card__description">{{ description }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{# ── Case: image-only ─────────────────────────────────────────── #}
+{% if has_image and not has_text %}
+
+  <div class="stat-card stat-card--image-only{{ full_class }}">
+    {% include 'canvas:image' ignore missing with {
+      src: media.src,
+      alt: media.alt|default(''),
+      class: 'stat-card__image',
+      width: media.width,
+      height: media.height
+    } only %}
+  </div>
+
+{# ── Case: text-only ──────────────────────────────────────────── #}
+{% elseif has_text and not has_image %}
+
+  <div class="stat-card stat-card--text-only{{ full_class }}">
+    <div class="stat-card__panel">
+      {% if value is not empty %}
+        <p class="stat-card__value">{{ value }}</p>
+      {% endif %}
+      {% if label is not empty or description is not empty %}
+        <div class="stat-card__content">
+          {% if label is not empty %}
+            <p class="stat-card__label">{{ label }}</p>
+          {% endif %}
+          {% if description is not empty %}
+            <p class="stat-card__description">{{ description }}</p>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+{# ── Case: image + text ───────────────────────────────────────── #}
+{% elseif has_text and has_image %}
+
+  <div class="stat-card stat-card--combined stat-card--img-{{ img_pos }}{{ full_class }}">
+
+    {% if img_pos == 'bottom' %}
+
+      <div class="stat-card__panel">
+        {% if value is not empty %}
+          <p class="stat-card__value">{{ value }}</p>
+        {% endif %}
+        {% if label is not empty or description is not empty %}
+          <div class="stat-card__content">
+            {% if label is not empty %}
+              <p class="stat-card__label">{{ label }}</p>
+            {% endif %}
+            {% if description is not empty %}
+              <p class="stat-card__description">{{ description }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+      <div class="stat-card__image-wrap">
+        {% include 'canvas:image' ignore missing with {
+          src: media.src,
+          alt: media.alt|default(''),
+          class: 'stat-card__image',
+          width: media.width,
+          height: media.height
+        } only %}
+      </div>
+
+    {% else %}
+
+      <div class="stat-card__image-wrap">
+        {% include 'canvas:image' ignore missing with {
+          src: media.src,
+          alt: media.alt|default(''),
+          class: 'stat-card__image',
+          width: media.width,
+          height: media.height
+        } only %}
+      </div>
+      <div class="stat-card__panel">
+        {% if value is not empty %}
+          <p class="stat-card__value">{{ value }}</p>
+        {% endif %}
+        {% if label is not empty or description is not empty %}
+          <div class="stat-card__content">
+            {% if label is not empty %}
+              <p class="stat-card__label">{{ label }}</p>
+            {% endif %}
+            {% if description is not empty %}
+              <p class="stat-card__description">{{ description }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+
+    {% endif %}
+  </div>
+
+{% endif %}

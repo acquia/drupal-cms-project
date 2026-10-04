@@ -1,0 +1,34 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Divider
+description: A line used to clearly separate content elements or sections.
+group: Content
+status: stable
+props:
+  type: object
+  properties:
+    text:
+      type: string
+      title: Text
+      description: Text to display in the divider.
+    color:
+      type: string
+      title: Color
+      description: Select the color of the divider.
+      enum:
+        - neutral
+        - primary
+        - secondary
+        - accent
+        - success
+        - warning
+        - info
+        - error
+      meta:enum:
+        neutral: Neutral
+        primary: Primary
+        secondary: Secondary
+        accent: Accent
+        success: Success
+        warning: Warning
+        info: Info
+        error: Error

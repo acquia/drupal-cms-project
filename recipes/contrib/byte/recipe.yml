@@ -1,0 +1,905 @@
+name: Byte
+type: Site
+description: 'Designed for a SaaS product website, this template includes landing pages, a blog, newsletter sign up and other features.'
+install:
+  - announcements_feed
+  - automated_cron
+  - big_pipe
+  - block
+  - breakpoint
+  - ckeditor5
+  - content_moderation
+  - contextual
+  - datetime
+  - dblog
+  - dynamic_page_cache
+  - editor
+  - field
+  - field_ui
+  - file
+  - filter
+  - image
+  - layout_builder
+  - layout_discovery
+  - link
+  - media
+  - media_library
+  - menu_link_content
+  - menu_ui
+  - mysql
+  - navigation
+  - node
+  - options
+  - package_manager
+  - page_cache
+  - path
+  - path_alias
+  - responsive_image
+  - system
+  - taxonomy
+  - text
+  - update
+  - user
+  - views
+  - views_ui
+  - workflows
+  - automatic_updates
+  - autosave_form
+  - better_exposed_filters
+  - bpmn_io
+  - canvas
+  - canvas_page_template_component
+  - captcha
+  - checklistapi
+  - coffee
+  - crop
+  - cva
+  - dashboard
+  - drupal_cms_helper
+  - drupical
+  - easy_breadcrumb
+  - easy_email
+  - easy_email_override
+  - eca
+  - eca_base
+  - eca_config
+  - eca_content
+  - eca_misc
+  - eca_render
+  - eca_ui
+  - eca_user
+  - field_group
+  - focal_point
+  - friendlycaptcha
+  - gin_login
+  - gin_toolbar
+  - honeypot
+  - jquery_ui
+  - jquery_ui_resizable
+  - klaro
+  - linkit
+  - login_emailusername
+  - mailsystem
+  - media_file_delete
+  - media_library_bulk_upload
+  - menu_link_attributes
+  - metatag
+  - metatag_open_graph
+  - metatag_twitter_cards
+  - modeler_api
+  - navigation_extra_tools
+  - pathauto
+  - project_browser
+  - redirect_404
+  - redirect
+  - sam
+  - scheduler
+  - scheduler_content_moderation_integration
+  - search_api_db
+  - search_api
+  - search_api_exclude
+  - selective_better_exposed_filters
+  - seo_checklist
+  - simple_sitemap
+  - svg_image
+  - symfony_mailer_lite
+  - tagify_user_list
+  - tagify
+  - token
+  - token_or
+  - trash
+  - ui_icons_field
+  - ui_icons_menu
+  - ui_icons_picker
+  - ui_icons
+  - view_password
+  - views_infinite_scroll
+  - webform_ui
+  - webform
+  - yoast_seo
+  - claro
+  - canvas_stark
+  - byte_theme
+  - easy_email_theme
+  - gin
+config:
+  strict: false
+  actions:
+    core.date_format.fallback:
+      setProperties:
+        status: true
+        locked: true
+        pattern: 'D, j M Y - H:i'
+    core.date_format.html_date:
+      setProperties:
+        status: true
+        locked: true
+        pattern: Y-m-d
+    core.date_format.html_datetime:
+      setProperties:
+        status: true
+        locked: true
+        pattern: 'Y-m-d\TH:i:sO'
+    core.date_format.html_month:
+      setProperties:
+        status: true
+        locked: true
+        pattern: Y-m
+    core.date_format.html_time:
+      setProperties:
+        status: true
+        locked: true
+        pattern: 'H:i:s'
+    core.date_format.html_week:
+      setProperties:
+        status: true
+        locked: true
+        pattern: Y-\WW
+    core.date_format.html_year:
+      setProperties:
+        status: true
+        locked: true
+        pattern: 'Y'
+    core.date_format.html_yearless_date:
+      setProperties:
+        status: true
+        locked: true
+        pattern: m-d
+    core.date_format.long:
+      setProperties:
+        status: true
+        locked: false
+        pattern: 'l, j F Y - H:i'
+    core.date_format.medium:
+      setProperties:
+        status: true
+        locked: false
+        pattern: 'D, j M Y - H:i'
+    core.date_format.short:
+      setProperties:
+        status: true
+        locked: false
+        pattern: 'j M Y - H:i'
+    core.entity_form_mode.user.register:
+      setProperties:
+        status: true
+        targetEntityType: user
+        cache: true
+    core.entity_view_mode.user.compact:
+      setProperties:
+        status: true
+        targetEntityType: user
+        cache: true
+    core.entity_view_mode.user.full:
+      setProperties:
+        status: false
+        targetEntityType: user
+        cache: true
+    core.menu.static_menu_link_overrides:
+      simpleConfigUpdate:
+        definitions:
+          announcements_feed__announcement:
+            enabled: false
+            menu_name: admin
+            parent: system.admin
+            weight: 10
+            expanded: false
+    system.action.user_block_user_action:
+      setProperties:
+        status: true
+        type: user
+        plugin: user_block_user_action
+        configuration: {  }
+    system.action.user_cancel_user_action:
+      setProperties:
+        status: true
+        type: user
+        plugin: user_cancel_user_action
+        configuration: {  }
+    system.action.user_unblock_user_action:
+      setProperties:
+        status: true
+        type: user
+        plugin: user_unblock_user_action
+        configuration: {  }
+    system.advisories:
+      simpleConfigUpdate:
+        enabled: true
+        interval_hours: 6
+    system.cron:
+      simpleConfigUpdate:
+        threshold:
+          requirements_warning: 172800
+          requirements_error: 1209600
+        logging: true
+    system.date:
+      simpleConfigUpdate:
+        first_day: 0
+        country:
+          default: null
+        timezone:
+          default: America/Toronto
+          user:
+            configurable: true
+            default: 0
+            warn: false
+    system.diff:
+      simpleConfigUpdate:
+        context:
+          lines_leading: 2
+          lines_trailing: 2
+    system.feature_flags:
+      simpleConfigUpdate:
+        linkset_endpoint: false
+    system.file:
+      simpleConfigUpdate:
+        allow_insecure_uploads: false
+        default_scheme: public
+        temporary_maximum_age: 21600
+    system.image.gd:
+      simpleConfigUpdate:
+        jpeg_quality: 75
+    system.image:
+      simpleConfigUpdate:
+        toolkit: gd
+    system.logging:
+      simpleConfigUpdate:
+        error_level: hide
+    system.mail:
+      simpleConfigUpdate:
+        interface:
+          default: php_mail
+        mailer_dsn:
+          scheme: sendmail
+          host: default
+          user: null
+          password: null
+          port: null
+          options: {  }
+    system.maintenance:
+      simpleConfigUpdate:
+        langcode: en
+        message: '@site is currently under maintenance. We should be back shortly. Thank you for your patience.'
+    system.menu.account:
+      setProperties:
+        status: true
+        description: 'Links related to the active user account'
+        locked: true
+    system.menu.admin:
+      setProperties:
+        status: true
+        description: 'Administrative task links'
+        locked: true
+    system.menu.footer:
+      setProperties:
+        status: true
+        description: 'Site information links'
+        locked: true
+    system.menu.main:
+      setProperties:
+        status: true
+        description: 'Site section links'
+        locked: true
+    system.menu.tools:
+      setProperties:
+        status: true
+        description: 'User tool links, often added by modules'
+        locked: true
+    system.performance:
+      simpleConfigUpdate:
+        cache:
+          page:
+            max_age: 900
+        css:
+          preprocess: true
+          gzip: true
+        fast_404:
+          enabled: true
+          paths: '/\.(?:txt|png|gif|jpe?g|css|js|ico|swf|flv|cgi|bat|pl|dll|exe|asp)$/i'
+          exclude_paths: '/\/(?:styles|imagecache)\//'
+          html: '<!DOCTYPE html><html><head><title>404 Not Found</title></head><body><h1>Not Found</h1><p>The requested URL "@path" was not found on this server.</p></body></html>'
+        js:
+          preprocess: true
+          gzip: true
+    system.site:
+      simpleConfigUpdate:
+        langcode: en
+        slogan: ''
+        page:
+          403: /user/login
+          404: /404
+          front: /home
+        admin_compact_mode: false
+        weight_select_max: 100
+        default_langcode: en
+        mail_notification: null
+    system.theme.global:
+      simpleConfigUpdate:
+        favicon:
+          mimetype: image/vnd.microsoft.icon
+          path: ''
+          url: ''
+          use_default: true
+        features:
+          comment_user_picture: true
+          comment_user_verification: true
+          favicon: true
+          node_user_picture: true
+        logo:
+          path: ''
+          url: null
+          use_default: true
+    system.theme:
+      simpleConfigUpdate:
+        admin: gin
+        default: byte_theme
+    user.flood:
+      simpleConfigUpdate:
+        uid_only: false
+        ip_limit: 50
+        ip_window: 3600
+        user_limit: 5
+        user_window: 21600
+    user.mail:
+      simpleConfigUpdate:
+        langcode: en
+        cancel_confirm:
+          subject: 'Account cancellation request for [user:display-name] at [site:name]'
+          body: |-
+            [user:display-name]
+
+            A request to cancel your account has been made at [site:name].
+
+            You may now cancel your account on [site:url-brief] by clicking this link or copying and pasting it into your browser:
+
+            [user:cancel-url]
+
+            NOTE: The cancellation of your account is not reversible.
+
+            This link expires in one day and nothing will happen if it is not used.
+
+            --  [site:name] team
+        password_reset:
+          subject: 'Replacement login information for [user:display-name] at [site:name]'
+          body: |-
+            [user:display-name],
+
+            A request to reset the password for your account has been made at [site:name].
+
+            You may now log in by clicking this link or copying and pasting it into your browser:
+
+            [user:one-time-login-url]
+
+            This link can only be used once to log in and will lead you to a page where you can set your password. It expires after one day and nothing will happen if it's not used.
+
+            --  [site:name] team
+        register_admin_created:
+          subject: 'An administrator created an account for you at [site:name]'
+          body: |-
+            [user:display-name],
+
+            A site administrator at [site:name] has created an account for you. You may now log in by clicking this link or copying and pasting it into your browser:
+
+            [user:one-time-login-url]
+
+            This link can only be used once to log in and will lead you to a page where you can set your password.
+
+            After setting your password, you will be able to log in at [site:login-url] in the future using:
+
+            username: [user:name]
+            password: Your password
+
+            --  [site:name] team
+        register_no_approval_required:
+          subject: 'Account details for [user:display-name] at [site:name]'
+          body: |-
+            [user:display-name],
+
+            Thank you for registering at [site:name]. You may now log in by clicking this link or copying and pasting it into your browser:
+
+            [user:one-time-login-url]
+
+            This link can only be used once to log in and will lead you to a page where you can set your password.
+
+            After setting your password, you will be able to log in at [site:login-url] in the future using:
+
+            username: [user:name]
+            password: Your password
+
+            --  [site:name] team
+        register_pending_approval:
+          subject: 'Account details for [user:display-name] at [site:name] (pending admin approval)'
+          body: |-
+            [user:display-name],
+
+            Thank you for registering at [site:name]. Your application for an account is currently pending approval. Once it has been approved, you will receive another email containing information about how to log in, set your password, and other details.
+
+            --  [site:name] team
+        register_pending_approval_admin:
+          subject: 'Account details for [user:display-name] at [site:name] (pending admin approval)'
+          body: |-
+            [user:display-name] has applied for an account.
+
+            [user:edit-url]
+        status_activated:
+          subject: 'Account details for [user:display-name] at [site:name] (approved)'
+          body: |-
+            [user:display-name],
+
+            Your account at [site:name] has been activated.
+
+            You may now log in by clicking this link or copying and pasting it into your browser:
+
+            [user:one-time-login-url]
+
+            This link can only be used once to log in and will lead you to a page where you can set your password.
+
+            After setting your password, you will be able to log in at [site:login-url] in the future using:
+
+            username: [user:account-name]
+            password: Your password
+
+            --  [site:name] team
+        status_blocked:
+          subject: 'Account details for [user:display-name] at [site:name] (blocked)'
+          body: |-
+            [user:display-name],
+
+            Your account on [site:name] has been blocked.
+
+            --  [site:name] team
+        status_canceled:
+          subject: 'Account details for [user:display-name] at [site:name] (canceled)'
+          body: |-
+            [user:display-name],
+
+            Your account on [site:name] has been canceled.
+
+            --  [site:name] team
+    user.role.anonymous:
+      setProperties:
+        status: true
+        is_admin: false
+        permissions:
+          - 'access content'
+          - 'use klaro'
+          - 'view media'
+    user.role.authenticated:
+      setProperties:
+        status: true
+        is_admin: false
+        permissions:
+          - 'access administration pages'
+          - 'access coffee'
+          - 'access content'
+          - 'access contextual links'
+          - 'access navigation'
+          - 'bypass honeypot protection'
+          - 'delete own files'
+          - 'skip CAPTCHA'
+          - 'use klaro'
+          - 'use text format webform_default'
+          - 'view media'
+          - 'view own unpublished content'
+          - 'view the administration theme'
+    user.settings:
+      simpleConfigUpdate:
+        langcode: en
+        anonymous: Anonymous
+        verify_mail: true
+        notify:
+          cancel_confirm: true
+          password_reset: true
+          status_activated: true
+          status_blocked: false
+          status_canceled: false
+          register_admin_created: true
+          register_no_approval_required: true
+          register_pending_approval: true
+        register: admin_only
+        cancel_method: user_cancel_block
+        password_reset_timeout: 86400
+        password_strength: true
+
+    ?canvas.component.block.announce_block:
+      disable: []
+    ?canvas.component.block.dashboard_placeholder:
+      disable: []
+    ?canvas.component.block.dashboard_site_status:
+      disable: []
+    ?canvas.component.block.events_block:
+      disable: []
+    ?canvas.component.block.local_actions_block:
+      disable: []
+    ?canvas.component.block.local_tasks_block:
+      disable: []
+    ?canvas.component.block.navigation_dashboard:
+      disable: []
+    ?canvas.component.block.navigation_link:
+      disable: []
+    ?canvas.component.block.navigation_shortcuts:
+      disable: []
+    ?canvas.component.block.navigation_user:
+      disable: []
+    ?canvas.component.block.page_title_block:
+      disable: []
+    canvas.component.block.project_browser_block.*:
+      disable: []
+    ?canvas.component.block.system_clear_cache_block:
+      disable: []
+    ?canvas.component.block.system_messages_block:
+      disable: []
+    ?canvas.component.block.user_login_block:
+      disable: []
+
+    canvas.content_template.node.blog.full:
+      create:
+        content_entity_type_id: node
+        content_entity_type_bundle: blog
+        content_entity_type_view_mode: full
+        component_tree: []
+      setComponentTree:
+        '0:92e68054-9f78-4420-8752-96ec693d2fa9':
+          uuid: 92e68054-9f78-4420-8752-96ec693d2fa9
+          component_id: block.system_breadcrumb_block
+          inputs:
+            label: Breadcrumbs
+            label_display: '0'
+        '1:14f8bf3e-e882-48fb-ba4e-83e932f0748b':
+          uuid: 14f8bf3e-e882-48fb-ba4e-83e932f0748b
+          component_id: sdc.byte_theme.hero-blog
+          component_version: 989a5b66efe6aa48
+          inputs:
+            heading_text:
+              sourceType: entity-field
+              expression: 'ℹ︎␜entity:node:blog␝title␞␟value'
+            level: 1
+            date:
+              sourceType: entity-field
+              expression: 'ℹ︎␜entity:node:blog␝created␞␟value'
+            author:
+              sourceType: entity-field
+              expression: 'ℹ︎␜entity:node:blog␝field_blog__byline␞␟value'
+            media:
+              sourceType: entity-field
+              expression: 'ℹ︎␜entity:node:blog␝field_featured_image␞␟entity␜␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}'
+        '2:ea40592d-2c03-45e8-9c19-a66a96a59ec9':
+          uuid: ea40592d-2c03-45e8-9c19-a66a96a59ec9
+          component_id: sdc.byte_theme.section
+          component_version: 5ef4c2af9bd07348
+          inputs:
+            columns: '100'
+            section_header: true
+            section_footer: true
+            margin_block_start: '0'
+            margin_block_end: '0'
+            mobile_columns: 1
+            width: 75%
+            padding_block_start: '0'
+            padding_block_end: '64'
+            background_color: accent
+        '2:main_slot:0:caa1e4b2-d58b-4140-b99b-ab3e1ce55ad5':
+          parent_uuid: ea40592d-2c03-45e8-9c19-a66a96a59ec9
+          slot: main_slot
+          uuid: caa1e4b2-d58b-4140-b99b-ab3e1ce55ad5
+          component_id: sdc.byte_theme.text
+          component_version: 16c79c28a4108f9b
+          inputs:
+            text:
+              sourceType: entity-field
+              expression: 'ℹ︎␜entity:node:blog␝field_content␞␟processed'
+            text_size: normal
+            text_color: inverted
+        '3:d371f39b-3ad5-4920-afb1-23320aa47c8a':
+          uuid: d371f39b-3ad5-4920-afb1-23320aa47c8a
+          component_id: sdc.byte_theme.section
+          component_version: 5ef4c2af9bd07348
+          inputs:
+            width: 100%
+            columns: '100'
+            mobile_columns: '1'
+            margin_block_start: '0'
+            margin_block_end: '0'
+            padding_block_start: '64'
+            padding_block_end: '64'
+            background_color: muted
+            section_header: true
+            section_footer: true
+            views_columns: 33-33-33
+        '3:header_slot:0:1dfd51a0-5209-45e4-968b-57732f763e7f':
+          parent_uuid: d371f39b-3ad5-4920-afb1-23320aa47c8a
+          slot: header_slot
+          uuid: 1dfd51a0-5209-45e4-968b-57732f763e7f
+          component_id: sdc.byte_theme.heading
+          component_version: 6e6854ead521fa05
+          inputs:
+            heading_text: 'More insights'
+            level: 2
+            text_size: default
+            text_color: default
+            align: center
+        '3:main_slot:0:0ab08fa6-8f5f-40f5-a662-cb824f8893f2':
+          parent_uuid: d371f39b-3ad5-4920-afb1-23320aa47c8a
+          slot: main_slot
+          uuid: 0ab08fa6-8f5f-40f5-a662-cb824f8893f2
+          component_id: block.views_block.blog-related
+          component_version: d30c747ee7b1d2d7
+          inputs:
+            label: 'Blog: Related blog posts'
+            label_display: '0'
+            views_label: ''
+            items_per_page: null
+        '4:4305752c-db60-48dc-837b-c7a12dd656fe':
+          uuid: 4305752c-db60-48dc-837b-c7a12dd656fe
+          component_id: sdc.byte_theme.cta
+          component_version: 2b510bc2d13c6354
+          inputs:
+            heading_text: 'Get ready to transform your operations'
+            level: 2
+            text: 'Sign up for a free trial and discover a world of possibilities to elevate your outreach and engagement strategies'
+            text_align: center
+        '4:actions:0:766d0781-cae3-471f-8d43-0f5f27659fbb':
+          parent_uuid: 4305752c-db60-48dc-837b-c7a12dd656fe
+          slot: actions
+          uuid: 766d0781-cae3-471f-8d43-0f5f27659fbb
+          component_id: sdc.byte_theme.button
+          component_version: 8c253a9827f0ca84
+          inputs:
+            variant: primary
+            size: medium
+            disabled: false
+            label: 'Get started'
+            icon: arrow-right
+            icon_first: false
+        '4:actions:1:f61ffe08-6016-458e-b19f-7bef09f26382':
+          parent_uuid: 4305752c-db60-48dc-837b-c7a12dd656fe
+          slot: actions
+          uuid: f61ffe08-6016-458e-b19f-7bef09f26382
+          component_id: sdc.byte_theme.button
+          component_version: 8c253a9827f0ca84
+          inputs:
+            variant: secondary
+            size: medium
+            disabled: false
+            label: 'Learn more'
+            icon: arrow-right
+            icon_first: false
+
+    canvas.content_template.node.page.full:
+      create:
+        content_entity_type_id: node
+        content_entity_type_bundle: page
+        content_entity_type_view_mode: full
+        component_tree: []
+      setComponentTree:
+        '0:92e68054-9f78-4420-8752-96ec693d2fa9':
+          uuid: 92e68054-9f78-4420-8752-96ec693d2fa9
+          component_id: block.system_breadcrumb_block
+          inputs:
+            label: Breadcrumbs
+            label_display: '0'
+        '1:b436211b-95ef-40ea-987a-e7b0f5782e33':
+          uuid: b436211b-95ef-40ea-987a-e7b0f5782e33
+          component_id: sdc.byte_theme.section
+          component_version: 5ef4c2af9bd07348
+          inputs:
+            columns: '100'
+            width: 75%
+            margin_block_start: '48'
+            margin_block_end: '48'
+            mobile_columns: 1
+            padding_block_start: '0'
+            padding_block_end: '0'
+            section_header: true
+            section_footer: true
+        '1:header_slot:0:f08be9dc-e328-4cb7-9499-df6db9bd8900':
+          parent_uuid: b436211b-95ef-40ea-987a-e7b0f5782e33
+          slot: header_slot
+          uuid: f08be9dc-e328-4cb7-9499-df6db9bd8900
+          component_id: sdc.byte_theme.heading
+          component_version: 6e6854ead521fa05
+          inputs:
+            heading_text:
+              sourceType: entity-field
+              expression: 'ℹ︎␜entity:node:page␝title␞␟value'
+            level: 1
+            text_size: default
+            text_color: default
+            align: left
+            url: 'No URL'
+        '1:main_slot:0:caa1e4b2-d58b-4140-b99b-ab3e1ce55ad5':
+          parent_uuid: b436211b-95ef-40ea-987a-e7b0f5782e33
+          slot: main_slot
+          uuid: caa1e4b2-d58b-4140-b99b-ab3e1ce55ad5
+          component_id: sdc.byte_theme.text
+          component_version: 16c79c28a4108f9b
+          inputs:
+            text:
+              sourceType: entity-field
+              expression: 'ℹ︎␜entity:node:page␝field_content␞␟processed'
+            text_size: normal
+            text_color: default
+
+    canvas.page_region.byte_theme.footer:
+      create:
+        theme: byte_theme
+        region: footer
+        component_tree: []
+      setComponentTree:
+        '0:b4ea9fb2-d3fc-428a-9114-bce92069cbab':
+          uuid: b4ea9fb2-d3fc-428a-9114-bce92069cbab
+          component_id: sdc.byte_theme.footer
+          component_version: d696cea1796b650e
+          inputs:
+            align: true
+        '0:footer_first:0:cc01f585-46ec-48a4-90b6-570277d1f370':
+          parent_uuid: b4ea9fb2-d3fc-428a-9114-bce92069cbab
+          slot: footer_first
+          uuid: cc01f585-46ec-48a4-90b6-570277d1f370
+          component_id: block.system_branding_block
+          inputs:
+            label: 'Site branding'
+            label_display: '0'
+            use_site_logo: true
+            use_site_name: false
+            use_site_slogan: false
+        '0:footer_first:1:fdcf2eb9-c422-4a13-8467-0407d8c2f127':
+          parent_uuid: b4ea9fb2-d3fc-428a-9114-bce92069cbab
+          slot: footer_first
+          uuid: fdcf2eb9-c422-4a13-8467-0407d8c2f127
+          component_id: block.system_menu_block.secondary
+          inputs:
+            label: Secondary
+            label_display: '0'
+            level: 1
+            depth: null
+            expand_all_items: false
+        '0:footer_first:2:23ee7d03-7227-4558-a489-619b59be07e0':
+          parent_uuid: b4ea9fb2-d3fc-428a-9114-bce92069cbab
+          slot: footer_first
+          uuid: 23ee7d03-7227-4558-a489-619b59be07e0
+          component_id: block.system_menu_block.social
+          inputs:
+            label: Social
+            label_display: '0'
+            level: 1
+            depth: null
+            expand_all_items: false
+        '0:footer_last:0:4bffe49a-041a-4120-bed4-3670026e2041':
+          parent_uuid: b4ea9fb2-d3fc-428a-9114-bce92069cbab
+          slot: footer_last
+          uuid: 4bffe49a-041a-4120-bed4-3670026e2041
+          component_id: sdc.byte_theme.heading
+          component_version: 6e6854ead521fa05
+          inputs:
+            heading_text: 'Stay up to date'
+            text_color: default
+            align: left
+            text_size: heading-responsive-2xl
+            level: 2
+        '0:footer_last:1:33b0c50f-4431-4684-9128-ae760159ef36':
+          parent_uuid: b4ea9fb2-d3fc-428a-9114-bce92069cbab
+          slot: footer_last
+          uuid: 33b0c50f-4431-4684-9128-ae760159ef36
+          component_id: sdc.byte_theme.text
+          component_version: 16c79c28a4108f9b
+          inputs:
+            text:
+              value: '<p>Subscribe to our newsletter to be the first to know about our latest updates, exclusive offers, and more.</p>'
+              format: canvas_html_block
+            text_size: text-sm
+            text_color: default
+        '0:footer_last:2:589290f2-3816-47c2-b5cf-44dbe05156ab':
+          parent_uuid: b4ea9fb2-d3fc-428a-9114-bce92069cbab
+          slot: footer_last
+          uuid: 589290f2-3816-47c2-b5cf-44dbe05156ab
+          component_id: block.webform_block
+          inputs:
+            label: Webform
+            label_display: '0'
+            webform_id: newsletter_signup
+            default_data: ''
+            redirect: false
+            lazy: false
+        '0:footer_utility_first:0:4208772f-dd0d-4588-8ce2-8509ba22aadc':
+          parent_uuid: b4ea9fb2-d3fc-428a-9114-bce92069cbab
+          slot: footer_utility_first
+          uuid: 4208772f-dd0d-4588-8ce2-8509ba22aadc
+          component_id: block.system_menu_block.footer
+          inputs:
+            label: Footer
+            label_display: '0'
+            level: 1
+            depth: null
+            expand_all_items: false
+        '0:footer_utility_last:0:a606580b-bd8b-4576-b89e-b9f97ef72d91':
+          parent_uuid: b4ea9fb2-d3fc-428a-9114-bce92069cbab
+          slot: footer_utility_last
+          uuid: a606580b-bd8b-4576-b89e-b9f97ef72d91
+          component_id: sdc.byte_theme.text
+          component_version: 16c79c28a4108f9b
+          inputs:
+            text:
+              value: '<p>© Copyright 2026</p>'
+              format: canvas_html_block
+            text_size: text-sm
+            text_color: default
+
+    canvas.page_region.byte_theme.header:
+      create:
+        theme: byte_theme
+        region: header
+        component_tree: []
+      setComponentTree:
+        '0:f63929cf-c0a3-4ad1-9167-49c5f4261be5':
+          uuid: f63929cf-c0a3-4ad1-9167-49c5f4261be5
+          component_id: sdc.byte_theme.navbar
+          component_version: 3149f199d66bbc29
+          inputs:
+            menu_align: center
+        '0:links:0:3df89a3a-3d7d-47d2-bce2-5423bc9164b1':
+          parent_uuid: f63929cf-c0a3-4ad1-9167-49c5f4261be5
+          slot: links
+          uuid: 3df89a3a-3d7d-47d2-bce2-5423bc9164b1
+          component_id: sdc.byte_theme.button
+          component_version: 8c253a9827f0ca84
+          inputs:
+            variant: primary
+            label: 'Sign up'
+            size: small
+            mobile_width: false
+            icon_first: false
+            disabled: false
+        '0:logo:0:ac1533d8-c91d-4744-9815-905f865b5bf4':
+          parent_uuid: f63929cf-c0a3-4ad1-9167-49c5f4261be5
+          slot: logo
+          uuid: ac1533d8-c91d-4744-9815-905f865b5bf4
+          component_id: block.system_branding_block
+          inputs:
+            label: 'Site branding'
+            label_display: '0'
+            use_site_logo: true
+            use_site_name: false
+            use_site_slogan: false
+        '0:navigation:0:6d91252f-b6dd-46cc-8bf2-5830471cdaf5':
+          parent_uuid: f63929cf-c0a3-4ad1-9167-49c5f4261be5
+          slot: navigation
+          uuid: 6d91252f-b6dd-46cc-8bf2-5830471cdaf5
+          component_id: block.system_menu_block.main
+          inputs:
+            label: 'Main navigation'
+            label_display: '0'
+            level: 1
+            depth: null
+            expand_all_items: false
+
+extra:
+  drupal_cms_installer:
+    creator: Drupal CMS
+    links:
+      - text: Demo
+        url: https://1-x-sto8008tjs6iflsxj7xdugohlnxgmecq.tugboatqa.com/
+      - text: Learn more
+        url: https://new.drupal.org/node/11445224
+  recipe_installer_kit:
+    finish_url: '/admin/dashboard/welcome'

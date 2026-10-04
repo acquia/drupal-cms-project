@@ -1,0 +1,32 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Google Translate
+description: A utility component that integrates automated machine translation for multi-language support.
+group: Global
+status: stable
+props:
+  type: object
+  properties:
+    language:
+      type: string
+      title: Language
+      description: Set the default language used by the widget.
+      default: 'en'
+      examples:
+        - 'en'
+    icon:
+      type: string
+      title: Icon
+      description: Icon depicting the translate widget.
+      default: 'globe'
+      examples:
+        - 'globe'
+libraryOverrides:
+  dependencies:
+    - core/drupal
+    - core/once
+    - morphos/google_translate_library
+  css:
+    component:
+      ../../dist/css/google_translate.css: { minified: true }
+  js:
+    ../../dist/js/google_translate.js: { minified: true }

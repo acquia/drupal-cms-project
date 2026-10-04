@@ -1,0 +1,75 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Footer
+status: stable
+description: Footer component
+# Overrides regular css with minified.
+libraryOverrides:
+  css:
+    component:
+      footer.min.css: { minified: true }
+group: Eureka main components
+props:
+  type: object
+  properties:
+    footer_contact_title:
+      type: ['string', 'null']
+      title: Footer contact title
+      description: Title for the footer contact details - Defaults to 'Contact Us'.
+      examples:
+        - Contact Us
+    footer_times_title:
+      type: ['string', 'null']
+      title: Footer opening times title
+      description: Title for the footer opening times - Defaults to 'Opening Times'.
+      examples:
+        - Opening Times
+    footer_quicklinks_title:
+      type: ['string', 'null']
+      title: Footer quick links title
+      description: Title for the footer quick links - Defaults to 'Quick Links'.
+      examples:
+        - Contact Us
+    footer_location:
+      type: ['string', 'null']
+      title: Footer location
+      description: Location / address info for the footer.
+      examples:
+        - 123 Meadow Lane Greenfield Meadowshire MD12 7AW
+    footer_phone:
+      type: ['string', 'null']
+      title: Footer phone
+      description: Contact phone number for the footer.
+      examples:
+        - 01234 567890
+    footer_email:
+      type: ['string', 'null']
+      title: Footer email
+      description: Contact email address for the footer.
+      examples:
+        - office@willowmeadow.sch.uk
+    footer_times:
+      type: ['string', 'null']
+      title: Text
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - <p><strong>School hours:</strong><br>Monday - Friday<br>8:45 AM - 3:15 PM</p><p><strong>Office hours:</strong><br>Monday - Friday<br>8:00 AM - 4:00 PM</p>
+    footer_copyright:
+      type: ['string', 'null']
+      title: Footer copyright
+      description: Copyright text, year automatically set to current year.
+      examples:
+        - Willow Meadow Primary School. All rights reserved.
+slots:
+  footer_branding_block:
+    title: Footer branding block
+    description: Block to include the site logo and slogan
+  footer_quicklinks_block:
+    title: Footer quick links
+    description: Quick links for the main footer content
+  footer_social_block:
+    title: Footer social
+    description: Social network links for the footer
+  footer_links_block:
+    title: Footer links
+    description: Bottom links next to the copyright

@@ -1,0 +1,65 @@
+request:
+  messages:
+    -
+      role: user
+      text: 'Hello There'
+      images: {  }
+      tools: null
+      tool_id: null
+  debug_data: {  }
+  chat_tools: null
+  chat_structured_json_schema: {  }
+  chat_strict_schema: false
+response:
+  normalized:
+    role: assistant
+    text: 'Hello! How can I help you today? 😊'
+    images: {  }
+    tools: null
+    tool_id: null
+  rawOutput:
+    id: chatcmpl-BsvTd5oCTqNpKXtL7vBvggUhnlFa7
+    object: chat.completion
+    created: 1752430353
+    model: gpt-4.1-2025-04-14
+    choices:
+      -
+        index: 0
+        message:
+          role: assistant
+          content: 'Hello! How can I help you today? 😊'
+        logprobs: null
+        finish_reason: stop
+    usage:
+      prompt_tokens: 9
+      completion_tokens: 10
+      total_tokens: 19
+      prompt_tokens_details:
+        cached_tokens: 0
+        audio_tokens: 0
+      completion_tokens_details:
+        reasoning_tokens: 0
+        accepted_prediction_tokens: 0
+        rejected_prediction_tokens: 0
+        audio_tokens: 0
+  metadata: {  }
+  tokenUsage:
+    input: 9
+    output: 10
+    total: 19
+    reasoning: 0
+    cached: 0
+  rateLimits:
+    rateLimitMaxRequests: 500
+    rateLimitMaxTokens: 30000
+    rateLimitRemainingRequests: 499
+    rateLimitRemainingTokens: 29981
+    rateLimitResetRequests: 120
+    rateLimitResetTokens: 1
+wait: 0
+label: 'Hello There AI API Explorer Test'
+tags:
+  - chat
+  - chat_generation
+  - ai_api_explorer
+operation_type: chat

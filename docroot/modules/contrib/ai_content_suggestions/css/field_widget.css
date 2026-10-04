@@ -1,0 +1,113 @@
+/* Suggestions Button */
+.ai-content-suggestions--enabled .button--primary,
+.ai-content-suggestions--enabled .button--primary:not(:focus),
+.ai-content-suggestions.form-submit {
+  padding-left: 40px !important;
+  background-image: url("../icons/ai_spark_icon_red.svg");
+  background-repeat: no-repeat;
+  background-position: 8px 8px;
+  background-size: 25px;
+}
+.ai-content-suggestions--enabled .button--primary:hover,
+.ai-content-suggestions.form-submit:hover {
+  background-image: url("../icons/ai_spark_icon_purple.svg");
+}
+
+/* Long text */
+.field--type-text-long.ai-content-suggestions--enabled .form-textarea-wrapper {
+  position: relative;
+}
+/* Long text AI function indicator */
+.field--type-text-long.ai-content-suggestions--enabled .form-textarea-wrapper::after {
+  top: 56px;
+}
+/* Long text button positioning */
+.field--type-text-long.ai-content-suggestions--enabled:has(.ck-focused) .filter-wrapper {
+  float: right;
+}
+
+.field--type-string.field--name-title.ai-content-suggestions--enabled *:has(> .form-element)::after {
+  top: 44px;
+}
+
+.field--type-string.field--name-title.ai-content-suggestions--enabled *:has(> .form-element) {
+  flex-grow: 1;
+}
+
+/* Short text */
+.field--type-string.ai-content-suggestions--enabled *:has(> .form-element),
+.field--type-string-long.ai-content-suggestions--enabled *:has(> .form-element) {
+  position: relative;
+}
+.field--type-string.ai-content-suggestions--enabled .ai-content-suggestions.button,
+.field--type-string-long.ai-content-suggestions--enabled .ai-content-suggestions.button,
+.field--type-string.ai-content-suggestions--enabled .field-widget-action-widget-button,
+.field--type-string-long.ai-content-suggestions--enabled .field-widget-action-widget-button {
+  margin-left: 16px;
+}
+.field--type-string.ai-content-suggestions--enabled,
+.field--type-string-long.ai-content-suggestions--enabled {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+/* Align the button with the bottom of the input. */
+.field--type-string.ai-content-suggestions--enabled,
+.field--type-string-long.ai-content-suggestions--enabled {
+  align-items: end;
+}
+.field--type-string.ai-content-suggestions--enabled .field-widget-action-widget-button,
+.field--type-string-long.ai-content-suggestions--enabled .field-widget-action-widget-button {
+  margin-block-end: var(--space-l, 1.5rem);
+}
+/* Pin button to col 2 row 1 so any other auto-placed sibling (e.g. length-indicator) flows into row 2. */
+.field--type-string.ai-content-suggestions--enabled .field-widget-action-widget-button,
+.field--type-string-long.ai-content-suggestions--enabled .field-widget-action-widget-button,
+.field--type-string.ai-content-suggestions--enabled .ai-content-suggestions.button,
+.field--type-string-long.ai-content-suggestions--enabled .ai-content-suggestions.button {
+  grid-row: 1;
+  grid-column: 2;
+}
+.field--type-string.ai-content-suggestions--enabled *:has(> .form-element)::after {
+  top: 36px;
+}
+.field--type-string-long.ai-content-suggestions--enabled .form-textarea-wrapper::after {
+  bottom: 10px;
+}
+
+/* AI function indicator */
+.field--type-string.ai-content-suggestions--on-focus *:has(> .form-element)::after,
+.field--type-string-long.ai-content-suggestions--on-focus .form-textarea-wrapper::after,
+.field--type-text-long.ai-content-suggestions--on-focus .form-textarea-wrapper::after {
+  position: absolute;
+  right: 12px;
+  display: block;
+  padding-left: 32px;
+  content: "AI Function";
+  transition: all 0.25s ease-in-out;
+  pointer-events: none;
+  opacity: 1;
+  color: #afafaa;
+  background-color: white;
+  background-image: url("../icons/ai_spark.svg");
+  background-repeat: no-repeat;
+  background-position: 8px;
+  background-size: 16px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.field--type-string.ai-content-suggestions--on-focus:focus-within *:has(> .form-element)::after,
+.field--type-string-long.ai-content-suggestions--on-focus:focus-within .form-textarea-wrapper::after,
+.field--type-text-long.ai-content-suggestions--on-focus:focus-within .form-textarea-wrapper::after {
+  opacity: 0;
+}
+
+/* Only show button when fields are focused. :focus-within keeps the button
+   visible while the button itself has focus, so it can be clicked. */
+.ai-content-suggestions--on-focus .field-widget-action-widget-button {
+  display: none;
+}
+
+.ai-content-suggestions--on-focus:focus-within .field-widget-action-widget-button {
+  display: block;
+}

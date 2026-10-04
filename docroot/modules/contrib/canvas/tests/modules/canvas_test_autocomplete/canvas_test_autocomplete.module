@@ -1,0 +1,56 @@
+<?php
+
+declare(strict_types=1);
+
+use Drupal\Core\Form\FormStateInterface;
+
+function canvas_test_autocomplete_form_component_instance_form_alter(array &$form, FormStateInterface $form_state): void {
+  $form['test_autocomplete'] = [
+    '#type' => 'textfield',
+    '#title' => 'Autocomplete Field',
+    '#autocomplete_route_name' => 'some.autocomplete.results',
+  ];
+
+  // Adds an auto-complete for a config entity, to test that autocomplete can
+  // also work without resolving a URI as the link widget does.
+  // @see https://www.drupal.org/project/canvas/issues/3588884
+  if (\Drupal::moduleHandler()->moduleExists('image')) {
+    $form['test_image_style_autocomplete'] = [
+      '#type' => 'entity_autocomplete',
+      '#title' => 'Image style autocomplete',
+      '#target_type' => 'image_style',
+    ];
+  }
+
+  $form['test_ajax_container'] = [
+    '#type' => 'container',
+    '#attributes' => ['id' => 'test-ajax-container'],
+  ];
+
+  $form['add_test_content'] = [
+    '#type' => 'button',
+    '#value' => t('Click to test AJAX vs PATCH'),
+    '#ajax' => [
+      'callback' => 'canvas_test_autocomplete_add_test_content_callback',
+      'wrapper' => 'test-ajax-container',
+    ],
+  ];
+  $form['add_test_content_help'] = [
+    '#markup' => '<p>
+        To test AJAX before PATCH, enter "z" in the autocomplete input then click the button to blur it.
+        </p>
+        <p>
+        To test PATCH before AJAX, throttle your connection speed, enter a value in any non-autocomplete input then quickly click the button.
+        </p>',
+  ];
+}
+
+/**
+ * AJAX callback to add a div with test content.
+ */
+function canvas_test_autocomplete_add_test_content_callback(array &$form, FormStateInterface $form_state): array {
+  $form['test_ajax_container']['test_content'] = [
+    '#markup' => '<div>Test content added by AJAX. ' . time() . '</div>',
+  ];
+  return $form['test_ajax_container'];
+}

@@ -1,0 +1,39 @@
+core.entity_view_display.*.*.*.third_party.custom_field_sdc:
+  type: custom_field_sdc.third_party_settings
+
+custom_field_sdc.third_party_settings:
+  type: mapping
+  label: 'Per-view-mode SDC display settings'
+  mapping:
+    settings:
+      type: mapping
+      label: Settings
+      mapping:
+        enabled:
+          type: boolean
+          label: 'Enable SDC'
+        component:
+          type: string
+          label: 'Component'
+        variant:
+          type: string
+          label: 'Variant'
+        props:
+          type: sequence
+          label: 'Props'
+          sequence:
+            type: custom_field.dynamic_property
+            label: 'Prop'
+        slots:
+          type: sequence
+          label: 'Slots'
+          sequence:
+            type: mapping
+            label: 'Slot'
+            mapping:
+              source:
+                type: string
+                label: 'Source'
+              field:
+                type: string
+                label: 'Field'

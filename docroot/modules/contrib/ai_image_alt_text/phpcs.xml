@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<ruleset name="Module">
+  <description>Drupal 11 coding standards for module.</description>
+  <file>.</file>
+  <arg name="extensions" value="php,module,inc,install,test,profile,theme,info,txt,md,yml"/>
+  <config name="drupal_core_version" value="11"/>
+
+  <exclude-pattern>*/.git/*</exclude-pattern>
+  <exclude-pattern>*/config/*</exclude-pattern>
+  <exclude-pattern>*/css/*</exclude-pattern>
+  <exclude-pattern>*/js/*</exclude-pattern>
+  <exclude-pattern>*/node_modules/*</exclude-pattern>
+  <exclude-pattern>*/vendor/*</exclude-pattern>
+  <exclude-pattern>*/.github/*</exclude-pattern>
+
+  <rule ref="Drupal">
+    <!-- Drupal.org packages add info keys automatically -->
+    <exclude name="Drupal.InfoFiles.AutoAddedKeys"/>
+  </rule>
+
+  <rule ref="DrupalPractice"/>
+</ruleset>

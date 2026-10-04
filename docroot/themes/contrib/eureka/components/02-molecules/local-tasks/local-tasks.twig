@@ -1,0 +1,74 @@
+{#
+/**
+ * Available variables:
+ * - local_tasks_base_class - base classname of the wrapper.
+ * - local_tasks_modifiers - array of modifiers to add to the base classname of the wrapper.
+ * - local_tasks_blockname - blockname prepended to the base classname of the wrapper(s) and each component.
+ * - local_tasks_extra_classes - array of extra classes to add to the base classes.
+ *
+ * - primary: HTML list items representing primary tasks.
+ * - secondary: HTML list items representing secondary tasks.
+ *
+ * - tasks - array of links including the tasks
+ * - local_tasks_contained: Set this option to true if you want the component to sit within a container.
+ *
+ * Each item in these variables (primary and secondary) can be individually
+ * themed in menu-local-task.html.twig.
+ * Available blocks:
+ * - list_content_block
+ */
+#}
+
+{% set local_tasks_base_class = 'local-tasks' %}
+{% set local_tasks_contained = local_tasks_contained|default(false) %}
+{% if local_tasks_contained %}
+  {% set local_tasks_extra_classes = ['container'] %}
+{% endif %}
+
+<div {{ bem(local_tasks_base_class, local_tasks_modifiers, local_tasks_blockname, local_tasks_extra_classes) }}>
+  {# Drupal specific #}
+  {% if primary %}
+    {# Screenreader-only text #}
+    {{ include("eureka:heading", {
+      heading: 'Primary tabs'|t,
+      heading_level: 2,
+      heading_extra_classes: ['visually-hidden'],
+    }, with_context = false) }}
+    {% embed "eureka:list" with {
+      list_base_class: 'nav',
+      list_blockname: local_tasks_base_class,
+    } %}
+      {% block list_content_block %}
+        {{ primary }}
+      {% endblock %}
+    {% endembed %}
+  {% elseif secondary %}
+    {# Screenreader-only text #}
+    {{ include("eureka:heading", {
+      heading: 'Secondary tabs'|t,
+      heading_level: 2,
+      heading_extra_classes: ['visually-hidden'],
+    }, with_context = false) }}
+    {% embed "eureka:list" %}
+      {% block list_content_block %}
+        {{ secondary }}
+      {% endblock %}
+    {% endembed %}
+  {% else %}
+  {# Storybook specific #}
+    {% embed "eureka:list" with {
+      list_base_class: 'nav',
+      list_blockname: local_tasks_base_class,
+    } %}
+      {% block list_content_block %}
+        {% for task in tasks %}
+          {{ include("eureka:local-task", {
+            local_task_text: task.text,
+            local_task_url: task.url|default('#'),
+            is_active: task.is_active,
+          }, with_context = false) }}
+        {% endfor %}
+      {% endblock %}
+    {% endembed %}
+  {% endif %}
+</div>

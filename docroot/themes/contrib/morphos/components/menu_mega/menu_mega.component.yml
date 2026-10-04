@@ -1,0 +1,54 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Menu Mega
+description: Menu formatted as a megamenu with columns of links with descriptions.
+group: Content
+props:
+  type: object
+  properties:
+    items:
+      title: Nav items
+      type: array
+      items:
+        type: object
+        properties:
+          url:
+            title: url
+            type: ['string', 'object', 'null']
+          title:
+            title: title
+            type: ['string', 'object', 'null']
+          below:
+            title: Child items
+            type: array
+    show_mobile_toggle:
+      title: Show mobile toggle
+      type: boolean
+      default: false
+    megamenu_columns:
+      title: Mega menu columns
+      type: string
+      default: '4'
+      enum:
+        - '2'
+        - '3'
+        - '4'
+        - '5'
+        - '6'
+    menu_classes:
+      title: Extra classes for the desktop menu
+      type: array
+      items:
+        type: string
+    mobile_classes:
+      title: Extra classes for the mobile dropdown
+      type: array
+      items:
+        type: string
+libraryOverrides:
+  dependencies:
+    - core/drupal
+    - core/once
+    - core/jquery
+    - morphos/accessible_megamenu_library
+  js:
+    menu_mega.js: {}

@@ -1,0 +1,38 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Slider
+group: Base
+description: "Image slider/carousel with Swiper. Figma desktop 1-9547, mobile 1-9299. Drop Image components into the Slides slot — each becomes a slide."
+props:
+  type: object
+  properties:
+    autoplay:
+      type: boolean
+      title: Autoplay
+      default: false
+    autoplay_delay:
+      type: number
+      title: Autoplay delay (ms)
+      default: 4000
+    loop:
+      type: boolean
+      title: Loop slides
+      default: true
+    show_arrows:
+      type: boolean
+      title: Show arrows
+      default: true
+    show_pagination:
+      type: boolean
+      title: Show pagination dots
+      default: true
+
+slots:
+  slides:
+    title: Slides
+    description: "Drop Image components here — each one becomes a slide."
+
+libraryOverrides:
+  dependencies:
+    - caresphere_theme/swiper
+  js:
+    slider.js: {}

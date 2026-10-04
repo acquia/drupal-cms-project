@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 340" font-family="Roboto, sans-serif">
+  <defs>
+    <style>
+      .step { fill: #009688; rx: 8; }
+      .step-text { fill: #fff; font-size: 13px; font-weight: 600; text-anchor: middle; dominant-baseline: central; }
+      .outcome { rx: 6; stroke-width: 1.5; }
+      .outcome-ok { fill: #e8f5e9; stroke: #66bb6a; }
+      .outcome-err { fill: #fbe9e7; stroke: #ef5350; }
+      .outcome-text { font-size: 12px; text-anchor: middle; dominant-baseline: central; }
+      .ok-text { fill: #2e7d32; }
+      .err-text { fill: #c62828; }
+      .arrow { fill: none; stroke: #78909c; stroke-width: 2; marker-end: url(#ah); }
+      .branch { fill: none; stroke: #78909c; stroke-width: 1.5; marker-end: url(#ah); }
+    </style>
+    <marker id="ah" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#78909c"/>
+    </marker>
+  </defs>
+  <!-- Step 1: Click Test -->
+  <rect x="130" y="10" width="180" height="38" class="step"/>
+  <text x="220" y="29" class="step-text">Click Test</text>
+  <line x1="220" y1="48" x2="220" y2="68" class="arrow"/>
+  <!-- Step 2: Save if needed -->
+  <rect x="130" y="68" width="180" height="38" class="step"/>
+  <text x="220" y="87" class="step-text">Save (if needed)</text>
+  <line x1="220" y1="106" x2="220" y2="126" class="arrow"/>
+  <!-- Step 3: Send request -->
+  <rect x="100" y="126" width="240" height="38" class="step"/>
+  <text x="220" y="145" class="step-text">Send test request to backend</text>
+  <line x1="220" y1="164" x2="220" y2="184" class="arrow"/>
+  <!-- Step 4: Waiting -->
+  <rect x="120" y="184" width="200" height="38" class="step"/>
+  <text x="220" y="203" class="step-text">Waiting state (polling)</text>
+  <!-- Branch: Success -->
+  <path d="M170,222 L170,250 L120,250" class="branch"/>
+  <rect x="10" y="260" width="220" height="36" class="outcome outcome-ok"/>
+  <text x="120" y="278" class="outcome-text ok-text">Backend ready -- Results displayed</text>
+  <!-- Branch: Error -->
+  <path d="M270,222 L270,250 L320,250" class="branch"/>
+  <rect x="210" y="260" width="220" height="36" class="outcome outcome-err"/>
+  <text x="320" y="278" class="outcome-text err-text">Error -- Error message shown</text>
+</svg>

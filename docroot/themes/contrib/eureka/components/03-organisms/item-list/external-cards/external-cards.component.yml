@@ -1,0 +1,29 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: External cards list
+status: stable
+description: Listing to display different types of items
+group: Eureka main components
+props:
+  type: object
+  properties:
+    external_cards_heading:
+      type: string
+      title: Item list heading
+      description: Heading element of the component title
+      examples:
+        - E-Learning Platforms
+    external_cards_heading_level:
+      type: ['number', 'null']
+      title: Item list heading level
+      description: Heading level of the heading element - only change this if you know what you're doing, as it affects accessibility
+      enum:
+          - 2
+          - 3
+          - 4
+          - 5
+      examples:
+          - 2
+slots:
+  external_cards_items:
+    title: External cards list items
+    description: Block slot for external cards list items

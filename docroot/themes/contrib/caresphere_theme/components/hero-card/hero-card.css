@@ -1,0 +1,277 @@
+/**
+ * @file hero-card.css
+ * SDC Hero Card component styles.
+ *
+ * Figma desktop node: 1:11105 — 640px tall, 64px side padding.
+ * Figma mobile  node: 1:10813 — auto height, 32px all-around padding.
+ */
+
+/* ============================================================
+   Container
+   ============================================================ */
+
+.hero-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+/* ============================================================
+   Card (background + content wrapper)
+   ============================================================ */
+
+.hero-card__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: var(--radius);
+  overflow: hidden;
+
+  /* Mobile: padding 32px all sides, auto height */
+  padding: calc(var(--spacing) * 8);
+}
+
+@media (min-width: 48rem) {
+  .hero-card__card {
+    /* Desktop: 640px tall, 64px horizontal padding */
+    min-height: 640px;
+    padding-inline: calc(var(--spacing) * 16);
+    padding-block: 0;
+  }
+}
+
+/* ============================================================
+   Background image + overlay
+   ============================================================ */
+
+.hero-card__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero-card__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-width: none;
+}
+
+.hero-card__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================================
+   Content column
+   ============================================================ */
+
+.hero-card__column {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 768px;
+
+  /* Mobile: 24px gap between content and actions */
+  gap: calc(var(--spacing) * 6);
+}
+
+@media (min-width: 48rem) {
+  .hero-card__column {
+    /* Desktop: 32px gap */
+    gap: calc(var(--spacing) * 8);
+  }
+}
+
+/* ============================================================
+   Text content
+   ============================================================ */
+
+.hero-card__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  color: #ffffff;
+
+  /* Mobile: 20px gap between heading and description */
+  gap: calc(var(--spacing) * 5);
+}
+
+@media (min-width: 48rem) {
+  .hero-card__content {
+    /* Desktop: 24px gap */
+    gap: calc(var(--spacing) * 6);
+  }
+}
+
+/* ============================================================
+   Heading
+   Figma: IBM Plex Serif Regular, 72px, letter-spacing -0.72px, lh 1.2
+   Theme token: --text-7xl = 4.5rem = 72px
+   ============================================================ */
+
+.hero-card__heading {
+  font-family: var(--font-serif);
+  font-weight: var(--font-weight-normal);
+  font-style: normal;
+  color: #ffffff;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  font-size: var(--text-4xl);
+}
+
+@media (min-width: 48rem) {
+  .hero-card__heading {
+    font-size: var(--text-7xl);
+    letter-spacing: -0.01em;
+  }
+}
+
+/* ============================================================
+   Description
+   Figma mobile:  DM Sans Regular 16px, lh 1.5
+   Figma desktop: DM Sans Regular 18px, lh 1.5
+   Theme tokens: --text-base = 1rem (16px), --text-lg = 1.125rem (18px)
+   ============================================================ */
+
+.hero-card__description {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-normal);
+  color: #ffffff;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+  line-height: 1.5;
+  font-size: var(--text-base);
+}
+
+@media (min-width: 48rem) {
+  .hero-card__description {
+    font-size: var(--text-lg);
+  }
+}
+
+/* ============================================================
+   Actions (button row)
+   ============================================================ */
+
+.hero-card__actions {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--spacing) * 4);
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* Empty state: hidden on the live site; visible drop zone in Canvas editor */
+.hero-card__empty-state {
+  display: none;
+}
+
+/* !important: Canvas slot wrappers can otherwise collapse this to the default dots. */
+.in-canvas .hero-card__empty-state {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.5rem;
+  width: 100%;
+  max-width: 28rem;
+  margin-inline: auto;
+  padding: calc(var(--spacing) * 2);
+  box-sizing: border-box;
+  border: 1px dashed rgba(255, 255, 255, 0.45);
+  border-radius: var(--radius);
+  background-color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.75);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+.in-canvas .hero-card__actions {
+  width: 100%;
+  min-height: 3.5rem;
+}
+
+/* Do not use :has() to hide this — Canvas injects wrapper elements as siblings. */
+
+/* ============================================================
+   Buttons — shared base
+   Figma: DM Sans Medium 16px, px 24px, py 10px
+   ============================================================ */
+
+.hero-card__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: calc(var(--spacing) * 6);
+  padding-block: calc(var(--spacing) * 2.5);
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  border-style: solid;
+  border-left-width: 1.5px;
+  border-right-width: 1.5px;
+  border-top-width: 1.5px;
+  border-bottom-width: 4px;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.hero-card__btn:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   Primary button
+   Figma: bg #c30000, border #9c0000
+   Theme tokens: --primary = #c30000, --destructive = #9c0000
+   ============================================================ */
+
+.hero-card__btn--primary {
+  background-color: var(--primary);
+  border-color: var(--destructive);
+  color: #ffffff;
+}
+
+.hero-card__btn--primary:hover {
+  background-color: var(--destructive);
+  text-decoration: none;
+}
+
+/* ============================================================
+   Secondary button
+   Figma: transparent bg, border rgba(255,255,255,0.2)
+   Theme token: --border-secondary = rgba(255,255,255,0.2)
+   ============================================================ */
+
+.hero-card__btn--secondary {
+  background-color: transparent;
+  border-color: var(--border-secondary);
+  color: #ffffff;
+}
+
+.hero-card__btn--secondary:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  text-decoration: none;
+}

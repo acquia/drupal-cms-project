@@ -1,0 +1,30 @@
+eca.event.plugin.workflow:transition:
+  type: eca.event.plugin
+  label: 'Workflow Transition'
+  mapping:
+    type:
+      type: string
+      label: 'Type (and bundle)'
+      constraints:
+        Choice:
+          callback: '\Drupal\eca\Validation\EcaConstraintCallbacks::getAllValidContentEntityTypesAndBundlesIncludeAny'
+    from_state:
+      type: string
+      label: 'From state'
+    to_state:
+      type: string
+      label: 'To state'
+
+action.configuration.eca_workflow_transition:*:
+  type: mapping
+  label: 'Configuration for the "Workflow Transition" action'
+  mapping:
+    new_state:
+      type: string
+      label: 'New state'
+    revision_log:
+      type: text
+      label: 'Revision Log'
+    object:
+      type: string
+      label: 'Token name holding the entity'

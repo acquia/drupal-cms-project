@@ -1,0 +1,144 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+
+name: Space Button
+
+description: A customizable button with options for icon, text, size, style, and state to fit different interactions.
+
+status: stable
+
+group: Atoms
+
+props:
+
+  type: object
+
+  required:
+    - text
+    - url
+    - size
+
+  properties:
+    text:
+      type: string
+      title: Button text
+      description: The text displayed on the button.
+      examples:
+        - 'Contact Us'
+
+    url:
+      type: string
+      title: URL
+      description: The action URL that the button links to when clicked.
+      examples:
+        - 'https://www.qed42.com/contact'
+
+    variant:
+      type: string
+      title: Variants
+      description: The visual style of the button (e.g., primary, secondary).
+      enum:
+        - primary
+        - secondary
+      default: primary
+      examples:
+        - 'primary'
+
+    size:
+      type: string
+      title: Size
+      description: The size of the button (e.g., small, medium, large).
+      enum:
+        - small
+        - medium
+        - large
+        - xlarge
+        - xxlarge
+        - xxxlarge
+      default: small
+      examples:
+        - 'small'
+
+    button_corners:
+      type: string
+      title: Corners
+      description: The style of the button corners (e.g., rounded or square).
+      enum:
+        - rectangle_corner
+        - rounded_half_circle
+      default: rounded_half_circle
+      examples:
+        - 'rounded_half_circle'
+
+    button_type:
+      type: string
+      title: Type
+      description: The type of button, determining whether it shows only an icon, only text, or both.
+      enum:
+        - only_icon
+        - text_with_icon
+        - only_text
+      default: only_text
+      examples:
+        - 'only_text'
+
+    icon:
+      type: string
+      title: Icon name
+      description: 'The ID of an icon from the <a href="https://phosphoricons.com" target="_blank">Phosphor Icons</a> library.'
+      default: "rocket"
+      examples:
+        - "rocket"
+
+    icon_size:
+      type: string
+      title: Icon size
+      enum:
+        - small
+        - medium
+        - large
+        - extra-large
+      meta:enum:
+        small: Small
+        medium: Medium
+        large: Large
+        extra-large: Extra large
+      examples:
+        - medium
+
+    icon_alignment:
+      type: string
+      title: Icon alignment
+      description: The alignment of the icon relative to the button text (left or right).
+      enum:
+        - left
+        - right
+      default: right
+      examples:
+        - 'right'
+
+    expanded:
+      type: string
+      title: Expanded
+      description: Whether the button should be full width or auto width.
+      enum:
+        - yes
+        - no
+      default: no
+      examples:
+        - no
+
+    button_state:
+      type: string
+      title: State
+      description: The state of the button (e.g., focused or disabled).
+      enum:
+        - focused
+        - disabled
+      default: focused
+      examples:
+        - 'focused'
+
+    classes:
+      type: string
+      title: Class names
+      description: Custom CSS class names (separate by spaces), applied when custom style is enabled.

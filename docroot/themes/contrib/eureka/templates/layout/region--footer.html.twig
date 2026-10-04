@@ -1,0 +1,36 @@
+{#
+/**
+ * @file
+ * Theme override to display a region.
+ *
+ * Available variables:
+ * - content: The content for this region, typically blocks.
+ * - attributes: HTML attributes for the region div.
+ * - region: The name of the region variable as defined in the theme's
+ *   .info.yml file.
+ *
+ * @see template_preprocess_region()
+ */
+#}
+
+{% embed "eureka:footer" with {
+  footer_location: global_location,
+  footer_phone: global_phone,
+  footer_email: global_email,
+  footer_contact_title: footer_contact_title,
+  footer_times_title: footer_times_title,
+  footer_quicklinks_title: footer_quicklinks_title,
+} %}
+  {% block footer_branding_block %}
+    {{ elements.eureka_sitebranding }}
+  {% endblock %}
+  {% block footer_quicklinks_block %}
+    {{ elements.eureka_quicklinks }}
+  {% endblock %}
+  {% block footer_social_block %}
+    {{ elements.eureka_social }}
+  {% endblock %}
+  {% block footer_links_block %}
+    {{ elements.eureka_footer }}
+  {% endblock %}
+{% endembed %}

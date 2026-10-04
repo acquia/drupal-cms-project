@@ -1,0 +1,267 @@
+<?php
+
+/**
+ * @file
+ * This module enables ALTCHA functionality.
+ */
+
+use Drupal\Component\Serialization\Json;
+use Drupal\Core\Url;
+use Drupal\altcha\Controller\ChallengeController;
+use Drupal\altcha\Form\AltchaSettingsForm;
+use Drupal\altcha\Utility\AltchaI18nUtility;
+
+/**
+ * Implements hook_theme().
+ */
+function altcha_theme(): array {
+  return [
+    'altcha_widget' => [
+      'variables' => [
+        'attributes' => [],
+        'content' => [],
+      ],
+      'template' => 'altcha-widget',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_captcha().
+ */
+function altcha_captcha(string $op, string $captcha_type = '') {
+  switch ($op) {
+    case 'list':
+      return ['ALTCHA'];
+
+    case 'generate':
+      if ($captcha_type === 'ALTCHA') {
+        $config = \Drupal::configFactory()->get('altcha.settings');
+
+        $labels = array_filter(array_map(function ($altcha_info) use ($config) {
+          return $config->get($altcha_info['altcha_key']) ?? NULL;
+        }, AltchaSettingsForm::getLabelMap()));
+
+        switch ($config->get('integration_type')) {
+          case 'sentinel_api':
+            $base_url = $config->get('sentinel_api_url');
+            $challenge_url = Url::fromUri($base_url . AltchaSettingsForm::SENTINEL_API_CHALLENGE_PATH, [
+              'query' => array_filter([
+                'apiKey' => $config->get('sentinel_api_key') ?? NULL,
+              ]),
+            ])->toString();
+            break;
+
+          case 'saas_api':
+            $region_map = AltchaSettingsForm::getRegionUrlMap();
+            $base_url = $region_map[$config->get('saas_api_region')];
+            $challenge_url = Url::fromUri($base_url . AltchaSettingsForm::SAAS_API_CHALLENGE_PATH, [
+              'query' => array_filter([
+                'apiKey' => $config->get('saas_api_key') ?? NULL,
+                'maxnumber' => $config->get('max_number') ?? NULL,
+              ]),
+            ])->toString();
+            break;
+
+          case 'self_hosted':
+          default:
+            $challenge_url = Url::fromRoute('altcha.challenge')->toString();
+            break;
+        }
+
+        [$language, $i18n_library] = AltchaI18nUtility::getI18nAttachment($labels);
+
+        $attributes = [
+          'challengeurl' => $challenge_url,
+          'maxnumber' => $config->get('max_number') ?? ChallengeController::DEFAULT_MAX_NUMBER,
+          'hidelogo' => $config->get('hide_logo') ?? NULL,
+          'hidefooter' => $config->get('hide_footer') ?? NULL,
+          'expire' => $config->get('expire') ?? NULL,
+          'delay' => $config->get('delay') ?? NULL,
+          'auto' => $config->get('auto_verification') ?? NULL,
+          'language' => $language,
+        ];
+
+        if ($config->get('floating_enabled')) {
+          $attributes += [
+            'floating' => $config->get('floating_mode'),
+            'floatingoffset' => $config->get('floating_offset') ?? NULL,
+            // The default ALTCHA selector 'input[type="submit"]' will
+            // not work on forms with a file upload field. Use the name="op"
+            // selector by default instead - this is not an ideal solution,
+            // since it won't always work correctly on multistep forms
+            // where there are 'next' and 'previous' submit buttons.
+            'floatinganchor' => $config->get('floating_anchor') ?: 'input[name="op"]',
+          ];
+        }
+
+        return [
+          'solution' => TRUE,
+          // As the validate callback does not depend on sid or solution,
+          // this captcha type can be displayed on cached pages.
+          'cacheable' => TRUE,
+          'form' => [
+            'captcha_response' => [
+              '#theme' => 'altcha_widget',
+              '#attributes' => array_filter($attributes),
+              '#attached' => array_merge_recursive(
+                altcha_get_attached_library('altcha/altcha', 'library_override'),
+                altcha_get_fallback_library(),
+                $i18n_library,
+              ),
+              '#cache' => [
+                'tags' => [
+                  'config:altcha.settings',
+                ],
+              ],
+            ],
+          ],
+          'captcha_validate' => 'altcha_captcha_validation',
+        ];
+      }
+  }
+}
+
+/**
+ * Validate the ALTCHA solution on form submit.
+ *
+ * @see altcha_captcha
+ */
+function altcha_captcha_validation($solution, $response, $element, $form_state): bool {
+  $hash = \Drupal::request()->request->get('altcha');
+  if (!is_string($hash)) {
+    return FALSE;
+  }
+
+  $json = base64_decode($hash);
+  if (!$json) {
+    return FALSE;
+  }
+
+  $payload = Json::decode($json);
+  $config = \Drupal::configFactory()->get('altcha.settings');
+  switch ($config->get('integration_type')) {
+    case 'sentinel_api':
+      $result = \Drupal::service('altcha.sentinel_solution_verification')->verify($payload);
+
+      // Support fallback to self-hosted when feature flag is enabled. Detection
+      // is based on the apiKey property, which is only present when a sentinel
+      // challenge solution is passed as payload to this validate callback.
+      if ($result === FALSE && $config->get('sentinel_fallback_enabled') && !isset($payload['apiKey'])) {
+        \Drupal::logger('altcha')->warning('ALTCHA Sentinel API fallback to self-hosted was used.');
+        return \Drupal::service('altcha.self_hosted_solution_verification')->verify($payload);
+      }
+      return $result;
+
+    case 'saas_api':
+    case 'self_hosted':
+    default:
+      return \Drupal::service('altcha.self_hosted_solution_verification')->verify($payload);
+  }
+
+}
+
+/**
+ * Implements template_preprocess_captcha().
+ *
+ * When floating UI (invisible captcha) is active, hide the CAPTCHA wrapper.
+ */
+function altcha_preprocess_captcha(&$variables, $hook, $info): void {
+  $altcha_config = \Drupal::configFactory()->get('altcha.settings');
+  if ($altcha_config->get('floating_enabled')) {
+    $variables['is_visible'] = FALSE;
+  }
+}
+
+/**
+ * Conditionally retrieves the ALTCHA fallback library to be attached.
+ */
+function altcha_get_fallback_library(): array {
+  $config = \Drupal::configFactory()->get('altcha.settings');
+  if ($config->get('integration_type') === 'sentinel_api' && $config->get('sentinel_fallback_enabled')) {
+    return [
+      'library' => [
+        'altcha/altcha.fallback',
+      ],
+      'drupalSettings' => [
+        'altcha' => [
+          'fallbackChallengeUrl' => Url::fromRoute('altcha.challenge')->toString(),
+        ],
+      ],
+    ];
+  }
+
+  return [];
+}
+
+/**
+ * Retrieves an ALTCHA library to be attached.
+ *
+ * @param string $default_library
+ *   The default library key.
+ * @param string $override_config_key
+ *   The library override config key within altcha.settings.
+ *
+ * @return array
+ *   The attachments to be added.
+ */
+function altcha_get_attached_library(string $default_library, string $override_config_key): array {
+  $library_override = \Drupal::configFactory()->get('altcha.settings')->get($override_config_key) ?? '';
+
+  // Use the default library.
+  if (empty($library_override)) {
+    $attached['library'][] = $default_library;
+    return $attached;
+  }
+
+  /** @var \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator */
+  $file_url_generator = \Drupal::service('file_url_generator');
+
+  /** @var \Drupal\Core\StreamWrapper\StreamWrapperManagerInterface $stream_wrapper_manager */
+  $stream_wrapper_manager = \Drupal::service('stream_wrapper_manager');
+
+  $drupal_root = \Drupal::root();
+
+  // Check if the path is a valid stream wrapper (e.g., 'public://').
+  if ($stream_wrapper_manager->isValidUri($library_override)) {
+    $src = $file_url_generator->generateAbsoluteString($library_override);
+  }
+  // If the path is an external URL, use it directly.
+  elseif (filter_var($library_override, FILTER_VALIDATE_URL)) {
+    $src = $library_override;
+  }
+  // If the path is an absolute server path, convert it relative to web root.
+  elseif (str_starts_with($library_override, $drupal_root)) {
+    $library_override = str_replace("$drupal_root/", '', $library_override);
+    $src = $file_url_generator->generateAbsoluteString($library_override);
+  }
+  else {
+    $src = $file_url_generator->generateAbsoluteString($library_override);
+  }
+
+  $attached['html_head'][] = [
+    [
+      '#tag' => 'script',
+      '#attributes' => [
+        'src' => $src,
+        'type' => 'module',
+      ],
+    ],
+    "altcha_$override_config_key",
+  ];
+
+  return $attached;
+}
+
+/**
+ * Implements hook_local_tasks_alter().
+ */
+function altcha_local_tasks_alter(&$local_tasks): void {
+  $local_task_key = 'config_translation.local_tasks:config_translation.item.overview.altcha.settings';
+  if (isset($local_tasks[$local_task_key])) {
+    // The config_translation module expects the base route to be
+    // altcha.settings like it is for other configuration
+    // entities. Altcha uses captcha_settings as the base route.
+    $local_tasks[$local_task_key]['base_route'] = 'captcha_settings';
+  }
+}

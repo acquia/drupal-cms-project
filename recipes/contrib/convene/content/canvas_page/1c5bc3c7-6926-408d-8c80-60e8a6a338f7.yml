@@ -1,0 +1,684 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 1c5bc3c7-6926-408d-8c80-60e8a6a338f7
+  default_langcode: en
+  depends:
+    d1f20231-3fb7-4827-b0ac-7359659fdf87: file
+    fb206a87-ed21-4f3b-a9e2-c0649397e1de: media
+    906c1012-a8f9-4c12-b79e-a369d2f979c0: file
+    0345c85b-342f-4a89-8d07-b51df2da0d31: media
+    167c0cf7-5f78-442d-a26e-9595ac802258: file
+    b37ee34c-4179-4b9e-ad7e-ece0595af279: media
+    b7d53ced-d13c-4b62-9114-89d604992e44: file
+    129628f8-b556-44f9-acef-26b889012d18: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Speakers page'
+  description:
+    -
+      value: 'Meet the expert speakers at Convene Conference. Discover keynote speakers, industry leaders, and professionals sharing insights and knowledge.'
+  components:
+    -
+      uuid: b94386d8-abfa-459b-9a3b-81b738258cbd
+      component_id: sdc.convene_theme.sdc_grid
+      inputs:
+        columns: '1'
+    -
+      parent_uuid: b94386d8-abfa-459b-9a3b-81b738258cbd
+      slot: slot_1
+      uuid: 26788bb4-033c-4ec9-aec9-24e0b18cdd87
+      component_id: sdc.convene_theme.hero
+      inputs:
+        variation: small
+    -
+      parent_uuid: 26788bb4-033c-4ec9-aec9-24e0b18cdd87
+      slot: heading
+      uuid: d1477d54-4db5-48f9-9deb-20fc817dfef8
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        heading: 'Meet the Speakers'
+        heading_tag: div
+    -
+      parent_uuid: 26788bb4-033c-4ec9-aec9-24e0b18cdd87
+      slot: subheading
+      uuid: 0d610b1d-d145-4170-924d-df14eb8f43f7
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        description: 'Why these speakers matter'
+        heading_tag: div
+    -
+      parent_uuid: 26788bb4-033c-4ec9-aec9-24e0b18cdd87
+      slot: background_media
+      uuid: 6abdaef3-934e-4f70-a09c-54353b8b2324
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: fb206a87-ed21-4f3b-a9e2-c0649397e1de
+            target_type: media
+    -
+      uuid: d01d881d-c2d6-4c9b-ac5d-3075880b7d9f
+      component_id: sdc.convene_theme.sdc_grid
+      inputs:
+        columns: '1'
+    -
+      parent_uuid: d01d881d-c2d6-4c9b-ac5d-3075880b7d9f
+      slot: slot_1
+      uuid: 8d1db644-1639-408c-a6cc-86ea860c48e3
+      component_id: sdc.convene_theme.featured_speakers
+      inputs:
+        list_view: true
+        more_title: 'More to come'
+        more_description: 'Knows what works when distance matters'
+    -
+      parent_uuid: 8d1db644-1639-408c-a6cc-86ea860c48e3
+      slot: speakers
+      uuid: 51cb62a6-e05a-4544-9bad-85521c990f00
+      component_id: sdc.convene_theme.speaker_card
+      inputs:
+        name: 'Sarah Chen'
+        role: 'Strategy lead'
+        description: 'Ten years building products that solve real problems for real people.'
+    -
+      parent_uuid: 51cb62a6-e05a-4544-9bad-85521c990f00
+      slot: speaker_card_image
+      uuid: c93f5af3-f81c-44c3-920c-c6cf3c5b1c66
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 0345c85b-342f-4a89-8d07-b51df2da0d31
+            target_type: media
+        loading: lazy
+    -
+      parent_uuid: 51cb62a6-e05a-4544-9bad-85521c990f00
+      slot: social_items
+      uuid: 5f4971ad-7fdc-4f93-af02-cd38336dad78
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: https://www.linkedin.com/
+        label: LinkedIn
+        platform: linkedin
+    -
+      parent_uuid: 51cb62a6-e05a-4544-9bad-85521c990f00
+      slot: social_items
+      uuid: 5563891f-a5c5-4a3b-8f4f-539757aae7f2
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: https://x.com/
+        label: Twitter
+        platform: twitter
+    -
+      parent_uuid: 51cb62a6-e05a-4544-9bad-85521c990f00
+      slot: social_items
+      uuid: d37077f0-bda8-467f-b68d-0510ffb34e20
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: /
+        label: website
+        platform: website
+    -
+      parent_uuid: 8d1db644-1639-408c-a6cc-86ea860c48e3
+      slot: speakers
+      uuid: 03c1869f-c2da-4921-b6b6-a1141ac7d920
+      component_id: sdc.convene_theme.speaker_card
+      inputs:
+        name: 'Marcus Rodriguez'
+        role: 'Research director'
+        description: 'Focuses on understanding how teams work best when distributed across time zones.'
+    -
+      parent_uuid: 03c1869f-c2da-4921-b6b6-a1141ac7d920
+      slot: speaker_card_image
+      uuid: feb678dc-58e2-46e7-a701-69150662a627
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: b37ee34c-4179-4b9e-ad7e-ece0595af279
+            target_type: media
+    -
+      parent_uuid: 03c1869f-c2da-4921-b6b6-a1141ac7d920
+      slot: social_items
+      uuid: 7111e65e-2880-4f80-bf7f-52de9c12f4d4
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: https://www.linkedin.com/
+        label: LinkedIn
+        platform: linkedin
+    -
+      parent_uuid: 03c1869f-c2da-4921-b6b6-a1141ac7d920
+      slot: social_items
+      uuid: e77f3e39-fe95-4df3-8e00-41b8be641350
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: https://x.com/
+        label: Twitter
+        platform: twitter
+    -
+      parent_uuid: 03c1869f-c2da-4921-b6b6-a1141ac7d920
+      slot: social_items
+      uuid: cb2c86c8-3871-4b02-b39c-d69182ac883b
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: https://www.web.com/
+        label: Website
+        platform: website
+    -
+      parent_uuid: 8d1db644-1639-408c-a6cc-86ea860c48e3
+      slot: speakers
+      uuid: c2c3c28b-e61b-4907-817c-e717c95e3078
+      component_id: sdc.convene_theme.speaker_card
+      inputs:
+        name: 'David Park'
+        role: 'Design principal'
+        description: 'Believes good design is invisible until it stops working the way it should.'
+    -
+      parent_uuid: c2c3c28b-e61b-4907-817c-e717c95e3078
+      slot: speaker_card_image
+      uuid: b9dd226d-c238-4e6f-9e9a-52b35754cb55
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 0345c85b-342f-4a89-8d07-b51df2da0d31
+            target_type: media
+    -
+      parent_uuid: c2c3c28b-e61b-4907-817c-e717c95e3078
+      slot: social_items
+      uuid: 73e5e75f-e695-45f5-9b8b-3c17692baca8
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: https://www.linkedin.com/
+        label: LinkedIn
+        platform: linkedin
+    -
+      parent_uuid: c2c3c28b-e61b-4907-817c-e717c95e3078
+      slot: social_items
+      uuid: 82afe91e-2244-45bf-b5ab-209e8ef9f72b
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: https://x.com/
+        label: Twitter
+        platform: twitter
+    -
+      parent_uuid: c2c3c28b-e61b-4907-817c-e717c95e3078
+      slot: social_items
+      uuid: 3ceb59ff-e938-4ab5-9dd6-4818570b4759
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: https://www.web.com/
+        label: Website
+        platform: website
+    -
+      parent_uuid: 8d1db644-1639-408c-a6cc-86ea860c48e3
+      slot: speakers
+      uuid: 889c0e1f-9961-40cf-8866-d10ba1bd15ee
+      component_id: sdc.convene_theme.speaker_card
+      inputs:
+        name: 'Elena Kowalski'
+        role: 'Operations expert'
+        description: 'Built systems that scale without losing the human element at the center.'
+    -
+      parent_uuid: 889c0e1f-9961-40cf-8866-d10ba1bd15ee
+      slot: speaker_card_image
+      uuid: 76047987-d85b-47a2-95b4-2cb46a8f3afa
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: b37ee34c-4179-4b9e-ad7e-ece0595af279
+            target_type: media
+    -
+      parent_uuid: 889c0e1f-9961-40cf-8866-d10ba1bd15ee
+      slot: social_items
+      uuid: 608401b5-3354-40d2-8121-4a5da644d18b
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: https://www.linkedin.com/
+        label: LinkedIn
+        platform: linkedin
+    -
+      parent_uuid: 889c0e1f-9961-40cf-8866-d10ba1bd15ee
+      slot: social_items
+      uuid: 43e95983-db90-4b3e-833c-5c7c08e21b89
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: https://x.com/
+        label: Twitter
+        platform: twitter
+    -
+      parent_uuid: 889c0e1f-9961-40cf-8866-d10ba1bd15ee
+      slot: social_items
+      uuid: f5b3e87a-9685-439d-b41f-ec4d9e590dd9
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: https://www.web.com/
+        label: Website
+        platform: website
+    -
+      parent_uuid: 8d1db644-1639-408c-a6cc-86ea860c48e3
+      slot: speakers
+      uuid: ae2ab65c-33f8-4cbd-92c2-4ed528f8e614
+      component_id: sdc.convene_theme.speaker_card
+      inputs:
+        name: 'Priya Sharma'
+        role: 'Engineering manager'
+        description: 'Spent years learning that the best code is the code that solves the problem.'
+    -
+      parent_uuid: ae2ab65c-33f8-4cbd-92c2-4ed528f8e614
+      slot: speaker_card_image
+      uuid: c4b47835-b188-4456-ab13-4fe2fed171ac
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 0345c85b-342f-4a89-8d07-b51df2da0d31
+            target_type: media
+        loading: lazy
+    -
+      parent_uuid: ae2ab65c-33f8-4cbd-92c2-4ed528f8e614
+      slot: social_items
+      uuid: f2480d8d-2dcd-4c36-8f57-938104a3572d
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: https://www.linkedin.com/
+        label: LinkedIn
+        platform: linkedin
+    -
+      parent_uuid: ae2ab65c-33f8-4cbd-92c2-4ed528f8e614
+      slot: social_items
+      uuid: 12cbd2d6-d0c3-4510-9ece-31491412a059
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: https://x.com/
+        label: Twitter
+        platform: twitter
+    -
+      parent_uuid: ae2ab65c-33f8-4cbd-92c2-4ed528f8e614
+      slot: social_items
+      uuid: 2e41d7be-bbab-4616-b927-f173f92cb1f6
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: https://www.web.com/
+        label: Website
+        platform: website
+    -
+      parent_uuid: 8d1db644-1639-408c-a6cc-86ea860c48e3
+      slot: speakers
+      uuid: 6f0dc901-1f84-4ede-9388-7802d8dadd09
+      component_id: sdc.convene_theme.speaker_card
+      inputs:
+        name: 'Thomas Wright'
+        role: 'Industry analyst'
+        description: 'Ten years building products that solve real problems for real people.'
+    -
+      parent_uuid: 6f0dc901-1f84-4ede-9388-7802d8dadd09
+      slot: speaker_card_image
+      uuid: abcf7967-0d3f-40c2-a514-39f554442f78
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 0345c85b-342f-4a89-8d07-b51df2da0d31
+            target_type: media
+    -
+      parent_uuid: 6f0dc901-1f84-4ede-9388-7802d8dadd09
+      slot: social_items
+      uuid: 929088cf-b545-46ca-9a97-97853f1bc47d
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: https://www.linkedin.com/
+        label: LinkedIn
+        platform: linkedin
+    -
+      parent_uuid: 6f0dc901-1f84-4ede-9388-7802d8dadd09
+      slot: social_items
+      uuid: 4a972566-ac06-45ca-b280-9e9d2a6da1c9
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: https://x.com/
+        label: Twitter
+        platform: twitter
+    -
+      parent_uuid: 6f0dc901-1f84-4ede-9388-7802d8dadd09
+      slot: social_items
+      uuid: 175fe617-aed1-48c4-a4c5-5109aa286404
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: https://www.web.com/
+        label: Website
+        platform: website
+    -
+      parent_uuid: 8d1db644-1639-408c-a6cc-86ea860c48e3
+      slot: speakers
+      uuid: 08ecdffb-cb84-4623-8f4a-5f58c36ab730
+      component_id: sdc.convene_theme.speaker_card
+      inputs:
+        name: 'Sarah Chen'
+        role: 'Additional speakers announced weekly through next month'
+        description: 'A decade spent designing products that work for the people who use them every day.'
+    -
+      parent_uuid: 08ecdffb-cb84-4623-8f4a-5f58c36ab730
+      slot: speaker_card_image
+      uuid: f81f6569-813d-47bd-a9ae-98620937ed81
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: b37ee34c-4179-4b9e-ad7e-ece0595af279
+            target_type: media
+    -
+      parent_uuid: 08ecdffb-cb84-4623-8f4a-5f58c36ab730
+      slot: social_items
+      uuid: d9c4fa1a-fc28-40f7-9926-1d715418e4c1
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: https://www.linkedin.com/
+        label: LinkedIn
+        platform: linkedin
+    -
+      parent_uuid: 08ecdffb-cb84-4623-8f4a-5f58c36ab730
+      slot: social_items
+      uuid: 264f31a7-6c3b-4594-9cd8-d8c138586a29
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: https://x.com/
+        label: Twitter
+        platform: twitter
+    -
+      parent_uuid: 08ecdffb-cb84-4623-8f4a-5f58c36ab730
+      slot: social_items
+      uuid: b2f4f5f6-49ab-4d43-8491-b8023fa03e6a
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: https://www.web.com/
+        label: Website
+        platform: website
+    -
+      parent_uuid: 8d1db644-1639-408c-a6cc-86ea860c48e3
+      slot: speakers
+      uuid: c1cfb3ce-afc8-4639-980f-06aa7e23d38b
+      component_id: sdc.convene_theme.speaker_card
+      inputs:
+        name: 'Marcus Rodriguez'
+        role: 'Research director'
+        description: 'Studies how distributed teams communicate and collaborate across different continents and time zones.'
+    -
+      parent_uuid: c1cfb3ce-afc8-4639-980f-06aa7e23d38b
+      slot: speaker_card_image
+      uuid: 9e3c0951-acaf-45aa-9c17-ff265ce39af6
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 0345c85b-342f-4a89-8d07-b51df2da0d31
+            target_type: media
+    -
+      parent_uuid: c1cfb3ce-afc8-4639-980f-06aa7e23d38b
+      slot: social_items
+      uuid: 0d94453a-ae6a-42c1-95c3-74e101c874c7
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: https://www.linkedin.com/
+        label: LinkedIn
+        platform: linkedin
+    -
+      parent_uuid: c1cfb3ce-afc8-4639-980f-06aa7e23d38b
+      slot: social_items
+      uuid: f8d66b0a-d7d2-4cc4-a946-751b95981bfd
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: https://x.com/
+        label: Twitter
+        platform: twitter
+    -
+      parent_uuid: c1cfb3ce-afc8-4639-980f-06aa7e23d38b
+      slot: social_items
+      uuid: 96a023bf-629f-4c93-a5e6-9a8e5ab7bf3d
+      component_id: sdc.convene_theme.social_link
+      inputs:
+        url: https://www.web.com/
+        label: Website
+        platform: website
+    -
+      parent_uuid: 8d1db644-1639-408c-a6cc-86ea860c48e3
+      slot: eyebrow_slot
+      uuid: 5806cc07-7705-479e-840b-e3d0bfb7fcee
+      component_id: sdc.convene_theme.typography
+      inputs:
+        eyebrow: Speakers
+    -
+      parent_uuid: 8d1db644-1639-408c-a6cc-86ea860c48e3
+      slot: title_slot
+      uuid: cea197b0-3ee2-4450-a596-ffaad8bbd5df
+      component_id: sdc.convene_theme.typography
+      inputs:
+        heading: 'Featured speakers'
+        heading_tag: div
+    -
+      parent_uuid: 8d1db644-1639-408c-a6cc-86ea860c48e3
+      slot: description_slot
+      uuid: 77cb072d-da0f-4c68-9478-8913f9225bd8
+      component_id: sdc.convene_theme.typography
+      inputs:
+        description: 'Learn from practitioners doing the work'
+        heading_tag: div
+    -
+      uuid: a98179f3-9d5c-44a0-b996-ecc1f2f4ecb9
+      component_id: sdc.convene_theme.accordion-container
+      inputs:
+        heading: Questions
+        dark_theme: false
+        description: 'Find answers to common questions about the summit and how to prepare.'
+    -
+      parent_uuid: a98179f3-9d5c-44a0-b996-ecc1f2f4ecb9
+      slot: items
+      uuid: 07cd0dd2-beb8-49f5-bc5e-bcc82c6ed70a
+      component_id: sdc.convene_theme.accordion
+      inputs: {  }
+    -
+      parent_uuid: 07cd0dd2-beb8-49f5-bc5e-bcc82c6ed70a
+      slot: title
+      uuid: a7c7c03c-15b0-4326-8376-0dd9a0299f4e
+      component_id: sdc.convene_theme.typography
+      inputs:
+        heading: 'When does registration close?'
+        heading_tag: div
+    -
+      parent_uuid: 07cd0dd2-beb8-49f5-bc5e-bcc82c6ed70a
+      slot: content
+      uuid: 098b081b-4a20-47b6-a5bc-1934a7808fe7
+      component_id: sdc.convene_theme.typography
+      inputs:
+        description: 'Registration closes one month before the event. After that date, spots are no longer available. Plan ahead to secure your place.'
+        heading_tag: div
+    -
+      parent_uuid: a98179f3-9d5c-44a0-b996-ecc1f2f4ecb9
+      slot: items
+      uuid: 05dbdc0a-e174-43fd-a5f5-cba3e11d686a
+      component_id: sdc.convene_theme.accordion
+      inputs: {  }
+    -
+      parent_uuid: 05dbdc0a-e174-43fd-a5f5-cba3e11d686a
+      slot: title
+      uuid: 4975e83f-dfc5-4c92-a541-edff3e3e2159
+      component_id: sdc.convene_theme.typography
+      inputs:
+        heading: "What's included in each pass?"
+        heading_tag: div
+    -
+      parent_uuid: 05dbdc0a-e174-43fd-a5f5-cba3e11d686a
+      slot: content
+      uuid: 47e1a712-1222-43df-bade-d536392846e0
+      component_id: sdc.convene_theme.typography
+      inputs:
+        description: 'All passes include access to keynotes, workshops, and networking events. Standard and premium tiers offer different seating and meal options. Check the pricing page for full details.'
+        heading_tag: div
+    -
+      parent_uuid: a98179f3-9d5c-44a0-b996-ecc1f2f4ecb9
+      slot: items
+      uuid: e64eb6ee-3c67-4ed7-84cd-5ffebd4c96f9
+      component_id: sdc.convene_theme.accordion
+      inputs: {  }
+    -
+      parent_uuid: e64eb6ee-3c67-4ed7-84cd-5ffebd4c96f9
+      slot: title
+      uuid: f74d2655-95d4-42bd-8c4f-6ebed4758ddf
+      component_id: sdc.convene_theme.typography
+      inputs:
+        heading: 'Can I attend just one day?'
+        heading_tag: div
+    -
+      parent_uuid: e64eb6ee-3c67-4ed7-84cd-5ffebd4c96f9
+      slot: content
+      uuid: 42f3878a-dc31-4c7f-aea9-995de877764d
+      component_id: sdc.convene_theme.typography
+      inputs:
+        description: "Single-day passes are available at a reduced rate. You'll have full access to sessions on your chosen day, including meals and networking events."
+        heading_tag: div
+    -
+      parent_uuid: a98179f3-9d5c-44a0-b996-ecc1f2f4ecb9
+      slot: items
+      uuid: 93e293b9-c397-4a01-b0ce-ab2d05b0c73a
+      component_id: sdc.convene_theme.accordion
+      inputs: {  }
+    -
+      parent_uuid: 93e293b9-c397-4a01-b0ce-ab2d05b0c73a
+      slot: title
+      uuid: 7e308506-e2a4-4d57-9b90-c67354afa300
+      component_id: sdc.convene_theme.typography
+      inputs:
+        heading: 'Is there a refund policy?'
+        heading_tag: div
+    -
+      parent_uuid: 93e293b9-c397-4a01-b0ce-ab2d05b0c73a
+      slot: content
+      uuid: 4e83944f-ee67-4894-b5d4-348b956141d0
+      component_id: sdc.convene_theme.typography
+      inputs:
+        description: 'Refunds are available up to two weeks before the event. Cancellations made closer to the date may not be eligible. Contact support for specific circumstances.'
+        heading_tag: div
+    -
+      parent_uuid: a98179f3-9d5c-44a0-b996-ecc1f2f4ecb9
+      slot: items
+      uuid: 0ed62246-9530-477c-bd6a-efe529275566
+      component_id: sdc.convene_theme.accordion
+      inputs: {  }
+    -
+      parent_uuid: 0ed62246-9530-477c-bd6a-efe529275566
+      slot: title
+      uuid: c22fe768-116d-462f-8cb7-e5ce34969578
+      component_id: sdc.convene_theme.typography
+      inputs:
+        heading: 'How do I get to the venue?'
+        heading_tag: div
+    -
+      parent_uuid: 0ed62246-9530-477c-bd6a-efe529275566
+      slot: content
+      uuid: a57acc3e-f208-45b6-bd68-80b7f804ce66
+      component_id: sdc.convene_theme.typography
+      inputs:
+        description: 'The venue page includes the address, parking information, and public transit options. We recommend arriving early on day one to allow time for check-in.'
+        heading_tag: div
+    -
+      parent_uuid: a98179f3-9d5c-44a0-b996-ecc1f2f4ecb9
+      slot: help_heading
+      uuid: 118040a7-b3c9-4974-a208-024b5dea55ba
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        heading: 'Need more help?'
+        heading_tag: div
+    -
+      parent_uuid: a98179f3-9d5c-44a0-b996-ecc1f2f4ecb9
+      slot: help_description
+      uuid: ffc014a7-691e-41a3-8be6-75db73ccea36
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        description: 'Reach out directly for questions not answered here.'
+    -
+      uuid: d228e9fb-1abe-41cf-8ba9-bd8ecf8bf241
+      component_id: sdc.convene_theme.sdc_grid
+      inputs:
+        columns: '1'
+    -
+      parent_uuid: d228e9fb-1abe-41cf-8ba9-bd8ecf8bf241
+      slot: slot_1
+      uuid: 3d5254dc-356d-4d07-8f4f-511590e4124b
+      component_id: sdc.convene_theme.hero
+      inputs:
+        variation: small
+    -
+      parent_uuid: 3d5254dc-356d-4d07-8f4f-511590e4124b
+      slot: heading
+      uuid: e57214fe-9d5d-419a-bbee-ea0b8c43e881
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        heading: 'Ready to join us'
+        heading_tag: div
+    -
+      parent_uuid: 3d5254dc-356d-4d07-8f4f-511590e4124b
+      slot: subheading
+      uuid: 5ba8390e-b841-496f-a9e7-3923f90e2a3d
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        description: 'Secure your spot before early-bird pricing ends next week.'
+        heading_tag: div
+    -
+      parent_uuid: 3d5254dc-356d-4d07-8f4f-511590e4124b
+      slot: actions
+      uuid: c17d4da7-cac6-41b2-803b-2b69c0e7fb71
+      component_id: sdc.convene_theme.button
+      inputs:
+        url:
+          uri: 'internal:/about'
+          options: {  }
+        text: Registration
+        variant: primary
+    -
+      parent_uuid: 3d5254dc-356d-4d07-8f4f-511590e4124b
+      slot: actions
+      uuid: b06e7fb4-0cc3-4fd9-9a81-da3b2245619d
+      component_id: sdc.convene_theme.button
+      inputs:
+        url:
+          uri: 'internal:/pricing-passes'
+          options: {  }
+        text: Pricing
+        variant: primary
+    -
+      parent_uuid: 3d5254dc-356d-4d07-8f4f-511590e4124b
+      slot: background_media
+      uuid: 4beb6d8b-fe01-4b6b-ac8d-aca1c23a5bcc
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 129628f8-b556-44f9-acef-26b889012d18
+            target_type: media
+  path:
+    -
+      alias: /speakers
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"title":"Speakers | Convene Conference"}'
