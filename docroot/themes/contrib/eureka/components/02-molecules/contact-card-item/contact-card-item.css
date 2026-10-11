@@ -1,0 +1,38 @@
+.contact-card-item {
+  padding: var(--spacing-3);
+  background-color: var(--white);
+  border-radius: var(--spacing-2);
+  box-shadow: var(--box-shadow-default);
+  margin-bottom: var(--spacing-2);
+  display: flex;
+  gap: var(--spacing-2);
+  text-align: center;
+  justify-content: center;
+}
+
+.contact-card-item__job {
+  font-size: var(--body-small);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--spacing-1);
+  color: var(--grey-dark);
+}
+
+.contact-card-item .heading {
+  font-weight: var(--font-medium);
+  margin-bottom: var(--spacing-2);
+}
+
+@media (min-width: 768px) {
+  .contact-card-item {
+    text-align: left;
+    flex-basis: calc(50% - 1.6rem/2); /* Two cards per row with 1.6rem spacing */
+    background-color: transparent;
+    box-shadow: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact-card-item {
+    flex-basis: calc(33% - 3.2rem/3); /* Three cards per row with 1.6rem spacing */
+  }
+}

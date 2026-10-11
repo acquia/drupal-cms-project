@@ -1,0 +1,187 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: base/webform.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+@reference '../tailwindcss';
+
+.webform-section {
+  @apply my-4 p-4;
+
+  background-color: var(--background-weak);
+  border-radius: var(--radius-box);
+
+  fieldset {
+    legend,
+    .fieldset-legend {
+      color: var(--highlight);
+    }
+  }
+}
+
+.webform-section-wrapper {
+  @apply flex flex-col gap-4;
+}
+
+.webform-flexbox {
+  @apply @container/webform-flexbox m-0 flex flex-wrap gap-4;
+}
+
+.webform-flex {
+  @apply flex flex-1 basis-full @md/webform-flexbox:basis-[0%];
+}
+
+.webform-flex--container {
+  @apply m-0 w-full;
+}
+
+.webform-element-description {
+  @apply mt-2 text-xs;
+}
+
+.webform-element-help {
+  @apply m-0 border-0 p-[2px];
+
+  background-color: var(--link);
+  color: var(--link-contrast);
+
+  &:hover,
+  &:focus,
+  &:active {
+    @apply border-0;
+
+    background-color: var(--link-active);
+    color: var(--link-contrast);
+  }
+}
+
+.webform-type-checkbox,
+.webform-type-radio {
+  &.form-item {
+    @apply flex items-center gap-2;
+
+    label {
+      @apply m-0 font-normal;
+    }
+  }
+}
+
+.webform-file-button-input {
+  @apply static;
+}
+
+.webform-options-display-side-by-side {
+  @apply flex items-center gap-2;
+
+  > div {
+    @apply m-0 flex gap-2;
+  }
+}
+.webform-options-display-one-column {
+  @apply flex flex-col gap-2;
+}
+
+.webform-options-display-two-columns {
+  @apply @container/webform-options-display grid grid-cols-2 gap-2;
+
+  > .form-item {
+    @apply col-span-2 @md/webform-options-display:col-span-1;
+  }
+}
+
+.webform-options-display-three-columns {
+  @apply @container/webform-options-display grid grid-cols-3 gap-2;
+
+  > .form-item {
+    @apply col-span-3 @md/webform-options-display:col-span-2 @2xl/webform-options-display:col-span-1;
+  }
+}
+
+.webform-options-display-buttons {
+  @apply m-0 flex gap-2;
+
+  .webform-options-display-buttons-wrapper {
+    @apply m-0;
+  }
+
+  label.webform-options-display-buttons-label {
+    @apply btn! btn-secondary! flex grow-0;
+  }
+
+  input:checked,
+  input:checked:focus {
+    + label.webform-options-display-buttons-label {
+      @apply btn-primary!;
+    }
+  }
+}
+
+.tippy-box {
+  @apply border-0;
+
+  color: var(--background);
+  background: var(--foreground);
+}
+
+.tippy-arrow {
+  color: var(--foreground);
+}
+
+/*
+ * Overridden UI dialog.
+ * Overridden styles with the Morphos design system.
+ * Due to the Gin theme override its styles and CSS variables into the global scope,
+ * which is not available on the frontend.
+ */
+.ui-widget-overlay {
+  @apply opacity-70!;
+
+  background-color: var(--background) !important;
+}
+
+.ui-widget.ui-dialog {
+  @apply shadow-lg;
+
+  &:not(.ui-dialog-off-canvas) {
+    border-radius: var(--radius-box);
+    background-color: var(--background);
+  }
+
+  .ui-dialog-titlebar {
+    @apply px-6 py-4;
+
+    background-color: var(--color-primary);
+    border-radius: var(--radius-box) var(--radius-box) 0 0;
+  }
+
+  .ui-dialog-title {
+    color: var(--color-primary-content);
+  }
+
+  .ui-dialog-titlebar-close {
+    .ui-icon-closethick {
+      @apply transform-none!;
+    }
+
+    &:hover,
+    &:focus {
+      border-color: var(--color-primary-content);
+    }
+  }
+
+  .ui-widget-content {
+    color: var(--foreground);
+
+    &.ui-dialog-content {
+      @apply p-6;
+
+      background-color: var(--background);
+    }
+  }
+
+  .ui-dialog-content:not(:has(+ .ui-widget-content.ui-dialog-buttonpane)) {
+    border-end-start-radius: var(--radius-box);
+    border-end-end-radius: var(--radius-box);
+  }
+}

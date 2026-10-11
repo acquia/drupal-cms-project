@@ -1,0 +1,76 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Pricing card
+group: Card
+props:
+  type: object
+  required:
+    - symbol_position
+  properties:
+    heading_text:
+      type: string
+      title: Heading
+      examples:
+        - Premium
+    description:
+      type: string
+      title: Description
+      examples:
+        - Curabitur nascetur non potenti pede luctus vivamus
+    price:
+      title: Price
+      description: Price
+      type: string
+      examples:
+        - "159"
+    currency_code:
+      type: string
+      title: Currency code
+      examples:
+        - USD
+    currency_symbol:
+      type: string
+      title: Currency symbol
+      examples:
+        - "$"
+    symbol_position:
+      type: string
+      title: Symbol position
+      enum:
+        - before
+        - after
+      meta:enum:
+        before: Before
+        after: After
+      examples:
+        - before
+      default:
+        - before
+    text:
+      title: Text
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: block
+      default: "<ul>
+        <li>Enter rich text</li>
+        <li>Facilisis dictumst letius in</li>
+        <li>Diam mus est faucibus ornare ut consectetuer metus</li>
+        </ul>"
+      examples:
+        - "<ul>
+          <li>Example item 1</li>
+          <li>Example item 2</li>
+          </ul>"
+    button_url:
+      type: string
+      title: Link
+    button_label:
+      type: string
+      title: Button label
+      examples:
+        - Choose this plan
+    promote:
+      type: boolean
+      title: Highlight card
+      default: false
+      examples:
+        - false

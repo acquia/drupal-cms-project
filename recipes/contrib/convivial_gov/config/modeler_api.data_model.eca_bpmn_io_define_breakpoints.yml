@@ -1,0 +1,143 @@
+langcode: en
+status: true
+dependencies: {  }
+id: eca_bpmn_io_define_breakpoints
+data: |
+  <?xml version="1.0" encoding="UTF-8"?>
+  <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:qa="http://some-company/schema/bpmn/qa" id="sample-diagram" targetNamespace="http://bpmn.io/schema/bpmn" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+    <bpmn2:process id="define_breakpoints" name="Define custom breakpoints" isExecutable="true" camunda:versionTag="1.0.0">
+      <bpmn2:documentation>Defines custom breakpoints for responsive images.</bpmn2:documentation>
+      <bpmn2:extensionElements>
+        <camunda:properties>
+          <camunda:property name="Tags" value="" />
+          <camunda:property name="Changelog" value="" />
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:startEvent id="eca_render__breakpoints_alter_1ni95xs" name="Alter breakpoint" camunda:modelerTemplate="org.drupal.event.eca_render:breakpoints_alter">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_render:breakpoints_alter" />
+          </camunda:properties>
+        </bpmn2:extensionElements>
+        <bpmn2:outgoing>Flow_1tiaxw5</bpmn2:outgoing>
+      </bpmn2:startEvent>
+      <bpmn2:task id="eca_render_alter_breakpoint_1ic6gni" name="Define small breakpoint" camunda:modelerTemplate="org.drupal.action.eca_render_alter_breakpoint">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_render_alter_breakpoint" />
+          </camunda:properties>
+          <camunda:field name="id">
+            <camunda:string>custom.sm</camunda:string>
+          </camunda:field>
+          <camunda:field name="definition">
+            <camunda:string>label: Small
+  mediaQuery: 'all and (min-width: 500px)'
+  weight: 0
+  multipliers:
+    - 1x
+  group: custom</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_1tiaxw5</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_15dbczg</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_render_alter_breakpoint_176hkyu" name="Define medium breakpoint" camunda:modelerTemplate="org.drupal.action.eca_render_alter_breakpoint">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_render_alter_breakpoint" />
+          </camunda:properties>
+          <camunda:field name="id">
+            <camunda:string>custom.md</camunda:string>
+          </camunda:field>
+          <camunda:field name="definition">
+            <camunda:string>label: Medium
+  mediaQuery: 'all and (min-width: 700px)'
+  weight: 1
+  multipliers:
+    - 1x
+  group: custom</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_15dbczg</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_1gyhp1j</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_render_alter_breakpoint_1k0stlk" name="Define large breakpoint" camunda:modelerTemplate="org.drupal.action.eca_render_alter_breakpoint">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_render_alter_breakpoint" />
+          </camunda:properties>
+          <camunda:field name="id">
+            <camunda:string>custom.lg</camunda:string>
+          </camunda:field>
+          <camunda:field name="definition">
+            <camunda:string>label: Large
+  mediaQuery: 'all and (min-width: 1000px)'
+  weight: 2
+  multipliers:
+    - 1x
+  group: custom</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_1gyhp1j</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_15rvffe</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_render_alter_breakpoint_1e7fgzt" name="Define x-large breakpoint" camunda:modelerTemplate="org.drupal.action.eca_render_alter_breakpoint">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_render_alter_breakpoint" />
+          </camunda:properties>
+          <camunda:field name="id">
+            <camunda:string>custom.xl</camunda:string>
+          </camunda:field>
+          <camunda:field name="definition">
+            <camunda:string>label: X-Large
+  mediaQuery: 'all and (min-width: 1300px)'
+  weight: 3
+  multipliers:
+    - 1x
+  group: custom</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_15rvffe</bpmn2:incoming>
+      </bpmn2:task>
+      <bpmn2:sequenceFlow id="Flow_1tiaxw5" sourceRef="eca_render__breakpoints_alter_1ni95xs" targetRef="eca_render_alter_breakpoint_1ic6gni" />
+      <bpmn2:sequenceFlow id="Flow_15dbczg" sourceRef="eca_render_alter_breakpoint_1ic6gni" targetRef="eca_render_alter_breakpoint_176hkyu" />
+      <bpmn2:sequenceFlow id="Flow_1gyhp1j" sourceRef="eca_render_alter_breakpoint_176hkyu" targetRef="eca_render_alter_breakpoint_1k0stlk" />
+      <bpmn2:sequenceFlow id="Flow_15rvffe" sourceRef="eca_render_alter_breakpoint_1k0stlk" targetRef="eca_render_alter_breakpoint_1e7fgzt" />
+    </bpmn2:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_define_breakpoints">
+      <bpmndi:BPMNPlane id="BPMNPlane_define_breakpoints" bpmnElement="define_breakpoints">
+        <bpmndi:BPMNShape id="eca_render__breakpoints_alter_1ni95xs_di" bpmnElement="eca_render__breakpoints_alter_1ni95xs">
+          <dc:Bounds x="57" y="52" width="36" height="36" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_render_alter_breakpoint_1ic6gni_di" bpmnElement="eca_render_alter_breakpoint_1ic6gni">
+          <dc:Bounds x="175" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_render_alter_breakpoint_176hkyu_di" bpmnElement="eca_render_alter_breakpoint_176hkyu">
+          <dc:Bounds x="325" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_render_alter_breakpoint_1k0stlk_di" bpmnElement="eca_render_alter_breakpoint_1k0stlk">
+          <dc:Bounds x="475" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_render_alter_breakpoint_1e7fgzt_di" bpmnElement="eca_render_alter_breakpoint_1e7fgzt">
+          <dc:Bounds x="625" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNEdge id="Flow_1tiaxw5_di" bpmnElement="Flow_1tiaxw5">
+          <di:waypoint x="93" y="70" />
+          <di:waypoint x="175" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_15dbczg_di" bpmnElement="Flow_15dbczg">
+          <di:waypoint x="275" y="70" />
+          <di:waypoint x="325" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_1gyhp1j_di" bpmnElement="Flow_1gyhp1j">
+          <di:waypoint x="425" y="70" />
+          <di:waypoint x="475" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_15rvffe_di" bpmnElement="Flow_15rvffe">
+          <di:waypoint x="575" y="70" />
+          <di:waypoint x="625" y="70" />
+        </bpmndi:BPMNEdge>
+      </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+  </bpmn2:definitions>

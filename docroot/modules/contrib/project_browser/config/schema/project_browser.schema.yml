@@ -1,0 +1,130 @@
+project_browser.admin_settings:
+  type: config_object
+  label: "Project Browser admin settings"
+  mapping:
+    default_source:
+      type: string
+      label: 'Default source plugin ID'
+      constraints:
+        NotBlank: []
+    enabled_sources:
+      type: sequence
+      label: 'Enabled source plugins'
+      sequence:
+        type: project_browser.source.[%key]
+        label: 'Source plugin settings'
+    allow_ui_install:
+      type: boolean
+      label: 'Allow installing packages from within the UI'
+    max_selections:
+      type: integer
+      nullable: true
+      label: 'The maximum number of projects that can be chosen for installation at once. Internal use only.'
+
+project_browser.source.*:
+  type: mapping
+  label: 'Source plugin-specific settings'
+  constraints:
+    # Sources have no settings by default, so they are all validatable.
+    FullyValidatable: ~
+
+project_browser.source_with_order:
+  type: mapping
+  label: 'Settings for source plugins with configurable display order'
+  mapping:
+    order:
+      type: sequence
+      label: 'Display order of projects'
+      sequence:
+        type: string
+        label: 'Project ID'
+        constraints:
+          NotBlank: []
+  constraints:
+    FullyValidatable: ~
+
+project_browser.source.recommended:
+  type: project_browser.source.*
+  label: 'Recommended source settings'
+  mapping:
+    uri:
+      type: uri
+      label: 'URI of recommended projects data'
+    ttl:
+      type: integer
+      label: 'How long to cache the data for, in seconds'
+      constraints:
+        Range:
+          min: 1
+  constraints:
+    FullyValidatable: ~
+
+project_browser.source.drupal_core:
+  type: project_browser.source_with_order
+  label: 'Drupal core source settings'
+
+project_browser.source.drupalorg_jsonapi:
+  type: project_browser.source_with_order
+  label: 'Drupal.org source settings'
+  mapping:
+    show_development_status:
+      type: boolean
+      label: 'Allow filtering by development status'
+
+project_browser.source.local_modules:
+  type: project_browser.source_with_order
+  label: 'Local modules source settings'
+
+project_browser.source.recipes:
+  type: project_browser.source_with_order
+  label: 'Recipes source settings'
+  mapping:
+    additional_directories:
+      type: sequence
+      label: 'Additional directories to scan for recipes'
+      sequence:
+        type: string
+        label: 'Directory path'
+        constraints:
+          NotBlank: []
+
+block.settings.project_browser_block:*:
+  type: block_settings
+  label: 'Project Browser block settings'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    paginate:
+      type: boolean
+      label: 'Enable pagination'
+    page_sizes:
+      type: string
+      label: 'Page sizes'
+      constraints:
+        # A comma-separated list of numbers with fuzzy spacing, e.g. `32, 64,88`.
+        Regex:
+          pattern: '/^([0-9]+\s*,?\s*)+$/'
+    sort_options:
+      type: sequence
+      label: 'Sort options'
+      nullable: true
+      sequence:
+        type: string
+        label: 'Sort option ID'
+        constraints:
+          NotBlank: []
+    default_sort:
+      type: string
+      label: 'Default sort criterion'
+      nullable: true
+      constraints:
+        NotBlank: []
+    filters:
+      type: sequence
+      label: 'Enabled filters'
+      nullable: true
+      sequence:
+        type: string
+        label: 'Filter ID'
+        constraints:
+          NotBlank: []

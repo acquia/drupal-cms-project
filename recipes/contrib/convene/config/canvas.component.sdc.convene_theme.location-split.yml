@@ -1,0 +1,69 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - convene_theme
+label: 'Location Split'
+id: sdc.convene_theme.location-split
+source: sdc
+source_local_id: 'convene_theme:location-split'
+provider: convene_theme
+active_version: 4fcacd0c152dc612
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+        eyebrow:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        description:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        address:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        phone:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        action:
+          title: 'Action Slot'
+          description: "Slot for buttons (e.g., 'Learn', 'Map')."

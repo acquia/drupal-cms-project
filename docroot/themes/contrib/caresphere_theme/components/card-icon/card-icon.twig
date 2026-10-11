@@ -1,0 +1,105 @@
+{% set has_cta = cta_label is not empty %}
+{% set has_url = url is not empty and not has_cta ? 'yes' : 'no' %}
+
+{% set tile =
+  html_cva(
+    base: ['relative p-6 md:p-8'],
+    variants: {
+      hasUrl: {
+        yes: 'group cursor-pointer hover:scale-103',
+        no: ''
+      },
+      backgroundColor: {
+        white: 'bg-white text-foreground transition duration-300 hover:bg-neutral-50/80',
+        black: 'bg-black text-white transition duration-300 hover:bg-slate-800',
+        'dark-gray': 'bg-dark-gray text-white transition duration-300 hover:bg-[#2e2e2e]',
+        'gray-light': 'bg-gray-light text-foreground transition duration-300 hover:bg-[#e4e4e4]',
+        'gray': 'bg-gray text-foreground transition duration-300 hover:bg-[#e8e8e8]',
+        noColor: 'bg-transparent text-foreground transition duration-300 hover:opacity-80'
+      },
+      tileSize: {
+        square: 'aspect-square',
+        '4:3': 'aspect-4/3',
+        '16:9': 'aspect-16/9',
+        noSize: 'aspect-none'
+      },
+      borderRadius: {
+        small: 'rounded-sm',
+        medium: 'rounded-xl md:rounded-2xl',
+        large: 'rounded-[24px] md:rounded-[32px]',
+        noRadius: 'rounded-none'
+      }
+    }
+  )
+%}
+
+{% set tile_classes =
+  tile.apply({
+    hasUrl: has_url,
+    backgroundColor: backgroundcolor|default('white'),
+    tileSize: tile_size|default('noSize'),
+    borderRadius: border_radius|default('noRadius')
+  })
+%}
+
+{% set icon_align_mod = icon_align|default('center') %}
+{% set text_align_mod = text_align|default('center') %}
+{% set icon_size_map = {
+  small: 'small',
+  medium: 'medium',
+  large: 'large',
+  'extra-large': 'extra-large'
+} %}
+
+<div class="card-icon {{ tile_classes }}">
+	<div class="card-icon__inner">
+		<div class="card-icon__icon-wrap card-icon__icon-wrap--{{ icon_align_mod }}">
+			{% if media.src %}
+				{{
+          include(
+            '@caresphere_theme/components/icon/icon.twig',
+            {
+              media: media,
+              custom_width: custom_width,
+              custom_height: custom_height,
+              icon_size: icon_size_map[icon_size]|default('medium')
+            },
+            with_context: false
+          )
+        }}
+			{% endif %}
+		</div>
+
+		{% if text is not empty or description is not empty or has_cta %}
+			<div class="card-icon__content card-icon__content--{{ text_align_mod }}">
+				{% if has_url %}
+					<a href="{{ url }}" class="card-icon__link before:absolute before:inset-0 before:content-[''] before:z-1" aria-label="{{ text is not empty ? text : 'View more' }}"></a>
+				{% endif %}
+				<div class="card-icon__content-block">
+					{% if text is not empty %}
+						<h3 class="card-icon__heading">{{ text }}</h3>
+					{% endif %}
+					{% if description is not empty %}
+						<span class="card-icon__description">{{ description }}</span>
+					{% endif %}
+					{% if has_cta %}
+						<div class="card-icon__actions">
+							{% set cta_btn_props = {
+								variant: cta_variant|default('primary'),
+								label: cta_label,
+								href: cta_url|default(''),
+								size: cta_size|default('medium')
+							} %}
+							{% if cta_icon is not empty and cta_icon != 'none' %}
+								{% set cta_btn_props = cta_btn_props|merge({icon: cta_icon}) %}
+							{% elseif cta_variant|default('primary') == 'link' and (cta_icon is empty or cta_icon == 'none') %}
+								{% set cta_btn_props = cta_btn_props|merge({icon: 'caret-right'}) %}
+							{% endif %}
+							{{ include('caresphere_theme:button', cta_btn_props) }}
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		{% endif %}
+	</div>
+</div>

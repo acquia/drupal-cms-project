@@ -1,0 +1,135 @@
+{% set hero_height = height|default('full') %}
+{% set hero_flex_position = flex_position|default('center-left') %}
+{% set hero_overlay_opacity = overlay_opacity|default('40%') %}
+{% set hero_object_position = object_position|default('center') %}
+{% set hero_overlap_navbar = overlap_navbar|default(false) ? 'yes' : 'no' %}
+
+{# Normalize classes - handle both array and string formats #}
+{% set additional_classes = classes|default('') %}
+{% if additional_classes is iterable %}
+  {% set additional_classes = additional_classes|join(' ') %}
+{% endif %}
+
+{% set hero_variants =
+  html_cva(
+    base: ['cq-full relative flex flex-col'],
+    variants: {
+      height: {
+        full: 'h-dvh',
+        large: ['h-3/4 min-h-[500px] md:max-h-[600px] xl:max-h-[800px]'],
+        ribbon: ['h-1/2 md:max-h-[450px] md:min-h-[400px] xl:max-h-[600px]']
+      },
+      flexPosition: {
+        'top-left': 'justify-start',
+        'center-left': 'justify-center-safe',
+        'bottom-left': 'justify-end',
+        'hero-center': 'justify-center'
+      },
+      overlapNavbar: {
+        yes: 'mt-[calc(var(--navbar-height)*-1)]',
+        no: ''
+      }
+    }
+  )
+%}
+
+{% set overlay_variants =
+  html_cva(
+    base: ['absolute inset-0'],
+    variants: {
+      opacity: {
+        '0%': 'bg-black/0',
+        '20%': 'bg-black/20',
+        '40%': 'bg-black/40',
+        '60%': 'bg-black/60',
+        '75%': 'bg-black/75'
+      }
+    }
+  )
+%}
+
+{% set image_variants =
+  html_cva(
+    base: ['h-full w-full object-cover'],
+    variants: {
+      position: {
+        top: 'object-top',
+        center: 'object-center',
+        bottom: 'object-bottom'
+      }
+    }
+  )
+%}
+
+{% set content_variants =
+  html_cva(
+    base: ['relative z-1 flex flex-col gap-6 py-6 md:py-10 xl:py-20'],
+    variants: {
+      flexPosition: {
+        'top-left': 'lg:max-w-2/3',
+        'center-left': 'lg:max-w-2/3',
+        'bottom-left': 'lg:max-w-2/3',
+        'hero-center': ['items-center text-center lg:mx-auto lg:max-w-2/3']
+      },
+      overlapNavbar: {
+        yes: 'pt-[calc(var(--navbar-height)+1.5rem)] md:pt-[calc(var(--navbar-height)+2.5rem)] xl:pt-[calc(var(--navbar-height)+5rem)]',
+        no: ''
+      }
+    }
+  )
+%}
+
+<section
+  class="{{
+  hero_variants.apply(
+    {
+      height: hero_height,
+      flexPosition: hero_flex_position,
+      overlapNavbar: hero_overlap_navbar
+    },
+    additional_classes
+  )
+  }}"
+>
+  {% if media.src is not empty %}
+    <div class="absolute z-[-1] h-full w-full">
+      {% block hero_media %}
+        {% if media.src is not empty %}
+          <div
+            class="{{
+            overlay_variants.apply({
+              opacity: hero_overlay_opacity
+            })
+            }}"
+          ></div>
+        {% endif %}
+        {% include 'canvas:image' ignore missing with {
+          src: media.src,
+          alt: media.alt,
+          width: media.width,
+          height: media.height,
+          loading: 'eager',
+          class: image_variants.apply({
+            position: hero_object_position
+          })
+        } only %}
+      {% endblock %}
+    </div>
+  {% endif %}
+  <div class="container mx-auto px-4">
+    <div
+      class="{{
+      content_variants.apply({
+        flexPosition: hero_flex_position,
+        overlapNavbar: hero_overlap_navbar
+      })
+      }}"
+    >
+      {% block hero_content %}
+        {% block hero_slot %}
+
+        {% endblock %}
+      {% endblock %}
+    </div>
+  </div>
+</section>

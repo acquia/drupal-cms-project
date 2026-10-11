@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_type_of_job
+    - node.type.vacancy
+    - taxonomy.vocabulary.type_of_job
+id: node.vacancy.field_type_of_job
+field_name: field_type_of_job
+entity_type: node
+bundle: vacancy
+label: 'Type of Job'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      type_of_job: type_of_job
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

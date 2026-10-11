@@ -1,0 +1,42 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Heading
+status: stable
+description: Default heading component
+group: Eureka component items
+props:
+  type: object
+  properties:
+    heading_level:
+      title: Heading level
+      type: number
+      description: From H1 to H6
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+      examples:
+        - 2
+    heading:
+      title: Heading text
+      type: string
+      description: Main heading text
+      examples:
+        - Lorem ipsum
+    heading_url:
+      title: Heading URL
+      type: ['string', 'null']
+      description: Wraps the heading into an <a> element
+    heading_size_override:
+      title: Heading size override
+      type: ['string', 'null']
+      description: From H1 to H6
+      enum:
+        - title
+        - main
+        - sub
+        - small
+        - xsmall
+        - tiny

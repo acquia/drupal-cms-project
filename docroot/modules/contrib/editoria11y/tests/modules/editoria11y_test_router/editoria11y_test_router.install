@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for the Editoria11y test router module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function editoria11y_test_router_install(): void {
+  // Some contrib modules (for example menu_manipulator) rebuild the router
+  // while they are installed. During a config sync this happens before
+  // modules installed later in the same import are available.
+  \Drupal::service('router.builder')->rebuild();
+}

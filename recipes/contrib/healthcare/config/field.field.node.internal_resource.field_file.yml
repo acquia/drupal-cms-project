@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_file
+    - media.type.document_private
+    - node.type.internal_resource
+id: node.internal_resource.field_file
+field_name: field_file
+entity_type: node
+bundle: internal_resource
+label: 'Resource Document'
+description: 'Select or add a private document.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      document_private: document_private
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: document
+field_type: entity_reference

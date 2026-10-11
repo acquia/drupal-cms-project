@@ -1,0 +1,15 @@
+blockquote,
+.blockquote {
+  border-left: var(--spacing-2) solid var(--brand-primary);
+  color: var(--text);
+  font-style: italic;
+  margin: var(--spacing-3) 0;
+  padding: var(--spacing-2) 0 var(--spacing-2) var(--spacing-2);
+}
+
+@media (min-width: 1024px) {
+  blockquote,
+  .blockquote {
+    padding-left: var(--spacing-5);
+  }
+}

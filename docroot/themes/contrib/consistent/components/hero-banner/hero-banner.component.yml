@@ -1,0 +1,40 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Hero banner
+group: Hero
+status: stable
+props:
+  type: object
+  properties:
+    heading_text:
+      type: string
+      title: Heading
+      examples:
+        - "Welcome to Your Local Council"
+    subtitle:
+      type: string
+      title: Subtitle
+      examples:
+        - "How can we help?"
+    media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Background image
+      type: object
+      examples:
+        - src: "https://placehold.co/1200x500"
+          alt: ""
+          width: 1200
+          height: 500
+    show_search:
+      type: boolean
+      title: Show search box
+      default: false
+      examples:
+        - false
+    cta_label:
+      type: string
+      title: CTA label
+      examples:
+        - "View all services"
+    cta_url:
+      type: string
+      title: CTA link

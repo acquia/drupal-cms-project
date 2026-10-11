@@ -1,0 +1,20 @@
+{#
+/** Available variables:
+ * - external_card_tag: External card tag text
+ * - external_card_heading:  External card heading text
+ * - external_card_text:  External card body text
+ * - external_card_cta_url: External card CTA URL
+ */
+#}
+{{ attach_library('eureka/card') }}
+
+{{ include("eureka:card", {
+  card_modifiers: 'external',
+  card_tag_content: true,
+  card_tag_text: external_card_tag,
+  card_heading: external_card_heading,
+  card_text: external_card_text,
+  show_card_link_cta: true,
+  card_link_url: external_card_cta_url,
+  card_link_text: 'Visit site'|t,
+}, with_context = false) }}

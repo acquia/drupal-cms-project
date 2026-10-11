@@ -1,0 +1,20 @@
+{#
+/**
+ * Available variables:
+ * - tag_base_class: the base classname
+ * - tag_modifiers: array of modifiers to add to the base classname
+ * - tag_blockname: blockname prepended to the base classname
+ * - tag_extra_classes: extra classes added
+ *
+ * - tag_type: defines the style of the tag and adds a modifier accordingly
+ *     Options: ['primary', 'secondary']
+ * - tag_text: the content of the paragraph (typically text)
+ *
+ * Available blocks:
+ */
+#}
+
+{% set tag_base_class = tag_base_class|default('tag') %}
+{% set tag_modifiers = tag_modifiers|default([])|merge([tag_type]) %}
+
+<span {{ bem(tag_base_class, tag_modifiers|default([]), tag_blockname, tag_extra_classes) }}>{{ tag_text }}</span>

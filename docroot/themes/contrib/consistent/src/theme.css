@@ -1,0 +1,84 @@
+/*
+   Service TW — Design Tokens (Default)
+   These were scoped to html to overcome cascade problem but should
+   probably move to :root
+*/
+
+html {
+  /* Primary palette */
+  --color-primary: #1d70b8;
+  --color-primary-hover: #003078;
+
+  /* Grey scale */
+  --color-black: #0b0c0c;
+  --color-white: #fff;
+  --color-grey-1: #505a5f;
+  --color-grey-2: #b1b4b6;
+  --color-grey-3: #f3f2f1;
+  --color-grey-4: #f8f8f8;
+
+  /* Accents */
+  --color-yellow: #f2a900;
+  --color-green: #00703c;
+  --color-red: #d4351c;
+
+  /* Application */
+  --color-background: var(--color-white);
+  --color-foreground: var(--color-black);
+  --color-muted: var(--color-grey-3);
+  --color-border: var(--color-grey-2);
+  --color-link: var(--color-primary);
+  --color-link-hover: var(--color-primary-hover);
+  --color-link-visited: #4c2c92;
+
+  /* Secondary — used for interactive elements such as the search submit button.
+     Defaulting to primary; confirm with design if a distinct value is needed. */
+  --color-secondary: var(--color-primary);
+  --color-focus: var(--color-yellow);
+  --color-focus-text: var(--color-black);
+
+  /* Typography */
+  --font-sans: arial, sans-serif;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 2rem;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Layout */
+  --container-max: 1380px;
+  --container-padding: 1.5rem;
+  --width-description: 40rem; /* max-width for intro/description text blocks */
+  --container-content: 56rem; /* max-width for prose/search results */
+
+  /* Shape */
+  --radius: 0;
+  --radius-sm: 0;
+
+  /* Offset shadow — none in default theme */
+  --shadow-offset: none;
+  --shadow-offset-x: 0px;
+  --shadow-offset-y: 0px;
+
+  /* Focus outline */
+  --focus-outline: 3px solid var(--color-focus);
+  --focus-outline-offset: 0;
+
+  /* Component tokens */
+  --color-card-border: var(--color-foreground);
+  --color-top-task-bg: var(--color-background);
+  --color-top-task-text: var(--color-foreground);
+  --color-top-task-border: var(--color-foreground);
+}

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 60" font-family="Roboto, sans-serif">
+  <defs>
+    <style>
+      .stage { fill: #009688; rx: 8; }
+      .stage-text { fill: #fff; font-size: 14px; font-weight: 600; text-anchor: middle; dominant-baseline: central; }
+      .arrow { fill: none; stroke: #78909c; stroke-width: 2; marker-end: url(#ah2); }
+    </style>
+    <marker id="ah2" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#78909c"/>
+    </marker>
+  </defs>
+  <rect x="10" y="10" width="110" height="40" class="stage"/>
+  <text x="65" y="30" class="stage-text">lint</text>
+  <line x1="120" y1="30" x2="160" y2="30" class="arrow"/>
+  <rect x="160" y="10" width="130" height="40" class="stage"/>
+  <text x="225" y="30" class="stage-text">typecheck</text>
+  <line x1="290" y1="30" x2="330" y2="30" class="arrow"/>
+  <rect x="330" y="10" width="110" height="40" class="stage"/>
+  <text x="385" y="30" class="stage-text">build</text>
+</svg>

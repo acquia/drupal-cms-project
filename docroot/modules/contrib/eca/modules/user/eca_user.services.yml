@@ -1,0 +1,8 @@
+services:
+  eca_user.account_switcher:
+    class: Drupal\eca_user\AccountSwitcher
+    arguments:
+      - '@account_switcher'
+
+parameters:
+  eca_user.skip_procedural_hook_scan: true

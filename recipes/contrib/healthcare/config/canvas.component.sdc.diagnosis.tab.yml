@@ -1,0 +1,40 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - diagnosis
+active_version: a0cea5d503f24206
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        title:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Tab 1'
+          expression: ℹ︎string␟value
+        active_by_default:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: false
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        tab_content:
+          title: 'Tab content'
+          description: 'Content displayed when this tab is active.'
+label: Tab
+id: sdc.diagnosis.tab
+provider: diagnosis
+source: sdc
+source_local_id: 'diagnosis:tab'

@@ -1,0 +1,253 @@
+# @drupal-canvas/cli
+
+## 0.26.2
+
+### Patch Changes
+
+- 614dfb4: Update runtime dependencies to compatible versions.
+- Updated dependencies [614dfb4]
+  - @drupal-canvas/eslint-config@0.10.1
+
+## 0.26.1
+
+### Patch Changes
+
+- Updated dependencies [73d9fb8]
+  - drupal-canvas@0.7.1
+
+## 0.26.0
+
+### Minor Changes
+
+- ed541e3: `canvas pull` migrates safe `getPageData()` and `getSiteData()` calls
+  in pulled components to the `usePageContext()` and `useSiteContext()` hooks
+  from `drupal-canvas/react`, when the connected site advertises context-hook
+  support and the project's installed React entry exports both hooks as runtime
+  values. The migration is all-or-nothing per file: a call must be an imported
+  binding called without arguments at an unconditional hook position in a
+  component or custom hook, with no possible earlier return and no identifier
+  conflicts. Planned conversions show before the pull is confirmed and honor
+  `--yes` and `--skip-overwrite`; remaining cases, `new JsonApiClient()`
+  construction, and helper modules are reported with an AI-agent migration
+  prompt.
+
+  The codemod resolves namespace imports conservatively (bare hook calls with a
+  root import, unchanged files on shadowed or computed namespace use), treats
+  only `memo`/`forwardRef` wrappers as components, and never imports a hook
+  twice.
+
+  React wrappers are recognized by their `react` import binding and only for
+  their component argument, and a replacement hook name shadowed anywhere in the
+  file leaves the file unchanged.
+
+  Component positions are decided syntactically before the name (named callbacks
+  passed to other calls are not components), and re-exported getters leave the
+  file unchanged.
+
+### Patch Changes
+
+- Updated dependencies [ed541e3]
+  - drupal-canvas@0.7.0
+
+## 0.25.2
+
+### Patch Changes
+
+- 24ad226: `canvas pull` no longer overwrites an existing local `package.json`.
+  It now preserves the local file and adds each dependency from the pulled
+  `dependencies` that is absent from the local `dependencies`,
+  `devDependencies`, and `peerDependencies` to the local `dependencies`, using
+  the pulled version. Existing versions, scripts, and other fields are left
+  unchanged. When no local `package.json` exists, the pulled one is written as
+  before.
+
+## 0.25.1
+
+### Patch Changes
+
+- 239a9a9: Explicitly set the React component type during non-headless push so
+  existing external components become Canvas-managed React components.
+
+## 0.25.0
+
+### Minor Changes
+
+- 9eb64a3: Add brand kit color synchronization support.
+  - Carry brand kit colors in `canvas.brand-kit.json` under a new `colors` key
+    alongside `fonts`: a map from the CSS custom property name (without `--`) to
+    a CSS color string (`#rrggbb`, `#rrggbbaa`, `rgb()`, `rgba()`, `hsl()`,
+    `hsla()`) or a `{value, name, displayFormat}` wrapper. Display names derive
+    from the key, so `"brand-red": "#cc0000"` is a complete entry.
+  - Pull colors from the site into the file and push entries to the site's color
+    endpoints, matching by the variable the key names. A pull right after a push
+    produces no diff, and a push right after a pull writes nothing.
+  - Never delete a site color that is absent from the file by default; report it
+    and offer the explicit `canvas push --prune-colors` opt-in.
+  - Validate the file at the start of push — before authentication or any
+    request — naming the offending entry for malformed values, invalid keys, two
+    keys naming the same variable, and duplicate display names (the site
+    requires unique color names).
+  - Validate `canvas.brand-kit.json` in `canvas validate`: JSON syntax,
+    structure against a published JSON Schema, and the semantic rules a schema
+    cannot express (key collisions, ranges inside color strings, font files
+    existing on disk). Files the CLI creates carry a `$schema` reference so
+    editors validate and autocomplete them.
+  - Brand kit is now included by default: `canvas pull` and `canvas push` sync
+    the brand kit without any flag. Pass `--no-include-brand-kit` to opt out, or
+    set `CANVAS_INCLUDE_BRAND_KIT=false`.
+  - `canvas:brand_kit` is now part of the default OAuth scope. Existing tokens
+    will request this scope on their next refresh.
+  - `--include-brand-kit` (positive form) is deprecated and emits a warning.
+    Remove it from scripts; `--no-include-brand-kit` is the supported opt-out.
+
+### Patch Changes
+
+- f65ea20: Add the `v0.langcode` entry to `dataDependencies.drupalSettings` for
+  components that import `canvasFormatDate`, `canvasFormatDateTime`,
+  `canvasFormatTime`, or `canvasFormatDateRange` from `drupal-canvas`, so that
+  published pages format dates in the active Drupal locale.
+- Updated dependencies [f65ea20]
+  - drupal-canvas@0.6.0
+
+## 0.24.1
+
+### Patch Changes
+
+- 5b4d934: Move the page template support check before authentication and
+  continue syncing other resources when page templates are not supported.
+- 52cec0f: Fix page template pulls to use resolved prop values.
+- d863921: Allow metadata preflight to validate components importing
+  dependencies included in the same push, while retaining dependency validation
+  during upload.
+- Updated dependencies [3ed0539]
+  - drupal-canvas@0.5.2
+
+## 0.24.0
+
+### Minor Changes
+
+- da4015e: Add page template synchronization support.
+  - Replace global regions with page templates. Projects using the old global
+    region files or configuration must migrate before running sync commands.
+  - Pull, push, validate, and reconcile media for page templates stored by
+    default in `page-templates/`.
+  - Allow pages and content templates to select a page template with the
+    `pageVariant` field.
+  - Let one page template become the site default with `"default": true`.
+  - Configure page templates with `pageTemplatesDir`, `sync.pageTemplates`, and
+    `--no-page-templates`.
+
+- 2d22d81: Reconcile external document media in push flows.
+  - `reconcile-media` uploads external document URLs (`pdf`, `rtf`, Office,
+    OpenDocument, and iWork formats) referenced by document props as `document`
+    media entities. The document's `title` and `description` are sent along with
+    the file.
+  - The default OAuth scopes now include `canvas:media:document:create`.
+
+- 78e3ff2: Validate authored Code Component metadata against the Canvas
+  contract.
+  - Validate raw `component.yml` envelopes and directly resolvable prop schemas
+    locally.
+  - Use the authenticated target site's non-mutating validation operation when
+    available, and warn when target acceptance was not validated.
+  - Preflight every complete Code Component payload before push mutations when
+    the target supports it.
+  - Derive content entity reference preview targets from
+    `dataDependencies.entityFields`.
+
+### Patch Changes
+
+- 8ba09a5: Fix pushing link props whose value is a relative reference without a
+  leading slash.
+  - `uri-reference` and `iri-reference` values such as `page.html?x=1`, `?x=1`
+    or `#section` are now sent as authored. Previously they were prefixed with
+    `internal:`, which the server rejects because an `internal:` URI requires a
+    leading slash.
+  - Root-relative values such as `/about` are still sent as `internal:/about`,
+    matching what the Canvas UI stores.
+  - URI schemes are now detected case-insensitively, so `HTTPS://…` is no longer
+    treated as a relative path.
+
+- Updated dependencies [108e9d4]
+- Updated dependencies [78e3ff2]
+  - drupal-canvas@0.5.1
+  - @drupal-canvas/eslint-config@0.10.0
+
+## 0.23.1
+
+### Patch Changes
+
+- Updated dependencies [a51630b]
+  - @drupal-canvas/eslint-config@0.9.0
+
+## 0.23.0
+
+### Minor Changes
+
+- 761cfbb: Trust system CA certificates to support working with DDEV
+  environments over HTTPS.
+- 761cfbb: Set minimum Node.js requirement: >=22.19.0 <23 || >=24.5.0.
+
+### Patch Changes
+
+- Updated dependencies [761cfbb]
+  - drupal-canvas@0.5.0
+  - @drupal-canvas/eslint-config@0.8.0
+
+## 0.22.0
+
+### Minor Changes
+
+- 9bcfe16: Push components as external metadata when the Canvas Headless SDK is
+  present.
+  - `push` detects `@drupal-canvas/headless` in the project and uploads every
+    component as `type: external` — metadata only, no JS/CSS — since a decoupled
+    app owns rendering.
+  - A `type: external` in a component's `component.yml` is honored the same way
+    without the SDK. The YAML file is never mutated; `type` is set on the API
+    payload only.
+  - Entry-less components (for example `.vue`, `.astro`, `.svelte` single-file
+    components) are discovered instead of being dropped as missing a JS entry.
+  - Existing external components are updated rather than recreated, and are
+    never deleted by `push`. A local/remote component type mismatch is rejected
+    at planning time with an actionable error instead of a confusing server
+    rejection.
+
+- 8933c5e: Add support for pushing and pulling local modules, assets, and
+  `package.json`.
+  - `push` uploads local module and asset dependencies used by components,
+    carrying their disk path and, for text modules, their verbatim source.
+  - `push` stores the project's `package.json` verbatim alongside the global
+    CSS.
+  - `pull` writes local module and asset dependencies, and `package.json`, back
+    to the project. Existing files are overwritten by default, or skipped with
+    `--skip-overwrite`.
+
+### Patch Changes
+
+- 7b03749: Fix component pulls to use JSX or TSX entry extensions that match the
+  pulled source.
+
+## 0.21.3
+
+### Patch Changes
+
+- 7bcf0cc: Fix reconcile-media to support bearer token authentication
+
+  The reconcile-media command now uses ensureAuthConfig() instead of directly
+  requiring clientId/clientSecret, allowing it to work with CANVAS_ACCESS_TOKEN
+  bearer token authentication like other commands (push, pull, build).
+
+## 0.21.2
+
+### Patch Changes
+
+- cbb1a53: Fix content template creation by omitting the unsupported `label`
+  property from create requests.
+
+## 0.21.1
+
+### Patch Changes
+
+- d71fdd4: Preserve resolved media and link props when pulling and pushing
+  global regions.

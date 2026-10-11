@@ -1,0 +1,108 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.article.field_banner_label
+    - field.field.node.article.field_category
+    - field.field.node.article.field_conclusion_body
+    - field.field.node.article.field_content_description
+    - field.field.node.article.field_date
+    - field.field.node.article.field_featured_content
+    - field.field.node.article.field_image
+    - field.field.node.article.field_prescription_required
+    - field.field.node.article.field_primary_category
+    - field.field.node.article.field_read_time
+    - field.field.node.article.field_secondary_category
+    - field.field.node.article.field_typical_forms
+    - field.field.node.article.field_user_image
+    - field.field.node.article.field_user_linkedin_link
+    - field.field.node.article.field_user_name
+    - field.field.node.article.field_user_short_description
+    - field.field.node.article.field_user_twitter_link
+    - node.type.article
+  module:
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.article.full
+targetEntityType: node
+bundle: article
+mode: full
+content:
+  field_banner_label:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  field_category:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_conclusion_body:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_image:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_primary_category:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_read_time:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_secondary_category:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 8
+    region: content
+hidden:
+  field_content_description: true
+  field_date: true
+  field_featured_content: true
+  field_prescription_required: true
+  field_typical_forms: true
+  field_user_image: true
+  field_user_linkedin_link: true
+  field_user_name: true
+  field_user_short_description: true
+  field_user_twitter_link: true
+  search_api_excerpt: true

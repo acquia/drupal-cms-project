@@ -1,0 +1,37 @@
+.card {
+  display: grid;
+  overflow: hidden;
+  grid-template-rows: max-content 200px 1fr;
+  width: 50%;
+  max-width: 800px;
+  border: 1px solid #999;
+  border-radius: 3px;
+
+  h2 {
+    margin: 0;
+    padding: 0.5rem;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .content {
+    padding: 0.5rem;
+
+    p {
+      background: #ccc;
+    }
+
+  }
+
+  footer {
+    padding: 0.5rem;
+    color: #fff;
+    background-color: #333;
+  }
+}
+

@@ -1,0 +1,159 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Drupal\Tests\default_admin\Functional;
+
+use Drupal\Tests\BrowserTestBase;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+
+/**
+ * Tests the Default Admin theme.
+ */
+#[Group('default_admin')]
+#[RunTestsInSeparateProcesses]
+class AdminTest extends BrowserTestBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  protected static $modules = [
+    'block',
+    'node',
+    'toolbar',
+  ];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'default_admin';
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp(): void {
+    parent::setUp();
+
+    $this->container->get('config.factory')
+      ->getEditable('system.theme')
+      ->set('default', 'default_admin')
+      ->set('admin', 'default_admin')
+      ->save();
+
+    $adminUser = $this->drupalCreateUser([
+      'access administration pages',
+      'administer themes',
+      'access toolbar',
+      'access content overview',
+    ]);
+    $this->drupalLogin($adminUser);
+  }
+
+  /**
+   * Tests Default Admin settings and markup.
+   */
+  public function testDefaultAdminSettings(): void {
+    $response = $this->drupalGet('/admin/content');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertStringContainsString('"defaultAdmin":{', $response);
+    $this->assertStringContainsString('"gin":{', $response);
+    $this->assertStringContainsString('"dark_mode":"auto"', $response);
+    $this->assertStringContainsString('"preset_accent_color":"blue"', $response);
+    $this->assertStringContainsString('"preset_focus_color":"gin"', $response);
+    $this->assertSession()->elementAttributeContains('css', 'html', 'data-admin-focus', 'gin');
+    $this->assertSession()->elementAttributeNotExists('css', 'html', 'data-gin-focus');
+    $this->assertSession()->elementExists('css', 'nav.breadcrumb[aria-labelledby="system-breadcrumb"]');
+    $this->assertSession()->elementExists('css', 'nav.breadcrumb #system-breadcrumb.visually-hidden');
+  }
+
+  /**
+   * Tests the dark mode setting.
+   */
+  public function testDarkModeSetting(): void {
+    \Drupal::configFactory()->getEditable('default_admin.settings')->set('enable_dark_mode', '1')->save();
+    $response = $this->drupalGet('/admin/content');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertStringContainsString('"dark_mode":"1"', $response);
+  }
+
+  /**
+   * Tests the high contrast setting.
+   */
+  public function testHighContrastSetting(): void {
+    \Drupal::configFactory()->getEditable('default_admin.settings')->set('high_contrast_mode', TRUE)->save();
+    $this->drupalGet('/admin/content');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->elementAttributeContains('css', 'html', 'class', 'high-contrast-mode');
+  }
+
+  /**
+   * Tests color accent setting.
+   */
+  public function testAccentColorSetting(): void {
+    \Drupal::configFactory()->getEditable('default_admin.settings')->set('preset_accent_color', 'red')->save();
+    $response = $this->drupalGet('/admin/content');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertStringContainsString('"preset_accent_color":"red"', $response);
+  }
+
+  /**
+   * Tests focus color setting.
+   */
+  public function testFocusColorSetting(): void {
+    \Drupal::configFactory()->getEditable('default_admin.settings')->set('preset_focus_color', 'blue')->save();
+    $response = $this->drupalGet('/admin/content');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertStringContainsString('"preset_focus_color":"blue"', $response);
+  }
+
+  /**
+   * Test user settings.
+   */
+  public function testUserSettings(): void {
+    \Drupal::configFactory()->getEditable('default_admin.settings')->set('show_user_theme_settings', TRUE)->save();
+
+    $user1 = $this->createUser();
+    $this->drupalLogin($user1);
+
+    // Change something on the logged in user form.
+    $this->assertStringContainsString('"dark_mode":"auto"', $this->drupalGet($user1->toUrl('edit-form')));
+
+    $this->submitForm([
+      'enable_user_settings' => TRUE,
+      'enable_dark_mode' => '1',
+    ], 'Save');
+    $this->assertStringContainsString('"dark_mode":"1"', $this->drupalGet($user1->toUrl('edit-form')));
+
+    // Login as admin.
+    $this->drupalLogin($this->rootUser);
+    $this->assertStringContainsString('"dark_mode":"auto"', $this->drupalGet('edit-form'));
+  }
+
+  /**
+   * Disabled: Test user settings.
+   */
+  public function disabledTestUserSettings(): void {
+    $user1 = $this->createUser();
+    $this->drupalLogin($user1);
+    // Change something on user1 edit form.
+    $this->drupalGet($user1->toUrl('edit-form'));
+    $this->submitForm([
+      'enable_user_settings' => TRUE,
+      'high_contrast_mode' => TRUE,
+      'enable_dark_mode' => '1',
+    ], 'Save');
+
+    // Check logged-in's user is not affected.
+    $loggedInUserResponse = $this->drupalGet('edit-form');
+    $this->assertStringContainsString('"high_contrast_mode":false', $loggedInUserResponse);
+    $this->assertStringContainsString('"dark_mode":"auto"', $loggedInUserResponse);
+
+    // Check settings of user1.
+    $this->drupalLogin($user1);
+    $rootUserResponse = $this->drupalGet($user1->toUrl('edit-form'));
+    $this->assertStringContainsString('"high_contrast_mode":true', $rootUserResponse);
+    $this->assertStringContainsString('"dark_mode":"1"', $rootUserResponse);
+  }
+
+}

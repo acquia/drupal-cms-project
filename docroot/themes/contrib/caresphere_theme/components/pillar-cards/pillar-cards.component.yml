@@ -1,0 +1,106 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Pillar cards
+group: Section
+status: stable
+description: "Row of three pillar/feature cards. Desktop: first card featured (large), others equal; mobile: vertical stack. Figma 1:10066 (desktop), 1:9826 (mobile)."
+props:
+  type: object
+  properties:
+    # Card 1 (featured on desktop: H3, 48px padding, optional primary + secondary CTAs)
+    card_1_media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Card 1 Icon
+      type: object
+      description: "Icon image (e.g. SVG) for the first card."
+    card_1_heading:
+      type: string
+      title: Card 1 Heading
+      examples:
+        - "Neighborhood strengthening"
+    card_1_description:
+      type: string
+      title: Card 1 Description
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - "Building trust and connection within local communities."
+    card_1_primary_label:
+      type: string
+      title: Card 1 Primary button label
+      examples:
+        - "Explore"
+    card_1_primary_url:
+      type: string
+      title: Card 1 Primary button URL
+    card_1_secondary_label:
+      type: string
+      title: Card 1 Secondary link label
+      examples:
+        - "Learn"
+    card_1_secondary_url:
+      type: string
+      title: Card 1 Secondary link URL
+
+    # Card 2
+    card_2_media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Card 2 Icon
+      type: object
+    card_2_heading:
+      type: string
+      title: Card 2 Heading
+      examples:
+        - "Skills and economic pathways"
+    card_2_description:
+      type: string
+      title: Card 2 Description
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - "Training and resources that lead to real opportunity."
+    card_2_primary_label:
+      type: string
+      title: Card 2 Primary button label
+    card_2_primary_url:
+      type: string
+      title: Card 2 Primary button URL
+    card_2_secondary_label:
+      type: string
+      title: Card 2 Secondary link label
+      examples:
+        - "Learn"
+    card_2_secondary_url:
+      type: string
+      title: Card 2 Secondary link URL
+
+    # Card 3
+    card_3_media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Card 3 Icon
+      type: object
+    card_3_heading:
+      type: string
+      title: Card 3 Heading
+      examples:
+        - "Wellbeing and preventive care"
+    card_3_description:
+      type: string
+      title: Card 3 Description
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - "Supporting physical and mental health across neighborhoods."
+    card_3_primary_label:
+      type: string
+      title: Card 3 Primary button label
+    card_3_primary_url:
+      type: string
+      title: Card 3 Primary button URL
+    card_3_secondary_label:
+      type: string
+      title: Card 3 Secondary link label
+      examples:
+        - "Learn"
+    card_3_secondary_url:
+      type: string
+      title: Card 3 Secondary link URL

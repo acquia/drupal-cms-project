@@ -1,0 +1,101 @@
+.menu--main .menu__item {
+  position: relative;
+  padding: var(--spacing-1) var(--spacing-2);
+  margin-bottom: var(--spacing-1);
+}
+
+.menu--main .menu__link {
+  color: var(--grey-dark);
+  font-weight: var(--font-medium);
+}
+
+.menu--main .menu__link--level-0 {
+  color: var(--text);
+}
+
+.menu--main .menu--sub {
+  display: none;
+  padding: var(--spacing-2) 0 0 var(--spacing-1);
+}
+
+.menu--main .menu--sub.is-expanded {
+  display: block;
+  z-index: 5000; /* Needs to go over leaflet's elements */
+}
+
+.menu--main .menu--sub .menu__item {
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .menu--main .menu__item--level-0 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .menu--main {
+    display: flex;
+    gap: var(--spacing-2);
+  }
+
+  .menu--main .menu__item {
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+
+  .menu--main .menu__link {
+    width: 100%;
+    padding: var(--spacing-1) var(--spacing-2);
+  }
+
+  .menu--main .menu__link--level-0 {
+    border-radius: 1.6rem;
+  }
+
+  .menu--main .menu__link--active,
+  .menu--main .menu__link--level-0:hover,
+  .menu--main .menu__link--level-0:focus-visible {
+    background-color: rgb(0 0 0 / 0.1);
+  }
+
+  .menu--main .menu__link--level-0[aria-expanded="true"] {
+    background-color: rgb(255 255 255 / 0.1);
+  }
+
+  .menu--main .menu__sub-expand,
+  .menu--main .menu__link--level-0 {
+    color: var(--white);
+  }
+
+  .menu--main .menu--sub {
+    position: absolute;
+    top: calc(100% + var(--spacing-1));
+    left: 0;
+    min-width: 31rem;
+    padding: var(--spacing-1) 0;
+    background-color: var(--white);
+    border-radius: 1.6rem;
+    box-shadow: var(--box-shadow-default);
+    overflow: hidden;
+  }
+
+  .menu--main .menu--sub.left-aligned {
+    left: auto;
+    right: 0;
+  }
+
+  .menu--main .menu--sub .menu__item:not(:last-child) {
+    margin-bottom: var(--spacing-1);
+  }
+
+  .menu--main .menu--sub .menu__link {
+    padding: var(--spacing-1) var(--spacing-5);
+  }
+
+  .menu--main .menu--sub .menu__link:hover,
+  .menu--main .menu--sub .menu__link:focus-visible {
+    background-color: var(--grey-light);
+  }
+}

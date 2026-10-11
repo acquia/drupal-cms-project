@@ -1,0 +1,882 @@
+import { promises as fs } from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { afterEach, describe, expect, it } from 'vitest';
+
+import {
+  buildIframeHtml,
+  buildPreviewPayload,
+  buildPreviewRuntimeEntrySource,
+  bundleInteractivePreview,
+  resolvePreviewSiteData,
+  withBrandKitColorCss,
+} from './preview-payload';
+
+import type { Spec } from '@json-render/core';
+
+const temporaryDirectories: string[] = [];
+
+async function makeTemporaryDirectory(): Promise<string> {
+  const directory = await fs.mkdtemp(
+    path.join(os.tmpdir(), 'canvas-workbench-preview-payload-'),
+  );
+  temporaryDirectories.push(directory);
+  return directory;
+}
+
+async function writeFile(
+  filePath: string,
+  content: string | Buffer,
+): Promise<void> {
+  await fs.mkdir(path.dirname(filePath), { recursive: true });
+  await fs.writeFile(filePath, content);
+}
+
+afterEach(async () => {
+  await Promise.all(
+    temporaryDirectories.map((directory) =>
+      fs.rm(directory, { recursive: true, force: true }),
+    ),
+  );
+  temporaryDirectories.length = 0;
+});
+
+describe('preview-payload', () => {
+  it('reports invalid Canvas import root config before discovery', async () => {
+    const root = await makeTemporaryDirectory();
+
+    await writeFile(
+      path.join(root, 'canvas.config.json'),
+      JSON.stringify(
+        {
+          componentDir: 'components',
+          pagesDir: 'pages',
+          aliasBaseDir: 'src',
+        },
+        null,
+        2,
+      ),
+    );
+
+    const payload = await buildPreviewPayload({
+      mode: 'component',
+      inputPath: 'components/card/component.yml',
+      projectRoot: root,
+    });
+
+    expect(payload.ok).toBe(false);
+    expect(payload.errors).toEqual([
+      expect.objectContaining({
+        code: 'invalid_canvas_config',
+        message:
+          'Invalid Canvas config: componentDir "components" must be inside aliasBaseDir "src".',
+      }),
+    ]);
+  });
+
+  it('builds interactive component preview payload with inlined css html', async () => {
+    const root = await makeTemporaryDirectory();
+
+    await writeFile(
+      path.join(root, 'canvas.config.json'),
+      JSON.stringify(
+        {
+          componentDir: 'src/components',
+          pagesDir: 'pages',
+          aliasBaseDir: 'src',
+          globalCssPath: 'src/global.css',
+        },
+        null,
+        2,
+      ),
+    );
+
+    await writeFile(
+      path.join(root, 'src/components/card/component.yml'),
+      [
+        'name: Card',
+        'props:',
+        '  properties:',
+        '    title:',
+        '      type: string',
+        '      examples:',
+        '        - Hello world',
+      ].join('\n'),
+    );
+    await writeFile(
+      path.join(root, 'src/components/card/index.tsx'),
+      'export default function Card() { return null; }',
+    );
+    await writeFile(
+      path.join(root, 'src/components/card/index.css'),
+      '.card { color: red; }',
+    );
+    await writeFile(path.join(root, 'src/global.css'), 'body { margin: 0; }');
+    await writeFile(
+      path.join(root, '.env'),
+      [
+        'CANVAS_SITE_URL=https://canvas.example.test',
+        'CANVAS_JSONAPI_PREFIX=api',
+      ].join('\n'),
+    );
+
+    let capturedRoot: string | null = null;
+    let capturedCssEntryPaths: string[] = [];
+
+    const payload = await buildPreviewPayload(
+      {
+        mode: 'component',
+        inputPath: 'src/components/card/component.yml',
+        projectRoot: root,
+      },
+      {
+        bundleInteractivePreview: async (options) => {
+          capturedRoot = options.spec.root;
+          capturedCssEntryPaths = options.cssEntryPaths;
+          return {
+            js: 'console.log("interactive");',
+            css: 'body{background:black;color:white;}',
+            siteData: null,
+          };
+        },
+      },
+    );
+
+    expect(payload.ok).toBe(true);
+    expect(payload.renderMode).toBe('interactive');
+    expect(payload.target?.projectRelativePath).toBe(
+      'src/components/card/component.yml',
+    );
+    expect(payload.spec?.root).toBe('canvas-workbench-preview-root');
+    expect(payload.css).toBe('body{background:black;color:white;}');
+    expect(payload.iframeHtml).toContain(
+      '<style data-canvas-preview-css>body{background:black;color:white;}</style>',
+    );
+    expect(payload.iframeHtml).toContain(
+      '<script type="text/javascript" data-canvas-preview-runtime>',
+    );
+    expect(payload.iframeHtml).toContain(
+      '<script type="text/javascript" data-canvas-preview-bootstrap>',
+    );
+    expect(payload.iframeHtml).toContain(
+      'const canvasPreviewBaseUrl = "https://canvas.example.test";',
+    );
+    expect(payload.iframeHtml).toContain(
+      'window.drupalSettings.canvasData.v0.baseUrl = canvasPreviewBaseUrl;',
+    );
+    expect(payload.iframeHtml).toContain(
+      'window.drupalSettings.canvasData.v0.jsonapiSettings.apiPrefix = "api";',
+    );
+    expect(capturedRoot).toBe('canvas-workbench-preview-root');
+    expect(capturedCssEntryPaths).toEqual(
+      expect.arrayContaining([
+        path.resolve(root, 'src/global.css'),
+        path.resolve(root, 'src/components/card/index.css'),
+      ]),
+    );
+  });
+
+  it('warns and uses legacy global css fallback when the new default is missing', async () => {
+    const root = await makeTemporaryDirectory();
+
+    await writeFile(
+      path.join(root, 'src/components/card/component.yml'),
+      'name: Card\n',
+    );
+    await writeFile(
+      path.join(root, 'src/components/card/index.tsx'),
+      'export default function Card() { return null; }',
+    );
+    await writeFile(
+      path.join(root, 'src/components/global.css'),
+      'body { margin: 0; }',
+    );
+
+    let capturedCssEntryPaths: string[] = [];
+
+    const payload = await buildPreviewPayload(
+      {
+        mode: 'component',
+        inputPath: 'src/components/card/component.yml',
+        projectRoot: root,
+      },
+      {
+        bundleInteractivePreview: async (options) => {
+          capturedCssEntryPaths = options.cssEntryPaths;
+          return {
+            js: 'console.log("interactive");',
+            css: 'body{margin:0;}',
+            siteData: null,
+          };
+        },
+      },
+    );
+
+    expect(payload.ok).toBe(true);
+    expect(payload.warnings).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          code: 'legacy_default_global_css_path',
+          path: './src/components/global.css',
+        }),
+      ]),
+    );
+    expect(capturedCssEntryPaths).toContain(
+      path.resolve(root, 'src/components/global.css'),
+    );
+  });
+
+  it('builds interactive page preview payload', async () => {
+    const root = await makeTemporaryDirectory();
+
+    await writeFile(
+      path.join(root, 'canvas.config.json'),
+      JSON.stringify(
+        {
+          componentDir: 'src/components',
+          pagesDir: 'pages',
+          aliasBaseDir: 'src',
+          globalCssPath: 'src/global.css',
+        },
+        null,
+        2,
+      ),
+    );
+
+    await writeFile(
+      path.join(root, 'src/components/hero/component.yml'),
+      'name: Hero\n',
+    );
+    await writeFile(
+      path.join(root, 'src/components/hero/index.tsx'),
+      'export default function Hero() { return null; }',
+    );
+
+    await writeFile(
+      path.join(root, 'src/components/card/component.yml'),
+      'name: Card\n',
+    );
+    await writeFile(
+      path.join(root, 'src/components/card/index.tsx'),
+      'export default function Card() { return null; }',
+    );
+    await writeFile(
+      path.join(root, 'src/components/card/index.css'),
+      '.card { padding: 1rem; }',
+    );
+
+    await writeFile(
+      path.join(root, 'pages/home.json'),
+      JSON.stringify(
+        {
+          title: 'Home',
+          elements: {
+            hero: {
+              type: 'js.hero',
+              props: {
+                title: 'Hello',
+              },
+            },
+            card: {
+              type: 'js.card',
+              props: {
+                featured: true,
+              },
+            },
+          },
+        },
+        null,
+        2,
+      ),
+    );
+    await writeFile(
+      path.join(root, 'page-templates/default.json'),
+      JSON.stringify({
+        label: 'Default',
+        default: true,
+        elements: {
+          content: { type: 'marker.page_content', props: {} },
+        },
+      }),
+    );
+
+    await writeFile(path.join(root, 'src/global.css'), 'body { margin: 0; }');
+
+    let capturedRegistryNames: string[] = [];
+    let capturedPageTemplateSpec: Spec | null = null;
+
+    const payload = await buildPreviewPayload(
+      {
+        mode: 'page',
+        inputPath: 'pages/home.json',
+        projectRoot: root,
+      },
+      {
+        bundleInteractivePreview: async (options) => {
+          capturedRegistryNames = options.componentSources
+            .map((source) => source.name)
+            .sort();
+          capturedPageTemplateSpec = options.pageTemplateSpec ?? null;
+          return {
+            js: 'console.log("interactive-page");',
+            css: '.page{display:block;}',
+            siteData: null,
+          };
+        },
+      },
+    );
+
+    expect(payload.ok).toBe(true);
+    expect(payload.renderMode).toBe('interactive');
+    expect(payload.target?.id).toBe('home');
+    expect(payload.spec?.root).toBe('canvas:component-tree');
+    expect(payload.css).toBe('.page{display:block;}');
+    expect(payload.iframeHtml).toContain('.page{display:block;}');
+    expect(capturedRegistryNames).toEqual(['card', 'hero']);
+    expect(
+      (capturedPageTemplateSpec as Spec | null)?.elements.content.type,
+    ).toBe('marker.page_content');
+  });
+
+  it('resolves canvas-color token refs in the page template spec for preview', async () => {
+    const root = await makeTemporaryDirectory();
+
+    await writeFile(
+      path.join(root, 'canvas.config.json'),
+      JSON.stringify(
+        {
+          componentDir: 'src/components',
+          pagesDir: 'pages',
+          aliasBaseDir: 'src',
+        },
+        null,
+        2,
+      ),
+    );
+
+    await writeFile(
+      path.join(root, 'canvas.brand-kit.json'),
+      JSON.stringify({ colors: { 'brand-red': '#cc1a1a' } }),
+    );
+
+    await writeFile(
+      path.join(root, 'src/components/nav/component.yml'),
+      `name: Nav
+machineName: nav
+props:
+  properties:
+    backgroundColor:
+      title: Background Color
+      type: string
+      $ref: json-schema-definitions://canvas.module/color
+`,
+    );
+    await writeFile(
+      path.join(root, 'src/components/nav/index.tsx'),
+      'export default function Nav() { return null; }',
+    );
+
+    await writeFile(
+      path.join(root, 'pages/home.json'),
+      JSON.stringify({
+        title: 'Home',
+        elements: {
+          hero: { type: 'js.nav', props: {} },
+        },
+      }),
+    );
+
+    await writeFile(
+      path.join(root, 'page-templates/default.json'),
+      JSON.stringify({
+        label: 'Default',
+        default: true,
+        elements: {
+          nav: {
+            type: 'js.nav',
+            props: { backgroundColor: 'canvas-color:brand-red' },
+          },
+          content: { type: 'marker.page_content', props: {} },
+        },
+      }),
+    );
+
+    let capturedPageTemplateSpec: unknown = null;
+    const siteData = {
+      baseUrl: 'https://canvas.example.test',
+      branding: { homeUrl: '/', siteName: 'Color and context', siteSlogan: '' },
+      jsonapiSettings: { apiPrefix: 'jsonapi' },
+    };
+
+    const payload = await buildPreviewPayload(
+      {
+        mode: 'page',
+        inputPath: 'pages/home.json',
+        projectRoot: root,
+      },
+      {
+        bundleInteractivePreview: async (options) => {
+          capturedPageTemplateSpec = options.pageTemplateSpec ?? null;
+          return { js: '', css: '.nav{display:block;}', siteData };
+        },
+      },
+    );
+
+    const navProps = (
+      capturedPageTemplateSpec as {
+        elements: { nav: { props: Record<string, unknown> } };
+      } | null
+    )?.elements.nav.props;
+    expect(navProps?.backgroundColor).toMatchObject({
+      cssVariable: '--brand-red',
+      cssColorValue: '#cc1a1a',
+    });
+    expect(payload.ok).toBe(true);
+    expect(payload.iframeHtml).toContain('--brand-red:');
+    expect(payload.iframeHtml?.indexOf('--brand-red:')).toBeLessThan(
+      payload.iframeHtml?.indexOf('.nav{') ?? -1,
+    );
+    expect(payload.iframeHtml).toContain(
+      JSON.stringify({ branding: siteData.branding }),
+    );
+    expect(payload.iframeHtml).toContain(
+      'window.drupalSettings.canvasData.v0.jsonapiSettings.apiPrefix = "jsonapi";',
+    );
+  });
+
+  it('keeps interactive render mode and fails when interactive bundle throws', async () => {
+    const root = await makeTemporaryDirectory();
+
+    await writeFile(
+      path.join(root, 'src/components/card/component.yml'),
+      'name: Card\n',
+    );
+    await writeFile(
+      path.join(root, 'src/components/card/index.tsx'),
+      'export default function Card() { return null; }',
+    );
+
+    const payload = await buildPreviewPayload(
+      {
+        mode: 'component',
+        inputPath: 'src/components/card/component.yml',
+        projectRoot: root,
+      },
+      {
+        bundleInteractivePreview: async () => {
+          throw new Error('boom');
+        },
+      },
+    );
+
+    expect(payload.ok).toBe(false);
+    expect(payload.renderMode).toBe('interactive');
+    expect(payload.iframeHtml).toBeNull();
+    expect(payload.errors[0]?.code).toBe('interactive_bundle_failed');
+  });
+
+  it('explains the configured componentDir when the target path is outside it', async () => {
+    const root = await makeTemporaryDirectory();
+
+    await writeFile(
+      path.join(root, 'canvas.config.json'),
+      JSON.stringify(
+        {
+          componentDir: 'src/components',
+          pagesDir: 'pages',
+        },
+        null,
+        2,
+      ),
+    );
+    await writeFile(
+      path.join(root, 'examples/components/card/component.yml'),
+      'name: Card\n',
+    );
+
+    const payload = await buildPreviewPayload({
+      mode: 'component',
+      inputPath: 'examples/components/card/component.yml',
+      projectRoot: root,
+    });
+
+    expect(payload.ok).toBe(false);
+    expect(payload.errors).toEqual([
+      expect.objectContaining({
+        code: 'component_not_found',
+        message: expect.stringContaining(
+          'configured componentDir ("src/components")',
+        ),
+      }),
+    ]);
+    expect(payload.errors[0]?.message).toContain(
+      'preview discovery, mocks, and @/ module resolution are scoped to the configured roots.',
+    );
+  });
+
+  it('explains the configured pagesDir when the target path is outside it', async () => {
+    const root = await makeTemporaryDirectory();
+
+    await writeFile(
+      path.join(root, 'canvas.config.json'),
+      JSON.stringify(
+        {
+          componentDir: 'src/components',
+          pagesDir: 'pages',
+        },
+        null,
+        2,
+      ),
+    );
+    await writeFile(
+      path.join(root, 'examples/pages/home.json'),
+      JSON.stringify(
+        {
+          title: 'Home',
+          elements: {},
+        },
+        null,
+        2,
+      ),
+    );
+
+    const payload = await buildPreviewPayload({
+      mode: 'page',
+      inputPath: 'examples/pages/home.json',
+      projectRoot: root,
+    });
+
+    expect(payload.ok).toBe(false);
+    expect(payload.errors).toEqual([
+      expect.objectContaining({
+        code: 'page_not_found',
+        message: expect.stringContaining('configured pagesDir ("pages")'),
+      }),
+    ]);
+    expect(payload.errors[0]?.message).toContain(
+      'components discovered under componentDir ("src/components")',
+    );
+  });
+
+  it('wraps generated previews in the drupal-canvas context providers', () => {
+    const source = buildPreviewRuntimeEntrySource({
+      spec: { root: 'root', elements: {} },
+      componentSources: [],
+      cssEntryPaths: [],
+      runtimeSettings: {
+        baseUrl: 'https://static.example.test',
+        jsonapiPrefix: 'static',
+      },
+    });
+    expect(source).toContain(
+      "import { createJsonApiClient } from 'drupal-canvas'; import { CanvasContextProvider, JsonApiClientProvider } from 'drupal-canvas/react';",
+    );
+    expect(source).toContain(
+      "import canvasSiteData from 'virtual:drupal-canvas/site-data';",
+    );
+    // The hooks resolve the backend from the same inputs as the bootstrap
+    // script (inlined static settings, site data module, preview origin),
+    // never from the legacy settings global.
+    expect(source).toContain(
+      'const canvasStaticSettings = {"baseUrl":"https://static.example.test","jsonapiPrefix":"static"};',
+    );
+    expect(source).toContain(
+      'const canvasResolvedSiteData = resolvePreviewSiteData(canvasStaticSettings, canvasSiteData);',
+    );
+    expect(source).toContain(
+      'const canvasContext = createWorkbenchContext(canvasResolvedSiteData, canvasPreviewOrigin);',
+    );
+    expect(source).toContain(
+      'const canvasJsonApiConfig = createWorkbenchJsonApiConfig(canvasResolvedSiteData, canvasPreviewOrigin);',
+    );
+    expect(source).not.toContain('canvasLegacySettings');
+    expect(source.indexOf('window.drupalSettings')).toBeLessThan(
+      source.indexOf('const canvasResolvedSiteData'),
+    );
+    expect(
+      source.slice(source.indexOf('const canvasStaticSettings')),
+    ).not.toContain('drupalSettings');
+    expect(source).toContain(
+      'React.createElement(CanvasContextProvider, { context: canvasContext }, withClient)',
+    );
+    expect(source).toContain(
+      'page: { pageTitle: "", breadcrumbs: [], mainEntity: null }',
+    );
+  });
+
+  it('declares the Workbench runtime and site data in the bootstrap script', () => {
+    const html = buildIframeHtml(
+      'console.log("runtime");',
+      '',
+      { baseUrl: 'https://canvas.example.test', jsonapiPrefix: null },
+      {
+        baseUrl: 'https://canvas.example.test',
+        branding: { homeUrl: '/', siteName: 'Site', siteSlogan: '' },
+        jsonapiSettings: { apiPrefix: 'jsonapi' },
+      },
+    );
+    expect(html).toContain(
+      'window.__drupalCanvasRuntime = { environment: "workbench" };',
+    );
+    expect(html).toContain(
+      'for (const [key, value] of Object.entries({"branding":{"homeUrl":"/","siteName":"Site","siteSlogan":""}}))',
+    );
+    expect(html).toContain(
+      'window.drupalSettings.canvasData.v0.jsonapiSettings.apiPrefix = "jsonapi";',
+    );
+    expect(html).toContain(
+      'window.drupalSettings.canvasData.v0.baseUrl = canvasPreviewBaseUrl;',
+    );
+  });
+
+  it('resolves one site-data snapshot for the legacy settings and the hooks', () => {
+    // Discovered site data wins over the static settings; the static
+    // settings fill what discovery did not provide.
+    expect(
+      resolvePreviewSiteData(
+        { baseUrl: 'https://static.example.test', jsonapiPrefix: 'static' },
+        {
+          baseUrl: 'https://discovered.example.test',
+          jsonapiSettings: { apiPrefix: 'discovered' },
+          branding: { homeUrl: '/', siteName: 'Site', siteSlogan: '' },
+        },
+      ),
+    ).toEqual({
+      baseUrl: 'https://discovered.example.test',
+      jsonapiSettings: { apiPrefix: 'discovered' },
+      branding: { homeUrl: '/', siteName: 'Site', siteSlogan: '' },
+    });
+    expect(
+      resolvePreviewSiteData(
+        { baseUrl: 'https://static.example.test', jsonapiPrefix: 'static' },
+        { branding: { homeUrl: '/', siteName: 'Site', siteSlogan: '' } },
+      ),
+    ).toEqual({
+      baseUrl: 'https://static.example.test',
+      jsonapiSettings: { apiPrefix: 'static' },
+      branding: { homeUrl: '/', siteName: 'Site', siteSlogan: '' },
+    });
+    // "JSON:API not installed" survives for legacy clients and hooks alike.
+    expect(
+      resolvePreviewSiteData(
+        { baseUrl: null, jsonapiPrefix: 'static' },
+        { baseUrl: 'https://site.example.test', jsonapiSettings: null },
+      ),
+    ).toEqual({ baseUrl: 'https://site.example.test', jsonapiSettings: null });
+    expect(
+      resolvePreviewSiteData({ baseUrl: null, jsonapiPrefix: null }, null),
+    ).toBeNull();
+
+    const html = buildIframeHtml(
+      'console.log("runtime");',
+      '',
+      { baseUrl: 'https://static.example.test', jsonapiPrefix: 'static' },
+      {
+        baseUrl: 'https://discovered.example.test',
+        jsonapiSettings: { apiPrefix: 'discovered' },
+      },
+    );
+    expect(html).toContain(
+      'const canvasPreviewBaseUrl = "https://discovered.example.test";',
+    );
+    expect(html).toContain(
+      'window.drupalSettings.canvasData.v0.jsonapiSettings.apiPrefix = "discovered";',
+    );
+    expect(html).not.toContain('static.example.test');
+    const notInstalled = buildIframeHtml(
+      '',
+      '',
+      { baseUrl: null, jsonapiPrefix: 'static' },
+      { baseUrl: 'https://site.example.test', jsonapiSettings: null },
+    );
+    expect(notInstalled).toContain(
+      'window.drupalSettings.canvasData.v0.jsonapiSettings = null;',
+    );
+    expect(notInstalled).not.toContain('apiPrefix = "static"');
+  });
+
+  it('builds runtime source that bootstraps React and drupalSettings defaults', () => {
+    const source = buildPreviewRuntimeEntrySource({
+      spec: {
+        root: 'canvas-workbench-preview-root',
+        elements: {},
+      },
+      pageTemplateSpec: {
+        root: 'content',
+        elements: {
+          content: { type: 'marker.page_content', props: {} },
+        },
+      },
+      componentSources: [
+        {
+          name: 'card',
+          jsEntryPath: '/tmp/card.tsx',
+        },
+        {
+          name: 'js.hero',
+          jsEntryPath: '/tmp/hero.tsx',
+        },
+      ],
+      cssEntryPaths: ['/tmp/global.css'],
+    });
+
+    expect(source).toContain('globalThis.React = React;');
+    expect(source).toContain(
+      'window.drupalSettings = window.drupalSettings ?? {};',
+    );
+    expect(source).toContain(
+      'window.drupalSettings.canvasData.v0.baseUrl = window.location.origin;',
+    );
+    expect(source).toContain(
+      '"card": typeof Component0 === \'function\' ? Component0 : () => null',
+    );
+    expect(source).toContain(
+      '"js.card": typeof Component0 === \'function\' ? Component0 : () => null',
+    );
+    expect(source).toContain(
+      '"js.hero": typeof Component1 === \'function\' ? Component1 : () => null',
+    );
+    expect(source).toContain(
+      '"hero": typeof Component1 === \'function\' ? Component1 : () => null',
+    );
+    expect(source).toContain(
+      'registry["marker.page_content"] = () => pageContent;',
+    );
+    expect(source).toContain(
+      'pageTemplateSpec ? renderSpec(pageTemplateSpec, registry) : pageContent',
+    );
+  });
+
+  it('inlines local font and image assets in the interactive bundle outputs', async () => {
+    const root = await makeTemporaryDirectory();
+
+    await writeFile(
+      path.join(root, 'src/global.css'),
+      [
+        '@font-face {',
+        "  font-family: 'DemoFont';",
+        "  src: url('./fonts/demo.woff2') format('woff2');",
+        '}',
+        ":root { --demo-font: 'DemoFont'; }",
+      ].join('\n'),
+    );
+    await writeFile(
+      path.join(root, 'src/fonts/demo.woff2'),
+      'not-a-real-font-but-valid-as-an-asset\n',
+    );
+    await writeFile(
+      path.join(root, 'src/components/asset-card/logo.png'),
+      Buffer.from(
+        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO7ZsS8AAAAASUVORK5CYII=',
+        'base64',
+      ),
+    );
+    await writeFile(
+      path.join(root, 'src/components/asset-card/index.tsx'),
+      [
+        "import logoUrl from './logo.png';",
+        "import { label } from '@/lib/labels';",
+        '',
+        'export default function AssetCard() {',
+        '  return (',
+        "    <div style={{ fontFamily: 'DemoFont' }}>",
+        '      <img alt="logo" src={logoUrl} />',
+        '      <p>{label}</p>',
+        '    </div>',
+        '  );',
+        '}',
+      ].join('\n'),
+    );
+    await writeFile(
+      path.join(root, 'src/lib/labels.ts'),
+      "export const label = 'Asset card';",
+    );
+
+    const bundled = await bundleInteractivePreview({
+      projectRoot: root,
+      aliasBaseDir: 'src',
+      spec: {
+        root: 'canvas-workbench-preview-root',
+        elements: {
+          'canvas-workbench-preview-root': {
+            type: 'asset-card',
+            props: {},
+          },
+        },
+      },
+      componentSources: [
+        {
+          name: 'asset-card',
+          jsEntryPath: path.join(root, 'src/components/asset-card/index.tsx'),
+        },
+      ],
+      cssEntryPaths: [path.join(root, 'src/global.css')],
+    });
+
+    expect(bundled.css).toContain('data:font/woff2;base64');
+    expect(bundled.js).toContain('data:image/png;base64');
+    expect(bundled.js).toContain('Asset card');
+  });
+
+  it('bundles jsx components without requiring an explicit React import', async () => {
+    const root = await makeTemporaryDirectory();
+
+    await writeFile(
+      path.join(root, 'src/components/hero/index.jsx'),
+      [
+        'export default function Hero({ headline }) {',
+        '  return <section><h1>{headline}</h1></section>;',
+        '}',
+      ].join('\n'),
+    );
+
+    const bundled = await bundleInteractivePreview({
+      projectRoot: root,
+      aliasBaseDir: 'src',
+      spec: {
+        root: 'canvas-workbench-preview-root',
+        elements: {
+          'canvas-workbench-preview-root': {
+            type: 'hero',
+            props: {
+              headline: 'Hello',
+            },
+          },
+        },
+      },
+      componentSources: [
+        {
+          name: 'hero',
+          jsEntryPath: path.join(root, 'src/components/hero/index.jsx'),
+        },
+      ],
+      cssEntryPaths: [],
+    });
+
+    expect(bundled.js).toContain('jsxDEV');
+    expect(bundled.js).not.toContain('React.createElement("section"');
+  });
+
+  describe('withBrandKitColorCss', () => {
+    it('prepends the brand kit color block to bundled CSS', async () => {
+      const projectRoot = await makeTemporaryDirectory();
+      await writeFile(
+        path.join(projectRoot, 'canvas.brand-kit.json'),
+        JSON.stringify({
+          colors: { 'brand-red': '#cc0000' },
+        }),
+      );
+
+      expect(withBrandKitColorCss(projectRoot, 'body { margin: 0; }')).toBe(
+        ':root {\n  --brand-red: #cc0000;\n}\n\nbody { margin: 0; }',
+      );
+    });
+
+    it('returns the CSS unchanged when the project has no brand kit colors', async () => {
+      const projectRoot = await makeTemporaryDirectory();
+      expect(withBrandKitColorCss(projectRoot, 'body { margin: 0; }')).toBe(
+        'body { margin: 0; }',
+      );
+    });
+  });
+});

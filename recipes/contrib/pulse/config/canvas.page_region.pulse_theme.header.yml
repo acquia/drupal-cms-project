@@ -1,0 +1,42 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.system_branding_block
+    - canvas.component.block.system_menu_block.account
+    - canvas.component.block.system_menu_block.main
+    - canvas.component.sdc.pulse_theme.space-header
+  module:
+    - options
+  theme:
+    - pulse_theme
+id: pulse_theme.header
+theme: pulse_theme
+region: header
+component_tree:
+  0:
+    uuid: 7e0ff382-c228-454c-a7d1-400118b1ead2
+    component_id: sdc.pulse_theme.space-header
+    component_version: 3149f199d66bbc29
+    inputs: '{"menu_align":"center"}'
+  '0:links:0':
+    parent_uuid: 7e0ff382-c228-454c-a7d1-400118b1ead2
+    slot: links
+    uuid: 57541971-106a-4c8d-a873-3cc7cf797b6e
+    component_id: block.system_menu_block.account
+    component_version: 4b3fb59b8eadb12d
+    inputs: '{"label":"User account menu","label_display":"0","level":1,"depth":null,"expand_all_items":false}'
+  '0:logo:0':
+    parent_uuid: 7e0ff382-c228-454c-a7d1-400118b1ead2
+    slot: logo
+    uuid: 79a154ce-1337-4e2b-b891-194ab465a20c
+    component_id: block.system_branding_block
+    component_version: b168140fdcaebae5
+    inputs: '{"label":"Site branding","label_display":"0","use_site_logo":true,"use_site_name":false,"use_site_slogan":false}'
+  '0:navigation:0':
+    parent_uuid: 7e0ff382-c228-454c-a7d1-400118b1ead2
+    slot: navigation
+    uuid: 421816c5-bec3-4046-b313-2e2aa9d20b6f
+    component_id: block.system_menu_block.main
+    component_version: 023ff7ba63f80798
+    inputs: '{"label":"Main navigation","label_display":"0","level":1,"depth":null,"expand_all_items":false}'

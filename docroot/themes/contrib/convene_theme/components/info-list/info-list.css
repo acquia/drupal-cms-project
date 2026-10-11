@@ -1,0 +1,58 @@
+.info-list {
+  padding: 80px 24px;
+  background-color: #FFFFFF;
+}
+
+.info-list .info-list__container {
+  max-width: 1000px; /* Constrained width based on screenshot */
+  width: 100%;
+  margin: 0 auto;
+}
+
+.info-list .info-list__items {
+  display: flex;
+  flex-direction: column;
+  gap: 48px; /* Vertical spacing between items */
+  border-top: 1px solid #93C5FD; /* Light blue top border */
+  padding-top: 48px;
+}
+
+/* Ensure Canvas injected divs play nicely with the flex layout */
+.info-list .info-list__items > * {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  width: 100%;
+}
+
+/* If Canvas injects an empty div, we want to visually show the dropzone block */
+.info-list .info-list__items:empty,
+.info-list .info-list__items > div:empty {
+  min-height: 120px;
+  outline: 1px dashed rgba(0, 0, 0, 0.1);
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  border-top: none; /* Remove border if empty so it doesn't double up */
+  padding-top: 0;
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+  .info-list {
+    padding: 64px 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .info-list {
+    padding: 48px 24px;
+  }
+  .info-list .info-list__items {
+    gap: 32px;
+    padding-top: 32px;
+  }
+  .info-list .info-list__items > * {
+    gap: 32px;
+  }
+}

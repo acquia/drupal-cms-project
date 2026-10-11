@@ -1,0 +1,41 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: External card
+status: stable
+description: External card component
+# Overrides regular css with minified.
+libraryOverrides:
+  css:
+    component:
+      external-card.min.css: { minified: true }
+group: Eureka component items
+props:
+  type: object
+  properties:
+    external_card_tag:
+      type: ['string', 'null']
+      title: Card tag text
+      description: Text for the card tag
+      examples:
+        - New
+    external_card_heading:
+      type: string
+      title: Card heading
+      description: Title of the card
+      examples:
+        - Lorem ipsum
+    external_card_text:
+      type: ['string', 'null']
+      title: Card text
+      description: Body of the card, usually HTML markup created in a WYSIWYG
+      examples:
+        - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    external_card_cta_url:
+      type: string
+      format: uri-reference
+      title: Vacancy CTA URL
+      description: Link to the vacancy
+      x-allowed-schemes:
+        - http
+        - https
+      examples:
+        - 'https://zoocha.com'

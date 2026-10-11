@@ -1,0 +1,58 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Section Intro
+group: Section
+status: stable
+props:
+  type: object
+  required:
+    - heading
+  properties:
+    tagline:
+      type: string
+      title: Tagline
+      description: "Short eyebrow label above the heading (DM Sans SemiBold 16px)."
+      examples:
+        - "Impact"
+    heading:
+      type: string
+      title: Heading
+      description: "Main heading text displayed as a centered serif heading."
+      contentMediaType: text/html
+      x-formatting-context: inline
+      examples:
+        - "Measurable change in our community"
+    heading_level:
+      type: number
+      title: Heading level
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+      meta:enum:
+        1: Heading 1 (Page Title size)
+        2: Heading 2 (Section Title size)
+        3: Heading 3
+        4: Heading 4
+        5: Heading 5 (Sub-section size)
+      default: 2
+      examples:
+        - 2
+    description:
+      type: string
+      title: Description
+      description: "Body text shown below the heading."
+      examples:
+        - "We track what matters. Our work produces real results that improve lives and strengthen neighborhoods."
+    textcolor:
+      type: string
+      title: Text Color
+      enum:
+        - dark
+        - light
+      default: dark
+slots:
+  ctas:
+    title: CTAs
+    description: "Call-to-action buttons displayed below the description."

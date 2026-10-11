@@ -1,0 +1,216 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 68dc5971-254d-4816-a6d4-3e75ddb97c38
+  default_langcode: en
+  depends:
+    d1f20231-3fb7-4827-b0ac-7359659fdf87: file
+    fb206a87-ed21-4f3b-a9e2-c0649397e1de: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: FAQs
+  description:
+    -
+      value: 'Find answers to common questions about Convene Conference including registration, tickets, schedule, venue, and event information.'
+  components:
+    -
+      uuid: 52ea5ace-1743-4b34-8609-f948cb0635dc
+      component_id: sdc.convene_theme.hero
+      inputs:
+        variation: small
+    -
+      parent_uuid: 52ea5ace-1743-4b34-8609-f948cb0635dc
+      slot: heading
+      uuid: 485ac330-ac8d-4aa2-b378-f8849adfa1cc
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        heading: 'Frequently asked questions'
+        heading_tag: div
+    -
+      parent_uuid: 52ea5ace-1743-4b34-8609-f948cb0635dc
+      slot: subheading
+      uuid: d4effe14-8b86-4f56-960d-2f02e7ba712d
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        description: 'Find answers to common questions about the event, registration, and logistics.'
+        heading_tag: div
+    -
+      parent_uuid: 52ea5ace-1743-4b34-8609-f948cb0635dc
+      slot: background_media
+      uuid: 53254e69-3814-478a-a566-82f9ea1f8309
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: fb206a87-ed21-4f3b-a9e2-c0649397e1de
+            target_type: media
+    -
+      uuid: a919ccd8-84f4-49a9-b60a-ba89ea182e8b
+      component_id: sdc.convene_theme.accordion-container
+      inputs:
+        heading: Questions
+        dark_theme: true
+        description: 'Everything you need to know before you arrive at the event.'
+    -
+      parent_uuid: a919ccd8-84f4-49a9-b60a-ba89ea182e8b
+      slot: items
+      uuid: a9f1d695-07a0-43c1-a292-2c4b7c1ff43b
+      component_id: sdc.convene_theme.accordion
+      inputs: {  }
+    -
+      parent_uuid: a9f1d695-07a0-43c1-a292-2c4b7c1ff43b
+      slot: title
+      uuid: b823f4a3-2237-4cbf-8fe5-74a1b3c1ee30
+      component_id: sdc.convene_theme.typography
+      inputs:
+        heading: 'When does registration open?'
+        heading_tag: div
+    -
+      parent_uuid: a9f1d695-07a0-43c1-a292-2c4b7c1ff43b
+      slot: content
+      uuid: 75c54c1b-e875-46d9-8afb-d21abac74a8e
+      component_id: sdc.convene_theme.typography
+      inputs:
+        description: 'Registration opens thirty days before the event. Early-bird pricing is available for the first two weeks. Check the pricing and passes page for current rates and deadlines.'
+        heading_tag: div
+    -
+      parent_uuid: a919ccd8-84f4-49a9-b60a-ba89ea182e8b
+      slot: items
+      uuid: 6510c403-445a-4a4e-aaba-edd8ad3d0438
+      component_id: sdc.convene_theme.accordion
+      inputs: {  }
+    -
+      parent_uuid: 6510c403-445a-4a4e-aaba-edd8ad3d0438
+      slot: title
+      uuid: b033636f-6973-4fed-a717-0c5e44e0a0ae
+      component_id: sdc.convene_theme.typography
+      inputs:
+        heading: 'What should I bring?'
+        heading_tag: div
+    -
+      parent_uuid: 6510c403-445a-4a4e-aaba-edd8ad3d0438
+      slot: content
+      uuid: ab2a4ef4-1231-461c-8655-7b556d2bdaca
+      component_id: sdc.convene_theme.typography
+      inputs:
+        description: 'Bring your confirmation email or ticket on your phone. A notebook and pen are useful for taking notes during sessions. Comfortable shoes are recommended as you will be moving between rooms.'
+        heading_tag: div
+    -
+      parent_uuid: a919ccd8-84f4-49a9-b60a-ba89ea182e8b
+      slot: items
+      uuid: 88f3ffc1-381c-4fe4-a145-2ac885a64deb
+      component_id: sdc.convene_theme.accordion
+      inputs: {  }
+    -
+      parent_uuid: 88f3ffc1-381c-4fe4-a145-2ac885a64deb
+      slot: title
+      uuid: 1edc52e3-4f6e-4a02-81e0-c0817fe3ba68
+      component_id: sdc.convene_theme.typography
+      inputs:
+        heading: 'Is there parking available?'
+        heading_tag: div
+    -
+      parent_uuid: 88f3ffc1-381c-4fe4-a145-2ac885a64deb
+      slot: content
+      uuid: 866af2c3-9958-404f-b166-4992a19f7299
+      component_id: sdc.convene_theme.typography
+      inputs:
+        description: 'Parking information is available on the venue page. Street parking is available nearby, and the venue has a small lot for registered attendees. Public transportation is also accessible from the location.'
+        heading_tag: div
+    -
+      parent_uuid: a919ccd8-84f4-49a9-b60a-ba89ea182e8b
+      slot: items
+      uuid: db807900-52c6-4d55-83ad-c01fb071e17d
+      component_id: sdc.convene_theme.accordion
+      inputs: {  }
+    -
+      parent_uuid: db807900-52c6-4d55-83ad-c01fb071e17d
+      slot: title
+      uuid: 30317d8d-a2b7-45fd-8256-d04d5cbb2107
+      component_id: sdc.convene_theme.typography
+      inputs:
+        heading: 'Can I get a refund?'
+        heading_tag: div
+    -
+      parent_uuid: db807900-52c6-4d55-83ad-c01fb071e17d
+      slot: content
+      uuid: 9fd7029d-e896-4214-8e6f-da1641561eaf
+      component_id: sdc.convene_theme.typography
+      inputs:
+        description: 'Refund policies depend on your pass type and purchase date. Review the terms when you complete registration through our ticketing partner. Contact support if you have specific questions about your purchase.'
+        heading_tag: div
+    -
+      parent_uuid: a919ccd8-84f4-49a9-b60a-ba89ea182e8b
+      slot: items
+      uuid: bd683197-6b3a-41eb-a0c6-c51548eed9e9
+      component_id: sdc.convene_theme.accordion
+      inputs: {  }
+    -
+      parent_uuid: bd683197-6b3a-41eb-a0c6-c51548eed9e9
+      slot: title
+      uuid: 987520ef-75f4-4f54-9e3a-38a3f5b53b5f
+      component_id: sdc.convene_theme.typography
+      inputs:
+        heading: 'What is the schedule?'
+        heading_tag: div
+    -
+      parent_uuid: bd683197-6b3a-41eb-a0c6-c51548eed9e9
+      slot: content
+      uuid: d57175d2-70ef-4d60-b424-8eab11a0cb68
+      component_id: sdc.convene_theme.typography
+      inputs:
+        description: 'The full agenda is posted on the agenda page with session times and speaker names. Sessions run from morning through late afternoon with breaks for meals. Check back closer to the event for any schedule updates.'
+        heading_tag: div
+    -
+      parent_uuid: a919ccd8-84f4-49a9-b60a-ba89ea182e8b
+      slot: help_heading
+      uuid: f8049777-3597-4806-9e5b-434936e6d4eb
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: left
+        color: white
+        heading: 'Need more help?'
+        heading_tag: div
+    -
+      parent_uuid: a919ccd8-84f4-49a9-b60a-ba89ea182e8b
+      slot: help_description
+      uuid: 79a5413c-02f8-4899-b7e2-48b0438587e3
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: left
+        color: white
+        description: 'Reach out to the event team directly.'
+        heading_tag: div
+    -
+      parent_uuid: a919ccd8-84f4-49a9-b60a-ba89ea182e8b
+      slot: help_button
+      uuid: c7a3c715-73bd-41e7-b9c6-2896c6d2eadc
+      component_id: sdc.convene_theme.button
+      inputs:
+        url:
+          uri: 'mailto:convene@example.com'
+          options: {  }
+        text: Email
+        variant: secondary
+  path:
+    -
+      alias: /faqs
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"title":"FAQs | Convene Conference Help \u0026 Information"}'

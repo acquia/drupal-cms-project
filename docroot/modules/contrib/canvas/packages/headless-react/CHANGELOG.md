@@ -1,0 +1,132 @@
+# @drupal-canvas/headless-react
+
+## 0.5.1
+
+### Patch Changes
+
+- aaaa869: Delegate eligible embedded link clicks in draft mode to the host when
+  it advertises navigation support.
+- Updated dependencies [aaaa869]
+- Updated dependencies [73d9fb8]
+- Updated dependencies [aaaa869]
+  - @drupal-canvas/headless@0.11.0
+  - drupal-canvas@0.7.1
+
+## 0.5.0
+
+### Minor Changes
+
+- ed541e3: `CanvasComponentTree` accepts `context` (from `fetchPage()`'s
+  `page.context`) and `jsonApi` (from the SDK's `getJsonApiRuntimeConfig()`)
+  props and mounts the `drupal-canvas` context and JSON:API client providers for
+  registered components. An explicit `context` prop takes precedence over an
+  outer `CanvasContextProvider`; without either, the hooks report missing
+  context. Server rendering gets the same draft-aware client as the browser (SWR
+  fallback data renders, hydration matches) without network access in a draft
+  session: draft requests made while rendering fail with
+  `ServerRenderingDraftFetchError`, which points to `getClient()` prefetching
+  and SWR fallback data.
+
+### Patch Changes
+
+- Updated dependencies [ed541e3]
+- Updated dependencies [ed541e3]
+  - drupal-canvas@0.7.0
+  - @drupal-canvas/headless@0.10.0
+
+## 0.4.3
+
+### Patch Changes
+
+- Updated dependencies [e1fae30]
+  - @drupal-canvas/headless@0.9.0
+
+## 0.4.2
+
+### Patch Changes
+
+- Updated dependencies [252aa34]
+  - @drupal-canvas/headless@0.8.0
+
+## 0.4.1
+
+### Patch Changes
+
+- bde9b02: Ship a compiled `dist` build instead of raw TypeScript source,
+  matching `@drupal-canvas/headless`.
+- Updated dependencies [98b764a]
+- Updated dependencies [fc2cbd1]
+  - @drupal-canvas/headless@0.7.0
+
+## 0.4.0
+
+### Minor Changes
+
+- e6a9c66: Add support for page variants.
+
+### Patch Changes
+
+- Updated dependencies [24800cb]
+- Updated dependencies [e6a9c66]
+- Updated dependencies [78e3ff2]
+  - @drupal-canvas/headless@0.6.0
+
+## 0.3.1
+
+### Patch Changes
+
+- Updated dependencies [71542ec]
+  - @drupal-canvas/headless@0.5.0
+
+## 0.3.0
+
+### Minor Changes
+
+- 761cfbb: Set minimum Node.js requirement: >=22.19.0 <23 || >=24.5.0.
+
+### Patch Changes
+
+- Updated dependencies [761cfbb]
+  - @drupal-canvas/headless@0.4.0
+
+## 0.2.1
+
+### Patch Changes
+
+- 9c6de1e: Fix framework bindings to use the isomorphic rendered-page exports.
+- Updated dependencies [9c6de1e]
+  - @drupal-canvas/headless@0.3.0
+
+## 0.2.0
+
+### Minor Changes
+
+- f16deaf: Support component-tree results from `/canvas/content-api` in the
+  React binding.
+
+### Patch Changes
+
+- Updated dependencies [f16deaf]
+- Updated dependencies [7f3da8f]
+  - @drupal-canvas/headless@0.2.0
+
+## 0.1.1
+
+### Patch Changes
+
+- 445ac1a: Require the Headless SDK version containing the latest draft session
+  recovery fixes.
+
+## 0.1.0
+
+### Minor Changes
+
+- 4e4c6d0: Add Canvas editor frame editing capabilities for headless frontends.
+- e2e3254: Set the Canvas editor frame height for the embedded headless
+  application.
+
+### Patch Changes
+
+- Updated dependencies [4e4c6d0]
+- Updated dependencies [e2e3254]
+  - @drupal-canvas/headless@0.1.0

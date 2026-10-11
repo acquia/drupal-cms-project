@@ -1,0 +1,15 @@
+{% set is_preview = canvas_is_preview or in_preview %}
+
+{% set classes = [
+  'skip-link',
+  'btn',
+  'btn-primary',
+  not is_preview ? 'absolute top-2 left-2 z-50 translate-y-[-150%] focus:translate-y-0 transition-all ease-in-out duration-300',
+] %}
+
+{% set text = text|default('Skip to main content') %}
+{% set anchor = anchor|default('#main-content') %}
+
+<a{{ attributes.setAttribute('href', anchor).addClass(classes) }}>
+  {{ text }}
+</a>

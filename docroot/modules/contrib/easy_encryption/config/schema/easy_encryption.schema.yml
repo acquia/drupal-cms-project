@@ -1,0 +1,36 @@
+easy_encryption.keys:
+  type: config_object
+  label: 'Easy Encryption keys'
+  mapping:
+    active_encryption_key_id:
+      type: string
+      label: 'ID of the active encryption ky'
+    encryption_keys:
+      type: sequence
+      label: 'Encryption keys'
+      sequence:
+        type: mapping
+        mapping:
+          encryption_key_id:
+            type: string
+            label: 'Encryption key id'
+            constraints:
+              NotBlank: [ ]
+
+key.provider.easy_encrypted:
+  type: mapping
+  label: 'Easy encrypted key provider settings'
+  mapping:
+    value:
+      type: string
+      label: 'The encrypted value'
+      requiredKey: false
+      constraints:
+        Regex:
+          pattern: '/^[a-f0-9]+$/'
+    encryption_key_id:
+      type: string
+      label: 'The ID of encryption key used for encrypting the value'
+      requiredKey: false
+      constraints:
+        NotBlank: [ ]

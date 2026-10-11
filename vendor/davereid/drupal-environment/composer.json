@@ -1,0 +1,73 @@
+{
+    "name": "davereid/drupal-environment",
+    "description": "Provides a helper for working with environment variables and Drupal hosting providers.",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "Drupal",
+        "Acquia",
+        "Pantheon",
+        "Tugboat",
+        "Environment"
+    ],
+    "authors": [
+        {
+            "name": "Dave Reid",
+            "email": "dave@davereid.net"
+        }
+    ],
+    "require": {
+        "php": ">=8.1"
+    },
+    "require-dev": {
+        "ergebnis/composer-normalize": "^2",
+        "php-parallel-lint/php-parallel-lint": "^1",
+        "phpro/grumphp-shim": "^2",
+        "phpstan/extension-installer": "^1",
+        "phpstan/phpstan": "^2",
+        "phpstan/phpstan-deprecation-rules": "^2",
+        "phpunit/phpunit": "^10 || ^11 || ^12",
+        "squizlabs/php_codesniffer": "^3.7 || ^4.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "DrupalEnvironment\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DrupalEnvironment\\Tests\\": "tests/src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "phpro/grumphp-shim": true,
+            "phpstan/extension-installer": true
+        },
+        "platform": {
+            "php": "8.4"
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.x-dev"
+        }
+    },
+    "scripts": {
+        "lint": [
+            "@phpcs",
+            "@phpstan"
+        ],
+        "phpcs": "vendor/bin/phpcs",
+        "phpstan": "vendor/bin/phpstan",
+        "phpunit": "vendor/bin/phpunit --coverage-text",
+        "test": [
+            "@putenv XDEBUG_MODE=coverage",
+            "@phpunit"
+        ]
+    }
+}

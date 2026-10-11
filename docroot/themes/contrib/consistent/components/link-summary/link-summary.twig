@@ -1,0 +1,12 @@
+<article class="stwl-offset-shadow--static flex flex-col h-full p-5 border border-card-border bg-background rounded-[var(--radius-sm)]">
+  <h3 class="font-bold text-base m-0 mb-2">
+    {% if link_summary_url is not empty %}
+      <a href="{{ link_summary_url }}" class="text-link underline hover:text-link-hover hover:[text-decoration-thickness:max(3px,0.1875rem)] focus:outline-none focus:bg-focus focus:text-focus-text focus:shadow-[0_2px_0_0_var(--color-foreground)] focus:no-underline">{{ link_summary_label }}</a>
+    {% else %}
+      {{ link_summary_label }}
+    {% endif %}
+  </h3>
+  {% if link_summary_text is not empty %}
+    <p class="text-base m-0 text-foreground">{{ link_summary_text }}</p>
+  {% endif %}
+</article>

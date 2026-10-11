@@ -1,0 +1,39 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: components/section/section.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+@reference '../../tailwindcss';
+
+.section__heading {
+  @apply mb-0;
+}
+
+.section__heading + .section__intro {
+  @apply mt-4;
+}
+
+.section__container-inner {
+  @apply gap-4 lg:gap-6;
+}
+
+.section__header {
+  @apply flex flex-col gap-4 lg:gap-6;
+}
+
+.section__content {
+  @apply gap-4 lg:gap-6;
+}
+
+.section__footer {
+  @apply order-3 col-span-12;
+}
+
+.section__footer-content {
+  @apply flex flex-col gap-4 lg:gap-6;
+}
+
+.section__readmore {
+  @apply flex justify-end;
+}

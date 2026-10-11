@@ -1,0 +1,119 @@
+/**
+ * @file card-testimonial.css
+ * Testimonial / profile card — Figma Drupal Community NGO Theme
+ * Desktop node 1:10624, Mobile node 1:10322
+ *
+ * Component CSS (design tokens, typography, layout). Used together with
+ * Tailwind utility classes in the Twig template; both apply.
+ */
+
+.card-testimonial {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+  gap: 1.25rem; /* 20px — mobile, Figma 1:10322 */
+  color: var(--card-foreground); /* #020704 per Figma color-scheme-1/text */
+  font-family: var(--font-sans);
+}
+
+.card-testimonial__avatar {
+  position: relative;
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.card-testimonial__avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-testimonial__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* 12px — mobile Figma 1:10322 */
+  width: 100%;
+  text-align: left;
+  line-height: 1.5;
+  align-items: flex-start; /* mobile: content left-aligned */
+}
+
+.card-testimonial__title-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* name + title centered per Figma (mobile & desktop) */
+  width: 100%;
+}
+
+.card-testimonial__name {
+  font-size: 1.125rem; /* 18px — Text/Medium, mobile */
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.5;
+}
+
+.card-testimonial__title {
+  font-size: 1rem; /* 16px — Text/Regular */
+  font-weight: var(--font-weight-normal);
+  line-height: 1.5;
+}
+
+.card-testimonial__bio {
+  font-size: 1rem; /* 16px — Text/Regular */
+  font-weight: var(--font-weight-normal);
+  width: 100%;
+  line-height: 1.5;
+}
+
+.card-testimonial__social {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  flex-shrink: 0;
+  padding-top: 0.25rem; /* 4px — mobile */
+}
+
+.card-testimonial__social-link {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  color: var(--card-foreground);
+  transition: opacity 0.2s ease;
+}
+
+.card-testimonial__social-link:hover {
+  opacity: 0.8;
+}
+
+.card-testimonial__social-link svg {
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 48rem) {
+  .card-testimonial {
+    gap: 1.5rem; /* 24px — desktop Figma 1:10624 */
+  }
+
+  .card-testimonial__content {
+    gap: 1rem; /* 16px — desktop */
+    align-items: center; /* desktop: content block centered */
+  }
+
+  .card-testimonial__name {
+    font-size: 1.375rem; /* 22px — Text/Large, desktop */
+  }
+
+  .card-testimonial__title {
+    font-size: 1.125rem; /* 18px — Text/Medium, desktop */
+  }
+
+  .card-testimonial__social {
+    padding-top: 0;
+  }
+}

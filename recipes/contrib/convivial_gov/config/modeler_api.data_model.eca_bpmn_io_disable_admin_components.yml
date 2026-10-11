@@ -1,0 +1,314 @@
+langcode: en
+status: true
+dependencies: {  }
+id: eca_bpmn_io_disable_admin_components
+data: |
+  <?xml version="1.0" encoding="UTF-8"?>
+  <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:qa="http://some-company/schema/bpmn/qa" id="sample-diagram" targetNamespace="http://bpmn.io/schema/bpmn" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+    <bpmn2:process id="disable_admin_components" name="Disable administrative components" isExecutable="true" camunda:versionTag="1.0.0">
+      <bpmn2:documentation>Disables Canvas components which are administrative in nature and not normally useful for page building.</bpmn2:documentation>
+      <bpmn2:extensionElements>
+        <camunda:properties>
+          <camunda:property name="Tags" value="" />
+          <camunda:property name="Changelog" value="" />
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:startEvent id="config__save_1_1" name="Component created" camunda:modelerTemplate="org.drupal.event.config:save">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="config:save" />
+          </camunda:properties>
+          <camunda:field name="config_name">
+            <camunda:string>canvas.component.</camunda:string>
+          </camunda:field>
+          <camunda:field name="sync_mode">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="write_mode">
+            <camunda:string>new</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:outgoing>Flow_1tylo3n</bpmn2:outgoing>
+      </bpmn2:startEvent>
+      <bpmn2:startEvent id="drupal__recipe_applied_1fyx1gt_1" name="Content Basics recipe applied" camunda:modelerTemplate="org.drupal.event.drupal:recipe_applied">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="drupal:recipe_applied" />
+          </camunda:properties>
+          <camunda:field name="recipe_base_path">
+            <camunda:string>drupal_cms_content_type_base</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:outgoing>Flow_02y0gyq</bpmn2:outgoing>
+      </bpmn2:startEvent>
+      <bpmn2:task id="eca_token_set_value_1l5cu8o" name="Define reject list" camunda:modelerTemplate="org.drupal.action.eca_token_set_value">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_token_set_value" />
+          </camunda:properties>
+          <camunda:field name="token_name">
+            <camunda:string>reject_list</camunda:string>
+          </camunda:field>
+          <camunda:field name="token_value">
+            <camunda:string>['block.system_menu_block.navigation-user-links', 'block.system_menu_block.top-tasks', 'block.navigation_dashboard', 'block.navigation_link', 'block.navigation_shortcuts', 'block.navigation_user', 'sdc.navigation.title', 'block.announce_block', 'block.dashboard_site_status', 'block.local_actions_block', 'block.local_tasks_block', 'block.system_menu_block.admin', 'block.system_menu_block.tools', 'block.system_messages_block', 'block.views_block.publishing_content-block_drafts', 'block.views_block.publishing_content-block_scheduled', 'block.views_block.recent_pages-block_recent_pages']</camunda:string>
+          </camunda:field>
+          <camunda:field name="use_yaml">
+            <camunda:string>yes</camunda:string>
+          </camunda:field>
+          <camunda:field name="validate_yaml">
+            <camunda:string>yes</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_0admdr5</bpmn2:incoming>
+        <bpmn2:incoming>Flow_0gxcfj3</bpmn2:incoming>
+        <bpmn2:outgoing>eca_list_contains_1txbft8</bpmn2:outgoing>
+        <bpmn2:outgoing>eca_scalar_18u1l51</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_token_set_value_0m175am" name="Rename token" camunda:modelerTemplate="org.drupal.action.eca_token_set_value">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_token_set_value" />
+          </camunda:properties>
+          <camunda:field name="token_name">
+            <camunda:string>component_id</camunda:string>
+          </camunda:field>
+          <camunda:field name="token_value">
+            <camunda:string>[config:id]</camunda:string>
+          </camunda:field>
+          <camunda:field name="use_yaml">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="validate_yaml">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_1tylo3n</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_0admdr5</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="list_config_0kyy3xk" name="Find all compoments" camunda:modelerTemplate="org.drupal.action.eca_config_list">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_config_list" />
+          </camunda:properties>
+          <camunda:field name="token_name">
+            <camunda:string>all_components</camunda:string>
+          </camunda:field>
+          <camunda:field name="prefix">
+            <camunda:string>canvas.component.</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_02y0gyq</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_0v4bfme</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_list_remove_0ovk2qy" name="For each component..." camunda:modelerTemplate="org.drupal.action.eca_list_remove">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_list_remove" />
+          </camunda:properties>
+          <camunda:field name="value">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="token_name">
+            <camunda:string>component_id</camunda:string>
+          </camunda:field>
+          <camunda:field name="method">
+            <camunda:string>first</camunda:string>
+          </camunda:field>
+          <camunda:field name="index">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="list_token">
+            <camunda:string>all_component</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>eca_count_0wp9z1p</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_0gxcfj3</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_config_action_1tn5vk1" name="Disable component" camunda:modelerTemplate="org.drupal.action.eca_config_action">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_config_action" />
+          </camunda:properties>
+          <camunda:field name="action_id">
+            <camunda:string>entity_method:canvas.component:disable</camunda:string>
+          </camunda:field>
+          <camunda:field name="config_name">
+            <camunda:string>canvas.component.[component_id]</camunda:string>
+          </camunda:field>
+          <camunda:field name="data">
+            <camunda:string>[]</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_09uxo6r</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_05uo1to</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_switch_account_1qxw36r" name="Temporarily become administrator" camunda:modelerTemplate="org.drupal.action.eca_switch_account">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_switch_account" />
+          </camunda:properties>
+          <camunda:field name="user_id">
+            <camunda:string>1</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>eca_list_contains_1txbft8</bpmn2:incoming>
+        <bpmn2:incoming>eca_scalar_18u1l51</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_09uxo6r</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:exclusiveGateway id="Gateway_11751ek">
+        <bpmn2:incoming>Flow_0v4bfme</bpmn2:incoming>
+        <bpmn2:incoming>Flow_05uo1to</bpmn2:incoming>
+        <bpmn2:outgoing>eca_count_0wp9z1p</bpmn2:outgoing>
+      </bpmn2:exclusiveGateway>
+      <bpmn2:sequenceFlow id="Flow_1tylo3n" sourceRef="config__save_1_1" targetRef="eca_token_set_value_0m175am" />
+      <bpmn2:sequenceFlow id="Flow_02y0gyq" sourceRef="drupal__recipe_applied_1fyx1gt_1" targetRef="list_config_0kyy3xk" />
+      <bpmn2:sequenceFlow id="eca_list_contains_1txbft8" name="Component in reject list?" camunda:modelerTemplate="org.drupal.condition.eca_list_contains" sourceRef="eca_token_set_value_1l5cu8o" targetRef="eca_switch_account_1qxw36r">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_list_contains" />
+          </camunda:properties>
+          <camunda:field name="negate">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="list_token">
+            <camunda:string>reject_list</camunda:string>
+          </camunda:field>
+          <camunda:field name="method">
+            <camunda:string>value</camunda:string>
+          </camunda:field>
+          <camunda:field name="value">
+            <camunda:string>[component_id]</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+      </bpmn2:sequenceFlow>
+      <bpmn2:sequenceFlow id="eca_scalar_18u1l51" name="Component is a Project Browser block?" camunda:modelerTemplate="org.drupal.condition.eca_scalar" sourceRef="eca_token_set_value_1l5cu8o" targetRef="eca_switch_account_1qxw36r">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_scalar" />
+          </camunda:properties>
+          <camunda:field name="negate">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="left">
+            <camunda:string>[component_id]</camunda:string>
+          </camunda:field>
+          <camunda:field name="right">
+            <camunda:string>block.project_browser_block.</camunda:string>
+          </camunda:field>
+          <camunda:field name="operator">
+            <camunda:string>beginswith</camunda:string>
+          </camunda:field>
+          <camunda:field name="type">
+            <camunda:string>value</camunda:string>
+          </camunda:field>
+          <camunda:field name="case">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+      </bpmn2:sequenceFlow>
+      <bpmn2:sequenceFlow id="Flow_0admdr5" sourceRef="eca_token_set_value_0m175am" targetRef="eca_token_set_value_1l5cu8o" />
+      <bpmn2:sequenceFlow id="Flow_0v4bfme" sourceRef="list_config_0kyy3xk" targetRef="Gateway_11751ek" />
+      <bpmn2:sequenceFlow id="Flow_0gxcfj3" sourceRef="eca_list_remove_0ovk2qy" targetRef="eca_token_set_value_1l5cu8o" />
+      <bpmn2:sequenceFlow id="Flow_05uo1to" sourceRef="eca_config_action_1tn5vk1" targetRef="Gateway_11751ek" />
+      <bpmn2:sequenceFlow id="Flow_09uxo6r" sourceRef="eca_switch_account_1qxw36r" targetRef="eca_config_action_1tn5vk1" />
+      <bpmn2:sequenceFlow id="eca_count_0wp9z1p" name="List not empty?" camunda:modelerTemplate="org.drupal.condition.eca_count" sourceRef="Gateway_11751ek" targetRef="eca_list_remove_0ovk2qy">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_count" />
+          </camunda:properties>
+          <camunda:field name="negate">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="left">
+            <camunda:string>all_components</camunda:string>
+          </camunda:field>
+          <camunda:field name="right">
+            <camunda:string>0</camunda:string>
+          </camunda:field>
+          <camunda:field name="operator">
+            <camunda:string>greaterthan</camunda:string>
+          </camunda:field>
+          <camunda:field name="type">
+            <camunda:string>numeric</camunda:string>
+          </camunda:field>
+          <camunda:field name="case">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+      </bpmn2:sequenceFlow>
+    </bpmn2:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_disable_admin_components">
+      <bpmndi:BPMNPlane id="BPMNPlane_disable_admin_components" bpmnElement="disable_admin_components">
+        <bpmndi:BPMNShape id="config__save_1_1_di" bpmnElement="config__save_1_1">
+          <dc:Bounds x="57" y="52" width="36" height="36" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="drupal__recipe_applied_1fyx1gt_1_di" bpmnElement="drupal__recipe_applied_1fyx1gt_1">
+          <dc:Bounds x="57" y="192" width="36" height="36" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_token_set_value_1l5cu8o_di" bpmnElement="eca_token_set_value_1l5cu8o">
+          <dc:Bounds x="625" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_token_set_value_0m175am_di" bpmnElement="eca_token_set_value_0m175am">
+          <dc:Bounds x="175" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="list_config_0kyy3xk_di" bpmnElement="list_config_0kyy3xk">
+          <dc:Bounds x="175" y="170" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_list_remove_0ovk2qy_di" bpmnElement="eca_list_remove_0ovk2qy">
+          <dc:Bounds x="475" y="170" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_config_action_1tn5vk1_di" bpmnElement="eca_config_action_1tn5vk1">
+          <dc:Bounds x="925" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_switch_account_1qxw36r_di" bpmnElement="eca_switch_account_1qxw36r">
+          <dc:Bounds x="775" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Gateway_11751ek_di" bpmnElement="Gateway_11751ek" isMarkerVisible="true">
+          <dc:Bounds x="350" y="185" width="50" height="50" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNEdge id="Flow_1tylo3n_di" bpmnElement="Flow_1tylo3n">
+          <di:waypoint x="93" y="70" />
+          <di:waypoint x="175" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_02y0gyq_di" bpmnElement="Flow_02y0gyq">
+          <di:waypoint x="93" y="210" />
+          <di:waypoint x="175" y="210" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="eca_list_contains_1txbft8_di" bpmnElement="eca_list_contains_1txbft8">
+          <di:waypoint x="725" y="70" />
+          <di:waypoint x="775" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="eca_scalar_18u1l51_di" bpmnElement="eca_scalar_18u1l51">
+          <di:waypoint x="725" y="70" />
+          <di:waypoint x="775" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_0admdr5_di" bpmnElement="Flow_0admdr5">
+          <di:waypoint x="275" y="70" />
+          <di:waypoint x="625" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_0v4bfme_di" bpmnElement="Flow_0v4bfme">
+          <di:waypoint x="275" y="210" />
+          <di:waypoint x="350" y="210" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_0gxcfj3_di" bpmnElement="Flow_0gxcfj3">
+          <di:waypoint x="575" y="210" />
+          <di:waypoint x="675" y="210" />
+          <di:waypoint x="675" y="110" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_05uo1to_di" bpmnElement="Flow_05uo1to">
+          <di:waypoint x="975" y="30" />
+          <di:waypoint x="975" y="0" />
+          <di:waypoint x="375" y="0" />
+          <di:waypoint x="375" y="185" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_09uxo6r_di" bpmnElement="Flow_09uxo6r">
+          <di:waypoint x="875" y="70" />
+          <di:waypoint x="925" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="eca_count_0wp9z1p_di" bpmnElement="eca_count_0wp9z1p">
+          <di:waypoint x="400" y="210" />
+          <di:waypoint x="475" y="210" />
+        </bpmndi:BPMNEdge>
+      </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+  </bpmn2:definitions>

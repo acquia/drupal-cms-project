@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 180" font-family="Roboto, sans-serif">
+  <defs>
+    <style>
+      .box { stroke: #b0bec5; stroke-width: 1.5; rx: 8; }
+      .box-left { fill: #fff3e0; }
+      .box-center { fill: #e8eaf6; }
+      .box-right { fill: #e0f2f1; }
+      .title { font-size: 13px; font-weight: 600; text-anchor: middle; dominant-baseline: central; }
+      .title-left { fill: #e65100; }
+      .title-center { fill: #283593; }
+      .title-right { fill: #00695c; }
+      .item { font-size: 12px; fill: #546e7a; text-anchor: middle; dominant-baseline: central; }
+      .connector { fill: none; stroke: #90a4ae; stroke-width: 2; marker-end: url(#bidi-end); marker-start: url(#bidi-start); }
+    </style>
+    <marker id="bidi-end" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
+      <path d="M0,0 L7,2.5 L0,5" fill="#90a4ae"/>
+    </marker>
+    <marker id="bidi-start" markerWidth="7" markerHeight="5" refX="1" refY="2.5" orient="auto">
+      <path d="M7,0 L0,2.5 L7,5" fill="#90a4ae"/>
+    </marker>
+  </defs>
+  <!-- Left: Model Owner -->
+  <rect x="20" y="20" width="170" height="140" class="box box-left"/>
+  <text x="105" y="48" class="title title-left">Model Owner (e.g. ECA)</text>
+  <line x1="40" y1="62" x2="170" y2="62" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="105" y="88" class="item">Config Entity</text>
+  <text x="105" y="112" class="item">Components</text>
+  <text x="105" y="132" class="item">Successors</text>
+  <!-- Center: Modeler API -->
+  <rect x="240" y="20" width="160" height="140" class="box box-center"/>
+  <text x="320" y="48" class="title title-center">Modeler API</text>
+  <line x1="260" y1="62" x2="380" y2="62" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="320" y="88" class="item">Api Service</text>
+  <text x="320" y="112" class="item">Save / Load</text>
+  <!-- Right: Modeler -->
+  <rect x="450" y="20" width="170" height="140" class="box box-right"/>
+  <text x="535" y="48" class="title title-right">Modeler (this module)</text>
+  <line x1="470" y1="62" x2="600" y2="62" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="535" y="88" class="item">React Flow UI</text>
+  <text x="535" y="112" class="item">Canvas / Panels</text>
+  <!-- Connectors -->
+  <line x1="190" y1="90" x2="240" y2="90" class="connector"/>
+  <line x1="400" y1="90" x2="450" y2="90" class="connector"/>
+</svg>

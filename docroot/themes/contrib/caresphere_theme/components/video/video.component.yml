@@ -1,0 +1,83 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Video
+group: Base
+description: Video player with optional thumbnail; supports remote (YouTube/Vimeo) and local video. Click play to hide thumbnail and play video; on pause thumbnail reappears.
+props:
+  type: object
+  properties:
+    video_source:
+      title: Video source
+      type: string
+      enum:
+        - remote
+        - local
+      meta:enum:
+        remote: Remote (YouTube, Vimeo, etc.)
+        local: Local (uploaded video file)
+      default: remote
+      description: Remote = oEmbed URL (YouTube/Vimeo). Local = direct video file URL.
+    video_url:
+      type: string
+      title: Video URL
+      description: For remote — paste YouTube or Vimeo oEmbed URL. For local — leave empty if using Video file (media) below.
+      examples:
+        - "https://www.youtube.com/watch?v=example"
+        - "/sites/default/files/videos/sample.mp4"
+    video_media:
+      $ref: json-schema-definitions://canvas.module/video
+      title: Video file
+      type: object
+      description: For local source only. Add or select from existing media library. If set, overrides Video URL.
+    thumbnail_media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Thumbnail image
+      type: object
+      description: Optional. When set, shows thumbnail and play button; clicking play hides thumbnail and starts video; on pause thumbnail reappears.
+    size:
+      title: Aspect ratio
+      type: string
+      enum:
+        - "2:1"
+        - 16:9
+        - 3:2
+        - 4:3
+        - 1:1
+      meta:enum:
+        2:1: "2×1"
+        16:9: "16×9"
+        3:2: "3×2"
+        4:3: "4×3"
+        1:1: Square
+      default: "16:9"
+      examples:
+        - "16:9"
+    radius:
+      type: string
+      title: Corner radius
+      enum:
+        - small
+        - large
+        - extra-large
+      meta:enum:
+        small: Small
+        large: Large
+        extra-large: Extra large
+      examples:
+        - "small"
+    border_radius:
+      type: number
+      title: Custom border radius
+      default: 0
+      description: Custom border radius in pixels (0 = use Corner radius preset above)
+    caption:
+      title: Caption
+      type: string
+    autoplay:
+      type: boolean
+      title: Autoplay (muted)
+      default: false
+      description: When enabled, video autoplays muted on load. Only applies when no thumbnail is used or after first play.
+
+libraryOverrides:
+  js:
+    video.js: {}

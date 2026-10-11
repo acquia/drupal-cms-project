@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_mc_event_location
+    - node.type.mc_event
+  module:
+    - text
+id: node.mc_event.field_mc_event_location
+field_name: field_mc_event_location
+entity_type: node
+bundle: mc_event
+label: Location
+description: 'Location of the event.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

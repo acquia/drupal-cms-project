@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="70 40 400 390" width="512" height="499">
+  <defs>
+    <!-- Primary gradient: dark teal -->
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00897B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#004D40;stop-opacity:1" />
+    </linearGradient>
+    <!-- Secondary gradient: medium teal -->
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#26A69A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00897B;stop-opacity:1" />
+    </linearGradient>
+    <!-- Tertiary gradient: light teal -->
+    <linearGradient id="grad3" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4DB6AC;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#26A69A;stop-opacity:1" />
+    </linearGradient>
+    <!-- Glow filter for the active/selected diamond -->
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="0 0 0 0 0.15
+                0 0 0 0 0.65
+                0 0 0 0 0.60
+                0 0 0 0.45 0" result="glowColor"/>
+      <feMerge>
+        <feMergeNode in="glowColor"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Connection lines (drawn first, behind nodes) -->
+  <!-- Top node to center diamond -->
+  <line x1="270" y1="136" x2="270" y2="210" stroke="#80CBC4" stroke-width="6" stroke-linecap="round"/>
+  <!-- Center diamond to bottom-left node -->
+  <line x1="234" y1="272" x2="192" y2="340" stroke="#80CBC4" stroke-width="6" stroke-linecap="round"/>
+  <!-- Center diamond to bottom-right node -->
+  <line x1="306" y1="272" x2="378" y2="340" stroke="#80CBC4" stroke-width="6" stroke-linecap="round"/>
+  <!-- Bottom-left to bottom-right (horizontal) -->
+  <line x1="232" y1="380" x2="338" y2="380" stroke="#80CBC4" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Directional arrows on lines -->
+  <!-- Arrow: top to center -->
+  <polygon points="270,210 263,196 277,196" fill="#80CBC4"/>
+  <!-- Arrow: center to bottom-left -->
+  <polygon points="192,340 204,332 199,345" fill="#80CBC4"/>
+  <!-- Arrow: center to bottom-right -->
+  <polygon points="378,340 366,332 371,345" fill="#80CBC4"/>
+
+  <!-- Top node: Circle (represents Start / Event) -->
+  <circle cx="270" cy="100" r="48" fill="url(#grad1)" stroke="#004D40" stroke-width="3"/>
+  <!-- Inner icon: play triangle for "start" -->
+  <polygon points="258,80 258,120 288,100" fill="white" opacity="0.9"/>
+
+  <!-- Center node: Diamond (represents Gateway) with glow effect -->
+  <g transform="translate(270,256)" filter="url(#glow)">
+    <rect x="-42" y="-42" width="84" height="84" rx="8" ry="8" fill="url(#grad2)" stroke="#00695C" stroke-width="3" transform="rotate(45)"/>
+    <!-- Inner icon: connection/hub symbol -->
+    <circle cx="0" cy="0" r="8" fill="white" opacity="0.9"/>
+    <line x1="-18" y1="0" x2="-8" y2="0" stroke="white" stroke-width="4" stroke-linecap="round" opacity="0.9"/>
+    <line x1="8" y1="0" x2="18" y2="0" stroke="white" stroke-width="4" stroke-linecap="round" opacity="0.9"/>
+    <line x1="0" y1="-18" x2="0" y2="-8" stroke="white" stroke-width="4" stroke-linecap="round" opacity="0.9"/>
+    <line x1="0" y1="8" x2="0" y2="18" stroke="white" stroke-width="4" stroke-linecap="round" opacity="0.9"/>
+  </g>
+
+  <!-- Bottom-left node: Rounded rect (represents Element / Action) -->
+  <rect x="144" y="344" width="96" height="72" rx="12" ry="12" fill="url(#grad3)" stroke="#00796B" stroke-width="3"/>
+  <!-- Inner icon: gear/cog for "action" -->
+  <circle cx="192" cy="380" r="16" fill="none" stroke="white" stroke-width="3.5" opacity="0.9"/>
+  <circle cx="192" cy="380" r="6" fill="white" opacity="0.9"/>
+
+  <!-- Bottom-right node: Rounded rect (represents Canvas / Visual Editor) -->
+  <rect x="330" y="344" width="96" height="72" rx="12" ry="12" fill="url(#grad3)" stroke="#00796B" stroke-width="3"/>
+  <!-- Inner icon: canvas grid for "visual editor" -->
+  <g transform="translate(378,380)" opacity="0.9">
+    <!-- Grid outline -->
+    <rect x="-14" y="-14" width="28" height="28" rx="2" ry="2" fill="none" stroke="white" stroke-width="3"/>
+    <!-- Vertical grid line -->
+    <line x1="0" y1="-14" x2="0" y2="14" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    <!-- Horizontal grid line -->
+    <line x1="-14" y1="0" x2="14" y2="0" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- Small decorative dots on connection lines -->
+  <circle cx="270" cy="172" r="4" fill="#4DB6AC"/>
+  <circle cx="213" cy="306" r="4" fill="#4DB6AC"/>
+  <circle cx="342" cy="306" r="4" fill="#4DB6AC"/>
+  <circle cx="285" cy="380" r="4" fill="#4DB6AC"/>
+</svg>

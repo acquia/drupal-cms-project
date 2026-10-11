@@ -1,0 +1,25 @@
+{% set classes = [
+  'grid-speakers',
+  admin_theme ? 'grid-speakers--admin-theme' : 'grid-speakers--themed',
+] %}
+
+<section{{attributes.addClass(classes)}}>
+  <div class="grid-speakers__container">
+    
+    <div class="grid-speakers__header">
+      {% if heading %}
+        <div class="grid-speakers__heading">{{ heading }}</div>
+      {% endif %}
+      {% if description %}
+        <div class="grid-speakers__description">{{ description }}</div>
+      {% endif %}
+    </div>
+
+    <div class="grid-speakers__grid">
+      {% if items %}
+        {{ items }}
+      {% endif %}
+    </div>
+    
+  </div>
+</section>

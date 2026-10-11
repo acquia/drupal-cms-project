@@ -1,0 +1,38 @@
+{% set classes = [
+  'card',
+  enabled ? 'enabled' : 'disabled',
+] %}
+<div{{ attributes.addClass(classes) }}>
+  <a class="link" href="{{ link }}">
+    <h3 class="title">
+    {%- if not enabled %}
+      <em>({{ 'Disabled'|t }})</em>
+    {% endif -%}
+    {{- label -}}{% if version %} <span class="version">{{ version }}</span>{% endif %}
+    {%- if total > 0 %}
+      <small>
+        {% trans %}
+          (1 icon)
+        {% plural total %}
+          ({{ total }} icons)
+        {% endtrans %}
+      </small>
+    {% endif -%}
+    </h3>
+  </a>
+  {% if description %}<p class="description">{{ description }}</p>{% endif %}
+  {% if license_name %}<p class="license">License: <a href="{{ license_url }}">{{ license_name }}</a></p>{% endif %}
+  <a class="link" href="{{ link }}">
+    <div class="content">
+      {%- if icons|length > 0 -%}
+        {% for icon in icons %}
+          {{ icon }}
+        {% endfor %}
+      {% else %}
+        {% if enabled %}
+          <em>{{ 'No icons found, be sure to have icons installed for this pack.'|t }}</em>
+        {% endif %}
+      {%- endif -%}
+    </div>
+  </a>
+</div>

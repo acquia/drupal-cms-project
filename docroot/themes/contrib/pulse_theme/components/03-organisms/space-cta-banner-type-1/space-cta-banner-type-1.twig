@@ -1,0 +1,68 @@
+{#
+/**
+ * @file
+ * CTA Banner component.
+ *
+ * Variables:
+ * - title: [string] The title of the CTA Banner.
+ * - description: [string] The description of the CTA Banner.
+ * - cta_banner_type: [string] The type of CTA Banner. Options: 'type_1', 'type_2', 'type_3'.
+ * - width: [string] The width of the CTA Banner. Options: 'boxed-width', 'full-width'.
+ * - alignment: [string] The alignment of the CTA Banner content. Options: 'left-align', 'center-align'.
+ * - image_type: [string] The type of image in the CTA Banner. Options: 'large-image', 'small-image'.
+ * - modifier_class: [string] Additional modifier classes for styling.
+ */
+#}
+
+{# Settings #}
+{% set element = element|default('section') %}
+
+{# Template #}
+{% set classes = ([
+  "cta-banner type-1 ga-cta-banner-type-1 ga_space_component",
+  width,
+  modifier_class
+] | sort | join(' ') | trim ) %}
+
+{% set attributes = attributes|default(create_attribute()).addClass(classes).setAttribute('role', 'banner') %}
+
+{% block cta_banner_type_1_block %}
+  <{{ element }} {{ attributes }}>
+      <div class="cta-banner-wrapper">
+        {% include 'canvas:image' ignore missing with {
+          src: background_image.src,
+          alt: background_image.alt,
+          class: 'cta-banner-image',
+          width: background_image.width,
+          height: background_image.height,
+          loading: loading|default('lazy')
+        } only %}
+
+        <div class="overlay-content">
+          <div class="content-container container mx-auto {{ alignment }}">
+            <div class="banner-content">
+              {% if title|render|striptags|trim is not empty %}
+                {% include 'pulse_theme:space-heading' with { content: title, tag_name: 'h2', modifier_class: 'h1', align: 'none' } only %} 
+              {% endif %}
+
+              {% if description|render|striptags|trim is not empty %}
+                <div class="banner-description">
+                  {{- description -}}
+                </div>
+              {% endif %}
+            </div>
+
+            {% if cta_content is not empty %}
+              <div class="banner-cta">
+                <div class="cta-button">
+                  {% block cta_content %}
+                    {{ cta_content }}
+                  {% endblock %}
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+  </{{ element }}>
+{% endblock %}

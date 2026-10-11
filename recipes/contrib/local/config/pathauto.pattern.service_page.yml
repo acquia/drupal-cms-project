@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: service_page
+label: 'Service page'
+type: 'canonical_entities:node'
+pattern: '[node:field_parent:entity:url:path]/[node:title]'
+selection_criteria:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    bundles:
+      service_page: service_page
+selection_logic: and
+weight: 0
+relationships: {  }

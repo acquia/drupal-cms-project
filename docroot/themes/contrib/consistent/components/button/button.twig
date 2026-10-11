@@ -1,0 +1,13 @@
+{% set button_variant = button_variant|default('primary') %}
+{% set tag = button_href is not empty and button_href != 'No URL' ? 'a' : 'button' %}
+
+{% set variant_classes = {
+  'primary':  'bg-primary text-background border-0 rounded-[var(--radius)] hover:bg-primary-hover focus:bg-focus focus:text-focus-text focus:outline-none focus:shadow-[0_2px_0_0_var(--color-foreground)]',
+  'secondary': 'bg-background text-foreground border-2 border-foreground rounded-[var(--radius)] hover:bg-muted focus:bg-focus focus:text-focus-text focus:outline-none focus:shadow-[0_2px_0_0_var(--color-foreground)]',
+  'inverted':  'bg-background text-foreground border-0 rounded-[var(--radius)] hover:bg-grey-3 focus:bg-focus focus:text-focus-text focus:outline-none focus:shadow-[0_2px_0_0_var(--color-foreground)]',
+}[button_variant] ?? 'bg-primary text-background border-0 rounded-[var(--radius)] hover:bg-primary-hover focus:bg-focus focus:text-focus-text focus:outline-none focus:shadow-[0_2px_0_0_var(--color-foreground)]' %}
+
+<{{ tag }}{% if tag == 'a' %} href="{{ button_href }}"{% endif %} class="inline-flex items-center gap-2 font-bold no-underline px-5 py-3 text-base transition duration-200 {{ variant_classes }}">
+  {{ button_label }}
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+</{{ tag }}>

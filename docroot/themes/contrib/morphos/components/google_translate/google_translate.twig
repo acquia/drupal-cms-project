@@ -1,0 +1,24 @@
+{% set is_preview = canvas_is_preview or in_preview %}
+{% set language = language|default('en') %}
+{% set icon = icon|default('globe') %}
+
+{% set classes = [
+  'google-translate',
+  'flex',
+  'items-center',
+  'relative',
+] %}
+
+<div{{ attributes.addClass(classes).setAttribute('data-language', language) }}>
+  <span class="google-translate__icon absolute">
+    {{ include('morphos:icon', {
+      icon: icon,
+      icon_size: 'icon-size--sm',
+    }, with_context: false) }}
+  </span>
+  {% if is_preview %}
+    <div class="pl-8">Google Translate</div>
+  {% else %}
+    <div class="google-translate__element"></div>
+  {% endif %}
+</div>

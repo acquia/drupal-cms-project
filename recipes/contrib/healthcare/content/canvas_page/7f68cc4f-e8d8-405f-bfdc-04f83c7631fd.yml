@@ -1,0 +1,69 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 7f68cc4f-e8d8-405f-bfdc-04f83c7631fd
+  default_langcode: en
+  depends:
+    c47aea18-a863-487d-9751-2873a3b7189d: file
+    d99ea1fe-cf1e-4f4e-a780-efdef70419a8: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Page Not Found'
+  components:
+    -
+      uuid: d24e7cfe-b9ec-432d-8aeb-0ee99a3611dd
+      component_id: sdc.diagnosis.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        padding_block_start: '0'
+        padding_block_end: '0'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        image_size: '4:3'
+        image_position: right
+        image_radius: extra-large
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: d99ea1fe-cf1e-4f4e-a780-efdef70419a8
+            target_type: media
+        background: default
+    -
+      parent_uuid: d24e7cfe-b9ec-432d-8aeb-0ee99a3611dd
+      slot: hero_slot
+      uuid: b61822e8-507a-413a-9652-dea26ab116f3
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Page Not Found'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: d24e7cfe-b9ec-432d-8aeb-0ee99a3611dd
+      slot: hero_slot
+      uuid: a3325def-5019-4649-909a-d961c050b614
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Sorry, the page you are looking for can not be found.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+  path:
+    -
+      alias: /not-found
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'
