@@ -58,7 +58,7 @@ class TrialsCloudPlatformBlock extends BlockBase {
       '#features' => $features,
       '#cta_url' => $cloud_ui_base_uri . '/applications/' . $subscription_id,
       '#attached' => [
-        'library' => ['acquia_trials_cloud_platform/source-platform'],
+        'library' => ['acquia_trials_cloud_platform/cloud-platform'],
       ],
     ];
   }
