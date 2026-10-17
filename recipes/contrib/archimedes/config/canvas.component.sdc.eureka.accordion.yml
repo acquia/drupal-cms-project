@@ -1,0 +1,166 @@
+langcode: en
+status: false
+dependencies:
+  module:
+    - options
+  theme:
+    - eureka
+label: Accordion
+id: sdc.eureka.accordion
+source: sdc
+source_local_id: 'eureka:accordion'
+provider: eureka
+active_version: 64bffea0b6b4d2ea
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        accordion_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum'
+          expression: ℹ︎string␟value
+        accordion_expanded_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum dolor sit amet'
+          expression: ℹ︎string␟value
+        accordion_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '3'
+          expression: ℹ︎list_float␟value
+        accordion_icon_before:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: false
+          expression: ℹ︎boolean␟value
+        accordion_icon_name:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: chevron
+          expression: ℹ︎string␟value
+        accordion_content:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra, tellus vitae bibendum egestas, nisl neque rhoncus enim, in vehicula ex mauris feugiat nunc. Cras sagittis at ante quis tincidunt. Quisque venenatis pharetra nisl, ac tincidunt augue blandit quis. Ut ornare tristique odio, sit amet ultrices leo bibendum vitae.'
+          expression: ℹ︎string␟value
+        accordion_contained:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: false
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  64bffea0b6b4d2ea:
+    settings:
+      prop_field_definitions:
+        accordion_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum'
+          expression: ℹ︎string␟value
+        accordion_expanded_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum dolor sit amet'
+          expression: ℹ︎string␟value
+        accordion_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '3'
+          expression: ℹ︎list_float␟value
+        accordion_icon_before:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: false
+          expression: ℹ︎boolean␟value
+        accordion_icon_name:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: chevron
+          expression: ℹ︎string␟value
+        accordion_content:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra, tellus vitae bibendum egestas, nisl neque rhoncus enim, in vehicula ex mauris feugiat nunc. Cras sagittis at ante quis tincidunt. Quisque venenatis pharetra nisl, ac tincidunt augue blandit quis. Ut ornare tristique odio, sit amet ultrices leo bibendum vitae.'
+          expression: ℹ︎string␟value
+        accordion_contained:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value:
+            -
+              value: false
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions: {  }

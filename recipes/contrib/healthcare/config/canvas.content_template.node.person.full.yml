@@ -1,0 +1,230 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.views_block.provider_locations-block_1
+    - canvas.component.sdc.diagnosis.button
+    - canvas.component.sdc.diagnosis.cta
+    - canvas.component.sdc.diagnosis.email
+    - canvas.component.sdc.diagnosis.group
+    - canvas.component.sdc.diagnosis.heading
+    - canvas.component.sdc.diagnosis.hero-side-by-side
+    - canvas.component.sdc.diagnosis.phone
+    - canvas.component.sdc.diagnosis.plain-text
+    - canvas.component.sdc.diagnosis.section
+    - canvas.component.sdc.diagnosis.text
+    - core.base_field_override.node.person.title
+    - core.entity_view_mode.node.full
+    - field.field.media.image.field_media_image
+    - field.field.node.person.field_areas_of_interest
+    - field.field.node.person.field_biography
+    - field.field.node.person.field_certifications
+    - field.field.node.person.field_collaboration_interests
+    - field.field.node.person.field_credentials
+    - field.field.node.person.field_education
+    - field.field.node.person.field_email
+    - field.field.node.person.field_honors_awards
+    - field.field.node.person.field_office_hours
+    - field.field.node.person.field_phone
+    - field.field.node.person.field_photo
+    - field.field.node.person.field_position_details
+    - field.field.node.person.field_professional_memberships
+    - field.field.node.person.field_professional_title
+    - field.field.node.person.field_pronouns
+    - field.field.node.person.field_publications
+    - field.field.node.person.field_research_activities
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - node.type.person
+  module:
+    - file
+    - media
+    - node
+    - options
+id: node.person.full
+content_entity_type_id: node
+content_entity_type_bundle: person
+content_entity_type_view_mode: full
+component_tree:
+  0:
+    uuid: 25395423-c599-46b3-82f7-ba155e103e02
+    component_id: sdc.diagnosis.hero-side-by-side
+    component_version: 4b74bc8cb0425504
+    inputs: '{"hero_flex_gap":"large","hero_flex_direction_mobile":"vertical","padding_block_start":"0","padding_block_end":"0","margin_block_start":"0","margin_block_end":"0","image_size":"4:3","image_position":"right","image_radius":"extra-large","media":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person\u241dfield_photo\u241e\u241fentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241f{src\u21a0src_with_alternate_widths,alt\u21a0alt,width\u21a0width,height\u21a0height}"},"background":"default"}'
+  '0:hero_slot:0':
+    parent_uuid: 25395423-c599-46b3-82f7-ba155e103e02
+    slot: hero_slot
+    uuid: d0b4fbef-a4b8-407b-9840-54013f24f569
+    component_id: sdc.diagnosis.heading
+    component_version: d7c6acbc91a60ac1
+    inputs: '{"heading_text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person\u241dtitle\u241e\u241fvalue"},"level":1,"text_size":"heading-responsive-4xl","text_color":"default","align":"left"}'
+  '0:hero_slot:1':
+    parent_uuid: 25395423-c599-46b3-82f7-ba155e103e02
+    slot: hero_slot
+    uuid: f5720f4b-c428-4fa9-b363-fbb6d832730f
+    component_id: sdc.diagnosis.group
+    component_version: b15d91618ddc80ad
+    inputs: '{"flex_direction":"column","items_align":"start","flex_align":"start"}'
+  '0:hero_slot:1:group_slot:0':
+    parent_uuid: f5720f4b-c428-4fa9-b363-fbb6d832730f
+    slot: group_slot
+    uuid: 70015567-73aa-490a-a6ec-34ab8d73df36
+    component_id: sdc.diagnosis.plain-text
+    component_version: 8ac71b85056f21c6
+    inputs: '{"text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person\u241dfield_credentials\u241e\u241fvalue"},"text_size":"normal","text_color":"default"}'
+  '0:hero_slot:1:group_slot:1':
+    parent_uuid: f5720f4b-c428-4fa9-b363-fbb6d832730f
+    slot: group_slot
+    uuid: 1a4b4e5d-842a-4193-9032-7cf4656f0458
+    component_id: sdc.diagnosis.plain-text
+    component_version: 8ac71b85056f21c6
+    inputs: '{"text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person\u241dfield_pronouns\u241e\u241fvalue"},"text_size":"normal","text_color":"default"}'
+  '0:hero_slot:1:group_slot:2':
+    parent_uuid: f5720f4b-c428-4fa9-b363-fbb6d832730f
+    slot: group_slot
+    uuid: 4ab3da11-4469-4ca4-8746-e2cd11b871ba
+    component_id: sdc.diagnosis.plain-text
+    component_version: 8ac71b85056f21c6
+    inputs: '{"text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person\u241dfield_professional_title\u241e\u241fvalue"},"text_size":"normal","text_color":"default"}'
+  '0:hero_slot:2':
+    parent_uuid: 25395423-c599-46b3-82f7-ba155e103e02
+    slot: hero_slot
+    uuid: 58c71bdc-dca9-44a4-939d-d0cc99463706
+    component_id: sdc.diagnosis.group
+    component_version: b15d91618ddc80ad
+    inputs: '{"flex_direction":"column","items_align":"start","flex_align":"start"}'
+  '0:hero_slot:2:group_slot:0':
+    parent_uuid: 58c71bdc-dca9-44a4-939d-d0cc99463706
+    slot: group_slot
+    uuid: 4a8d64df-fedf-4cb5-bdcb-ceb335342910
+    component_id: sdc.diagnosis.email
+    component_version: f9c87a46bb1c695a
+    inputs: '{"email":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person\u241dfield_email\u241e\u241fvalue"},"text_size":"normal","text_color":"default"}'
+  '0:hero_slot:2:group_slot:1':
+    parent_uuid: 58c71bdc-dca9-44a4-939d-d0cc99463706
+    slot: group_slot
+    uuid: 58dab4a0-1757-43c7-bccd-5c4bf445b0d1
+    component_id: sdc.diagnosis.phone
+    component_version: 049f998d5db142dd
+    inputs: '{"phone":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person\u241dfield_phone\u241e\u241fvalue"},"text_size":"normal","text_color":"default"}'
+  1:
+    uuid: 33aaf445-e1f2-4a4d-b655-78ff5bf19980
+    component_id: sdc.diagnosis.section
+    component_version: 4e137b5efb1f5f5f
+    inputs: '{"width":"100%","columns":"67-33","mobile_columns":"1","margin_block_start":"48","margin_block_end":"48","padding_block_start":"0","padding_block_end":"0","section_header":false,"section_footer":false}'
+  '1:main_slot:0':
+    parent_uuid: 33aaf445-e1f2-4a4d-b655-78ff5bf19980
+    slot: main_slot
+    uuid: cf793e49-fc7f-400d-b3c2-8ceebaa0eca6
+    component_id: sdc.diagnosis.group
+    component_version: b15d91618ddc80ad
+    inputs: '{"flex_direction":"column","items_align":"start","flex_align":"start"}'
+  '1:main_slot:0:group_slot:0':
+    parent_uuid: cf793e49-fc7f-400d-b3c2-8ceebaa0eca6
+    slot: group_slot
+    uuid: 47779986-f426-4050-8504-87da931cc624
+    component_id: sdc.diagnosis.text
+    component_version: a32701352f55e6f5
+    inputs: '{"text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person\u241dfield_position_details\u241e\u241fprocessed"},"text_size":"normal","text_color":"default"}'
+  '1:main_slot:0:group_slot:1':
+    parent_uuid: cf793e49-fc7f-400d-b3c2-8ceebaa0eca6
+    slot: group_slot
+    uuid: 6cb1c133-fa66-48a1-bef8-b922f5e4cba7
+    component_id: sdc.diagnosis.text
+    component_version: a32701352f55e6f5
+    inputs: '{"text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person\u241dfield_biography\u241e\u241fprocessed"},"text_size":"normal","text_color":"default","label":"Biography: "}'
+  '1:main_slot:0:group_slot:2':
+    parent_uuid: cf793e49-fc7f-400d-b3c2-8ceebaa0eca6
+    slot: group_slot
+    uuid: 211d8913-2267-4e8b-a3d2-2890c96facce
+    component_id: sdc.diagnosis.text
+    component_version: a32701352f55e6f5
+    inputs: '{"label":"Education:","text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person\u241dfield_education\u241e\u241fprocessed"},"text_size":"normal","text_color":"default"}'
+  '1:main_slot:0:group_slot:3':
+    parent_uuid: cf793e49-fc7f-400d-b3c2-8ceebaa0eca6
+    slot: group_slot
+    uuid: 58ebd4b2-6435-43ea-bf4e-a11eaf33bce8
+    component_id: sdc.diagnosis.text
+    component_version: a32701352f55e6f5
+    inputs: '{"label":"Certification \u0026 Licenses: ","text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person\u241dfield_certifications\u241e\u241fprocessed"},"text_size":"normal","text_color":"default"}'
+  '1:main_slot:0:group_slot:4':
+    parent_uuid: cf793e49-fc7f-400d-b3c2-8ceebaa0eca6
+    slot: group_slot
+    uuid: 627e1ded-4d7a-45e6-a265-16375eba4543
+    component_id: sdc.diagnosis.text
+    component_version: a32701352f55e6f5
+    inputs: '{"label":"Honors \u0026 Awards: ","text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person\u241dfield_honors_awards\u241e\u241fprocessed"},"text_size":"normal","text_color":"default"}'
+  '1:main_slot:0:group_slot:5':
+    parent_uuid: cf793e49-fc7f-400d-b3c2-8ceebaa0eca6
+    slot: group_slot
+    uuid: 2ab3333b-70fe-4494-a714-bdaba9d2f4ab
+    component_id: sdc.diagnosis.text
+    component_version: a32701352f55e6f5
+    inputs: '{"label":"Areas of Interest \u0026 Expertise:  ","text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person\u241dfield_areas_of_interest\u241e\u241fprocessed"},"text_size":"normal","text_color":"default"}'
+  '1:main_slot:0:group_slot:6':
+    parent_uuid: cf793e49-fc7f-400d-b3c2-8ceebaa0eca6
+    slot: group_slot
+    uuid: f2f45468-6749-412e-b109-b408eff7ad20
+    component_id: sdc.diagnosis.text
+    component_version: a32701352f55e6f5
+    inputs: '{"label":"Collaboration Interests:  ","text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person\u241dfield_collaboration_interests\u241e\u241fprocessed"},"text_size":"normal","text_color":"default"}'
+  '1:main_slot:0:group_slot:7':
+    parent_uuid: cf793e49-fc7f-400d-b3c2-8ceebaa0eca6
+    slot: group_slot
+    uuid: 05325fca-4638-4936-a81c-1a325c5b898b
+    component_id: sdc.diagnosis.text
+    component_version: a32701352f55e6f5
+    inputs: '{"label":"Professional Memberships:  ","text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person\u241dfield_professional_memberships\u241e\u241fprocessed"},"text_size":"normal","text_color":"default"}'
+  '1:main_slot:0:group_slot:8':
+    parent_uuid: cf793e49-fc7f-400d-b3c2-8ceebaa0eca6
+    slot: group_slot
+    uuid: ea2bb19a-fa29-4166-a67f-874def8edc42
+    component_id: sdc.diagnosis.text
+    component_version: a32701352f55e6f5
+    inputs: '{"label":"Research Activities:  ","text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person\u241dfield_research_activities\u241e\u241fprocessed"},"text_size":"normal","text_color":"default"}'
+  '1:main_slot:0:group_slot:9':
+    parent_uuid: cf793e49-fc7f-400d-b3c2-8ceebaa0eca6
+    slot: group_slot
+    uuid: f418c2aa-fd97-4d63-8762-9c37021b3c00
+    component_id: sdc.diagnosis.text
+    component_version: a32701352f55e6f5
+    inputs: '{"label":"Publications \u0026 Achievements:  ","text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person\u241dfield_publications\u241e\u241fprocessed"},"text_size":"normal","text_color":"default"}'
+  '1:main_slot:1':
+    parent_uuid: 33aaf445-e1f2-4a4d-b655-78ff5bf19980
+    slot: main_slot
+    uuid: f129fdc0-9664-440b-ac24-50d4e352aa7f
+    component_id: sdc.diagnosis.group
+    component_version: b15d91618ddc80ad
+    inputs: '{"flex_direction":"column","items_align":"start","flex_align":"start"}'
+  '1:main_slot:1:group_slot:0':
+    parent_uuid: f129fdc0-9664-440b-ac24-50d4e352aa7f
+    slot: group_slot
+    uuid: d897e2c0-b904-40bf-9abf-96d2597a58b3
+    component_id: sdc.diagnosis.text
+    component_version: a32701352f55e6f5
+    inputs: '{"label":"Hours:","text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:person\u241dfield_office_hours\u241e\u241fprocessed"},"text_size":"normal","text_color":"default"}'
+  2:
+    uuid: fa5da986-c0db-4d36-9dfb-196f4d63be22
+    component_id: sdc.diagnosis.section
+    component_version: 4e137b5efb1f5f5f
+    inputs: '{"width":"100%","columns":"100","mobile_columns":"1","margin_block_start":"48","margin_block_end":"48","padding_block_start":"0","padding_block_end":"0","section_header":false,"section_footer":false,"views_columns":"33-33-33"}'
+  '2:main_slot:0':
+    parent_uuid: fa5da986-c0db-4d36-9dfb-196f4d63be22
+    slot: main_slot
+    uuid: 6a58929f-c5cd-4e51-a772-508a45cff5d0
+    component_id: block.views_block.provider_locations-block_1
+    component_version: 451b6a6127fb1366
+    inputs: '{"label":"Provider Locations","label_display":"0","views_label":"","items_per_page":null}'
+  3:
+    uuid: 3de956aa-f600-4f17-b306-f65724e23542
+    component_id: sdc.diagnosis.cta
+    component_version: 85c3d4f60a48e2d1
+    inputs: '{"heading_text":"Book an Appointment","level":2,"text":"Lorem ipsum dolor sit amet.","text_align":"center"}'
+  '3:actions:0':
+    parent_uuid: 3de956aa-f600-4f17-b306-f65724e23542
+    slot: actions
+    uuid: b1075cd9-9ba5-4949-8e96-4e3fb81d7965
+    component_id: sdc.diagnosis.button
+    component_version: 8886a0097e12e915
+    inputs: '{"variant":"primary","label":"Button label","size":"medium","mobile_width":false,"icon_first":false,"disabled":false}'
+exposed_slots: {  }

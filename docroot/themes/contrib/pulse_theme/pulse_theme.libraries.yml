@@ -1,0 +1,46 @@
+global-styling:
+  css:
+    theme:
+      components/00-base/global/global.css: {}
+      components/00-base/space-utility/space-utility.css: {}
+      components/01-atoms/space-button/space-button.css: {}
+      components/00-base/global/base-header.css: {}
+      components/00-base/global/base-footer.css: {}
+      components/00-base/global/space-form.css: {}
+      components/00-base/global/cookies.css: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - core/drupalSettings
+
+theme-settings:
+  css:
+    theme:
+      components/00-base/global/theme-settings.css: {}
+
+splide-slider:
+  css:
+    component:
+      https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/css/splide-core.min.css: { type: external, minified: true }
+  js:
+    https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/js/splide.min.js: { type: external, minified: true, attributes: { defer: true } }
+
+space-slider:
+  css:
+    component:
+      components/03-organisms/space-slider/space-slider.css: {}
+  js:
+    components/03-organisms/space-slider/space-slider.js: { attributes: { defer: true } }
+  dependencies:
+    - core/drupal
+    - core/once
+    - core/jquery
+    - pulse_theme/splide-slider
+
+notification-messages:
+  version: VERSION
+  js:
+    assets/js/notification-messages.js: {}
+  dependencies:
+    - core/drupal
+    - core/once

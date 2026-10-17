@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 220" font-family="Roboto, sans-serif">
+  <defs>
+    <style>
+      .title-bg { fill: #009688; rx: 8; }
+      .title { fill: #fff; font-size: 16px; font-weight: 600; text-anchor: middle; dominant-baseline: central; }
+      .row { fill: #fff; stroke: #cfd8dc; stroke-width: 1; }
+      .row-alt { fill: #f5f5f5; stroke: #cfd8dc; stroke-width: 1; }
+      .feature { fill: #009688; font-size: 13px; font-weight: 600; dominant-baseline: central; }
+      .desc { fill: #546e7a; font-size: 13px; dominant-baseline: central; }
+    </style>
+  </defs>
+  <!-- Title bar -->
+  <rect x="10" y="10" width="540" height="40" class="title-bg"/>
+  <text x="280" y="30" class="title">Replay &amp; Testing</text>
+  <!-- Row 1 -->
+  <rect x="10" y="50" width="540" height="50" class="row"/>
+  <line x1="160" y1="50" x2="160" y2="100" stroke="#cfd8dc" stroke-width="1"/>
+  <text x="30" y="75" class="feature">Replay</text>
+  <text x="180" y="75" class="desc">Load past execution data and step through it on the canvas.</text>
+  <!-- Row 2 -->
+  <rect x="10" y="100" width="540" height="50" class="row-alt"/>
+  <line x1="160" y1="100" x2="160" y2="150" stroke="#cfd8dc" stroke-width="1"/>
+  <text x="30" y="125" class="feature">Live Testing</text>
+  <text x="180" y="125" class="desc">Trigger a workflow execution and see results immediately.</text>
+  <!-- Row 3 -->
+  <rect x="10" y="150" width="540" height="50" class="row"/>
+  <line x1="160" y1="150" x2="160" y2="200" stroke="#cfd8dc" stroke-width="1"/>
+  <text x="30" y="175" class="feature">Tokens &amp; Data</text>
+  <text x="180" y="175" class="desc">Inspect token values at each step and drag them into forms.</text>
+  <!-- Bottom border -->
+  <rect x="10" y="10" width="540" height="190" rx="8" fill="none" stroke="#b0bec5" stroke-width="1.5"/>
+</svg>

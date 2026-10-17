@@ -1,0 +1,129 @@
+{% set has_url = url is not empty ? 'yes' : 'no' %}
+
+{% set tile =
+  html_cva(
+    base: ['relative p-6 md:p-8'],
+    variants: {
+      hasUrl: {
+        yes: 'group cursor-pointer hover:scale-103',
+        no: ''
+      },
+      backgroundColor: {
+        primary: 'bg-primary text-primary-foreground transition duration-300 hover:bg-primary/80',
+        secondary: 'bg-secondary text-secondary-foreground transition duration-300 hover:bg-secondary/80',
+        accent: 'bg-accent text-accent-foreground transition duration-300 hover:bg-accent/80',
+        muted: 'bg-muted text-muted-foreground transition duration-300 hover:bg-muted/80',
+        noColor: 'border border-border bg-none text-foreground transition duration-300 hover:text-foreground/70'
+      },
+      tileSize: {
+        square: 'aspect-square',
+        '4:3': 'aspect-4/3',
+        '16:9': 'aspect-16/9',
+        noSize: 'aspect-none'
+      },
+      borderRadius: {
+        small: 'rounded-sm',
+        medium: 'rounded-xl md:rounded-2xl',
+        large: 'rounded-[24px] md:rounded-[32px]',
+        noRadius: 'rounded-none'
+      }
+    }
+  )
+%}
+
+{% set tile_classes =
+  tile.apply({
+    hasUrl: has_url,
+    backgroundColor: background_color|default('noColor'),
+    tileSize: tile_size|default('noSize'),
+    borderRadius: border_radius|default('noRadius')
+  })
+%}
+
+{% set icon_container =
+  html_cva(
+    base: ['flex', 'w-full'],
+    variants: {
+      iconAlign: {
+        left: 'justify-start',
+        center: 'justify-center',
+        right: 'justify-end'
+      }
+    }
+  )
+%}
+
+{% set icon_container_classes =
+  icon_container.apply({
+    iconAlign: icon_align|default('center')
+  })
+%}
+
+{% set icon_size_map = {
+  small: 'small',
+  medium: 'medium',
+  large: 'large',
+  'extra-large': 'extra-large'
+} %}
+
+{% set text_container =
+  html_cva(
+    base: ['w-full', 'pt-2'],
+    variants: {
+      textAlign: {
+        left: 'text-start',
+        center: 'text-center',
+        right: 'text-end'
+      }
+    }
+  )
+%}
+
+{% set text_container_classes =
+  text_container.apply({
+    textAlign: text_align|default('center')
+  })
+%}
+
+<div class="{{ tile_classes }}">
+  <div class="flex h-full flex-col justify-center">
+    <div class="{{ icon_container_classes }}">
+      {% if icon %}
+        {{
+          include(
+            '@byte_theme/components/icon/icon.twig',
+            {
+              icon: icon,
+              icon_size: icon_size_map[icon_size]|default('medium')
+            },
+            with_context: false
+          )
+        }}
+      {% endif %}
+    </div>
+
+    <div class="{{ text_container_classes }}">
+      {% if text is not empty or description is not empty %}
+        {% if url is not empty %}
+          <a href="{{ url }}" class="flex w-full flex-col before:absolute before:inset-0 before:content-['']">
+            {% if text is not empty %}
+              <h3>{{ text }}</h3>
+            {% endif %}
+            {% if description is not empty %}
+              <span class="mt-3">{{ description }}</span>
+            {% endif %}
+          </a>
+        {% else %}
+          <span class="flex w-full flex-col before:absolute before:inset-0 before:content-['']">
+            {% if text is not empty %}
+              <h3>{{ text }}</h3>
+            {% endif %}
+            {% if description is not empty %}
+              <span class="mt-3">{{ description }}</span>
+            {% endif %}
+          </span>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+{% set classes = ['pager', 'py-6'] %}
+
+{% if items.previous or items.next %}
+  <nav class="{{ classes|join(' ') }}" role="navigation" aria-labelledby="{{ heading_id }}">
+    {% if pagination_heading_level == 'h1' %}
+      <h1 id="{{ heading_id }}" class="sr-only">{{ 'Pagination'|t }}</h1>
+    {% elseif pagination_heading_level == 'h2' %}
+      <h2 id="{{ heading_id }}" class="sr-only">{{ 'Pagination'|t }}</h2>
+    {% elseif pagination_heading_level == 'h3' %}
+      <h3 id="{{ heading_id }}" class="sr-only">{{ 'Pagination'|t }}</h3>
+    {% elseif pagination_heading_level == 'h4' %}
+      <h4 id="{{ heading_id }}" class="sr-only">{{ 'Pagination'|t }}</h4>
+    {% elseif pagination_heading_level == 'h5' %}
+      <h5 id="{{ heading_id }}" class="sr-only">{{ 'Pagination'|t }}</h5>
+    {% elseif pagination_heading_level == 'h6' %}
+      <h6 id="{{ heading_id }}" class="sr-only">{{ 'Pagination'|t }}</h6>
+    {% else %}
+      <h2 id="{{ heading_id }}" class="sr-only">{{ 'Pagination'|t }}</h2>
+    {% endif %}
+    <div class="join">
+      {% if items.previous %}
+        <a
+          class="btn join-item" href="{{ items.previous.href }}" title="{{ 'Go to previous page'|t }}"
+          rel="prev"{{ items.previous.attributes|without('href', 'title', 'rel') }}>
+          <span class="visually-hidden">{{ 'Previous page'|t }}</span>
+          <span aria-hidden="true">{{ items.previous.text|default('&laquo;'|t) }}</span>
+        </a>
+      {% endif %}
+      {% if items.current %}
+        <span class="btn btn-active btn-default join-item">
+          {% trans %}Page {{ items.current }}{% endtrans %}
+        </span>
+      {% endif %}
+      {% if items.next %}
+        <a class="btn join-item" href="{{ items.next.href }}" title="{{ 'Go to next page'|t }}"
+           rel="next"{{ items.next.attributes|without('href', 'title', 'rel') }}>
+          <span class="visually-hidden">{{ 'Next page'|t }}</span>
+          <span aria-hidden="true">{{ items.next.text|default('&raquo;'|t) }}</span>
+        </a>
+      {% endif %}
+    </div>
+  </nav>
+{% endif %}

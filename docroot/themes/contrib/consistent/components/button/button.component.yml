@@ -1,0 +1,31 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Button
+group: Base
+status: stable
+props:
+  type: object
+  required:
+    - button_variant
+  properties:
+    button_label:
+      type: string
+      title: Label
+      default: "Button label"
+      examples:
+        - "View all services"
+    button_href:
+      type: string
+      title: Link
+    button_variant:
+      type: string
+      title: Style
+      enum:
+        - primary
+        - secondary
+        - inverted
+      meta:enum:
+        primary: Primary
+        secondary: Secondary
+        inverted: Inverted (white)
+      examples:
+        - primary

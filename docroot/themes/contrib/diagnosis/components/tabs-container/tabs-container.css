@@ -1,0 +1,141 @@
+/**
+ * Tabs Container component styles
+ * Handles tablist visibility and responsive behavior
+ */
+
+/* Hide tablist by default (mobile) */
+.tabs-container--tablist {
+  display: none;
+}
+
+/* Show tablist on desktop */
+@media (min-width: 768px) {
+  .tabs-container--tablist {
+    display: flex;
+  }
+}
+
+/* Hide tablist in Canvas editor */
+.tabs-container--canvas .tabs-container--tablist {
+  display: none !important;
+}
+
+/* Hide mobile accordion buttons on desktop */
+.tab--mobile-button {
+  display: flex;
+}
+
+@media (min-width: 768px) {
+  .tab--mobile-button {
+    display: none;
+  }
+}
+
+/* Show mobile buttons in Canvas */
+.tab--canvas .tab--mobile-button {
+  display: flex;
+}
+
+/* ========================================
+   Vertical Tabs Layout
+   ======================================== */
+
+/* Vertical layout: side-by-side on desktop */
+@media (min-width: 768px) {
+  .tabs-container--vertical {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  /* Tablist on the left side */
+  .tabs-container--vertical .tabs-container--tablist {
+    flex-direction: column;
+    border-bottom: none;
+    border-right: 1px solid var(--border);
+    min-width: 200px;
+    flex-shrink: 0;
+  }
+
+  /* Tab buttons styled for vertical layout */
+  .tabs-container--vertical .tabs-container--tablist [role="tab"] {
+    text-align: left;
+    border-bottom: none;
+    border-right: 2px solid transparent;
+    padding: 0.75rem 1rem;
+    width: 100%;
+  }
+
+  /* Active tab indicator on the right */
+  .tabs-container--vertical .tabs-container--tablist [role="tab"][aria-selected="true"] {
+    border-right-color: var(--primary);
+    background-color: var(--muted);
+  }
+
+  /* Content area takes remaining space */
+  .tabs-container--vertical .tabs-container--content {
+    flex: 1;
+    margin-top: 0;
+  }
+
+  /* Hide mobile accordion in vertical layout */
+  .tabs-container--vertical .tab--mobile-button {
+    display: none;
+  }
+
+  /* Show all tab panels stacked in vertical layout on desktop */
+  .tabs-container--vertical .tab {
+    border-bottom: none;
+  }
+}
+
+/* Horizontal layout (default) - existing behavior */
+@media (min-width: 768px) {
+  .tabs-container--horizontal .tabs-container--tablist {
+    flex-direction: row;
+  }
+}
+
+/* ========================================
+   Canvas Editor Overrides
+   ======================================== */
+
+/* Canvas mode: Show all tabs stacked for editing */
+.tabs-container--canvas {
+  display: block !important;
+}
+
+/* In Canvas, keep vertical layout but show all content */
+.tabs-container--canvas.tabs-container--vertical .tabs-container--content {
+  margin-left: 0;
+}
+
+/* Show tab titles in Canvas for vertical tabs */
+.tabs-container--canvas.tabs-container--vertical .tab--title-wrapper {
+  display: block !important;
+  margin-bottom: 0.5rem;
+}
+
+/* Stack all tabs in Canvas mode */
+.tabs-container--canvas .tabs-container--content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Show all tab panels in Canvas */
+.tabs-container--canvas .tab--panel {
+  height: auto !important;
+  padding: 1rem !important;
+  overflow: visible !important;
+  border: 1px dashed var(--border);
+  border-radius: 0.25rem;
+}
+
+/* Visual indicator for each tab section in Canvas */
+.tabs-container--canvas .tab {
+  padding: 1rem;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+}

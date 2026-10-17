@@ -1,0 +1,56 @@
+_meta:
+  version: '1.0'
+  entity_type: easy_email
+  uuid: ceccf813-bd43-4c88-8f5b-dc17fda978bc
+  bundle: default
+default:
+  revision_user:
+    -
+      target_id: 0
+  label:
+    -
+      value: Default
+  creator_uid:
+    -
+      target_id: 0
+  recipient_uid:
+    -
+      target_id: 1
+  recipient_address:
+    -
+      value: kiran.kadam@qed42.com
+  from_name:
+    -
+      value: 'CMS Template'
+  from_address:
+    -
+      value: kiran.kadam@qed42.com
+  subject:
+    -
+      value: 'New release(s) available for CMS Template'
+  body_html:
+    -
+      value: |-
+        There are updates available for your version of Drupal. To ensure the proper functioning of your site, you should update as soon as possible.<br />
+        <br />
+        There are security updates available for one or more of your modules or themes. To ensure the security of your server, you should update immediately!<br />
+        <br />
+        See the available updates page for more information:<br />
+        https://cms-template.ddev.site/admin/reports/updates<br />
+        <br />
+        Your site is currently configured to send these emails when any updates are available. To get notified only for security updates, https://cms-template.ddev.site/admin/reports/updates/settings.
+      format: easy_email
+  body_plain:
+    -
+      value: |-
+        There are updates available for your version of Drupal. To ensure the proper functioning of your site, you should update as soon as possible.
+
+        There are security updates available for one or more of your modules or themes. To ensure the security of your server, you should update immediately!
+
+        See the available updates page for more information:
+        https://cms-template.ddev.site/admin/reports/updates
+
+        Your site is currently configured to send these emails when any updates are available. To get notified only for security updates, https://cms-template.ddev.site/admin/reports/updates/settings.
+  sent:
+    -
+      value: 1772710414

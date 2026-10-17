@@ -1,0 +1,33 @@
+{#
+/**
+ * Available variables:
+ * - contact_card_item_base_class: base classname of the wrapper.
+ * - contact_card_item_modifiers: array of modifiers to add to the base classname of the wrapper.
+ * - contact_card_item_blockname: blockname prepended to the base classname of the wrapper(s) and each component.
+ * - contact_card_item_extra_classes: array of extra classes to add to the base classes.
+ *
+ * - contact_card_item_heading: heading text of the quick links component.
+ * - contact_card_item_job: job title text of the quick links component.
+ * - contact_card_item_email: email address text of the quick links component.
+ */
+#}
+
+{% set contact_card_item_base_class = 'contact-card-item' %}
+{% set contact_card_item_modifiers =  contact_card_item_modifiers|default([]) %}
+
+<div {{ bem(contact_card_item_base_class, contact_card_item_modifiers, contact_card_item_blockname, contact_card_item_extra_classes) }}>
+  <div {{ bem('text', [], contact_card_item_base_class) }}>
+    <p {{ bem('job', [], contact_card_item_base_class) }}>
+      {{ contact_card_item_job }}
+    </p>
+    {{ include("eureka:heading", {
+      heading_level: 3,
+      heading: contact_card_item_heading,
+      heading_size_override: 'xsmall',
+    }, with_context = false) }}
+    {{ include("eureka:link", {
+      link_content:  contact_card_item_email,
+      link_url:' mailto:' ~ contact_card_item_email,
+    }, with_context = false) }}
+  </div>
+</div>

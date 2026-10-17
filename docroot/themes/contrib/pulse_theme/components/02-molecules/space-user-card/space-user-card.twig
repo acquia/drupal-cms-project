@@ -1,0 +1,75 @@
+{#
+/**
+ * @file
+ * User Detail component.
+ *
+ * This component renders a user profile block with an optional image,
+ * name, description, and social media links.
+ *
+ * Properties:
+ * - image: [object] User image.
+ *   - src: [string] Image URL.
+ *   - alt: [string] Alternative text for accessibility.
+ * - name: [string] User name.
+ * - description: [string] Short user description.
+ * - twitter_url: [string] Twitter profile link.
+ * - linkedin_url: [string] LinkedIn profile link.
+ * - extra_classes: [string] Optional additional wrapper classes.
+ *
+ * Slots:
+ * - None.
+ */
+#}
+
+{# Template #}
+<div class="user-detail {{ extra_classes }}">
+	{% if image %}
+		<div class="user-image">
+			{% include 'canvas:image' ignore missing with {
+				src: image.src,
+				alt: image.alt,
+				width: image.width,
+				height: image.height,
+				loading: loading|default('lazy'),
+				class: 'w-full h-full object-cover'
+			} only %}
+		</div>
+	{% endif %}
+
+	<div class="flex-1">
+		{% if name %}
+			<div class="user-name">
+				{{ name }}
+			</div>
+		{% endif %}
+
+		{% if description %}
+			<p class="user-description">
+				{{ description }}
+			</p>
+		{% endif %}
+
+		<div class="social-link-wrap flex items-center gap-3 mt-2">
+			{% if twitter_url %}
+				<a href="{{ twitter_url }}" target="_blank" class="social-link text-gray-500 hover:text-gray-800 transition" aria-label="Twitter">
+					{% include 'pulse_theme:space-icon' with {
+						icon: 'twitter-logo',
+						icon_size: 'extra-small',
+						alt: 'Follow us on Twitter'
+					} only %}
+				</a>
+			{% endif %}
+
+			{% if linkedin_url %}
+				<a href="{{ linkedin_url }}" target="_blank" class="social-link text-gray-500 hover:text-gray-700 transition" aria-label="LinkedIn">
+					{% include 'pulse_theme:space-icon' with {
+						icon: 'linkedin-logo',
+						icon_size: 'extra-small',
+						alt: 'Follow us on linkedin'
+					} only %}
+					</svg>
+				</a>
+			{% endif %}
+		</div>
+	</div>
+</div>

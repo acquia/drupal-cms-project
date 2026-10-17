@@ -1,0 +1,28 @@
+{
+  "name": "drupal/eca",
+  "license": "GPL-2.0-or-later",
+  "type": "drupal-module",
+  "description": "Event, Conditions, Actions - powerful, versatile, and user-friendly rules engine for Drupal",
+  "support": {
+    "issues": "https://drupal.org/project/issues/eca",
+    "source": "https://drupal.org/project/eca"
+  },
+  "require": {
+    "php": ">=8.3",
+    "ext-json": "*",
+    "dragonmantank/cron-expression": "^3.1",
+    "drupal/core": "^11.3 || ^12.0",
+    "drupal/modeler_api": "^1.1"
+  },
+  "require-dev": {
+    "drupal/modeler": "^1.0",
+    "drupal/project_browser": "^2.1"
+  },
+  "extra": {
+    "patches": {
+      "drupal/project_browser": {
+        "#3622921 Implement getModulesToInstall in TestModuleInstaller": "https://git.drupalcode.org/issue/project_browser-3622921/-/commit/9afcce0676ca61ca1514a14b6d882cbd081c0045.diff"
+      }
+    }
+  }
+}

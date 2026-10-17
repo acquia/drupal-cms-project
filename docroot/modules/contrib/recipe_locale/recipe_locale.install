@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Install and uninstall hooks for Recipe Interface Translation Integration.
+ */
+
+declare(strict_types=1);
+
+use Drupal\recipe_locale\LocaleIntegration;
+
+/**
+ * Implements hook_uninstall().
+ */
+function recipe_locale_uninstall(): void {
+  // Take the recipes out of the Interface Translation data. Left in place,
+  // they would show up on the translation status report with no name and
+  // produce PHP warnings there, because Locale can no longer look them up.
+  if (\Drupal::moduleHandler()->moduleExists('locale')) {
+    \Drupal::service(LocaleIntegration::class)->removeAll();
+  }
+}

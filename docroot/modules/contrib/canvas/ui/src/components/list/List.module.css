@@ -1,0 +1,98 @@
+.listContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.componentPreviewTooltipContent {
+  transform-origin: var(--radix-tooltip-content-transform-origin);
+  animation: slide-from-left-and-fade-in 200ms ease-out;
+}
+
+@keyframes slide-from-left-and-fade-in {
+  from {
+    transform: translateX(-24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.folderTrigger {
+  width: 100%;
+  border-radius: var(--radius-2);
+  .chevron {
+    cursor: pointer;
+    &:hover {
+        color: var(--blue-9);
+    }
+  }
+  .folderCount {
+    background-color: var(--gray-3);
+  }
+}
+
+.folderIcon {
+  color: var(--slate-a9);
+}
+
+.chevron {
+  transition: transform 300ms ease-in-out;
+  color: var(--slate-12);
+ &.isOpen {
+    transform: rotate(90deg);
+  }
+}
+
+.isOver {
+  border-radius: var(--radius-2);
+  background: var(--blue-3);
+  * {
+    pointer-events: none;
+  }
+}
+
+.isDragging {
+  cursor: grabbing;
+  opacity: 0.5;
+}
+
+.emptyDropZone {
+  min-height: var(--space-6);
+}
+
+.dropIndicatorAbove {
+  position: relative;
+}
+
+.dropIndicatorAbove::before {
+  position: absolute;
+  z-index: 10;
+  top: -4px;
+  right: 0;
+  left: 0;
+  height: 2px;
+  content: '';
+  border-radius: 1px;
+  background-color: var(--blue-9);
+}
+
+.dropIndicatorBelow {
+  position: relative;
+}
+
+.dropIndicatorBelow::after {
+  position: absolute;
+  z-index: 10;
+  right: 0;
+  bottom: -4px;
+  left: 0;
+  height: 2px;
+  content: '';
+  border-radius: 1px;
+  background-color: var(--blue-9);
+}

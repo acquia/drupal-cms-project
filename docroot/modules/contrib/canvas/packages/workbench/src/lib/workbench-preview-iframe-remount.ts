@@ -1,0 +1,105 @@
+import { isComponentMetadataPath } from './component-metadata-path';
+import { isTopLevelContentTemplateSpecPath } from './content-template-spec-path';
+import { isMockSpecPath } from './mock-spec-path';
+import {
+  isTopLevelPageSpecPath,
+  isTopLevelPageTemplateSpecPath,
+} from './page-spec-path';
+
+import type { DiscoveryResult } from './discovery-client';
+import type {
+  PreviewManifest,
+  PreviewManifestComponent,
+} from './preview-contract';
+
+/**
+ * Stable structural fingerprint for discovery + manifest: brand kit CSS URL,
+ * global CSS URL, sorted component names, sorted page slugs, sorted
+ * content-template slugs, and sorted page-template ids. Content edits to an
+ * existing JSON file should not change this string.
+ */
+export function computeWorkbenchStructuralFingerprint(
+  discovery: DiscoveryResult,
+  manifest: PreviewManifest,
+): string {
+  const brandKitCss = manifest.brandKitCssUrl ?? '';
+  const globalCss = manifest.globalCssUrl ?? '';
+  const componentNames = [...discovery.components]
+    .map((component) => component.name)
+    .sort()
+    .join('\0');
+  const pageSlugs = [...discovery.pages]
+    .map((page) => page.slug)
+    .sort()
+    .join('\0');
+  const contentTemplateSlugs = [...discovery.contentTemplates]
+    .map((template) => template.slug)
+    .sort()
+    .join('\0');
+  const pageTemplateIds = [...discovery.pageTemplates]
+    .map((pageTemplate) => pageTemplate.id)
+    .sort()
+    .join('\0');
+  return `${brandKitCss}\n${globalCss}\n${componentNames}\n${pageSlugs}\n${contentTemplateSlugs}\n${pageTemplateIds}`;
+}
+
+export function shouldHideComponentPreviewFrame(
+  component: Pick<
+    PreviewManifestComponent,
+    'metadataErrors' | 'previewable'
+  > | null,
+  expectedRenderId: string | null,
+  settledRenderId: string | null,
+): boolean {
+  return Boolean(
+    component &&
+    (component.metadataErrors.length > 0 ||
+      (component.previewable && settledRenderId !== expectedRenderId)),
+  );
+}
+
+export interface WorkbenchHotPayload {
+  reloadFrameOnly?: boolean;
+  filePath?: string;
+  event?: string;
+}
+
+/**
+ * When a full manifest refresh runs (`reloadFrameOnly: false`), the shell can
+ * skip remounting the preview iframe if the change is an in-place edit to
+ * component metadata, a component mock, or a page spec and discovery
+ * structure is unchanged. The mounted iframe then receives the refreshed
+ * discovery data and a new render request with the fresh spec, so its
+ * component state survives while props and mock data update.
+ */
+export function shouldSkipWorkbenchIframeRemount(params: {
+  payload: WorkbenchHotPayload | undefined;
+  previousFingerprint: string | null;
+  nextFingerprint: string;
+}): boolean {
+  const { payload, previousFingerprint, nextFingerprint } = params;
+
+  if (payload?.reloadFrameOnly !== false) {
+    return false;
+  }
+
+  if (!payload.filePath || payload.event !== 'change') {
+    return false;
+  }
+
+  if (
+    !isComponentMetadataPath(payload.filePath) &&
+    !isMockSpecPath(payload.filePath) &&
+    !isTopLevelPageSpecPath(payload.filePath) &&
+    !isTopLevelContentTemplateSpecPath(payload.filePath) &&
+    !isTopLevelPageTemplateSpecPath(payload.filePath)
+  ) {
+    return false;
+  }
+
+  if (previousFingerprint === null) {
+    return false;
+  }
+
+  return previousFingerprint === nextFingerprint;
+}

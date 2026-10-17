@@ -1,0 +1,63 @@
+{#
+/**
+ * @file
+ * Space Detail Page Hero Banner component.
+ *
+ * This component renders a Hero Banner with a background image, a headline, and an optional label, primary & secondary categories.
+ *
+ * Properties:
+ * - background_image: [object] The background image of the hero banner.
+ *   - src: [string] The URL of the background image.
+ *   - alt: [string] Alternative text for accessibility.
+ *   - width: [integer] Image width in pixels.
+ *   - height: [integer] Image height in pixels.
+ * - title: [string] The main heading displayed on the hero banner.
+ * - label: [string|render array] Optional intro label displayed above categories.
+ * - primary_category: [string] Primary category text.
+ * - secondary_category: [string] Secondary category text.
+ */
+#}
+
+{% set primary = primary_category|default('')|trim %}
+{% set secondary = secondary_category|default('')|trim %}
+
+{# Template #}
+{% block detail_page_hero_banner_block %}
+	<section class="hero-banner detail-page-banner style-2 ga-hero-banner-2 ga_space_component" role="banner">
+		<div class="backgroundImage w-full h-full xl:h-screen absolute top-0 left-0 bg-cover bg-no-repeat bg-center">
+			<img src="{{ background_image.src }}" alt="{{ background_image.alt }}"></img>
+		</div>
+
+		<div class="container relative mx-auto z-20 {{ modifier_class }}">
+			<div class="top-content">
+				{% if label|render|striptags|trim is not empty %}
+					<span class="intro-label">
+						{{ label }}
+					</span>
+				{% endif %}
+
+				{% if primary or secondary %}
+					<div class="category-wrapper">
+						{% if primary %}
+							<span {{ region_attributes.primary_category |default(create_attribute()) .addClass('primary_category') }}>
+								{{ primary }}
+							</span>
+						{% endif %}
+
+						{% if secondary %}
+							<span {{ region_attributes.secondary_category |default(create_attribute()) .addClass('secondary_category') }}>
+								{{ secondary }}
+							</span>
+						{% endif %}
+					</div>
+				{% endif %}
+
+				{% if title|render|striptags|trim is not empty %}
+					<div class="heading max-w-798 mx-auto">
+						{% include 'pulse_theme:space-heading' with { content: title, tag_name: 'h1', align: 'none' } only %}
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</section>
+{% endblock %}

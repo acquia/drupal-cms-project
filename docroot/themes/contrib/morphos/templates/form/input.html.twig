@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ * Default theme implementation for an 'input' #type form element.
+ *
+ * Available variables:
+ * - attributes: A list of HTML attributes for the input element.
+ * - children: Optional additional rendered elements.
+ *
+ * @see template_preprocess_input()
+ */
+#}
+{% set type = element['#type'] %}
+{% set is_boolean = type == 'checkbox' and (element['#attributes']['value'] == 1 or element['#attributes']['value'] == 0) %}
+{% set type_input = ['textfield', 'date', 'webform_time', 'password', 'email', 'number', 'tel', 'url', 'entity_autocomplete'] %}
+
+{% set classes = [
+  type in type_input ? 'input',
+  type == 'range' ? 'range',
+  type == 'file' ? 'file-input',
+  type == 'checkbox' and is_boolean ? 'toggle',
+  type == 'checkbox' and not is_boolean ? 'checkbox',
+  type == 'radio' ? 'radio',
+  type == 'button' or type == 'submit' ? 'btn btn-default',
+  type == 'submit' and element['#button_type'] == 'primary' ? 'btn btn-primary',
+] %}
+
+<input{{ attributes.addClass(classes) }} />{{ children }}

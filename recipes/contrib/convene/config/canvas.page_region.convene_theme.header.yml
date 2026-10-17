@@ -1,0 +1,42 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.system_branding_block
+    - canvas.component.block.system_menu_block.main
+    - canvas.component.sdc.convene_theme.header
+  theme:
+    - convene_theme
+id: convene_theme.header
+region: header
+theme: convene_theme
+component_tree:
+  0:
+    uuid: 0a8c64a3-a079-4c49-91a5-34ec23ff11fb
+    component_id: sdc.convene_theme.header
+    component_version: dc8327a33ab50c9e
+    inputs: {  }
+  '0:header:0':
+    parent_uuid: 0a8c64a3-a079-4c49-91a5-34ec23ff11fb
+    slot: header
+    uuid: d0bf942b-c4d7-4775-a847-f49c9419ea11
+    component_id: block.system_branding_block
+    component_version: b168140fdcaebae5
+    inputs:
+      label: 'Site branding'
+      label_display: '0'
+      use_site_logo: true
+      use_site_name: false
+      use_site_slogan: false
+  '0:header:1':
+    parent_uuid: 0a8c64a3-a079-4c49-91a5-34ec23ff11fb
+    slot: header
+    uuid: d0bf942b-c4d7-4775-a847-f49c9419ea12
+    component_id: block.system_menu_block.main
+    component_version: 023ff7ba63f80798
+    inputs:
+      label: 'Main navigation'
+      label_display: '0'
+      level: 1
+      depth: null
+      expand_all_items: true

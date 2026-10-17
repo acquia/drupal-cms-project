@@ -1,0 +1,42 @@
+{% set classes = [
+  'pricing-card',
+  admin_theme ? 'pricing-card--admin-theme' : 'pricing-card--themed',
+] %}
+
+<div{{attributes.addClass(classes)}}>
+  <div class="pricing-card__inner">
+    <div class="pricing-card__header">
+      {% if title %}
+        <h3 class="pricing-card__title">
+          {{ title }}
+        </h3>
+      {% endif %}
+
+      {% if description %}
+        <div class="pricing-card__description">
+          {{ description }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="pricing-card__price-action">
+      {% if price %}
+        <div class="pricing-card__price">
+          {{ price }}
+        </div>
+      {% endif %}
+
+      {% if action %}
+        <div class="pricing-card__action">
+          {{ action }}
+        </div>
+      {% endif %}
+    </div>
+
+    {% if features %}
+      <div class="pricing-card__features">
+        {{ features }}
+      </div>
+    {% endif %}
+  </div>
+</div>

@@ -1,0 +1,60 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Vacancy card
+status: stable
+description: Vacancy card item
+# Overrides regular css with minified.
+libraryOverrides:
+  css:
+    component:
+      vacancy-card.min.css: { minified: true }
+group: Eureka component items
+props:
+  type: object
+  properties:
+    vacancy_card_heading:
+      type: string
+      title: Vacancy card heading
+      description: Title of the vacancy
+      examples:
+        - Year 3 Class Teacher
+    vacancy_card_tags:
+      type: ['boolean', 'null']
+      title: Vacancy card tags
+      description: True to display tags (to review)
+      examples:
+        - true
+    vacancy_card_text:
+      type: ['string', 'null']
+      title: Vacancy text / description
+      description: Description of the vacancy
+      examples:
+        - We are seeking an enthusiastic and dedicated Year 3 Class Teacher to join our supportive and dynamic team.
+    vacancy_card_date:
+      type: ['string', 'null']
+      format: date
+      title: Vacancy date / deadline
+      description: Date of the vacancy, usually the deadline
+      examples:
+        - '2025-11-15'
+    vacancy_card_salary:
+      type: ['string', 'null']
+      title: Vacancy salary
+      description: Salary for the vacancy
+      examples:
+        - £28,000 - £38,810 per annum
+    vacancy_card_cta_text:
+      type: ['string', 'null']
+      title: Vacancy CTA text
+      description: Text for the call to action
+      examples:
+        - Apply now
+    vacancy_card_cta_url:
+      type: string
+      format: uri-reference
+      title: Vacancy CTA URL
+      description: Link to the vacancy
+      x-allowed-schemes:
+        - http
+        - https
+      examples:
+        - 'https://zoocha.com'

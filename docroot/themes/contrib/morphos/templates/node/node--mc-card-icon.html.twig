@@ -1,0 +1,20 @@
+{% set icon_size_map = {
+  '16': 'icon-size--xs',
+  '32': 'icon-size--sm',
+  '48': 'icon-size--md',
+  '64': 'icon-size--lg',
+  '96': 'icon-size--xl'
+} %}
+
+{% if content.field_mc_icon.0 %}
+  {% set icon_data = content.field_mc_icon.0 %}
+  {% set raw_size = icon_data['#settings'].size %}
+{% endif %}
+
+{{ include('morphos:card_icon', {
+  icon: content.field_mc_icon.0['#icon_id'],
+  icon_size: icon_size_map[raw_size] ?? "icon-size--sm",
+  heading: label,
+  url: url,
+  summary: content.field_mc_description
+}, with_context = false) }}

@@ -1,0 +1,113 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.system_branding_block
+    - canvas.component.block.system_menu_block.footer-connect
+    - canvas.component.block.system_menu_block.footer-organization
+    - canvas.component.block.system_menu_block.footer-programs
+    - canvas.component.block.system_menu_block.footer-resources
+    - canvas.component.block.system_menu_block.footer-support
+    - canvas.component.block.webform_block
+    - canvas.component.sdc.caresphere_theme.section
+    - canvas.component.sdc.caresphere_theme.section-grid
+    - canvas.component.sdc.caresphere_theme.text
+    - filter.format.canvas_html_block
+  module:
+    - options
+    - text
+  theme:
+    - caresphere_theme
+id: caresphere_theme.footer
+theme: caresphere_theme
+region: footer
+component_tree:
+  0:
+    uuid: c9df4ac3-ad49-4978-844c-d80a182afa38
+    component_id: sdc.caresphere_theme.section
+    component_version: 53b3ea832b5dc53e
+    inputs: '{"use_custom_container":false,"marginbottom":0,"backgroundcolor":"black","paddingtop":10,"paddingbottom":10,"gap":10}'
+  '0:content:0':
+    parent_uuid: c9df4ac3-ad49-4978-844c-d80a182afa38
+    slot: content
+    uuid: 921e7185-b343-462f-96f0-934d559a4ead
+    component_id: sdc.caresphere_theme.section-grid
+    component_version: 04145a81d752b635
+    inputs: '{"grid_layout":"2_column_50_50","is_small_container":false}'
+  '0:content:0:slot_1:0':
+    parent_uuid: 921e7185-b343-462f-96f0-934d559a4ead
+    slot: slot_1
+    uuid: d7cc3dd1-f982-4946-b2e6-6a5f8237ea09
+    component_id: sdc.caresphere_theme.text
+    component_version: 16c79c28a4108f9b
+    inputs: '{"text":{"value":"\u003Cp\u003E\u003Cstrong\u003EJoin Our Mission\u003C\/strong\u003E\u003C\/p\u003E\u003Cp\u003EStay informed about our latest initiatives and how you can help.\u003C\/p\u003E","format":"canvas_html_block"},"text_size":"normal","text_color":"default"}'
+  '0:content:0:slot_2:0':
+    parent_uuid: 921e7185-b343-462f-96f0-934d559a4ead
+    slot: slot_2
+    uuid: cd85ccb6-052f-4474-a90c-897c18a4c363
+    component_id: block.webform_block
+    component_version: 75298500addde82f
+    inputs: '{"label":"Webform","label_display":"0","webform_id":"newsletter_email_signup","default_data":"","redirect":false,"lazy":false}'
+  '0:content:0:slot_2:1':
+    parent_uuid: 921e7185-b343-462f-96f0-934d559a4ead
+    slot: slot_2
+    uuid: 8301eb53-fe5b-4c4e-9958-91cb0c2254d9
+    component_id: sdc.caresphere_theme.text
+    component_version: 16c79c28a4108f9b
+    inputs: '{"text":{"value":"\u003Cp\u003EWe respect your privacy and never share your data\u003C\/p\u003E","format":"canvas_html_block"},"text_size":"normal","text_color":"default"}'
+  '0:content:1':
+    parent_uuid: c9df4ac3-ad49-4978-844c-d80a182afa38
+    slot: content
+    uuid: c36f6730-224a-4926-9b24-54303b94b5c6
+    component_id: sdc.caresphere_theme.section-grid
+    component_version: 04145a81d752b635
+    inputs: '{"grid_layout":"1_column","is_small_container":false}'
+  '0:content:1:slot_1:0':
+    parent_uuid: c36f6730-224a-4926-9b24-54303b94b5c6
+    slot: slot_1
+    uuid: d7223b0c-e14c-404b-83fa-3e350a7aba08
+    component_id: block.system_branding_block
+    component_version: b168140fdcaebae5
+    inputs: '{"label":"Site branding","label_display":"0","use_site_logo":true,"use_site_name":true,"use_site_slogan":true}'
+  '0:content:1:slot_1:1':
+    parent_uuid: c36f6730-224a-4926-9b24-54303b94b5c6
+    slot: slot_1
+    uuid: 614d5389-8cc3-4e0e-a087-85f39619b412
+    component_id: block.system_menu_block.footer-organization
+    component_version: 68fb9541f734d522
+    inputs: '{"label":"Footer Organization","label_display":"0","level":1,"depth":null,"expand_all_items":false}'
+  '0:content:1:slot_1:2':
+    parent_uuid: c36f6730-224a-4926-9b24-54303b94b5c6
+    slot: slot_1
+    uuid: 8e14cdb8-0a26-4fe8-8905-c949c47a65e5
+    component_id: block.system_menu_block.footer-programs
+    component_version: 7922d0192b367d33
+    inputs: '{"label":"Footer Programs","label_display":"0","level":1,"depth":null,"expand_all_items":false}'
+  '0:content:1:slot_1:3':
+    parent_uuid: c36f6730-224a-4926-9b24-54303b94b5c6
+    slot: slot_1
+    uuid: d7e5872c-2937-4c7c-b36f-595470926288
+    component_id: block.system_menu_block.footer-resources
+    component_version: f6d9e52072d258b7
+    inputs: '{"label":"Footer Resources","label_display":"0","level":1,"depth":null,"expand_all_items":false}'
+  '0:content:1:slot_1:4':
+    parent_uuid: c36f6730-224a-4926-9b24-54303b94b5c6
+    slot: slot_1
+    uuid: ce6fb617-e329-4539-92b0-e43526883acd
+    component_id: block.system_menu_block.footer-support
+    component_version: 56007a8642618383
+    inputs: '{"label":"Footer Support","label_display":"0","level":1,"depth":null,"expand_all_items":false}'
+  '0:content:1:slot_1:5':
+    parent_uuid: c36f6730-224a-4926-9b24-54303b94b5c6
+    slot: slot_1
+    uuid: 0bf26c9e-b135-40f3-af47-8d031a24496f
+    component_id: block.system_menu_block.footer-connect
+    component_version: a26ee8d33f0d258e
+    inputs: '{"label":"Footer Connect","label_display":"0","level":"1","depth":null,"expand_all_items":false}'
+  '0:content:1:slot_1:6':
+    parent_uuid: c36f6730-224a-4926-9b24-54303b94b5c6
+    slot: slot_1
+    uuid: 8a9cc5d3-bbc6-44c1-93c3-3f0248da33d3
+    component_id: sdc.caresphere_theme.text
+    component_version: 16c79c28a4108f9b
+    inputs: '{"text":{"value":"\u003Cp class=\u0022text-align-center\u0022\u003E\u00a9 2026 \u003Ca href=\u0022https:\/\/opensenselabs.com\u0022\u003EOpenSense Labs\u003C\/a\u003E. Crafted together with the community.\u003C\/p\u003E","format":"canvas_html_block"},"text_size":"normal","text_color":"default"}'

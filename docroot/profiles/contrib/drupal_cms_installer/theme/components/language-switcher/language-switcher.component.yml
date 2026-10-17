@@ -1,0 +1,20 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Language Switcher
+status: stable
+noUi: true
+group: Drupal CMS Installer
+
+libraryOverrides:
+  dependencies:
+    - core/drupal
+    - core/once
+    - drupal_cms_installer_theme/drupal.dialog
+
+props:
+  type: object
+  properties:
+    languages:
+      # The keys are language codes, and the values are objects with `name`,
+      # `direction`, and `url` properties.
+      type: object
+      title: Languages

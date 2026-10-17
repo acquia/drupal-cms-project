@@ -1,0 +1,15 @@
+services:
+
+  modeler.yaml_schema_lookup:
+    class: Drupal\modeler\YamlSchemaLookup
+    arguments:
+      - '@config.typed'
+
+  modeler.form_to_json_converter:
+    class: Drupal\modeler\FormToJsonConverter
+    arguments:
+      - '@modeler.yaml_schema_lookup'
+      - '@config.typed'
+
+  Drupal\modeler\YamlSchemaLookup: '@modeler.yaml_schema_lookup'
+  Drupal\modeler\FormToJsonConverter: '@modeler.form_to_json_converter'

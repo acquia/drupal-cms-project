@@ -1,0 +1,120 @@
+name: Space CTA Banner
+
+description: |
+  The **Space CTA Banner – Type 1** is a call-to-action banner designed to 
+  highlight key messages and encourage user interaction. It supports a title, 
+  description, and flexible content placement for CTAs such as buttons or links.  
+
+  **Inputs:**
+  - `title`: The main heading text of the banner.
+  - `description`: Supporting text that elaborates on the call-to-action.
+  - `width`: Defines the banner layout width (`boxed-width`, `full-width`).
+  - `alignment`: Controls the text alignment (`left-align`, `center-align`).
+  - `modifier_class`: Allows adding custom CSS classes for style overrides.  
+
+  **Slots:**
+  - `cta_content`: A flexible slot area for inserting one or more 
+    **Space Button** components or other call-to-action elements.
+
+# Status can be: "experimental", "stable", "deprecated", "obsolete".
+status: stable
+
+# Use this key to organize components together.
+group: Organisms
+
+props:
+
+  type: object
+
+  required:
+    - title
+    - description
+    - width
+    - alignment
+
+  properties:
+    title:
+      type: string
+      title: Title
+      description: The title of the CTA Banner.
+      examples:
+        - 'Vivamus aliquet elit'
+
+    description:
+      type: string
+      title: Description
+      contentMediaType: text/html
+      x-formatting-context: block
+      description: The description of the CTA Banner.
+      examples:
+        - 'Maecenas vestibulum mollis diam. In ac felis quis tortor malesuada pretium.'
+
+    background_image:
+      title: Background image
+      $ref: json-schema-definitions://canvas.module/image
+      type: object
+      description: Set image as background image of section.
+      examples:
+        - src: 'images/cta_background.png'
+          alt: 'CTA Banner placeholder'
+          width: 1440
+          height: 500
+
+    width:
+      type: string
+      title: CTA Banner width
+      description: Width of CTA Banner.
+      enum:
+        - boxed-width
+        - full-width
+      default: full-width
+      examples:
+        - 'full-width'
+
+    alignment:
+      type: string
+      title: Alignment
+      description: Alignment of CTA Banner content.
+      enum:
+        - left-align
+        - center-align
+        - stacked
+      default: stacked
+      examples:
+        - 'stacked'
+
+    modifier_class:
+      type: string
+      title: Modifier class
+      description: Additional classes.
+      examples:
+        - 'custom-class'
+
+slots:
+
+  cta_content:
+    title: Content
+    description: A flexible slot area for inserting one or more **Space Button** components or other call-to-action elements.
+
+thirdPartySettings:
+  sdcStorybook:
+    stories:
+      preview:
+        slots:
+          cta_content:
+            - type: component
+              component: 'pulse_theme:space-button'
+              props:
+                url: '#'
+                text: 'Learn more'
+                button_type: 'only_text'
+                variant: 'secondary'
+                size: 'xlarge'
+            - type: component
+              component: 'pulse_theme:space-button'
+              props:
+                url: '#'
+                text: 'Get Started'
+                button_type: 'only_text'
+                variant: 'primary'
+                size: 'xlarge'

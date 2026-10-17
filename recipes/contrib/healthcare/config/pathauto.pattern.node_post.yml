@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node_post
+label: 'Post URL Pattern'
+type: 'canonical_entities:node'
+pattern: 'news/[node:title]'
+selection_criteria:
+  p0efd833-3db0-4df9-9fef-ced42c1e777p:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      post: post
+selection_logic: and
+weight: -5
+relationships: {  }

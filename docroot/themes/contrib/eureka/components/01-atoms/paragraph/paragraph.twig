@@ -1,0 +1,50 @@
+{#
+/**
+ * Available variables:
+ * - paragraph_base_class: the base classname
+ * - paragraph_modifiers: array of modifiers to add to the base classname
+ * - paragraph_blockname: blockname prepended to the base classname
+ * - paragraph_extra_classes: extra classes added
+ *
+ * - paragraph_size: defines the style of the paragraph and adds a class accordingly
+ *     Options: ['default', 'xs', 'small', 'medium', 'large']
+ * - paragraph_content: the content of the paragraph (typically text)
+ * - paragraph_icon: true to display an icon
+ * - paragraph_icon_name: name of the optional icon to display
+ * - paragraph_icon_before: true to display the icon before the text
+ *
+ * Available blocks:
+ * - paragraph_content_block: used to replace the content of the paragraph with something other than plain text
+ *   for example: A formatted text field in Drupal
+ */
+#}
+
+{% set paragraph_base_class = paragraph_base_class|default('paragraph') %}
+
+{# Size variations #}
+{% if paragraph_size %}
+  {% set paragraph_modifiers = paragraph_modifiers|default([])|merge([paragraph_size]) %}
+{% endif %}
+
+{# Icon variation #}
+{% if paragraph_icon %}
+  {% set paragraph_modifiers = paragraph_modifiers|default([])|merge(['icon']) %}
+{% endif %}
+
+<p {{ bem(paragraph_base_class, paragraph_modifiers|default([]), paragraph_blockname, paragraph_extra_classes) }}>
+  {% if paragraph_icon and paragraph_icon_before %}
+    {{ include("eureka:icon", {
+      icon_name: paragraph_icon_name|default('time'),
+      icon_decorative: true,
+    }, with_context = false) }}
+  {% endif %}
+  {% block paragraph_content_block %}
+    {{ paragraph_content|raw }}
+  {% endblock %}
+  {% if paragraph_icon and not paragraph_icon_before %}
+    {{ include("eureka:icon", {
+      icon_name: paragraph_icon_name|default('time'),
+      icon_decorative: true,
+    }, with_context = false) }}
+  {% endif %}
+</p>

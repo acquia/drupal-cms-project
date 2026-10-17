@@ -1,0 +1,45 @@
+field.widget.settings.icon_linkit_attributes_widget:
+  type: field.widget.settings.linkit
+  label: 'Icon linkit attributes widget settings'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    placeholder_url:
+      type: string
+      label: 'Placeholder for URL'
+    placeholder_title:
+      type: label
+      label: 'Placeholder for link text'
+    enabled_attributes:
+      type: sequence
+      sequence:
+        type: boolean
+        label: 'Enabled'
+    widget_default_open:
+      type: string
+      label: 'Widget expand behavior'
+    allowed_icon_pack:
+      type: sequence
+      label: 'Icon pack limitation for selection'
+      sequence:
+        type: string
+        label: 'Icon pack id'
+    show_settings:
+      type: boolean
+      label: 'Show extractor settings'
+    icon_required:
+      type: boolean
+      label: 'Set icon required'
+    icon_position:
+      type: boolean
+      label: 'Allow icon pack display selection'
+    icon_selector:
+      type: string
+      label: 'Icon FormElement name'
+    result_format:
+      type: string
+      label: 'Autocomplete format'
+    max_result:
+      # Because of linkit settings this become a string.
+      type: string
+      label: 'Maximum result'

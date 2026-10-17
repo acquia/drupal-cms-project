@@ -1,0 +1,50 @@
+{# For an explanation of the [&>*:] syntax @see https://medium.com/@replynamanjain/tailwind-css-targeting-child-elements-b60c0ca11652 #}
+{% set text_text_color = text_color|default('default') %}
+{% set text_text_size = text_size|default('normal') %}
+
+{% set text_component =
+  html_cva(
+    base: [
+      '[&_h2]:mt-6 [&_h2]:mb-3 [&_h3]:mt-4 [&_h3]:mb-2 [&_h4]:mt-3 [&_h4]:mb-1 [&_h5]:my-2 [&_h6]:my-1',
+      '[&_h2]:text-2xl [&_h2]:lg:text-3xl [&_h3]:text-xl [&_h3]:lg:text-2xl [&_h4]:text-lg [&_h4]:lg:text-xl',
+      '[&_li]:mb-1 [&_ol]:my-4 [&_ol]:list-decimal [&_ul]:my-4',
+      '[&>*:first-child]:mt-0 [&>*:last-child]:mb-0',
+      '[&_a]:underline [&_a]:underline-offset-2 [&_a]:transition [&_a]:duration-300',
+      '[&_table]:my-6',
+      '[&_td]:p-3 [&_th]:p-3',
+      '[&_tr]:border-b [&_tr]:border-b-border/40',
+      '[&_blockquote]:xl:3xl [&_blockquote]:text-xl [&_blockquote]:italic [&_blockquote]:md:text-2xl',
+      '[&_blockquote]:m-auto [&_blockquote]:max-w-3xl [&_blockquote]:[&>*:last-child]:mb-0',
+      '[&_blockquote]:my-8 [&_blockquote]:border-l-4 [&_blockquote]:border-border/40 [&_blockquote]:py-1.5 [&_blockquote]:pl-4',
+      '[&_figure]:my-6 [&_figure]:w-fit',
+      '[&_figcaption]:block [&_figcaption]:pt-2 [&_figcaption]:pb-3 [&_figcaption]:text-sm [&_figcaption]:opacity-80 [&_figcaption]:lg:text-base'
+    ],
+    variants: {
+      textColor: {
+        default: 'text-foreground [&_a]:hover:text-foreground/70',
+        inverted: 'text-background [&_a]:hover:text-background/70',
+        primary: 'text-primary [&_a]:hover:text-primary/70'
+      },
+      textSize: {
+        'text-xs': 'text-xs md:text-sm xl:text-md',
+        'text-sm': 'text-sm md:text-md xl:text-lg',
+        normal: 'text-base md:text-lg xl:text-xl',
+        'text-lg': 'text-lg md:text-xl xl:text-2xl',
+        'text-xl': 'text-xl md:text-2xl xl:text-3xl',
+        'text-2xl': 'text-2xl md:text-3xl xl:text-4xl',
+        'text-3xl': 'text-3xl md:text-4xl xl:text-5xl'
+      }
+    }
+  )
+%}
+
+{% set text_classes =
+  text_component.apply({
+    textColor: text_text_color,
+    textSize: text_text_size
+  })
+%}
+
+<div class="{{ text_classes }}">
+  {{ text }}
+</div>

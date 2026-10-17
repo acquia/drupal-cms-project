@@ -1,0 +1,176 @@
+{% set button_variant = variant|default('primary') %}
+{% set button_size = size|default('medium') %}
+{% set is_outlined = outlined|default(false) %}
+{% set is_disabled = disabled|default(false) %}
+{% set has_icon = icon is not empty %}
+{% set has_label = label is not empty %}
+
+{% set button_variants =
+  html_cva(
+    base: [
+      'group flex items-center justify-center transition duration-300 ease-in-out',
+      'rounded-full leading-tight font-medium',
+      'cursor-pointer no-underline outline-none hover:no-underline',
+      'focus-visible:outline-1 focus-visible:outline-solid',
+      'active:outline-1 active:outline-solid',
+      'disabled:pointer-events-none disabled:bg-muted disabled:text-muted-foreground',
+      is_outlined ? 'border'
+    ],
+    variants: {
+      size: {
+        small: 'gap-1 px-4 py-1.5 text-sm xl:py-2.5 xl:text-md',
+        medium: 'gap-2 px-5 py-2.5 text-md xl:py-3 xl:text-lg',
+        large: 'gap-3 px-6 py-3 text-lg xl:py-3.5 xl:text-xl'
+      },
+      variant: {
+        primary: [
+          is_outlined ? 'border-primary text-primary' : 'bg-primary text-white',
+          'hover:bg-primary-dark hover:text-white',
+          'focus-visible:border-transparent focus-visible:bg-primary-dark focus-visible:text-white focus-visible:outline-primary-light',
+          'active:bg-primary active:text-white active:outline-primary-light'
+        ],
+        secondary: [
+          is_outlined ? 'border-secondary text-secondary' : 'bg-secondary text-primary-foreground',
+          is_outlined ? 'hover:border-secondary-dark hover:bg-accent hover:text-secondary-dark' : 'hover:bg-secondary-dark hover:text-white',
+          is_outlined
+            ? 'focus-visible:border-transparent focus-visible:bg-accent focus-visible:text-secondary-dark focus-visible:outline-secondary-dark'
+            : 'focus-visible:border-transparent focus-visible:bg-secondary-dark focus-visible:text-white focus-visible:outline-secondary-light',
+          is_outlined
+            ? 'active:border-transparent active:bg-accent active:text-secondary active:outline-secondary-dark'
+            : 'active:text-white active:outline-secondary-light'
+        ],
+        accent: [
+          is_outlined ? 'border-accent text-accent' : 'bg-accent text-primary',
+          'hover:bg-accent-dark hover:text-primary',
+          'focus-visible:border-transparent focus-visible:bg-accent-dark focus-visible:text-primary focus-visible:outline-2 focus-visible:outline-secondary',
+          'active:bg-accent active:text-primary active:outline-accent-light'
+        ],
+        light: [
+          is_outlined ? 'border-white text-white' : 'bg-white text-primary',
+          is_outlined ? 'hover:bg-white/30 hover:text-white' : 'hover:bg-white/60 hover:text-primary-light',
+          'focus-visible:border-transparent focus-visible:bg-white/30 focus-visible:text-white focus-visible:outline-muted',
+          'active:bg-white active:text-primary active:outline-muted'
+        ]
+      },
+      width: {
+        full: 'w-full sm:w-fit',
+        fit: 'w-fit'
+      },
+      iconPosition: {
+        first: 'flex-row',
+        last: 'flex-row-reverse'
+      }
+    },
+    compoundVariants: [
+      {
+        size: 'small',
+        hasLabel: 'no',
+        class: '!p-2 xl:!p-2.5'
+      },
+      {
+        size: 'medium',
+        hasLabel: 'no',
+        class: '!p-3 xl:!p-3.5'
+      },
+      {
+        size: 'large',
+        hasLabel: 'no',
+        class: '!p-3 xl:!p-3.5'
+      }
+    ]
+  )
+%}
+
+{% set icon_size_map = {
+  small: 'extra-extra-small',
+  medium: 'extra-small',
+  large: 'small'
+} %}
+
+{% set button_width = mobile_width|default(false) ? 'full' : 'fit' %}
+{% set icon_position = icon_first|default(false) ? 'first' : 'last' %}
+{% set has_label_variant = has_label ? 'yes' : 'no' %}
+{% set outlined_variant = is_outlined ? 'yes' : 'no' %}
+{% set icon_classes = 'transition duration-300 ease-in-out group-hover:translate-x-1' %}
+
+{# Normalize btn_classes - handle both array and string formats #}
+{% set additional_classes = btn_classes|default('') %}
+{% if additional_classes is iterable %}
+  {% set additional_classes = additional_classes|join(' ') %}
+{% endif %}
+
+{# If href is provided and button is not disabled, present a link; otherwise render a button #}
+{% set disabled_attr = is_disabled ? 'aria-disabled="true"' : '' %}
+{% set button_disabled_attr = is_disabled ? 'disabled' : '' %}
+{% set href = disabled|default(false) ? null : href %}
+
+{% if href %}
+  <a
+    href="{{ href }}"
+    class="{{
+    button_variants.apply(
+      {
+        size: button_size,
+        variant: button_variant,
+        width: button_width,
+        iconPosition: has_icon ? icon_position : 'last',
+        hasLabel: has_label_variant,
+        outlined: outlined_variant
+      },
+      additional_classes
+    )
+    }}"
+    {{ disabled_attr }}
+  >
+    {% if has_icon %}
+      <span class="{{ icon_classes }}">
+        {{
+          include(
+            '@haven_theme/components/icon/icon.twig',
+            {
+              weight: 'bold',
+              icon: icon,
+              icon_size: icon_size_map[button_size]
+            },
+            with_context: false
+          )
+        }}
+      </span>
+    {% endif %}
+    {{ label }}
+  </a>
+{% else %}
+  <button
+    class="{{
+    button_variants.apply(
+      {
+        size: button_size,
+        variant: button_variant,
+        width: button_width,
+        iconPosition: has_icon ? icon_position : 'last',
+        hasLabel: has_label_variant,
+        outlined: outlined_variant
+      },
+      additional_classes
+    )
+    }}"
+    {{ button_disabled_attr }}
+  >
+    {% if has_icon %}
+      <span class="{{ icon_classes }}">
+        {{
+          include(
+            '@haven_theme/components/icon/icon.twig',
+            {
+              weight: 'bold',
+              icon: icon,
+              icon_size: icon_size_map[button_size]
+            },
+            with_context: false
+          )
+        }}
+      </span>
+    {% endif %}
+    {{ label }}
+  </button>
+{% endif %}

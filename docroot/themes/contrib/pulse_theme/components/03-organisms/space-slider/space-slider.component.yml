@@ -1,0 +1,150 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+
+name: Space Slider
+
+status: stable
+
+group: Organisms
+
+props:
+
+  type: object
+
+  properties:
+    slides_type:
+      type: string
+      title: 'Slides Type'
+      enum:
+        - slide
+        - loop
+      default: slide
+      examples:
+        - 'slide'
+
+    slide_focus:
+      type: string
+      title: 'Slide Focus'
+      enum:
+        - none
+        - center
+      default: none
+      examples:
+        - 'none'
+
+    slides_per_view_desktop:
+      type: integer
+      title: 'Slides Per View Desktop'
+      enum: [1, 2, 3, 4, 5, 6]
+      default: 3
+      examples: [3]
+
+    slides_per_view_ipad:
+      type: integer
+      title: 'Slides Per View iPad'
+      enum: [1, 2, 3]
+      default: 2
+      examples: [2]
+
+    slides_per_view_mobile:
+      type: integer
+      title: 'Slides Per View Mobile'
+      enum: [1, 2]
+      default: 1
+      examples: [1]
+
+    autoplay:
+      type: boolean
+      title: 'Autoplay'
+      default: false
+      examples:
+        - false
+
+    arrows:
+      type: boolean
+      title: 'Show Arrows'
+      default: true
+      examples:
+        - true
+
+    arrows_color:
+      type: string
+      title: 'Arrows Color'
+      enum:
+        - primary
+        - secondary
+      default: primary
+      examples: 
+        - 'primary'
+
+    arrows_alignment:
+      type: string
+      title: 'Arrows Alignment'
+      enum:
+        - left
+        - right
+        - center
+      default: left
+      examples: 
+        - 'left'
+
+    pagination:
+      type: boolean
+      title: 'Show Pagination'
+      default: false
+      examples:
+        - false
+
+    pagination_color:
+      type: string
+      title: 'Pagination Color'
+      enum:
+        - primary
+        - secondary
+      default: primary
+      examples: 
+        - 'primary'
+
+    pagination_alignment:
+      type: string
+      enum:
+        - left
+        - right
+        - center
+      title: 'Pagination Alignment'
+      default: center
+      examples: 
+        - 'center'
+
+    pagination_type:
+      type: string
+      title: 'Pagination Type'
+      enum:
+        - default
+        - arrow-with-pagination
+      default: default
+      examples:
+        - 'default'
+
+    with_gradient:
+      type: boolean
+      title: With Gradient
+      description: Enable or Disable gradient overlay, that will be visible at left and right side of the slider container. Use this only with Slide Focus 'Center' mode.
+      default: false
+      examples:
+        - false
+
+    extra_classes:
+      type: string
+      title: 'Extra Classes'
+      description: 'Additional CSS classes.'
+      examples: ['my-custom-slider']
+
+slots:
+
+  slide_item:
+    title: Slide Item
+    description: Content for the slide item
+
+libraryOverrides:
+  dependencies:
+    - pulse_theme/space-slider

@@ -1,0 +1,309 @@
+langcode: en
+status: true
+dependencies: {  }
+id: eca_bpmn_io_content_duplicate
+data: |
+  <?xml version="1.0" encoding="UTF-8"?>
+  <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:qa="http://some-company/schema/bpmn/qa" id="sample-diagram" targetNamespace="http://bpmn.io/schema/bpmn" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+    <bpmn2:process id="content_duplicate" name="Duplicate content" isExecutable="true" camunda:versionTag="">
+      <bpmn2:documentation />
+      <bpmn2:extensionElements>
+        <camunda:properties>
+          <camunda:property name="Tags" value="" />
+          <camunda:property name="Changelog" value="" />
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:startEvent id="eca_render__entity_operations_link" name="Operation links" camunda:modelerTemplate="org.drupal.event.eca_render:entity_operations">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_render:entity_operations" />
+          </camunda:properties>
+          <camunda:field name="entity_type_id">
+            <camunda:string>node</camunda:string>
+          </camunda:field>
+          <camunda:field name="bundle">
+            <camunda:string></camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:outgoing>Flow_1cw8l3p</bpmn2:outgoing>
+      </bpmn2:startEvent>
+      <bpmn2:startEvent id="content_entity__prepareform_entity" name="Prepare entity form" camunda:modelerTemplate="org.drupal.event.content_entity:prepareform">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="content_entity:prepareform" />
+          </camunda:properties>
+          <camunda:field name="type">
+            <camunda:string>node _all</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:outgoing>Flow_15qvdqc</bpmn2:outgoing>
+      </bpmn2:startEvent>
+      <bpmn2:startEvent id="eca_render__local_tasks_tasks" name="Alter local task" camunda:modelerTemplate="org.drupal.event.eca_render:local_tasks">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_render:local_tasks" />
+          </camunda:properties>
+        </bpmn2:extensionElements>
+        <bpmn2:outgoing>Flow_0a6ogpb</bpmn2:outgoing>
+      </bpmn2:startEvent>
+      <bpmn2:task id="eca_render_build_link" name="Link" camunda:modelerTemplate="org.drupal.action.eca_render_build">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_render_build" />
+          </camunda:properties>
+          <camunda:field name="name">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="token_name">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="weight">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="mode">
+            <camunda:string>append</camunda:string>
+          </camunda:field>
+          <camunda:field name="value">
+            <camunda:string>"#type": link
+  "#url": /[entity:entity_type]/add/[entity:bundle_id]?duplicate=[entity:id]
+  "#title": Duplicate</camunda:string>
+          </camunda:field>
+          <camunda:field name="use_yaml">
+            <camunda:string>yes</camunda:string>
+          </camunda:field>
+          <camunda:field name="validate_yaml">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>eca_entity_is_accessible_link</bpmn2:incoming>
+      </bpmn2:task>
+      <bpmn2:task id="eca_token_load_entity_entity" name="Load original entity" camunda:modelerTemplate="org.drupal.action.eca_token_load_entity">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_token_load_entity" />
+          </camunda:properties>
+          <camunda:field name="token_name">
+            <camunda:string>original</camunda:string>
+          </camunda:field>
+          <camunda:field name="from">
+            <camunda:string>id</camunda:string>
+          </camunda:field>
+          <camunda:field name="entity_type">
+            <camunda:string>node</camunda:string>
+          </camunda:field>
+          <camunda:field name="entity_id">
+            <camunda:string>[id]</camunda:string>
+          </camunda:field>
+          <camunda:field name="revision_id">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="properties">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="langcode">
+            <camunda:string>_interface</camunda:string>
+          </camunda:field>
+          <camunda:field name="latest_revision">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="unchanged">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="object">
+            <camunda:string>entity</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_0mjwsvc</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_14kshf8</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="action_message_action_message" name="Show duplicate message" camunda:modelerTemplate="org.drupal.action.action_message_action">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="action_message_action" />
+          </camunda:properties>
+          <camunda:field name="message">
+            <camunda:string>You are duplicating "[original:label]"</camunda:string>
+          </camunda:field>
+          <camunda:field name="replace_tokens">
+            <camunda:string>yes</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_14kshf8</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_1vec5og</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_clone_entity_duplicate" name="Duplicate content" camunda:modelerTemplate="org.drupal.action.eca_clone_entity">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_clone_entity" />
+          </camunda:properties>
+          <camunda:field name="token_name">
+            <camunda:string>entity</camunda:string>
+          </camunda:field>
+          <camunda:field name="label">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="published">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="owner">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="object">
+            <camunda:string>original</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_1vec5og</bpmn2:incoming>
+      </bpmn2:task>
+      <bpmn2:task id="eca_clone_entity_link" name="Duplicate" camunda:modelerTemplate="org.drupal.action.eca_clone_entity">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_clone_entity" />
+          </camunda:properties>
+          <camunda:field name="token_name">
+            <camunda:string>temp</camunda:string>
+          </camunda:field>
+          <camunda:field name="label">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="published">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="owner">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="object">
+            <camunda:string>entity</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_1cw8l3p</bpmn2:incoming>
+        <bpmn2:incoming>Flow_14xanwe</bpmn2:incoming>
+        <bpmn2:outgoing>eca_entity_is_accessible_link</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_token_load_route_param_parmeter" name="Load route parameter" camunda:modelerTemplate="org.drupal.action.eca_token_load_route_param">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_token_load_route_param" />
+          </camunda:properties>
+          <camunda:field name="token_name">
+            <camunda:string>entity</camunda:string>
+          </camunda:field>
+          <camunda:field name="request">
+            <camunda:string>2</camunda:string>
+          </camunda:field>
+          <camunda:field name="parameter_name">
+            <camunda:string>node</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_0a6ogpb</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_14xanwe</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="eca_token_load_query_arg_query" name="Load entity ID" camunda:modelerTemplate="org.drupal.action.eca_token_load_query_arg">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_token_load_query_arg" />
+          </camunda:properties>
+          <camunda:field name="token_name">
+            <camunda:string>id</camunda:string>
+          </camunda:field>
+          <camunda:field name="argument_name">
+            <camunda:string>duplicate</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_15qvdqc</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_0mjwsvc</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:sequenceFlow id="Flow_1cw8l3p" sourceRef="eca_render__entity_operations_link" targetRef="eca_clone_entity_link" />
+      <bpmn2:sequenceFlow id="Flow_15qvdqc" sourceRef="content_entity__prepareform_entity" targetRef="eca_token_load_query_arg_query" />
+      <bpmn2:sequenceFlow id="Flow_0a6ogpb" sourceRef="eca_render__local_tasks_tasks" targetRef="eca_token_load_route_param_parmeter" />
+      <bpmn2:sequenceFlow id="Flow_14kshf8" sourceRef="eca_token_load_entity_entity" targetRef="action_message_action_message" />
+      <bpmn2:sequenceFlow id="Flow_1vec5og" sourceRef="action_message_action_message" targetRef="eca_clone_entity_duplicate" />
+      <bpmn2:sequenceFlow id="eca_entity_is_accessible_link" name="create access?" camunda:modelerTemplate="org.drupal.condition.eca_entity_is_accessible" sourceRef="eca_clone_entity_link" targetRef="eca_render_build_link">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_entity_is_accessible" />
+          </camunda:properties>
+          <camunda:field name="negate">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="operation">
+            <camunda:string>create</camunda:string>
+          </camunda:field>
+          <camunda:field name="entity">
+            <camunda:string>temp</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+      </bpmn2:sequenceFlow>
+      <bpmn2:sequenceFlow id="Flow_14xanwe" sourceRef="eca_token_load_route_param_parmeter" targetRef="eca_clone_entity_link" />
+      <bpmn2:sequenceFlow id="Flow_0mjwsvc" sourceRef="eca_token_load_query_arg_query" targetRef="eca_token_load_entity_entity" />
+    </bpmn2:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_content_duplicate">
+      <bpmndi:BPMNPlane id="BPMNPlane_content_duplicate" bpmnElement="content_duplicate">
+        <bpmndi:BPMNShape id="eca_render__entity_operations_link_di" bpmnElement="eca_render__entity_operations_link">
+          <dc:Bounds x="57" y="52" width="36" height="36" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="content_entity__prepareform_entity_di" bpmnElement="content_entity__prepareform_entity">
+          <dc:Bounds x="57" y="192" width="36" height="36" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_render__local_tasks_tasks_di" bpmnElement="eca_render__local_tasks_tasks">
+          <dc:Bounds x="57" y="332" width="36" height="36" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_render_build_link_di" bpmnElement="eca_render_build_link">
+          <dc:Bounds x="475" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_token_load_entity_entity_di" bpmnElement="eca_token_load_entity_entity">
+          <dc:Bounds x="325" y="170" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="action_message_action_message_di" bpmnElement="action_message_action_message">
+          <dc:Bounds x="475" y="170" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_clone_entity_duplicate_di" bpmnElement="eca_clone_entity_duplicate">
+          <dc:Bounds x="625" y="170" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_clone_entity_link_di" bpmnElement="eca_clone_entity_link">
+          <dc:Bounds x="325" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_token_load_route_param_parmeter_di" bpmnElement="eca_token_load_route_param_parmeter">
+          <dc:Bounds x="175" y="310" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="eca_token_load_query_arg_query_di" bpmnElement="eca_token_load_query_arg_query">
+          <dc:Bounds x="175" y="170" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNEdge id="Flow_1cw8l3p_di" bpmnElement="Flow_1cw8l3p">
+          <di:waypoint x="93" y="70" />
+          <di:waypoint x="325" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_15qvdqc_di" bpmnElement="Flow_15qvdqc">
+          <di:waypoint x="93" y="210" />
+          <di:waypoint x="175" y="210" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_0a6ogpb_di" bpmnElement="Flow_0a6ogpb">
+          <di:waypoint x="93" y="350" />
+          <di:waypoint x="175" y="350" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_14kshf8_di" bpmnElement="Flow_14kshf8">
+          <di:waypoint x="425" y="210" />
+          <di:waypoint x="475" y="210" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_1vec5og_di" bpmnElement="Flow_1vec5og">
+          <di:waypoint x="575" y="210" />
+          <di:waypoint x="625" y="210" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="eca_entity_is_accessible_link_di" bpmnElement="eca_entity_is_accessible_link">
+          <di:waypoint x="425" y="70" />
+          <di:waypoint x="475" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_14xanwe_di" bpmnElement="Flow_14xanwe">
+          <di:waypoint x="275" y="350" />
+          <di:waypoint x="300" y="350" />
+          <di:waypoint x="300" y="140" />
+          <di:waypoint x="300" y="140" />
+          <di:waypoint x="300" y="70" />
+          <di:waypoint x="325" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_0mjwsvc_di" bpmnElement="Flow_0mjwsvc">
+          <di:waypoint x="275" y="210" />
+          <di:waypoint x="325" y="210" />
+        </bpmndi:BPMNEdge>
+      </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+  </bpmn2:definitions>

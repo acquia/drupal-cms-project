@@ -1,0 +1,50 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: components/navbar/navbar.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+@reference "../../tailwindcss";
+
+.navbar--preview {
+  .navbar__container {
+    @apply flex-nowrap;
+  }
+
+  .navbar__start,
+  .navbar__center,
+  .navbar__end {
+    @apply min-w-20;
+  }
+}
+
+.navbar {
+  @apply p-0;
+
+  .menu {
+    @apply m-0;
+  }
+
+  a {
+    @apply no-underline;
+  }
+}
+
+.navbar__container {
+  @apply relative flex min-h-[4rem] flex-wrap items-center justify-between gap-2 lg:gap-4;
+}
+
+.navbar__start,
+.navbar__center,
+.navbar__end {
+  @apply flex items-center gap-2;
+}
+
+.navbar__start,
+.navbar__end {
+  @apply flex-0 flex-shrink-1 basis-auto;
+}
+
+.navbar__center {
+  @apply flex-1 flex-shrink-0 basis-auto justify-end lg:justify-center;
+}

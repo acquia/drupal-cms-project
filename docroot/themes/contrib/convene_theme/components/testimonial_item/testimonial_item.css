@@ -1,0 +1,115 @@
+.testimonial-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 40px;
+  width: 100%;
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  padding: 0 20px;
+}
+
+.testimonial-item__logo {
+  min-height: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  img {
+    object-fit: contain;
+  }
+}
+
+.testimonial-item__quote {
+  font-family: inherit;
+  font-size: clamp(24px, 4vw, 32px);
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-style: normal;
+  color: #ffffff;
+  font-weight: 300;
+  min-height: 40px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+
+  * {
+    color: #fff; 
+  }
+}
+
+.testimonial-item__author {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.testimonial-item__author-media {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.1); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.testimonial-item__author-media img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+}
+
+.testimonial-item__author-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.testimonial-item__author-name {
+  font-family: inherit;
+  font-weight: 600; /* Semi-Bold */
+  font-size: 16px;
+  color: #ffffff;
+  min-height: 24px;
+  width: 100%;
+}
+
+.testimonial-item__author-role {
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7); /* subtle grey/blue text */
+  min-height: 24px;
+  width: 100%;
+}
+
+body.canvas-page .testimonial-item--themed .testimonial-item__quote,
+body.canvas-page .testimonial-item--themed .testimonial-item__author-name {
+  color: #FFF;
+}
+
+.testimonial-item.testimonial-item--themed .testimonial-item__quote,
+body:not(.canvas-page) .testimonial-item.testimonial-item--admin-theme .testimonial-item__quote,
+.testimonial-item.testimonial-item--themed .testimonial-item__author-name,
+body:not(.canvas-page) .testimonial-item.testimonial-item--admin-theme .testimonial-item__author-name {
+  color: white !important;
+}
+
+@media (max-width: 768px) {
+  .testimonial-item {
+    gap: 24px;
+    padding: 0 16px;
+  }
+  
+  .testimonial-item__quote {
+    font-size: 20px;
+  }
+}

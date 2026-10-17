@@ -1,0 +1,150 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Section
+group: Layout
+status: stable
+props:
+  type: object
+  required:
+    - columns
+    - mobile_columns
+    - width
+    - margin_block_start
+    - margin_block_end
+    - padding_block_start
+    - padding_block_end
+  properties:
+    width:
+      type: string
+      title: Section width
+      enum:
+        - "100%"
+        - "90%"
+        - "80%"
+        - "75%"
+        - "50%"
+      default: "100%"
+      examples:
+        - "100%"
+    columns:
+      type: string
+      title: Grid layout
+      description: Layout selected applies on desktop and tablet.
+      enum:
+        - "100"
+        - "50-50"
+        - "33-33-33"
+        - "75-25"
+        - "25-75"
+        - "67-33"
+        - "33-67"
+        - "50-25-25"
+        - "25-25-50"
+        - "25-25-25-25"
+      examples:
+        - "50-50"
+      default:
+        - "50-50"
+    views_columns:
+      type: string
+      title: Views grid
+      description: If you are using a view in this section, select the grid layout.
+      enum:
+        - "50-50"
+        - "33-33-33"
+        - "25-25-25-25"
+    mobile_columns:
+      type: string
+      title: Columns on mobile
+      enum:
+        - "1"
+        - "2"
+        - "3"
+      examples:
+        - "1"
+    margin_block_start:
+      type: string
+      title: Margin top
+      enum:
+        - "0"
+        - "8"
+        - "20"
+        - "32"
+        - "48"
+        - "64"
+        - "96"
+        - "128"
+      examples:
+        - "48"
+    margin_block_end:
+      type: string
+      title: Margin bottom
+      enum:
+        - "0"
+        - "8"
+        - "20"
+        - "32"
+        - "48"
+        - "64"
+        - "96"
+        - "128"
+      examples:
+        - "48"
+    padding_block_start:
+      type: string
+      title: Padding top
+      enum:
+        - "0"
+        - "16"
+        - "32"
+        - "64"
+      examples:
+        - "0"
+    padding_block_end:
+      type: string
+      title: Padding bottom
+      enum:
+        - "0"
+        - "16"
+        - "32"
+        - "64"
+      examples:
+        - "0"
+    background_color:
+      type: string
+      title: Background color
+      enum:
+        - primary
+        - secondary
+        - accent
+        - muted
+      meta:enum:
+        primary: Primary
+        secondary: Secondary
+        accent: Accent
+        muted: Muted
+    background_media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Background image
+      type: object
+    section_header:
+      type: boolean
+      title: Show header region
+      examples:
+        - true
+      default:
+        - true
+    section_footer:
+      type: boolean
+      title: Show footer region
+      examples:
+        - true
+      default:
+        - true
+
+slots:
+  header_slot:
+    title: "Header"
+  main_slot:
+    title: "Grid"
+  footer_slot:
+    title: "Footer"

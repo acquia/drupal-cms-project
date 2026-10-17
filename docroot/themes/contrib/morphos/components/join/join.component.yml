@@ -1,0 +1,22 @@
+$schema: 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Join
+description: A utility that visually merges buttons or inputs into a single seamless unit.
+group: Element
+status: stable
+props:
+  type: object
+  properties:
+    direction:
+      type: string
+      title: Direction
+      description: Select the join direction.
+      enum:
+        - join-horizontal
+        - join-vertical
+      meta:enum:
+        join-horizontal: Horizontal
+        join-vertical: Vertical
+slots:
+  items:
+    title: Items
+    description: Add button items.

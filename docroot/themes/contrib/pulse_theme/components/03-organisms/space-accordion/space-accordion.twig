@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * accordion
+ *
+ * See accordion.space.yaml for documentation.
+ */
+#}
+
+{% set icon_position = alignment == 'right' ? 'icon-right' : 'icon-left' %}
+{% set border_class = border ? 'with-border' : '' %}
+
+{# TEMPLATE #}
+{% block accordion_block %}
+  <div class="accordion ga-accordion {{ container_width }} {{ icon_type }} {{ icon_position }} {{ border_class }}" role="tablist">
+    {{ items }}
+  </div>
+{% endblock %}

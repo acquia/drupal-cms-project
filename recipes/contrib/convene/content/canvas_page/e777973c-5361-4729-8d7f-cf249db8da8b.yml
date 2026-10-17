@@ -1,0 +1,180 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: e777973c-5361-4729-8d7f-cf249db8da8b
+  default_langcode: en
+  depends:
+    b7d53ced-d13c-4b62-9114-89d604992e44: file
+    129628f8-b556-44f9-acef-26b889012d18: media
+    d1f20231-3fb7-4827-b0ac-7359659fdf87: file
+    fb206a87-ed21-4f3b-a9e2-c0649397e1de: media
+    2a6ae46d-b147-4419-b223-142a9bfa2308: file
+    6e2440bc-b39f-4687-8ca8-02b6f83580ee: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Registration
+  description:
+    -
+      value: 'Register for Convene Conference and secure your spot. Complete your registration and join the event experience.'
+  components:
+    -
+      uuid: 3a0cb076-c657-4c23-808c-f5bc689b6475
+      component_id: sdc.convene_theme.hero
+      inputs:
+        variation: small
+    -
+      parent_uuid: 3a0cb076-c657-4c23-808c-f5bc689b6475
+      slot: heading
+      uuid: f02ff6ad-6aeb-4bda-81f4-a6f94f88ad11
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        heading: Registration
+        heading_tag: div
+    -
+      parent_uuid: 3a0cb076-c657-4c23-808c-f5bc689b6475
+      slot: subheading
+      uuid: a2080529-2cfb-4660-a1e7-d4ed4898cff9
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        description: 'Complete your registration through our ticketing partner to secure your spot.'
+        heading_tag: div
+    -
+      parent_uuid: 3a0cb076-c657-4c23-808c-f5bc689b6475
+      slot: background_media
+      uuid: 71cc5b24-c016-4e80-a024-8b8f968a4ac3
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 129628f8-b556-44f9-acef-26b889012d18
+            target_type: media
+        loading: lazy
+    -
+      uuid: 37d25397-bdcd-4c62-ad72-261bb810f2ea
+      component_id: sdc.convene_theme.cta
+      inputs:
+        title: 'Your registration is handled securely through our external ticketing partner. Click below to complete the process.'
+        eyebrow: Simple
+    -
+      uuid: 54d83268-c074-4f10-aec1-794c3b4391e8
+      component_id: sdc.convene_theme.map-container
+      inputs:
+        title: 'Secure your spot now'
+        description: 'Complete your registration through our trusted ticketing partner to confirm your attendance.'
+        alternate_bg: false
+    -
+      parent_uuid: 54d83268-c074-4f10-aec1-794c3b4391e8
+      slot: media
+      uuid: cfc14a46-a13f-48a3-828e-94834c891244
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 129628f8-b556-44f9-acef-26b889012d18
+            target_type: media
+        loading: lazy
+    -
+      uuid: 3d414c9a-de1c-4687-b4e4-25773d2a1650
+      component_id: sdc.convene_theme.map-container
+      inputs:
+        title: 'What you should know'
+        eyebrow: Details
+        description: 'Review the key information below before completing your registration to ensure a smooth experience.'
+        alternate_bg: false
+    -
+      parent_uuid: 3d414c9a-de1c-4687-b4e4-25773d2a1650
+      slot: media
+      uuid: cc9d7944-0763-463c-aa1e-3baac52654f6
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: fb206a87-ed21-4f3b-a9e2-c0649397e1de
+            target_type: media
+    -
+      uuid: 05dcd491-f4ae-439c-8e8a-febc971de0f7
+      component_id: sdc.convene_theme.info-grid
+      inputs: {  }
+    -
+      parent_uuid: 05dcd491-f4ae-439c-8e8a-febc971de0f7
+      slot: items
+      uuid: aac07a3d-4163-46e4-bb82-ba5a9c3f6f3a
+      component_id: sdc.convene_theme.info-item
+      inputs:
+        title: 'Payment methods accepted'
+        description: 'We accept all major credit cards and digital payment options through our ticketing partner.'
+        highlight_border: true
+    -
+      parent_uuid: 05dcd491-f4ae-439c-8e8a-febc971de0f7
+      slot: items
+      uuid: a9fdf30e-71a1-4b43-b22b-091cfb370775
+      component_id: sdc.convene_theme.info-item
+      inputs:
+        title: 'Confirmation email sent'
+        description: 'You will receive a confirmation email immediately after completing your registration with event details.'
+        highlight_border: false
+    -
+      parent_uuid: 05dcd491-f4ae-439c-8e8a-febc971de0f7
+      slot: items
+      uuid: 6c7367f6-3c30-4278-b6b1-541809214723
+      component_id: sdc.convene_theme.info-item
+      inputs:
+        title: 'Questions or issues'
+        description: 'Contact our support team if you encounter any problems during the registration process.'
+        highlight_border: false
+    -
+      uuid: dc6ced3a-b8f2-4d29-b9f1-beaa9e446878
+      component_id: sdc.convene_theme.hero
+      inputs:
+        variation: small
+    -
+      parent_uuid: dc6ced3a-b8f2-4d29-b9f1-beaa9e446878
+      slot: heading
+      uuid: 9dc3f5e1-8852-4e28-a1a0-bcdd1f293790
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        heading: 'Ready to join us'
+        heading_tag: div
+    -
+      parent_uuid: dc6ced3a-b8f2-4d29-b9f1-beaa9e446878
+      slot: subheading
+      uuid: 878d6638-844f-4cf1-8cb2-66666a210705
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        description: 'Secure your spot before early-bird pricing ends next week.'
+        heading_tag: div
+    -
+      parent_uuid: dc6ced3a-b8f2-4d29-b9f1-beaa9e446878
+      slot: background_media
+      uuid: 388f07fe-7d43-4f8c-a2f4-3f9a9d3d8f34
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 6e2440bc-b39f-4687-8ca8-02b6f83580ee
+            target_type: media
+        loading: lazy
+  path:
+    -
+      alias: /registration
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"title":"Register | Convene Conference Registration"}'

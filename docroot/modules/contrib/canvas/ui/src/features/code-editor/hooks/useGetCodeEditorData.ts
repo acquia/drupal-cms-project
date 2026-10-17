@@ -1,0 +1,254 @@
+/**
+ * @file
+ * Loads the code component and global asset library data.
+ *
+ * If there is an auto-save entry for either, it will be preferred over the
+ * canonical entity source.
+ */
+
+import { useEffect, useState } from 'react';
+import { useErrorBoundary } from 'react-error-boundary';
+
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import {
+  selectForceRefresh,
+  setForceRefresh,
+} from '@/features/code-editor/codeEditorSlice';
+import {
+  useGetAssetLibraryQuery,
+  useGetAutoSaveQuery as useGetAutoSaveQueryAssetLibrary,
+} from '@/services/assetLibrary';
+import {
+  useGetAutoSaveQuery as useGetAutoSaveQueryBrandKit,
+  useGetBrandKitQuery,
+} from '@/services/brandKit';
+import {
+  useGetAutoSaveQuery as useGetAutoSaveQueryCodeComponent,
+  useGetCodeComponentQuery,
+} from '@/services/componentAndLayout';
+import { getCanvasSettings } from '@/utils/drupal-globals';
+import { hasPermission } from '@/utils/permissions';
+
+import type {
+  AssetLibrary,
+  BrandKit,
+  CodeComponentSerialized,
+} from '@/types/CodeComponent';
+
+const ASSET_LIBRARY_ID = 'global';
+
+type CodeEditorData = {
+  dataCodeComponent: CodeComponentSerialized | undefined;
+  dataGlobalAssetLibrary: AssetLibrary | undefined;
+  dataBrandKit: BrandKit | undefined;
+  isLoading: boolean;
+  isSuccess: boolean;
+};
+
+const useGetCodeEditorData = (
+  currentComponentId: string,
+  { skip }: { skip?: boolean } = { skip: false },
+): CodeEditorData => {
+  const { showBoundary } = useErrorBoundary();
+  const forceRefresh = useAppSelector(selectForceRefresh);
+  const dispatch = useAppDispatch();
+  // Returned values are tracked in local states.
+  const [dataCodeComponent, setDataCodeComponent] = useState<
+    CodeEditorData['dataCodeComponent'] | undefined
+  >(undefined);
+  const [dataGlobalAssetLibrary, setDataGlobalAssetLibrary] = useState<
+    CodeEditorData['dataGlobalAssetLibrary'] | undefined
+  >(undefined);
+  const [dataBrandKit, setDataBrandKit] = useState<
+    CodeEditorData['dataBrandKit'] | undefined
+  >(undefined);
+  const [isLoading, setIsLoading] =
+    useState<CodeEditorData['isLoading']>(false);
+  const [isSuccess, setIsSuccess] =
+    useState<CodeEditorData['isSuccess']>(false);
+
+  // Get the auto-saved data of the code component if it exists.
+  const {
+    currentData: dataGetAutoSaveCodeComponent,
+    error: errorGetAutoSaveCodeComponent,
+    isFetching: isLoadingGetAutoSaveCodeComponent,
+    isSuccess: isSuccessGetAutoSaveCodeComponent,
+  } = useGetAutoSaveQueryCodeComponent(currentComponentId, {
+    skip: skip && !forceRefresh,
+  });
+
+  // Get the code component data, but skip if auto-saved data exists.
+  // When forceRefresh is true (e.g. after discarding), do not skip so we refetch
+  // the canonical component and the editor can re-initialize.
+  const {
+    currentData: dataGetCodeComponent,
+    error: errorGetCodeComponent,
+    isFetching: isLoadingGetCodeComponent,
+    isSuccess: isSuccessGetCodeComponent,
+  } = useGetCodeComponentQuery(currentComponentId, {
+    skip:
+      (skip && !forceRefresh) ||
+      isLoadingGetAutoSaveCodeComponent ||
+      (isSuccessGetAutoSaveCodeComponent &&
+        dataGetAutoSaveCodeComponent &&
+        ('data' in dataGetAutoSaveCodeComponent
+          ? !!dataGetAutoSaveCodeComponent.data
+          : !!dataGetAutoSaveCodeComponent)),
+  });
+
+  // Set the code component data in a local state.
+  useEffect(() => {
+    const autoSaveData =
+      dataGetAutoSaveCodeComponent && 'data' in dataGetAutoSaveCodeComponent
+        ? dataGetAutoSaveCodeComponent.data
+        : dataGetAutoSaveCodeComponent;
+    setDataCodeComponent(autoSaveData || dataGetCodeComponent);
+  }, [dataGetAutoSaveCodeComponent, dataGetCodeComponent]);
+
+  // Get the auto-saved data of the global asset library if it exists.
+  const {
+    currentData: dataGetAutoSaveAssetLibrary,
+    error: errorGetAutoSaveAssetLibrary,
+    isFetching: isLoadingGetAutoSaveAssetLibrary,
+    isSuccess: isSuccessGetAutoSaveAssetLibrary,
+  } = useGetAutoSaveQueryAssetLibrary(ASSET_LIBRARY_ID, {
+    skip,
+  });
+
+  // Get the global asset library data, but skip if auto-saved data exists.
+  const {
+    currentData: dataGetAssetLibrary,
+    error: errorGetAssetLibrary,
+    isFetching: isLoadingGetAssetLibrary,
+    isSuccess: isSuccessGetAssetLibrary,
+  } = useGetAssetLibraryQuery(ASSET_LIBRARY_ID, {
+    skip:
+      skip ||
+      isLoadingGetAutoSaveAssetLibrary ||
+      (isSuccessGetAutoSaveAssetLibrary &&
+        dataGetAutoSaveAssetLibrary &&
+        ('data' in dataGetAutoSaveAssetLibrary
+          ? !!dataGetAutoSaveAssetLibrary.data
+          : !!dataGetAutoSaveAssetLibrary)),
+  });
+
+  // Set the global asset library data in a local state.
+  useEffect(() => {
+    const autoSaveData =
+      dataGetAutoSaveAssetLibrary && 'data' in dataGetAutoSaveAssetLibrary
+        ? dataGetAutoSaveAssetLibrary.data
+        : dataGetAutoSaveAssetLibrary;
+    setDataGlobalAssetLibrary(autoSaveData || dataGetAssetLibrary);
+  }, [dataGetAutoSaveAssetLibrary, dataGetAssetLibrary]);
+
+  const {
+    currentData: dataGetAutoSaveBrandKit,
+    error: errorGetAutoSaveBrandKit,
+    isFetching: isLoadingGetAutoSaveBrandKit,
+    isSuccess: isSuccessGetAutoSaveBrandKit,
+  } = useGetAutoSaveQueryBrandKit(ASSET_LIBRARY_ID, {
+    skip: skip || !hasPermission('brandKit') || !getCanvasSettings()?.devMode,
+  });
+
+  const {
+    currentData: dataGetBrandKit,
+    error: errorGetBrandKit,
+    isFetching: isLoadingGetBrandKit,
+    isSuccess: isSuccessGetBrandKit,
+  } = useGetBrandKitQuery(ASSET_LIBRARY_ID, {
+    skip:
+      skip ||
+      isLoadingGetAutoSaveBrandKit ||
+      (isSuccessGetAutoSaveBrandKit &&
+        dataGetAutoSaveBrandKit &&
+        ('data' in dataGetAutoSaveBrandKit
+          ? !!dataGetAutoSaveBrandKit.data
+          : !!dataGetAutoSaveBrandKit)),
+  });
+
+  useEffect(() => {
+    const autoSaveData =
+      dataGetAutoSaveBrandKit && 'data' in dataGetAutoSaveBrandKit
+        ? dataGetAutoSaveBrandKit.data
+        : dataGetAutoSaveBrandKit;
+    setDataBrandKit(autoSaveData || dataGetBrandKit);
+  }, [dataGetAutoSaveBrandKit, dataGetBrandKit]);
+
+  // Set the loading state in a local state.
+  useEffect(() => {
+    setIsLoading(
+      isLoadingGetAutoSaveCodeComponent ||
+        isLoadingGetCodeComponent ||
+        isLoadingGetAutoSaveAssetLibrary ||
+        isLoadingGetAssetLibrary ||
+        isLoadingGetAutoSaveBrandKit ||
+        isLoadingGetBrandKit,
+    );
+  }, [
+    isLoadingGetAutoSaveCodeComponent,
+    isLoadingGetCodeComponent,
+    isLoadingGetAutoSaveAssetLibrary,
+    isLoadingGetAssetLibrary,
+    isLoadingGetAutoSaveBrandKit,
+    isLoadingGetBrandKit,
+  ]);
+
+  // Set the success state in a local state.
+  useEffect(() => {
+    setIsSuccess(
+      (isSuccessGetAutoSaveCodeComponent || isSuccessGetCodeComponent) &&
+        (isSuccessGetAutoSaveAssetLibrary || isSuccessGetAssetLibrary) &&
+        (isSuccessGetAutoSaveBrandKit || isSuccessGetBrandKit),
+    );
+  }, [
+    isSuccessGetAutoSaveCodeComponent,
+    isSuccessGetCodeComponent,
+    isSuccessGetAutoSaveAssetLibrary,
+    isSuccessGetAssetLibrary,
+    isSuccessGetAutoSaveBrandKit,
+    isSuccessGetBrandKit,
+  ]);
+
+  // Show error boundary if there is an error.
+  useEffect(() => {
+    if (
+      errorGetAutoSaveCodeComponent ||
+      errorGetCodeComponent ||
+      errorGetAutoSaveAssetLibrary ||
+      errorGetAssetLibrary ||
+      errorGetAutoSaveBrandKit ||
+      errorGetBrandKit
+    ) {
+      showBoundary(
+        errorGetCodeComponent || errorGetAssetLibrary || errorGetBrandKit,
+      );
+    }
+  }, [
+    errorGetAutoSaveCodeComponent,
+    errorGetCodeComponent,
+    errorGetAutoSaveAssetLibrary,
+    errorGetAssetLibrary,
+    errorGetAutoSaveBrandKit,
+    errorGetBrandKit,
+    showBoundary,
+  ]);
+
+  if (
+    forceRefresh &&
+    !isLoadingGetAutoSaveCodeComponent &&
+    isSuccessGetAutoSaveCodeComponent
+  ) {
+    // We successfully fetched the auto-save data, turn off force refresh.
+    dispatch(setForceRefresh(false));
+  }
+
+  return {
+    dataCodeComponent,
+    dataGlobalAssetLibrary,
+    dataBrandKit,
+    isLoading,
+    isSuccess,
+  };
+};
+
+export default useGetCodeEditorData;

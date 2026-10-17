@@ -1,0 +1,20 @@
+{% set containerSize = containerSize|default('100') %}
+{% set srcset = image.src|toSrcSet(image.width) %}
+
+<img
+  class="image"
+  src="{{ image.src }}"
+  {% if srcset %}
+    srcset="{{ srcset }}"
+    sizes="auto {{ containerSize }}vw"
+  {% endif %}
+  alt="{{ image.alt }}"
+  {# Absent for an SVG image that specifies neither `width`/`height` nor a `viewBox`: then the browser must size it. #}
+  {% if image.width %}
+    width="{{ image.width }}"
+  {% endif %}
+  {% if image.height %}
+    height="{{ image.height }}"
+  {% endif %}
+  loading="lazy"
+/>

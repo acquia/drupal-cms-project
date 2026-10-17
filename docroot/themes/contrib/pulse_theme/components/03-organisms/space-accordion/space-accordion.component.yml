@@ -1,0 +1,87 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+
+name: Space Accordion
+
+description: This component allows for the display of collapsible content sections, ideal for presenting frequently asked questions, detailed information, or nested content in a compact manner. It helps in organizing large amounts of text by showing only a summary initially, expanding upon user interaction. Use this component to improve content scannability and reduce visual clutter on a page.
+
+status: stable
+
+group: Organisms
+
+props:
+
+  type: object
+
+  properties:
+
+    icon_type:
+      type: string
+      title: Icon
+      description: Icon
+      enum:
+        - PlusMinus
+        - chevronDown
+        - noIcon
+      default: PlusMinus
+      examples:
+        - 'PlusMinus'
+
+    alignment:
+      type: string
+      title: Icon alignment
+      description: Icon alignment
+      enum:
+        - right
+        - left
+      default: right
+      examples:
+        - 'right'
+
+    border:
+      type: boolean
+      title: Border Style
+      description: Border Style
+      default: true
+      examples:
+        - true
+
+    container_width:
+      type: string
+      title: Container width
+      description: Container width
+      enum:
+        - default
+        - half-width
+        - three-quarters-width
+      default: default
+      examples:
+        - 'default'
+
+slots:
+
+  items:
+    title: Accordion Items
+    description: Add one or more **Accordion Item** components into this slot; each item will render as a collapsible panel inside the accordion.
+
+thirdPartySettings:
+  sdcStorybook:
+    stories:
+      preview:
+        slots:
+          items:
+            - type: component
+              component: 'pulse_theme:space-accordion-item'
+              props:
+                label: asperiores
+                content: Vitae ut voluptas quo pariatur velit. Quo dolorum natus perferendis natus quia temporibus autem totam. Deserunt vero provident necessitatibus praesentium fugit qui. Facilis dignissimos tenetur. Dicta odit ut est et sunt. Est dolorem sit qui ea non beatae dolor et aliquid.
+            - type: component
+              component: 'pulse_theme:space-accordion-item'
+              props:
+                label: sapiente
+                content: Vitae ut voluptas quo pariatur velit. Quo dolorum natus perferendis natus quia temporibus autem totam. Deserunt vero provident necessitatibus praesentium fugit qui. Facilis dignissimos tenetur. Dicta odit ut est et sunt. Est dolorem sit qui ea non beatae dolor et aliquid.
+            - type: component
+              component: 'pulse_theme:space-accordion-item'
+              props:
+                label: asperiores
+                content: Vitae ut voluptas quo pariatur velit. Quo dolorum natus perferendis natus quia temporibus autem totam. Deserunt vero provident necessitatibus praesentium fugit qui. Facilis dignissimos tenetur. Dicta odit ut est et sunt. Est dolorem sit qui ea non beatae dolor et aliquid.
+                

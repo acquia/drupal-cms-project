@@ -1,0 +1,140 @@
+<?php
+
+/**
+ * @file
+ * Hook implementations for the amazee.ai AI provider.
+ */
+
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\ai_provider_amazeeio\Hook\AiProviderAmazeeioHooks;
+use Drupal\ai_provider_amazeeio\AmazeeIoApi\AmazeeClient;
+use Drupal\config_ignore\ConfigIgnoreConfig;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\TempStore\TempStoreException;
+use Drupal\Core\Url;
+use Drupal\search_api\IndexInterface;
+use Drupal\user\UserInterface;
+
+/**
+ * Implements hook_theme().
+ */
+#[LegacyHook]
+function ai_provider_amazeeio_theme(): array {
+  return \Drupal::service(AiProviderAmazeeioHooks::class)->theme();
+}
+
+/**
+ * Implements hook_search_api_index_update().
+ *
+ * When the search API index is updated, check the fields are correctly
+ * setup in Postgres.
+ */
+#[LegacyHook]
+function ai_provider_amazeeio_search_api_index_update(IndexInterface $index): void {
+  \Drupal::service(AiProviderAmazeeioHooks::class)->searchApiIndexUpdate($index);
+}
+
+/**
+ * Implements hook_user_logout().
+ */
+#[LegacyHook]
+function ai_provider_amazeeio_user_logout(AccountInterface $account): void {
+  \Drupal::service(AiProviderAmazeeioHooks::class)->userLogout($account);
+}
+
+/**
+ * Implements hook_user_login().
+ */
+#[LegacyHook]
+function ai_provider_amazeeio_user_login(UserInterface $account): void {
+  \Drupal::service(AiProviderAmazeeioHooks::class)->userLogin($account);
+}
+
+/**
+ * Helper function to redirect the user to the amazee.ai AI settings page.
+ *
+ * The redirect happens after a login, if there is no API key.
+ *
+ * It is important to know that this function does not trigger the redirect
+ * itself, it just flags that a redirect to a specific page should be done.
+ * This method just adds the destination parameter, so it doesn't halt the
+ * execution of the process. It means that this will work for example on form
+ * submissions, or other types of operations that will trigger the redirect
+ * after they completed the execution.
+ */
+function _ai_provider_amazeeio_redirect_to_settings_page(): void {
+  $configFactory = \Drupal::configFactory();
+  $config = $configFactory->get('ai_provider_amazeeio.settings');
+
+  $currentUser = \Drupal::currentUser();
+  if ($currentUser->hasPermission('administer ai providers')) {
+    // Call ai_provider_amazeeio.api_client->getPrivateApiKeys() and log the
+    // result.
+    $apiClient = \Drupal::service('ai_provider_amazeeio.api_client');
+    $apiKey = $apiClient->getPrivateApiKey($config->get('api_key'));
+    $trial_account = \Drupal::state()->get('ai_provider_amazeeio.trial_account');
+    if (is_null($apiKey) || $trial_account) {
+      if ($trial_account) {
+        // @todo do we want to force logout the trial account?
+      }
+
+      // Redirect to the settings page.
+      //
+      // Using the lighter, 2nd approach from #107 in
+      // https://www.drupal.org/project/redirect_after_login/issues/3214949
+      $url = Url::fromRoute('ai_provider_amazeeio.settings_form')->toString();
+      \Drupal::service('request_stack')
+        ->getCurrentRequest()->query->set('destination', $url);
+    }
+  }
+}
+
+/**
+ * Helper function to log user out of amazee.ai system.
+ */
+function _ai_provider_amazeeio_amazee_logout(): void {
+  /** @var \Drupal\ai_provider_amazeeio\AmazeeIoApi\ClientInterface $amazee_client */
+  $amazee_client = \Drupal::service('ai_provider_amazeeio.api_client');
+  $amazee_client->setHost(AmazeeClient::AMAZEE_API_HOST);
+  $amazee_client->logout();
+
+  /** @var \Drupal\Core\TempStore\PrivateTempStoreFactory $temp_store */
+  $temp_store = \Drupal::service('tempstore.private');
+  try {
+    $temp_store->get('amazeeio_ai')->delete('access_token');
+  }
+  catch (TempStoreException $e) {
+    // Log error but do nothing as this shouldn't affect the user.
+    \Drupal::logger('ai_provider_amazeeio')->error('Failed to log out of amazee.ai: @error', ['@error' => $e->getMessage()]);
+  }
+}
+
+/**
+ * Implements hook_config_ignore_ignored_alter().
+ */
+#[LegacyHook]
+function ai_provider_amazeeio_config_ignore_ignored_alter(ConfigIgnoreConfig $config): void {
+  \Drupal::service(AiProviderAmazeeioHooks::class)->configIgnoreIgnoredAlter($config);
+}
+
+/**
+ * Prepares variables for the amazeeio_ai_dashboard template.
+ */
+function template_preprocess_amazeeio_ai_dashboard(array &$variables): void {
+  $element = $variables['element'];
+  $variables['logo'] = $element['#logo'] ?? '';
+  $variables['health'] = $element['#health'] ?? [];
+  $variables['models'] = $element['#models'] ?? [];
+  $variables['host'] = $element['#host'] ?? '';
+  $variables['database'] = $element['#database'] ?? '';
+  $variables['key_name'] = $element['#key_name'] ?? '';
+  $variables['trial_account'] = $element['#trial_account'] ?? FALSE;
+  $variables['team'] = $element['#team'] ?? NULL;
+  $variables['key_info'] = $element['#key_info'] ?? NULL;
+  $variables['management_key_info'] = $element['#management_key_info'] ?? NULL;
+
+  // Variables for the interactive buttons so Twig can render them securely.
+  $variables['submit_disconnect'] = $element['submit_disconnect'] ?? [];
+  $variables['health_refresh'] = $element['health_refresh'] ?? [];
+  $variables['refresh'] = $element['refresh'] ?? [];
+}

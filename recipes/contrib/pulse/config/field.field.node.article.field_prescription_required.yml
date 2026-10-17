@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_prescription_required
+    - node.type.article
+id: node.article.field_prescription_required
+field_name: field_prescription_required
+entity_type: node
+bundle: article
+label: 'Prescription Required'
+description: 'Prescription Required, "yes / no"'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

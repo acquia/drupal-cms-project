@@ -1,0 +1,40 @@
+{% set classes = [
+  'accordion-container',
+  admin_theme ? 'accordion-container--admin-theme' : 'accordion-container--themed',
+  dark_theme ? 'accordion-container--dark',
+] %}
+
+<section{{attributes.addClass(classes)}}>
+  <div class="accordion-container__inner">
+    
+    <div class="accordion-container__header">
+      {% if heading %}
+        <div class="accordion-container__heading">
+          {{ heading }}
+        </div>
+      {% endif %}
+      {% if description %}
+        <div class="accordion-container__description">
+          {{ description }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="accordion-container__items">
+      {{ items }}
+    </div>
+
+    <div class="accordion-container__help">
+      <div class="accordion-container__help-heading">
+        {{ help_heading }}
+      </div>
+      <div class="accordion-container__help-description">
+        {{ help_description }}
+      </div>
+      <div class="accordion-container__help-button">
+        {{ help_button }}
+      </div>
+    </div>
+
+  </div>
+</section>
