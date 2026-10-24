@@ -1,0 +1,27 @@
+config_language_lock_test_config_action.create_always_valid_entity:
+  path: '/admin/config/regional/config-language-lock/test-config-action/create-always-valid-entity/{machine_name}'
+  defaults:
+    _controller: '\Drupal\config_language_lock_test_config_action\Controller\ConfigActionTestController::createAlwaysValidEntity'
+  requirements:
+    _permission: 'administer site configuration'
+
+config_language_lock_test_config_action.apply_recipe_valid_langcode_action:
+  path: '/admin/config/regional/config-language-lock/test-config-action/apply-recipe-valid-langcode-action'
+  defaults:
+    _controller: '\Drupal\config_language_lock_test_config_action\Controller\ConfigActionTestController::applyValidLangcodeActionRecipe'
+  requirements:
+    _permission: 'administer site configuration'
+
+config_language_lock_test_config_action.apply_action_empty_langcode:
+  path: '/admin/config/regional/config-language-lock/test-config-action/apply-action-empty-langcode'
+  defaults:
+    _controller: '\Drupal\config_language_lock_test_config_action\Controller\ConfigActionTestController::applyEmptyLangcodeActionRecipe'
+  requirements:
+    _permission: 'administer site configuration'
+
+config_language_lock_test_config_action.apply_action_unknown_langcode:
+  path: '/admin/config/regional/config-language-lock/test-config-action/apply-action-unknown-langcode'
+  defaults:
+    _controller: '\Drupal\config_language_lock_test_config_action\Controller\ConfigActionTestController::applyUnknownLangcodeActionRecipe'
+  requirements:
+    _permission: 'administer site configuration'

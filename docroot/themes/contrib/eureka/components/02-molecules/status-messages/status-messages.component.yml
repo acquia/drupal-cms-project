@@ -1,0 +1,29 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Status messages
+status: stable
+description: Status messages component
+# Overrides regular css with minified.
+libraryOverrides:
+  css:
+    component:
+      status-messages.min.css: { minified: true }
+group: Eureka main components
+props:
+  type: object
+  properties:
+    status_messages_type:
+      type: string
+      title: Status messages types
+      description: Types of the status messages - status, warning or error messages
+      enum:
+        - status
+        - warning
+        - error
+      examples:
+        - status
+    status_messages_headings:
+      type: string
+      title: Status messages headings
+      description: Heading of the status message
+      examples:
+        - Lorem ipsum dolor sit amet

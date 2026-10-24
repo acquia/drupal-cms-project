@@ -1,0 +1,62 @@
+
+include:
+  - project: $_GITLAB_TEMPLATES_REPO
+    ref: $_GITLAB_TEMPLATES_REF
+    file:
+      - "/includes/include.drupalci.main.yml"
+      - "/includes/include.drupalci.variables.yml"
+      - "/includes/include.drupalci.workflows.yml"
+
+variables:
+  SKIP_PHPMD:
+    value: '0'
+    description: 'Set to 1 to skip the PHPMD CI job'
+
+cspell:
+  allow_failure: true
+  variables:
+    _CSPELL_IGNORE_PATHS: '**/build/icon.js, *.json, **/*.svg'
+
+.skip-phpmd-rule: &skip-phpmd-rule
+  if: '$SKIP_PHPMD == "1"'
+  when: never
+
+.phpmd-base:
+  stage: validate
+  needs:
+    - composer
+  before_script:
+    - curl -fsSL https://phpmd.org/static/latest/phpmd.phar -o vendor/bin/phpmd
+    - chmod +x vendor/bin/phpmd
+  script:
+    - php --version
+    - vendor/bin/phpmd --version
+    - |
+      BASELINE_FILE="${_WEB_ROOT}/modules/custom/${CI_PROJECT_NAME}/.phpmd.baseline.xml"
+      PHPMD_CONFIG="${_WEB_ROOT}/modules/custom/${CI_PROJECT_NAME}/.phpmd.xml"
+      if [ -f "$BASELINE_FILE" ]; then
+        sed -i "s#/builds/project/display_builder#${CI_PROJECT_DIR}#g" "$BASELINE_FILE"
+      fi
+      if [ -f "$PHPMD_CONFIG" ]; then
+        BASELINE_ARG=""
+        if [ -f "$BASELINE_FILE" ]; then
+          BASELINE_ARG="--baseline-file $BASELINE_FILE"
+        fi
+        vendor/bin/phpmd "${_WEB_ROOT}/modules/custom/${CI_PROJECT_NAME}" gitlab "$PHPMD_CONFIG" --exclude 'tests/*,**/tests/*' $BASELINE_ARG > phpmd-quality-report.json || true
+        vendor/bin/phpmd "${_WEB_ROOT}/modules/custom/${CI_PROJECT_NAME}" text "$PHPMD_CONFIG" --exclude 'tests/*,**/tests/*' $BASELINE_ARG
+      else
+        echo "[Notice] File .phpmd.xml not found at ${PHPMD_CONFIG}, skipping phpmd."
+      fi
+  allow_failure: false
+  artifacts:
+    expose_as: phpmd
+    when: always
+    expire_in: 6 mos
+    reports:
+      codequality: phpmd-quality-report.json
+    name: artifacts-$CI_PIPELINE_ID-$CI_JOB_NAME_SLUG
+    paths:
+      - phpmd-quality-report.json
+
+phpmd:
+  extends: .phpmd-base

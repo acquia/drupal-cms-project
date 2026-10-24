@@ -1,0 +1,18 @@
+{#
+/** Available variables:
+ * - staff_card_heading:  Staff card heading text
+ * - staff_card_text:  Staff card body text
+* - staff_card_image_src:  Staff card image source URL
+* - staff_card_image_alt:  Staff card image alt text
+ */
+#}
+{{ attach_library('eureka/card') }}
+
+{{ include("eureka:card", {
+  card_modifiers: 'staff',
+  card_image: true,
+  card_image: staff_card_image,
+  card_heading: staff_card_heading,
+  card_heading_size_override: 'xsmall',
+  card_text: staff_card_text,
+}, with_context = false) }}

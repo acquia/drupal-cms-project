@@ -1,0 +1,17 @@
+{% set classes = [
+  'accordion-item',
+  admin_theme ? 'accordion-item--admin-theme' : 'accordion-item--themed',
+] %}
+
+<div{{attributes.addClass(classes)}}>
+  <div role="button" tabindex="0" class="accordion-item__trigger" aria-expanded="false">
+    <div class="accordion-item__title">
+      {{ title }}
+    </div>
+  </div>
+  <div class="accordion-item__content">
+    <div class="accordion-item__inner">
+      {{ content }}
+    </div>
+  </div>
+</div>

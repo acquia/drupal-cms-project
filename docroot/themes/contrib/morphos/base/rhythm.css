@@ -1,0 +1,17 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: base/rhythm.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+@reference "../tailwindcss";
+
+.has-rhythm + .has-rhythm {
+  @apply mt-4 lg:mt-6;
+}
+
+.no-rhythm {
+  .has-rhythm + .has-rhythm {
+    @apply mt-0 lg:mt-0;
+  }
+}

@@ -1,0 +1,135 @@
+<?php
+
+/**
+ * @file
+ * Contains hook implementations for Automatic Updates.
+ */
+
+declare(strict_types=1);
+
+use Drupal\automatic_updates\CronUpdateRunner;
+use Drupal\automatic_updates\ReleaseChooser;
+use Drupal\automatic_updates\UpdateSandboxManager;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+use Drupal\Core\Utility\Error;
+
+/**
+ * Implements hook_form_FORM_ID_alter() for update_settings.
+ */
+function automatic_updates_form_update_settings_alter(array &$form): void {
+  $config = \Drupal::config('automatic_updates.settings');
+
+  $form['unattended_level'] = [
+    '#type' => 'radios',
+    '#title' => t('Unattended background updates'),
+    '#options' => [
+      CronUpdateRunner::DISABLED => t('Disabled'),
+      CronUpdateRunner::SECURITY => t('Security updates only'),
+      CronUpdateRunner::ALL => t('All patch releases'),
+    ],
+    '#default_value' => $config->get('unattended.level'),
+    '#description' => t('When background updates are applied, your site will be briefly put into maintenance mode.'),
+  ];
+  $form['unattended_method'] = [
+    '#type' => 'radios',
+    '#title' => t('How unattended updates should be run'),
+    '#options' => [
+      'web' => t('By using the Automated Cron module or a request to /system/cron'),
+      'console' => t('By the <code>auto-update</code> command-line utility'),
+    ],
+    '#default_value' => $config->get('unattended.method'),
+    '#states' => [
+      'invisible' => [
+        'input[name="unattended_level"]' => [
+          'value' => CronUpdateRunner::DISABLED,
+        ],
+      ],
+    ],
+    '#description' => t('To use the <code>/system/cron</code> method <a href="http://drupal.org/docs/user_guide/en/security-cron.html">ensure cron is set up correctly</a>.'),
+  ];
+  $form['#submit'][] = '_automatic_updates_submit_update_settings';
+}
+
+/**
+ * Saves settings for unattended updates.
+ *
+ * @param array $form
+ *   The complete form structure.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The form state.
+ */
+function _automatic_updates_submit_update_settings(array &$form, FormStateInterface $form_state): void {
+  \Drupal::configFactory()
+    ->getEditable('automatic_updates.settings')
+    ->set('unattended', [
+      'method' => $form_state->getValue('unattended_method'),
+      'level' => $form_state->getValue('unattended_level'),
+    ])
+    ->save();
+}
+
+/**
+ * Implements hook_preprocess_update_project_status().
+ */
+function automatic_updates_preprocess_update_project_status(array &$variables) {
+  $project = &$variables['project'];
+  if ($project['name'] !== 'drupal') {
+    return;
+  }
+  $stage = \Drupal::service(UpdateSandboxManager::class);
+  $supported_target_versions = [];
+  /** @var \Drupal\automatic_updates\ReleaseChooser $recommender */
+  $recommender = \Drupal::service(ReleaseChooser::class);
+  try {
+    if ($installed_minor_release = $recommender->getLatestInInstalledMinor($stage)) {
+      $supported_target_versions[] = $installed_minor_release->getVersion();
+    }
+    if ($next_minor_release = $recommender->getLatestInNextMinor($stage)) {
+      $supported_target_versions[] = $next_minor_release->getVersion();
+    }
+  }
+  catch (RuntimeException $exception) {
+    // If for some reason we are not able to get the update recommendations
+    // do not alter the report.
+    Error::logException(\Drupal::logger('automatic_updates'), $exception);
+    return;
+  }
+  $variables['#attached']['library'][] = 'automatic_updates/update_status';
+
+  $update_form_url = Url::fromRoute('automatic_updates.update_form')
+    ->setAbsolute()
+    ->toString();
+
+  $status = &$variables['status'];
+  if ($supported_target_versions && $status['label']) {
+    $status['label'] = [
+      '#markup' => t(
+        '@label <a href=":update-form">Update now</a>', [
+          '@label' => $status['label'],
+          ':update-form' => $update_form_url,
+        ]),
+    ];
+  }
+  // BEGIN: DELETE FROM CORE MERGE REQUEST
+  if (empty($variables['versions'])) {
+    return;
+  }
+  foreach ($variables['versions'] as &$themed_version) {
+    $version_info = &$themed_version['#version'];
+    if ($supported_target_versions && in_array($version_info['version'], $supported_target_versions, TRUE)) {
+      $version_info['download_link'] = $update_form_url;
+    }
+    else {
+      // If this version will not be displayed as an option on this module's
+      // update form replace the link to download the archive file with the
+      // release notes link. The release notes page will provide Composer
+      // instructions. While this isn't a perfect solution the Update module
+      // Twig templates do not check if 'download_link' is set, so we cannot
+      // unset it here.
+      $themed_version['#attributes']['class'][] = 'automatic-updates-unsupported-version';
+      $version_info['download_link'] = $version_info['release_link'];
+    }
+  }
+  // END: DELETE FROM CORE MERGE REQUEST
+}

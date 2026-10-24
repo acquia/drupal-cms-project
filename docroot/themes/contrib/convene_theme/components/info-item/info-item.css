@@ -1,0 +1,27 @@
+.info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 16px;
+  border-top: 1px solid transparent; /* Match spacing even without border */
+}
+
+/* Optional Highlight Border (light blue) */
+.info-item.info-item--highlight {
+  border-top: 1px solid #93C5FD; /* Tailwind blue-300 equivalent */
+}
+
+.info-item__title {
+  margin: 0 0 12px 0;
+  font-size: 20px;
+  font-weight: 400; /* Regular weight */
+  color: #030804;
+}
+
+.info-item__description {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #4b5563; /* Gray text matching Figma */
+}

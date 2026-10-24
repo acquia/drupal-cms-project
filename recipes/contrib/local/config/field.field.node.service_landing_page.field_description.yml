@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_description
+    - node.type.service_landing_page
+id: node.service_landing_page.field_description
+field_name: field_description
+entity_type: node
+bundle: service_landing_page
+label: Description
+description: 'Introductory text shown at the top of the landing page.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

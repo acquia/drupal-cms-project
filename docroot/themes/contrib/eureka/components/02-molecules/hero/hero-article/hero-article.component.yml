@@ -1,0 +1,57 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Hero Article
+status: stable
+description: Hero article component
+# Overrides regular css with minified.
+libraryOverrides:
+  css:
+    component:
+      hero-article.min.css: { minified: true }
+group: Eureka main components
+props:
+  type: object
+  properties:
+    hero_article_media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Hero image media
+      description: Media and alt text for the hero image.
+      type: object
+      examples:
+        - src: 'assets/277628-911758.jpg'
+          alt: 'Photo by gdtography: https://www.pexels.com/photo/long-exposure-photography-white-dome-building-interior-911758/'
+    hero_article_media_alt:
+      type: ['string', 'null']
+      title: Hero image alt
+      description: Image alt text
+      examples:
+        - Hero image alt text for screenreaders
+    hero_article_heading:
+      type: string
+      title: Hero heading
+      description: Title of the hero
+      examples:
+        - Lorem ipsum
+    hero_article_heading_level:
+      type: ['number', 'null']
+      title: Hero heading level
+      description: Heading level of the heading element - only change this if you know what you're doing, as it affects accessibility
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+      examples:
+        - 1
+    hero_article_autor:
+      type: [ 'string', 'null' ]
+      title: Hero author
+      description: Hero strapline
+      examples:
+        - Dolor sit
+    hero_article_date:
+      title: 'String, format=date'
+      type: string
+      format: date
+      examples:
+        - '2018-11-13'

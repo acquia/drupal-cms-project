@@ -1,0 +1,171 @@
+name: Space Flexible Slot
+
+# Status can be: "experimental", "stable", "deprecated", "obsolete".
+status: stable
+
+# Use this key to organize components together.
+group: Base
+
+props:
+  type: object
+  properties:
+    no_of_columns:
+      type: string
+      title: Columns
+      description: 'Number of inline columns: none, one, two, three, four.'
+      enum:
+        - none
+        - one
+        - two
+        - three
+        - four
+      default: none
+      examples:
+        - 'none'
+    
+    column_width:
+      type: string
+      title: Column Width
+      description: 'Adjust column width based on number of columns.'
+      enum:
+        - '100'
+        - '50-50'
+        - '33-66'
+        - '66-33'
+        - '25-75'
+        - '75-25'
+        - '25-50-25'
+        - '50-25-25'
+        - '25-25-50'
+        - '33-33-33'
+        - '25-25-25-25'
+      meta:enum:
+        100: 1 Col - 100%
+        50-50: 2 Col - 50%/50%
+        33-66: 2 Col - 33%/66%
+        66-33: 2 Col - 66%/33%
+        25-75: 2 Col - 25%/75%
+        75-25: 2 Col - 75%/25%
+        25-50-25: 3 Col - 25%/50%/25%
+        50-25-25: 3 Col - 50%/25%/25%
+        25-25-50: 3 Col - 25%/25%/50%
+        33-33-33: 3 Col - 33%/33%/33%
+        25-25-25-25: 4 Col - 25%/25%/25%/25%
+      default: '100'
+      examples:
+        - '100'
+
+    vertical:
+      type: string
+      title: Align items
+      description: 'Vertical alignment: top, center, bottom.'
+      enum:
+        - top
+        - center
+        - bottom
+      default: top
+      examples:
+        - 'top'
+
+    horizontal:
+      type: string
+      title: Justify items
+      description: 'Horizontal alignment: left, center, right, space-between. Note: space-between only works with col: none.'
+      enum:
+        - left
+        - center
+        - right
+        - space-between
+      default: left
+      examples:
+        - 'left'
+
+    direction:
+      type: string
+      title: Direction of items
+      description: 'Place items: Across the page, Down the page.'
+      enum:
+        - across
+        - down
+      default: across 
+      examples:
+        - 'across'
+
+    gap:
+      type: string
+      title: Gap between items
+      description: 'The space between columns or content.'
+      enum:
+        - none
+        - small
+        - medium
+        - large
+      default: medium
+      examples:
+        - 'medium'
+
+    wrap:
+      type: string
+      title: Wrap
+      description: 'When using col: none, this will allow components to wrap.'
+      enum:
+        - wrap
+        - nowrap
+      examples:
+        - 'wrap'
+
+    margin_top:
+      type: string
+      title: Margin top
+      Description: The top margin of the container.
+      enum:
+        - none
+        - x-small
+        - small
+        - medium
+        - large
+        - x-large
+      default: none
+      examples:
+        - 'none'
+
+    margin_bottom:
+      type: string
+      title: Margin bottom
+      Description: The bottom margin of the container.
+      enum:
+        - none
+        - x-small
+        - small
+        - medium
+        - large
+        - x-large
+      default: none
+      examples:
+        - 'none'
+
+    modifier_class:
+      type: string
+      title: Modifier class
+      description: Additional classes.
+
+slots:
+  content:
+    title: Content
+    description: Flexible content slot.
+
+  column_one:
+    title: Column one
+    description: First column slot.
+
+  column_two:
+    title: Column two
+    description: Second column slot.
+
+  column_three:
+    title: Column three
+    description: Third column slot.
+
+  column_four:
+    title: Column four
+    description: Fourth column slot.

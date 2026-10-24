@@ -1,0 +1,19 @@
+# The 'type' should be "label" for short meta tags and "text" for ones which
+# could get longer, especially ones which use a textarea field instead of a
+# textfield.
+
+metatag.metatag_tag.schema_defined_term_type:
+  type: string
+  label: '@type'
+metatag.metatag_tag.schema_defined_term_name:
+  type: text
+  label: 'name'
+metatag.metatag_tag.schema_defined_term_description:
+  type: text
+  label: 'description'
+metatag.metatag_tag.schema_defined_term_term_code:
+  type: text
+  label: 'termCode'
+metatag.metatag_tag.schema_defined_term_in_defined_term_set:
+  type: text
+  label: 'inDefinedTermSet'

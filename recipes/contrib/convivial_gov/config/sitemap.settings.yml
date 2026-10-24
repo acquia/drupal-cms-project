@@ -1,0 +1,25 @@
+page_title: Sitemap
+path: sitemap
+message:
+  value: ''
+  format: plain_text
+plugins:
+  frontpage:
+    base_plugin: frontpage
+    enabled: true
+    weight: 0
+    settings:
+      title: 'Front page'
+      rss: null
+    id: frontpage
+    provider: sitemap
+  'menu:main':
+    base_plugin: menu
+    enabled: true
+    weight: 0
+    settings:
+      title: ''
+      show_disabled: false
+    id: 'menu:main'
+    provider: sitemap
+include_css: true

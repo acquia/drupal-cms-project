@@ -1,0 +1,128 @@
+{#
+/**
+ * @file
+ * Theme implementation for the amazee.ai dashboard.
+ *
+ * Available variables:
+ * - health: array containing 'status' and 'message'.
+ * - models: array of selected models or error message.
+ * - host: string representing the LLM URL.
+ * - database: string representing the VectorDB database.
+ * - key_name: string representing the selected key name.
+ * - trial_account: boolean indicating if using a trial account.
+ * - team: array containing team information.
+ * - spend: array containing spend information.
+ * - submit_disconnect: render array for the disconnect button.
+ * - health_refresh: render array for checking health.
+ * - refresh: render array for refreshing models.
+ *
+ * @ingroup themeable
+ */
+#}
+<div class="ai-connected-layout">
+  <div class="ai-top-layout">
+    <div class="ai-top-left">
+      {% if logo %}
+        <img src="{{ logo }}" alt="amazee.ai" width="250"/>
+      {% endif %}
+      {{ submit_disconnect }}
+    </div>
+    <div class="ai-top-right">
+      <div class="ai-health-section">
+        <div class="ai-health-text">
+          <div class="ai-health-status {{ health.status ? 'ai-status-online' : 'ai-status-offline' }}">
+            <strong>{{ health.status ? '🟢' : '🔴' }} {{ health.message }}</strong>
+          </div>
+          {% if health.checked_at %}
+            <div class="ai-text-muted ai-description" style="font-size: 0.85em;">
+              {{ 'Last checked: @time'|t({'@time': health.checked_at}) }}
+              {% if health.litellm_version %}
+                ({{ 'LiteLLM v@version'|t({'@version': health.litellm_version}) }})
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+        {# Health Check button injected via Form API #}
+        {{ health_refresh }}
+      </div>
+    </div>
+  </div>
+
+  {% if trial_account %}
+    <p class="ai-text-muted ai-description">
+      {{ 'You are currently using a free anonymous trial account.'|t }}
+      {{ 'This account has a very limited budget.'|t }}
+      {{ 'You may want to disconnect and connect with a full user account.'|t }}
+    </p>
+  {% endif %}
+
+  {% if host or key_name %}
+    <div class="ai-connection-details" style="margin-top: 2rem;">
+      <table>
+        <tbody>
+          {% if team and team.name %}
+            <tr>
+              <th>{{ 'Team'|t }}</th>
+              <td>{{ team.name }}</td>
+            </tr>
+          {% endif %}
+          <tr>
+            <th>{{ 'LLM Key Name'|t }}</th>
+            <td>{{ management_key_info.name ?: ((key_info.key_alias ?: key_info.key_name) ?: key_name) }}</td>
+          </tr>
+          {% if host %}
+            <tr>
+              <th>{{ 'LLM URL'|t }}</th>
+              <td>{{ host }}</td>
+            </tr>
+          {% endif %}
+          {% if database %}
+            <tr>
+              <th>{{ 'VectorDB Database'|t }}</th>
+              <td>{{ database }}</td>
+            </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+
+    {% if models.error is defined or models is not empty %}
+    <div class="ai-models-section" style="margin-top: 3rem;">
+      {% if models.error is defined %}
+        <p class="ai-text-muted ai-description">{{ models.error }}</p>
+        {# Refresh Models button injected via Form API #}
+        {{ refresh }}
+      {% elseif models is not empty %}
+        {% set has_description = false %}
+        {% for model in models %}
+          {% if model.description is not empty %}
+            {% set has_description = true %}
+          {% endif %}
+        {% endfor %}
+
+        <h3>{{ 'Available Models'|t }}</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>{{ 'Model'|t }}</th>
+              {% if has_description %}
+                <th>{{ 'Description'|t }}</th>
+              {% endif %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for model in models %}
+              <tr>
+                <td>{{ model.id }}</td>
+                {% if has_description %}
+                  <td>{{ model.description }}</td>
+                {% endif %}
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+    </div>
+    {% endif %}
+  {% endif %}
+</div>

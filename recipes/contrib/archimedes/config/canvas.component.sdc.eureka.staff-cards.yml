@@ -1,0 +1,231 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - options
+  theme:
+    - eureka
+label: 'Staff cards list'
+id: sdc.eureka.staff-cards
+source: sdc
+source_local_id: 'eureka:staff-cards'
+provider: eureka
+active_version: f642805666f0280f
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        staff_cards_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Meet our staff'
+          expression: ℹ︎string␟value
+        staff_cards_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '2'
+          expression: ℹ︎list_float␟value
+        staff_cards_summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Our dedicated team of teachers and staff are passionate about creating a nurturing environment where every child can thrive.'
+          expression: ℹ︎string␟value
+        staff_cards_cta_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Meet all our staff'
+          expression: ℹ︎string␟value
+        staff_cards_cta_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: 'https://zoocha.com'
+              options: {  }
+          expression: ℹ︎link␟url
+        staff_cards_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Learn more about our experienced and caring team.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        staff_cards_items_list:
+          title: 'staff cards list items'
+          description: 'Block slot for staff cards list items'
+  f642805666f0280f:
+    settings:
+      prop_field_definitions:
+        staff_cards_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Meet our staff'
+          expression: ℹ︎string␟value
+        staff_cards_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '2'
+          expression: ℹ︎list_float␟value
+        staff_cards_summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Our dedicated team of teachers and staff are passionate about creating a nurturing environment where every child can thrive.'
+          expression: ℹ︎string␟value
+        staff_cards_cta_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Meet all our staff'
+          expression: ℹ︎string␟value
+        staff_cards_cta_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: 'https://zoocha.com'
+              options: {  }
+          expression: ℹ︎link␟url
+        staff_cards_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Learn more about our experienced and caring team.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        staff_cards_items_list:
+          title: 'staff cards list items'
+          description: 'Block slot for staff cards list items'
+  1f914551f9ae05e3:
+    settings:
+      prop_field_definitions:
+        staff_cards_cta_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Meet all our staff'
+          expression: ℹ︎string␟value
+        staff_cards_cta_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: 'https://zoocha.com'
+              options: {  }
+          expression: ℹ︎link␟url
+        staff_cards_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Meet our staff'
+          expression: ℹ︎string␟value
+        staff_cards_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '2'
+          expression: ℹ︎list_float␟value
+        staff_cards_summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Our dedicated team of teachers and staff are passionate about creating a nurturing environment where every child can thrive.'
+          expression: ℹ︎string␟value
+        staff_cards_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Learn more about our experienced and caring team.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        staff_cards_items:
+          title: 'staff cards list items'
+          description: 'Block slot for staff cards list items'

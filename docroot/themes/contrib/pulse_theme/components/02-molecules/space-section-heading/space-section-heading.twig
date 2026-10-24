@@ -1,0 +1,78 @@
+{#
+/**
+ * @file
+ * section heading
+ *
+ * See section-heading.space.yaml for documentation.
+ */
+#}
+
+{# Default #}
+{% set element = element|default('section') %}
+{% set alignment = alignment|default('left')|lower %}
+{% set tag_name = tag_name|default('h2') %}
+{% set with_image = with_image|default(false) %}
+
+{% set alignmentClass =
+  alignment == 'center'
+    ? 'text-center center-alignment'
+    : alignment == 'split'
+      ? 'split-section'
+      : ''
+%}
+
+{# Classes #}
+{% set classes = ([
+  'section-heading ga-section-heading ga_space_component',
+  alignmentClass,
+  description is empty ? 'no-description' : ''
+] | sort | join(' ') | trim ) %}
+
+{% set attributes = attributes|default(create_attribute()).addClass(classes) %}
+{# Template #}
+{% block section_heading_block %}
+  <{{ element }} {{ attributes }}>
+    <div class="container mx-auto">
+      <div class="intro-section">
+        {% if label|render|striptags|trim is not empty %}
+          <span class="intro-section__label">
+            {{ label }}
+          </span>
+        {% endif %}
+
+        {% block title %}
+          {% if title|render|striptags|trim is not empty %}
+            <div class="intro-section__title flex">
+              <{{ tag_name }} class="headline">
+                {% if with_image %}
+                  <span class="intro-section__image intro-section__image--before mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="68" height="36" viewBox="0 0 68 36" fill="none">
+                      <path d="M50.3099 32.0661L0 35.6166L52.2761 35.4247L67.2121 0L50.3099 32.0661Z" fill="var(--color-sds-primary-dark)"/>
+                    </svg>
+                  </span>
+                {% endif %}
+                {{- title -}}
+                {% if with_image %}
+                  <span class="intro-section__image intro-section__image--after ml-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="68" height="67" viewBox="0 0 68 67" fill="none">
+                      <path d="M9.263 6.27507L2.48145 17.0092L10.8993 0L10.3432 60.2263L20.2008 52.5245L8.0448 66.0999L9.263 6.27507Z" fill="var(--color-sds-primary)" fill-opacity="0.7"/>
+                      <path d="M23.3935 47.4421L67.1152 46.7425L22.6405 44.0957L11.6812 57.2305L23.3935 47.4421Z" fill="var(--color-sds-primary)" fill-opacity="0.7"/>
+                    </svg>
+                  </span>
+                {% endif %}
+              </{{ tag_name }}>
+            </div>
+          {% endif %}
+        {% endblock %}
+      </div>
+
+      {% if description is not empty %}
+        <div class="data-section">
+          <div class="data-section__description">
+            {{ description }}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </{{ element }}>
+{% endblock %}

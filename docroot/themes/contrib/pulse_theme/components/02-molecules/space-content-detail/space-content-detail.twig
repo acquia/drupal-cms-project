@@ -1,0 +1,94 @@
+{# Default wrapper element #}
+{% set element = element|default('div') %}
+
+{# Classes #}
+{% set classes = [
+  'content-detail-wrapper',
+  content_overlap ? 'content-overlap' : '',
+  extra_classes ? extra_classes: '',
+] %}
+
+{% set attributes = attributes|default(create_attribute()).addClass(classes|sort|join(' ')|trim) %}
+
+{# Date formatting #}
+{% if date %}
+	{% set date_iso = date|date('Y-m-d') %}
+	{% set date_formatted = date|date('d M Y') %}
+{% endif %}
+
+<{{element}} {{ attributes }}>
+
+	{% if tag_label1 and tag_data1
+    or tag_label2 and tag_data2
+    or tag_label3 and tag_data3 %}
+
+		<div class="top-info grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4">
+			{% if tag_label1 and tag_data1 %}
+				<div class="info-inner">
+					<span>{{ tag_label1 }}</span>
+					<p>
+						{{ tag_data1 }}
+					</p>
+				</div>
+			{% endif %}
+
+			{% if tag_label2 and tag_data2 %}
+				<div class="info-inner">
+					<span>{{ tag_label2 }}</span>
+					<p>
+						{{ tag_data2 }}
+					</p>
+				</div>
+			{% endif %}
+
+			{% if tag_label3 and tag_data3 %}
+				<div class="info-inner">
+					<span>{{ tag_label3 }}</span>
+					<p>
+						{{ tag_data3 }}
+					</p>
+				</div>
+			{% endif %}
+		</div>
+	{% endif %}
+
+	{# Date #}
+	{% if date %}
+		<div {{ region_attributes.date|default(create_attribute()).addClass('content_date') }}>
+			<time datetime="{{ date_iso }}">{{ date_formatted }}</time>
+		</div>
+	{% endif %}
+
+	{# Text content #}
+	{% if text|render|striptags|trim %}
+		<div {{ region_attributes.text|default(create_attribute()).addClass('content') }}>
+			{{ text }}
+		</div>
+	{% endif %}
+
+	{#conclusion #}
+	{% if conclusion|render|striptags|trim %}
+		<div {{ region_attributes.conclusion|default(create_attribute()).addClass('conclusion') }}>
+			{% include 'pulse_theme:space-heading' with { content: 'Conclusion', tag_name: 'h4', align: 'none', modifier_class: 'conclusion_title' } only %}
+			<div class="conclusion_body">{{ conclusion }}</div>
+		</div>
+	{% endif %}
+
+	<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+		{% if content %}
+			<div {{ region_attributes.content|default(create_attribute()).addClass('user-details') }}>
+				{% block content %}
+					{{ content }}
+				{% endblock %}
+			</div>
+		{% endif %}
+
+		{% if image %}
+			<div {{ region_attributes.image|default(create_attribute()).addClass('upscale-image') }}>
+				{% block image %}
+					{{ image }}
+				{% endblock %}
+			</div>
+		{% endif %}
+	</div>
+</{{element}}>

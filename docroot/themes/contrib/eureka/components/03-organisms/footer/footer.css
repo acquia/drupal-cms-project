@@ -1,0 +1,132 @@
+.footer {
+  margin: var(--spacing-1);
+  padding: var(--spacing-3) var(--spacing-1);
+  color: var(--white);
+  background-color: var(--brand-primary-dark);
+  border-radius: var(--spacing-2);
+}
+
+.footer .heading {
+  color: var(--white);
+  font-size: var(--body-small);
+}
+
+.footer .menu__link {
+  color: var(--white);
+}
+
+.footer .paragraph--icon {
+  align-items: flex-start;
+  gap: var(--spacing-2);
+}
+
+.footer__top {
+  gap: var(--spacing-5);
+}
+
+.footer__branding .block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3) var(--spacing-8);
+  font-size: var(--body-small);
+}
+
+.footer__branding a {
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.footer__column > * {
+  flex-grow: 0;
+}
+
+.footer__times {
+  display: flex;
+  gap: var(--spacing-2);
+  font-size: var(--body-small);
+}
+
+.footer__times .icon {
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+}
+
+.footer__social nav {
+  margin-top: auto;
+  padding-top: var(--spacing-4);
+}
+
+.footer__social .menu {
+  justify-content: center;
+}
+
+.footer__social .menu__link {
+  display: flex;
+}
+
+.footer__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  margin-top: var(--spacing-5);
+  padding-top: var(--spacing-3);
+  border-top: 0.1rem solid var(--white);
+}
+
+@media (min-width: 768px) {
+  .footer {
+    padding: var(--spacing-4) var(--spacing-2);
+  }
+
+  .footer__branding .block {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .footer__social nav {
+    padding-top: var(--spacing-2);
+  }
+
+  .footer__bottom {
+    margin-top: var(--spacing-8);
+  }
+}
+
+@media (min-width: 1280px) {
+  .footer {
+    padding: var(--spacing-8) var(--spacing-6);
+  }
+
+  .footer__top {
+    gap: var(--spacing-1);
+  }
+
+  .footer__branding .block {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-5);
+  }
+
+  .footer__social .menu {
+    justify-content: flex-start;
+  }
+
+  .footer__bottom {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    margin-top: var(--spacing-3);
+  }
+}
+
+/* Specific media query for our lives to be simpler */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .footer__column {
+    flex-direction: row;
+    gap: var(--spacing-4);
+  }
+
+  .footer__column .component-title {
+    min-width: 160px;
+  }
+}

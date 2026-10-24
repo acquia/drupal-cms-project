@@ -1,0 +1,138 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.mc_search_index
+    - field.field.node.mc_resource.field_featured_image
+    - field.field.node.mc_resource.field_mc_attachments
+    - field.field.node.mc_resource.field_mc_audiences
+    - field.field.node.mc_resource.field_mc_banner_featured_links
+    - field.field.node.mc_resource.field_mc_banner_featured_title
+    - field.field.node.mc_resource.field_mc_banner_image
+    - field.field.node.mc_resource.field_mc_banner_title
+    - field.field.node.mc_resource.field_mc_content
+    - field.field.node.mc_resource.field_mc_description
+    - field.field.node.mc_resource.field_mc_hide
+    - field.field.node.mc_resource.field_mc_icon
+    - field.field.node.mc_resource.field_mc_intent
+    - field.field.node.mc_resource.field_mc_intents_satisfied
+    - field.field.node.mc_resource.field_mc_intro
+    - field.field.node.mc_resource.field_mc_keywords
+    - field.field.node.mc_resource.field_mc_published_date
+    - field.field.node.mc_resource.field_mc_relateds
+    - field.field.node.mc_resource.field_mc_resource_type
+    - field.field.node.mc_resource.field_mc_review_date
+    - field.field.node.mc_resource.field_mc_search_exclude
+    - field.field.node.mc_resource.field_mc_thumbnail
+    - field.field.node.mc_resource.field_mc_toc
+    - field.field.node.mc_resource.field_mc_topics
+    - field.field.node.mc_resource.field_mc_updated_date
+    - field.field.node.mc_resource.field_seo_analysis
+    - field.field.node.mc_resource.field_seo_description
+    - field.field.node.mc_resource.field_seo_image
+    - field.field.node.mc_resource.field_seo_title
+    - node.type.mc_resource
+  module:
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.mc_resource.mc_search_index
+targetEntityType: node
+bundle: mc_resource
+mode: mc_search_index
+content:
+  field_mc_banner_featured_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_mc_banner_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_mc_content:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_mc_description:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_mc_intro:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_mc_keywords:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_mc_topics:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_seo_description:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_seo_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 8
+    region: content
+hidden:
+  content_moderation_control: true
+  field_featured_image: true
+  field_mc_attachments: true
+  field_mc_audiences: true
+  field_mc_banner_featured_links: true
+  field_mc_banner_image: true
+  field_mc_hide: true
+  field_mc_icon: true
+  field_mc_intent: true
+  field_mc_intents_satisfied: true
+  field_mc_published_date: true
+  field_mc_relateds: true
+  field_mc_resource_type: true
+  field_mc_review_date: true
+  field_mc_search_exclude: true
+  field_mc_thumbnail: true
+  field_mc_toc: true
+  field_mc_updated_date: true
+  field_seo_analysis: true
+  field_seo_image: true
+  links: true
+  search_api_excerpt: true

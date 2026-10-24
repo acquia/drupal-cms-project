@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies: {  }
+id: loop_test_agent
+label: 'Loop Test Agent'
+description: 'A minimal agent with three echo tools, used to test externally-driven execution.'
+system_prompt: 'You are a test agent. Call the tools you are given, one per turn.'
+secured_system_prompt: '[ai_agent:agent_instructions]'
+tools:
+  'ai_agents_tools_test:dummy_tool': true
+  'ai_agents_tools_test:dummy_tool_two': true
+  'ai_agents_tools_test:dummy_tool_three': true
+orchestration_agent: true
+triage_agent: false
+max_loops: 10
+default_information_tools: ''
+tool_usage_limits: {  }
+tool_settings:
+  'ai_agents_tools_test:dummy_tool':
+    return_directly: 0
+  'ai_agents_tools_test:dummy_tool_two':
+    return_directly: 0
+  'ai_agents_tools_test:dummy_tool_three':
+    return_directly: 0
+context_agent: null
+masquerade_roles: {  }
+exclude_users_role: false

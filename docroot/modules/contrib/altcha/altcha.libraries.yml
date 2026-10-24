@@ -1,0 +1,32 @@
+altcha:
+  version: "1.0.7"
+  header: true
+  js:
+    assets/vendor/altcha/altcha.min.js: { minified: true, attributes: { defer: true, type: module }}
+
+altcha-i18n-all:
+  version: "1.0.7"
+  header: true
+  js:
+    assets/vendor/altcha/i18n/all.min.js: { weight: -2, minified: true, attributes: { defer: true, type: module }}
+  dependencies:
+    - altcha/altcha
+
+altcha.fallback:
+  version: "1.0.0"
+  header: true
+  js:
+    js/altcha-fallback.behaviors.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - altcha/altcha
+
+altcha-i18n-custom:
+  version: "1.0.7"
+  header: true
+  js:
+    js/custom-translation.behaviors.js: { attributes: { defer: true, type: module }}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings

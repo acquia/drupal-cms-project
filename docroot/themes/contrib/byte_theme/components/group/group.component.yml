@@ -1,0 +1,111 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Group
+group: Layout
+status: stable
+props:
+  type: object
+  required:
+    - flex_direction
+    - flex_align
+    - items_align
+  properties:
+    flex_direction:
+      type: string
+      title: Item direction
+      enum:
+        - column
+        - row
+      meta:enum:
+        column: Vertical
+        row: Horizontal
+      default: "column"
+      examples:
+        - "column"
+    flex_gap:
+      type: string
+      title: Space between items
+      enum:
+        - sm
+        - md
+        - lg
+        - xl
+      meta:enum:
+        sm: Small
+        md: Medium
+        lg: Large
+        xl: Extra-Large
+      examples:
+        - md
+    items_align:
+      type: string
+      title: Alignment within group
+      enum:
+        - start
+        - center
+        - end
+      meta:enum:
+        start: Start
+        center: Center
+        end: End
+      default: "start"
+      examples:
+        - "start"
+    flex_align:
+      type: string
+      title: Alignment within parent
+      enum:
+        - start
+        - center
+        - end
+      meta:enum:
+        start: Start
+        center: Center
+        end: End
+      default: "center"
+      examples:
+        - "center"
+    radius:
+      type: string
+      title: Rounded corners
+      enum:
+        - sm
+        - md
+        - lg
+        - xl
+      meta:enum:
+        sm: Small
+        md: Medium
+        lg: Large
+        xl: Extra-Large
+      examples:
+        - sm
+    padding:
+      type: string
+      title: Padding
+      enum:
+        - sm
+        - md
+        - lg
+        - xl
+      meta:enum:
+        sm: Small
+        md: Medium
+        lg: Large
+        xl: Extra-Large
+      examples:
+        - sm
+    background:
+      type: string
+      title: Background color
+      enum:
+        - primary
+        - secondary
+        - accent
+      meta:enum:
+        primary: Primary
+        secondary: Secondary
+        accent: Accent
+
+slots:
+  group_slot:
+    title: "Group items"

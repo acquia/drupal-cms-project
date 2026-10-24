@@ -1,0 +1,25 @@
+field.widget.settings.tagify_link_widget:
+  type: field.widget.settings.link_default
+  label: 'Tagify link widget settings'
+  mapping:
+    match_operator:
+      type: string
+      label: 'Autocomplete matching'
+    match_limit:
+      type: integer
+      label: 'Maximum number of autocomplete suggestions'
+    suggestions_dropdown:
+      type: integer
+      label: 'Suggestions dropdown'
+    placeholder:
+      type: label
+      label: 'Placeholder'
+    show_entity_id:
+      type: boolean
+      label: 'Include entity id'
+    show_info_label:
+      type: boolean
+      label: 'Include info label'
+    info_label:
+      type: string
+      label: 'Info label content'

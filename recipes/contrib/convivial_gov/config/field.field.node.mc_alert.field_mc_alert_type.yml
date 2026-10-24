@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_mc_alert_type
+    - node.type.mc_alert
+  module:
+    - options
+id: node.mc_alert.field_mc_alert_type
+field_name: field_mc_alert_type
+entity_type: node
+bundle: mc_alert
+label: Type
+description: 'The classification for the alert.'
+required: true
+translatable: false
+default_value:
+  -
+    value: info
+default_value_callback: ''
+settings: {  }
+field_type: list_string

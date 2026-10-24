@@ -1,0 +1,424 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 15d9bd9b-6398-47a6-ab39-292111c7e81e
+  default_langcode: en
+  depends:
+    dff4c626-a52e-4de8-a7fe-b5d45735fecc: file
+    1852211b-caab-41a7-8c0e-7d9dcfdcf922: media
+    3bd23e3e-bdcc-4022-ba3d-7fb6155d2ce5: file
+    2f65cbdf-8489-4b20-978d-11d6718a67c1: media
+    ecb03c82-006c-4e6e-8a20-92004dd54713: file
+    314867f8-16c4-4493-9bd9-17e75ad4f407: media
+    5b494607-63f6-4b4c-a5a2-0c0d6882c874: file
+    8923d0ca-30f8-484d-bb65-0f877e779e71: media
+    6e15c340-ff65-418c-951e-f2f5bd4a0d6b: file
+    7bae443a-7804-439a-82b8-1d7e083381d5: media
+    dacf7a13-e736-474a-81d4-db9ae03a0f6c: file
+    4c5386c9-a718-4c6a-91bc-63fa62251a46: media
+    8e373af0-2441-4366-8642-b9c70bdb7e62: file
+    165226ff-ec18-47f5-970d-20bf2ec4478b: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Get involved'
+  components:
+    -
+      uuid: 98b6141a-bfaa-4127-9811-623349a35ae3
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        alignment: center
+        paddingtop: 14
+        paddingbottom: 14
+        backgroundcolor: black
+        background_image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 1852211b-caab-41a7-8c0e-7d9dcfdcf922
+            target_type: media
+        use_custom_container: false
+    -
+      parent_uuid: 98b6141a-bfaa-4127-9811-623349a35ae3
+      slot: content
+      uuid: 9d03a4f8-5122-442c-b227-c7a1d9544536
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: 'Be part of something'
+          format: canvas_html_inline
+        tagline: Join
+        description: 'There are many ways to make a difference beyond writing a check.'
+        heading_level: 1
+    -
+      parent_uuid: 9d03a4f8-5122-442c-b227-c7a1d9544536
+      slot: ctas
+      uuid: 472f75c2-6fc1-4ebc-a0a5-0e38dc1f2f42
+      component_id: sdc.caresphere_theme.button
+      inputs:
+        href: /about
+        size: medium
+        label: 'Learn more'
+        variant: secondary-white
+        disabled: false
+        icon_first: false
+        mobile_width: false
+        border_radius: default
+    -
+      uuid: 60e1ecc1-d82b-4b41-b3cf-e75c74e812dc
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        alignment: center
+        paddingtop: 14
+        marginbottom: 0
+        paddingbottom: 10
+        use_custom_container: false
+    -
+      parent_uuid: 60e1ecc1-d82b-4b41-b3cf-e75c74e812dc
+      slot: content
+      uuid: 3aa3d8b5-a261-45c7-9e4e-70d633f1166e
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: 'Three paths to make an impact'
+          format: full_html
+        tagline: Ways
+        description: 'Each one matters. Each one changes things.'
+        heading_level: 2
+    -
+      uuid: 167e5ecb-b73f-4468-928a-0823fe459dff
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        alignment: left
+        marginbottom: 0
+        paddingbottom: 14
+        use_custom_container: false
+    -
+      parent_uuid: 167e5ecb-b73f-4468-928a-0823fe459dff
+      slot: content
+      uuid: 1a5df43e-ac35-4b3a-b4d2-5e8f2569d3b7
+      component_id: sdc.caresphere_theme.section-grid
+      inputs:
+        grid_layout: 2_column_33_66
+        column_1_layout: stacked
+        column_2_layout: full
+        is_small_container: false
+    -
+      parent_uuid: 1a5df43e-ac35-4b3a-b4d2-5e8f2569d3b7
+      slot: slot_1
+      uuid: e62f87e2-7eee-493b-9a0a-1746c0dde441
+      component_id: sdc.caresphere_theme.card-icon
+      inputs:
+        text: 'Volunteer with us'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 2f65cbdf-8489-4b20-978d-11d6718a67c1
+            target_type: media
+        cta_url: /
+        cta_label: Learn
+        icon_size: large
+        tile_size: square
+        icon_align: left
+        text_align: left
+        cta_variant: link
+        description:
+          value: '<p>Show up and do the work alongside our team.</p>'
+          format: canvas_html_block
+        border_radius: medium
+    -
+      parent_uuid: 1a5df43e-ac35-4b3a-b4d2-5e8f2569d3b7
+      slot: slot_1
+      uuid: 2e5bb393-9ca8-4fd5-a104-74bf5f3a58ad
+      component_id: sdc.caresphere_theme.card-icon
+      inputs:
+        text: 'Build a partnership'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 314867f8-16c4-4493-9bd9-17e75ad4f407
+            target_type: media
+        cta_url: /
+        cta_label: Discuss
+        icon_size: large
+        tile_size: square
+        icon_align: left
+        text_align: left
+        cta_variant: link
+        description:
+          value: "<p>Bring your organization's resources and reach to the mission.</p>"
+          format: canvas_html_block
+        border_radius: medium
+    -
+      parent_uuid: 1a5df43e-ac35-4b3a-b4d2-5e8f2569d3b7
+      slot: slot_2
+      uuid: 126bda61-7cb2-432f-8eb4-d99b5c49116a
+      component_id: sdc.caresphere_theme.card-advocacy
+      inputs:
+        tagline: Advocacy
+        headline: 'Speak up and help us reach the people who need to hear this'
+        body_text: Join
+        button_url: /
+        image_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 1852211b-caab-41a7-8c0e-7d9dcfdcf922
+            target_type: media
+        button_label: Advocate
+    -
+      uuid: 4a19cfce-686b-45f6-b9ad-a2bb11ef338c
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        gap: 10
+        alignment: center
+        paddingtop: 14
+        marginbottom: 0
+        paddingbottom: 14
+        backgroundcolor: black
+        use_custom_container: false
+    -
+      parent_uuid: 4a19cfce-686b-45f6-b9ad-a2bb11ef338c
+      slot: content
+      uuid: d8edb507-4933-4ed2-a4b5-eacb26e48819
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: 'Join us in building change'
+          format: canvas_html_inline
+        description: 'Your support creates opportunity and strengthens the community we serve together.'
+        heading_level: 2
+    -
+      parent_uuid: d8edb507-4933-4ed2-a4b5-eacb26e48819
+      slot: ctas
+      uuid: 50d39c96-6013-41b8-bcbf-2303162e774c
+      component_id: sdc.caresphere_theme.button
+      inputs:
+        href: 'https://easebuzz.in/demo'
+        size: medium
+        label: Donate
+        variant: primary
+        disabled: false
+        icon_first: false
+        mobile_width: false
+        border_radius: default
+    -
+      parent_uuid: 4a19cfce-686b-45f6-b9ad-a2bb11ef338c
+      slot: content
+      uuid: 5780895b-29c5-4a7b-8558-e83d3340758d
+      component_id: sdc.caresphere_theme.section-grid
+      inputs:
+        grid_layout: 1_column
+        is_small_container: false
+    -
+      parent_uuid: 5780895b-29c5-4a7b-8558-e83d3340758d
+      slot: slot_1
+      uuid: c4a3aa69-06f0-4080-af22-83b6f4dd0ddb
+      component_id: sdc.caresphere_theme.image
+      inputs:
+        size: '16:9'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 8923d0ca-30f8-484d-bb65-0f877e779e71
+            target_type: media
+        radius: small
+        border_radius: 8
+    -
+      uuid: 058ba942-3883-46e4-bd66-98ce68dafe4e
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        gap: 10
+        paddingtop: 14
+        marginbottom: 0
+        paddingbottom: 14
+        use_custom_container: false
+    -
+      parent_uuid: 058ba942-3883-46e4-bd66-98ce68dafe4e
+      slot: content
+      uuid: 38cad37e-b8d7-41ab-8776-1d9922aef0b2
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: Questions
+          format: full_html
+        description: 'Find answers to what you need to know about getting involved with us.'
+        heading_level: 2
+    -
+      parent_uuid: 058ba942-3883-46e4-bd66-98ce68dafe4e
+      slot: content
+      uuid: 9555be1e-024b-48a4-a2c8-34a3434873b6
+      component_id: sdc.caresphere_theme.section-grid
+      inputs:
+        grid_layout: 1_column
+        grid_row_gap: 2
+        column_1_layout: stacked
+        is_small_container: false
+    -
+      parent_uuid: 9555be1e-024b-48a4-a2c8-34a3434873b6
+      slot: slot_1
+      uuid: cce1040a-7df3-497a-bd30-c9a03fd61a58
+      component_id: sdc.caresphere_theme.accordion
+      inputs:
+        answer: "We work with people's schedules. Some volunteer weekly, others help once a month. You decide what works for you."
+        question: 'How much time do I need?'
+        default_state: collapsed
+    -
+      parent_uuid: 9555be1e-024b-48a4-a2c8-34a3434873b6
+      slot: slot_1
+      uuid: a8efb468-e3bd-4cf4-a0ca-587289750191
+      component_id: sdc.caresphere_theme.accordion
+      inputs:
+        answer: 'No. We train everyone. What matters is your willingness to show up and do the work.'
+        question: 'Do I need experience?'
+        default_state: collapsed
+    -
+      parent_uuid: 9555be1e-024b-48a4-a2c8-34a3434873b6
+      slot: slot_1
+      uuid: e0f5f27c-f4d0-4bcd-a0b3-aac180d8be5c
+      component_id: sdc.caresphere_theme.accordion
+      inputs:
+        answer: "Yes. We have roles both in the field and online. Tell us what you prefer and we'll find a fit."
+        question: 'Can I volunteer remotely?'
+        default_state: collapsed
+    -
+      parent_uuid: 9555be1e-024b-48a4-a2c8-34a3434873b6
+      slot: slot_1
+      uuid: ecac147e-7c40-401d-96e9-67311de3fad4
+      component_id: sdc.caresphere_theme.accordion
+      inputs:
+        answer: "Businesses and organizations partner with us in many ways. Reach out and let's talk about what's possible."
+        question: 'What about partnerships?'
+        default_state: collapsed
+    -
+      parent_uuid: 9555be1e-024b-48a4-a2c8-34a3434873b6
+      slot: slot_1
+      uuid: 9bffba82-bece-4687-bd41-313bf950e749
+      component_id: sdc.caresphere_theme.accordion
+      inputs:
+        answer: 'No. Volunteering is free. We cover what you need to do the work.'
+        question: 'Is there a cost?'
+        default_state: collapsed
+    -
+      parent_uuid: 058ba942-3883-46e4-bd66-98ce68dafe4e
+      slot: content
+      uuid: 3a0cba28-e3c7-4cd3-9673-bc7e3be0aaa7
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: 'Still have questions'
+          format: canvas_html_inline
+        description: 'Get in touch with our team.'
+        heading_level: 2
+    -
+      parent_uuid: 3a0cba28-e3c7-4cd3-9673-bc7e3be0aaa7
+      slot: ctas
+      uuid: 1516d69c-c05a-4009-a0ea-42d59cb19973
+      component_id: sdc.caresphere_theme.button
+      inputs:
+        href: /contact
+        size: medium
+        label: Contact
+        variant: secondary-dark
+        disabled: false
+        icon_first: false
+        mobile_width: false
+        border_radius: default
+    -
+      uuid: 73ab0b2e-5f77-42f9-a0a4-fecd564e559c
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        paddingtop: 14
+        marginbottom: 0
+        paddingbottom: 14
+        backgroundcolor: gray-light
+        use_custom_container: false
+    -
+      parent_uuid: 73ab0b2e-5f77-42f9-a0a4-fecd564e559c
+      slot: content
+      uuid: 75a9ff19-bf72-4d55-9733-9a4938e0056a
+      component_id: sdc.caresphere_theme.section-grid
+      inputs:
+        grid_layout: 2_column_50_50
+        grid_row_gap: 4
+        column_1_layout: stacked
+        grid_column_gap: 10
+        is_small_container: false
+    -
+      parent_uuid: 75a9ff19-bf72-4d55-9733-9a4938e0056a
+      slot: slot_1
+      uuid: ba523dda-a0fb-4fe7-a152-21f24f8faf93
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: 'Tell us more'
+          format: full_html
+        tagline: Connect
+        description: "We'll respond within two business days."
+        heading_level: 2
+    -
+      parent_uuid: 75a9ff19-bf72-4d55-9733-9a4938e0056a
+      slot: slot_1
+      uuid: 0170dbf5-e0d5-49f6-b428-6d00793eb0eb
+      component_id: sdc.caresphere_theme.section-grid
+      inputs:
+        grid_gap: 2
+        grid_layout: 1_column
+        column_1_layout: full
+        is_small_container: false
+    -
+      parent_uuid: 0170dbf5-e0d5-49f6-b428-6d00793eb0eb
+      slot: slot_1
+      uuid: ff45bc71-d2d1-4747-af5f-ae92c944b5b2
+      component_id: sdc.caresphere_theme.contact-email
+      inputs:
+        url: 'mailto:hello@communityimpact.org'
+        email_text: hello@communityimpactnetwork.org
+        icon_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 7bae443a-7804-439a-82b8-1d7e083381d5
+            target_type: media
+    -
+      parent_uuid: 0170dbf5-e0d5-49f6-b428-6d00793eb0eb
+      slot: slot_1
+      uuid: f1c09a15-5e1a-483a-b652-7733822e5a04
+      component_id: sdc.caresphere_theme.contact-email
+      inputs:
+        url: 'mailto:hello@communityimpact.org'
+        email_text: '+1 (555) 000-0000'
+        icon_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 4c5386c9-a718-4c6a-91bc-63fa62251a46
+            target_type: media
+    -
+      parent_uuid: 0170dbf5-e0d5-49f6-b428-6d00793eb0eb
+      slot: slot_1
+      uuid: 88a021b3-4938-40e9-b4f0-6ee9c9955ea2
+      component_id: sdc.caresphere_theme.contact-email
+      inputs:
+        email_text: '123 Sample St, Sydney NSW 2000 AU'
+        icon_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 165226ff-ec18-47f5-970d-20bf2ec4478b
+            target_type: media
+    -
+      parent_uuid: 75a9ff19-bf72-4d55-9733-9a4938e0056a
+      slot: slot_2
+      uuid: 889172e9-af00-43b3-bb90-a4fedd29adfe
+      component_id: block.webform_block
+      inputs:
+        lazy: false
+        label: Webform
+        redirect: false
+        webform_id: tell_us_more
+        default_data: ''
+        label_display: '0'
+  path:
+    -
+      alias: /get-involved
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

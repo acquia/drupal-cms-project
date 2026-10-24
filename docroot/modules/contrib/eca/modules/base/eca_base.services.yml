@@ -1,0 +1,12 @@
+services:
+  # Fix autowiring for Hooks.
+  Drupal\eca\EcaState: '@eca.state'
+  # Core declares http_handler_stack private. The "HTTP: send request" action
+  # builds its retry client on a clone of this configured stack, so services
+  # tagged http_client_middleware still apply to retried requests.
+  eca_base.http_handler_stack:
+    alias: http_handler_stack
+    public: true
+
+parameters:
+  eca_base.skip_procedural_hook_scan: true

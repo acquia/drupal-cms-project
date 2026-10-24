@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.local_actions_block
+    - canvas.component.block.local_tasks_block
+    - canvas.component.block.page_title_block
+  theme:
+    - gin
+id: gin.header
+region: header
+theme: gin
+component_tree:
+  - 
+    uuid: fa376107-4ff1-4288-b6b1-8de7f004b4e3
+    component_id: block.page_title_block
+    component_version: 90ce139b2d3e2601
+    inputs:
+      label: 'Page title'
+      label_display: '0'
+  -
+    uuid: 6c52dd4a-5a85-4274-93b7-4ee8f5a862aa
+    component_id: block.local_tasks_block
+    component_version: 429966cebad152ba
+    inputs:
+      label: 'Primary tabs'
+      label_display: '0'
+      primary: true
+      secondary: false

@@ -1,0 +1,81 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+
+name: Space Pagination
+
+status: stable
+
+group: Molecules
+
+description: Show pagination to indicate a series of related content exists across multiple pages.
+
+props:
+
+  type: object
+
+  properties:
+    items:
+      type: array
+      title: List of pager items.
+      description: The list is keyed by the following elements (first, previous, next, last, pages) which they have href, attributes, text)
+      default: []
+
+    current:
+      type: number
+      title: Current page
+      description: The page number of the current page.
+
+    shapes:
+      type: string
+      title: Shapes
+      description: Shapes of pagination items.
+      enum:
+        - rounded-full
+        - rounded-lg
+      default: null
+      examples:
+        - 'rounded-full'
+
+    color:
+      type: string
+      title: Color
+      description: Color of the pagination.
+      enum:
+        - lightColor
+        - darkColor
+      default: null
+      examples:
+        - 'lightColor'
+        - 'darkColor'
+
+    type:
+      type: string
+      title: Type
+      description: Type of pagination.
+      enum:
+        - card-default
+        - card-minimal
+      default: null
+      examples:
+        - 'card-default'
+        - 'card-minimal'
+  
+    shape:
+      type: string
+      title: Shape
+      description: Shape of pagination items.
+      enum:
+        - rounded-full
+        - square
+      default: null
+      examples:
+        - 'rounded-full'
+        
+    ellipses:
+      type: array
+      title: Ellipses
+      description: If there are more pages than the quantity allows, then an ellipsis before or after the listed pages may be present. (previous, next)
+
+    attributes:
+      type: Drupal\Core\Template\Attribute
+      title: Title Attributes
+      description: HTML attributes for the pagination element.

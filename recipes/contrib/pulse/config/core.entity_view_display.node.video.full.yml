@@ -1,0 +1,91 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.video.field_banner_label
+    - field.field.node.video.field_card_image
+    - field.field.node.video.field_conclusion_body
+    - field.field.node.video.field_condition
+    - field.field.node.video.field_content_description
+    - field.field.node.video.field_date
+    - field.field.node.video.field_featured_content
+    - field.field.node.video.field_primary_category
+    - field.field.node.video.field_read_time
+    - field.field.node.video.field_secondary_category
+    - field.field.node.video.field_specialist_involved
+    - field.field.node.video.field_typical_treatments
+    - field.field.node.video.field_user_image
+    - field.field.node.video.field_user_linkedin_link
+    - field.field.node.video.field_user_name
+    - field.field.node.video.field_user_short_description
+    - field.field.node.video.field_user_twitter_link
+    - field.field.node.video.field_video_text
+    - node.type.video
+  module:
+    - text
+    - user
+id: node.video.full
+targetEntityType: node
+bundle: video
+mode: full
+content:
+  field_banner_label:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  field_conclusion_body:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_primary_category:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_read_time:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_secondary_category:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_card_image: true
+  field_condition: true
+  field_content_description: true
+  field_date: true
+  field_featured_content: true
+  field_specialist_involved: true
+  field_typical_treatments: true
+  field_user_image: true
+  field_user_linkedin_link: true
+  field_user_name: true
+  field_user_short_description: true
+  field_user_twitter_link: true
+  field_video_text: true
+  search_api_excerpt: true

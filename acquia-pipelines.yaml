@@ -1,0 +1,16 @@
+version: 1.3.0
+
+services:
+  - mysql
+  - php:
+      version: 8.5
+  - memcached
+
+events:
+  build:
+    steps:
+      - setup:
+          type: script
+          script:
+            - composer validate --no-check-all --ansi
+            - composer install --no-dev --optimize-autoloader

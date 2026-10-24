@@ -1,0 +1,69 @@
+{#
+/**
+ * @file
+ * Space Hero Banner Style 2 component.
+ *
+ * This component renders a Hero Banner with a background image, a headline, and an optional sub-headline.
+ * It also includes slots for additional content and banner info items.
+ *
+ * Properties:
+ * - background_image: [object] The background image of the hero banner.
+ *   - src: [string] The URL of the background image.
+ *   - alt: [string] Alternative text for accessibility.
+ *   - width: [integer] Image width in pixels.
+ *   - height: [integer] Image height in pixels.
+ * - title: [string] The main heading displayed on the hero banner.
+ * - sub_headline: [string] An optional secondary headline providing additional context.
+ *
+ * Slots:
+ * - content: A slot for additional content inside the banner.
+ * - items: A slot for adding block banner info items, such as icons, statistics, or highlights.
+ */
+#}
+
+{# Template #}
+{% block hero_banner_style_2_block %}
+  <section class="hero-banner style-2 ga-hero-banner-2 ga_space_component" role="banner">
+    <div class="backgroundImage w-full h-full xl:h-screen absolute top-0 left-0 bg-cover bg-no-repeat bg-center">
+      {% include 'canvas:image' ignore missing with {
+        src: background_image.src,
+        alt: background_image.alt,
+        class: 'cta-banner-image',
+        width: background_image.width,
+        height: background_image.height,
+        loading: loading|default('eager'),
+        attributes: create_attribute({
+          fetchpriority: 'high'
+        })
+      } only %}
+    </div>
+
+    <div class="container relative mx-auto z-[9] {{ modifier_class }}">
+      <div class="top-content">
+        {% if label|render|striptags|trim is not empty %}
+          <span class="intro-label">
+            {{ label }}
+          </span>
+        {% endif %}
+
+        {% if title|render|striptags|trim is not empty %}
+          <div class="heading max-w-798 mx-auto">
+            {% include 'pulse_theme:space-heading' with { content: title, tag_name: 'h1', align: 'none' } only %}
+          </div>
+        {% endif %}
+
+        {% if sub_headline|render|striptags|trim is not empty %}
+          <div{{ region_attributes.sub_headline|default(create_attribute()).addClass('sub-headline w-full') }}>{{ sub_headline }}</div>
+        {% endif %}
+      </div>
+
+      {% if content is not empty %}
+        <div class="email-form">{{ content }}</div>
+      {% endif %}
+    </div>
+
+    {% if items is not empty %}
+      <div class="bottom-info">{{ items }}</div>
+    {% endif %}
+  </section>
+{% endblock %}

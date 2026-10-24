@@ -1,0 +1,89 @@
+services:
+  _defaults:
+    autowire: true
+
+  Drupal\easy_encryption\Encryption\EncryptorInterface:
+    class: Drupal\easy_encryption\Encryption\SodiumSealedBoxEncryptor
+
+  logger.channel.easy_encryption:
+    class: Drupal\Core\Logger\LoggerChannel
+    factory: ['@logger.factory', 'get']
+    arguments: ['easy_encryption']
+
+  Drupal\easy_encryption\Sodium\SodiumKeyPairRepositoryUsingKeyEntities:
+    class: Drupal\easy_encryption\Sodium\SodiumKeyPairRepositoryUsingKeyEntities
+    private: true
+    arguments:
+      $appRoot: '%app.root%'
+      $logger: '@logger.channel.easy_encryption'
+    tags:
+      - { name: 'easy_encryption.key_activation_observer' }
+      - { name: 'easy_encryption.key_deletion_observer' }
+
+  Drupal\easy_encryption\Sodium\SodiumKeyPairReadRepositoryInterface: '@Drupal\easy_encryption\Sodium\SodiumKeyPairRepositoryUsingKeyEntities'
+  Drupal\easy_encryption\Sodium\SodiumKeyPairWriteRepositoryInterface: '@Drupal\easy_encryption\Sodium\SodiumKeyPairRepositoryUsingKeyEntities'
+
+  Drupal\easy_encryption\Sodium\PrivateKeyStorageMigrator:
+    arguments:
+      $logger: '@logger.channel.easy_encryption'
+
+  Drupal\easy_encryption\Internal\EasyEncryptionUninstallValidator:
+    arguments:
+      $keyRepository: '@key.repository'
+    tags:
+      - { name: module_install.uninstall_validator }
+
+  Drupal\easy_encryption\KeyManagement\KeyGeneratorInterface:
+    class: Drupal\easy_encryption\KeyManagement\SodiumKeyPairGenerator
+    arguments:
+      $logger: '@logger.channel.easy_encryption'
+
+  Drupal\easy_encryption\KeyManagement\KeyActivatorInterface:
+    class: Drupal\easy_encryption\KeyManagement\KeyActivator
+    arguments:
+      $logger: '@logger.channel.easy_encryption'
+      $observers: !tagged_iterator 'easy_encryption.key_activation_observer'
+
+  Drupal\easy_encryption\KeyManagement\KeyRotatorInterface:
+    class: Drupal\easy_encryption\KeyManagement\KeyRotator
+    arguments:
+      $keyRepository: '@key.repository'
+      $logger: '@logger.channel.easy_encryption'
+
+  Drupal\easy_encryption\KeyManagement\KeyPrunerInterface:
+    class: Drupal\easy_encryption\KeyManagement\KeyPruner
+    arguments:
+      $logger: '@logger.channel.easy_encryption'
+      $observers: !tagged_iterator 'easy_encryption.key_deletion_observer'
+
+  Drupal\easy_encryption\KeyManagement\KeyUsageTrackerInterface:
+    class: Drupal\easy_encryption\KeyManagement\KeyUsageTracker
+    arguments:
+      $providers: !tagged_iterator 'easy_encryption.key_usage_provider'
+
+  Drupal\easy_encryption\KeyManagement\Adapter\KeyUsageProviderFromEasyEncryptedKeyEntities:
+    class: Drupal\easy_encryption\KeyManagement\Adapter\KeyUsageProviderFromEasyEncryptedKeyEntities
+    arguments:
+      $keyRepository: '@key.repository'
+    tags:
+      - { name: easy_encryption.key_usage_provider }
+
+  Drupal\easy_encryption\KeyManagement\Adapter\ConfigKeyRegistry:
+    class: Drupal\easy_encryption\KeyManagement\Adapter\ConfigKeyRegistry
+    private: true
+
+  Drupal\easy_encryption\KeyManagement\Port\KeyRegistryInterface: '@Drupal\easy_encryption\KeyManagement\Adapter\ConfigKeyRegistry'
+  Drupal\easy_encryption\KeyManagement\Port\MutableKeyRegistryInterface: '@Drupal\easy_encryption\KeyManagement\Adapter\ConfigKeyRegistry'
+
+  Drupal\easy_encryption\KeyTransfer\KeyTransferInterface:
+    class: Drupal\easy_encryption\KeyTransfer\KeyTransfer
+    arguments:
+      $logger: '@logger.channel.easy_encryption'
+      $payloadHandlers: !tagged_iterator 'easy_encryption.key_transfer_payload_handler'
+
+  Drupal\easy_encryption\KeyTransfer\Port\KeyPackageCodecInterface:
+    class: Drupal\easy_encryption\KeyTransfer\Adapter\KeyPackageCodec
+
+  Drupal\easy_encryption\Sodium\Adapter\SodiumKeyPairPayloadHandler:
+    tags:
+      - { name: 'easy_encryption.key_transfer_payload_handler' }
