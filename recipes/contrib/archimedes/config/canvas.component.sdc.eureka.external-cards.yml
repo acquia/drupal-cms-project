@@ -1,0 +1,119 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - eureka
+label: 'External cards list'
+id: sdc.eureka.external-cards
+source: sdc
+source_local_id: 'eureka:external-cards'
+provider: eureka
+active_version: 6c55ed9eaed51e15
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        external_cards_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'E-Learning Platforms'
+          expression: ℹ︎string␟value
+        external_cards_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '2'
+          expression: ℹ︎list_float␟value
+    fallback_metadata:
+      slot_definitions:
+        external_cards_items:
+          title: 'External cards list items'
+          description: 'Block slot for external cards list items'
+  6c55ed9eaed51e15:
+    settings:
+      prop_field_definitions:
+        external_cards_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'E-Learning Platforms'
+          expression: ℹ︎string␟value
+        external_cards_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '2'
+          expression: ℹ︎list_float␟value
+    fallback_metadata:
+      slot_definitions:
+        external_cards_items:
+          title: 'External cards list items'
+          description: 'Block slot for external cards list items'
+  6300401b0e0c2e90:
+    settings:
+      prop_field_definitions:
+        external_cards_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'E-Learning Platforms'
+          expression: ℹ︎string␟value
+        external_cards_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '2'
+          expression: ℹ︎list_float␟value
+    fallback_metadata:
+      slot_definitions:
+        item_list_items_block:
+          title: 'External cards list items'
+          description: 'Block slot for external cards list items'
+  8135db16c8f01c7a:
+    settings:
+      prop_field_definitions:
+        external_cards_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'E-Learning Platforms'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        item_list_items_block:
+          title: 'External cards list items'
+          description: 'Block slot for external cards list items'

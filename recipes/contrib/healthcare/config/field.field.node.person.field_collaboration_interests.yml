@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_collaboration_interests
+    - node.type.person
+  module:
+    - text
+id: node.person.field_collaboration_interests
+field_name: field_collaboration_interests
+entity_type: node
+bundle: person
+label: 'Collaboration Interests'
+description: 'Areas of interest for potential research collaborations or partnerships'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

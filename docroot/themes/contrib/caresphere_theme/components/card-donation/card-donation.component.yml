@@ -1,0 +1,55 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Donation card
+group: Card
+description: "Dark-themed donation tier card from Figma (desktop node 1-8898, mobile 1-8495). Price, includes list with checkmarks, and CTA button."
+props:
+  type: object
+  properties:
+    plan_title:
+      type: string
+      title: Plan title
+      description: 'e.g. "One time" or "Monthly"'
+      default: "One time"
+    plan_icon_media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Plan icon
+      type: object
+      description: "Optional icon (e.g. cube) shown next to plan title."
+    price_amount:
+      type: string
+      title: Price amount
+      description: "Numeric amount without currency symbol"
+      default: "19"
+    price_suffix:
+      type: string
+      title: Price suffix
+      description: "Text after amount, e.g. /mo or /year"
+      default: "/mo"
+    currency_symbol:
+      type: string
+      title: Currency symbol
+      default: "$"
+    includes_heading:
+      type: string
+      title: Includes heading
+      default: "Includes"
+    benefits:
+      type: string
+      title: Benefits list
+      description: "Use the editor to add as many list items as you want (ul/li). List markers will show the check icon."
+      default: ""
+      contentMediaType: text/html
+      x-formatting-context: block
+    button_label:
+      type: string
+      title: Button label
+      default: "Donate now"
+    button_url:
+      type: string
+      title: Button link
+      description: "URL for the CTA button"
+      default: ""
+    tab_id:
+      type: string
+      title: Tab ID
+      description: "Matches a tab label when used with the Tabs component in the same section (e.g. 'Monthly', 'Yearly'). Cards with this id are shown when that tab is selected. Leave empty to show in all tabs or when 'View all' is selected."

@@ -1,0 +1,7 @@
+{{ include('morphos:summary', {
+  info: content.field_mc_event_type,
+  heading: label,
+  url: url,
+  summary: content.field_mc_description,
+  date: content.field_mc_event_start_date
+}, with_context = false) }}

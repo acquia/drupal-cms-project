@@ -1,0 +1,62 @@
+{#
+/**
+ * @file
+ * Theme override to display all the fields in a row.
+ *
+ * Available variables:
+ * - view: The view in use.
+ * - fields: A list of fields, each one contains:
+ *   - content: The output of the field.
+ *   - raw: The raw data for the field, if it exists. This is NOT output safe.
+ *   - class: The safe class ID to use.
+ *   - handler: The Views field handler controlling this field.
+ *   - inline: Whether or not the field should be inline.
+ *   - wrapper_element: An HTML element for a wrapper.
+ *   - wrapper_attributes: List of attributes for wrapper element.
+ *   - separator: An optional separator that may appear before a field.
+ *   - label: The field's label text.
+ *   - label_element: An HTML element for a label wrapper.
+ *   - label_attributes: List of attributes for label wrapper.
+ *   - label_suffix: Colon after the label.
+ *   - element_type: An HTML element for the field content.
+ *   - element_attributes: List of attributes for HTML element for field content.
+ *   - has_label_colon: A boolean indicating whether to display a colon after
+ *     the label.
+ *   - element_type: An HTML element for the field content.
+ *   - element_attributes: List of attributes for HTML element for field content.
+ * - row: The raw result from the query, with all data it fetched.
+ *
+ * @see template_preprocess_views_view_fields()
+ */
+#}
+
+{% set node = row._entity %}
+{% set image = null %}
+
+{% if node.field_card_image.entity %}
+	{% set media = node.field_card_image.entity %}
+
+	{% if media.field_media_image.entity %}
+		{% set file = media.field_media_image.entity %}
+		{% set image = {
+      src: file_url(file.uri.value),
+      alt: media.field_media_image.alt|default('', true),
+      width: file.width|default(384),
+      height: file.height|default(223)
+    } %}
+	{% endif %}
+{% endif %}
+
+{# Include Image card component #}
+{% include 'pulse_theme:space-videocard' with { 
+  vertical_column_alignment: 'top-image',
+  alignment: 'vertical',
+  card_size: 'large',
+  title: fields.title.content,
+  image: image,
+  date: fields.field_date.content,
+  read_time: fields.field_read_time.content,
+  text: fields.field_content_description.content,
+  primary_category: fields.field_primary_category.content,
+  secondary_category: fields.field_secondary_category.content
+} only %}

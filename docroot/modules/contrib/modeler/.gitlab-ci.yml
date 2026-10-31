@@ -1,0 +1,229 @@
+include:
+  - project: $_GITLAB_TEMPLATES_REPO
+    ref: $_GITLAB_TEMPLATES_REF
+    file:
+      - '/includes/include.drupalci.main.yml'
+      - '/includes/include.drupalci.variables.yml'
+      - '/includes/include.drupalci.workflows.yml'
+variables:
+  _AUTORUN_NEXT_MAJOR: 'push-and-schedule'
+  _AUTORUN_NEXT_MINOR: 'push-and-schedule'
+  _CSPELL_IGNORE_PATHS: "dist/*, ui/dist/*, ui/tests/e2e/fixtures/mocks.ts, ui/tests/screenshots/*, ui/tests/storybook-static/*, ui/tests/playwright-report/*"
+  _MKDOCS_STRICT: '0'
+  SKIP_STYLELINT: '1'
+  SKIP_ESLINT: '1'
+  OPT_IN_TEST_PREVIOUS_MAJOR: 0
+  OPT_IN_TEST_CURRENT: 1
+  OPT_IN_TEST_NEXT_MINOR: 1
+  OPT_IN_TEST_NEXT_MAJOR: 1
+  RUN_JOB_UPGRADE_STATUS: 1
+stages:
+  - build
+  - validate
+  - test
+  - release
+
+reactapp build:
+  stage: build
+  variables:
+    GIT_STRATEGY: fetch
+    GIT_CHECKOUT: "true"
+  script:
+    - cd ui
+    - npm ci
+    - npm run build:production
+  artifacts:
+    paths:
+      - dist/
+      - ui/node_modules/
+
+reactapp lint:
+  stage: validate
+  image: node:20.14.0-alpine
+  variables:
+    GIT_STRATEGY: fetch
+    GIT_CHECKOUT: "true"
+  needs:
+    - reactapp build
+  script:
+    - cd ui
+    - npm run lint
+
+reactapp type check:
+  stage: validate
+  image: node:20.14.0-alpine
+  variables:
+    GIT_STRATEGY: fetch
+    GIT_CHECKOUT: "true"
+  needs:
+    - reactapp build
+  script:
+    - cd ui
+    - npm run type-check
+
+reactapp unit tests:
+  stage: test
+  image: node:20.14.0-alpine
+  variables:
+    GIT_STRATEGY: fetch
+    GIT_CHECKOUT: "true"
+  needs:
+    - reactapp build
+  script:
+    - cd ui
+    - npm run test:ci
+
+reactapp e2e:
+  stage: test
+  image: node:20-bookworm
+  variables:
+    GIT_STRATEGY: fetch
+    GIT_CHECKOUT: "true"
+  needs:
+    - reactapp build
+  script:
+    - cd ui
+    - npx playwright install --with-deps chromium
+    - npm run e2e
+  artifacts:
+    when: always
+    paths:
+      - ui/tests/playwright-report/
+      - ui/tests/test-results/
+
+reactapp a11y:
+  stage: test
+  image: node:20-bookworm
+  variables:
+    GIT_STRATEGY: fetch
+    GIT_CHECKOUT: "true"
+  needs:
+    - reactapp build
+  script:
+    - cd ui
+    - npx playwright install --with-deps chromium
+    - npm run test-storybook:ci
+  artifacts:
+    when: always
+    paths:
+      - ui/tests/storybook-static/
+
+cspell:
+  allow_failure: false
+phpcs:
+  allow_failure: false
+phpstan:
+  allow_failure: false
+phpstan (next minor):
+  allow_failure: false
+phpstan (next major):
+  allow_failure: false
+phpunit (previous major):
+  allow_failure: false
+# Drupal core's DrupalTestCaseTrait now raises a deprecation notice whenever
+# SYMFONY_DEPRECATIONS_HELPER is present in the environment at all (even set
+# to 'disabled', which is what .phpunit-base sets it to), since that
+# configuration mechanism is deprecated in drupal:11.5.0 and removed in
+# drupal:12.0.0 (see https://www.drupal.org/node/3594014). That self-inflicted
+# deprecation flips run-tests.sh's exit code even though all assertions pass.
+# Only the next-minor/next-major variants run core versions new enough to
+# trigger it, so unset the variable there before delegating to the shared
+# phpunit script (setting it to an empty string is not enough: PHP's
+# getenv() still returns '' which is !== FALSE).
+phpunit (next minor):
+  allow_failure: false
+  script:
+    - unset SYMFONY_DEPRECATIONS_HELPER
+    - !reference [ .phpunit-base-script ]
+    - echo "Exiting with EXIT_CODE=$EXIT_CODE" && exit $EXIT_CODE
+phpunit (next major):
+  allow_failure: false
+  script:
+    - unset SYMFONY_DEPRECATIONS_HELPER
+    - !reference [ .phpunit-base-script ]
+    - echo "Exiting with EXIT_CODE=$EXIT_CODE" && exit $EXIT_CODE
+upgrade status:
+  allow_failure: false
+
+release:
+  stage: release
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+(-[a-zA-Z0-9.]+)?$/
+  before_script:
+    - export VERSION=$(echo ${CI_COMMIT_TAG} | cut -c2-)
+    - git config --global user.email "no-reply@drupal.org"
+    - git config --global user.name "drupal.org GitLab CI"
+    - git remote set-url origin https://gitlab-ci-token:${GITLAB_CI_RELEASE_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git
+  script:
+    - cd ui
+    - npm ci
+    - npm run build:production
+    - cd ..
+    - git add -f dist
+    - git commit -m "Add built assets for release ${VERSION}"
+    - git tag -f $VERSION
+    - git push origin $VERSION
+
+# Verify that non-v-prefixed tags contain built assets. A tag like "1.0.0"
+# (without "v" prefix) is expected to be created by the release job above,
+# which includes the compiled CSS and JS bundles. If someone manually creates
+# such a tag without going through the v-prefixed release flow, the assets
+# will be missing because dist/ is gitignored on regular branches.
+#
+# When assets are missing, this job automatically deletes the broken tag and
+# the pipeline fails.
+verify release assets:
+  stage: .pre
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+(-[a-zA-Z0-9.]+)?$/
+  script:
+    - |
+      echo "============================================="
+      echo " RELEASE TAG ASSET VERIFICATION"
+      echo "============================================="
+      echo ""
+      echo "Tag: ${CI_COMMIT_TAG}"
+      echo ""
+      MISSING=0
+      REQUIRED_FILES="dist/modeler.bundle.css dist/modeler.bundle.js"
+      for file in $REQUIRED_FILES; do
+        if [ ! -f "$file" ]; then
+          echo "MISSING: $file"
+          MISSING=1
+        else
+          echo "OK:      $file"
+        fi
+      done
+      echo ""
+      if [ "$MISSING" -eq 0 ]; then
+        echo "All required assets are present. Release tag is valid."
+        exit 0
+      fi
+      echo "============================================="
+      echo " ERROR: Built assets are missing!"
+      echo "============================================="
+      echo ""
+      echo "Tag '${CI_COMMIT_TAG}' does not contain the required"
+      echo "built assets (CSS/JS bundles). This most likely happened"
+      echo "because the tag was created without the required 'v' prefix."
+      echo ""
+      echo "Tags must start with 'v' (e.g. v${CI_COMMIT_TAG}) to trigger"
+      echo "the build pipeline that compiles and includes the assets."
+      echo ""
+
+      # --- Delete the broken tag ---
+      echo "Deleting broken tag '${CI_COMMIT_TAG}'..."
+      git remote set-url origin "https://gitlab-ci-token:${GITLAB_CI_RELEASE_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
+      if git push origin ":refs/tags/${CI_COMMIT_TAG}"; then
+        echo "Tag '${CI_COMMIT_TAG}' has been deleted."
+        echo ""
+        echo "To create a proper release, push the tag with 'v' prefix:"
+        echo "  git tag v${CI_COMMIT_TAG}"
+        echo "  git push origin v${CI_COMMIT_TAG}"
+      else
+        echo "WARNING: Failed to delete tag '${CI_COMMIT_TAG}'."
+        echo "Please delete it manually:"
+        echo "  git push origin :refs/tags/${CI_COMMIT_TAG}"
+      fi
+      echo ""
+      exit 1

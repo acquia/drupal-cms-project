@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.local_tasks_block
+  theme:
+    - gin
+id: gin.pre_content
+region: pre_content
+theme: gin
+component_tree:
+  -
+    uuid: 49bc1de2-d965-4269-8dcc-28c597f7be63
+    component_id: block.local_tasks_block
+    component_version: 429966cebad152ba
+    inputs:
+      label: 'Secondary tabs'
+      label_display: '0'
+      primary: false
+      secondary: true

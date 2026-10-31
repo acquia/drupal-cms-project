@@ -1,0 +1,80 @@
+<?php
+
+use Drupal\Core\Asset\AttachedAssets;
+
+/**
+ * Implements hook_preprocess_easy_email_body_html().
+ */
+function easy_email_theme_preprocess_easy_email_body_html(&$variables) {
+  $variables['site_logo'] = easy_email_theme_determine_site_logo_url();
+  $variables['site_name'] = \Drupal::config('system.site')->get('name');
+  $variables['site_url'] = \Drupal\Core\Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString();
+
+  // Get the CSS files from the easy_email_theme/style-tag-styles library
+  $css_render = [
+    '#attached' => [
+      'library' => [
+        'easy_email_theme/style-tag-styles',
+      ],
+    ],
+  ];
+  $asset_resolver = \Drupal::service('asset.resolver');
+  $css_optimizer = \Drupal::service('asset.css.optimizer');
+  $css = '';
+  foreach ($asset_resolver->getCssAssets(AttachedAssets::createFromRenderArray($css_render), FALSE) as $asset) {
+    if (($asset['type'] === 'file') && $asset['preprocess']) {
+      $css .= $css_optimizer->optimize($asset);
+    } else {
+      $css .= file_get_contents($asset['data']);
+    }
+  }
+  if (!empty($css)) {
+    $variables['style_tag_styles'] = $css;
+  }
+}
+
+function easy_email_theme_determine_site_logo_url() {
+  $site_logo_url = NULL;
+
+  // Is Easy Email Theme configured to use the default logo?
+  $use_default_logo = (bool) theme_get_setting('logo.use_default');
+  if ($use_default_logo) {
+    // If Easy Email Theme is using the default, get the currently configured logo from the default theme.
+    $default_theme = \Drupal::config('system.theme')->get('default');
+    if (!empty($default_theme)) {
+      $default_theme_uses_default_logo = (bool) theme_get_setting('logo.use_default', $default_theme);
+      if ($default_theme_uses_default_logo) {
+        $default_site_logo = theme_get_setting('logo.url', $default_theme);
+        // Default logo includes the base path, so remove it for consistency
+        $base_path = base_path();
+        if (str_starts_with($default_site_logo, $base_path)) {
+          $default_site_logo = substr($default_site_logo, strlen($base_path));
+        }
+      }
+      else {
+        $default_site_logo = theme_get_setting('logo.path', $default_theme);
+      }
+      if (file_exists($default_site_logo)) {
+        $site_logo_url = \Drupal::service('file_url_generator')->generateAbsoluteString($default_site_logo);
+      }
+    }
+  }
+  else {
+    // Easy Email Theme is not using the default logo, so get the logo from the theme itself.
+    $site_logo = theme_get_setting('logo.path', 'easy_email_theme');
+    if (!empty($site_logo) && file_exists($site_logo)) {
+      $site_logo_url = \Drupal::service('file_url_generator')->generateAbsoluteString($site_logo);
+    }
+  }
+  return $site_logo_url;
+}
+
+if (\Drupal::moduleHandler()->moduleExists('symfony_mailer')) {
+  /**
+   * Implements hook_preprocess_email() for Symfony Mailer.
+   */
+  function easy_email_theme_preprocess_email(&$variables) {
+    easy_email_theme_preprocess_easy_email_body_html($variables);
+  }
+}
+

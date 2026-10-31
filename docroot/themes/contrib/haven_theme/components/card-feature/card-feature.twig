@@ -1,0 +1,131 @@
+{% set card_overlay = overlay|default('noColor') %}
+{% set is_clickable = url is not empty ? 'yes' : 'no' %}
+
+{% set card =
+  html_cva(
+    base: ['group @container relative flex aspect-square flex-col gap-8 rounded-sm in-[.views-row]:h-full'],
+    variants: {
+      clickable: {
+        yes: 'transition duration-300 hover:scale-104 hover:shadow-2xl',
+        no: ''
+      },
+      overlay: {
+        primary: 'bg-primary',
+        secondary: 'bg-secondary',
+        accent: 'bg-accent',
+        muted: 'bg-muted',
+        white: 'bg-primary-foreground'
+      }
+    }
+  )
+%}
+
+{% set card_media =
+  html_cva(
+    base: 'absolute inset-0 mt-auto overflow-hidden rounded-sm',
+    variants: {},
+    compound_variants: [
+      {
+        overlay: ['primary', 'secondary', 'accent', 'muted', 'white'],
+        class: 'opacity-50'
+      }
+    ]
+  )
+%}
+
+{% set card_image =
+  html_cva(
+    base: ['h-full w-full object-cover'],
+    variants: {
+      overlay: {
+        noColor: ''
+      }
+    },
+    compound_variants: [
+      {
+        overlay: ['primary', 'secondary', 'accent', 'muted', 'white'],
+        class: 'grayscale-50'
+      }
+    ]
+  )
+%}
+
+{% set icon_size_map = {
+  small: 'small',
+  medium: 'medium',
+  large: 'large',
+  'extra-large': 'extra-large'
+} %}
+
+{% set card_content = html_cva(base: 'z-10 flex h-full w-full flex-col items-baseline gap-4 p-4 @min-[350px]:p-6', variants: {}) %}
+
+<div
+  class="{{
+  card.apply(
+    {
+      clickable: is_clickable,
+      overlay: card_overlay
+    },
+    card_classes|default('')
+  )
+  }}"
+>
+  {% if media.src is not empty %}
+    <div
+      class="{{
+      card_media.apply({
+        style: card_style,
+        overlay: card_overlay
+      })
+      }}"
+    >
+      {% block media %}
+        {% include 'canvas:image' ignore missing with {
+          src: media.src,
+          alt: media.alt,
+          class: card_image.apply({
+            overlay: card_overlay
+          }),
+          width: media.width,
+          height: media.height,
+          sizes: card_orientation == 'stacked' ? 'auto, 100vw' : '50vw'
+        } only %}
+      {% endblock %}
+      {% if card_overlay == 'noColor' %}
+        <div class="absolute inset-0 h-full w-full bg-gradient-to-b from-transparent to-black/70"></div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div
+    class="{{
+    card_content.apply({
+      style: card_style
+    })
+    }}"
+  >
+    <header class="text-primary-foreground">
+      {% if icon %}
+        {{
+          include(
+            '@haven_theme/components/icon/icon.twig',
+            {
+              icon: icon,
+              icon_size: icon_size_map[icon_size]|default('medium')
+            },
+            with_context: false
+          )
+        }}
+      {% endif %}
+    </header>
+    <div class="mt-auto flex w-full gap-1 md:gap-2">
+      <h3 class="text-2xl leading-none font-semibold text-primary-foreground @min-[250px]:text-3xl @min-[350px]:text-4xl">
+        {% if is_clickable %}
+          <a href="{{ url }}" class="after:absolute after:inset-0 after:content-['']">{{ heading_text }}</a>
+        {% else %}
+          {{ heading_text }}
+        {% endif %}
+      </h3>
+    </div>
+  </div>
+</div>

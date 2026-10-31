@@ -1,0 +1,182 @@
+/**
+ * @file video.css
+ * SDC Video component.
+ * Desktop: Figma node 1-10549; Mobile: Figma node 1-10225.
+ */
+
+/* ============================================================
+   Wrapper & container
+   ============================================================ */
+
+.video-figure {
+  margin: 0;
+  width: 100%;
+}
+
+.video__wrapper {
+  position: relative;
+  width: 100%;
+  background-color: var(--muted, #1a1f1c);
+}
+
+.video__container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ============================================================
+   Media (video element or embed container)
+   ============================================================ */
+
+.video__media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.video__media[aria-hidden="true"] {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.video__media[aria-hidden="false"] {
+  visibility: visible;
+}
+
+.video__element,
+.video__embed {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.video__embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ============================================================
+   Thumbnail overlay (desktop: larger play; mobile: compact)
+   ============================================================ */
+
+.video__thumbnail-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.video__thumbnail-wrap[data-hidden] {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.video__thumbnail-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+}
+
+.video__thumbnail-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Play button — mobile (Figma 1-10225): smaller, centered */
+.video__play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--primary, #c30000);
+  color: var(--primary-foreground, #fff);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md, 0 4px 6px rgba(0, 0, 0, 0.2));
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.video__play-btn:hover {
+  background-color: var(--destructive, #9c0000);
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+.video__play-btn:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.video__play-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-left: 4px; /* optical centering for play triangle */
+}
+
+.video__play-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Desktop (Figma 1-10549): larger play button */
+@media (min-width: 48rem) {
+  .video__play-btn {
+    width: 72px;
+    height: 72px;
+  }
+
+  .video__play-icon {
+    width: 32px;
+    height: 32px;
+    margin-left: 6px;
+  }
+}
+
+/* ============================================================
+   Caption
+   ============================================================ */
+
+.video__caption {
+  display: block;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: var(--text-sm, 0.875rem);
+  line-height: var(--text-sm--line-height, 1.5);
+  color: var(--muted-foreground, rgba(255, 255, 255, 0.6));
+}
+
+@media (min-width: 48rem) {
+  .video__caption {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: var(--text-base, 1rem);
+  }
+}

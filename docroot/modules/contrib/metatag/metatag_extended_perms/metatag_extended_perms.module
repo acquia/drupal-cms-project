@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Primary hook implementations for metatag_extended_perms.
+ */
+
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\metatag_extended_perms\Hook\FieldHooks;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_field_widget_single_element_form_alter().
+ */
+#[LegacyHook]
+function metatag_extended_perms_field_widget_single_element_form_alter(&$element, FormStateInterface $form_state, $context) {
+  \Drupal::service(FieldHooks::class)->fieldWidgetSingleElementFormAlter($element, $form_state, $context);
+}

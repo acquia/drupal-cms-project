@@ -1,0 +1,10 @@
+name: 'Config language lock action unknown langcode test'
+install:
+  - config_language_lock_test_types
+config:
+  actions:
+    config_language_lock_test_types.always_valid.lock_action_unknown:
+      createIfNotExists:
+        langcode: zz
+        label: 'Lock action unknown langcode'
+        id: lock_action_unknown

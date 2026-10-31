@@ -1,0 +1,35 @@
+{#
+  Avatar — Profile block with image, name, and title/role.
+  Figma node 1:7450 — 56px circle, name SemiBold 16px, title Regular 16px, gap 16px.
+#}
+{% set has_image = image_media is defined and image_media is not empty and image_media.src is defined and image_media.src is not empty %}
+
+<div class="avatar" data-name="Avatar" data-node-id="1:7450">
+  <div class="avatar__image" data-name="Avatar Image" data-node-id="1:7451">
+    {% if has_image %}
+      <div class="avatar__image-inner">
+        {% include 'canvas:image' ignore missing with {
+          src: image_media.src,
+          alt: image_media.alt|default(name|default('Avatar')),
+          class: 'avatar__img',
+          width: 56,
+          height: 56
+        } only %}
+      </div>
+    {% else %}
+      <div class="avatar__placeholder" aria-hidden="true">
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="currentColor"/>
+        </svg>
+      </div>
+    {% endif %}
+  </div>
+  <div class="avatar__text" data-name="Avatar Content" data-node-id="1:7452">
+    {% if name is defined and name is not empty %}
+      <p class="avatar__name" data-node-id="1:7453">{{ name }}</p>
+    {% endif %}
+    {% if title is defined and title is not empty %}
+      <p class="avatar__title" data-node-id="1:7454">{{ title }}</p>
+    {% endif %}
+  </div>
+</div>

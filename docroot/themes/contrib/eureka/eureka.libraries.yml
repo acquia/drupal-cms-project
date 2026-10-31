@@ -1,0 +1,33 @@
+global:
+  css:
+    base:
+      components/00-base/global.min.css: { }
+  js:
+    components/01-atoms/tables/tables.min.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupal.tabbingmanager
+    - core/once
+    - eureka/fonts
+
+fonts:
+  version: VERSION
+  css:
+    component:
+      //fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap: { type: external }
+
+splide:
+  js:
+    //cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js: { type: external }
+    //cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js: { type: external }
+
+leaflet:
+  css:
+    component:
+      //unpkg.com/leaflet@1.9.4/dist/leaflet.css: { type: external }
+  js:
+    //unpkg.com/leaflet@1.9.4/dist/leaflet.js: { type: external }
+
+youtube_iframe_api:
+  js:
+    //www.youtube.com/iframe_api: {type: external, attributes: { defer: true, async: true } }

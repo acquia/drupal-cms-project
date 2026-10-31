@@ -1,0 +1,32 @@
+{% set classes = [
+  'benefit-card',
+  admin_theme ? 'benefit-card--admin-theme' : 'benefit-card--themed',
+] %}
+
+<div{{attributes.addClass(classes)}}>
+  <div class="benefit-card__inner">
+    {% if icon %}
+      <div class="benefit-card__icon">
+        {{ icon }}
+      </div>
+    {% endif %}
+    
+    {% if title %}
+      <h3 class="benefit-card__title">
+        {{ title }}
+      </h3>
+    {% endif %}
+
+    {% if description %}
+      <div class="benefit-card__description">
+        {{ description }}
+      </div>
+    {% endif %}
+
+    {% if action %}
+      <div class="benefit-card__action">
+        {{ action }}
+      </div>
+    {% endif %}
+  </div>
+</div>

@@ -1,0 +1,34 @@
+{#
+/**
+ * Available variables:
+ * - contact_cards_base_class: base classname of the wrapper.
+ * - contact_cards_modifiers: array of modifiers to add to the base classname of the wrapper.
+ * - contact_cards_blockname: blockname prepended to the base classname of the wrapper(s) and each component.
+ * - contact_cards_extra_classes: array of extra classes to add to the base classes.
+ *
+ * - contact_cards_heading: heading text of the quick links component.
+ * - contact_cards_heading_level: heading level of the quick links component.
+ * - contact_cards_summary: summary text of the quick links component.
+ *
+ * - contact_cards_items: rendered HTML of the quick links items.
+ */
+#}
+
+{% set contact_cards_base_class = 'contact-cards' %}
+{% set contact_cards_modifiers =  contact_cards_modifiers|default([]) %}
+
+<div {{ bem(contact_cards_base_class, contact_cards_modifiers, contact_cards_blockname, contact_cards_extra_classes) }}>
+  <div class="container">
+    {{ include('eureka:component-title', {
+      component_title_centered: true,
+      component_title_heading: contact_cards_heading,
+      component_title_heading_level: contact_cards_heading_level,
+      component_title_summary: contact_cards_summary,
+    }, with_context = false) }}
+    <div {{ bem('items', [], contact_cards_base_class) }}>
+      {% block contact_cards_items_block %}
+        {{ contact_cards_items }}
+      {% endblock %}
+    </div>
+  </div>
+</div>

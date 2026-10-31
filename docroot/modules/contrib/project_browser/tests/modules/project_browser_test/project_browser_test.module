@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * @file
+ * For use in Project Browser tests.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Asset\AttachedAssetsInterface;
+use Drupal\Core\Config\Checkpoint\CheckpointListInterface;
+use Drupal\Core\Extension\Extension;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function project_browser_test_form_project_browser_apply_recipe_form_alter(array &$form): void {
+  $form['actions']['apply']['#submit'] = [
+    '::submitForm',
+    'project_browser_test_record_checkpoint_name',
+  ];
+}
+
+/**
+ * Records the active checkpoint name in state for functional tests to read.
+ */
+function project_browser_test_record_checkpoint_name(): void {
+  $checkpoint = \Drupal::service(CheckpointListInterface::class)
+    ->getActiveCheckpoint();
+  \Drupal::state()
+    ->set('project_browser_test.checkpoint_name', $checkpoint?->label);
+}
+
+/**
+ * Implements hook_js_settings_alter().
+ */
+function project_browser_test_js_settings_alter(array &$settings, AttachedAssetsInterface $assets): void {
+  // For testing purposes, trick Project Browser into thinking Pinky and The
+  // Brain has been downloaded but not installed.
+  $settings['project_browser']['modules']['pinky_brain'] = 0;
+}
+
+/**
+ * Implements hook_system_info_alter().
+ */
+function project_browser_system_info_alter(array &$info, Extension $extension, string $type): void {
+  // Expose core's Package Manager in the UI so it can be installed in
+  // Nightwatch tests.
+  if ($type === 'module' && $extension->getName() === 'package_manager') {
+    $info['hidden'] = FALSE;
+  }
+}

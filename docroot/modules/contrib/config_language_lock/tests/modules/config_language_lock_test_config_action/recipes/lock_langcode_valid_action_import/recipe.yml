@@ -1,0 +1,33 @@
+name: 'Config language lock valid langcode action import test'
+install:
+  - config_language_lock_test_types
+config:
+  actions:
+    config_language_lock_test_types.always_valid.lock_action_always_valid:
+      createIfNotExists:
+        label: 'Lock action always valid no langcode'
+        id: lock_action_always_valid
+    config_language_lock_test_types.always_valid.lock_action_always_valid_other:
+      createIfNotExists:
+        langcode: yy
+        label: 'Lock action always valid other language'
+        id: lock_action_always_valid_other
+    config_language_lock_test_types.maybe_invalid.lock_action_maybe_invalid_missing:
+      createIfNotExists:
+        label: 'Lock action maybe invalid missing langcode'
+        id: lock_action_maybe_invalid_missing
+    config_language_lock_test_types.maybe_invalid.lock_action_maybe_invalid_empty:
+      createIfNotExists:
+        langcode: ''
+        label: 'Lock action maybe invalid empty langcode'
+        id: lock_action_maybe_invalid_empty
+    config_language_lock_test_types.maybe_invalid.lock_action_maybe_invalid_other:
+      createIfNotExists:
+        langcode: yy
+        label: 'Lock action maybe invalid other language'
+        id: lock_action_maybe_invalid_other
+    config_language_lock_test_types.maybe_invalid.lock_action_maybe_invalid_unknown:
+      createIfNotExists:
+        langcode: zz
+        label: 'Lock action maybe invalid unknown langcode'
+        id: lock_action_maybe_invalid_unknown

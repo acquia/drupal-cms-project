@@ -1,0 +1,645 @@
+langcode: en
+status: false
+dependencies:
+  config:
+    - image.style.canvas_parametrized_width
+  module:
+    - file
+    - image
+    - link
+    - options
+    - svg_image
+  theme:
+    - convene_theme
+active_version: 212a46f50a8660a0
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        variation:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value: null
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        heading:
+          title: 'Heading Slot'
+          description: 'Slot for the main headline (use Typography atom).'
+        subheading:
+          title: 'Subheading Slot'
+          description: 'Slot for the subheadline (use Typography atom).'
+        actions:
+          title: Buttons
+          description: 'Buttons to be displayed in the hero section.'
+        background_media:
+          title: 'Background Image'
+          description: 'Image to be displayed as background.'
+  212a46f50a8660a0:
+    settings:
+      prop_field_definitions:
+        variation:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        heading:
+          title: 'Heading Slot'
+          description: 'Slot for the main headline (use Typography atom).'
+        subheading:
+          title: 'Subheading Slot'
+          description: 'Slot for the subheadline (use Typography atom).'
+        actions:
+          title: Buttons
+          description: 'Buttons to be displayed in the hero section.'
+        background_media:
+          title: 'Background Image'
+          description: 'Image to be displayed as background.'
+  785e17ee533f2a26:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+        variation:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        disable_css:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value: null
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        heading:
+          title: 'Heading Slot'
+          description: 'Slot for the main headline (use Typography atom).'
+        subheading:
+          title: 'Subheading Slot'
+          description: 'Slot for the subheadline (use Typography atom).'
+        actions:
+          title: Buttons
+          description: 'Buttons to be displayed in the hero section.'
+        background_media:
+          title: 'Background Image'
+          description: 'Image to be displayed as background.'
+  bb6a6ae05c4715f5:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+        title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Join us for the summit'
+          expression: ℹ︎string␟value
+        description:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'A gathering of minds to shape the future.'
+          expression: ℹ︎string␟value
+        primary_cta_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Get Tickets'
+          expression: ℹ︎string␟value
+        primary_cta_url:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '#'
+          expression: ℹ︎string␟value
+        secondary_cta_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Learn More'
+          expression: ℹ︎string␟value
+        secondary_cta_url:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '#'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  7531656d83e566ea:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+        variation:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        disable_css:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value: null
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        heading:
+          title: 'Heading Slot'
+          description: 'Slot for the main headline (use Typography atom).'
+        subheading:
+          title: 'Subheading Slot'
+          description: 'Slot for the subheadline (use Typography atom).'
+        actions:
+          title: Buttons
+          description: 'Buttons to be displayed in the hero section.'
+        background_media:
+          title: 'Background Image'
+          description: 'Image to be displayed as background.'
+  aaf582b907a5805b:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+        variation:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        heading:
+          title: 'Heading Slot'
+          description: 'Slot for the main headline (use Typography atom).'
+        subheading:
+          title: 'Subheading Slot'
+          description: 'Slot for the subheadline (use Typography atom).'
+        actions:
+          title: Buttons
+          description: 'Buttons to be displayed in the hero section.'
+        background_media:
+          title: 'Background Image'
+          description: 'Image to be displayed as background.'
+  3ec454e7153f6e0f:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        heading:
+          title: 'Heading Slot'
+          description: 'Slot for the main headline (use Typography atom).'
+        subheading:
+          title: 'Subheading Slot'
+          description: 'Slot for the subheadline (use Typography atom).'
+        actions:
+          title: Buttons
+          description: 'Buttons to be displayed in the hero section.'
+        background_media:
+          title: 'Background Image'
+          description: 'Image to be displayed as background.'
+  a2c76a36e6a94bdf:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        heading:
+          title: 'Heading Slot'
+          description: 'Slot for the main headline (use Typography atom).'
+        subheading:
+          title: 'Subheading Slot'
+          description: 'Slot for the subheadline (use Typography atom).'
+        actions:
+          title: Buttons
+          description: 'Buttons to be displayed in the hero section.'
+  d34f821a5bcff7c7:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+        heading:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Welcome to Our Site'
+          expression: ℹ︎string␟value
+        subheading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Discover amazing features and benefits'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        actions:
+          title: Buttons
+          description: 'Buttons to be displayed in the hero section.'
+        background_media:
+          title: 'Background Image'
+          description: 'Image to be displayed as background.'
+  d2a547285e98b891:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+        heading:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Welcome to Our Site'
+          expression: ℹ︎string␟value
+        subheading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Discover amazing features and benefits'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        actions:
+          title: Actions
+          description: 'Call to action buttons.'
+        background_media:
+          title: 'Background Media'
+          description: 'Image or video to use as background.'
+  8392359c1cb81acb:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+        heading:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Welcome to Our Site'
+          expression: ℹ︎string␟value
+        subheading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Discover amazing features and benefits'
+          expression: ℹ︎string␟value
+        background_image:
+          required: false
+          field_type: image
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: image_image
+          default_value: {  }
+          expression: ℹ︎image␟src_with_alternate_widths
+    fallback_metadata:
+      slot_definitions:
+        actions:
+          title: Actions
+          description: 'Call to action buttons.'
+        background_media:
+          title: 'Background Media'
+          description: 'Image or video to use as background.'
+  ffbd68dd9d4e9d45:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+        heading:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Welcome to Our Site'
+          expression: ℹ︎string␟value
+        subheading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Discover amazing features and benefits'
+          expression: ℹ︎string␟value
+        background_image:
+          required: false
+          field_type: image
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: image_image
+          default_value: {  }
+          expression: ℹ︎image␟src_with_alternate_widths
+    fallback_metadata:
+      slot_definitions:
+        actions:
+          title: Actions
+          description: 'Call to action buttons.'
+  9f51128ed499ab43:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+        heading:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Welcome to Our Site'
+          expression: ℹ︎string␟value
+        subheading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Discover amazing features and benefits'
+          expression: ℹ︎string␟value
+        background_image:
+          required: false
+          field_type: image
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: image_image
+          default_value: {  }
+          expression: ℹ︎image␟src_with_alternate_widths
+    fallback_metadata:
+      slot_definitions:
+        content:
+          title: Content
+          description: 'Hero content (auto-populated).'
+        actions:
+          title: Actions
+          description: 'Call to action buttons.'
+  41b325c2fd70a0e7:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+        heading:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Welcome to Our Site'
+          expression: ℹ︎string␟value
+        subheading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Discover amazing features and benefits'
+          expression: ℹ︎string␟value
+        background_image:
+          required: false
+          field_type: image
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: image_image
+          default_value: {  }
+          expression: ℹ︎image␟src_with_alternate_widths
+        primary_button_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Get Started'
+          expression: ℹ︎string␟value
+        primary_button_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: /get-started
+              options: {  }
+          expression: ℹ︎link␟url
+        secondary_button_text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Learn More'
+          expression: ℹ︎string␟value
+        secondary_button_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: /learn-more
+              options: {  }
+          expression: ℹ︎link␟url
+    fallback_metadata:
+      slot_definitions:
+        content:
+          title: Content
+          description: 'Hero content (auto-populated).'
+label: 'Hero Banner'
+id: sdc.convene_theme.hero
+provider: convene_theme
+source: sdc
+source_local_id: 'convene_theme:hero'

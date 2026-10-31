@@ -1,0 +1,17 @@
+services:
+  _defaults:
+    autowire: true
+
+  Drupal\recipe_locale\RecipeTracker: {}
+
+  Drupal\recipe_locale\EventSubscriber\RecipeSubscriber:
+    tags:
+      - { name: event_subscriber }
+
+  Drupal\recipe_locale\EventSubscriber\ConfigSubscriber:
+    tags:
+      - { name: event_subscriber }
+
+# The Interface Translation (locale) module is optional. The services that
+# talk to it are registered by RecipeLocaleServiceProvider, only when locale
+# is installed.

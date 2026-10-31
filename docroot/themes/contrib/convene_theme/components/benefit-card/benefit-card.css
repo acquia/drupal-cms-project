@@ -1,0 +1,54 @@
+.benefit-card {
+  background-color: #F3F4F6;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.benefit-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.benefit-card__inner {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.benefit-card__icon img,
+.benefit-card__icon svg,
+.benefit-card__icon .media,
+.benefit-card__icon .component {
+  max-height: 48px;
+  width: 48px;
+  height: 48px;
+  display: block;
+  object-fit: contain;
+  mix-blend-mode: multiply; /* Removes white background from PNG icons */
+}
+
+.benefit-card__title {
+  margin-bottom: 12px;
+  font-size: 24px;
+  font-weight: 400; /* Regular per screenshot */
+  line-height: 1.3;
+  color: #030804;
+}
+
+.benefit-card__description {
+  margin-bottom: 32px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #4b5563; /* Grey text */
+  flex-grow: 1; /* Pushes the action link to the bottom */
+  margin-bottom: 1rem;
+}
+
+.benefit-card__action {
+  margin-top: auto;
+  /* Action link styling defaults will come from the Button variant (e.g. quaternary) placed in this slot */
+}

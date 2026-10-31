@@ -1,0 +1,19 @@
+automatic_updates.report_update:
+  route_name: automatic_updates.update_form
+  base_route: system.admin_reports
+  title: Update
+  weight: 10
+
+automatic_updates.module_update:
+  # @see \Drupal\automatic_updates\Routing\RouteSubscriber::alterRoutes()
+  route_name: automatic_updates.module_update
+  base_route: system.modules_list
+  title: Update
+  weight: 10
+
+automatic_updates.theme_update:
+  # @see \Drupal\automatic_updates\Routing\RouteSubscriber::alterRoutes()
+  route_name: automatic_updates.theme_update
+  base_route: system.themes_page
+  title: Update
+  weight: 20

@@ -1,0 +1,31 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a form element label.
+ *
+ * Available variables:
+ * - title: The label's text.
+ * - title_display: Elements title_display setting.
+ * - required: An indicator for whether the associated form element is required.
+ * - attributes: A list of HTML attributes for the label.
+ *
+ * @see template_preprocess_form_element_label()
+ */
+#}
+{%
+  set classes = [
+    'form-label',
+    title_display == 'after' ? 'option label',
+    title_display == 'invisible' ? 'visually-hidden',
+    required ? 'js-form-required',
+    required ? 'form-required',
+  ]
+%}
+{% if title %}
+  <label{{ attributes.addClass(classes) }}>
+    {{ title }}
+    {% if required or element['#element_is_required'] %}
+      <span class="form-required-indicator">({{ 'required'|t }})</span>
+    {% endif %}
+  </label>
+{% endif %}

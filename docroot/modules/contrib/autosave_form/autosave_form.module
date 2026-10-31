@@ -1,0 +1,61 @@
+<?php
+
+/**
+ * @file
+ * This module holds autosave form functionality.
+ */
+
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\autosave_form\Hook\AutosaveFormHooks;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_entity_type_alter().
+ *
+ * Sets the default autosave form handler to the entity type if it is not
+ * defined.
+ *
+ * @see \Drupal\Core\Entity\Annotation\EntityType
+ */
+#[LegacyHook]
+function autosave_form_entity_type_alter(array &$entity_types) {
+  \Drupal::service(AutosaveFormHooks::class)->entityTypeAlter($entity_types);
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+#[LegacyHook]
+function autosave_form_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::service(AutosaveFormHooks::class)->formAlter($form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_entity_update().
+ */
+#[LegacyHook]
+function autosave_form_entity_update(EntityInterface $entity) {
+  \Drupal::service(AutosaveFormHooks::class)->entityUpdate($entity);
+}
+
+/**
+ * Implements hook_entity_update() for the user entity type.
+ *
+ * If the permissions of a user are changed, then we delete the autosave states
+ * belonging to that user. It is possible that new permissions the user is
+ * loosing the ability to access certain fields, but the autosave states contain
+ * data for them.
+ */
+#[LegacyHook]
+function autosave_form_user_update(EntityInterface $user) {
+  \Drupal::service(AutosaveFormHooks::class)->userUpdate($user);
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+#[LegacyHook]
+function autosave_form_entity_insert(EntityInterface $entity) {
+  \Drupal::service(AutosaveFormHooks::class)->entityInsert($entity);
+}

@@ -1,0 +1,53 @@
+.cms-installer__dialog {
+  border: none;
+  border-radius: var(--gin-border-m);
+  max-inline-size: var(--cms-installer-dialog-size);
+  inline-size: min(100%, 90vw);
+  padding: var(--cms-installer-dialog-p);
+  opacity: 0;
+  transform: scale(0.95);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    display 0.4s allow-discrete,
+    overlay 0.4s allow-discrete;
+}
+
+.cms-installer__dialog[open] {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@starting-style {
+  .cms-installer__dialog[open] {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+.cms-installer__dialog::backdrop {
+  background-color: transparent;
+  transition:
+    background-color 0.4s ease,
+    display 0.4s allow-discrete,
+    overlay 0.4s allow-discrete;
+}
+
+.cms-installer__dialog[open]::backdrop {
+  background-color: rgba(18, 18, 23, 0.5);
+}
+
+@starting-style {
+  .cms-installer__dialog[open]::backdrop {
+    background-color: transparent;
+  }
+}
+
+.cms-installer__dialog[data-closing] {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.cms-installer__dialog[data-closing]::backdrop {
+  background-color: transparent;
+}

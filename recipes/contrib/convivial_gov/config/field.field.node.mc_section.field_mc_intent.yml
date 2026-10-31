@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_mc_intent
+    - node.type.mc_section
+    - taxonomy.vocabulary.mc_intent
+id: node.mc_section.field_mc_intent
+field_name: field_mc_intent
+entity_type: node
+bundle: mc_section
+label: Intent
+description: 'The intent assigned to the user when the content is viewed.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      mc_intent: mc_intent
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: intent
+field_type: entity_reference

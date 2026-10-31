@@ -1,0 +1,11 @@
+services:
+  eca_htmx.request_info:
+    class: Drupal\eca_htmx\HtmxRequestInfo
+    arguments:
+      - '@request_stack'
+  eca_htmx.token_data.request:
+    class: Drupal\eca_htmx\Token\HtmxRequestDataProvider
+    arguments:
+      - '@eca_htmx.request_info'
+    tags:
+      - { name: eca.token_data_provider }

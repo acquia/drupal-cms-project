@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * @file
+ * The AI translate module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+use Drupal\ai_translate\Hook\FormHooks;
+use Drupal\ai_translate\Hook\HelpHooks;
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+#[LegacyHook]
+function ai_translate_form_field_config_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::service(FormHooks::class)->fieldConfigFormAlter($form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+#[LegacyHook]
+function ai_translate_form_locale_translate_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::service(FormHooks::class)->localeTranslateEditFormAlter($form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_help().
+ */
+#[LegacyHook]
+function ai_translate_help($route_name, RouteMatchInterface $route_match) {
+  return \Drupal::service(HelpHooks::class)->help($route_name, $route_match);
+}
+
+/**
+ * Check if default provider is chosen and model is selected.
+ *
+ * @return bool
+ *   True if a default provider has been set.
+ */
+function _ai_translate_check_default_provider_and_model(): bool {
+  $sets = \Drupal::service('ai.provider')->getDefaultProviderForOperationType('translate_text');
+  if (empty($sets['provider_id'])) {
+    \Drupal::messenger()->addMessage(t('Please set a default provider & model for text translation in the <a href=":url">AI module settings</a>.', [':url' => Url::fromRoute('ai.settings_form')->toString()]), 'error', FALSE);
+    return FALSE;
+  }
+  return TRUE;
+}

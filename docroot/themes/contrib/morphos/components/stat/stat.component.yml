@@ -1,0 +1,70 @@
+$schema: 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Stat
+description: A single data visualization component featuring a large number and a descriptive label.
+group: Content
+status: stable
+props:
+  type: object
+  properties:
+    title:
+      type: string
+      title: Title
+      description: Title of the statistic.
+      examples:
+        - Revenue
+    prefix:
+      type: string
+      title: Prefix
+      description: Prefix content for the value. e.g. $
+      examples:
+        - $
+    value:
+      type: number
+      title: Value
+      description: Value to display and animate.
+      examples:
+        - 100
+    suffix:
+      type: string
+      title: Suffix
+      description: 'Suffix content for the value. e.g. %'
+      examples:
+        - m
+    size:
+      type: string
+      title: Size
+      description: Select the size of the stat.
+      enum:
+        - stat--xs
+        - stat--sm
+        - stat--md
+        - stat--lg
+        - stat--xl
+      meta:enum:
+        stat--xs: Extra small
+        stat--sm: Small
+        stat--md: Medium
+        stat--lg: Large
+        stat--xl: Extra large
+    desc:
+      type: string
+      title: Description
+      description: Short description of the statistic.
+      examples:
+        - 21% increase
+slots:
+  figure:
+    title: Figure
+    description: Add image item.
+  actions:
+    title: Actions
+    description: Add button items.
+libraryOverrides:
+  dependencies:
+    - core/drupal
+    - core/once
+  css:
+    component:
+      ../../dist/css/stat.css: { minified: true }
+  js:
+    ../../dist/js/stat.js: { minified: true }

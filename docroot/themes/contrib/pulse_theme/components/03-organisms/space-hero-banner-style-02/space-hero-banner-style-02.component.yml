@@ -1,0 +1,94 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+
+name: Space Hero Banner
+
+description: This component renders a prominent hero banner style 02, designed for the top of a page to create a strong initial impact. It integrates a background image with a main title and sub-headline, effectively communicating a key message to the user. Use this component to introduce a page or section, drawing attention to its core purpose or offering.
+
+status: stable
+
+group: Organisms
+
+props:
+
+  type: object
+
+  required:
+    - title
+    - sub_headline
+
+  properties:
+    background_image:
+      title: Background image
+      $ref: json-schema-definitions://canvas.module/image
+      type: object
+      examples:
+        - src: 'images/city.jpg'
+          alt: 'Boring placeholder'
+          width: 1440
+          height: 900
+
+    label:
+      type: string
+      title: Label
+      description: The label of the section.
+      examples: 
+        - 'Launch faster'
+
+    title:
+      type: string
+      title: Title
+      description: title
+      examples:
+        - 'Curabitur suscipit suscipit tellus'
+
+    sub_headline:
+      type: string
+      title: Sub Headline
+      contentMediaType: text/html
+      x-formatting-context: block
+      description: Sub Headline
+      examples:
+        - "Nous travaillons avec des clients du monde entier pour des utilisateurs du monde entier. Tout xE7a depuis la belle ville de Lyon, en France."
+
+    modifier_class:
+      type: string
+      title: Modifier class
+      description: Additional classes.
+      examples:
+        - 'custom-class'
+
+slots:
+
+  content:
+    title: Content
+    description: Add the **Email Form** component into this slot.
+
+  items:
+    title: Block Banner info items
+    description: Add one or more **Text** components into this slot.
+
+thirdPartySettings:
+  sdcStorybook:
+    stories:
+      preview:
+        slots:
+          items:
+            - type: component
+              component: 'pulse_theme:space-stats-kpi'
+              props:
+                keynumber: '400'
+                subheading: 'Projects completed'
+                description: ''
+            - type: component
+              component: 'pulse_theme:space-stats-kpi'
+              props:
+                keynumber: '28'
+                subheading: 'Efficiency Increase'
+                description: ''
+            - type: component
+              component: 'pulse_theme:space-stats-kpi'
+              props:
+                keynumber: '10'
+                subheading: 'Combined Experience'      
+                description: ''
+                    

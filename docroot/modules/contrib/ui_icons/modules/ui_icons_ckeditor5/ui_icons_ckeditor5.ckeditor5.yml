@@ -1,0 +1,33 @@
+# @see core/modules/ckeditor5/ckeditor5.ckeditor5.yml
+# @see https://www.drupal.org/project/ckeditor5_dev
+ui_icons_ckeditor5_icon:
+  # Configuration that will be sent to CKEditor 5 JavaScript plugins.
+  ckeditor5:
+    plugins:
+      - icon.Icon
+    config:
+      icon:
+        openDialog:
+          func:
+            name: Drupal.ckeditor5.openDialog
+            invoke: false
+        dialogSettings:
+          height: 75%
+          dialogClass: ui-icons-widget-modal
+          title: Insert Icon
+
+  # Configuration that will be used directly by Drupal.
+  drupal:
+    label: 'Icon'
+    library: ui_icons_ckeditor5/icon
+    admin_library: ui_icons_ckeditor5/admin.icon
+    class: Drupal\ui_icons_ckeditor5\Plugin\CKEditor5Plugin\IconPlugin
+    toolbar_items:
+      icon:
+        label: 'Icon'
+    elements:
+      - <drupal-icon>
+      - <drupal-icon data-icon-id data-icon-settings class role aria-label aria-hidden>
+    conditions:
+      filter: icon_embed
+      toolbarItem: icon

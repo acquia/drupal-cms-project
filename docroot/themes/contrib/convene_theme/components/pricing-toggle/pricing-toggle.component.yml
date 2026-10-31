@@ -1,0 +1,20 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Pricing Toggle
+group: Atoms
+status: stable
+description: A pill-shaped toggle switch for pricing grids.
+props:
+  type: object
+  properties:
+    tab_1_text:
+      title: Tab 1 Text
+      type: string
+      default: 'Early'
+    tab_2_text:
+      title: Tab 2 Text
+      type: string
+      default: 'Standard'
+library:
+  css:
+    component:
+      pricing-toggle.css: {}

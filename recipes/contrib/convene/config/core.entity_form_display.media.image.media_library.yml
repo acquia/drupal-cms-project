@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - media.type.image
+id: media.image.media_library
+targetEntityType: media
+bundle: image
+mode: media_library
+content: {  }
+hidden:
+  created: true
+  name: true
+  path: true
+  publish_on: true
+  publish_state: true
+  status: true
+  uid: true
+  unpublish_on: true
+  unpublish_state: true

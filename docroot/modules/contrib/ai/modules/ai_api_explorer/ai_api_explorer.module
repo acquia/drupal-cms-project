@@ -1,0 +1,59 @@
+<?php
+
+/**
+ * @file
+ * Hooks and custom functions for the AI API Explorer module.
+ */
+
+use Drupal\ai_api_explorer\Hook\AiApiExplorer;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Hook\Attribute\LegacyHook;
+
+/**
+ * Implements hook_menu_links_discovered_alter().
+ */
+function ai_api_explorer_menu_links_discovered_alter(&$links): void {
+  $database = \Drupal::database();
+  $query = $database->query('SELECT name FROM {router} WHERE name LIKE :name', [':name' => 'ai_api_explorer.form.%']);
+  foreach ($query->fetchAll() as $result) {
+    $route = \Drupal::service('router.route_provider')->getRouteByName($result->name);
+
+    /** @var \Drupal\ai_api_explorer\AiApiExplorerPluginManager $plugin_manager */
+    $plugin_manager = \Drupal::service('plugin.manager.ai_api_explorer');
+
+    /** @var \Drupal\ai_api_explorer\AiApiExplorerInterface $plugin */
+    $plugin_id = $route->getDefault('plugin_id');
+    $definition = $plugin_manager->getDefinition($plugin_id);
+
+    /** @var \Drupal\ai_api_explorer\AiApiExplorerInterface $plugin */
+    $plugin = $plugin_manager->createInstance($plugin_id, $definition);
+
+    $links['ai_api_explorer.form.' . $plugin_id] = [
+      'title' => $plugin->getLabel(),
+      'description' => $plugin->getDescription(),
+      'parent' => 'ai_api_explorer.main',
+      'route_name' => $result->name,
+      'weight' => 0,
+      'provider' => 'ai_api_explorer',
+      'id' => $result->name,
+    ];
+  }
+}
+
+/**
+ * Implements hook_file_download().
+ *
+ * Denies explorer output files to users who may not use the explorers. The
+ * file module serves them, and only to the user who generated them.
+ */
+function ai_api_explorer_file_download(string $uri): ?int {
+  return \Drupal::service('ai_api_explorer.output_files')->checkDownloadAccess($uri);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+#[LegacyHook]
+function ai_api_explorer_form_ai_tools_library_select_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::service(AiApiExplorer::class)->aiToolsLibrarySelectFormAlter($form, $form_state, $form_id);
+}

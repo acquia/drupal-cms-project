@@ -1,0 +1,17 @@
+recipe_locale.recipes:
+  path: '/admin/reports/translations/recipes'
+  defaults:
+    _controller: '\Drupal\recipe_locale\Controller\RecipeListController::overview'
+    _title: 'Recipe translations'
+  requirements:
+    _permission: 'translate interface'
+    _module_dependencies: 'locale'
+
+recipe_locale.remove:
+  path: '/admin/reports/translations/recipes/{recipe}/remove'
+  defaults:
+    _form: '\Drupal\recipe_locale\Form\RemoveRecipeForm'
+    _title: 'Remove recipe'
+  requirements:
+    _permission: 'translate interface'
+    _module_dependencies: 'locale'

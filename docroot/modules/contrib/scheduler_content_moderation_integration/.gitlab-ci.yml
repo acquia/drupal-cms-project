@@ -1,0 +1,38 @@
+################
+# DrupalCI GitLabCI template
+#
+# Project page:  https://git.drupalcode.org/project/gitlab_templates/
+# Documentation: https://project.pages.drupalcode.org/gitlab_templates/
+################
+
+include:
+  - project: $_GITLAB_TEMPLATES_REPO
+    ref: $_GITLAB_TEMPLATES_REF
+    file:
+      - '/includes/include.drupalci.main.yml'
+      - '/includes/include.drupalci.variables.yml'
+      - '/includes/include.drupalci.workflows.yml'
+
+# Pipeline configuration variables
+variables:
+  # Uncomment to run tests in parallel. But it triggers a lot of deprecations.
+  _PHPUNIT_CONCURRENT: '1'
+  OPT_IN_TEST_MAX_PHP: '1'
+  # Uncomment when 11.4 is out.
+  OPT_IN_TEST_PREVIOUS_MINOR: '1'
+  # Uncomment when D12 is out.
+  OPT_IN_TEST_PREVIOUS_MAJOR: '1'
+  OPT_IN_TEST_CURRENT: '1'
+  # Uncomment when D12 alpha is out.
+  # OPT_IN_TEST_NEXT_MAJOR: '1'
+  OPT_IN_TEST_NEXT_MINOR: '1'
+  _SHOW_ENVIRONMENT_VARIABLES: 1
+  _CSPELL_WORDS: phplint, csslint
+  _ALL_VALIDATE_ALLOW_FAILURE: 0
+
+.composer-base:
+  after_script:
+    - vendor/bin/drush status
+    # Show versions of the important components for quick and easy reference.
+    - COLUMNS=120 composer show | grep -E '\/(core |scheduler|commerce|entity|address)'
+

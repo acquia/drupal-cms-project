@@ -1,0 +1,93 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the ALTCHA module.
+ */
+
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_install().
+ */
+function altcha_install(): void {
+  /** @var \Drupal\altcha\SecretManager $secret_manager */
+  $secret_manager = \Drupal::service('altcha.secret_manager');
+  $secret_manager->generateSecretKey();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function altcha_uninstall(): void {
+  /** @var \Drupal\altcha\SecretManager $secret_manager */
+  $secret_manager = \Drupal::service('altcha.secret_manager');
+  $secret_manager->deleteSecretKey();
+
+  $config_factory = \Drupal::configFactory();
+  $config_factory->getEditable('altcha.settings')->delete();
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function altcha_requirements($phase): array {
+  if ($phase !== 'runtime') {
+    return [];
+  }
+
+  $config_factory = \Drupal::configFactory();
+  $altcha_settings = $config_factory->get('altcha.settings');
+
+  $requirements = [];
+  switch ($altcha_settings->get('integration_type')) {
+    case 'sentinel_api':
+      $sentinel_api_url = $altcha_settings->get('sentinel_api_url');
+      $sentinel_api_key = $altcha_settings->get('sentinel_api_key');
+      $sentinel_api_secret = $altcha_settings->get('sentinel_api_secret');
+      if (empty($sentinel_api_url) || empty($sentinel_api_key) || empty($sentinel_api_secret)) {
+        $requirements['altcha_sentinel_api'] = [
+          'title' => t('ALTCHA'),
+          'value' => t('ALTCHA Sentinel needs base URL, API key and API secret key configuration to function properly.'),
+          'description' => t('Configure it <a href=":altcha_settings_url">here</a>.', [
+            ':altcha_settings_url' => Url::fromRoute('altcha.settings')->toString(),
+          ]),
+          'severity' => REQUIREMENT_ERROR,
+        ];
+      }
+      break;
+
+    case 'saas_api':
+      $api_key = $altcha_settings->get('saas_api_key');
+      $api_region = $altcha_settings->get('saas_api_region');
+      if (empty($api_key) || empty($api_region)) {
+        $requirements['altcha_saas_api'] = [
+          'title' => t('ALTCHA'),
+          'value' => t('ALTCHA SaaS needs API configuration to function properly.'),
+          'description' => t('Configure it <a href=":altcha_settings_url">here</a>.', [
+            ':altcha_settings_url' => Url::fromRoute('altcha.settings')->toString(),
+          ]),
+          'severity' => REQUIREMENT_ERROR,
+        ];
+      }
+      break;
+
+    case 'self_hosted':
+    default:
+      /** @var \Drupal\altcha\SecretManager $secret_manager */
+      $secret_manager = \Drupal::service('altcha.secret_manager');
+      if (empty($secret_manager->getSecretKey())) {
+        $requirements['altcha_self_hosted'] = [
+          'title' => t('ALTCHA'),
+          'value' => t('ALTCHA self-hosted needs a secret key to function properly.'),
+          'description' => t('Generate it <a href=":altcha_settings_url">here</a>.', [
+            ':altcha_settings_url' => Url::fromRoute('altcha.settings')->toString(),
+          ]),
+          'severity' => REQUIREMENT_ERROR,
+        ];
+      }
+      break;
+  }
+
+  return $requirements;
+}
