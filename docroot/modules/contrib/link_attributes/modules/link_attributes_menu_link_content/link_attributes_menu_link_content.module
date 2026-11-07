@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Implements the link_attributes_menu_link_content functionality.
+ */
+
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\link_attributes_menu_link_content\Hook\LinkAttributesMenuLinkContentHooks;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_entity_base_field_info_alter().
+ */
+#[LegacyHook]
+function link_attributes_menu_link_content_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type) {
+  \Drupal::service(LinkAttributesMenuLinkContentHooks::class)->entityBaseFieldInfoAlter($fields, $entity_type);
+}
+
+/**
+ * Implements hook_help().
+ */
+#[LegacyHook]
+function link_attributes_menu_link_content_help($route_name, RouteMatchInterface $route_match) {
+  return \Drupal::service(LinkAttributesMenuLinkContentHooks::class)->help($route_name, $route_match);
+}

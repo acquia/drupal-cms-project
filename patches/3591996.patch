@@ -1,0 +1,48 @@
+From 1d8967992c7109264aeab5d6ced0958ee384f76a Mon Sep 17 00:00:00 2001
+From: wotnak <wotnak@pm.me>
+Date: Wed, 9 Sep 2026 23:11:39 +0200
+Subject: [PATCH] fix: #3591996 Delay site template page variant migration
+ until other recipe listeners finish
+
+---
+ src/EventSubscriber/RecipeSubscriber.php | 16 +++++++++++++++-
+ 1 file changed, 15 insertions(+), 1 deletion(-)
+
+diff --git a/src/EventSubscriber/RecipeSubscriber.php b/src/EventSubscriber/RecipeSubscriber.php
+index a95e59c473..580c2a9b17 100644
+--- a/src/EventSubscriber/RecipeSubscriber.php
++++ b/src/EventSubscriber/RecipeSubscriber.php
+@@ -29,7 +29,10 @@ final class RecipeSubscriber implements EventSubscriberInterface {
+   public static function getSubscribedEvents(): array {
+     return [
+       PreImportEvent::class => 'ensureComponentsExist',
+-      RecipeAppliedEvent::class => 'onApply',
++      RecipeAppliedEvent::class => [
++        ['onApply'],
++        ['migrateSiteTemplate', PHP_INT_MIN],
++      ],
+     ];
+   }
+ 
+@@ -68,7 +71,18 @@ final class RecipeSubscriber implements EventSubscriberInterface {
+         $this->configActionManager->applyAction($action_id, $name, $data);
+       }
+     }
++  }
+ 
++  /**
++   * Migrates page regions after all other recipe listeners have run.
++   *
++   * Installing the page template component module rebuilds the container.
++   * Running last prevents later listeners from using the invalidated container.
++   *
++   * @param \Drupal\Core\Recipe\RecipeAppliedEvent $event
++   *   The event object.
++   */
++  public static function migrateSiteTemplate(RecipeAppliedEvent $event): void {
+     if ($event->recipe->type === 'Site') {
+       PageVariantMigration::migrateDefaultTheme();
+     }
+-- 
+GitLab
+

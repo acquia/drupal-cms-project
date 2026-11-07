@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ * Default theme template for custom fields.
+ *
+ * To override output, copy the "custom-field.html.twig" from the templates directory
+ * to your theme's directory and customize it, just like customizing other
+ * Drupal templates such as page.html.twig or node.html.twig.
+ *
+ * Instead of overriding the theming for all fields, you can also just override
+ * theming for a subset of fields using
+ * @link themeable Theme hook suggestions. @endlink For example,
+ * here are some theme hook suggestions that can be used for a field_foo field
+ * on an article node type:
+ * - custom-field--field-my-field-name.html.twig
+ *
+ * Available variables:
+ * - items: An array of custom field items.
+ * - attributes: HTML attributes for the containing element.
+ * - field_name: The name of the field.
+ *
+ * @see template_preprocess_custom_field()
+ */
+#}
+
+{% for item in items %}
+  {{ item|render }}
+{% endfor %}

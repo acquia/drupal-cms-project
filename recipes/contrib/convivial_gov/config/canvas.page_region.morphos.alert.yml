@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.system_messages_block
+    - canvas.component.block.views_block.alerts-alert_banner
+  theme:
+    - morphos
+id: morphos.alert
+region: alert
+theme: morphos
+component_tree:
+  '0:1a651936-9788-419e-890e-8eaeef09250f':
+    uuid: 1a651936-9788-419e-890e-8eaeef09250f
+    component_id: block.system_messages_block
+    component_version: 1609d44df6c8b26a
+    inputs:
+      label: Messages
+      label_display: '0'
+  '1:d50c1302-f217-4293-ab48-9d9ff7bb572f':
+    uuid: d50c1302-f217-4293-ab48-9d9ff7bb572f
+    component_id: block.views_block.alerts-alert_banner
+    component_version: 57593301f7ea7980
+    inputs:
+      label: 'Alerts: Alert banner'
+      label_display: '0'
+      views_label: ''
+      items_per_page: null

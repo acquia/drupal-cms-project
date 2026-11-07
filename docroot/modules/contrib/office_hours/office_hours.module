@@ -1,0 +1,213 @@
+<?php
+
+/**
+ * @file
+ * Creates a field and widget for inserting working or office hours per day.
+ */
+
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\field\FieldStorageConfigInterface;
+use Drupal\office_hours\Hook\OfficeHoursFieldHooks;
+use Drupal\office_hours\Hook\OfficeHoursHooks;
+use Drupal\office_hours\Hook\OfficeHoursThemeHooks;
+use Drupal\office_hours\Hook\OfficeHoursViewsHooks;
+use Drupal\views\Plugin\views\cache\CachePluginBase;
+use Drupal\views\ViewExecutable;
+
+/**
+ * FormElement base plugin class is deprecated and renamed to FormElementBase.
+ *
+ * @see https://www.drupal.org/node/3436275
+ */
+if (class_exists('\Drupal\Core\Render\Element\FormElementBase')) {
+  class_alias(
+    '\Drupal\Core\Render\Element\FormElementBase',
+    '\Drupal\office_hours\Element\FormElementBase'
+  );
+}
+else {
+  class_alias(
+    '\Drupal\Core\Render\Element\FormElement',
+    '\Drupal\office_hours\Element\FormElementBase'
+  );
+}
+
+
+/**
+ * Hook preprocess_field must remain procedural (message in D11.1).
+ *
+ * In Drupal\Core\Hook\HookCollectorPass::checkForProceduralOnlyHooks().
+ *
+ * @see https://www.drupal.org/project/office_hours/issues/3505428
+ * @see https://drupalize.me/blog/drupal-111-adds-hooks-classes-history-how-and-tutorials-weve-updated
+ */
+
+/**
+ * Implements hook_field_type_category_info_alter().
+ *
+ * Add field type icon.
+ */
+#[LegacyHook]
+function office_hours_field_type_category_info_alter(&$definitions): void {
+  \Drupal::service(OfficeHoursFieldHooks::class)->fieldTypeCategoryInfoAlter($definitions);
+}
+
+/**
+ * Implements hook_help() on 'help.page.office_hours'.
+ */
+#[LegacyHook]
+function office_hours_help($route_name, RouteMatchInterface $route_match): string {
+  return \Drupal::service(OfficeHoursFieldHooks::class)->help($route_name, $route_match);
+}
+
+/**
+ * Implements hook_preprocess_field().
+ *
+ * Note: Hook preprocess_field must remain procedural (message in D11.1).
+ * in Drupal\Core\Hook\HookCollectorPass::checkForProceduralOnlyHooks().
+ */
+function office_hours_preprocess_field(&$variables, $hook): void {
+  \Drupal::service(OfficeHoursThemeHooks::class)->preprocessField($variables, $hook);
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ *
+ * Note: Hook preprocess_field must remain procedural (message in D11.1).
+ * in Drupal\Core\Hook\HookCollectorPass::checkForProceduralOnlyHooks().
+ */
+function office_hours_preprocess_office_hours(&$variables): void {
+  \Drupal::service(OfficeHoursThemeHooks::class)->preprocessOfficeHours($variables);
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ *
+ * Note: Hook preprocess_field must remain procedural (message in D11.1).
+ * in Drupal\Core\Hook\HookCollectorPass::checkForProceduralOnlyHooks().
+ */
+function office_hours_preprocess_office_hours_status(&$variables): void {
+  \Drupal::service(OfficeHoursThemeHooks::class)->preprocessOfficeHoursStatus($variables);
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ *
+ * Note: Hook preprocess_field must remain procedural (message in D11.1).
+ * in Drupal\Core\Hook\HookCollectorPass::checkForProceduralOnlyHooks().
+ */
+function office_hours_preprocess_office_hours_table(&$variables): void {
+  \Drupal::service(OfficeHoursThemeHooks::class)->preprocessOfficeHoursTable($variables);
+}
+
+/**
+ * Implements hook_theme().
+ */
+#[LegacyHook]
+function office_hours_theme() {
+  return \Drupal::service(OfficeHoursThemeHooks::class)->theme();
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+#[LegacyHook]
+function office_hours_theme_suggestions_office_hours(array $variables) {
+  return \Drupal::service(OfficeHoursThemeHooks::class)->themeSuggestionsOfficeHours($variables);
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function office_hours_theme_suggestions_office_hours_status(array $variables) {
+  return \Drupal::service(OfficeHoursThemeHooks::class)->themeSuggestionsOfficeHoursStatus($variables);
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function office_hours_theme_suggestions_office_hours_table(array $variables) {
+  return \Drupal::service(OfficeHoursThemeHooks::class)->themeSuggestionsOfficeHoursTable($variables);
+}
+
+/**
+ * Implements hook_tokens().
+ */
+#[LegacyHook]
+function office_hours_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
+  return \Drupal::service(OfficeHoursHooks::class)->tokens($type, $tokens, $data, $options, $bubbleable_metadata);
+}
+
+/**
+ * Implements hook_field_views_data().
+ */
+#[LegacyHook]
+function office_hours_field_views_data(FieldStorageConfigInterface $field_storage) {
+  return \Drupal::service(OfficeHoursViewsHooks::class)->fieldViewsData($field_storage);
+}
+
+/**
+ * Implements hook_views_query_substitutions().
+ */
+#[LegacyHook]
+function office_hours_views_query_substitutions(ViewExecutable $view) {
+  return \Drupal::service(OfficeHoursViewsHooks::class)->viewsQuerySubstitutions($view);
+}
+
+/**
+ * Implements hook_views_pre_execute().
+ */
+#[LegacyHook]
+function office_hours_views_pre_execute(ViewExecutable $view) {
+  return \Drupal::service(OfficeHoursViewsHooks::class)->viewsPreExecute($view);
+}
+
+/**
+ * Implements hook_views_post_execute().
+ */
+#[LegacyHook]
+function office_hours_views_post_execute(ViewExecutable $view) {
+  return \Drupal::service(OfficeHoursViewsHooks::class)->viewsPostExecute($view);
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+#[LegacyHook]
+function office_hours_views_pre_render(ViewExecutable $view) {
+  return \Drupal::service(OfficeHoursViewsHooks::class)->viewsPreRender($view);
+}
+
+/**
+ * Implements hook_views_post_render().
+ */
+#[LegacyHook]
+function office_hours_views_post_render(ViewExecutable $view, array &$output, CachePluginBase $cache) {
+  return \Drupal::service(OfficeHoursViewsHooks::class)->viewsPostRender($view, $output, $cache);
+}
+
+/**
+ * Implements hook_office_hours_time_format_alter().
+ */
+function office_hours_office_hours_time_format_alter(string &$formatted_time) {
+  // Only to test the alter hook in office_hours.api.php .
+  $date_time = new \DateTime();
+  // $date_time->setTimestamp($time);
+  $date_time->setTimezone(new \DateTimeZone('Asia/Manila'));
+  $time = $date_time->getTimestamp();
+}
+
+/**
+ * Implements hook_office_hours_current_time_alter().
+ */
+function office_hours_office_hours_current_time_alter(int &$time, $entity) {
+  // Only to test the alter hook in office_hours.api.php .
+
+  $date_time = new \DateTime();
+  $date_time->setTimestamp($time);
+  $date_time->setTimezone(new \DateTimeZone('Asia/Manila'));
+  $time = $date_time->getTimestamp();
+  // After this set timezone, i am expecting that store status will be display as per Manila timezone irrespective on user timezone.
+}

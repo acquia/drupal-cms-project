@@ -1,0 +1,86 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Image card
+group: Card
+props:
+  type: object
+  required:
+    - heading_text
+    - orientation
+    - style
+  properties:
+    background:
+      type: string
+      title: Background
+      enum:
+        - default
+        - accent
+        - primary
+        - inverted
+      meta:enum:
+        default: Default
+        accent: Accent
+        primary: Primary
+        inverted: Inverted
+      examples:
+        - default
+    style:
+      type: string
+      title: Style
+      enum:
+        - framed
+        - full
+      meta:enum:
+        framed: Framed
+        full: Full width
+      examples:
+        - framed
+    orientation:
+      type: string
+      title: Orientation
+      enum:
+        - vertical
+        - horizontal
+      meta:enum:
+        vertical: Vertical
+        horizontal: Horizontal
+      examples:
+        - vertical
+    heading_text:
+      type: string
+      title: Heading
+      examples:
+        - "This is your card title"
+    level:
+      type: number
+      title: Heading level
+      enum:
+        - 2
+        - 3
+        - 4
+      default: 3
+      examples:
+        - 3
+    url:
+      type: string
+      title: Link
+      format: uri-reference
+    media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Image
+      type: object
+      examples:
+        - src: "assets/jj-ying-8bghKxNU1j0-unsplash.jpg"
+          width: 1200
+          height: 900
+          alt: "Photo by jjying: https://unsplash.com/photos/purple-and-blue-light-digital-wallpaper-8bghKxNU1j0"
+    text:
+      type: string
+      title: Description
+      pattern: "(.|\\r?\\n)*"
+      examples:
+        - "Quaerat laborum rerum dolores dolores dolor qui."
+    is_text_centered:
+      type: boolean
+      title: Center text
+      examples:
+        - false

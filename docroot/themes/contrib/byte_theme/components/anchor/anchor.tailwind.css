@@ -1,0 +1,11 @@
+.anchor--visible {
+  @apply flex min-h-10 items-center justify-center border border-dotted border-foreground p-1 text-sm opacity-50;
+
+  &:is(span, a) {
+    @apply inline-flex;
+  }
+
+  .anchor--help-text {
+    @apply inline;
+  }
+}

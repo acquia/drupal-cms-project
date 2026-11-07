@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="70 40 400 390" width="512" height="499">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3F51B5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1A237E;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#5C6BC0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3F51B5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad3" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7986CB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5C6BC0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Connection lines (drawn first, behind nodes) -->
+  <!-- Top node to center diamond -->
+  <line x1="226" y1="136" x2="226" y2="210" stroke="#9FA8DA" stroke-width="6" stroke-linecap="round"/>
+  <!-- Center diamond to bottom-left node -->
+  <line x1="190" y1="272" x2="148" y2="340" stroke="#9FA8DA" stroke-width="6" stroke-linecap="round"/>
+  <!-- Center diamond to bottom-right node -->
+  <line x1="262" y1="272" x2="334" y2="340" stroke="#9FA8DA" stroke-width="6" stroke-linecap="round"/>
+  <!-- Bottom-left to bottom-right (horizontal) -->
+  <line x1="188" y1="380" x2="294" y2="380" stroke="#9FA8DA" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Directional arrows on lines -->
+  <!-- Arrow: top to center -->
+  <polygon points="226,210 219,196 233,196" fill="#9FA8DA"/>
+  <!-- Arrow: center to bottom-left -->
+  <polygon points="148,340 160,332 155,345" fill="#9FA8DA"/>
+  <!-- Arrow: center to bottom-right -->
+  <polygon points="334,340 322,332 327,345" fill="#9FA8DA"/>
+
+  <!-- Top node: Circle (represents Start / Model Owner) -->
+  <circle cx="226" cy="100" r="48" fill="url(#grad1)" stroke="#1A237E" stroke-width="3"/>
+  <!-- Inner icon: play triangle for "start" -->
+  <polygon points="214,80 214,120 244,100" fill="white" opacity="0.9"/>
+
+  <!-- "API" text to the right of top circle and center diamond -->
+  <text x="377" y="190" font-family="Arial, Helvetica, sans-serif" font-size="80" font-weight="bold" fill="#1A237E" letter-spacing="2" text-anchor="middle">API</text>
+
+  <!-- Center node: Diamond (represents the API / Gateway) -->
+  <g transform="translate(226,256)">
+    <rect x="-42" y="-42" width="84" height="84" rx="8" ry="8" fill="url(#grad2)" stroke="#283593" stroke-width="3" transform="rotate(45)"/>
+    <!-- Inner icon: connection/hub symbol -->
+    <circle cx="0" cy="0" r="8" fill="white" opacity="0.9"/>
+    <line x1="-18" y1="0" x2="-8" y2="0" stroke="white" stroke-width="4" stroke-linecap="round" opacity="0.9"/>
+    <line x1="8" y1="0" x2="18" y2="0" stroke="white" stroke-width="4" stroke-linecap="round" opacity="0.9"/>
+    <line x1="0" y1="-18" x2="0" y2="-8" stroke="white" stroke-width="4" stroke-linecap="round" opacity="0.9"/>
+    <line x1="0" y1="8" x2="0" y2="18" stroke="white" stroke-width="4" stroke-linecap="round" opacity="0.9"/>
+  </g>
+
+  <!-- Bottom-left node: Rounded rect (represents Element / Action) -->
+  <rect x="100" y="344" width="96" height="72" rx="12" ry="12" fill="url(#grad3)" stroke="#3949AB" stroke-width="3"/>
+  <!-- Inner icon: gear/cog for "action" -->
+  <circle cx="148" cy="380" r="16" fill="none" stroke="white" stroke-width="3.5" opacity="0.9"/>
+  <circle cx="148" cy="380" r="6" fill="white" opacity="0.9"/>
+
+  <!-- Bottom-right node: Rounded rect (represents Modeler / Visual) -->
+  <rect x="286" y="344" width="96" height="72" rx="12" ry="12" fill="url(#grad3)" stroke="#3949AB" stroke-width="3"/>
+  <!-- Inner icon: pencil/edit for "modeler" -->
+  <g transform="translate(334,380)" opacity="0.9">
+    <line x1="-12" y1="12" x2="8" y2="-8" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <line x1="5" y1="-5" x2="11" y2="-11" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <line x1="-12" y1="12" x2="-8" y2="12" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <line x1="-12" y1="12" x2="-12" y2="8" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Small decorative dots on connection lines -->
+  <circle cx="226" cy="172" r="4" fill="#7986CB"/>
+  <circle cx="169" cy="306" r="4" fill="#7986CB"/>
+  <circle cx="298" cy="306" r="4" fill="#7986CB"/>
+  <circle cx="241" cy="380" r="4" fill="#7986CB"/>
+</svg>

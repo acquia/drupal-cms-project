@@ -1,0 +1,91 @@
+/**
+ * @file image.css
+ * SDC Image component styles.
+ * Provides styling for the utility-like classes used by the Image twig template.
+ */
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.aspect-2\/1 {
+  aspect-ratio: 2 / 1;
+}
+.aspect-16\/9 {
+  aspect-ratio: 16 / 9;
+}
+.aspect-3\/2 {
+  aspect-ratio: 3 / 2;
+}
+.aspect-4\/3 {
+  aspect-ratio: 4 / 3;
+}
+.aspect-1\/1 {
+  aspect-ratio: 1 / 1;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.rounded-none {
+  border-radius: 0;
+}
+.rounded-sm {
+  border-radius: 0.125rem;
+}
+.rounded-xl {
+  border-radius: 0.5rem;
+}
+.rounded-\[24px\] {
+  border-radius: 24px;
+}
+
+.object-cover {
+  object-fit: cover;
+}
+
+.group-hover\:scale-105 {
+  transition: transform 300ms ease;
+}
+
+.group:hover .group-hover\:scale-105 {
+  transform: scale(1.05);
+}
+
+.duration-300 {
+  transition-duration: 300ms;
+}
+
+.block {
+  display: block;
+}
+
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.text-sm {
+  font-size: var(--text-sm, 0.875rem);
+  line-height: var(--text-sm--line-height, 1.25rem);
+}
+
+@media (min-width: 1024px) {
+  .lg\:py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .lg\:text-base {
+    font-size: var(--text-base, 1rem);
+    line-height: var(--text-base--line-height, 1.5rem);
+  }
+}
+
+figure {
+  margin: 0;
+}

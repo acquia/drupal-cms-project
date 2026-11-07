@@ -1,0 +1,58 @@
+# These routes have the same names and paths as real admin pages from other modules.
+# That lets us test telemetry without installing all those modules.
+# @see \Drupal\Tests\drupal_cms_helper\Kernel\TelemetryHooksTest::testAdminPages()
+automatic_updates.update_form:
+  path: '/admin/reports/updates/update'
+  defaults:
+    _controller: '\Drupal\telemetry_test\Controller\TelemetryTestController::page'
+  requirements:
+    _access: 'TRUE'
+
+checklistapi.checklists.language_checklist:
+  path: '/admin/config/regional/multilingual-checklist'
+  defaults:
+    _controller: '\Drupal\telemetry_test\Controller\TelemetryTestController::page'
+  requirements:
+    _access: 'TRUE'
+
+checklistapi.checklists.seo_checklist:
+  path: '/admin/config/search/seo-checklist'
+  defaults:
+    _controller: '\Drupal\telemetry_test\Controller\TelemetryTestController::page'
+  requirements:
+    _access: 'TRUE'
+
+entity.canvas_page.collection:
+  path: '/admin/content/pages'
+  defaults:
+    _controller: '\Drupal\telemetry_test\Controller\TelemetryTestController::page'
+  requirements:
+    _access: 'TRUE'
+
+entity.menu.collection:
+  path: '/admin/structure/menu'
+  defaults:
+    _controller: '\Drupal\telemetry_test\Controller\TelemetryTestController::page'
+  requirements:
+    _access: 'TRUE'
+
+entity.view.collection:
+  path: '/admin/structure/views'
+  defaults:
+    _controller: '\Drupal\telemetry_test\Controller\TelemetryTestController::page'
+  requirements:
+    _access: 'TRUE'
+
+entity.webform.collection:
+  path: '/admin/structure/webform'
+  defaults:
+    _controller: '\Drupal\telemetry_test\Controller\TelemetryTestController::page'
+  requirements:
+    _access: 'TRUE'
+
+project_browser.browse:
+  path: '/admin/modules/browse/{source}'
+  defaults:
+    _controller: '\Drupal\telemetry_test\Controller\TelemetryTestController::page'
+  requirements:
+    _access: 'TRUE'

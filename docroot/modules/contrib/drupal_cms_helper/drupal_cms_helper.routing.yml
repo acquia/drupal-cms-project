@@ -1,0 +1,8 @@
+# @api
+# This route is part of Drupal CMS's developer-facing API and may be relied upon.
+drupal_cms_helper.site_export:
+  path: '/admin/config/development/site-export'
+  defaults:
+    _controller: '\Drupal\drupal_cms_helper\Controller\ExportController::exportArchive'
+  requirements:
+    _permission: 'administer site configuration'

@@ -1,0 +1,30 @@
+$schema: 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Diff
+description: A visual comparison tool used to show differences between two images.
+group: Content
+status: stable
+noUi: true
+props:
+  type: object
+  properties:
+    item_1:
+      title: Item 1
+      description: Add image item.
+      type:
+        - object
+        - 'null'
+    item_2:
+      title: Item 2
+      description: Add image item.
+      type:
+        - object
+        - 'null'
+libraryOverrides:
+  dependencies:
+    - core/drupal
+    - core/once
+  js:
+    diff.js: {}
+  css:
+    component:
+      ../../dist/css/diff.css: { minified: true }

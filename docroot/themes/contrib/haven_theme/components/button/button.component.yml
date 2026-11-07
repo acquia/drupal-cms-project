@@ -1,0 +1,90 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Button
+group: Base
+status: stable
+props:
+  type: object
+  required:
+    - variant
+    - size
+  properties:
+    variant:
+      type: string
+      title: Style
+      enum:
+        - primary
+        - secondary
+        - accent
+        - light
+      meta:enum:
+        primary: Primary
+        secondary: Secondary
+        accent: Accent
+        light: Light
+      examples:
+        - primary
+    outlined:
+      type: boolean
+      title: Outline only
+      default: false
+      examples:
+        - false
+    label:
+      type: string
+      title: Label
+      default: "Button label"
+      examples:
+        - "Button label"
+    href:
+      title: link
+      type: string
+      format: uri-reference
+    size:
+      type: string
+      title: Button size
+      enum:
+        - small
+        - medium
+        - large
+      meta:enum:
+        small: Small
+        medium: Medium
+        large: Large
+      examples:
+        - medium
+    icon:
+      type: string
+      title: Icon
+      enum:
+        - arrow-right
+        - arrow-left
+        - caret-right
+        - caret-left
+        - download
+        - user-plus
+      meta:enum:
+        arrow-right: Arrow right
+        arrow-left: Arrow left
+        caret-right: Caret right
+        caret-left: Caret left
+        download: Download
+        user-plus: User plus
+      examples:
+        - arrow-right
+    icon_first:
+      type: boolean
+      title: Display icon first
+      default: false
+      examples:
+        - false
+    mobile_width:
+      type: boolean
+      title: Full width on mobile
+      default: false
+    disabled:
+      type: boolean
+      title: Disabled
+      default: false
+      examples:
+        - false
+        - true

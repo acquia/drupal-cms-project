@@ -1,0 +1,348 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 06b3bbf0-640d-45d1-8775-45663393b463
+  default_langcode: en
+  depends:
+    b7d53ced-d13c-4b62-9114-89d604992e44: file
+    129628f8-b556-44f9-acef-26b889012d18: media
+    2a6ae46d-b147-4419-b223-142a9bfa2308: file
+    6e2440bc-b39f-4687-8ca8-02b6f83580ee: media
+    7f5adb40-e100-48d2-924d-2f5be9fbfaff: file
+    46bb3995-1058-4931-8508-c667ebf5027f: media
+    d1f20231-3fb7-4827-b0ac-7359659fdf87: file
+    fb206a87-ed21-4f3b-a9e2-c0649397e1de: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Pricing and Passes'
+  description:
+    -
+      value: 'View Convene Conference ticket pricing, passes, and packages. Choose the right pass for sessions, workshops, and networking events.'
+  components:
+    -
+      uuid: 920329bb-ca7c-4541-84bb-e7a5d6f6cbc6
+      component_id: sdc.convene_theme.hero
+      inputs:
+        variation: small
+    -
+      parent_uuid: 920329bb-ca7c-4541-84bb-e7a5d6f6cbc6
+      slot: heading
+      uuid: 3d88a486-cb51-419e-b6cc-3bb39d40f8f8
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        heading: 'Pricing and passes'
+        heading_tag: div
+    -
+      parent_uuid: 920329bb-ca7c-4541-84bb-e7a5d6f6cbc6
+      slot: subheading
+      uuid: 36bba2b6-500a-49d0-9f85-2e2e5fe4fc6a
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        description: 'Choose the pass that works best for you and secure your spot at the event.'
+        heading_tag: div
+    -
+      parent_uuid: 920329bb-ca7c-4541-84bb-e7a5d6f6cbc6
+      slot: background_media
+      uuid: 6a7e4c8a-8acd-4f7e-83e3-58117bd08090
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 129628f8-b556-44f9-acef-26b889012d18
+            target_type: media
+        loading: lazy
+    -
+      uuid: 8744622b-e2f2-43c3-abfe-692b5cc62167
+      component_id: sdc.convene_theme.passes-grid
+      inputs:
+        title: 'Three ways to join us'
+        eyebrow: Passes
+        description: 'Pick the option that fits your needs.'
+    -
+      parent_uuid: 8744622b-e2f2-43c3-abfe-692b5cc62167
+      slot: items
+      uuid: bf95edc3-e410-48d3-b0da-8ef88565f7b0
+      component_id: sdc.convene_theme.pass-card
+      inputs:
+        title: 'General admission pass'
+        eyebrow: General
+        description: 'Access to all sessions and networking events.'
+    -
+      parent_uuid: bf95edc3-e410-48d3-b0da-8ef88565f7b0
+      slot: media
+      uuid: d37063c2-6c8d-470d-a66d-422b82e2982b
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 6e2440bc-b39f-4687-8ca8-02b6f83580ee
+            target_type: media
+    -
+      parent_uuid: 8744622b-e2f2-43c3-abfe-692b5cc62167
+      slot: items
+      uuid: 443fd83a-3d95-4aad-8933-5e4de1ea80a8
+      component_id: sdc.convene_theme.pass-card
+      inputs:
+        title: 'Student pricing available'
+        eyebrow: Student
+        description: 'Full access with valid student identification required.'
+    -
+      parent_uuid: 443fd83a-3d95-4aad-8933-5e4de1ea80a8
+      slot: media
+      uuid: 1c5cab62-39ae-4401-aaad-f2f616406438
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 46bb3995-1058-4931-8508-c667ebf5027f
+            target_type: media
+    -
+      parent_uuid: 8744622b-e2f2-43c3-abfe-692b5cc62167
+      slot: items
+      uuid: 9ffdff22-8967-41a0-bcaa-3f644584053b
+      component_id: sdc.convene_theme.pass-card
+      inputs:
+        title: 'Premium experience included'
+        eyebrow: VIP
+        description: 'Reserved seating, exclusive lounge, and priority support.'
+    -
+      parent_uuid: 9ffdff22-8967-41a0-bcaa-3f644584053b
+      slot: media
+      uuid: 3ad1f0a6-3917-4561-9c78-dfea906c181d
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: fb206a87-ed21-4f3b-a9e2-c0649397e1de
+            target_type: media
+    -
+      uuid: 40c60ac5-2b26-4cdc-af15-3f027c7bb1d8
+      component_id: sdc.convene_theme.pricing-grid
+      inputs:
+        title: 'Simple pricing'
+        eyebrow: Passes
+        description: 'Pay once, attend everything included.'
+    -
+      parent_uuid: 40c60ac5-2b26-4cdc-af15-3f027c7bb1d8
+      slot: items
+      uuid: c39dc4bc-f495-4e43-a7d2-a86bb6accae8
+      component_id: sdc.convene_theme.pricing-card
+      inputs:
+        price: $99
+        title: 'Early bird'
+        description: 'Limited availability, register now.'
+    -
+      parent_uuid: c39dc4bc-f495-4e43-a7d2-a86bb6accae8
+      slot: action
+      uuid: 7677c822-eb60-405a-8235-1c9fd861f526
+      component_id: sdc.convene_theme.button
+      inputs:
+        url:
+          uri: 'https://sandbox.moonlightpay.net/'
+          options: {  }
+        text: 'Book now'
+        target: _blank
+        variant: primary
+    -
+      parent_uuid: c39dc4bc-f495-4e43-a7d2-a86bb6accae8
+      slot: features
+      uuid: 416fba64-ae6f-4c65-90f4-8bd01a7de5e3
+      component_id: sdc.convene_theme.list-check-item
+      inputs:
+        text: 'All conference sessions'
+    -
+      parent_uuid: c39dc4bc-f495-4e43-a7d2-a86bb6accae8
+      slot: features
+      uuid: 6e506670-effd-4354-a555-1a3005ce917c
+      component_id: sdc.convene_theme.list-check-item
+      inputs:
+        text: 'Networking reception included'
+    -
+      parent_uuid: c39dc4bc-f495-4e43-a7d2-a86bb6accae8
+      slot: features
+      uuid: 69033cf7-309d-4fb8-b403-15d36ae7c9df
+      component_id: sdc.convene_theme.list-check-item
+      inputs:
+        text: 'Digital materials access'
+    -
+      parent_uuid: 40c60ac5-2b26-4cdc-af15-3f027c7bb1d8
+      slot: items
+      uuid: b30bad4f-d859-41a9-8ffa-98992ac19f2a
+      component_id: sdc.convene_theme.pricing-card
+      inputs:
+        price: $149
+        title: 'Standard pass'
+        description: 'Full event access available.'
+    -
+      parent_uuid: b30bad4f-d859-41a9-8ffa-98992ac19f2a
+      slot: action
+      uuid: a127563a-31fd-4dc2-bf73-816eadbf3ba6
+      component_id: sdc.convene_theme.button
+      inputs:
+        url:
+          uri: 'https://sandbox.moonlightpay.net/'
+          options: {  }
+        text: 'Book now'
+        target: _blank
+        variant: primary
+    -
+      parent_uuid: b30bad4f-d859-41a9-8ffa-98992ac19f2a
+      slot: features
+      uuid: 2ca45e5a-c993-461b-af5a-46c4043e072f
+      component_id: sdc.convene_theme.list-check-item
+      inputs:
+        text: 'All conference sessions'
+    -
+      parent_uuid: b30bad4f-d859-41a9-8ffa-98992ac19f2a
+      slot: features
+      uuid: 74363ae7-9b1e-4fae-9bd4-d25cec99c6cd
+      component_id: sdc.convene_theme.list-check-item
+      inputs:
+        text: 'Networking reception included'
+    -
+      parent_uuid: b30bad4f-d859-41a9-8ffa-98992ac19f2a
+      slot: features
+      uuid: 8f37824f-ec65-4cce-ba03-01aecd58be35
+      component_id: sdc.convene_theme.list-check-item
+      inputs:
+        text: 'Digital materials access'
+    -
+      parent_uuid: b30bad4f-d859-41a9-8ffa-98992ac19f2a
+      slot: features
+      uuid: 26a17dca-1b42-453d-ac00-0524dac1ab9b
+      component_id: sdc.convene_theme.list-check-item
+      inputs:
+        text: 'Printed agenda and notes'
+    -
+      parent_uuid: 40c60ac5-2b26-4cdc-af15-3f027c7bb1d8
+      slot: items
+      uuid: dd904525-e031-4539-9053-55f0438aa4b4
+      component_id: sdc.convene_theme.pricing-card
+      inputs:
+        price: $249
+        title: 'VIP pass'
+        description: 'Premium experience with perks.'
+    -
+      parent_uuid: dd904525-e031-4539-9053-55f0438aa4b4
+      slot: action
+      uuid: 0bb91912-5115-4c92-918d-56f69adf181e
+      component_id: sdc.convene_theme.button
+      inputs:
+        url:
+          uri: 'https://sandbox.moonlightpay.net/'
+          options: {  }
+        text: 'Book now'
+        target: _blank
+        variant: primary
+    -
+      parent_uuid: dd904525-e031-4539-9053-55f0438aa4b4
+      slot: features
+      uuid: fd3c18ee-7ea9-43f9-88e4-1bcaedba7b33
+      component_id: sdc.convene_theme.list-check-item
+      inputs:
+        text: 'Reserved front seating'
+    -
+      parent_uuid: dd904525-e031-4539-9053-55f0438aa4b4
+      slot: features
+      uuid: 3e17d43a-e45f-45b0-9d16-7cf735efa57b
+      component_id: sdc.convene_theme.list-check-item
+      inputs:
+        text: 'Exclusive VIP lounge access'
+    -
+      parent_uuid: dd904525-e031-4539-9053-55f0438aa4b4
+      slot: features
+      uuid: cd6a712b-8d1e-4b69-8ca4-872aa9ddba36
+      component_id: sdc.convene_theme.list-check-item
+      inputs:
+        text: 'Priority speaker meet and greet'
+    -
+      parent_uuid: dd904525-e031-4539-9053-55f0438aa4b4
+      slot: features
+      uuid: b74a6aa6-deac-42e6-bdbe-7b39cf52b0c6
+      component_id: sdc.convene_theme.list-check-item
+      inputs:
+        text: 'Printed agenda and notes'
+    -
+      parent_uuid: dd904525-e031-4539-9053-55f0438aa4b4
+      slot: features
+      uuid: dd721fef-7a22-46de-ab98-5d9cdd1616d9
+      component_id: sdc.convene_theme.list-check-item
+      inputs:
+        text: 'Dedicated support line'
+    -
+      uuid: 0c93ebb8-3ce4-4465-ab05-42b2c40fc9ea
+      component_id: sdc.convene_theme.hero
+      inputs:
+        variation: small
+    -
+      parent_uuid: 0c93ebb8-3ce4-4465-ab05-42b2c40fc9ea
+      slot: heading
+      uuid: 22142ffe-e7e4-43a4-b4d1-594e788c23e9
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        heading: 'Ready to join us'
+        heading_tag: div
+    -
+      parent_uuid: 0c93ebb8-3ce4-4465-ab05-42b2c40fc9ea
+      slot: subheading
+      uuid: c233e2ae-ec2c-4509-9253-445bdeafba05
+      component_id: sdc.convene_theme.typography
+      inputs:
+        align: center
+        heading: 'Secure your spot before early-bird pricing ends next week.'
+        heading_tag: div
+    -
+      parent_uuid: 0c93ebb8-3ce4-4465-ab05-42b2c40fc9ea
+      slot: actions
+      uuid: 5182aa3a-9a6d-47ad-a334-87aff886c009
+      component_id: sdc.convene_theme.button
+      inputs:
+        url:
+          uri: 'internal:/registeration'
+          options: {  }
+        text: Register
+        variant: primary
+    -
+      parent_uuid: 0c93ebb8-3ce4-4465-ab05-42b2c40fc9ea
+      slot: actions
+      uuid: 9dbdd8f4-3841-4934-b6b2-199a7c42898b
+      component_id: sdc.convene_theme.button
+      inputs:
+        url:
+          uri: 'internal:/pricing-passes'
+          options: {  }
+        text: Pricing
+        variant: primary
+    -
+      parent_uuid: 0c93ebb8-3ce4-4465-ab05-42b2c40fc9ea
+      slot: background_media
+      uuid: 6c83216f-d26e-4ffc-b873-a6d1529224c6
+      component_id: sdc.convene_theme.media
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 6e2440bc-b39f-4687-8ca8-02b6f83580ee
+            target_type: media
+  path:
+    -
+      alias: /pricing-passes
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"title":"Pricing \u0026 Passes | Convene Conference Tickets"}'

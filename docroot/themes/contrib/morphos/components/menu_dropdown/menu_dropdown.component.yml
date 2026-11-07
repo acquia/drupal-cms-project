@@ -1,0 +1,37 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Menu Dropdown
+description: Menu formatted as a series of dropdowns showing child items.
+group: Content
+noUi: true
+props:
+  type: object
+  properties:
+    items:
+      title: Nav items
+      type: array
+      items:
+        type: object
+        properties:
+          url:
+            title: url
+            type: ['string', 'object', 'null']
+          title:
+            title: title
+            type: ['string', 'object', 'null']
+          below:
+            title: Child items
+            type: array
+    show_mobile_toggle:
+      title: Show mobile toggle
+      type: boolean
+      default: false
+    menu_classes:
+      title: Extra classes for the desktop menu
+      type: array
+      items:
+        type: string
+    mobile_classes:
+      title: Extra classes for the mobile dropdown
+      type: array
+      items:
+        type: string

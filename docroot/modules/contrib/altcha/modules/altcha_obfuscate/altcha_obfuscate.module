@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * This module enables ALTCHA obfuscate functionality.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function altcha_obfuscate_theme(): array {
+  return [
+    'altcha_obfuscate_reveal_button' => [
+      'variables' => [
+        'attributes' => [],
+        'text' => [],
+        'view_mode' => NULL,
+        'entity_type' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'altcha-obfuscate-reveal-button',
+    ],
+  ];
+}

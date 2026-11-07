@@ -1,0 +1,68 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.system_menu_block.about
+    - canvas.component.block.system_menu_block.explore
+    - canvas.component.block.system_menu_block.footer-utility-menu
+    - canvas.component.block.system_menu_block.resources
+    - canvas.component.block.system_menu_block.social-media-menu
+    - canvas.component.sdc.pulse_theme.space-container
+    - canvas.component.sdc.pulse_theme.space-footer
+    - filter.format.canvas_html_block
+  module:
+    - options
+    - text
+  theme:
+    - pulse_theme
+id: pulse_theme.footer
+theme: pulse_theme
+region: footer
+component_tree:
+  0:
+    uuid: 20491127-d08d-480c-9880-02d4cf0be77f
+    component_id: sdc.pulse_theme.space-container
+    component_version: 346ac0f8acf96ce9
+    inputs: '{"background_color":"option-9","width":"full-width","padding_top":"none","padding_bottom":"none","margin_top":"none","margin_bottom":"none","background_pattern":false,"pattern_image_position":"bottom-right"}'
+  '0:content:0':
+    parent_uuid: 20491127-d08d-480c-9880-02d4cf0be77f
+    slot: content
+    uuid: e19b8285-c064-4ef5-a7e4-47ff7cd1735f
+    component_id: sdc.pulse_theme.space-footer
+    component_version: 65352048345cd7cd
+    inputs: '{"brand_name":"Pulse","brand_slogan":"Healthcare, made clear","brand_description":{"value":"A modern healthcare platform to understand healthcare clearly and securely.","format":"canvas_html_block"},"disclaimer":{"value":"Your data is protected with industry-standard security. Pulse does not provide medical diagnosis.","format":"canvas_html_block"},"copyright":"2026 Pulse Health Technologies"}'
+  '0:content:0:columns:0':
+    parent_uuid: e19b8285-c064-4ef5-a7e4-47ff7cd1735f
+    slot: columns
+    uuid: 2ac2eca6-2bbb-4d35-91e6-b19d886b1a23
+    component_id: block.system_menu_block.resources
+    component_version: f42ec65ad6779ab0
+    inputs: '{"label":"Resources","label_display":"0","level":1,"depth":null,"expand_all_items":false}'
+  '0:content:0:columns:1':
+    parent_uuid: e19b8285-c064-4ef5-a7e4-47ff7cd1735f
+    slot: columns
+    uuid: 4a5290f9-2122-4fbf-939e-0c97ab842bdd
+    component_id: block.system_menu_block.about
+    component_version: d1b4c07352cb4ad1
+    inputs: '{"label":"About","label_display":"0","level":1,"depth":null,"expand_all_items":false}'
+  '0:content:0:columns:2':
+    parent_uuid: e19b8285-c064-4ef5-a7e4-47ff7cd1735f
+    slot: columns
+    uuid: 5e38ee8a-f6ed-4816-a865-4a2fb4f0a51f
+    component_id: block.system_menu_block.explore
+    component_version: 8f36fb68d221578e
+    inputs: '{"label":"Explore","label_display":"0","level":1,"depth":null,"expand_all_items":false}'
+  '0:content:0:footer_bottom_links:0':
+    parent_uuid: e19b8285-c064-4ef5-a7e4-47ff7cd1735f
+    slot: footer_bottom_links
+    uuid: 84c6261e-3d2c-460b-9830-4e07578959f7
+    component_id: block.system_menu_block.footer-utility-menu
+    component_version: 1282adb6ba6f9753
+    inputs: '{"label":"Footer Utility menu","label_display":"0","level":1,"depth":null,"expand_all_items":false}'
+  '0:content:0:social_links:0':
+    parent_uuid: e19b8285-c064-4ef5-a7e4-47ff7cd1735f
+    slot: social_links
+    uuid: b9566c3d-b0e2-4223-8f00-716921e5ce66
+    component_id: block.system_menu_block.social-media-menu
+    component_version: 19a1dff8e3f56e57
+    inputs: '{"label":"Social media menu","label_display":"0","level":1,"depth":null,"expand_all_items":false}'

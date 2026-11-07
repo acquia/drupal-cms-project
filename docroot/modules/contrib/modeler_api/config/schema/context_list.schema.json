@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Modeler API Context List",
+  "description": "A list of resolved modeler API contexts for a given model owner. Each context defines available plugins per component type.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id", "topic", "model_owner", "components"],
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "The unique context identifier."
+      },
+      "topic": {
+        "type": "string",
+        "description": "The human-readable topic of the context."
+      },
+      "model_owner": {
+        "type": "string",
+        "description": "The model owner plugin ID this context belongs to."
+      },
+      "components": {
+        "type": "object",
+        "description": "Available plugins per component type. All includes are resolved.",
+        "additionalProperties": false,
+        "propertyNames": {
+          "enum": ["start", "subprocess", "swimlane", "element", "link", "gateway", "annotation"]
+        },
+        "patternProperties": {
+          "^(start|subprocess|swimlane|element|link|gateway|annotation)$": {
+            "type": "object",
+            "required": ["plugins"],
+            "additionalProperties": false,
+            "properties": {
+              "plugins": {
+                "type": "array",
+                "description": "The list of available plugin IDs for this component type, with includes resolved.",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

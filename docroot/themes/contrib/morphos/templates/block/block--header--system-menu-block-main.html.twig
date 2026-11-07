@@ -1,0 +1,136 @@
+{#
+/**
+ * @file
+ * Header main menu block with selectable menu style.
+ *
+ * Additional variables:
+ * - header_menu_style: 'simple', 'dropdown', or 'megamenu'.
+ * - megamenu_columns: '2', '3', '4', '5', or '6'.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - in_preview: Whether the plugin is being rendered in preview mode.
+ * - content: The content of this block.
+ * - attributes: HTML attributes for the containing element.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: HTML attributes for the title element.
+ * - content_attributes: HTML attributes for the content element.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * Headings should be used on navigation menus that consistently appear on
+ * multiple pages. When this menu block's label is configured to not be
+ * displayed, it is automatically made invisible using the 'visually-hidden' CSS
+ * class, which still keeps it visible for screen-readers and assistive
+ * technology. Headings allow screen-reader and keyboard only users to navigate
+ * to or skip the links.
+ * See http://juicystudio.com/article/screen-readers-display-none.php and
+ * https://www.w3.org/TR/WCAG-TECHS/H42.html for more information.
+ *
+ * @ingroup themeable
+ */
+#}
+{% set heading_id = attributes.id ~ '-menu'|clean_id %}
+{% set menu_style = header_menu_style|default('dropdown') %}
+
+<nav{{ attributes.setAttribute('role', 'navigation').setAttribute('aria-labelledby', heading_id) }}>
+  {# Label. If not displayed, we still provide it for screen readers. #}
+  {% if not configuration.label_display %}
+    {% set title_attributes = title_attributes.addClass('visually-hidden') %}
+  {% endif %}
+  {{ title_prefix }}
+  <div{{ title_attributes.setAttribute('id', heading_id) }}>{{ configuration.label }}</div>
+  {{ title_suffix }}
+
+  {% if menu_style == 'simple' %}
+    {{ include('morphos:menu_simple', {
+      attributes: create_attribute(),
+      items: content['#items'],
+      show_mobile_toggle: true,
+      menu_classes: [
+        'hidden',
+        'lg:flex!',
+        'menu-horizontal',
+      ],
+      mobile_classes: [
+        'menu-sm',
+        'w-full',
+        'absolute',
+        'top-[100%]',
+        'left-0',
+        'right-0',
+        'mt-2',
+        'p-2',
+        'rounded-b-lg',
+        'shadow',
+        'z-1',
+      ],
+    },
+      with_context: false
+    ) }}
+  {% endif %}
+
+  {% if menu_style == 'dropdown' %}
+    {{ include('morphos:menu_dropdown', {
+      attributes: create_attribute(),
+      items: content['#items'],
+      show_mobile_toggle: true,
+      menu_classes: [
+        'hidden',
+        'lg:flex!',
+        'menu-horizontal',
+      ],
+      mobile_classes: [
+        'menu-sm',
+        'w-full',
+        'absolute',
+        'top-[100%]',
+        'left-0',
+        'right-0',
+        'mt-2',
+        'p-2',
+        'rounded-b-lg',
+        'shadow',
+        'z-1',
+      ],
+    },
+      with_context: false
+    ) }}
+  {% endif %}
+
+  {% if menu_style == 'megamenu' %}
+    {{ include('morphos:menu_mega', {
+      attributes: create_attribute(),
+      items: content['#items'],
+      show_mobile_toggle: true,
+      megamenu_columns: megamenu_columns|default('4'),
+      menu_classes: [
+        'hidden',
+        'lg:block!',
+      ],
+      mobile_classes: [
+        'menu-sm',
+        'w-full',
+        'absolute',
+        'top-[100%]',
+        'left-0',
+        'right-0',
+        'mt-2',
+        'p-2',
+        'rounded-b-lg',
+        'shadow',
+        'z-1',
+      ],
+    },
+      with_context: false
+    ) }}
+  {% endif %}
+</nav>

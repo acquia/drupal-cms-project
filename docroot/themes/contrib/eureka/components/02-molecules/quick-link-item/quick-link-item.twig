@@ -1,0 +1,48 @@
+{#
+/**
+ * Available variables:
+ * - quick_link_item_base_class: base classname of the wrapper.
+ * - quick_link_item_modifiers: array of modifiers to add to the base classname of the wrapper.
+ * - quick_link_item_blockname: blockname prepended to the base classname of the wrapper(s) and each component.
+ * - quick_link_item_extra_classes: array of extra classes to add to the base classes.
+ *
+ * - quick_link_item_heading: heading text of the quick links component.
+ * - quick_link_item_heading_level: heading level of the quick links component.
+ * - quick_link_item_summary: summary text of the quick links component.
+ *
+ * - quick_link_item_items: rendered HTML of the quick links items.
+ */
+#}
+
+{% set quick_link_item_base_class = 'quick-link-item' %}
+{% set quick_link_item_modifiers =  quick_links_modifiers|default([]) %}
+
+<div {{ bem(quick_link_item_base_class, quick_link_item_modifiers, quick_link_item_blockname, quick_link_item_extra_classes) }}>
+  <div {{ bem('icon', [], quick_link_item_base_class) }}>
+    {% if quick_link_item_icon_custom.src %}
+      {% include 'canvas:image' with {
+        src: quick_link_item_icon_custom.src,
+      } only %}
+    {% else %}
+      {{ include("eureka:icon", {
+        icon_name: quick_link_item_icon_name|default('document'),
+        icon_decorative: true,
+      }, with_context = false) }}
+    {% endif %}
+  </div>
+  <div {{ bem('text', [], quick_link_item_base_class) }}>
+    {{ include("eureka:heading", {
+      heading_level: 3,
+      heading: quick_link_item_heading,
+      heading_size_override: 'xsmall',
+    }, with_context = false) }}
+    <p {{ bem('summary', [], quick_link_item_base_class) }}>
+      {{ quick_link_item_summary }}
+    </p>
+    {{ include("eureka:link", {
+      link_cta: true,
+      link_content:  quick_link_item_link_text,
+      link_url: quick_link_item_link_url,
+    }, with_context = false) }}
+  </div>
+</div>

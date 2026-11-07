@@ -1,0 +1,68 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+
+name: Space Image
+
+description: An image component with customizable corners, captions, and additional styling options.
+
+status: stable
+
+group: Atoms
+
+props:
+
+  type: object
+
+  properties:
+    image:
+      title: 'Image'
+      description: The image file or URL to be displayed.
+      $ref: json-schema-definitions://canvas.module/image
+      type: object
+      examples:
+        - src: 'images/city.jpeg'
+          alt: 'Boring placeholder'
+          width: 600
+          height: 400
+          
+    corners:
+      type: string
+      title: Image corners
+      description: The style of the image corners (e.g., rounded or sharp).
+      enum:
+        - none
+        - round
+        - round-md
+        - round-lg
+        - round-xl
+        - round-2xl
+        - round-3xl
+        - round-full
+      default: none
+      examples:
+        - none
+
+    image_caption:
+      type: string
+      title: Caption
+      description: The caption text displayed below the image.
+      default: null
+      examples:
+        - null
+
+    loading:
+      title: Image loading
+      description: 'Keep this set to "lazy" unless you are absolutely sure this will always appear "Above the fold" on page load.'
+      type: string
+      enum:
+        - eager
+        - lazy
+      meta:enum:
+        eager: Eager
+        lazy: Lazy (recommended)
+      examples:
+        - lazy
+
+    extra_classes:
+      type: string
+      title: Class names
+      description: Custom CSS class names (separated by spaces) applied when custom styling is enabled.

@@ -1,0 +1,61 @@
+$schema: 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Tabs
+description: A navigation component that switches between different content panes within the same space.
+group: Content
+status: stable
+props:
+  type: object
+  properties:
+    placement:
+      type: string
+      title: Placement
+      description: Select the placement of the tabs.
+      enum:
+        - tabs-top
+        - tabs-bottom
+      meta:enum:
+        tabs-top: Top
+        tabs-bottom: Bottom
+    size:
+      type: string
+      title: Size
+      description: Select the size of the tabs.
+      enum:
+        - tabs-xs
+        - tabs-sm
+        - tabs-md
+        - tabs-lg
+        - tabs-xl
+      meta:enum:
+        tabs-xs: Extra small
+        tabs-sm: Small
+        tabs-md: Medium
+        tabs-lg: Large
+        tabs-xl: Extra large
+    style:
+      type: string
+      title: Style
+      description: Select the style of the tabs.
+      enum:
+        - tabs-box
+        - tabs-border
+        - tabs-lift
+      meta:enum:
+        tabs-box: Box
+        tabs-border: Border
+        tabs-lift: Lift
+      examples:
+        - tabs-border
+slots:
+  items:
+    title: Items
+    description: Add tab items.
+libraryOverrides:
+  dependencies:
+    - core/drupal
+    - core/once
+  js:
+    tabs.js: {}
+  css:
+    component:
+      tabs.css: {}

@@ -1,0 +1,1721 @@
+import fs from 'fs/promises';
+import path from 'path';
+import { Option } from 'commander';
+import { parse } from '@babel/parser';
+import * as p from '@clack/prompts';
+import {
+  discoverCanvasProject,
+  loadComponentsMetadata,
+  transformColorExamplesInProps,
+} from '@drupal-canvas/discovery';
+import { resolveHostGlobalCssPath } from '@drupal-canvas/vite-compat';
+
+import { ensureConfig, getConfig } from '../config';
+import {
+  planColorPull,
+  readBrandKitColorsFile,
+  writeBrandKitColorsConfig,
+} from '../lib/colors/color-pull.js';
+import {
+  buildExistingVariantKeys,
+  pullFonts,
+  readBrandKitConfig,
+  updateBrandKitConfig,
+  variantKey,
+} from '../lib/fonts/font-pull.js';
+import { createApiService, ensureAuthConfig } from '../services/api';
+import {
+  applySyncOptionAliasesAndWarnings,
+  parseBooleanOption,
+  pluralizeComponent,
+  updateConfigFromOptions,
+} from '../utils/command-helpers';
+import { printCommandIntro } from '../utils/command-intro';
+import { appendCommandSummarySection } from '../utils/command-summary';
+import { contentTemplateToAuthored } from '../utils/content-templates';
+import { evaluateContextHookSupport } from '../utils/context-hook-support';
+import { ensureTailwindImportAtTop } from '../utils/ensure-global-css-tailwind-import';
+import {
+  diagnoseLegacyApiUsage,
+  migrateGetterCalls,
+} from '../utils/getter-codemod';
+import { mergePackageJsonDependencies } from '../utils/merge-package-json';
+import { pageVariantToAuthoredSpec } from '../utils/page-variants';
+import { pageToAuthoredSpec } from '../utils/pages';
+import { stripProjectedContentEntityReferencePropKeys } from '../utils/process-component-files';
+import {
+  COMMAND_RESULT_REPORT_OPTIONS,
+  reportResults,
+} from '../utils/report-results';
+import { dumpMetadataWithComments } from '../utils/yaml-comments.js';
+
+import type {
+  ComponentMetadata,
+  DiscoveredComponent,
+  DiscoveredContentTemplate,
+  DiscoveredPage,
+  DiscoveredPageTemplate,
+} from '@drupal-canvas/discovery';
+import type {
+  AssetLibraryBundledSource,
+  AssetLibraryManifestEntry,
+} from '@drupal-canvas/ui/types/CodeComponent';
+import type { Command } from 'commander';
+import type { ApiService } from '../services/api';
+import type {
+  BrandKitColorEntry,
+  ColorFolderEntry,
+  Component,
+} from '../types/Component';
+import type { ContentTemplateListItem } from '../types/ContentTemplate';
+import type { Metadata } from '../types/Metadata';
+import type { PageListItem } from '../types/Page';
+import type { PageVariant } from '../types/PageVariant';
+import type { Result } from '../types/Result';
+import type { CommandSummaryResource } from '../utils/command-summary';
+import type { ContextHookSupport } from '../utils/context-hook-support';
+import type { GetterMigrationResult } from '../utils/getter-codemod';
+
+interface PullOptions {
+  clientId?: string;
+  clientSecret?: string;
+  siteUrl?: string;
+  scope?: string;
+  includePages?: boolean;
+  includeContentTemplates?: boolean;
+  pages?: boolean;
+  contentTemplates?: boolean;
+  pageTemplates?: boolean;
+  includeBrandKit?: boolean;
+  dir?: string;
+  yes?: boolean;
+  skipOverwrite?: boolean;
+}
+
+export interface PullTaskPrepareResult {
+  summaryLines: string[];
+  localOnlyCount: number;
+}
+
+export interface PullTask {
+  startLabel: string;
+  stopLabel: string;
+  prepare(): Promise<PullTaskPrepareResult>;
+  execute(options?: { deleteLocalOnly?: boolean }): Promise<PullTaskResult>;
+}
+
+export interface PullTaskResult {
+  results: Result[];
+  title: string;
+  label: string;
+  notes?: string[];
+}
+
+function pluralizeLabel(count: number, singular: string, plural?: string) {
+  return count === 1 ? singular : (plural ?? `${singular}s`);
+}
+
+function formatSummaryLine(
+  groupLabel: string,
+  total: number,
+  newCount: number,
+  existingCount: number,
+  unit?: string,
+  unitPlural?: string,
+): string {
+  const count = unit
+    ? `${total} ${pluralizeLabel(total, unit, unitPlural)}`
+    : String(total);
+  const details: string[] = [];
+  if (newCount > 0) details.push(`${newCount} new`);
+  if (existingCount > 0) details.push(`${existingCount} existing`);
+  const suffix = details.length > 0 ? ` (${details.join(', ')})` : '';
+  return `${groupLabel}: ${count} pull${suffix}`;
+}
+
+function formatPullPlan(summaryLines: string[]): string {
+  return ['Plan', ...summaryLines].join('\n');
+}
+
+function formatErrorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
+}
+
+function pullFailureItemName(message: string): string {
+  return message.includes('Authentication Error') ||
+    message.includes('Authentication failed')
+    ? 'Authentication failed'
+    : 'Pull failed';
+}
+
+function isWithinDirectory(directory: string, candidate: string): boolean {
+  const relative = path.relative(directory, candidate);
+  return (
+    relative === '' ||
+    (!relative.startsWith(`..${path.sep}`) &&
+      relative !== '..' &&
+      !path.isAbsolute(relative))
+  );
+}
+
+async function resolveAssetPullDestination(
+  projectRoot: string,
+  relativePath: string,
+): Promise<string> {
+  const destination = path.resolve(projectRoot, relativePath);
+  if (
+    destination === projectRoot ||
+    !isWithinDirectory(projectRoot, destination)
+  ) {
+    throw new Error(
+      `File "${relativePath}" resolves outside the project root.`,
+    );
+  }
+
+  let currentPath = projectRoot;
+  for (const segment of path
+    .relative(projectRoot, destination)
+    .split(path.sep)) {
+    currentPath = path.join(currentPath, segment);
+    let stats;
+    try {
+      stats = await fs.lstat(currentPath);
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+        break;
+      }
+      throw error;
+    }
+    if (!stats.isSymbolicLink()) {
+      continue;
+    }
+
+    let resolvedLink: string;
+    try {
+      resolvedLink = await fs.realpath(currentPath);
+    } catch {
+      throw new Error(
+        `File "${relativePath}" cannot be safely resolved within the project root.`,
+      );
+    }
+    if (!isWithinDirectory(projectRoot, resolvedLink)) {
+      throw new Error(
+        `File "${relativePath}" resolves outside the project root through a symbolic link.`,
+      );
+    }
+    currentPath = resolvedLink;
+  }
+
+  return destination;
+}
+
+function sourceCanUseJsx(source: string): boolean {
+  try {
+    parse(source, {
+      sourceType: 'module',
+      plugins: ['jsx'],
+    });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function getPulledJsPath(existingPath: string, source: string): string {
+  const extension = path.extname(existingPath).toLowerCase();
+  if (
+    (extension === '.js' || extension === '.jsx') &&
+    !sourceCanUseJsx(source)
+  ) {
+    return `${existingPath.slice(0, -extension.length)}.tsx`;
+  }
+  return existingPath;
+}
+
+export function buildSkippedLocalOnlyPullResources(
+  localOnlyCount: number,
+  deleteLocalOnly: boolean,
+): CommandSummaryResource[] {
+  if (localOnlyCount === 0 || deleteLocalOnly) {
+    return [];
+  }
+  return [
+    {
+      label: 'Components',
+      count: localOnlyCount,
+      unit: 'local-only component delete',
+      unitPlural: 'local-only component deletes',
+      action: 'skipped',
+    },
+  ];
+}
+
+/**
+ * Shared mutable reference for brand kit colors, populated during
+ * brand kit task prepare() and used during component task execute().
+ */
+interface BrandKitColorsRef {
+  colors: BrandKitColorEntry[];
+}
+
+/**
+ * Shared ref populated by the brand kit task prepare() and used during
+ * component task execute() for folder-aware color prop comments.
+ */
+interface ColorFolderRef {
+  folders: ColorFolderEntry[];
+}
+
+/**
+ * The getter migration a pull performs on component sources when the site
+ * and the installed `drupal-canvas` package support the context hooks.
+ * `null` means the gates were not evaluated (no site URL).
+ */
+export type PullCodemodSupport = ContextHookSupport | null;
+
+/** The AI-agent migration prompt printed for components left unchanged. */
+export const GETTER_MIGRATION_PROMPT =
+  'Legacy APIs remain supported in Drupal and Workbench. For headless use, ' +
+  'migrate only the remaining legacy API usages identified above. In function ' +
+  'components or custom hooks, use the corresponding hooks from ' +
+  '`drupal-canvas/react`. Call hooks unconditionally at the top level before ' +
+  'any possible return; handle missing context or clients. Outside components and ' +
+  'custom hooks, use SDK page context data or `getClient()` in headless server ' +
+  'code; pass data or a client to browser helpers. Preserve output, types, hook ' +
+  'order, and access controls. Never expose credentials.';
+
+const NULLABLE_HOOKS_NOTE =
+  'The context hooks return null when no context is available. Strict ' +
+  'TypeScript checks may require follow-up for nullable results; no null ' +
+  'guards were generated.';
+
+export function createComponentsPullTask(
+  apiService: ApiService,
+  componentDir: string,
+  skipOverwrite: boolean,
+  brandKitColorsRef: BrandKitColorsRef,
+  colorFolderRef: ColorFolderRef,
+  codemodSupport: PullCodemodSupport = null,
+): PullTask {
+  let components: Record<string, Component> = {};
+  const localComponentMap = new Map<string, DiscoveredComponent>();
+  let localOnlyComponents: DiscoveredComponent[] = [];
+  let preferJsxForNewComponents = false;
+  /** Planned getter migrations, keyed by machine name. */
+  const migrations = new Map<string, GetterMigrationResult>();
+
+  function buildMetadata(component: Component): Metadata {
+    // Build UUID → BrandKitColorEntry map from the shared ref.
+    const colorsByUuid = new Map(
+      brandKitColorsRef.colors.map((c) => [c.id, c]),
+    );
+
+    const metadata: Metadata = {
+      name: component.name,
+      machineName: component.machineName,
+      status: component.status,
+      required: component.required || [],
+      props: transformColorExamplesInProps(
+        {
+          properties: stripProjectedContentEntityReferencePropKeys(
+            component.props || {},
+          ),
+        },
+        colorsByUuid,
+        'toVarKey',
+      ) as Metadata['props'],
+      slots: Array.isArray(component.slots) ? {} : component.slots || {},
+      dataDependencies: component.dataDependencies?.entityFields
+        ? { entityFields: component.dataDependencies.entityFields }
+        : {},
+    };
+
+    return metadata;
+  }
+
+  function writeComponentFiles(
+    component: Component,
+    paths: { metadataPath: string; jsPath: string; cssPath: string },
+  ): Promise<void[]> {
+    const metadata = buildMetadata(component);
+    const yamlWithComments = dumpMetadataWithComments(
+      metadata,
+      colorFolderRef.folders,
+    );
+    const writes: Promise<void>[] = [
+      fs.writeFile(paths.metadataPath, yamlWithComments, 'utf-8'),
+    ];
+
+    if (component.sourceCodeJs) {
+      writes.push(fs.writeFile(paths.jsPath, component.sourceCodeJs, 'utf-8'));
+    }
+
+    if (component.sourceCodeCss) {
+      writes.push(
+        fs.writeFile(paths.cssPath, component.sourceCodeCss, 'utf-8'),
+      );
+    }
+
+    return Promise.all(writes);
+  }
+
+  return {
+    startLabel: 'Pulling components',
+    stopLabel: 'Pulled components',
+
+    async prepare(): Promise<PullTaskPrepareResult> {
+      const [fetchedComponents, discoveryResult] = await Promise.all([
+        apiService.listComponents(),
+        discoverCanvasProject({ componentRoot: componentDir }),
+      ]);
+
+      // External components are implemented by the configured external
+      // application and synced into Drupal as metadata only: pulling them
+      // would create phantom local components without an implementation.
+      components = Object.fromEntries(
+        Object.entries(fetchedComponents).filter(
+          ([, component]) => component.type !== 'external',
+        ),
+      );
+
+      for (const discovered of discoveryResult.components) {
+        localComponentMap.set(discovered.name, discovered);
+      }
+      preferJsxForNewComponents =
+        discoveryResult.components.length > 0 &&
+        discoveryResult.components.every((component) => {
+          if (!component.jsEntryPath) {
+            return false;
+          }
+          const extension = path.extname(component.jsEntryPath).toLowerCase();
+          return extension === '.js' || extension === '.jsx';
+        });
+
+      const remoteMachineNames = new Set(
+        Object.values(components).map((c) => c.machineName),
+      );
+      localOnlyComponents = discoveryResult.components.filter(
+        (d) => !remoteMachineNames.has(d.name),
+      );
+
+      const total = Object.keys(components).length;
+      const lines: string[] = [];
+
+      if (total > 0) {
+        const existingCount = Object.values(components).filter((component) =>
+          localComponentMap.has(component.machineName),
+        ).length;
+        const newCount = total - existingCount;
+        lines.push(
+          formatSummaryLine('Components', total, newCount, existingCount),
+        );
+      }
+
+      if (localOnlyComponents.length > 0) {
+        const n = localOnlyComponents.length;
+        lines.push(`Components: ${n} delete (local-only)`);
+      }
+
+      // Plan the getter migration so the conversions show before the pull
+      // is confirmed.
+      migrations.clear();
+      if (codemodSupport?.supported) {
+        for (const component of Object.values(components)) {
+          if (!component.sourceCodeJs) {
+            continue;
+          }
+          const discovered = localComponentMap.get(component.machineName);
+          if (discovered && skipOverwrite) {
+            continue;
+          }
+          const result = migrateGetterCalls(
+            component.sourceCodeJs,
+            discovered?.jsEntryPath ??
+              path.join(componentDir, component.machineName, 'index.tsx'),
+          );
+          if (result.usesGetters || result.constructsClient) {
+            migrations.set(component.machineName, result);
+          }
+        }
+        const planned = [...migrations.entries()].filter(
+          ([, result]) => result.changed,
+        );
+        if (planned.length > 0) {
+          lines.push(
+            `Components: ${planned.length} getter migration${planned.length === 1 ? '' : 's'} to context hooks`,
+          );
+          for (const [machineName, result] of planned) {
+            lines.push(
+              `  ${machineName}: ${result.conversions
+                .map(
+                  (conversion) => `${conversion.from}() → ${conversion.to}()`,
+                )
+                .join(', ')}`,
+            );
+          }
+        }
+      }
+
+      return {
+        summaryLines: lines,
+        localOnlyCount: localOnlyComponents.length,
+      };
+    },
+
+    async execute(options?: {
+      deleteLocalOnly?: boolean;
+    }): Promise<PullTaskResult> {
+      const results: Result[] = [];
+      const notes: string[] = [];
+      const remainingGetterComponents: string[] = [];
+      const legacyClients: string[] = [];
+      let migratedAny = false;
+
+      for (const remoteComponent of Object.values(components)) {
+        try {
+          const discovered = localComponentMap.get(remoteComponent.machineName);
+
+          if (discovered && skipOverwrite) {
+            results.push({
+              itemName: remoteComponent.machineName,
+              success: true,
+              details: [{ content: 'Skipped (already exists)' }],
+            });
+            continue;
+          }
+
+          // Apply the planned getter migration to the source that is written.
+          const migration = migrations.get(remoteComponent.machineName);
+          const component: Component =
+            migration?.changed && remoteComponent.sourceCodeJs
+              ? { ...remoteComponent, sourceCodeJs: migration.source }
+              : remoteComponent;
+          const details: { content: string }[] = [];
+          if (migration?.changed) {
+            migratedAny = true;
+            details.push({
+              content: `Migrated ${migration.conversions
+                .map(
+                  (conversion) => `${conversion.from}() → ${conversion.to}()`,
+                )
+                .join(', ')}`,
+            });
+          }
+          const warnings =
+            migration?.warnings.map((warning) => `Not migrated: ${warning}`) ??
+            [];
+          if (migration && !migration.changed && migration.usesGetters) {
+            remainingGetterComponents.push(remoteComponent.machineName);
+          }
+          if (migration?.constructsClient) {
+            legacyClients.push(remoteComponent.machineName);
+          }
+
+          if (discovered) {
+            const dir = path.dirname(discovered.metadataPath);
+            const existingJsPath = discovered.jsEntryPath;
+            const defaultJsPath = existingJsPath ?? path.join(dir, 'index.tsx');
+            const pulledJsPath = component.sourceCodeJs
+              ? getPulledJsPath(defaultJsPath, component.sourceCodeJs)
+              : defaultJsPath;
+            await writeComponentFiles(component, {
+              metadataPath: discovered.metadataPath,
+              jsPath: pulledJsPath,
+              cssPath: discovered.cssEntryPath ?? path.join(dir, 'index.css'),
+            });
+            if (existingJsPath && pulledJsPath !== existingJsPath) {
+              await fs.rm(existingJsPath);
+            }
+          } else {
+            const dir = path.join(componentDir, component.machineName);
+            await fs.mkdir(dir, { recursive: true });
+            const defaultExtension =
+              preferJsxForNewComponents &&
+              component.sourceCodeJs &&
+              sourceCanUseJsx(component.sourceCodeJs)
+                ? '.jsx'
+                : '.tsx';
+            const defaultJsPath = path.join(dir, `index${defaultExtension}`);
+            const pulledJsPath = component.sourceCodeJs
+              ? getPulledJsPath(defaultJsPath, component.sourceCodeJs)
+              : defaultJsPath;
+            await writeComponentFiles(component, {
+              metadataPath: path.join(dir, 'component.yml'),
+              jsPath: pulledJsPath,
+              cssPath: path.join(dir, 'index.css'),
+            });
+          }
+
+          results.push({
+            itemName: component.machineName,
+            success: true,
+            ...(details.length > 0 && { details }),
+            ...(warnings.length > 0 && { warnings }),
+          });
+        } catch (error) {
+          results.push({
+            itemName: remoteComponent.machineName,
+            success: false,
+            details: [
+              {
+                content: error instanceof Error ? error.message : String(error),
+              },
+            ],
+          });
+        }
+      }
+
+      // The capability gates failed: report the limitation once, with the
+      // migration guidance, when pulled sources still use the getters.
+      if (codemodSupport && !codemodSupport.supported) {
+        const usesGetters = Object.values(components).some(
+          (component) =>
+            component.sourceCodeJs &&
+            !(localComponentMap.has(component.machineName) && skipOverwrite) &&
+            migrateGetterCalls(component.sourceCodeJs, 'index.tsx').usesGetters,
+        );
+        if (usesGetters) {
+          notes.push(
+            'Getter calls were left unchanged because the context hooks could not be used:',
+            ...codemodSupport.reasons.map((reason) => `  - ${reason}`),
+            `Migration prompt for AI agents: ${GETTER_MIGRATION_PROMPT}`,
+          );
+        }
+      }
+      if (remainingGetterComponents.length > 0) {
+        notes.push(
+          `Components with getter calls left unchanged: ${remainingGetterComponents.join(', ')}`,
+        );
+      }
+      if (legacyClients.length > 0) {
+        notes.push(
+          `Components still constructing \`new JsonApiClient()\`: ${legacyClients.join(', ')}`,
+        );
+      }
+      if (remainingGetterComponents.length > 0 || legacyClients.length > 0) {
+        notes.push(
+          `Migration prompt for AI agents: ${GETTER_MIGRATION_PROMPT}`,
+        );
+      }
+      if (migratedAny) {
+        notes.push(NULLABLE_HOOKS_NOTE);
+      }
+
+      if (options?.deleteLocalOnly && localOnlyComponents.length > 0) {
+        for (const discovered of localOnlyComponents) {
+          try {
+            await fs.rm(discovered.directory, { recursive: true, force: true });
+            results.push({
+              itemName: discovered.name,
+              success: true,
+              details: [{ content: 'Deleted' }],
+            });
+          } catch (error) {
+            results.push({
+              itemName: discovered.name,
+              success: false,
+              details: [
+                {
+                  content:
+                    error instanceof Error ? error.message : String(error),
+                },
+              ],
+            });
+          }
+        }
+      }
+
+      return {
+        results,
+        title: 'Pulled components',
+        label: 'Component',
+        notes: notes.length > 0 ? notes : undefined,
+      };
+    },
+  };
+}
+
+export function createPagesPullTask(
+  apiService: ApiService,
+  pagesDir: string,
+  skipOverwrite: boolean,
+  componentDir?: string,
+): PullTask {
+  let pages: Record<string, PageListItem> = {};
+  let componentMetadata: ComponentMetadata[] = [];
+  const localPageMap = new Map<string, DiscoveredPage>();
+  const localPageSlugMap = new Map<string, DiscoveredPage>();
+
+  function getPageSlug(page: Pick<PageListItem, 'path' | 'uuid'>): string {
+    const slug = page.path.replace(/^\/+|\/+$/g, '').replace(/\//g, '-');
+
+    if (slug) {
+      return slug;
+    }
+
+    return page.path === '/' ? 'index' : page.uuid;
+  }
+
+  function getDiscoveredPage(page: PageListItem): DiscoveredPage | undefined {
+    const byUuid = localPageMap.get(page.uuid);
+    if (byUuid) {
+      return byUuid;
+    }
+
+    return localPageSlugMap.get(getPageSlug(page));
+  }
+
+  return {
+    startLabel: 'Pulling pages',
+    stopLabel: 'Pulled pages',
+
+    async prepare(): Promise<PullTaskPrepareResult> {
+      const [fetchedPages, discoveryResult] = await Promise.all([
+        apiService.listPages(),
+        discoverCanvasProject({
+          pagesRoot: pagesDir,
+          ...(componentDir ? { componentRoot: componentDir } : {}),
+        }),
+      ]);
+
+      componentMetadata = await loadComponentsMetadata(discoveryResult);
+
+      pages = fetchedPages;
+
+      for (const discovered of discoveryResult.pages) {
+        if (discovered.uuid) {
+          localPageMap.set(discovered.uuid, discovered);
+        }
+        localPageSlugMap.set(discovered.slug, discovered);
+      }
+
+      const total = Object.keys(pages).length;
+      if (total === 0) return { summaryLines: [], localOnlyCount: 0 };
+
+      const existingCount = Object.values(pages).filter((page) =>
+        Boolean(getDiscoveredPage(page)),
+      ).length;
+      const newCount = total - existingCount;
+
+      const lines = [
+        formatSummaryLine('Pages', total, newCount, existingCount),
+      ];
+      return { summaryLines: lines, localOnlyCount: 0 };
+    },
+
+    async execute(): Promise<PullTaskResult> {
+      const results: Result[] = [];
+
+      for (const page of Object.values(pages)) {
+        try {
+          const discovered = getDiscoveredPage(page);
+
+          if (discovered && skipOverwrite) {
+            results.push({
+              itemName: page.title,
+              success: true,
+              details: [{ content: 'Skipped (already exists)' }],
+            });
+            continue;
+          }
+
+          const fullPage = await apiService.getPage(page.id);
+
+          const nonJsComponents = fullPage.components.filter(
+            (c) => !c.component_id.startsWith('js.'),
+          );
+          if (nonJsComponents.length > 0) {
+            const unsupported = [
+              ...new Set(nonJsComponents.map((c) => c.component_id)),
+            ].join(', ');
+            results.push({
+              itemName: page.title,
+              success: false,
+              details: [
+                {
+                  content: `Skipped: contains unsupported components (${unsupported}). Only code components are supported.`,
+                },
+              ],
+            });
+            continue;
+          }
+
+          const localData = pageToAuthoredSpec(fullPage, {
+            componentMetadata,
+          });
+
+          const fileName = getPageSlug(page);
+          const filePath =
+            discovered?.path ?? path.join(pagesDir, `${fileName}.json`);
+          await fs.mkdir(path.dirname(filePath), { recursive: true });
+          await fs.writeFile(
+            filePath,
+            JSON.stringify(localData, null, 2) + '\n',
+            'utf-8',
+          );
+
+          results.push({ itemName: page.title, success: true });
+        } catch (error) {
+          results.push({
+            itemName: page.title,
+            success: false,
+            details: [
+              {
+                content: error instanceof Error ? error.message : String(error),
+              },
+            ],
+          });
+        }
+      }
+
+      return { results, title: 'Pulled pages', label: 'Page' };
+    },
+  };
+}
+
+export function createContentTemplatesPullTask(
+  apiService: ApiService,
+  contentTemplatesDir: string,
+  skipOverwrite: boolean,
+  componentDir?: string,
+): PullTask {
+  let templates: Record<string, ContentTemplateListItem> = {};
+  let componentMetadata: ComponentMetadata[] = [];
+  const localById = new Map<string, DiscoveredContentTemplate>();
+
+  return {
+    startLabel: 'Pulling content templates',
+    stopLabel: 'Pulled content templates',
+
+    async prepare(): Promise<PullTaskPrepareResult> {
+      const [fetchedTemplates, discoveryResult] = await Promise.all([
+        apiService.listContentTemplates(),
+        discoverCanvasProject({
+          contentTemplatesRoot: contentTemplatesDir,
+          ...(componentDir ? { componentRoot: componentDir } : {}),
+        }),
+      ]);
+
+      componentMetadata = await loadComponentsMetadata(discoveryResult);
+      templates = fetchedTemplates;
+
+      for (const discovered of discoveryResult.contentTemplates) {
+        localById.set(discovered.slug, discovered);
+      }
+
+      const total = Object.keys(templates).length;
+      if (total === 0) return { summaryLines: [], localOnlyCount: 0 };
+
+      const existingCount = Object.values(templates).filter((template) =>
+        localById.has(template.id),
+      ).length;
+      const newCount = total - existingCount;
+
+      const lines = [
+        formatSummaryLine('Content templates', total, newCount, existingCount),
+      ];
+      return { summaryLines: lines, localOnlyCount: 0 };
+    },
+
+    async execute(): Promise<PullTaskResult> {
+      const results: Result[] = [];
+
+      for (const listItem of Object.values(templates)) {
+        try {
+          const discovered = localById.get(listItem.id);
+
+          if (discovered && skipOverwrite) {
+            results.push({
+              itemName: listItem.label,
+              success: true,
+              details: [{ content: 'Skipped (already exists)' }],
+            });
+            continue;
+          }
+
+          const fullTemplate = await apiService.getContentTemplate(listItem.id);
+
+          const authored = contentTemplateToAuthored(
+            fullTemplate,
+            componentMetadata,
+          );
+
+          const filePath =
+            discovered?.path ??
+            path.join(contentTemplatesDir, `${listItem.id}.json`);
+          const resolvedDir = path.resolve(contentTemplatesDir);
+          if (!path.resolve(filePath).startsWith(resolvedDir + path.sep)) {
+            throw new Error(
+              `Content template ID "${listItem.id}" resolves outside the content templates directory.`,
+            );
+          }
+          await fs.mkdir(path.dirname(filePath), { recursive: true });
+          await fs.writeFile(
+            filePath,
+            JSON.stringify(authored, null, 2) + '\n',
+            'utf-8',
+          );
+
+          results.push({
+            itemName: listItem.label,
+            success: true,
+          });
+        } catch (error) {
+          results.push({
+            itemName: listItem.label,
+            success: false,
+            details: [
+              {
+                content: error instanceof Error ? error.message : String(error),
+              },
+            ],
+          });
+        }
+      }
+
+      return {
+        results,
+        title: 'Pulled content templates',
+        label: 'Content template',
+      };
+    },
+  };
+}
+
+export function createPageTemplatesPullTask(
+  apiService: ApiService,
+  pageTemplatesDir: string,
+  skipOverwrite: boolean,
+  componentDir?: string,
+): PullTask {
+  let pageVariants: Record<string, PageVariant> = {};
+  let defaultVariantId: string | null = null;
+  let componentMetadata: ComponentMetadata[] = [];
+  const localPageTemplateMap = new Map<string, DiscoveredPageTemplate>();
+
+  return {
+    startLabel: 'Pulling page templates',
+    stopLabel: 'Pulled page templates',
+
+    async prepare(): Promise<PullTaskPrepareResult> {
+      const [fetched, defaultVariant, discoveryResult] = await Promise.all([
+        apiService.listPageVariants(),
+        apiService.getDefaultPageVariant(),
+        discoverCanvasProject({
+          pageTemplatesRoot: pageTemplatesDir,
+          ...(componentDir ? { componentRoot: componentDir } : {}),
+        }),
+      ]);
+
+      componentMetadata = await loadComponentsMetadata(discoveryResult);
+      pageVariants = fetched;
+      defaultVariantId = defaultVariant.default_page_variant;
+      for (const discovered of discoveryResult.pageTemplates) {
+        localPageTemplateMap.set(discovered.id, discovered);
+      }
+
+      const total = Object.keys(pageVariants).length;
+      if (total === 0) return { summaryLines: [], localOnlyCount: 0 };
+
+      const existingCount = Object.values(pageVariants).filter((variant) =>
+        localPageTemplateMap.has(variant.id),
+      ).length;
+      const newCount = total - existingCount;
+
+      return {
+        summaryLines: [
+          formatSummaryLine('Page templates', total, newCount, existingCount),
+        ],
+        localOnlyCount: 0,
+      };
+    },
+
+    async execute(): Promise<PullTaskResult> {
+      const results: Result[] = [];
+
+      for (const variant of Object.values(pageVariants)) {
+        try {
+          const discovered = localPageTemplateMap.get(variant.id);
+          if (discovered && skipOverwrite) {
+            results.push({
+              itemName: variant.id,
+              success: true,
+              details: [{ content: 'Skipped (already exists)' }],
+            });
+            continue;
+          }
+
+          // The intrinsic "Page content" marker is part of every variant and
+          // round-trips like any other component; everything else must be a
+          // code component for the authored codebase to build it.
+          const unsupportedComponents = variant.component_tree.filter(
+            (c) =>
+              !c.component_id.startsWith('js.') &&
+              !c.component_id.startsWith('marker.'),
+          );
+          if (unsupportedComponents.length > 0) {
+            const unsupported = [
+              ...new Set(unsupportedComponents.map((c) => c.component_id)),
+            ].join(', ');
+            results.push({
+              itemName: variant.id,
+              success: false,
+              details: [
+                {
+                  content: `Skipped: contains unsupported components (${unsupported}). Only code components and the page content marker are supported.`,
+                },
+              ],
+            });
+            continue;
+          }
+
+          const localData = pageVariantToAuthoredSpec(
+            variant,
+            variant.id === defaultVariantId,
+            componentMetadata,
+          );
+          const filePath =
+            discovered?.path ??
+            path.join(pageTemplatesDir, `${variant.id}.json`);
+          await fs.mkdir(path.dirname(filePath), { recursive: true });
+          await fs.writeFile(
+            filePath,
+            JSON.stringify(localData, null, 2) + '\n',
+            'utf-8',
+          );
+
+          results.push({ itemName: variant.id, success: true });
+        } catch (error) {
+          results.push({
+            itemName: variant.id,
+            success: false,
+            details: [
+              {
+                content: error instanceof Error ? error.message : String(error),
+              },
+            ],
+          });
+        }
+      }
+
+      return {
+        results,
+        title: 'Pulled page templates',
+        label: 'Page template',
+      };
+    },
+  };
+}
+
+export function createAssetsPullTask(
+  apiService: ApiService,
+  globalCssPath: string,
+  skipOverwrite: boolean,
+  projectRoot: string,
+): PullTask {
+  let globalCss = '';
+  let localExists = false;
+  let packageJson: string | null = null;
+  let packageJsonExists = false;
+  const packageJsonPath = path.join(projectRoot, 'package.json');
+  let codebaseAssets: AssetLibraryManifestEntry[] = [];
+  let bundledSources: AssetLibraryBundledSource[] = [];
+
+  return {
+    startLabel: 'Pulling assets',
+    stopLabel: 'Pulled assets',
+
+    async prepare(): Promise<PullTaskPrepareResult> {
+      const globalAssetLibrary = await apiService.getGlobalAssetLibrary();
+      globalCss = globalAssetLibrary?.css?.original || '';
+      packageJson = globalAssetLibrary?.packageJson || null;
+      codebaseAssets = (globalAssetLibrary?.assets ?? []).filter(
+        (entry): entry is AssetLibraryManifestEntry =>
+          typeof entry.path === 'string' && entry.path.length > 0,
+      );
+      // Sources of local modules bundled into other artifacts. They have no
+      // `uri` and are absent from the runtime import map; a pull restores them
+      // verbatim so the editable file reappears on disk.
+      bundledSources = (globalAssetLibrary?.bundledSources ?? []).filter(
+        (entry): entry is AssetLibraryBundledSource =>
+          typeof entry.path === 'string' &&
+          entry.path.length > 0 &&
+          typeof entry.source === 'string',
+      );
+      // Collect the asset sub-items that are present into one compact line,
+      // e.g. `Assets: global CSS, package.json, 7 local imports pull`.
+      const assetParts: string[] = [];
+      if (globalCss) {
+        localExists = await fs
+          .access(globalCssPath)
+          .then(() => true)
+          .catch(() => false);
+        assetParts.push('global CSS');
+      }
+      if (packageJson) {
+        packageJsonExists = await fs
+          .access(packageJsonPath)
+          .then(() => true)
+          .catch(() => false);
+        assetParts.push('package.json');
+      }
+      const localCount = codebaseAssets.length + bundledSources.length;
+      if (localCount > 0) {
+        assetParts.push(
+          `${localCount} local ${pluralizeLabel(localCount, 'import')}`,
+        );
+      }
+      const summaryLines: string[] =
+        assetParts.length > 0 ? [`Assets: ${assetParts.join(', ')} pull`] : [];
+      return { summaryLines, localOnlyCount: 0 };
+    },
+
+    async execute(): Promise<PullTaskResult> {
+      const results: Result[] = [];
+      const notes: string[] = [];
+      // Set when the pulled `package.json` is newly created or gains added
+      // dependencies, so the user is reminded to reinstall. A no-op merge (no
+      // missing dependencies) raises no note.
+      let packageJsonChanged = false;
+      if (globalCss) {
+        try {
+          if (skipOverwrite && localExists) {
+            results.push({
+              itemName: 'global.css',
+              success: true,
+              details: [{ content: 'Skipped (already exists)' }],
+            });
+          } else {
+            await fs.mkdir(path.dirname(globalCssPath), { recursive: true });
+            const outputCss = ensureTailwindImportAtTop(globalCss);
+            await fs.writeFile(globalCssPath, outputCss, 'utf-8');
+            results.push({ itemName: 'global.css', success: true });
+          }
+        } catch (error) {
+          const errorMessage =
+            error instanceof Error ? error.message : String(error);
+          results.push({
+            itemName: 'global.css',
+            success: false,
+            details: [{ content: errorMessage }],
+          });
+        }
+      }
+      if (packageJson) {
+        try {
+          if (skipOverwrite && packageJsonExists) {
+            results.push({
+              itemName: 'package.json',
+              success: true,
+              details: [{ content: 'Skipped (already exists)' }],
+            });
+          } else if (!packageJsonExists) {
+            // No local file to preserve: write the pulled manifest verbatim.
+            await fs.writeFile(packageJsonPath, packageJson, 'utf-8');
+            packageJsonChanged = true;
+            results.push({ itemName: 'package.json', success: true });
+          } else {
+            // A local file exists: preserve it and only add dependencies it is
+            // missing, so project-owned fields (scripts, metadata) survive.
+            const local = await fs.readFile(packageJsonPath, 'utf-8');
+            const { output, added } = mergePackageJsonDependencies(
+              local,
+              packageJson,
+            );
+            if (output === null) {
+              results.push({
+                itemName: 'package.json',
+                success: true,
+                details: [{ content: 'No changes' }],
+              });
+            } else {
+              await fs.writeFile(packageJsonPath, output, 'utf-8');
+              packageJsonChanged = true;
+              for (const name of added) {
+                results.push({
+                  itemName: name,
+                  itemType: 'Dependency',
+                  success: true,
+                  details: [{ content: 'Added' }],
+                });
+              }
+            }
+          }
+        } catch (error) {
+          // A malformed local `package.json` fails only this item; the rest of
+          // the pull continues. The local file is left untouched.
+          const errorMessage =
+            error instanceof Error ? error.message : String(error);
+          results.push({
+            itemName: 'package.json',
+            success: false,
+            details: [
+              {
+                content: `Could not merge dependencies: ${errorMessage}. Fix the local package.json and pull again.`,
+              },
+            ],
+          });
+        }
+      }
+      const resolvedProjectRoot = await fs.realpath(projectRoot);
+      for (const entry of codebaseAssets) {
+        // `entry.path` is guaranteed a non-empty string by the prepare() filter.
+        const relativePath = entry.path as string;
+        try {
+          const dest = await resolveAssetPullDestination(
+            resolvedProjectRoot,
+            relativePath,
+          );
+          const destExists = await fs
+            .access(dest)
+            .then(() => true)
+            .catch(() => false);
+          if (skipOverwrite && destExists) {
+            results.push({
+              itemName: relativePath,
+              success: true,
+              details: [{ content: 'Skipped (already exists)' }],
+            });
+            continue;
+          }
+          await fs.mkdir(path.dirname(dest), { recursive: true });
+          if (typeof entry.source === 'string') {
+            // Text module: write the verbatim original source (the `uri`
+            // artifact holds minified compiled JS, which is not editable).
+            await fs.writeFile(dest, entry.source, 'utf-8');
+            // Helper modules are never rewritten by the getter codemod.
+            const diagnostics = /\.(jsx?|tsx?|mjs)$/.test(relativePath)
+              ? diagnoseLegacyApiUsage(entry.source, relativePath)
+              : [];
+            if (diagnostics.length > 0) {
+              results.push({
+                itemName: relativePath,
+                success: true,
+                details: diagnostics.map((content) => ({
+                  content: `Diagnostic: ${content}`,
+                })),
+              });
+              continue;
+            }
+          } else if (entry.url) {
+            // Binary asset: the `uri` artifact holds the original bytes;
+            // download over HTTP and write verbatim.
+            const buffer = await apiService.downloadFile(entry.url);
+            await fs.writeFile(dest, buffer);
+          } else {
+            throw new Error('No source or downloadable URL available.');
+          }
+          results.push({ itemName: relativePath, success: true });
+        } catch (error) {
+          const errorMessage =
+            error instanceof Error ? error.message : String(error);
+          results.push({
+            itemName: relativePath,
+            success: false,
+            details: [{ content: errorMessage }],
+          });
+        }
+      }
+      for (const entry of bundledSources) {
+        const relativePath = entry.path;
+        try {
+          const dest = await resolveAssetPullDestination(
+            resolvedProjectRoot,
+            relativePath,
+          );
+          const destExists = await fs
+            .access(dest)
+            .then(() => true)
+            .catch(() => false);
+          if (skipOverwrite && destExists) {
+            results.push({
+              itemName: relativePath,
+              success: true,
+              details: [{ content: 'Skipped (already exists)' }],
+            });
+            continue;
+          }
+          await fs.mkdir(path.dirname(dest), { recursive: true });
+          // Bundled sources are always verbatim text; they never carry a `uri`
+          // or downloadable URL because they are not standalone artifacts.
+          await fs.writeFile(dest, entry.source, 'utf-8');
+          results.push({ itemName: relativePath, success: true });
+        } catch (error) {
+          const errorMessage =
+            error instanceof Error ? error.message : String(error);
+          results.push({
+            itemName: relativePath,
+            success: false,
+            details: [{ content: errorMessage }],
+          });
+        }
+      }
+      if (packageJsonChanged) {
+        notes.push(
+          'package.json changed. Run `npm install` to install dependencies.',
+        );
+      }
+      return {
+        results,
+        title: 'Pulled assets',
+        label: 'Asset',
+        notes: notes.length > 0 ? notes : undefined,
+      };
+    },
+  };
+}
+
+export function createBrandKitPullTask(
+  apiService: ApiService,
+  projectRoot: string,
+  skipOverwrite: boolean = false,
+  brandKitColorsRef: BrandKitColorsRef,
+  colorFolderRef: ColorFolderRef,
+): PullTask {
+  let totalFontVariants = 0;
+  let newCount = 0;
+  let existingCount = 0;
+  let remoteColors: BrandKitColorEntry[] = [];
+
+  return {
+    startLabel: 'Pulling brand kit',
+    stopLabel: 'Pulled brand kit',
+
+    async prepare(): Promise<PullTaskPrepareResult> {
+      const [brandKit, brandKitConfig, folders] = await Promise.all([
+        apiService.getBrandKit(),
+        readBrandKitConfig(projectRoot),
+        apiService.getFolders(),
+      ]);
+
+      // Populate the shared ref so component pull can resolve color examples.
+      remoteColors = brandKit.colors ?? [];
+      brandKitColorsRef.colors = remoteColors;
+
+      // Populate the shared ref so component pull can add folder comments.
+      const colorFolders = folders.filter((f) => f.type === 'color');
+      colorFolderRef.folders = colorFolders;
+
+      const summaryLines: string[] = [];
+      const remoteFonts = brandKit.fonts ?? [];
+      totalFontVariants = remoteFonts.length;
+      if (totalFontVariants > 0) {
+        const existingKeys = buildExistingVariantKeys(
+          brandKitConfig?.families ?? [],
+        );
+
+        existingCount = remoteFonts.filter((e) =>
+          existingKeys.has(
+            variantKey(e.family, e.weight ?? '400', e.style ?? 'normal'),
+          ),
+        ).length;
+        newCount = remoteFonts.filter(
+          (e) =>
+            e.url &&
+            !existingKeys.has(
+              variantKey(e.family, e.weight ?? '400', e.style ?? 'normal'),
+            ),
+        ).length;
+
+        summaryLines.push(
+          formatSummaryLine(
+            'brand kit',
+            totalFontVariants,
+            newCount,
+            existingCount,
+            'font variant',
+          ),
+        );
+      }
+
+      // remoteColors already populated from brandKit.colors above.
+      const colorPlan = planColorPull(
+        remoteColors,
+        await readBrandKitColorsFile(projectRoot),
+        { skipOverwrite },
+      );
+      if (remoteColors.length > 0) {
+        summaryLines.push(
+          formatSummaryLine(
+            'brand kit colors',
+            remoteColors.length,
+            colorPlan.added.length,
+            colorPlan.unchanged + colorPlan.updated.length,
+            'color',
+          ),
+        );
+      } else if (
+        colorPlan.changed ||
+        colorPlan.localOnly.length > 0 ||
+        colorPlan.duplicates.length > 0
+      ) {
+        // No colors to pull, but the local file still has color entries to
+        // report or tidy — schedule the task so that work happens.
+        summaryLines.push(
+          `brand kit colors: 0 pull (${colorPlan.localOnly.length + colorPlan.duplicates.length} local-only)`,
+        );
+      }
+
+      return {
+        summaryLines,
+        localOnlyCount: 0,
+      };
+    },
+
+    async execute(): Promise<PullTaskResult> {
+      const config = getConfig();
+      const result = await pullFonts(apiService, projectRoot, config.fonts);
+
+      const results: Result[] = [];
+      const notes: string[] = [];
+
+      for (const entry of result.downloaded) {
+        results.push({
+          itemName: `${entry.name} ${entry.weights?.[0] ?? '400'} ${entry.styles?.[0] ?? 'normal'}`,
+          success: true,
+        });
+      }
+
+      if (result.skipped > 0) {
+        results.push({
+          itemName: 'font variants',
+          success: true,
+          details: [
+            {
+              content: `Skipped ${result.skipped} (already in config)`,
+            },
+          ],
+        });
+      }
+
+      if (result.count > 0) {
+        await updateBrandKitConfig(projectRoot, result.downloaded);
+      }
+
+      // Colors: server colors in palette order, hand-formatted entries kept
+      // verbatim, local-only entries preserved and reported.
+      const colorPlan = planColorPull(
+        remoteColors,
+        await readBrandKitColorsFile(projectRoot),
+        { skipOverwrite },
+      );
+      for (const itemName of colorPlan.added) {
+        results.push({
+          itemName,
+          success: true,
+          details: [{ content: 'Added' }],
+        });
+      }
+      for (const itemName of colorPlan.updated) {
+        results.push({
+          itemName,
+          success: true,
+          details: [{ content: 'Updated' }],
+        });
+      }
+      if (colorPlan.unchanged > 0) {
+        results.push({
+          itemName: 'colors',
+          success: true,
+          details: [
+            { content: `Skipped ${colorPlan.unchanged} (already in file)` },
+          ],
+        });
+      }
+      if (colorPlan.changed) {
+        await writeBrandKitColorsConfig(projectRoot, colorPlan.colors);
+      }
+      if (colorPlan.localOnly.length > 0) {
+        notes.push(
+          `${colorPlan.localOnly.length} ${pluralizeLabel(colorPlan.localOnly.length, 'color')} in canvas.brand-kit.json ${colorPlan.localOnly.length === 1 ? 'is' : 'are'} not on the site and ${colorPlan.localOnly.length === 1 ? 'was' : 'were'} kept: ${colorPlan.localOnly.join(', ')}. Run \`canvas push\` to create them.`,
+        );
+      }
+      if (colorPlan.duplicates.length > 0) {
+        notes.push(
+          `Removed ${colorPlan.duplicates.length} duplicate color ${pluralizeLabel(colorPlan.duplicates.length, 'entry', 'entries')} from canvas.brand-kit.json (the first entry for each variable was kept): ${colorPlan.duplicates.map((key) => `"${key}"`).join(', ')}.`,
+        );
+      }
+
+      return {
+        results,
+        title: 'Pulled brand kit',
+        label: 'Item',
+        notes: notes.length > 0 ? notes : undefined,
+      };
+    },
+  };
+}
+
+export function pullCommand(program: Command): void {
+  program
+    .command('pull')
+    .description(
+      'pull components, global CSS, and optional fonts and pages from Drupal',
+    )
+    .option('--client-id <id>', 'Client ID')
+    .option('--client-secret <secret>', 'Client Secret')
+    .option('--site-url <url>', 'Site URL')
+    .option('--scope <scope>', 'Scope')
+    .addOption(
+      new Option(
+        '--include-pages [enabled]',
+        'Include pages in the pull operation',
+      )
+        .preset('true')
+        .argParser(parseBooleanOption)
+        .default(undefined),
+    )
+    .addOption(
+      new Option(
+        '--include-content-templates [enabled]',
+        'Include content templates in the pull operation',
+      )
+        .preset('true')
+        .argParser(parseBooleanOption)
+        .default(undefined),
+    )
+    .option('--no-pages', 'Exclude pages from the pull operation')
+    .option(
+      '--no-content-templates',
+      'Exclude content templates from the pull operation',
+    )
+    .option(
+      '--no-page-templates',
+      'Exclude page templates from the pull operation',
+    )
+    .addOption(
+      new Option(
+        '--include-brand-kit [enabled]',
+        'Include brand kit (fonts and colors) in the pull operation',
+      )
+        .preset('true')
+        .argParser(parseBooleanOption)
+        .default(undefined),
+    )
+    .option(
+      '--no-include-brand-kit',
+      'Exclude brand kit (fonts and colors) from the pull operation',
+    )
+    .option('-d, --dir <directory>', 'Component directory')
+    .option('-y, --yes', 'Skip all confirmation prompts')
+    .option('--skip-overwrite', 'Skip pulling items that already exist locally')
+    .action(async (options: PullOptions) => {
+      printCommandIntro('pull');
+      const s = p.spinner();
+      let spinnerActive = false;
+      let spinnerFailureLabel = 'Pull failed';
+
+      try {
+        applySyncOptionAliasesAndWarnings(options);
+        updateConfigFromOptions(options);
+
+        await ensureAuthConfig();
+        await ensureConfig(['componentDir']);
+
+        const config = getConfig();
+        const apiService = await createApiService();
+        const includesPages = config.includePages;
+        const includesContentTemplates = config.includeContentTemplates;
+        const includesPageTemplates = config.includePageTemplates;
+        const includesBrandKit = config.includeBrandKit;
+
+        // Shared ref to pass brand kit colors from brand kit task to component task.
+        const brandKitColorsRef: BrandKitColorsRef = { colors: [] };
+
+        // Shared ref to pass color folders from brand kit task to component task.
+        const colorFolderRef: ColorFolderRef = { folders: [] };
+
+        // Build pull tasks.
+        const projectRoot = process.cwd();
+        // The getter migration runs only when the site and the installed
+        // drupal-canvas package both support the context hooks.
+        const codemodSupport = await evaluateContextHookSupport({
+          siteUrl: config.siteUrl,
+          projectRoot,
+        });
+        const tasks: PullTask[] = [
+          createComponentsPullTask(
+            apiService,
+            config.componentDir,
+            options.skipOverwrite ?? false,
+            brandKitColorsRef,
+            colorFolderRef,
+            codemodSupport,
+          ),
+          createAssetsPullTask(
+            apiService,
+            resolveHostGlobalCssPath(projectRoot),
+            options.skipOverwrite ?? false,
+            projectRoot,
+          ),
+        ];
+
+        if (includesBrandKit) {
+          tasks.push(
+            createBrandKitPullTask(
+              apiService,
+              projectRoot,
+              options.skipOverwrite ?? false,
+              brandKitColorsRef,
+              colorFolderRef,
+            ),
+          );
+        }
+
+        if (includesPages) {
+          tasks.push(
+            createPagesPullTask(
+              apiService,
+              config.pagesDir,
+              options.skipOverwrite ?? false,
+              config.componentDir,
+            ),
+          );
+        }
+
+        if (includesPageTemplates) {
+          tasks.push(
+            createPageTemplatesPullTask(
+              apiService,
+              config.pageTemplatesDir,
+              options.skipOverwrite ?? false,
+              config.componentDir,
+            ),
+          );
+        }
+
+        if (includesContentTemplates) {
+          tasks.push(
+            createContentTemplatesPullTask(
+              apiService,
+              path.resolve(projectRoot, config.contentTemplatesDir),
+              options.skipOverwrite ?? false,
+              config.componentDir,
+            ),
+          );
+        }
+
+        // Fetch remote data and discover local state.
+        s.start('Fetching remote data');
+        spinnerActive = true;
+        spinnerFailureLabel = 'Fetch failed';
+        const prepareResults = await Promise.all(tasks.map((t) => t.prepare()));
+        const summaryLines = prepareResults.flatMap((r) => r.summaryLines);
+        const localOnlyCount = prepareResults.reduce(
+          (sum, r) => sum + r.localOnlyCount,
+          0,
+        );
+        if (summaryLines.length === 0) {
+          s.stop('Nothing to pull', 0);
+          p.outro('Nothing to pull');
+          return;
+        }
+
+        s.stop('Fetched remote data', 0);
+        spinnerActive = false;
+        p.log.message(formatPullPlan(summaryLines));
+
+        if (!options.yes) {
+          const confirmed = await p.confirm({
+            message: `Pull from ${config.siteUrl}?`,
+            initialValue: true,
+          });
+          if (p.isCancel(confirmed) || !confirmed) {
+            p.cancel('Operation cancelled');
+            return;
+          }
+        }
+
+        let deleteLocalOnly = false;
+        if (localOnlyCount > 0) {
+          if (options.yes) {
+            deleteLocalOnly = true;
+          } else {
+            const deleteLocal = await p.confirm({
+              message: `Delete ${localOnlyCount} local ${pluralizeComponent(localOnlyCount)} that no longer exist remotely?`,
+              initialValue: false,
+            });
+            if (p.isCancel(deleteLocal)) {
+              p.cancel('Operation cancelled');
+              return;
+            }
+            deleteLocalOnly = Boolean(deleteLocal);
+          }
+        }
+        const skippedResources = buildSkippedLocalOnlyPullResources(
+          localOnlyCount,
+          deleteLocalOnly,
+        );
+
+        const plannedTasks = tasks.filter(
+          (_task, index) => prepareResults[index].summaryLines.length > 0,
+        );
+        const outcomes: PullTaskResult[] = [];
+
+        for (const task of plannedTasks) {
+          s.start(task.startLabel);
+          spinnerActive = true;
+          spinnerFailureLabel = task.stopLabel;
+
+          const outcome = await task.execute({ deleteLocalOnly });
+          outcomes.push(outcome);
+          const taskHasFailures = outcome.results.some(
+            (result) => !result.success,
+          );
+          s.stop(task.stopLabel, taskHasFailures ? 2 : 0);
+          spinnerActive = false;
+
+          if (outcome.results.length === 0) {
+            continue;
+          }
+          reportResults(outcome.results, outcome.title, outcome.label, {
+            ...COMMAND_RESULT_REPORT_OPTIONS,
+            showTitle: false,
+          });
+        }
+
+        const hasFailures = outcomes.some((outcome) =>
+          outcome.results.some((result) => !result.success),
+        );
+
+        if (skippedResources.length > 0) {
+          const skippedLines: string[] = [];
+          appendCommandSummarySection(
+            skippedLines,
+            'Skipped',
+            skippedResources,
+            'skipped',
+          );
+          p.log.message(skippedLines.join('\n'));
+        }
+        const notes = outcomes.flatMap((outcome) => outcome.notes ?? []);
+        if (notes.length > 0) {
+          p.note(notes.join('\n'));
+        }
+        p.outro(hasFailures ? 'Pull incomplete' : 'Pull completed');
+        if (hasFailures) {
+          process.exitCode = 1;
+          return;
+        }
+      } catch (error) {
+        if (spinnerActive) {
+          s.stop(spinnerFailureLabel, 2);
+        }
+        const message = formatErrorMessage(error);
+        reportResults(
+          [
+            {
+              itemName: pullFailureItemName(message),
+              success: false,
+              details: [{ content: message }],
+            },
+          ],
+          'Pull failed',
+          'Item',
+          COMMAND_RESULT_REPORT_OPTIONS,
+        );
+        p.outro('Pull failed');
+        process.exitCode = 1;
+      }
+    });
+}

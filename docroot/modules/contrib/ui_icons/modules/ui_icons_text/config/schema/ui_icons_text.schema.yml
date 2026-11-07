@@ -1,0 +1,17 @@
+filter_settings.icon_embed:
+  type: mapping
+  label: 'Icon Embed'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    allowed_icon_pack:
+      type: sequence
+      label: 'Icon pack allowed for selection'
+      sequence:
+        type: string
+    result_format:
+      type: string
+      label: 'Autocomplete format'
+    max_result:
+      type: integer
+      label: 'Maximum result'

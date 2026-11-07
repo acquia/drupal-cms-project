@@ -1,0 +1,88 @@
+{#
+/**
+ * Available variables:
+ * - hero_primary_base_class: base classname of the wrapper.
+ * - hero_primary_modifiers: array of modifiers to add to the base classname of the wrapper.
+ * - hero_primary_blockname: blockname prepended to the base classname of the wrapper(s) and each component.
+ * - hero_primary_extra_classes: array of extra classes to add to the base classes.
+ *
+ * - hero_primary_media: url of the hero_primary image.
+ * - hero_primary_media_alt: alt of the hero_primary image.
+ * - hero_primary_heading: Title of the component
+ * - hero_primary_heading_level: (default: 1) what level of heading to show on the hero_primary
+ * - hero_primary_text: Descriptive text
+ * - hero_primary_cta_text: hero_primary text of the cta
+ * - hero_primary_cta_url: url of the cta
+ * - hero_primary_cta_secondary_text: (optional) secondary text of the cta
+ * - hero_primary_cta_secondary_url: (optional) url of the secondary cta
+ *
+ * Available blocks:
+ * - hero_primary_media_block
+ * - hero_primary_text_block
+ */
+#}
+{% set hero_primary_base_class = 'hero-primary' %}
+{% set hero_primary_modifiers = hero_primary_modifiers|default([]) %}
+
+<section {{ bem(hero_primary_base_class, hero_primary_modifiers, hero_primary_blockname, hero_primary_extra_classes) }}>
+  {# Image #}
+  {% if hero_primary_media %}
+    {% block hero_primary_media_block %}
+      <div {{ bem('media', [], hero_primary_base_class) }}>
+        {% include 'canvas:image' with {
+          src: hero_primary_media.src,
+          alt: hero_primary_media.alt,
+          loading: 'lazy',
+          sizes: '(max-width: 480px) 100vw, (max-width: 768px) 50vw, 33vw',
+        } only %}
+      </div>
+    {% endblock %}
+  {% endif %}
+  {# Content #}
+  {% if hero_primary_heading or hero_primary_text %}
+    <div {{ bem('content', hero_primary_content_modifiers, hero_primary_base_class) }}>
+      {# Title #}
+      {% if hero_primary_heading_white_words or hero_primary_heading_colour_words %}
+        {% embed"eureka:heading" with {
+          heading_level: hero_primary_heading_level|default(1),
+        }%}
+          {% block heading_block %}
+            {% if hero_primary_heading_white_words %}
+              <span>{{ hero_primary_heading_white_words }}</span>
+            {% endif %}
+            {{ hero_primary_heading_colour_words }}
+          {% endblock %}
+        {% endembed %}
+      {% endif %}
+      {# Text #}
+      {% if hero_primary_text %}
+        {% block hero_primary_text_block %}
+          {{ include("eureka:paragraph", {
+            paragraph_content: hero_primary_text,
+          }, with_context = false) }}
+        {% endblock %}
+      {% endif %}
+        <div {{ bem('ctas', [], hero_primary_base_class) }}>
+        {# CTA #}
+        {% if hero_primary_cta_url %}
+          {{ include("eureka:button", {
+            button_content: hero_primary_cta_text,
+            button_url: hero_primary_cta_url,
+            button_type: 'primary',
+            button_extra_classes: ['hero-primary__cta'],
+          }, with_context = false) }}
+        {% endif %}
+        {# CTA Secondary #}
+        {% if hero_primary_cta_secondary_url %}
+          {{ include("eureka:link", {
+            link_content: hero_primary_cta_secondary_text,
+            link_url: hero_primary_cta_secondary_url,
+            link_cta: true,
+            link_modifiers: ['text-inverse'],
+            link_extra_classes: ['hero-primary__cta-secondary'],
+          }, with_context = false) }}
+        {% endif %}
+        </div>
+    </div>
+  {% endif %}
+</section>

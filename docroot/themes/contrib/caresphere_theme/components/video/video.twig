@@ -1,0 +1,95 @@
+{#
+  Video SDC: desktop layout from Figma node 1-10549, mobile from 1-10225.
+  Supports remote (YouTube/Vimeo) and local video; optional thumbnail with play overlay.
+  Click play → thumbnail hides, video plays; pause → thumbnail reappears.
+#}
+{% set custom_radius = border_radius|default(0) %}
+{% set has_custom_radius = custom_radius > 0 %}
+{% set has_radius = has_custom_radius or (radius is not empty) ? 'yes' : 'no' %}
+{% set source = video_source|default('remote') %}
+{% set has_thumbnail = thumbnail_media is defined and thumbnail_media is not empty and thumbnail_media.src is defined and thumbnail_media.src is not empty %}
+{# Local: prefer media library (video_media.src), else manual video_url. Remote: video_url only. #}
+{% set video_url_val = (source == 'local' and video_media is defined and video_media is not empty and video_media.src is defined and video_media.src is not empty) ? video_media.src : (video_url|default('')) %}
+
+{% set video_container =
+  html_cva(
+    base: 'video cq-full w-full',
+    variants: {
+      size: {
+        '2:1': 'aspect-2/1',
+        '16:9': 'aspect-16/9',
+        '3:2': 'aspect-3/2',
+        '4:3': 'aspect-4/3',
+        '1:1': 'aspect-1/1'
+      },
+      hasRadius: {
+        yes: 'overflow-hidden',
+        no: 'rounded-none'
+      },
+      radius: {
+        small: 'rounded-sm',
+        large: 'rounded-xl md:rounded-2xl',
+        'extra-large': 'rounded-[24px] md:rounded-[32px]'
+      }
+    }
+  )
+%}
+
+{% set container_classes =
+  video_container.apply({
+    size: size|default('16:9'),
+    hasRadius: has_radius,
+    radius: has_custom_radius ? '' : (radius|default('small'))
+  })
+%}
+
+{% set container_style = has_custom_radius ? 'border-radius: ' ~ custom_radius ~ 'px' : '' %}
+
+<figure class="video-figure">
+  <div class="video__wrapper {{ container_classes }}"{% if container_style %} style="{{ container_style }}"{% endif %}>
+    <div class="video__container" data-video-source="{{ source }}" data-video-url="{{ video_url_val }}" data-has-thumbnail="{{ has_thumbnail ? 'true' : 'false' }}">
+      {# Media area: video (local) or placeholder for iframe (remote), both hidden when thumbnail is shown and not yet played #}
+      <div class="video__media" aria-hidden="{{ has_thumbnail ? 'true' : 'false' }}">
+        {% if source == 'local' and video_url_val %}
+          <video
+            class="video__element"
+            src="{{ video_url_val }}"
+            controls
+            playsinline
+            preload="metadata"
+            data-video-local
+          ></video>
+        {% elseif source == 'remote' and video_url_val %}
+          <div class="video__embed" data-video-remote aria-label="Video player"></div>
+        {% endif %}
+      </div>
+
+      {# Optional thumbnail + play button overlay; hidden when playing, shown when paused or before first play #}
+      {% if has_thumbnail %}
+        <div class="video__thumbnail-wrap" data-video-thumbnail>
+          <div class="video__thumbnail-inner">
+            {% include 'canvas:image' ignore missing with {
+              src: thumbnail_media.src,
+              alt: thumbnail_media.alt|default('Video thumbnail'),
+              class: 'video__thumbnail-img',
+              width: thumbnail_media.width|default(1280),
+              height: thumbnail_media.height|default(720)
+            } only %}
+            <button type="button" class="video__play-btn" data-video-play aria-label="Play video">
+              <span class="video__play-icon" aria-hidden="true">
+                <svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  {% if caption %}
+    <figcaption class="video__caption">
+      {{ caption }}
+    </figcaption>
+  {% endif %}
+</figure>

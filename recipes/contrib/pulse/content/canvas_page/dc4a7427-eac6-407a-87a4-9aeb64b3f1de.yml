@@ -1,0 +1,118 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: dc4a7427-eac6-407a-87a4-9aeb64b3f1de
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Disclaimer
+  components:
+    -
+      uuid: f3d0b8aa-5f66-41fc-beb0-89ec30f9e08f
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: boxed-width
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: small
+        background_pattern: false
+        pattern_image_position: bottom-right
+    -
+      parent_uuid: f3d0b8aa-5f66-41fc-beb0-89ec30f9e08f
+      slot: content
+      uuid: 944ed76d-f5e7-4216-bb48-60c2a0038404
+      component_id: sdc.pulse_theme.space-section-heading
+      inputs:
+        title: Disclaimer
+        tag_name: h2
+        description:
+          value: "<p>The information provided on Pulse is intended to support learning, awareness, and general understanding \Lof health-related topics. It is not a substitute for professional medical advice, diagnosis, or treatment.</p>"
+          format: canvas_html_block
+        alignment: center
+        with_image: false
+    -
+      uuid: 76eb0330-c61d-40d6-9f5e-341b8dfe1699
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: width-5xl
+        padding_left: small
+        padding_right: small
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: none
+        background_pattern: false
+        pattern_image_position: bottom-right
+    -
+      parent_uuid: 76eb0330-c61d-40d6-9f5e-341b8dfe1699
+      slot: content
+      uuid: 85b9ef63-0a92-478e-8262-86d3cac85db5
+      component_id: sdc.pulse_theme.space-text
+      inputs:
+        text:
+          value: '<p>All content on this platform—including articles, research summaries, tools, visuals, and any other materials—is provided for informational and educational purposes only.</p><p><br>Always seek the advice of a qualified healthcare professional with any questions you may have regarding a medical condition, symptoms, medications, or treatment options. Never disregard professional medical advice or delay seeking it because of something you have read on</p><p>&nbsp;</p>'
+          format: canvas_html_block
+        text_size: text-lg
+        heading_level: h4
+        title: 'Not medical advice'
+    -
+      parent_uuid: 76eb0330-c61d-40d6-9f5e-341b8dfe1699
+      slot: content
+      uuid: 0151bde8-3b9c-4417-8a32-d512b9b266e6
+      component_id: sdc.pulse_theme.space-text
+      inputs:
+        text:
+          value: "<p>Pulse does not provide medical diagnoses, treatment plans, or personalized medical recommendations.\L&nbsp;</p><p>Any examples, scenarios, or explanations shared on the platform are general in nature and may not apply to your specific situation.<br><br>Health conditions can vary widely from person to person. What works for one individual may not be appropriate for another.</p><p>&nbsp;</p>"
+          format: canvas_html_block
+        text_size: text-lg
+        heading_level: h4
+        title: 'No diagnosis or treatment'
+    -
+      parent_uuid: 76eb0330-c61d-40d6-9f5e-341b8dfe1699
+      slot: content
+      uuid: 330cba80-33ab-4a2d-958d-078b600c5dfc
+      component_id: sdc.pulse_theme.space-text
+      inputs:
+        text:
+          value: '<p>We aim to ensure that all content on Pulse is accurate, evidence-informed, and up to date.</p><p>However, medical knowledge is constantly evolving, and we cannot guarantee that all information will always reflect the most current research or clinical guidelines.<br><br>Pulse makes no warranties or representations regarding the completeness, reliability, or accuracy of the information presented.</p><p>&nbsp;</p>'
+          format: canvas_html_block
+        text_size: text-lg
+        heading_level: h4
+        title: 'Accuracy and updates'
+    -
+      parent_uuid: 76eb0330-c61d-40d6-9f5e-341b8dfe1699
+      slot: content
+      uuid: 6c59c5df-8b32-44ea-ac20-497b3f427e1b
+      component_id: sdc.pulse_theme.space-text
+      inputs:
+        text:
+          value: '<p>Pulse may include links to external websites, research papers, tools, or third-party resources for additional context or reference.</p><p>We do not control or endorse the content, claims, or practices of these external sources and are not responsible for their accuracy, availability, or policies.</p>'
+          format: canvas_html_block
+        text_size: text-lg
+        heading_level: h4
+        title: 'External links and third-party content'
+  path:
+    -
+      alias: /disclaimer
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

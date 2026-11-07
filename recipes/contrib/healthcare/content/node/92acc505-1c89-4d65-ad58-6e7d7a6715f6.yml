@@ -1,0 +1,64 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 92acc505-1c89-4d65-ad58-6e7d7a6715f6
+  bundle: event
+  default_langcode: en
+  depends:
+    b7795770-df36-460f-b81f-2ea674b3cb13: taxonomy_term
+    6b2fdf18-f391-472f-b0b0-cbdb26a54c3f: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Skin Cancer Screening Clinic'
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /events/skin-cancer-screening-clinic
+      langcode: en
+  field_capacity:
+    -
+      value: 30
+  field_description:
+    -
+      value: '<p>Saltmarsh Island Health partners with regional dermatology specialists to offer free skin cancer screenings.</p><ul><li data-list-item-id="e05f6f5f1943dcb540cc75f9fb66026ed">Full body skin examinations</li><li data-list-item-id="eaf4b4917bfa0f71826cce15ad4546a84">Mole and lesion evaluation</li><li data-list-item-id="edf655d121bd277e7d21361eccf8d2963">Sun safety education</li><li data-list-item-id="eaab5712995c68eb4a83482837614b73f">Skin care recommendations</li><li data-list-item-id="eef6d3fd8708bb7bca363a14493b00b67">Referrals for follow-up care if needed</li></ul><p>Registration required. Limited appointments available. Call to schedule your screening time.</p>'
+      format: full_html
+  field_event_date:
+    -
+      value: 1902232800
+      end_value: 1902250800
+      duration: 300
+      rrule: 0
+      rrule_index: 0
+      timezone: ''
+  field_event_type:
+    -
+      entity: b7795770-df36-460f-b81f-2ea674b3cb13
+  field_location:
+    -
+      entity: 6b2fdf18-f391-472f-b0b0-cbdb26a54c3f
+  field_registration_link:
+    -
+      uri: 'https://example.com'
+      title: 'Register Now'
+      options: {  }
+  field_summary:
+    -
+      value: 'Free skin cancer screenings performed by board-certified dermatologists. Early detection saves lives.'

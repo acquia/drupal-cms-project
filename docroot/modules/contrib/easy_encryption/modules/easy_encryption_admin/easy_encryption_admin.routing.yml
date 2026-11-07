@@ -1,0 +1,39 @@
+easy_encryption_admin.keys:
+  path: '/admin/config/system/easy-encryption/keys'
+  defaults:
+    _controller: '\Drupal\easy_encryption_admin\Controller\EncryptionKeysController::list'
+    _title: 'Easy Encryption keys'
+  requirements:
+    _permission: 'administer easy encryption keys'
+  options:
+    _admin_route: true
+
+easy_encryption_admin.keys_export:
+  path: '/admin/config/system/easy-encryption/keys/{encryption_key_id}/export'
+  defaults:
+    _controller: '\Drupal\easy_encryption_admin\Controller\EncryptionKeysController::export'
+    _title: 'Export encryption key'
+  requirements:
+    _permission: 'administer easy encryption keys'
+  options:
+    _admin_route: true
+
+easy_encryption_admin.keys_import:
+  path: '/admin/config/system/easy-encryption/keys/import'
+  defaults:
+    _form: '\Drupal\easy_encryption_admin\Form\ImportEncryptionKeyForm'
+    _title: 'Import encryption key'
+  requirements:
+    _permission: 'administer easy encryption keys'
+  options:
+    _admin_route: true
+
+easy_encryption_admin.migrate_private_key:
+  path: '/admin/config/system/easy-encryption/migrate-private-key'
+  defaults:
+    _form: '\Drupal\easy_encryption_admin\Form\PrivateKeyStorageMigratorForm'
+    _title: 'Migrate private key to filesystem'
+  requirements:
+    _custom_access: 'easy_encryption_admin.access.private_key_storage_migrator::access'
+  options:
+    _admin_route: true

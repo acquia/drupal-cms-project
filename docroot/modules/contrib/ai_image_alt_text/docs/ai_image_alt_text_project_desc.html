@@ -1,0 +1,94 @@
+<p>This module is part of the <a href="https://www.drupal.org/project/ai">AI module</a> ecosystem and included in <a href="https://www.drupal.org/project/dxpr_cms">DXPR CMS</a>.</p>
+
+<blockquote>Generate accurate, descriptive alt text automatically using AI vision models. Improve accessibility and search rankings while maintaining editorial control through human-in-the-loop verification.</blockquote>
+
+<a href="/files/project-images/ai_alt_image_text.png"><img src="/files/project-images/ai_alt_image_text.png" alt="AI Alt Image Text" /></a>
+
+<h3>You need AI Image Alt Text if</h3>
+<ul>
+  <li>You manage sites with hundreds or thousands of images lacking alt text</li>
+  <li>You need to improve accessibility compliance and SEO rankings</li>
+  <li>Your content team struggles to write consistent, descriptive alt text</li>
+  <li>You want to speed up content publishing while maintaining quality</li>
+</ul>
+
+<h3 id="module-project--features">Features</h3>
+<ul>
+  <li><strong>One-click generation</strong>: a "Generate" button appears on every image field widget; click it to produce alt text from the uploaded image</li>
+  <li><strong>Human-in-the-loop</strong>: review and edit the AI suggestion before saving; editorial control stays with your team</li>
+  <li><strong>Autogenerate on upload</strong>: optionally generate alt text the moment an image is uploaded, with no manual step required</li>
+  <li><strong>Multilingual</strong>: detects the entity’s language and generates alt text in the corresponding language automatically</li>
+  <li><strong>Customisable prompt</strong>: edit the Twig-based prompt template at /admin/config/ai/ai_image_alt_text to match your editorial style</li>
+  <li><strong>Image preprocessing</strong>: choose an image style to resize images before sending them to the AI, reducing API costs without sacrificing quality</li>
+  <li><strong>Model flexibility</strong>: works with any vision-capable model through the AI module: OpenAI GPT-4o, Anthropic Claude, Google Gemini, Fireworks AI, and others</li>
+  <li><strong>Bulk processing</strong>: the included AI Image Bulk Alt Text sub-module lets you generate or regenerate alt text for existing images across your entire site</li>
+</ul>
+
+<p><a href="/files/ai-alt-text-generate.jpg"><img src="/files/ai-alt-text-generate.jpg" alt="AI Image Alt Text generation in progress on an image field widget, showing the Generate button and AI-produced alt text suggestion" /></a></p>
+
+  <h3 id="module-project--seo">SEO benefits</h3>
+  <p>
+    Generating accurate and descriptive alt texts enhances your website's accessibility and improves search engine optimization (SEO). Alt texts help search engines understand image content, which can improve your site's ranking in image search results. By using this module, you ensure high-quality, consistent alt text generation that adheres to best practices for both accessibility and SEO.
+  </p>
+
+  <h3>Installation</h3>
+<pre><code>composer require drupal/ai_image_alt_text
+drush en ai_image_alt_text</code></pre>
+  <p>To enable bulk processing of existing images, also enable the sub-module:</p>
+<pre><code>drush en ai_image_bulk_alt_text</code></pre>
+
+<p><a href="/files/ai-alt-text-config_0.jpg"><img src="/files/ai-alt-text-config_0.jpg" alt="AI Image Alt Text configuration page at admin/config/ai/ai_image_alt_text showing prompt template, image preprocessing, and autogenerate settings" /></a></p>
+
+  <h3 id="module-project--post-installation">Post-installation</h3>
+  <ol>
+    <li>Set up permissions to determine which roles can generate alt texts using AI.</li>
+    <li>
+      Access the settings page at /admin/config/ai/ai_image_alt_text to customize the prompt or adjust how the image is preprocessed before being sent to the AI.
+    </li>
+    <li>A button will then appear on image fields for generating alt texts.</li>
+  </ol>
+
+  <div class="note-tip">
+    <h4>Prefer a turnkey demo site?</h4>
+    <p>Spin up <strong>DXPR CMS</strong>: Drupal pre-configured with DXPR Builder, DXPR Theme, AI Image Alt Text module, and security best practices.</p>
+    <p><a href="https://www.drupal.org/project/dxpr_cms" title="DXPR CMS platform">Get DXPR CMS »</a></p>
+  </div>
+
+  <h3 id="module-project--additional-requirements">Additional requirements</h3>
+  <p>
+    This module uses the <a href="https://www.drupal.org/project/ai">AI module</a> as its foundation. It supports any vision model available through providers like OpenAI, Anthropic, and Fireworks AI.
+  </p>
+
+  <h2>FAQ</h2>
+
+  <dl>
+    <dt>Which AI models does AI Image Alt Text support?</dt>
+    <dd>
+      <p>The module works with any vision model available through the Drupal AI module, including OpenAI (GPT-4o), Anthropic (Claude), Google (Gemini), and Fireworks AI. Switch models at any time without changing your workflow.</p>
+    </dd>
+
+    <dt>Does the module generate alt text automatically on upload?</dt>
+    <dd>
+      <p>By default the module uses a human-in-the-loop approach: a "Generate" button appears next to the alt text field on image widgets. Click it to produce a suggestion, review and edit as needed, then save. You can also enable fully automatic generation on upload in the settings at /admin/config/ai/ai_image_alt_text, with an option to hide the manual button entirely.</p>
+    </dd>
+
+    <dt>Does AI Image Alt Text support multilingual content?</dt>
+    <dd>
+      <p>Yes. The module detects the entity’s language setting and generates alt text in the corresponding language. This works automatically with Drupal's multilingual system; no extra configuration is required.</p>
+    </dd>
+
+    <dt>Can I customise the prompt used to generate alt text?</dt>
+    <dd>
+      <p>Yes. Visit /admin/config/ai/ai_image_alt_text to edit the prompt template and configure how images are preprocessed before being sent to the AI. You can tailor the instructions to match your editorial style and accessibility requirements.</p>
+    </dd>
+
+    <dt>How does this module improve SEO?</dt>
+    <dd>
+      <p>Search engines use alt text to understand image content and index it for image search results. AI Image Alt Text generates accurate, descriptive alt text that follows accessibility best practices, which improves both your search visibility and your WCAG compliance.</p>
+    </dd>
+  </dl>
+
+  <h3 id="module-project--similar-projects">Similar projects</h3>
+  <p>
+    The <a href="https://www.drupal.org/project/auto_alter">Automatic Alternative Text</a> module offers similar functionality by leveraging Azure Computer Vision to generate alt texts when an entity is saved.
+  </p>

@@ -1,0 +1,167 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 598f5f84-5cd9-442d-9579-ac661857d774
+  default_langcode: en
+  depends:
+    d134e05d-aa28-484c-acce-23ebb8e67796: file
+    e85471d9-a3fe-47e3-8b4a-9de4ee93af55: file
+    520e4954-3193-464e-b5ff-3150435eb9d8: media
+    880b57b6-1857-49cf-a004-58c6f490de11: media
+    79c4fc10-86f9-4385-81a8-333b2e1d22a8: file
+    7657582b-23fd-4902-99d4-0c22cea22ca4: media
+    a05ac8b6-60bb-4c43-9789-3e674b8b4f1a: file
+    ce406055-cc1d-478f-b1df-a9f5f3b6abe4: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'module page'
+  components:
+    -
+      uuid: 0410b2eb-eec2-42e1-a296-4ff790feb6eb
+      component_id: sdc.pulse_theme.space-container
+      inputs:
+        background_color: transparent
+        width: full-width
+        padding_left: none
+        padding_right: none
+        padding_top: none
+        padding_bottom: none
+        margin_top: none
+        margin_bottom: none
+        background_pattern: false
+        pattern_image_position: bottom-right
+    -
+      parent_uuid: 0410b2eb-eec2-42e1-a296-4ff790feb6eb
+      slot: content
+      uuid: 780dc05d-fa83-448c-b561-caa8ce116c2c
+      component_id: sdc.pulse_theme.space-testimony-card
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 520e4954-3193-464e-b5ff-3150435eb9d8
+            target_type: media
+        person_name: 'Rohini K'
+        text:
+          value: '<p>The content published on the Pulse platform provided clarity about my health care. It made everything feel more structured and comprehensible.</p>'
+          format: canvas_html_block
+        designation: 'Content Manager'
+        company_logo:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 880b57b6-1857-49cf-a004-58c6f490de11
+            target_type: media
+    -
+      uuid: d9b1c3f1-8677-4ee6-886a-178e97fb2dc9
+      component_id: sdc.pulse_theme.space-flexi
+      inputs:
+        no_of_columns: two
+        column_width: 33-66
+        vertical: top
+        horizontal: left
+        direction: across
+        gap: medium
+        wrap: wrap
+        margin_top: none
+        margin_bottom: none
+    -
+      parent_uuid: d9b1c3f1-8677-4ee6-886a-178e97fb2dc9
+      slot: column_one
+      uuid: 80c34458-7503-472a-be0f-0d1ce82a7e68
+      component_id: sdc.pulse_theme.space-dark-bg-imagecard
+      inputs:
+        title: 'Explore Nutrition'
+        url: /event/building-sustainable-workout
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 7657582b-23fd-4902-99d4-0c22cea22ca4
+            target_type: media
+        text:
+          value: 'Explore the world of balanced eating, mindful choices, and science-backed advice—no fads, just facts.'
+          format: canvas_html_block
+        alignment: vertical
+        horizontal_column_alignment: left-image
+        vertical_column_alignment: top-image
+        card_layout: default
+        card_size: large
+        full_box_link: false
+    -
+      parent_uuid: d9b1c3f1-8677-4ee6-886a-178e97fb2dc9
+      slot: column_two
+      uuid: 32cd09d3-82eb-4262-93b6-7acccc6d2d1d
+      component_id: sdc.pulse_theme.space-dark-bg-imagecard
+      inputs:
+        title: 'Explore Nutrition'
+        url: /event/building-sustainable-workout
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: ce406055-cc1d-478f-b1df-a9f5f3b6abe4
+            target_type: media
+        text:
+          value: 'Explore the world of balanced eating, mindful choices, and science-backed advice—no fads, just facts.'
+          format: canvas_html_block
+        alignment: vertical
+        horizontal_column_alignment: left-image
+        vertical_column_alignment: top-image
+        card_layout: default
+        card_size: large
+        full_box_link: false
+    -
+      uuid: 98905ca6-3cd3-4d61-82fe-f4782110c601
+      component_id: sdc.pulse_theme.space-dark-bg-imagecard
+      inputs:
+        title: 'Explore Nutrition'
+        url: /event/building-sustainable-workout
+        image:
+          sourceType: default-relative-url
+          value:
+            src: images/city.jpg
+            alt: 'Boring placeholder'
+            width: 336
+            height: 392
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.pulse_theme.space-dark-bg-imagecard
+        text:
+          value: 'Explore the world of balanced eating, mindful choices, and science-backed advice—no fads, just facts.'
+          format: canvas_html_block
+        alignment: vertical
+        horizontal_column_alignment: left-image
+        vertical_column_alignment: top-image
+        card_layout: no-image
+        card_size: large
+        full_box_link: false
+  path:
+    -
+      alias: /module-page
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

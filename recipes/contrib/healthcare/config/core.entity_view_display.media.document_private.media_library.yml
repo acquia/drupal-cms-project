@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.document_private.field_file_size
+    - field.field.media.document_private.field_file_type
+    - field.field.media.document_private.field_media_file
+    - image.style.medium
+    - media.type.document_private
+  module:
+    - svg_image
+id: media.document_private.media_library
+targetEntityType: media
+bundle: document_private
+mode: media_library
+content:
+  thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: medium
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_file_size: true
+  field_file_type: true
+  field_media_file: true
+  name: true
+  uid: true

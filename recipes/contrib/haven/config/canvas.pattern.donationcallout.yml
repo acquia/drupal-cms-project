@@ -1,0 +1,103 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.haven_theme.button
+    - canvas.component.sdc.haven_theme.group
+    - canvas.component.sdc.haven_theme.heading
+    - canvas.component.sdc.haven_theme.section
+  module:
+    - options
+id: donationcallout
+label: 'Donation callout'
+component_tree:
+  0:
+    uuid: 474ef8af-f050-4930-b05c-fd20d3f2995f
+    component_id: sdc.haven_theme.section
+    component_version: c6eea4f08b0e0778
+    inputs:
+      width: 100%
+      columns: '2 columns 67-33'
+      mobile_columns: '1'
+      margin_block_start: '64'
+      margin_block_end: '64'
+      padding_block_start: '32'
+      padding_block_end: '32'
+      section_header: false
+      section_footer: false
+      restrict_width: true
+      background_color: accent
+  '0:main_slot:0':
+    parent_uuid: 474ef8af-f050-4930-b05c-fd20d3f2995f
+    slot: main_slot
+    uuid: 8fbd7cbd-46dc-4faa-b5fe-7bbe27d8dbc5
+    component_id: sdc.haven_theme.group
+    component_version: 671b7e47d5b61c8b
+    inputs:
+      flex_direction: column
+      flex_gap: md
+      items_align: start
+      flex_align: center
+      radius: sm
+  '0:main_slot:0:group_slot:0':
+    parent_uuid: 8fbd7cbd-46dc-4faa-b5fe-7bbe27d8dbc5
+    slot: group_slot
+    uuid: 9175acca-bd96-4f2b-ba9d-71226d2fa0b2
+    component_id: sdc.haven_theme.heading
+    component_version: f463a8803de8d3f1
+    inputs:
+      heading_text: 'Join the fight against climate change'
+      text_size: heading-responsive-2xl
+      text_color: default
+      align: left
+  '0:main_slot:0:group_slot:1':
+    parent_uuid: 8fbd7cbd-46dc-4faa-b5fe-7bbe27d8dbc5
+    slot: group_slot
+    uuid: f26b450f-1810-42c6-9c7b-b7bb55997b1b
+    component_id: sdc.haven_theme.heading
+    component_version: f463a8803de8d3f1
+    inputs:
+      heading_text: 'Lorem ipsum dolor sit amet senectus malesuada maximus imperdiet. Lorem ipsum dolor sit amet senectus malesuada maximus imperdiet. '
+      text_size: default
+      text_color: default
+      align: left
+  '0:main_slot:1':
+    parent_uuid: 474ef8af-f050-4930-b05c-fd20d3f2995f
+    slot: main_slot
+    uuid: 8a69a153-3342-4e71-a906-4ff228c8cba1
+    component_id: sdc.haven_theme.group
+    component_version: 671b7e47d5b61c8b
+    inputs:
+      flex_direction: row
+      flex_gap: md
+      items_align: start
+      flex_align: center
+  '0:main_slot:1:group_slot:0':
+    parent_uuid: 8a69a153-3342-4e71-a906-4ff228c8cba1
+    slot: group_slot
+    uuid: 614b023c-435f-441d-b0f2-d6ad47a16278
+    component_id: sdc.haven_theme.button
+    component_version: 32e33be7067aa921
+    inputs:
+      variant: primary
+      outlined: false
+      label: 'Donate now'
+      size: medium
+      icon: arrow-right
+      icon_first: false
+      disabled: false
+      mobile_width: false
+  '0:main_slot:1:group_slot:1':
+    parent_uuid: 8a69a153-3342-4e71-a906-4ff228c8cba1
+    slot: group_slot
+    uuid: 5480ff11-0417-4cdf-9bda-0c9cbf0d9ec5
+    component_id: sdc.haven_theme.button
+    component_version: 32e33be7067aa921
+    inputs:
+      variant: primary
+      outlined: true
+      label: 'Learn more'
+      size: medium
+      icon_first: false
+      disabled: false
+      mobile_width: false

@@ -1,0 +1,49 @@
+.info-grid {
+  padding: 80px 24px;
+  background-color: #FFFFFF;
+  padding-top: 0;
+}
+
+.info-grid .info-grid__container {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.info-grid .info-grid__items {
+  display: flex;
+  gap: 48px;
+}
+
+/* Ensure Canvas injected divs play nicely with the CSS grid */
+.info-grid .info-grid__items>* {
+  display: flex;
+}
+
+/* If Canvas injects an empty div, we want to visually show the dropzone block */
+.info-grid .info-grid__items:empty,
+.info-grid .info-grid__items>div:empty {
+  min-height: 120px;
+  outline: 1px dashed rgba(0, 0, 0, 0.1);
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+  .info-grid {
+    padding: 64px 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .info-grid {
+    padding: 48px 24px;
+  }
+
+  .info-grid .info-grid__items {
+    flex-direction: column;
+    gap: 24px;
+  }
+}

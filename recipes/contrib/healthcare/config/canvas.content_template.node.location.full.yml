@@ -1,0 +1,95 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.views_block.services_by_location-block_1
+    - canvas.component.sdc.diagnosis.address
+    - canvas.component.sdc.diagnosis.heading
+    - canvas.component.sdc.diagnosis.hero-side-by-side
+    - canvas.component.sdc.diagnosis.phone
+    - canvas.component.sdc.diagnosis.section
+    - canvas.component.sdc.diagnosis.text
+    - core.base_field_override.node.location.title
+    - core.entity_view_mode.node.full
+    - field.field.media.image.field_media_image
+    - field.field.node.location.field_accessibility
+    - field.field.node.location.field_address
+    - field.field.node.location.field_fax
+    - field.field.node.location.field_parking
+    - field.field.node.location.field_phone
+    - field.field.node.location.field_photo
+    - field.field.node.location.field_transit
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - node.type.location
+  module:
+    - file
+    - media
+    - node
+    - options
+id: node.location.full
+content_entity_type_id: node
+content_entity_type_bundle: location
+content_entity_type_view_mode: full
+component_tree:
+  0:
+    uuid: ab410f0c-5dbe-4f2f-a3ef-72f1be585152
+    component_id: sdc.diagnosis.hero-side-by-side
+    component_version: 4b74bc8cb0425504
+    inputs: '{"hero_flex_gap":"large","hero_flex_direction_mobile":"vertical","padding_block_start":"32","padding_block_end":"0","margin_block_start":"0","margin_block_end":"0","image_size":"4:3","image_position":"right","image_radius":"extra-large","media":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:location\u241dfield_photo\u241e\u241fentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241f{src\u21a0src_with_alternate_widths,alt\u21a0alt,width\u21a0width,height\u21a0height}"},"background":"secondary"}'
+  '0:hero_slot:0':
+    parent_uuid: ab410f0c-5dbe-4f2f-a3ef-72f1be585152
+    slot: hero_slot
+    uuid: 414e71c5-932d-4339-9d90-5010a2154ce1
+    component_id: sdc.diagnosis.heading
+    component_version: d7c6acbc91a60ac1
+    inputs: '{"heading_text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:location\u241dtitle\u241e\u241fvalue"},"level":2,"text_size":"heading-responsive-4xl","text_color":"default","align":"left"}'
+  '0:hero_slot:1':
+    parent_uuid: ab410f0c-5dbe-4f2f-a3ef-72f1be585152
+    slot: hero_slot
+    uuid: 38f15655-c051-461e-93fe-450f394012c8
+    component_id: sdc.diagnosis.address
+    component_version: 27472be308ee6f99
+    inputs: '{"organization":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:location\u241dfield_address\u241e\u241forganization"},"address_line1":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:location\u241dfield_address\u241e\u241faddress_line1"},"address_line2":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:location\u241dfield_address\u241e\u241faddress_line3"},"locality":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:location\u241dfield_address\u241e\u241flocality"},"administrative_area":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:location\u241dfield_address\u241e\u241fadministrative_area"},"postal_code":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:location\u241dfield_address\u241e\u241fpostal_code"},"text_color":"default","text_size":"normal"}'
+  '0:hero_slot:2':
+    parent_uuid: ab410f0c-5dbe-4f2f-a3ef-72f1be585152
+    slot: hero_slot
+    uuid: 80a8a31f-0a74-42ea-8319-a0e9f614d815
+    component_id: sdc.diagnosis.phone
+    component_version: 049f998d5db142dd
+    inputs: '{"label":"Phone","phone":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:location\u241dfield_phone\u241e\u241fvalue"},"text_size":"normal","text_color":"default"}'
+  '0:hero_slot:3':
+    parent_uuid: ab410f0c-5dbe-4f2f-a3ef-72f1be585152
+    slot: hero_slot
+    uuid: 9603a173-2f29-4454-8bb5-9100771574c0
+    component_id: sdc.diagnosis.phone
+    component_version: 049f998d5db142dd
+    inputs: '{"label":"Fax","phone":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:location\u241dfield_fax\u241e\u241fvalue"},"text_size":"normal","text_color":"default"}'
+  1:
+    uuid: c5554473-dcab-4214-a79c-32fff631c5cd
+    component_id: sdc.diagnosis.text
+    component_version: a32701352f55e6f5
+    inputs: '{"label":"Accessiblity:","text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:location\u241dfield_accessibility\u241e\u241fprocessed"},"text_size":"normal","text_color":"default"}'
+  2:
+    uuid: 1d1acdf8-86e3-4423-a17f-a5f66fead3a2
+    component_id: sdc.diagnosis.text
+    component_version: a32701352f55e6f5
+    inputs: '{"label":"Public Transit:","text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:location\u241dfield_transit\u241e\u241fprocessed"},"text_size":"normal","text_color":"default"}'
+  3:
+    uuid: e0da92e9-ecbf-4183-b395-e98e96c9470a
+    component_id: sdc.diagnosis.text
+    component_version: a32701352f55e6f5
+    inputs: '{"label":"Parking:","text":{"sourceType":"entity-field","expression":"\u2139\ufe0e\u241centity:node:location\u241dfield_parking\u241e\u241fprocessed"},"text_size":"normal","text_color":"default"}'
+  4:
+    uuid: 7d2a52bb-4e55-4991-aba3-5832500d9690
+    component_id: sdc.diagnosis.section
+    component_version: 4e137b5efb1f5f5f
+    inputs: '{"width":"100%","columns":"100","mobile_columns":"1","margin_block_start":"48","margin_block_end":"48","padding_block_start":"0","padding_block_end":"0","section_header":true,"section_footer":true,"views_columns":"33-33-33"}'
+  '4:main_slot:0':
+    parent_uuid: 7d2a52bb-4e55-4991-aba3-5832500d9690
+    slot: main_slot
+    uuid: 02432eef-bd96-4d3d-bb4a-4cba0f1ae1a9
+    component_id: block.views_block.services_by_location-block_1
+    component_version: 58a17822e296e3cd
+    inputs: '{"label":"Services by location","label_display":"0","views_label":"","items_per_page":null}'
+exposed_slots: {  }

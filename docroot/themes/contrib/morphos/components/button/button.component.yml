@@ -1,0 +1,187 @@
+$schema: 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Button
+description: An interactive element used to trigger actions, submit forms, or navigate to pages.
+group: Element
+status: stable
+props:
+  type: object
+  properties:
+    text:
+      type: string
+      title: Text
+      description: Label for the button.
+      examples:
+        - 'Button text'
+    url:
+      type: string
+      title: URL
+      description: URL for the button link.
+      format: uri-reference
+    label:
+      type: string
+      title: Label
+      description: ARIA label for the button. Add this if there is no text for the button.
+    icon:
+      type: string
+      title: Icon
+      description: Icon for the button.
+      enum:
+        - plus
+        - plus-circle
+        - plus-square
+        - check
+        - check-circle
+        - floppy-disk
+        - trash
+        - trash-simple
+        - x
+        - x-circle
+        - pencil
+        - pencil-simple
+        - pencil-line
+        - magnifying-glass
+        - magnifying-glass-plus
+        - arrow-right
+        - caret-right
+        - arrow-left
+        - caret-left
+        - download-simple
+        - upload-simple
+        - export
+        - share-network
+        - sign-in
+        - sign-out
+        - heart
+        - thumbs-up
+        - star
+        - bookmark-simple
+        - gear
+        - sliders
+        - dots-three-outline
+        - chat-centered-dots
+        - paper-plane-tilt
+        - phone
+        - copy
+        - clipboard
+      meta:enum:
+        plus: 'Add: Plus'
+        plus-circle: 'Add: Plus circle'
+        plus-square: 'Add: Plus square'
+        check: 'Confirm: Check'
+        check-circle: 'Confirm: Check circle'
+        floppy-disk: 'Confirm: Floppy disk'
+        trash: 'Remove: Trash'
+        trash-simple: 'Remove: Trash simple'
+        x: 'Remove: X'
+        x-circle: 'Remove: X circle'
+        pencil: 'Edit: Pencil'
+        pencil-simple: 'Edit: Pencil simple'
+        pencil-line: 'Edit: Pencil line'
+        magnifying-glass: 'Search: Magnifying glass'
+        magnifying-glass-plus: 'Search: Magnifying glass plus'
+        arrow-right: 'Direction: Arrow right'
+        caret-right: 'Direction: Caret right'
+        arrow-left: 'Direction: Arrow left'
+        caret-left: 'Direction: Caret left'
+        download-simple: 'Transfer: Download simple'
+        upload-simple: 'Transfer: Upload simple'
+        export: 'Transfer: Export'
+        share-network: 'Transfer: Share network'
+        sign-in: 'Authenticate: Sign in'
+        sign-out: 'Authenticate: Sign out'
+        heart: 'Engagement: Heart'
+        thumbs-up: 'Engagement: Thumbs up'
+        star: 'Engagement: Star'
+        bookmark-simple: 'Engagement: Bookmark simple'
+        gear: 'Settings: Gear'
+        sliders: 'Settings: Sliders'
+        dots-three-outline: 'Settings: Dots three outline'
+        chat-centered-dots: 'Comms: Chat centered dots'
+        paper-plane-tilt: 'Comms: Paper plane tilt'
+        phone: 'Comms: Phone'
+        copy: 'Copy: Copy'
+        clipboard: 'Copy: Clipboard'
+    icon_position:
+      type: string
+      title: Icon position
+      description: Select the position of the icon at the start or end.
+      enum:
+        - icon-position--start
+        - icon-position--end
+      meta:enum:
+        icon-position--start: Start
+        icon-position--end: End
+    color:
+      type: string
+      title: Color
+      description: Select the color of the button.
+      enum:
+        - btn-primary
+        - btn-secondary
+        - btn-accent
+        - btn-neutral
+        - btn-info
+        - btn-success
+        - btn-warning
+        - btn-error
+      meta:enum:
+        btn-primary: Primary
+        btn-secondary: Secondary
+        btn-accent: Accent
+        btn-neutral: Neutral
+        btn-info: Info
+        btn-success: Success
+        btn-warning: Warning
+        btn-error: Error
+    style:
+      type: string
+      title: Style
+      description: Select the style of the button.
+      enum:
+        - btn-outline
+        - btn-dash
+        - btn-soft
+        - btn-ghost
+        - btn-link
+      meta:enum:
+        btn-outline: Outline
+        btn-dash: Dash
+        btn-soft: Soft
+        btn-ghost: Ghost
+        btn-link: Link
+    size:
+      type: string
+      title: Size
+      description: Select the size of the button.
+      enum:
+        - btn-xs
+        - btn-sm
+        - btn-md
+        - btn-lg
+        - btn-xl
+      meta:enum:
+        btn-xs: Extra small
+        btn-sm: Small
+        btn-md: Medium
+        btn-lg: Large
+        btn-xl: Extra large
+    shape:
+      type: string
+      title: Shape
+      description: Select the shape of the button.
+      enum:
+        - btn-square
+        - btn-circle
+      meta:enum:
+        btn-square: Square
+        btn-circle: Circle
+    display:
+      type: string
+      title: Display
+      description: Select how the button should be displayed.
+      enum:
+        - btn-wide
+        - btn-block
+      meta:enum:
+        btn-wide: Wide
+        btn-block: Block

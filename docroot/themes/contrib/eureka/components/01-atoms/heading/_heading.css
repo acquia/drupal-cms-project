@@ -1,0 +1,99 @@
+/*
+ * Generic header styles:
+ * All arguments are optional. If not defined, the defaults below will be used
+*/
+
+h1,
+.h1,
+.heading--title {
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-weight: var(--font-bold);
+  font-style: normal;
+  line-height: 1.15;
+  margin: 0 0 var(--spacing-3);
+  width: auto;
+  font-size: var(--heading--title);
+}
+
+h2,
+.h2,
+.heading--main {
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-weight: var(--font-bold);
+  font-style: normal;
+  line-height: 1.2;
+  margin: 0 0 var(--spacing-3);
+  width: auto;
+  font-size: var(--heading--main);
+}
+
+h3,
+.h3,
+.heading--sub {
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-weight: var(--font-bold);
+  font-style: normal;
+  line-height: 1.25;
+  margin: 0 0 var(--spacing-3);
+  width: auto;
+  font-size: var(--heading--sub);
+}
+
+h4,
+.h4,
+.heading--small {
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-weight: var(--font-bold);
+  font-style: normal;
+  line-height: 1.30;
+  margin: 0 0 var(--spacing-3);
+  width: auto;
+  font-size: var(--heading--small);
+}
+
+h5,
+.heading--xsmall {
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-weight: var(--font-bold);
+  font-style: normal;
+  line-height: 1.4;
+  margin: 0 0 var(--spacing-3);
+  width: auto;
+  font-size: var(--heading--xsmall);
+}
+
+h6,
+.heading--tiny {
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-weight: var(--font-bold);
+  font-style: normal;
+  line-height: 1.4;
+  margin: 0 0 var(--spacing-3);
+  width: auto;
+  font-size: var(--heading--tiny);
+}
+
+.heading__link,
+.heading__link:hover,
+.heading__link:focus-visible {
+  color: inherit;
+}
+
+.heading__icon {
+  font-size: inherit;
+  height: 1.5rem;
+  margin-left: auto;
+  width: 1.5rem;
+}
+
+/* Adding extra spacing for h2 and h3 inside wysiwygs. */
+.text-long h2,
+.text-long h3 {
+  margin: var(--spacing-5) 0 var(--spacing-2);
+}

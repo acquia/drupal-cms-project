@@ -1,0 +1,29 @@
+{% set classes = [
+  'card-grid-section',
+  admin_theme ? 'card-grid-section--admin-theme' : 'card-grid-section--themed',
+] %}
+
+<section{{attributes.addClass(classes)}}>
+	<div class="card-grid-section__container">
+		<div class="card-grid-section__header">
+			<div class="card-grid-section__header__eyebrow">
+				{{ eyebrow }}
+			</div>
+			<div class="card-grid-section__header__heading">
+				{{ heading }}
+			</div>
+			<div class="card-grid-section__header__description">
+				{{ description }}
+			</div>
+		</div>
+
+		<div class="card-grid-section__cards">
+			<div class="card-grid-section__cards__horizontal">
+				{{ horizontal_cards }}
+			</div>
+			<div class="card-grid-section__cards__vertical">
+				{{ vertical_cards }}
+			</div>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,29 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Drupal\Tests\canvas\Kernel\AutoSave;
+
+use Drupal\canvas\Entity\AssetLibrary;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+
+/**
+ * Tests auto-save conflict handling for asset libraries.
+ *
+ * @see \Drupal\canvas\Entity\AssetLibrary
+ */
+#[Group('canvas')]
+#[Group('canvas_auto_save')]
+#[RunTestsInSeparateProcesses]
+final class AutoSaveConflictAssetLibraryTest extends AutoSaveConflictConfigTestBase {
+
+  protected string $updateKey = 'label';
+
+  protected function setUpEntity(): void {
+    $globalAssetLibrary = AssetLibrary::load('global');
+    \assert($globalAssetLibrary instanceof AssetLibrary);
+    $this->entity = $globalAssetLibrary;
+  }
+
+}

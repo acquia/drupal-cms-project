@@ -1,0 +1,9 @@
+config_language_lock.settings:
+  path: '/admin/config/regional/config-language-lock'
+  defaults:
+    _form: '\Drupal\config_language_lock\Form\ConfigLanguageLockSettingsForm'
+    _title: 'Configuration language'
+  requirements:
+    _permission: 'administer languages+administer configuration language'
+  options:
+    _admin_route: TRUE

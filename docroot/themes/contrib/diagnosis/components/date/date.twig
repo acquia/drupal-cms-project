@@ -1,0 +1,29 @@
+{% if start_date is not empty or start_time is not empty %}
+  <div class="flex items-center gap-2 text-sm {{ date_classes|default('') }}">
+    {% if show_icon|default(true) %}
+      {{
+        include(
+          '@diagnosis/components/icon/icon.twig',
+          {
+            icon: 'calendar',
+            icon_size: 'extra-small'
+          },
+          with_context: false
+        )
+      }}
+    {% endif %}
+    <time>
+      {{- start_date -}}
+      {%- if start_time is not empty -%}
+        {{- start_date is not empty ? ' · ' -}}{{ start_time }}
+      {%- endif -%}
+      {%- if end_date is not empty or end_time is not empty -%}
+        {{- ' – ' -}}
+        {{- end_date -}}
+        {%- if end_time is not empty -%}
+          {{- end_date is not empty ? ' · ' -}}{{ end_time }}
+        {%- endif -%}
+      {%- endif %}
+    </time>
+  </div>
+{% endif %}

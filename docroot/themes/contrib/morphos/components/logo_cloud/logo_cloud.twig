@@ -1,0 +1,23 @@
+{% set is_preview = canvas_is_preview or in_preview %}
+
+{% set classes = [
+  'logo-cloud',
+  'flex',
+  'flex-wrap',
+  'items-center',
+  is_preview ? 'w-full min-h-20',
+  position == 'position-start' ? 'justify-start',
+  position == 'position-center' or not position ? 'justify-center',
+  position == 'position-end' ? 'justify-end',
+  size == 'logo-size--xs' ? 'logo-cloud--xs',
+  size == 'logo-size--sm' ? 'logo-cloud--sm',
+  size == 'logo-size--md' or not size ? 'logo-cloud--md',
+  size == 'logo-size--lg' ? 'logo-cloud--lg',
+  size == 'logo-size--xl' ? 'logo-cloud--xl',
+  gap ? 'gap-' ~ gap : 'gap-4',
+  'has-rhythm',
+] %}
+
+<div{{ attributes.addClass(classes) }}>
+  {% block logo_images %}{% endblock %}
+</div>

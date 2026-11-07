@@ -1,0 +1,21 @@
+# Schema for the test model config entity.
+#
+# The third_party_settings mapping is wired to model_settings.third_party.*
+# exactly as a real model owner wires it, so that the modeler API settings are
+# validated against their own schema when a test model is saved.
+modeler_api_test.model.*:
+  type: config_entity
+  label: 'Test Model'
+  mapping:
+    third_party_settings:
+      requiredKey: false
+      type: sequence
+      label: 'Third party settings'
+      sequence:
+        type: model_settings.third_party.[%key]
+    id:
+      type: machine_name
+      label: ID
+    label:
+      type: label
+      label: Label

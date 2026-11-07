@@ -1,0 +1,239 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: f84e64f5-3104-4834-bbda-29058a6ed238
+  default_langcode: en
+  depends:
+    02ac6ea4-acd2-441f-9fd0-8e9b82ed1de9: file
+    f194d397-e857-4c9f-86c2-48f2754b98e0: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Notice of Privacy Practices'
+  description:
+    -
+      value: 'How we protect your health information.'
+  components:
+    -
+      uuid: e2e60c15-7908-42b7-9f7b-2f3ae4a42d24
+      component_id: sdc.diagnosis.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        background: secondary
+        padding_block_start: '32'
+        padding_block_end: '32'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        image_size: '4:3'
+        image_position: right
+        image_radius: extra-large
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: f194d397-e857-4c9f-86c2-48f2754b98e0
+            target_type: media
+    -
+      parent_uuid: e2e60c15-7908-42b7-9f7b-2f3ae4a42d24
+      slot: hero_slot
+      uuid: e779bf4a-6efb-446a-88ce-eab876dd8b38
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Notice of Privacy Practices'
+        level: 1
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: e2e60c15-7908-42b7-9f7b-2f3ae4a42d24
+      slot: hero_slot
+      uuid: f8dd1dc2-de1b-47d7-bf2b-2244288fcad4
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>How we protect your health information.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: 775c06f8-762d-47d6-8566-b8d9ae8521e5
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: 775c06f8-762d-47d6-8566-b8d9ae8521e5
+      slot: main_slot
+      uuid: efdd16f6-ee7d-43c6-bfee-77c0fd463a0a
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p><strong>Effective Date: January 1, 2024</strong></p><p>This notice describes how medical information about you may be used and disclosed and how you can get access to this information. Please review it carefully.</p><p>&nbsp;</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 775c06f8-762d-47d6-8566-b8d9ae8521e5
+      slot: main_slot
+      uuid: eda5823a-4df8-43c6-9fbf-602b037182d0
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Our Commitment to Your Privacy'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 775c06f8-762d-47d6-8566-b8d9ae8521e5
+      slot: main_slot
+      uuid: f309e163-49ef-40af-8aba-7999d96b80ac
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Saltmarsh Island Health is committed to protecting the privacy of your personal health information (PHI). We are required by law to maintain the privacy of your PHI and to provide you with this Notice of our legal duties and privacy practices.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 775c06f8-762d-47d6-8566-b8d9ae8521e5
+      slot: main_slot
+      uuid: 23ae4741-2798-444e-a1d2-017f490188b0
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'How We May Use and Disclose Your Health Information'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 775c06f8-762d-47d6-8566-b8d9ae8521e5
+      slot: main_slot
+      uuid: b932bc30-4f46-4bce-be65-49550cc0c173
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Treatment
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 775c06f8-762d-47d6-8566-b8d9ae8521e5
+      slot: main_slot
+      uuid: 5e4d4c65-4062-4b22-bd16-35ad30c4914f
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>We may use and disclose your PHI to provide, coordinate, or manage your healthcare and related services.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 775c06f8-762d-47d6-8566-b8d9ae8521e5
+      slot: main_slot
+      uuid: 45ef3178-483b-4c18-a133-7f2870f05db7
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Payment
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 775c06f8-762d-47d6-8566-b8d9ae8521e5
+      slot: main_slot
+      uuid: 944c588f-9121-4ba2-a13b-baf0b5d67e29
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>We may use and disclose your PHI to obtain payment for services we provide to you.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 775c06f8-762d-47d6-8566-b8d9ae8521e5
+      slot: main_slot
+      uuid: 7076731d-85b2-4a4b-a593-39a4a985402b
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Healthcare Operations'
+        level: 3
+        text_size: heading-responsive-2xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 775c06f8-762d-47d6-8566-b8d9ae8521e5
+      slot: main_slot
+      uuid: 368501ed-baa0-4126-8a39-d7521395d3a9
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>We may use and disclose your PHI for our healthcare operations, including quality assessment, training, and administrative purposes.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 775c06f8-762d-47d6-8566-b8d9ae8521e5
+      slot: main_slot
+      uuid: 290899db-1009-440e-aab1-63e353911260
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Your Rights Regarding Your Health Information'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 775c06f8-762d-47d6-8566-b8d9ae8521e5
+      slot: main_slot
+      uuid: 6b926b36-6cd8-47f2-a562-da506a4e43eb
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<ul><li data-list-item-id="e722e4b99d7e8160483010bf8143edae9">Right to inspect and copy your health information</li><li data-list-item-id="e7b7b5b5eb54dbf6c9e3aac66494dd0e1">Right to request an amendment to your health information</li><li data-list-item-id="e918d07b4ebdd63c224fa271fa6293bd5">Right to an accounting of disclosures</li><li data-list-item-id="e3918dfcc7d004ec29f4288d5f8d2c8cd">Right to request restrictions on uses and disclosures</li><li data-list-item-id="e2134205ed5a21769fa40f4e135883c64">Right to request confidential communications</li><li data-list-item-id="ed87a693eea56191b20f6ff24a0ca79e2">Right to receive a paper copy of this notice</li></ul>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 775c06f8-762d-47d6-8566-b8d9ae8521e5
+      slot: main_slot
+      uuid: 1ad407bf-c781-416e-8a95-2186c0a25c96
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Questions or Complaints'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 775c06f8-762d-47d6-8566-b8d9ae8521e5
+      slot: main_slot
+      uuid: ca254bda-4f0b-4a0b-ad1a-615f66d3f15c
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>If you have questions or wish to file a complaint about our privacy practices, contact our Privacy Officer at privacy@saltmarshhealth.org or (555) 123-4575.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+  path:
+    -
+      alias: /privacy
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

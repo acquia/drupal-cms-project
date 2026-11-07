@@ -1,0 +1,31 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Contact card item
+status: stable
+description: Contact card item component
+# Overrides regular css with minified.
+libraryOverrides:
+  css:
+    component:
+      contact-card-item.min.css: { minified: true }
+group: Eureka main components
+props:
+  type: object
+  properties:
+    contact_card_item_job:
+      type: ['string', 'null']
+      title: Contact job title
+      description: Job title for the contact
+      examples:
+        - Deputy Headteacher
+    contact_card_item_heading:
+      type: string
+      title: Contact name heading
+      description: Contact name heading
+      examples:
+        - Mr. David Williams
+    contact_card_item_email:
+      title: Contact email
+      description: Email address for the contact
+      type: ['string', 'null']
+      examples:
+        - deputy@willowmeadow.sch.uk

@@ -1,0 +1,58 @@
+{#
+/**
+ * Available variables:
+ * - link_base_class: the base class name
+ * - link_modifiers: array of modifiers to add to the base classname
+ * - link_blockname: blockname prepended to the base classname
+ * - link_extra_classes: extra classes added
+ *
+ * - link_content: the content of the link (typically text)
+ * - link_url: the url this link should poing to
+ * - link_attributes: array of attribute,value pairs
+ * - link_icon: if set to true, it will add an icon modifier class
+ * - link_icon_name: name of the svg icon used for an iconed link
+ * - link_icon_before: positions the icon at the right of the link and will add an icon-before modifier class.
+ * - link_cta: Call to action link style.
+ *
+ * Available blocks:
+ * - link_content_block: used to replace the content of the link
+ *     Example: to insert the image component
+ */
+#}
+{% set link_base_class = link_base_class|default('link') %}
+
+{% if link_cta %}
+  {% set link_icon = true %}
+  {% set link_icon_name = 'arrow-right' %}
+  {% set link_modifiers = link_modifiers|default([])|merge(['cta']) %}
+{% endif %}
+
+{% if link_icon %}
+  {% set link_modifiers = link_modifiers|default([])|merge(['icon']) %}
+{% endif %}
+{% if link_icon_before %}
+  {% set link_modifiers = link_modifiers|default([])|merge(['icon-before']) %}
+{% endif %}
+
+<a {{ bem(link_base_class, link_modifiers|default([]), link_blockname, link_extra_classes) }}
+  {% for attribute, value in link_attributes %}
+{{ attribute }}="{{ value }}"
+{% endfor %}
+href="{{ link_url }}"
+>
+  {% if link_icon and link_icon_before %}
+    {{ include("eureka:icon", {
+      icon_name: link_icon_name|default('chevron'),
+      icon_decorative: true,
+    }, with_context = false) }}
+  {% endif %}
+  {%- block link_content_block -%}
+    {{ link_content|raw }}
+  {%- endblock -%}
+  {% if link_icon and not link_icon_before %}
+    {{ include("eureka:icon", {
+      icon_name: link_icon_name|default('chevron'),
+      icon_decorative: true,
+    }, with_context = false) }}
+  {% endif %}
+</a>

@@ -1,0 +1,9 @@
+altcha_obfuscate:
+  version: "1.0.7"
+  header: true
+  js:
+    # ALTCHA plugin libraries should be loaded before the main library.
+    # See https://altcha.org/docs/plugins/#enabling-plugins.
+    assets/vendor/altcha/obfuscation.min.js: { weight: -2, minified: true, attributes: { defer: true, type: module }}
+  dependencies:
+    - altcha/altcha

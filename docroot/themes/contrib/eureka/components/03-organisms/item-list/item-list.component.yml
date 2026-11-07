@@ -1,0 +1,49 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Item list
+status: stable
+description: Listing to display different types of items
+group: Eureka main components
+# Overrides regular css with minified.
+libraryOverrides:
+  css:
+    component:
+      item-list.min.css: { minified: true }
+props:
+  type: object
+  properties:
+    item_list_type:
+      type: string
+      title: Item list type
+      description: Type of items inside the list
+      enum:
+          - column-cards
+          - cards-x-scrollable
+      examples:
+          - column-cards
+    item_list_heading:
+      type: string
+      title: Item list heading
+      description: Heading element of the component title
+      examples:
+        - Vacancies
+    item_list_heading_level:
+      type: ['number', 'null']
+      title: Item list heading level
+      description: Heading level of the heading element - only change this if you know what you're doing, as it affects accessibility
+      enum:
+        - 2
+        - 3
+        - 4
+        - 5
+      examples:
+        - 2
+    item_list_summary:
+      type: ['string', 'null']
+      title: Item list summary
+      description: Summary / text intro
+      examples:
+        - Optional summary below the title
+slots:
+  item_list_items_block:
+    title: Item list items
+    description: Items inside of the list

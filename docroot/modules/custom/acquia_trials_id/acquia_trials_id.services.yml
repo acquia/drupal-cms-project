@@ -1,0 +1,13 @@
+services:
+  acquia_trials_id.cloud_api.client_factory:
+    class: Drupal\acquia_trials_id\Api\ClientFactory
+    arguments:
+      - '@http_client_factory'
+      - '%acquia_id.cloud_api_base_uri%'
+
+  Drupal\acquia_trials_id\EventSubscriber\OAuth2AuthorizationEventSubscriber:
+    arguments:
+      - '@acquia_trials_id.cloud_api.client_factory'
+      - '@entity_type.manager'
+    tags:
+      - { name: event_subscriber }

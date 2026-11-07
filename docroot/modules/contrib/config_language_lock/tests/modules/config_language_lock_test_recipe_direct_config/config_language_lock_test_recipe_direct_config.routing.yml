@@ -1,0 +1,20 @@
+config_language_lock_test_recipe_direct_config.apply_recipe_valid_langcode_direct_config:
+  path: '/admin/config/regional/config-language-lock/test-recipe-direct-config/apply-recipe-valid-langcode-direct-config'
+  defaults:
+    _controller: '\Drupal\config_language_lock_test_recipe_direct_config\Controller\RecipeDirectConfigTestController::applyValidLangcodeDirectConfigRecipe'
+  requirements:
+    _permission: 'administer site configuration'
+
+config_language_lock_test_recipe_direct_config.apply_recipe_empty_langcode:
+  path: '/admin/config/regional/config-language-lock/test-recipe-direct-config/apply-recipe-empty-langcode'
+  defaults:
+    _controller: '\Drupal\config_language_lock_test_recipe_direct_config\Controller\RecipeDirectConfigTestController::applyEmptyLangcodeRecipe'
+  requirements:
+    _permission: 'administer site configuration'
+
+config_language_lock_test_recipe_direct_config.apply_recipe_unknown_langcode:
+  path: '/admin/config/regional/config-language-lock/test-recipe-direct-config/apply-recipe-unknown-langcode'
+  defaults:
+    _controller: '\Drupal\config_language_lock_test_recipe_direct_config\Controller\RecipeDirectConfigTestController::applyUnknownLangcodeRecipe'
+  requirements:
+    _permission: 'administer site configuration'

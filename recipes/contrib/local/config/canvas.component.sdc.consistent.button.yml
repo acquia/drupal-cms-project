@@ -1,0 +1,48 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - consistent
+active_version: 80dd57a6705a4bd4
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        button_label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'View all services'
+          expression: ℹ︎string␟value
+        button_href:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        button_variant:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: primary
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+label: Button
+id: sdc.consistent.button
+provider: consistent
+source: sdc
+source_local_id: 'consistent:button'

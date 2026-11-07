@@ -1,0 +1,499 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 08af15ae-cd02-4257-ac20-5fcb490bceba
+  default_langcode: en
+  depends:
+    1de4ff4b-3dc3-43a7-9ff0-7da29b838ee0: file
+    c62ac8de-ffa9-4adb-9495-11b663aec45b: media
+    4f082302-ab2a-4d84-9b7d-77360c5a09d0: file
+    e21acbe1-598c-4992-996f-bc03cba49bd5: media
+    0d3dbded-a39b-490f-99f2-1edafdc5c078: file
+    eee091cb-44bd-4624-b5bb-ad8067f852ac: media
+    9f36f5a9-ee07-484b-842a-6f189abe7147: file
+    faf5e205-3221-4203-8fca-0c313827fd96: media
+    6c5eb90e-6047-4fea-8397-8ac7ce46beb5: file
+    0c2fadf1-c683-4044-b9df-d001bf83746c: media
+    14c2b859-7fa5-4561-b18c-26de75f7c14b: file
+    fee6a456-c82b-4a53-bb9d-5c4a3dce72ea: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Homepage
+  components:
+    -
+      uuid: 9d336a93-d833-46ed-8b7d-7cf66497661a
+      component_id: sdc.diagnosis.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        background: secondary
+        padding_block_start: '0'
+        padding_block_end: '0'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        image_size: '4:3'
+        image_position: right
+        image_radius: extra-large
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: c62ac8de-ffa9-4adb-9495-11b663aec45b
+            target_type: media
+    -
+      parent_uuid: 9d336a93-d833-46ed-8b7d-7cf66497661a
+      slot: hero_slot
+      uuid: 5cba2f14-69bf-4cd6-88a8-10d3021addd0
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Your Island. Your Health. Your Home'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 9d336a93-d833-46ed-8b7d-7cf66497661a
+      slot: hero_slot
+      uuid: 4e47f2b5-4437-46a0-a91d-8d49f6bf5fe3
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: "<p>For more than 110 years, Saltmarsh Island Health has been your neighbor, your partner, and your trusted healthcare home.&nbsp;</p><p>From Harbor Hollow to East Marsh, we're here with compassionate care when you need it most.</p>"
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 9d336a93-d833-46ed-8b7d-7cf66497661a
+      slot: hero_slot
+      uuid: cbe63a74-fc3d-4e3f-9f5c-d0568073afef
+      component_id: sdc.diagnosis.button
+      inputs:
+        variant: primary
+        label: 'Find Care Near You'
+        size: medium
+        icon: arrow-right
+        icon_first: false
+        disabled: false
+        mobile_width: false
+        href: /locations
+    -
+      uuid: a00abf5e-e9b8-464d-a4c9-b56e9a0cffb2
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 100%
+        columns: 33-33-33
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: true
+    -
+      parent_uuid: a00abf5e-e9b8-464d-a4c9-b56e9a0cffb2
+      slot: header_slot
+      uuid: fc39cccb-1f21-41f4-b77a-9fa23f42e191
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 100%
+        columns: 33-33-33
+        mobile_columns: '1'
+        margin_block_start: '0'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: fc39cccb-1f21-41f4-b77a-9fa23f42e191
+      slot: main_slot
+      uuid: 0981d69c-f5fe-47a3-8024-47a6911c71ad
+      component_id: sdc.diagnosis.card
+      inputs:
+        background: default
+        style: full
+        orientation: vertical
+        heading_text: 'Find a Provider'
+        level: 3
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: e21acbe1-598c-4992-996f-bc03cba49bd5
+            target_type: media
+        text: 'Search our physicians, nurse practitioners, and specialists to find the right care for you and your family.'
+        is_text_centered: false
+        url: /providers
+    -
+      parent_uuid: fc39cccb-1f21-41f4-b77a-9fa23f42e191
+      slot: main_slot
+      uuid: 255baa23-0bf0-4c90-8d94-fbabe7a13079
+      component_id: sdc.diagnosis.card
+      inputs:
+        background: default
+        style: full
+        orientation: vertical
+        heading_text: 'Explore Locations'
+        level: 3
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: eee091cb-44bd-4624-b5bb-ad8067f852ac
+            target_type: media
+        text: 'Find primary care, urgent care, rehab services, and our main hospital campus across Saltmarsh Island.'
+        is_text_centered: false
+        url: /locations
+    -
+      parent_uuid: fc39cccb-1f21-41f4-b77a-9fa23f42e191
+      slot: main_slot
+      uuid: 09548cb3-90e4-426b-b4d3-1d01b0173096
+      component_id: sdc.diagnosis.card
+      inputs:
+        background: default
+        style: full
+        orientation: vertical
+        heading_text: 'Patient Portal'
+        level: 3
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: faf5e205-3221-4203-8fca-0c313827fd96
+            target_type: media
+        text: 'Access your health records, request appointments, message your care team, and view test results.'
+        is_text_centered: false
+        url: /patients/portal
+    -
+      parent_uuid: a00abf5e-e9b8-464d-a4c9-b56e9a0cffb2
+      slot: header_slot
+      uuid: a0e3298a-e32c-4d2c-8a29-f7f3b705be24
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Quality Care Across the Island'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: a00abf5e-e9b8-464d-a4c9-b56e9a0cffb2
+      slot: header_slot
+      uuid: 39de2834-bcc8-4032-8d7f-3d85dfd1d6c2
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>From routine checkups to urgent care and emergency services, Saltmarsh Island Health provides comprehensive healthcare close to home. Our team of dedicated providers delivers compassionate care at convenient locations across the island.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: a00abf5e-e9b8-464d-a4c9-b56e9a0cffb2
+      slot: main_slot
+      uuid: c50b4261-55f4-469b-a6b2-ce38536308ef
+      component_id: sdc.diagnosis.card-icon
+      inputs:
+        tile_size: square
+        border_radius: medium
+        icon: heartbeat
+        icon_size: extra-large
+        icon_align: center
+        text: 'Family Medicine'
+        description:
+          value: '<p>Your health partner for every stage of life. Our family medicine providers offer preventive care, chronic disease management, and wellness visits for the whole family—right here on the island.</p>'
+          format: canvas_html_block
+        text_align: left
+        button_variant: primary
+        button_icon_first: false
+        button_mobile_width: false
+        url: /services/family-medicine
+        background_color: secondary
+    -
+      parent_uuid: a00abf5e-e9b8-464d-a4c9-b56e9a0cffb2
+      slot: main_slot
+      uuid: 360e74d9-2690-4eff-b667-7566d63a33cc
+      component_id: sdc.diagnosis.card-icon
+      inputs:
+        tile_size: square
+        border_radius: medium
+        icon: ambulance
+        icon_size: extra-large
+        icon_align: center
+        text: 'Emergency Services'
+        description:
+          value: '<p>24/7 emergency care at Harbor Hollow Hill Campus when you need it most. Our emergency team is ready to respond to life-threatening conditions and critical injuries, day or night.</p>'
+          format: canvas_html_block
+        text_align: left
+        button_variant: primary
+        button_icon_first: false
+        button_mobile_width: false
+        url: /services/emergency-department
+        background_color: secondary
+    -
+      parent_uuid: a00abf5e-e9b8-464d-a4c9-b56e9a0cffb2
+      slot: main_slot
+      uuid: a75dbd16-ad20-4284-bacd-5745998dd680
+      component_id: sdc.diagnosis.card-icon
+      inputs:
+        tile_size: square
+        border_radius: medium
+        icon: hospital
+        icon_size: extra-large
+        icon_align: center
+        text: 'Urgent Care'
+        description:
+          value: "<p>Walk-in care for minor injuries and illnesses when you can't wait for an appointment. No appointment needed at Scalloper's Cove Urgent Care—open seven days a week with extended evening hours.</p>"
+          format: canvas_html_block
+        text_align: left
+        button_variant: primary
+        button_icon_first: false
+        button_mobile_width: false
+        url: /services/urgent-care
+        background_color: secondary
+    -
+      parent_uuid: a00abf5e-e9b8-464d-a4c9-b56e9a0cffb2
+      slot: main_slot
+      uuid: 4bf9b1a9-4b3d-4267-a553-73660e328f0d
+      component_id: sdc.diagnosis.card-icon
+      inputs:
+        tile_size: square
+        border_radius: medium
+        icon: bicycle
+        icon_size: extra-large
+        icon_align: center
+        text: 'Physical Therapy & Rehabilitation'
+        description:
+          value: "<p>Recover your strength and mobility with personalized therapy programs. From post-surgical recovery to fall prevention and chronic pain management, we'll help you get back to doing what you love.</p>"
+          format: canvas_html_block
+        text_align: left
+        button_variant: primary
+        button_icon_first: false
+        button_mobile_width: false
+        url: /services/physical-therapy-rehabilitation
+        background_color: secondary
+    -
+      parent_uuid: a00abf5e-e9b8-464d-a4c9-b56e9a0cffb2
+      slot: main_slot
+      uuid: dafc488b-b51c-4e90-88a9-727f71b5998b
+      component_id: sdc.diagnosis.card-icon
+      inputs:
+        tile_size: square
+        border_radius: medium
+        icon: gender-female
+        icon_size: extra-large
+        icon_align: center
+        text: "Women's Health"
+        description:
+          value: '<p>Comprehensive care for women at every life stage, from annual exams to prenatal care and midwifery services. Our providers offer compassionate, patient-centered care in a comfortable setting.</p>'
+          format: canvas_html_block
+        text_align: left
+        button_variant: primary
+        button_icon_first: false
+        button_mobile_width: false
+        url: /services/womens-health-obgyn
+        background_color: secondary
+    -
+      parent_uuid: a00abf5e-e9b8-464d-a4c9-b56e9a0cffb2
+      slot: main_slot
+      uuid: be79a5cf-a91b-4263-9914-14783ccbebfa
+      component_id: sdc.diagnosis.card-icon
+      inputs:
+        tile_size: square
+        border_radius: medium
+        icon: brain
+        icon_size: extra-large
+        icon_align: center
+        text: 'Behavioral Health'
+        description:
+          value: '<p>Mental health matters. Our licensed counselors provide confidential support for anxiety, depression, stress management, and more—because your emotional wellness is just as important as your physical health.</p>'
+          format: canvas_html_block
+        text_align: left
+        button_variant: primary
+        button_icon_first: false
+        button_mobile_width: false
+        url: /services/behavioral-health-psychiatry
+        background_color: secondary
+    -
+      parent_uuid: a00abf5e-e9b8-464d-a4c9-b56e9a0cffb2
+      slot: footer_slot
+      uuid: 9be40639-d36a-4f91-852e-cb41d996c0f2
+      component_id: sdc.diagnosis.button
+      inputs:
+        variant: primary
+        label: 'View All Services'
+        size: medium
+        icon: arrow-right
+        mobile_width: false
+        icon_first: false
+        disabled: false
+        href: /services
+    -
+      uuid: fef0a951-f5db-4918-aa8b-ff35f08e3296
+      component_id: sdc.diagnosis.stats-section
+      inputs:
+        content_heading: 'Serving Our Island Community Since 1912'
+        content_body:
+          value: '<p>From routine check-ups to emergency care, our team serves nearly every family across the island.</p><p>&nbsp;</p><p>These numbers reflect generations of trust, a commitment to accessible care no matter where you live, and the dedicated providers who choose to make Saltmarsh their home</p>'
+          format: canvas_html_block
+        content_button_url: /locations
+        content_button_text: 'Find Care Near You'
+        content_button_icon_first: false
+        content_button_mobile_width: false
+        stat1_value: 10K+
+        stat1_label:
+          value: '<p>Happy Customers</p>'
+          format: canvas_html_block
+        stat2_value: 500+
+        stat2_label:
+          value: '<p>Projects Completed</p>'
+          format: canvas_html_block
+        stat3_value: 50+
+        stat3_label:
+          value: '<p>Team Members</p>'
+          format: canvas_html_block
+        margin_block_start: '48'
+        margin_block_end: '48'
+        rounded: true
+        content_background: accent
+        stat1_background: primary
+    -
+      uuid: 62846496-1b03-4a0c-921e-4c69a843e6ec
+      component_id: sdc.diagnosis.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        padding_block_start: '0'
+        padding_block_end: '0'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        image_size: '4:3'
+        image_position: right
+        image_radius: extra-large
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 0c2fadf1-c683-4044-b9df-d001bf83746c
+            target_type: media
+        background: secondary
+    -
+      parent_uuid: 62846496-1b03-4a0c-921e-4c69a843e6ec
+      slot: hero_slot
+      uuid: 700b1683-b462-4231-ab2f-5ae7d53406fc
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Find Your Provider'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 62846496-1b03-4a0c-921e-4c69a843e6ec
+      slot: hero_slot
+      uuid: a151f9c8-b00c-45dc-bc6e-a87386c919cf
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: "<p>Our physicians, nurse practitioners, and specialists aren't just your healthcare team—they're your neighbors.</p><p>They know your family, they understand island life, and they're here year-round when you need them.</p><p>Browse our provider directory to find the right match for you and your family.</p>"
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 62846496-1b03-4a0c-921e-4c69a843e6ec
+      slot: hero_slot
+      uuid: ad77c3a8-2924-4b85-80bb-9d9e557e3546
+      component_id: sdc.diagnosis.button
+      inputs:
+        variant: primary
+        label: 'Browse All Providers'
+        size: medium
+        icon: arrow-right
+        mobile_width: false
+        icon_first: false
+        disabled: false
+        href: /providers
+    -
+      uuid: ee8ed1bc-2347-4263-ae6e-816d6cc2f056
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Patient Stories'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: center
+    -
+      uuid: 7aefffae-6f1d-48c8-9b57-7888ec335861
+      component_id: sdc.diagnosis.carousel
+      inputs:
+        aria_label: Testimonials
+        show_navigation: true
+        show_pagination: true
+    -
+      parent_uuid: 7aefffae-6f1d-48c8-9b57-7888ec335861
+      slot: slides
+      uuid: fa46bee9-7f11-44d7-bfe8-3759cbcba088
+      component_id: sdc.diagnosis.carousel-slide
+      inputs:
+        background: default
+        padding: medium
+        width: 50%
+    -
+      parent_uuid: fa46bee9-7f11-44d7-bfe8-3759cbcba088
+      slot: slide_content
+      uuid: 631b2f42-9ed6-4f6f-9d69-9e49716bfd69
+      component_id: sdc.diagnosis.blockquote
+      inputs:
+        text: '"When I fell on the docks, the team at Scalloper''s Cove Urgent Care got me in right away. They knew I needed to get back out on the water, but made sure I understood how to take care of it. They treat you like family here."'
+        cite_name: 'Robert "Bobby" Machado'
+        cite_text: "Commercial Fisherman, Scalloper's Cove"
+    -
+      parent_uuid: 7aefffae-6f1d-48c8-9b57-7888ec335861
+      slot: slides
+      uuid: 20986b21-ac8a-40a0-95a3-4c9ed9fac71e
+      component_id: sdc.diagnosis.carousel-slide
+      inputs:
+        background: default
+        padding: medium
+        width: 50%
+    -
+      parent_uuid: 20986b21-ac8a-40a0-95a3-4c9ed9fac71e
+      slot: slide_content
+      uuid: c80fe1dd-0fc6-40e3-bc54-7f298f7ce993
+      component_id: sdc.diagnosis.blockquote
+      inputs:
+        text: "Dr. Patel has been our family doctor for over a decade. She knows my kids by name, remembers my mother's health history, and never makes us feel rushed. Having quality care in Harbor Hollow means everything to our family."
+        cite_name: 'Jennifer Oakes'
+        cite_text: 'Patient Since 2012, East Marsh'
+    -
+      uuid: b54f2be9-61d7-48be-ae03-72d1f48cffb7
+      component_id: sdc.diagnosis.cta
+      inputs:
+        heading_text: 'Careers at Saltmarsh Island Health'
+        level: 2
+        text: "Join a team that's been caring for island families since 1912, where meaningful work meets true work-life balance and neighbors know your name."
+        text_align: center
+        background_color: inverted
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: fee6a456-c82b-4a53-bb9d-5c4a3dce72ea
+            target_type: media
+    -
+      parent_uuid: b54f2be9-61d7-48be-ae03-72d1f48cffb7
+      slot: actions
+      uuid: 0e9b68cd-1b1c-4027-a1c5-86b4179e05cb
+      component_id: sdc.diagnosis.button
+      inputs:
+        variant: primary
+        label: 'Explore Career Opportunities'
+        size: medium
+        icon: arrow-right
+        icon_first: false
+        disabled: false
+        mobile_width: false
+        href: /careers
+  path:
+    -
+      alias: /homepage
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

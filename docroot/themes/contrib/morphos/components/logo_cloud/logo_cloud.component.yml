@@ -1,0 +1,71 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Logo cloud
+description: A horizontal arrangement of partner or agency logos, typically used for endorsements or affiliations.
+group: Content
+status: stable
+props:
+  type: object
+  properties:
+    size:
+      type: string
+      title: Size
+      description: Select the size of the logo cloud.
+      enum:
+        - logo-size--xs
+        - logo-size--sm
+        - logo-size--md
+        - logo-size--lg
+        - logo-size--xl
+      meta:enum:
+        logo-size--xs: Extra small
+        logo-size--sm: Small
+        logo-size--md: Medium
+        logo-size--lg: Large
+        logo-size--xl: Extra large
+      default: logo-size--md
+    position:
+      type: string
+      title: Position
+      description: Select the position of the logo cloud.
+      enum:
+        - position-start
+        - position-center
+        - position-end
+      meta:enum:
+        position-start: Start
+        position-center: Center
+        position-end: End
+      default: position-center
+    gap:
+      type: string
+      title: Gap
+      description: Select the gap between items.
+      enum:
+        - '0'
+        - '2'
+        - '4'
+        - '6'
+        - '8'
+        - '12'
+        - '16'
+        - '20'
+        - '24'
+      meta:enum:
+        '0': '0 (0px)'
+        '2': '2 (8px)'
+        '4': '4 (16px)'
+        '6': '6 (24px)'
+        '8': '8 (32px)'
+        '12': '12 (48px)'
+        '16': '16 (64px)'
+        '20': '20 (80px)'
+        '24': '24 (96px)'
+      default: '4'
+slots:
+  logo_images:
+    title: Logos
+    description: Add image items.
+libraryOverrides:
+  css:
+    component:
+      ../../dist/css/logo_cloud.css: { minified: true }

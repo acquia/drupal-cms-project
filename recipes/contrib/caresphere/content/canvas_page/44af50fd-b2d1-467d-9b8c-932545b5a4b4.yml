@@ -1,0 +1,259 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 44af50fd-b2d1-467d-9b8c-932545b5a4b4
+  default_langcode: en
+  depends:
+    6e278bc5-4d07-4454-861d-c3b1034edfe9: file
+    8cc0c611-6f05-49af-ac13-dd880428fca6: media
+    fd6b45cc-dcd5-4161-baff-17ce59126ccc: file
+    74b7d1b2-46c0-4ce6-9b7a-24ac846b1a1b: media
+    47daac98-0d45-4677-8d0e-05d4d63a6624: file
+    3d0656f6-b8f1-4c65-8a71-958c65899013: media
+    dff4c626-a52e-4de8-a7fe-b5d45735fecc: file
+    1852211b-caab-41a7-8c0e-7d9dcfdcf922: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Donate
+  components:
+    -
+      uuid: 0dfd283d-26d2-49c3-82f6-20fd623436e2
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        alignment: center
+        paddingtop: 14
+        marginbottom: 0
+        paddingbottom: 14
+        backgroundcolor: black
+        background_image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 8cc0c611-6f05-49af-ac13-dd880428fca6
+            target_type: media
+        use_custom_container: false
+    -
+      parent_uuid: 0dfd283d-26d2-49c3-82f6-20fd623436e2
+      slot: content
+      uuid: 2c03273a-1e29-4420-b88e-91dba17cd019
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: 'Make a difference'
+          format: canvas_html_inline
+        tagline: Support
+        description: 'Your contribution directly funds the work that changes lives in our community every day'
+        heading_level: 1
+    -
+      parent_uuid: 2c03273a-1e29-4420-b88e-91dba17cd019
+      slot: ctas
+      uuid: 6712a527-3c2d-4a8e-adb9-f6fdfb1a0030
+      component_id: sdc.caresphere_theme.button
+      inputs:
+        href: 'https://easebuzz.in/demo'
+        size: medium
+        label: Donate
+        variant: primary
+        disabled: false
+        icon_first: false
+        mobile_width: false
+        border_radius: default
+    -
+      parent_uuid: 2c03273a-1e29-4420-b88e-91dba17cd019
+      slot: ctas
+      uuid: 9bee2204-04f1-43f7-9f15-79d6921935b6
+      component_id: sdc.caresphere_theme.button
+      inputs:
+        href: /about
+        size: medium
+        label: Learn
+        variant: secondary-white
+        disabled: false
+        icon_first: false
+        mobile_width: false
+        border_radius: default
+    -
+      uuid: 66b68d3d-74dc-476d-bbed-0f2a1c9da870
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        alignment: center
+        paddingtop: 14
+        marginbottom: 0
+        paddingbottom: 10
+        backgroundcolor: dark-gray
+        use_custom_container: false
+    -
+      parent_uuid: 66b68d3d-74dc-476d-bbed-0f2a1c9da870
+      slot: content
+      uuid: e12948a2-a8f3-4f4a-9ae1-e3e4cd6c8f2d
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: 'Give today'
+          format: full_html
+        tagline: Ways
+        textcolor: light
+        description: 'Choose what works best for you'
+        heading_level: 2
+    -
+      uuid: bbe035f2-21fd-4e68-83ae-b63c0262d6f3
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        gap: 6
+        marginbottom: 0
+        paddingbottom: 14
+        backgroundcolor: dark-gray
+        use_custom_container: false
+    -
+      parent_uuid: bbe035f2-21fd-4e68-83ae-b63c0262d6f3
+      slot: content
+      uuid: 0f90a9d9-fdea-4161-86be-3dbf7075e289
+      component_id: sdc.caresphere_theme.tabs
+      inputs:
+        variant: colored-background
+        tab_labels: 'View all,Monthly,Yearly'
+    -
+      parent_uuid: bbe035f2-21fd-4e68-83ae-b63c0262d6f3
+      slot: content
+      uuid: 77fc9480-a58b-4f2e-944b-f6c3adec2128
+      component_id: sdc.caresphere_theme.section-grid
+      inputs:
+        grid_layout: 3_column
+        grid_column_gap: 4
+        is_small_container: false
+    -
+      parent_uuid: 77fc9480-a58b-4f2e-944b-f6c3adec2128
+      slot: slot_1
+      uuid: cedafaf4-39f1-4853-906d-0fc36ae88117
+      component_id: sdc.caresphere_theme.card-donation
+      inputs:
+        tab_id: monthly
+        benefits:
+          value: '<ul><li data-list-item-id="e04a2383cd105e610c6ddf80dfa983f01">Supports one family</li><li data-list-item-id="ed0c413489dd9aa2b75720106403ecaf0">Monthly impact report</li><li data-list-item-id="e6bb53762dc41e5dea0c30a17f38af074">Donor recognition</li></ul>'
+          format: canvas_html_block
+        button_url: 'https://easebuzz.in/demo/'
+        plan_title: 'One time'
+        plan_icon_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 74b7d1b2-46c0-4ce6-9b7a-24ac846b1a1b
+            target_type: media
+    -
+      parent_uuid: 77fc9480-a58b-4f2e-944b-f6c3adec2128
+      slot: slot_2
+      uuid: 73fe990d-314a-4498-8004-c66557a1508f
+      component_id: sdc.caresphere_theme.card-donation
+      inputs:
+        tab_id: monthly
+        benefits:
+          value: '<ul><li data-list-item-id="e340016abb0800ab24518a82c549862da">Supports three families</li><li data-list-item-id="e18e12d6a6bb3f5181818c6e1d8cc21ed">Quarterly impact updates</li><li data-list-item-id="e0563311339d12c3799b5b59b3787bc7f">Donor recognition</li><li data-list-item-id="eb0bce377f9b198c4cda52c3561876054">Event invitations</li></ul>'
+          format: canvas_html_block
+        button_url: 'https://easebuzz.in/demo/'
+        plan_title: 'Sustaining partner'
+        price_amount: '29'
+        plan_icon_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 3d0656f6-b8f1-4c65-8a71-958c65899013
+            target_type: media
+    -
+      parent_uuid: 77fc9480-a58b-4f2e-944b-f6c3adec2128
+      slot: slot_3
+      uuid: f4281600-30e7-44a9-bb03-ae080c340de4
+      component_id: sdc.caresphere_theme.card-donation
+      inputs:
+        tab_id: yearly
+        benefits:
+          value: '<ul><li data-list-item-id="e340016abb0800ab24518a82c549862da">Supports five families</li><li data-list-item-id="e18e12d6a6bb3f5181818c6e1d8cc21ed">Quarterly impact updates</li><li data-list-item-id="e0563311339d12c3799b5b59b3787bc7f">Donor recognition</li><li data-list-item-id="eb0bce377f9b198c4cda52c3561876054">Event invitations</li><li data-list-item-id="ea82f5b0864c3aecfc414a7d34d34de82">Annual impact report</li></ul>'
+          format: canvas_html_block
+        button_url: 'https://easebuzz.in/demo/'
+        plan_title: 'Community champion'
+        price_amount: '49'
+        plan_icon_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 74b7d1b2-46c0-4ce6-9b7a-24ac846b1a1b
+            target_type: media
+    -
+      uuid: ba548c8f-bcb5-414a-b6b4-0d46c174bab3
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        gap: 10
+        alignment: center
+        paddingtop: 14
+        marginbottom: 0
+        paddingbottom: 14
+        backgroundcolor: black
+        use_custom_container: false
+    -
+      parent_uuid: ba548c8f-bcb5-414a-b6b4-0d46c174bab3
+      slot: content
+      uuid: 74ddb88b-9985-4789-84d1-f66a4b634a75
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: 'Join us in building change'
+          format: full_html
+        description: 'Your support creates opportunity and strengthens the community we serve together.'
+        heading_level: 2
+    -
+      parent_uuid: 74ddb88b-9985-4789-84d1-f66a4b634a75
+      slot: ctas
+      uuid: f40b3d82-2710-43e1-86c8-460cd070aaab
+      component_id: sdc.caresphere_theme.button
+      inputs:
+        href: 'https://easebuzz.in/demo'
+        size: medium
+        label: Donate
+        variant: primary
+        disabled: false
+        icon_first: false
+        mobile_width: false
+        border_radius: default
+    -
+      parent_uuid: 74ddb88b-9985-4789-84d1-f66a4b634a75
+      slot: ctas
+      uuid: fb1bd662-e742-4c16-ae9c-e12b17ff5a25
+      component_id: sdc.caresphere_theme.button
+      inputs:
+        href: /get-involved
+        size: medium
+        label: 'Get invloved'
+        variant: secondary-white
+        disabled: false
+        icon_first: false
+        mobile_width: false
+        border_radius: default
+    -
+      parent_uuid: ba548c8f-bcb5-414a-b6b4-0d46c174bab3
+      slot: content
+      uuid: 30bf834e-1771-4b7a-a94d-172e3a5fbed8
+      component_id: sdc.caresphere_theme.section-grid
+      inputs:
+        grid_layout: 1_column
+        is_small_container: false
+    -
+      parent_uuid: 30bf834e-1771-4b7a-a94d-172e3a5fbed8
+      slot: slot_1
+      uuid: aeaca13f-2b5d-45dd-8298-81f9fa95ba2e
+      component_id: sdc.caresphere_theme.image
+      inputs:
+        size: '16:9'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 1852211b-caab-41a7-8c0e-7d9dcfdcf922
+            target_type: media
+        radius: small
+        border_radius: 8
+  path:
+    -
+      alias: /donate
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

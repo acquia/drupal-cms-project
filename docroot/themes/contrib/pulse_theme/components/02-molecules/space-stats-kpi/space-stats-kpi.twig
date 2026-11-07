@@ -1,0 +1,57 @@
+{# 
+/**
+ * @file
+ * Space Stats KPI component.
+ *
+ * Variables:
+ * - keynumber: [string] The main KPI number (e.g., '+400').
+ * - subheading: [string] The subheadline describing the KPI (e.g., 'Projects completed').
+ * - description: [string] Additional description text (e.g., 'We have helped build over 400 projects...').
+ * - alignment: [string] Text alignment: 'left' or 'center'. Defaults to 'left'.
+ * - layout_type: [string] The layout style: 'default', 'accentlineleft', 'accentlinetop', 'withbackground', 'withicon'. Defaults to 'default'.
+ * - extra_classes: [string] Additional CSS classes for custom styles.
+ *
+ * Slots:
+ * - icon: [HTML] Content for an optional icon slot.
+ * - link: [HTML] Content for an optional link slot.
+ */
+# }
+
+{# Classes #}
+{% set classes = [
+  alignment == 'center' ? 'text-center center-layout': '',
+  'stats-kpi ga-stats-kpi ga_space_component md:flex-1',
+  extra_classes ? extra_classes
+] %}
+{% set attributes = attributes|default(create_attribute()).addClass(classes| sort | join(' ') | trim) %}
+
+{# Template #}
+{% block stats_and_kpi_block %}
+  <div class="stats-kpi-main-wrapper">
+    <div {{ attributes }}>
+      <div class="stats-kpi-wrapper">
+        {% if keynumber|render|striptags|trim is not empty %}
+          <h2 class="keyfact-figure counter h1" data-target="{{ keynumber }}"></h2>
+        {% endif %}
+
+        {% if subheading|render|striptags|trim is not empty %}
+          {% include 'pulse_theme:space-heading' with { content: subheading, tag_name: 'h3', align: 'none' } only %}
+        {% endif %}
+
+        {% if description|render|striptags|trim is not empty %}
+          <div class="keyfact-description">
+            {{ description }}
+          </div>
+        {% endif %}
+
+        {% if link|render is not empty %}
+          <div class="cta-btn">
+            {% block stats_kpi_link %}
+              {{ link }}
+            {% endblock %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,193 @@
+<div data-testid="multivalue-props-component">
+  <h2>Text</h2>
+  {% if text is not empty %}
+    <div data-testid="text-component">
+      <ul id="text-list">
+        {% for t in text %}
+          <li>{{ t }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  <h2>Text Limited</h2>
+  {% if text_limited is not empty %}
+    <div data-testid="text-limited-component">
+      <ul id="text-limited-list">
+        {% for t in text_limited %}
+          <li>{{ t }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  <h2>Text Required</h2>
+  {% if text_required is not empty %}
+    <div data-testid="text-required-component">
+      <ul id="text-required-list">
+        {% for t in text_required %}
+          <li>{{ t }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  <h2>Link</h2>
+  {% if link is not empty %}
+    <div data-testid="link-component">
+      <ul id="link-list">
+        {% for l in link %}
+          <li><a href="{{ l }}">{{ l }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  <h2>Link Limited</h2>
+  {% if link_limited is not empty %}
+    <div data-testid="link-limited-component">
+      <ul id="link-limited-list">
+        {% for l in link_limited %}
+          <li><a href="{{ l }}">{{ l }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  <h2>Relative Link</h2>
+  {% if relative_link is not empty %}
+    <div data-testid="relative_link-component">
+      <ul id="relative-link-list">
+        {% for r in relative_link %}
+          <li><a href="{{ r }}">{{ r }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  <h2>Relative Link Limited</h2>
+  {% if relative_link_limited is not empty %}
+    <div data-testid="relative_link-limited-component">
+      <ul id="relative-link-limited-list">
+        {% for r in relative_link_limited %}
+          <li><a href="{{ r }}">{{ r }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  <h2>Number</h2>
+  {% if number is not empty %}
+    <div data-testid="number-component">
+      <ul id="number-list">
+        {% for n in number %}
+          <li>{{ n }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  <h2>Number Limited</h2>
+  {% if number_limited is not empty %}
+    <div data-testid="number-limited-component">
+      <ul id="number-limited-list">
+        {% for n in number_limited %}
+          <li>{{ n }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  <h2>Integer</h2>
+  {% if integer is not empty %}
+    <div data-testid="integer-component">
+      <ul id="integer-list">
+        {% for i in integer %}
+          <li>{{ i }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  <h2>Integer Limited</h2>
+  {% if integer_limited is not empty %}
+    <div data-testid="integer-limited-component">
+      <ul id="integer-limited-list">
+        {% for i in integer_limited %}
+          <li>{{ i }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  <h2>Datetime</h2>
+  {% if datetime is not empty %}
+    <div data-testid="datetime-component">
+      <ul id="datetime-list">
+        {% for d in datetime %}
+          <li>{{ d }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  <h2>Datetime Limited</h2>
+  {% if datetime_limited is not empty %}
+    <div data-testid="datetime-limited-component">
+      <ul id="datetime-limited-list">
+        {% for d in datetime_limited %}
+          <li>{{ d }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  <h2>Date</h2>
+  {% if date is not empty %}
+    <div data-testid="date-component">
+      <ul id="date-list">
+        {% for d in date %}
+          <li>{{ d }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  <h2>Date Limited</h2>
+  {% if date_limited is not empty %}
+    <div data-testid="date-limited-component">
+      <ul id="date-limited-list">
+        {% for d in date_limited %}
+          <li>{{ d }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  <h2>List Text</h2>
+  {% if list_text is not empty %}
+    <div data-testid="list-text-component">
+      <ul id="list-text-list">
+        {% for item in list_text %}
+          <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  <h2>List Text Limited</h2>
+  {% if list_text_limited is not empty %}
+    <div data-testid="list-text-limited-component">
+      <ul id="list-text-limited-list">
+        {% for item in list_text_limited %}
+          <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  <h2>List Integer</h2>
+  {% if list_int is not empty %}
+    <div data-testid="list-int-component">
+      <ul id="list-int-list">
+        {% for item in list_int %}
+          <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  <h2>List Integer Limited</h2>
+  {% if list_int_limited is not empty %}
+    <div data-testid="list-int-limited-component">
+      <ul id="list-int-limited-list">
+        {% for item in list_int_limited %}
+          <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+</div>

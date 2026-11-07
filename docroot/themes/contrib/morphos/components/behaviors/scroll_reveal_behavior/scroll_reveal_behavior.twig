@@ -1,0 +1,43 @@
+{#
+/**
+ * @file
+ * Scroll Reveal Behavior component.
+ *
+ * Applies scroll reveal animations to the parent component using
+ * IntersectionObserver. Place this component in the behaviors slot.
+ */
+#}
+
+{% set is_preview = canvas_is_preview or in_preview %}
+
+{% set classes = [
+  'scroll-reveal-behavior',
+] %}
+
+{% set preview_classes = [
+  'color--alternate',
+  'p-2',
+  'text-center',
+  'text-sm',
+] %}
+
+{% if is_preview %}
+  <div{{ attributes.addClass(classes, preview_classes) }}>
+    Scroll Reveal Behavior
+  </div>
+{% else %}
+  <div{{ attributes.addClass(classes)
+    .setAttribute('role', 'presentation')
+    .setAttribute('data-scroll-reveal', true)
+    .setAttribute('data-scroll-reveal-delay', delay|default(0))
+    .setAttribute('data-scroll-reveal-distance', distance|default('50px'))
+    .setAttribute('data-scroll-reveal-duration', duration|default(500))
+    .setAttribute('data-scroll-reveal-mobile', mobile is not defined ? true : mobile)
+    .setAttribute('data-scroll-reveal-opacity', opacity|default(0))
+    .setAttribute('data-scroll-reveal-origin', origin|default('bottom'))
+    .setAttribute('data-scroll-reveal-scale', scale|default(100))
+    .setAttribute('data-scroll-reveal-sequence-interval', sequence_interval|default(0))
+    .setAttribute('data-scroll-reveal-sequence-selector', sequence_selector|default(''))
+    .setAttribute('data-behavior-media-query', media_query_value ? media_query_value : null) }}>
+  </div>
+{% endif %}

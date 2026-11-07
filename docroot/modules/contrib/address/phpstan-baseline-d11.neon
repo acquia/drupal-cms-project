@@ -1,0 +1,12 @@
+parameters:
+    ignoreErrors:
+        -
+            rawMessage: '''
+                Call to deprecated function views_field_default_views_data():
+                in drupal:11.2.0 and is removed from drupal:12.0.0. Use
+                \Drupal::service('views.field_data_provider')
+                ->defaultFieldImplementation($field_storage); instead.
+            '''
+            identifier: function.deprecated
+            count: 1
+            path: address.views.inc

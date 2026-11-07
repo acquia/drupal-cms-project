@@ -1,0 +1,190 @@
+import { assertLegacyRuntime } from './migration.js';
+
+export type {
+  CanvasContext,
+  PageContext,
+  SiteContext,
+} from './context-types.js';
+
+interface Linkset {
+  linkset: LinksetItem[];
+}
+
+interface LinksetItem {
+  anchor: string;
+  item: LinksetMenuItem[];
+}
+
+interface LinksetMenuItem {
+  href: string;
+  hierarchy: string[];
+  _children?: LinksetMenuItem[];
+  _hasSubmenu: boolean;
+}
+
+/**
+ * Sort menu items from core's menu API into a tree with additional
+ * _children and _hasSubmenu properties.
+ *
+ * @param linkset
+ *
+ * @return menuItems
+ */
+export function sortMenu(linkset: Linkset) {
+  const menuItemsMap = new Map();
+  const menu: LinksetMenuItem[] = [];
+
+  if (!linkset.linkset?.length) {
+    return [];
+  }
+
+  linkset.linkset[0].item.forEach((item) => {
+    const hierarchyKey = item.hierarchy.join('|');
+    menuItemsMap.set(hierarchyKey, {
+      ...item,
+      id: hierarchyKey,
+      _children: [],
+      _hasSubmenu: false,
+    });
+  });
+
+  linkset.linkset[0].item.forEach((item) => {
+    const hierarchyKey = item.hierarchy.join('|');
+    const currentItem = menuItemsMap.get(hierarchyKey);
+
+    if (item.hierarchy.length === 1) {
+      // Root level item.
+      menu.push(currentItem);
+    } else {
+      // Child item.
+      const parentHierarchy = item.hierarchy.slice(0, -1);
+      const parentKey = parentHierarchy.join('|');
+      const parent = menuItemsMap.get(parentKey);
+      if (parent) {
+        parent._children.push(currentItem);
+        parent._hasSubmenu = true;
+      }
+    }
+  });
+
+  return menu;
+}
+
+export interface BreadcrumbLink {
+  key: string;
+  text: string;
+  url: string;
+}
+
+export interface EntityMetadata {
+  bundle: string;
+  entityTypeId: string;
+  uuid: string;
+  // The language requested via the URL (the negotiated content language).
+  requestedLanguage: string;
+  // The language actually rendered. This can differ from `requestedLanguage` as
+  // the default translation is used when the requested language is unavailable.
+  renderedLanguage: string;
+  /**
+   * All enabled site languages for building a language switcher.
+   *
+   * Includes default and untranslated languages
+   * (`translationAvailable: false`). Untranslated entries still include a URL
+   * that resolves to the fallback translation. Empty when the entity type does
+   * not support translation or the site is monolingual.
+   */
+  translations: TranslationMetadata[];
+}
+
+export interface TranslationMetadata {
+  langcode: string;
+  // The language name in the current display language (e.g. "German").
+  name: string;
+  // The language's own native name (e.g. "Deutsch").
+  nativeName: string;
+  url: string;
+  // Whether the entity has a translation in this language that the current
+  // user may view.
+  translationAvailable: boolean;
+  // Whether this is the requested language (the URL/content language), even
+  // when its content falls back to the default translation.
+  current: boolean;
+}
+
+export interface PageData {
+  pageTitle: string;
+  breadcrumbs: Array<BreadcrumbLink>;
+  mainEntity: EntityMetadata | null;
+}
+
+export interface ThemeAssets {
+  logo: { url: string };
+  favicon: { url: string; mimeType: string };
+}
+
+export interface SiteData {
+  branding: {
+    homeUrl: string;
+    siteName: string;
+    siteSlogan: string;
+  };
+  baseUrl: string;
+  themeAssets: ThemeAssets;
+}
+
+/**
+ * Reads the current page data from `drupalSettings`.
+ *
+ * Supported in Drupal-rendered Code Components and Canvas Workbench previews
+ * only; elsewhere it throws an actionable migration error.
+ *
+ * @deprecated Use `usePageContext()` in React Code Components, or read
+ *   `page.context.page` from the Headless SDK's page response outside
+ *   components.
+ */
+export const getPageData = (): PageData => {
+  assertLegacyRuntime('getPageData()');
+  const pageData = {
+    pageTitle: globalThis?.drupalSettings?.canvasData?.v0?.pageTitle || '',
+    breadcrumbs: globalThis?.drupalSettings?.canvasData?.v0?.breadcrumbs || [],
+    mainEntity: globalThis?.drupalSettings?.canvasData?.v0?.mainEntity || null,
+  };
+  globalThis?.window?.parent.postMessage({
+    type: '_canvas_useswr_data_fetch',
+    id: 'getPageData()',
+    data: pageData,
+  });
+  return pageData;
+};
+
+/**
+ * Reads the site data from `drupalSettings`.
+ *
+ * Supported in Drupal-rendered Code Components and Canvas Workbench previews
+ * only; elsewhere it throws an actionable migration error.
+ *
+ * @deprecated Use `useSiteContext()` in React Code Components, or read
+ *   `page.context.site` from the Headless SDK's page response outside
+ *   components.
+ */
+export const getSiteData = (): SiteData => {
+  assertLegacyRuntime('getSiteData()');
+  const siteData = {
+    branding: globalThis?.drupalSettings?.canvasData?.v0?.branding || {
+      homeUrl: '',
+      siteName: '',
+      siteSlogan: '',
+    },
+    baseUrl: globalThis?.drupalSettings?.canvasData?.v0?.baseUrl || '/',
+    themeAssets: globalThis?.drupalSettings?.canvasData?.v0?.themeAssets || {
+      logo: { url: '' },
+      favicon: { url: '', mimeType: '' },
+    },
+  };
+  globalThis?.window?.parent.postMessage({
+    type: '_canvas_useswr_data_fetch',
+    id: 'getSiteData()',
+    data: siteData,
+  });
+  return siteData;
+};

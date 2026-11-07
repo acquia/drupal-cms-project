@@ -1,0 +1,24 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Speaker Card
+group: Molecules
+status: stable
+description: An individual speaker profile card.
+props:
+  type: object
+  properties:
+    admin_theme:
+      title: Admin Theme
+      type: boolean
+      default: false
+      description: Check to enable Admin Theme styles (applies CSS only on frontend to preserve Canvas builder look).
+slots:
+  media:
+    title: Media Slot
+    description: Slot for the speaker's photo.
+  content:
+    title: Content Slot
+    description: Slot for the speaker's name and role.
+library:
+  css:
+    component:
+      card-speaker.css: {}

@@ -1,0 +1,17 @@
+services:
+  ai_dashboard.route_subscriber:
+    class: Drupal\ai_dashboard\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
+  logger.channel.ai_dashboard:
+    parent: logger.channel_base
+    arguments: ['ai_dashboard']
+  Drupal\ai_dashboard\Hook\AiDashboardHooks:
+    class: Drupal\ai_dashboard\Hook\AiDashboardHooks
+    autowire: true
+  ai_dashboard.setup_status:
+    class: Drupal\ai_dashboard\AiSetupStatus
+    arguments: ['@ai.provider', '@config.factory', '@logger.channel.ai_dashboard']
+  plugin.manager.ai_documentation:
+    class: Drupal\ai_dashboard\AiDocumentationManager
+    arguments: ['@module_handler', '@cache.discovery']

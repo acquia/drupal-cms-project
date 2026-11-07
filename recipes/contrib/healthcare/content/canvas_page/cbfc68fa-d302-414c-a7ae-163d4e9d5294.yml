@@ -1,0 +1,228 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: cbfc68fa-d302-414c-a7ae-163d4e9d5294
+  default_langcode: en
+  depends:
+    5ec6b2ce-734e-4baf-bca3-5317a2475d7b: file
+    78e61f99-c667-4457-9235-520ccd6787b3: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Nondiscrimination Notice'
+  description:
+    -
+      value: 'Saltmarsh Island Health does not discriminate.'
+  components:
+    -
+      uuid: 09ed4c72-386f-43a2-9033-924d40d6267c
+      component_id: sdc.diagnosis.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        background: secondary
+        padding_block_start: '32'
+        padding_block_end: '32'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        image_size: '4:3'
+        image_position: right
+        image_radius: extra-large
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 78e61f99-c667-4457-9235-520ccd6787b3
+            target_type: media
+    -
+      parent_uuid: 09ed4c72-386f-43a2-9033-924d40d6267c
+      slot: hero_slot
+      uuid: 603bdbb3-d4bb-4b4b-894e-76d1b9cdcb87
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Nondiscrimination Notice'
+        level: 1
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 09ed4c72-386f-43a2-9033-924d40d6267c
+      slot: hero_slot
+      uuid: a01670d3-0b96-413c-b5b7-a18d67a555d5
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Saltmarsh Island Health does not discriminate.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: 88d7cb5b-87d3-46c6-968a-c0de423a51ee
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: 88d7cb5b-87d3-46c6-968a-c0de423a51ee
+      slot: main_slot
+      uuid: 236299ce-8bc3-429d-a95a-a8a378ee675a
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Saltmarsh Island Health complies with applicable Federal civil rights laws and does not discriminate on the basis of race, color, national origin, age, disability, or sex.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 88d7cb5b-87d3-46c6-968a-c0de423a51ee
+      slot: main_slot
+      uuid: e0864a2c-0906-40dd-b3bb-4ae50bd81e4f
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Section 1557 of the Affordable Care Act'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 88d7cb5b-87d3-46c6-968a-c0de423a51ee
+      slot: main_slot
+      uuid: 5aa6ec47-21fc-4c9b-9207-b22e79353265
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Saltmarsh Island Health does not exclude people or treat them differently because of race, color, national origin, age, disability, or sex, including sexual orientation and gender identity.</p><p>Saltmarsh Island Health:</p><ul><li data-list-item-id="eec829d7774455081709c49fe7bb4aa6d">Provides free aids and services to people with disabilities to communicate effectively with us</li><li data-list-item-id="e872da1f22a6e95e7b69293651ae584e1">Provides free language services to people whose primary language is not English</li></ul>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 88d7cb5b-87d3-46c6-968a-c0de423a51ee
+      slot: main_slot
+      uuid: b4bccecc-27cb-4692-83f3-15c8e27abd83
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Language Assistance Services'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 88d7cb5b-87d3-46c6-968a-c0de423a51ee
+      slot: main_slot
+      uuid: 84fc2f39-851f-4f8f-aca2-c1ed262f869c
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>If you speak a language other than English, language assistance services are available to you at no cost. Call (555) 123-4567.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 88d7cb5b-87d3-46c6-968a-c0de423a51ee
+      slot: main_slot
+      uuid: aea79059-b2e0-4c24-9eae-6ac9051f1bbe
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Español
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 88d7cb5b-87d3-46c6-968a-c0de423a51ee
+      slot: main_slot
+      uuid: 2e358a00-f588-4952-ace2-57bc2ef1276e
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Si habla español, tiene a su disposición servicios gratuitos de asistencia lingüística. Llame al (555) 123-4567.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 88d7cb5b-87d3-46c6-968a-c0de423a51ee
+      slot: main_slot
+      uuid: 52467add-8e6f-4855-a880-d523acf0cebc
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Português
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 88d7cb5b-87d3-46c6-968a-c0de423a51ee
+      slot: main_slot
+      uuid: a55b3740-b1c7-4727-8528-ad0269fcecbe
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Se você fala português, encontram-se disponíveis serviços linguísticos, grátis. Ligue para (555) 123-4567.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 88d7cb5b-87d3-46c6-968a-c0de423a51ee
+      slot: main_slot
+      uuid: a8529468-3af0-48b4-b312-028db054e311
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Disability Access'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 88d7cb5b-87d3-46c6-968a-c0de423a51ee
+      slot: main_slot
+      uuid: 8ec68956-182b-41f8-94a4-3330a06e6a14
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>If you need auxiliary aids or services (such as qualified sign language interpreters, written information in other formats, or assistive listening devices), please contact (555) 123-4567.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 88d7cb5b-87d3-46c6-968a-c0de423a51ee
+      slot: main_slot
+      uuid: 6b9646cd-6f18-4e6c-a642-fca0d3e8e80d
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'File a Grievance'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 88d7cb5b-87d3-46c6-968a-c0de423a51ee
+      slot: main_slot
+      uuid: 4b69c705-d673-454a-97c6-724e587bf791
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>If you believe Saltmarsh Island Health has failed to provide these services or discriminated in another way, you can file a grievance with our Civil Rights Coordinator at civilrights@saltmarshhealth.org or (555) 123-4577.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+  path:
+    -
+      alias: /nondiscrimination
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

@@ -1,0 +1,12 @@
+services:
+  altcha.secret_manager:
+    class: Drupal\altcha\SecretManager
+    arguments: ['@state']
+
+  altcha.self_hosted_solution_verification:
+    class: Drupal\altcha\SelfHostedSolutionVerification
+    arguments: [ '@altcha.secret_manager', '@keyvalue.expirable', '@datetime.time', '@lock' ]
+
+  altcha.sentinel_solution_verification:
+    class: Drupal\altcha\SentinelSolutionVerification
+    arguments: [ '@config.factory', '@keyvalue.expirable', '@datetime.time', '@lock' ]

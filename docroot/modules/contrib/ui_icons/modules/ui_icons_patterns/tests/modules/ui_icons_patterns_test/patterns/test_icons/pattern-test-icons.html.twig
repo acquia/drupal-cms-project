@@ -1,0 +1,15 @@
+<span{{ attributes }} style="border: solid 1px red; border-radius: 20px; padding: 5px; display: inline-block">
+  {% if icon1 %}
+  <div class="button__icon">{{ icon1.pack_id ~ ':' ~ icon1.icon_id }}: {{ icon(icon1.pack_id, icon1.icon_id, icon1.settings) }}</div>
+  {% endif %}
+  {% if icon1_limited %}
+  <div class="button__icon">{{ icon1_limited.pack_id ~ ':' ~ icon1_limited.icon_id }}: {{ icon(icon1_limited.pack_id, icon1_limited.icon_id, icon1_limited.settings) }}</div>
+  {% endif %}
+  <div class="button__label">{{ label }}</div>
+  {% if icon2 %}
+  <div class="button__icon">{{ icon2.pack_id ~ ':' ~ icon2.icon_id }}: {{ icon(icon2.pack_id, icon2.icon_id, icon2.settings) }}</div>
+  {% endif %}
+  {% if icon2_limited %}
+  <div class="button__icon">{{ icon2_limited.pack_id ~ ':' ~ icon2_limited.icon_id }}: {{ icon(icon2_limited.pack_id, icon2_limited.icon_id, icon2_limited.settings) }}</div>
+  {% endif %}
+</span>

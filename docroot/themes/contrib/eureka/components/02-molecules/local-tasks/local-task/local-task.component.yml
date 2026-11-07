@@ -1,0 +1,20 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Local task
+status: stable
+description: Local tasks component
+group: Eureka main components
+props:
+  type: object
+  properties:
+    local_task_text:
+      type: string
+      title: Local task text
+      description: Text of the local task
+      examples:
+        - View
+    local_task_url:
+      type: ['string', 'null']
+      title: Local task url
+      description: URL of the local task
+      examples:
+        - 'https://zoocha.com'

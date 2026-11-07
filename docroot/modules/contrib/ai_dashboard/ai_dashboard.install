@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update hooks for ai_dashboard module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function ai_dashboard_install() {
+  $project_browser_settings = \Drupal::configFactory()
+    ->getEditable('project_browser.admin_settings');
+  $enabled_sources = $project_browser_settings->get('enabled_sources');
+  // Enable AI Dashboard Recommended Source.
+  $enabled_sources['ai_dashboard_recommended'] = [
+    'uri' => 'https://git.drupalcode.org/api/v4/projects/196945/repository/files/ai_dashboard_recommended_recipes.yml/raw?ref=HEAD',
+    'ttl' => 1,
+  ];
+  $project_browser_settings->set('enabled_sources', $enabled_sources);
+  $project_browser_settings->save();
+}
