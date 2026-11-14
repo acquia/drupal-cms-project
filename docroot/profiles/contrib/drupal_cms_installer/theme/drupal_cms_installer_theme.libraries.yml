@@ -1,0 +1,35 @@
+maintenance-page:
+  css:
+    theme:
+      css/gin-variables.css: {}
+      css/fonts.css: {}
+      css/installer-styles.css: {}
+      css/add-ons.css: {}
+      css/premium-theme-helper.css: {}
+      css/buttons.css: {}
+      css/license-key-dialog.css: {}
+  js:
+    js/premium-helper.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupal.debounce
+    - core/once
+
+drupal.progress:
+  js:
+    js/progress.js: {}
+
+# Polyfills for native dialog and invoker functionality.
+# https://caniuse.com/?search=commandfor and https://caniuse.com/?search=closedby
+# We are using closedby="any" and that's the default behavior in all browsers Drupal 11 supports...except for Safari.
+# https://www.npmjs.com/package/invokers-polyfill & https://www.npmjs.com/package/dialog-closedby-polyfill
+drupal.dialog:
+  js:
+    js/invokers-polyfill.min.js:
+      attributes:
+        type: module
+      minified: true
+    js/dialog-closedby-polyfill.min.js:
+      attributes:
+        type: module
+      minified: true

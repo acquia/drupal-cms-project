@@ -1,0 +1,19 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: base/breadcrumb.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+@reference "../tailwindcss";
+
+.breadcrumbs {
+  @apply overflow-x-visible;
+
+  li + li {
+    &:before {
+      @apply mx-3 opacity-100;
+
+      border-color: var(--foreground-weak);
+    }
+  }
+}

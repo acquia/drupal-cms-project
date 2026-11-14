@@ -1,0 +1,64 @@
+{#
+/**
+ * @file
+ * space Grid component.
+ *
+ * Variables:
+ * - no_of_columns: [string] no_of_columns: none, one, two, three, four.
+ * - vertical: [string] Vertical: top, center, bottom.
+ * - horizontal: [string] Horizontal: left, center, right, space-between.
+ * - direction: [string] Horizontal: across, down.
+ * - gap: [string] Gap: none, small, medium, large.
+ * - wrap: [boolean] Wrap: wrap, nowrap.
+ * - modifier_class: [string] Additional classes.
+ */
+#}
+
+{% set gap_class = 'space-grid--gap-%s'|format(gap|default('none')) %}
+{% set vertical_class = 'space-grid--vertical-%s'|format(vertical|default('none')) %}
+{% set horizontal_class = 'space-grid--horizontal-%s'|format(horizontal|default('left')) %}
+{% set direction_class = 'space-grid--direction-%s'|format(direction|default('across')) %}
+{% set col_class = 'space-grid--col-%s'|format(no_of_columns|default('none')) %}
+{% set wrap_class = 'space-grid--wrap-%s'|format(wrap|default('wrap')) %}
+{% set margin_top = 'margin-top-%s'|format(margin_top|default('none')) %}
+{% set margin_bottom = 'margin-bottom-%s'|format(margin_bottom|default('none')) %}
+{% set col_width_class = 'space-grid--width-%s'|format(column_width|default('100')) %}
+{% set modifier_class = '%s %s %s %s %s %s %s %s %s'|format(gap_class, vertical_class, horizontal_class, direction_class, wrap_class, margin_top, margin_bottom, col_class, col_width_class, modifier_class|default('')) %}
+{% set columns = { 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'none': 0 } %}
+{% set col_count = columns[no_of_columns] %}
+
+<div class="space-grid {{ modifier_class }}" role="grid" aria-label="Content grid">
+  {% if col_count == 0 %}
+    {%- block content %}
+      {{- content -}}
+    {% endblock -%}
+  {% endif %}
+  {% if col_count > 0 %}
+    <div role="gridcell" aria-label="Column one">
+      {%- block column_one %}
+        {{- column_one -}}
+      {% endblock -%}
+    </div>
+  {% endif %}
+  {% if col_count > 1 %}
+    <div role="gridcell" aria-label="Column two">
+      {%- block column_two %}
+        {{- column_two -}}
+      {% endblock -%}
+    </div>
+  {% endif %}
+  {% if col_count > 2 %}
+    <div role="gridcell" aria-label="Column three">
+      {%- block column_three %}
+        {{- column_three -}}
+      {% endblock -%}
+    </div>
+  {% endif %}
+  {% if col_count > 3 %}
+    <div role="gridcell" aria-label="Column four">
+      {%- block column_four %}
+        {{- column_four -}}
+      {% endblock -%}
+    </div>
+  {% endif %}
+</div>

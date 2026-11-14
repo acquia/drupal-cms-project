@@ -1,0 +1,154 @@
+/**
+ * @file accordion.css
+ * Accordion SDC — Figma desktop 1-9109, mobile 1-8706.
+ * One panel per item; header (question + close) and collapsible answer.
+ */
+
+/* -----------------------------------------------------------------------------
+   Container & items
+   ----------------------------------------------------------------------------- */
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+.accordion__item {
+  background: var(--color-scheme-1-foreground, #f2f2f2);
+  border: 1px solid var(--color-scheme-1-border, rgba(2, 7, 4, 0.15));
+  border-radius: var(--radius-large, 8px);
+  overflow: hidden;
+  min-height: fit-content;
+}
+
+.accordion__item + .accordion__item {
+  margin-top: 12px;
+}
+
+/* -----------------------------------------------------------------------------
+   Header (Question row) — mobile first (Figma 1-8706): 20px/16px padding, 16px bold
+   ----------------------------------------------------------------------------- */
+.accordion__header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  padding: 16px 20px;
+  overflow: hidden;
+}
+
+.accordion__trigger {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  font-family: var(--font-sans, "DM Sans", sans-serif);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-scheme-1-text, #020704);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.accordion__trigger:hover,
+.accordion__trigger:focus-visible {
+  outline: none;
+}
+
+.accordion__trigger:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.accordion__question {
+  white-space: pre-wrap;
+}
+
+/* Close (collapse) icon — visible only when panel is open */
+.accordion__close {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: currentColor;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.accordion__item--open .accordion__close {
+  display: flex;
+}
+
+.accordion__close:hover,
+.accordion__close:focus-visible {
+  outline: none;
+}
+
+.accordion__close:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.accordion__close-icon {
+  display: block;
+  line-height: 0;
+}
+
+.accordion__close-icon svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+/* -----------------------------------------------------------------------------
+   Panel (Answer) — mobile: pb 20px, px 20px; 16px regular
+   ----------------------------------------------------------------------------- */
+.accordion__panel {
+  overflow: hidden;
+}
+
+.accordion__panel[hidden] {
+  display: none;
+}
+
+.accordion__content {
+  padding: 0 20px 20px;
+}
+
+.accordion__answer {
+  margin: 0;
+  font-family: var(--font-sans, "DM Sans", sans-serif);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-scheme-1-text, #020704);
+  max-width: 768px;
+  white-space: pre-wrap;
+}
+
+/* -----------------------------------------------------------------------------
+   Desktop (Figma 1-9109): header 24px/20px, question 18px; answer pb 24px px 24px
+   ----------------------------------------------------------------------------- */
+@media (min-width: 48rem) {
+  .accordion__header {
+    padding: 20px 24px;
+  }
+
+  .accordion__trigger {
+    font-size: 18px;
+  }
+
+  .accordion__content {
+    padding: 0 24px 24px;
+  }
+}

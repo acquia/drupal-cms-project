@@ -1,0 +1,23 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Canvas test SDC for sparkline (>1 integers between -100 and 100)
+props:
+  type: object
+  required:
+    - data
+  properties:
+    data:
+      type: array
+      title: Sparkline data
+      # Unlike the `sparkline_no_min` SDC, this explicitly requires ≥1 item via minItems: 1.
+      # This SDC is intentionally compatible with Canvas: minItems: 1 aligns
+      # perfectly with Drupal's "required means >=1 value" Field API semantics.
+      # Used in tests to verify Canvas correctly accepts minItems: 1 and enforces
+      # the constraint (value: [] produces a validation error).
+      minItems: 1
+      maxItems: 100
+      items:
+        type: integer
+        minimum: -100
+        maximum: 100
+      examples:
+        - [0, 10, 20, 30, -40, -50, 5, 7, 9]

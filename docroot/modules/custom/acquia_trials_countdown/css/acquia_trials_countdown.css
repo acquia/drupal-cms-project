@@ -1,0 +1,166 @@
+/* Trials countdown banner
+ * All selectors scoped under #trials-countdown-banner to prevent
+ * theme styles from bleeding through.
+ *
+ * The banner is position:fixed at the very top of the viewport. To keep it
+ * from covering page content or the admin chrome, JS publishes the banner's
+ * measured height as --acquia-trials-banner-height on <html>, and the rules
+ * below reserve that space declaratively. Because they are CSS calc() rules,
+ * they re-apply automatically whenever a theme or toolbar re-renders (e.g.
+ * after an AJAX form save), which the previous JS-only approach did not.
+ */
+:root {
+  --acquia-trials-banner-height: 0px;
+}
+
+#trials-countdown-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* Just above the highest known admin chrome (classic toolbar tray: 1250),
+   * but below genuinely modal dialogs so it never traps them. */
+  z-index: 1300;
+  width: 100%;
+  background-color: #FFF8E1;
+  border-bottom: 1px solid #F0E3B5;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #333;
+  box-sizing: border-box;
+}
+
+/* Generic content push: works for all front-end themes (desktop content is in
+ * normal flow) and for the classic toolbar's content region. */
+body {
+  padding-top: var(--acquia-trials-banner-height, 0px);
+}
+
+/* Offset fixed admin chrome down by the banner height. Core/Gin anchor these
+ * to the top of the viewport (top:0 / inset-block-start:0) and do not offset
+ * themselves, so we must push them. !important is required because the core
+ * rules carry high specificity; they are not themselves !important, so we win.
+ */
+
+/* Core Navigation (the default admin chrome for Drupal CMS site templates). */
+.top-bar {
+  inset-block-start: var(--acquia-trials-banner-height, 0px) !important;
+}
+
+.admin-toolbar {
+  inset-block-start: var(--acquia-trials-banner-height, 0px) !important;
+  /* Shrink the full-height sidebar so it does not overflow the viewport. */
+  block-size: calc(100vh - var(--acquia-trials-banner-height, 0px)) !important;
+}
+
+.admin-toolbar-overlay {
+  inset-block-start: var(--acquia-trials-banner-height, 0px) !important;
+}
+
+/* Gin admin theme. */
+.gin--navigation-top-bar {
+  inset-block-start: var(--acquia-trials-banner-height, 0px) !important;
+}
+
+.gin--navigation .admin-toolbar {
+  inset-block-start: var(--acquia-trials-banner-height, 0px) !important;
+  height: calc(100vh - var(--acquia-trials-banner-height, 0px)) !important;
+}
+
+/* Gin pushes content with body padding only on narrow viewports. */
+@media (max-width: 60.99em) {
+  body.gin--navigation {
+    padding-block-start: calc(var(--gin-toolbar-y-offset) + var(--acquia-trials-banner-height, 0px)) !important;
+  }
+}
+
+/* Gin sticky form-actions bar / sidebar on edit forms. This is the element
+ * behind the "covered after saving forms" report: it anchors at 54px. */
+body:has(.gin--navigation-top-bar .gin-sticky-form-actions) #gin_sidebar {
+  inset-block-start: calc(54px + var(--acquia-trials-banner-height, 0px)) !important;
+  height: calc(100% - 54px - var(--acquia-trials-banner-height, 0px)) !important;
+}
+
+/* Classic core toolbar (not the default here, but handle it defensively). */
+body.toolbar-fixed .toolbar-oriented .toolbar-bar {
+  top: var(--acquia-trials-banner-height, 0px) !important;
+}
+
+.toolbar-horizontal .toolbar-tray {
+  margin-top: var(--acquia-trials-banner-height, 0px) !important;
+}
+
+#trials-countdown-banner .trials-countdown-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 100%;
+  padding: 10px 20px;
+  gap: 16px;
+}
+
+#trials-countdown-banner .trials-countdown-text {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-width: 0;
+}
+
+#trials-countdown-banner .trials-countdown-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: #F9A825;
+}
+
+#trials-countdown-banner .trials-countdown-time {
+  font-weight: 700;
+  white-space: nowrap;
+  color: #333;
+}
+
+#trials-countdown-banner .trials-countdown-desc {
+  color: #333;
+}
+
+#trials-countdown-banner a.trials-countdown-cta {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding: 6px 16px;
+  background-color: #1D70B8;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+#trials-countdown-banner a.trials-countdown-cta:hover,
+#trials-countdown-banner a.trials-countdown-cta:focus {
+  background-color: #145A8E;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 600px) {
+  #trials-countdown-banner .trials-countdown-inner {
+    flex-direction: column;
+    text-align: center;
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  #trials-countdown-banner .trials-countdown-text {
+    justify-content: center;
+  }
+
+  #trials-countdown-banner a.trials-countdown-cta {
+    align-self: center;
+  }
+}

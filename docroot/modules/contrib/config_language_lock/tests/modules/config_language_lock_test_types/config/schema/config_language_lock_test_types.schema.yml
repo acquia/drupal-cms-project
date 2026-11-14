@@ -1,0 +1,23 @@
+config_language_lock_test_types.always_valid.*:
+  type: config_entity
+  label: 'Lock test always valid'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    id:
+      type: machine_name
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+
+config_language_lock_test_types.maybe_invalid.*:
+  type: config_entity
+  label: 'Lock test maybe invalid'
+  mapping:
+    id:
+      type: machine_name
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'

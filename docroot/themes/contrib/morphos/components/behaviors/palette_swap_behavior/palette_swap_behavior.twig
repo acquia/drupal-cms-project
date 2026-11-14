@@ -1,0 +1,37 @@
+{#
+/**
+ * @file
+ * Palette Swap Behavior component.
+ *
+ * Swaps the color palette of the parent component when it scrolls into view.
+ * Place this component in the behaviors slot.
+ */
+#}
+
+{% set is_preview = canvas_is_preview or in_preview %}
+
+{% set classes = [
+  'palette-swap-behavior',
+] %}
+
+{% set preview_classes = [
+  'color--alternate',
+  'p-2',
+  'text-center',
+  'text-sm',
+] %}
+
+{% if is_preview %}
+  <div{{ attributes.addClass(classes, preview_classes) }}>
+    Palette Swap Behavior
+  </div>
+{% else %}
+  <div{{ attributes.addClass(classes)
+    .setAttribute('role', 'presentation')
+    .setAttribute('data-palette-swap', true)
+    .setAttribute('data-palette-swap-duration', duration|default(500))
+    .setAttribute('data-palette-swap-swap', swap|default('standard'))
+    .setAttribute('data-palette-swap-threshold', threshold|default(50))
+    .setAttribute('data-behavior-media-query', media_query ? media_query : null) }}>
+  </div>
+{% endif %}

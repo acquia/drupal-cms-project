@@ -1,0 +1,44 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Icon
+group: Base
+status: stable
+props:
+  type: object
+  required:
+    - icon
+    - icon_size
+  properties:
+    icon:
+      type: object
+      title: Icon
+      description: 'An icon from the Phosphor Icons library.'
+      required:
+        - pack_id
+        - icon_id
+      properties:
+        pack_id:
+          type: string
+        icon_id:
+          type: string
+      examples:
+        - pack_id: phosphor
+          icon_id: rocket
+          settings: {}
+    icon_size:
+      type: string
+      title: Icon size
+      enum:
+        - extra-small
+        - small
+        - medium
+        - large
+        - extra-large
+      meta:enum:
+        extra-small: Extra small
+        small: Small
+        medium: Medium
+        large: Large
+        extra-large: Extra large
+      default: small
+      examples:
+        - small

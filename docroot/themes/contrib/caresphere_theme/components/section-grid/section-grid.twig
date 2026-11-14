@@ -1,0 +1,54 @@
+{#
+  Section Grid component.
+  Configurable grid with 3 slots and multiple layout options: 1 column, 3 columns, 2 columns (50/50, 66/33, 33/66).
+#}
+
+{% set layout = grid_layout|default('3_column') %}
+{% set c1_layout = column_1_layout|default('full') %}
+{% set c2_layout = column_2_layout|default('stacked') %}
+{% set c3_layout = column_3_layout|default('stacked') %}
+{% set align = alignment|default('stretch') %}
+{% set h_align = horizontal_alignment|default('stretch') %}
+{# If only one of row/column gap is set, use it for both; else use grid_gap for both when unset #}
+{% set base_gap = grid_gap|default(4) %}
+{% set row_gap_rem = (grid_row_gap|default(grid_column_gap)|default(base_gap)) * 0.5 %}
+{% set col_gap_rem = (grid_column_gap|default(grid_row_gap)|default(base_gap)) * 0.5 %}
+{% set inline_style = '--section-grid-row-gap: ' ~ row_gap_rem ~ 'rem; --section-grid-column-gap: ' ~ col_gap_rem ~ 'rem;' %}
+
+{% set container_class = is_small_container ? 'small-container' : 'custom-container' %}
+
+<div
+	class="section-grid {{ container_class }} section-grid--layout-{{ layout }} section-grid--align-{{ align }} section-grid--justify-{{ h_align }}" {{ attributes.setAttribute('style', inline_style) }}>
+
+	{# Column 1 #}
+	<div class="section-grid__col section-grid__col--{{ c1_layout }}">
+		{% block slot_1 %}
+			<div class="section-grid__empty-state">
+				<em>Drag component to Slot 1</em>
+			</div>
+		{% endblock %}
+	</div>
+
+	{# Column 2 #}
+	{% if layout != '1_column' %}
+		<div class="section-grid__col section-grid__col--{{ c2_layout }}">
+			{% block slot_2 %}
+				<div class="section-grid__empty-state">
+					<em>Drag component to Slot 2</em>
+				</div>
+			{% endblock %}
+		</div>
+	{% endif %}
+
+	{# Column 3 #}
+	{% if layout == '3_column' %}
+		<div class="section-grid__col section-grid__col--{{ c3_layout }}">
+			{% block slot_3 %}
+				<div class="section-grid__empty-state">
+					<em>Drag component to Slot 3</em>
+				</div>
+			{% endblock %}
+		</div>
+	{% endif %}
+
+</div>

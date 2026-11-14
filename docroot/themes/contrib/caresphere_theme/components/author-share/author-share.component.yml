@@ -1,0 +1,56 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Author & Share
+group: Content
+props:
+  type: object
+  properties:
+    author_media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Author avatar
+      description: "Author profile image. Shown as 56×56 circle."
+      type: object
+    author_name:
+      type: string
+      title: Author name
+      default: ""
+      examples:
+        - "Sarah Mitchell"
+    date:
+      type: string
+      title: Publish date
+      description: "e.g. 15 Mar 2024"
+      default: ""
+    read_time:
+      type: string
+      title: Read time
+      description: "e.g. 6 min read"
+      default: ""
+    share_url:
+      type: string
+      title: URL to share
+      description: "Base URL for copy and social share. Leave empty to use current page."
+      default: ""
+    link_copy_url:
+      type: string
+      title: Copy link — URL
+      description: "Dedicated URL for the copy-link button. Empty = use URL to share or current page."
+      default: ""
+    link_linkedin_url:
+      type: string
+      title: LinkedIn — URL
+      description: "Dedicated URL for the LinkedIn share button. Empty = build from URL to share."
+      default: ""
+    link_x_url:
+      type: string
+      title: X (Twitter) — URL
+      description: "Dedicated URL for the X share button. Empty = build from URL to share."
+      default: ""
+    link_facebook_url:
+      type: string
+      title: Facebook — URL
+      description: "Dedicated URL for the Facebook share button. Empty = build from URL to share."
+      default: ""
+
+libraryOverrides:
+  js:
+    author-share.js: {}

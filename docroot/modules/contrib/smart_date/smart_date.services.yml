@@ -1,0 +1,28 @@
+services:
+  smart_date.manager:
+    class: Drupal\smart_date\SmartDateManager
+  smart_date.route_subscriber:
+    class: Drupal\smart_date\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
+  smart_date_format.twig_extension:
+    class: Drupal\smart_date\TwigExtension\SmartDateFormat
+    tags:
+      - { name: twig.extension }
+
+  Drupal\smart_date\Hook\SmartDateHooks:
+    class: Drupal\smart_date\Hook\SmartDateHooks
+    autowire: true
+
+  Drupal\smart_date\Hook\SmartDateTokensHooks:
+    class: Drupal\smart_date\Hook\SmartDateTokensHooks
+    autowire: true
+    arguments:
+      $smartDateManager: '@smart_date.manager'
+      $tokenEntityMapper: '@?token.entity_mapper'
+
+  Drupal\smart_date\Hook\SmartDateViewsHooks:
+    class: Drupal\smart_date\Hook\SmartDateViewsHooks
+    autowire: true
+    arguments:
+      $fieldViewsDataProvider: '@?views.field_data_provider'

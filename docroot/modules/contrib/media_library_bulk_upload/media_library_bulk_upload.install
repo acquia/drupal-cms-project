@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for Media Library Bulk Upload.
+ */
+
+/**
+ * Normalizes the stored media types setting to a list of selected IDs.
+ *
+ * The settings form used to store the raw checkboxes values, so unselected
+ * media types were saved as "0". This made it impossible to remove the
+ * limitation by unchecking all media types.
+ */
+function media_library_bulk_upload_update_10001(): void {
+  $config = \Drupal::configFactory()->getEditable('media_library_bulk_upload.settings');
+  $media_types = $config->get('media_types') ?? [];
+  $config->set('media_types', array_values(array_filter($media_types)))->save();
+}

@@ -1,0 +1,47 @@
+{#
+/**
+ * Available variables:
+ * - breadcrumb_base_class - base classname of the wrapper.
+ * - breadcrumb_modifiers - array of modifiers to add to the base classname of the wrapper.
+ * - breadcrumb_blockname - blockname prepended to the base classname of the wrapper(s) and each component.
+ * - breadcrumb_extra_classes - array of extra classes to add to the base classes.
+ *
+ * Available blocks:
+ * - list_content_block
+ * - list_item_content_block
+ */
+#}
+
+{% set breadcrumb_base_class = 'breadcrumb' %}
+
+<nav aria-labelledby='system-breadcrumb' {{ bem(breadcrumb_base_class, breadcrumb_modifiers, breadcrumb_blockname, breadcrumb_extra_classes) }}>
+  {# Hidden menu title for screen readers #}
+  <h2 {{ bem('visually-hidden') }} id='system-breadcrumb'>{{ 'Breadcrumb trail'|t }}</h2>
+
+  {# Main breadcrumb list #}
+  {% embed "eureka:list" with {
+    list_type: 'ol',
+    list_base_class: 'list',
+    list_modifiers: ['inline'],
+    list_extra_classes: [breadcrumb_base_class ~ '__list'],
+  } %}
+    {% block list_content_block %}
+      {% for item in breadcrumb %}
+        {% embed "eureka:list-item" with {
+          list_item_extra_classes: [breadcrumb_base_class ~ '__item'],
+        } %}
+          {% block list_item_content_block %}
+            {% if item.url %}
+              {{ include("eureka:link", {
+                link_content: item.text,
+                link_url: item.url,
+              }, with_context = false) }}
+            {% else %}
+              {{ item.text }}
+            {% endif %}
+          {% endblock %}
+        {% endembed %}
+      {% endfor %}
+    {% endblock %}
+  {% endembed %}
+</nav>

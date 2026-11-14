@@ -1,0 +1,76 @@
+parameters:
+	ignoreErrors:
+		-
+			rawMessage: Variable $backend_plugin in PHPDoc tag @var does not exist.
+			count: 1
+			path: src/Plugin/Field/FieldType/GeofieldItem.php
+
+		-
+			rawMessage: Variable $geom in PHPDoc tag @var does not exist.
+			count: 1
+			path: src/Plugin/Field/FieldWidget/GeofieldBaseWidget.php
+
+		-
+			rawMessage: '\Drupal calls should be avoided in classes, use dependency injection instead'
+			count: 1
+			path: src/Plugin/GeofieldProximitySourceBase.php
+
+		-
+			rawMessage: '''
+				PHPDoc tag @throws has invalid value (\Drupal\geofield\Exception\HaversineUnavailableException;
+				  If the haversine is unavailable, due to incorrect setup definitions.): Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 165 on line 7
+			'''
+			count: 1
+			path: src/Plugin/GeofieldProximitySourceInterface.php
+
+		-
+			rawMessage: '''
+				PHPDoc tag @throws has invalid value (\Drupal\geofield\Exception\InvalidPointException;
+				  If the proximity cannot be created, due to incorrect point coordinates
+				  definition.): Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 284 on line 12
+			'''
+			count: 1
+			path: src/Plugin/GeofieldProximitySourceInterface.php
+
+		-
+			rawMessage: '''
+				PHPDoc tag @throws has invalid value (\Drupal\geofield\Exception\ProximityUnavailableException;
+				  If any other case the proximity value cannot be created correctly.): Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 457 on line 16
+			'''
+			count: 1
+			path: src/Plugin/GeofieldProximitySourceInterface.php
+
+		-
+			rawMessage: Access to an undefined property Symfony\Component\Validator\Constraint::$message.
+			count: 1
+			path: src/Plugin/Validation/Constraint/GeoConstraintValidator.php
+
+		-
+			rawMessage: Variable $source_plugin in PHPDoc tag @var does not match assigned variable $values.
+			count: 1
+			path: src/Plugin/views/argument/GeofieldProximityArgument.php
+
+		-
+			rawMessage: 'Call to an undefined method Drupal\views\Plugin\views\query\QueryPluginBase::addWhere().'
+			count: 1
+			path: src/Plugin/views/filter/GeofieldProximityFilter.php
+
+		-
+			rawMessage: 'Call to an undefined method Drupal\views\Plugin\views\query\QueryPluginBase::addWhereExpression().'
+			count: 3
+			path: src/Plugin/views/filter/GeofieldProximityFilter.php
+
+		-
+			rawMessage: 'Variable $identifier in isset() always exists and is not nullable.'
+			count: 1
+			path: src/Plugin/views/filter/GeofieldProximityFilter.php
+
+		-
+			rawMessage: Variable $source_plugin in PHPDoc tag @var does not exist.
+			count: 2
+			path: src/Plugin/views/filter/GeofieldProximityFilter.php
+
+		-
+			rawMessage: 'Variable $units_description in isset() always exists and is not nullable.'
+			count: 1
+			path: src/Plugin/views/filter/GeofieldProximityFilter.php

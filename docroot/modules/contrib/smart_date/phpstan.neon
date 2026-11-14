@@ -1,0 +1,33 @@
+parameters:
+    level: 1
+    parallel:
+        maximumNumberOfProcesses: 1
+    fileExtensions:
+        - php
+        - module
+        - inc
+        - install
+        - theme
+        - profile
+    reportUnmatchedIgnoredErrors: false
+    excludePaths:
+      -  src/Feeds/Target/SmartDate.php
+      -  src/Controller/FullCalendarController.php
+      -  src/Plugin/FullcalendarViewProcessor/SmartDateProcessor.php
+      -  src/Plugin/diff/Field/SmartdateFieldBuilder.php
+    ignoreErrors:
+        # new static() is a best practice in Drupal, so we cannot fix that.
+        - "#^Unsafe usage of new static#"
+        # This constructor has to match the signature of its core parent,
+        # DateTimeFormatterBase, which injects the date_format storage, so the
+        # parameter cannot be replaced here.
+        -
+            identifier: drupal.entityStorageDirectInjection
+            path: modules/smart_date_recur/src/Plugin/Field/FieldFormatter/SmartDateRecurrenceFormatter.php
+        # BC fallback for subclasses still passing the date_format storage.
+        # @todo Remove in 5.0.0 along with the deprecated constructor argument.
+        -
+            identifier: globalDrupalDependencyInjection.useDependencyInjection
+            path: src/Plugin/Field/FieldWidget/SmartDateDefaultWidget.php
+includes:
+    - phpstan-baseline.neon

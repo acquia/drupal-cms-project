@@ -1,0 +1,66 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Grid
+group: Layout
+status: stable
+props:
+  type: object
+  required:
+    - columns
+    - mobile_columns
+    - width
+  properties:
+    width:
+      type: string
+      title: Grid width
+      enum:
+        - "100%"
+        - "90%"
+        - "80%"
+        - "70%"
+        - "60%"
+        - "50%"
+      default: "100%"
+      examples:
+        - "100%"
+    columns:
+      type: string
+      title: Columns
+      description: Layout selected applies on desktop and tablet.
+      enum:
+        - "1 column"
+        - "2 columns"
+        - "3 columns"
+        - "4 columns"
+        - "5 columns"
+        - "6 columns"
+        - "2 columns 75%-25%"
+        - "2 columns 25%-75%"
+        - "2 columns 67%-33%"
+        - "2 columns 33%-67%"
+        - "3 columns 50%-25%-25%"
+        - "3 columns 25%-25%-50%"
+      examples:
+        - "2 columns"
+      default:
+        - "2 columns"
+    mobile_columns:
+      type: string
+      title: Columns on mobile
+      enum:
+        - "1"
+        - "2"
+        - "3"
+      examples:
+        - "1"
+    reverse_mobile:
+      type: boolean
+      title: Reverse direction on mobile
+      description: Swap the order of the first and last items on mobile.
+      examples:
+        - false
+      default:
+        - false
+
+slots:
+  main_slot:
+    title: "Grid"

@@ -1,0 +1,59 @@
+{#
+/**
+ * Available variables:
+ * - status_messages_base_class: base classname of the wrapper.
+ * - status_messages_modifiers: array of modifiers to add to the base classname of the wrapper.
+ * - status_messages_blockname: blockname prepended to the base classname of the wrapper(s) and each component.
+ * - status_messages_extra_classes: array of extra classes to add to the base classes.
+ *
+ * - status_messages_headings: checks status title.
+ * - status_messages_type: checks type of status message.
+ * - is_message_with_icon: checks type of status message.
+ * - status_messages_messages: messages content.
+ *
+ * Available blocks:
+ * - status_messages_headings_block
+ */
+#}
+
+{% set status_messages_base_class = 'status-messages' %}
+{% set is_message_with_icon = status_messages_type in ['error', 'status', 'warning'] %}
+
+<div {{ bem(status_messages_base_class, status_messages_modifiers|default([])|merge([status_messages_type]), status_messages_blockname, status_messages_extra_classes) }} role="contentinfo" aria-label="{{ status_messages_headings[status_messages_type] }}" aria-labelledby="{{ status_headings[type] }}">
+  {% if type == 'error' %}
+    <div role="alert">
+  {% endif %}
+    {% if status_messages_headings or is_message_with_icon %}
+      <div {{ bem('header', [], status_messages_base_class) }}>
+        {% if is_message_with_icon %}
+          {{ include("eureka:icon", {
+            icon_name: status_messages_type,
+            icon_decorative: true,
+          }, with_context = false) }}
+        {% endif %}
+        {% if status_messages_headings %}
+          {% block status_messages_headings_block %}
+            {{ include("eureka:heading", {
+              heading_level: status_messages_heading_level|default(2),
+              heading: status_messages_headings,
+              heading_size_override: 'xsmall',
+            }, with_context = false) }}
+          {% endblock %}
+        {% endif %}
+      </div>
+    {% endif %}
+    <div {{ bem('content', [], status_messages_base_class) }}>
+      {% if status_messages_messages|length > 1 %}
+        {{ include("eureka:list", {
+          list_modifiers: ['unstyled'],
+          list_extra_classes: [status_messages_base_class ~ '__list'],
+          list_items: status_messages_messages
+        }, with_context = false) }}
+      {% else %}
+        {{ status_messages_messages|first }}
+      {% endif %}
+    </div>
+  {% if type == 'error' %}
+    </div>
+  {% endif %}
+</div>

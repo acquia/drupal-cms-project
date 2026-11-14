@@ -1,0 +1,73 @@
+  .featured-speakers--themed .speaker-card {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    color: #ffffff;
+    height: 100%;
+    text-align: left;
+
+    .speaker-card__image-wrapper {
+      overflow: hidden;
+      margin-bottom: 24px;
+      aspect-ratio: 1 / 1;
+      width: 100%;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+        border-radius: 8px;
+      }
+    }
+
+    &:hover .speaker-card__image-wrapper img {
+      transform: scale(1.05);
+    }
+
+    .speaker-card__content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .speaker-card__name {
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 150%;
+      letter-spacing: 0%;
+      margin: 0;
+      padding: 0;
+      color: #fff;
+    }
+
+    .speaker-card__role {
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 150%;
+      letter-spacing: 0%;
+      color: #fff;
+    }
+
+    .speaker-card__description {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #B0B0B0;
+      margin-bottom: 16px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 1rem;
+    }
+
+    .speaker-card__social {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: auto;
+    }
+  }

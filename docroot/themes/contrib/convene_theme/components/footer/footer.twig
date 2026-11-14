@@ -1,0 +1,15 @@
+<footer role="contentinfo" class="site-footer">
+  {% if footer %}
+    <div class="site-footer__content">
+      {{ footer }}
+    </div>
+  {% endif %}
+
+  {% if footer_bottom %}
+    <div class="site-footer__bottom">
+      <div class="site-footer__bottom__inner">
+        {{ footer_bottom }}
+      </div>
+    </div>
+  {% endif %}
+</footer>

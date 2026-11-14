@@ -1,0 +1,134 @@
+{% set classes = ['pager', 'my-4', 'font-medium'] %}
+
+{% set ellipsis_container_classes = ['flex items-center justify-center rounded px-2 py-1.5'] %}
+
+{% if items %}
+  <nav class="{{ classes|join(' ') }}" role="navigation" aria-labelledby="{{ heading_id }}">
+    {% if pagination_heading_level == 'h1' %}
+      <h1 id="{{ heading_id }}" class="sr-only">{{ 'Pagination'|t }}</h1>
+    {% elseif pagination_heading_level == 'h2' %}
+      <h2 id="{{ heading_id }}" class="sr-only">{{ 'Pagination'|t }}</h2>
+    {% elseif pagination_heading_level == 'h3' %}
+      <h3 id="{{ heading_id }}" class="sr-only">{{ 'Pagination'|t }}</h3>
+    {% elseif pagination_heading_level == 'h4' %}
+      <h4 id="{{ heading_id }}" class="sr-only">{{ 'Pagination'|t }}</h4>
+    {% elseif pagination_heading_level == 'h5' %}
+      <h5 id="{{ heading_id }}" class="sr-only">{{ 'Pagination'|t }}</h5>
+    {% elseif pagination_heading_level == 'h6' %}
+      <h6 id="{{ heading_id }}" class="sr-only">{{ 'Pagination'|t }}</h6>
+    {% else %}
+      <h2 id="{{ heading_id }}" class="sr-only">{{ 'Pagination'|t }}</h2>
+    {% endif %}
+    <ul class="flex list-none items-center justify-center gap-1">
+      {# Print first item if we are not on the first page. #}
+      {% if items.first %}
+        <li>
+          <a href="{{ items.first.href }}" title="{{ 'Go to first page'|t }}" {{ items.first.attributes|without('href', 'title') }}>
+            <span class="sr-only">{{ 'First page'|t }}</span>
+            <span
+              aria-hidden="true"
+              class="pager__list-item text-sm whitespace-nowrap hover:underline hover:decoration-1 hover:underline-offset-3 md:text-base"
+            >
+              {{ items.first.text|default('« First'|t) }}
+            </span>
+          </a>
+        </li>
+      {% endif %}
+      {# Print previous item if we are not on the first page. #}
+      {% if items.previous %}
+        <li>
+          <a
+            href="{{ items.previous.href }}"
+            title="{{ 'Go to previous page'|t }}"
+            rel="prev"
+            class="flex items-center justify-center gap-1 rounded pe-2 lg:pe-4"
+            {{ items.previous.attributes|without('href', 'title', 'rel') }}
+          >
+            <span class="sr-only">{{ 'Previous page'|t }}</span>
+            <i class="pager__icon ph ph-caret-left flex h-6 w-6 shrink-0 items-center justify-center px-2 text-2xl leading-none lg:px-4"></i>
+            <span
+              class="pager__list-item text-sm whitespace-nowrap hover:underline hover:decoration-1 hover:underline-offset-3 md:text-base"
+              aria-hidden="true"
+            >
+              {{ items.previous.text|default('Previous'|t) }}
+            </span>
+          </a>
+        </li>
+      {% endif %}
+      {# Add an ellipsis if there are further previous pages. #}
+
+      {% if ellipses.previous %}
+        <li>
+          <span class="{{ ellipsis_container_classes|join(' ') }}" role="presentation">
+            <i class="pager__icon ph ph-caret-left h-6 w-6 shrink-0 text-2xl leading-none"></i>
+          </span>
+        </li>
+      {% endif %}
+      {# Now generate the actual pager piece. #}
+      {% for key, item in items.pages %}
+        <li>
+          {% if current == key %}
+            {% set title = 'Current page'|t %}
+            {% set page_classes = 'flex items-center justify-center aspect-square rounded px-2 lg:px-4 border border' %}
+          {% else %}
+            {% set title =
+              'Go to page @key'|t({
+                '@key': key
+              })
+            %}
+            {% set page_classes =
+              'hover:underline hover:decoration-1 hover:underline-offset-3 flex items-center justify-center aspect-square rounded px-2 lg:px-4'
+            %}
+          {% endif %}
+          <a href="{{ item.href }}" title="{{ title }}" class="{{ page_classes }}" {{ item.attributes|without('href', 'title') }}>
+            <span class="sr-only">{{ 'Page'|t }}</span>
+            <span class="pager__list-item text-sm whitespace-nowrap md:text-base">{{- key -}}</span>
+          </a>
+        </li>
+      {% endfor %}
+      {# Add an ellipsis if there are further next pages. #}
+      {% if ellipses.next %}
+        <li>
+          <span class="{{ ellipsis_container_classes|join(' ') }}" role="presentation">
+            <i class="pager__icon ph ph-caret-right h-6 w-6 shrink-0 text-2xl leading-none"></i>
+          </span>
+        </li>
+      {% endif %}
+      {# Print next item if we are not on the last page. #}
+      {% if items.next %}
+        <li>
+          <a
+            href="{{ items.next.href }}"
+            title="{{ 'Go to next page'|t }}"
+            rel="next"
+            class="flex items-center justify-center gap-1 rounded ps-2 lg:ps-4"
+            {{ items.next.attributes|without('href', 'title', 'rel') }}
+          >
+            <span class="sr-only">{{ 'Next page'|t }}</span>
+            <span
+              class="pager__list-item text-sm whitespace-nowrap hover:underline hover:decoration-1 hover:underline-offset-3 md:text-base"
+              aria-hidden="true"
+            >
+              {{ items.next.text|default('Next'|t) }}
+            </span>
+            <i class="pager__icon ph ph-caret-right flex h-6 w-6 shrink-0 items-center justify-center px-2 text-2xl leading-none lg:px-4"></i>
+          </a>
+        </li>
+      {% endif %}
+      {# Print last item if we are not on the last page. #}
+      {% if items.last %}
+        <li>
+          <a href="{{ items.last.href }}" title="{{ 'Go to last page'|t }}" {{ items.last.attributes|without('href', 'title') }}>
+            <span class="sr-only">{{ 'Last page'|t }}</span>
+            <span
+              aria-hidden="true"
+              class="pager__list-item text-sm whitespace-nowrap hover:underline hover:decoration-1 hover:underline-offset-3 md:text-base"
+            >
+              {{ items.last.text|default('Last »'|t) }}
+            </span>
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endif %}

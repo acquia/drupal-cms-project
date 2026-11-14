@@ -1,0 +1,36 @@
+/**
+ * @file
+ * JavaScript behaviors for webforms.
+ */
+
+(function ($, Drupal, once) {
+  /**
+   * Attach behaviors to trigger submit button from input onchange.
+   *
+   * @type {Drupal~behavior}
+   *
+   * @prop {Drupal~behaviorAttach} attach
+   *   Attaches form trigger submit events.
+   */
+  Drupal.behaviors.webformSubmitTrigger = {
+    attach(context) {
+      $(once('webform-trigger-submit', '[data-webform-trigger-submit]')).on(
+        'change',
+        function () {
+          const submitSelector = this.getAttribute(
+            'data-webform-trigger-submit',
+          );
+          let submitElement;
+          try {
+            submitElement = document.querySelector(submitSelector);
+          } catch (error) {
+            return;
+          }
+          if (submitElement) {
+            $(submitElement).trigger('mousedown');
+          }
+        },
+      );
+    },
+  };
+})(jQuery, Drupal, once);

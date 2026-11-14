@@ -1,0 +1,51 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Teaser Big
+status: stable
+group: Display
+description: A featured content preview with a large footprint, used to highlight primary news or pages.
+props:
+  type: object
+  properties:
+    info:
+      title: Info
+      description: Info text that describes the type or category of the item.
+      type: string
+    date:
+      type:
+        - string
+        - 'null'
+      title: Date
+      description: The most relevant date for the item.
+    heading:
+      title: Heading
+      description: The heading content.
+      type: string
+      examples:
+        - Teaser - Big heading
+    heading_level:
+      type: number
+      title: Heading level
+      description: Select the heading level.
+      enum: [1, 2, 3, 4, 5, 6]
+      default: 3
+    url:
+      title: URL
+      description: The URL of the item.
+      type: string
+    summary:
+      title: Summary
+      description: Summary text describing the item.
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - <p>Teaser - Big summary.</p>
+    image:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Image
+      description: Image depicting the item.
+      type: object
+libraryOverrides:
+  css:
+    component:
+      ../../../dist/css/teaser_big.css: { minified: true }

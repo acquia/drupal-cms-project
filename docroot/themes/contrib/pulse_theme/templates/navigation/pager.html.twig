@@ -1,0 +1,10 @@
+{# Include Space Pagination component #}
+{% include 'pulse_theme:space-pagination' with {
+  items: items|default({}),
+  current: current|default(1),
+  ellipses: ellipses|default({}),
+  type: 'card-default',
+  shape: 'rounded-full',
+  color: 'lightColor'
+} only %}
+

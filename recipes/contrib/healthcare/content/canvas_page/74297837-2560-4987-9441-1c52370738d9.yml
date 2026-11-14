@@ -1,0 +1,110 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 74297837-2560-4987-9441-1c52370738d9
+  default_langcode: en
+  depends:
+    24929179-dd4a-4a38-805a-bab3e0a48315: file
+    40684f60-ab1e-4dd2-b1f1-a68077eb0975: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Locations
+  description:
+    -
+      value: 'Convenient locations across Saltmarsh Island to serve you better.'
+  components:
+    -
+      uuid: 7add7bf7-90ef-499f-a0b2-2c21f81e01b6
+      component_id: sdc.diagnosis.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        background: secondary
+        padding_block_start: '32'
+        padding_block_end: '32'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        image_size: '4:3'
+        image_position: right
+        image_radius: extra-large
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 40684f60-ab1e-4dd2-b1f1-a68077eb0975
+            target_type: media
+    -
+      parent_uuid: 7add7bf7-90ef-499f-a0b2-2c21f81e01b6
+      slot: hero_slot
+      uuid: 37e3f770-6b15-4ca5-9e67-7331cc0acf37
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Our Locations'
+        level: 1
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 7add7bf7-90ef-499f-a0b2-2c21f81e01b6
+      slot: hero_slot
+      uuid: 86272905-c846-4e00-a924-5d91d8810cea
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Convenient locations across Saltmarsh Island to serve you better.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: 0f69a9af-4fed-48ba-80cf-342a10ba3cfe
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+        views_columns: 25-25-25-25
+    -
+      parent_uuid: 0f69a9af-4fed-48ba-80cf-342a10ba3cfe
+      slot: main_slot
+      uuid: f54d98bf-3dda-466a-84ee-d545ec7c25e9
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Saltmarsh Island Health operates four facilities across the island, ensuring you have access to quality healthcare close to home. All locations offer ample parking, are ADA accessible, and are served by public transit.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 0f69a9af-4fed-48ba-80cf-342a10ba3cfe
+      slot: main_slot
+      uuid: 1d440eee-1e1f-435f-b631-afc6a8c25319
+      component_id: block.views_block.locations_all-block_1
+      inputs:
+        label: Locations
+        label_display: '0'
+        views_label: 'Our Locations'
+        items_per_page: 4
+  path:
+    -
+      alias: /locations
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

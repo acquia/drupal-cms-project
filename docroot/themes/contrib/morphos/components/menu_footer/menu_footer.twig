@@ -1,0 +1,39 @@
+{%
+  set base_classes = [
+    'menu-footer',
+    'grid',
+    'grid-cols-1',
+    'sm:grid-cols-2',
+    'lg:grid-cols-4',
+    'gap-8',
+  ]|merge(footer_menu_classes ?: [])
+%}
+
+<div class="{{ base_classes|join(' ') }}" {{ attributes }}>
+  {% if items %}
+    {% for item in items %}
+      <div>
+        {# Detect nolink items for column headers #}
+        {% if item.url.isRouted and item.url.routeName == '<nolink>' %}
+          <h3>
+            {{ item.title }}
+          </h3>
+        {% else %}
+          <h3>
+            {{ link(item.title, item.url) }}
+          </h3>
+        {% endif %}
+
+        {% if item.below %}
+          <ul class="list-none flex flex-col gap-2 ps-0">
+            {% for child in item.below %}
+              <li>
+                {{ link(child.title, child.url) }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>

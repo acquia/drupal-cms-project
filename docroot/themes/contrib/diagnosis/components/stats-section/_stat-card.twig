@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * Private partial for individual stat cards.
+ * Not a standalone SDC - only used within stats-section.
+ *
+ * Available variables:
+ * - value: The stat value (string)
+ * - label: The stat label (string)
+ * - background: Background variant (default|accent|primary|inverted)
+ * - rounded: Whether to apply rounded corners (boolean)
+ */
+#}
+{% set card_background = background|default('default') %}
+{% set card_rounded = rounded|default(true) %}
+
+<div class="stat-card card {{ card_rounded ? 'card--rounded' }} card--bg-{{ card_background }}">
+  <div class="stat-card__content">
+    <div class="stat-card__value">
+      {{ value }}
+    </div>
+    <div class="stat-card__label">
+      {{ label }}
+    </div>
+  </div>
+</div>

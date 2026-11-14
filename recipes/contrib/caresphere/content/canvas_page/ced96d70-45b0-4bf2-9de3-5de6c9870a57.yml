@@ -1,0 +1,453 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: ced96d70-45b0-4bf2-9de3-5de6c9870a57
+  default_langcode: en
+  depends:
+    b61479f7-f97f-4993-b937-a8877fe51424: file
+    ead7c0ea-588c-47f3-8b7b-a6ac4d07187d: media
+    cc3af746-8476-4dc7-a1d2-4f2689a2e438: file
+    29ea4949-4be2-4ee6-ac68-14e55af27138: media
+    482521a4-de88-4213-afbe-6fd24ac34371: file
+    2e293bc3-9c1a-478d-a538-273c39c0a4a6: media
+    7db5e293-c848-4872-b84f-cf0be36846ae: file
+    165b1528-fc92-4269-86c0-6fe6b15f6420: media
+    e44846eb-708a-496c-91cb-4c2e009c1252: file
+    b0df0371-fffb-4918-a837-8d0ed8459f41: media
+    79afa1bb-112a-42f4-bdbc-19305d28f794: file
+    74e2fcb3-a8e2-464d-9206-5690b601639f: media
+    bee82fc3-b947-46db-afc0-477bdc1472ed: file
+    df68e56a-0368-4cce-bb4d-767c642b8c83: media
+    bf2aa177-88cf-42ab-a256-103c96e6042f: file
+    f072b133-9ccf-41c5-812b-1b486722b9c8: media
+    0a06e8a7-7954-42fa-9770-18b365ca4153: file
+    153d0922-a446-4a2e-abf3-f9ac43faff9b: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Programs
+  components:
+    -
+      uuid: 12ac7f15-fdbc-4fbb-8cba-8433b36e3909
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        alignment: center
+        paddingtop: 14
+        marginbottom: 0
+        paddingbottom: 14
+        backgroundcolor: black
+        background_image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: ead7c0ea-588c-47f3-8b7b-a6ac4d07187d
+            target_type: media
+        use_custom_container: false
+    -
+      parent_uuid: 12ac7f15-fdbc-4fbb-8cba-8433b36e3909
+      slot: content
+      uuid: 0b7e5079-560b-436d-b27e-77205eb9d56d
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: 'What we do'
+          format: canvas_html_inline
+        tagline: Action
+        textcolor: light
+        description: 'Community Impact Network runs focused programs designed to create lasting change where it matters most.'
+        heading_level: 1
+    -
+      parent_uuid: 0b7e5079-560b-436d-b27e-77205eb9d56d
+      slot: ctas
+      uuid: 570fb1f1-3668-4286-999b-6f0b9797333a
+      component_id: sdc.caresphere_theme.button
+      inputs:
+        href: /about
+        size: medium
+        label: Explore
+        variant: primary
+        disabled: false
+        icon_first: false
+        mobile_width: false
+        border_radius: default
+    -
+      uuid: 8d47117d-7bcf-4fb5-8609-307c85ed172a
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        alignment: center
+        margintop: 14
+        marginbottom: 0
+        use_custom_container: true
+    -
+      parent_uuid: 8d47117d-7bcf-4fb5-8609-307c85ed172a
+      slot: content
+      uuid: 27bdd847-0d93-4864-97a6-6e9eeb037721
+      component_id: sdc.caresphere_theme.heading
+      inputs:
+        align: center
+        level: 3
+        text_size: heading-responsive-xl
+        text_color: primary
+        heading_text: 'Supporting communities, transforming lives'
+    -
+      uuid: 09e93221-7173-4a85-85af-585cbacd16ff
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        paddingtop: 10
+        marginbottom: 0
+        paddingbottom: 14
+        use_custom_container: false
+    -
+      parent_uuid: 09e93221-7173-4a85-85af-585cbacd16ff
+      slot: content
+      uuid: 2c508780-a52e-48f4-8361-2f1af5e5ef1c
+      component_id: sdc.caresphere_theme.slider
+      inputs:
+        loop: true
+        autoplay: false
+        show_arrows: true
+        autoplay_delay: 2000
+        show_pagination: true
+    -
+      parent_uuid: 2c508780-a52e-48f4-8361-2f1af5e5ef1c
+      slot: slides
+      uuid: aa01716b-0972-49c5-a891-3a979d60f204
+      component_id: sdc.caresphere_theme.image
+      inputs:
+        size: '1:1'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 29ea4949-4be2-4ee6-ac68-14e55af27138
+            target_type: media
+        radius: small
+        caption: 'Together, we build stronger communities.'
+        border_radius: 8
+    -
+      parent_uuid: 2c508780-a52e-48f4-8361-2f1af5e5ef1c
+      slot: slides
+      uuid: b6e94f01-9eff-4d19-b781-7fff5d28da6b
+      component_id: sdc.caresphere_theme.image
+      inputs:
+        size: '1:1'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 2e293bc3-9c1a-478d-a538-273c39c0a4a6
+            target_type: media
+        radius: small
+        caption: 'Education is the foundation of change.'
+        border_radius: 8
+    -
+      parent_uuid: 2c508780-a52e-48f4-8361-2f1af5e5ef1c
+      slot: slides
+      uuid: eb280743-8589-47eb-bd22-70e965d3b119
+      component_id: sdc.caresphere_theme.image
+      inputs:
+        size: '1:1'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 165b1528-fc92-4269-86c0-6fe6b15f6420
+            target_type: media
+        caption: 'Protecting our planet for future generations.'
+        border_radius: 8
+    -
+      parent_uuid: 2c508780-a52e-48f4-8361-2f1af5e5ef1c
+      slot: slides
+      uuid: 9ebdfc73-4533-4cf5-a122-beb4e1fb0b41
+      component_id: sdc.caresphere_theme.image
+      inputs:
+        size: '1:1'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: b0df0371-fffb-4918-a837-8d0ed8459f41
+            target_type: media
+        radius: small
+        caption: 'No one should sleep hungry.'
+        border_radius: 8
+    -
+      parent_uuid: 2c508780-a52e-48f4-8361-2f1af5e5ef1c
+      slot: slides
+      uuid: 19311e3d-655c-411f-a75b-807869b1c12e
+      component_id: sdc.caresphere_theme.image
+      inputs:
+        size: '1:1'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 74e2fcb3-a8e2-464d-9206-5690b601639f
+            target_type: media
+        radius: small
+        caption: 'Empowering lives through skills.'
+        border_radius: 8
+    -
+      parent_uuid: 2c508780-a52e-48f4-8361-2f1af5e5ef1c
+      slot: slides
+      uuid: 0073b328-9464-4141-9548-bc0d381dae81
+      component_id: sdc.caresphere_theme.image
+      inputs:
+        size: '1:1'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: df68e56a-0368-4cce-bb4d-767c642b8c83
+            target_type: media
+        radius: small
+        caption: 'Be the change you want to see.'
+        border_radius: 8
+    -
+      uuid: f6ab85d1-a936-4205-b9ca-17bca2cfdc68
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        alignment: center
+        paddingtop: 14
+        marginbottom: 0
+        paddingbottom: 10
+        backgroundcolor: dark-gray
+        use_custom_container: false
+    -
+      parent_uuid: f6ab85d1-a936-4205-b9ca-17bca2cfdc68
+      slot: content
+      uuid: f7e3e605-abc9-4e14-adc3-750b3cf6b1d3
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: 'Our core initiatives'
+          format: canvas_html_inline
+        tagline: Programs
+        textcolor: light
+        description: 'Each program addresses real needs in our community.'
+        heading_level: 2
+    -
+      uuid: ebe50929-818b-4ec4-9769-2ee0d0d831b5
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        alignment: left
+        marginbottom: 0
+        paddingbottom: 14
+        backgroundcolor: dark-gray
+        use_custom_container: false
+    -
+      parent_uuid: ebe50929-818b-4ec4-9769-2ee0d0d831b5
+      slot: content
+      uuid: ff500c4c-4656-4dba-ab7b-dce21c4c4242
+      component_id: sdc.caresphere_theme.section-grid
+      inputs:
+        grid_gap: 4
+        column_1_layout: full
+        column_2_layout: full
+        column_3_layout: full
+    -
+      parent_uuid: ff500c4c-4656-4dba-ab7b-dce21c4c4242
+      slot: slot_1
+      uuid: e38c4e65-6102-43ab-8d63-2883b321af6b
+      component_id: sdc.caresphere_theme.card-icon
+      inputs:
+        text: 'Community support and development'
+        cta_url: /about
+        cta_icon: caret-right
+        cta_size: small
+        cta_label: Learn
+        icon_size: large
+        tile_size: square
+        icon_align: left
+        text_align: left
+        cta_variant: secondary-dark
+        description:
+          value: '<p>We work directly with neighborhoods to strengthen local connections.</p>'
+          format: canvas_html_block
+        border_radius: medium
+        backgroundcolor: black
+    -
+      parent_uuid: ff500c4c-4656-4dba-ab7b-dce21c4c4242
+      slot: slot_2
+      uuid: c32857f8-3c5b-467c-aea7-dd8f4428a30f
+      component_id: sdc.caresphere_theme.card-icon
+      inputs:
+        url: /about
+        text: 'Education and opportunity programs'
+        cta_url: /about
+        cta_icon: caret-right
+        cta_size: small
+        cta_label: Learn
+        icon_size: large
+        tile_size: square
+        icon_align: left
+        text_align: left
+        cta_variant: secondary-dark
+        description:
+          value: '<p>Access to learning resources opens doors for those seeking growth.</p>'
+          format: canvas_html_block
+        border_radius: medium
+        backgroundcolor: black
+    -
+      parent_uuid: ff500c4c-4656-4dba-ab7b-dce21c4c4242
+      slot: slot_3
+      uuid: a6eb32ee-7161-4dd9-bba5-fb069c86d1c0
+      component_id: sdc.caresphere_theme.card-icon
+      inputs:
+        text: 'Health and wellness initiatives'
+        cta_url: /about
+        cta_icon: caret-right
+        cta_size: small
+        cta_label: Learn
+        icon_size: large
+        tile_size: square
+        icon_align: left
+        text_align: left
+        cta_variant: secondary-dark
+        description:
+          value: '<p>We believe healthy communities start with accessible care and support.</p>'
+          format: canvas_html_block
+        border_radius: medium
+        backgroundcolor: black
+    -
+      uuid: dc5c78f2-0c52-45f0-b5c6-f91974d320d6
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        alignment: center
+        margintop: 14
+        marginbottom: 10
+        use_custom_container: false
+    -
+      parent_uuid: dc5c78f2-0c52-45f0-b5c6-f91974d320d6
+      slot: content
+      uuid: 50b6934b-45b4-49ab-b56b-654f95660270
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: 'How we work'
+          format: canvas_html_inline
+        tagline: Impact
+        description: 'Three focused areas drive our mission forward.'
+        heading_level: 2
+    -
+      uuid: e517cd70-8c38-4edd-81fd-9efe5007b171
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        marginbottom: 14
+        use_custom_container: false
+    -
+      parent_uuid: e517cd70-8c38-4edd-81fd-9efe5007b171
+      slot: content
+      uuid: 9005bd76-d7d1-4f8c-a3f8-5cc81d8b89ea
+      component_id: sdc.caresphere_theme.pillar-cards
+      inputs:
+        card_1_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: f072b133-9ccf-41c5-812b-1b486722b9c8
+            target_type: media
+        card_2_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: f072b133-9ccf-41c5-812b-1b486722b9c8
+            target_type: media
+        card_3_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: f072b133-9ccf-41c5-812b-1b486722b9c8
+            target_type: media
+        card_1_heading: 'Neighborhood strengthening'
+        card_2_heading: 'Skills and economic pathways'
+        card_3_heading: 'Wellbeing and preventive care'
+        card_1_description:
+          value: 'Building trust and connection within local communities.'
+          format: canvas_html_block
+        card_1_primary_url: /impact
+        card_2_description:
+          value: 'Training and resources that lead to real opportunity.'
+          format: canvas_html_block
+        card_3_description:
+          value: 'Supporting physical and mental health across neighborhoods.'
+          format: canvas_html_block
+        card_1_primary_label: Explore
+        card_2_secondary_url: /news
+        card_3_secondary_url: /news
+        card_2_secondary_label: Learn
+        card_3_secondary_label: Learn
+    -
+      uuid: b58f2169-cea5-496b-a747-c5720ce91bd2
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        alignment: center
+        paddingtop: 14
+        marginbottom: 0
+        paddingbottom: 10
+        backgroundcolor: black
+        use_custom_container: false
+    -
+      parent_uuid: b58f2169-cea5-496b-a747-c5720ce91bd2
+      slot: content
+      uuid: 292425c4-634a-491c-a85e-5ad6a27a8754
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: 'Join us in building change'
+          format: canvas_html_inline
+        textcolor: light
+        description: 'Your support creates opportunity and strengthens the community we serve together.'
+        heading_level: 2
+    -
+      parent_uuid: 292425c4-634a-491c-a85e-5ad6a27a8754
+      slot: ctas
+      uuid: 508b6cd8-2e84-4d6d-85c8-c10a6e727d68
+      component_id: sdc.caresphere_theme.button
+      inputs:
+        href: 'https://easebuzz.in/demo'
+        size: medium
+        label: Donate
+        variant: primary
+        disabled: false
+        icon_first: false
+        mobile_width: false
+        border_radius: default
+    -
+      parent_uuid: 292425c4-634a-491c-a85e-5ad6a27a8754
+      slot: ctas
+      uuid: 9af1c0b0-b70d-4f5a-84a3-ffbafff19a06
+      component_id: sdc.caresphere_theme.button
+      inputs:
+        href: /get-involved
+        size: medium
+        label: 'Get involved'
+        variant: secondary-white
+        disabled: false
+        icon_first: false
+        mobile_width: false
+        border_radius: default
+    -
+      uuid: 925333c2-5757-4976-92eb-a508d4dda876
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        marginbottom: 0
+        paddingbottom: 14
+        backgroundcolor: black
+        use_custom_container: false
+    -
+      parent_uuid: 925333c2-5757-4976-92eb-a508d4dda876
+      slot: content
+      uuid: 9a0af66f-09fb-49b1-adea-82cc9cd91614
+      component_id: sdc.caresphere_theme.section-grid
+      inputs:
+        grid_layout: 1_column
+    -
+      parent_uuid: 9a0af66f-09fb-49b1-adea-82cc9cd91614
+      slot: slot_1
+      uuid: 7addb770-c389-4ba2-bc3d-32b920337e19
+      component_id: sdc.caresphere_theme.image
+      inputs:
+        size: '16:9'
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 153d0922-a446-4a2e-abf3-f9ac43faff9b
+            target_type: media
+        radius: small
+        border_radius: 8
+  path:
+    -
+      alias: /programs
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

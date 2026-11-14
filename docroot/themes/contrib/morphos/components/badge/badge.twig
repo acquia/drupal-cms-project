@@ -1,0 +1,28 @@
+{% set classes = [
+  'badge',
+  color ? color : 'badge-default',
+  style,
+  size,
+] %}
+
+{% set is_icon_start =
+  icon_position == 'icon-position--start'
+  or not icon_position
+  ? true : false %}
+
+{% set icon_element %}
+  {% if icon %}
+    {{ include('morphos:icon', {
+      icon,
+      icon_size: 'icon-size--xs',
+    },
+      with_context: false
+    ) }}
+  {% endif %}
+{% endset %}
+
+<span{{ attributes.addClass(classes) }}>
+  {{ is_icon_start ? icon_element }}
+  {{ label }}
+  {{ not is_icon_start ? icon_element }}
+</span>

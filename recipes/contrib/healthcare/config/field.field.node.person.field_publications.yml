@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_publications
+    - node.type.person
+  module:
+    - text
+id: node.person.field_publications
+field_name: field_publications
+entity_type: node
+bundle: person
+label: 'Publications & Achievements'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

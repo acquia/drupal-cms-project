@@ -1,0 +1,92 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Button
+group: Base
+status: stable
+props:
+  type: object
+  required:
+    - variant
+    - size
+  properties:
+    variant:
+      type: string
+      title: Style
+      enum:
+        - primary
+        - secondary
+        - primary-inverted
+        - secondary-inverted
+      meta:enum:
+        primary: Primary
+        secondary: Secondary
+        primary-inverted: Primary inverted
+        secondary-inverted: Secondary inverted
+      examples:
+        - primary
+    label:
+      type: string
+      title: Label
+      default: "Button label"
+      examples:
+        - "Button label"
+    href:
+      type: string
+      title: Link
+      format: uri-reference
+    target:
+      type: string
+      title: Link target
+      enum:
+        - _self
+        - _blank
+      meta:enum:
+        _self: Same window
+        _blank: New tab (external)
+      examples:
+        - _self
+    size:
+      type: string
+      title: Button size
+      enum:
+        - small
+        - medium
+        - large
+      meta:enum:
+        small: Small
+        medium: Medium
+        large: Large
+      examples:
+        - medium
+    icon:
+      type: object
+      title: Icon
+      description: 'An icon from the Phosphor Icons library. Suggested icons: arrow-right, arrow-left, caret-right, caret-left, download, user-plus.'
+      required:
+        - pack_id
+        - icon_id
+      properties:
+        pack_id:
+          type: string
+        icon_id:
+          type: string
+      examples:
+        - pack_id: phosphor
+          icon_id: arrow-right
+          settings: {}
+    mobile_width:
+      type: boolean
+      title: Full width on mobile
+      default: false
+    icon_first:
+      type: boolean
+      title: Display icon first
+      default: false
+      examples:
+        - false
+    disabled:
+      type: boolean
+      title: Disabled
+      default: false
+      examples:
+        - false
+        - true

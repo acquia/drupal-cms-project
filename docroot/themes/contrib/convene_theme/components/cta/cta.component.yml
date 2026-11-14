@@ -1,0 +1,27 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: CTA (Call To Action)
+group: Organisms
+status: stable
+description: Centered call-to-action block with a full width dark blue background and action button slot.
+props:
+  type: object
+  properties:
+    admin_theme:
+      title: Admin Theme
+      type: boolean
+      default: false
+      description: Check to enable Admin Theme styles.
+    eyebrow:
+      title: Eyebrow (e.g., 'Simple')
+      type: string
+    title:
+      title: Main Text (e.g., 'Your registration is handled securely...')
+      type: string
+slots:
+  action:
+    title: Action Slot
+    description: Slot for primary and secondary action buttons.
+library:
+  css:
+    component:
+      cta.css: {}

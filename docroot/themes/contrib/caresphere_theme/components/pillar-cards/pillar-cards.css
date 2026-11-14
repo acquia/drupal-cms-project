@@ -1,0 +1,164 @@
+/**
+ * @file pillar-cards.css
+ * Pillar cards — Figma 1:10066 (desktop), 1:9826 (mobile).
+ *
+ * Desktop: row, gap 32px; first card featured (640px width, 48px padding, H3);
+ *          other cards flex-equal, 24px padding, H5.
+ * Mobile:  column stack, gap 32px; all cards full width, 24px padding.
+ * Tokens:  --card, --border, --radius, --font-serif, --font-sans, --card-foreground.
+ */
+
+.pillar-cards {
+  width: 100%;
+}
+
+.pillar-cards__row {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 8); /* 32px */
+  align-items: stretch;
+  width: 100%;
+}
+
+@media (min-width: 64rem) {
+  .pillar-cards__row {
+    flex-direction: row;
+    align-items: stretch;
+  }
+}
+
+.pillar-cards__card {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.pillar-cards__card--featured {
+  padding: calc(var(--spacing) * 6); 
+}
+
+@media (min-width: 64rem) {
+  .pillar-cards__card:not(.pillar-cards__card--featured) {
+    flex: 1 1 0;
+    min-height: 0;
+    padding: calc(var(--spacing) * 6); 
+  }
+
+  .pillar-cards__card--featured {
+    flex: 0 0 640px;
+    padding: calc(var(--spacing) * 12); /* 48px desktop */
+  }
+}
+
+.pillar-cards__content {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 6); /* 24px */
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+
+.pillar-cards__card--featured .pillar-cards__content {
+  gap: calc(var(--spacing) * 8); /* 32px on featured */
+}
+
+.pillar-cards__top {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 5); /* 20px mobile */
+  width: 100%;
+}
+
+.pillar-cards__card--featured .pillar-cards__top {
+  gap: calc(var(--spacing) * 6); /* 24px featured */
+}
+
+.pillar-cards__icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.pillar-cards__icon span,
+.pillar-cards__icon img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.pillar-cards__text {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 2); /* 8px between heading and description for standard */
+  width: 100%;
+  color: var(--card-foreground);
+}
+
+.pillar-cards__card--featured .pillar-cards__text {
+  gap: calc(var(--spacing) * 6); /* 24px for featured */
+}
+
+/* Heading H3 — 44px, line-height 1.2, letter-spacing -0.44px (Figma Text Sizes/Heading 3) */
+.pillar-cards__heading--h3 {
+  font-family: var(--font-serif);
+  font-size: 2.5rem; /* 40px mobile */
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.44px;
+  margin: 0;
+}
+
+@media (min-width: 48rem) {
+  .pillar-cards__heading--h3 {
+    font-size: 2.75rem; /* 44px */
+  }
+}
+
+/* Heading H5 — 28px, line-height 1.4, letter-spacing -0.28px (Figma Text Sizes/Heading 5) */
+.pillar-cards__heading--h5 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem; /* 24px mobile */
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.28px;
+  margin: 0;
+}
+
+@media (min-width: 48rem) {
+  .pillar-cards__heading--h5 {
+    font-size: 1.75rem; /* 28px */
+  }
+}
+
+.pillar-cards__description {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+  color: var(--card-foreground);
+}
+
+.pillar-cards__description p {
+  margin: 0 0 0.5em;
+}
+
+.pillar-cards__description p:last-child {
+  margin-bottom: 0;
+}
+
+.pillar-cards__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--spacing) * 6); /* 24px */
+  align-items: center;
+  margin-top: 0;
+}

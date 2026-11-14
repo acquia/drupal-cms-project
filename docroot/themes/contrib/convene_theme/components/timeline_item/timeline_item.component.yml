@@ -1,0 +1,24 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Timeline Item
+group: Molecules
+status: stable
+description: A single item in a timeline with a date/time, title, and description.
+props:
+  type: object
+  properties:
+    time:
+      title: Time / Date
+      type: string
+      description: The time or date of the event (e.g. "Today", "Next week").
+    title:
+      title: Title
+      type: string
+      description: The title of the event.
+    description:
+      title: Description
+      type: string
+      description: A short description of the event.
+library:
+  css:
+    component:
+      timeline_item.css: {}

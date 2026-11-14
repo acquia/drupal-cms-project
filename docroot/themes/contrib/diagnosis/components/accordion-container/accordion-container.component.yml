@@ -1,0 +1,14 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Accordion container
+description: A container for any content, only one of whose accordions may be open at a time.
+group: Layout
+props:
+  type: object
+  properties: {}
+slots:
+  accordion_content:
+    title: Accordion content
+    description: Only one of collapsible sections added can be open at a time.
+libraryOverrides:
+  js:
+    accordion-container.js: { attributes: { type: module } }

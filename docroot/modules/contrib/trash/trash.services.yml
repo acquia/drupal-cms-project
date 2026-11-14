@@ -1,0 +1,102 @@
+services:
+  _defaults:
+    autowire: true
+
+  trash.manager:
+    class: Drupal\trash\TrashManager
+  Drupal\trash\TrashManagerInterface: '@trash.manager'
+
+  trash.entity_purger:
+    class: Drupal\trash\TrashEntityPurger
+    arguments: ['@entity_type.manager', '@trash.manager', '@config.factory', '@datetime.time', '@queue', '@settings']
+  Drupal\trash\TrashEntityPurger: '@trash.entity_purger'
+
+  trash.config_subscriber:
+    class: Drupal\trash\EventSubscriber\TrashConfigSubscriber
+    arguments: ['@entity_type.manager', '@trash.manager', '@entity.last_installed_schema.repository', '@router.builder', '@kernel']
+    tags:
+      - { name: event_subscriber }
+
+  trash.entity_schema_subscriber:
+    class: Drupal\trash\EventSubscriber\TrashEntitySchemaSubscriber
+    arguments: ['@trash.manager', '@config.factory']
+    tags:
+      - { name: event_subscriber }
+
+  trash.ignore_subscriber:
+    class: Drupal\trash\EventSubscriber\TrashIgnoreSubscriber
+    tags:
+      - { name: event_subscriber }
+
+  trash.route_subscriber:
+    class: Drupal\trash\Routing\RouteSubscriber
+    arguments: ['@entity_type.manager', '@trash.manager']
+    tags:
+      - { name: event_subscriber }
+
+  trash.route_processor:
+    class: Drupal\trash\RouteProcessor\TrashRouteProcessor
+    tags:
+      - { name: route_processor_outbound }
+
+  trash.uninstall_validator:
+    class: Drupal\trash\TrashUninstallValidator
+    arguments: ['@entity_type.manager', '@trash.manager']
+    # todo: Enable autoconfigure and remove tag and lazy once we drop d10 support.
+    # See https://www.drupal.org/project/drupal/issues/3432595.
+    lazy: true
+    tags:
+      - { name: module_install.uninstall_validator }
+
+  # Hook implementations.
+  Drupal\trash\Hook\TrashEntityHooks: ~
+  Drupal\trash\Hook\TrashEntityInfoHooks: ~
+  Drupal\trash\Hook\TrashHooks: ~
+  Drupal\trash\Hook\TrashViewsHooks: ~
+
+  Drupal\trash\TrashViewBuilder: ~
+
+  # Trash handlers.
+  trash.handler_configurator:
+    class: Drupal\trash\Handler\TrashHandlerConfigurator
+    public: false
+
+  Drupal\trash\Hook\TrashHandler\NodeTrashHandler:
+    tags:
+      - { name: trash_handler, entity_type_id: node }
+  Drupal\trash\Hook\TrashHandler\TaxonomyTermTrashHandler:
+    autowire: true
+    tags:
+      - { name: trash_handler, entity_type_id: taxonomy_term }
+  Drupal\trash\Hook\TrashHandler\MenuLinkContentTrashHandler:
+    tags:
+      - { name: trash_handler, entity_type_id: menu_link_content }
+      - { name: event_subscriber }
+  Drupal\trash\Hook\TrashHandler\RedirectTrashHandler:
+    tags:
+      - { name: trash_handler, entity_type_id: redirect }
+  Drupal\trash\Hook\TrashHandler\PathAliasTrashHandler:
+    tags:
+      - { name: trash_handler, entity_type_id: path_alias }
+  Drupal\trash\Hook\TrashHandler\FileTrashHandler:
+    tags:
+      - { name: trash_handler, entity_type_id: file }
+
+  Drupal\trash\Cache\TrashEntityCacheBackend:
+    public: false
+    decorates: cache.entity
+
+  Drupal\trash\Cache\TrashEntityMemoryCacheBackend:
+    public: false
+    decorates: entity.memory_cache
+
+  # Register our trash-aware validator with the core class name so that the
+  # class resolver uses it instead of the core validator.
+  # Must be non-shared because validation context is injected via setter.
+  Drupal\trash\Validation\TrashAwareUniqueFieldValueValidator:
+    shared: false
+    calls:
+      - [setTrashManager, ['@trash.manager']]
+  # Alias with leading backslash to match UniqueFieldConstraint::validatedBy().
+  \Drupal\Core\Validation\Plugin\Validation\Constraint\UniqueFieldValueValidator:
+    alias: Drupal\trash\Validation\TrashAwareUniqueFieldValueValidator

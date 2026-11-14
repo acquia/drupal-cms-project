@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Install and uninstall functions for Acquia Trials Countdown.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function acquia_trials_countdown_install() {
+  // @todo Use the API to get expiration when it's ready.
+  //$subscription_id = getenv('SUBSCRIPTION_ID') ?: '';
+  //$trial_end = \Drupal::service('acquia_trials_countdown.trial_end_client')
+  //  ->fetchTrialEnd($subscription_id);
+  $trial_end = (60 * 60 * 24 * 14) + time();
+  \Drupal::state()->set('acquia_trials_countdown.trial_end', $trial_end);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function acquia_trials_countdown_uninstall() {
+  \Drupal::state()->delete('acquia_trials_countdown.trial_end');
+}

@@ -1,0 +1,33 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Partners Split Grid
+group: Organisms
+status: stable
+description: A split layout grid component for displaying textual content on the left and Logo Cards on the right (e.g. Platinum Partners).
+props:
+  type: object
+  properties:
+    admin_theme:
+      title: Admin Theme
+      type: boolean
+      default: false
+      description: Check to enable Admin Theme styles (applies CSS only on frontend to preserve Canvas builder look).
+    eyebrow:
+      title: Eyebrow
+      type: string
+    title:
+      title: Title
+      type: string
+    description:
+      title: Description
+      type: string
+slots:
+  action_cta:
+    title: Action CTA
+    description: Buttons or links to display under the description on the left.
+  items:
+    title: Items Slot
+    description: Slot for individual logo card components on the right.
+library:
+  css:
+    component:
+      partners-split.css: {}

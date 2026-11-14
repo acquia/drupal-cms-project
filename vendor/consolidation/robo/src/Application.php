@@ -1,0 +1,111 @@
+<?php
+
+namespace Robo;
+
+use Symfony\Component\Console\Application as SymfonyApplication;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+
+class Application extends SymfonyApplication
+{
+    /**
+     * @param string $name
+     * @param string $version
+     */
+    public function __construct($name, $version)
+    {
+        parent::__construct($name, $version);
+
+        $this->getDefinition()
+            ->addOption(
+                new InputOption('--simulate', null, InputOption::VALUE_NONE, 'Run in simulated mode (show what would have happened).')
+            );
+        $this->getDefinition()
+            ->addOption(
+                new InputOption('--progress-delay', null, InputOption::VALUE_REQUIRED, 'Number of seconds before progress bar is displayed in long-running task collections. Default: 2s.', Config::DEFAULT_PROGRESS_DELAY)
+            );
+
+        $this->getDefinition()
+            ->addOption(
+                new InputOption('--define', '-D', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Define a configuration item value.', [])
+            );
+    }
+
+    /**
+     * Override add() method to redirect to addCommand() for Symfony 7.4+ compatibility.
+     *
+     * @param Command $command
+     * @return Command|null
+     */
+    public function add(Command $command): ?Command
+    {
+        return $this->addCommand($command);
+    }
+
+    /**
+     * Compatibility wrapper for add/addCommand methods.
+     *
+     * Symfony 7.4+ accepts Command|callable, while Symfony 6 only accepts Command.
+     * We remove the type hint from the parameter to maintain compatibility.
+     *
+     * @param Command|callable $command
+     * @return Command|null
+     */
+    public function addCommand($command): ?Command
+    {
+        if (method_exists(parent::class, 'addCommand')) {
+            return parent::addCommand($command);
+        }
+        // For Symfony 6, only Command objects are supported
+        if (!$command instanceof Command) {
+            throw new \InvalidArgumentException('Symfony 6 only supports Command objects');
+        }
+        return parent::add($command);
+    }
+
+    /**
+     * @param string $roboFile
+     * @param string $roboClass
+     */
+    public function addInitRoboFileCommand($roboFile, $roboClass)
+    {
+        $createRoboFile = new Command('init');
+        $createRoboFile->setDescription("Intitalizes basic RoboFile in current dir");
+        $createRoboFile->setCode(function (InputInterface $input, OutputInterface $output) use ($roboClass, $roboFile) {
+            $output->writeln("<comment>  ~~~ Welcome to Robo! ~~~~ </comment>");
+            $output->writeln("<comment>  " . basename($roboFile) . " will be created in the current directory </comment>");
+            file_put_contents(
+                $roboFile,
+                '<?php'
+                . "\n/**"
+                . "\n * This is project's console commands configuration for Robo task runner."
+                . "\n *"
+                . "\n * @see https://robo.li/"
+                . "\n */"
+                . "\nclass " . $roboClass . " extends \\Robo\\Tasks\n{\n    // define public methods as commands\n}"
+            );
+            $output->writeln("<comment>  Edit this file to add your commands! </comment>");
+            // Symfony 8 requires an int exit code from command code.
+            return 0;
+        });
+        $this->addCommand($createRoboFile);
+    }
+
+    /**
+     * Add self update command, do nothing if null is provided
+     *
+     * @param string $repository
+     *   GitHub Repository for self update.
+     */
+    public function addSelfUpdateCommand($repository = null)
+    {
+        if (!$repository || !class_exists('\SelfUpdate\SelfUpdateCommand') || empty(\Phar::running())) {
+            return;
+        }
+        $selfUpdateManager = new \SelfUpdate\SelfUpdateManager($this->getName(), $this->getVersion(), $repository);
+        $selfUpdateCommand = new \SelfUpdate\SelfUpdateCommand($selfUpdateManager);
+        $this->addCommand($selfUpdateCommand);
+    }
+}

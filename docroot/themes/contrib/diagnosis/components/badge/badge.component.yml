@@ -1,0 +1,51 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Badge
+group: Base
+status: stable
+props:
+  type: object
+  required:
+    - label
+    - style
+  properties:
+    label:
+      type: string
+      title: Link text
+      examples:
+        - Badge text
+    url:
+      type: string
+      title: Link
+    style:
+      type: string
+      title: Style
+      enum:
+        - primary
+        - secondary
+      meta:enum:
+        primary: Primary
+        secondary: Secondary
+      examples:
+        - primary
+    icon:
+      type: object
+      title: Icon
+      description: 'An icon from the Phosphor Icons library.'
+      required:
+        - pack_id
+        - icon_id
+      properties:
+        pack_id:
+          type: string
+        icon_id:
+          type: string
+      examples:
+        - pack_id: phosphor
+          icon_id: rocket
+          settings: {}
+    icon_first:
+      type: boolean
+      title: Icon first
+      default: true
+      examples:
+        - true

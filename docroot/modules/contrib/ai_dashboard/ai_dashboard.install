@@ -1,0 +1,92 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update hooks for ai_dashboard module.
+ */
+
+use Drupal\ai_dashboard\Plugin\ProjectBrowserSource\AiDashboardRecommended;
+
+/**
+ * Implements hook_install().
+ */
+function ai_dashboard_install() {
+  _ai_dashboard_enable_project_browser_sources();
+}
+
+/**
+ * Enables the Project Browser sources provided by this module.
+ */
+function _ai_dashboard_enable_project_browser_sources() {
+  $project_browser_settings = \Drupal::configFactory()
+    ->getEditable('project_browser.admin_settings');
+  $enabled_sources = $project_browser_settings->get('enabled_sources') ?? [];
+  // Enable AI Dashboard Recommended Source.
+  $enabled_sources['ai_dashboard_recommended'] = [
+    'uri' => AiDashboardRecommended::DEFAULT_URI,
+    'ttl' => 1,
+  ];
+  // Enable the source used to browse AI-related contrib projects.
+  $enabled_sources['ai_dashboard_extensions'] = [];
+  $project_browser_settings->set('enabled_sources', $enabled_sources);
+  $project_browser_settings->save();
+}
+
+/**
+ * Replaces the "Extensions" module list block with a project browser block.
+ *
+ * The "Extensions" block used to list the AI modules already installed on
+ * the site. It is replaced with a project browser block scoped to the
+ * "Artificial Intelligence" category on Drupal.org, so it can be used to
+ * discover AI-related contrib projects instead.
+ *
+ * @see https://www.drupal.org/project/ai_dashboard/issues/3567898
+ */
+function ai_dashboard_update_11001() {
+  _ai_dashboard_enable_project_browser_sources();
+
+  // Work on the raw configuration: the entity's getSections() returns
+  // Section objects, while the stored layout is a plain nested array.
+  $config = \Drupal::configFactory()->getEditable('dashboard.dashboard.ai_dashboard');
+  if ($config->isNew()) {
+    return;
+  }
+
+  $sections = $config->get('layout') ?? [];
+  $changed = FALSE;
+  foreach ($sections as $delta => $section) {
+    foreach ($section['components'] ?? [] as $uuid => $component) {
+      if (($component['configuration']['id'] ?? NULL) === 'module_list_packages') {
+        $sections[$delta]['components'][$uuid] = [
+          'uuid' => $uuid,
+          'region' => $component['region'],
+          'configuration' => [
+            'id' => 'project_browser_block:ai_dashboard_extensions',
+            'label' => 'Extensions',
+            'label_display' => 'visible',
+            'provider' => 'project_browser',
+            'context_mapping' => [],
+            'paginate' => TRUE,
+            'page_sizes' => '8, 12, 16, 20',
+            'sort_options' => ['best_match', 'created'],
+            'default_sort' => 'best_match',
+            'filters' => ['search'],
+          ],
+          'weight' => $component['weight'],
+          'additional' => $component['additional'] ?? [],
+        ];
+        $changed = TRUE;
+      }
+    }
+  }
+  if ($changed) {
+    $config->set('layout', array_values($sections))->save();
+  }
+}
+
+/**
+ * Clears cached empty recommended recipes results from Project Browser.
+ */
+function ai_dashboard_update_11002() {
+  \Drupal::cache('project_browser')->deleteAll();
+}

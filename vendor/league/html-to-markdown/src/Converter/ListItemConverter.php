@@ -1,0 +1,84 @@
+<?php
+
+declare(strict_types=1);
+
+namespace League\HTMLToMarkdown\Converter;
+
+use League\HTMLToMarkdown\Coerce;
+use League\HTMLToMarkdown\Configuration;
+use League\HTMLToMarkdown\ConfigurationAwareInterface;
+use League\HTMLToMarkdown\ElementInterface;
+use League\HTMLToMarkdown\NoBreakSpaces;
+
+class ListItemConverter implements ConverterInterface, ConfigurationAwareInterface
+{
+    /** @var Configuration */
+    protected $config;
+
+    /** @var string|null */
+    protected $listItemStyle;
+
+    public function setConfig(Configuration $config): void
+    {
+        $this->config = $config;
+    }
+
+    public function convert(ElementInterface $element): string
+    {
+        // If parent is an ol, use numbers, otherwise, use dashes
+        $listType = ($parent = $element->getParent()) ? $parent->getTagName() : 'ul';
+
+        // Add spaces to start for nested list items
+        $level = $element->getListItemLevel();
+
+        // A leading no-break space is kept, as whatever follows it wasn't escaped as being at the start of the line
+        $value = \trim(\implode("\n" . '    ', \explode("\n", \ltrim(NoBreakSpaces::rtrim($element->getValue())))));
+
+        // If list item is the first in a nested list, add a newline before it
+        $prefix = '';
+        if ($level > 0 && $element->getSiblingPosition() === 1) {
+            $prefix = "\n";
+        }
+
+        if ($listType === 'ul') {
+            $listItemStyle          = Coerce::toString($this->config->getOption('list_item_style', '-'));
+            $listItemStyleAlternate = Coerce::toString($this->config->getOption('list_item_style_alternate', ''));
+            if (! isset($this->listItemStyle)) {
+                $this->listItemStyle = $listItemStyleAlternate ?: $listItemStyle;
+            }
+
+            if ($listItemStyleAlternate && $level === 0 && $element->getSiblingPosition() === 1) {
+                $this->listItemStyle = $this->listItemStyle === $listItemStyle ? $listItemStyleAlternate : $listItemStyle;
+            }
+
+            return $prefix . $this->listItemStyle . ' ' . $value . "\n";
+        }
+
+        if ($listType === 'ol' && ($parent = $element->getParent()) && \is_numeric($start = $parent->getAttribute('start'))) {
+            $number = (int) $start + $element->getSiblingPosition() - 1;
+        } else {
+            $number = $element->getSiblingPosition();
+        }
+
+        // Anything else isn't a list marker, which would leave the item's contents as part of a paragraph
+        if ($number < 0 || $number > 999999999) {
+            $number = $element->getSiblingPosition();
+        }
+
+        // The lines after the first only belong to the item when indented as far as the end of its marker
+        $marker = $number . '. ';
+        if (\strlen($marker) > 4) {
+            $value = \str_replace("\n    ", "\n" . \str_repeat(' ', \strlen($marker)), $value);
+        }
+
+        return $prefix . $marker . $value . "\n";
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getSupportedTags(): array
+    {
+        return ['li'];
+    }
+}

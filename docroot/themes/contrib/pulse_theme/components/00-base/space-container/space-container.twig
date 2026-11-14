@@ -1,0 +1,60 @@
+{#
+/**
+ * @file
+ * Space Container component.
+ *
+ * Variables:
+ * - background_color: [string] The background color of the container. eg: 'transparent', etc.
+ * - width: [string] The width of the container. eg: 'boxed-width', 'full-width'.
+ * - padding_left: [string] The left padding of the container. eg: 'none', 'small', etc.
+ * - padding_right: [string] The right padding of the container. eg: 'none', 'small', etc.
+ * - padding_top: [string] The top padding of the container. eg: 'none', 'small', etc. 
+ * - padding_bottom: [string] The bottom padding of the container. eg: 'none', 'small', etc.
+ * - margin_top: [string] The top margin of the container. eg: 'none', 'small', 'medium', etc.
+ * - margin_bottom: [string] The bottom margin of the container. eg: 'none', 'small', etc.
+ * - modifier_class: [string] Additional modifier classes for styling.
+ */
+#}
+
+{# Settings #}
+{% set bg_class = background_color == 'base-brand' ? 'bg-sds-base-brand' : 'background-%s'|format(background_color|default('none')) %}
+{% set width = width|default('default') %}
+{% set padding_left = width != 'full-width' ? 'padding-left-%s'|format(padding_left|default('none')) : ''%}
+{% set padding_right = width != 'full-width' ? 'padding-right-%s'|format(padding_right|default('none')) : '' %}
+{% set padding_top = 'padding-top-%s'|format(padding_top|default('none')) %}
+{% set padding_bottom = 'padding-bottom-%s'|format(padding_bottom|default('none')) %}
+{% set margin_top = 'margin-top-%s'|format(margin_top|default('none')) %}
+{% set margin_bottom = 'margin-bottom-%s'|format(margin_bottom|default('none')) %}
+{# Pattern classes #}
+{% set pattern_enabled = background_pattern ? 'has-pattern' : '' %}
+{% set pattern_position_class = background_pattern and pattern_image_position != 'none'
+  ? 'pattern--' ~ pattern_image_position
+  : ''
+%}
+{% set classes = [
+  width,
+  padding_left,
+  padding_right,
+  padding_top,
+  padding_bottom,
+  margin_top,
+  margin_bottom,
+  pattern_enabled,
+  pattern_position_class,
+  modifier_class|default('')
+] %}
+
+{% set modifier_class = classes|filter(v => v is not empty)|join(' ')|trim %}
+
+{# TEMPLATE #}
+<div class="space-container {{ modifier_class }} {{ bg_class }}">
+  <div class="{{ width == 'boxed-width' ? 'container relative mx-auto' : '' }}">
+    {% block content %}
+      {% if content is not empty %}
+        {{ content }}
+      {% else %}
+        <div class="sr-only">No content provided in container</div>
+      {% endif %}
+    {% endblock %}
+  </div>
+</div>

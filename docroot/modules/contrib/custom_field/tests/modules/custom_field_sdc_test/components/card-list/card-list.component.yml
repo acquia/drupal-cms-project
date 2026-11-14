@@ -1,0 +1,45 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+name: Card List
+description: A card list element, used for testing an array of objects.
+slots:
+  title:
+    title: Section title
+    description: A section title.
+props:
+  type: object
+  properties:
+    attributes:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      description: Wrapper attributes.
+    cards:
+      type: array
+      title: Cards
+      description: An array of cards.
+      items:
+        type: object
+        properties:
+          heading:
+            type: string
+            title: Heading
+            description: The heading text.
+            examples:
+              - 'Card'
+          content:
+            type: string
+            title: Content
+            description: The main text.
+            examples:
+              - 'An example block of text.'
+          footer:
+            type: string
+            title: Footer
+            description: The footer text.
+            examples:
+              - 'I have a footer!'
+          tags:
+            type: array
+            title: Tags
+            description: Tags to be displayed.
+            items:
+              type: string

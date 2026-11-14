@@ -1,0 +1,239 @@
+html {
+  --bpmn-background-color: var(--color-white);
+}
+html.gin--dark-mode {
+  --bpmn-background-color: var(--color-gray-800);
+}
+#bpmn-io {
+  position: relative;
+  color-scheme: normal;
+}
+#bpmn-io .canvas {
+  position: fixed;
+  bottom: 0;
+}
+#bpmn-io .canvas .bjs-container {
+  background-color: var(--bpmn-background-color);
+}
+#bpmn-io .convert-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  opacity: .5;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 300px;
+}
+#bpmn-io .convert-overlay.completed {
+  display: none;
+}
+#bpmn-io .property-panel.in-canvas {
+  position: absolute;
+  z-index: 9;
+  top: 0;
+  right: 0;
+  width: 310px;
+  max-width: 90vw;
+  padding-left: 4px;
+}
+#bpmn-io .property-panel.in-canvas .bio-properties-panel::after {
+  content: '';
+  background-color: var(--group-bottom-border-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  cursor: ew-resize;
+  z-index: 11;
+}
+#bpmn-io .bio-properties-panel-header {
+  margin-bottom: 0;
+}
+#bpmn-io .property-panel input {
+  padding-right: unset;
+}
+
+.modeler-api-embed #bpmn-io .canvas {
+  position: unset;
+  height: 80vh;
+}
+.modeler-api-embed #bpmn-io .property-panel.in-canvas {
+  bottom: 0;
+}
+
+div[data-drupal-messages=""],
+.messages-list {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.messages-list:hover {
+  cursor: pointer;
+}
+div[data-drupal-messages=""] .messages__wrapper,
+.messages-list .messages__wrapper,
+div[data-drupal-messages=""] .messages-list__wrapper,
+.messages-list .messages-list__wrapper {
+  position: relative;
+  z-index: 9;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.bjs-breadcrumbs {
+  top: 0;
+}
+.djs-palette {
+  top: 0;
+  left: 0;
+}
+/* Hidden platform components ======================================================================================= */
+.djs-popup.bpmn-replace .djs-popup-search,
+.djs-popup.bpmn-replace .djs-popup-group .entry:not([data-id="replace-with-collapsed-subprocess"]):not([data-id="replace-with-expanded-subprocess"]) {
+  display: none;
+}
+
+.cmd-element-template-chooser .cmd-change-menu__entry_header {
+  color: var(--text-color);
+  font-size: 14px;
+  font-weight: var(--change-menu-header-font-weight);
+}
+
+/* Fix position of action buttons for Claro */
+#bpmn-io-modeler {
+  position: relative;
+}
+#bpmn-io-modeler #edit-actions {
+  position: absolute;
+  top: -120px;
+  right: 0;
+  z-index: 500;
+}
+body.gin--navigation #bpmn-io-modeler #edit-actions {
+  top: -80px;
+}
+body.gin--navigation #drupal-off-canvas-wrapper,
+body.gin--core-navigation #drupal-off-canvas-wrapper {
+  top: 0 !important;
+  margin-top: var(--admin-toolbar-top-bar-height);
+  height: calc(100% - var(--admin-toolbar-top-bar-height)) !important;
+}
+
+/* Fix container width for Gin */
+.gin--edit-form .page-wrapper__node-edit-form .block-system-main-block {
+  max-width: unset !important;
+}
+
+/* Override certain properties for Gin's dark mode */
+html.gin--dark-mode #bpmn-io {
+  color-scheme: normal;
+}
+html.gin--dark-mode .djs-context-pad .entry {
+  background-color: transparent;
+  box-shadow: 0 0 2px 1px transparent;
+}
+
+/* Workarounds for broken template select button */
+#bpmn-io .bio-properties-panel-group-header-buttons .bio-properties-panel-group-header-button:not(.bio-properties-panel-arrow),
+#bpmn-io .bio-properties-panel-dropdown-button.bio-properties-panel-group-header-button {
+  background-color: var(--select-template-background-color);
+}
+#bpmn-io .bio-properties-panel-group-header-buttons .bio-properties-panel-add-entry {
+  fill: var(--add-entry-hover-fill-color);
+}
+#bpmn-io .bio-properties-panel-dropdown-button.bio-properties-panel-template-not-found button {
+  background-color: var(--unknown-template-hover-background-color);
+}
+
+/* Workarounds for broken palette width */
+.djs-palette.two-column.open {
+  width: 96px;
+}
+
+/* Token browser link */
+a.token-dialog {
+  text-decoration: none;
+}
+#edit-token-browser:hover a.token-dialog,
+a.token-dialog:hover {
+  color: var(--gin-color-button-text);
+}
+
+/* Close button for minimap */
+.djs-minimap:not(.open):hover {
+  cursor: pointer;
+}
+.djs-minimap.open .toggle {
+  width: 30px;
+  height: 30px;
+}
+.djs-minimap.open .toggle::before {
+  content: 'X';
+}
+.djs-minimap.open .toggle:hover {
+  cursor: pointer;
+}
+
+/* In canvas widgets */
+#bpmn-io-widgets,
+#bpmn-io-form-widgets {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 2px;
+  background-color: var(--bpmn-background-color);
+  opacity: .9;
+}
+#bpmn-io-widgets .widget,
+#bpmn-io-form-widgets .widget {
+  position: relative;
+  display: inline-block;
+  padding: 15px;
+}
+#bpmn-io-widgets .widget:not([disabled="disabled"]):hover,
+#bpmn-io-form-widgets .widget:not([disabled="disabled"]):hover {
+  cursor: pointer;
+  color: var(--toolbar-button-hover-color. #13161a);
+  outline: 2px solid var(--admin-toolbar-color-blue-200, #94bbff);
+  outline-offset: var(--toolbar-button-outline-offset, 0);
+  border-radius: var(--admin-toolbar-space-8, calc(0.5 * max(1rem, 16px)));
+  background-color: var(--toolbar-button-hover-bg, #f3f5f9);
+}
+body.gin--navigation #bpmn-io-widgets .widget:not([disabled="disabled"]):hover,
+body.gin--core-navigation #bpmn-io-widgets .widget:not([disabled="disabled"]):hover,
+body.gin--navigation #bpmn-io-form-widgets .widget:not([disabled="disabled"]):hover,
+body.gin--core-navigation #bpmn-io-form-widgets .widget:not([disabled="disabled"]):hover {
+  background-color: var(--gin-color-primary-light-hover, #f3f5f9);
+}
+.djs-minimap:not(.open) {
+  background-color: transparent;
+}
+.djs-minimap:not(.open) .toggle {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border: none;
+  border-radius: 2px;
+  text-align: center;
+  line-height: 50px;
+}
+.djs-minimap {
+  top: unset;
+  right: unset;
+  left: 0;
+  bottom: 0;
+}
+.djs-minimap:not(.open) {
+  border: none;
+}
+.djs-minimap:not(.open) .toggle {
+  padding: unset;
+}
+.djs-minimap:not(.open) .toggle::before {
+  content: '';
+}

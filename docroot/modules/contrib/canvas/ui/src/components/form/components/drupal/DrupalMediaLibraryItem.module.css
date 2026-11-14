@@ -1,0 +1,23 @@
+.item {
+  display: flex;
+}
+
+.dragHandle {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  cursor: grab;
+  color: var(--blue-9);
+}
+
+.dragHandle:active {
+  cursor: grabbing;
+}
+
+:global([data-num-items="1"]  [data-canvas-drag-handle]) {
+  cursor: default;
+  opacity: 0.4;
+  color: var(--gray-8);
+}

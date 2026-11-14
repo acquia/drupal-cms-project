@@ -1,0 +1,61 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: components/backgrounds/video_background/video_background.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+/* Wrapper: no pointer events so background doesn't capture clicks. */
+.video-background {
+  pointer-events: none;
+}
+
+/* Media container fills the wrapper edge-to-edge. */
+.video-background__media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/*
+ * VideoJS player: override default sizing.
+ * Actual dimensions are set by JavaScript sizeMedia().
+ */
+.video-background__media .video-js {
+  position: absolute !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+/* Hide all VideoJS UI elements for background usage. */
+.video-background__media .vjs-big-play-button,
+.video-background__media .vjs-control-bar,
+.video-background__media .vjs-loading-spinner,
+.video-background__media .vjs-text-track-display,
+.video-background__media .vjs-modal-dialog,
+.video-background__media .vjs-poster,
+.video-background__media .vjs-error-display {
+  display: none !important;
+}
+
+/* YouTube and Vimeo iframes: fill the VideoJS container. */
+.video-background__media .video-js iframe {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+}
+
+/* Local video: object-fit cover for responsive edge-to-edge. */
+.video-background__media .video-js video.vjs-tech {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Ensure the parent component has enough height for the video. */
+.component:has(.video-background) {
+  min-height: 20rem;
+}

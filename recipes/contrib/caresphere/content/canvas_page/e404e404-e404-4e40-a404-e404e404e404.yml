@@ -1,0 +1,63 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: e404e404-e404-4e40-a404-e404e404e404
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: '404 - Page Not Found'
+  components:
+    -
+      uuid: e6ddd3a3-680b-46ed-82b8-18a785084a52
+      component_id: sdc.caresphere_theme.section
+      inputs:
+        alignment: center
+        paddingtop: 20
+        marginbottom: 0
+        paddingbottom: 20
+        backgroundcolor: dark-gray
+        use_custom_container: false
+    -
+      parent_uuid: e6ddd3a3-680b-46ed-82b8-18a785084a52
+      slot: content
+      uuid: cc55fecb-f048-450a-9244-c08a8175b03d
+      component_id: sdc.caresphere_theme.section-intro
+      inputs:
+        heading:
+          value: '404'
+          format: canvas_html_inline
+        tagline: Oops!
+        textcolor: light
+        description: "The page you are looking for doesn't exist or has been moved. Let's get you back on track."
+        heading_level: 1
+    -
+      parent_uuid: cc55fecb-f048-450a-9244-c08a8175b03d
+      slot: ctas
+      uuid: 9639abf9-7bf2-4146-b81d-1c5a7101beb9
+      component_id: sdc.caresphere_theme.button
+      inputs:
+        href: /home
+        size: medium
+        label: 'Back to Home'
+        variant: primary
+        disabled: false
+        icon_first: false
+        mobile_width: false
+        border_radius: default
+  path:
+    -
+      alias: /page-not-found
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

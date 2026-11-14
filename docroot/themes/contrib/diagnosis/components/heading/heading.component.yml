@@ -1,0 +1,78 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Heading
+group: Base
+status: stable
+props:
+  type: object
+  required:
+    - heading_text
+    - level
+    - text_color
+    - text_size
+    - align
+  properties:
+    heading_text:
+      type: string
+      title: Heading
+      default: "Enter title"
+      examples:
+        - Your heading goes here
+    level:
+      type: number
+      title: Heading level
+      enum: [1, 2, 3, 4, 5, 6]
+      examples:
+        - 2
+    text_size:
+      type: string
+      title: Text size
+      enum:
+        - default
+        - heading-responsive-8xl
+        - heading-responsive-7xl
+        - heading-responsive-6xl
+        - heading-responsive-5xl
+        - heading-responsive-4xl
+        - heading-responsive-3xl
+        - heading-responsive-2xl
+        - heading-responsive-xl
+      meta:enum:
+        heading-responsive-8xl: 8XL
+        heading-responsive-7xl: 7XL
+        heading-responsive-6xl: 6XL
+        heading-responsive-5xl: 5XL
+        heading-responsive-4xl: 4XL
+        heading-responsive-3xl: 3XL
+        heading-responsive-2xl: 2XL
+        heading-responsive-xl: XL
+      examples:
+        - heading-responsive-4xl
+    text_color:
+      type: string
+      title: Text color
+      enum:
+        - default
+        - inverted
+        - primary
+      meta:enum:
+        default: Default text
+        inverted: Inverted text
+        primary: Primary
+      examples:
+        - default
+    align:
+      type: string
+      title: Text alignment
+      enum:
+        - left
+        - center
+        - right
+      meta:enum:
+        left: Left
+        center: Center
+        right: Right
+      examples:
+        - left
+    url:
+      type: string
+      title: Link

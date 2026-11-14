@@ -1,0 +1,26 @@
+{
+  "name": "haven_theme",
+  "private": true,
+  "version": "1.0.0",
+  "license": "GPL-2.0-or-later",
+  "type": "module",
+  "scripts": {
+    "dev": "$npm_execpath run s:tailwindcss -- --watch",
+    "build": "$npm_execpath run s:tailwindcss && $npm_execpath run s:motion",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "s:tailwindcss": "tailwindcss --input ./src/main.css --minify --output ./build/main.min.css",
+    "s:motion": "esbuild ./src/motion.js --bundle --minify --format=iife --outfile=./build/motion.js"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.18",
+    "@zackad/prettier-plugin-twig": "^0.16.2",
+    "esbuild": "^0.28.0",
+    "prettier": "^3.7.4",
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "tailwindcss": "^4.1.18"
+  },
+  "dependencies": {
+    "motion": "^12.37.0"
+  }
+}

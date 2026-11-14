@@ -1,0 +1,107 @@
+<?php
+
+/**
+ * @file
+ * Installation/uninstallation related functions for the image_captcha module.
+ */
+
+use Drupal\Component\Utility\DeprecationHelper;
+use Drupal\Core\Extension\Requirement\RequirementSeverity;
+use Drupal\Core\Hook\Attribute\LegacyRequirementsHook;
+
+/**
+ * Implements hook_requirements().
+ *
+ * Core 11.2 also calls
+ * \Drupal\image_captcha\Install\Requirements\ImageCaptchaRequirements, which
+ * returns the same rows; from 11.3 only that class is used.
+ */
+#[LegacyRequirementsHook]
+function image_captcha_requirements($phase) {
+  if ($phase !== 'install') {
+    return [];
+  }
+  return _image_captcha_install_requirements();
+}
+
+/**
+ * Returns the install-time requirements of the Image CAPTCHA module.
+ *
+ * @return array
+ *   The requirements, keyed by name.
+ */
+function _image_captcha_install_requirements(): array {
+  $requirements = [];
+  // Check if the GD library is available and raise an error when not. This
+  // is the same check _image_captcha_check_setup() makes, done directly
+  // because the module's classes cannot be autoloaded before it is
+  // installed.
+  if (!function_exists('imagepng')) {
+    $requirements['image_captcha_requires_gd'] = [
+      'title' => \Drupal::translation()
+        ->translate('Image CAPTCHA requires GD library'),
+      'description' =>
+      \Drupal::translation()
+        ->translate('The Image CAPTCHA module can not be installed because your PHP setup does not provide the <a href="!gddoc">GD library</a>, which is required to generate images.',
+            ['!gddoc' => 'http://www.php.net/manual/en/book.image.php']
+      ),
+      'severity' => DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '11.2.0', fn() => RequirementSeverity::Error, fn() => REQUIREMENT_ERROR),
+    ];
+  }
+  return $requirements;
+}
+
+/**
+ * Implements hook_install().
+ */
+function image_captcha_install() {
+  $config = \Drupal::configFactory()->getEditable('image_captcha.settings');
+  $module_path = \Drupal::service('extension.list.module')->getPath('image_captcha');
+  $config->set('image_captcha_fonts', [
+    hash('sha256', $module_path . '/fonts/Tesox/tesox.ttf'),
+    hash('sha256', $module_path . '/fonts/Tuffy/Tuffy.ttf'),
+  ])->save();
+}
+
+/**
+ * Convert existing setting to hashes.
+ */
+function image_captcha_update_8001() {
+  $config = \Drupal::configFactory()->getEditable('image_captcha.settings');
+
+  foreach ($config->get('image_captcha_fonts') as $index => $font) {
+    if (!empty($font) && strpos($font, '.ttf') !== FALSE) {
+      $config->set('image_captcha_fonts.' . $index, hash('sha256', $font));
+    }
+  }
+  $config->save();
+}
+
+/**
+ * Fix possibly broken image_captcha fonts path after 8.x-1.7 update.
+ */
+function image_captcha_update_9001(&$sandbox) {
+  // Reset the font path from the correct module directory location:
+  $config = \Drupal::configFactory()->getEditable('image_captcha.settings');
+  $module_path = \Drupal::service('extension.list.module')->getPath('image_captcha');
+  $config->set('image_captcha_fonts', [
+    hash('sha256', $module_path . '/fonts/Tesox/tesox.ttf'),
+    hash('sha256', $module_path . '/fonts/Tuffy/Tuffy.ttf'),
+  ])->save();
+}
+
+/**
+ * Set captcha 'title' default, as the setting did not exist before.
+ */
+function image_captcha_update_9002(&$sandbox) {
+  $config = \Drupal::configFactory()->getEditable('image_captcha.settings');
+  $config->set('title', 'CAPTCHA')->save();
+}
+
+/**
+ * Remove image_captcha "title" config as it never should have existed.
+ */
+function image_captcha_update_9003(&$sandbox) {
+  $imageCaptchaConfig = \Drupal::configFactory()->getEditable('image_captcha.settings');
+  $imageCaptchaConfig->clear('title')->save();
+}

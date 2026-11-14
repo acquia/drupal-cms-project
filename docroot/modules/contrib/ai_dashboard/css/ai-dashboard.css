@@ -1,0 +1,236 @@
+/* General */
+.dashboard--ai-dashboard .block > form {
+  margin: var(--gin-spacing-s);
+}
+
+.dashboard--ai-dashboard .block > details {
+  margin: var(--gin-spacing-s);
+}
+
+.dashboard--ai-dashboard .block-help {
+  margin: var(--gin-spacing-m) var(--gin-spacing-xl);
+}
+
+.dashboard--ai-dashboard .block-ai-dashboard .block-help + :is(form, details, .gin-layer-wrapper) {
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+/* AI Provider Setup */
+
+@media (min-width: 1024px) {
+  .dashboard--ai-dashboard .ai-setup-ai-provider .details-wrapper {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: var(--gin-spacing-m);
+    align-items: baseline;
+  }
+
+  .dashboard--ai-dashboard .ai-setup-ai-provider .claro-details__description {
+    grid-column: span 5;
+    margin: 0px;
+  }
+  .dashboard--ai-dashboard .ai-setup-ai-provider :is(.form-item--provider, .form-item--api-key) {
+    grid-column: span 2;
+  }
+}
+
+.dashboard--ai-dashboard .ai-setup-ai-provider :is(select, input:not([type="submit"])) {
+  width: 100%;
+}
+
+.dashboard--ai-dashboard .ai-provider-setup-warning {
+  display: block;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-position: left top;
+  padding-left: calc(20px + var(--gin-spacing-xs));
+}
+
+/* Features Section */
+/*
+ * Note: this block's plugin ID has a derivative (`project_browser_block:
+ * ai_dashboard_recommended`), so the usual `.block-<plugin id>` class that
+ * admin themes add (e.g. `.block-ai-documentation` below) comes out much
+ * less predictable than it looks: Html::getClass() strips the ":" instead
+ * of turning it into a separator, so "block" and "ai_dashboard_recommended"
+ * end up mashed together mid-class. Scope on the block's own markup
+ * instead: #project-browser is the unique mount point project_browser
+ * always renders.
+ */
+.dashboard--ai-dashboard #project-browser {
+  margin: var(--gin-spacing-l) var(--gin-spacing-s);
+}
+
+.dashboard--ai-dashboard #project-browser .search__form-container {
+  padding: 0px;
+}
+
+/* Compact, scannable project cards: smaller minimum width fits more cards
+ * per row, tighter padding/gaps reduce card height, and the description is
+ * clamped so varying text lengths don't stretch cards unevenly. */
+.dashboard--ai-dashboard #project-browser .pb-projects-grid {
+  --grid-item--min-width: 220px;
+  --grid-layout-gap: var(--gin-spacing-m);
+}
+
+.dashboard--ai-dashboard #project-browser .pb-project {
+  padding: var(--gin-spacing-s);
+}
+
+.dashboard--ai-dashboard #project-browser .pb-project--grid {
+  gap: var(--gin-spacing-xs);
+}
+
+.dashboard--ai-dashboard #project-browser .pb-project__logo--grid img {
+  max-height: 40px;
+}
+
+.dashboard--ai-dashboard #project-browser .pb-project__title {
+  font-size: var(--ai-font-size-base);
+}
+
+.dashboard--ai-dashboard #project-browser .pb-project__body {
+  margin-block: var(--gin-spacing-xs);
+  font-size: var(--ai-font-size-s);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.dashboard--ai-dashboard #project-browser .pb-project__icons {
+  gap: var(--gin-spacing-xs);
+}
+
+/* Extensions Section */
+.dashboard--ai-dashboard .block-module-list-packages > form {
+  margin: var(--gin-spacing-xl);
+}
+
+.dashboard--ai-dashboard .block-module-list-packages .table-filter-text {
+  width: 100%;
+}
+
+/* Status Section */
+.dashboard--ai-dashboard .ai-dashboard-provider {
+  position: relative;
+}
+
+.dashboard--ai-dashboard .ai-dashboard-enabled-providers-status .provider-status {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 8px;
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  z-index: 2;
+}
+
+.dashboard--ai-dashboard .provider-status [class^="provider-status--"] {
+  height: 20px;
+  width: 20px;
+  display: block;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  background-image: url("/modules/contrib/ai/assets/icons/warning.svg");
+}
+
+.dashboard--ai-dashboard .provider-status .provider-status--yes {
+  background-image: url("/modules/contrib/ai/assets/icons/checkmark-circle.svg");
+}
+
+.dashboard--ai-dashboard .provider-status .provider-status--no {
+  background-image: url("/modules/contrib/ai/assets/icons/x-circle.svg");
+}
+
+.dashboard--ai-dashboard .provider-status .provider-status--configuration-link {
+  background-image: url("/modules/contrib/ai/assets/icons/gear.svg");
+}
+
+@media (min-width: 1024px) {
+  .dashboard--ai-dashboard .ai-dashboard-enabled-providers-status .provider-status {
+    top: 26px;
+  }
+  .dashboard--ai-dashboard .block-ai-operations-status .ai-dashboard-enabled-providers-status {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--gin-spacing-s);
+  }
+}
+
+.dashboard--ai-dashboard .block-ai-operations-status .ai-dashboard-enabled-providers-status details {
+  height: fit-content;
+}
+
+.dashboard--ai-dashboard .block-ai-operations-status .item-list h3 {
+  margin-top: 0px;
+  font-size: var(--ai-font-size-base);
+}
+
+.dashboard--ai-dashboard .block-ai-operations-status .item-list {
+  padding: 12px;
+  background-color: rgba(var(--gin-color-primary-light-rgb), 0.25);
+  border-radius: var(--gin-border-m);
+}
+
+.dashboard--ai-dashboard .block-ai-operations-status .item-list :is(ul, li) {
+  list-style: none;
+  margin: 0px;
+}
+
+.dashboard--ai-dashboard .block-ai-operations-status .item-list li {
+  margin-bottom: var(--gin-spacing-xs);
+  padding-left: 28px;
+  background-image: url("/modules/contrib/ai/assets/icons/checkmark-circle.svg");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 20px;
+}
+.dashboard--ai-dashboard .block-ai-operations-status .item-list .operation-type-not-supported {
+  background-image: url("/modules/contrib/ai/assets/icons/x-circle.svg");
+}
+
+.dashboard--ai-dashboard .block-ai-operations-status .ai-dashboard-default-models-status .details-wrapper  {
+  display:  grid;
+  gap: var(--gin-spacing-s);
+  grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+}
+
+@media (min-width: 1024px) {
+  .dashboard--ai-dashboard .block-ai-operations-status .ai-dashboard-default-models-status .details-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.dashboard--ai-dashboard .block-ai-operations-status .ai-dashboard-operation-type-default {
+  padding: var(--gin-spacing-m);
+  border: 1px solid var(--gin-border-color);
+  border-radius: var(--gin-border-l);
+}
+
+.dashboard--ai-dashboard .block-ai-operations-status .ai-dashboard-operation-type-default h3 {
+  margin-top: 0px;
+  font-weight: var(--gin-font-weight-bold);
+}
+
+.dashboard--ai-dashboard .block-ai-operations-status .operation-type-default-setting {
+  margin-bottom: 0px;
+  background-color: rgba(var(--gin-color-primary-light-rgb), 0.25);
+  padding: var(--gin-spacing-xs);
+  border-radius: var(--gin-border-xs);
+}
+
+/* Documentation */
+.dashboard--ai-dashboard .admin-list {
+  margin-bottom: 0px;
+}
+
+.dashboard--ai-dashboard .block-ai-documentation .button.expand {
+  margin: 0px 0px var(--space-s) var(--space-s);
+}
+.dashboard--ai-dashboard .block-ai-documentation .button.expand[data-expanded="true"]::before {
+  content: "-";
+}

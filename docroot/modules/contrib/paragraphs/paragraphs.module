@@ -1,0 +1,266 @@
+<?php
+
+/**
+ * @file
+ * Contains paragraphs.module.
+ */
+
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\paragraphs\Hook\ParagraphsHooks;
+use Drupal\Core\Field\FieldTypeCategoryManagerInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\paragraphs\Entity\ParagraphsType;
+use Drupal\paragraphs\Hook\ParagraphsThemeHooks;
+use Drupal\paragraphs\MigrationPluginsAlterer;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Entity\EntityTypeInterface;
+
+/**
+ * Implements hook_help().
+ */
+#[LegacyHook]
+function paragraphs_help($route_name, RouteMatchInterface $route_match) {
+  return \Drupal::service(ParagraphsHooks::class)->help($route_name, $route_match);
+}
+
+function paragraphs_type_get_types() {
+  return ParagraphsType::loadMultiple();
+}
+
+function paragraphs_type_get_names() {
+  return array_map(function ($bundle_info) {
+    return $bundle_info['label'];
+  }, \Drupal::service('entity_type.bundle.info')->getBundleInfo('paragraphs_type'));
+}
+
+function paragraphs_type_load($name) {
+  return ParagraphsType::load($name);
+}
+
+/**
+ * Implements hook_theme().
+ */
+#[LegacyHook]
+function paragraphs_theme() {
+  return \Drupal::service(ParagraphsThemeHooks::class)->theme();
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+#[LegacyHook]
+function paragraphs_theme_suggestions_paragraph(array $variables) {
+  return \Drupal::service(ParagraphsThemeHooks::class)->themeSuggestionsParagraph($variables);
+}
+
+/**
+ * Implements hook_theme_registry_alter().
+ */
+#[LegacyHook]
+function paragraphs_theme_registry_alter(&$theme_registry) {
+  \Drupal::service(ParagraphsThemeHooks::class)->themeRegistryAlter($theme_registry);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+#[LegacyHook]
+function paragraphs_form_entity_form_display_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::service(ParagraphsHooks::class)->formEntityFormDisplayEditFormAlter($form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Indicate unsupported multilingual paragraphs field configuration.
+ */
+#[LegacyHook]
+function paragraphs_form_field_config_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::service(ParagraphsHooks::class)->formFieldConfigEditFormAlter($form, $form_state, $form_id);
+}
+
+function paragraphs_field_ui_preconfigured_options_alter(array &$options, $field_type) {
+  // Move the preconfigured paragraph option to the generic category,
+  // so it is available as a top-level option in the new field type selection
+  // UI in Drupal 10.2+.
+  if ($field_type == 'entity_reference_revisions' && !empty($options['paragraph'])) {
+    $options['paragraph']['weight'] = -15;
+    $options['paragraph']['category'] = FieldTypeCategoryManagerInterface::FALLBACK_CATEGORY;
+
+    $options['paragraph']['label'] = t('Paragraphs');
+    $options['paragraph']['description'] = t('Create structured content.');
+  }
+}
+
+/**
+ * Implements hook_preprocess_form_element__new_storage_type().
+ */
+#[LegacyHook]
+function paragraphs_preprocess_form_element__new_storage_type(&$variables) {
+  \Drupal::service(ParagraphsHooks::class)->preprocessFormElementNewStorageType($variables);
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ *
+ * Our paragraphs_form_field_config_edit_form_alter() needs to be run after
+ * that of the content_translation module in order to see the current state
+ * of the translation field.
+ *
+ * The hook here can't be more specific, as the $hook that's passed in to this
+ * function is form_alter, and not form_FORM_ID_alter.
+ */
+function paragraphs_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'form_alter' && isset($implementations['paragraphs'])) {
+    $group = $implementations['paragraphs'];
+    unset($implementations['paragraphs']);
+    $implementations['paragraphs'] = $group;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Indicate unsupported multilingual paragraphs field configuration.
+ *
+ * Add a warning that paragraph fields can not be translated.
+ * Switch to error if a paragraph field is marked as translatable.
+ */
+#[LegacyHook]
+function paragraphs_form_language_content_settings_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::service(ParagraphsHooks::class)->formLanguageContentSettingsFormAlter($form, $form_state, $form_id);
+}
+
+/**
+ * Prepares variables for paragraph templates.
+ *
+ * Default template: paragraph.html.twig.
+ *
+ * Most themes use their own copy of paragraph.html.twig. The default is located
+ * inside "templates/paragraph.html.twig". Look in there for the
+ * full list of variables.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An array of elements to display in view mode.
+ *   - paragraph: The paragraph object.
+ *   - view_mode: View mode; e.g., 'full', 'teaser'...
+ */
+function template_preprocess_paragraph(&$variables) {
+  \Drupal::service(ParagraphsThemeHooks::class)->preprocessParagraph($variables);
+}
+
+/**
+ * Prepares variables for modal form add widget template.
+ *
+ * Default template: paragraphs-add-dialog.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - buttons: An array of buttons to display in the modal form.
+ */
+function template_preprocess_paragraphs_add_dialog(&$variables) {
+  \Drupal::service(ParagraphsThemeHooks::class)->preprocessParagraphsAddDialog($variables);
+}
+
+/**
+ * Prepares variables for paragraphs_actions component.
+ *
+ * Default template: paragraphs-actions.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - actions: An array of default action buttons.
+ *   - dropdown_actions: An array of buttons for dropdown.
+ */
+function template_preprocess_paragraphs_actions(&$variables) {
+  \Drupal::service(ParagraphsThemeHooks::class)->preprocessParagraphsActions($variables);
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for field_multiple_value_form().
+ *
+ * Reorganize table rows and columns added in
+ * template_preprocess_field_multiple_value_form() to suite Paragraph's needs.
+ *
+ * @see template_preprocess_field_multiple_value_form()
+ */
+#[LegacyHook]
+function paragraphs_preprocess_field_multiple_value_form(&$variables) {
+  \Drupal::service(ParagraphsHooks::class)->preprocessFieldMultipleValueForm($variables);
+}
+
+/**
+ * Implements hook_migration_plugins_alter().
+ *
+ * @todo refactor/rethink this when
+ * https://www.drupal.org/project/drupal/issues/2904765 is resolved
+ */
+#[LegacyHook]
+function paragraphs_migration_plugins_alter(array &$migrations) {
+  \Drupal::service(ParagraphsHooks::class)->migrationPluginsAlter($migrations);
+}
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+#[LegacyHook]
+function paragraphs_entity_type_alter(array &$entity_types) {
+  \Drupal::service(ParagraphsHooks::class)->entityTypeAlter($entity_types);
+}
+
+/**
+ * Implements hook_entity_base_field_info_alter().
+ */
+#[LegacyHook]
+function paragraphs_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type) {
+  \Drupal::service(ParagraphsHooks::class)->entityBaseFieldInfoAlter($fields, $entity_type);
+}
+
+/**
+ * Remove 'field_' prefix from field collection bundles.
+ *
+ * @param array $migration
+ *   The migration configuration to process.
+ *
+ * @deprecated in paragraphs:8.x-1.13 and is removed from paragraphs:8.x-2.0.
+ *   Use \Drupal\paragraphs\MigrationPluginsAlterer::paragraphsMigrationBundleAdjust().
+ * @see https://www.drupal.org/project/paragraphs/issues/2911244
+ */
+function _paragraphs_migration_bundle_adjust(array &$migration) {
+  $migration_plugins_alterer = \Drupal::service('paragraphs.migration_plugins_alterer');
+  assert($migration_plugins_alterer instanceof MigrationPluginsAlterer);
+  $migration_plugins_alterer->paragraphsMigrationBundleAdjust($migration);
+}
+
+/**
+ * Map field_collection_item and 'paragraphs_item' fields to 'paragraph'.
+ *
+ * @param array $migration
+ *   The migration to process.
+ * @param string $destination
+ *   The process destination.
+ *
+ * @deprecated in paragraphs:8.x-1.13 and is removed from paragraphs:8.x-2.0.
+ *   Use \Drupal\paragraphs\MigrationPluginsAlterer::paragraphsMigrationEntityTypeAdjust().
+ * @see https://www.drupal.org/project/paragraphs/issues/2911244
+ */
+function _paragraphs_migration_entity_type_adjust(array &$migration, $destination = 'entity_type') {
+  $migration_plugins_alterer = \Drupal::service('paragraphs.migration_plugins_alterer');
+  assert($migration_plugins_alterer instanceof MigrationPluginsAlterer);
+  $migration_plugins_alterer->paragraphsMigrationEntityTypeAdjust($migration, $destination);
+}
+
+/**
+ * Prepares variables for.
+ *
+ * Default template: paragraphs-summary.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - buttons: An array of buttons to display in the modal form.
+ */
+function template_preprocess_paragraphs_summary(&$variables) {
+  \Drupal::service(ParagraphsThemeHooks::class)->preprocessParagraphsSummary($variables);
+}

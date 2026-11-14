@@ -1,0 +1,91 @@
+{# Normalize footer_classes - handle both array and string formats #}
+{% set additional_classes = footer_classes|default('') %}
+{% if additional_classes is iterable %}
+  {% set additional_classes = additional_classes|join(' ') %}
+{% endif %}
+
+{% set footer_variants = html_cva(base: ['flex', 'flex-col']) %}
+
+{% set footer_top_variants =
+  html_cva(base: ['flex w-full flex-col justify-between gap-6 py-8 md:grid md:grid-cols-2 md:gap-6 [&_li]:text-lg', 'border-t border-border'])
+%}
+
+{% set footer_first_col_variants = html_cva(base: ['flex', 'flex-col', 'gap-6', '[&_.branding]:h-8']) %}
+
+{% set footer_last_col_variants =
+  html_cva(base: ['flex flex-col gap-2 md:mx-0 md:ms-auto md:w-xs lg:w-md', '[&_form]:flex [&_form]:flex-row [&_form]:gap-2 md:[&_form]:items-end'])
+%}
+
+{% set footer_bottom_variants =
+  html_cva(
+    base: [
+      'flex w-full flex-col gap-2 py-3 [&_li]:text-xs [&_li]:md:text-sm [&_li]:xl:text-md',
+      'md:grid md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] md:gap-6 md:py-4',
+      'border-t border-border'
+    ]
+  )
+%}
+
+{% set footer_bottom_col_variants =
+  html_cva(
+    base: ['site-footer--bottom-col'],
+    variants: {
+      align: {
+        left: '',
+        right: ['md:flex md:justify-end']
+      }
+    }
+  )
+%}
+
+<section class="site-footer container mx-auto px-4">
+  <div class="{{ footer_variants.apply({}, additional_classes) }}">
+    <div class="{{ footer_top_variants.apply({}) }}">
+      {% if block('footer_first') is defined %}
+        <div class="{{ footer_first_col_variants.apply({}) }}">
+          {% block footer_first %}
+            {# Slot for components. #}
+          {% endblock %}
+        </div>
+      {% endif %}
+
+      {% if block('footer_last') is defined %}
+        <div class="{{ footer_last_col_variants.apply({}) }}">
+          {% block footer_last %}
+            {# Slot for components. #}
+          {% endblock %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="{{ footer_bottom_variants.apply({}) }}">
+      {% if block('footer_utility_first') is defined %}
+        <div
+          class="{{
+          footer_bottom_col_variants.apply({
+            align: 'left'
+          })
+          }}"
+        >
+          {% block footer_utility_first %}
+            {# Slot for components. #}
+          {% endblock %}
+        </div>
+      {% endif %}
+
+      {% if block('footer_utility_last') is defined %}
+        <div
+          class="{{
+          footer_bottom_col_variants.apply({
+            align: 'right'
+          })
+          }}"
+        >
+          {% block footer_utility_last %}
+            {# Slot for components. #}
+          {% endblock %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
