@@ -94,10 +94,11 @@ jobs:
           mkdir -p docroot/sites/default/files
 
       - name: Install Drupal
+        shell: bash
         run: |
           ./vendor/bin/drush site:install ./recipes/contrib/${{ matrix.site-template }} --yes 2>&1 | tee install.log
           cat install.log
-          if grep -q "\[error\]" install.log; then
+          if grep -qE "\[error\]|^In .+\.php line [0-9]+:" install.log; then
             echo "Drush finished with hidden errors"
             exit 1
           fi
