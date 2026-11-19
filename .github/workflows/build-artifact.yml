@@ -1,27 +1,36 @@
-name: Build and Deploy Artifact to dist Branch
+name: Build, Test, and Deploy Artifact to dist Branch
 on:
   push:
     branches:
       - main
+  pull_request:
   schedule:
-    # Run this workflow every 8 hours to repackage the pre-built dist branch including exported config.
+    # Run this workflow every 8 hours to repackage the pre-built dist branch with the latest dependencies.
     - cron: 0 */8 * * *
   workflow_dispatch:
 env:
   ARTIFACT_DIR: /tmp/artifact
+  ARTIFACT_TARBALL: /tmp/artifact.tar
 permissions:
-  contents: write
+  contents: read
+
+# Never run two dist rebuilds at once. Superseded pull request runs are cancelled.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
+  # Compose the codebase exactly once. Every later job tests or deploys this
+  # same build, so what gets pushed to dist is exactly what was tested.
   build-artifact:
     name: Build Drupal Artifact
     runs-on: ubuntu-latest
+    outputs:
+      templates: ${{ steps.site-templates.outputs.templates }}
 
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
-        with:
-          ref: main
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -29,6 +38,12 @@ jobs:
           php-version: '8.5'
           extensions: mbstring, xml, mysql, pdo_mysql, gd
           coverage: none
+
+      - name: Get available Site Templates
+        id: site-templates
+        run: |
+          TEMPLATES=$(php -r '$t = include "docroot/sites/default/site-templates.php"; echo json_encode(array_keys($t));')
+          echo "templates=$TEMPLATES" >> "$GITHUB_OUTPUT"
 
       - name: Get composer cache directory
         id: composer-cache
@@ -63,6 +78,7 @@ jobs:
             ./ $ARTIFACT_DIR
 
       - name: Install Drupal and export configuration
+        shell: bash
         run: |
           cd $ARTIFACT_DIR
 
@@ -71,28 +87,114 @@ jobs:
           mkdir -p files-private/default
           touch docroot/sites/default/files/.gitkeep
           touch files-private/default/.gitkeep
-          
+
           # Ensure the private files directory has an .htaccess file.
           HTACCESS_CONTENT=$(./vendor/bin/drush php-eval 'echo \Drupal\Component\FileSecurity\FileSecurity::htaccessLines(TRUE);')
           echo "$HTACCESS_CONTENT" > files-private/default/.htaccess
-          
+
           ./vendor/bin/drush site:install recipes/contrib/drupal_cms_starter \
             --db-url="mysql://drupal:drupal@127.0.0.1/drupal" \
             --site-name="Drupal CMS" \
             --account-name=admin \
             --account-pass=admin \
             --yes
-          
+
           ./vendor/bin/drush recipe ../recipes/custom/acquia_trials
+
+      - name: Package artifact
+        run: tar -C $ARTIFACT_DIR -cf $ARTIFACT_TARBALL .
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-artifact
+          path: ${{ env.ARTIFACT_TARBALL }}
+          retention-days: 3
+
+  # Install every Site Template from the built artifact. Any failure blocks the dist deploy.
+  install:
+    name: Install `${{ matrix.site-template }}`
+    needs: build-artifact
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        site-template: ${{ fromJson(needs.build-artifact.outputs.templates) }}
+
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          extensions: mbstring, xml, mysql, pdo_mysql, gd
+          coverage: none
+
+      - name: Start MySQL and create database
+        run: |
+          sudo systemctl start mysql.service
+          mysql -e 'CREATE USER "drupal"@"127.0.0.1" IDENTIFIED BY "drupal";' -uroot -proot
+          mysql -e 'CREATE DATABASE drupal;' -uroot -proot
+          mysql -e 'GRANT ALL PRIVILEGES ON drupal.* TO "drupal"@"127.0.0.1";' -uroot -proot
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-artifact
+          path: /tmp
+
+      - name: Unpack artifact
+        run: |
+          mkdir -p $ARTIFACT_DIR
+          tar -C $ARTIFACT_DIR -xf $ARTIFACT_TARBALL
+
+      - name: Install `${{ matrix.site-template }}`
+        shell: bash
+        working-directory: ${{ env.ARTIFACT_DIR }}
+        run: |
+          set -o pipefail
+
+          # Mirror the commands the Trials provisioning service runs.
+          ./vendor/bin/drush site:install ./recipes/contrib/${{ matrix.site-template }} \
+            --db-url="mysql://drupal:drupal@127.0.0.1/drupal" \
+            --site-name="CI ${{ matrix.site-template }}" \
+            --yes 2>&1 | tee install.log
+          ./vendor/bin/drush recipe ../recipes/custom/acquia_trials 2>&1 | tee -a install.log
+          ./vendor/bin/drush cache:rebuild 2>&1 | tee -a install.log
+
+          # Some failures are logged without a non-zero exit code.
+          if grep -qE "\[error\]|^In .+\.php line [0-9]+:" install.log; then
+            echo "::error title=${{ matrix.site-template }}::Drush reported errors while installing ${{ matrix.site-template }}."
+            exit 1
+          fi
+
+  deploy:
+    name: Deploy to dist branch
+    needs: install
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-artifact
+          path: /tmp
+
+      - name: Unpack artifact
+        run: |
+          mkdir -p $ARTIFACT_DIR
+          tar -C $ARTIFACT_DIR -xf $ARTIFACT_TARBALL
 
       - name: Remove values that should be unique.
         run: |
           cd $ARTIFACT_DIR
-                    
+
           # Ignore the salt hash auto-generated by Drupal Recommended Settings, we'll create a unique one for each project.
           cat > .gitignore << 'EOF'
           # Files that we'll regenerate for each unique clone.
-          salt.txt          
+          salt.txt
           EOF
 
       - name: Deploy to dist branch
@@ -100,13 +202,13 @@ jobs:
           cd $ARTIFACT_DIR
 
           cat >> .gitignore << EOF
-          
+
           # Ensure the files directories are included in the artifact, but ignore their contents except for .htaccess files.
           docroot/sites/*/files/*
           !docroot/sites/*/files/.htaccess
           files-private/default/*
           !files-private/default/.htaccess
-          
+
           # This file shouldn't be included in the actual artifact either.
           .gitignore
           EOF
