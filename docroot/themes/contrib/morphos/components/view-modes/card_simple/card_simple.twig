@@ -1,0 +1,38 @@
+{% set classes = [
+  'card',
+  'card--simple',
+  url ? 'card--clickable',
+] %}
+
+<div{{ attributes.addClass(classes) }}>
+  <div class="card__body card-body">
+    {% if info %}
+      <div class="card__info">
+        {{ info }}
+      </div>
+    {% endif %}
+
+    {% if heading %}
+      {{ include('morphos:heading', {
+        heading,
+        level: heading_level|default(3),
+        url: url|default(''),
+        additional_classes: ['card__title', 'card-title'],
+      },
+        with_context: false
+      ) }}
+    {% endif %}
+
+    {% if summary %}
+      <div class="card__content">
+        {{ summary }}
+      </div>
+    {% endif %}
+
+    {% if date %}
+      <div class="card__date">
+        {{ date }}
+      </div>
+    {% endif %}
+  </div>
+</div>

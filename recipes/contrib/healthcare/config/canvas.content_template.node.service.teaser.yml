@@ -1,0 +1,46 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.diagnosis.card
+    - core.base_field_override.node.service.title
+    - core.entity_view_mode.node.teaser
+    - field.field.media.image.field_media_image
+    - field.field.node.service.field_featured_image
+    - field.field.node.service.field_summary
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - node.type.service
+  module:
+    - file
+    - media
+    - node
+    - options
+id: node.service.teaser
+content_entity_type_id: node
+content_entity_type_bundle: service
+content_entity_type_view_mode: teaser
+component_tree:
+  -
+    uuid: cfce50d1-57f7-48d4-b642-75b0038622b1
+    component_id: sdc.diagnosis.card
+    component_version: 29f168ca617d82db
+    inputs:
+      background: default
+      style: full
+      orientation: vertical
+      heading_text:
+        sourceType: entity-field
+        expression: ℹ︎␜entity:node:service␝title␞␟value
+      level: 3
+      media:
+        sourceType: entity-field
+        expression: ℹ︎␜entity:node:service␝field_featured_image␞␟entity␜␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}
+      text:
+        sourceType: entity-field
+        expression: ℹ︎␜entity:node:service␝field_summary␞␟value
+      url:
+        sourceType: host-entity-url
+        absolute: true
+      is_text_centered: false
+exposed_slots: {  }

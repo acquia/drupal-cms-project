@@ -1,0 +1,24 @@
+.linkit-widget-container .fieldset__wrapper,
+.linkit-widget-container .fieldset-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  column-gap: var(--space-l, 10px);
+  > * {
+    width: 100%;
+    /* Fix none collapsing margins (caused by flex) */
+    margin-bottom: 0;
+  }
+  > .form-item--linkit-widget-uri,
+  > .form-item--linkit-widget-title {
+    flex: 1 1 auto;
+    width: calc(50% - var(--space-l, 10px));
+    min-width: 20em;
+    input {
+      width: 100%;
+    }
+  }
+  /* Claro specific fixes */
+  .claro-autocomplete {
+    width: 100%;
+  }
+}

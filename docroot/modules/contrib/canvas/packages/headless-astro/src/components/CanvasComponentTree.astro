@@ -1,0 +1,28 @@
+---
+// Carry the ambient declaration of the virtual components module into any
+// TypeScript program that includes this file.
+/// <reference path="../virtual.d.ts" />
+
+import { convertLegacyCustomElementsFormat } from '@drupal-canvas/headless';
+import JsonRenderCanvasComponentTree from '@drupal-canvas/json-render-astro/CanvasComponentTree.astro';
+import canvasComponents from 'virtual:@drupal-canvas/headless/components';
+
+import type { CanvasComponentRegistry } from '@drupal-canvas/json-render-astro';
+import type { CanvasComponentTree } from '@drupal-canvas/headless';
+
+interface Props {
+  tree: CanvasComponentTree | null;
+  components?: CanvasComponentRegistry;
+  /** Whether Canvas editor boundaries and empty drop areas should render. */
+  preview?: boolean;
+}
+
+const { tree, components = canvasComponents, preview = false } = Astro.props;
+const renderTree = convertLegacyCustomElementsFormat(tree, components);
+---
+
+<JsonRenderCanvasComponentTree
+  tree={renderTree}
+  components={components}
+  preview={preview}
+/>

@@ -1,0 +1,333 @@
+// @vitest-environment jsdom
+// cspell:ignore janvier Bonjour fichier fichiers Salut
+
+/**
+ * Server rendering of a live draft session with SWR fallback data, then
+ * browser hydration of that HTML: the draft-aware client created on the
+ * server keeps the SWR key enabled, so the fallback renders on both sides
+ * and hydration does not mismatch, while draft data is never fetched during
+ * server rendering (ADR 21, "Server rendering and SWR").
+ */
+
+import { act } from 'react';
+import {
+  TranslationsProvider,
+  useDateFormatter,
+  useJsonApiClient,
+  useTranslation,
+} from 'drupal-canvas/react';
+import { hydrateRoot } from 'react-dom/client';
+import { renderToString } from 'react-dom/server';
+import useSWR, { SWRConfig } from 'swr';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
+import {
+  CanvasComponentTree,
+  ServerRenderingDraftFetchError,
+} from './canvas-component-tree';
+
+import type { CanvasComponentTree as CanvasComponentTreeDocument } from '@drupal-canvas/headless';
+import type { CanvasContext, JsonApiRuntimeConfig } from 'drupal-canvas';
+
+const context: CanvasContext = {
+  page: { pageTitle: 'Draft page', breadcrumbs: [], mainEntity: null },
+  site: {
+    branding: { homeUrl: '/', siteName: 'Site', siteSlogan: '' },
+    baseUrl: 'https://drupal.example',
+    themeAssets: { logo: { url: '' }, favicon: { url: '', mimeType: '' } },
+  },
+};
+
+const draftRuntime: JsonApiRuntimeConfig = {
+  baseUrl: 'https://drupal.example',
+  apiPrefix: 'jsonapi',
+  proxyUrl: '/api/canvas/jsonapi',
+  resourceVersion: 'rel:working-copy',
+  preview: true,
+};
+
+interface Article {
+  title: string;
+}
+
+function jsonApiResponse(title: string): Response {
+  return new Response(
+    JSON.stringify({
+      data: { type: 'node--article', id: 'a', attributes: { title } },
+    }),
+    { status: 200, headers: { 'content-type': 'application/vnd.api+json' } },
+  );
+}
+
+/** A portable Code Component: string key, fetch through the hook's client. */
+function ArticleTitle() {
+  const client = useJsonApiClient();
+  const { data } = useSWR(
+    client ? 'article' : null,
+    () => client!.getResource('node--article', 'a') as Promise<Article>,
+  );
+  return <p data-testid="title">{data ? data.title : 'Loading'}</p>;
+}
+
+const tree = {
+  root: 'article',
+  elements: {
+    article: {
+      type: 'js.article',
+      props: {},
+      children: [],
+    },
+  },
+} satisfies CanvasComponentTreeDocument;
+
+function App() {
+  return (
+    <SWRConfig
+      value={{
+        fallback: { article: { title: 'Draft article' } },
+        provider: () => new Map(),
+        dedupingInterval: 0,
+      }}
+    >
+      <CanvasComponentTree
+        tree={tree}
+        components={{ article: ArticleTitle }}
+        context={context}
+        jsonApi={draftRuntime}
+      />
+    </SWRConfig>
+  );
+}
+
+function renderOnServer(element: React.ReactElement): string {
+  const globalWithWindow = globalThis as { window?: unknown };
+  const savedWindow = globalWithWindow.window;
+  delete globalWithWindow.window;
+  try {
+    return renderToString(element);
+  } finally {
+    globalWithWindow.window = savedWindow;
+  }
+}
+
+describe('draft server rendering with SWR fallback and hydration', () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.unstubAllGlobals();
+    document.body.innerHTML = '';
+  });
+
+  it('renders the fallback on the server through a non-null draft client and hydrates without mismatch', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const error = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    // Server: the client exists (the SWR key stays enabled) and SWR reads the
+    // fallback; no network request is made.
+    const serverFetch = vi.fn<typeof fetch>();
+    vi.stubGlobal('fetch', serverFetch);
+    const html = renderOnServer(<App />);
+    expect(html).toContain('Draft article');
+    expect(html).not.toContain('Loading');
+    expect(serverFetch).not.toHaveBeenCalled();
+    expect(
+      warn.mock.calls.map(([message]) => String(message)),
+    ).not.toContainEqual(expect.stringContaining('useJsonApiClient()'));
+
+    // Browser: hydrate the server HTML; the fallback renders again, then
+    // SWR revalidates through the same-origin proxy with cookies.
+    const browserFetch = vi.fn<typeof fetch>(async () =>
+      jsonApiResponse('Revalidated draft article'),
+    );
+    vi.stubGlobal('fetch', browserFetch);
+    (
+      globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }
+    ).IS_REACT_ACT_ENVIRONMENT = true;
+    const container = document.createElement('div');
+    container.innerHTML = html;
+    document.body.append(container);
+    const recoverable: unknown[] = [];
+    await act(async () => {
+      hydrateRoot(container, <App />, {
+        onRecoverableError: (cause) => recoverable.push(cause),
+      });
+    });
+    expect(recoverable).toEqual([]);
+    expect(
+      error.mock.calls.map(([message]) => String(message)),
+    ).not.toContainEqual(expect.stringMatching(/hydration/i));
+
+    await vi.waitFor(() =>
+      expect(container.textContent).toContain('Revalidated draft article'),
+    );
+    expect(browserFetch).toHaveBeenCalledTimes(1);
+    const [url, init] = browserFetch.mock.calls[0];
+    expect(String(url)).toMatch(
+      /^\/api\/canvas\/jsonapi\/jsonapi\/node\/article\/a\?.*resourceVersion=rel(%3A|:)working-copy/,
+    );
+    expect(init?.credentials).toBe('same-origin');
+  });
+
+  it('refuses draft network requests during server rendering with an actionable error', async () => {
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const serverFetch = vi.fn<typeof fetch>();
+    vi.stubGlobal('fetch', serverFetch);
+    let pending: Promise<Article> | undefined;
+    function Fetcher() {
+      const client = useJsonApiClient();
+      // Non-null: the same configuration as the browser client.
+      expect(client?.runtimeConfig).toMatchObject({
+        proxyUrl: '/api/canvas/jsonapi',
+        resourceVersion: 'rel:working-copy',
+        preview: true,
+      });
+      pending = client?.getResource('node--article', 'a') as
+        Promise<Article> | undefined;
+      return null;
+    }
+    renderOnServer(
+      <CanvasComponentTree
+        tree={tree}
+        components={{ article: Fetcher }}
+        context={context}
+        jsonApi={draftRuntime}
+      />,
+    );
+    expect(pending).toBeDefined();
+    await expect(pending).rejects.toBeInstanceOf(
+      ServerRenderingDraftFetchError,
+    );
+    await expect(pending).rejects.toThrow(/getClient\(\)/);
+    expect(serverFetch).not.toHaveBeenCalled();
+  });
+
+  it('formats dates in the site language of the context when rendering on the server', () => {
+    function EventDate() {
+      const formatDate = useDateFormatter();
+      return <time>{formatDate('2026-01-15', { dateStyle: 'long' })}</time>;
+    }
+    const render = (langcode?: string) =>
+      renderOnServer(
+        <CanvasComponentTree
+          tree={{
+            root: 'date',
+            elements: { date: { type: 'js.date', props: {}, children: [] } },
+          }}
+          components={{ date: EventDate }}
+          context={{
+            ...context,
+            site: context.site && { ...context.site, langcode },
+          }}
+        />,
+      );
+    expect(render('fr')).toContain('15 janvier 2026');
+    expect(render('en')).toContain('January 15, 2026');
+    expect(render()).toContain('January 15, 2026');
+  });
+
+  it('translates with the context translations on the server and hydrates without mismatch', async () => {
+    const error = vi.spyOn(console, 'error').mockImplementation(() => {});
+    function Greeting() {
+      const { t, formatPlural } = useTranslation();
+      const greeting = t('Hello @name', { '@name': 'Ada' });
+      return (
+        <p>{`${greeting}, ${formatPlural(2, '1 file', '@count files')}`}</p>
+      );
+    }
+    // The translations travel with the page context, so the server and the
+    // browser render the same text.
+    const translated = (
+      <CanvasComponentTree
+        tree={{
+          root: 'greeting',
+          elements: {
+            greeting: { type: 'js.greeting', props: {}, children: [] },
+          },
+        }}
+        components={{ greeting: Greeting }}
+        context={{
+          ...context,
+          translations: {
+            strings: {
+              '': {
+                'Hello @name': 'Bonjour @name',
+                '1 file\x03@count files': '1 fichier\x03@count fichiers',
+              },
+            },
+            pluralFormula: { 0: 0, 1: 0, default: 1 },
+          },
+        }}
+      />
+    );
+    const html = renderOnServer(translated);
+    expect(html).toContain('Bonjour Ada, 2 fichiers');
+
+    (
+      globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }
+    ).IS_REACT_ACT_ENVIRONMENT = true;
+    const container = document.createElement('div');
+    container.innerHTML = html;
+    document.body.append(container);
+    const recoverable: unknown[] = [];
+    await act(async () => {
+      hydrateRoot(container, translated, {
+        onRecoverableError: (cause) => recoverable.push(cause),
+      });
+    });
+    expect(recoverable).toEqual([]);
+    expect(
+      error.mock.calls.map(([message]) => String(message)),
+    ).not.toContainEqual(expect.stringMatching(/hydration/i));
+    expect(container.textContent).toBe('Bonjour Ada, 2 fichiers');
+  });
+
+  it('translates with an application dictionary above the tree on the server and hydrates without mismatch', async () => {
+    const error = vi.spyOn(console, 'error').mockImplementation(() => {});
+    function Greeting() {
+      const { t } = useTranslation();
+      return <p>{t('Hello @name', { '@name': 'Ada' })}</p>;
+    }
+    // The application's dictionary replaces the translations Drupal returned
+    // in the page context, which the tree still provides.
+    const translated = (
+      <TranslationsProvider
+        translations={{ strings: { '': { 'Hello @name': 'Salut @name' } } }}
+      >
+        <CanvasComponentTree
+          tree={{
+            root: 'greeting',
+            elements: {
+              greeting: { type: 'js.greeting', props: {}, children: [] },
+            },
+          }}
+          components={{ greeting: Greeting }}
+          context={{
+            ...context,
+            translations: {
+              strings: { '': { 'Hello @name': 'Bonjour @name' } },
+            },
+          }}
+        />
+      </TranslationsProvider>
+    );
+    const html = renderOnServer(translated);
+    expect(html).toContain('Salut Ada');
+
+    (
+      globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }
+    ).IS_REACT_ACT_ENVIRONMENT = true;
+    const container = document.createElement('div');
+    container.innerHTML = html;
+    document.body.append(container);
+    const recoverable: unknown[] = [];
+    await act(async () => {
+      hydrateRoot(container, translated, {
+        onRecoverableError: (cause) => recoverable.push(cause),
+      });
+    });
+    expect(recoverable).toEqual([]);
+    expect(
+      error.mock.calls.map(([message]) => String(message)),
+    ).not.toContainEqual(expect.stringMatching(/hydration/i));
+    expect(container.textContent).toBe('Salut Ada');
+  });
+});

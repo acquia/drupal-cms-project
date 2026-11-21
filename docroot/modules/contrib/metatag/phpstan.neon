@@ -1,0 +1,20 @@
+# Configuration file for PHPStan static code checking, see https://phpstan.org.
+includes:
+  - phar://phpstan.phar/conf/bleedingEdge.neon
+
+parameters:
+  level: 2
+  paths:
+    - .
+  ignoreErrors:
+    # new static() is a best practice in Drupal, so we cannot fix that.
+    - "#^Unsafe usage of new static#"
+    - "#^Missing cache backend declaration for performance.#"
+    # Migrate source plugins must keep extending and calling DrupalSqlBase,
+    # which core deprecated in 11.3 without providing a replacement.
+    -
+      identifiers:
+        - class.extendsDeprecatedClass
+        - instanceof.deprecatedClass
+        - method.deprecatedClass
+        - staticMethod.deprecatedClass

@@ -1,0 +1,52 @@
+{#
+/**
+ * @file
+ * The default template file for the HTML body of an easy email.
+ *
+ * Available variables:
+ * - body: The HTML body content as a render array
+ * - easy_email: The easy email entity
+ * - footer: The footer parts to show, empty when the footer is off:
+ *   - site_name: The site name.
+ *   - slogan: The site slogan.
+ *
+ * This template may be overriden by easy email type, using one of the
+ * following template names:
+ * - easy-email-body-html.html.twig: global, used by default.
+ * - easy-email-body-html--my-easy-email-type.html.twig: only for emails using the "my_easy_email_type" template.
+ *
+ * @see template_preprocess()
+ * @see template_preprocess_easy_email_body_html()
+ *
+ * @ingroup themeable
+ */
+#}
+{% if style_tag_styles %}
+  <style>
+    {{ style_tag_styles }}
+  </style>
+{% endif %}
+<div class="email-body-wrapper">
+  <div class="email-body">
+    <div class="header">
+      {% if site_logo %}
+        <div class="site-logo"><a href="{{ site_url }}"><img alt="{{ site_name }}" src="{{ site_logo }}" /></a></div>
+      {% else %}
+        <div class="site-name"><a href="{{ site_url }}">{{ site_name }}</a></div>
+      {% endif %}
+    </div>
+    <div class="content">
+      {{ body }}
+    </div>
+    {% if footer %}
+      <div class="footer">
+        {% if footer.site_name %}
+          <div class="footer-site-name"><a href="{{ site_url }}">{{ footer.site_name }}</a></div>
+        {% endif %}
+        {% if footer.slogan %}
+          <div class="footer-slogan">{{ footer.slogan }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>

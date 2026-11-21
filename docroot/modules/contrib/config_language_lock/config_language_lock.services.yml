@@ -1,0 +1,18 @@
+services:
+  _defaults:
+    autoconfigure: true
+    autowire: true
+
+  logger.channel.config_language_lock:
+    parent: logger.channel_base
+    arguments: ['config_language_lock']
+
+  Drupal\config_language_lock\ConfigLanguageLockConfigManager:
+    arguments:
+      $localeConfigManager: '@?locale.config_manager'
+      $typedConfigManager: '@config.typed'
+  Drupal\config_language_lock\ConfigLanguageLockBatch: ~
+  Drupal\config_language_lock\Hook\ConfigLanguageLockHooks: ~
+  Drupal\config_language_lock\CanvasIntegrationChecker: ~
+  Drupal\config_language_lock\Hook\ConfigLanguageLockRequirementsHooks: ~
+  Drupal\config_language_lock\EventSubscriber\ConfigLanguageLockRecipeAppliedSubscriber: ~

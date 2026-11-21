@@ -1,0 +1,33 @@
+.partner-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background-color: #F3F4F6;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  min-height: 120px;
+  min-width: 150px;
+}
+
+.partner-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.partner-card img,
+.partner-card svg,
+.partner-card .media,
+.partner-card .component {
+  max-width: 100%;
+  height: auto;
+  min-height: 48px;
+  max-height: 80px;
+  object-fit: contain;
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: auto;
+  width: 140px;
+  height: 56px;
+}

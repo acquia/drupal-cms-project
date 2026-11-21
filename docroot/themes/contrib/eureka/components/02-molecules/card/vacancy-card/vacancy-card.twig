@@ -1,0 +1,79 @@
+{#
+/** Available variables:
+ * - vacancy_card_base_class: base classname of the wrapper.
+ * - vacancy_card_modifiers: array of modifiers to add to the base classname of the wrapper.
+ * - vacancy_card_blockname: blockname prepended to the base classname of the wrapper(s) and each component.
+ * - vacancy_card_extra_classes: extra classes, optional for the component.
+ *
+ * - vacancy_card_heading: vacancy card heading.
+ * - vacancy_card_heading_level: vacancy card heading level.
+ * - vacancy_card_text: vacancy card text / description.
+ * - vacancy_card_date: vacancy card date / deadline.
+ * - vacancy_card_salary: vacancy card salary.
+ * - vacancy_card_cta_url: vacancy card cta url.
+ * - vacancy_card_cta_text: vacancy card cta text.
+ *
+ * Available blocks:
+ * - vacancy_card_tags_block
+ */
+#}
+
+{% set vacancy_card_base_class = 'vacancy-card' %}
+
+<div {{ bem(vacancy_card_base_class, vacancy_card_modifiers, vacancy_card_blockname, vacancy_card_extra_classes) }}>
+  <div {{ bem('content', [], vacancy_card_base_class) }}>
+    {% if vacancy_card_heading %}
+      {{ include("eureka:heading", {
+        heading: vacancy_card_heading,
+        heading_level: vacancy_card_heading_level|default(3),
+        heading_size_override: 'small',
+        heading_extra_classes: ['vacancy-card__heading'],
+      }, with_context = false) }}
+    {% endif %}
+
+    {% if vacancy_card_tags %}
+      <div {{ bem('tags', [], vacancy_card_base_class) }}>
+        {% block vacancy_card_tags_block %}
+          {# Dummy tag to check FE #}
+          {{ include("eureka:tag", {
+            tag_text: 'Teaching',
+            tag_type: 'primary',
+          }, with_context = false) }}
+        {% endblock %}
+      </div>
+    {% endif %}
+
+    {% if vacancy_card_text %}
+      {{ include("eureka:paragraph", {
+        paragraph_content: vacancy_card_text,
+        paragraph_extra_classes: ['vacancy-card__text'],
+      }, with_context = false) }}
+    {% endif %}
+
+    {% if vacancy_card_date %}
+      {{ include("eureka:paragraph", {
+        paragraph_content: 'Application deadline: @date'|t({ '@date' : vacancy_card_date|date("F d, Y")}),
+        paragraph_icon: true,
+        paragraph_icon_name: 'time',
+        paragraph_icon_before: true,
+        paragraph_extra_classes: ['vacancy-card__date'],
+      }, with_context = false) }}
+    {% endif %}
+
+    {% if vacancy_card_salary %}
+      <p class="paragraph paragraph--no-margin vacancy-card__salary"><span>{{ 'Salary:'|t }}</span> {{ vacancy_card_salary }}</p>
+    {% endif %}
+  </div>
+
+  {% if vacancy_card_cta_url %}
+    {{ include("eureka:button", {
+      button_content: vacancy_card_cta_text|default('Apply now'|t),
+      button_url: vacancy_card_cta_url,
+      button_type: 'secondary',
+      button_icon: true,
+      button_icon_before: true,
+      button_icon_name: 'external',
+      button_extra_classes: ['vacancy-card__cta'],
+    }, with_context = false) }}
+  {% endif %}
+</div>

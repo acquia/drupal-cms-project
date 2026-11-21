@@ -1,0 +1,21 @@
+{
+    "name": "drupal/from_starterkit_theme",
+    "type": "drupal-recipe",
+    "require": {
+        "drupal/site_template_helper": "*"
+    },
+    "extra": {
+        "drupal-site-template": {
+            "generate-theme": {
+                "name": "blank",
+                "info": {
+                    "regions": {
+                        "header": "Header",
+                        "content": "Content",
+                        "footer": "Footer"
+                    }
+                }
+            }
+        }
+    }
+}

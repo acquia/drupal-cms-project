@@ -1,0 +1,123 @@
+@layer components;
+
+/* Modal state - prevents body scroll when mobile menu is open */
+:root.navbar-modal-open {
+  &,
+  body {
+    overflow: hidden;
+  }
+}
+
+/* Menu visibility toggle (controlled by JS) */
+.navbar--menu:not(.navbar--menu--open) {
+  @apply hidden md:flex;
+}
+
+/* Child component styling that can't be moved to Twig */
+.navbar--links .button.button {
+  @apply mx-8 w-[calc(100%-var(--spacing)*16)] md:m-auto md:w-auto;
+}
+
+.navbar--dropdown-menu .dropdown-menu {
+  @apply w-full md:w-auto;
+}
+
+.navbar--dropdown-menu-wrapper > :last-child {
+  @apply pb-24 md:pb-0;
+}
+
+/* Dark mode: banner menu bar matches the main menu background */
+.dark .banner-menu-bar {
+  background-color: var(--background);
+}
+
+/* External region styling */
+.region-header {
+  .navbar--modal-top {
+    @apply px-4;
+  }
+}
+
+/* Branding component styling */
+.navbar--logo,
+.navbar--modal-logo {
+  .branding {
+    @apply h-8 md:h-10;
+    display: inline-flex;
+    /* Reserve minimum space to reduce layout shift - accommodates logos from square (1:1) to wide (6:1) */
+    min-width: 2rem; /* Minimum for square logos */
+
+    @media (min-width: 768px) {
+      min-width: 2.5rem;
+    }
+
+    svg,
+    img[src$=".svg"] {
+      @apply h-full w-auto max-w-full;
+      /* Preserve intrinsic aspect ratio from SVG viewBox or image dimensions */
+      height: 100%;
+      width: auto;
+    }
+  }
+}
+
+/* Menu item with submenu - desktop dropdown container */
+.menu-item--has-children {
+  @apply relative;
+}
+
+/* Submenu wrapper - hidden by default, positioned as dropdown on desktop */
+.submenu-wrapper {
+  @apply md:absolute md:top-full md:left-0 md:z-10;
+  @apply md:mt-1 md:rounded-md md:bg-background md:shadow-lg;
+  @apply md:min-w-[200px];
+}
+
+/* Submenu nested lists */
+.submenu-wrapper ul {
+  @apply flex-col gap-1;
+}
+
+.submenu-wrapper .menu-link {
+  @apply md:min-h-[40px] md:rounded-md md:text-sm;
+  @apply hover:md:bg-primary hover:md:text-primary-foreground;
+  @apply focus:md:bg-primary focus:md:text-primary-foreground;
+}
+
+/* Submenu visibility - controlled by expand button on all screen sizes */
+.dropdown-menu__expand-button[aria-expanded="false"] + .submenu-wrapper {
+  @apply hidden;
+}
+
+.dropdown-menu__expand-button[aria-expanded="true"] + .submenu-wrapper {
+  @apply block;
+}
+
+/* Mobile only: full width so submenu stacks below parent, with indent */
+@media (max-width: 767px) {
+  .dropdown-menu__expand-button[aria-expanded="true"] + .submenu-wrapper {
+    @apply w-full basis-full pl-4;
+  }
+}
+
+/* Expand button icon rotation when expanded */
+.dropdown-menu__expand-button svg {
+  transition: transform 0.2s ease;
+}
+
+.dropdown-menu__expand-button[aria-expanded="true"] svg {
+  @apply rotate-180;
+}
+
+/* Right-align dropdown for last top-level menu item to prevent off-screen overflow on desktop */
+@media (min-width: 768px) {
+  ul[data-level="1"] > li:last-child > .submenu-wrapper {
+    left: auto;
+    right: 0;
+  }
+}
+
+/* Submenu indicator positioning */
+.submenu-indicator {
+  @apply ms-auto md:ms-1;
+}

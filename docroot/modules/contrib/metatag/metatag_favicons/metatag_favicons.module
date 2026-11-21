@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Custom hook implementations for Metatag Favicons.
+ */
+
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\metatag_favicons\Hook\HelpHooks;
+use Drupal\metatag_favicons\Hook\OutputHooks;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+#[LegacyHook]
+function metatag_favicons_help($route_name, RouteMatchInterface $route_match) {
+  return \Drupal::service(HelpHooks::class)->help($route_name, $route_match);
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+#[LegacyHook]
+function metatag_favicons_page_attachments_alter(array &$attachments) {
+  return \Drupal::service(OutputHooks::class)->pageAttachmentsAlter($attachments);
+}

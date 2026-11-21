@@ -1,0 +1,15 @@
+{% set banner_attributes = create_attribute() %}
+
+<div{{ banner_attributes.addClass(['page__banner', 'color--primary']) }}>
+  {% embed 'morphos:banner' with {
+    attributes: create_attribute(),
+    title: page_title,
+    texture: 'texture--conic-top-start',
+    padding_top: '24',
+    padding_bottom: '24',
+  } %}
+    {% block breadcrumb %}
+      {{ page.breadcrumb }}
+    {% endblock %}
+  {% endembed %}
+</div>

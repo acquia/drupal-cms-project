@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - file
+    - honeypot
+    - system
+    - webform
+id: submission_viewer
+label: 'Submission viewer'
+weight: -6
+is_admin: false
+permissions:
+  - 'access webform help'
+  - 'access webform overview'
+  - 'bypass honeypot protection'
+  - 'delete own files'
+  - 'view any webform submission'
+  - 'view the administration theme'

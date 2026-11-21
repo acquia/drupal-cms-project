@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_research_paper_file
+    - node.type.researches
+  module:
+    - file
+id: node.researches.field_research_paper_file
+field_name: field_research_paper_file
+entity_type: node
+bundle: researches
+label: 'Research Paper file'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'txt pdf'
+  max_filesize: ''
+  description_field: false
+field_type: file

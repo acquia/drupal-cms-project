@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" font-family="system-ui, -apple-system, sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="none" stroke="#546e7a" stroke-width="1.5"/>
+    </marker>
+    <marker id="arrow-back" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
+      <path d="M8,0 L0,3 L8,6" fill="none" stroke="#546e7a" stroke-width="1.5"/>
+    </marker>
+  </defs>
+
+  <!-- Modeler API (center) -->
+  <rect x="200" y="20" width="240" height="60" rx="8" fill="#3f51b5" stroke="#283593" stroke-width="1.5"/>
+  <text x="320" y="46" text-anchor="middle" fill="#fff" font-weight="bold" font-size="15">Modeler API</text>
+  <text x="320" y="64" text-anchor="middle" fill="#c5cae9" font-size="11">Api service &#xB7; central coordinator</text>
+
+  <!-- Left arm: Model Owner -->
+  <line x1="260" y1="80" x2="140" y2="130" stroke="#546e7a" stroke-width="1.5" marker-start="url(#arrow-back)" marker-end="url(#arrow)"/>
+  <rect x="30" y="130" width="220" height="56" rx="6" fill="#e8eaf6" stroke="#7986cb" stroke-width="1.2"/>
+  <text x="140" y="153" text-anchor="middle" font-weight="600" fill="#283593">Model Owner</text>
+  <text x="140" y="170" text-anchor="middle" fill="#546e7a" font-size="11">components &#xB7; config &#xB7; storage</text>
+
+  <!-- Right arm: Modeler -->
+  <line x1="380" y1="80" x2="500" y2="130" stroke="#546e7a" stroke-width="1.5" marker-start="url(#arrow-back)" marker-end="url(#arrow)"/>
+  <rect x="390" y="130" width="220" height="56" rx="6" fill="#e8eaf6" stroke="#7986cb" stroke-width="1.2"/>
+  <text x="500" y="153" text-anchor="middle" font-weight="600" fill="#283593">Modeler</text>
+  <text x="500" y="170" text-anchor="middle" fill="#546e7a" font-size="11">UI &#xB7; parse &#xB7; serialize</text>
+
+  <!-- Config Entity (under Model Owner) -->
+  <line x1="140" y1="186" x2="140" y2="218" stroke="#90a4ae" stroke-width="1.2"/>
+  <rect x="40" y="218" width="200" height="40" rx="5" fill="#fff" stroke="#b0bec5" stroke-width="1"/>
+  <text x="140" y="243" text-anchor="middle" fill="#455a64" font-size="12">Config Entity (Drupal config)</text>
+
+  <!-- Raw Data (under Modeler) -->
+  <line x1="500" y1="186" x2="500" y2="218" stroke="#90a4ae" stroke-width="1.2"/>
+  <rect x="400" y="218" width="200" height="40" rx="5" fill="#fff" stroke="#b0bec5" stroke-width="1"/>
+  <text x="500" y="243" text-anchor="middle" fill="#455a64" font-size="12">Raw Data (XML, JSON, ...)</text>
+
+  <!-- NO link between Config Entity and Raw Data -->
+  <!-- Explicit gap to show full abstraction -->
+
+  <!-- Annotation: no direct link -->
+  <text x="320" y="244" text-anchor="middle" fill="#b71c1c" font-size="11" font-style="italic">no direct link</text>
+
+  <!-- Components label (under config entity) -->
+  <text x="140" y="284" text-anchor="middle" fill="#78909c" font-size="11">Components &#xB7; Successors &#xB7; Colors</text>
+  <text x="140" y="298" text-anchor="middle" fill="#78909c" font-size="11">Swimlanes &#xB7; Annotations</text>
+</svg>

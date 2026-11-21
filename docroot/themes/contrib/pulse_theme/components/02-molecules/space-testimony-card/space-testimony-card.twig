@@ -1,0 +1,89 @@
+{#
+/**
+ * @file
+ * Space Testimonial Card component.
+ *
+ * This component renders a Testimonial Card with 
+ * company branding. It is designed to display user testimonials along with their name, designation,
+ * and associated images.
+ *
+ * Properties:
+ * - image: [object] Avatar image with properties:
+ *   - src: [string] The URL of the image.
+ *   - alt: [string] Alternative text for accessibility.
+ *   - width: [integer] Image width in pixels.
+ *   - height: [integer] Image height in pixels.
+ * - person_name: [string] The full name of the person providing the testimonial.
+ * - text: [string] The testimonial content or message.
+ * - designation: [string] The title or role of the person.
+ * - extra_classes: [string] Additional CSS classes for customization.
+ *
+ * Slots:
+ * - company_logo: [markup] An optional company logo in `company-logo-and-avatar` layout.
+ */
+#}
+
+{# Default #}
+{% set element = element|default('article') %}
+
+{# Classes #}
+{% set classes = [
+  'testimonial-card ga-testimonial-card ga_space_component text-center m-auto',
+  extra_classes ? extra_classes : '',
+] %}
+{% set attributes = attributes|default(create_attribute()).addClass(classes| sort | join(' ') | trim) %}
+
+{# Template #}
+{% block testimonial_company_logo_and_avatar_card %}
+  <{{element}} {{ attributes.addClass() }}>
+    <div class="container mx-auto">
+      <div class="testimonial-card-inner w-full flex flex-wrap justify-center">
+        <div class="avatar-image-wrapper">
+          {% include 'canvas:image' ignore missing with {
+            src: image.src,
+            alt: image.alt,
+            width: image.width,
+            height: image.height,
+            loading: loading|default('lazy'),
+            class: 'rounded-full'
+          } only %}
+        </div>
+
+        {% if text|render|striptags|trim %}
+          <div class="avatar-text-wrapper flex items-start flex-wrap">
+            <img src="/themes/contrib/pulse_theme/components/02-molecules/space-testimony-card/images/quots-icon.svg" alt="Quote Icon" class="quote-icon w-5 h-5 mb-2">
+            <div {{ region_attributes.text|default(create_attribute()).addClass('card_text') }}>
+              {{ text }}
+            </div>
+          </div>
+        {% endif %}
+
+        <div class="avatar-info-wrapper flex w-full flex-wrap justify-center">
+          {% if person_name|render|striptags|trim %}
+            <h4 class="avatar-name mr-2 mb-0">
+              {{ person_name }}<span>,</span>
+            </h4>
+          {% endif %}
+
+          {% if designation|render|striptags|trim %}
+            <div {{ region_attributes.designation|default(create_attribute()).addClass('avatar-designation') }}>
+              {{ designation }}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="company-logo-wrapper w-full flex justify-center">
+          {% block company_logo %}
+            {% include 'canvas:image' ignore missing with {
+              src: company_logo.src,
+              alt: company_logo.alt,
+              width: company_logo.width,
+              height: company_logo.height,
+              loading: loading|default('lazy')
+            } only %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </{{element}}>
+{% endblock %}

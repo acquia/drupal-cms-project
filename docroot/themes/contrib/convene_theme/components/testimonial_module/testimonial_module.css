@@ -1,0 +1,106 @@
+.testimonial-module.testimonial-module--themed, body:not(.canvas-page) .testimonial-module.testimonial-module--admin-theme, .testimonial-module {
+  background-color: #092845 !important;
+  color: #ffffff;
+  padding: 80px 24px;
+  overflow: hidden;
+}
+
+.testimonial-module .testimonial-module__container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.testimonial-module .testimonial-module__slider-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.testimonial-module .testimonial-module__nav {
+  background-color: rgba(255, 255, 255, 0.05); /* very subtle light background */
+  border: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.testimonial-module .testimonial-module__nav:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.testimonial-module .testimonial-module__nav:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.testimonial-module .testimonial-module__slider-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  flex: 1;
+  min-height: 200px; /* Base empty state height for drops */
+}
+
+.testimonial-module .testimonial-module__slider-track::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+/* We must ensure items (which might be wrapped by Drupal Canvas) stretch perfectly */
+.testimonial-module .testimonial-module__slider-track > * {
+  flex: 0 0 100%;
+  width: 100%;
+  scroll-snap-align: center;
+}
+
+.testimonial-module .testimonial-module__controls {
+  display: flex;
+  justify-content: center;
+}
+
+.testimonial-module .testimonial-module__dots {
+  display: flex;
+  gap: 8px;
+}
+
+.testimonial-module .testimonial-module__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.testimonial-module .testimonial-module__dot.active {
+  background-color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .testimonial-module.testimonial-module--themed, body:not(.canvas-page) .testimonial-module.testimonial-module--admin-theme, .testimonial-module {
+    padding: 64px 16px;
+  }
+
+  .testimonial-module .testimonial-module__slider-wrapper {
+    gap: 0;
+  }
+
+  .testimonial-module .testimonial-module__nav {
+    display: none; /* Hide arrows on mobile to prevent text overlap, users can swipe naturally */
+  }
+}

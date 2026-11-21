@@ -1,0 +1,97 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.person_profile.field_badge
+    - field.field.node.person_profile.field_callout_content
+    - field.field.node.person_profile.field_callout_heading
+    - field.field.node.person_profile.field_content
+    - field.field.node.person_profile.field_featured_image
+    - field.field.node.person_profile.field_role
+    - field.field.node.person_profile.field_seo_analysis
+    - field.field.node.person_profile.field_seo_description
+    - field.field.node.person_profile.field_seo_image
+    - field.field.node.person_profile.field_seo_title
+    - field.field.node.person_profile.field_sidebar
+    - node.type.person_profile
+  module:
+    - media
+    - text
+    - user
+id: node.person_profile.default
+targetEntityType: node
+bundle: person_profile
+mode: default
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  field_badge:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_callout_content:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  field_callout_heading:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_content:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_featured_image:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: eager
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_role:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_sidebar:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_seo_analysis: true
+  field_seo_description: true
+  field_seo_image: true
+  field_seo_title: true
+  search_api_excerpt: true

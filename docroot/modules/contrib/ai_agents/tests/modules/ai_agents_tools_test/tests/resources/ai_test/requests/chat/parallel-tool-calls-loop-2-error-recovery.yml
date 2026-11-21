@@ -1,0 +1,127 @@
+request:
+  messages:
+    -
+      role: user
+      text: 'Build a page with parallel tools.'
+      images: {  }
+      remote_files: {  }
+      tools: null
+      tool_id: null
+    -
+      role: assistant
+      text: ''
+      images: {  }
+      remote_files: {  }
+      tools:
+        -
+          id: call_1
+          type: function
+          function:
+            name: dummy_tool
+            arguments: '{"input":"alpha"}'
+        -
+          id: call_2
+          type: function
+          function:
+            name: dummy_tool
+            arguments: '{"input":"beta"}'
+        -
+          id: call_3
+          type: function
+          function:
+            name: dummy_tool_two
+            arguments: '{"input":"gamma"}'
+      tool_id: null
+    -
+      role: tool
+      text: 'Error: The tool "dummy_tool" may only be called once per response, but it was called multiple times. None of the tool calls in this response were executed. Please respond again, calling "dummy_tool" at most once and waiting for its result before deciding on further calls.'
+      images: {  }
+      remote_files: {  }
+      tools: null
+      tool_id: call_1
+    -
+      role: tool
+      text: 'Error: The tool "dummy_tool" may only be called once per response, but it was called multiple times. None of the tool calls in this response were executed. Please respond again, calling "dummy_tool" at most once and waiting for its result before deciding on further calls.'
+      images: {  }
+      remote_files: {  }
+      tools: null
+      tool_id: call_2
+    -
+      role: tool
+      text: 'Error: This tool call was not executed, because the tool(s) "dummy_tool" may only be called once per response, so all calls were rejected. Please issue your tool calls again.'
+      images: {  }
+      remote_files: {  }
+      tools: null
+      tool_id: call_3
+  debug_data: {  }
+  chat_tools:
+    -
+      type: function
+      function:
+        name: dummy_tool
+        description: 'A test plugin that echoes back the input string.'
+        parameters:
+          type: object
+          properties:
+            input:
+              name: input
+              type: string
+              description: 'Input The input string to echo back.'
+          required:
+            - input
+    -
+      type: function
+      function:
+        name: dummy_tool_two
+        description: 'A test plugin that echoes back the input string.'
+        parameters:
+          type: object
+          properties:
+            input:
+              name: input
+              type: string
+              description: 'Input The input string to echo back.'
+          required:
+            - input
+    -
+      type: function
+      function:
+        name: dummy_tool_three
+        description: 'A test plugin that echoes back the input string.'
+        parameters:
+          type: object
+          properties:
+            input:
+              name: input
+              type: string
+              description: 'Input The input string to echo back.'
+          required:
+            - input
+  chat_structured_json_schema: {  }
+  chat_strict_schema: false
+response:
+  normalized:
+    role: assistant
+    text: 'Recovered after rejection.'
+    images: {  }
+    remote_files: {  }
+    tools: null
+    tool_id: null
+  rawOutput:
+    role: assistant
+    text: 'Recovered after rejection.'
+  metadata: {  }
+  tokenUsage:
+    input: null
+    output: null
+    total: null
+    reasoning: null
+    cached: null
+  rateLimits:
+    rateLimitMaxRequests: null
+    rateLimitMaxTokens: null
+    rateLimitRemainingRequests: null
+    rateLimitRemainingTokens: null
+    rateLimitResetRequests: null
+    rateLimitResetTokens: null
+operation_type: chat

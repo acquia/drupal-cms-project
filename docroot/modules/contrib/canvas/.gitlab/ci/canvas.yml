@@ -1,0 +1,28 @@
+# The Canvas testing image's environment points Composer, npm, Turborepo,
+# Playwright and Cypress at its warm caches. Astro and TypeScript instead write
+# to the repo's own `.cache` directory (which `.drupal-restore-git` links to
+# $CI_PROJECT_DIR/.cache), so link the image's copies in there.
+.canvas-cache: &canvas-cache
+  - |
+    if [ -n "$CANVAS_CACHE_DIR" ]; then
+      mkdir -p "$CI_PROJECT_DIR/.cache"
+      for name in astro tsc; do
+        [ -e "$CI_PROJECT_DIR/.cache/$name" ] || [ -L "$CI_PROJECT_DIR/.cache/$name" ] || ln -s "$CANVAS_CACHE_DIR/$name" "$CI_PROJECT_DIR/.cache/$name"
+      done
+    fi
+
+.canvas-ui: &canvas-ui
+  - *canvas-cache
+  - npm ci
+  # The UI's build script runs through Turborepo, which builds its workspace
+  # dependencies (headless, astro-hydration, and their dependencies) first.
+  - npm run build -w ui
+
+# canvas_ssr's Deno runner looks for the binary at vendor/bin/deno.
+.deno: &deno
+  - |
+    DENO_VERSION=2.9.8
+    curl -fsSL -o /tmp/deno.zip "https://github.com/denoland/deno/releases/download/v${DENO_VERSION}/deno-x86_64-unknown-linux-gnu.zip"
+    unzip -q -o /tmp/deno.zip -d /usr/local/bin
+    chmod 0755 /usr/local/bin/deno
+    ln -sf /usr/local/bin/deno "$CI_PROJECT_DIR/_drupal/vendor/bin/deno"

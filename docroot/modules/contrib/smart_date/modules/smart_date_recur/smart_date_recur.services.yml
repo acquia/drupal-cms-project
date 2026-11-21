@@ -1,0 +1,19 @@
+services:
+  smart_date_recur.manager:
+    class: Drupal\smart_date_recur\SmartDateRecurManager
+  # smart_date_recur.rule:
+  #     class: Drupal\smart_date_recur\Entity\SmartDateRule
+  # smart_date_recur.format:
+  #     class: Drupal\smart_date_recur\Plugin\Field\FieldFormatter\SmartDateRecurrenceFormatter
+
+  Drupal\smart_date_recur\Hook\SmartDateRecurHooks:
+    class: Drupal\smart_date_recur\Hook\SmartDateRecurHooks
+    autowire: true
+    arguments:
+      $smartDateRecurManager: '@smart_date_recur.manager'
+
+  Drupal\smart_date_recur\Hook\SmartDateRecurTokensHooks:
+    class: Drupal\smart_date_recur\Hook\SmartDateRecurTokensHooks
+    autowire: true
+    arguments:
+      $tokenEntityMapper: '@?token.entity_mapper'

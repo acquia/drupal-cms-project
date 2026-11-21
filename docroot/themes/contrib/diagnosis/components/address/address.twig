@@ -1,0 +1,39 @@
+{% set color_class =
+  {
+    default: 'text-foreground',
+    inverted: 'text-background',
+    primary: 'text-primary'
+  }[text_color|default('default')]
+%}
+
+{% set size_class =
+  {
+    'text-sm': 'text-sm',
+    normal: 'text-base',
+    'text-lg': 'text-lg'
+  }[text_size|default('normal')]
+%}
+
+{% if organization is not empty or address_line1 is not empty %}
+  <address class="leading-relaxed not-italic {{ color_class }} {{ size_class }}">
+    {% if organization is not empty %}
+      <span class="block font-medium">{{ organization }}</span>
+    {% endif %}
+    {% if address_line1 is not empty %}
+      <span class="block">{{ address_line1 }}</span>
+    {% endif %}
+    {% if address_line2 is not empty %}
+      <span class="block">{{ address_line2 }}</span>
+    {% endif %}
+    {% if locality is not empty or administrative_area is not empty or postal_code is not empty %}
+      <span class="block">
+        {%- if locality is not empty %}{{ locality }}{% endif %}
+        {%- if locality is not empty and administrative_area is not empty %}, {% endif %}
+        {%- if administrative_area is not empty %}{{ administrative_area }}{% endif %}
+        {%- if postal_code is not empty %}
+          {{ postal_code }}
+        {% endif %}
+      </span>
+    {% endif %}
+  </address>
+{% endif %}

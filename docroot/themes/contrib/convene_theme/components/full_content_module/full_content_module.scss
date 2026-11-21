@@ -1,0 +1,263 @@
+@use '../../scss/variables' as *;
+
+.full-content-module {
+  background-color: #ffffff;
+  padding: 64px 20px;
+  font-family: $font-family;
+  color: $text-regular-color;
+  
+  max-width: 800px; /* Constrain width to match Figma screenshot proportions */
+  margin: 0 auto;
+
+  /* TOP META BAR */
+  &__top-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+  }
+
+  &__breadcrumbs {
+    font-size: 0.875rem;
+    color: #4b5563;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    a {
+      color: #718096;
+      text-decoration: none;
+
+      &:hover {
+        color: $btn-blue;
+      }
+    }
+
+    &-divider {
+      color: #A0AEC0;
+    }
+
+    &-current {
+      color: #030804;
+      font-weight: 500;
+    }
+  }
+
+  /* GLOBAL UTILITIES */
+  &__social-share {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+
+    a {
+      color: #030804;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      width: 44px;
+      height: 44px;
+
+      svg {
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    &--plain {
+      a {
+        width: auto;
+        height: auto;
+        &:hover {
+          color: $btn-blue;
+        }
+      }
+    }
+
+    &--circle {
+      a {
+        border-radius: 50%;
+        background-color: #F3F4F6;
+        
+        &:hover {
+          background-color: #E5E7EB;
+          color: $btn-blue;
+        }
+      }
+    }
+  }
+
+  /* BOTTOM META BAR */
+  &__bottom-meta {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    border-top: 1px solid #E2E8F0;
+    padding-top: 3rem;
+  }
+
+  &__share-this {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    .share-label {
+      font-size: 1.125rem;
+      font-weight: 500;
+      color: #030804;
+    }
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+
+    .tag {
+      background-color: #F3F4F6;
+      color: #4b5563;
+      padding: 6px 16px;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid transparent;
+
+      &:hover {
+        border-color: #D1D5DB;
+        background-color: #E5E7EB;
+      }
+    }
+  }
+
+  /* TEXT BLOCK (RICH TEXT AREA) */
+  &__body {
+    h1 {
+      font-size: 3rem; /* Very large font from screenshot */
+      font-weight: 300;
+      line-height: 1.2;
+      color: #000;
+      margin-top: 0;
+      margin-bottom: 2rem;
+      
+      @media (min-width: $tablet-breakpoint) {
+         font-size: 3.5rem;
+      }
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 300;
+      line-height: 1.2;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      color: #000;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      color: #4b5563; /* slightly faded body color */
+    }
+
+    p.lead {
+       font-size: 1.25rem;
+       font-weight: 400;
+       color: #030804; /* Darker more prominent text */
+       line-height: 1.5;
+       margin-bottom: 2rem;
+    }
+
+    figure {
+      margin: 2rem 0;
+      
+      .figure-placeholder {
+         width: 100%;
+         height: 480px;
+         background-color: #D1D5DB; /* Medium Grey from screenshot */
+         border-radius: 6px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         color: #9CA3AF;
+         
+         svg {
+            width: 80px;
+            height: 80px;
+         }
+      }
+
+      figcaption {
+        padding-top: 1rem;
+        font-size: 0.75rem;
+        color: #6B7280;
+      }
+    }
+
+    blockquote {
+       font-size: 1.25rem;
+       font-style: italic;
+       color: #030804;
+       border-left: 2px solid #E2E8F0; /* Added subtle left border per request */
+       padding: 0 0 0 1.5rem;
+       margin: 2.5rem 0;
+       line-height: 1.5;
+    }
+  }
+
+  /* EVENT TEAM BLOCK */
+  &__event-team {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid #E2E8F0;
+    padding-top: 3rem;
+
+    .event-team-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 1rem;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      &--placeholder {
+        background-color: #E2E8F0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #A0AEC0;
+
+        svg {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+
+    .event-team-name {
+      font-weight: 600;
+      color: #030804;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .event-team-role {
+      font-size: 0.875rem;
+      color: #718096;
+    }
+  }
+}

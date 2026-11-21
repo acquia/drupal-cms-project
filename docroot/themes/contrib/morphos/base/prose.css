@@ -1,0 +1,59 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: base/prose.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+/**
+ * WARNING: This is not a tailwind typography plugins
+ * Apply basic styles for prose classes
+ */
+
+@reference '../tailwindcss';
+
+.prose {
+  --prose-font-size: calc(var(--font-size-base) * var(--prose-scale));
+  --prose-scale: 1;
+
+  @media (min-width: 64rem) {
+    div,
+    p,
+    ul,
+    ol,
+    blockquote,
+    table {
+      font-size: var(--prose-font-size, revert-layer);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .font-display {
+      --prose-font-size: calc(var(--font-size) * var(--prose-scale));
+      font-size: var(--prose-font-size, revert-layer);
+    }
+  }
+}
+
+.prose-base {
+  --prose-scale: 1;
+}
+
+.prose-sm {
+  --prose-scale: 0.875;
+}
+
+.prose-lg {
+  --prose-scale: 1.25;
+}
+
+.prose-xl {
+  --prose-scale: 1.5;
+}
+
+.prose-2xl {
+  --prose-scale: 2;
+}

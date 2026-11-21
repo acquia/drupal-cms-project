@@ -1,0 +1,32 @@
+# PHPStan configuration for the Drupal 12 (next major) job.
+#
+# The gitlab_templates default, minus the Commerce and Webform integration
+# code: the next major jobs remove those modules because they have no Drupal 12
+# release yet. A class extending a missing parent cannot be ignored, so the
+# integration code is excluded rather than its errors ignored.
+parameters:
+  level: 0
+  fileExtensions:
+    - php
+    - module
+    - inc
+    - install
+    - theme
+    - profile
+  excludePaths:
+    - src/EventSubscriber/Commerce*
+    - src/Plugin/GoogleTag/Event/Commerce/*
+    - src/Plugin/views/area/CommerceProductViewItemList.php
+    - src/Plugin/WebformHandler/*
+  reportUnmatchedIgnoredErrors: false
+  ignoreErrors:
+    # new static() is a best practice in Drupal, so we cannot fix that.
+    - '#^Unsafe usage of new static#'
+    # The Commerce hooks in google_tag.module.
+    -
+      message: '#Drupal\\commerce_[a-z_]+\\#'
+      path: google_tag.module
+    # The Webform submission type in the purchase event plugin.
+    -
+      message: '#Drupal\\webform\\#'
+      path: src/Plugin/GoogleTag/Event/WebformPurchase.php

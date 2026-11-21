@@ -1,0 +1,49 @@
+{
+    "version": "0.2",
+    "language": "en-US",
+    "allowCompoundWords": false,
+    "globRoot": ".",
+    "ignorePaths": [
+      "**/node_modules/**",
+      "*.svg",
+      "**/build/icon.js",
+      "*.json",
+      "*.yml",
+      "*.codepoints",
+      "*.svg",
+      "phpstan.neon",
+      "phpmd.xml",
+      "mkdocs.yml"
+    ],
+    "dictionaries": [
+      "dictionary",
+      "drupal",
+      "companies",
+      "fonts",
+      "html",
+      "php",
+      "softwareTerms",
+      "project-words"
+    ],
+    "dictionaryDefinitions": [
+      {
+        "name": "drupal",
+        "path": "/var/www/html/web/core/misc/cspell/drupal-dictionary.txt"
+      },
+      {
+        "name": "dictionary",
+        "path": "/var/www/html/web/core/misc/cspell/dictionary.txt"
+      },
+      {
+        "name": "project-words",
+        "path": "./.cspell-project-words.txt",
+        "addWords": true
+      }
+     ],
+    "overrides": [
+      {
+        "filename": "**/{*.engine,*.inc,*.install,*.module,*.profile,*.theme}",
+        "languageId": "php"
+      }
+    ]
+}

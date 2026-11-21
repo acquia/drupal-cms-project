@@ -1,0 +1,21 @@
+# PHPStan configuration for the Drupal 10 (previous major) job.
+#
+# The gitlab_templates default, plus the classes that the module uses only on
+# newer releases: the OOP hook attributes and the classes they reference
+# (Drupal 11.1+), RequirementSeverity (Drupal 11.2+), and the PHPUnit 10+ test
+# attributes. Drupal 10 never loads the code that needs them.
+parameters:
+  level: 0
+  fileExtensions:
+    - php
+    - module
+    - inc
+    - install
+    - theme
+    - profile
+  reportUnmatchedIgnoredErrors: false
+  ignoreErrors:
+    # new static() is a best practice in Drupal, so we cannot fix that.
+    - '#^Unsafe usage of new static#'
+    - '#^Attribute class (Drupal\\Core\\Hook\\Attribute|PHPUnit\\Framework\\Attributes)\\[A-Za-z]+ does not exist\.$#'
+    - '#Drupal\\Core\\(Hook\\Order\\Order|Extension\\ProceduralCall|Extension\\Requirement\\RequirementSeverity)\b#'

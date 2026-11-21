@@ -1,0 +1,118 @@
+"$schema": https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+
+name: Space Content Details
+
+status: stable
+
+group: Molecules
+
+props:
+
+  type: object
+
+  properties:
+    text:
+      type: string
+      title: Rich text
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique pretium pellentesque semper enim aliquam.</p>
+
+    date:
+      type: string
+      title: Date
+      description: A date to be displayed in the card.
+      examples:
+        - "20 Jan 2026"
+
+    tag_label1:
+      type: string
+      title: Tag Label 1
+      description: A label for the first tag to be displayed in the content.
+      examples:
+        - "Category"
+
+    tag_data1:
+      type: string
+      title: Tag Data 1
+      description: Data for the first tag to be displayed in the content, corresponding to Tag Label 1.
+      examples:
+        - "Pain & Inflammation"
+
+    tag_label2:
+      type: string
+      title: Tag Label 2
+      description: A label for the second tag to be displayed in the content.
+      examples:
+        - "Prescription Required"
+    
+    tag_data2:
+      type: string
+      title: Tag Data 2
+      description: Data for the second tag to be displayed in the content, corresponding to Tag Label 2.
+      examples:
+        - "No"
+
+    tag_label3:
+      type: string
+      title: Tag Label 3
+      description: A label for the third tag to be displayed in the content.
+      examples:
+          - "Typical Forms"
+
+    tag_data3:
+      type: string
+      title: Tag Data 3
+      description: Data for the third tag to be displayed in the content, corresponding to Tag Label 3.
+      examples:
+        - "Capsules"
+
+    conclusion:
+      type: string
+      title: Conclusion
+      contentMediaType: text/html
+      x-formatting-context: block
+      description: A conclusion text to be displayed in the content.
+      examples:
+        - <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique pretium pellentesque semper enim aliquam.</p>
+
+    content_overlap:
+      type: boolean
+      title: Content Overlap Top
+      description: Whether the content overlaps the top of the box
+      default: true
+      examples:
+        - true
+
+slots:
+
+  content:
+    title: Content
+    description: Add the **User Card** component into this slot.
+
+  image:
+    title: Image
+    description: Add the **Image** component into this slot.
+
+thirdPartySettings:
+  sdcStorybook:
+    stories:
+      preview:
+        slots:
+          items:
+            - type: component
+              component: "pulse_theme:space-user-card"
+              props:
+                name: "400"
+                description: "Projects completed"
+                image:
+                  src: "images/person.jpg"
+                  alt: "Boring placeholder"
+                twitter_url: "https://twitter.com/example"
+                linkedin_url: "https://linkedin.com/in/example"
+            - type: component
+              component: "pulse_theme:space-image"
+              props:
+                src: "images/medicine.jpg"
+                alt: "Boring placeholder"

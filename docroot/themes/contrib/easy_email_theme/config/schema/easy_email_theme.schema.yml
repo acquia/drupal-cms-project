@@ -1,0 +1,19 @@
+# Schema for the configuration files of the Easy Email Theme.
+
+easy_email_theme.settings:
+  type: theme_settings
+  label: 'Easy Email Theme settings'
+  mapping:
+    footer:
+      type: mapping
+      label: 'Footer'
+      mapping:
+        enabled:
+          type: boolean
+          label: 'Show a footer in HTML emails'
+        site_name:
+          type: boolean
+          label: 'Show the site name in the footer'
+        slogan:
+          type: boolean
+          label: 'Show the site slogan in the footer'

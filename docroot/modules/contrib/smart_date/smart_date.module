@@ -1,0 +1,103 @@
+<?php
+
+/**
+ * @file
+ * Field hooks for a field that stores a start and end date as timestamps.
+ */
+
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\smart_date\Hook\SmartDateHooks;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+#[LegacyHook]
+function smart_date_help($route_name, RouteMatchInterface $route_match) {
+  return \Drupal::service(SmartDateHooks::class)->help($route_name, $route_match);
+}
+
+/**
+ * Implements hook_entity_access().
+ *
+ * Prevent deletion of the default configuration.
+ */
+#[LegacyHook]
+function smart_date_entity_access($entity, $operation, $account) {
+  return \Drupal::service(SmartDateHooks::class)->entityAccess($entity, $operation, $account);
+}
+
+/**
+ * Helper function to sort a multidimensional array on multiple values.
+ */
+function smart_date_array_orderby() {
+  $args = func_get_args();
+  $data = array_shift($args);
+  foreach ($args as $n => $field) {
+    if (is_string($field)) {
+      $tmp = [];
+      foreach ($data as $key => $row) {
+        $tmp[$key] = $row[$field] ?? NULL;
+      }
+      $args[$n] = $tmp;
+    }
+  }
+  $args[] = &$data;
+  call_user_func_array('array_multisort', $args);
+  return array_pop($args);
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ *
+ * Prepopulate the smart date field with the date passed from query parameter.
+ */
+#[LegacyHook]
+function smart_date_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::service(SmartDateHooks::class)->formNodeFormAlter($form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_views_plugins_filter_alter().
+ *
+ * Replace the core date views filter with a version supporting granularity.
+ */
+#[LegacyHook]
+function smart_date_views_plugins_filter_alter(array &$plugins) {
+  \Drupal::service(SmartDateHooks::class)->viewsPluginsFilterAlter($plugins);
+}
+
+/**
+ * Implements hook_config_schema_info_alter().
+ */
+#[LegacyHook]
+function smart_date_config_schema_info_alter(&$definitions) {
+  \Drupal::service(SmartDateHooks::class)->configSchemaInfoAlter($definitions);
+}
+
+/**
+ * Implements hook_views_plugins_argument_alter().
+ *
+ * Replace the core date views argument with a version with more options.
+ */
+#[LegacyHook]
+function smart_date_views_plugins_argument_alter(array &$plugins) {
+  \Drupal::service(SmartDateHooks::class)->viewsPluginsArgumentAlter($plugins);
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ *
+ * Move smart_date hook_tokens() implementation to the end of the list to avoid
+ * conflict with the Tokens module's replacement for custom date format/values.
+ */
+function smart_date_module_implements_alter(&$implementations, $hook) {
+  switch ($hook) {
+    case 'tokens':
+      $group = $implementations['smart_date'];
+      unset($implementations['smart_date']);
+      $implementations['smart_date'] = $group;
+      break;
+  }
+}

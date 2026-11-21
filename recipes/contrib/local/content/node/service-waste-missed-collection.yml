@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 89eb7538-2a41-4ef7-9d45-e3eb9b8105b5
+  bundle: service_page
+  default_langcode: en
+  depends:
+    04137efd-230b-4886-8bb6-0fc435e7b678: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Report a missed collection'
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /waste-and-recycling/report-missed-collection
+      langcode: en
+  field_content:
+    -
+      value: '<h2>Before you report</h2><p>Please check the following before submitting a report, as these are the most common reasons a collection does not take place:</p><ul><li>Your bin was at the kerbside before 6am on your collection day</li><li>The bin lid was fully closed and not overloaded</li><li>No contamination was present — for example, food waste in the recycling bin</li><li>Your collection day has not changed due to a recent bank holiday</li></ul><blockquote><p>Crews are required to leave bins that are contaminated, overloaded, or not accessible. If any of these applied, the missed collection cannot be reported — please correct the issue and present your bin on your next scheduled day.</p></blockquote><h2>What we need from you</h2><table><thead><tr><th>Information</th><th>Why we need it</th></tr></thead><tbody><tr><td>Your full address</td><td>To identify your property on the collection route</td></tr><tr><td>Which bin was missed</td><td>General waste, recycling, food waste, or garden waste</td></tr><tr><td>Your collection day</td><td>To verify the crew visited your street</td></tr><tr><td>Date of the missed collection</td><td>Reports must be made within three working days</td></tr></tbody></table><h2>What happens next</h2><p>We will investigate and, if the miss is confirmed, arrange a return collection within two working days. Leave your bin at the kerbside — do not move it back until it has been emptied. You will receive a confirmation reference by email when your report is logged.</p>'
+      format: content_format
+  field_description:
+    -
+      value: 'Let us know if your bin was not emptied on your scheduled day. We aim to return within two working days.'
+  field_parent:
+    -
+      entity: 04137efd-230b-4886-8bb6-0fc435e7b678

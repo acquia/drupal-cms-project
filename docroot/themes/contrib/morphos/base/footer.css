@@ -1,0 +1,38 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: base/footer.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+@reference "../tailwindcss";
+
+@layer utilities.daisyui.l1.l2.l3 {
+  .footer {
+    place-items: unset;
+    gap: unset;
+    grid-auto-flow: unset;
+
+    > * {
+      place-items: unset;
+      gap: unset;
+      display: unset;
+    }
+  }
+
+  .footer h3 {
+    @apply mb-4 tracking-wider uppercase;
+  }
+
+  .menu-footer li a {
+    @apply underline underline-offset-2;
+  }
+
+  .footer svg {
+    fill: var(--foreground);
+  }
+}
+
+.footer h3 {
+  --font-size: 1.25rem;
+  --font-weight: 700;
+}

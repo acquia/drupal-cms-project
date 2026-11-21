@@ -1,0 +1,7 @@
+name: 'Config language lock recipe extension invalid langcode test'
+install:
+  - config_language_lock_test_extension_import
+config:
+  import:
+    config_language_lock_test_extension_import:
+      - config_language_lock_test_types.always_valid.lock_ext_invalid

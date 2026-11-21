@@ -1,0 +1,99 @@
+################
+# DrupalCI GitLabCI template
+#
+# Gitlab-ci.yml to replicate DrupalCI testing for Contrib
+#
+# With thanks to:
+#   * The GitLab Acceleration Initiative participants
+#   * DrupalSpoons
+################
+
+################
+# Guidelines
+#
+# This template is designed to give any Contrib maintainer everything they need to test, without requiring modification. It is also designed to keep up to date with Core Development automatically through the use of include files that can be centrally maintained.
+#
+# However, you can modify this template if you have additional needs for your project.
+# See https://project.pages.drupalcode.org/gitlab_templates/ for full documentation.
+################
+
+################
+# Includes
+#
+# Add additional configuration through includes. As long as you include the
+# main file below, future includes added by the Drupal Association will be
+# picked up automatically. The _GITLAB_TEMPLATES_REPO / _GITLAB_TEMPLATES_REF
+# variables are provided by the drupalcode.org GitLab instance.
+################
+
+include:
+  - project: $_GITLAB_TEMPLATES_REPO
+    ref: $_GITLAB_TEMPLATES_REF
+    file:
+      - '/includes/include.drupalci.main.yml'
+      - '/includes/include.drupalci.variables.yml'
+      - '/includes/include.drupalci.workflows.yml'
+
+################
+# Pipeline configuration variables.
+#
+# Defaults test against the current stable core. Opt in to extra jobs as needed.
+# https://project.pages.drupalcode.org/gitlab_templates/info/variables-and-jobs/
+################
+
+variables:
+  OPT_IN_TEST_MAX_PHP: '1'
+  OPT_IN_TEST_PREVIOUS_MINOR: '1'
+  # Drupal 10 and Drupal 12 run on every pipeline.
+  OPT_IN_TEST_PREVIOUS_MAJOR: '1'
+  OPT_IN_TEST_NEXT_MAJOR: '1'
+  _AUTORUN_PREVIOUS_MAJOR: 'all'
+  _AUTORUN_NEXT_MAJOR: 'all'
+
+# The PHP 8.1 images are Debian bullseye, whose apt repositories are gone.
+# The phpstan and phpunit previous major jobs inherit this.
+composer (previous major):
+  variables:
+    PHP_VERSION: '8.3'
+
+# Commerce, Commerce Wishlist, Webform and Google Analytics do not support
+# Drupal 12 yet, so the tests that need them only run on Drupal 10 and 11. The
+# search module left core in Drupal 12 and is required from contrib instead.
+# csp is installed leniently until it declares Drupal 12 support.
+.next-major-skip-unsupported: &next-major-skip-unsupported
+  - rm -fv tests/src/*/Commerce*Test.php tests/src/*/*/Commerce*Test.php tests/src/Traits/CommerceStoreTrait.php
+  - rm -fv tests/src/Kernel/GoogleAnalyticsPageAttachmentsTest.php tests/src/Kernel/Migrate/GoogleAnalyticsMigrationTest.php tests/src/Kernel/Migrate/GoogleTagRequirementsTest.php
+  - rm -fv tests/src/*/*/Webform*Test.php
+
+composer (next major):
+  variables:
+    _LENIENT_ALLOW_LIST: 'csp'
+  before_script:
+    - *next-major-skip-unsupported
+    - composer remove --dev --no-update drupal/commerce drupal/commerce_wishlist drupal/webform drupal/google_analytics
+    - composer require --dev --no-update drupal/search:^1
+
+phpunit (next major):
+  variables:
+    _LENIENT_ALLOW_LIST: 'csp'
+    _PHPUNIT_LENIENT_COMPATIBILITY: '1'
+    # The templates merge core's patterns into .deprecation-ignore.txt but
+    # leave core's phpunit.xml.dist reading core/.deprecation-ignore.txt.
+    DRUPAL_DEPRECATION_FILTER_CONFIG: '{"projectIgnoreFile":"$CI_PROJECT_DIR/.deprecation-ignore.txt"}'
+  before_script:
+    - *next-major-skip-unsupported
+
+# Code for newer releases and for modules without a Drupal 12 release only
+# fails phpstan on the other majors, so those jobs use their own config.
+phpstan (previous major):
+  before_script:
+    - cp -v .gitlab-ci/phpstan-previous-major.neon $DRUPAL_PROJECT_FOLDER/phpstan.neon
+
+phpstan (next major):
+  before_script:
+    - *next-major-skip-unsupported
+    - cp -v .gitlab-ci/phpstan-next-major.neon $DRUPAL_PROJECT_FOLDER/phpstan.neon
+
+# Keep coding standards visible without blocking the pipeline.
+phpcs:
+  allow_failure: true

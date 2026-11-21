@@ -1,0 +1,35 @@
+{#
+  Icon component using SVG icons from the Phosphor icon pack.
+
+  @param icon (object|string) - An object with pack_id and icon_id, or a bare Phosphor icon ID (e.g., 'rocket', 'arrow-right')
+  @param icon_size (string) - Size enum: 'extra-small', 'small', 'medium', 'large', 'extra-large'
+  @param icon_color (string) - Optional color value (defaults to 'currentColor')
+  @param alt (string) - Optional alt text for accessibility (leave empty for decorative icons)
+#}
+
+{% set size_map = {
+  'extra-extra-small': 16,
+  'extra-small': 20,
+  small: 24,
+  medium: 32,
+  large: 48,
+  'extra-large': 64
+} %}
+
+{% set icon_pack = icon is iterable ? icon.pack_id|default('phosphor') : 'phosphor' %}
+{% set icon_id = icon is iterable ? icon.icon_id : icon %}
+{% set resolved_size = size_map[icon_size]|default(size_map['small']) %}
+
+<div class="min-w:{{ resolved_size }}">
+  {{
+    icon(
+      icon_pack,
+      icon_id,
+      {
+        size: resolved_size,
+        color: icon_color|default('currentColor'),
+        alt: alt|default('')
+      }
+    )
+  }}
+</div>

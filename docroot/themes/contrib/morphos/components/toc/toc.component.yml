@@ -1,0 +1,59 @@
+$schema: 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: Table of contents
+description: An automatically generated list of links that jump to specific headings within the page content.
+group: Content
+status: stable
+props:
+  type: object
+  required:
+    - content_selector
+    - heading_levels
+  properties:
+    show:
+      type: boolean
+      title: Show
+      description: Enable to show the table of contents.
+    heading:
+      type: string
+      title: Heading
+      description: The heading content.
+    heading_level:
+      type: number
+      title: Heading level
+      description: Select the heading level.
+      enum: [1, 2, 3, 4, 5, 6]
+      default: 2
+      examples:
+        - 2
+    content_selector:
+      type: string
+      title: Content selector
+      description: Where to grab the headings to build the table of contents.
+      default: .layout__content
+      examples:
+        - .layout__content
+    heading_levels:
+      type: string
+      title: Heading levels
+      description: Headings to include from the content. e.g. h2, h3 (selector).
+      default: h2
+      examples:
+        - h2
+    ignore_selector:
+      type: string
+      title: Ignore selector
+      description: Headings to ignore from the content (selector).
+    sticky:
+      type: boolean
+      title: Sticky
+      description: Enable to make the table of contents sticky.
+libraryOverrides:
+  dependencies:
+    - core/drupal
+    - core/once
+    - morphos/tocbot_library
+  js:
+    toc.js: {}
+  css:
+    component:
+      toc.css: {}

@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_mc_attachments
+    - media.type.document
+    - node.type.mc_article
+id: node.mc_article.field_mc_attachments
+field_name: field_mc_attachments
+entity_type: node
+bundle: mc_article
+label: Attachments
+description: 'File attachments for download.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      document: document
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

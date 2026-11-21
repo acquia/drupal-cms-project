@@ -1,0 +1,366 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 744045cd-5d25-4ca4-a270-95aec17a9a21
+  default_langcode: en
+  depends:
+    0a744316-f4f2-4520-972d-1f5e2c2a45d9: file
+    f8f48a35-91f6-4769-9585-2773772fcd2d: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Campaign
+  description:
+    -
+      value: 'Campaign with custom skin.'
+  components:
+    -
+      uuid: 7b9cde53-e304-4265-8645-547017f49104
+      component_id: sdc.morphos.hero
+      inputs:
+        content_width: content-width--66
+        padding_top: '32'
+        padding_bottom: '32'
+        container: container--normal
+        content_position: content-position--center
+        content_alignment: center
+        palette: color--standard
+        texture: texture--conic-top-start
+    -
+      parent_uuid: 7b9cde53-e304-4265-8645-547017f49104
+      slot: items
+      uuid: ca35fb53-6f95-4c7d-a0ff-207cd5de41c6
+      component_id: sdc.morphos.heading
+      inputs:
+        heading: Campaign
+        level: 2
+        use_display_font: true
+    -
+      parent_uuid: 7b9cde53-e304-4265-8645-547017f49104
+      slot: items
+      uuid: 0d0d6d6e-822b-4e89-a26a-7c2d3c65c026
+      component_id: sdc.morphos.content
+      inputs:
+        content:
+          value: '<p>&nbsp;Configure unique and custom theme skins to suit any campaign. Colour it your way.</p>'
+          format: canvas_html_block
+    -
+      parent_uuid: 7b9cde53-e304-4265-8645-547017f49104
+      slot: items
+      uuid: dfd5081d-311e-45d7-bedd-15ba7778ab93
+      component_id: sdc.morphos.button
+      inputs:
+        text: 'Button text'
+    -
+      uuid: 728a398c-efcf-4b6a-8766-d3b3324f1438
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: false
+        heading: 'Why it matters'
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--accent
+        intro:
+          value: '<p>With a single theme, you can support multiple brands or campaigns, adapt visuals as needs change, and refresh the look of your site without redesigning or rebuilding existing structures.</p>'
+          format: canvas_html_block
+        layout: layout--4-8
+        texture: texture--conic-top-end
+    -
+      uuid: 77d6602b-df79-4bd0-9c6a-6822bf21a921
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--33-33-33
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--secondary
+        layout: layout--12
+        heading: 'Skins & colour systems'
+        intro:
+          value: '<p>Powerful skins. Light &amp; dark, done right.<br>Each Convivial skin includes:</p>'
+          format: canvas_html_block
+        content_position: section-position--center
+        content_alignment: section-alignment--center
+    -
+      parent_uuid: 77d6602b-df79-4bd0-9c6a-6822bf21a921
+      slot: main_items
+      uuid: 5e344193-cd23-4fd5-99f6-ebca679e5f47
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: sun-horizon
+        icon_size: icon-size--xl
+        icon_align: center
+        heading: 'Light and Dark mode schemes'
+        heading_level: 3
+    -
+      parent_uuid: 77d6602b-df79-4bd0-9c6a-6822bf21a921
+      slot: main_items
+      uuid: 1776989c-14f6-44fc-b382-5dc562f4d585
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: palette
+        icon_size: icon-size--xl
+        icon_align: center
+        heading: 'Multiple palette options per scheme'
+        heading_level: 3
+    -
+      parent_uuid: 77d6602b-df79-4bd0-9c6a-6822bf21a921
+      slot: main_items
+      uuid: 37f608dc-69db-4bd0-aa35-f6a45825aba2
+      component_id: sdc.morphos.card_icon
+      inputs:
+        icon: scales
+        icon_size: icon-size--xl
+        icon_align: center
+        heading: 'Balanced colors for layout, components, and UI states'
+        heading_level: 3
+    -
+      parent_uuid: 77d6602b-df79-4bd0-9c6a-6822bf21a921
+      slot: footer_items
+      uuid: 992705c6-de85-4456-bcd4-b1a0451eebad
+      component_id: sdc.morphos.button
+      inputs:
+        text: 'Button text'
+        style: btn-outline
+    -
+      uuid: a44f24d1-a8e1-423c-9360-c7b1231e25ca
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        layout: layout--4-8
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--33-33-33
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--alternate
+        heading: 'Flexible configuration'
+        intro:
+          value: '<p>Skins allow for more than just colours to be changed!&nbsp;</p>'
+          format: canvas_html_block
+        content_position: section-position--center
+        content_alignment: section-alignment--center
+    -
+      parent_uuid: a44f24d1-a8e1-423c-9360-c7b1231e25ca
+      slot: main_items
+      uuid: a82e08df-80d4-4bae-ba6f-fabbfacb1a51
+      component_id: sdc.morphos.tile_canvas
+      inputs:
+        heading: 'Rounded corners'
+        info: 'Tile title'
+        url: 'http://example.com'
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: f8f48a35-91f6-4769-9585-2773772fcd2d
+            target_type: media
+    -
+      parent_uuid: a44f24d1-a8e1-423c-9360-c7b1231e25ca
+      slot: main_items
+      uuid: fb288e38-ae34-4802-aab3-1e64dbd825fb
+      component_id: sdc.morphos.tile_canvas
+      inputs:
+        heading: Borders
+        info: Info
+        url: 'http://example.com'
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: f8f48a35-91f6-4769-9585-2773772fcd2d
+            target_type: media
+    -
+      parent_uuid: a44f24d1-a8e1-423c-9360-c7b1231e25ca
+      slot: main_items
+      uuid: 21d277b9-a2c1-4bb9-a77d-bd97fa7c26bc
+      component_id: sdc.morphos.tile_canvas
+      inputs:
+        heading: Noise
+        info: Info
+        url: 'http://example.com'
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: f8f48a35-91f6-4769-9585-2773772fcd2d
+            target_type: media
+    -
+      uuid: 224affc2-f3a8-4c14-bcff-b566157c2243
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        layout: layout--4-8
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--100
+        column_widths: section-col-widths--50-50
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--primary
+        heading: 'Ideal use cases'
+        intro:
+          value: '<p>Perfect for various scenarios</p>'
+          format: canvas_html_block
+        content_position: section-position--start
+        content_alignment: section-alignment--start
+    -
+      parent_uuid: 224affc2-f3a8-4c14-bcff-b566157c2243
+      slot: main_items
+      uuid: d87cf9b2-ee16-447e-9213-578a1036bb81
+      component_id: sdc.morphos.title
+      inputs:
+        heading: 'Marketing and campaign sites'
+        url: 'http://example.com'
+    -
+      parent_uuid: 224affc2-f3a8-4c14-bcff-b566157c2243
+      slot: main_items
+      uuid: f3db9964-b176-407e-8bb2-4d935865b6be
+      component_id: sdc.morphos.title
+      inputs:
+        heading: 'Content-heavy platforms'
+        url: 'http://example.com'
+    -
+      parent_uuid: 224affc2-f3a8-4c14-bcff-b566157c2243
+      slot: main_items
+      uuid: 7923d32d-bdaf-4a80-804b-fd32804f7e29
+      component_id: sdc.morphos.title
+      inputs:
+        heading: 'SaaS and product websites'
+        url: 'http://example.com'
+    -
+      parent_uuid: 224affc2-f3a8-4c14-bcff-b566157c2243
+      slot: main_items
+      uuid: 5e15f5ed-116d-4611-9391-8bfb43b6830d
+      component_id: sdc.morphos.title
+      inputs:
+        heading: 'Managing multiple identies'
+        url: 'http://example.com'
+    -
+      parent_uuid: 224affc2-f3a8-4c14-bcff-b566157c2243
+      slot: footer_items
+      uuid: 33a74a7f-8e5a-4a98-8d37-e86e6c326fc4
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: true
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--50
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--neutral
+        heading: 'Get started today'
+        intro:
+          value: '<p>We can help you get started by making Convivial work for you.</p>'
+          format: canvas_html_block
+        content_position: section-position--center
+        content_alignment: section-alignment--center
+        layout: layout--12
+    -
+      parent_uuid: 33a74a7f-8e5a-4a98-8d37-e86e6c326fc4
+      slot: header_items
+      uuid: b7ff785d-f8b0-4162-88de-9120880471dc
+      component_id: sdc.morphos.button
+      inputs:
+        text: 'Button text'
+    -
+      uuid: d9725eff-2fc1-4f19-aba3-9f1a09b34d3c
+      component_id: sdc.morphos.section
+      inputs:
+        show_header: true
+        show_footer: false
+        layout: layout--12
+        heading_level: 2
+        hide_heading: false
+        content_width: section-width--50
+        column_widths: section-col-widths--100
+        padding_top: '12'
+        padding_bottom: '12'
+        container: container--normal
+        palette: color--standard
+        content_position: section-position--center
+        content_alignment: section-alignment--center
+        heading: 'Frequently asked questions'
+    -
+      parent_uuid: d9725eff-2fc1-4f19-aba3-9f1a09b34d3c
+      slot: main_items
+      uuid: 118e3426-ddfa-4800-ba08-aee066b3524f
+      component_id: sdc.morphos.accordion_group
+      inputs: {  }
+    -
+      parent_uuid: 118e3426-ddfa-4800-ba08-aee066b3524f
+      slot: accordion_items
+      uuid: f52827f6-36c7-4578-8ddb-c22919df22a8
+      component_id: sdc.morphos.accordion
+      inputs:
+        title: 'How do I edit colours in Convivial?'
+        content:
+          value: '<p>Accordion content goes here.</p>'
+          format: canvas_html_block
+        icon: collapse-plus
+    -
+      parent_uuid: 118e3426-ddfa-4800-ba08-aee066b3524f
+      slot: accordion_items
+      uuid: 77f27787-aadb-4d01-9557-ed051d89e70d
+      component_id: sdc.morphos.accordion
+      inputs:
+        title: 'How do I add background images in Convivial?'
+        content:
+          value: '<p>Convivial makes use of background modifiers with built in accessibility overlay considerations, which are colour palette and scheme aware.</p>'
+          format: canvas_html_block
+        icon: collapse-plus
+        force: collapse-open
+    -
+      parent_uuid: 118e3426-ddfa-4800-ba08-aee066b3524f
+      slot: accordion_items
+      uuid: e182cd36-a8f5-41e9-afaf-bce94e5dc339
+      component_id: sdc.morphos.accordion
+      inputs:
+        title: 'How do I create a new skin to support a new campaign?'
+        content:
+          value: '<p>Accordion content goes here.</p>'
+          format: canvas_html_block
+        icon: collapse-plus
+    -
+      parent_uuid: 118e3426-ddfa-4800-ba08-aee066b3524f
+      slot: accordion_items
+      uuid: 8aa34cd6-2dc1-4b3e-affb-07515a72595a
+      component_id: sdc.morphos.accordion
+      inputs:
+        title: 'Why is Convivial so easy to use?'
+        content:
+          value: '<p>Accordion content goes here.</p>'
+          format: canvas_html_block
+        icon: collapse-plus
+  path:
+    -
+      alias: /campaign
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

@@ -1,0 +1,16 @@
+services:
+  emulsify_tools.twig.emulsify_tools_add_attributes:
+    class: Drupal\emulsify_tools\AddAttributesTwigExtension
+    parent: twig.extension
+    tags:
+      - { name: twig.extension }
+  emulsify_tools.twig.emulsify_tools_bem:
+    class: Drupal\emulsify_tools\BemTwigExtension
+    parent: twig.extension
+    tags:
+      - { name: twig.extension }
+  emulsify_tools.subtheme_generator:
+    class: Drupal\emulsify_tools\SubThemeGenerator
+    arguments: ['@emulsify_tools.filesystem']
+  emulsify_tools.filesystem:
+    class: Symfony\Component\Filesystem\Filesystem

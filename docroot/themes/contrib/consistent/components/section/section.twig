@@ -1,0 +1,34 @@
+{% set section_columns = section_columns|default('100') %}
+{% set section_background = section_background|default('none') %}
+{% set section_header = section_header is defined ? section_header : true %}
+{% set section_footer = section_footer is defined ? section_footer : true %}
+
+{% set bg_class = {
+  'none': '',
+  'muted': 'bg-muted',
+  'primary': 'bg-primary text-background',
+  'dark': 'bg-foreground text-background',
+}[section_background] ?? '' %}
+
+{% set grid_class = {
+  '100': 'grid-cols-1',
+  '50-50': 'grid-cols-1 md:grid-cols-2',
+  '33-33-33': 'grid-cols-1 md:grid-cols-3',
+  '25-25-25-25': 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
+  '75-25': 'grid-cols-1 md:grid-cols-[minmax(0,3fr)_minmax(0,1fr)]',
+  '25-75': 'grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(0,3fr)]',
+}[section_columns] ?? 'grid-cols-1' %}
+
+<section class="py-10 {{ bg_class }}">
+  <div class="stwl-container">
+    {% if section_header and section_header_slot %}
+      <div class="mb-6">{{ section_header_slot }}</div>
+    {% endif %}
+    <div class="grid {{ grid_class }} gap-6">
+      {{ section_main_slot }}
+    </div>
+    {% if section_footer and section_footer_slot %}
+      <div class="mt-6">{{ section_footer_slot }}</div>
+    {% endif %}
+  </div>
+</section>

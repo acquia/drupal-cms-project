@@ -1,0 +1,60 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - caresphere_theme
+label: Slider
+id: sdc.caresphere_theme.slider
+source: sdc
+source_local_id: 'caresphere_theme:slider'
+provider: caresphere_theme
+active_version: a294af6f215df626
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        autoplay:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value: null
+          expression: ℹ︎boolean␟value
+        autoplay_delay:
+          required: false
+          field_type: float
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value: null
+          expression: ℹ︎float␟value
+        loop:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value: null
+          expression: ℹ︎boolean␟value
+        show_arrows:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value: null
+          expression: ℹ︎boolean␟value
+        show_pagination:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value: null
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        slides:
+          title: Slides
+          description: 'Drop Image components here — each one becomes a slide.'

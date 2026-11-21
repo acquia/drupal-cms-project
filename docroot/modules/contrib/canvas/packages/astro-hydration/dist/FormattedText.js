@@ -1,0 +1,1 @@
+import{jsx as e}from"react/jsx-runtime";function t({children:t,as:n=`div`,...r}){return e(n,{dangerouslySetInnerHTML:{__html:t},...r})}export{t as default};

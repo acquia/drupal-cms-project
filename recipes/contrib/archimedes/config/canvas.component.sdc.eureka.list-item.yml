@@ -1,0 +1,45 @@
+langcode: en
+status: false
+dependencies:
+  theme:
+    - eureka
+label: 'List item'
+id: sdc.eureka.list-item
+source: sdc
+source_local_id: 'eureka:list-item'
+provider: eureka
+active_version: 1bb2dfa73aea7cf9
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        list_item_icon:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: chevron
+          expression: ℹ︎string␟value
+        list_item_label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        list_item_content:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'List item text'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }

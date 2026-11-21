@@ -1,0 +1,16 @@
+google_tag_test.generate_lead_form:
+  path: '/google-tag-generate-lead'
+  defaults:
+    _form: Drupal\google_tag_test\Form\GenerateLeadForm
+    _title: 'Generate lead test form'
+  requirements:
+    # Test-only form; left open so tests can request it without logging in.
+    _access: 'TRUE'
+google_tag_test.page:
+  path: '/google-tag-test/page/{name}'
+  defaults:
+    _controller: Drupal\google_tag_test\Controller\TestPageController::page
+    _title: 'Google Tag test page'
+  requirements:
+    # Test-only page; left open so tests can request it without logging in.
+    _access: 'TRUE'

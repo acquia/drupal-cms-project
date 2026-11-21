@@ -1,0 +1,79 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+
+name: Space Footer
+
+group: Layout
+
+props:
+
+  type: object
+
+  required:
+    - brand_name
+    - brand_slogan
+    - brand_description
+    - copyright
+
+  properties:
+    brand_logo:
+      title: Brand logo
+      $ref: json-schema-definitions://canvas.module/image
+      type: object
+      description: Upload the brand logo.
+
+    brand_name:
+      type: string
+      title: Brand Name
+      description: Name of the brand
+      examples:
+        - 'Plus'
+
+    brand_slogan:
+      type: string
+      title: Brand Slogan
+      description: Slogan for the brand
+      examples:
+        - 'Healthcare, made clear'
+
+    brand_description:
+      type: string
+      title: Brand Description
+      contentMediaType: text/html
+      x-formatting-context: block
+      description: Description for the brand
+      examples:
+        - 'A modern healthcare platform to understand healthcare clearly and securely.'
+
+    disclaimer:
+      type: string
+      title: Disclaimer Text
+      contentMediaType: text/html
+      x-formatting-context: block
+      description: Disclaimer text for the brand
+      examples:
+        - 'Your data is protected with industry-standard security. Pulse does not provide medical diagnosis.'
+
+    copyright:
+      type: string
+      title: Copyright Text
+      description: Copyright text for the brand
+      examples:
+        - '2026 Pulse Health Technologies'
+
+slots:
+
+  social_links:
+    title: Social Media Links
+    description: Place social media icon links here
+
+  columns:
+    title: Navigation Columns
+    description: Place footer navigation columns here
+
+  footer_bottom_links:
+    title: Legal Links
+    description: Place Privacy, Terms, Cookies links here
+
+  cookie_section:
+    title: Cookie Section
+    description: Place Cookie section here

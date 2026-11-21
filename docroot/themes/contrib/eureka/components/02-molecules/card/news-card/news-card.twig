@@ -1,0 +1,22 @@
+{#
+/** Available variables:
+ * - news_card_image: Image URL for the news card.
+* - news_card_heading: Heading text for the news card.
+* - news_card_text: Text content for the news card.
+* - news_card_date: Date string for the news card.
+* - news_card_link_url: URL for the "Read more" link.
+ */
+#}
+{{ attach_library('eureka/card') }}
+
+{{ include("eureka:card", {
+  card_modifiers: 'news',
+  card_image: true,
+  card_image: news_card_image,
+  card_heading: news_card_heading,
+  card_text: news_card_text,
+  card_date: news_card_date,
+  show_card_link_cta: true,
+  card_link_text: 'Read more'|t,
+  card_link_url: news_card_link_url,
+}, with_context = false) }}

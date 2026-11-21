@@ -1,0 +1,324 @@
+/**
+ * @file section-stories.css
+ * Section Stories — Figma 1:7769 (desktop), 1:7583 (mobile).
+ *
+ * Desktop: header row (title left, View all right); row of 3 cards, gap 32px.
+ * Mobile: header block; stacked cards, gap 48px; View all button at bottom.
+ * Themes: --text-dark (light text on dark), --text-light (dark text on light).
+ */
+
+/* ============================================================
+   Base wrapper
+   ============================================================ */
+
+.section-stories {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  gap: calc(var(--spacing) * 12); /* 48px mobile */
+}
+
+@media (min-width: 48rem) {
+  .section-stories {
+    gap: calc(var(--spacing) * 20); /* 80px desktop */
+  }
+}
+
+/* ============================================================
+   Theme: dark (Stories — white text on dark)
+   ============================================================ */
+
+.section-stories--text-dark .section-stories__tagline,
+.section-stories--text-dark .section-stories__heading,
+.section-stories--text-dark .section-stories__description {
+  color: var(--color-scheme-3-text, white);
+}
+
+.section-stories--text-dark .section-stories__card {
+  background-color: var(--color-scheme-3-foreground, #020704);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.section-stories--text-dark .section-stories__tag {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.section-stories--text-dark .section-stories__read-time,
+.section-stories--text-dark .section-stories__card-title,
+.section-stories--text-dark .section-stories__card-description {
+  color: var(--color-scheme-3-text, white);
+}
+
+.section-stories--text-dark .section-stories__card-link {
+  color: white;
+}
+
+.section-stories--text-dark .section-stories__card-link:hover {
+  color: white;
+  text-decoration: none;
+}
+
+/* ============================================================
+   Theme: light (Blog — dark text on light)
+   ============================================================ */
+
+.section-stories--text-light .section-stories__tagline,
+.section-stories--text-light .section-stories__heading,
+.section-stories--text-light .section-stories__description {
+  color: var(--color-scheme-1-text, #020704);
+}
+
+.section-stories--text-light .section-stories__card {
+  background-color: var(--color-scheme-1-foreground, #f2f2f2);
+  border: 1px solid rgba(2, 7, 4, 0.15);
+}
+
+.section-stories--text-light .section-stories__tag {
+  background-color: rgba(2, 7, 4, 0.05);
+  border: 1px solid rgba(2, 7, 4, 0.15);
+  color: #020704;
+}
+
+.section-stories--text-light .section-stories__read-time,
+.section-stories--text-light .section-stories__card-title,
+.section-stories--text-light .section-stories__card-description {
+  color: var(--color-scheme-1-text, #020704);
+}
+
+.section-stories--text-light .section-stories__card-link {
+  color: #020704;
+}
+
+.section-stories--text-light .section-stories__card-link:hover {
+  color: #020704;
+  text-decoration: none;
+}
+
+/* ============================================================
+   Header: mobile = block; desktop = row, button on right
+   ============================================================ */
+
+.section-stories__header {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 3);
+  width: 100%;
+}
+
+@media (min-width: 48rem) {
+  .section-stories__header {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: calc(var(--spacing) * 6);
+  }
+}
+
+.section-stories__title-block {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 4); /* 16px */
+  max-width: 768px;
+  min-width: 0;
+}
+
+.section-stories__title-block .section-stories__heading + .section-stories__description,
+.section-stories__title-block .section-stories__heading + * {
+  margin-top: 0;
+}
+
+.section-stories__tagline {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-semibold);
+  font-size: 1rem; /* 16px */
+  line-height: 1.5;
+  margin: 0;
+}
+
+.section-stories__heading {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 4vw, 3.25rem); /* 28px mobile → 52px desktop */
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.section-stories__description {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--text-base); /* 16px mobile; Figma desktop 18px */
+  line-height: 1.5;
+  margin: 0;
+}
+
+@media (min-width: 48rem) {
+  .section-stories__description {
+    font-size: 1.125rem; /* 18px desktop */
+  }
+}
+
+/* View all: desktop = inline in header; mobile = below cards */
+.section-stories__button-wrapper--mobile {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end !important;
+}
+
+.section-stories__actions--desktop {
+  display: none;
+}
+
+@media (min-width: 48rem) {
+  .section-stories__button-wrapper--mobile {
+    display: none;
+  }
+
+  .section-stories__actions--desktop {
+    display: flex;
+    flex-shrink: 0;
+  }
+}
+
+/* ============================================================
+   Content + grid
+   ============================================================ */
+
+.section-stories__content {
+  width: 100%;
+}
+
+.section-stories__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+  gap: calc(var(--spacing) * 12); /* 48px mobile */
+}
+
+/* Keep cards in rows once there is horizontal room. */
+@media (min-width: 48rem) {
+  .section-stories__grid {
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: calc(var(--spacing) * 8); /* 32px */
+  }
+}
+
+/* ============================================================
+   Card
+   ============================================================ */
+
+.section-stories__card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius, 8px);
+  overflow: hidden;
+  min-width: 0;
+}
+
+.section-stories__card-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 335 / 221; /* Figma mobile; desktop similar */
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.section-stories__card-img,
+.section-stories__card-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.section-stories__card-body {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 6); /* 24px */
+  padding: calc(var(--spacing) * 5) calc(var(--spacing) * 6); /* 20px 24px mobile */
+  min-width: 0;
+  flex: 1;
+}
+
+@media (min-width: 48rem) {
+  .section-stories__card-body {
+    padding: calc(var(--spacing) * 6); /* 24px desktop */
+  }
+}
+
+.section-stories__card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(var(--spacing) * 4); /* 16px */
+}
+
+.section-stories__tag {
+  display: inline-flex;
+  align-items: flex-start;
+  padding-inline: calc(var(--spacing) * 2.5);
+  padding-block: calc(var(--spacing) * 1);
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--text-sm); /* 14px */
+  line-height: 1.5;
+}
+
+.section-stories__read-time {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.section-stories__card-text {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 2); /* 8px */
+}
+
+.section-stories__card-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.75rem; /* 28px H5 */
+  line-height: 1.4;
+  letter-spacing: -0.28px;
+  margin: 0;
+  width: 100%;
+}
+
+.section-stories__card-description {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--text-base);
+  line-height: 1.5;
+  margin: 0;
+  width: 100%;
+}
+
+.section-stories__card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--spacing) * 2); /* 8px */
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  text-decoration: none;
+  align-self: flex-start;
+}
+
+.section-stories__card-link-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.section-stories__card-link-icon svg {
+  width: 100%;
+  height: 100%;
+}

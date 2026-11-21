@@ -1,0 +1,40 @@
+langcode: en
+status: false
+dependencies:
+  module:
+    - options
+  theme:
+    - eureka
+label: 'Status messages'
+id: sdc.eureka.status-messages
+source: sdc
+source_local_id: 'eureka:status-messages'
+provider: eureka
+active_version: 88224954344cdef9
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        status_messages_type:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: status
+          expression: ℹ︎list_string␟value
+        status_messages_headings:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Lorem ipsum dolor sit amet'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }

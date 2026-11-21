@@ -1,0 +1,44 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 203d2d8c-1571-45fc-9a05-483e32035b63
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    71ed4cf8-a001-4388-8b2c-5dcad2f42fbf: menu_link_content
+    3c9645a0-81f6-4eab-a223-7138c6eea361: canvas_page
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Events
+  menu_name:
+    -
+      value: footer
+  link:
+    -
+      title: ''
+      options:
+        icon: null
+        icon_display: icon_only
+      target_uuid: 3c9645a0-81f6-4eab-a223-7138c6eea361
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: true
+  weight:
+    -
+      value: -49
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:71ed4cf8-a001-4388-8b2c-5dcad2f42fbf'
+  revision_translation_affected:
+    -
+      value: true

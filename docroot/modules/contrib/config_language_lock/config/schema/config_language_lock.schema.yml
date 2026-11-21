@@ -1,0 +1,11 @@
+config_language_lock.settings:
+  type: config_object
+  label: 'Config language lock settings'
+  mapping:
+    locked_langcode:
+      type: langcode
+      label: 'Locked configuration language code'
+      nullable: true
+    follow_site_default:
+      type: boolean
+      label: 'Automatically follow site default language'

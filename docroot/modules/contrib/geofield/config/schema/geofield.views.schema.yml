@@ -1,0 +1,152 @@
+# The settings the proximity origin source plugins store, shared by the
+# proximity field, filter and sort, which all offer the same sources.
+geofield_proximity_source_configuration:
+  type: mapping
+  label: 'Proximity origin source configuration'
+  mapping:
+    exposed_summary:
+      type: boolean
+      label: 'Expose the summary description of the proximity source'
+    origin:
+      type: mapping
+      label: 'Origin coordinates'
+      mapping:
+        lat:
+          type: string
+          label: 'Latitude'
+        lon:
+          type: string
+          label: 'Longitude'
+    origin_hidden_flag:
+      type: boolean
+      label: 'Hide the origin input elements from the exposed form'
+    origin_summary_flag:
+      type: boolean
+      label: 'Show the origin coordinates as a summary in the exposed form'
+    origin_address:
+      type: string
+    plugins:
+      type: sequence
+      sequence:
+        type: mapping
+        mapping:
+          checked:
+            type: boolean
+          weight:
+            type: integer
+    use_autocomplete:
+      type: boolean
+    settings:
+      type: mapping
+      mapping:
+        autocomplete:
+          type: mapping
+          mapping:
+            min_terms:
+              type: integer
+            delay:
+              type: integer
+            address_format:
+              type: string
+    source_proximity_filter:
+      type: string
+      label: 'Source proximity filter'
+
+views.field.geofield_proximity_field:
+  type: views.field.numeric
+  label: 'Geofield Proximity Field'
+  mapping:
+    units:
+      type: string
+      label: 'Units'
+    source:
+      type: string
+      label: 'Origin source plugin'
+    source_configuration:
+      type: geofield_proximity_source_configuration
+
+views.filter.geofield_proximity_filter:
+  type: views_filter
+  label: 'Geofield proximity filter'
+  mapping:
+    expose:
+      type: mapping
+      mapping:
+        placeholder:
+          type: string
+        min_placeholder:
+          type: string
+        max_placeholder:
+          type: string
+    units:
+      type: string
+    exposed_units:
+      type: boolean
+    source:
+      type: string
+    source_configuration:
+      type: geofield_proximity_source_configuration
+
+views.filter_value.geofield_proximity_filter:
+  type: views.field.numeric
+  label: 'Geofield Proximity Filter'
+  mapping:
+    operator:
+      type: string
+    units:
+      type: string
+    exposed_units:
+      type: boolean
+    min:
+      type: integer
+    max:
+      type: integer
+    value:
+      type: integer
+    source:
+      type: string
+    source_configuration:
+      type: mapping
+      mapping:
+        exposed_summary:
+          type: boolean
+
+views.sort.geofield_proximity_sort:
+  type: views_sort
+  label: 'Geofield Proximity Sort'
+  mapping:
+    units:
+      type: string
+    source:
+      type: string
+    source_configuration:
+      type: geofield_proximity_source_configuration
+
+views.argument.geofield_proximity_argument:
+  type: views_argument
+  label: 'Geofield Proximity Argument'
+
+views.filter_value.geofield_rectangular_boundary_filter:
+  type: views.field.numeric
+  label: 'Geofield Rectangular Boundary Filter'
+  mapping:
+    value:
+      type: mapping
+      label: 'Value'
+      mapping:
+        lat_north_east:
+          type: string
+          label: 'North East Latitude'
+        lon_north_east:
+          type: string
+          label: 'North East Longitude'
+        lat_south_west:
+          type: string
+          label: 'South West Latitude'
+        lon_south_west:
+          type: string
+          label: 'North East Longitude'
+
+views.argument.geofield_rectangular_boundary_argument:
+  type: views_argument
+  label: 'Geofield Rectangular Boundary Argument'

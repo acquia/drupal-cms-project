@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Canvas page spec",
+  "description": "Authored Canvas page format. Workbench normalizes this into an @json-render/react-compatible spec by synthesizing the canvas:component-tree root wrapper.",
+  "type": "object",
+  "required": ["title", "path", "elements"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional JSON Schema reference for editor tooling."
+    },
+    "uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Page UUID. Used to match local pages with their remote counterparts."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Page metadata. Workbench may surface this separately from the normalized @json-render/react-compatible spec."
+    },
+    "path": {
+      "type": "string",
+      "description": "Page path alias."
+    },
+    "description": {
+      "type": "string",
+      "description": "Page meta description."
+    },
+    "pageVariant": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Machine name of the page variant (page template) rendering this page. Omitted means the site default."
+    },
+    "elements": {
+      "type": "object",
+      "description": "Authored page elements. Workbench preserves key insertion order when synthesizing canvas:component-tree children.",
+      "propertyNames": {
+        "not": {
+          "const": "canvas:component-tree"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/definitions/element"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "not": {
+    "properties": {
+      "root": {}
+    },
+    "required": ["root"]
+  },
+  "definitions": {
+    "element": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "props": {},
+        "slots": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "_provenance": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

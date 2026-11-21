@@ -1,0 +1,34 @@
+.panel {
+  border-radius: var(--panel-border-radius);
+  background: var(--color-panel-solid);
+  box-shadow: var(--shadow-4);
+}
+
+.animateOff {
+  transition:
+    transform 0.2s cubic-bezier(0.4, 0, 0.6, 1),
+    opacity 0.2s ease-in,
+    width 0.2s cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+.offLeft,
+.offRight {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.offLeft {
+  overflow: hidden;
+  width: 0 !important;
+  transform: translateX(-110%) scaleX(0.8);
+  transform-origin: left center;
+  border: none !important;
+}
+
+.offRight {
+  overflow: hidden;
+  width: 0 !important;
+  transform: translateX(110%) scaleX(0.8);
+  transform-origin: right center;
+  border: none !important;
+}

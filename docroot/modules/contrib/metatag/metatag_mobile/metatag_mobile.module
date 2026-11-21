@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Contains metatag_mobile.module..
+ */
+
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\metatag_mobile\Hook\HelpHooks;
+use Drupal\metatag_mobile\Hook\OutputHooks;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+#[LegacyHook]
+function metatag_mobile_help($route_name, RouteMatchInterface $route_match) {
+  return \Drupal::service(HelpHooks::class)->help($route_name, $route_match);
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+#[LegacyHook]
+function metatag_mobile_page_attachments_alter(array &$attachments) {
+  \Drupal::service(OutputHooks::class)->pageAttachmentsAlter($attachments);
+}

@@ -1,0 +1,5 @@
+# The tabs on the translation status report. A deriver defines them, so they
+# exist only when the Interface Translation module is installed.
+recipe_locale.tabs:
+  class: Drupal\Core\Menu\LocalTaskDefault
+  deriver: Drupal\recipe_locale\Plugin\Derivative\LocaleLocalTasks
