@@ -1,0 +1,197 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - convene_theme
+label: 'Card Grid Section'
+id: sdc.convene_theme.card_grid_section
+source: sdc
+source_local_id: 'convene_theme:card_grid_section'
+provider: convene_theme
+active_version: fe52753ab286ffd0
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        eyebrow:
+          title: 'Eyebrow Slot'
+          description: 'Slot for the eyebrow (use Typography atom).'
+        heading:
+          title: 'Heading Slot'
+          description: 'Slot for the main headline (use Typography atom).'
+        description:
+          title: 'Description Slot'
+          description: 'Slot for the subheadline (use Typography atom).'
+        horizontal_cards:
+          title: 'Horizontal Cards Slot'
+          description: 'Slot for the horizontal cards.'
+        vertical_cards:
+          title: 'Vertical Cards Slot'
+          description: 'Slot for the vertical cards.'
+  dcc8a1c948ec4d58:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+        disable_css:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          default_value: null
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        eyebrow:
+          title: 'Eyebrow Slot'
+          description: 'Slot for the eyebrow (use Typography atom).'
+        heading:
+          title: 'Heading Slot'
+          description: 'Slot for the main headline (use Typography atom).'
+        description:
+          title: 'Description Slot'
+          description: 'Slot for the subheadline (use Typography atom).'
+        horizontal_cards:
+          title: 'Horizontal Cards Slot'
+          description: 'Slot for the horizontal cards.'
+        vertical_cards:
+          title: 'Vertical Cards Slot'
+          description: 'Slot for the vertical cards.'
+  895202891bdbe080:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        eyebrow:
+          title: 'Eyebrow Slot'
+          description: 'Slot for the eyebrow (use Typography atom).'
+        heading:
+          title: 'Heading Slot'
+          description: 'Slot for the main headline (use Typography atom).'
+        description:
+          title: 'Description Slot'
+          description: 'Slot for the subheadline (use Typography atom).'
+        horizontal_cards:
+          title: 'Horizontal Cards Slot'
+          description: 'Slot for the horizontal cards.'
+        vertical_cards:
+          title: 'Vertical Cards Slot'
+          description: 'Slot for the vertical cards.'
+        disable_css:
+          title: 'Disable CSS'
+          description: 'Check to disable the custom styles.'
+  70915fe0dd802b38:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+    fallback_metadata:
+      slot_definitions:
+        eyebrow:
+          title: 'Eyebrow Slot'
+          description: 'Slot for the eyebrow (use Typography atom).'
+        heading:
+          title: 'Heading Slot'
+          description: 'Slot for the main headline (use Typography atom).'
+        description:
+          title: 'Description Slot'
+          description: 'Slot for the subheadline (use Typography atom).'
+        horizontal_cards:
+          title: 'Horizontal Cards Slot'
+          description: 'Slot for the horizontal cards.'
+        vertical_cards:
+          title: 'Vertical Cards Slot'
+          description: 'Slot for the vertical cards.'
+  cf78a986ed474102:
+    settings:
+      prop_field_definitions:
+        admin_theme:
+          required: false
+          field_type: boolean
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: boolean_checkbox
+          description: 'Check to enable Admin Theme styles.'
+          default_value: null
+          expression: ℹ︎boolean␟value
+        eyebrow:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        description:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        align:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        background:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions: {  }

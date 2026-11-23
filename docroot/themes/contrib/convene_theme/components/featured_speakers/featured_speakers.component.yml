@@ -1,0 +1,50 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Featured Speakers Slider
+group: Organisms
+status: stable
+description: A slider component displaying a list of speaker cards.
+props:
+  type: object
+  properties:
+    more_title:
+      title: More Section Title
+      type: string
+      default: "More to come"
+    more_description:
+      title: More Section Description
+      type: string
+      default: "Additional speakers announced weekly through next month"
+    admin_theme:
+      title: Admin Theme
+      type: boolean
+      default: false
+      description: Check to enable Admin Theme styles (applies CSS only on frontend to preserve Canvas builder look).
+    list_view:
+      title: List View
+      type: boolean
+      default: false
+      description: Display speakers in a wrapping grid instead of a horizontal slider.
+slots:
+  speakers:
+    title: Speakers
+    description: A list of speaker card components.
+  eyebrow_slot:
+    title: Eyebrow Slot
+    description: The section eyebrow, typically a typography element.
+  title_slot:
+    title: Title Slot
+    description: The section title, typically a typography element.
+  description_slot:
+    title: Description Slot
+    description: The section description, typically a typography element.
+  more_button_slot:
+    title: More Button Slot
+    description: The button in the more to come section, typically an atom button.
+library:
+  css:
+    component:
+      featured_speakers.css: {}
+  js:
+    featured_speakers.js:
+      attributes:
+        defer: true

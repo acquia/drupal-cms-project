@@ -1,0 +1,27 @@
+{#
+  Tabs — Unlimited tags. Two variants (Figma):
+  - default: no container background; only active tab has bg (1-11183 desktop, 1-10890 mobile).
+  - colored-background: container has gray bg + border (1-8895 desktop, 1-8492 mobile).
+#}
+{% set label_str = tab_labels|default('View all,Monthly,Yearly') %}
+{% set labels_raw = label_str|split(',') %}
+{% set active_idx = active_index|default(0) %}
+{% set variant = (variant|default('default') is empty ? 'default' : variant)|trim %}
+{% set variant_class = variant == 'colored-background' ? 'tabs--colored-background' : 'tabs--default' %}
+
+{% set tab_id_pre = tab_id_prefix|default('tab') %}
+{% set aria_lab = aria_label|default('') %}
+
+<div class="tabs {{ variant_class }}" data-tabs role="region" aria-label="{{ aria_lab is not empty ? aria_lab : 'Tabs'|t }}">
+	<div class="tabs__list" role="tablist">
+		{% set idx = -1 %}
+		{% for part in labels_raw %}
+			{% set lab = part|trim %}
+			{% if lab is not empty %}
+				{% set idx = idx + 1 %}
+				{% set is_active = (idx == active_idx) %}
+				<button type="button" class="tabs__tab {{ is_active ? 'tabs__tab--active' : '' }}" role="tab" aria-selected="{{ is_active ? 'true' : 'false' }}" id="{{ tab_id_pre }}-{{ idx }}" data-tab-index="{{ idx }}" data-tab-id="{{ lab }}">{{ lab }}</button>
+			{% endif %}
+		{% endfor %}
+	</div>
+</div>

@@ -1,0 +1,107 @@
+{#
+/**
+ * @file
+ * Space Hero Banner Style 2 component.
+ *
+ * This component renders a Hero Banner with a background image, a headline, and an optional sub-headline.
+ * It also includes slots for additional content and banner info items.
+ *
+ * Properties:
+ * - background_image: [object] The background image of the hero banner.
+ *   - src: [string] The URL of the background image.
+ *   - alt: [string] Alternative text for accessibility.
+ *   - width: [integer] Image width in pixels.
+ *   - height: [integer] Image height in pixels.
+ * - title: [string] The main heading displayed on the hero banner.
+ * - sub_headline: [string] An optional secondary headline providing additional context.
+ *
+ * Slots:
+ * - content: A slot for additional content inside the banner.
+ * - items: A slot for adding block banner info items, such as icons, statistics, or highlights.
+ */
+#}
+
+{% set primary = primary_category|default('')|trim %}
+{% set secondary = secondary_category|default('')|trim %}
+{% set icon_align_value = icon_align|default('left') %}
+
+{# Template #}
+{% block hero_banner_with_media %}
+  <section class="hero-banner-with-media ga-hero-banner-2 ga_space_component" role="banner">
+    <div class="container relative mx-auto z-20 {{ modifier_class }}">
+      <div class="flex flex-wrap">
+        <div class="left-content w-full md:w-8/12 lg:w-9/12 mb-10 md:mb-0">
+          {% if label|render|striptags|trim is not empty %}
+            <span class="intro-label">
+              {{ label }}
+            </span>
+          {% endif %}
+
+          {% if primary or secondary %}
+            <div class="category-wrapper">
+              {% if primary %}
+                <span class="primary_category">
+                  {{ primary }}
+                </span>
+              {% endif %}
+
+              {% if secondary %}
+                <span class="secondary_category">
+                  {{ secondary }}
+                </span>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          {% if title|render|striptags|trim is not empty %}
+            <div class="heading">
+              {% include 'pulse_theme:space-heading' with {
+                content: title,
+                tag_name: 'h1',
+                align: 'none',
+                spacing_bottom: 'medium',
+              } only %}
+            </div>
+          {% endif %}
+
+          {% if institute_involved|render|striptags|trim is not empty %}
+            <div class="institute-involved flex flex-wrap gap-2">
+              <span class="institute-label">{{'Institute involved:'|t}} </span>
+              <div class="institute-name">{{ institute_involved }}</div>
+            </div>
+          {% endif %}
+
+        </div>
+        <div class="right-image w-full md:w-4/12 lg:w-3/12">
+          {% include 'canvas:image' ignore missing with {
+            src: image.src,
+            alt: image.alt,
+            width: image.width,
+            height: image.height,
+            loading: loading|default('eager'),
+            attributes: create_attribute({
+              fetchpriority: 'high'
+            })
+          } only %}
+
+            <div class="mt-6 flex justify-center">
+              {% if download_paper_link %}
+                {% include 'pulse_theme:space-button' with {
+                  text: 'Download paper',
+                  url: download_paper_link,
+                  variant: 'primary',
+                  size: 'large',
+                  button_type: 'text_with_icon',
+                  icon: 'download',
+                  icon_alignment: 'left',
+                  icon_size: 'small',
+                  button_corners: 'rounded_half_circle',
+                  button_state: 'disabled'
+                } only %}
+              {% endif %}     
+            </div>       
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

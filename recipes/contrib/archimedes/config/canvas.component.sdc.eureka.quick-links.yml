@@ -1,0 +1,92 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - eureka
+label: 'Quick links'
+id: sdc.eureka.quick-links
+source: sdc
+source_local_id: 'eureka:quick-links'
+provider: eureka
+active_version: 9bc15e992bb1f394
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        quick_links_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Quick links'
+          expression: ℹ︎string␟value
+        quick_links_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '3'
+          expression: ℹ︎list_float␟value
+        quick_links_summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Find what you need quickly with our convenient links to essential information and services.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        quick_links_items_block:
+          title: 'Quick links items block'
+          description: 'Block to hold quick link item components'
+  9bc15e992bb1f394:
+    settings:
+      prop_field_definitions:
+        quick_links_heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Quick links'
+          expression: ℹ︎string␟value
+        quick_links_heading_level:
+          required: false
+          field_type: list_float
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '3'
+          expression: ℹ︎list_float␟value
+        quick_links_summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Find what you need quickly with our convenient links to essential information and services.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        quick_links_items_block:
+          title: 'Quick links items block'
+          description: 'Block to hold quick link item components'

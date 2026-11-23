@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.system_branding_block
+    - canvas.component.block.system_menu_block.main
+    - canvas.component.sdc.caresphere_theme.button
+  module:
+    - options
+  theme:
+    - caresphere_theme
+id: caresphere_theme.header
+theme: caresphere_theme
+region: header
+component_tree:
+  -
+    uuid: 616f0a84-1050-4f19-993a-31543b184ab8
+    component_id: block.system_branding_block
+    component_version: b168140fdcaebae5
+    inputs: '{"label":"Site branding","label_display":"0","use_site_logo":true,"use_site_name":false,"use_site_slogan":false}'
+  -
+    uuid: 66f2d772-b345-4069-8fd8-c24da9405935
+    component_id: block.system_menu_block.main
+    component_version: 023ff7ba63f80798
+    inputs: '{"label":"Main navigation","label_display":"0","level":1,"depth":null,"expand_all_items":false}'
+  -
+    uuid: 4d0b6f6a-b339-45d6-81d8-b9d0e5b3a744
+    component_id: sdc.caresphere_theme.button
+    component_version: 1fea841cab710e4e
+    inputs: '{"variant":"primary","label":"Contact","size":"medium","mobile_width":false,"icon_first":false,"disabled":false,"href":"\/contact"}'

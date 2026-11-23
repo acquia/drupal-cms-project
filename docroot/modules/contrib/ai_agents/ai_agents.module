@@ -1,0 +1,157 @@
+<?php
+
+/**
+ * @file
+ * Contains hook implementations for the ai_agents module.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Plugin\Context\ContextDefinition;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert() for ai_agent entities.
+ *
+ * AiAgent config entities are exposed as ai_function_call plugin definitions
+ * via hook_ai_function_call_info_alter(). The function-call plugin manager
+ * caches that result, so it must be cleared whenever an ai_agent entity is
+ * created, updated, or deleted — otherwise the cached list is stale.
+ */
+function ai_agents_ai_agent_insert(EntityInterface $entity) {
+  \Drupal::service('plugin.manager.ai_agents')->clearCachedDefinitions();
+  \Drupal::service('plugin.manager.ai.function_calls')->clearCachedDefinitions();
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update() for ai_agent entities.
+ */
+function ai_agents_ai_agent_update(EntityInterface $entity) {
+  \Drupal::service('plugin.manager.ai_agents')->clearCachedDefinitions();
+  \Drupal::service('plugin.manager.ai.function_calls')->clearCachedDefinitions();
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete() for ai_agent entities.
+ */
+function ai_agents_ai_agent_delete(EntityInterface $entity) {
+  \Drupal::service('plugin.manager.ai_agents')->clearCachedDefinitions();
+  \Drupal::service('plugin.manager.ai.function_calls')->clearCachedDefinitions();
+}
+
+/**
+ * Implements hook_ai_function_call_info_alter().
+ */
+function ai_agents_ai_function_call_info_alter(array &$definitions) {
+  // Get all the agents.
+  $agent_plugin_manager = \Drupal::service('plugin.manager.ai_agents');
+  $agents = $agent_plugin_manager->getDefinitions();
+  foreach ($agents as $agent) {
+    $instance = $agent_plugin_manager->createInstance($agent['id']);
+    $id = 'ai_agents::ai_agent::' . $agent['id'];
+    $definitions[$id] = [
+      'class' => 'Drupal\ai_agents\Plugin\AiFunctionCall\AiAgentWrapper',
+      'provider' => 'ai_agents',
+      'id' => $id,
+      'function_name' => $agent['id'],
+      'name' => (string) $agent['label'],
+      'description' => $instance->agentsCapabilities()[$agent['id']]['description'] ?? (string) $agent['label'],
+      'group' => 'agent_tools',
+      'context_definitions' => [
+        'prompt' => new ContextDefinition(
+          data_type: 'string',
+          label: new TranslatableMarkup("Prompt"),
+          description: new TranslatableMarkup("The prompt in natural language on how to invoke this agent."),
+          required: TRUE,
+        ),
+        'files' => new ContextDefinition(
+          data_type: 'list',
+          label: new TranslatableMarkup("Files"),
+          description: new TranslatableMarkup("The files using file id."),
+          required: FALSE,
+        ),
+      ],
+    ];
+  }
+
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function ai_agents_token_info() {
+  return [
+    'types' => [
+      'ai_agent' => [
+        'name' => new TranslatableMarkup('AI Agent'),
+        'needs-data' => 'ai_agent',
+      ],
+    ],
+    'tokens' => [
+      'ai_agent' => [
+        'agent_instructions' => [
+          'name' => new TranslatableMarkup('Agent instructions'),
+          'description' => new TranslatableMarkup('Specific instructions that define how the AI agent should behave and respond to tasks for a particular interaction.'),
+        ],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function ai_agents_tokens($type, $tokens, array $data = [], array $options = []) {
+  $replacements = [];
+
+  // Handle ai_agent type tokens.
+  if ($type === 'ai_agent' && isset($data['ai_agent'])) {
+    $ai_agent = $data['ai_agent'];
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'agent_instructions':
+          $replacements[$original] = $ai_agent->get('system_prompt');
+          break;
+      }
+    }
+  }
+
+  return $replacements;
+}
+
+/**
+ * Implements hook_preprocess_ai_tools_library_item().
+ */
+function ai_agents_preprocess_ai_tools_library_item(array &$variables) {
+  // Check that the current route is for editing an AI Agent.
+  $route_match = \Drupal::routeMatch();
+  $current_route_name = $route_match->getRouteName();
+  // It should either be the edit form or the add form.
+  if (!in_array($current_route_name, ['entity.ai_agent.edit_form', 'entity.ai_agent.add_form'])) {
+    return;
+  }
+  // Get the agent ID from the route parameters.
+  $agent_id = $route_match->getParameter('ai_agent');
+  // Create the variables button with an array of link render arrays.
+  $url = $agent_id ?
+    Url::fromRoute('entity.ai_agent.edit_form', [
+      'ai_agent' => $agent_id->id(),
+    ]) : Url::fromRoute('entity.ai_agent.add_form');
+  $link = [
+    '#type' => 'link',
+    '#title' => t('Configure'),
+    '#url' => $url,
+    '#attributes' => [
+      'class' => [
+        'dynamic-tool-modal',
+        'btn',
+        'btn-secondary',
+        'button',
+        'btn-small',
+        'button-small',
+      ],
+      'data-tool' => str_replace(':', '_', $variables['tool_id']),
+    ],
+  ];
+  $variables['buttons'] = $link;
+}

@@ -1,0 +1,19 @@
+# Deprecations triggered by dependencies, not by this module. These are
+# appended to core/.deprecation-ignore.txt by the "phpunit (next minor)" and
+# "phpunit (next major)" jobs in .gitlab-ci.yml, so that deprecations from
+# other projects do not fail the run. Remove entries once the dependencies
+# have been fixed. See https://www.drupal.org/node/3285162 for the format.
+
+# Devel.
+%Code in devel\.module is deprecated in drupal:11\.5\.0%
+%devel_requirements without a \#\[LegacyRequirementsHook\] attribute is deprecated%
+%Not supporting attribute discovery in Drupal\\devel\\%
+%Using @Block annotation for plugin with ID devel_%
+# Called by devel.install.
+%Calling Drupal\\Core\\Config\\Config::save\(\) with the \$has_trusted_data argument is deprecated%
+
+# Return type forward compatibility warnings in Devel and Project Browser.
+%might add "[^"]+" as a native return type declaration in the future\. Do the same in (?:implementation|child class) "Drupal\\(?:devel|project_browser)\\%
+
+# Core: the text_with_summary module is split out from text during updates.
+%The module 'text_with_summary' is deprecated%

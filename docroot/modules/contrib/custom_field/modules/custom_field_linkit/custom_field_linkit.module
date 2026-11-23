@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Custom field linkit module file.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\custom_field_linkit\Hook\ConfigSchemaHooks;
+
+/**
+ * Implements hook_config_schema_info_alter().
+ */
+// @phpstan-ignore-next-line
+#[LegacyHook]
+// phpcs:ignore Squiz.WhiteSpace.FunctionSpacing.Before
+function custom_field_linkit_config_schema_info_alter(array &$definitions): void {
+  \Drupal::service(ConfigSchemaHooks::class)->configSchemaInfoAlter($definitions);
+}

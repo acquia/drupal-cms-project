@@ -1,0 +1,162 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 20d33a36-76af-4d10-9d4d-6cb7f94c503a
+  default_langcode: en
+  depends:
+    0a0e70a7-8ee2-43aa-8e72-1c9ebf6e2099: file
+    1500fd3f-54bc-41ce-b944-7c34c975ad86: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'About Us'
+  description:
+    -
+      value: 'Compassionate Care for Our Island Community Since 1952'
+  components:
+    -
+      uuid: f1fb1c56-0b35-443c-8a9b-a4a559576fde
+      component_id: sdc.diagnosis.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        background: secondary
+        padding_block_start: '32'
+        padding_block_end: '32'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        image_size: '4:3'
+        image_position: right
+        image_radius: extra-large
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 1500fd3f-54bc-41ce-b944-7c34c975ad86
+            target_type: media
+    -
+      parent_uuid: f1fb1c56-0b35-443c-8a9b-a4a559576fde
+      slot: hero_slot
+      uuid: 00364c5e-1f0a-4d4e-abff-36ffac496236
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'About Saltmarsh Island Health'
+        level: 1
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: f1fb1c56-0b35-443c-8a9b-a4a559576fde
+      slot: hero_slot
+      uuid: 850ac77a-3ef9-4f1c-a8ba-f852f49c6bc5
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Compassionate Care for Our Island Community Since 1952</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: 4842747b-6056-48e9-bff4-d044776378ff
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: 4842747b-6056-48e9-bff4-d044776378ff
+      slot: main_slot
+      uuid: fc6f6a48-aca9-49dd-afa0-f3856d65ebef
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Saltmarsh Island Health has been serving the residents of Saltmarsh Island and surrounding coastal communities for over 70 years. What began as a small community clinic has grown into a comprehensive healthcare system offering primary care, specialty services, and urgent care.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 4842747b-6056-48e9-bff4-d044776378ff
+      slot: main_slot
+      uuid: 33c0bb08-0849-42dc-8c8e-ad32bd62a9b5
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Our Mission'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 4842747b-6056-48e9-bff4-d044776378ff
+      slot: main_slot
+      uuid: d3566158-0c9d-42f1-b790-13262d220373
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>To provide accessible, high-quality healthcare to every member of our island community, treating each patient with dignity, compassion, and respect.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 4842747b-6056-48e9-bff4-d044776378ff
+      slot: main_slot
+      uuid: 36cb272a-351d-4087-b52b-a64ba92e7e04
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Our Values'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 4842747b-6056-48e9-bff4-d044776378ff
+      slot: main_slot
+      uuid: 9c0f9694-8688-438b-8ee7-fe970eeac4d9
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<ul><li data-list-item-id="eb9b499b3e089d988bcdf5f60e93aafa0"><strong>Patient-Centered Care:</strong> Your health and well-being are at the center of everything we do.</li><li data-list-item-id="ec29da4a06f8fefd7ea78b8ba7e8a004c"><strong>Excellence:</strong> We are committed to the highest standards of medical care and continuous improvement.</li><li data-list-item-id="e4cbda31c0f525c0d7bcca194e8fd6589"><strong>Community:</strong> We are proud to serve and support the Saltmarsh Island community.</li><li data-list-item-id="e50ac0cb6150b20676eb4c90ad5e82145"><strong>Integrity:</strong> We operate with honesty, transparency, and ethical practices.</li><li data-list-item-id="e65550b5ddb312bc9862205eddf699c8b"><strong>Compassion:</strong> We treat every patient with kindness, empathy, and understanding.</li></ul>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: 4842747b-6056-48e9-bff4-d044776378ff
+      slot: main_slot
+      uuid: bd0c447d-439f-4ae8-b2f5-48d2fee2d341
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Accreditations & Awards'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: 4842747b-6056-48e9-bff4-d044776378ff
+      slot: main_slot
+      uuid: 657616f7-f1db-4d1b-a0be-ee3480b6efad
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Saltmarsh Island Health is accredited by The Joint Commission and has received the Lighthouse Award for Excellence in Patient Safety. Our commitment to quality has earned recognition from the American Heart Association and the National Committee for Quality Assurance.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+  path:
+    -
+      alias: /about
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

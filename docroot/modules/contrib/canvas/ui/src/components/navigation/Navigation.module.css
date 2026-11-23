@@ -1,0 +1,28 @@
+.search {
+  flex-grow: 1;
+}
+.path {
+  color: var(--gray-11)
+}
+
+.item {
+  border-radius: var(--radius-3);
+   .optionsButton:not([data-state="open"]) {
+    visibility: hidden;
+   }
+}
+.item:hover,
+.item:focus-within {
+  background: var(--slate-a3);
+  .optionsButton {
+    visibility: visible;
+  }
+}
+
+.pageLink {
+  display: flex;
+  flex-grow: 1;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}

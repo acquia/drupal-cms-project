@@ -1,0 +1,26 @@
+# Deprecations google_tag cannot fix yet. The GitLab CI templates append
+# core's .deprecation-ignore.txt to this file.
+# See https://www.drupal.org/node/3285162 for the format.
+
+# Native return types. google_tag's base classes, forms, entity and controller
+# are not final, so adding return types would break code that extends them.
+%Method "[^"]+::[^"]+\(\)" might add "[^"]+" as a native return type declaration in the future. Do the same in (?:implementation|child class) "Drupal\\google_tag\\[^"]+"%
+
+# Plugin annotations are removed in Drupal 13. They stay while Drupal 10 is
+# supported; the attributes can go beside them in a follow-up.
+%Using @(GoogleTagEvent|EntityType|Condition) annotation for plugin with ID [a-z_]+ is deprecated and is removed from drupal:13\.0\.0%
+
+# Procedural .module code has to move to classes before Drupal 13.
+%Code in [a-z_]+\.module is deprecated in drupal:11\.5\.0 and must be converted before drupal:13\.0\.0%
+
+# Dependencies used only by the tests.
+%Method "[^"]+::[^"]+\(\)" might add "[^"]+" as a native return type declaration in the future. Do the same in (?:implementation|child class) "Drupal\\(search|search_api|search_api_db|search_extra_type|token|csp)\\[^"]+"%
+%(token|csp)_requirements without a \#\[LegacyRequirementsHook\] attribute is deprecated in drupal:11\.3\.0%
+%The deprecated alter hook hook_search_api_db_query_alter\(\) is implemented in these locations: search_api_test_db_search_api_db_query_alter%
+%The deprecated alter hook hook_system_info_alter\(\) is implemented in these locations: ComposerDrupalLenient\\Drupal\\LenientHooks::systemInfoAlter%
+%is deprecated in search_api:8\.x-1\.[0-9]+ and is removed from search_api:2\.0\.0%
+%Calling drupal_static(_reset)?\(\) with "token_[a-z_]+" as argument is deprecated in drupal:11\.5\.0%
+
+# Guzzle 8.5 deprecated defaultUserAgent(), which core's browser test stack
+# still calls. Remove once core stops calling it.
+%GuzzleHttp\\Utils::defaultUserAgent\(\) is deprecated%

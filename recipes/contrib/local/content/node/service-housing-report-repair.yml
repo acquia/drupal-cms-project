@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: b4ee8175-57ef-440e-a521-c5af36d8746e
+  bundle: service_page
+  default_langcode: en
+  depends:
+    dc37eb59-6951-4d90-8fdd-e4bd7d88bfd5: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Report a repair to a council property'
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /housing/report-repair-council-property
+      langcode: en
+  field_content:
+    -
+      value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>'
+      format: content_format
+  field_description:
+    -
+      value: 'Report a repair needed to your council property. Emergency repairs are available 24 hours a day.'
+  field_parent:
+    -
+      entity: dc37eb59-6951-4d90-8fdd-e4bd7d88bfd5

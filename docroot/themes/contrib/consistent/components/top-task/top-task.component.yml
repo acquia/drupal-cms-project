@@ -1,0 +1,19 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Top task
+group: Navigation
+status: stable
+props:
+  type: object
+  required:
+    - top_task_label
+  properties:
+    top_task_label:
+      type: string
+      title: Label
+      examples:
+        - "Pay your Council Tax"
+    top_task_url:
+      type: string
+      title: URL
+      examples:
+        - "/council-tax/pay"

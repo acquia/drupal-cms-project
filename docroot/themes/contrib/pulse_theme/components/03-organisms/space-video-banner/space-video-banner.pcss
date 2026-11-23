@@ -1,0 +1,47 @@
+@reference "../../00-base/global/global.pcss";
+
+/* video banner */
+
+.video-banner {
+  @apply py-10 px-4 xl:py-[180px] relative text-center min-h-full xl:min-h-screen bg-sds-base-brand;
+
+  &:before {
+    @apply absolute top-0 left-0 w-full h-full bg-center bg-no-repeat;
+
+    content: "";
+    background-image: url("./images/grid-pattern.png");
+  }
+
+  .top-content {
+    @apply max-w-6xl mx-auto;
+  }
+
+  .intro-label {
+    @apply mb-6 block uppercase font-light tracking-widest;
+  }
+
+  .headline {
+    @apply mx-0 break-words;
+  }
+
+  .category-wrapper {
+    @apply flex items-center gap-2 mb-9 justify-center;
+
+    span {
+      @apply inline-block px-4 py-1 rounded-full text-base font-normal bg-sds-gray;
+
+      box-shadow: 0px 1px 3px 0px rgba(16, 24, 40, 0.1);
+    }
+
+    .primary_category {
+      @apply bg-black text-white;
+    }
+  }
+
+  .video-wrapper {
+    iframe,
+    video {
+      @apply mx-auto rounded-3xl w-full max-w-3xl h-48 md:h-96;
+    }
+  }
+}

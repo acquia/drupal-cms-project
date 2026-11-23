@@ -1,0 +1,350 @@
+import {
+  startTransition,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import { useParams } from 'react-router';
+import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
+import { Callout } from '@radix-ui/themes';
+
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { usePreviewGeometryUpdater } from '@/features/layout/preview/PreviewGeometryContext';
+import PreviewProgress from '@/features/layout/preview/PreviewProgress';
+import { useHeadlessDraftSession } from '@/features/layout/preview/useHeadlessDraftSession';
+import ViewportOverlay from '@/features/layout/previewOverlay/ViewportOverlay';
+import {
+  EditorFrameMode,
+  selectEditorFrameMode,
+  selectViewportMinHeight,
+  selectViewportWidth,
+  setFirstLoadComplete,
+  unsetUpdatingComponent,
+} from '@/features/ui/uiSlice';
+
+import type { HeadlessSettings } from '@drupal-canvas/types';
+import type { AutoSavesHashRecord } from '@/types/AutoSaves';
+
+import styles from './Preview.module.css';
+
+interface HeadlessPreviewProps {
+  settings: HeadlessSettings;
+  autoSavesHash: AutoSavesHashRecord;
+}
+
+interface PreviewFrameDescriptor {
+  frameKey: string;
+  entityType: string;
+  entityId: string;
+  viewMode?: string;
+  autoSavesHash: AutoSavesHashRecord;
+}
+
+interface PreviewFrameState {
+  active: PreviewFrameDescriptor | null;
+  pending: PreviewFrameDescriptor | null;
+  pendingReady: boolean;
+}
+
+interface HeadlessPreviewFrameProps extends PreviewFrameDescriptor {
+  settings: HeadlessSettings;
+  viewportWidth: number;
+  viewportMinHeight: number;
+  active: boolean;
+  onReady: (key: string) => void;
+}
+
+const HeadlessPreviewFrame: React.FC<HeadlessPreviewFrameProps> = ({
+  settings,
+  autoSavesHash,
+  entityType,
+  entityId,
+  viewMode,
+  viewportWidth,
+  viewportMinHeight,
+  active,
+  onReady,
+  frameKey,
+}) => {
+  const dispatch = useAppDispatch();
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const previewContainerRef = useRef<HTMLDivElement>(null);
+  const { updateGeometry, clearGeometry } = usePreviewGeometryUpdater();
+  const editorFrameMode = useAppSelector(selectEditorFrameMode);
+
+  // For non-full view modes (e.g. teaser, card), use no min height so the
+  // frame is sized to its content. A selected device-viewport preset only
+  // floors the "full" view mode, mirroring the same-origin Viewport.
+  const effectiveMinHeight =
+    viewMode && viewMode !== 'full' ? 0 : viewportMinHeight;
+  const {
+    statusText,
+    contentHeight,
+    contentHeightReady,
+    geometryReady,
+    geometry,
+  } = useHeadlessDraftSession(
+    iframeRef,
+    settings,
+    entityType,
+    entityId,
+    autoSavesHash,
+    effectiveMinHeight,
+    { viewMode },
+  );
+
+  // Floors at effectiveMinHeight (the selected device-viewport preset for the
+  // "full" view mode, or 0 for content-sized view modes) so a shorter piece of
+  // content never shrinks the frame below the simulated device height — the
+  // same floor useSyncIframeHeightToContent keeps for the same-origin preview.
+  // Retain the previous height while a reloaded document reports its height.
+  const effectiveHeight = Math.max(contentHeight ?? 0, effectiveMinHeight);
+
+  useEffect(() => {
+    if (contentHeightReady) {
+      onReady(frameKey);
+    }
+  }, [contentHeightReady, frameKey, onReady]);
+
+  useEffect(() => {
+    if (active) {
+      updateGeometry(geometry);
+      // Standard preview clears this state when its iframe finishes updating.
+      // A new app-side snapshot is the equivalent completion signal here.
+      dispatch(unsetUpdatingComponent());
+    }
+  }, [active, dispatch, geometry, updateGeometry]);
+
+  useEffect(() => {
+    return () => {
+      if (active) {
+        clearGeometry();
+      }
+    };
+  }, [active, clearGeometry]);
+
+  return (
+    <div
+      data-testid={
+        active
+          ? 'canvas-headless-active-frame'
+          : 'canvas-headless-pending-frame'
+      }
+      aria-hidden={!active}
+      style={{
+        width: `${viewportWidth}px`,
+        minHeight: `${effectiveHeight}px`,
+        background: '#fff',
+        ...(active
+          ? {}
+          : {
+              position: 'absolute',
+              inset: 0,
+              visibility: 'hidden',
+              pointerEvents: 'none',
+            }),
+      }}
+    >
+      <p
+        data-testid={
+          active ? 'canvas-headless-status' : 'canvas-headless-pending-status'
+        }
+        aria-live={active ? 'polite' : 'off'}
+        style={{
+          margin: 0,
+          padding: '4px 8px',
+          fontSize: '12px',
+          color: '#666',
+          borderBottom: '1px solid #eee',
+        }}
+      >
+        {statusText}
+      </p>
+      {active &&
+        contentHeightReady &&
+        geometryReady &&
+        !geometry.some(
+          ({ type, id }) => type === 'region' && id === 'content',
+        ) && (
+          <Callout.Root
+            color="amber"
+            role="status"
+            className={styles.headlessWarning}
+          >
+            <Callout.Icon>
+              <ExclamationTriangleIcon />
+            </Callout.Icon>
+            <Callout.Text>
+              The active frontend did not render an editable content region.
+              Check the page template&apos;s components and the slot containing
+              Page content, or switch to a compatible frontend.
+            </Callout.Text>
+          </Callout.Root>
+        )}
+      <div
+        ref={previewContainerRef}
+        data-testid={
+          active
+            ? 'canvas-headless-viewport'
+            : 'canvas-headless-pending-viewport'
+        }
+        style={{
+          height: `${effectiveHeight}px`,
+          overflow: 'hidden',
+          background: '#fff',
+        }}
+      >
+        <iframe
+          ref={iframeRef}
+          title={active ? 'Headless preview' : 'Pending headless preview'}
+          data-testid={
+            active ? 'canvas-headless-iframe' : 'canvas-headless-pending-iframe'
+          }
+          tabIndex={
+            active && editorFrameMode === EditorFrameMode.INTERACTIVE ? 0 : -1
+          }
+          // The editor frame centers its scroll position once the first load
+          // completes; the srcdoc pipeline normally reports that.
+          onLoad={() => dispatch(setFirstLoadComplete(true))}
+          style={
+            {
+              '--canvas-headless-preview-height': `${effectiveHeight}px`,
+              display: 'block',
+              width: '100%',
+              // The host temporarily replaces height during viewport probes. A
+              // stable declaration lets it restore this property without
+              // overwriting a newer height committed by React during the probe.
+              height: 'var(--canvas-headless-preview-height)',
+              pointerEvents:
+                active && editorFrameMode === EditorFrameMode.INTERACTIVE
+                  ? 'auto'
+                  : 'none',
+              border: 'none',
+            } as React.CSSProperties
+          }
+        ></iframe>
+        {active && editorFrameMode === EditorFrameMode.EDIT && (
+          <ViewportOverlay previewContainerRef={previewContainerRef} />
+        )}
+      </div>
+    </div>
+  );
+};
+
+/**
+ * Embeds the configured frontend app in the editor frame.
+ *
+ * Replaces the Drupal-rendered srcdoc preview when the canvas_headless
+ * module is enabled. The iframe is cross-origin, so draft state, height, and
+ * shared preview geometry travel over the origin-checked postMessage protocol.
+ * The app measures its own document; Canvas converts those rectangles and
+ * renders its standard interactive overlays here.
+ * A reported preview without a content region shows a warning because Canvas
+ * cannot provide the page's drag-and-drop area without that region.
+ * The warning sits above the preview without moving the measured iframe.
+ *
+ * Page changes are double-buffered: the current iframe remains visible while
+ * the next page activates and reports its height, then the new iframe replaces
+ * it in one render. Readiness is recorded in a transition, and a pending frame
+ * is promoted only if it still matches the committed route. This avoids
+ * exposing navigation and height-probe states or replacing the current frame
+ * with a canceled preview.
+ */
+const HeadlessPreview: React.FC<HeadlessPreviewProps> = ({
+  settings,
+  autoSavesHash,
+}) => {
+  const viewportWidth = useAppSelector(selectViewportWidth);
+  const viewportMinHeight = useAppSelector(selectViewportMinHeight);
+  const { entityId, entityType, previewEntityId, viewMode } = useParams();
+  const contentEntityId = entityId ?? previewEntityId;
+  const autoSavesHashRef = useRef(autoSavesHash);
+  autoSavesHashRef.current = autoSavesHash;
+  const currentFrame = useMemo<PreviewFrameDescriptor | null>(() => {
+    if (!entityType || !contentEntityId) {
+      return null;
+    }
+    return {
+      frameKey: `${entityType}:${contentEntityId}:${viewMode ?? ''}`,
+      entityType,
+      entityId: contentEntityId,
+      viewMode,
+      autoSavesHash: autoSavesHashRef.current,
+    };
+  }, [contentEntityId, entityType, viewMode]);
+  const [frames, setFrames] = useState<PreviewFrameState>(() => ({
+    active: currentFrame,
+    pending: null,
+    pendingReady: false,
+  }));
+
+  useEffect(() => {
+    if (!currentFrame) {
+      return;
+    }
+    setFrames((current) => {
+      if (!current.active) {
+        return { active: currentFrame, pending: null, pendingReady: false };
+      }
+      if (current.active.frameKey === currentFrame.frameKey) {
+        return current.pending
+          ? { ...current, pending: null, pendingReady: false }
+          : current;
+      }
+      if (current.pending?.frameKey === currentFrame.frameKey) {
+        return current.pendingReady
+          ? { active: current.pending, pending: null, pendingReady: false }
+          : current;
+      }
+      return { ...current, pending: currentFrame, pendingReady: false };
+    });
+  }, [currentFrame, frames.pendingReady]);
+
+  const markFrameReady = useCallback((frameKey: string) => {
+    // Let route transitions settle before deciding whether to display this frame.
+    startTransition(() => {
+      setFrames((current) => {
+        if (current.pending?.frameKey !== frameKey || current.pendingReady) {
+          return current;
+        }
+        return { ...current, pendingReady: true };
+      });
+    });
+  }, []);
+
+  const visibleFrames = [frames.active, frames.pending].filter(
+    (frame): frame is PreviewFrameDescriptor => frame !== null,
+  );
+
+  return (
+    <div
+      className={styles.previewContainer}
+      style={{ width: `${viewportWidth}px` }}
+    >
+      <PreviewProgress loading={frames.pending !== null} />
+      {visibleFrames.map((frame) => {
+        const isActive = frame.frameKey === frames.active?.frameKey;
+        return (
+          <HeadlessPreviewFrame
+            {...frame}
+            key={frame.frameKey}
+            autoSavesHash={
+              frame.frameKey === currentFrame?.frameKey
+                ? autoSavesHash
+                : frame.autoSavesHash
+            }
+            settings={settings}
+            viewportWidth={viewportWidth}
+            viewportMinHeight={viewportMinHeight}
+            active={isActive}
+            onReady={markFrameReady}
+          />
+        );
+      })}
+    </div>
+  );
+};
+
+export default HeadlessPreview;

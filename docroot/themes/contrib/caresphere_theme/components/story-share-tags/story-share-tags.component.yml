@@ -1,0 +1,64 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Story Share & Tags
+group: Content
+status: stable
+description: "Share this story heading, social share buttons (link, LinkedIn, X, Facebook), and optional category tags. Figma desktop 1:7432 (horizontal), mobile 1:7218 (stacked)."
+props:
+  type: object
+  properties:
+    share_heading:
+      type: string
+      title: Share heading
+      description: "Label above share buttons (e.g. 'Share this story')."
+      default: "Share this story"
+      examples:
+        - "Share this story"
+    share_url:
+      type: string
+      title: URL to share
+      description: "Base URL for copy link and social share. Leave empty to use current page."
+      default: ""
+    link_copy_url:
+      type: string
+      title: Copy link — URL
+      description: "Dedicated URL for the copy-link button. Empty = use URL to share or current page."
+      default: ""
+    link_linkedin_url:
+      type: string
+      title: LinkedIn — URL
+      description: "Dedicated URL for the LinkedIn share button. Empty = build from URL to share."
+      default: ""
+    link_x_url:
+      type: string
+      title: X (Twitter) — URL
+      description: "Dedicated URL for the X share button. Empty = build from URL to share."
+      default: ""
+    link_facebook_url:
+      type: string
+      title: Facebook — URL
+      description: "Dedicated URL for the Facebook share button. Empty = build from URL to share."
+      default: ""
+    tag_1:
+      type: string
+      title: Tag 1
+      description: "First tag label. Leave empty to hide."
+      default: ""
+    tag_2:
+      type: string
+      title: Tag 2
+      description: "Second tag label. Leave empty to hide."
+      default: ""
+    tag_3:
+      type: string
+      title: Tag 3
+      description: "Third tag label. Leave empty to hide."
+      default: ""
+    tag_4:
+      type: string
+      title: Tag 4
+      description: "Fourth tag label. Leave empty to hide."
+      default: ""
+
+libraryOverrides:
+  js:
+    story-share-tags.js: {}

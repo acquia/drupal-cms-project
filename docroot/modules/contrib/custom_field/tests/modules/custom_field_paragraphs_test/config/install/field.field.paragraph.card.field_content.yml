@@ -1,0 +1,48 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_content
+    - media.type.document
+    - media.type.image
+    - paragraphs.paragraphs_type.card
+  module:
+    - custom_field
+id: paragraph.card.field_content
+field_name: field_content
+entity_type: paragraph
+bundle: card
+label: Content
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  field_settings:
+    title:
+      check_empty: false
+      required: true
+      translatable: false
+      description: ''
+      description_display: after
+      prefix: ''
+      suffix: ''
+      allowed_values: { }
+    media:
+      check_empty: false
+      required: false
+      translatable: false
+      description: ''
+      description_display: after
+      handler: 'default:media'
+      handler_settings:
+        sort:
+          field: _none
+          direction: ASC
+        auto_create: false
+        target_bundles:
+          document: document
+          image: image
+        auto_create_bundle: document
+field_type: custom

@@ -1,0 +1,240 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 144956ae-ecd6-4c16-9bfc-26880d52cbf9
+  default_langcode: en
+  depends:
+    275d6adb-479d-4d19-9fd2-df7787615166: file
+    b2a4c41a-17c9-41e5-8955-2fbbce1273a8: media
+    009bcc5c-3f64-45e9-91fa-2cce8c1cbfc9: file
+    d17b97d0-d7f6-42ba-a4d8-e8cd4ea3305f: media
+    2a663784-fefe-4d95-b70d-3acaa7a5211b: file
+    dda02fa6-7bc5-4691-b2ca-fc29c8f54d92: media
+    a42b37d5-b02a-47f4-9b1c-b95904c2d79f: file
+    91fc265e-9eb0-4a3b-b8e9-04d7a961f31c: media
+    320e8f19-c5f6-48be-8373-fc37115e3296: file
+    cbeb8a6b-c71b-479b-ab98-0c8b76b5ca53: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Home
+  components:
+    -
+      uuid: 3885857f-1dce-47e8-b1a2-5a6141b85142
+      component_id: sdc.consistent.hero-banner
+      inputs:
+        heading_text: 'Welcome to Your Local Council'
+        subtitle: 'How can we help?'
+        show_search: true
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: b2a4c41a-17c9-41e5-8955-2fbbce1273a8
+            target_type: media
+    -
+      uuid: 414e3792-04b5-4460-9046-775ff24d1635
+      component_id: sdc.consistent.section
+      inputs:
+        section_columns: 33-33-33
+        section_background: none
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: 414e3792-04b5-4460-9046-775ff24d1635
+      slot: section_header_slot
+      uuid: 502beabf-e891-4d3a-b95c-423820f12c75
+      component_id: sdc.consistent.heading
+      inputs:
+        heading_text: 'Most popular'
+        heading_level: 2
+    -
+      parent_uuid: 414e3792-04b5-4460-9046-775ff24d1635
+      slot: section_main_slot
+      uuid: 5c1d6efe-0965-45a3-b10b-b1b2e795cfe4
+      component_id: sdc.consistent.top-task
+      inputs:
+        top_task_label: 'Pay your local tax'
+        top_task_url: /local-tax/pay-your-local-tax
+    -
+      parent_uuid: 414e3792-04b5-4460-9046-775ff24d1635
+      slot: section_main_slot
+      uuid: e4ee66b1-69a4-415f-a2a5-aff4aa9c5d20
+      component_id: sdc.consistent.top-task
+      inputs:
+        top_task_label: 'Tell us you are moving'
+        top_task_url: /local-tax/tell-us-you-are-moving
+    -
+      parent_uuid: 414e3792-04b5-4460-9046-775ff24d1635
+      slot: section_main_slot
+      uuid: 9f5cd842-bd44-4694-af5d-be56f2f67d52
+      component_id: sdc.consistent.top-task
+      inputs:
+        top_task_label: 'Apply for a tax reduction or discount'
+        top_task_url: /local-tax/reductions-and-discounts
+    -
+      parent_uuid: 414e3792-04b5-4460-9046-775ff24d1635
+      slot: section_main_slot
+      uuid: ef037b81-35bf-4d30-86bb-31ead6a8e535
+      component_id: sdc.consistent.top-task
+      inputs:
+        top_task_label: 'Report a missed collection'
+        top_task_url: /waste-and-recycling/report-missed-collection
+    -
+      parent_uuid: 414e3792-04b5-4460-9046-775ff24d1635
+      slot: section_main_slot
+      uuid: 98f0f725-e97e-48f3-a921-04ad1eec2402
+      component_id: sdc.consistent.top-task
+      inputs:
+        top_task_label: 'Apply for social housing'
+        top_task_url: /housing/apply-social-housing
+    -
+      parent_uuid: 414e3792-04b5-4460-9046-775ff24d1635
+      slot: section_main_slot
+      uuid: 195b4ea0-ceea-4740-b362-f4de5b5e20b4
+      component_id: sdc.consistent.top-task
+      inputs:
+        top_task_label: 'Find a library'
+        top_task_url: /library-services/find-library
+    -
+      uuid: d905b564-8ef9-44b1-9d17-3845d65ae58e
+      component_id: sdc.consistent.section
+      inputs:
+        section_columns: 33-33-33
+        section_background: none
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: d905b564-8ef9-44b1-9d17-3845d65ae58e
+      slot: section_header_slot
+      uuid: e9348073-13f4-476a-9816-5c4b008be0d6
+      component_id: sdc.consistent.heading
+      inputs:
+        heading_text: 'Council services'
+        heading_level: 2
+    -
+      parent_uuid: d905b564-8ef9-44b1-9d17-3845d65ae58e
+      slot: section_main_slot
+      uuid: f82be188-08a1-4f05-ae62-980338b61383
+      component_id: sdc.consistent.link-summary
+      inputs:
+        link_summary_label: 'Waste and recycling'
+        link_summary_url: /waste-and-recycling
+        link_summary_text: 'Check your collection schedule, report a missed collection, and find your nearest recycling centre.'
+    -
+      parent_uuid: d905b564-8ef9-44b1-9d17-3845d65ae58e
+      slot: section_main_slot
+      uuid: ea485611-079e-4829-9595-298e841a6ace
+      component_id: sdc.consistent.link-summary
+      inputs:
+        link_summary_label: 'Local tax'
+        link_summary_url: /local-tax
+        link_summary_text: 'Pay your local property tax, apply for a discount or reduction, and manage your account online.'
+    -
+      parent_uuid: d905b564-8ef9-44b1-9d17-3845d65ae58e
+      slot: section_main_slot
+      uuid: 3bc05444-a079-4f47-96bc-6dd632480d0a
+      component_id: sdc.consistent.link-summary
+      inputs:
+        link_summary_label: Housing
+        link_summary_url: /housing
+        link_summary_text: 'Apply for social housing, report a repair, and find tenancy support in your area.'
+    -
+      parent_uuid: d905b564-8ef9-44b1-9d17-3845d65ae58e
+      slot: section_main_slot
+      uuid: 4cd16555-b18a-4f58-a7d3-7ee743591eaf
+      component_id: sdc.consistent.link-summary
+      inputs:
+        link_summary_label: 'Parks and green spaces'
+        link_summary_url: /parks-and-green-spaces
+        link_summary_text: 'Find a park, check facilities and opening times, and book a space for your event.'
+    -
+      parent_uuid: d905b564-8ef9-44b1-9d17-3845d65ae58e
+      slot: section_main_slot
+      uuid: e8b13b3a-0884-44e5-8ac4-f2e502029a6d
+      component_id: sdc.consistent.link-summary
+      inputs:
+        link_summary_label: Libraries
+        link_summary_url: /library-services
+        link_summary_text: 'Find your nearest library, join for free, borrow books and e-books, and discover community programmes.'
+    -
+      uuid: 79deb9c1-ee8a-4586-95a0-0692e64247c0
+      component_id: sdc.consistent.section
+      inputs:
+        section_columns: 33-33-33
+        section_background: none
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: 79deb9c1-ee8a-4586-95a0-0692e64247c0
+      slot: section_header_slot
+      uuid: 03db533f-1a29-4b65-98b4-1af49969fdd8
+      component_id: sdc.consistent.heading
+      inputs:
+        heading_text: Featured
+        heading_level: 2
+    -
+      parent_uuid: 79deb9c1-ee8a-4586-95a0-0692e64247c0
+      slot: section_main_slot
+      uuid: 127ad9e3-d927-4f8b-95b9-4951f772298c
+      component_id: sdc.consistent.card
+      inputs:
+        card_heading: 'Summer Reading Challenge now open'
+        card_url: /library-services/learning-and-community-programmes
+        card_text: 'Children aged 4 to 11 can sign up at any library branch. Read six books over the summer and earn your certificate.'
+        card_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: d17b97d0-d7f6-42ba-a4d8-e8cd4ea3305f
+            target_type: media
+    -
+      parent_uuid: 79deb9c1-ee8a-4586-95a0-0692e64247c0
+      slot: section_main_slot
+      uuid: 12ec9af3-b0bf-4551-b036-5612715c2508
+      component_id: sdc.consistent.card
+      inputs:
+        card_heading: 'New cycle trails open at Millbrook Country Park'
+        card_url: /parks-and-green-spaces/find-park-or-green-space
+        card_text: 'Two new waymarked trails are now open — a 5km family route and a 12km cross-country circuit.'
+        card_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: dda02fa6-7bc5-4691-b2ca-fc29c8f54d92
+            target_type: media
+    -
+      parent_uuid: 79deb9c1-ee8a-4586-95a0-0692e64247c0
+      slot: section_main_slot
+      uuid: f977776e-94af-4e36-b594-df42ffcbcfaf
+      component_id: sdc.consistent.card
+      inputs:
+        card_heading: 'About this site template'
+        card_url: /about
+        card_text: 'Find out how this template was built, what content types are available, and how Canvas powers the page layouts.'
+        card_media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 91fc265e-9eb0-4a3b-b8e9-04d7a961f31c
+            target_type: media
+    -
+      uuid: 72bf8b8f-6106-4a1b-a68b-25d74dc1961d
+      component_id: sdc.consistent.cta-banner
+      inputs:
+        heading_text: "What's on in your area"
+        text: 'Events, activities, and community news from across the council area. Updated every week.'
+        cta_label: "See what's on"
+        cta_url: /whats-on
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: cbeb8a6b-c71b-479b-ab98-0c8b76b5ca53
+            target_type: media
+  path:
+    -
+      alias: /home
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

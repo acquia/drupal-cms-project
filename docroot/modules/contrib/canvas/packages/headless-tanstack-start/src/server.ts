@@ -1,0 +1,68 @@
+import { CANVAS_COMPONENT_PREVIEW_QUERY } from '@drupal-canvas/headless';
+import {
+  createDraftServer,
+  isPageRedirect,
+  resolveDraftConfig,
+} from '@drupal-canvas/headless/server';
+import { getCookie, getRequest } from '@tanstack/react-start/server';
+
+import {
+  TANSTACK_DRAFT_FLAG_COOKIE_NAME,
+  tanstackDraftAdapter,
+} from './adapter';
+
+/**
+ * The module-level draft server every request shares. Authentication and
+ * preview context come from the current cookies and URL through the helpers
+ * in @tanstack/react-start/server. The configuration is resolved from
+ * the environment lazily per call — nothing here touches the request or
+ * the environment at import time, so builds without CANVAS_SITE_URL set do
+ * not throw.
+ */
+const server = createDraftServer({ adapter: tanstackDraftAdapter });
+
+export const getDraftData = server.getDraftData;
+export const enableDraftMode = server.enableDraftMode;
+export const renewDraftSession = server.renewDraftSession;
+export const disableDraftMode = server.disableDraftMode;
+export const getDraftConfig = server.getConfig;
+export const getClient = server.getClient;
+export const getPublicClient = server.getPublicClient;
+export const getDraftClient = server.getDraftClient;
+export const fetchEntity = server.fetchEntity;
+export const fetchPage = server.fetchPage;
+export const fetchComponentPreview = server.fetchComponentPreview;
+export const getJsonApiRuntimeConfig = server.getJsonApiRuntimeConfig;
+export const handleJsonApiProxy = server.handleJsonApiProxy;
+
+/** Safe loader data for the reserved isolated component-preview route. */
+export async function getComponentPreviewData() {
+  const componentId = new URL(getRequest().url).searchParams.get(
+    CANVAS_COMPONENT_PREVIEW_QUERY,
+  );
+  const draftData = await getDraftData();
+  if (!draftData || !componentId) {
+    return null;
+  }
+  const page = await fetchComponentPreview(componentId);
+  if (!page || isPageRedirect(page)) {
+    return null;
+  }
+  return {
+    page,
+  };
+}
+
+/**
+ * Whether draft mode is on for this request — the flag cookie, regardless
+ * of whether the session data behind it is intact or expired. This is the
+ * "should the app surface draft session state at all" signal (the banner);
+ * for data access, getClient() already falls back to public content when
+ * the session has expired.
+ */
+export function isDraftModeEnabled(): boolean {
+  return getCookie(TANSTACK_DRAFT_FLAG_COOKIE_NAME) === '1';
+}
+
+export { isDraftSessionExpired } from '@drupal-canvas/headless';
+export { resolveDraftConfig };

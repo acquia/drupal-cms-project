@@ -1,0 +1,56 @@
+/* Styles apply only when inside a themed timeline component */
+.timeline-component--themed .timeline-item {
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+
+  .timeline-item__marker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 24px;
+    z-index: 10;
+  }
+
+  .timeline-item__dot {
+    width: 16px;
+    height: 16px;
+    background-color: #000;
+    border-radius: 50%;
+    flex-shrink: 0;
+    z-index: 2;
+  }
+
+  .timeline-item__line {
+    position: absolute;
+    background-color: #000;
+    z-index: 1;
+  }
+
+  .timeline-item__title {
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 140%;
+    letter-spacing: -1%;
+    color: #030804;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 8px;
+
+    * {
+      font-weight: 400 !important;
+    }
+  }
+
+  .timeline-item__description {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 150%;
+    letter-spacing: 0%;
+    color: #030804;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 16px;
+  }
+}

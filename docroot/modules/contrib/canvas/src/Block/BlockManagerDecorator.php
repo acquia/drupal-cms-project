@@ -1,0 +1,176 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Drupal\canvas\Block;
+
+use Drupal\canvas\ComponentSource\ComponentSourceManager;
+use Drupal\canvas\Plugin\Canvas\ComponentSource\BlockComponent;
+use Drupal\Component\Plugin\Discovery\CachedDiscoveryInterface;
+use Drupal\Component\Plugin\FallbackPluginManagerInterface;
+use Drupal\Core\Block\BlockManagerInterface;
+
+/**
+ * Decorates the block plugin manager to re-generate block Canvas components.
+ *
+ * When block plugin definitions are re-discovered (triggered by
+ * clearCachedDefinitions()), Canvas needs to regenerate its Component config
+ * entities for the "block" component source. Without this, newly added block
+ * plugins (e.g. Views blocks) do not appear in Canvas until a full cache clear.
+ *
+ * This is skipped while a module is being installed, because the module's
+ * database tables may not exist yet.
+ *
+ * @todo Refactor this after https://www.drupal.org/project/drupal/issues/3001284 lands.
+ *
+ * @see \Drupal\canvas\Plugin\Canvas\ComponentSource\BlockComponent
+ * @see \Drupal\canvas\Plugin\Canvas\ComponentSource\BlockComponentDiscovery
+ * @see \Drupal\canvas\ComponentSource\ComponentSourceManager::generateComponents()
+ * @see https://www.drupal.org/project/canvas/issues/3578142
+ * @internal
+ */
+final class BlockManagerDecorator implements BlockManagerInterface, FallbackPluginManagerInterface, CachedDiscoveryInterface {
+
+  /**
+   * TRUE while a module is being installed or uninstalled.
+   *
+   * While a module installs, core clears the plugin caches before it creates
+   * the module's database tables. While a module uninstalls, core drops the
+   * module's database tables, and other modules (for example Layout Builder)
+   * then trigger a block plugin cache clear. Generating block components at
+   * either moment reads tables that don't exist, and the install or uninstall
+   * crashes halfway. So clearCachedDefinitions() skips generation until the
+   * install or uninstall is done.
+   *
+   * This lives on the service, so a container rebuild resets it. That is
+   * fine: core rebuilds the container before invoking
+   * hook_module_preinstall(), and any later rebuild happens after the tables
+   * exist. On uninstall, core rebuilds the container after the module's
+   * tables are gone, and the cache clear that follows regenerates components
+   * without the uninstalled module.
+   *
+   * @var bool
+   *
+   * @see \Drupal\Core\Extension\ModuleInstaller::doInstall()
+   * @see \Drupal\Core\Extension\ModuleInstaller::uninstall()
+   * @see \Drupal\canvas\Hook\ComponentSourceHooks::modulePreinstall()
+   * @see \Drupal\canvas\Hook\ComponentSourceHooks::modulesInstalled()
+   * @see \Drupal\canvas\Hook\ComponentSourceHooks::modulePreuninstall()
+   * @see \Drupal\canvas\Hook\ComponentSourceHooks::modulesUninstalled()
+   * @see https://www.drupal.org/project/canvas/issues/3582851
+   * @see https://www.drupal.org/project/canvas/issues/3592377
+   */
+  public bool $moduleInstallOrUninstallInProgress = FALSE;
+
+  /**
+   * The decorated block plugin manager is responsible for caching, not this!
+   *
+   * @phpstan-ignore pluginManagerSetsCacheBackend.missingCacheBackend
+   */
+  public function __construct(
+    private readonly BlockManagerInterface&FallbackPluginManagerInterface&CachedDiscoveryInterface $decorated,
+    private readonly ComponentSourceManager $componentSourceManager,
+  ) {}
+
+  /**
+   * {@inheritdoc}
+   */
+  public function clearCachedDefinitions(): void {
+    $this->decorated->clearCachedDefinitions();
+
+    // During a module install, Canvas generates all components once the
+    // install is done. During a module uninstall, core's own cache clear after
+    // the container rebuild regenerates them.
+    // @see ::$moduleInstallOrUninstallInProgress
+    // @see \Drupal\canvas\Hook\ComponentSourceHooks::modulesInstalled()
+    if ($this->moduleInstallOrUninstallInProgress) {
+      return;
+    }
+    $this->componentSourceManager->generateComponents(BlockComponent::SOURCE_PLUGIN_ID);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function useCaches($use_caches = FALSE): void {
+    $this->decorated->useCaches($use_caches);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getDefinition($plugin_id, $exception_on_invalid = TRUE): mixed {
+    return $this->decorated->getDefinition($plugin_id, $exception_on_invalid);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getDefinitions(): array {
+    return $this->decorated->getDefinitions();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function hasDefinition($plugin_id): bool {
+    return $this->decorated->hasDefinition($plugin_id);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function createInstance($plugin_id, array $configuration = []): object {
+    return $this->decorated->createInstance($plugin_id, $configuration);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getInstance(array $options): object|false {
+    return $this->decorated->getInstance($options);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getDefinitionsForContexts(array $contexts = []): array {
+    return $this->decorated->getDefinitionsForContexts($contexts);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCategories(): array {
+    return $this->decorated->getCategories();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getSortedDefinitions(?array $definitions = NULL, string $label_key = 'label'): array {
+    return $this->decorated->getSortedDefinitions($definitions, $label_key);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getGroupedDefinitions(?array $definitions = NULL, string $label_key = 'label'): array {
+    return $this->decorated->getGroupedDefinitions($definitions, $label_key);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getFilteredDefinitions($consumer, $contexts = NULL, array $extra = []): array {
+    return $this->decorated->getFilteredDefinitions($consumer, $contexts, $extra);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getFallbackPluginId($plugin_id, array $configuration = []): string {
+    return $this->decorated->getFallbackPluginId($plugin_id, $configuration);
+  }
+
+}

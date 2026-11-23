@@ -1,0 +1,130 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Section Stories
+group: Section
+status: stable
+description: "Stories/Blog section with tagline, heading, description, optional View all button, and a row of story cards (desktop) or stacked cards (mobile). Figma 1:7769 (desktop), 1:7583 (mobile)."
+props:
+  type: object
+  properties:
+    tagline:
+      type: string
+      title: Tagline
+      default: "Stories"
+    heading:
+      type: string
+      title: Heading
+      default: "What we're doing now"
+    heading_level:
+      type: number
+      title: Heading level
+      enum: [2, 3, 4, 5]
+      default: 2
+    description:
+      type: string
+      title: Description
+      default: "Follow our latest work and see the progress we're making."
+    view_all_label:
+      type: string
+      title: View all button label
+      default: "View all"
+    view_all_url:
+      type: string
+      title: View all button URL
+      default: ""
+    textcolor:
+      type: string
+      title: Text color (theme)
+      enum:
+        - dark
+        - light
+      meta:enum:
+        dark: Dark
+        light: Light
+      default: dark
+
+    card_1_media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Card 1 Image
+      type: object
+    card_1_category:
+      type: string
+      title: Card 1 Category
+      default: "Report"
+    card_1_read_time:
+      type: string
+      title: Card 1 Read time
+      default: "3 min read"
+    card_1_title:
+      type: string
+      title: Card 1 Title
+      default: "Impact Update"
+    card_1_description:
+      type: string
+      title: Card 1 Description
+      default: "Brief summary of the story."
+    card_1_link_label:
+      type: string
+      title: Card 1 Link label
+      default: "Learn more"
+    card_1_link_url:
+      type: string
+      title: Card 1 Link URL
+      default: ""
+
+    card_2_media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Card 2 Image
+      type: object
+    card_2_category:
+      type: string
+      title: Card 2 Category
+      default: "Community"
+    card_2_read_time:
+      type: string
+      title: Card 2 Read time
+      default: "5 min read"
+    card_2_title:
+      type: string
+      title: Card 2 Title
+      default: "Community Stories"
+    card_2_description:
+      type: string
+      title: Card 2 Description
+      default: "Brief summary of the story."
+    card_2_link_label:
+      type: string
+      title: Card 2 Link label
+      default: "Learn more"
+    card_2_link_url:
+      type: string
+      title: Card 2 Link URL
+      default: ""
+
+    card_3_media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Card 3 Image
+      type: object
+    card_3_category:
+      type: string
+      title: Card 3 Category
+      default: "Events"
+    card_3_read_time:
+      type: string
+      title: Card 3 Read time
+      default: "2 min read"
+    card_3_title:
+      type: string
+      title: Card 3 Title
+      default: "Upcoming Events"
+    card_3_description:
+      type: string
+      title: Card 3 Description
+      default: "Brief summary of the story."
+    card_3_link_label:
+      type: string
+      title: Card 3 Link label
+      default: "Learn more"
+    card_3_link_url:
+      type: string
+      title: Card 3 Link URL
+      default: ""

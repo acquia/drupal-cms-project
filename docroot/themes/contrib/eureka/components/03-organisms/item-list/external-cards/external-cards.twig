@@ -1,0 +1,17 @@
+{#
+/**
+ * Available variables:
+ * - external_cards_heading: base classname of the wrapper.
+ */
+#}
+
+{% embed "eureka:item-list" with {
+  item_list_type: 'column-cards',
+  item_list_modifiers: ['external-cards'],
+  item_list_heading_level: external_cards_heading_level,
+  item_list_heading: external_cards_heading,
+}%}
+  {% block item_list_items_block %}
+    {{ external_cards_items }}
+  {% endblock %}
+{% endembed %}

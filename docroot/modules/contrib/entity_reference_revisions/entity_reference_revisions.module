@@ -1,0 +1,231 @@
+<?php
+
+/**
+ * @file
+ * Provides a field that can reference other entities.
+ */
+
+use Drupal\entity_reference_revisions\Hook\EntityReferenceRevisionsHooks;
+use Drupal\entity_reference_revisions\Hook\EntityHooks;
+use Drupal\Component\Utility\NestedArray;
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\field\FieldStorageConfigInterface;
+
+/**
+ * Implements hook_help().
+ */
+#[LegacyHook]
+function entity_reference_revisions_help($route_name, RouteMatchInterface $route_match) {
+  return \Drupal::service(EntityReferenceRevisionsHooks::class)->help($route_name, $route_match);
+}
+
+/**
+ * Implements hook_field_widget_info_alter().
+ */
+#[LegacyHook]
+function entity_reference_revisions_field_widget_info_alter(&$info) {
+  \Drupal::service(EntityReferenceRevisionsHooks::class)->fieldWidgetInfoAlter($info);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update() for 'field_storage_config'.
+ *
+ * Reset the instance handler settings, when the target type is changed.
+ */
+#[LegacyHook]
+function entity_reference_revisions_field_storage_config_update(FieldStorageConfigInterface $field_storage) {
+  \Drupal::service(EntityHooks::class)->fieldStorageConfigUpdate($field_storage);
+}
+
+/**
+ * Render API callback: Processes the field settings form and allows access to
+ * the form state.
+ *
+ * @deprecated in entity_reference_revisions:8.x-1.15 and is removed from
+ *    entity_reference_revisions:2.0.0.
+ *
+ * @internal
+ */
+function _entity_reference_revisions_field_field_settings_ajax_process($form, FormStateInterface $form_state) {
+  _entity_reference_revisions_field_field_settings_ajax_process_element($form, $form);
+  return $form;
+}
+
+/**
+ * Adds entity_reference specific properties to AJAX form elements from the
+ * field settings form.
+ *
+ * @deprecated in entity_reference_revisions:8.x-1.15 and is removed from
+ *    entity_reference_revisions:2.0.0.
+ *
+ * @internal
+ */
+function _entity_reference_revisions_field_field_settings_ajax_process_element(&$element, $main_form) {
+  if (!empty($element['#ajax'])) {
+    $element['#ajax'] = [
+      'callback' => 'entity_reference_revisions_settings_ajax',
+      'wrapper' => $main_form['#id'],
+      'element' => $main_form['#array_parents'],
+    ];
+  }
+
+  foreach (Element::children($element) as $key) {
+    _entity_reference_revisions_field_field_settings_ajax_process_element($element[$key], $main_form);
+  }
+}
+
+/**
+ * Render API callback: Moves entity_reference specific Form API elements
+ * (i.e. 'handler_settings') up a level for easier processing by the validation
+ * and submission handlers.
+ *
+ * @deprecated in entity_reference_revisions:8.x-1.15 and is removed from
+ *    entity_reference_revisions:2.0.0.
+ *
+ * @internal
+ */
+function _entity_reference_revisions_form_process_merge_parent($element) {
+  $parents = $element['#parents'];
+  array_pop($parents);
+  $element['#parents'] = $parents;
+  return $element;
+}
+
+/**
+ * Form element validation handler; Filters the #value property of an element.
+ *
+ * @deprecated in entity_reference_revisions:8.x-1.15 and is removed from
+ *    entity_reference_revisions:2.0.0.
+ *
+ * @internal
+ */
+function _entity_reference_revisions_element_validate_filter(&$element, FormStateInterface $form_state) {
+  $element['#value'] = array_filter($element['#value']);
+  $form_state->setValueForElement($element, $element['#value']);
+}
+
+/**
+ * Ajax callback for the handler settings form.
+ *
+ * @deprecated in entity_reference_revisions:8.x-1.15 and is removed from
+ *    entity_reference_revisions:2.0.0.
+ *
+ * @internal
+ */
+function entity_reference_revisions_settings_ajax($form, FormStateInterface $form_state) {
+  return NestedArray::getValue($form, $form_state->getTriggeringElement()['#ajax']['element']);
+}
+
+/**
+ * Submit handler for the non-JS case.
+ *
+ * @deprecated in entity_reference_revisions:8.x-1.15 and is removed from
+ *    entity_reference_revisions:2.0.0.
+ *
+ * @internal
+ */
+function entity_reference_revisions_settings_ajax_submit($form, FormStateInterface $form_state) {
+  $form_state->setRebuild();
+}
+
+/**
+ * Creates a field of an entity reference revisions field storage on the specified bundle.
+ *
+ * @param string $entity_type
+ *   The type of entity the field will be attached to.
+ * @param string $bundle
+ *   The bundle name of the entity the field will be attached to.
+ * @param string $field_name
+ *   The name of the field; if it already exists, a new instance of the existing
+ *   field will be created.
+ * @param string $field_label
+ *   The label of the field.
+ * @param string $target_entity_type
+ *   The type of the referenced entity.
+ * @param string $selection_handler
+ *   The selection handler used by this field.
+ * @param array $selection_handler_settings
+ *   An array of settings supported by the selection handler specified above.
+ *   (e.g. 'target_bundles', 'sort', 'auto_create', etc).
+ * @param int $cardinality
+ *   The cardinality of the field.
+ *
+ * @deprecated in entity_reference_revisions:8.x-1.15 and is removed from
+ *   entity_reference_revisions:2.0.0.
+ *
+ * @internal
+ */
+function entity_reference_revisions_create_field($entity_type, $bundle, $field_name, $field_label, $target_entity_type, $selection_handler = 'default', $selection_handler_settings = [], $cardinality = 1) {
+  // Look for or add the specified field to the requested entity bundle.
+  if (!FieldStorageConfig::loadByName($entity_type, $field_name)) {
+    \Drupal::entityTypeManager()->getStorage('field_storage_config')->create([
+      'field_name' => $field_name,
+      'type' => 'entity_reference_revisions',
+      'entity_type' => $entity_type,
+      'cardinality' => $cardinality,
+      'settings' => [
+        'target_type' => $target_entity_type,
+      ],
+    ])->save();
+  }
+  if (!FieldConfig::loadByName($entity_type, $bundle, $field_name)) {
+    \Drupal::entityTypeManager()->getStorage('field_config')->create([
+      'field_name' => $field_name,
+      'entity_type' => $entity_type,
+      'bundle' => $bundle,
+      'label' => $field_label,
+      'settings' => [
+        'handler' => $selection_handler,
+        'handler_settings' => $selection_handler_settings,
+      ],
+    ])->save();
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for 'field_ui_field_storage_add_form'.
+ */
+#[LegacyHook]
+function entity_reference_revisions_form_field_ui_field_storage_add_form_alter(array &$form) {
+  \Drupal::service(EntityReferenceRevisionsHooks::class)->formFieldUiFieldStorageAddFormAlter($form);
+}
+
+/**
+ * Implements hook_entity_revision_create().
+ */
+#[LegacyHook]
+function entity_reference_revisions_entity_revision_create(ContentEntityInterface $new_revision, ContentEntityInterface $entity, $keep_untranslatable_fields) {
+  \Drupal::service(EntityHooks::class)->entityRevisionCreate($new_revision, $entity, $keep_untranslatable_fields);
+}
+
+/**
+ * Batch callback to dispatch the orphan composite batch operation to a service.
+ *
+ * @internal
+ *
+ * @deprecated in entity_reference_revisions:8.x-1.15 and is removed from
+ *   entity_reference_revisions:2.0.0.
+ */
+function _entity_reference_revisions_orphan_purger_batch_dispatcher() {
+  $args = func_get_args();
+  [$service, $method] = explode(':', array_shift($args));
+  // The second argument (context) is passed by reference.
+  $values = $args[1];
+  $args[1] = &$values;
+  call_user_func_array([\Drupal::service($service), $method], $args);
+}
+
+/**
+ * Implements hook_entity_delete().
+ */
+#[LegacyHook]
+function entity_reference_revisions_entity_delete(EntityInterface $entity) {
+  \Drupal::service(EntityHooks::class)->delete($entity);
+}

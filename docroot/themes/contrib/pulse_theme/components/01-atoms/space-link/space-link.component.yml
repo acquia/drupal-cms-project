@@ -1,0 +1,57 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+
+name: Space Link
+
+description: A customizable link component with options for text, URL, target behavior, and custom styling.
+
+status: stable
+
+group: Atoms
+
+props:
+
+  type: object
+
+  properties:
+    text:
+      type: string
+      title: Link text
+      description: The visible text of the link.
+      examples:
+        - 'Learn more'
+
+    url:
+      type: string
+      title: Url
+      description: The destination URL the link points to.
+      examples:
+        - 'https://google.com'
+
+    title_text:
+      type: string
+      title: Title text
+      description: Additional information displayed when hovering over the link (tooltip).
+
+    target:
+      type: string
+      title: Target
+      description: Defines where to open the link (e.g., same window, new tab).
+      enum:
+        - self
+        - blank
+        - parent
+        - top
+      default: 'self'
+      examples:
+        - 'self'
+
+    custom_style:
+      type: boolean
+      title: Custom Style
+      description: Enables or disables custom styling for the link.
+      default: false
+
+    extra_classes:
+      type: string
+      title: Class names
+      description: Custom class names to apply to the link, used only if custom style is enabled.

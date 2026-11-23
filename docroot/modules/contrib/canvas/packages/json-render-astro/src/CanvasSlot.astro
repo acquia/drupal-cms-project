@@ -1,0 +1,68 @@
+---
+import CanvasElement from './CanvasElement.astro';
+import {
+  CANVAS_EMPTY_SLOT_PLACEHOLDER_CLASS,
+  formatCanvasCommentMarker,
+  isCanvasComponentTreeSlotEmpty,
+} from '@drupal-canvas/json-render/renderer';
+
+import type { CanvasComponentTree } from '@drupal-canvas/json-render';
+import type { CanvasComponentRegistry } from './types';
+
+interface Props {
+  tree: CanvasComponentTree;
+  name: string;
+  childKeys: string[];
+  components: CanvasComponentRegistry;
+  path: string;
+  editor: boolean;
+  componentUuid?: string;
+}
+
+const {
+  tree,
+  name,
+  childKeys,
+  components,
+  path,
+  editor,
+  componentUuid,
+} = Astro.props;
+const slotId = componentUuid ? `${componentUuid}/${name}` : null;
+const empty = isCanvasComponentTreeSlotEmpty(tree, childKeys);
+---
+
+{
+  editor && slotId && (
+    <Fragment
+      set:html={`<!-- ${formatCanvasCommentMarker({ type: 'slot', position: 'start', id: slotId })} -->`}
+    />
+  )
+}
+{
+  editor && slotId && empty && (
+    <div
+      aria-hidden="true"
+      class={CANVAS_EMPTY_SLOT_PLACEHOLDER_CLASS}
+    />
+  )
+}
+{
+  (!editor || !empty) &&
+    childKeys.map((childKey, index) => (
+      <CanvasElement
+        tree={tree}
+        elementKey={childKey}
+        components={components}
+        path={`${path}:${name}:${index}`}
+        editor={editor}
+      />
+    ))
+}
+{
+  editor && slotId && (
+    <Fragment
+      set:html={`<!-- ${formatCanvasCommentMarker({ type: 'slot', position: 'end', id: slotId })} -->`}
+    />
+  )
+}

@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Contains hooks and functions for ai_dashboard module.
+ */
+
+use Drupal\ai_dashboard\Hook\AiDashboardHooks;
+use Drupal\Core\Hook\Attribute\LegacyHook;
+
+/**
+ * Implements hook_theme().
+ */
+#[LegacyHook]
+function ai_dashboard_theme() {
+  return \Drupal::service(AiDashboardHooks::class)->theme();
+}
+
+/**
+ * Implements hook_preprocess_block().
+ */
+#[LegacyHook]
+function ai_dashboard_preprocess_block(&$variables) {
+  \Drupal::service(AiDashboardHooks::class)->preprocessBlock($variables);
+}

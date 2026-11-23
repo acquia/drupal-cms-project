@@ -1,0 +1,79 @@
+{% set has_url = url is not empty ? 'yes' : 'no' %}
+
+{% set tile =
+  html_cva(
+    base: ['max-w-full md:min-h-[80px]'],
+    variants: {
+      hasUrl: {
+        yes: 'group cursor-pointer transition duration-300 hover:scale-103',
+        no: ''
+      },
+      backgroundColor: {
+        primary: 'bg-primary text-primary-foreground shadow-lg hover:shadow-sm',
+        secondary: 'bg-secondary text-secondary-foreground shadow-lg hover:shadow-sm',
+        accent: 'bg-accent text-accent-foreground shadow-lg hover:shadow-sm',
+        muted: 'bg-muted text-muted-foreground shadow-lg hover:shadow-sm',
+        bright: 'bg-bright text-bright-foreground shadow-lg hover:shadow-sm',
+        light: 'bg-light text-light-foreground shadow-lg hover:shadow-sm',
+        inverted: 'bg-foreground text-background shadow-lg hover:shadow-sm',
+        noColor: 'bg-none text-foreground'
+      },
+      borderRadius: {
+        small: 'rounded-sm',
+        medium: 'rounded-xl md:rounded-2xl',
+        large: 'rounded-[24px] md:rounded-[32px]',
+        noRadius: 'rounded-none'
+      }
+    }
+  )
+%}
+
+{% set tile_classes =
+  tile.apply({
+    hasUrl: has_url,
+    backgroundColor: background_color|default('noColor'),
+    borderRadius: border_radius|default('noRadius')
+  })
+%}
+
+<div class="{{ tile_classes }}">
+  <div class="flex h-[100%] items-center justify-center p-[10%]">
+    {% block logo %}
+      {% if url is not empty %}
+        <a href="{{ url }}">
+          {% if media.src is not empty %}
+            {{
+              include(
+                'canvas:image',
+                {
+                  src: media.src,
+                  alt: media.alt,
+                  width: media.width,
+                  height: media.height
+                },
+                false,
+                true
+              )
+            }}
+          {% endif %}
+        </a>
+      {% else %}
+        {% if media.src is not empty %}
+          {{
+            include(
+              'canvas:image',
+              {
+                src: media.src,
+                alt: media.alt,
+                width: media.width,
+                height: media.height
+              },
+              false,
+              true
+            )
+          }}
+        {% endif %}
+      {% endif %}
+    {% endblock %}
+  </div>
+</div>

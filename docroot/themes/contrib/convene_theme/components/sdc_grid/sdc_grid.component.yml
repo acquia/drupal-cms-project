@@ -1,0 +1,248 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: SDC Grid
+group: Section
+status: stable
+description: A flexible grid layout component with customizable columns and spacing.
+props:
+  type: object
+  required:
+    - columns
+  properties:
+    columns:
+      type: string
+      title: Number of Columns
+      description: Choose how many columns to display (1-4).
+      enum:
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "33-33-33"
+      meta:enum:
+        "1": 1 Column
+        "2": 2 Columns
+        "3": 3 Columns
+        "4": 4 Columns
+        "33-33-33": 3 Columns (Legacy)
+      examples:
+        - "1"
+      default: "1"
+    gap:
+      type: string
+      title: Gap Between Items
+      description: Space between grid items.
+      enum:
+        - "8px"
+        - "16px"
+        - "20px"
+        - "24px"
+        - "32px"
+      meta:enum:
+        "8px": Small (8px)
+        "16px": Medium (16px)
+        "20px": Default (20px)
+        "24px": Large (24px)
+        "32px": Extra Large (32px)
+      examples:
+        - "20px"
+    margin_top:
+      type: string
+      title: Margin Top
+      enum:
+        - "8px"
+        - "16px"
+        - "24px"
+        - "32px"
+        - "48px"
+        - "64px"
+        - "80px"
+        - "112px"
+      meta:enum:
+        "8px": 8px
+        "16px": 16px
+        "24px": 24px
+        "32px": 32px
+        "48px": 48px
+        "64px": 64px
+        "80px": 80px
+        "112px": 112px
+      examples:
+        - "8px"
+    margin_right:
+      type: string
+      title: Margin Right
+      enum:
+        - "8px"
+        - "16px"
+        - "24px"
+        - "32px"
+        - "48px"
+        - "64px"
+        - "80px"
+        - "112px"
+      meta:enum:
+        "8px": 8px
+        "16px": 16px
+        "24px": 24px
+        "32px": 32px
+        "48px": 48px
+        "64px": 64px
+        "80px": 80px
+        "112px": 112px
+      examples:
+        - "8px"
+    margin_bottom:
+      type: string
+      title: Margin Bottom
+      enum:
+        - "8px"
+        - "16px"
+        - "24px"
+        - "32px"
+        - "48px"
+        - "64px"
+        - "80px"
+        - "112px"
+      meta:enum:
+        "8px": 8px
+        "16px": 16px
+        "24px": 24px
+        "32px": 32px
+        "48px": 48px
+        "64px": 64px
+        "80px": 80px
+        "112px": 112px
+      examples:
+        - "8px"
+    margin_left:
+      type: string
+      title: Margin Left
+      enum:
+        - "8px"
+        - "16px"
+        - "24px"
+        - "32px"
+        - "48px"
+        - "64px"
+        - "80px"
+        - "112px"
+      meta:enum:
+        "8px": 8px
+        "16px": 16px
+        "24px": 24px
+        "32px": 32px
+        "48px": 48px
+        "64px": 64px
+        "80px": 80px
+        "112px": 112px
+      examples:
+        - "8px"
+    padding_top:
+      type: string
+      title: Padding Top
+      enum:
+        - "8px"
+        - "16px"
+        - "24px"
+        - "32px"
+        - "48px"
+        - "64px"
+        - "80px"
+        - "112px"
+      meta:enum:
+        "8px": 8px
+        "16px": 16px
+        "24px": 24px
+        "32px": 32px
+        "48px": 48px
+        "64px": 64px
+        "80px": 80px
+        "112px": 112px
+      examples:
+        - "8px"
+    padding_right:
+      type: string
+      title: Padding Right
+      enum:
+        - "8px"
+        - "16px"
+        - "24px"
+        - "32px"
+        - "48px"
+        - "64px"
+        - "80px"
+        - "112px"
+      meta:enum:
+        "8px": 8px
+        "16px": 16px
+        "24px": 24px
+        "32px": 32px
+        "48px": 48px
+        "64px": 64px
+        "80px": 80px
+        "112px": 112px
+      examples:
+        - "8px"
+    padding_bottom:
+      type: string
+      title: Padding Bottom
+      enum:
+        - "8px"
+        - "16px"
+        - "24px"
+        - "32px"
+        - "48px"
+        - "64px"
+        - "80px"
+        - "112px"
+      meta:enum:
+        "8px": 8px
+        "16px": 16px
+        "24px": 24px
+        "32px": 32px
+        "48px": 48px
+        "64px": 64px
+        "80px": 80px
+        "112px": 112px
+      examples:
+        - "8px"
+    padding_left:
+      type: string
+      title: Padding Left
+      enum:
+        - "8px"
+        - "16px"
+        - "24px"
+        - "32px"
+        - "48px"
+        - "64px"
+        - "80px"
+        - "112px"
+      meta:enum:
+        "8px": 8px
+        "16px": 16px
+        "24px": 24px
+        "32px": 32px
+        "48px": 48px
+        "64px": 64px
+        "80px": 80px
+        "112px": 112px
+      examples:
+        - "8px"
+slots:
+  slot_1:
+    title: Column 1
+    description: Content for the first column (always visible).
+  slot_2:
+    title: Column 2
+    description: Content for the second column (visible when columns >= 2).
+  slot_3:
+    title: Column 3
+    description: Content for the third column (visible when columns >= 3).
+  slot_4:
+    title: Column 4
+    description: Content for the fourth column (visible when columns = 4).
+library:
+  css:
+    component:
+      sdc_grid.css: {}

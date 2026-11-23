@@ -1,0 +1,37 @@
+{% set level = heading_level|default(2) %}
+{% set tag = 'h' ~ level %}
+{% set text_color = textcolor|default('dark') %}
+{% set has_ctas = ctas is not empty %}
+
+<div class="section-intro section-intro--centered section-intro--text-{{ text_color }} custom-container{{ has_ctas ? ' section-intro--has-ctas' : '' }}">
+
+	<div class="section-intro__content">
+		{% if tagline %}
+			<div class="section-intro__tagline-wrap">
+				<p class="section-intro__tagline">{{ tagline }}</p>
+			</div>
+		{% endif %}
+		{% if heading %}
+			<{{ tag }} class="section-intro__heading section-intro__heading--{{ tag }}">
+				{{- heading -}}
+			</{{ tag }}>
+		{% endif %}
+		{% if description %}
+			<p class="section-intro__description">{{ description }}</p>
+		{% endif %}
+	</div>
+
+	{# Anonymous users: hide empty slot entirely. Logged-in users: show editor fallback. #}
+	{% if has_ctas or logged_in %}
+		<div class="section-intro__actions">
+			{% block ctas %}
+			{% endblock %}
+			{% if not has_ctas and logged_in %}
+				<div class="section-intro__empty-state">
+					<em>{{ 'Drop buttons or links here (CTAs)'|t }}</em>
+				</div>
+			{% endif %}
+		</div>
+	{% endif %}
+
+</div>

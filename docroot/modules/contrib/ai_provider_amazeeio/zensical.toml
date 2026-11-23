@@ -1,0 +1,79 @@
+[project]
+site_name = "amazee.ai Private AI Provider module for Drupal"
+site_description = "Documentation for the amazee.ai Private AI Provider module for Drupal."
+site_url = "https://project.pages.drupalcode.org/ai_provider_amazeeio/"
+repo_url = "https://git.drupalcode.org/project/ai_provider_amazeeio"
+repo_name = "drupal/ai_provider_amazeeio"
+edit_uri = "-/tree/1.3.x/docs/"
+license = "GPL-2.0-or-later"
+copyright = "Copyright &copy; amazee.io"
+
+nav = [
+    { "Home" = "index.md" },
+    { "Vector Database" = "vector-database.md" },
+    { "Advanced Configuration" = "advanced-configuration.md" },
+    { "Deployment Guide" = "deployment.md" },
+]
+
+[project.theme]
+features = [
+    "content.action.edit",
+    "content.code.copy",
+    "navigation.footer",
+    "navigation.indexes",
+    "navigation.instant",
+    "navigation.top",
+    "navigation.tracking",
+    "search.highlight",
+]
+
+[[project.theme.palette]]
+scheme = "default"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+scheme = "slate"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to light mode"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/gitlab"
+link = "https://git.drupalcode.org/project/ai_provider_amazeeio"
+
+# Markdown extensions. Zensical does not enable `tables` by default and our
+# docs are table-heavy; mermaid diagrams need the superfences custom fence.
+[project.markdown_extensions.abbr]
+[project.markdown_extensions.admonition]
+[project.markdown_extensions.attr_list]
+[project.markdown_extensions.def_list]
+[project.markdown_extensions.footnotes]
+[project.markdown_extensions.md_in_html]
+[project.markdown_extensions.tables]
+[project.markdown_extensions.toc]
+permalink = true
+[project.markdown_extensions.pymdownx.betterem]
+[project.markdown_extensions.pymdownx.caret]
+[project.markdown_extensions.pymdownx.details]
+[project.markdown_extensions.pymdownx.emoji]
+emoji_generator = "zensical.extensions.emoji.to_svg"
+emoji_index = "zensical.extensions.emoji.twemoji"
+[project.markdown_extensions.pymdownx.highlight]
+anchor_linenums = true
+line_spans = "__span"
+pygments_lang_class = true
+[project.markdown_extensions.pymdownx.inlinehilite]
+[project.markdown_extensions.pymdownx.keys]
+[project.markdown_extensions.pymdownx.magiclink]
+[project.markdown_extensions.pymdownx.mark]
+[project.markdown_extensions.pymdownx.smartsymbols]
+[project.markdown_extensions.pymdownx.superfences]
+custom_fences = [
+    { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
+]
+[project.markdown_extensions.pymdownx.tabbed]
+alternate_style = true
+combine_header_slug = true
+[project.markdown_extensions.pymdownx.tasklist]
+custom_checkbox = true
+[project.markdown_extensions.pymdownx.tilde]

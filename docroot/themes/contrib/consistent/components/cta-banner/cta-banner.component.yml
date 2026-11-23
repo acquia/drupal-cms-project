@@ -1,0 +1,23 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: CTA Banner
+group: Content
+status: stable
+props:
+  type: object
+  properties:
+    heading_text:
+      type: string
+      title: Heading
+    text:
+      type: string
+      title: Body text
+    cta_label:
+      type: string
+      title: Button label
+    cta_url:
+      type: string
+      title: Button URL
+    media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Image
+      type: object

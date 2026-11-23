@@ -1,0 +1,7 @@
+# The content overview page is only accessible if it has at least one child
+# link. Normally, the Node module provides one.
+# @see \Drupal\system\Access\SystemAdminMenuBlockAccessCheck
+telemetry_test.content_link:
+  title: 'Telemetry test'
+  route_name: entity.canvas_page.collection
+  parent: system.admin_content

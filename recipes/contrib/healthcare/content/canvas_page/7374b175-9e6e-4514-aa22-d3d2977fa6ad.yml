@@ -1,0 +1,195 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 7374b175-9e6e-4514-aa22-d3d2977fa6ad
+  default_langcode: en
+  depends:
+    fb0e29ef-eb85-495a-a771-7473374be594: file
+    ca7faadb-8770-4d0e-8b8a-d4e31e8b7a55: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Plan Your Visit'
+  description:
+    -
+      value: 'What to expect when you visit Saltmarsh Island Health.'
+  components:
+    -
+      uuid: af997d57-bab8-497a-bbdb-2f7c6cb273b1
+      component_id: sdc.diagnosis.hero-side-by-side
+      inputs:
+        hero_flex_gap: large
+        hero_flex_direction_mobile: vertical
+        background: secondary
+        padding_block_start: '32'
+        padding_block_end: '32'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        image_size: '4:3'
+        image_position: right
+        image_radius: extra-large
+        media:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: ca7faadb-8770-4d0e-8b8a-d4e31e8b7a55
+            target_type: media
+    -
+      parent_uuid: af997d57-bab8-497a-bbdb-2f7c6cb273b1
+      slot: hero_slot
+      uuid: b0877ecd-c7c7-4706-be02-575a290f1354
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Plan Your Visit'
+        level: 1
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: af997d57-bab8-497a-bbdb-2f7c6cb273b1
+      slot: hero_slot
+      uuid: d759ee87-10a4-4411-b25d-47b1b789d1e0
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>What to expect when you visit Saltmarsh Island Health.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      uuid: ea63f06c-0c63-44a3-92f3-d963275a1fe4
+      component_id: sdc.diagnosis.section
+      inputs:
+        width: 50%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: false
+        section_footer: false
+    -
+      parent_uuid: ea63f06c-0c63-44a3-92f3-d963275a1fe4
+      slot: main_slot
+      uuid: 2ee6de3d-c79d-46fd-9471-c3623f0275f8
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'What to Bring'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ea63f06c-0c63-44a3-92f3-d963275a1fe4
+      slot: main_slot
+      uuid: bd62bb22-728f-4278-9449-7ce54b0ba73b
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<ul><li data-list-item-id="ee946bb201a2f0e1272c49cb8e03db635">Valid photo ID (driver''s license, passport, or state ID)</li><li data-list-item-id="e8a26629daf03813ad33c2e55e84cf7e6">Insurance card(s)</li><li data-list-item-id="e24a4f1e75cfedfdd4f3dbb68971097b4">List of current medications (including dosages)</li><li data-list-item-id="e5026d7e366ddcca2005e74571f81868b">List of allergies</li><li data-list-item-id="e47284d8c1b59a057420a807738e3c1fa">Any recent test results or imaging from other providers</li><li data-list-item-id="e780dd29cfd3268c18ee3e72590d2fcd7">Payment for copays or deductibles</li></ul>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: ea63f06c-0c63-44a3-92f3-d963275a1fe4
+      slot: main_slot
+      uuid: 3efc1410-4f42-4552-a750-0fdc880456c1
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Arrival & Check-In'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ea63f06c-0c63-44a3-92f3-d963275a1fe4
+      slot: main_slot
+      uuid: 5728929b-c206-4611-a0e8-8344a15b9239
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Please arrive 15 minutes before your scheduled appointment to complete registration and update your information. Check in at the front desk with your photo ID and insurance card.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: ea63f06c-0c63-44a3-92f3-d963275a1fe4
+      slot: main_slot
+      uuid: 0b7ba0e4-e6fe-42c6-9cc0-8762706d17ba
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Parking
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ea63f06c-0c63-44a3-92f3-d963275a1fe4
+      slot: main_slot
+      uuid: a071d826-727f-4b4c-bba8-381c20a3992b
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>Free parking is available at all locations. ADA accessible parking spaces are located near main entrances.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: ea63f06c-0c63-44a3-92f3-d963275a1fe4
+      slot: main_slot
+      uuid: 77a886f3-f92e-4727-8f12-539ba45a6089
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: 'Visitor Policy'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ea63f06c-0c63-44a3-92f3-d963275a1fe4
+      slot: main_slot
+      uuid: 9fed507d-cc20-4fba-b5ef-a924bdb134ea
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>For your safety and privacy, we limit visitors to one support person per patient. Exceptions may be made for minors and patients requiring assistance.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+    -
+      parent_uuid: ea63f06c-0c63-44a3-92f3-d963275a1fe4
+      slot: main_slot
+      uuid: 80a41740-8e4e-4e4d-b70d-ea8dceed73b7
+      component_id: sdc.diagnosis.heading
+      inputs:
+        heading_text: Accessibility
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+    -
+      parent_uuid: ea63f06c-0c63-44a3-92f3-d963275a1fe4
+      slot: main_slot
+      uuid: 60dca334-b915-44b7-a1e8-3f7d608f4632
+      component_id: sdc.diagnosis.text
+      inputs:
+        text:
+          value: '<p>All Saltmarsh Island Health facilities are fully ADA accessible with wheelchair access, elevators, accessible restrooms, and assistive listening devices available upon request.</p>'
+          format: canvas_html_block
+        text_size: normal
+        text_color: default
+  path:
+    -
+      alias: /patients/plan-your-visit
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

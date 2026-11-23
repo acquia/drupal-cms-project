@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for the Trash module.
+ */
+
+use Drupal\Core\Url;
+use Drupal\trash\Form\TrashSettingsForm;
+
+/**
+ * Implements hook_requirements().
+ */
+function trash_requirements(string $phase): array {
+  $requirements = [];
+
+  if ($phase === 'runtime') {
+    $unsupported_entity_types = array_intersect(
+      \Drupal::service('trash.manager')->getEnabledEntityTypes(),
+      TrashSettingsForm::getUnsupportedEntityTypes(),
+    );
+    if ($unsupported_entity_types) {
+      $labels = array_map(
+        fn (string $entity_type_id): string => (string) \Drupal::entityTypeManager()->getDefinition($entity_type_id)->getLabel(),
+        $unsupported_entity_types,
+      );
+      $requirements['trash_disallowed_entity_types'] = [
+        'title' => t('Trash'),
+        'value' => t('Unsupported entity types enabled'),
+        'severity' => REQUIREMENT_WARNING,
+        'description' => t('Trash is enabled for the following entity types that are not supported and can cause errors: %entity_types.<br />Disable them on the <a href=":url">Trash settings</a> page.', [
+          '%entity_types' => implode(', ', $labels),
+          ':url' => Url::fromRoute('trash.settings.form')->toString(),
+        ]),
+      ];
+    }
+  }
+
+  return $requirements;
+}
+
+/**
+ * Update the enabled entity types and bundles configuration.
+ */
+function trash_update_9301(): void {
+  // This was moved from trash_post_update_set_enabled_entity_types_bundles().
+  // @see https://www.drupal.org/project/trash/issues/3453832
+  $config = \Drupal::configFactory()->getEditable('trash.settings');
+  $enabledEntityTypes = $config->get('enabled_entity_types');
+  if (array_is_list($enabledEntityTypes)) {
+    $enabledEntityTypesBundles = array_combine(
+      $enabledEntityTypes,
+      array_fill(0, count($enabledEntityTypes), [])
+    );
+
+    $config->set('enabled_entity_types', $enabledEntityTypesBundles);
+    $config->save();
+  }
+}
+
+/**
+ * Add the compact_overview configuration.
+ */
+function trash_update_10301(): void {
+  $config = \Drupal::configFactory()->getEditable('trash.settings');
+  $config->set('compact_overview', FALSE)->save();
+}

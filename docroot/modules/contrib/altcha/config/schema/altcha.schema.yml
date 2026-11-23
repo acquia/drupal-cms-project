@@ -1,0 +1,169 @@
+altcha.settings:
+  type: config_object
+  label: 'ALTCHA Settings'
+  mapping:
+    integration_type:
+      type: string
+      label: 'Integration type'
+      constraints:
+        Choice:
+          - self_hosted
+          - saas_api
+          - sentinel_api
+    saas_api_key:
+      type: string
+      label: 'SaaS API key'
+      constraints:
+        Regex:
+          pattern: '/^(key_|ckey_)/'
+          message: 'The API key should either start with "key_" or "ckey_".'
+    saas_api_region:
+      type: string
+      label: 'SaaS API region'
+      constraints:
+        Choice:
+          - eu
+          - us
+    sentinel_api_url:
+      type: string
+      label: 'Sentinel base URL'
+      constraints:
+        Regex:
+          pattern: '/^https?:\/\//'
+          message: 'Must be a valid URL address.'
+    sentinel_api_key:
+      type: string
+      label: 'Sentinel API key'
+      constraints:
+        Regex:
+          pattern: '/^(key_)/'
+          message: 'The API key should start with "key_".'
+    sentinel_api_secret:
+      type: string
+      label: 'Secret Key'
+    sentinel_fallback_enabled:
+      type: boolean
+      label: 'Enable fallback to self-hosted'
+    auto_verification:
+      type: string
+      label: 'Auto verification'
+      constraints:
+        Choice:
+          - off
+          - onfocus
+          - onload
+          - onsubmit
+    max_number:
+      type: integer
+      label: 'Complexity'
+      nullable: true
+      constraints:
+        Range:
+          min: 1000
+          max: 1000000
+    expire:
+      type: integer
+      label: 'Expire'
+      nullable: true
+      constraints:
+        Range:
+          min: 1
+    delay:
+      type: integer
+      label: 'Delay'
+      nullable: true
+      constraints:
+        Range:
+          min: 1
+    library_override:
+      type: string
+      label: 'Override ALTHCHA JS library'
+    floating_enabled:
+      type: boolean
+      label: 'Floating enabled'
+    floating_mode:
+      type: string
+      label: 'Floating mode'
+      constraints:
+        Choice:
+          - auto
+          - top
+          - bottom
+    floating_anchor:
+      type: string
+      label: 'Floating anchor'
+      constraints:
+        Length:
+          max: 64
+    floating_offset:
+      type: integer
+      label: 'Floating offset'
+      nullable: true
+      constraints:
+        Range:
+          min: 1
+    hide_logo:
+      type: boolean
+      label: 'Hide logo'
+    hide_footer:
+      type: boolean
+      label: 'Hide footer'
+    i18n_method:
+      type: string
+      label: 'Internationalization method'
+    i18n_library_override:
+      type: string
+      label: 'Override ALTHCHA i18n JS library'
+    aria:
+      type: label
+      label: 'Aria link label'
+    enter_code:
+      type: label
+      label: 'Enter code'
+    enter_code_aria:
+      type: label
+      label: 'Aria enter code'
+    error:
+      type: label
+      label: 'Error'
+    expired:
+      type: label
+      label: 'Expired'
+    footer:
+      type: label
+      label: 'Footer'
+    get_audio:
+      type: label
+      label: 'Get audio'
+    label:
+      type: label
+      label: 'Label'
+    verify:
+      type: label
+      label: 'Verify'
+    verification_required:
+      type: label
+      label: 'Verification required'
+    verified:
+      type: label
+      label: 'Verified'
+    verifying:
+      type: label
+      label: 'Verifying'
+    wait:
+      type: label
+      label: 'Wait alert'
+    obfuscate_reveal_text:
+      type: label
+      label: 'Obfuscate reveal text'
+    obfuscate_max_number:
+      type: integer
+      label: 'Obfuscate complexity'
+      nullable: true
+      constraints:
+        Range:
+          min: 1
+          max: 10000
+    obfuscate_library_override:
+      type: string
+      label: 'Override ALTHCHA obfuscate JS library'

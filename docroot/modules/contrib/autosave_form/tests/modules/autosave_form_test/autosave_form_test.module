@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ */
+
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\autosave_form_test\Hook\AutosaveFormTestHooks;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+#[LegacyHook]
+function autosave_form_test_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::service(AutosaveFormTestHooks::class)->formAlter($form, $form_state, $form_id);
+}
+
+/**
+ *
+ */
+function autosave_form_test_autosave_submit($form, FormStateInterface $form_state) {
+  /** @var \Drupal\Core\State\StateInterface $state */
+  $state = \Drupal::state();
+  $count = $state->get('autosave_submit_count', 0);
+  $state->set('autosave_submit_count', ++$count);
+}

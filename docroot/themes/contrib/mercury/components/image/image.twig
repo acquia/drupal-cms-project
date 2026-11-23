@@ -1,0 +1,66 @@
+{% set has_radius = radius is not empty ? 'yes' : 'no' %}
+{% set has_url = url is not empty ? 'yes' : 'no' %}
+
+{% set image_container =
+  html_cva(
+    base: 'cq-full w-full',
+    variants: {
+      size: {
+        '2:1': 'aspect-2/1',
+        '16:9': 'aspect-16/9',
+        '3:2': 'aspect-3/2',
+        '4:3': 'aspect-4/3',
+        '1:1': 'aspect-1/1'
+      },
+      hasRadius: {
+        yes: 'overflow-hidden',
+        no: 'rounded-none'
+      },
+      radius: {
+        small: 'rounded-sm',
+        large: 'rounded-xl md:rounded-2xl',
+        'extra-large': 'rounded-[24px] md:rounded-[32px]'
+      }
+    }
+  )
+%}
+
+{% set container_classes =
+  image_container.apply({
+    size: size,
+    hasRadius: has_radius,
+    radius: radius
+  })
+%}
+
+<figure>
+  <div class="{{ container_classes }}">
+    {% block media %}
+      {% if url is not empty %}
+        <a href="{{ url }}" class="group">
+          {% include 'canvas:image' ignore missing with {
+            src: media.src,
+            alt: media.alt,
+            class: 'object-cover w-full h-full group-hover:scale-105 duration-300',
+            width: media.width,
+            height: media.height,
+            loading: 'eager'
+          } only %}
+        </a>
+      {% else %}
+        {% include 'canvas:image' ignore missing with {
+          src: media.src,
+          alt: media.alt,
+          class: 'object-cover w-full h-full',
+          width: media.width,
+          height: media.height
+        } only %}
+      {% endif %}
+    {% endblock %}
+  </div>
+  {% if caption %}
+    <figcaption class="block py-1 text-sm lg:py-2 lg:text-base">
+      {{ caption }}
+    </figcaption>
+  {% endif %}
+</figure>

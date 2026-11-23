@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Contains metatag_test_custom_route.module..
+ */
+
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\metatag_test_custom_route\Hook\MetatagHooks;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_metatag_route_entity().
+ */
+#[LegacyHook]
+function metatag_test_custom_route_metatag_route_entity(RouteMatchInterface $route_match) {
+  return \Drupal::service(MetatagHooks::class)->metatagRouteEntity($route_match);
+}

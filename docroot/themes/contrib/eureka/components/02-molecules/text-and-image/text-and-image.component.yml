@@ -1,0 +1,89 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Text and image
+status: stable
+description: Text and image component
+# Overrides regular css with minified.
+libraryOverrides:
+  css:
+    component:
+      text-and-image.min.css: { minified: true }
+group: Eureka main components
+props:
+  type: object
+  properties:
+    text_and_image_heading:
+      type: string
+      title: Text and image heading
+      description: Heading for the content of the component
+      examples:
+        - Lorem ipsum dolor
+    text_and_image_heading_level:
+      type: ['number', 'null']
+      title: Text and image heading level
+      description: Heading level of the heading element - only change this if you know what you're doing, as it affects accessibility
+      enum:
+        - 2
+        - 3
+        - 4
+        - 5
+      examples:
+        - 2
+    text_and_image_description:
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: block
+      title: Text and image description
+      description: Main text content of the component
+      examples:
+        - 'Lorem ipsum <strong>dolor sit amet</strong>, consectetur adipiscing elit. Donec pellentesque pulvinar rutrum. Curabitur elementum condimentum fringilla. Duis eu erat at nulla ultricies posuere non pellentesque turpis.'
+    text_and_image_media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Text and image media
+      description: Media and alt text for the image.
+      type: object
+      examples:
+        - src: 'assets/277628-911758.jpg'
+          alt: 'Photo by gdtography: https://www.pexels.com/photo/long-exposure-photography-white-dome-building-interior-911758/'
+    text_and_image_alignment:
+      type: string
+      title: Text and image alignment
+      description: Alignment for the component's image
+      enum:
+        - image-right
+        - image-left
+      examples:
+        - image-right
+    text_and_image_cta_text:
+      type: ['string', 'null']
+      title: Text and image CTA text
+      description: Text for the optional call to action
+      examples:
+        - Call to action
+    text_and_image_cta_url:
+      title: Text and image CTA url
+      description: URL for the optional call to action
+      type: string
+      format: uri-reference
+      x-allowed-schemes:
+        - http
+        - https
+      examples:
+        - https://uri.example.com
+    text_and_image_cta_external:
+      type: boolean
+      title: Text and image external CTA
+      description: True for displaying a small external icon in the CTA
+      examples:
+        - true
+    text_and_image_message_section_title:
+      type: string
+      title: Text and image message section title
+      description: Title for the message section, like a name
+      examples:
+        - Mrs. Jane Holloway
+    text_and_image_message_section_subitle:
+      type: string
+      title: Text and image message section subtitle
+      description: Subtitle for the message section, like a role
+      examples:
+        - Headteacher

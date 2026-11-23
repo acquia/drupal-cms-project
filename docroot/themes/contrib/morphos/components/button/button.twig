@@ -1,0 +1,44 @@
+{% set is_icon_start = icon_position == 'icon-position--start' ? true : false %}
+{% set is_icon_only = shape ? true : false %}
+
+{% set classes = [
+  'btn',
+  color ? color : 'btn-default',
+  display,
+  shape,
+  size,
+  style,
+] %}
+
+{% set icon_content %}
+  {% if icon %}
+    {{ include('morphos:icon', {
+      icon,
+      icon_size: 'icon-size--xs',
+    },
+      with_context: false
+    ) }}
+  {% endif %}
+{% endset %}
+
+{% set button_content %}
+  {{ is_icon_start ? icon_content }}
+  {% if not is_icon_only %}
+    {{ text }}
+  {% endif %}
+  {{ not is_icon_start ? icon_content }}
+{% endset %}
+
+{% if url %}
+  <a{{ attributes
+    .addClass(classes, additional_classes)
+    .setAttribute('href', url)
+    .setAttribute('aria-label', label) }}>
+    {{ button_content }}
+  </a>
+{% else %}
+  <button{{ attributes.addClass(classes, additional_classes)
+    .setAttribute('aria-label', label) }}>
+    {{ button_content }}
+  </button>
+{% endif %}

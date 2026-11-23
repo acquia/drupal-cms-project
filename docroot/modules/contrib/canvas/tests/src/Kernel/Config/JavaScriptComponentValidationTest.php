@@ -1,0 +1,2834 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Drupal\Tests\canvas\Kernel\Config;
+
+// cspell:ignore sofie componente extraño
+
+use Drupal\canvas\Entity\JavaScriptComponent;
+use Drupal\canvas\Exception\ConstraintViolationException;
+use Drupal\canvas\JsonSchemaInterpreter\JsonSchemaObjectRef;
+use Drupal\canvas\Plugin\Canvas\ComponentSource\JsComponentDiscovery;
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
+use Drupal\Core\Render\Component\Exception\InvalidComponentException;
+use Drupal\Core\Theme\Component\ComponentValidator;
+use Drupal\Core\TypedData\TypedDataInterface;
+use Drupal\Core\TypedData\TypedDataManagerInterface;
+use Drupal\Core\TypedData\Validation\RecursiveValidator;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\field\FieldStorageConfigInterface;
+use Drupal\media\Entity\MediaType;
+use Drupal\node\Entity\NodeType;
+use Drupal\Tests\canvas\Kernel\CanvasKernelTestBase;
+use Drupal\Tests\canvas\Traits\BetterConfigDependencyManagerTrait;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+use PHPUnit\Framework\Attributes\TestWith;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
+
+/**
+ * Tests validation of JavaScriptComponent entities.
+ */
+#[Group('canvas')]
+#[Group('JavaScriptComponents')]
+#[RunTestsInSeparateProcesses]
+class JavaScriptComponentValidationTest extends BetterConfigEntityValidationTestBase {
+
+  use BetterConfigDependencyManagerTrait;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected static $modules = [
+    ...CanvasKernelTestBase::CANVAS_KERNEL_TEST_MINIMAL_MODULES,
+    'field',
+    'node',
+    // Provides `internal_string_field` (a base field marked internal) for the
+    // EntityFieldExpressionMustNotTargetInternalProperty coverage.
+    'entity_test',
+    // Provides a field type with an internal (non-computed) `secret` property,
+    // for the same constraint's field-property-level coverage.
+    'canvas_test_internal_field_property',
+    // Provides the `link` field type, for EntityFieldExpressionMayOnlyTargetResolvableUris
+    // coverage: its raw `uri` (not internal, but not resolvable to a
+    // browser-accessible URL either) is rejected, while its computed,
+    // resolvable `url` remains usable.
+    'link',
+  ];
+
+  /**
+   * {@inheritdoc}
+   *
+   * @phpstan-ignore property.defaultValue
+   */
+  protected static array $propertiesWithRequiredKeys = [
+    'css' => [
+      "'original' is a required key.",
+      "'compiled' is a required key.",
+    ],
+    'js' => [
+      "'original' is a required key.",
+      "'compiled' is a required key.",
+    ],
+  ];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected static array $propertiesWithOptionalValues = ['type', 'translatableStrings'];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp(): void {
+    parent::setUp();
+    $this->installEntitySchema('node');
+    $this->installEntitySchema('user');
+    $this->installEntitySchema('path_alias');
+    $this->installEntitySchema('entity_test');
+    // Opt in to entity_test's `internal_string_field` base field.
+    // @see \Drupal\entity_test\Hook\EntityTestHooks::entityBaseFieldInfo()
+    \Drupal::state()->set('entity_test.internal_field', TRUE);
+    NodeType::create(['type' => 'article', 'name' => 'Article'])->save();
+    $javascript_component_base = [
+      'name' => 'Test',
+      'status' => TRUE,
+      'props' => [
+        'text' => [
+          'type' => 'string',
+          'title' => 'Title',
+          'examples' => ['Press', 'Submit now'],
+        ],
+      ],
+      'slots' => [
+        'test_slot' => [
+          'title' => 'test',
+          'description' => 'Title',
+          'examples' => [
+            'Test 1',
+            'Test 2',
+          ],
+        ],
+      ],
+      'js' => [
+        'original' => 'console.log("Test")',
+        'compiled' => 'console.log("Test")',
+      ],
+      'css' => [
+        'original' => '.test { display: none; }',
+        'compiled' => '.test{display:none;}',
+      ],
+      'dataDependencies' => [],
+    ];
+    JavaScriptComponent::create([...$javascript_component_base, 'machineName' => 'other'])->save();
+    $this->entity = JavaScriptComponent::create([
+      ...$javascript_component_base,
+      'machineName' => 'test',
+      'dependencies' => [
+        'enforced' => [
+          'config' => [
+            // @phpstan-ignore-next-line
+            JavaScriptComponent::load('other')->getConfigDependencyName(),
+          ],
+        ],
+      ],
+    ]);
+    $this->entity->save();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function testRequiredPropertyValuesMissing(?array $additional_expected_validation_errors_when_missing = NULL): void {
+    parent::testRequiredPropertyValuesMissing([
+      'js' => [
+        'js' => 'React code components must contain JavaScript and CSS.',
+      ],
+      'css' => [
+        'css' => 'React code components must contain JavaScript and CSS.',
+      ],
+    ]);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function testEntityIsValid(): void {
+    parent::testEntityIsValid();
+
+    // Beyond validity, validate config dependencies are computed correctly.
+    $this->assertSame(
+      [
+        'config' => [
+          'canvas.js_component.other',
+        ],
+      ],
+      $this->entity->getDependencies()
+    );
+    $this->assertSame([
+      'config' => [
+        'canvas.js_component.other',
+      ],
+      'module' => [
+        'canvas',
+      ],
+    ], $this->getAllDependencies($this->entity));
+  }
+
+  public function testAssetsMatchComponentType(): void {
+    $this->entity->set('type', 'external');
+    $this->assertValidationErrors([]);
+
+    $this->entity->set('js', NULL);
+    $this->entity->set('css', NULL);
+    $this->assertValidationErrors([]);
+
+    $this->entity->set('type', 'react');
+    $this->assertValidationErrors([
+      'js' => 'React code components must contain JavaScript and CSS.',
+      'css' => 'React code components must contain JavaScript and CSS.',
+    ]);
+  }
+
+  #[TestWith([TRUE, TRUE, []])]
+  #[TestWith([TRUE, FALSE, ['' => 'Prop "silly" is required, but does not have example value']])]
+  #[TestWith([FALSE, TRUE, []])]
+  #[TestWith([FALSE, FALSE, []])]
+  public function testPropExample(bool $required, bool $has_example, array $expected_validation_errors): void {
+    $test_prop_definition = [
+      'type' => 'boolean',
+      'title' => $this->randomMachineName(),
+      'examples' => [TRUE],
+    ];
+    if (!$has_example) {
+      unset($test_prop_definition['examples']);
+    }
+    $this->entity
+      ->set('required', $required ? ['silly'] : [])
+      ->set('props', ['silly' => $test_prop_definition]);
+    $this->assertValidationErrors($expected_validation_errors);
+  }
+
+  public static function providerValidEnumsAndExamples(): \Generator {
+    yield 'string' => [
+      "string",
+      ["the answer", "Wim", "Sofie", "Jack"],
+      ["the answer" => "the answer", "Wim" => "Wim", "Sofie" => "Sofie", "Jack" => "Jack"],
+      NULL,
+    ];
+    yield 'integer' => ["integer", [42, 1988, 1992, 2024], ["42" => "42", "1988" => "1988", "1992" => "1992", "2024" => "2024"], NULL];
+  }
+
+  #[DataProvider('providerValidEnumsAndExamples')]
+  public function testValidEnumsAndExamples(string $json_schema_type, array $enum_and_examples_both, array $meta_enum, ?array $expected_typecasting): void {
+    $this->entity->set('props', [
+      'tested_enum_prop' => [
+        'type' => $json_schema_type,
+        'title' => "enum: $json_schema_type",
+        'enum' => $enum_and_examples_both,
+        'meta:enum' => $meta_enum,
+        'examples' => $enum_and_examples_both,
+      ],
+    ]);
+    $this->assertValidationErrors([]);
+    $this->entity->save();
+
+    // The expected output (i.e. after saving) is the input. But in a few cases,
+    // typecasting may occur. For readability, the third parameter is only
+    // required for those cases.
+    $expected = $expected_typecasting ?? $enum_and_examples_both;
+
+    $this->assertSame($expected, $this->entity->get('props')['tested_enum_prop']['enum']);
+    $this->assertSame($meta_enum, $this->entity->get('props')['tested_enum_prop']['meta:enum']);
+    $this->assertSame($expected, $this->entity->get('props')['tested_enum_prop']['examples']);
+  }
+
+  #[DataProvider('providerInvalidEnumsAndExamples')]
+  public function testInvalidEnumsAndExamples(string $json_schema_type, array $enum_and_examples_both, ?array $meta_enum, array $indexed_validation_errors, array $expected_validation_errors): void {
+    $this->entity->set('props', [
+      'tested_enum_prop' => array_merge([
+        'type' => $json_schema_type,
+        'title' => "enum: $json_schema_type",
+        'enum' => $enum_and_examples_both,
+        'examples' => $enum_and_examples_both,
+      ], $meta_enum ? ['meta:enum' => $meta_enum] : []),
+    ]);
+
+    // The expected validation errors are keyed by the index whose value in the
+    // $enum_and_examples_both array is expected to trigger a validation error.
+    // This is then expanded to expect an explicit validation error for that
+    // same index in both `enum` and `examples`, hence ensuring consistent
+    // validation for both.
+    foreach ($indexed_validation_errors as $index => $validation_error) {
+      $expected_validation_errors["props.tested_enum_prop.enum.$index"] = $validation_error;
+      $expected_validation_errors["props.tested_enum_prop.examples.$index"] = $validation_error;
+    }
+    if ($meta_enum) {
+      $this->assertSame($meta_enum, $this->entity->get('props')['tested_enum_prop']['meta:enum']);
+    }
+    $this->assertValidationErrors($expected_validation_errors);
+  }
+
+  #[TestWith(['missing', "The JavaScript component with the machine name 'missing' does not exist."])]
+  #[TestWith(['', "The 'importedJsComponents' contains an invalid component name."])]
+  #[TestWith(['🚀', "The 'importedJsComponents' contains an invalid component name."])]
+  #[TestWith(['componente_extraño', "The 'importedJsComponents' contains an invalid component name."])]
+  #[TestWith([';', "The 'importedJsComponents' contains an invalid component name."])]
+  public function testNonExistingJsDependencies(string $component_id, string $expected_exception_message): void {
+    \assert($this->entity instanceof JavaScriptComponent);
+    $this->expectException(ConstraintViolationException::class);
+    $this->expectExceptionMessage($expected_exception_message);
+
+    \assert($this->entity instanceof JavaScriptComponent);
+    $client_values = $this->entity->normalizeForClientSide()->values;
+    $client_values['importedJsComponents'] = [$component_id];
+    $this->entity->updateFromClientSide($client_values);
+  }
+
+  public static function providerInvalidEnumsAndExamples(): array {
+    return [
+      'Invalid string' => [
+        'string',
+        ['string', 42, 3.14, NULL],
+        NULL,
+        ['3' => 'This value should not be null.'],
+        [
+          '' => [
+            // If not meta:enums are specified, they are generated, but number ones
+            // with decimals will be invalid.
+            'The "meta:enum" keys for the "tested_enum_prop" prop enum cannot contain a dot. Offending key: "3.14"',
+            'The values for the "tested_enum_prop" prop enum must be defined in "meta:enum". Missing keys: "3_14"',
+          ],
+        ],
+      ],
+      'Invalid integer' => [
+        'integer',
+        ['string', 42, 3.14, NULL],
+        NULL,
+        [
+          '0' => 'This value should be of the correct primitive type.',
+          '2' => 'This value should be of the correct primitive type.',
+          '3' => 'This value should not be null.',
+        ],
+        [
+          '' => [
+            'Prop "tested_enum_prop" has invalid example value: [] String value found, but an integer or an object is required',
+            'The "meta:enum" keys for the "tested_enum_prop" prop enum cannot contain a dot. Offending key: "3.14"',
+            'The values for the "tested_enum_prop" prop enum must be defined in "meta:enum". Missing keys: "3_14"',
+          ],
+        ],
+      ],
+      // ⚠️ For now, Canvas does not support `enum` on `type: number` to match core and for better usability.
+      // @see https://www.drupal.org/project/canvas/issues/3534758
+      'Number' => [
+        'number',
+        [3.14, 1.0],
+        NULL,
+        [],
+        [
+          '' => [
+            'The "meta:enum" keys for the "tested_enum_prop" prop enum cannot contain a dot. Offending key: "3.14"',
+            'The values for the "tested_enum_prop" prop enum must be defined in "meta:enum". Missing keys: "3_14"',
+          ],
+          'props.tested_enum_prop' => "'enum' is an unknown key because props.tested_enum_prop.type is number (see config schema type canvas.json_schema.prop.*||canvas.json_schema.prop_shape.number).",
+        ],
+      ],
+      'Invalid number' => [
+        'number',
+        ['string', 42, 3.14, NULL],
+        NULL,
+        [],
+        [
+          '' => [
+            'Prop "tested_enum_prop" has invalid example value: [] String value found, but a number or an object is required',
+            'The "meta:enum" keys for the "tested_enum_prop" prop enum cannot contain a dot. Offending key: "3.14"',
+            'The values for the "tested_enum_prop" prop enum must be defined in "meta:enum". Missing keys: "3_14"',
+          ],
+          'props.tested_enum_prop' => "'enum' is an unknown key because props.tested_enum_prop.type is number (see config schema type canvas.json_schema.prop.*||canvas.json_schema.prop_shape.number).",
+          'props.tested_enum_prop.examples.0' => 'This value should be of the correct primitive type.',
+          'props.tested_enum_prop.examples.3' => 'This value should not be null.',
+        ],
+      ],
+    ];
+  }
+
+  /**
+   * Tests `type: boolean` validation and edge cases.
+   *
+   * (Cannot be tested generically, like `string`, `integer` and `number`.)
+   */
+  public function testBooleanPropDefinition(): void {
+    // Try using `enum` on a boolean prop.
+    $this->entity->set('props', [
+      'some_boolean' => [
+        'type' => 'boolean',
+        'title' => 'either/or',
+        'enum' => [TRUE, FALSE],
+        'examples' => [TRUE, NULL, FALSE],
+      ],
+    ]);
+    $this->assertValidationErrors([
+      'props.some_boolean' => "'enum' is an unknown key because props.some_boolean.type is boolean (see config schema type canvas.json_schema.prop.*||canvas.json_schema.prop_shape.boolean).",
+      'props.some_boolean.examples.1' => 'This value should not be null.',
+    ]);
+  }
+
+  /**
+   * Tests `type: string` `format: …` validation edge cases.
+   *
+   * @todo Expand this test coverage in https://www.drupal.org/project/canvas/issues/3542890 — this shows what is allowed by the two choices offered by the UI.
+   */
+  #[TestWith([['format' => 'uri-reference'], 'https://example.com', NULL])]
+  #[TestWith([['format' => 'uri-reference'], 'ftp://example.com', NULL])]
+  #[TestWith([['format' => 'uri-reference'], '/node/1', NULL])]
+  #[TestWith([['format' => 'uri-reference'], 'bunny.jpg', NULL])]
+  #[TestWith([['format' => 'uri'], 'https://example.com', NULL])]
+  #[TestWith([['format' => 'uri'], 'ftp://example.com', NULL])]
+  #[TestWith([['format' => 'uri'], '/node/1', 'Invalid URL format'])]
+  #[TestWith([['format' => 'uri'], 'bunny.jpg', 'Invalid URL format'])]
+  public function testStringFormatPropDefinition(array $string_definition, string $example, ?string $validation_error): void {
+    $this->entity->set('props', [
+      'beep' => [
+        'type' => 'string',
+        'title' => 'A meaningful title, but irrelevant in this test',
+        ...$string_definition,
+        'examples' => [$example],
+      ],
+    ]);
+    $expected_validation_errors = \is_null($validation_error)
+      ? []
+      : ['' => 'Prop "beep" has invalid example value: [] ' . $validation_error];
+    $this->assertValidationErrors($expected_validation_errors);
+  }
+
+  /**
+   * Tests `type: array` validation and edge cases.
+   */
+  #[DataProvider('providerTestArrayPropDefinition')]
+  public function testArrayPropDefinition(array $array_prop, array $expected_errors): void {
+    $this->entity->set('props', ['array_prop_name' => $array_prop]);
+    $this->assertValidationErrors($expected_errors);
+  }
+
+  public static function providerTestArrayPropDefinition(): \Generator {
+    yield 'Invalid: array with maxItems <2' => [
+      [
+        'type' => 'array',
+        'title' => 'Weirdly Wrapped String',
+        'items' => ['type' => 'string'],
+        'maxItems' => 1,
+        'examples' => [['o hai, I make zero sense']],
+      ],
+      [
+        '' => 'The "maxItems" restriction on arrays (if set) must be at least 2, but got 1 on prop "array_prop_name". Use a non-array type for single-value props.',
+        'props.array_prop_name.maxItems' => 'This value should be <em class="placeholder">2</em> or more.',
+      ],
+    ];
+    yield 'Valid: string array with format' => [
+      [
+        'type' => 'array',
+        'title' => 'Links',
+        'items' => ['type' => 'string', 'format' => 'uri-reference'],
+        'examples' => [['/foo', '/bar']],
+      ],
+      [],
+    ];
+    yield 'Valid: string array with enum' => [
+      [
+        'type' => 'array',
+        'title' => 'Red or blue',
+        'items' => [
+          'type' => 'string',
+          'enum' => ['red', 'blue'],
+          'meta:enum' => [
+            'red' => 'Red',
+            'blue' => 'Blue',
+          ],
+        ],
+        'examples' => [['red', 'red', 'blue']],
+      ],
+      [],
+    ];
+    yield 'Invalid: string array with format and an example violating the format' => [
+      [
+        'type' => 'array',
+        'title' => 'Links',
+        'items' => ['type' => 'string', 'format' => 'uri'],
+        'examples' => [
+          ['/foo', 'https://example.com/bar', 'baz', 'https://drupal.org/project/canvas'],
+        ],
+      ],
+      [
+        '' => "Prop \"array_prop_name\" has invalid example value: [[0]] Invalid URL format\n[[2]] Invalid URL format",
+      ],
+    ];
+    yield 'Valid: string array with maxItems' => [
+      [
+        'type' => 'array',
+        'title' => 'Tags',
+        'items' => ['type' => 'string'],
+        'maxItems' => 5,
+        'examples' => [['Tag A', 'Tag B']],
+      ],
+      [],
+    ];
+    yield 'Valid: integer array without maxItems' => [
+      [
+        'type' => 'array',
+        'title' => 'Scores',
+        'items' => ['type' => 'integer'],
+        'examples' => [[1, 2, 3]],
+      ],
+      [],
+    ];
+    yield 'Valid: HTML string array' => [
+      [
+        'type' => 'array',
+        'title' => 'Rich Quotes',
+        'items' => [
+          'type' => 'string',
+          'contentMediaType' => 'text/html',
+          'x-formatting-context' => 'block',
+        ],
+        'examples' => [
+          [
+            '<p>This is a paragraph with <strong>bold</strong> text.</p><ul><li>List item 1</li><li>List item 2</li></ul>',
+            '<p><strong>Hello</strong>, world!</p>',
+          ],
+        ],
+      ],
+      [],
+    ];
+    yield 'Valid: boolean array' => [
+      [
+        'type' => 'array',
+        'title' => 'Flags',
+        'items' => ['type' => 'boolean'],
+        'examples' => [[TRUE, FALSE]],
+      ],
+      [],
+    ];
+    yield 'Valid: number array' => [
+      [
+        'type' => 'array',
+        'title' => 'Prices',
+        'items' => ['type' => 'number'],
+        'examples' => [[1.99, 9.99]],
+      ],
+      [],
+    ];
+    yield 'Invalid: example exceeds maxItems — maxItems is validated against examples' => [
+      [
+        'type' => 'array',
+        'title' => 'Scores',
+        'items' => ['type' => 'integer'],
+        'maxItems' => 3,
+        'examples' => [[1, 2, 3, 4]],
+      ],
+      [
+        '' => "Prop \"array_prop_name\" has invalid example value: [] There must be a maximum of 3 items in the array, 4 found",
+      ],
+    ];
+    // `array` is a valid JSON Schema type but excluded from Canvas's items
+    // Choice constraint (nested arrays are not supported by Drupal's Field
+    // API). Using `array` here rather than a truly invalid type (e.g.
+    // `unknown`) ensures only the config schema Choice violation fires and
+    // not the SDC JSON Schema validator, which would also reject types that
+    // are not valid JSON Schema at all.
+    yield 'Invalid: nested array items not supported — config schema Choice + no storable prop shape' => [
+      [
+        'type' => 'array',
+        'title' => 'Bad Items',
+        'items' => ['type' => 'array'],
+      ],
+      [
+        '' => 'Drupal Canvas does not know of a field type/widget to allow populating the <code>array_prop_name</code> prop, with the shape <code>{"type":"array","items":{"type":"array"}}</code>.',
+        'props.array_prop_name.items' => "'items' is a required key because props.array_prop_name.items.type is array (see config schema type canvas.json_schema.prop_shape.array).",
+        'props.array_prop_name.items.type' => 'The value you selected is not a valid choice.',
+      ],
+    ];
+
+    yield 'Invalid: missing items schema' => [
+      [
+        'type' => 'array',
+        'title' => 'Missing Items',
+        // No examples - when items is missing, examples can't be validated
+        // since the type resolution depends on items.type.
+      ],
+      [
+        '' => 'Drupal Canvas does not know of a field type/widget to allow populating the <code>array_prop_name</code> prop, with the shape <code>{"type":"array"}</code>.',
+        'props.array_prop_name' => "'items' is a required key because props.array_prop_name.type is array (see config schema type canvas.json_schema.prop.*||canvas.json_schema.prop_shape.array).",
+      ],
+    ];
+
+    yield 'Invalid: integer array with string examples' => [
+      [
+        'type' => 'array',
+        'title' => 'Scores',
+        'items' => ['type' => 'integer'],
+        'examples' => [['not', 'integers']],
+      ],
+      [
+        '' => "Prop \"array_prop_name\" has invalid example value: [[0]] String value found, but an integer is required\n[[1]] String value found, but an integer is required",
+        'props.array_prop_name.examples.0.0' => 'This value should be of the correct primitive type.',
+        'props.array_prop_name.examples.0.1' => 'This value should be of the correct primitive type.',
+      ],
+    ];
+
+    yield 'Invalid: number array with string examples' => [
+      [
+        'type' => 'array',
+        'title' => 'Prices',
+        'items' => ['type' => 'number'],
+        'examples' => [['not', 'numbers']],
+      ],
+      [
+        '' => "Prop \"array_prop_name\" has invalid example value: [[0]] String value found, but a number is required\n[[1]] String value found, but a number is required",
+        'props.array_prop_name.examples.0.0' => 'This value should be of the correct primitive type.',
+        'props.array_prop_name.examples.0.1' => 'This value should be of the correct primitive type.',
+      ],
+    ];
+
+    yield 'Valid: object array prop' => [
+      [
+        'type' => 'array',
+        'title' => 'Images',
+        'items' => JsonSchemaObjectRef::Image->asPropShapeArray(),
+        'examples' => [
+          [
+            [
+              'src' => 'https://example.com/image1.png',
+              'alt' => 'First image',
+              'width' => 800,
+              'height' => 600,
+            ],
+            [
+              'src' => 'https://example.com/image2.png',
+              'alt' => 'Second image',
+              'width' => 1200,
+              'height' => 900,
+            ],
+          ],
+        ],
+      ],
+      [],
+    ];
+
+    yield 'Invalid: object array with wrong keys' => [
+      [
+        'type' => 'array',
+        'title' => 'Images',
+        'items' => JsonSchemaObjectRef::Image->asPropShapeArray(),
+        'examples' => [
+          [
+            [
+              // Missing required 'src', has invalid key 'url'.
+              'url' => 'https://example.com/image.png',
+              'alt' => 'Image',
+            ],
+          ],
+        ],
+      ],
+      [
+        '' => 'Prop "array_prop_name" has invalid example value: [[0].src] The property src is required',
+        'props.array_prop_name.examples.0.0' => "'src' is a required key.",
+        'props.array_prop_name.examples.0.0.url' => "'url' is not a supported key.",
+      ],
+    ];
+
+    yield 'Invalid: object array with a relative image src example' => [
+      [
+        'type' => 'array',
+        'title' => 'Images',
+        'items' => [
+          'type' => 'object',
+          '$ref' => 'json-schema-definitions://canvas.module/image',
+        ],
+        'examples' => [
+          [
+            [
+              'src' => 'https://example.com/cat.jpg',
+              'alt' => 'A valid example.',
+            ],
+            [
+              'src' => './hero.jpg',
+              'alt' => 'A relative path that JsComponent cannot resolve.',
+            ],
+          ],
+        ],
+      ],
+      [
+        '' => 'Image prop "array_prop_name" example src "./hero.jpg" must be a fully-qualified URL with both scheme and host. Use a placeholder URL such as https://placehold.co/600x400.',
+      ],
+    ];
+
+    // `type: object` without `$ref` fails at the config schema level because
+    // $ref is required in canvas.json_schema.item.object, matching the same
+    // requirement as canvas.json_schema.prop_shape.object.
+    yield 'Invalid: object items without $ref — config schema required key + no storable prop shape' => [
+      [
+        'type' => 'array',
+        'title' => 'Objects',
+        'items' => ['type' => 'object'],
+      ],
+      [
+        '' => 'Drupal Canvas does not know of a field type/widget to allow populating the <code>array_prop_name</code> prop, with the shape <code>{"type":"array","items":{"type":"object"}}</code>.',
+        'props.array_prop_name.items' => "'\$ref' is a required key because props.array_prop_name.items.type is object (see config schema type canvas.json_schema.prop_shape.object).",
+      ],
+    ];
+
+    // A list of references uses the existing content-entity-reference shape as
+    // its `items`. Config schema accepts it, and the content-entity-reference
+    // rules apply to `items`. No `dataDependencies.entityFields` entry exists
+    // here, so `toSdcDefinition()` cannot inject `x-allowed-entity-type-id`.
+    // @see \Drupal\canvas\ComponentMetadataRequirementsChecker::check()
+    yield 'Invalid: content-entity-reference array prop without entityFields' => [
+      [
+        'type' => 'array',
+        'title' => 'Related articles',
+        'items' => JsonSchemaObjectRef::ContentEntityReference->asPropShapeArray(),
+        'maxItems' => 3,
+      ],
+      [
+        '' => 'Missing "x-allowed-entity-type-id" for content entity reference prop "array_prop_name".',
+      ],
+    ];
+  }
+
+  /**
+   * Tests `type: object` validation and edge cases.
+   *
+   * (Cannot be tested generically, like `string`, `integer` and `number`.)
+   */
+  public function testObjectPropDefinition(): void {
+    $this->entity->set('props', [
+      // A well-known object shape that is fully described by JSON Schema: the
+      // code component developer knows exactly what to expect.
+      'some_object' => JsonSchemaObjectRef::Image->asPropShapeArray() + [
+        'title' => $this->randomString(),
+        'enum' => [NULL],
+        'meta:enum' => [NULL => 'Test'],
+        'examples' => [
+          [],
+          NULL,
+          [
+            'src' => 'https://placehold.co/1200x900@2x.png',
+            'width' => 1200,
+            'height' => 900,
+            'alt' => 'Example image placeholder',
+          ],
+          [
+            // Only required props.
+            'src' => 'https://placehold.co/1200x900@2x.png',
+          ],
+          [
+            // Invalid pattern.
+            'src' => 'hi mum, this is not a url',
+          ],
+          [
+            // Missing required 'src'.
+            'width' => 1200,
+          ],
+          [
+            // Relative path: rejected because JsComponent cannot resolve them.
+            'src' => 'path/to/image.png',
+          ],
+          [
+            // Root-relative URL: rejected because it has no scheme/host.
+            'src' => '/root/relative/path/to/image.png',
+          ],
+          [
+            // Valid absolute URL, but using a disallowed scheme.
+            'src' => 'public://cat.jpg',
+          ],
+        ],
+      ],
+      // A well-known object shape that is loosely described by JSON Schema: the
+      // code component developer knows to expect an optional object, but the
+      // exact shape depends on the entity field data they choose. Those choices
+      // are stored in `dataDependencies.entityFields`.
+      'article' => [
+        'title' => 'Interesting article',
+        'type' => 'object',
+        '$ref' => 'json-schema-definitions://canvas.module/content-entity-reference',
+      ],
+      // The constraints chosen by the code component developer should not be
+      // duplicated in the prop definition: it can be computed from
+      // `dataDependencies.entityFields` and would be redundant to maintain in
+      // two places. `examples` are also unsupported: the referenced entity is
+      // resolved at runtime from `dataDependencies.entityFields`.
+      'employee' => [
+        'title' => 'Employee',
+        'type' => 'object',
+        '$ref' => 'json-schema-definitions://canvas.module/content-entity-reference',
+        // Valid in JSON Schema, but not allowed in code component's prop
+        // definitions.
+        'x-allowed-entity-type-id' => 'user',
+        'examples' => [],
+      ],
+    ]);
+    $this->entity->set('required', ['employee']);
+    $this->entity->set('dataDependencies', [
+      'entityFields' => [
+        'article' => ['ℹ︎␜entity:node:article␝title␞␟value'],
+        'employee' => ['ℹ︎␜entity:user␝name␞␟value'],
+      ],
+    ]);
+    $this->assertValidationErrors([
+      '' => [
+        'Prop "some_object" has invalid example value: [src] The property src is required',
+        'Prop "employee" is a content-entity-reference prop and must not have examples.',
+        'Prop "employee" is required, but content-entity-reference props must be optional.',
+        'Image prop "some_object" example src "hi mum, this is not a url" must be a fully-qualified URL with both scheme and host. Use a placeholder URL such as https://placehold.co/600x400.',
+        'Image prop "some_object" example src "path/to/image.png" must be a fully-qualified URL with both scheme and host. Use a placeholder URL such as https://placehold.co/600x400.',
+        'Image prop "some_object" example src "/root/relative/path/to/image.png" must be a fully-qualified URL with both scheme and host. Use a placeholder URL such as https://placehold.co/600x400.',
+      ],
+      'props.employee.x-allowed-entity-type-id' => "'x-allowed-entity-type-id' is not a supported key.",
+      'props.some_object.enum.0' => 'This value should not be null.',
+      'props.some_object.examples.0' => [
+        "'src' is a required key.",
+        'This value should not be blank.',
+      ],
+      'props.some_object.examples.1' => 'This value should not be null.',
+      'props.some_object.examples.4.src' => 'This value should be a valid URI reference.',
+      'props.some_object.examples.5' => "'src' is a required key.",
+      'props.some_object.examples.8.src' => "'public' is not allowed, must be one of the allowed schemes: http, https.",
+    ]);
+    \assert($this->entity instanceof JavaScriptComponent);
+    // Invalid props won't be returned, but no error should happen when calling `getContentEntityReferenceProps()`.
+    $this->assertSame([
+      'article' => [
+        'title' => 'Interesting article',
+        ...JsonSchemaObjectRef::ContentEntityReference->asPropShapeArray(),
+      ],
+    ], $this->entity->getContentEntityReferenceProps());
+  }
+
+  /**
+   * Tests a list of references: a `type: array` content-entity-reference prop.
+   *
+   * This test does not validate the config entity. It calls the methods that
+   * project and check the prop definitions directly.
+   *
+   * @see \Drupal\canvas\Entity\JavaScriptComponent::getContentEntityReferenceProps()
+   * @see \Drupal\canvas\Entity\JavaScriptComponent::toSdcDefinition()
+   * @see \Drupal\canvas\ComponentMetadataRequirementsChecker::check()
+   */
+  public function testContentEntityReferenceListProp(): void {
+    $js_component = $this->entity;
+    \assert($js_component instanceof JavaScriptComponent);
+    $js_component->set('props', [
+      'article' => [
+        'title' => 'Interesting article',
+        ...JsonSchemaObjectRef::ContentEntityReference->asPropShapeArray(),
+      ],
+      'related_articles' => [
+        'title' => 'Related articles',
+        'type' => 'array',
+        'items' => JsonSchemaObjectRef::ContentEntityReference->asPropShapeArray(),
+        'maxItems' => 3,
+      ],
+      // Same as for a single reference: `x-allowed-*` keys in the prop
+      // definition exclude the prop.
+      'employees' => [
+        'title' => 'Employees',
+        'type' => 'array',
+        'items' => JsonSchemaObjectRef::ContentEntityReference->asPropShapeArray() + [
+          'x-allowed-entity-type-id' => 'user',
+        ],
+      ],
+    ]);
+    $js_component->set('dataDependencies', [
+      'entityFields' => [
+        'article' => ['ℹ︎␜entity:node:article␝title␞␟value'],
+        'related_articles' => ['ℹ︎␜entity:node:article␝title␞␟value'],
+      ],
+    ]);
+
+    self::assertSame(['article', 'related_articles'], \array_keys($js_component->getContentEntityReferenceProps()));
+    self::assertFalse($js_component->isContentEntityReferenceObjectListProp('article'));
+    self::assertTrue($js_component->isContentEntityReferenceObjectListProp('related_articles'));
+    self::assertFalse($js_component->isContentEntityReferenceObjectListProp('employees'));
+
+    // A single reference gets the `x-allowed-*` keys on the prop. A list of
+    // references gets them on its `items`.
+    $sdc_props = $js_component->toSdcDefinition()['props']['properties'];
+    self::assertSame([
+      'title' => 'Interesting article',
+      ...JsonSchemaObjectRef::ContentEntityReference->asPropShapeArray(),
+      'x-allowed-entity-type-id' => 'node',
+      'x-allowed-bundle' => 'article',
+    ], $sdc_props['article']);
+    self::assertSame([
+      'title' => 'Related articles',
+      'type' => 'array',
+      'items' => [
+        ...JsonSchemaObjectRef::ContentEntityReference->asPropShapeArray(),
+        'x-allowed-entity-type-id' => 'node',
+        'x-allowed-bundle' => 'article',
+      ],
+      'maxItems' => 3,
+    ], $sdc_props['related_articles']);
+
+    // Prop VALUES are validated against the projected definition by core's
+    // ComponentValidator, with the JSON Schema validator Canvas configures for
+    // it. Each item of the list is validated against the `items` schema.
+    // @see \Drupal\canvas\CanvasServiceProvider::alter()
+    // @see \Drupal\canvas\Plugin\Canvas\ComponentSource\JsonSchemaPropsComponentSourceBase::validateComponentInput()
+    $component_validator = $this->container->get(ComponentValidator::class);
+    \assert($component_validator instanceof ComponentValidator);
+    $sdc_plugin = JsComponentDiscovery::buildEphemeralSdcPluginInstance($js_component);
+    $validate_values = function (array $values) use ($component_validator, $sdc_plugin): array {
+      try {
+        $component_validator->validateProps(['related_articles' => $values], $sdc_plugin);
+        return [];
+      }
+      catch (InvalidComponentException $e) {
+        return \explode("\n", $e->getMessage());
+      }
+    };
+    $article_payload = ['__type' => 'article', '__url' => '/node/1', 'title' => 'An article'];
+    self::assertSame([], $validate_values([]));
+    self::assertSame([], $validate_values([$article_payload, $article_payload]));
+    // An item that is not a reference is invalid, wherever it is in the list.
+    self::assertSame(
+      ['[canvas:test/related_articles[1]] String value found, but an object is required.'],
+      $validate_values([$article_payload, 'not a reference']),
+    );
+    self::assertSame(
+      ['[canvas:test/related_articles] There must be a maximum of 3 items in the array, 4 found.'],
+      $validate_values([$article_payload, $article_payload, $article_payload, $article_payload]),
+    );
+  }
+
+  /**
+   * Tests the validation of a list of references prop definition.
+   *
+   * @param array<string, mixed> $prop
+   *   The definition of the `array_prop_name` prop.
+   * @param array<string, string|string[]> $expected_errors
+   *   The expected validation errors.
+   * @param array<string, mixed> $entity_values
+   *   Values to set on the entity besides the prop, keyed by property name.
+   */
+  #[DataProvider('providerContentEntityReferenceListPropDefinition')]
+  public function testContentEntityReferenceListPropDefinition(array $prop, array $expected_errors, array $entity_values): void {
+    $this->entity->set('props', ['array_prop_name' => $prop]);
+    foreach ($entity_values as $property => $value) {
+      $this->entity->set($property, $value);
+    }
+    $this->assertValidationErrors($expected_errors);
+  }
+
+  /**
+   * Data provider for testContentEntityReferenceListPropDefinition().
+   */
+  public static function providerContentEntityReferenceListPropDefinition(): \Generator {
+    // A list of references: `type: array` with a content-entity-reference as
+    // `items`. The reference itself is resolved from
+    // `dataDependencies.entityFields`.
+    $reference_list = [
+      'type' => 'array',
+      'title' => 'Related articles',
+      'items' => JsonSchemaObjectRef::ContentEntityReference->asPropShapeArray(),
+    ];
+    $article_title = ['ℹ︎␜entity:node:article␝title␞␟value'];
+    $with_article_title = ['dataDependencies' => ['entityFields' => ['array_prop_name' => $article_title]]];
+    yield 'Valid: content-entity-reference array' => [
+      $reference_list,
+      [],
+      $with_article_title,
+    ];
+    yield 'Valid: content-entity-reference array with maxItems 2' => [
+      $reference_list + ['maxItems' => 2],
+      [],
+      $with_article_title,
+    ];
+    yield 'Invalid: content-entity-reference array with maxItems <2' => [
+      $reference_list + ['maxItems' => 1],
+      [
+        '' => 'The "maxItems" restriction on arrays (if set) must be at least 2, but got 1 on prop "array_prop_name". Use a non-array type for single-value props.',
+        'props.array_prop_name.maxItems' => 'This value should be <em class="placeholder">2</em> or more.',
+      ],
+      $with_article_title,
+    ];
+    // A required list of references with examples fails the array rule (it
+    // would need `minItems: 1`) and both reference rules (references must be
+    // optional, and must not have examples).
+    yield 'Invalid: required content-entity-reference array with examples' => [
+      $reference_list + ['examples' => [[]]],
+      [
+        '' => [
+          'Prop "array_prop_name" is a content-entity-reference prop and must not have examples.',
+          'Multiple-cardinality prop "array_prop_name" is required, but does not specify `minItems: 1`.',
+          'Prop "array_prop_name" is required, but content-entity-reference props must be optional.',
+        ],
+      ],
+      $with_article_title + ['required' => ['array_prop_name']],
+    ];
+    // `minItems` is only allowed on required props, and content-entity-
+    // reference props must be optional: so a list of references can never have
+    // `minItems`. There is no rule specific to lists of references.
+    yield 'Invalid: content-entity-reference array with minItems' => [
+      $reference_list + ['minItems' => 1],
+      [
+        '' => 'Multiple-cardinality prop "array_prop_name" specifies `minItems`, but is not required. Only required multiple-cardinality props can specify `minItems`.',
+      ],
+      $with_article_title,
+    ];
+    yield 'Invalid: content-entity-reference array and required with minItems' => [
+      $reference_list + ['minItems' => 1],
+      [
+        '' => 'Prop "array_prop_name" is required, but content-entity-reference props must be optional.',
+      ],
+      $with_article_title + ['required' => ['array_prop_name']],
+    ];
+    // The `x-allowed-*` keys are computed from `dataDependencies.entityFields`
+    // and projected into `items`: they must not be in the prop definition, and
+    // their projected values are validated.
+    yield 'Invalid: content-entity-reference array with x-allowed-* in items' => [
+      [...$reference_list, 'items' => $reference_list['items'] + ['x-allowed-entity-type-id' => 'user']],
+      [
+        'props.array_prop_name.items.x-allowed-entity-type-id' => "'x-allowed-entity-type-id' is not a supported key.",
+      ],
+      $with_article_title,
+    ];
+    yield 'Invalid: content-entity-reference array targeting a non-existent bundle' => [
+      $reference_list,
+      [
+        '' => 'Invalid value "nonsense" for "x-allowed-bundle": not a known bundle of entity type "node".',
+        'dataDependencies.entityFields.array_prop_name.0' => "The entity type 'node' does not have a 'nonsense' bundle.",
+      ],
+      ['dataDependencies' => ['entityFields' => ['array_prop_name' => ['ℹ︎␜entity:node:nonsense␝title␞␟value']]]],
+    ];
+    yield 'Invalid: content-entity-reference array targeting a non-existent entity type' => [
+      $reference_list,
+      [
+        '' => 'Missing "x-allowed-entity-type-id" for content entity reference prop "array_prop_name".',
+        'dataDependencies.entityFields.array_prop_name.0' => "The entity type 'nonsense' does not exist.",
+      ],
+      ['dataDependencies' => ['entityFields' => ['array_prop_name' => ['ℹ︎␜entity:nonsense␝title␞␟value']]]],
+    ];
+  }
+
+  /**
+   * Tests that an empty-string example for a string prop is rejected.
+   *
+   * @see https://www.drupal.org/i/3587211
+   */
+  public function testEmptyStringExampleRejected(): void {
+    $this->entity->set('props', [
+      'delta' => [
+        'type' => 'string',
+        'title' => 'Delta',
+        'examples' => [''],
+      ],
+    ]);
+    $this->assertValidationErrors([
+      '' => 'Prop "delta" example value `""` cannot be used as a default.',
+    ]);
+  }
+
+  /**
+   * Tests different permutations of entity values.
+   *
+   * @param array $shape
+   *   Array of entity values.
+   * @param array $expected_errors
+   *   Expected validation errors.
+   */
+  #[DataProvider('providerTestEntityShapes')]
+  public function testEntityShapes(array $shape, array $expected_errors): void {
+    $this->entity = JavaScriptComponent::create($shape);
+    $this->assertValidationErrors($expected_errors);
+  }
+
+  public static function providerTestEntityShapes(): array {
+    return [
+      'Invalid: no JS' => [
+        [
+          'machineName' => 'test-no-slots-no-props',
+          'name' => 'Test',
+          'props' => [],
+          'slots' => [],
+          'js' => [
+            'original' => NULL,
+            'compiled' => NULL,
+          ],
+          'css' => [
+            'original' => '.test { display: none; }',
+            'compiled' => '.test{display:none;}',
+          ],
+          'dataDependencies' => [],
+        ],
+        [
+          'js.compiled' => 'This value should not be null.',
+          'js.original' => 'This value should not be null.',
+        ],
+      ],
+      'Invalid: Unknown prop type' => [
+        [
+          'machineName' => 'test-unknown-prop-type',
+          'name' => 'Test',
+          'props' => [
+            'mixed_up_prop' => [
+              'type' => 'unknown',
+              'title' => 'Title',
+              'enum' => [
+                'Press',
+                'Click',
+                'Submit',
+              ],
+              'meta:enum' => [
+                'Press' => 'Press',
+                'Click' => 'Click',
+                'Submit' => 'Submit',
+              ],
+              'examples' => ['Press', 'Submit now'],
+            ],
+          ],
+          'slots' => [],
+          'js' => [
+            'original' => 'console.log("Test")',
+            'compiled' => 'console.log("Test")',
+          ],
+          'css' => [
+            'original' => '.test { display: none; }',
+            'compiled' => '.test{display:none;}',
+          ],
+          'dataDependencies' => [],
+        ],
+        [
+          '' => "In component canvas:test-unknown-prop-type:\nUnable to find class/interface \"unknown\" specified in the prop \"mixed_up_prop\" for the component \"canvas:test-unknown-prop-type\".",
+          'props.mixed_up_prop' => [
+            "'enum' is an unknown key because props.mixed_up_prop.type is unknown (see config schema type canvas.json_schema.prop.*||canvas.json_schema.prop_shape.*).",
+            "'meta:enum' is an unknown key because props.mixed_up_prop.type is unknown (see config schema type canvas.json_schema.prop.*||canvas.json_schema.prop_shape.*).",
+          ],
+          'props.mixed_up_prop.type' => 'The value you selected is not a valid choice.',
+        ],
+      ],
+      'Valid: no props and no slots' => [
+        [
+          'machineName' => 'test-no-slots-no-props',
+          'name' => 'Test',
+          'props' => [],
+          'slots' => [],
+          'js' => [
+            'original' => 'console.log("Test")',
+            'compiled' => 'console.log("Test")',
+          ],
+          'css' => [
+            'original' => '.test { display: none; }',
+            'compiled' => '.test{display:none;}',
+          ],
+          'dataDependencies' => [],
+        ],
+        [],
+      ],
+      'Valid: props (of all supported types), of which two required and no slots' => [
+        [
+          'machineName' => 'test-props-no-slots',
+          'name' => 'Test',
+          'props' => [
+            'string' => [
+              'type' => 'string',
+              'title' => 'Title',
+              'examples' => ['Press', 'Submit now'],
+            ],
+            'boolean' => [
+              'type' => 'boolean',
+              'title' => 'Truth',
+              'examples' => [TRUE, FALSE],
+            ],
+            'integer' => [
+              'type' => 'integer',
+              'title' => 'Integer',
+              'examples' => [23, 10, 2024],
+            ],
+            'number' => [
+              'type' => 'number',
+              'title' => 'Number',
+              'examples' => [3.14],
+            ],
+            'journalist' => [
+              'type' => 'object',
+              'title' => 'Journalist',
+              '$ref' => 'json-schema-definitions://canvas.module/content-entity-reference',
+            ],
+            'article' => [
+              'type' => 'object',
+              'title' => 'News article',
+              '$ref' => 'json-schema-definitions://canvas.module/content-entity-reference',
+            ],
+          ],
+          'required' => [
+            'string',
+            'integer',
+          ],
+          'slots' => [],
+          'js' => [
+            'original' => 'console.log("Test")',
+            'compiled' => 'console.log("Test")',
+          ],
+          'css' => [
+            'original' => '.test { display: none; }',
+            'compiled' => '.test{display:none;}',
+          ],
+          'dataDependencies' => [
+            'entityFields' => [
+              'journalist' => ['ℹ︎␜entity:user␝name␞␟value'],
+              'article' => [
+                'ℹ︎␜entity:node:article␝title␞␟value',
+                'ℹ︎␜entity:node:article␝body␞␟processed',
+              ],
+            ],
+          ],
+        ],
+        [],
+      ],
+      'Invalid: a non-existent required prop' => [
+        [
+          'machineName' => 'test-non-existent-required-prop',
+          'name' => 'Test',
+          'props' => [
+            'string' => [
+              'type' => 'string',
+              'title' => 'Title',
+              'examples' => ['Press', 'Submit now'],
+            ],
+          ],
+          'required' => [
+            'does_not_exist',
+          ],
+          'slots' => [],
+          'js' => [
+            'original' => 'console.log("Test")',
+            'compiled' => 'console.log("Test")',
+          ],
+          'css' => [
+            'original' => '.test { display: none; }',
+            'compiled' => '.test{display:none;}',
+          ],
+          'dataDependencies' => [],
+        ],
+        [
+          // ⚠️ SDC does not complain about this!
+          // @see \Drupal\Core\Theme\Component\ComponentValidator
+          // @todo Update once https://www.drupal.org/project/drupal/issues/3493086 is fixed.
+        ],
+      ],
+      'Valid: props, no slots set' => [
+        [
+          'machineName' => 'test-props-no-slots',
+          'name' => 'Test',
+          'props' => [
+            'text' => [
+              'type' => 'string',
+              'title' => 'Title',
+              'examples' => ['Press', 'Submit now'],
+            ],
+          ],
+          'js' => [
+            'original' => 'console.log("Test")',
+            'compiled' => 'console.log("Test")',
+          ],
+          'css' => [
+            'original' => '.test { display: none; }',
+            'compiled' => '.test{display:none;}',
+          ],
+          'dataDependencies' => [],
+        ],
+        [],
+      ],
+      'Valid: enum props' => [
+        [
+          'machineName' => 'test-props-no-slots',
+          'name' => 'Test',
+          'props' => [
+            'text' => [
+              'type' => 'string',
+              'title' => 'Title',
+              'enum' => [
+                'Press',
+                'Click',
+                'Submit',
+              ],
+              'meta:enum' => [
+                'Press' => 'Press',
+                'Click' => 'Click',
+                'Submit' => 'Submit',
+              ],
+              'examples' => ['Press', 'Submit'],
+            ],
+          ],
+          'slots' => [],
+          'js' => [
+            'original' => 'console.log("Test")',
+            'compiled' => 'console.log("Test")',
+          ],
+          'css' => [
+            'original' => '.test { display: none; }',
+            'compiled' => '.test{display:none;}',
+          ],
+          'dataDependencies' => [],
+        ],
+        [],
+      ],
+      'Valid: slots (one with description+examples, one without), no props' => [
+        [
+          'machineName' => 'test_slots',
+          'status' => TRUE,
+          'name' => 'Test',
+          'props' => [],
+          'slots' => [
+            'test_slot' => [
+              'title' => 'test',
+              'description' => 'Title',
+              'examples' => [
+                'Test 1',
+                'Test 2',
+              ],
+            ],
+            'test_slot_only_required' => [
+              'title' => 'test',
+            ],
+          ],
+          'js' => [
+            'original' => 'console.log("Test")',
+            'compiled' => 'console.log("Test")',
+          ],
+          'css' => [
+            'original' => '.test { display: none; }',
+            'compiled' => '.test{display:none;}',
+          ],
+          'dataDependencies' => [],
+        ],
+        [],
+      ],
+      'Valid: empty JS and CSS, no props, and "disabled"' => [
+        [
+          'machineName' => 'test-no-js-no-css-no-props-nor-slots-and-disabled',
+          'status' => FALSE,
+          'name' => 'Test',
+          'props' => [],
+          'slots' => [],
+          'js' => [
+            'original' => '',
+            'compiled' => '',
+          ],
+          'css' => [
+            'original' => '',
+            'compiled' => '',
+          ],
+          'dataDependencies' => [],
+        ],
+        [],
+      ],
+      'Valid: image prop' => [
+        [
+          'machineName' => 'image-prop-no-slots',
+          'name' => 'Test',
+          'props' => [
+            'image' => JsonSchemaObjectRef::Image->asPropShapeArray() + [
+              'title' => 'Image title',
+              'examples' => [
+                [
+                  'src' => 'https://example.com/image.png',
+                  'alt' => 'Alternative text',
+                  'width' => 800,
+                  'height' => 600,
+                ],
+              ],
+            ],
+          ],
+          'slots' => [],
+          'js' => [
+            'original' => 'console.log("Test")',
+            'compiled' => 'console.log("Test")',
+          ],
+          'css' => [
+            'original' => '.test { display: none; }',
+            'compiled' => '.test{display:none;}',
+          ],
+          'dataDependencies' => [],
+        ],
+        [],
+      ],
+      'Invalid: required image prop missing examples' => [
+        [
+          'machineName' => 'image-prop-no-slots-no-examples',
+          'name' => 'Test',
+          'required' => [
+            'image',
+          ],
+          'props' => [
+            'image' => JsonSchemaObjectRef::Image->asPropShapeArray() + [
+              'title' => 'Image title',
+            ],
+          ],
+          'slots' => [],
+          'js' => [
+            'original' => 'console.log("Test")',
+            'compiled' => 'console.log("Test")',
+          ],
+          'css' => [
+            'original' => '.test { display: none; }',
+            'compiled' => '.test{display:none;}',
+          ],
+          'dataDependencies' => [],
+        ],
+        [
+          '' => 'Prop "image" is required, but does not have example value',
+        ],
+      ],
+      'Valid: optional image prop missing examples' => [
+        [
+          'machineName' => 'image-prop-no-slots-no-examples',
+          'name' => 'Test',
+          'props' => [
+            'image' => JsonSchemaObjectRef::Image->asPropShapeArray() + [
+              'title' => 'Image title',
+            ],
+          ],
+          'slots' => [],
+          'js' => [
+            'original' => 'console.log("Test")',
+            'compiled' => 'console.log("Test")',
+          ],
+          'css' => [
+            'original' => '.test { display: none; }',
+            'compiled' => '.test{display:none;}',
+          ],
+          'dataDependencies' => [],
+        ],
+        [],
+      ],
+      'Invalid: image prop $ref' => [
+        [
+          'machineName' => 'image-prop-no-slots-no-ref',
+          'name' => 'Test',
+          'props' => [
+            'image' => [
+              'title' => 'Image title',
+              'type' => 'object',
+              'examples' => [
+                [
+                  // @todo this is actually an invalid example, will be detected by https://www.drupal.org/i/3508725
+                  'src' => 'https://example.com/image.png',
+                  'alt' => 'Alternative text',
+                  'width' => 800,
+                  'height' => 600,
+                ],
+              ],
+            ],
+          ],
+          'slots' => [],
+          'js' => [
+            'original' => 'console.log("Test")',
+            'compiled' => 'console.log("Test")',
+          ],
+          'css' => [
+            'original' => '.test { display: none; }',
+            'compiled' => '.test{display:none;}',
+          ],
+          'dataDependencies' => [],
+        ],
+        [
+          '' => 'Drupal Canvas does not know of a field type/widget to allow populating the <code>image</code> prop, with the shape <code>{"type":"object"}</code>.',
+          'props.image' => '\'$ref\' is a required key because props.image.type is object (see config schema type canvas.json_schema.prop.*||canvas.json_schema.prop_shape.object).',
+          'props.image.examples.0.alt' => "'alt' is not a supported key.",
+          'props.image.examples.0.height' => "'height' is not a supported key.",
+          'props.image.examples.0.src' => "'src' is not a supported key.",
+          'props.image.examples.0.width' => "'width' is not a supported key.",
+        ],
+      ],
+      'Invalid: image prop with incorrect $ref' => [
+        [
+          'machineName' => 'test-props-no-slots',
+          'name' => 'Test',
+          'props' => [
+            'image' => [
+              'title' => 'Image title',
+              'type' => 'object',
+              '$ref' => "json-schema-definitions://canvas.module/heading",
+              'examples' => [
+                [
+                  'src' => 'https://example.com/image.png',
+                  'alt' => 'Alternative text',
+                  'width' => 800,
+                  'height' => 600,
+                ],
+              ],
+            ],
+          ],
+          'slots' => [],
+          'js' => [
+            'original' => 'console.log("Test")',
+            'compiled' => 'console.log("Test")',
+          ],
+          'css' => [
+            'original' => '.test { display: none; }',
+            'compiled' => '.test{display:none;}',
+          ],
+          'dataDependencies' => [],
+        ],
+        [
+          '' => "Prop \"image\" has invalid example value: [text] The property text is required\n[element] The property element is required",
+          'props.image.$ref' => 'The value you selected is not a valid choice.',
+          'props.image.examples.0' => [
+            "'text' is a required key.",
+            "'element' is a required key.",
+          ],
+          'props.image.examples.0.alt' => "'alt' is not a supported key.",
+          'props.image.examples.0.height' => "'height' is not a supported key.",
+          'props.image.examples.0.src' => "'src' is not a supported key.",
+          'props.image.examples.0.width' => "'width' is not a supported key.",
+        ],
+      ],
+      'Valid: array prop (string items, with maxItems, required, with example)' => [
+        [
+          'machineName' => 'test-array-prop',
+          'name' => 'Test',
+          'props' => [
+            'tags' => [
+              'type' => 'array',
+              'title' => 'Tags',
+              'items' => ['type' => 'string'],
+              'maxItems' => 10,
+              'minItems' => 1,
+              'examples' => [
+                ['Tag A', 'Tag B'],
+              ],
+            ],
+          ],
+          'required' => ['tags'],
+          'slots' => [],
+          'js' => [
+            'original' => 'console.log("Test")',
+            'compiled' => 'console.log("Test")',
+          ],
+          'css' => [
+            'original' => '.test { display: none; }',
+            'compiled' => '.test{display:none;}',
+          ],
+          'dataDependencies' => [],
+        ],
+        [],
+      ],
+      'Valid: array prop (integer items, no maxItems, optional, no example)' => [
+        [
+          'machineName' => 'test-array-integer-prop',
+          'name' => 'Test',
+          'props' => [
+            'scores' => [
+              'type' => 'array',
+              'title' => 'Scores',
+              'items' => ['type' => 'integer'],
+            ],
+          ],
+          'slots' => [],
+          'js' => [
+            'original' => 'console.log("Test")',
+            'compiled' => 'console.log("Test")',
+          ],
+          'css' => [
+            'original' => '.test { display: none; }',
+            'compiled' => '.test{display:none;}',
+          ],
+          'dataDependencies' => [],
+        ],
+        [],
+      ],
+      'Invalid: required array prop with no example' => [
+        [
+          'machineName' => 'test-required-array-no-example',
+          'name' => 'Test',
+          'props' => [
+            'tags' => [
+              'type' => 'array',
+              'title' => 'Tags',
+              'items' => ['type' => 'string'],
+              'minItems' => 1,
+            ],
+          ],
+          'required' => ['tags'],
+          'slots' => [],
+          'js' => [
+            'original' => 'console.log("Test")',
+            'compiled' => 'console.log("Test")',
+          ],
+          'css' => [
+            'original' => '.test { display: none; }',
+            'compiled' => '.test{display:none;}',
+          ],
+          'dataDependencies' => [],
+        ],
+        [
+          '' => 'Prop "tags" is required, but does not have example value',
+        ],
+      ],
+      'Valid: markup prop' => [
+        [
+          'machineName' => 'test-props-no-slots',
+          'name' => 'Test',
+          'props' => [
+            'markup' => [
+              'title' => 'Markup',
+              'type' => 'string',
+              'contentMediaType' => 'text/html',
+              'x-formatting-context' => 'block',
+              'examples' => [
+                '<p>This is a paragraph with <strong>bold</strong> text.</p><ul><li>List item 1</li><li>List item 2</li></ul>',
+              ],
+            ],
+          ],
+          'slots' => [],
+          'js' => [
+            'original' => 'console.log("Test")',
+            'compiled' => 'console.log("Test")',
+          ],
+          'css' => [
+            'original' => '.test { display: none; }',
+            'compiled' => '.test{display:none;}',
+          ],
+          'dataDependencies' => [],
+        ],
+        [],
+      ],
+    ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function providerInvalidMachineNameCharacters(): array {
+    return [
+      'INVALID: space separated' => ['space separated', FALSE],
+      'INVALID: period separated' => ['period.separated', FALSE],
+      'VALID: dash separated' => ['dash-separated', TRUE],
+      'VALID: underscore separated' => ['underscore_separated', TRUE],
+      'VALID: contains uppercase' => ['containsUppercase', TRUE],
+      'INVALID: starts uppercase' => ['StartsUppercase', FALSE],
+      'VALID: contains number' => ['number1', TRUE],
+      'INVALID: starts with number' => ['10th_birthday', FALSE],
+    ];
+  }
+
+  public function testInvalidSlotIdentifiedByConfigSchema(): void {
+    $original_test_slot = $this->entity->get('slots')['test_slot'];
+    $this->entity->set('slots', [
+      '0-slot' => $original_test_slot,
+    ]);
+    // Twig can't use this slot name: it reads `{{ 0-slot }}` as `0` minus
+    // `slot`. Core's component metadata schema accepts it before Drupal 11.5,
+    // and rejects it since Drupal 11.5. The test reads core's slot name pattern
+    // instead of \Drupal::VERSION, because version_compare() sorts development
+    // versions like 11.5-dev before 11.5.
+    // @see https://www.drupal.org/i/3465228
+    $metadata_schema = json_decode((string) file_get_contents($this->root . '/core/assets/schemas/v1/metadata.schema.json'), TRUE, flags: JSON_THROW_ON_ERROR);
+    $core_allows_slot_name = FALSE;
+    foreach (\array_keys($metadata_schema['$defs']['slotDefinition']['patternProperties']) as $slot_name_pattern) {
+      if (preg_match('/' . $slot_name_pattern . '/', '0-slot') === 1) {
+        $core_allows_slot_name = TRUE;
+      }
+    }
+    $this->assertValidationErrors($core_allows_slot_name ? [] : [
+      '' => "In component canvas:test:\n[slots] The property 0-slot is not defined and the definition does not allow additional properties",
+    ]);
+
+    unset($original_test_slot['title']);
+    $this->entity->set('slots', [
+      'test_slot' => $original_test_slot,
+    ]);
+    $this->assertValidationErrors([
+      '' => 'Slot "test_slot" must have title',
+      'slots.test_slot' => "'title' is a required key.",
+    ]);
+  }
+
+  public function testCollisionBetweenPropsAndSlots(): void {
+    $prop_colliding_with_slot = [
+      'test_slot' => [
+        'title' => 'contrived example',
+        'type' => 'string',
+        'examples' => ['foo'],
+      ],
+    ];
+    $this->entity->set('props', $prop_colliding_with_slot);
+    $this->assertValidationErrors([
+      '' => 'The component "canvas:test" declared [test_slot] both as a prop and as a slot. Make sure to use different names.',
+    ]);
+
+    // Verify that if there's a lower-level problem, that both the low-level and
+    // this high-level consistency validation error appear.
+    unset($prop_colliding_with_slot['test_slot']['examples']);
+    $this->entity->set('props', $prop_colliding_with_slot);
+    $this->assertValidationErrors([
+      '' => 'The component "canvas:test" declared [test_slot] both as a prop and as a slot. Make sure to use different names.',
+    ]);
+  }
+
+  /**
+   * @param array<string, mixed> $test
+   *   The `dataDependencies` to set.
+   * @param array<string, string|string[]> $expected_errors
+   *   The expected validation errors.
+   * @param string[] $additional_props
+   *   Names of synthetic props to inject, besides the ones keyed in
+   *   `entityFields`.
+   */
+  #[TestWith([[], [], []])]
+  #[TestWith([['something' => []], ['dataDependencies.something' => "'something' is not a supported key."], []])]
+  #[TestWith([['drupalSettings' => []], ['dataDependencies.drupalSettings' => 'This value should not be blank.'], []])]
+  #[TestWith([['drupalSettings' => ['v0.pageTitle', 'foo']], ['dataDependencies.drupalSettings.1' => 'The value you selected is not a valid choice.'], []])]
+  #[TestWith([['drupalSettings' => ['v0.pageTitle', 'v0.branding']], [], []])]
+  #[TestWith([['drupalSettings' => ['v0.langcode']], [], []])]
+  #[TestWith([['urls' => []], ['dataDependencies.urls' => 'This value should not be blank.'], []])]
+  #[TestWith([['urls' => ['https://www.drupal.org/jsonapi']], [], []])]
+  #[TestWith([['drupalSettings' => ['v0.pageTitle', 'v0.branding'], 'urls' => ['https://www.drupal.org/jsonapi'], 'entityFields' => ['my_reference' => ['ℹ︎␜entity:user␝name␞␟value']]], [], []])]
+  #[TestWith([['drupalSettings' => ['foo'], 'entityFields' => ['nonexistent_prop' => ['ℹ︎␜entity:user␝name␞␟value']]], ['dataDependencies.drupalSettings.0' => 'The value you selected is not a valid choice.', 'dataDependencies.entityFields.nonexistent_prop' => "'nonexistent_prop' is not a supported key."], []])]
+  #[TestWith([['entityFields' => ['text' => ['ℹ︎␜entity:user␝name␞␟value']]], ['dataDependencies.entityFields.text' => "'text' is not a supported key."], []])]
+  #[TestWith([['entityFields' => ['my_reference_list' => ['ℹ︎␜entity:user␝name␞␟value']]], [], []])]
+  #[TestWith([['entityFields' => ['my_reference' => ['ℹ︎␜entity:user␝name␞␟value'], 'my_reference_list' => ['ℹ︎␜entity:user␝name␞␟value']]], [], []])]
+  #[TestWith([['entityFields' => ['my_string_list' => ['ℹ︎␜entity:user␝name␞␟value']]], ['dataDependencies.entityFields.my_string_list' => "'my_string_list' is not a supported key."], []])]
+  #[TestWith([['entityFields' => ['my_image_list' => ['ℹ︎␜entity:user␝name␞␟value']]], ['dataDependencies.entityFields.my_image_list' => "'my_image_list' is not a supported key."], []])]
+  #[TestWith([['entityFields' => ['my_reference' => ['ℹ︎␜entity:user␝name␞␟value']]], ['' => 'Missing "x-allowed-entity-type-id" for content entity reference prop "my_reference_list".', 'dataDependencies.entityFields' => "'my_reference_list' is a required key."], ['my_reference_list']])]
+  public function testDataDependencies(array $test, array $expected_errors, array $additional_props): void {
+    // Auto-inject synthetic props whenever the test data targets them via
+    // `entityFields`. This exercises the `SequenceKeysMustMatch` `conditions`
+    // scoping — only content-entity-reference props (single or list) are valid
+    // keys:
+    // - `my_reference`: a single content-entity-reference prop.
+    // - `my_reference_list`: a list of content-entity-references prop.
+    // - `my_string_list`: a list of strings prop. Its `items` mapping has no
+    //   `$ref` key.
+    // - `my_image_list`: a list of images prop. Its `items` mapping has a
+    //   `$ref` key, but not the content-entity-reference one.
+    // Negative rows targeting a non-content-entity-reference prop key (e.g.
+    // `text`, which has no `items` mapping at all) intentionally skip
+    // injection of a content-entity-reference prop so that the constraint sees
+    // zero content-entity-reference props and flags the key as unsupported.
+    $synthetic_props = [
+      'my_reference' => JsonSchemaObjectRef::ContentEntityReference->asPropShapeArray(),
+      'my_reference_list' => [
+        'type' => 'array',
+        'items' => JsonSchemaObjectRef::ContentEntityReference->asPropShapeArray(),
+      ],
+      'my_string_list' => [
+        'type' => 'array',
+        'items' => ['type' => 'string'],
+      ],
+      'my_image_list' => [
+        'type' => 'array',
+        'items' => JsonSchemaObjectRef::Image->asPropShapeArray(),
+      ],
+    ];
+    self::assertInstanceOf(JavaScriptComponent::class, $this->entity);
+    $props = $this->entity->getProps() ?? [];
+    $injected_prop_names = \array_merge(\array_keys($test['entityFields'] ?? []), $additional_props);
+    foreach (\array_intersect_key($synthetic_props, \array_flip($injected_prop_names)) as $prop_name => $prop_schema) {
+      $props[$prop_name] = [
+        'title' => $this->randomString(),
+        ...$prop_schema,
+      ];
+    }
+    $this->entity->setProps($props);
+
+    $this->entity->set('dataDependencies', $test);
+    $this->assertValidationErrors($expected_errors);
+  }
+
+  /**
+   * Tests the condition forms accepted by the SequenceKeysMustMatch constraint.
+   *
+   * @see \Drupal\canvas\Plugin\Validation\Constraint\SequenceKeysMustMatchConstraint::$conditions
+   */
+  public function testSequenceKeysMustMatchConditions(): void {
+    self::assertInstanceOf(JavaScriptComponent::class, $this->entity);
+    $content_entity_reference = JsonSchemaObjectRef::ContentEntityReference;
+    $this->entity->setProps([
+      'single' => ['title' => 'Single', ...$content_entity_reference->asPropShapeArray()],
+      'list' => ['title' => 'List', 'type' => 'array', 'items' => $content_entity_reference->asPropShapeArray()],
+      'strings' => ['title' => 'Strings', 'type' => 'array', 'items' => ['type' => 'string']],
+      'text' => ['title' => 'Text', 'type' => 'string'],
+    ]);
+    $this->entity->set('dataDependencies', [
+      'entityFields' => ['text' => ['ℹ︎␜entity:user␝name␞␟value']],
+    ]);
+    $typed_config = $this->entity->getTypedData();
+    $entity_fields = $typed_config->get('dataDependencies.entityFields');
+    $single_set = ['type' => 'object', '$ref' => $content_entity_reference->value];
+    $list_set = [
+      'type' => 'array',
+      'items.type' => 'object',
+      'items.$ref' => $content_entity_reference->value,
+    ];
+
+    // Cases: the conditions, and the props that match them. The validated
+    // sequence has only the key `text`, which never matches. So every case
+    // reports `text` as invalid, and the matching props as missing.
+    $expected_keys_per_case = [
+      // A single set (not a list of sets) selects the elements matching all of
+      // its conditions.
+      'single set' => [$single_set, ['single']],
+      // A dotted key targets a key of a nested mapping. `strings` has an
+      // `items` mapping, but without `$ref`: no match.
+      'nested key' => [$list_set, ['list']],
+      // The nested parent `items` is absent for `single` and `text`. That is
+      // no match instead of an error.
+      'nested parent missing' => [['items.$ref' => $content_entity_reference->value], ['list']],
+      // A list of sets selects the elements matching at least one set.
+      'any of two sets' => [[$single_set, $list_set], ['single', 'list']],
+    ];
+    foreach ($expected_keys_per_case as $case => [$conditions, $expected_keys]) {
+      $violations = $this->validateEntityFields($typed_config, $entity_fields, $conditions);
+      $messages = [];
+      foreach ($violations as $violation) {
+        $messages[] = (string) $violation->getMessage();
+      }
+      \sort($messages);
+
+      $expected_messages = \array_map(fn (string $key): string => \sprintf("'%s' is a required key.", $key), $expected_keys);
+      $expected_messages[] = "'text' is not a supported key.";
+      \sort($expected_messages);
+      self::assertSame($expected_messages, $messages, $case);
+    }
+
+    // An unknown top-level key is an error in the condition itself.
+    $this->expectException(\LogicException::class);
+    $this->expectExceptionMessage('Condition key "nonexistent" is not a valid key of the target sequence item.');
+    $this->validateEntityFields($typed_config, $entity_fields, ['nonexistent' => 'object']);
+  }
+
+  /**
+   * Validates `entityFields` against a SequenceKeysMustMatch constraint.
+   *
+   * @param \Drupal\Core\TypedData\TypedDataInterface $typed_config
+   *   The typed config of the entire JavaScriptComponent.
+   * @param \Drupal\Core\TypedData\TypedDataInterface $entity_fields
+   *   The `dataDependencies.entityFields` element of the typed config.
+   * @param array<int|string, mixed> $conditions
+   *   The `conditions` option of the constraint.
+   */
+  private function validateEntityFields(TypedDataInterface $typed_config, TypedDataInterface $entity_fields, array $conditions): ConstraintViolationListInterface {
+    $constraint = $this->container->get('validation.constraint')->create('SequenceKeysMustMatch', [
+      'propertyPathToSequence' => 'props',
+      'conditions' => $conditions,
+    ]);
+    $validator = $this->container->get(TypedDataManagerInterface::class)->getValidator();
+    \assert($validator instanceof RecursiveValidator);
+    return $validator->startContext($typed_config)
+      ->validate($entity_fields, [$constraint])
+      ->getViolations();
+  }
+
+  /**
+   * Tests validation of the translatable strings.
+   *
+   * @param list<array<string, string>> $translatable_strings
+   *   The translatable strings to validate.
+   * @param array<string, string|list<string>> $expected_errors
+   *   The expected validation errors, keyed by property path.
+   */
+  #[DataProvider('providerTranslatableStrings')]
+  public function testTranslatableStrings(array $translatable_strings, array $expected_errors): void {
+    $this->entity->set('translatableStrings', $translatable_strings);
+    $this->assertValidationErrors($expected_errors);
+  }
+
+  public static function providerTranslatableStrings(): \Generator {
+    yield 'valid' => [
+      [
+        ['source' => 'Hello @name'],
+        ['source' => '1 file', 'plural' => '@count files'],
+        ['source' => 'May', 'context' => \str_repeat('a', 255)],
+      ],
+      [],
+    ];
+    yield 'none' => [[], []];
+    yield 'empty source' => [
+      [['source' => '']],
+      ['translatableStrings.0.source' => 'This value should not be blank.'],
+    ];
+    yield 'missing source' => [
+      [['plural' => '@count files']],
+      ['translatableStrings.0' => "'source' is a required key."],
+    ];
+    yield 'empty plural' => [
+      [['source' => '1 file', 'plural' => '']],
+      ['translatableStrings.0.plural' => 'This value should not be blank.'],
+    ];
+    yield 'empty context' => [
+      [['source' => 'May', 'context' => '']],
+      ['translatableStrings.0.context' => 'This value should not be blank.'],
+    ];
+    yield 'plural delimiter' => [
+      [['source' => "1 file\x03", 'plural' => "\x03@count files"]],
+      [
+        'translatableStrings.0.source' => 'A translatable string must not contain the U+0003 character, which separates plural forms.',
+        'translatableStrings.0.plural' => 'A translatable string must not contain the U+0003 character, which separates plural forms.',
+      ],
+    ];
+    yield 'non-ASCII context' => [
+      [['source' => 'May', 'context' => 'Month – long']],
+      ['translatableStrings.0.context' => 'A translation context must contain only ASCII characters.'],
+    ];
+    yield 'long context' => [
+      [['source' => 'May', 'context' => \str_repeat('a', 256)]],
+      ['translatableStrings.0.context' => 'A translation context must not be longer than 255 characters.'],
+    ];
+    yield 'unknown key' => [
+      [['source' => 'May', 'locale' => 'pl']],
+      ['translatableStrings.0.locale' => "'locale' is not a supported key."],
+    ];
+  }
+
+  /**
+   * Tests that translatable strings may be unknown, whatever the source code.
+   */
+  public function testTranslatableStringsUnknown(): void {
+    $this->entity->set('js', ['original' => "import { useTranslation } from 'drupal-canvas/react';", 'compiled' => '']);
+    $this->entity->set('translatableStrings', NULL);
+    $this->assertValidationErrors([]);
+    $this->entity->set('translatableStrings', []);
+    $this->assertValidationErrors([]);
+  }
+
+  /**
+   * Tests entityFields within dataDependencies.
+   */
+  #[DataProvider('providerEntityFieldsDataDependencies')]
+  public function testEntityFieldsDataDependencies(array $test, array $expected_errors, array $required): void {
+    $this->installEntitySchema('media');
+    $media_type = MediaType::create([
+      'id' => 'image',
+      'label' => 'Image',
+      'source' => 'image',
+    ]);
+    $media_type->save();
+    $source_field = $media_type->getSource()->createSourceField($media_type);
+    $source_field_storage = $source_field->getFieldStorageDefinition();
+    \assert($source_field_storage instanceof FieldStorageConfigInterface);
+    $source_field_storage->save();
+    $source_field->save();
+    $media_type->set('source_configuration', [
+      'source_field' => $source_field->getName(),
+    ])->save();
+
+    // A second media type so multi-bundle reference fields can be tested.
+    $video_type = MediaType::create([
+      'id' => 'video',
+      'label' => 'Video',
+      'source' => 'video_file',
+    ]);
+    $video_type->save();
+    $video_source_field = $video_type->getSource()->createSourceField($video_type);
+    $video_source_field_storage = $video_source_field->getFieldStorageDefinition();
+    \assert($video_source_field_storage instanceof FieldStorageConfigInterface);
+    if (!FieldStorageConfig::loadByName('media', $video_source_field->getName())) {
+      $video_source_field_storage->save();
+    }
+    $video_source_field->save();
+    $video_type->set('source_configuration', [
+      'source_field' => $video_source_field->getName(),
+    ])->save();
+
+    // Multi-bundle entity reference field targeting both media types.
+    FieldStorageConfig::create([
+      'field_name' => 'field_media',
+      'entity_type' => 'node',
+      'type' => 'entity_reference',
+      'settings' => ['target_type' => 'media'],
+    ])->save();
+    FieldConfig::create([
+      'field_name' => 'field_media',
+      'entity_type' => 'node',
+      'bundle' => 'article',
+      'label' => 'Media',
+      'settings' => ['handler_settings' => ['target_bundles' => ['image' => 'image', 'video' => 'video']]],
+    ])->save();
+
+    // A field whose item type marks a property internal — for the case
+    // asserting internal field properties cannot be referenced.
+    // @see \Drupal\canvas_test_internal_field_property\…
+    FieldStorageConfig::create([
+      'field_name' => 'field_with_secret',
+      'entity_type' => 'entity_test',
+      'type' => 'canvas_test_internal_property',
+    ])->save();
+    FieldConfig::create([
+      'field_name' => 'field_with_secret',
+      'entity_type' => 'entity_test',
+      'bundle' => 'entity_test',
+      'label' => 'Field with a secret',
+    ])->save();
+
+    // A field whose item type marks a *computed* property internal — for the
+    // case asserting that internal computed field properties cannot be
+    // referenced either. `DateTimeItemOverride` marks `date` internal.
+    // @see \Drupal\canvas\Plugin\Field\FieldTypeOverride\DateTimeItemOverride
+    FieldStorageConfig::create([
+      'field_name' => 'field_date',
+      'entity_type' => 'entity_test',
+      'type' => 'datetime',
+    ])->save();
+    FieldConfig::create([
+      'field_name' => 'field_date',
+      'entity_type' => 'entity_test',
+      'bundle' => 'entity_test',
+      'label' => 'Date',
+    ])->save();
+
+    // A field whose raw `uri` property is not resolvable to a
+    // browser-accessible URL (it can be `entity:node/1`) — for the case
+    // asserting raw URI properties cannot be referenced.
+    // @see \Drupal\canvas\Plugin\Field\FieldTypeOverride\LinkItemOverride
+    FieldStorageConfig::create([
+      'field_name' => 'field_link',
+      'entity_type' => 'entity_test',
+      'type' => 'link',
+    ])->save();
+    FieldConfig::create([
+      'field_name' => 'field_link',
+      'entity_type' => 'entity_test',
+      'bundle' => 'entity_test',
+      'label' => 'Link',
+    ])->save();
+
+    // A multi-valued reference field — for the cases asserting multi-valued
+    // fields can be referenced.
+    FieldStorageConfig::create([
+      'field_name' => 'field_related',
+      'entity_type' => 'entity_test',
+      'type' => 'entity_reference',
+      'settings' => ['target_type' => 'user'],
+      'cardinality' => FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED,
+    ])->save();
+    FieldConfig::create([
+      'field_name' => 'field_related',
+      'entity_type' => 'entity_test',
+      'bundle' => 'entity_test',
+      'label' => 'Related users',
+    ])->save();
+
+    FieldStorageConfig::create([
+      'field_name' => 'field_keywords',
+      'entity_type' => 'entity_test',
+      'type' => 'list_string',
+      'cardinality' => FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED,
+      'settings' => [
+        'allowed_values' => [
+          'alpha' => 'Alpha',
+          'beta' => 'Beta',
+        ],
+      ],
+    ])->save();
+    FieldConfig::create([
+      'field_name' => 'field_keywords',
+      'entity_type' => 'entity_test',
+      'bundle' => 'entity_test',
+      'label' => 'Keywords',
+      'field_type' => 'list_string',
+    ])->save();
+    FieldStorageConfig::create([
+      'field_name' => 'field_priority',
+      'entity_type' => 'entity_test',
+      'type' => 'list_integer',
+      'cardinality' => FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED,
+      'settings' => [
+        'allowed_values' => [
+          1 => 'Low',
+          2 => 'Medium',
+        ],
+      ],
+    ])->save();
+    FieldConfig::create([
+      'field_name' => 'field_priority',
+      'entity_type' => 'entity_test',
+      'bundle' => 'entity_test',
+      'label' => 'Priority',
+      'field_type' => 'list_integer',
+    ])->save();
+    FieldStorageConfig::create([
+      'field_name' => 'field_scores',
+      'entity_type' => 'entity_test',
+      'type' => 'list_float',
+      'cardinality' => FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED,
+      'settings' => [
+        'allowed_values' => [
+          '1.5' => 'One point five',
+          '2.5' => 'Two point five',
+        ],
+      ],
+    ])->save();
+    FieldConfig::create([
+      'field_name' => 'field_scores',
+      'entity_type' => 'entity_test',
+      'bundle' => 'entity_test',
+      'label' => 'Scores',
+      'field_type' => 'list_float',
+    ])->save();
+
+    // A multi-valued field on BOTH media bundles — for the case asserting a
+    // multi-valued field leaf *inside a branch* is accepted. Both branches must
+    // have the same leaf cardinality, so the field exists on image + video.
+    FieldStorageConfig::create([
+      'field_name' => 'field_media_tags',
+      'entity_type' => 'media',
+      'type' => 'string',
+      'cardinality' => FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED,
+    ])->save();
+    foreach (['image', 'video'] as $media_bundle) {
+      FieldConfig::create([
+        'field_name' => 'field_media_tags',
+        'entity_type' => 'media',
+        'bundle' => $media_bundle,
+        'label' => 'Tags',
+      ])->save();
+    }
+
+    // A single-valued reference from a media bundle into entity_test — for the
+    // case asserting a branch whose value is itself a nested reference chain
+    // containing a violating (internal) leaf is still rejected.
+    FieldStorageConfig::create([
+      'field_name' => 'field_media_et_ref',
+      'entity_type' => 'media',
+      'type' => 'entity_reference',
+      'settings' => ['target_type' => 'entity_test'],
+    ])->save();
+    foreach (['image', 'video'] as $media_bundle) {
+      FieldConfig::create([
+        'field_name' => 'field_media_et_ref',
+        'entity_type' => 'media',
+        'bundle' => $media_bundle,
+        'label' => 'Related entity test',
+      ])->save();
+    }
+
+    // A link field on BOTH media bundles — for the case asserting a raw `uri`
+    // leaf *inside a branch* is still rejected. Both branches must share the
+    // same leaf shape, so the field exists on image + video.
+    FieldStorageConfig::create([
+      'field_name' => 'field_media_link',
+      'entity_type' => 'media',
+      'type' => 'link',
+    ])->save();
+    foreach (['image', 'video'] as $media_bundle) {
+      FieldConfig::create([
+        'field_name' => 'field_media_link',
+        'entity_type' => 'media',
+        'bundle' => $media_bundle,
+        'label' => 'Link',
+      ])->save();
+    }
+
+    // A self-referential multi-target-bundle reference on BOTH media bundles —
+    // for the case asserting a nested branch (descending through a second
+    // multi-bundle reference inside a branch) is rejected gracefully, not fatal.
+    FieldStorageConfig::create([
+      'field_name' => 'field_media_related',
+      'entity_type' => 'media',
+      'type' => 'entity_reference',
+      'settings' => ['target_type' => 'media'],
+    ])->save();
+    foreach (['image', 'video'] as $media_bundle) {
+      FieldConfig::create([
+        'field_name' => 'field_media_related',
+        'entity_type' => 'media',
+        'bundle' => $media_bundle,
+        'label' => 'Related media',
+        'settings' => ['handler_settings' => ['target_bundles' => ['image' => 'image', 'video' => 'video']]],
+      ])->save();
+    }
+
+    // Add `my_reference` as a content-entity-reference prop when the test row
+    // targets it, so `entityFields` keys have a valid target.
+    if (\array_key_exists('entityFields', $test) && \array_key_exists('my_reference', $test['entityFields'])) {
+      \assert($this->entity instanceof JavaScriptComponent);
+      $props = $this->entity->getProps() ?? [];
+      $props['my_reference'] = [
+        'title' => 'My reference',
+        ...JsonSchemaObjectRef::ContentEntityReference->asPropShapeArray(),
+      ];
+      $this->entity->setProps($props);
+    }
+
+    $this->entity->set('dataDependencies', $test);
+    if (!empty($required)) {
+      $this->entity->set('required', $required);
+    }
+    $this->assertValidationErrors($expected_errors);
+  }
+
+  /**
+   * Data provider for testEntityFieldsDataDependencies().
+   */
+  public static function providerEntityFieldsDataDependencies(): \Generator {
+    yield 'empty entityFields' => [
+      ['entityFields' => []],
+      ['dataDependencies.entityFields' => "There must be >=1 content-entity-reference prop; otherwise the 'entityFields' key should be omitted."],
+      [],
+    ];
+
+    yield 'entityFields key not in props' => [
+      ['entityFields' => ['nonexistent_prop' => ['ℹ︎␜entity:user␝name␞␟value']]],
+      ['dataDependencies.entityFields.nonexistent_prop' => "'nonexistent_prop' is not a supported key."],
+      [],
+    ];
+
+    yield 'entityFields valid key but empty array' => [
+      ['entityFields' => ['my_reference' => []]],
+      [
+        '' => 'Missing "x-allowed-entity-type-id" for content entity reference prop "my_reference".',
+        'dataDependencies.entityFields.my_reference' => 'There must be >=1 entity field expression; otherwise the content-entity-reference prop should be deleted.',
+      ],
+      [],
+    ];
+
+    yield 'entityFields valid key with invalid expression' => [
+      ['entityFields' => ['my_reference' => ['not-a-valid-expression']]],
+      [
+        '' => 'Missing "x-allowed-entity-type-id" for content entity reference prop "my_reference".',
+        'dataDependencies.entityFields.my_reference.0' => '<em class="placeholder">not-a-valid-expression</em> is not a valid prop expression.',
+      ],
+      [],
+    ];
+
+    yield 'entityFields valid expression of disallowed type' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎string␟value']]],
+      [
+        '' => 'Missing "x-allowed-entity-type-id" for content entity reference prop "my_reference".',
+        'dataDependencies.entityFields.my_reference.0' => 'The expression is valid, but not one of the allowed types: <em class="placeholder">&quot;FieldPropExpression&quot;, &quot;FieldObjectPropsExpression&quot;, &quot;ReferenceFieldPropExpression&quot;</em>.',
+      ],
+      [],
+    ];
+
+    yield 'entityFields alongside drupalSettings' => [
+      ['drupalSettings' => ['v0.pageTitle'], 'entityFields' => ['my_reference' => ['ℹ︎␜entity:user␝name␞␟value']]],
+      [],
+      [],
+    ];
+
+    // Valid expression types: FieldPropExpression, ReferenceFieldPropExpression, FieldObjectPropsExpression.
+    yield 'entityFields valid FieldPropExpression' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:node:article␝title␞␟value']]],
+      [],
+      [],
+    ];
+
+    yield 'entityFields valid ReferenceFieldPropExpression' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:node:article␝uid␞␟entity␜␜entity:user␝name␞␟value']]],
+      [],
+      [],
+    ];
+
+    yield 'entityFields valid FieldObjectPropsExpression' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:user␝user_picture␞␟{alt↠alt,title↠title}']]],
+      [],
+      [],
+    ];
+
+    // A FieldObjectPropsExpression whose object-prop names are not the field
+    // property (here `src` for property `url`) cannot be reproduced by the
+    // content selection UI: expanding it to atomic selections and re-combining
+    // them renames `src` to `url`, losing data. Rejected by the idempotency
+    // constraint.
+    // @see \Drupal\canvas\Plugin\Validation\Constraint\EntityFieldExpressionsMustBeIdempotentConstraint
+    yield 'entityFields non-idempotent FieldObjectPropsExpression (custom leaf name)' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:user␝user_picture␞␟{src↠url,alt↠alt}']]],
+      ['dataDependencies.entityFields.my_reference' => "The expression 'ℹ︎␜entity:user␝user_picture␞␟{src↠url,alt↠alt}' cannot be reproduced by the content selection UI; expanding and re-combining it yields 'ℹ︎␜entity:user␝user_picture␞␟{alt↠alt,url↠url}'. Its object property names must be the field property or referenced-field name."],
+      [],
+    ];
+
+    // Same, for a follow-reference (`↝`) entry whose name (`src`) is not the
+    // referenced field's developer-facing key (`uri`).
+    yield 'entityFields non-idempotent FieldObjectPropsExpression (custom reference name)' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:media:image␝field_media_image␞␟{src↝entity␜␜entity:file␝uri␞␟url,srcset↠srcset_candidate_uri_template,width↠width}']]],
+      ['dataDependencies.entityFields.my_reference' => "The expression 'ℹ︎␜entity:media:image␝field_media_image␞␟{src↝entity␜␜entity:file␝uri␞␟url,srcset↠srcset_candidate_uri_template,width↠width}' cannot be reproduced by the content selection UI; expanding and re-combining it yields 'ℹ︎␜entity:media:image␝field_media_image␞␟{srcset_candidate_uri_template↠srcset_candidate_uri_template,uri↝entity␜␜entity:file␝uri␞␟url,width↠width}'. Its object property names must be the field property or referenced-field name."],
+      [],
+    ];
+
+    // Same entity type+bundle constraint.
+    yield 'entityFields mixed entity types in same prop' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:user␝name␞␟value', 'ℹ︎␜entity:node:article␝title␞␟value']]],
+      ['dataDependencies.entityFields.my_reference' => 'All entity field expressions must target the same entity type and bundle, but found: entity:user, entity:node:article.'],
+      [],
+    ];
+
+    yield 'entityFields same entity type in same prop' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:user␝name␞␟value', 'ℹ︎␜entity:user␝mail␞␟value']]],
+      [],
+      [],
+    ];
+
+    // Same-host same-field FieldPropExpression entries must be combined into a
+    // single FieldObjectPropsExpression. The two expressions below differ only
+    // in their propName (`width` vs `srcset_candidate_uri_template`) so they
+    // share the same (entityType, fieldName, delta) group key and must be
+    // coalesced.
+    // @see \Drupal\canvas\Plugin\Validation\Constraint\EntityFieldExpressionsSameFieldMustBeCoalescedConstraint
+    yield 'entityFields same field FieldPropExpressions must be combined' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:media:image␝field_media_image␞␟width', 'ℹ︎␜entity:media:image␝field_media_image␞␟srcset_candidate_uri_template']]],
+      ['dataDependencies.entityFields.my_reference' => "Multiple expressions on the same field 'entity:media:image.field_media_image' must be coalesced into a single FieldObjectPropsExpression."],
+      [],
+    ];
+
+    // Two ReferenceFieldPropExpressions starting on the same field (here `uid`
+    // → user) into the same bundle but targeting DIFFERENT final fields are
+    // consumed only through a nested object — with no loose pick on `uid`, none
+    // of its values are picked directly. JsComponent::buildReferencePayload()
+    // keys the referenced object by the referencer, so they must be coalesced
+    // into a single FieldObjectPropsExpression on `uid` whose entries follow
+    // the reference (`↝`).
+    // @see \Drupal\canvas\Plugin\Canvas\ComponentSource\JsComponent::buildReferencePayload()
+    // @see \Drupal\canvas\PropExpressions\StructuredData\Coalescer::coalesce()
+    yield 'entityFields same field ReferenceFieldPropExpressions on different final fields must be combined' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:node:article␝uid␞␟entity␜␜entity:user␝name␞␟value', 'ℹ︎␜entity:node:article␝uid␞␟entity␜␜entity:user␝mail␞␟value']]],
+      ['dataDependencies.entityFields.my_reference' => "Multiple expressions on the same field 'entity:node:article.uid' must be coalesced into a single FieldObjectPropsExpression."],
+      [],
+    ];
+
+    // Two ReferenceFieldPropExpressions sharing the same chain AND the same
+    // final target field but different sub-properties (e.g.
+    // `uid → user.user_picture.alt` and `uid → user.user_picture.width`)
+    // would collide on the `user_picture` key within the referenced object
+    // (JsComponent::generateKeyForExpression() uses the field name, not its sub-property). The coalescing combines them into a single
+    // ReferenceFieldPropExpression with a FieldObjectPropsExpression target;
+    // when it can't (true duplicate sub-property), the validator flags it.
+    // @see \Drupal\canvas\Entity\JavaScriptComponent::coalesceEntityFields()
+    yield 'entityFields duplicate ReferenceFieldPropExpression on same final field+property is rejected' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:node:article␝uid␞␟entity␜␜entity:user␝user_picture␞␟alt', 'ℹ︎␜entity:node:article␝uid␞␟entity␜␜entity:user␝user_picture␞␟alt']]],
+      ['dataDependencies.entityFields.my_reference' => "Multiple expressions on the same field 'entity:node:article.uid' must be coalesced into a single FieldObjectPropsExpression."],
+      [],
+    ];
+
+    // A loose expression and a reference descending through that same field
+    // key the same payload entry in JsComponent::buildReferencePayload(), so
+    // they must be coalesced into a single FieldObjectPropsExpression whose
+    // reference-derived entry follows the reference (`↝`) — which
+    // JavaScriptComponent::coalesceEntityFields() does for client data; this
+    // guards direct config writes.
+    // @see \Drupal\canvas\PropExpressions\StructuredData\Coalescer::coalesce()
+    yield 'entityFields loose expression and reference through the same field must be combined' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:node:article␝uid␞␟target_id', 'ℹ︎␜entity:node:article␝uid␞␟entity␜␜entity:user␝name␞␟value']]],
+      ['dataDependencies.entityFields.my_reference' => "Multiple expressions on the same field 'entity:node:article.uid' must be coalesced into a single FieldObjectPropsExpression."],
+      [],
+    ];
+
+    yield 'entityFields loose expression and reference through the same field coalesced into one expression' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:node:article␝uid␞␟{name↝entity␜␜entity:user␝name␞␟value,target_id↠target_id}']]],
+      [],
+      [],
+    ];
+
+    // A single multi-bundle branch reference validates: a branch expression
+    // whose per-bundle leaves are all pickable has no violation.
+    yield 'entityFields multi-bundle branch ReferenceFieldPropExpression validates' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:node:article␝field_media␞␟entity␜[␜entity:media:image␝field_media_image␞␟alt][␜entity:media:video␝field_media_video_file␞␟target_id]']]],
+      [],
+      [],
+    ];
+
+    // Multi-bundle references are no longer rejected outright, but identical
+    // duplicates on the same reference field are still flagged by the coalescing
+    // constraint (they must become one branch expression to be storable).
+    yield 'entityFields duplicate multi-bundle ReferenceFieldPropExpression must be coalesced' => [
+      [
+        'entityFields' => [
+          'my_reference' => [
+            'ℹ︎␜entity:node:article␝field_media␞␟entity␜[␜entity:media:image␝field_media_image␞␟alt][␜entity:media:video␝field_media_video_file␞␟target_id]',
+            'ℹ︎␜entity:node:article␝field_media␞␟entity␜[␜entity:media:image␝field_media_image␞␟alt][␜entity:media:video␝field_media_video_file␞␟target_id]',
+          ],
+        ],
+      ],
+      [
+        'dataDependencies.entityFields.my_reference' => "Multiple expressions on the same field 'entity:node:article.field_media' must be coalesced into a single FieldObjectPropsExpression.",
+      ],
+      [],
+    ];
+
+    // Two multi-bundle ReferenceFieldPropExpressions on the same reference
+    // field but with different sub-property picks: no longer rejected as
+    // unsupported multi-bundle references, but the coalescing constraint still
+    // flags the colliding picks on the same field.
+    yield 'entityFields different-sub-property multi-bundle ReferenceFieldPropExpression on same field must be coalesced' => [
+      [
+        'entityFields' => [
+          'my_reference' => [
+            'ℹ︎␜entity:node:article␝field_media␞␟entity␜[␜entity:media:image␝field_media_image␞␟alt][␜entity:media:video␝field_media_video_file␞␟target_id]',
+            'ℹ︎␜entity:node:article␝field_media␞␟entity␜[␜entity:media:image␝field_media_image␞␟width][␜entity:media:video␝field_media_video_file␞␟display]',
+          ],
+        ],
+      ],
+      [
+        'dataDependencies.entityFields.my_reference' => "Multiple expressions on the same field 'entity:node:article.field_media' must be coalesced into a single FieldObjectPropsExpression.",
+      ],
+      [],
+    ];
+
+    // The two remaining expression validators descend into every branch of a
+    // multi-target-bundle reference, so a violating leaf hidden INSIDE one
+    // branch is still rejected.
+    //
+    // (a) An internal (non-computed) field leaf inside one branch: `media`'s
+    // `revision_default` base field is internal. Both branches pick it so their
+    // leaf shape matches (a branch requires a consistent shape).
+    // @see \Drupal\canvas\Plugin\Validation\Constraint\EntityFieldExpressionMustNotTargetInternalPropertyConstraint
+    yield 'entityFields internal field leaf inside a branch is rejected' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:node:article␝field_media␞␟entity␜[␜entity:media:image␝revision_default␞␟value][␜entity:media:video␝revision_default␞␟value]']]],
+      ['dataDependencies.entityFields.my_reference.0' => "The field property 'entity:media:image.revision_default.value' is internal and cannot be referenced."],
+      [],
+    ];
+
+    // (b) A multi-valued field leaf inside one branch: `field_media_tags` is
+    // unlimited-cardinality. Both branches target it (matching leaf cardinality
+    // is required within a branch). Multi-valued leaves are accepted: they
+    // resolve to a list of values.
+    yield 'entityFields multi-valued field leaf inside a branch is accepted' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:node:article␝field_media␞␟entity␜[␜entity:media:image␝field_media_tags␞␟value][␜entity:media:video␝field_media_tags␞␟value]']]],
+      [],
+      [],
+    ];
+
+    // A raw `uri` field leaf inside one branch: `field_media_link`'s raw `uri`
+    // is not resolvable to a browser-accessible URL. Both branches pick it, so
+    // the resolvable-URIs guard descends into each branch and rejects it.
+    // @see \Drupal\canvas\Plugin\Validation\Constraint\EntityFieldExpressionMayOnlyTargetResolvableUrisConstraint
+    yield 'entityFields raw uri field leaf inside a branch is rejected' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:node:article␝field_media␞␟entity␜[␜entity:media:image␝field_media_link␞␟uri][␜entity:media:video␝field_media_link␞␟uri]']]],
+      ['dataDependencies.entityFields.my_reference.0' => "The field property 'entity:media:image.field_media_link.uri' is a raw URI, not guaranteed to resolve to a browser-accessible URL, and cannot be referenced."],
+      [],
+    ];
+
+    // (c) A branch whose value is itself a nested reference chain containing a
+    // violating leaf: each branch descends via `field_media_et_ref` into
+    // `entity_test` and picks the internal `internal_string_field`. The internal
+    // guard descends through both the branch AND the nested chain to reject the
+    // leaf (`.0`).
+    // @see \Drupal\canvas\Plugin\Validation\Constraint\EntityFieldExpressionMustNotTargetInternalPropertyConstraint
+    yield 'entityFields internal leaf in a nested chain inside a branch is rejected' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:node:article␝field_media␞␟entity␜[␜entity:media:image␝field_media_et_ref␞␟entity␜␜entity:entity_test:entity_test␝internal_string_field␞␟value][␜entity:media:video␝field_media_et_ref␞␟entity␜␜entity:entity_test:entity_test␝internal_string_field␞␟value]']]],
+      [
+        'dataDependencies.entityFields.my_reference.0' => "The field property 'entity:entity_test.internal_string_field.value' is internal and cannot be referenced.",
+      ],
+      [],
+    ];
+
+    // (d) The same shape as (c) but with a valid leaf: each branch descends via
+    // `field_media_et_ref` into `entity_test` and picks the public `name` base
+    // field. Nothing rejects it, so it is accepted.
+    yield 'entityFields valid leaf in a nested chain inside a branch is accepted' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:node:article␝field_media␞␟entity␜[␜entity:media:image␝field_media_et_ref␞␟entity␜␜entity:entity_test:entity_test␝name␞␟value][␜entity:media:video␝field_media_et_ref␞␟entity␜␜entity:entity_test:entity_test␝name␞␟value]']]],
+      [],
+      [],
+    ];
+
+    // (e) A branch that descends through a SECOND multi-bundle reference is a
+    // nested branch (a branch inside a branch), which is not yet supported.
+    // `field_media_related` targets both media bundles, so descending it inside
+    // one `field_media` branch would nest. Coalescing bails gracefully (no
+    // fatal) and the same-field coalescing guard reports the precise reason
+    // instead of implying the picks can be combined.
+    // @todo Becomes an accepted case once nested branching is supported, in https://git.drupalcode.org/project/canvas/-/work_items/3591865
+    yield 'entityFields nested branch (multi-bundle reference within a branch) is rejected' => [
+      [
+        'entityFields' => [
+          'my_reference' => [
+            'ℹ︎␜entity:node:article␝field_media␞␟entity␜␜entity:media:image␝field_media_related␞␟entity␜␜entity:media:image␝name␞␟value',
+            'ℹ︎␜entity:node:article␝field_media␞␟entity␜␜entity:media:image␝field_media_related␞␟entity␜␜entity:media:video␝name␞␟value',
+            'ℹ︎␜entity:node:article␝field_media␞␟entity␜␜entity:media:video␝name␞␟value',
+          ],
+        ],
+      ],
+      ['dataDependencies.entityFields.my_reference' => "The expressions on field 'entity:node:article.field_media' descend through a multi-bundle reference more than once, which is not yet supported."],
+      [],
+    ];
+
+    // Entity type/bundle existence validation.
+    yield 'entityFields non-existent entity type' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:nonsense␝title␞␟value']]],
+      [
+        '' => 'Missing "x-allowed-entity-type-id" for content entity reference prop "my_reference".',
+        'dataDependencies.entityFields.my_reference.0' => "The entity type 'nonsense' does not exist.",
+      ],
+      [],
+    ];
+
+    yield 'entityFields non-existent bundle' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:node:nonsense␝title␞␟value']]],
+      [
+        '' => 'Invalid value "nonsense" for "x-allowed-bundle": not a known bundle of entity type "node".',
+        'dataDependencies.entityFields.my_reference.0' => "The entity type 'node' does not have a 'nonsense' bundle.",
+      ],
+      [],
+    ];
+
+    // The picker omits internal (non-computed) fields and field properties;
+    // storing one anyway (e.g. via an AI-generated code component) is rejected.
+    // `internal_string_field` is an entity_test base field marked internal.
+    // @see \Drupal\canvas\Plugin\Validation\Constraint\EntityFieldExpressionMustNotTargetInternalPropertyConstraint
+    yield 'entityFields targeting an internal field' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:entity_test:entity_test␝internal_string_field␞␟value']]],
+      ['dataDependencies.entityFields.my_reference.0' => "The field property 'entity:entity_test.internal_string_field.value' is internal and cannot be referenced."],
+      [],
+    ];
+
+    // Same, at the field-property level: `field_with_secret` adds a `secret`
+    // property marked internal (no core field type marks a non-computed
+    // property internal).
+    yield 'entityFields targeting an internal field property' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:entity_test:entity_test␝field_with_secret␞␟secret']]],
+      ['dataDependencies.entityFields.my_reference.0' => "The field property 'entity:entity_test.field_with_secret.secret' is internal and cannot be referenced."],
+      [],
+    ];
+
+    // Same, for a *computed* property explicitly marked internal:
+    // `DateTimeItemOverride` marks `date` internal, but because `date` is
+    // also computed, `DataDefinitionInterface::isInternal()` cannot
+    // distinguish that explicit mark from the default computed-properties-
+    // are-internal behavior — this used to go undetected.
+    // @see \Drupal\canvas\Utility\TypedDataHelper::isExplicitlyInternal()
+    yield 'entityFields targeting an internal computed field property' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:entity_test:entity_test␝field_date␞␟date']]],
+      ['dataDependencies.entityFields.my_reference.0' => "The field property 'entity:entity_test.field_date.date' is internal and cannot be referenced."],
+      [],
+    ];
+
+    // A `link` field's raw `uri` is not resolvable to a browser-accessible URL
+    // (it can be `entity:node/1`), so storing an expression targeting it is
+    // rejected. `uri` is not internal, so
+    // EntityFieldExpressionMustNotTargetInternalProperty does not catch this.
+    // @see \Drupal\canvas\Plugin\Validation\Constraint\EntityFieldExpressionMayOnlyTargetResolvableUrisConstraint
+    yield 'entityFields targeting a raw uri field property' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:entity_test:entity_test␝field_link␞␟uri']]],
+      ['dataDependencies.entityFields.my_reference.0' => "The field property 'entity:entity_test.field_link.uri' is a raw URI, not guaranteed to resolve to a browser-accessible URL, and cannot be referenced."],
+      [],
+    ];
+
+    // Only the raw `uri` is rejected: a `link` field remains fully usable in
+    // CER through `url`, Canvas's computed, resolvable resolution of `uri` (it
+    // carries a UriSchemeConstraint restricted to http/https, so
+    // TypedDataHelper::isRestrictedToHttpSchemes() lets it through). A "Read
+    // more" style component can still bind a link's destination this way.
+    // @see \Drupal\canvas\Plugin\Field\FieldTypeOverride\LinkItemOverride
+    yield 'entityFields targeting a link field\'s resolvable url property' => [
+      ['entityFields' => ['my_reference' => ['ℹ︎␜entity:entity_test:entity_test␝field_link␞␟url']]],
+      [],
+      [],
+    ];
+
+    // Multi-valued fields are accepted, whether the expression descends through
+    // the reference, picks a leaf property, or specifies an explicit delta. A
+    // delta-less expression resolves to a list. Only the coalescing rule still
+    // applies: a delta-less reference and a leaf on the same field must be
+    // coalesced into a single FieldObjectPropsExpression.
+    // @see \Drupal\canvas\Plugin\Validation\Constraint\EntityFieldExpressionsSameFieldMustBeCoalescedConstraint
+    yield 'entityFields on a multi-valued field' => [
+      [
+        'entityFields' => [
+          'my_reference' => [
+            'ℹ︎␜entity:entity_test:entity_test␝field_related␞␟entity␜␜entity:user␝name␞␟value',
+            'ℹ︎␜entity:entity_test:entity_test␝field_related␞␟target_id',
+            'ℹ︎␜entity:entity_test:entity_test␝field_related␞0␟entity␜␜entity:user␝name␞␟value',
+          ],
+        ],
+      ],
+      [
+        'dataDependencies.entityFields.my_reference' => "Multiple expressions on the same field 'entity:entity_test.field_related' must be coalesced into a single FieldObjectPropsExpression.",
+      ],
+      [],
+    ];
+
+    yield 'entityFields on a multi-valued reference field' => [
+      [
+        'entityFields' => [
+          'my_reference' => [
+            'ℹ︎␜entity:entity_test:entity_test␝field_related␞␟entity␜␜entity:user␝name␞␟value',
+          ],
+        ],
+      ],
+      [],
+      [],
+    ];
+
+    yield 'entityFields on a multi-valued field leaf' => [
+      [
+        'entityFields' => [
+          'my_reference' => [
+            'ℹ︎␜entity:entity_test:entity_test␝field_related␞␟target_id',
+          ],
+        ],
+      ],
+      [],
+      [],
+    ];
+
+    yield 'entityFields on a multi-valued list field' => [
+      [
+        'entityFields' => [
+          'my_reference' => [
+            'ℹ︎␜entity:entity_test:entity_test␝field_keywords␞␟value',
+          ],
+        ],
+      ],
+      [],
+      [],
+    ];
+
+    yield 'entityFields on a multi-valued integer list field' => [
+      [
+        'entityFields' => [
+          'my_reference' => [
+            'ℹ︎␜entity:entity_test:entity_test␝field_priority␞␟value',
+          ],
+        ],
+      ],
+      [],
+      [],
+    ];
+
+    yield 'entityFields on a multi-valued float list field' => [
+      [
+        'entityFields' => [
+          'my_reference' => [
+            'ℹ︎␜entity:entity_test:entity_test␝field_scores␞␟value',
+          ],
+        ],
+      ],
+      [],
+      [],
+    ];
+  }
+
+  /**
+   * Tests x-allowed-bundle validation for bundled entity types.
+   *
+   * @todo Implement this when the content-entity-reference prop type is added in #3573831.
+   */
+  public function testEntityFieldsMissingBundleForBundledEntityType(): void {
+    $this->markTestSkipped('Requires the content-entity-reference prop type with x-allowed-bundle from #3573831.');
+  }
+
+  /**
+   * Tests that `entityFields` expressions contribute to calculated dependencies.
+   *
+   * Validation-only coverage of `entityFields` lives in
+   * ::testEntityFieldsDataDependencies(). This method complements it by saving
+   * the entity and asserting the full `getDependencies()` output for each
+   * allowed expression type and the regression case.
+   *
+   * @param array $data_dependencies
+   *   The dataDependencies value to save on the entity.
+   * @param array $expected_deps
+   *   The exact expected output of $entity->getDependencies() after save.
+   */
+  #[DataProvider('providerEntityFieldsCalculatedDependencies')]
+  public function testEntityFieldsCalculatedDependencies(array $data_dependencies, array $expected_deps): void {
+    // Install a configurable field on the `user` entity so that
+    // `FieldObjectPropsExpression` against `user_picture` contributes a
+    // `field.field.user.user.user_picture` config dep.
+    // @see core/profiles/standard/config/install/field.storage.user.user_picture.yml
+    FieldStorageConfig::create([
+      'entity_type' => 'user',
+      'field_name' => 'user_picture',
+      'type' => 'image',
+      'translatable' => FALSE,
+      'cardinality' => 1,
+    ])->save();
+    FieldConfig::create([
+      'label' => 'Picture',
+      'description' => '',
+      'field_name' => 'user_picture',
+      'entity_type' => 'user',
+      'bundle' => 'user',
+      'required' => FALSE,
+    ])->save();
+
+    // Create a `media:image` media type (with its image source field) and an
+    // `entity_reference` field on `node:article` targeting it — the shape
+    // produced by Canvas's media library integration.
+    // @see config/install/image.style.canvas_parametrized_width.yml
+    $this->installConfig(['canvas']);
+    $this->installEntitySchema('media');
+    $media_type = MediaType::create([
+      'id' => 'image',
+      'label' => 'Image',
+      'source' => 'image',
+    ]);
+    $media_type->save();
+    $source_field = $media_type->getSource()->createSourceField($media_type);
+    $source_field_storage = $source_field->getFieldStorageDefinition();
+    \assert($source_field_storage instanceof FieldStorageConfigInterface);
+    $source_field_storage->save();
+    $source_field->save();
+    $media_type->set('source_configuration', [
+      'source_field' => $source_field->getName(),
+    ])->save();
+    FieldStorageConfig::create([
+      'entity_type' => 'node',
+      'field_name' => 'field_media',
+      'type' => 'entity_reference',
+      'settings' => ['target_type' => 'media'],
+      'translatable' => FALSE,
+      'cardinality' => 1,
+    ])->save();
+    FieldConfig::create([
+      'label' => 'Media',
+      'description' => '',
+      'field_name' => 'field_media',
+      'entity_type' => 'node',
+      'bundle' => 'article',
+      'required' => FALSE,
+      'settings' => [
+        'handler' => 'default:media',
+        'handler_settings' => [
+          'target_bundles' => ['image' => 'image'],
+        ],
+      ],
+    ])->save();
+
+    // Extend the test entity with additional (non-required) props that mirror a
+    // realistic multi-entity-reference component so that keys like
+    // `suggested_by` and `highlighted_article` are valid `entityFields` keys.
+    $this->entity->set('props', $this->entity->get('props') + [
+      'suggested_by' => [
+        'type' => 'string',
+        'title' => 'Suggested by',
+        'examples' => ['Alice', 'Bob'],
+      ],
+      'highlighted_article' => [
+        'type' => 'string',
+        'title' => 'Highlighted article',
+        'examples' => ['Hello', 'World'],
+      ],
+    ]);
+
+    $this->entity->set('dataDependencies', $data_dependencies);
+    $this->entity->save();
+    $this->assertSame($expected_deps, $this->entity->getDependencies());
+  }
+
+  /**
+   * Data provider for ::testEntityFieldsCalculatedDependencies().
+   */
+  public static function providerEntityFieldsCalculatedDependencies(): \Generator {
+    $enforced = 'canvas.js_component.other';
+
+    // Note on key ordering: `getDependencies()` unsets the `enforced` key and
+    // re-merges the enforced deps into the result AFTER the non-enforced ones,
+    // so `module` (added during calculation) appears before `config` (which
+    // only contains the enforced dep), and `canvas.js_component.other` is
+    // appended to `config` after any freshly-computed config deps.
+    // @see \Drupal\Core\Config\Entity\ConfigEntityBase::getDependencies()
+
+    // Base field on a non-bundled entity type → only the entity type provider.
+    yield 'FieldPropExpression on user.name (base field, no bundle)' => [
+      ['entityFields' => ['text' => ['ℹ︎␜entity:user␝name␞␟value']]],
+      [
+        'module' => ['user'],
+        'config' => [$enforced],
+      ],
+    ];
+
+    // Base field on a bundled entity type → bundle config dep added.
+    yield 'FieldPropExpression on node:article.title (base field, bundled)' => [
+      ['entityFields' => ['text' => ['ℹ︎␜entity:node:article␝title␞␟value']]],
+      [
+        'config' => ['node.type.article', $enforced],
+        'module' => ['node'],
+      ],
+    ];
+
+    // ReferenceFieldPropExpression — deps from BOTH branches merged.
+    yield 'ReferenceFieldPropExpression node:article.uid → user.name' => [
+      ['entityFields' => ['text' => ['ℹ︎␜entity:node:article␝uid␞␟entity␜␜entity:user␝name␞␟value']]],
+      [
+        'config' => ['node.type.article', $enforced],
+        'module' => ['node', 'user'],
+      ],
+    ];
+
+    // FieldObjectPropsExpression on a configurable field → field config dep.
+    // `alt` and `title` are real ImageItem properties; ImageItem's storage
+    // contributes a `file` module dep in addition to the `user` entity type.
+    yield 'FieldObjectPropsExpression on user.user_picture' => [
+      ['entityFields' => ['text' => ['ℹ︎␜entity:user␝user_picture␞␟{alt↠alt,title↠title}']]],
+      [
+        'config' => ['field.field.user.user.user_picture', $enforced],
+        'module' => ['file', 'user'],
+      ],
+    ];
+
+    // `drupalSettings` alongside `entityFields` — entityFields deps still added.
+    yield 'entityFields alongside drupalSettings' => [
+      ['drupalSettings' => ['v0.pageTitle'], 'entityFields' => ['text' => ['ℹ︎␜entity:user␝name␞␟value']]],
+      [
+        'module' => ['user'],
+        'config' => [$enforced],
+      ],
+    ];
+
+    // Multiple content-entity-reference props in one component, with one prop
+    // using a `FieldObjectPropsExpression` that follows an entity reference
+    // (`src↝entity…`) into the referenced `file` entity.
+    yield 'multiple entityFields props with follow-reference FieldObjectPropsExpression' => [
+      [
+        'entityFields' => [
+          'suggested_by' => [
+            "ℹ︎␜entity:user␝name␞␟value",
+          ],
+          'highlighted_article' => [
+            "ℹ︎␜entity:node:article␝title␞␟value",
+            "ℹ︎␜entity:node:article␝field_media␞␟entity␜␜entity:media:image␝field_media_image␞␟{src↝entity␜␜entity:file␝uri␞␟url,srcset↠srcset_candidate_uri_template,width↠width}",
+          ],
+        ],
+      ],
+      [
+        'config' => [
+          'field.field.media.image.field_media_image',
+          'field.field.node.article.field_media',
+          'image.style.canvas_parametrized_width',
+          'media.type.image',
+          'node.type.article',
+          $enforced,
+        ],
+        'module' => [
+          'file',
+          'media',
+          'node',
+          'user',
+        ],
+      ],
+    ];
+
+    // Regression: no `entityFields` → nothing beyond the enforced dep.
+    yield 'no entityFields (regression)' => [
+      [],
+      ['config' => [$enforced]],
+    ];
+  }
+
+  protected function assertValidationErrors(array $expected_messages): void {
+    // JsComponentHasValidAndSupportedSdcMetadata adds additional validation, but
+    // \Drupal\KernelTests\Core\Config\ConfigEntityValidationTestBase::testInvalidMachineNameCharacters()
+    // does not provide a way to add additional errors when the machine name is
+    // invalid.
+    $invalid_id_messages = [
+      'machineName' => 'The <em class="placeholder">&quot;' . $this->entity->id() . '&quot;</em> machine name is not valid.',
+      '' => "The 'machineName' property cannot be changed.",
+    ];
+    // 'dash-separated' is valid machine name for component but not for config
+    // entity.
+    if ($this->entity->id() !== 'dash-separated' && $expected_messages === $invalid_id_messages) {
+      $expected_messages[''] = [
+        "In component canvas:{$this->entity->id()}:\n[id] Does not match the regex pattern ^[a-z]([a-zA-Z0-9_-]*[a-zA-Z0-9])*:[a-z]([a-zA-Z0-9_-]*[a-zA-Z0-9])*$\n[machineName] Does not match the regex pattern ^[a-z]([a-zA-Z0-9_-]*[a-zA-Z0-9])*$",
+        $expected_messages[''],
+      ];
+    }
+    parent::assertValidationErrors($expected_messages);
+  }
+
+}

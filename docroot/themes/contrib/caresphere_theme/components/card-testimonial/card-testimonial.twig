@@ -1,0 +1,57 @@
+{#
+  Testimonial / profile card matching Figma:
+  - Desktop (1:10624): 80px avatar, name 22px, title 18px, bio 16px, content centered, gap 24px
+  - Mobile (1:10322): 80px avatar, name 18px, title 16px, bio 16px, content left, gap 20px, social pt 4px
+#}
+<div class="card-testimonial flex h-full flex-col items-start gap-5 md:gap-6 text-foreground">
+	<div class="card-testimonial__avatar relative shrink-0 size-20 overflow-hidden rounded-full">
+		{% block media %}
+			{% if media.src is not empty %}
+				{% include 'canvas:image' ignore missing with {
+          src: media.src,
+          alt: media.alt|default(cite_name),
+          class: 'absolute inset-0 size-full object-cover',
+          width: media.width|default(80),
+          height: media.height|default(80),
+          sizes: '80px'
+        } only %}
+			{% endif %}
+		{% endblock %}
+	</div>
+
+	<div class="card-testimonial__content flex flex-col gap-3 md:gap-4 w-full md:items-center text-left leading-[1.5]">
+		<div class="card-testimonial__title-block flex flex-col w-full md:items-center">
+			{% if cite_name is not empty %}
+				<p class="card-testimonial__name font-semibold w-full">{{ cite_name }}</p>
+			{% endif %}
+			{% if cite_text is not empty %}
+				<p class="card-testimonial__title font-normal w-full">{{ cite_text }}</p>
+			{% endif %}
+		</div>
+		{% if text is not empty %}
+			<p class="card-testimonial__bio font-normal w-full">{{ text }}</p>
+		{% endif %}
+	</div>
+
+	{% if link_linkedin is not empty or link_x is not empty or link_dribbble is not empty %}
+		<div class="card-testimonial__social flex gap-[14px] items-start shrink-0 pt-1 md:pt-0">
+			{% if link_linkedin is not empty %}
+				<a href="{{ link_linkedin }}" target="_blank" rel="noopener noreferrer" class="card-testimonial__social-link size-6 text-foreground hover:opacity-80" aria-label="LinkedIn">
+					<svg class="size-full" viewbox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+				</a>
+			{% endif %}
+			{% if link_x is not empty %}
+				<a href="{{ link_x }}" target="_blank" rel="noopener noreferrer" class="card-testimonial__social-link size-6 text-foreground hover:opacity-80" aria-label="X">
+					<svg class="size-full" viewbox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+				</a>
+			{% endif %}
+			{% if link_dribbble is not empty %}
+				<a href="{{ link_dribbble }}" target="_blank" rel="noopener noreferrer" class="card-testimonial__social-link size-6 text-foreground hover:opacity-80" aria-label="Dribbble">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M12 3C7.03145 3 3 7.03145 3 12C3 16.9686 7.03145 21 12 21C16.9588 21 21 16.9686 21 12C21 7.03145 16.9588 3 12 3ZM17.9447 7.14859C19.0184 8.45662 19.6627 10.1258 19.6822 11.9317C19.4284 11.8829 16.8904 11.3655 14.333 11.6876C14.2744 11.5607 14.2256 11.4241 14.167 11.2874C14.0108 10.9165 13.8352 10.5358 13.6594 10.1746C16.4902 9.0228 17.7787 7.36334 17.9447 7.14859ZM12 4.32755C13.9523 4.32755 15.7386 5.05966 17.0955 6.26031C16.9588 6.45553 15.7972 8.00759 13.064 9.03253C11.8048 6.71909 10.4089 4.82538 10.1942 4.53254C10.77 4.39588 11.3753 4.32755 12 4.32755ZM8.72996 5.04989C8.93494 5.32321 10.3015 7.22668 11.5803 9.49131C7.98807 10.448 4.81562 10.4284 4.47397 10.4284C4.9718 8.04664 6.58243 6.06507 8.72996 5.04989ZM4.30803 12.0098C4.30803 11.9317 4.30803 11.8536 4.30803 11.7755C4.63991 11.7852 8.36876 11.8341 12.205 10.6822C12.4295 11.1117 12.6345 11.551 12.8297 11.9902C12.7321 12.0195 12.6247 12.0488 12.5271 12.0781C8.56399 13.3568 6.45553 16.8514 6.27983 17.1442C5.05965 15.7874 4.30803 13.9816 4.30803 12.0098ZM12 19.692C10.2234 19.692 8.58352 19.0868 7.28525 18.0716C7.42191 17.7885 8.98371 14.782 13.3178 13.269C13.3373 13.2592 13.3471 13.2592 13.3666 13.2495C14.4501 16.051 14.8894 18.4034 15.0065 19.077C14.0792 19.4772 13.064 19.692 12 19.692ZM16.2852 18.3742C16.2072 17.9056 15.7972 15.6605 14.7917 12.898C17.2028 12.5173 19.3113 13.1421 19.5749 13.23C19.243 15.3677 18.013 17.2126 16.2852 18.3742Z" fill="#020704"/>
+					</svg>
+				</a>
+			{% endif %}
+		</div>
+	{% endif %}
+</div>

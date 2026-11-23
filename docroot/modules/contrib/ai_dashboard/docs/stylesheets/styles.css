@@ -1,0 +1,194 @@
+/**
+ * Tablesort
+ */
+
+.tablesort-filter,
+.tablesort-category {
+  margin-right: 0.4rem;
+  padding: 0.3em;
+}
+
+.tablesort-category {
+  cursor: pointer;
+}
+
+.tablesort-filter.md-search__input {
+  border: 1px solid gray;
+  border-radius: 3px;
+  font-size: 1em;
+}
+
+/**
+ * Tabbed Modules / Recipes
+ */
+
+.ecosystem .tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  border-bottom: 2px solid var(--md-default-fg-color--lightest);
+}
+
+.ecosystem .tab-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--md-default-fg-color--light);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+}
+
+.ecosystem .tab-btn:hover {
+  color: var(--md-primary-fg-color);
+}
+
+.ecosystem .tab-btn.active {
+  color: var(--md-primary-fg-color);
+  border-bottom-color: var(--md-primary-fg-color);
+}
+
+.ecosystem .tab-panel {
+  display: none;
+}
+
+.ecosystem .tab-panel.active {
+  display: block;
+}
+
+/* Filter controls above each table. */
+.ecosystem .controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.8rem;
+}
+
+.ecosystem .filter-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+  color: var(--md-default-fg-color--light);
+}
+
+.ecosystem .filter-group label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+}
+
+.ecosystem .ecosystem-empty {
+  color: var(--md-default-fg-color--light);
+  font-style: italic;
+}
+
+/**
+ * Stability badge
+ */
+.badge {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.stab-stable { background: #d4edda; color: #155724; }
+.stab-rc     { background: #cce5ff; color: #004085; }
+.stab-beta   { background: #fff3cd; color: #856404; }
+.stab-alpha  { background: #fde8d8; color: #7d3800; }
+.stab-dev    { background: #e2e3e5; color: #383d41; }
+
+/**
+ * Right-align numeric columns and centre the security shield.
+ */
+.col-usage, .col-downloads, .col-stars,
+th.col-usage, th.col-downloads, th.col-stars {
+  text-align: right;
+}
+
+.col-security,
+th.col-security {
+  text-align: center;
+}
+
+.col-security .shield {
+  opacity: 0.55;
+  vertical-align: middle;
+}
+
+.col-version {
+  white-space: nowrap;
+}
+
+/* Muted project description, shown below the linked name. */
+.ecosystem .proj-desc {
+  color: var(--md-default-fg-color--light);
+  margin-top: 0.15rem;
+}
+
+/**
+ * Category column and its clickable filter pills.
+ */
+/* Column hidden to save horizontal space — categories are still used by the
+   multi-select filter (via each row's data-categories attribute). */
+.col-cat,
+th.col-cat {
+  display: none;
+}
+
+.ecosystem .cat-pill {
+  display: inline-block;
+  padding: 1px 8px;
+  margin: 1px 3px 1px 0;
+  border-radius: 10px;
+  font-size: 0.72rem;
+  background: var(--md-code-bg-color);
+  color: var(--md-default-fg-color--light);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.ecosystem .cat-pill:hover {
+  background: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+}
+
+/* Category multi-select filter. The native control shows when Chosen.js isn't
+   loaded; Chosen's own stylesheet styles the enhanced widget. */
+.ecosystem .cat-filter {
+  min-width: 240px;
+  font-size: 0.8rem;
+}
+
+.ecosystem .chosen-container {
+  font-size: 0.8rem;
+  text-align: left;
+}
+
+#cat_modules_chosen {
+  margin-left: 0;
+}
+
+#cat_modules_chosen .chosen-choices {
+  margin-left: 0;
+}
+
+.filter-group .chosen-drop .chosen-results {
+  margin-left: 0;
+}
+
+.chosen-drop .chosen-results .active-result {
+  margin-left: 0
+}
+
+ecosystem-modules table th[role="columnheader"]::after {
+  margin-left: 0;
+}

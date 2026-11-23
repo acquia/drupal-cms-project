@@ -1,0 +1,27 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Donation Accordion
+group: Base
+status: stable
+description: "Expandable panel. Drag multiple instances to create a group."
+props:
+  type: object
+  properties:
+    question:
+      type: string
+      title: "Question"
+      default: "Your question here"
+    answer:
+      type: string
+      title: "Answer"
+      default: "Your answer here"
+    default_state:
+      type: string
+      title: "Default state"
+      enum:
+        - expanded
+        - collapsed
+      meta:enum:
+        expanded: Expanded
+        collapsed: Collapsed
+      default: expanded
+      description: "Whether this panel starts open (Expanded) or closed (Collapsed)."

@@ -1,0 +1,9 @@
+parameters:
+  level: 6
+  reportUnmatchedIgnoredErrors: false
+  ignoreErrors:
+    - identifier: missingType.iterableValue
+    - identifier: missingType.generics
+  excludePaths:
+    - 'ui/*'
+    - 'dist/*'

@@ -1,0 +1,90 @@
+parameters:
+	ignoreErrors:
+		-
+			message: """
+				#^Call to deprecated method getSubdivisionDepth\\(\\) of class CommerceGuys\\\\Addressing\\\\AddressFormat\\\\AddressFormat\\:
+				Use getSubdivisionDataFields\\(\\) instead\\.$#
+			"""
+			count: 1
+			path: src/Element/Address.php
+
+		-
+			message: """
+				#^Class Drupal\\\\address\\\\Element\\\\Address extends deprecated class Drupal\\\\Core\\\\Render\\\\Element\\\\FormElement\\:
+				in drupal\\:10\\.3\\.0 and is removed from drupal\\:12\\.0\\.0\\. use
+				  \\\\Drupal\\\\Core\\\\Render\\\\Element\\\\FormElementBase instead\\.$#
+			"""
+			count: 1
+			path: src/Element/Address.php
+
+		-
+			message: """
+				#^Class Drupal\\\\address\\\\Element\\\\Country extends deprecated class Drupal\\\\Core\\\\Render\\\\Element\\\\FormElement\\:
+				in drupal\\:10\\.3\\.0 and is removed from drupal\\:12\\.0\\.0\\. use
+				  \\\\Drupal\\\\Core\\\\Render\\\\Element\\\\FormElementBase instead\\.$#
+			"""
+			count: 1
+			path: src/Element/Country.php
+
+		-
+			message: """
+				#^Class Drupal\\\\address\\\\Element\\\\Zone extends deprecated class Drupal\\\\Core\\\\Render\\\\Element\\\\FormElement\\:
+				in drupal\\:10\\.3\\.0 and is removed from drupal\\:12\\.0\\.0\\. use
+				  \\\\Drupal\\\\Core\\\\Render\\\\Element\\\\FormElementBase instead\\.$#
+			"""
+			count: 1
+			path: src/Element/Zone.php
+
+		-
+			message: """
+				#^Call to deprecated method getSubdivisionDepth\\(\\) of class CommerceGuys\\\\Addressing\\\\AddressFormat\\\\AddressFormat\\:
+				Use getSubdivisionDataFields\\(\\) instead\\.$#
+			"""
+			count: 1
+			path: src/Element/ZoneTerritory.php
+
+		-
+			message: """
+				#^Class Drupal\\\\address\\\\Element\\\\ZoneTerritory extends deprecated class Drupal\\\\Core\\\\Render\\\\Element\\\\FormElement\\:
+				in drupal\\:10\\.3\\.0 and is removed from drupal\\:12\\.0\\.0\\. use
+				  \\\\Drupal\\\\Core\\\\Render\\\\Element\\\\FormElementBase instead\\.$#
+			"""
+			count: 1
+			path: src/Element/ZoneTerritory.php
+
+		-
+			message: "#^Access to an undefined property Drupal\\\\address\\\\Plugin\\\\Field\\\\FieldType\\\\AddressItem\\:\\:\\$country_code\\.$#"
+			count: 1
+			path: src/Plugin/Field/FieldType/AddressItem.php
+
+		-
+			message: "#^Access to an undefined property Drupal\\\\address\\\\Plugin\\\\Field\\\\FieldType\\\\AddressItem\\:\\:\\$langcode\\.$#"
+			count: 2
+			path: src/Plugin/Field/FieldType/AddressItem.php
+
+		-
+			message: "#^Access to an undefined property Drupal\\\\address\\\\Plugin\\\\Field\\\\FieldType\\\\ZoneItem\\:\\:\\$value\\.$#"
+			count: 1
+			path: src/Plugin/Field/FieldType/ZoneItem.php
+
+		-
+			message: """
+				#^Call to deprecated method renderPlain\\(\\) of interface Drupal\\\\Core\\\\Render\\\\RendererInterface\\:
+				in drupal\\:10\\.3\\.0 and is removed from drupal\\:12\\.0\\.0\\. Use
+				  \\\\Drupal\\\\Core\\\\Render\\\\RendererInterface\\:\\:renderInIsolation\\(\\) instead\\.$#
+			"""
+			count: 1
+			path: src/Plugin/diff/Field/AddressFieldBuilder.php
+
+		-
+			message: """
+				#^Call to deprecated method getSubdivisionDepth\\(\\) of class CommerceGuys\\\\Addressing\\\\AddressFormat\\\\AddressFormat\\:
+				Use getSubdivisionDataFields\\(\\) instead\\.$#
+			"""
+			count: 1
+			path: src/Plugin/views/filter/AdministrativeArea.php
+
+		-
+			message: "#^\\\\Drupal calls should be avoided in classes, use dependency injection instead$#"
+			count: 1
+			path: src/Plugin/views/filter/AdministrativeArea.php

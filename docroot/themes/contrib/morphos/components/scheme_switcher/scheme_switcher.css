@@ -1,0 +1,20 @@
+/*!
+ * Project Name: Morphos (morpht/morphos)
+ * File: components/scheme_switcher/scheme_switcher.css
+ * Copyright (c) 2026 Morpht Pty Ltd
+ */
+
+@reference '../../tailwindcss';
+
+.scheme-switcher__toggle {
+  @apply m-0 inline-grid gap-0;
+
+  border-color: var(--link);
+  border-radius: var(--radius-selector);
+}
+
+.scheme-switcher__toggle svg {
+  background-color: var(--link);
+  color: var(--link-contrast);
+  border-radius: var(--radius-field);
+}

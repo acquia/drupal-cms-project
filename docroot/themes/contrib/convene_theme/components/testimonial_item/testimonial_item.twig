@@ -1,0 +1,30 @@
+{% set classes = [
+  'testimonial-item',
+  admin_theme ? 'testimonial-item--admin-theme' : 'testimonial-item--themed',
+] %}
+
+<div{{attributes.addClass(classes)}}>
+  <div class="testimonial-item__logo">
+    {{ logo }}
+  </div>
+
+  {% if quote %}
+    <blockquote class="testimonial-item__quote">
+      {{ quote }}
+    </blockquote>
+  {% endif %}
+
+  <div class="testimonial-item__author">
+    <div class="testimonial-item__author-media">
+      {{ author_media }}
+    </div>
+    <div class="testimonial-item__author-info">
+      {% if author_name %}
+        <div class="testimonial-item__author-name">{{ author_name }}</div>
+      {% endif %}
+      {% if author_role %}
+        <div class="testimonial-item__author-role">{{ author_role }}</div>
+      {% endif %}
+    </div>
+  </div>
+</div>

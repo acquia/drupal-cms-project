@@ -1,0 +1,23 @@
+/* @TODO: Remove after carousels get implemented */
+.card--news {
+  max-width: 500px;
+}
+
+.card--news__content {
+  width: 100%;
+  background-color: var(--white);
+  padding: var(--spacing-4) var(--spacing-3);
+}
+
+/* @TODO: Remove after carousels get implemented */
+@media (min-width: 580px) {
+  .card--news {
+    flex-basis: calc(50% - 0.8rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .card--news {
+    flex-basis: calc(33% - 3.2rem/3); /* Three cards per row with 1.6rem spacing */
+  }
+}

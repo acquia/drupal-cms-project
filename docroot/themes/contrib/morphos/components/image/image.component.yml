@@ -1,0 +1,41 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Image
+description: A standalone visual element with support for captions, alt text, and responsive scaling.
+group: Element
+noUi: true
+props:
+  type: object
+  properties:
+    image:
+      title: Image
+      description: Image object to display.
+      type:
+        - object
+        - 'null'
+    url:
+      title: URL
+      description: URL of the image.
+      type: string
+      format: uri-reference
+    width:
+      title: Width
+      description: Width in pixels.
+      type: number
+      default: 800
+    alt:
+      title: Alt
+      description: Alternative text describing the image.
+      type:
+        - string
+        - 'null'
+    loading:
+      title: Loading
+      description: Select the method of loading the image.
+      type: string
+      enum:
+        - eager
+        - lazy
+      meta:enum:
+        eager: Eager
+        lazy: Lazy
+      default: lazy

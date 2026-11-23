@@ -1,0 +1,9 @@
+services:
+  plugin.manager.custom_field_type_test:
+    class: Drupal\custom_field_test\PluginManager\FieldTypeTestManager
+    autowire: true
+    parent: default_plugin_manager
+
+  # Alias to FieldTypeTestManager.
+  Drupal\custom_field_test\PluginManager\FieldTypeTestManagerInterface:
+    alias: plugin.manager.custom_field_type_test

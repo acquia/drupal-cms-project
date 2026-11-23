@@ -1,0 +1,1 @@
+function e(e){return e.path?.alias||(e.drupal_internal__nid?`/node/${e.drupal_internal__nid}`:`#`)}function t(e){let t=new Map,n=[];return e.forEach(e=>{t.set(e.id,{...e,_children:[],_hasSubmenu:!1})}),e.forEach(e=>{let r=t.get(e.id);if(e.parent&&t.has(e.parent)){let n=t.get(e.parent);n._children.push(r),n._hasSubmenu=!0}else n.push(r)}),n}export{e as getNodePath,t as sortMenu};

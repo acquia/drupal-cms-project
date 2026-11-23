@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Support module for testing Google Tag Ajax commands.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_js_alter().
+ *
+ * Drops gtag.js when requested, as a content blocker would.
+ */
+function google_tag_ajax_test_js_alter(array &$javascript): void {
+  if (\Drupal::state()->get('google_tag_ajax_test.block_gtag', FALSE)) {
+    $path = \Drupal::service('extension.list.module')->getPath('google_tag');
+    unset($javascript[$path . '/js/gtag.js']);
+  }
+}

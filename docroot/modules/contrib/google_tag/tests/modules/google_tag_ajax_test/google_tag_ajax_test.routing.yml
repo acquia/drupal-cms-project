@@ -1,0 +1,8 @@
+google_tag_ajax_test.form:
+  path: '/google-tag-ajax-test'
+  defaults:
+    _form: Drupal\google_tag_ajax_test\Form\AjaxEventForm
+    _title: 'Google Tag Ajax event test form'
+  requirements:
+    # Test-only form; left open so tests can request it without logging in.
+    _access: 'TRUE'

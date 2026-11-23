@@ -1,0 +1,44 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 5998be99-a47a-4106-81c5-36112f3cebc2
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    10c26387-d367-430a-8269-aaa1a2a257c3: menu_link_content
+    eeedc719-aabb-483b-ad81-92db3edb8f93: canvas_page
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Behaviors
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      title: ''
+      options:
+        icon: null
+        icon_display: icon_only
+      target_uuid: eeedc719-aabb-483b-ad81-92db3edb8f93
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: true
+  weight:
+    -
+      value: -48
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:10c26387-d367-430a-8269-aaa1a2a257c3'
+  revision_translation_affected:
+    -
+      value: true

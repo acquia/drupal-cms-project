@@ -1,0 +1,111 @@
+<?php
+
+/**
+ * @file
+ * Theme hooks for caresphere_theme.
+ */
+
+use Drupal\block_content\Plugin\Block\BlockContentBlock;
+use Drupal\Core\Render\Element;
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements template_preprocess_page().
+ *
+ * Sets $variables['rendered_by_canvas'] so page.html.twig can skip the
+ * layout-content wrapper when Canvas is rendering the page.
+ */
+function caresphere_theme_preprocess_page(array &$variables): void {
+  $route_match = \Drupal::routeMatch();
+  $route_name = $route_match->getRouteName();
+  $module_handler = \Drupal::moduleHandler();
+
+  if (
+    $route_name === 'entity.canvas_page.canonical'
+    || str_starts_with($route_match->getRouteObject()?->getPath() ?? '', '/canvas/')
+  ) {
+    $variables['rendered_by_canvas'] = TRUE;
+  }
+  elseif ($route_name === 'entity.node.canonical' && $module_handler->moduleExists('canvas')) {
+    $node = $route_match->getParameter('node');
+    assert($node instanceof NodeInterface);
+
+    $variables['rendered_by_canvas'] = (bool) \Drupal::entityTypeManager()
+      ->getStorage('content_template')
+      ->getQuery()
+      ->accessCheck(FALSE)
+      ->count()
+      ->condition('content_entity_type_id', 'node')
+      ->condition('content_entity_type_bundle', $node->getType())
+      ->condition('content_entity_type_view_mode', 'full')
+      ->condition('status', TRUE)
+      ->execute();
+  }
+  else {
+    $variables['rendered_by_canvas'] = FALSE;
+  }
+
+  // Expose footer blocks by ID for region--footer.html.twig (Figma markup).
+  // Done in page preprocess so we have the un-rendered footer build with block keys.
+  if (isset($variables['page']['footer']) && is_array($variables['page']['footer'])) {
+    $footer = &$variables['page']['footer'];
+    $variables['page']['footer']['#footer_blocks'] = [];
+    foreach (Element::children($footer) as $key) {
+      $variables['page']['footer']['#footer_blocks'][$key] = $footer[$key];
+    }
+  }
+
+  // Attach login branding for user login/password/register pages.
+  if (in_array($route_name, ['user.login', 'user.pass', 'user.register'])) {
+    $variables['#attached']['library'][] = 'caresphere_theme/login';
+  }
+}
+
+/**
+ * Implements template_preprocess_region() for footer.
+ *
+ * Picks up #footer_blocks set in preprocess_page (so region template gets
+ * blocks by ID for exact Figma markup). Fallback: build from elements children.
+ */
+function caresphere_theme_preprocess_region(array &$variables): void {
+  if (($variables['elements']['#region'] ?? '') !== 'footer') {
+    return;
+  }
+
+  if (isset($variables['elements']['#footer_blocks'])) {
+    $variables['footer_blocks'] = $variables['elements']['#footer_blocks'];
+    return;
+  }
+
+  $variables['footer_blocks'] = [];
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['footer_blocks'][$key] = $variables['elements'][$key];
+  }
+}
+
+/**
+ * Implements template_preprocess_breadcrumb().
+ */
+function caresphere_theme_preprocess_breadcrumb(array &$variables): void {
+  if (empty($variables['breadcrumb'])) {
+    return;
+  }
+
+  $current_uri = \Drupal::request()->getRequestUri();
+  
+  // If we're on a path like /suport/... or /support/... and the breadcrumb has 2 items (Home and Current),
+  // insert 'Support' as the second segment.
+  if ((str_contains($current_uri, '/suport/') || str_contains($current_uri, '/support/')) && count($variables['breadcrumb']) === 2) {
+    $segments = explode('/', trim($current_uri, '/'));
+    if (count($segments) >= 2) {
+      // Create a link for the parent segment.
+      $support_item = [
+        'text' => 'Support', // Standardized name
+        'url' => '/' . $segments[0], // Use first segment as URL
+      ];
+      
+      // Splice it into the breadcrumb.
+      array_splice($variables['breadcrumb'], 1, 0, [$support_item]);
+    }
+  }
+}

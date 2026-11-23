@@ -1,0 +1,38 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+
+name: Space Header
+
+group: Layout
+
+props:
+
+  type: object
+
+  properties:
+    menu_align:
+      title: Menu alignment
+      type: string
+      description: Menu alignment on desktop.
+      enum:
+        - left
+        - center
+        - right
+      default: center
+      examples:
+        - center
+
+slots:
+  logo:
+    title: Site logo
+
+  navigation:
+    title: Navigation menu
+
+  links:
+    title: CTAs
+
+libraryOverrides:
+  js:
+    space-header.js:
+      attributes:
+        type: module
